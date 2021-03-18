@@ -1,0 +1,16 @@
+{
+  "name": "@vant-taro/~components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@tarojs/components": "^3.1.2",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/node": "^14.14.25",
+    "sass": "^1.32.6"
+  }
+}
