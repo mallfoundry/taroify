@@ -1,0 +1,13 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+.#{$component-prefix}space {
+  display: inline-flex;
+  align-items: center;
+
+  &-item {
+    margin-right: 8px;
+    box-sizing: border-box;
+    display: inline-block;
+  }
+}
