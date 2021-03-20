@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "baseUrl": ".",
-    "outDir": "../../bundles/components",
+    "outDir": "../../bundles/core",
     "sourceMap": false,
     "target": "esnext",
     "module": "esnext",

@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 import classNames from "classnames"
 import { prefixClassname } from "../styles"
 import { Button as TaroButton, View } from "@tarojs/components"
+import { ITouchEvent } from "@tarojs/components/types/common"
 
 export enum ButtonFormType {
   Button = "button",
@@ -45,6 +46,8 @@ interface ButtonProps {
   block?: boolean
   formType?: ButtonFormType
   children?: ReactNode
+  // events
+  onClick?: (event: ITouchEvent) => void
 }
 
 export default function Button(props: ButtonProps) {
@@ -54,6 +57,7 @@ export default function Button(props: ButtonProps) {
     color = ButtonColor.Default,
     formType = ButtonFormType.Button,
     children,
+    onClick,
   } = props
   return (
     <View
@@ -77,6 +81,7 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button-color-warning")]: color === ButtonColor.Warning,
           [prefixClassname("button-color-danger")]: color === ButtonColor.Danger,
         })}
+      onClick={onClick}
     >
       <TaroButton
         formType={formType === ButtonFormType.Submit ? "submit" : (formType === ButtonFormType.Reset ? "reset" : undefined)}
