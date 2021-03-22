@@ -4,14 +4,14 @@ import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-interface OverlayProps {
+interface BackdropProps {
   open?: boolean
   closable?: boolean
   children?: ReactNode
   onClose?: (event: ITouchEvent) => void
 }
 
-export default function Overlay(props: OverlayProps) {
+export default function Backdrop(props: BackdropProps) {
   const { open = false, closable = false, children, onClose } = props
 
   function handleClose(event: ITouchEvent) {
@@ -20,10 +20,11 @@ export default function Overlay(props: OverlayProps) {
     }
   }
 
+
   return (
     <View
-      className={classNames(prefixClassname("overlay"), {
-        [prefixClassname("overlay-open")]: open,
+      className={classNames(prefixClassname("backdrop"), {
+        [prefixClassname("backdrop-open")]: open,
       })}
       onClick={handleClose}
     >
