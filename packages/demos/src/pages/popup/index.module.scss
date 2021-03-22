@@ -1,0 +1,13 @@
+
+.ContentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .ContentBlock {
+    background-color: #fff;
+    width: 120px;
+    height: 120px;
+  }
+}

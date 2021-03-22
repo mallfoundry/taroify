@@ -1,0 +1,29 @@
+
+.Home {
+  padding: 0 16px;
+  background: #fff;
+
+  .HomeTitle {
+    display: flex;
+    padding-top: 1.2rem;
+    align-items: center;
+
+    .HomeLogo {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .HomeName {
+      display: inline-block;
+      font-size: 2rem;
+      margin-left: 16px;
+    }
+  }
+
+  .HomeDescription {
+    display: block;
+    margin: 10px 0 40px;
+    color: rgba(69, 90, 100, 0.6);
+    font-size: 14px * 2;
+  }
+}

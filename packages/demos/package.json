@@ -1,7 +1,6 @@
 {
   "name": "@vant-taro/demos",
   "version": "1.0.0",
-  "private": true,
   "description": "",
   "templateInfo": {
     "name": "default",
@@ -41,6 +40,7 @@
     "@tarojs/runtime": "3.1.2",
     "@tarojs/taro": "3.1.2",
     "@vant-taro/icons": "^1.0.0",
+    "classnames": "^2.2.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },

@@ -1,0 +1,22 @@
+
+.Page {
+
+  .Nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px * 2;
+    background-color: #fff;
+
+    .NavTitle {
+      font-weight: 600;
+      font-size: 16px * 2;
+      text-transform: capitalize;
+    }
+  }
+
+  .PageContent {
+    padding: 0 16px;
+  }
+}
