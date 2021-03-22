@@ -1,0 +1,48 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$button-line-height: 1.2;
+$button-border-width: $border-width-base;
+$button-border-radius: $border-radius-sm;
+
+$button-shape-round-border-radius: $border-radius-max;
+
+$button-size-mini-height: $height-xs;
+$button-size-mini-padding: $padding-xs;
+$button-size-mini-font-size: $font-size-xs;
+
+$button-size-small-height: $height-sm;
+$button-size-small-padding: $padding-sm;
+$button-size-small-font-size: $font-size-sm;
+
+$button-size-medium-height: $height-md;
+$button-size-medium-padding: $padding-md;
+$button-size-medium-font-size: $font-size-md;
+
+$button-size-large-height: $height-lg;
+$button-size-large-padding: $padding-lg;
+$button-size-large-font-size: $font-size-lg;
+
+$button-color-default-color: $text-color;
+$button-color-default-background-color: $white-color;
+$button-color-default-border-color: $border-color;
+
+$button-color-primary-color: $white-color;
+$button-color-primary-background-color: $primary-color;
+$button-color-primary-border-color: $primary-color;
+
+$button-color-info-color: $white-color;
+$button-color-info-background-color: $info-color;
+$button-color-info-border-color: $info-color;
+
+$button-color-success-color: $white-color;
+$button-color-success-background-color: $success-color;
+$button-color-success-border-color: $success-color;
+
+$button-color-warning-color: $white-color;
+$button-color-warning-background-color: $warning-color;
+$button-color-warning-border-color: $warning-color;
+
+$button-color-danger-color: $white-color;
+$button-color-danger-background-color: $error-color;
+$button-color-danger-border-color: $error-color;

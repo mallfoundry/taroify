@@ -1,0 +1,31 @@
+@import "../styles/prefix";
+
+.#{$component-prefix}row {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-justify-end {
+    justify-content: end;
+  }
+
+  &-justify-center {
+    justify-content: center;
+  }
+
+  &-justify-space-around {
+    justify-content: space-around;
+  }
+
+  &-justify-space-between {
+    justify-content: space-between;
+  }
+
+  &-align-center {
+    align-items: center;
+  }
+
+  &-align-bottom {
+    align-items: flex-end;
+  }
+
+}

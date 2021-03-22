@@ -1,0 +1,38 @@
+@import "./variables";
+
+.#{$component-prefix}cell {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: $padding-sm;
+  overflow: hidden;
+  color: $text-color;
+  line-height: $line-height-sm;
+  font-size: $font-size-md;
+  background-color: #fff;
+
+  &-label {
+    flex: 1;
+  }
+
+  &-clickable {
+    cursor: pointer;
+
+    &:active {
+      background-color: $cell-active-color;
+    }
+  }
+
+  &-value {
+    color: $cell-value-color;
+    text-align: right;
+    flex: 1;
+  }
+
+  &-arrow {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    color: $cell-value-color;
+  }
+}
