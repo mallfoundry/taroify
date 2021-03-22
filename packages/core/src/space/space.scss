@@ -3,10 +3,12 @@
 
 .#{$component-prefix}space {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
 
   &-item {
     margin-right: 8px;
+    margin-bottom: 8px;
     box-sizing: border-box;
     display: inline-block;
   }
