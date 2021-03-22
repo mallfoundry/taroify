@@ -1,7 +1,6 @@
 {
-  "name": "site",
+  "name": "@vant-taro/site",
   "version": "0.1.0",
-  "private": true,
   "sideEffects": false,
   "scripts": {
     "start": "craco start",
@@ -10,7 +9,6 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@vant-taro/components": "^1.0.0",
     "classnames": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
