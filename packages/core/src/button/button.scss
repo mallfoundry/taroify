@@ -1,58 +1,12 @@
-@import "../styles/prefix";
-@import "../styles/variables";
-
-$button-size-mini-height: 24px;
-$button-size-mini-padding: 0 $padding-base;
-$button-size-mini-font-size: $font-size-xs;
-
-$button-size-small-height: 32px;
-$button-size-small-padding: 0 $padding-xs;
-$button-size-small-font-size: $font-size-sm;
-
-$button-size-medium-padding: 0 15px;
-$button-size-medium-font-size: $font-size-md;
-
-$button-size-large-height: 50px;
-
-$button-color-default-height: 44px;
-$button-color-default-line-height: 1.2;
-$button-color-default-font-size: $font-size-lg;
-$button-color-default-color: $text-color;
-$button-color-default-background-color: $white;
-$button-color-default-border-color: $border-color;
-
-$button-color-primary-color: $white;
-$button-color-primary-background-color: $primary-color;
-$button-color-primary-border-color: $primary-color;
-
-$button-color-info-color: $white;
-$button-color-info-background-color: $info-color;
-$button-color-info-border-color: $info-color;
-
-$button-color-success-color: $white;
-$button-color-success-background-color: $success-color;
-$button-color-success-border-color: $success-color;
-
-$button-color-warning-color: $white;
-$button-color-warning-background-color: $warning-color;
-$button-color-warning-border-color: $warning-color;
-
-$button-color-danger-color: $white;
-$button-color-danger-background-color: $error-color;
-$button-color-danger-border-color: $error-color;
-
-$button-border-width: $border-width-base;
-$button-border-radius: $border-radius-sm;
+@import "./variables";
 
 .#{$component-prefix}button {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  height: $button-color-default-height;
   margin: 0;
   padding: 0;
-  font-size: $button-color-default-font-size;
-  //line-height: $button-default-line-height;
+  line-height: $button-line-height;
   text-align: center;
   border-radius: $button-border-radius;
   cursor: pointer;
@@ -64,10 +18,10 @@ $button-border-radius: $border-radius-sm;
     left: 50%;
     width: 100%;
     height: 100%;
-    background-color: $black;
+    background-color: $black-color;
     border-width: inherit;
     border-style: inherit;
-    border-color: $black;
+    border-color: $black-color;
     border-radius: inherit; /* inherit parent's border radius */
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -91,7 +45,7 @@ $button-border-radius: $border-radius-sm;
   }
 
   &-variant-outlined {
-    background: $white;
+    background: $white-color;
 
     &.#{$component-prefix}button-color-default {
       //border: $button-border-width solid $button-color-default-border-color;
@@ -123,25 +77,32 @@ $button-border-radius: $border-radius-sm;
     }
   }
 
+  &-shape-round {
+    border-radius: $button-shape-round-border-radius;
+  }
+
   &-size-mini {
-    height: $button-size-mini-height;
-    padding: $button-size-mini-padding;
     font-size: $button-size-mini-font-size;
+    padding: $button-size-mini-padding;
+    height: $button-size-mini-height;
   }
 
   &-size-small {
-    height: $button-size-small-height;
-    padding: $button-size-small-padding;
     font-size: $button-size-small-font-size;
+    padding: $button-size-small-padding;
+    height: $button-size-small-height;
   }
 
   &-size-medium {
-    padding: $button-size-medium-padding;
     font-size: $button-size-medium-font-size;
+    padding: $button-size-medium-padding;
+    height: $button-size-medium-height;
   }
 
   &-size-large {
     width: 100%;
+    font-size: $button-size-large-font-size;
+    padding: $button-size-large-padding;
     height: $button-size-large-height;
   }
 
