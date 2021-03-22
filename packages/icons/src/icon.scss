@@ -1,0 +1,65 @@
+@import "./variables";
+
+.vant-icon {
+  width: 1em;
+  height: 1em;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.vant-icon-size-inherit {
+  font-size: inherit;
+}
+
+.vant-icon-size-mini {
+  font-size: 20px;
+}
+
+.vant-icon-size-small {
+  font-size: 24px;
+}
+
+.vant-icon-size-medium {
+  font-size: 36px;
+}
+
+.vant-icon-size-large {
+  font-size: 40px;
+}
+
+.vant-icon-color-inherit {
+  color: inherit;
+}
+
+.vant-icon-color-default {
+  color: $default-color;
+}
+
+.vant-icon-color-primary {
+  color: $primary-color;
+}
+
+.vant-icon-color-info {
+  color: $info-color;
+}
+
+.vant-icon-color-success {
+  color: $success-color;
+}
+
+.vant-icon-color-warning {
+  color: $warning-color;
+}
+
+.vant-icon-color-danger {
+  color: $danger-color;
+}
