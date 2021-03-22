@@ -19,6 +19,7 @@
 /build
 /dist
 /packages/*/dist
+/packages/*/build
 /packages/*/*.d.ts
 
 # temp
