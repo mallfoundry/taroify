@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "@tarojs/components": "3.1.2",
+    "@vant-taro/icons": "^1.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21"
   },
