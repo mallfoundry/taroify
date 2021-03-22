@@ -39,8 +39,16 @@ export enum ButtonColor {
 
 type ButtonColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
+export enum ButtonShape {
+  Circle = "circle",
+  Round = "round",
+}
+
+type ButtonShapeString = "circle" | "round"
+
 interface ButtonProps {
   variant?: ButtonVariant | ButtonVariantString
+  shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
   color?: ButtonColor | ButtonColorString
   block?: boolean
@@ -51,14 +59,17 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps) {
+
   const {
     variant = ButtonVariant.Text,
+    shape,
     size = ButtonSize.Medium,
     color = ButtonColor.Default,
     formType = ButtonFormType.Button,
     children,
     onClick,
   } = props
+
   return (
     <View
       className={classNames(
@@ -68,7 +79,9 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button-variant-text")]: variant === ButtonVariant.Text,
           [prefixClassname("button-variant-contained")]: variant === ButtonVariant.Contained,
           [prefixClassname("button-variant-outlined")]: variant === ButtonVariant.Outlined,
-          // Set variant style
+          // Set shape style
+          [prefixClassname("button-shape-round")]: shape === ButtonShape.Round,
+          // Set size style
           [prefixClassname("button-size-mini")]: size === ButtonSize.Mini,
           [prefixClassname("button-size-small")]: size === ButtonSize.Small,
           [prefixClassname("button-size-medium")]: size === ButtonSize.Medium,
