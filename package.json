@@ -7,8 +7,8 @@
   "scripts": {
     "jest": "jest",
     "dts": "tsc --help",
-    "watch:components": "babel -w packages/components/src/ -d bundles/components --copy-files --extensions \".ts,.tsx\"",
-    "watch:components-decorators:": "tsc -w -p packages/components/tsconfig.d.json",
+    "watch:core": "babel -w packages/core/src/ -d bundles/core --copy-files --extensions \".ts,.tsx\"",
+    "watch:core-decorators:": "tsc -w -p packages/core/tsconfig.d.json",
     "watch:icons": "babel -w packages/icons/src/ -d bundles/icons --copy-files --extensions \".ts,.tsx\"",
     "watch:icons-decorators:": "tsc -w -p packages/icons/tsconfig.d.json"
   },
