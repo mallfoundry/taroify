@@ -1,19 +1,12 @@
-@import "../styles/prefix";
-
-$popup-duration: 300ms;
-$popup-z-index: 1010;
-
+@import "./variables";
 
 .#{$component-prefix}popup {
   position: fixed;
   max-height: 100%;
   overflow-y: auto;
   background-color: #fff;
-  visibility: hidden;
-
-  //transform: translate3d(0, 100%, 0);
-  //z-index: $popup-z-index;
-  //transition: transform $popup-duration cubic-bezier(0.36, 0.66, 0.04, 1);
+  z-index: $popup-z-index;
+  transition: transform $popup-duration;
 
   //&-close {
   //  position: absolute;
@@ -25,6 +18,12 @@ $popup-z-index: 1010;
   //  cursor: pointer;
   //}
 
+  &-center {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
   &-anchor-top {
     top: 0;
     left: 0;
@@ -34,6 +33,30 @@ $popup-z-index: 1010;
   &-anchor-right {
     top: 50%;
     right: 0;
+    transform: translate3d(0, -50%, 0);
+
+    &.#{$component-prefix}transition-slide-right {
+
+      &-enter {
+        transform: translate3d(100%, -50%, 0);
+      }
+
+      &-enter-active {
+        transform: translate3d(0, -50%, 0);
+        transition-property: opacity, transform;
+        transition-timing-function: ease;
+      }
+
+      &-exit {
+        transform: translate3d(0, -50%, 0);
+      }
+
+      &-exit-active {
+        transform: translate3d(100%, -50%, 0);
+        transition-property: opacity, transform;
+        transition-timing-function: ease;
+      }
+    }
   }
 
   &-anchor-bottom {
@@ -42,67 +65,32 @@ $popup-z-index: 1010;
     width: 100%;
   }
 
-  &-anchor-bottom {
+  &-anchor-left {
     top: 50%;
     left: 0;
-    width: 100%;
-    z-index: 100;
-  }
+    transform: translate3d(0, -50%, 0);
 
+    &.#{$component-prefix}transition-slide-left {
 
-  &-open {
-    visibility: visible;
+      &-enter {
+        transform: translate3d(-100%, -50%, 0);
+      }
 
-    /*  .#{$component-prefix}popup-container {
-        transform: translate3d(0, 0, 0);
-      }*/
+      &-enter-active {
+        transform: translate3d(0, -50%, 0);
+        transition-property: opacity, transform;
+        transition-timing-function: ease;
+      }
+
+      &-exit {
+        transform: translate3d(0, -50%, 0);
+      }
+
+      &-exit-active {
+        transform: translate3d(-100%, -50%, 0);
+        transition-property: opacity, transform;
+        transition-timing-function: ease;
+      }
+    }
   }
 }
-
-
-//.#{$component-prefix}popup {
-//  position: fixed;
-//  width: 100%;
-//  height: 100%;
-//  top: 0;
-//  left: 0;
-//  visibility: hidden;
-//  transition: visibility $popup-duration cubic-bezier(0.36, 0.66, 0.04, 1);
-//  z-index: $popup-z-index;
-//
-//  &-container {
-//    position: absolute;
-//    bottom: 0;
-//    width: 100%;
-//    background-color: #fff;
-//    transform: translate3d(0, 100%, 0);
-//    z-index: $popup-z-index;
-//    transition: transform $popup-duration cubic-bezier(0.36, 0.66, 0.04, 1);
-//  }
-//
-//  &-header {
-//    padding: 16px 24px;
-//  }
-//
-//  &-close {
-//    position: absolute;
-//    top: 16px;
-//    right: 16px;
-//    z-index: 10;
-//    color: #c8c9cc;
-//    size: 16px;
-//    cursor: pointer;
-//  }
-//
-//  .#{$component-prefix}popup-body {
-//    padding: 14px;
-//  }
-//}
-//
-//.#{$component-prefix}popup-open {
-//  visibility: visible;
-//
-//  .#{$component-prefix}popup-container {
-//    transform: translate3d(0, 0, 0);
-//  }
-//}
