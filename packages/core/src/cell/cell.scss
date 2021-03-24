@@ -1,6 +1,7 @@
 @import "./variables";
 
 .#{$component-prefix}cell {
+  position: relative;
   display: flex;
   box-sizing: border-box;
   width: 100%;
@@ -11,8 +12,21 @@
   font-size: $font-size-md;
   background-color: #fff;
 
+  &::after {
+    @include hairline-bottom($cell-border-color, $padding-sm, $padding-sm);
+  }
+
+  &:last-child::after, &-borderless::after {
+    display: none;
+  }
+
   &-label {
     flex: 1;
+  }
+
+
+  &-borderless {
+
   }
 
   &-clickable {
@@ -30,6 +44,13 @@
   }
 
   &-arrow {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    color: $cell-value-color;
+  }
+
+  &-end-icon {
     display: flex;
     align-items: center;
     margin-left: 6px;
