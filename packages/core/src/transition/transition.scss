@@ -1,0 +1,231 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+// Fade Animation
+.#{$component-prefix}transition-fade {
+
+  &-enter {
+    opacity: 0;
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transition-timing-function: ease;
+    transition-property: opacity;
+  }
+
+  &-exit {
+    opacity: 1;
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transition-property: opacity;
+    transition-timing-function: ease;
+  }
+}
+
+// Fade Up Animation
+.#{$component-prefix}transition-fade-up {
+
+  &-enter {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+// Fade Down Animation
+.#{$component-prefix}transition-fade-down {
+
+  &-enter {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+// Fade Left Animation
+.#{$component-prefix}transition-fade-left {
+
+  &-enter {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+// Fade Right Animation
+.#{$component-prefix}transition-fade-right {
+
+  &-enter {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+// Slide Animation
+.#{$component-prefix}transition-slide-up {
+
+  &-enter {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  &-enter-active {
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    transform: translate3d(0, 100%, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+.#{$component-prefix}transition-slide-down {
+
+  &-enter {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  &-enter-active {
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    transform: translate3d(0, -100%, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+.#{$component-prefix}transition-slide-left {
+
+  &-enter {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &-enter-active {
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    transform: translate3d(-100%, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
+
+.#{$component-prefix}transition-slide-right {
+
+  &-enter {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &-enter-active {
+    transform: translate3d(0, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+
+  &-exit {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-exit-active {
+    transform: translate3d(100%, 0, 0);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+  }
+}
