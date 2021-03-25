@@ -1,0 +1,39 @@
+@import "./variables";
+
+.#{$component-prefix}image {
+  position: relative;
+  display: inline-block;
+
+  &-round {
+    overflow: hidden;
+    border-radius: 50%;
+
+    img {
+      border-radius: inherit;
+    }
+  }
+
+  &-loading {
+    display: none;
+  }
+
+  &-fallback, &-placeholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $image-placeholder-text-color;
+    font-size: $image-placeholder-font-size;
+    background-color: $image-placeholder-background-color;
+
+    &-icon {
+      font-size: $image-placeholder-icon-size;
+    }
+  }
+
+}
