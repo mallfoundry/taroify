@@ -6,7 +6,6 @@
   overflow-y: auto;
   background-color: #fff;
   z-index: $popup-z-index;
-  transition: transform $popup-duration;
 
   //&-close {
   //  position: absolute;
@@ -28,12 +27,30 @@
     top: 0;
     left: 0;
     width: 100%;
+
+    &.#{$component-prefix}popup-rounded {
+      border-radius: 0 0 $popup-round-border-radius $popup-round-border-radius;
+    }
+  }
+
+  &-anchor-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    &.#{$component-prefix}popup-rounded {
+      border-radius: $popup-round-border-radius $popup-round-border-radius 0 0;
+    }
   }
 
   &-anchor-right {
     top: 50%;
     right: 0;
     transform: translate3d(0, -50%, 0);
+
+    &.#{$component-prefix}popup-rounded {
+      border-radius: $popup-round-border-radius 0 0 $popup-round-border-radius;
+    }
 
     &.#{$component-prefix}transition-slide-right {
 
@@ -59,16 +76,14 @@
     }
   }
 
-  &-anchor-bottom {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-
   &-anchor-left {
     top: 50%;
     left: 0;
     transform: translate3d(0, -50%, 0);
+
+    &.#{$component-prefix}popup-rounded {
+      border-radius: 0 $popup-round-border-radius $popup-round-border-radius 0;
+    }
 
     &.#{$component-prefix}transition-slide-left {
 
