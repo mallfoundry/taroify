@@ -7,12 +7,14 @@
     "@tarojs/components": "3.1.2",
     "@vant-taro/icons": "^1.0.0",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.25",
+    "@types/react-transition-group": "^4.4.1",
     "sass": "^1.32.6"
   }
 }
