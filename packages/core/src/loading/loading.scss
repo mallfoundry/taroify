@@ -1,0 +1,75 @@
+@import "./variables";
+
+.#{$component-prefix}loading {
+  position: relative;
+  color: $loading-color;
+  font-size: 0;
+  vertical-align: middle;
+
+  &-spinner, &-circular {
+    position: relative;
+    display: inline-block;
+    width: $loading-size;
+    height: $loading-size;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+  }
+
+  &-spinner {
+    animation: vant-rotate 0.8s steps(12) infinite;
+
+    &-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      &::before {
+        display: block;
+        width: 2px * 2;
+        height: 25%;
+        margin: 0 auto;
+        background-color: currentColor;
+        border-radius: 40%;
+        content: ' ';
+      }
+
+      // Generate 12 item
+      @for $i from 1 through 12 {
+        &:nth-of-type(#{$i}) {
+          transform: rotate($i * 30deg);
+          opacity: 1 - (0.75 / 12) * ($i - 1);
+        }
+      }
+    }
+  }
+
+  &-circular {
+    &-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      border-width: 5px;
+      border-style: solid;
+      border-color: currentColor transparent transparent transparent;
+      border-radius: 50%;
+      animation: vant-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+
+      &:nth-child(1) {
+        animation-delay: -0.45s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -0.3s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: -0.15s;
+      }
+    }
+  }
+}
