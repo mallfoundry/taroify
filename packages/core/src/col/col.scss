@@ -1,4 +1,5 @@
 @import "../styles/prefix";
+@import "../styles/variables";
 
 .#{$component-prefix}col {
   display: block;
@@ -13,6 +14,6 @@
   }
 
   .#{$component-prefix}col-offset-#{$i} {
-    margin-left: $i * (100% / 24);
+    margin-left: $i * (100% / 24) * $hd;
   }
 }
