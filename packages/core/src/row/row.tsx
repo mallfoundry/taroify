@@ -65,10 +65,8 @@ function useGutter(gutter?: RowGutter): [undefined | number, undefined | number]
 export default function Row(props: RowProps) {
   const { className, gutter, justify, align, children } = props
   const gutters = useGutter(gutter)
-  const [horizontalGutter, verticalGutter] = gutters
-  console.log(horizontalGutter, verticalGutter)
+  const [horizontalGutter] = gutters
 
-  //
   const gutterStyle: CSSProperties = {}
   if (horizontalGutter) {
     const averagePadding = _.toNumber(horizontalGutter) / 2
