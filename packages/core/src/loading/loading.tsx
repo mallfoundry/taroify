@@ -36,6 +36,7 @@ type LoadingTypeString = "circular" | "spinner"
 interface LoadingProps {
   type?: LoadingType | LoadingTypeString
   color?: string
+  size?: string | number
 }
 
 export default function Loading(props: LoadingProps) {
