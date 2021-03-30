@@ -32,6 +32,21 @@
     opacity: 0.1;
   }
 
+  &-disabled {
+    &:active::before {
+      opacity: 0;
+    }
+
+    cursor: not-allowed;
+    opacity: $button-disabled-opacity;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+
+
   &-variant-text {
     //height: $button-size-mini-height;
     //padding: $button-size-mini-padding;
@@ -152,6 +167,36 @@
     // see: https://github.com/youzan/vant/issues/7617
     &::before {
       content: ' ';
+    }
+
+    .#{$component-prefix}icon {
+      font-size: 1.2em;
+      line-height: inherit;
+      color: inherit;
+    }
+
+    .#{$component-prefix}icon + &-text,
+    &-text + .#{$component-prefix}icon,
+    &-loading + &-text,
+    &-text + &-loading {
+      margin-left: $padding-base;
+    }
+  }
+
+  &-hairline {
+    border-width: 0;
+
+    &::after {
+      border-color: inherit;
+      border-radius: $button-border-radius * 2;
+    }
+
+    &.#{$component-prefix}-button-round::after {
+      border-radius: $button-shape-round-border-radius;
+    }
+
+    &.#{$component-prefix}-button-square::after {
+      border-radius: 0;
     }
   }
 
