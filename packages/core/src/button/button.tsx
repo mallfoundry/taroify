@@ -40,6 +40,7 @@ export enum ButtonColor {
 type ButtonColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
 export enum ButtonShape {
+  Square = "square",
   Circle = "circle",
   Round = "round",
 }
@@ -51,8 +52,11 @@ interface ButtonProps {
   shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
   color?: ButtonColor | ButtonColorString
-  block?: boolean
   formType?: ButtonFormType
+  block?: boolean
+  hairline?: boolean
+  disabled?: boolean
+  startIcon?: ReactNode
   children?: ReactNode
   // events
   onClick?: (event: ITouchEvent) => void
@@ -61,11 +65,15 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
 
   const {
-    variant = ButtonVariant.Text,
+    variant = ButtonVariant.Contained,
     shape,
     size = ButtonSize.Medium,
     color = ButtonColor.Default,
     formType = ButtonFormType.Button,
+    block,
+    hairline,
+    disabled,
+    startIcon,
     children,
     onClick,
   } = props
@@ -75,6 +83,10 @@ export default function Button(props: ButtonProps) {
       className={classNames(
         prefixClassname("button"),
         {
+          [prefixClassname("button-disabled")]: disabled,
+          [prefixClassname("button-block")]: block,
+          [prefixClassname("button-hairline")]: hairline,
+          [prefixClassname("hairline-surround")]: hairline,
           // Set variant style
           [prefixClassname("button-variant-text")]: variant === ButtonVariant.Text,
           [prefixClassname("button-variant-contained")]: variant === ButtonVariant.Contained,
@@ -101,7 +113,8 @@ export default function Button(props: ButtonProps) {
       />
       <View
         className={prefixClassname("button-content")}>
-        {children}
+        {startIcon}
+        {children && <View className={prefixClassname("button-content-text")} children={children} />}
       </View>
     </View>
   )
