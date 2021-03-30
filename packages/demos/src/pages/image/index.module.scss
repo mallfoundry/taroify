@@ -1,0 +1,26 @@
+
+.ImageDemo {
+
+  :global {
+    .vant-col {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.Text {
+  display: block;
+  margin-top: 10px;
+  color: #646566;
+  text-align: center;
+}
+
+.BasicImage {
+  width: 200px;
+  height: 200px;
+}
+
+.Image {
+  width: 100%;
+  height: 27vw;
+}
