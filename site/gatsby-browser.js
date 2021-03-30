@@ -1,0 +1,5 @@
+import "normalize.css/normalize.css"
+import "prismjs/themes/prism.css"
+import "./src/styles/global.scss"
+import "./src/styles/prism.scss"
+import "./src/styles/docs.scss"
