@@ -38,12 +38,12 @@ $background-color-light: #fafafa;
 $text-link-color: #576b95;
 
 // Padding
-$padding-base: 4px;
-$padding-xs: $padding-base * 2 * $hd;
-$padding-sm: $padding-base * 3 * $hd;
-$padding-md: $padding-base * 4 * $hd;
-$padding-lg: $padding-base * 6 * $hd;
-$padding-xl: $padding-base * 8 * $hd;
+$padding-base: 4px * $hd;
+$padding-xs: $padding-base * 2;
+$padding-sm: $padding-base * 3;
+$padding-md: $padding-base * 4;
+$padding-lg: $padding-base * 6;
+$padding-xl: $padding-base * 8;
 
 // Font
 $font-size-xs: 10px * $hd;
