@@ -1,7 +1,8 @@
 import "@vant-taro/core/index.scss"
 import Page from "../../components/page"
 import { useState } from "react"
-import { Backdrop, Button } from "@vant-taro/core"
+import Backdrop from "@vant-taro/core/backdrop"
+import Button from "@vant-taro/core/button"
 import Block from "../../components/block"
 import { View } from "@tarojs/components"
 
@@ -10,7 +11,6 @@ import classes from "./index.module.scss"
 export default function BackdropDemo() {
   const [open, setOpen] = useState(false)
   const [opened2, setOpened2] = useState(false)
-  console.log(opened2, setOpened2)
 
   return (
     <Page title="Backdrop">
@@ -19,7 +19,7 @@ export default function BackdropDemo() {
           variant="contained" color="primary"
           onClick={() => setOpen(true)}>显示遮盖层</Button>
         <Backdrop
-          open={open} closable={true}
+          open={open} closeable
           onClose={() => setOpen(false)} />
       </Block>
       <Block title="嵌入内容">
@@ -27,7 +27,7 @@ export default function BackdropDemo() {
           variant="contained" color="primary"
           onClick={() => setOpened2(true)}>嵌入内容</Button>
         <Backdrop
-          open={opened2} closable={true}
+          open={opened2} closeable
           onClose={() => setOpened2(false)}>
           <View className={classes.ContentWrapper}>
             <View className={classes.ContentBlock} />
