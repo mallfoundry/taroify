@@ -1,13 +1,11 @@
-import Block from "../../components/block"
-import Page from "../../components/page"
-import Cell from "@vant-taro/core/cell"
-import Transition, { TransitionName } from "@vant-taro/core/transition"
-import ArrowForwardIosOutlined from "@vant-taro/icons/ArrowForwardIosOutlined"
-import classes from "./index.module.scss"
-import "@vant-taro/core/index.scss"
 import { useState } from "react"
 import { View } from "@tarojs/components"
-
+import Block from "../../components/block"
+import Page from "../../components/page"
+import Cell from "@taroify/core/cell"
+import Transition, { TransitionName } from "@taroify/core/transition"
+import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import classes from "./index.module.scss"
 
 export default function TransitionDemo() {
   const [name, setName] = useState<TransitionName>(TransitionName.Fade)

@@ -1,7 +1,7 @@
 import { Component } from "react"
 import "./app.scss"
-import "@vant-taro/icons/index.scss"
-import "@vant-taro/core/index.scss"
+import "@taroify/icons/index.scss"
+import "@taroify/core/index.scss"
 
 class App extends Component {
 

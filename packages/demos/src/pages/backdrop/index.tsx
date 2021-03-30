@@ -1,8 +1,7 @@
-import "@vant-taro/core/index.scss"
 import Page from "../../components/page"
 import { useState } from "react"
-import Backdrop from "@vant-taro/core/backdrop"
-import Button from "@vant-taro/core/button"
+import Backdrop from "@taroify/core/backdrop"
+import Button from "@taroify/core/button"
 import Block from "../../components/block"
 import { View } from "@tarojs/components"
 

@@ -1,4 +1,4 @@
-import Cell from "@vant-taro/core/cell"
+import Cell from "@taroify/core/cell"
 import "./index.scss"
 import Block from "../../components/block"
 import Page from "../../components/page"

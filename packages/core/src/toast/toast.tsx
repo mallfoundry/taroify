@@ -3,10 +3,10 @@ import { ReactElement, ReactNode, useEffect, useState } from "react"
 import Popup from "../popup"
 import classNames from "classnames"
 import { prefixClassname } from "../styles"
-import { IconColor } from "@vant-taro/icons/Icon"
+import { IconColor } from "@taroify/icons/Icon"
 import { View } from "@tarojs/components"
-import DoneOutlined from "@vant-taro/icons/DoneOutlined"
-import PriorityHighOutlined from "@vant-taro/icons/PriorityHighOutlined"
+import DoneOutlined from "@taroify/icons/DoneOutlined"
+import PriorityHighOutlined from "@taroify/icons/PriorityHighOutlined"
 
 export enum ToastType {
   Text = "text",

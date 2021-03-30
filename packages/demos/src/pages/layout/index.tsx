@@ -1,9 +1,8 @@
-import classes from "./index.module.scss"
-import "@vant-taro/core/index.scss"
 import Page from "../../components/page"
 import Block from "../../components/block"
-import Row from "@vant-taro/core/row"
-import Col from "@vant-taro/core/col"
+import Row from "@taroify/core/row"
+import Col from "@taroify/core/col"
+import classes from "./index.module.scss"
 
 export default function Layout() {
   return (

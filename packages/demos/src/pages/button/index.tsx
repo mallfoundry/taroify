@@ -1,10 +1,9 @@
-import Button from "@vant-taro/core/button"
-import Space from "@vant-taro/core/space"
-import WhiteSpace from "@vant-taro/core/white-space"
-import "./index.scss"
-import "@vant-taro/core/index.scss"
+import Button from "@taroify/core/button"
+import Space from "@taroify/core/space"
+import WhiteSpace from "@taroify/core/white-space"
 import Block from "../../components/block"
 import Page from "../../components/page"
+import "./index.scss"
 
 export default function ButtonDemo() {
   return (

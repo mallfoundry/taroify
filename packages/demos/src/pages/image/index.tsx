@@ -1,12 +1,12 @@
-import Image, { ImageMode } from "@vant-taro/core/image"
-import Row from "@vant-taro/core/row"
-import Col from "@vant-taro/core/col"
+import Image, { ImageMode } from "@taroify/core/image"
+import Row from "@taroify/core/row"
+import Col from "@taroify/core/col"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
 import { Text } from "@tarojs/components"
-import ImageOutlined from "@vant-taro/icons/ImageOutlined"
-import BrokenImageOutlined from "@vant-taro/icons/BrokenImageOutlined"
+import ImageOutlined from "@taroify/icons/ImageOutlined"
+import BrokenImageOutlined from "@taroify/icons/BrokenImageOutlined"
+import classes from "./index.module.scss"
 
 export default function ImageDemo() {
   const imageUrl = "https://img01.yzcdn.cn/vant/cat.jpeg"

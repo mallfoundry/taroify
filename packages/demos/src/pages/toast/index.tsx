@@ -1,10 +1,9 @@
-import "@vant-taro/core/index.scss"
-import Page from "../../components/page"
-import Cell from "@vant-taro/core/cell"
-import Toast, { ToastType } from "@vant-taro/core/toast"
-import Block from "../../components/block"
-import ArrowForwardIosOutlined from "@vant-taro/icons/ArrowForwardIosOutlined"
 import { useState } from "react"
+import Block from "../../components/block"
+import Page from "../../components/page"
+import Cell from "@taroify/core/cell"
+import Toast, { ToastType } from "@taroify/core/toast"
+import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
 
 
 interface OpenOptions {

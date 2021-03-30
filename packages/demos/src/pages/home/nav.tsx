@@ -1,8 +1,7 @@
 import { Navigator, View } from "@tarojs/components"
-import classes from "./nav.module.scss"
 import { ReactNode } from "react"
-import "@vant-taro/icons/index.scss"
-import ArrowForwardIosOutlined from "@vant-taro/icons/ArrowForwardIosOutlined"
+import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import classes from "./nav.module.scss"
 
 interface NavBlockProps {
   title?: ReactNode

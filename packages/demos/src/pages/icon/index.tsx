@@ -1,11 +1,11 @@
 import "./index.scss"
-import "@vant-taro/core/index.scss"
-import "@vant-taro/icons/index.scss"
+import "@taroify/core/index.scss"
+import "@taroify/icons/index.scss"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import { MaterialIcon } from "@vant-taro/icons/material"
-import ArrowBackIosOutlined from "@vant-taro/icons/ArrowBackIosOutlined"
-import ArrowForwardIosOutlined from "@vant-taro/icons/ArrowForwardIosOutlined"
+import { MaterialIcon } from "@taroify/icons/material"
+import ArrowBackIosOutlined from "@taroify/icons/ArrowBackIosOutlined"
+import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
 
 export default function IconDemo() {
   return (

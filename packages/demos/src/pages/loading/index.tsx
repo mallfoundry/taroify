@@ -1,8 +1,8 @@
-import Loading from "@vant-taro/core/loading"
-import Space from "@vant-taro/core/space"
-import "./index.scss"
+import Loading from "@taroify/core/loading"
+import Space from "@taroify/core/space"
 import Block from "../../components/block"
 import Page from "../../components/page"
+import "./index.scss"
 
 export default function LoadingDemo() {
   return (

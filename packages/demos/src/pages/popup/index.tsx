@@ -1,10 +1,10 @@
-import "@vant-taro/core/index.scss"
+import "@taroify/core/index.scss"
 import Page from "../../components/page"
 import { CSSProperties, useState } from "react"
-import Popup, { PopupAnchor } from "@vant-taro/core/popup"
+import Popup, { PopupAnchor } from "@taroify/core/popup"
+import Cell from "@taroify/core/cell"
 import Block from "../../components/block"
-import ArrowForwardIosOutlined from "@vant-taro/icons/ArrowForwardIosOutlined"
-import Cell from "@vant-taro/core/cell"
+import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
 
 interface OpenOptions {
   open?: boolean,

@@ -2,3 +2,8 @@
   background-color: #f7f8fa;
   height: 100vh;
 }
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
