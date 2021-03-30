@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "sourceMap": false,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": false,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "declaration": true,
+    "declarationMap": true,
+    "types": [
+      "jest",
+      "node"
+    ],
+    "rootDir": ".",
+    "jsx": "react",
+  },
+}
