@@ -5,7 +5,7 @@
 /.pnp
 .yarn
 .pnp.js
-
+node_modules/
 /packages/*/node_modules
 /packages/*/package-lock.json
 
@@ -15,9 +15,14 @@
 # eslint
 .eslintcache
 
+# bundles
+/bundles
+
 # production
 /build
 /dist
+.cache/
+/site/public/
 /packages/*/dist
 /packages/*/build
 /packages/*/*.d.ts
