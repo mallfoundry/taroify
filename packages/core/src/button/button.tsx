@@ -11,6 +11,8 @@ export enum ButtonFormType {
   Reset = "reset"
 }
 
+type ButtonFormTypeString = "button" | "submit" | "reset"
+
 export enum ButtonVariant {
   Contained = "contained",
   Text = "text",
@@ -52,7 +54,7 @@ interface ButtonProps {
   shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
   color?: ButtonColor | ButtonColorString
-  formType?: ButtonFormType
+  formType?: ButtonFormType | ButtonFormTypeString
   block?: boolean
   hairline?: boolean
   disabled?: boolean
