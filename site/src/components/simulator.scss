@@ -1,0 +1,32 @@
+
+.vant-simulator {
+  position: absolute;
+  top: 90px;
+  right: 30px;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 360px;
+  min-width: 360px;
+  overflow: hidden;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: #ebedf0 0 4px 12px;
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 640px;
+  }
+
+  &-fixed {
+    position: fixed;
+    top: 24px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .vant-simulator {
+    right: 50%;
+    margin-right: -800px;
+  }
+}
