@@ -1,4 +1,6 @@
-import { Button, Space, WhiteSpace } from "@vant-taro/core"
+import Button from "@vant-taro/core/button"
+import Space from "@vant-taro/core/space"
+import WhiteSpace from "@vant-taro/core/white-space"
 import "./index.scss"
 import "@vant-taro/core/index.scss"
 import Block from "../../components/block"
