@@ -1,5 +1,6 @@
 @import "../styles/prefix";
 @import "../styles/variables";
+@import "../styles/hairline";
 
 $button-line-height: 1.2;
 $button-border-width: $border-width-base;
@@ -7,19 +8,21 @@ $button-border-radius: $border-radius-sm;
 
 $button-shape-round-border-radius: $border-radius-max;
 
-$button-size-mini-height: $height-xs;
-$button-size-mini-padding: $padding-xs;
+$button-disabled-opacity: $disabled-opacity;
+
+$button-size-mini-height: 24px * $hd;
+$button-size-mini-padding: $padding-base;
 $button-size-mini-font-size: $font-size-xs;
 
-$button-size-small-height: $height-sm;
+$button-size-small-height: 32px * $hd;
 $button-size-small-padding: $padding-sm;
 $button-size-small-font-size: $font-size-sm;
 
-$button-size-medium-height: $height-md;
+$button-size-medium-height: 44px * $hd;
 $button-size-medium-padding: $padding-md;
 $button-size-medium-font-size: $font-size-md;
 
-$button-size-large-height: $height-lg;
+$button-size-large-height: 50px * $hd;
 $button-size-large-padding: $padding-lg;
 $button-size-large-font-size: $font-size-lg;
 
