@@ -8,7 +8,7 @@ export default function Home() {
     <View className={classes.Home}>
       <View className={classes.HomeTitle}>
         <Image className={classes.HomeLogo} mode="aspectFit" src="https://img01.yzcdn.cn/vant/logo.png" />
-        <Text className={classes.HomeName}>Vant Taro</Text>
+        <Text className={classes.HomeName}>Taroify</Text>
       </View>
       <View className={classes.HomeDescription}>轻量、可靠的小程序端 Taro 组件库</View>
       <Nav title="基础组件">
