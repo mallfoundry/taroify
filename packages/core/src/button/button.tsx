@@ -45,7 +45,7 @@ export enum ButtonShape {
   Round = "round",
 }
 
-type ButtonShapeString = "circle" | "round"
+type ButtonShapeString = "square" | "circle" | "round"
 
 interface ButtonProps {
   variant?: ButtonVariant | ButtonVariantString
