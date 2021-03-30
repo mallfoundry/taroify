@@ -57,9 +57,9 @@ export default function Icon(props: IconProps) {
     <MaterialIcon
       className={
         classNames(
-          `vant-icon`,
-          `vant-icon-color-${color}`,
-          `vant-icon-size-${size}`,
+          `taroify-icon`,
+          `taroify-icon-color-${color}`,
+          `taroify-icon-size-${size}`,
           className,
         )
       }

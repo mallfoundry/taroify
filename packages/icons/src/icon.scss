@@ -1,6 +1,6 @@
 @import "./variables";
 
-.vant-icon {
+.taroify-icon {
   width: 1em;
   height: 1em;
   font-weight: normal;
@@ -16,50 +16,50 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.vant-icon-size-inherit {
+.taroify-icon-size-inherit {
   font-size: inherit;
 }
 
-.vant-icon-size-mini {
+.taroify-icon-size-mini {
   font-size: 20px;
 }
 
-.vant-icon-size-small {
+.taroify-icon-size-small {
   font-size: 24px;
 }
 
-.vant-icon-size-medium {
+.taroify-icon-size-medium {
   font-size: 36px;
 }
 
-.vant-icon-size-large {
+.taroify-icon-size-large {
   font-size: 40px;
 }
 
-.vant-icon-color-inherit {
+.taroify-icon-color-inherit {
   color: inherit;
 }
 
-.vant-icon-color-default {
+.taroify-icon-color-default {
   color: $default-color;
 }
 
-.vant-icon-color-primary {
+.taroify-icon-color-primary {
   color: $primary-color;
 }
 
-.vant-icon-color-info {
+.taroify-icon-color-info {
   color: $info-color;
 }
 
-.vant-icon-color-success {
+.taroify-icon-color-success {
   color: $success-color;
 }
 
-.vant-icon-color-warning {
+.taroify-icon-color-warning {
   color: $warning-color;
 }
 
-.vant-icon-color-danger {
+.taroify-icon-color-danger {
   color: $danger-color;
 }
