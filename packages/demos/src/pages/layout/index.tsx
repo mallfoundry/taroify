@@ -1,10 +1,11 @@
-import Page from "../../components/page"
-import Block from "../../components/block"
+import * as React from "react"
 import Row from "@taroify/core/row"
 import Col from "@taroify/core/col"
+import Page from "../../components/page"
+import Block from "../../components/block"
 import classes from "./index.module.scss"
 
-export default function Layout() {
+export default function LayoutDemo() {
   return (
     <Page title="布局" className={classes.Layout}>
       <Block title="基础用法">

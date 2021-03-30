@@ -1,5 +1,6 @@
-import { Navigator, View } from "@tarojs/components"
+import * as React from "react"
 import { ReactNode } from "react"
+import { Navigator, View } from "@tarojs/components"
 import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
 import classes from "./nav.module.scss"
 

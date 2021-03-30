@@ -1,10 +1,10 @@
-import "@taroify/core/index.scss"
-import Page from "../../components/page"
+import * as React from "react"
 import { CSSProperties, useState } from "react"
-import Popup, { PopupAnchor } from "@taroify/core/popup"
 import Cell from "@taroify/core/cell"
-import Block from "../../components/block"
+import Popup, { PopupAnchor } from "@taroify/core/popup"
 import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import Page from "../../components/page"
+import Block from "../../components/block"
 
 interface OpenOptions {
   open?: boolean,

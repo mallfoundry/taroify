@@ -1,11 +1,12 @@
+import * as React from "react"
+import { Text } from "@tarojs/components"
 import Image, { ImageMode } from "@taroify/core/image"
 import Row from "@taroify/core/row"
 import Col from "@taroify/core/col"
-import Block from "../../components/block"
-import Page from "../../components/page"
-import { Text } from "@tarojs/components"
 import ImageOutlined from "@taroify/icons/ImageOutlined"
 import BrokenImageOutlined from "@taroify/icons/BrokenImageOutlined"
+import Block from "../../components/block"
+import Page from "../../components/page"
 import classes from "./index.module.scss"
 
 export default function ImageDemo() {

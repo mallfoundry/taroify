@@ -1,11 +1,9 @@
-import "./index.scss"
-import "@taroify/core/index.scss"
-import "@taroify/icons/index.scss"
+import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import { MaterialIcon } from "@taroify/icons/material"
 import ArrowBackIosOutlined from "@taroify/icons/ArrowBackIosOutlined"
 import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import "./index.scss"
 
 export default function IconDemo() {
   return (
@@ -14,7 +12,6 @@ export default function IconDemo() {
         <ArrowBackIosOutlined />
         <ArrowBackIosOutlined />
         <ArrowForwardIosOutlined />
-        <MaterialIcon children="face" />
       </Block>
     </Page>
   )

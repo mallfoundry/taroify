@@ -1,3 +1,4 @@
+import * as React from "react"
 import { ReactNode } from "react"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
