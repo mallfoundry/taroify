@@ -21,7 +21,19 @@
       "node"
     ],
     "rootDir": ".",
-    "jsx": "react"
+    "jsx": "react",
+    "typeRoots": [
+      "node_modules/@types",
+      "typings.d.d.ts"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        "src/.umi/*"
+      ]
+    }
   },
   "include": [
     "packages/*/src"
