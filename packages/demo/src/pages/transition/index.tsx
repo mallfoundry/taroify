@@ -3,7 +3,7 @@ import { useState } from "react"
 import { View } from "@tarojs/components"
 import Cell from "@taroify/core/cell"
 import Transition, { TransitionName } from "@taroify/core/transition"
-import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import ArrowRight from "@taroify/icons/ArrowRight"
 import Block from "../../components/block"
 import Page from "../../components/page"
 import classes from "./index.module.scss"
@@ -21,42 +21,42 @@ export default function TransitionDemo() {
     <Page title="动画">
       <Block title="基本用法">
         <Cell clickable label="Fade"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.Fade)}
         />
         <Cell clickable label="Fade Up"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.FadeUp)}
         />
         <Cell clickable label="Fade Down"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.FadeDown)}
         />
         <Cell clickable label="Fade Left"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.FadeLeft)}
         />
         <Cell clickable label="Fade Right"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.FadeRight)}
         />
         <Cell clickable label="Slide Up"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.SlideUp)}
         />
         <Cell clickable label="Slide Down"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.SlideDown)}
         />
         <Cell clickable label="Slide Left"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.SlideLeft)}
         />
         <Cell clickable label="Slide Right"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
-        <Transition in={state} duration={10000} name={name}>
+        <Transition in={state} name={name}>
           <View className={classes.AnimateBlock} />
         </Transition>
       </Block>
