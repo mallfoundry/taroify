@@ -6,45 +6,45 @@ $button-line-height: 1.2;
 $button-border-width: $border-width-base;
 $button-border-radius: $border-radius-sm;
 
-$button-shape-round-border-radius: $border-radius-max;
-
 $button-disabled-opacity: $disabled-opacity;
 
-$button-size-mini-height: 24px * $hd;
-$button-size-mini-padding: 0 $padding-base;
-$button-size-mini-font-size: $font-size-xs;
+$button-round-border-radius: $border-radius-max;
 
-$button-size-small-height: 32px * $hd;
-$button-size-small-padding: 0 $padding-xs;
-$button-size-small-font-size: $font-size-sm;
+$button-mini-height: 24px * $hd;
+$button-mini-padding: 0 $padding-base;
+$button-mini-font-size: $font-size-xs;
 
-$button-size-medium-height: 44px * $hd;
-$button-size-medium-padding: 0 $padding-md;
-$button-size-medium-font-size: $font-size-md;
+$button-small-height: 32px * $hd;
+$button-small-padding: 0 $padding-xs;
+$button-small-font-size: $font-size-sm;
 
-$button-size-large-height: 50px * $hd;
-$button-size-large-font-size: $font-size-lg;
+$button-medium-height: 44px * $hd;
+$button-medium-padding: 0 $padding-md;
+$button-medium-font-size: $font-size-md;
 
-$button-color-default-color: $text-color;
-$button-color-default-background-color: $white-color;
-$button-color-default-border-color: $border-color;
+$button-large-height: 50px * $hd;
+$button-large-font-size: $font-size-lg;
 
-$button-color-primary-color: $white-color;
-$button-color-primary-background-color: $primary-color;
-$button-color-primary-border-color: $primary-color;
+$button-default-color: $text-color;
+$button-default-background-color: $white-color;
+$button-default-border-color: $border-color;
 
-$button-color-info-color: $white-color;
-$button-color-info-background-color: $info-color;
-$button-color-info-border-color: $info-color;
+$button-primary-color: $white-color;
+$button-primary-background-color: $primary-color;
+$button-primary-border-color: $primary-color;
 
-$button-color-success-color: $white-color;
-$button-color-success-background-color: $success-color;
-$button-color-success-border-color: $success-color;
+$button-info-color: $white-color;
+$button-info-background-color: $info-color;
+$button-info-border-color: $info-color;
 
-$button-color-warning-color: $white-color;
-$button-color-warning-background-color: $warning-color;
-$button-color-warning-border-color: $warning-color;
+$button-success-color: $white-color;
+$button-success-background-color: $success-color;
+$button-success-border-color: $success-color;
 
-$button-color-danger-color: $white-color;
-$button-color-danger-background-color: $error-color;
-$button-color-danger-border-color: $error-color;
+$button-warning-color: $white-color;
+$button-warning-background-color: $warning-color;
+$button-warning-border-color: $warning-color;
+
+$button-danger-color: $white-color;
+$button-danger-background-color: $error-color;
+$button-danger-border-color: $error-color;

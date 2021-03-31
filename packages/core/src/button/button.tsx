@@ -87,26 +87,27 @@ export default function Button(props: ButtonProps) {
         {
           [prefixClassname("button-disabled")]: disabled,
           [prefixClassname("button-block")]: block,
+          // Set hairline style
           [prefixClassname("button-hairline")]: hairline,
           [prefixClassname("hairline-surround")]: hairline,
           // Set variant style
-          [prefixClassname("button-variant-text")]: variant === ButtonVariant.Text,
-          [prefixClassname("button-variant-contained")]: variant === ButtonVariant.Contained,
-          [prefixClassname("button-variant-outlined")]: variant === ButtonVariant.Outlined,
+          [prefixClassname("button-text")]: variant === ButtonVariant.Text,
+          [prefixClassname("button-contained")]: variant === ButtonVariant.Contained,
+          [prefixClassname("button-outlined")]: variant === ButtonVariant.Outlined,
           // Set shape style
-          [prefixClassname("button-shape-round")]: shape === ButtonShape.Round,
+          [prefixClassname("button-round")]: shape === ButtonShape.Round,
           // Set size style
-          [prefixClassname("button-size-mini")]: size === ButtonSize.Mini,
-          [prefixClassname("button-size-small")]: size === ButtonSize.Small,
-          [prefixClassname("button-size-medium")]: size === ButtonSize.Medium,
-          [prefixClassname("button-size-large")]: size === ButtonSize.Large,
+          [prefixClassname("button-mini")]: size === ButtonSize.Mini,
+          [prefixClassname("button-small")]: size === ButtonSize.Small,
+          [prefixClassname("button-medium")]: size === ButtonSize.Medium,
+          [prefixClassname("button-large")]: size === ButtonSize.Large,
           // Set color style
-          [prefixClassname("button-color-default")]: color === ButtonColor.Default,
-          [prefixClassname("button-color-primary")]: color === ButtonColor.Primary,
-          [prefixClassname("button-color-info")]: color === ButtonColor.Info,
-          [prefixClassname("button-color-success")]: color === ButtonColor.Success,
-          [prefixClassname("button-color-warning")]: color === ButtonColor.Warning,
-          [prefixClassname("button-color-danger")]: color === ButtonColor.Danger,
+          [prefixClassname("button-default")]: color === ButtonColor.Default,
+          [prefixClassname("button-primary")]: color === ButtonColor.Primary,
+          [prefixClassname("button-info")]: color === ButtonColor.Info,
+          [prefixClassname("button-success")]: color === ButtonColor.Success,
+          [prefixClassname("button-warning")]: color === ButtonColor.Warning,
+          [prefixClassname("button-danger")]: color === ButtonColor.Danger,
         })}
       onClick={onClick}
     >
