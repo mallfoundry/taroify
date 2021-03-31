@@ -3,7 +3,6 @@ import { ReactElement, ReactNode, useEffect, useState } from "react"
 import Popup from "../popup"
 import classNames from "classnames"
 import { prefixClassname } from "../styles"
-import { IconColor } from "@taroify/icons/Icon"
 import { View } from "@tarojs/components"
 import DoneOutlined from "@taroify/icons/DoneOutlined"
 import PriorityHighOutlined from "@taroify/icons/PriorityHighOutlined"
@@ -38,7 +37,6 @@ function appendIconClassName(node ?: ReactNode) {
   const element = node as ReactElement
   return React.cloneElement(node, {
     className: classNames(prefixClassname("toast-icon"), element.props.className),
-    color: IconColor.Inherit,
   })
 }
 
