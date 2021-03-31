@@ -4,8 +4,9 @@ import Popup from "../popup"
 import classNames from "classnames"
 import { prefixClassname } from "../styles"
 import { View } from "@tarojs/components"
-import DoneOutlined from "@taroify/icons/DoneOutlined"
-import PriorityHighOutlined from "@taroify/icons/PriorityHighOutlined"
+import Success from "@taroify/icons/Success"
+import Fail from "@taroify/icons/Fail"
+import Loading from "../loading"
 
 export enum ToastType {
   Text = "text",
@@ -22,10 +23,13 @@ function defaultIcon(icon ?: ReactNode, type?: ToastType | ToastTypeString) {
     return icon
   }
   if (type === ToastType.Success) {
-    return <DoneOutlined />
+    return <Success />
+  }
+  if (type === ToastType.Loading) {
+    return <Loading />
   }
   if (type === ToastType.Fail) {
-    return <PriorityHighOutlined />
+    return <Fail />
   }
   return undefined
 }
