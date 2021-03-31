@@ -6,13 +6,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px * 2;
+    height: 56px * 2;
     background-color: #fff;
 
     .NavTitle {
       font-weight: 600;
       font-size: 16px * 2;
       text-transform: capitalize;
+    }
+
+    .NavBack {
+      position: absolute;
+      top: 16px * 2;
+      left: 16px * 2;
+      width: 24px * 2;
+      height: 24px * 2;
+      color: #969799;
+      cursor: pointer;
     }
   }
 
