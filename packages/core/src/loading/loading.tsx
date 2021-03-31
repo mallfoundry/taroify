@@ -10,7 +10,7 @@ const SpinIcon = _.range(0, 12)
 
 function LoadingSpinner() {
   return (
-    <View className="vant-loading-spinner">
+    <View className={prefixClassname("loading-spinner")}>
       {SpinIcon}
     </View>
   )
