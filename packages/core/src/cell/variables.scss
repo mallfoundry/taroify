@@ -2,6 +2,29 @@
 @import "../styles/variables";
 @import "../styles/mixins/hairline";
 
+$cell-font-size: $font-size-md;
+$cell-line-height: 24px * $hd;
+
 $cell-border-color: $border-color;
 $cell-value-color: $gray-6;
 $cell-active-color: $active-color;
+
+$cell-icon-size: 16px * $hd;
+$cell-start-icon-margin-left: 4px * $hd;
+$cell-end-icon-margin-right: 4px * $hd;
+
+$cell-description-color: $gray-6;
+$cell-description-font-size: $font-size-sm;
+$cell-description-line-height: $line-height-sm;
+$cell-description-margin-top: $padding-base;
+
+$cell-vertical-padding: 10px * $hd;
+$cell-horizontal-padding: $padding-md;
+
+$cell-medium-vertical-padding: $padding-sm;
+$cell-medium-title-font-size: $font-size-lg;
+$cell-medium-label-font-size: $font-size-md;
+
+$cell-large-vertical-padding: $padding-sm;
+$cell-large-label-font-size: $font-size-lg;
+$cell-large-description-font-size: $font-size-md;
