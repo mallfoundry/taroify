@@ -2,7 +2,7 @@ import * as React from "react"
 import { CSSProperties, useState } from "react"
 import Cell from "@taroify/core/cell"
 import Popup, { PopupAnchor } from "@taroify/core/popup"
-import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import ArrowRight from "@taroify/icons/ArrowRight"
 import Page from "../../components/page"
 import Block from "../../components/block"
 
@@ -43,31 +43,31 @@ export default function PopupDemo() {
     <Page title="Popup">
       <Block title="基础用法">
         <Cell clickable label="显示遮盖层"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: undefined })}
         />
       </Block>
       <Block title="弹出位置">
         <Cell clickable label="顶部弹出"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: PopupAnchor.Top })}
         />
         <Cell clickable label="底部弹出"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: PopupAnchor.Bottom })}
         />
         <Cell clickable label="左侧弹出"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: PopupAnchor.Left })}
         />
         <Cell clickable label="右侧弹出"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: PopupAnchor.Right })}
         />
       </Block>
       <Block title="圆角弹窗">
         <Cell clickable label="圆角弹窗"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ anchor: PopupAnchor.Bottom, rounded: true })}
         />
       </Block>

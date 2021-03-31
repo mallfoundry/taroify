@@ -4,7 +4,7 @@ import Block from "../../components/block"
 import Page from "../../components/page"
 import Cell from "@taroify/core/cell"
 import Toast, { ToastType } from "@taroify/core/toast"
-import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import ArrowRight from "@taroify/icons/ArrowRight"
 
 
 interface OpenOptions {
@@ -28,19 +28,19 @@ export default function ToastDemo() {
     <Page title="Toast">
       <Block title="基础用法">
         <Cell clickable label="文字提示"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ type: ToastType.Text, message: "文字提示" })}
         />
         <Cell clickable label="加载提示"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ type: ToastType.Loading, message: "加载中..." })}
         />
         <Cell clickable label="成功提示"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ type: ToastType.Success, message: "成功文案" })}
         />
         <Cell clickable label="失败提示"
-              endIcon={<ArrowForwardIosOutlined color="inherit" size="inherit" />}
+              endIcon={<ArrowRight />}
               onClick={() => handleOpen({ type: ToastType.Fail, message: "失败文案" })}
         />
       </Block>

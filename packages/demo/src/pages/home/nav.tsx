@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ReactNode } from "react"
 import { Navigator, View } from "@tarojs/components"
-import ArrowForwardIosOutlined from "@taroify/icons/ArrowForwardIosOutlined"
+import ArrowRight from "@taroify/icons/ArrowRight"
 import classes from "./nav.module.scss"
 
 interface NavBlockProps {
@@ -16,7 +16,7 @@ export function NavBlock(props: NavBlockProps) {
       className={classes.NavBlock}
       url={href}>
       {title}
-      <ArrowForwardIosOutlined size="small" />
+      <ArrowRight size="small" />
     </Navigator>
   )
 }
