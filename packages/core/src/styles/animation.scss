@@ -1,6 +1,7 @@
+@import './prefix';
 @import './variables';
 
-@keyframes vant-rotate {
+@keyframes #{$component-prefix}-rotate {
   from {
     transform: rotate(0deg);
   }
