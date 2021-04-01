@@ -17,7 +17,7 @@
   }
 
   &-spinner {
-    animation: vant-rotate 0.8s steps(12) infinite;
+    animation: #{$component-prefix}-rotate 0.8s steps(12) infinite;
 
     &-item {
       position: absolute;
@@ -57,7 +57,7 @@
       border-style: solid;
       border-color: currentColor transparent transparent transparent;
       border-radius: 50%;
-      animation: vant-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      animation: #{$component-prefix}-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 
       &:nth-child(1) {
         animation-delay: -0.45s;
