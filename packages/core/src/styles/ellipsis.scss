@@ -1,0 +1,14 @@
+@import './prefix';
+@import './mixins/ellipsis';
+
+.#{$component-prefix}-ellipsis {
+  @include ellipsis();
+}
+
+.#{$component-prefix}-multi-ellipsis-l2 {
+  @include multi-ellipsis(2);
+}
+
+.#{$component-prefix}-multi-ellipsis-l3 {
+  @include multi-ellipsis(3);
+}
