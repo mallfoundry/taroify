@@ -6,8 +6,8 @@ export default function Handler() {
     <header className="vant-header">
       <div className="vant-header-top">
         <div className="vant-header-logo">
-          <img src="https://img01.yzcdn.cn/vant/logo.png" alt="vant logo" />
-          <span>Vant Taro</span>
+          <img src="https://img01.yzcdn.cn/vant/logo.png" alt="taroify logo" />
+          <span>Taroify</span>
         </div>
       </div>
     </header>
