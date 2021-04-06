@@ -35,7 +35,6 @@ export function navigateBack() {
   sendMessage(NAVIGATE_BACK_MESSAGE)
 }
 
-
 export function framedWrapper() {
   return process.env.TARO_ENV === "h5" && parent != window
 }
