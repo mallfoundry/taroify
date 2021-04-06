@@ -12,17 +12,16 @@ export default function Home() {
       </View>
       <View className={classes.HomeDescription}>轻量、可靠的小程序端 Taro 组件库</View>
       <Nav title="基础组件">
-        <NavBlock href="/pages/button/index" title="Button 按钮" />
-        <NavBlock href="/pages/cell/index" title="Cell 单元格" />
-        <NavBlock href="/pages/icon/index" title="Icon 图标" />
-        <NavBlock href="/pages/image/index" title="Image 图片" />
-        <NavBlock href="/pages/layout/index" title="Layout 布局" />
-        <NavBlock href="/pages/backdrop/index" title="Backdrop 背景暗化" />
-        <NavBlock href="/pages/popup/index" title="Popup 弹出层" />
-        <NavBlock href="/pages/button/index" title="Style 内置样式" />
-        <NavBlock href="/pages/transition/index" title="Transition 动画" />
-        <NavBlock href="/pages/toast/index" title="Toast 轻提示" />
-        <NavBlock href="/pages/loading/index" title="Loading 加载" />
+        <NavBlock component="button" href="/pages/button/index" title="Button 按钮" />
+        <NavBlock component="cell" href="/pages/cell/index" title="Cell 单元格" />
+        <NavBlock component="icon" href="/pages/icon/index" title="Icon 图标" />
+        <NavBlock component="image" href="/pages/image/index" title="Image 图片" />
+        <NavBlock component="layout" href="/pages/layout/index" title="Layout 布局" />
+        <NavBlock component="backdrop" href="/pages/backdrop/index" title="Backdrop 背景暗化" />
+        <NavBlock component="popup" href="/pages/popup/index" title="Popup 弹出层" />
+        <NavBlock component="transition" href="/pages/transition/index" title="Transition 动画" />
+        <NavBlock component="toast" href="/pages/toast/index" title="Toast 轻提示" />
+        <NavBlock component="loading" href="/pages/loading/index" title="Loading 加载" />
       </Nav>
     </View>
   )
