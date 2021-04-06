@@ -1,26 +1,14 @@
-import { Component } from "react"
+import { ReactNode } from "react"
 import "./app.scss"
 import "@taroify/icons/index.scss"
 import "@taroify/core/index.scss"
 
-class App extends Component {
+interface AppProps {
+  children?: ReactNode
+}
 
-  componentDidMount() {
-  }
-
-  componentDidShow() {
-  }
-
-  componentDidHide() {
-  }
-
-  componentDidCatchError() {
-  }
-
-  // this.props.children 是将要会渲染的页面
-  render() {
-    return this.props.children
-  }
+function App({ children }: AppProps) {
+  return children
 }
 
 export default App
