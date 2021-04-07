@@ -1,25 +1,22 @@
 {
-  "name": "vant",
+  "name": "taroify",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {
     "jest": "jest",
-    "dts": "tsc --help",
-    "watch:core": "babel -w packages/core/src/ -d bundles/core --copy-files --extensions \".ts,.tsx\"",
-    "watch:core-decorators:": "tsc -w -p packages/core/tsconfig.d.json",
-    "watch:icons": "babel -w packages/icons/src/ -d bundles/icons --copy-files --extensions \".ts,.tsx\"",
-    "watch:icons-decorators:": "tsc -w -p packages/icons/tsconfig.d.json"
+    "core:watch": "babel -w packages/core/src/ -d bundles/core --copy-files --extensions \".ts,.tsx\"",
+    "core-decorators:watch": "tsc -w -p packages/core/tsconfig.d.json",
+    "icons:watch": "babel -w packages/icons/src/ -d bundles/icons --copy-files --extensions \".ts,.tsx\"",
+    "icons-decorators:watch": "tsc -w -p packages/icons/tsconfig.d.json",
+    "bundles:clean": "node scripts/clean.js"
   },
   "workspaces": [
     "packages/*",
     "bundles/*"
   ],
   "dependencies": {
-    "@tarojs/components": "^3.0.26",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.13",
