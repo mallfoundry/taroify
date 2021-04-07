@@ -2,7 +2,7 @@ import * as React from "react"
 import Button from "@taroify/core/button"
 import Space from "@taroify/core/space"
 import WhiteSpace from "@taroify/core/white-space"
-import DoneOutlined from "@taroify/icons/DoneOutlined"
+import ShopOutlined from "@taroify/icons/ShopOutlined"
 import Block from "../../components/block"
 import Page from "../../components/page"
 import classes from "./index.module.scss"
@@ -58,9 +58,9 @@ export default function ButtonDemo() {
       </Block>
       <Block title="图标按钮">
         <Space>
-          <Button variant="contained" color="primary" startIcon={<DoneOutlined />} />
-          <Button variant="contained" color="primary" startIcon={<DoneOutlined />}>主要按钮</Button>
-          <Button variant="outlined" color="primary" startIcon={<DoneOutlined />}>轮廓按钮</Button>
+          <Button variant="contained" color="primary" startIcon={<ShopOutlined />} />
+          <Button variant="contained" color="primary" startIcon={<ShopOutlined />}>主要按钮</Button>
+          <Button variant="outlined" color="primary" startIcon={<ShopOutlined />}>轮廓按钮</Button>
         </Space>
       </Block>
       <Block title="按钮尺寸">
