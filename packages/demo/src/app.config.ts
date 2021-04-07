@@ -11,6 +11,7 @@ export default {
     "pages/popup/index",
     "pages/transition/index",
     "pages/toast/index",
+    "pages/space/index",
   ],
   window: {
     backgroundTextStyle: "light",
