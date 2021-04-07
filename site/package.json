@@ -1,8 +1,8 @@
- {
-  "name": "@vant-taro/site",
+{
+  "name": "@taroify/site",
   "version": "1.0.0",
   "private": true,
-  "author": "TangZhi",
+  "author": "Taroify",
   "keywords": [
     "gatsby"
   ],
