@@ -16,7 +16,7 @@ export default {
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#4fc08d",
-    navigationBarTitleText: "Vant Taro",
+    navigationBarTitleText: "Taroify",
     navigationBarTextStyle: "black",
   },
 }
