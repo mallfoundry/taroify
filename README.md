@@ -37,8 +37,8 @@ function ButtonDemo() {
 
 ## 链接
 
-* [更新日志](https://gitee.com/mallfoundry/vant-taro)
-* [意见反馈](https://gitee.com/mallfoundry/vant-taro/issues)
+* [更新日志](https://gitee.com/mallfoundry/taroify)
+* [意见反馈](https://gitee.com/mallfoundry/taroify/issues)
 
 ## 开源协议
 
