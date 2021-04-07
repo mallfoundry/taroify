@@ -61,6 +61,7 @@ interface ImagePlaceholderProps {
 }
 
 function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholderProps) {
+  // Icon Element
   if (React.isValidElement(children)) {
     return (
       <>
@@ -73,7 +74,7 @@ function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholder
       </>
     )
   }
-  console.log("fallback", children, typeof children)
+  // Text String
   if (_.isString(children) || _.isNumber(children)) {
     return (
       <View className={prefixClassname(`image-${prefix}`)} children={children} />
@@ -115,16 +116,13 @@ export default function Image(props: ImageProps) {
     setLoading(true)
   }, [src])
 
-  // console.log(className, style, src, alt, round, lazyLoad, taroMode)
   function handleLoad() {
     setLoading(false)
-    console.log("handle load")
   }
 
   function handleError() {
     setLoading(false)
     setFailed(true)
-    console.log("handle error")
   }
 
   return (
