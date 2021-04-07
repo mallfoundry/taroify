@@ -3,8 +3,8 @@ import { Text } from "@tarojs/components"
 import Image, { ImageMode } from "@taroify/core/image"
 import Row from "@taroify/core/row"
 import Col from "@taroify/core/col"
-import ImageOutlined from "@taroify/icons/ImageOutlined"
-import BrokenImageOutlined from "@taroify/icons/BrokenImageOutlined"
+import Photo from "@taroify/icons/Photo"
+import PhotoFail from "@taroify/icons/PhotoFail"
 import Block from "../../components/block"
 import Page from "../../components/page"
 import classes from "./index.module.scss"
@@ -55,7 +55,7 @@ export default function ImageDemo() {
           <Col span="8">
             <Image
               className={classes.Image}
-              placeholder={<ImageOutlined />}
+              placeholder={<Photo />}
             />
             <Text className={classes.Text}>默认提示</Text>
           </Col>
@@ -73,7 +73,7 @@ export default function ImageDemo() {
           <Col span="8">
             <Image
               className={classes.Image} src="error"
-              fallback={<BrokenImageOutlined />}
+              fallback={<PhotoFail />}
             />
             <Text className={classes.Text}>默认提示</Text>
           </Col>
