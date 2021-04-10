@@ -30,8 +30,8 @@ export default function VantIcon(props: VantIconProps) {
           `van-icon-${children}`,
           `taroify-icon`,
           {
-            [`taroify-icon-${color}`]: color,
-            [`taroify-icon-${size}`]: size,
+            [`taroify-icon--${color}`]: color,
+            [`taroify-icon--${size}`]: size,
           },
           className,
         )}

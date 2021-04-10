@@ -14,52 +14,49 @@
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-}
 
-.taroify-icon-inherit {
-  font-size: inherit;
-}
+  &--inherit {
+    font-size: inherit;
+    color: inherit;
+  }
 
-.taroify-icon-mini {
-  font-size: 20px;
-}
+  &--mini {
+    font-size: 20px;
+  }
 
-.taroify-icon-small {
-  font-size: 24px;
-}
+  &--small {
+    font-size: 24px;
+  }
 
-.taroify-icon-medium {
-  font-size: 36px;
-}
+  &--medium {
+    font-size: 36px;
+  }
 
-.taroify-icon-large {
-  font-size: 40px;
-}
+  &--large {
+    font-size: 40px;
+  }
 
-.taroify-icon-inherit {
-  color: inherit;
-}
+  &--default {
+    color: $default-color;
+  }
 
-.taroify-icon-default {
-  color: $default-color;
-}
+  &--primary {
+    color: $primary-color;
+  }
 
-.taroify-icon-primary {
-  color: $primary-color;
-}
+  &--info {
+    color: $info-color;
+  }
 
-.taroify-icon-info {
-  color: $info-color;
-}
+  &--success {
+    color: $success-color;
+  }
 
-.taroify-icon-success {
-  color: $success-color;
-}
+  &--warning {
+    color: $warning-color;
+  }
 
-.taroify-icon-warning {
-  color: $warning-color;
-}
-
-.taroify-icon-danger {
-  color: $danger-color;
+  &--danger {
+    color: $danger-color;
+  }
 }

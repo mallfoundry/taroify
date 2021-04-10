@@ -40,8 +40,8 @@ export default function MaterialIcon(props: MaterialIconProps) {
           },
           `taroify-icon`,
           {
-            [`taroify-icon-${color}`]: color,
-            [`taroify-icon-${size}`]: size,
+            [`taroify-icon--${color}`]: color,
+            [`taroify-icon--${size}`]: size,
           },
           className,
         )}
