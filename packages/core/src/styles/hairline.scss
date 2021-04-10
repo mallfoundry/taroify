@@ -10,39 +10,39 @@
 
 .#{$component-prefix}hairline {
   &,
-  &-top,
-  &-left,
-  &-right,
-  &-bottom,
-  &-surround,
-  &-top-bottom {
+  &--top,
+  &--left,
+  &--right,
+  &--bottom,
+  &--surround,
+  &--top-bottom {
     position: relative;
   }
 
-  &-top::after {
+  &--top::after {
     border-top-width: $border-width-base;
   }
 
-  &-left::after {
+  &--left::after {
     border-left-width: $border-width-base;
   }
 
-  &-right::after {
+  &--right::after {
     border-right-width: $border-width-base;
   }
 
-  &-bottom::after {
+  &--bottom::after {
     border-bottom-width: $border-width-base;
   }
 
   &,
-  &-unset {
-    &-top-bottom::after {
+  &--unset {
+    &--top-bottom::after {
       border-width: $border-width-base 0;
     }
   }
 
-  &-surround::after {
+  &--surround::after {
     border-width: $border-width-base;
   }
 }
