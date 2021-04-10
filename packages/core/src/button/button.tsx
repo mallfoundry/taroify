@@ -85,29 +85,29 @@ export default function Button(props: ButtonProps) {
       className={classNames(
         prefixClassname("button"),
         {
-          [prefixClassname("button-disabled")]: disabled,
-          [prefixClassname("button-block")]: block,
+          [prefixClassname("button--disabled")]: disabled,
+          [prefixClassname("button--block")]: block,
           // Set hairline style
-          [prefixClassname("button-hairline")]: hairline,
-          [prefixClassname("hairline-surround")]: hairline,
+          [prefixClassname("button--hairline")]: hairline,
+          [prefixClassname("hairline--surround")]: hairline,
           // Set variant style
-          [prefixClassname("button-text")]: variant === ButtonVariant.Text,
-          [prefixClassname("button-contained")]: variant === ButtonVariant.Contained,
-          [prefixClassname("button-outlined")]: variant === ButtonVariant.Outlined,
+          [prefixClassname("button--text")]: variant === ButtonVariant.Text,
+          [prefixClassname("button--contained")]: variant === ButtonVariant.Contained,
+          [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
           // Set shape style
-          [prefixClassname("button-round")]: shape === ButtonShape.Round,
+          [prefixClassname("button--round")]: shape === ButtonShape.Round,
           // Set size style
-          [prefixClassname("button-mini")]: size === ButtonSize.Mini,
-          [prefixClassname("button-small")]: size === ButtonSize.Small,
-          [prefixClassname("button-medium")]: size === ButtonSize.Medium,
-          [prefixClassname("button-large")]: size === ButtonSize.Large,
+          [prefixClassname("button--mini")]: size === ButtonSize.Mini,
+          [prefixClassname("button--small")]: size === ButtonSize.Small,
+          [prefixClassname("button--medium")]: size === ButtonSize.Medium,
+          [prefixClassname("button--large")]: size === ButtonSize.Large,
           // Set color style
-          [prefixClassname("button-default")]: color === ButtonColor.Default,
-          [prefixClassname("button-primary")]: color === ButtonColor.Primary,
-          [prefixClassname("button-info")]: color === ButtonColor.Info,
-          [prefixClassname("button-success")]: color === ButtonColor.Success,
-          [prefixClassname("button-warning")]: color === ButtonColor.Warning,
-          [prefixClassname("button-danger")]: color === ButtonColor.Danger,
+          [prefixClassname("button--default")]: color === ButtonColor.Default,
+          [prefixClassname("button--primary")]: color === ButtonColor.Primary,
+          [prefixClassname("button--info")]: color === ButtonColor.Info,
+          [prefixClassname("button--success")]: color === ButtonColor.Success,
+          [prefixClassname("button--warning")]: color === ButtonColor.Warning,
+          [prefixClassname("button--danger")]: color === ButtonColor.Danger,
         })}
       onClick={onClick}
     >
@@ -115,9 +115,9 @@ export default function Button(props: ButtonProps) {
         formType={formType === ButtonFormType.Submit ? "submit" : (formType === ButtonFormType.Reset ? "reset" : undefined)}
       />
       <View
-        className={prefixClassname("button-content")}>
+        className={prefixClassname("button__content")}>
         {startIcon}
-        {children && <View className={prefixClassname("button-content-text")} children={children} />}
+        {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
     </View>
   )
