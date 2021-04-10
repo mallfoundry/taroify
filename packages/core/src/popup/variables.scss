@@ -3,3 +3,9 @@
 
 $popup-z-index: 1010;
 $popup-round-border-radius: 16px * $hd;
+// close icon
+$popup-close-icon-size: 22px * $hd;
+$popup-close-icon-color: $gray-5;
+$popup-close-icon-active-color: $gray-6;
+$popup-close-icon-margin: 16px * $hd;
+$popup-close-icon-z-index: 1;

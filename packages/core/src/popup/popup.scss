@@ -7,48 +7,38 @@
   background-color: #fff;
   z-index: $popup-z-index;
 
-  //&-close {
-  //  position: absolute;
-  //  top: 16px;
-  //  right: 16px;
-  //  z-index: 10;
-  //  color: #c8c9cc;
-  //  size: 16px;
-  //  cursor: pointer;
-  //}
-
-  &-center {
+  &--center {
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
   }
 
-  &-anchor-top {
+  &--top {
     top: 0;
     left: 0;
     width: 100%;
 
-    &.#{$component-prefix}popup-rounded {
+    &.#{$component-prefix}popup--rounded {
       border-radius: 0 0 $popup-round-border-radius $popup-round-border-radius;
     }
   }
 
-  &-anchor-bottom {
+  &--bottom {
     bottom: 0;
     left: 0;
     width: 100%;
 
-    &.#{$component-prefix}popup-rounded {
+    &.#{$component-prefix}popup--rounded {
       border-radius: $popup-round-border-radius $popup-round-border-radius 0 0;
     }
   }
 
-  &-anchor-right {
+  &--right {
     top: 50%;
     right: 0;
     transform: translate3d(0, -50%, 0);
 
-    &.#{$component-prefix}popup-rounded {
+    &.#{$component-prefix}popup--rounded {
       border-radius: $popup-round-border-radius 0 0 $popup-round-border-radius;
     }
 
@@ -76,12 +66,12 @@
     }
   }
 
-  &-anchor-left {
+  &--left {
     top: 50%;
     left: 0;
     transform: translate3d(0, -50%, 0);
 
-    &.#{$component-prefix}popup-rounded {
+    &.#{$component-prefix}popup--rounded {
       border-radius: 0 $popup-round-border-radius $popup-round-border-radius 0;
     }
 
@@ -106,6 +96,38 @@
         transition-property: opacity, transform;
         transition-timing-function: ease;
       }
+    }
+  }
+
+  &__close-icon {
+    position: absolute;
+    z-index: $popup-close-icon-z-index;
+    color: $popup-close-icon-color;
+    size: $popup-close-icon-size;
+    cursor: pointer;
+
+    &:active {
+      color: $popup-close-icon-active-color;
+    }
+
+    &--top-left {
+      top: $popup-close-icon-margin;
+      left: $popup-close-icon-margin;
+    }
+
+    &--top-right {
+      top: $popup-close-icon-margin;
+      right: $popup-close-icon-margin;
+    }
+
+    &--bottom-left {
+      bottom: $popup-close-icon-margin;
+      left: $popup-close-icon-margin;
+    }
+
+    &--bottom-right {
+      right: $popup-close-icon-margin;
+      bottom: $popup-close-icon-margin;
     }
   }
 }
