@@ -5,12 +5,16 @@
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  padding: $padding-sm;
+  padding: $cell-vertical-padding $cell-horizontal-padding;
   overflow: hidden;
   color: $text-color;
-  line-height: $line-height-sm;
-  font-size: $font-size-md;
+  font-size: $cell-font-size;
+  line-height: $cell-line-height;
   background-color: #fff;
+
+  &__label {
+    flex: 1;
+  }
 
   &::after {
     @include hairline-bottom($cell-border-color, $padding-sm, $padding-sm);
@@ -20,16 +24,43 @@
     display: none;
   }
 
-  &-label {
-    flex: 1;
-  }
-
-
-  &-borderless {
+  &--borderless {
 
   }
 
-  &-clickable {
+  &--start {
+    align-items: flex-start;
+  }
+
+  &--center {
+    align-items: center;
+  }
+
+  &--end {
+    align-items: flex-end;
+  }
+
+  &--large {
+    padding-top: $cell-large-vertical-padding;
+    padding-bottom: $cell-large-vertical-padding;
+
+    .#{$component-prefix}cell__label {
+      font-size: $cell-large-label-font-size;
+    }
+
+    .#{$component-prefix}cell__description {
+      font-size: $cell-large-description-font-size;
+    }
+  }
+
+  &__description {
+    color: $cell-description-color;
+    font-size: $cell-description-font-size;
+    line-height: $cell-description-line-height;
+    margin-top: $cell-description-margin-top;
+  }
+
+  &--clickable {
     cursor: pointer;
 
     &:active {
@@ -37,23 +68,33 @@
     }
   }
 
-  &-value {
+  &__value {
     color: $cell-value-color;
     text-align: right;
     flex: 1;
+
+    &--alone {
+      color: $text-color;
+      text-align: left;
+    }
   }
 
-  &-arrow {
-    display: flex;
-    align-items: center;
-    margin-left: 6px;
-    color: $cell-value-color;
+  &__start-icon, &__end-icon {
+    height: $cell-line-height;
+    font-size: $cell-icon-size;
+    line-height: $cell-line-height;
   }
 
-  &-end-icon {
+  &__start-icon {
     display: flex;
     align-items: center;
-    margin-left: 6px;
+    margin-right: $cell-start-icon-margin-left;
+  }
+
+  &__end-icon {
+    display: flex;
+    align-items: center;
+    margin-left: $cell-end-icon-margin-right;
     color: $cell-value-color;
   }
 }
