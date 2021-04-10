@@ -4,7 +4,7 @@
   position: relative;
   display: inline-block;
 
-  &-round {
+  &--round {
     overflow: hidden;
     border-radius: 50%;
 
@@ -13,11 +13,11 @@
     }
   }
 
-  &-loading {
+  &--loading {
     display: none;
   }
 
-  &-fallback, &-placeholder {
+  &__fallback, &__placeholder {
     width: 100%;
     height: 100%;
     position: absolute;

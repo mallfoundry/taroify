@@ -67,8 +67,8 @@ function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholder
       <>
         {
           React.cloneElement(children as ReactElement, {
-            className: classNames(prefixClassname(`image-${prefix}`),
-              prefixClassname(`image-${prefix}-icon`)),
+            className: classNames(prefixClassname(`image__${prefix}`),
+              prefixClassname(`image__${prefix}-icon`)),
           })
         }
       </>
@@ -77,7 +77,7 @@ function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholder
   // Text String
   if (_.isString(children) || _.isNumber(children)) {
     return (
-      <View className={prefixClassname(`image-${prefix}`)} children={children} />
+      <View className={prefixClassname(`image__${prefix}`)} children={children} />
     )
   }
   return <></>
@@ -134,8 +134,8 @@ export default function Image(props: ImageProps) {
           lazyLoad={lazyLoad}
           className={classNames(
             {
-              [prefixClassname("image-round")]: round,
-              [prefixClassname("image-loading")]: loading,
+              [prefixClassname("image--round")]: round,
+              [prefixClassname("image--loading")]: loading,
             },
             className,
           )}
