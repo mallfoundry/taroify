@@ -40,7 +40,7 @@ function appendIconClassName(node ?: ReactNode) {
   }
   const element = node as ReactElement
   return React.cloneElement(node, {
-    className: classNames(prefixClassname("toast-icon"), element.props.className),
+    className: classNames(prefixClassname("toast__icon"), element.props.className),
   })
 }
 
@@ -88,12 +88,12 @@ export default function Toast(props: ToastProps) {
         classNames(
           prefixClassname("toast"),
           {
-            [prefixClassname(`toast-${type}`)]: type,
+            [prefixClassname(`toast--${type}`)]: type,
           },
         )
       }>
       {icon}
-      {icon ? <View className={prefixClassname("toast-message")} children={children} /> : children}
+      {icon ? <View className={prefixClassname("toast__message")} children={children} /> : children}
     </Popup>
   )
 }
