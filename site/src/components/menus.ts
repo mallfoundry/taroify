@@ -11,6 +11,10 @@ export default [
         to: "/quickstart/",
       },
       {
+        title: "开发指南",
+        to: "/contribution/",
+      },
+      {
         title: "更新日志",
         to: "/changelog/",
       },
