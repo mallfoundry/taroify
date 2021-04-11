@@ -7,11 +7,11 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "site:develop": "gatsby develop",
+    "site:start": "gatsby develop",
+    "site:build": "gatsby build --prefix-paths",
+    "site:serve": "gatsby serve --prefix-paths",
+    "site:clean": "gatsby clean"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
