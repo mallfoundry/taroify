@@ -1,3 +1,6 @@
+@import "./variables";
+
 body {
-    background-color: #f7f8fa;
+  background-color: $vant-background-color;
+  min-width: 1100px;
 }
