@@ -31,6 +31,7 @@
   &-item-group {
     padding-left: 6px;
     margin-bottom: 16px;
+
     &-title {
       padding: 8px 0 8px 24px;
       color: #455a64;
@@ -43,7 +44,7 @@
   &-item {
     margin: 8px 0;
 
-    a {
+    span {
       display: block;
       margin: 0;
       padding: 8px 0 8px 24px;
@@ -52,6 +53,7 @@
       line-height: 20px;
       transition: color 0.2s;
       text-decoration: none;
+      cursor: pointer;
 
       &:hover {
         color: #4fc08d;
@@ -59,7 +61,7 @@
     }
 
     &-active {
-      a {
+      span {
         color: #4fc08d;
         font-weight: 600;
         background-color: #ebfff0;
