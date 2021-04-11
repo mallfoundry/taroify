@@ -1,4 +1,5 @@
 import * as _ from "lodash"
+import { navigate } from "gatsby"
 
 const SOURCE_PROPERTY_NAME = "source"
 const SIMULATOR_SOURCE_NAME = "taroify-simulator"
@@ -23,11 +24,10 @@ export function listeningSimulatorEvents() {
   })
 }
 
-const COMPONENT_NAMES = ["button", "cell", "icon", "image", "layout", "popup", "toast"]
+const COMPONENT_NAMES = ["button", "cell", "icon", "image", "layout", "popup", "style", "toast"]
 
 function navigateToComponent(component: string) {
-  // @ts-ignore
-  window.___push(`/components/${component}`)
+  navigate(`/components/${component}`)
 }
 
 interface NavigateToOptions {
