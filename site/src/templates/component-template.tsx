@@ -14,14 +14,15 @@ interface ComponentTemplateProps {
 export default function ComponentTemplate(props: ComponentTemplateProps) {
   const { data } = props
   const post = data.markdownRemark
+  const { slug } = post.fields
   return (
     <div className="vant-docs">
       <Handler />
-      <SideNav />
+      <SideNav slug={slug} />
       <div className="vant-docs-container vant-docs-container-with-simulator">
         <div className="vant-docs-content" dangerouslySetInnerHTML={{ __html: docsCardWrapper(post.html) }} />
       </div>
-      <Simulator />
+      <Simulator slug={slug} />
     </div>
   )
 }
