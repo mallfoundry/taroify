@@ -1,15 +1,17 @@
+@import "../styles/variables";
+
 .vant-simulator {
   position: absolute;
   top: 90px;
-  right: 30px;
+  right: 24px;
   z-index: 1;
   box-sizing: border-box;
   width: 360px;
   min-width: 360px;
   overflow: hidden;
   background: #fafafa;
-  border-radius: 12px;
-  box-shadow: #ebedf0 0 4px 12px;
+  border-radius: $vant-border-radius;
+  box-shadow: 0 8px 12px #ebedf0;
 
   iframe {
     display: block;
@@ -26,6 +28,13 @@
 @media (min-width: 1680px) {
   .vant-simulator {
     right: 50%;
-    margin-right: -800px;
+    margin-right: -816px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .vant-simulator {
+    right: auto;
+    left: 750px;
   }
 }
