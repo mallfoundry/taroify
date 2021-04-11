@@ -1,4 +1,4 @@
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import * as React from "react"
 import { ReactNode } from "react"
 import classNames from "classnames"
@@ -24,12 +24,11 @@ interface MenuItemProps {
 }
 
 function MenuItem({ title, to, active }: MenuItemProps) {
-
   return (
     <div className={classNames("vant-side-nav-item", {
       ["vant-side-nav-item-active"]: active,
-    })}>
-      <Link to={to} children={title} />
+    })} onClick={() => navigate(to)}>
+      <span>{title}</span>
     </div>
   )
 }
