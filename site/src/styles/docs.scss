@@ -1,18 +1,20 @@
 @import "./variables";
 
 .vant-docs {
+  &-container {
+    box-sizing: border-box;
+    padding-left: 220px;
+    overflow: hidden;
+
+    &-with-simulator {
+      padding-right: 384px;
+    }
+  }
+
   @media (min-width: 1680px) {
     &-container {
       width: 1680px;
       margin: 0 auto;
-
-      box-sizing: border-box;
-      padding-left: 220px;
-      overflow: hidden;
-
-      &-with-simulator {
-        padding-right: 390px;
-      }
     }
   }
 
