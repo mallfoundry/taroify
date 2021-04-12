@@ -23,19 +23,14 @@
     "rootDir": ".",
     "jsx": "react",
     "typeRoots": [
-      "node_modules/@types",
-      "typings.d.d.ts"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@@/*": [
-        "src/.umi/*"
-      ]
-    }
+      "node_modules/@types"
+    ]
   },
   "include": [
-    "packages/*/src"
+    "packages/*/src",
+    "typings.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
