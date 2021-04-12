@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: process.env.NODE_ENV === "development" ? "/" : "/taroify.com",
   siteMetadata: {
     title: "Taroify",
     siteUrl: `https://www.taroify.com`,
