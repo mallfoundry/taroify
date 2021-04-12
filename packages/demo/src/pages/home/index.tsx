@@ -19,9 +19,10 @@ export default function Home() {
         <NavBlock component="layout" href="/pages/layout/index" title="Layout 布局" />
         <NavBlock component="backdrop" href="/pages/backdrop/index" title="Backdrop 背景暗化" />
         <NavBlock component="popup" href="/pages/popup/index" title="Popup 弹出层" />
-        <NavBlock component="transition" href="/pages/transition/index" title="Transition 动画" />
+        <NavBlock component="style" href="/pages/style/index" title="Style 内置样式" />
         <NavBlock component="toast" href="/pages/toast/index" title="Toast 轻提示" />
         <NavBlock component="loading" href="/pages/loading/index" title="Loading 加载" />
+        <NavBlock component="space" href="/pages/space/index" title="Space 间距" />
       </Nav>
     </View>
   )
