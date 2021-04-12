@@ -1,14 +1,21 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@import "./variables";
 
 .#{$component-prefix}space {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
 
+  &-horizontal {
+
+  }
+
+  &-vertical {
+
+  }
+
   &-item {
-    margin-right: 8px;
-    margin-bottom: 8px;
+    margin-right: 8px * $hd;
+    margin-bottom: 8px * $hd;
     box-sizing: border-box;
     display: inline-block;
   }
