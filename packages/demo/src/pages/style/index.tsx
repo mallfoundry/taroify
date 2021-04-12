@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useState } from "react"
+import classNames from "classnames"
 import { View } from "@tarojs/components"
 import Cell from "@taroify/core/cell"
 import Transition, { TransitionName } from "@taroify/core/transition"
@@ -18,8 +19,16 @@ export default function TransitionDemo() {
   }
 
   return (
-    <Page title="动画">
-      <Block title="基本用法">
+    <Page title="样式">
+      <Block title="文字省略">
+        <View className={classNames("taroify-ellipsis", classes.EllipsisText)}>这是一段最多显示一行的文字，后面的内容会省略省略省略</View>
+        <View
+          className={classNames("taroify-ellipsis--l2", classes.EllipsisText)}>这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。</View>
+      </Block>
+      <Block title="1px 边框">
+        <View className={classNames("taroify-hairline--top", classes.HairlineLine)} />
+      </Block>
+      <Block title="动画">
         <Cell clickable label="Fade"
               endIcon={<ArrowRight />}
               onClick={() => toggleTransition(TransitionName.Fade)}
