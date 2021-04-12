@@ -24,12 +24,12 @@
       "global.d.ts"
     ]
   },
+  "include": [
+    "./global.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist"
-  ],
-  "include": [
-    "./global.d.ts"
   ],
   "compileOnSave": false
 }
