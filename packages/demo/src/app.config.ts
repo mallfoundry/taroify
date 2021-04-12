@@ -9,7 +9,7 @@ export default {
     "pages/loading/index",
     "pages/backdrop/index",
     "pages/popup/index",
-    "pages/transition/index",
+    "pages/style/index",
     "pages/toast/index",
     "pages/space/index",
   ],
