@@ -1,5 +1,5 @@
 const config = {
-  projectName: "demos",
+  projectName: "@taroify/demo",
   date: "2021-3-9",
   designWidth: 750,
   deviceRatio: {
@@ -38,8 +38,7 @@ const config = {
     },
   },
   h5: {
-    // publicPath: '/taroify-demo/h5/',
-    publicPath: "/",
+    publicPath: process.env.NODE_ENV === "development" ? "/" : "/taroify-demo/h5",
     staticDirectory: "static",
     postcss: {
       autoprefixer: {
