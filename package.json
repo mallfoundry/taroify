@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
-    "jest": "jest",
+    "test": "jest",
     "core:watch": "babel -w packages/core/src/ -d bundles/core --copy-files --extensions \".ts,.tsx\"",
     "core-decorators:watch": "tsc -w -p packages/core/tsconfig.d.json",
     "icons:watch": "babel -w packages/icons/src/ -d bundles/icons --copy-files --extensions \".ts,.tsx\"",
@@ -16,8 +15,7 @@
     "packages/*",
     "bundles/*"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
@@ -28,15 +26,19 @@
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.13",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^13.1.2",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.1",
-    "@types/react-test-renderer": "^17.0.0",
+    "babel-jest": "^26.6.3",
     "cross-env": "^7.0.3",
+    "global-jsdom": "^8.0.0",
     "jest": "^26.6.0",
     "jest-transform-css": "^2.1.0",
     "lerna": "^3.22.1",
-    "react-test-renderer": "^17.0.1",
+    "ts-jest": "^26.5.4",
     "typescript": "^4.1.3"
   }
 }
