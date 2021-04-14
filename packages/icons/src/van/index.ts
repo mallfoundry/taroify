@@ -1,1 +1,1 @@
-export { default as VantIcon } from "./VantIcon"
+export { default as VanIcon } from "./VanIcon"
