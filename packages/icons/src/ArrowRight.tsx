@@ -1,6 +1,6 @@
 import * as React from "react"
 import { IconProps } from "./shared"
-import { VantIcon } from "./vant"
+import { VantIcon } from "./van"
 
 export default function ArrowRight(props: IconProps) {
   const { ...rest } = props

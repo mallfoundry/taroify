@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { View } from "@tarojs/components"
 import { IconColor, IconColorString, IconSize, IconSizeString } from "../shared"
 
-interface VantIconProps {
+interface VanIconProps {
   className?: string
   style?: CSSProperties
   size?: IconSize | IconSizeString
@@ -13,7 +13,7 @@ interface VantIconProps {
   onClick?: () => void
 }
 
-export default function VantIcon(props: VantIconProps) {
+export default function VanIcon(props: VanIconProps) {
   const {
     className, style,
     size = IconSize.Medium,
