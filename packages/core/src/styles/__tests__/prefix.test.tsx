@@ -1,4 +1,4 @@
-import { prefixClassname } from "../index"
+import { prefixClassname } from "../prefix"
 
 const __PREFIX = "taroify-"
 
