@@ -1,8 +1,22 @@
 {
   "name": "@taroify/~icons",
-  "version": "1.0.0",
-  "main": "index.js",
+  "description": "Taroify icon components built on Taro",
+  "version": "0.0.0",
   "license": "MIT",
+  "private": "true",
+  "keywords": [
+    "ui",
+    "taro",
+    "react",
+    "mobile",
+    "frontend",
+    "component",
+    "components"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@tarojs/components": "^3.1.4",
     "classnames": "^2.2.6"
