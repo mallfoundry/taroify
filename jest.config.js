@@ -9,7 +9,7 @@ module.exports = {
   moduleNameMapper: {
     "@tarojs/components": "@tarojs/components/dist-h5/react",
   },
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.ts"],
   testEnvironment: "jest-environment-jsdom",
   testMatch: [
     "<rootDir>/packages/**/__tests__/**/*.[jt]s?(x)",
