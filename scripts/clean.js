@@ -1,5 +1,5 @@
-import * as fs from "fs"
-import rimraf from "rimraf"
+const fs = require("fs")
+const rimraf = require("rimraf")
 
 function cleanBundle(name) {
   const basepath = `./bundles/${name}`
