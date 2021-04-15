@@ -65,7 +65,6 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps) {
-
   const {
     variant = ButtonVariant.Contained,
     shape,
