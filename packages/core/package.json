@@ -1,11 +1,12 @@
 {
   "name": "@taroify/~core",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": "true",
   "dependencies": {
+    "@taroify/icons": "^0.0.1",
     "@tarojs/components": "3.1.2",
-    "@taroify/icons": "^1.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "react-transition-group": "^4.4.1"
