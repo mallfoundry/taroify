@@ -13,7 +13,13 @@ interface BackdropProps {
 }
 
 export default function Backdrop(props: BackdropProps) {
-  const { open = false, closeable = false, duration = 300, children, onClose } = props
+  const {
+    open = false,
+    closeable = false,
+    duration = 300,
+    children,
+    onClose,
+  } = props
 
   function handleClose(event: ITouchEvent) {
     if (closeable && onClose) {
@@ -29,8 +35,8 @@ export default function Backdrop(props: BackdropProps) {
       style={{
         transitionDuration: `${duration}ms`,
       }}
-      onClick={handleClose}>
-      {children}
-    </View>
+      onClick={handleClose}
+      children={children}
+    />
   )
 }
