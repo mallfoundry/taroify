@@ -2,8 +2,8 @@
 
 .#{$component-prefix}loading {
   position: relative;
-  color: $loading-color;
   font-size: 0;
+  color: $loading-color;
   vertical-align: middle;
 
   &__spinner,
@@ -11,8 +11,8 @@
     position: relative;
     display: inline-block;
     width: $loading-size;
-    height: $loading-size;
     max-width: 100%;
+    height: $loading-size;
     max-height: 100%;
     vertical-align: middle;
   }
@@ -32,16 +32,16 @@
         width: 2px * 2;
         height: 25%;
         margin: 0 auto;
+        content: ' ';
         background-color: currentColor;
         border-radius: 40%;
-        content: ' ';
       }
 
       // Generate 12 item
       @for $i from 1 through 12 {
         &:nth-of-type(#{$i}) {
-          transform: rotate($i * 30deg);
           opacity: 1 - (0.75 / 12) * ($i - 1);
+          transform: rotate($i * 30deg);
         }
       }
     }
@@ -54,9 +54,9 @@
       left: 0;
       width: calc(100% - 10px);
       height: calc(100% - 10px);
-      border-width: 5px;
+      border-color: currentColor transparent transparent;
       border-style: solid;
-      border-color: currentColor transparent transparent transparent;
+      border-width: 5px;
       border-radius: 50%;
       animation: #{$component-prefix}-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 

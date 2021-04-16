@@ -14,9 +14,9 @@
   } */
 
   &-item {
-    margin-right: 8px * $hd;
-    margin-bottom: 8px * $hd;
     box-sizing: border-box;
     display: inline-block;
+    margin-right: 8px * $hd;
+    margin-bottom: 8px * $hd;
   }
 }

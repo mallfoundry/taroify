@@ -1,16 +1,16 @@
 @import "./variables";
 
 .#{$component-prefix}toast {
+  box-sizing: content-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-sizing: content-box;
   font-size: $toast-font-size;
   line-height: $toast-line-height;
+  color: $toast-text-color;
   background: $toast-background-color;
   border-radius: $toast-border-radius;
-  color: $toast-text-color;
 
   &--text {
     width: fit-content;
@@ -23,14 +23,14 @@
   &--success,
   &--fail {
     width: $toast-default-width;
-    padding: $toast-default-padding;
     max-width: $toast-max-width;
     min-height: $toast-default-min-height;
+    padding: $toast-default-padding;
   }
 
   &__icon {
-    color: $toast-icon-color;
     font-size: 36px * $hd !important;
+    color: $toast-icon-color;
   }
 
   &__message {

@@ -2,8 +2,8 @@
 @import "../styles/variables";
 
 .#{$component-prefix}white-space {
-  display: block;
   box-sizing: border-box;
+  display: block;
   user-select: none;
 
   &-size-mini {

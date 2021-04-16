@@ -2,8 +2,8 @@
 @import "../styles/variables";
 
 .#{$component-prefix}col {
-  display: block;
   box-sizing: border-box;
+  display: block;
   min-height: 1px;
 }
 

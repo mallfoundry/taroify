@@ -2,14 +2,14 @@
 
 .#{$component-prefix}cell {
   position: relative;
-  display: flex;
   box-sizing: border-box;
+  display: flex;
   width: 100%;
   padding: $cell-vertical-padding $cell-horizontal-padding;
   overflow: hidden;
-  color: $text-color;
   font-size: $cell-font-size;
   line-height: $cell-line-height;
+  color: $text-color;
   background-color: #fff;
 
   &__label {
@@ -55,10 +55,10 @@
   }
 
   &__description {
-    color: $cell-description-color;
+    margin-top: $cell-description-margin-top;
     font-size: $cell-description-font-size;
     line-height: $cell-description-line-height;
-    margin-top: $cell-description-margin-top;
+    color: $cell-description-color;
   }
 
   &--clickable {
@@ -70,9 +70,9 @@
   }
 
   &__value {
+    flex: 1;
     color: $cell-value-color;
     text-align: right;
-    flex: 1;
 
     &--alone {
       color: $text-color;

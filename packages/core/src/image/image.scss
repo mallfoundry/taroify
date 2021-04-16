@@ -19,8 +19,6 @@
 
   &__fallback,
   &__placeholder {
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
@@ -28,8 +26,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: $image-placeholder-text-color;
+    width: 100%;
+    height: 100%;
     font-size: $image-placeholder-font-size;
+    color: $image-placeholder-text-color;
     background-color: $image-placeholder-background-color;
 
     &-icon {

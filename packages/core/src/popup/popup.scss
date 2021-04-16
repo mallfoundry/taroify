@@ -2,10 +2,10 @@
 
 .#{$component-prefix}popup {
   position: fixed;
+  z-index: $popup-z-index;
   max-height: 100%;
   overflow-y: auto;
   background-color: #fff;
-  z-index: $popup-z-index;
 
   &--center {
     top: 50%;
@@ -48,9 +48,9 @@
       }
 
       &-enter-active {
-        transform: translate3d(0, -50%, 0);
-        transition-property: opacity, transform;
         transition-timing-function: ease;
+        transition-property: opacity, transform;
+        transform: translate3d(0, -50%, 0);
       }
 
       &-exit {
@@ -58,9 +58,9 @@
       }
 
       &-exit-active {
-        transform: translate3d(100%, -50%, 0);
-        transition-property: opacity, transform;
         transition-timing-function: ease;
+        transition-property: opacity, transform;
+        transform: translate3d(100%, -50%, 0);
       }
     }
   }
@@ -80,9 +80,9 @@
       }
 
       &-enter-active {
-        transform: translate3d(0, -50%, 0);
-        transition-property: opacity, transform;
         transition-timing-function: ease;
+        transition-property: opacity, transform;
+        transform: translate3d(0, -50%, 0);
       }
 
       &-exit {
@@ -90,9 +90,9 @@
       }
 
       &-exit-active {
-        transform: translate3d(-100%, -50%, 0);
-        transition-property: opacity, transform;
         transition-timing-function: ease;
+        transition-property: opacity, transform;
+        transform: translate3d(-100%, -50%, 0);
       }
     }
   }
@@ -101,8 +101,8 @@
     position: absolute;
     z-index: $popup-close-icon-z-index;
     color: $popup-close-icon-color;
-    size: $popup-close-icon-size;
     cursor: pointer;
+    size: $popup-close-icon-size;
 
     &:active {
       color: $popup-close-icon-active-color;

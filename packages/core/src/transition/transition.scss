@@ -19,8 +19,8 @@
 
   &-exit-active {
     opacity: 0;
-    transition-property: opacity;
     transition-timing-function: ease;
+    transition-property: opacity;
   }
 }
 
@@ -33,9 +33,9 @@
 
   &-enter-active {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -45,9 +45,9 @@
 
   &-exit-active {
     opacity: 0;
-    transform: translate3d(0, 100%, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 100%, 0);
   }
 }
 
@@ -60,9 +60,9 @@
 
   &-enter-active {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -72,9 +72,9 @@
 
   &-exit-active {
     opacity: 0;
-    transform: translate3d(0, -100%, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, -100%, 0);
   }
 }
 
@@ -87,9 +87,9 @@
 
   &-enter-active {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -99,9 +99,9 @@
 
   &-exit-active {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
@@ -114,9 +114,9 @@
 
   &-enter-active {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -126,9 +126,9 @@
 
   &-exit-active {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -139,9 +139,9 @@
   }
 
   &-enter-active {
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -149,9 +149,9 @@
   }
 
   &-exit-active {
-    transform: translate3d(0, 100%, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 100%, 0);
   }
 }
 
@@ -161,9 +161,9 @@
   }
 
   &-enter-active {
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -171,9 +171,9 @@
   }
 
   &-exit-active {
-    transform: translate3d(0, -100%, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, -100%, 0);
   }
 }
 
@@ -183,9 +183,9 @@
   }
 
   &-enter-active {
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -193,9 +193,9 @@
   }
 
   &-exit-active {
-    transform: translate3d(-100%, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
@@ -205,9 +205,9 @@
   }
 
   &-enter-active {
-    transform: translate3d(0, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
 
   &-exit {
@@ -215,8 +215,8 @@
   }
 
   &-exit-active {
-    transform: translate3d(100%, 0, 0);
-    transition-property: opacity, transform;
     transition-timing-function: ease;
+    transition-property: opacity, transform;
+    transform: translate3d(100%, 0, 0);
   }
 }

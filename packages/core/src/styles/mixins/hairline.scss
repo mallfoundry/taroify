@@ -3,8 +3,8 @@
 @mixin hairline-common {
   position: absolute;
   box-sizing: border-box;
-  content: ' ';
   pointer-events: none;
+  content: ' ';
 }
 
 @mixin hairline($color: $border-color) {
