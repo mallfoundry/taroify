@@ -10,7 +10,7 @@ $backdrop-z-index: 1;
   left: 0;
   z-index: $backdrop-z-index;
   height: 100%;
-  background-color: rgba(0, 0, 0, .45);
+  background-color: rgba(0, 0, 0, 0.45);
   opacity: 0;
   visibility: hidden;
   transition-property: opacity, visibility;
