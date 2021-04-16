@@ -3,7 +3,6 @@
 
 // Fade Animation
 .#{$component-prefix}transition-fade {
-
   &-enter {
     opacity: 0;
   }
@@ -27,7 +26,6 @@
 
 // Fade Up Animation
 .#{$component-prefix}transition-fade-up {
-
   &-enter {
     opacity: 0;
     transform: translate3d(0, 100%, 0);
@@ -55,7 +53,6 @@
 
 // Fade Down Animation
 .#{$component-prefix}transition-fade-down {
-
   &-enter {
     opacity: 0;
     transform: translate3d(0, -100%, 0);
@@ -83,7 +80,6 @@
 
 // Fade Left Animation
 .#{$component-prefix}transition-fade-left {
-
   &-enter {
     opacity: 0;
     transform: translate3d(-100%, 0, 0);
@@ -111,7 +107,6 @@
 
 // Fade Right Animation
 .#{$component-prefix}transition-fade-right {
-
   &-enter {
     opacity: 0;
     transform: translate3d(100%, 0, 0);
@@ -139,7 +134,6 @@
 
 // Slide Animation
 .#{$component-prefix}transition-slide-up {
-
   &-enter {
     transform: translate3d(0, 100%, 0);
   }
@@ -162,7 +156,6 @@
 }
 
 .#{$component-prefix}transition-slide-down {
-
   &-enter {
     transform: translate3d(0, -100%, 0);
   }
@@ -185,7 +178,6 @@
 }
 
 .#{$component-prefix}transition-slide-left {
-
   &-enter {
     transform: translate3d(-100%, 0, 0);
   }
@@ -208,7 +200,6 @@
 }
 
 .#{$component-prefix}transition-slide-right {
-
   &-enter {
     transform: translate3d(100%, 0, 0);
   }

@@ -43,7 +43,6 @@
     }
 
     &.#{$component-prefix}transition-slide-right {
-
       &-enter {
         transform: translate3d(100%, -50%, 0);
       }
@@ -76,7 +75,6 @@
     }
 
     &.#{$component-prefix}transition-slide-left {
-
       &-enter {
         transform: translate3d(-100%, -50%, 0);
       }

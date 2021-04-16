@@ -19,7 +19,9 @@
     padding: $toast-text-padding;
   }
 
-  &--loading, &--success, &--fail {
+  &--loading,
+  &--success,
+  &--fail {
     width: $toast-default-width;
     padding: $toast-default-padding;
     max-width: $toast-max-width;

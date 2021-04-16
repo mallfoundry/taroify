@@ -6,7 +6,8 @@
   font-size: 0;
   vertical-align: middle;
 
-  &__spinner, &__circular {
+  &__spinner,
+  &__circular {
     position: relative;
     display: inline-block;
     width: $loading-size;

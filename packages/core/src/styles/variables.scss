@@ -65,12 +65,11 @@ $line-height-sm: 20px * $hd;
 $line-height-md: 22px * $hd;
 $line-height-lg: 24px * $hd;
 
+$base-font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+  helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB',
+  'Microsoft Yahei', sans-serif;
 
-$base-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB',
-'Microsoft Yahei', sans-serif;
-
-$price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial, sans-serif;
+$price-integer-font-family: avenir-heavy, pingfang sc, helvetica neue, arial, sans-serif;
 
 // Animation
 $animation-duration-base: 0.3s;
