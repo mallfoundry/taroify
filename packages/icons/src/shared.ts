@@ -17,10 +17,17 @@ export enum IconColor {
   Info = "info",
   Success = "success",
   Warning = "warning",
-  Danger = "danger"
+  Danger = "danger",
 }
 
-export type IconColorString = "inherit" | "default" | "primary" | "info" | "success" | "warning" | "danger"
+export type IconColorString =
+  | "inherit"
+  | "default"
+  | "primary"
+  | "info"
+  | "success"
+  | "warning"
+  | "danger"
 
 export interface IconProps {
   className?: string

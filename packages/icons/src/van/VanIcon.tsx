@@ -1,7 +1,7 @@
+import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties } from "react"
-import classNames from "classnames"
-import { View } from "@tarojs/components"
 import { IconColor, IconColorString, IconSize, IconSizeString } from "../shared"
 
 interface VanIconProps {
@@ -15,7 +15,8 @@ interface VanIconProps {
 
 export default function VanIcon(props: VanIconProps) {
   const {
-    className, style,
+    className,
+    style,
     size = IconSize.Medium,
     color = IconColor.Inherit,
     children,
@@ -24,17 +25,16 @@ export default function VanIcon(props: VanIconProps) {
 
   return (
     <View
-      className={
-        classNames(
-          `van-icon`,
-          `van-icon-${children}`,
-          `taroify-icon`,
-          {
-            [`taroify-icon--${color}`]: color,
-            [`taroify-icon--${size}`]: size,
-          },
-          className,
-        )}
+      className={classNames(
+        "van-icon",
+        `van-icon-${children}`,
+        "taroify-icon",
+        {
+          [`taroify-icon--${color}`]: color,
+          [`taroify-icon--${size}`]: size,
+        },
+        className
+      )}
       style={style}
       onClick={onClick}
     />

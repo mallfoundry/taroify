@@ -4,7 +4,5 @@ import { VanIcon } from "./van"
 
 export default function ArrowUp(props: IconProps) {
   const { ...rest } = props
-  return (
-    <VanIcon children="arrow-up" {...rest} />
-  )
+  return <VanIcon children="arrow-up" {...rest} />
 }

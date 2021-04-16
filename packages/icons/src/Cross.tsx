@@ -4,7 +4,5 @@ import { VanIcon } from "./van"
 
 export default function Cross(props: IconProps) {
   const { ...rest } = props
-  return (
-    <VanIcon children="cross" {...rest} />
-  )
+  return <VanIcon children="cross" {...rest} />
 }

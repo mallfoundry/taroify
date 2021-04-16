@@ -1,5 +1,5 @@
-import classNames from "classnames"
 import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties } from "react"
 import { IconColor, IconColorString, IconSize, IconSizeString } from "../shared"
@@ -11,7 +11,7 @@ export enum MaterialIconTheme {
   Sharp = "sharp",
 }
 
-type MaterialIconThemeString = "filled" | "outlined" | "rounded" | "sharp";
+type MaterialIconThemeString = "filled" | "outlined" | "rounded" | "sharp"
 
 interface MaterialIconProps {
   className?: string
@@ -24,7 +24,8 @@ interface MaterialIconProps {
 
 export default function MaterialIcon(props: MaterialIconProps) {
   const {
-    className, style,
+    className,
+    style,
     theme = MaterialIconTheme.Filled,
     size = IconSize.Medium,
     color = IconColor.Inherit,
@@ -32,19 +33,18 @@ export default function MaterialIcon(props: MaterialIconProps) {
   } = props
   return (
     <View
-      className={
-        classNames(
-          {
-            ["material-icons"]: theme === MaterialIconTheme.Filled,
-            [`material-icons-${theme}`]: theme !== MaterialIconTheme.Filled,
-          },
-          `taroify-icon`,
-          {
-            [`taroify-icon--${color}`]: color,
-            [`taroify-icon--${size}`]: size,
-          },
-          className,
-        )}
+      className={classNames(
+        {
+          "material-icons": theme === MaterialIconTheme.Filled,
+          [`material-icons-${theme}`]: theme !== MaterialIconTheme.Filled,
+        },
+        "taroify-icon",
+        {
+          [`taroify-icon--${color}`]: color,
+          [`taroify-icon--${size}`]: size,
+        },
+        className
+      )}
       style={style}
       children={children}
     />
