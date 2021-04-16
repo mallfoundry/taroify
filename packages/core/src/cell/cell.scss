@@ -20,13 +20,14 @@
     @include hairline-bottom($cell-border-color, $padding-sm, $padding-sm);
   }
 
-  &:last-child::after, &-borderless::after {
+  &:last-child::after,
+  &-borderless::after {
     display: none;
   }
 
-  &--borderless {
+  /* &--borderless {
 
-  }
+  } */
 
   &--start {
     align-items: flex-start;
@@ -79,7 +80,8 @@
     }
   }
 
-  &__start-icon, &__end-icon {
+  &__start-icon,
+  &__end-icon {
     height: $cell-line-height;
     font-size: $cell-icon-size;
     line-height: $cell-line-height;
