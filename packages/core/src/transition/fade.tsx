@@ -1,7 +1,6 @@
 import * as React from "react"
 import { ReactNode } from "react"
 import Transition, { TransitionName } from "./transition"
-import * as _ from "lodash"
 
 export enum FadeDirection {
   Up = "up",
@@ -12,10 +11,7 @@ export enum FadeDirection {
 
 type FadeDirectionString = "up" | "down" | "left" | "right"
 
-function getTransactionName(direction ?: FadeDirection | FadeDirectionString) {
-  if (_.isUndefined(direction)) {
-    return TransitionName.Fade
-  }
+function getTransactionName(direction?: FadeDirection | FadeDirectionString) {
   if (direction === FadeDirection.Up) {
     return TransitionName.FadeUp
   }
@@ -28,6 +24,7 @@ function getTransactionName(direction ?: FadeDirection | FadeDirectionString) {
   if (direction === FadeDirection.Right) {
     return TransitionName.FadeRight
   }
+  return TransitionName.Fade
 }
 
 interface FadeProps {

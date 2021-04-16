@@ -1,9 +1,9 @@
 import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useContext } from "react"
-import classNames from "classnames"
-import { prefixClassname } from "../styles"
 import { RowContext } from "../row/row"
+import { prefixClassname } from "../styles"
 
 interface ColProps {
   className?: string
@@ -34,12 +34,13 @@ export default function Col(props: ColProps) {
           [prefixClassname(`col-${span}`)]: span !== undefined,
           [prefixClassname(`col-offset-${offset}`)]: offset !== undefined,
         },
-        className,
+        className
       )}
       style={{
         ...style,
         ...gutterStyle,
       }}
-      children={children} />
+      children={children}
+    />
   )
 }

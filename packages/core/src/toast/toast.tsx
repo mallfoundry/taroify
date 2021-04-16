@@ -1,24 +1,24 @@
+import Fail from "@taroify/icons/Fail"
+import Success from "@taroify/icons/Success"
+import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { ReactElement, ReactNode, useEffect, useState } from "react"
-import Popup from "../popup"
-import classNames from "classnames"
-import { prefixClassname } from "../styles"
-import { View } from "@tarojs/components"
-import Success from "@taroify/icons/Success"
-import Fail from "@taroify/icons/Fail"
 import Loading from "../loading"
+import Popup from "../popup"
+import { prefixClassname } from "../styles"
 
 export enum ToastType {
   Text = "text",
   Loading = "loading",
   Success = "success",
   Fail = "fail",
-  Html = "html"
+  Html = "html",
 }
 
 type ToastTypeString = "text" | "loading" | "success" | "fail" | "html"
 
-function defaultIcon(icon ?: ReactNode, type?: ToastType | ToastTypeString) {
+function defaultIcon(icon?: ReactNode, type?: ToastType | ToastTypeString) {
   if (icon) {
     return icon
   }
@@ -34,13 +34,16 @@ function defaultIcon(icon ?: ReactNode, type?: ToastType | ToastTypeString) {
   return undefined
 }
 
-function appendIconClassName(node ?: ReactNode) {
+function appendIconClassName(node?: ReactNode) {
   if (!React.isValidElement(node)) {
     return node
   }
   const element = node as ReactElement
   return React.cloneElement(node, {
-    className: classNames(prefixClassname("toast__icon"), element.props.className),
+    className: classNames(
+      prefixClassname("toast__icon"),
+      element.props.className
+    ),
   })
 }
 
@@ -55,45 +58,57 @@ interface ToastProps {
 }
 
 export default function Toast(props: ToastProps) {
-  const { open: openProp, type = ToastType.Text, backdrop = false, duration = 3000, children, onClose } = props
+  const {
+    open: openProp,
+    type = ToastType.Text,
+    backdrop = false,
+    duration = 3000,
+    children,
+    onClose,
+  } = props
   const [open, setOpen] = useState(openProp)
   const icon = appendIconClassName(defaultIcon(props.icon, type))
 
-  function handleClose() {
-    if (onClose) {
-      onClose()
-    }
-  }
+  // function handleClose() {
+  //   if (onClose) {
+  //     onClose()
+  //   }
+  // }
 
   useEffect(() => {
     setOpen(openProp)
-    let timer: any = undefined
+    let timer: any
     if (openProp) {
       timer = setTimeout(() => {
         setOpen(false)
-        handleClose()
+        if (onClose) {
+          onClose()
+        }
         clearTimeout(timer)
       }, duration)
     } else {
       clearTimeout(timer)
     }
     return () => clearTimeout(timer)
-  }, [openProp])
+  }, [openProp, duration, onClose])
 
   return (
     <Popup
       open={open}
       backdrop={backdrop}
-      className={
-        classNames(
-          prefixClassname("toast"),
-          {
-            [prefixClassname(`toast--${type}`)]: type,
-          },
-        )
-      }>
+      className={classNames(prefixClassname("toast"), {
+        [prefixClassname(`toast--${type}`)]: type,
+      })}
+    >
       {icon}
-      {icon ? <View className={prefixClassname("toast__message")} children={children} /> : children}
+      {icon ? (
+        <View
+          className={prefixClassname("toast__message")}
+          children={children}
+        />
+      ) : (
+        children
+      )}
     </Popup>
   )
 }

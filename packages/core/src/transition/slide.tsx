@@ -11,7 +11,7 @@ export enum SlideDirection {
 
 type SlideDirectionString = "up" | "down" | "left" | "right"
 
-function getTransactionName(direction ?: SlideDirection | SlideDirectionString) {
+function getTransactionName(direction: SlideDirection | SlideDirectionString) {
   if (direction === SlideDirection.Up) {
     return TransitionName.SlideUp
   }
@@ -24,6 +24,7 @@ function getTransactionName(direction ?: SlideDirection | SlideDirectionString) 
   if (direction === SlideDirection.Right) {
     return TransitionName.SlideRight
   }
+  return TransitionName.SlideUp
 }
 
 interface SlideProps {
@@ -34,7 +35,12 @@ interface SlideProps {
 }
 
 export default function Slide(props: SlideProps) {
-  const { direction, in: inProp, duration, children } = props
+  const {
+    direction = SlideDirection.Up,
+    in: inProp,
+    duration,
+    children,
+  } = props
   const name = getTransactionName(direction)
   return (
     <Transition

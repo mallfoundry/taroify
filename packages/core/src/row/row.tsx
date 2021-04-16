@@ -1,9 +1,9 @@
 import { View } from "@tarojs/components"
+import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import { createContext, CSSProperties, ReactNode } from "react"
-import classNames from "classnames"
 import { prefixClassname } from "../styles"
-import * as _ from "lodash"
 
 interface RowContextType {
   gutter: [number | undefined, number | undefined]
@@ -17,14 +17,14 @@ export enum RowJustify {
   End = "end",
   Center = "center",
   SpaceAround = "space-around",
-  SpaceBetween = "space-between"
+  SpaceBetween = "space-between",
 }
 
-type RowJustifyString = "end" | "center" | "space-around" | "space-between";
+type RowJustifyString = "end" | "center" | "space-around" | "space-between"
 
 export enum RowAlign {
   Center = "center",
-  Bottom = "bottom"
+  Bottom = "bottom",
 }
 
 type RowAlignString = "center" | "bottom"
@@ -39,8 +39,9 @@ interface RowProps {
   children?: ReactNode
 }
 
-function useGutter(gutter?: RowGutter): [undefined | number, undefined | number] {
-
+function useGutter(
+  gutter?: RowGutter
+): [undefined | number, undefined | number] {
   if (gutter === undefined) {
     return [undefined, undefined]
   }
@@ -81,21 +82,27 @@ export default function Row(props: RowProps) {
         {
           // Set justify style
           [prefixClassname("row-justify-end")]: justify === RowJustify.End,
-          [prefixClassname("row-justify-center")]: justify === RowJustify.Center,
-          [prefixClassname("row-justify-space-around")]: justify === RowJustify.SpaceAround,
-          [prefixClassname("row-justify-space-between")]: justify === RowJustify.SpaceBetween,
+          [prefixClassname("row-justify-center")]:
+            justify === RowJustify.Center,
+          [prefixClassname("row-justify-space-around")]:
+            justify === RowJustify.SpaceAround,
+          [prefixClassname("row-justify-space-between")]:
+            justify === RowJustify.SpaceBetween,
           // Set align style
           [prefixClassname("row-align-center")]: align === RowAlign.Center,
           [prefixClassname("row-align-bottom")]: align === RowAlign.Bottom,
         },
-        className,
+        className
       )}
       style={{
         ...gutterStyle,
-      }}>
-      <RowContext.Provider value={{
-        gutter: gutters,
-      }}>
+      }}
+    >
+      <RowContext.Provider
+        value={{
+          gutter: gutters,
+        }}
+      >
         {children}
       </RowContext.Provider>
     </View>

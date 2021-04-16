@@ -1,12 +1,12 @@
+import Cross from "@taroify/icons/Cross"
+import { View } from "@tarojs/components"
+import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactElement, ReactNode } from "react"
-import classNames from "classnames"
-import { View } from "@tarojs/components"
-import { prefixClassname } from "../styles"
 import Backdrop from "../backdrop"
-import * as _ from "lodash"
+import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
-import Cross from "@taroify/icons/Cross"
 
 export enum PopupPlacement {
   Top = "top",
@@ -18,7 +18,6 @@ export enum PopupPlacement {
 type PopupPlacementString = "top" | "right" | "bottom" | "left"
 
 function toTransactionName(placement?: PopupPlacement | PopupPlacementString) {
-
   if (placement === PopupPlacement.Top) {
     return TransitionName.SlideDown
   }
@@ -39,7 +38,7 @@ function toTransactionName(placement?: PopupPlacement | PopupPlacementString) {
 }
 
 enum PopupBackdrop {
-  Static = "static"
+  Static = "static",
 }
 
 type PopupBackdropString = "static"
@@ -56,18 +55,22 @@ function PopupClose(props: PopupCloseProps) {
   if (React.isValidElement(children)) {
     const iconElement = children as ReactElement
     return React.cloneElement(iconElement, {
-      className: classNames(iconElement.props.classNames, prefixClassname("popup__close-icon"), {
-        [prefixClassname("popup__close-icon--top-right")]: placement === PopupPlacement.Left || placement === PopupPlacement.Top || placement === PopupPlacement.Bottom,
-        [prefixClassname("popup__close-icon--top-left")]: placement === PopupPlacement.Right,
-      }),
+      className: classNames(
+        iconElement.props.classNames,
+        prefixClassname("popup__close-icon"),
+        {
+          [prefixClassname("popup__close-icon--top-right")]:
+            placement === PopupPlacement.Left ||
+            placement === PopupPlacement.Top ||
+            placement === PopupPlacement.Bottom,
+          [prefixClassname("popup__close-icon--top-left")]:
+            placement === PopupPlacement.Right,
+        }
+      ),
     })
   }
 
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <>{children}</>
 }
 
 interface PopupProps {
@@ -103,27 +106,34 @@ export default function Popup(props: PopupProps) {
   const transactionName = toTransactionName(placement)
   return (
     <>
-      {
-        backdrop && <Backdrop
-          open={open/* && backdrop*/}
+      {backdrop && (
+        <Backdrop
+          open={open /* && backdrop */}
           duration={duration}
           closeable={backdrop !== PopupBackdrop.Static}
-          onClose={onClose} />
-      }
+          onClose={onClose}
+        />
+      )}
       <Transition in={open} name={transactionName} duration={duration}>
         <View
-          className={classNames(prefixClassname("popup"),
+          className={classNames(
+            prefixClassname("popup"),
             {
               [prefixClassname("popup--open")]: open,
               [prefixClassname("popup--rounded")]: rounded,
               [prefixClassname("popup--center")]: _.isUndefined(placement),
               [prefixClassname("popup--top")]: placement === PopupPlacement.Top,
-              [prefixClassname("popup--right")]: placement === PopupPlacement.Right,
-              [prefixClassname("popup--bottom")]: placement === PopupPlacement.Bottom,
-              [prefixClassname("popup--left")]: placement === PopupPlacement.Left,
+              [prefixClassname("popup--right")]:
+                placement === PopupPlacement.Right,
+              [prefixClassname("popup--bottom")]:
+                placement === PopupPlacement.Bottom,
+              [prefixClassname("popup--left")]:
+                placement === PopupPlacement.Left,
             },
-            className)}
-          style={style}>
+            className
+          )}
+          style={style}
+        >
           {closeable && <PopupClose placement={placement} />}
           {children}
         </View>

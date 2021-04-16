@@ -1,20 +1,15 @@
 import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import classNames from "classnames"
 import { prefixClassname } from "../styles"
 
-const SpinIcon = _.range(0, 12)
-  .map(key => (
-    <View key={key} className={prefixClassname("loading__spinner__item")} />
-  ))
+const SpinIcon = _.range(0, 12).map((key) => (
+  <View key={key} className={prefixClassname("loading__spinner__item")} />
+))
 
 function LoadingSpinner() {
-  return (
-    <View className={prefixClassname("loading__spinner")}>
-      {SpinIcon}
-    </View>
-  )
+  return <View className={prefixClassname("loading__spinner")}>{SpinIcon}</View>
 }
 
 function LoadingCircular() {
@@ -29,7 +24,7 @@ function LoadingCircular() {
 
 export enum LoadingType {
   Circular = "circular",
-  Spinner = "spinner"
+  Spinner = "spinner",
 }
 
 type LoadingTypeString = "circular" | "spinner"
@@ -44,10 +39,12 @@ export default function Loading(props: LoadingProps) {
   const { type = LoadingType.Circular } = props
 
   return (
-    <View className={classNames(prefixClassname("loading"), {
-      [prefixClassname("loading--spinner")] :type === LoadingType.Spinner,
-      [prefixClassname("loading--circular")] :type === LoadingType.Circular,
-    })}>
+    <View
+      className={classNames(prefixClassname("loading"), {
+        [prefixClassname("loading--spinner")]: type === LoadingType.Spinner,
+        [prefixClassname("loading--circular")]: type === LoadingType.Circular,
+      })}
+    >
       {type === LoadingType.Spinner && <LoadingSpinner />}
       {type === LoadingType.Circular && <LoadingCircular />}
     </View>

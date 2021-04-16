@@ -1,8 +1,8 @@
+import classNames from "classnames"
 import * as React from "react"
 import { ReactElement, ReactNode } from "react"
-import classNames from "classnames"
-import { prefixClassname } from "../styles"
 import { CSSTransition } from "react-transition-group"
+import { prefixClassname } from "../styles"
 
 export enum TransitionName {
   Fade = "fade",
@@ -13,15 +13,15 @@ export enum TransitionName {
   SlideUp = "slide-up",
   SlideDown = "slide-down",
   SlideLeft = "slide-left",
-  SlideRight = "slide-right"
+  SlideRight = "slide-right",
 }
 
-function elementStyle(children ?: ReactNode) {
+function elementStyle(children?: ReactNode) {
   if (!React.isValidElement(children)) {
     return {}
   }
   const element = children as ReactElement
-  const style = element.props.style
+  const { style } = element.props
   return style ?? {}
 }
 
@@ -33,16 +33,19 @@ interface TransitionProps {
 }
 
 export default function Transition(props: TransitionProps) {
-  const { name = TransitionName.Fade, in: inProp = false, duration = 300, children } = props
+  const {
+    name = TransitionName.Fade,
+    in: inProp = false,
+    duration = 300,
+    children,
+  } = props
   const childrenStyle = elementStyle(children)
   return (
     <CSSTransition
       in={inProp}
       timeout={duration}
       unmountOnExit
-      classNames={classNames(
-        prefixClassname(`transition-${name}`),
-      )}
+      classNames={classNames(prefixClassname(`transition-${name}`))}
       style={{
         ...childrenStyle,
         transitionDuration: `${duration}ms`,

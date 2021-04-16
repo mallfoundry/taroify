@@ -1,7 +1,7 @@
-import * as React from "react"
-import { ReactNode } from "react"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
+import * as React from "react"
+import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface CellGroupProps {
@@ -16,13 +16,11 @@ export default function CellGroup(props: CellGroupProps) {
     <>
       <View className={prefixClassname("cell-group__title")} children={title} />
       <View
-        className={classNames(
-          prefixClassname("cell-group"),
-          {
-            [prefixClassname(`hairline--top-bottom`)]: bordered,
-          },
-        )}
-        children={children} />
+        className={classNames(prefixClassname("cell-group"), {
+          [prefixClassname("hairline--top-bottom")]: bordered,
+        })}
+        children={children}
+      />
     </>
   )
 }

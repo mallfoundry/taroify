@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
-import classNames from "classnames"
 import { prefixClassname } from "../styles"
 
 interface SpaceItemProps {
@@ -20,7 +20,7 @@ function SpaceItem(props: SpaceItemProps) {
 
 export enum SpaceDirection {
   Horizontal = "horizontal",
-  Vertical = "vertical"
+  Vertical = "vertical",
 }
 
 type SpaceDirectionString = "horizontal" | "vertical"
@@ -42,10 +42,16 @@ interface SpaceProps {
 export default function Space(props: SpaceProps) {
   const { direction = SpaceDirection.Horizontal, children } = props
   return (
-    <View className={classNames(prefixClassname("space"), {
-      [prefixClassname(`space-${direction}`)]: direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
-    })}>
-      {React.Children.map(children, (item, index) => <SpaceItem key={index} children={item} />)}
+    <View
+      className={classNames(prefixClassname("space"), {
+        [prefixClassname(`space-${direction}`)]:
+          direction === SpaceDirection.Horizontal ||
+          direction === SpaceDirection.Vertical,
+      })}
+    >
+      {React.Children.map(children, (item, index) => (
+        <SpaceItem key={index} children={item} />
+      ))}
     </View>
   )
 }

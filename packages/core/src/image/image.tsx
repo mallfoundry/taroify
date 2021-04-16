@@ -1,9 +1,15 @@
 import { Image as TaroImage, View } from "@tarojs/components"
-import * as React from "react"
-import { CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react"
 import classNames from "classnames"
-import { prefixClassname } from "../styles"
 import * as _ from "lodash"
+import * as React from "react"
+import {
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react"
+import { prefixClassname } from "../styles"
 
 export enum ImageMode {
   ScaleToFill = "scaleToFill",
@@ -23,7 +29,7 @@ export enum ImageMode {
 }
 
 type ImageModeString =
-  "scaleToFill"
+  | "scaleToFill"
   | "aspectFit"
   | "aspectFill"
   | "widthFix"
@@ -37,7 +43,6 @@ type ImageModeString =
   | "topRight"
   | "bottomLeft"
   | "bottomRight"
-
 
 function toTaroMode(mode: ImageMode | ImageModeString): string {
   if (mode === ImageMode.TopLeft) {
@@ -60,24 +65,30 @@ interface ImagePlaceholderProps {
   children?: ReactNode
 }
 
-function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholderProps) {
+function ImagePlaceholder({
+  prefix = "placeholder",
+  children,
+}: ImagePlaceholderProps) {
   // Icon Element
   if (React.isValidElement(children)) {
     return (
       <>
-        {
-          React.cloneElement(children as ReactElement, {
-            className: classNames(prefixClassname(`image__${prefix}`),
-              prefixClassname(`image__${prefix}-icon`)),
-          })
-        }
+        {React.cloneElement(children as ReactElement, {
+          className: classNames(
+            prefixClassname(`image__${prefix}`),
+            prefixClassname(`image__${prefix}-icon`)
+          ),
+        })}
       </>
     )
   }
   // Text String
   if (_.isString(children) || _.isNumber(children)) {
     return (
-      <View className={prefixClassname(`image__${prefix}`)} children={children} />
+      <View
+        className={prefixClassname(`image__${prefix}`)}
+        children={children}
+      />
     )
   }
   return <></>
@@ -127,34 +138,40 @@ export default function Image(props: ImageProps) {
 
   return (
     <>
-      {
-        (!failed && src) && <TaroImage
+      {!failed && src && (
+        <TaroImage
           src={src as string}
-          mode={taroMode as unknown as undefined}
+          mode={(taroMode as unknown) as undefined}
           lazyLoad={lazyLoad}
           className={classNames(
             {
               [prefixClassname("image--round")]: round,
               [prefixClassname("image--loading")]: loading,
             },
-            className,
+            className
           )}
           style={style}
           imgProps={{ alt }}
           onError={handleError}
           onLoad={handleLoad}
         />
-      }
-      {
-        (loading && placeholder) && <View className={classNames(prefixClassname("image"), className)} style={style}>
+      )}
+      {loading && placeholder && (
+        <View
+          className={classNames(prefixClassname("image"), className)}
+          style={style}
+        >
           <ImagePlaceholder prefix="placeholder" children={placeholder} />
         </View>
-      }
-      {
-        (failed && fallback) && <View className={classNames(prefixClassname("image"), className)} style={style}>
+      )}
+      {failed && fallback && (
+        <View
+          className={classNames(prefixClassname("image"), className)}
+          style={style}
+        >
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
-      }
+      )}
     </>
   )
 }

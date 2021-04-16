@@ -16,16 +16,14 @@ interface WhiteSpaceProps {
   size?: WhiteSpaceSize | WhiteSpaceSizeString
 }
 
-
 export default function WhiteSpace(props: WhiteSpaceProps) {
   const { size = WhiteSpaceSize.Medium } = props
   return (
     <View
-      className={
-        classNames(
-          prefixClassname("white-space"),
-          prefixClassname(`white-space-size-${size}`),
-        )}
+      className={classNames(
+        prefixClassname("white-space"),
+        prefixClassname(`white-space-size-${size}`)
+      )}
     />
   )
 }
