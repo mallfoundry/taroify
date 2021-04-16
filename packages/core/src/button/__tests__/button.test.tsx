@@ -1,15 +1,18 @@
 import { render } from "@testing-library/react"
 import * as React from "react"
-import Button from "../button"
 import { prefixClassname } from "../../styles"
+import Button from "../button"
 
 describe("<Button />", () => {
-
   // The default button contains prefix--contained --medium --default
   it("should have default classNames", () => {
     const { container } = render(<Button />)
     const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass("taroify-button--contained", "taroify-button--medium", "taroify-button--default")
+    expect(el).toHaveClass(
+      "taroify-button--contained",
+      "taroify-button--medium",
+      "taroify-button--default",
+    )
   })
 
   it("should have disabled className", () => {
@@ -27,13 +30,19 @@ describe("<Button />", () => {
   it("should be hairline button", () => {
     const { container } = render(<Button hairline />)
     const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--hairline")}`, `${prefixClassname("hairline--surround")}`)
+    expect(el).toHaveClass(
+      `${prefixClassname("button--hairline")}`,
+      `${prefixClassname("hairline--surround")}`,
+    )
   })
 
   it("should be hairline button", () => {
     const { container } = render(<Button hairline />)
     const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--hairline")}`, `${prefixClassname("hairline--surround")}`)
+    expect(el).toHaveClass(
+      `${prefixClassname("button--hairline")}`,
+      `${prefixClassname("hairline--surround")}`,
+    )
   })
 
   it("should be text button", () => {
@@ -132,13 +141,21 @@ describe("<Button />", () => {
   })
 
   it("should have children", () => {
-    const { container } = render(<Button color="danger" formType="reset">Test</Button>)
+    const { container } = render(
+      <Button color="danger" formType="reset">
+        Test
+      </Button>,
+    )
     const el = container.querySelector(`.${prefixClassname("button")}`)
     expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
   })
 
   it("should have startIcon", () => {
-    const { container } = render(<Button color="danger" startIcon="icon">Test</Button>)
+    const { container } = render(
+      <Button color="danger" startIcon="icon">
+        Test
+      </Button>,
+    )
     const el = container.querySelector(`.${prefixClassname("button")}`)
     expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
   })
