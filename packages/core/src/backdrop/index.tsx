@@ -1,3 +1,1 @@
-import Backdrop from "./backdrop"
-
-export default Backdrop
+export { default } from "./backdrop"
