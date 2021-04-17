@@ -13,7 +13,9 @@ const NAVIGATE_BACK_MESSAGE: Message = {
 
 function sendMessage(message: Message) {
   if (framedWrapper()) {
+    /* eslint-disable no-restricted-globals */
     parent.postMessage(message, "*")
+    /* eslint-enable no-restricted-globals */
   }
 }
 
@@ -36,5 +38,7 @@ export function navigateBack() {
 }
 
 export function framedWrapper() {
+  /* eslint-disable no-restricted-globals */
   return process.env.TARO_ENV === "h5" && parent != window
+  /* eslint-enable no-restricted-globals */
 }

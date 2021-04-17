@@ -45,7 +45,7 @@ export default function Nav(props: NavProps) {
   const { title, children } = props
   return (
     <View className={classes.Nav}>
-      <View className={classes.NavTitle} children={title} />
+      <View className={classes.NavTitle}>{title}</View>
       <View className={classes.NavBlocks}>
         {children}
       </View>

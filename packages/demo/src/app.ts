@@ -1,7 +1,7 @@
+import "@taroify/core/index.scss"
+import "@taroify/icons/index.scss"
 import { ReactNode } from "react"
 import "./app.scss"
-import "@taroify/icons/index.scss"
-import "@taroify/core/index.scss"
 
 interface AppProps {
   children?: ReactNode

@@ -17,18 +17,22 @@ export default function BackdropDemo() {
       <Block title="基础用法">
         <Button
           variant="contained" color="primary"
-          onClick={() => setOpen(true)}>显示遮盖层</Button>
+          onClick={() => setOpen(true)}
+        >显示遮盖层</Button>
         <Backdrop
           open={open} closeable
-          onClose={() => setOpen(false)} />
+          onClose={() => setOpen(false)}
+        />
       </Block>
       <Block title="嵌入内容">
         <Button
           variant="contained" color="primary"
-          onClick={() => setOpened2(true)}>嵌入内容</Button>
+          onClick={() => setOpened2(true)}
+        >嵌入内容</Button>
         <Backdrop
           open={opened2} closeable
-          onClose={() => setOpened2(false)}>
+          onClose={() => setOpened2(false)}
+        >
           <View className={classes.ContentWrapper}>
             <View className={classes.ContentBlock} />
           </View>

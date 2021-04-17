@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '单元格'
+  navigationBarTitleText: "单元格",
 }

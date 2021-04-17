@@ -24,9 +24,7 @@ export default function Page(props: PageProps) {
           <View className={classes.NavTitle}>{title} </View>
         </View>
       </Target>
-      <View
-        className={classes.PageContent}
-        children={children} />
+      <View className={classes.PageContent}>{children}</View>
     </View>
   )
 }

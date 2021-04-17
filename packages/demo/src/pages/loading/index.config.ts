@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '加载'
+  navigationBarTitleText: "加载",
 }

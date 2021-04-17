@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: 'Backdrop 背景暗化'
+  navigationBarTitleText: "Backdrop 背景暗化",
 }

@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '布局'
+  navigationBarTitleText: "布局",
 }
