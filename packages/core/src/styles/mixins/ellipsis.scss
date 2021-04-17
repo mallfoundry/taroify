@@ -3,7 +3,7 @@
   /* stylelint-disable property-no-unknown */
   box-orient: vertical;
   /* stylelint-enable property-no-unknown */
-  display: box;
+  display: flex;
   -webkit-line-clamp: $lines;
   overflow: hidden;
   text-overflow: ellipsis;
