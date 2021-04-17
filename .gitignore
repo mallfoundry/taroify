@@ -26,6 +26,9 @@ node_modules/
 /packages/*/dist
 /packages/*/build
 
+#gatsby
+.content/
+
 # temp
 .temp/
 .rn_temp/
