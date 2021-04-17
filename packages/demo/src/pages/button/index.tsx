@@ -1,6 +1,4 @@
-import Button from "@taroify/core/button"
-import Space from "@taroify/core/space"
-import WhiteSpace from "@taroify/core/white-space"
+import { Button, Space, WhiteSpace } from "@taroify/core"
 import ShopOutlined from "@taroify/icons/ShopOutlined"
 import * as React from "react"
 import Block from "../../components/block"

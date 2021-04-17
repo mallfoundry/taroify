@@ -1,6 +1,5 @@
-import Col from "@taroify/core/col"
-import Image, { ImageMode } from "@taroify/core/image"
-import Row from "@taroify/core/row"
+import { Col, Image, Row } from "@taroify/core"
+import { ImageMode } from "@taroify/core/image"
 import Photo from "@taroify/icons/Photo"
 import PhotoFail from "@taroify/icons/PhotoFail"
 import { Text } from "@tarojs/components"

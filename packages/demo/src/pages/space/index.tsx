@@ -1,4 +1,4 @@
-import Space from "@taroify/core/space"
+import { Space } from "@taroify/core"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"

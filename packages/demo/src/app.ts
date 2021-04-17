@@ -1,4 +1,3 @@
-import "@taroify/core/index.scss"
 import "@taroify/icons/index.scss"
 import { ReactNode } from "react"
 import "./app.scss"

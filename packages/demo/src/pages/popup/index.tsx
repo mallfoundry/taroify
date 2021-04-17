@@ -1,5 +1,5 @@
-import Cell from "@taroify/core/cell"
-import Popup, { PopupPlacement } from "@taroify/core/popup"
+import { Cell, Popup } from "@taroify/core"
+import { PopupPlacement } from "@taroify/core/popup"
 import ArrowRight from "@taroify/icons/ArrowRight"
 import * as React from "react"
 import { CSSProperties, useState } from "react"
@@ -45,50 +45,50 @@ export default function PopupDemo() {
     <Page title="Popup">
       <Block title="基础用法">
         <Cell clickable label="显示遮盖层"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: undefined })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: undefined })}
         />
       </Block>
       <Block title="弹出位置">
         <Cell clickable label="顶部弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Top })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Top })}
         />
         <Cell clickable label="底部弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Bottom })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Bottom })}
         />
         <Cell clickable label="左侧弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Left })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Left })}
         />
         <Cell clickable label="右侧弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Right })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Right })}
         />
       </Block>
       <Block title="关闭按钮">
         <Cell clickable label="顶部弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Top, closeable: true })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Top, closeable: true })}
         />
         <Cell clickable label="底部弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Bottom, closeable: true })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Bottom, closeable: true })}
         />
         <Cell clickable label="左侧弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Left, closeable: true })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Left, closeable: true })}
         />
         <Cell clickable label="右侧弹出"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Right, closeable: true })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Right, closeable: true })}
         />
       </Block>
       <Block title="圆角弹窗">
         <Cell clickable label="圆角弹窗"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: PopupPlacement.Bottom, rounded: true })}
+              endIcon={<ArrowRight />}
+              onClick={() => handleOpen({ placement: PopupPlacement.Bottom, rounded: true })}
         />
       </Block>
       <Popup

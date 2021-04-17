@@ -1,5 +1,4 @@
-import Col from "@taroify/core/col"
-import Row from "@taroify/core/row"
+import { Col, Row } from "@taroify/core"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"

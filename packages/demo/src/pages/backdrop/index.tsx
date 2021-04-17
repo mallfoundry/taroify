@@ -1,5 +1,4 @@
-import Backdrop from "@taroify/core/backdrop"
-import Button from "@taroify/core/button"
+import { Backdrop, Button } from "@taroify/core"
 import { View } from "@tarojs/components"
 import * as React from "react"
 import { useState } from "react"

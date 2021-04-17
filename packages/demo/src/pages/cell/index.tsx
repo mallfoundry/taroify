@@ -1,5 +1,4 @@
-import Cell from "@taroify/core/cell"
-import CellGroup from "@taroify/core/cell-group"
+import { Cell, CellGroup } from "@taroify/core"
 import ArrowDown from "@taroify/icons/ArrowDown"
 import ArrowRight from "@taroify/icons/ArrowRight"
 import LocationOutlined from "@taroify/icons/LocationOutlined"
