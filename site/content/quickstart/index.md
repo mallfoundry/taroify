@@ -35,9 +35,11 @@ module.exports = {
     [
       "import",
       {
-        libraryName: "@taroify/core",
-        libraryDirectory: "",
-        style: true,
+        "libraryName": "@taroify/core",
+        "libraryDirectory": "",
+        "style": (name) => {
+          return `${name}/index.scss`
+        },
       },
       "@taroify/core",
     ],
@@ -45,7 +47,7 @@ module.exports = {
 };
 ```
 
-接着你可以在代码中直接引入 Vant 组件：
+接着你可以在代码中直接引入 Taroify 组件：
 
 ```js
 // 插件会自动将代码转化为方式二中的按需引入形式
