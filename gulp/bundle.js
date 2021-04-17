@@ -1,6 +1,5 @@
 const fs = require("fs")
 const rimraf = require("rimraf")
-const gulp = require("gulp")
 const { series } = require("gulp")
 
 function cleanBundle(name) {
@@ -35,8 +34,8 @@ function initBundle(name) {
   return initPackageTask
 }
 
-function buildBundle(name) {
+function createBundle(name) {
   return series(cleanBundle(name), initBundle(name))
 }
 
-exports.buildBundle = buildBundle
+exports.createBundle = createBundle
