@@ -1,11 +1,11 @@
 #container {
-
+  // none
 }
 
 body {
-  background-color: #f7f8fa;
   height: 100vh;
   overflow: auto;
+  background-color: #f7f8fa;
 
   &::-webkit-scrollbar {
     width: 0;

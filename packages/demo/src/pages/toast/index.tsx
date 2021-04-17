@@ -1,10 +1,10 @@
+import Cell from "@taroify/core/cell"
+import Toast, { ToastType } from "@taroify/core/toast"
+import ArrowRight from "@taroify/icons/ArrowRight"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import Cell from "@taroify/core/cell"
-import Toast, { ToastType } from "@taroify/core/toast"
-import ArrowRight from "@taroify/icons/ArrowRight"
 
 
 interface OpenOptions {

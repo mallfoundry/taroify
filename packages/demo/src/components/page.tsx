@@ -1,9 +1,9 @@
-import * as React from "react"
-import { ReactNode } from "react"
+import ArrowLeft from "@taroify/icons/ArrowLeft"
 import { View } from "@tarojs/components"
 import { navigateBack } from "@tarojs/taro"
-import ArrowLeft from "@taroify/icons/ArrowLeft"
 import classNames from "classnames"
+import * as React from "react"
+import { ReactNode } from "react"
 import classes from "./page.module.scss"
 import Target from "./target"
 

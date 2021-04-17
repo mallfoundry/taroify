@@ -5,25 +5,25 @@
   .NavTitle {
     display: block;
     margin: 0 0 16px * 2;
-    color: rgba(69, 90, 100, 0.6);
     font-size: 16px * 2;
+    color: rgba(69, 90, 100, 0.6);
   }
 
   .NavBlocks {
   }
 
   .NavBlock {
-    cursor: pointer;
     position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 0 0 20px;
+    justify-content: space-between;
     padding: 20px 40px;
-    color: #323233;
-    font-weight: 600;
+    margin: 0 0 20px;
     font-size: 24px;
+    font-weight: 600;
     line-height: 40px;
+    color: #323233;
+    cursor: pointer;
     background: #f7f8fa;
     border-radius: 99px;
     transition: background 0.3s;

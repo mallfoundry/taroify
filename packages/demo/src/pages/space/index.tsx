@@ -1,7 +1,7 @@
-import * as React from "react"
-import Page from "../../components/page"
-import Block from "../../components/block"
 import Space from "@taroify/core/space"
+import * as React from "react"
+import Block from "../../components/block"
+import Page from "../../components/page"
 
 export default function SpaceDemo() {
   return (

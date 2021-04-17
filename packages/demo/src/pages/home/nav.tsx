@@ -1,7 +1,7 @@
+import ArrowRight from "@taroify/icons/ArrowRight"
+import { Navigator, View } from "@tarojs/components"
 import * as React from "react"
 import { ReactNode } from "react"
-import { Navigator, View } from "@tarojs/components"
-import ArrowRight from "@taroify/icons/ArrowRight"
 import { framedWrapper, navigateTo } from "../../utils/framed-router"
 import classes from "./nav.module.scss"
 

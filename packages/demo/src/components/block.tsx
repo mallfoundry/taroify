@@ -1,8 +1,8 @@
+import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
-import { View } from "@tarojs/components"
 import classes from "./block.module.scss"
-import classNames from "classnames"
 
 interface BlockProps {
   className?: string

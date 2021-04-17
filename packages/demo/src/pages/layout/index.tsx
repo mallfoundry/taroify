@@ -1,8 +1,8 @@
-import * as React from "react"
-import Row from "@taroify/core/row"
 import Col from "@taroify/core/col"
-import Page from "../../components/page"
+import Row from "@taroify/core/row"
+import * as React from "react"
 import Block from "../../components/block"
+import Page from "../../components/page"
 import classes from "./index.module.scss"
 
 export default function LayoutDemo() {

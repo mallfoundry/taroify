@@ -1,10 +1,10 @@
-import * as React from "react"
-import { useState } from "react"
-import { View } from "@tarojs/components"
 import Backdrop from "@taroify/core/backdrop"
 import Button from "@taroify/core/button"
-import Page from "../../components/page"
+import { View } from "@tarojs/components"
+import * as React from "react"
+import { useState } from "react"
 import Block from "../../components/block"
+import Page from "../../components/page"
 
 import classes from "./index.module.scss"
 

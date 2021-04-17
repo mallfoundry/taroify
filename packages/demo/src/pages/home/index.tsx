@@ -1,7 +1,7 @@
 import { Image, Text, View } from "@tarojs/components"
 import * as React from "react"
-import Nav, { NavBlock } from "./nav"
 import classes from "./index.module.scss"
+import Nav, { NavBlock } from "./nav"
 
 export default function Home() {
   return (

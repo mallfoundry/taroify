@@ -4,8 +4,8 @@
 
   .HomeTitle {
     display: flex;
-    padding-top: 1.2rem;
     align-items: center;
+    padding-top: 1.2rem;
 
     .HomeLogo {
       width: 1.4rem;
@@ -14,15 +14,15 @@
 
     .HomeName {
       display: inline-block;
-      font-size: 1.4rem;
       margin-left: 14px * 2;
+      font-size: 1.4rem;
     }
   }
 
   .HomeDescription {
     display: block;
     margin: 10px 0 40px;
-    color: rgba(69, 90, 100, 0.6);
     font-size: 14px * 2;
+    color: rgba(69, 90, 100, 0.6);
   }
 }

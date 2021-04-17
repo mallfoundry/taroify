@@ -10,10 +10,10 @@
 }
 
 .EllipsisText {
-  color: #323233;
+  margin-bottom: 16px * 2;
   font-size: 14px * 2;
   line-height: 18px * 2;
-  margin-bottom: 16px * 2;
+  color: #323233;
 
   &:last-child {
     margin-bottom: 0;
@@ -25,7 +25,7 @@
   height: 30px * 2;
   background-color: #fff;
 
-  &:after {
+  &::after {
     top: 5px * 2;
   }
 }
