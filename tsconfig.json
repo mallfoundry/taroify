@@ -28,7 +28,7 @@
   },
   "include": [
     "packages/*/src",
-    "jest-setup.ts",
+    "jest/jest-setup.ts",
     "typings.d.ts"
   ],
   "exclude": [
