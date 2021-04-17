@@ -2,7 +2,7 @@ const { series, parallel } = require("gulp")
 const { buildTypescript, watchTypescript } = require("./gulp/typescript")
 const { copyReadmeFiles, watchReadmeFiles } = require("./gulp/readme")
 const { buildScss, watchScss } = require("./gulp/scss")
-const { buildBundle } = require("./gulp/bundle")
+const { createBundle } = require("./gulp/bundle")
 const { serveDemo, serveSite } = require("./gulp/serve")
 
 function watch() {
@@ -14,10 +14,12 @@ function watch() {
   watchReadmeFiles("core/docs")
 }
 
+exports.clean = series(createBundle("core"), createBundle("icons"))
+
 exports.develop = parallel(watch, serveDemo, serveSite)
 
 exports.build = series( //
-  buildBundle("icons"), buildBundle("core"), //
+  createBundle("icons"), createBundle("core"), //
   buildScss("icons"), buildScss("core"), //
   buildTypescript("icons"), buildTypescript("core"),//
 )
