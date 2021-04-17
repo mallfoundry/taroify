@@ -4,7 +4,5 @@ import { VanIcon } from "./van"
 
 export default function Photo(props: IconProps) {
   const { ...rest } = props
-  return (
-    <VanIcon children="photo" {...rest} />
-  )
+  return <VanIcon children="photo" {...rest} />
 }
