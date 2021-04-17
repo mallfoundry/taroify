@@ -2,6 +2,7 @@
   "name": "@taroify/demo",
   "version": "1.0.0",
   "description": "",
+  "private": "true",
   "templateInfo": {
     "name": "default",
     "typescript": true,
@@ -39,8 +40,8 @@
     "@tarojs/react": "3.1.2",
     "@tarojs/runtime": "3.1.2",
     "@tarojs/taro": "3.1.2",
-    "@taroify/icons": "^1.0.0",
-    "@taroify/core": "^1.0.0",
+    "@taroify/icons": "^0.0.0",
+    "@taroify/core": "^0.0.0",
     "classnames": "^2.2.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
