@@ -14,6 +14,8 @@ module.exports = {
   testMatch: [
     "<rootDir>/packages/**/__tests__/**/*.[jt]s?(x)",
     "<rootDir>/packages/**/?(*.)+(spec|test).[tj]s?(x)",
+    "<rootDir>/gulp/**/__tests__/**/*.[jt]s?(x)",
+    "<rootDir>/gulp/**/?(*.)+(spec|test).[tj]s?(x)",
   ],
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
