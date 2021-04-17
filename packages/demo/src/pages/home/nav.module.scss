@@ -1,4 +1,4 @@
-
+/* stylelint-disable selector-class-pattern */
 .Nav {
   font-size: 10px;
 
@@ -7,9 +7,6 @@
     margin: 0 0 16px * 2;
     font-size: 16px * 2;
     color: rgba(69, 90, 100, 0.6);
-  }
-
-  .NavBlocks {
   }
 
   .NavBlock {
@@ -37,9 +34,14 @@
     }
 
     :global {
+      /* stylelint-disable selector-max-compound-selectors */
       .taroify-icon {
         color: #b6c3d2;
       }
+
+      /* stylelint-enable selector-max-compound-selectors */
     }
   }
 }
+
+/* stylelint-enable selector-class-pattern */

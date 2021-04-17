@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .Layout {
   :global {
     .taroify-col {
@@ -19,3 +20,5 @@
     }
   }
 }
+
+/* stylelint-enable selector-class-pattern */

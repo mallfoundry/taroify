@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .AnimateBlock {
   position: fixed;
   top: 50%;
@@ -29,3 +30,5 @@
     top: 5px * 2;
   }
 }
+
+/* stylelint-enable selector-class-pattern */
