@@ -9,11 +9,14 @@
     "allowJs": false,
     "strict": true,
     "noUnusedLocals": true,
+    "noImplicitAny": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "removeComments": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
     "types": [
       "jest",
       "node"
