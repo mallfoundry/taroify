@@ -14,6 +14,10 @@
       "error",
       "double"
     ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
     "import/order": [
       "error"
     ]
