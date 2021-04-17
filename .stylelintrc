@@ -14,6 +14,15 @@
         ]
       }
     ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "host",
+          "global"
+        ]
+      }
+    ],
     "max-nesting-depth": [
       3,
       {
