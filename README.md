@@ -26,9 +26,9 @@ yarn add @taroify/core --production
 ## 使用组件
 
 ```jsx
-import Button from "@taroify/core/button"
+import { Button } from "@taroify/core"
 
-function ButtonDemo() {
+function ButtonExample() {
   return (
     <Button color="primary">按钮</Button>
   )
