@@ -1,5 +1,6 @@
 const fs = require("fs")
 const rimraf = require("rimraf")
+const gulp = require("gulp")
 const { series } = require("gulp")
 
 function cleanBundle(name) {
@@ -23,7 +24,9 @@ function initBundle(name) {
   const initPackageTask = (cb) => {
     const packageFile = fs.readFileSync(`./packages/${name}/package.json`, "utf8")
     const packageJson = JSON.parse(packageFile)
-    packageJson.private = "false"
+    if (packageJson.private) {
+      delete packageJson.private
+    }
     if (packageJson.name) {
       packageJson.name = packageJson.name.replace("/~", "/")
     }
@@ -34,8 +37,21 @@ function initBundle(name) {
   return initPackageTask
 }
 
+function copyBundleFiles(name, filename) {
+  const copyBundleFilesTask = () => {
+    return gulp.src(`./packages/${name}/${filename}`, {
+      allowEmpty: true,
+    })
+      .pipe(gulp.dest(`./bundles/${name}`))
+  }
+  copyBundleFilesTask.displayName = `copy file(${filename}) to bundles/${name}`
+  return copyBundleFilesTask
+}
+
 function createBundle(name) {
-  return series(cleanBundle(name), initBundle(name))
+  return series(cleanBundle(name), initBundle(name),//
+    copyBundleFiles(name, ".npmignore"),//
+    copyBundleFiles(name, "README.md"))
 }
 
 exports.createBundle = createBundle

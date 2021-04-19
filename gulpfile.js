@@ -16,7 +16,9 @@ function watch() {
 
 exports.clean = series(createBundle("core"), createBundle("icons"))
 
-exports.develop = parallel(watch, serveDemo, serveSite)
+exports.develop = parallel(
+  createBundle("icons"), createBundle("core"),//
+  watch, serveDemo, serveSite)
 
 exports.watch = watch
 
