@@ -12,8 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
-### v0.0.0
+### v0.0.1-alpha.0
 
-`2021-04-10`
+`2021-04-19`
 
-等待更新...
+**New Component**
+
+- 新增 Backdrop 组件
+- 新增 Button 组件
+- 新增 Cell 组件
+- 新增 CellGroup 组件
+- 新增 Col 组件
+- 新增 Image 组件
+- 新增 Loading 组件
+- 新增 Popup 组件
+- 新增 Row 组件
+- 新增 Toast 组件
+- 新增 Transition 组件
