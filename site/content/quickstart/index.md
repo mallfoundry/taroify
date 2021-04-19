@@ -51,7 +51,7 @@ module.exports = {
 
 ```js
 // 插件会自动将代码转化为方式二中的按需引入形式
-import { Button } from "@taroify/core";
+import { Button } from "@taroify/core"
 ```
 
 #### TypeScript 插件
@@ -63,6 +63,6 @@ import { Button } from "@taroify/core";
 在不使用插件的情况下，可以手动引入需要的组件。
 
 ```js
-import Button from "@taroify/core/button";
-import "@taroify/core/button/index.scss";
+import "@taroify/core/button/index.scss"
+import Button from "@taroify/core/button"
 ```
