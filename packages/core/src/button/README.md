@@ -7,7 +7,7 @@
 ### 引入
 
 ```jsx
-import Button from "@taroify/core/button"
+import { Button } from "@taroify/core"
 ```
 
 ## 代码演示
