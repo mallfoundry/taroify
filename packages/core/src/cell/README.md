@@ -7,8 +7,7 @@
 ### 引入
 
 ```jsx
-import Cell from "@taroify/core/cell"
-import CellGroup from "@taroify/core/cell-group"
+import { Cell, CellGroup } from "@taroify/core"
 ```
 
 ## 代码演示

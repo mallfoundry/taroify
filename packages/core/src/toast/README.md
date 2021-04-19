@@ -7,7 +7,7 @@
 ### 引入
 
 ```jsx
-import Toast from "@taroify/core/toast"
+import { Toast } from "@taroify/core"
 ```
 
 ## 代码演示

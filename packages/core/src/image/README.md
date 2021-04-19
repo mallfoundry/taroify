@@ -7,7 +7,7 @@
 ### 引入
 
 ```jsx
-import Image from "@taroify/core/image"
+import { Image } from "@taroify/core"
 ```
 
 ## 代码演示

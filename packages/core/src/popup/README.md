@@ -7,7 +7,7 @@
 ### 引入
 
 ```jsx
-import Popup from "@taroify/core/popup"
+import { Popup } from "@taroify/core"
 ```
 
 ## 代码演示
