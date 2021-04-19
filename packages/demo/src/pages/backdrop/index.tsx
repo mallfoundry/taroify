@@ -17,7 +17,7 @@ export default function BackdropDemo() {
         <Button
           variant="contained" color="primary"
           onClick={() => setOpen(true)}
-        >显示遮盖层</Button>
+        >显示背景板</Button>
         <Backdrop
           open={open} closeable
           onClose={() => setOpen(false)}
