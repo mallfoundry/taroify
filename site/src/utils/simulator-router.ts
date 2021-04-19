@@ -24,7 +24,10 @@ export function listeningSimulatorEvents() {
   })
 }
 
-const COMPONENT_NAMES = ["button", "cell", "icon", "image", "layout", "popup", "style", "toast"]
+const COMPONENT_NAMES = [
+  "button", "cell", "icon", "image", "layout", "popup", "style", "toast",//
+  "backdrop", "loading",
+]
 
 function navigateToComponent(component: string) {
   navigate(`/components/${component}`)
