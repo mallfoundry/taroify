@@ -53,6 +53,14 @@ const config = {
         },
       },
     },
+    output: {
+      filename: "js/[name].[hash:8].js",
+      chunkFilename: "chunk/[name].[chunkhash:8].js",
+    },
+    miniCssExtractPluginOption: {
+      filename: "css/[name].[hash:8].css",
+      chunkFilename: "chunk/[name].[chunkhash:8].css",
+    },
   },
 }
 
