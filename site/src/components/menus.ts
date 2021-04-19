@@ -57,4 +57,17 @@ export default [
       },
     ],
   },
+  {
+    title: "反馈组件",
+    children: [
+      {
+        title: "Loading 加载",
+        to: "/components/loading/",
+      },
+      {
+        title: "Backdrop 背景板",
+        to: "/components/backdrop/",
+      },
+    ],
+  },
 ]
