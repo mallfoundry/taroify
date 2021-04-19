@@ -17,12 +17,14 @@ export default function Home() {
         <NavBlock component="icon" href="/pages/icon/index" title="Icon 图标" />
         <NavBlock component="image" href="/pages/image/index" title="Image 图片" />
         <NavBlock component="layout" href="/pages/layout/index" title="Layout 布局" />
-        <NavBlock component="backdrop" href="/pages/backdrop/index" title="Backdrop 背景暗化" />
         <NavBlock component="popup" href="/pages/popup/index" title="Popup 弹出层" />
         <NavBlock component="style" href="/pages/style/index" title="Style 内置样式" />
         <NavBlock component="toast" href="/pages/toast/index" title="Toast 轻提示" />
-        <NavBlock component="loading" href="/pages/loading/index" title="Loading 加载" />
         <NavBlock component="space" href="/pages/space/index" title="Space 间距" />
+      </Nav>
+      <Nav title="反馈组件">
+        <NavBlock component="loading" href="/pages/loading/index" title="Loading 加载" />
+        <NavBlock component="backdrop" href="/pages/backdrop/index" title="Backdrop 背景暗化" />
       </Nav>
     </View>
   )
