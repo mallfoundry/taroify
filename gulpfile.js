@@ -18,6 +18,8 @@ exports.clean = series(createBundle("core"), createBundle("icons"))
 
 exports.develop = parallel(watch, serveDemo, serveSite)
 
+exports.watch = watch
+
 exports.build = series( //
   createBundle("icons"), createBundle("core"), //
   buildScss("icons"), buildScss("core"), //
