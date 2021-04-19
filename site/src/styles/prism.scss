@@ -11,6 +11,7 @@
 .gatsby-highlight {
   position: relative;
   display: block;
+  margin: 20px 0 0;
   padding: 16px;
   overflow-x: auto;
   color: $vant-code-color;
@@ -57,6 +58,7 @@ code[class*='language-'], pre[class*='language-'] {
 
 .token.params,
 .token.keyword,
+.token.property,
 .token.attribute {
   color: $vant-purple;
 }
@@ -64,6 +66,7 @@ code[class*='language-'], pre[class*='language-'] {
 .token.function,
 .token.deletion,
 .token.variable,
+.token.boolean,
 .token.number,
 .token.regexp,
 .token.literal,
@@ -76,6 +79,7 @@ code[class*='language-'], pre[class*='language-'] {
 .token.tag,
 .token.operator,
 .token.attr-name,
+.token.selector,
 .token.selector-tag,
 .token.title,
 .token.section,
