@@ -41,8 +41,11 @@ node_modules/
 .env.production.local
 
 npm-debug.log*
+npm-error.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+lerna-error.log*
 yarn.lock
 
 # IntelliJ IDEA
