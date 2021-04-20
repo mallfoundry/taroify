@@ -3,6 +3,15 @@
   "version": "0.0.1-alpha.0",
   "license": "MIT",
   "private": "true",
+  "keywords": [
+    "ui",
+    "taro",
+    "react",
+    "mobile",
+    "frontend",
+    "component",
+    "components"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
