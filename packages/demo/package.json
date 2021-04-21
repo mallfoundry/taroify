@@ -2,6 +2,7 @@
   "name": "@taroify/demo",
   "version": "0.0.1-alpha.0",
   "description": "",
+  "author": "Taroify",
   "private": "true",
   "templateInfo": {
     "name": "default",
@@ -33,7 +34,6 @@
     "Android >= 4.1",
     "ios >= 8"
   ],
-  "author": "",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@taroify/core": "^0.0.1-alpha.0",
