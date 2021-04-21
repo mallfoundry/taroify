@@ -33,7 +33,7 @@ export default function VanIcon(props: VanIconProps) {
           [`taroify-icon--${color}`]: color,
           [`taroify-icon--${size}`]: size,
         },
-        className
+        className,
       )}
       style={style}
       onClick={onClick}
