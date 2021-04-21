@@ -1,5 +1,4 @@
 const { series, parallel } = require("gulp")
-const { lintScss } = require("@taroify/cli")
 const { buildTypescript, watchTypescript } = require("./typescript")
 const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
 const { buildScss, watchScss } = require("./scss")
@@ -45,5 +44,3 @@ exports.readme = series(
 )
 
 exports.serve = parallel(serveDemo, serveSite)
-
-exports.lintScss = series(lintScss)
