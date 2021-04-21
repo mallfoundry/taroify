@@ -1,0 +1,1 @@
+export { demoPrefix } from "./prefix"
