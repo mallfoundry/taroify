@@ -31,40 +31,40 @@ export default function TransitionDemo() {
       </Block>
       <Block title="动画">
         <Cell clickable label="Fade"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.Fade)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.Fade)}
         />
         <Cell clickable label="Fade Up"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.FadeUp)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.FadeUp)}
         />
         <Cell clickable label="Fade Down"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.FadeDown)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.FadeDown)}
         />
         <Cell clickable label="Fade Left"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.FadeLeft)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.FadeLeft)}
         />
         <Cell clickable label="Fade Right"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.FadeRight)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.FadeRight)}
         />
         <Cell clickable label="Slide Up"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.SlideUp)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.SlideUp)}
         />
         <Cell clickable label="Slide Down"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.SlideDown)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.SlideDown)}
         />
         <Cell clickable label="Slide Left"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.SlideLeft)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.SlideLeft)}
         />
         <Cell clickable label="Slide Right"
-              endIcon={<ArrowRight />}
-              onClick={() => toggleTransition(TransitionName.SlideRight)}
+          endIcon={<ArrowRight />}
+          onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
         <Transition in={state} name={name}>
           <View className={classes.AnimateBlock} />

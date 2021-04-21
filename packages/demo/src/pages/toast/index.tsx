@@ -27,26 +27,27 @@ export default function ToastDemo() {
     <Page title="Toast">
       <Block title="基础用法">
         <Cell clickable label="文字提示"
-              endIcon={<ArrowRight />}
-              onClick={() => handleOpen({ type: ToastType.Text, message: "文字提示" })}
+          endIcon={<ArrowRight />}
+          onClick={() => handleOpen({ type: ToastType.Text, message: "文字提示" })}
         />
         <Cell clickable label="加载提示"
-              endIcon={<ArrowRight />}
-              onClick={() => handleOpen({ type: ToastType.Loading, message: "加载中..." })}
+          endIcon={<ArrowRight />}
+          onClick={() => handleOpen({ type: ToastType.Loading, message: "加载中..." })}
         />
         <Cell clickable label="成功提示"
-              endIcon={<ArrowRight />}
-              onClick={() => handleOpen({ type: ToastType.Success, message: "成功文案" })}
+          endIcon={<ArrowRight />}
+          onClick={() => handleOpen({ type: ToastType.Success, message: "成功文案" })}
         />
         <Cell clickable label="失败提示"
-              endIcon={<ArrowRight />}
-              onClick={() => handleOpen({ type: ToastType.Fail, message: "失败文案" })}
+          endIcon={<ArrowRight />}
+          onClick={() => handleOpen({ type: ToastType.Fail, message: "失败文案" })}
         />
       </Block>
       <Toast
         backdrop={false}
         open={options.open}
         type={options.type}
+        duration={200000}
         onClose={() => setOptions({
           ...options,
           open: false,
