@@ -33,12 +33,7 @@ interface TransitionProps {
 }
 
 export default function Transition(props: TransitionProps) {
-  const {
-    name = TransitionName.Fade,
-    in: inProp = false,
-    duration = 300,
-    children,
-  } = props
+  const { name = TransitionName.Fade, in: inProp = false, duration = 300, children } = props
   const childrenStyle = elementStyle(children)
   return (
     <CSSTransition

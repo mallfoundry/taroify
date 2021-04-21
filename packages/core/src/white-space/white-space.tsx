@@ -22,7 +22,7 @@ export default function WhiteSpace(props: WhiteSpaceProps) {
     <View
       className={classNames(
         prefixClassname("white-space"),
-        prefixClassname(`white-space-size-${size}`)
+        prefixClassname(`white-space-size-${size}`),
       )}
     />
   )

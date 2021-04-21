@@ -2,13 +2,7 @@ import { Image as TaroImage, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import {
-  CSSProperties,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react"
+import { CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react"
 import { prefixClassname } from "../styles"
 
 export enum ImageMode {
@@ -65,10 +59,7 @@ interface ImagePlaceholderProps {
   children?: ReactNode
 }
 
-function ImagePlaceholder({
-  prefix = "placeholder",
-  children,
-}: ImagePlaceholderProps) {
+function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholderProps) {
   // Icon Element
   if (React.isValidElement(children)) {
     return (
@@ -76,7 +67,7 @@ function ImagePlaceholder({
         {React.cloneElement(children as ReactElement, {
           className: classNames(
             prefixClassname(`image__${prefix}`),
-            prefixClassname(`image__${prefix}-icon`)
+            prefixClassname(`image__${prefix}-icon`),
           ),
         })}
       </>
@@ -84,12 +75,7 @@ function ImagePlaceholder({
   }
   // Text String
   if (_.isString(children) || _.isNumber(children)) {
-    return (
-      <View
-        className={prefixClassname(`image__${prefix}`)}
-        children={children}
-      />
-    )
+    return <View className={prefixClassname(`image__${prefix}`)} children={children} />
   }
   return <></>
 }
@@ -148,7 +134,7 @@ export default function Image(props: ImageProps) {
               [prefixClassname("image--round")]: round,
               [prefixClassname("image--loading")]: loading,
             },
-            className
+            className,
           )}
           style={style}
           imgProps={{ alt }}
@@ -157,18 +143,12 @@ export default function Image(props: ImageProps) {
         />
       )}
       {loading && placeholder && (
-        <View
-          className={classNames(prefixClassname("image"), className)}
-          style={style}
-        >
+        <View className={classNames(prefixClassname("image"), className)} style={style}>
           <ImagePlaceholder prefix="placeholder" children={placeholder} />
         </View>
       )}
       {failed && fallback && (
-        <View
-          className={classNames(prefixClassname("image"), className)}
-          style={style}
-        >
+        <View className={classNames(prefixClassname("image"), className)} style={style}>
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
       )}

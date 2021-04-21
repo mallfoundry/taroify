@@ -61,21 +61,16 @@ export default function Cell(props: CellProps) {
           [prefixClassname("cell--clickable")]: clickable,
           [prefixClassname("cell--borderless")]: !bordered,
         },
-        className
+        className,
       )}
       onClick={onClick}
     >
-      {startIcon && (
-        <View className={prefixClassname("cell-start-icon")}>{startIcon}</View>
-      )}
+      {startIcon && <View className={prefixClassname("cell-start-icon")}>{startIcon}</View>}
       {label && (
         <View className={prefixClassname("cell__label")}>
           {label}
           {description && (
-            <View
-              className={prefixClassname("cell__description")}
-              children={description}
-            />
+            <View className={prefixClassname("cell__description")} children={description} />
           )}
         </View>
       )}
@@ -86,9 +81,7 @@ export default function Cell(props: CellProps) {
       >
         {children}
       </View>
-      {endIcon && (
-        <View className={prefixClassname("cell__end-icon")}>{endIcon}</View>
-      )}
+      {endIcon && <View className={prefixClassname("cell__end-icon")}>{endIcon}</View>}
     </View>
   )
 }

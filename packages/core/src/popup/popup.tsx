@@ -55,18 +55,13 @@ function PopupClose(props: PopupCloseProps) {
   if (React.isValidElement(children)) {
     const iconElement = children as ReactElement
     return React.cloneElement(iconElement, {
-      className: classNames(
-        iconElement.props.classNames,
-        prefixClassname("popup__close-icon"),
-        {
-          [prefixClassname("popup__close-icon--top-right")]:
-            placement === PopupPlacement.Left ||
-            placement === PopupPlacement.Top ||
-            placement === PopupPlacement.Bottom,
-          [prefixClassname("popup__close-icon--top-left")]:
-            placement === PopupPlacement.Right,
-        }
-      ),
+      className: classNames(iconElement.props.classNames, prefixClassname("popup__close-icon"), {
+        [prefixClassname("popup__close-icon--top-right")]:
+          placement === PopupPlacement.Left ||
+          placement === PopupPlacement.Top ||
+          placement === PopupPlacement.Bottom,
+        [prefixClassname("popup__close-icon--top-left")]: placement === PopupPlacement.Right,
+      }),
     })
   }
 
@@ -123,14 +118,11 @@ export default function Popup(props: PopupProps) {
               [prefixClassname("popup--rounded")]: rounded,
               [prefixClassname("popup--center")]: _.isUndefined(placement),
               [prefixClassname("popup--top")]: placement === PopupPlacement.Top,
-              [prefixClassname("popup--right")]:
-                placement === PopupPlacement.Right,
-              [prefixClassname("popup--bottom")]:
-                placement === PopupPlacement.Bottom,
-              [prefixClassname("popup--left")]:
-                placement === PopupPlacement.Left,
+              [prefixClassname("popup--right")]: placement === PopupPlacement.Right,
+              [prefixClassname("popup--bottom")]: placement === PopupPlacement.Bottom,
+              [prefixClassname("popup--left")]: placement === PopupPlacement.Left,
             },
-            className
+            className,
           )}
           style={style}
         >

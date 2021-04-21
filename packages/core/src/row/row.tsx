@@ -39,9 +39,7 @@ interface RowProps {
   children?: ReactNode
 }
 
-function useGutter(
-  gutter?: RowGutter
-): [undefined | number, undefined | number] {
+function useGutter(gutter?: RowGutter): [undefined | number, undefined | number] {
   if (gutter === undefined) {
     return [undefined, undefined]
   }
@@ -82,17 +80,14 @@ export default function Row(props: RowProps) {
         {
           // Set justify style
           [prefixClassname("row-justify-end")]: justify === RowJustify.End,
-          [prefixClassname("row-justify-center")]:
-            justify === RowJustify.Center,
-          [prefixClassname("row-justify-space-around")]:
-            justify === RowJustify.SpaceAround,
-          [prefixClassname("row-justify-space-between")]:
-            justify === RowJustify.SpaceBetween,
+          [prefixClassname("row-justify-center")]: justify === RowJustify.Center,
+          [prefixClassname("row-justify-space-around")]: justify === RowJustify.SpaceAround,
+          [prefixClassname("row-justify-space-between")]: justify === RowJustify.SpaceBetween,
           // Set align style
           [prefixClassname("row-align-center")]: align === RowAlign.Center,
           [prefixClassname("row-align-bottom")]: align === RowAlign.Bottom,
         },
-        className
+        className,
       )}
       style={{
         ...gutterStyle,

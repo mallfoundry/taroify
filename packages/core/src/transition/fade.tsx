@@ -38,12 +38,5 @@ export default function Fade(props: FadeProps) {
   const { direction, in: inProp, duration, children } = props
   const name = getTransactionName(direction)
 
-  return (
-    <Transition
-      in={inProp}
-      name={name}
-      duration={duration}
-      children={children}
-    />
-  )
+  return <Transition in={inProp} name={name} duration={duration} children={children} />
 }

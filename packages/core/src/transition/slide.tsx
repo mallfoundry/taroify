@@ -35,19 +35,7 @@ interface SlideProps {
 }
 
 export default function Slide(props: SlideProps) {
-  const {
-    direction = SlideDirection.Up,
-    in: inProp,
-    duration,
-    children,
-  } = props
+  const { direction = SlideDirection.Up, in: inProp, duration, children } = props
   const name = getTransactionName(direction)
-  return (
-    <Transition
-      in={inProp}
-      name={name}
-      duration={duration}
-      children={children}
-    />
-  )
+  return <Transition in={inProp} name={name} duration={duration} children={children} />
 }

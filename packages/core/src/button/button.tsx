@@ -39,13 +39,7 @@ export enum ButtonColor {
   Danger = "danger",
 }
 
-type ButtonColorString =
-  | "default"
-  | "primary"
-  | "info"
-  | "success"
-  | "warning"
-  | "danger"
+type ButtonColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
 export enum ButtonShape {
   Square = "square",
@@ -95,10 +89,8 @@ export default function Button(props: ButtonProps) {
         [prefixClassname("hairline--surround")]: hairline,
         // Set variant style
         [prefixClassname("button--text")]: variant === ButtonVariant.Text,
-        [prefixClassname("button--contained")]:
-          variant === ButtonVariant.Contained,
-        [prefixClassname("button--outlined")]:
-          variant === ButtonVariant.Outlined,
+        [prefixClassname("button--contained")]: variant === ButtonVariant.Contained,
+        [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
         // Set shape style
         [prefixClassname("button--round")]: shape === ButtonShape.Round,
         // Set size style
@@ -127,12 +119,7 @@ export default function Button(props: ButtonProps) {
       />
       <View className={prefixClassname("button__content")}>
         {startIcon}
-        {children && (
-          <View
-            className={prefixClassname("button__text")}
-            children={children}
-          />
-        )}
+        {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
     </View>
   )

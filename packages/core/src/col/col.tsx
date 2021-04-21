@@ -34,7 +34,7 @@ export default function Col(props: ColProps) {
           [prefixClassname(`col-${span}`)]: span !== undefined,
           [prefixClassname(`col-offset-${offset}`)]: offset !== undefined,
         },
-        className
+        className,
       )}
       style={{
         ...style,
