@@ -46,9 +46,7 @@ export default function Nav(props: NavProps) {
   return (
     <View className={classes.Nav}>
       <View className={classes.NavTitle}>{title}</View>
-      <View className={classes.NavBlocks}>
-        {children}
-      </View>
+      <View className={classes.NavBlocks}>{children}</View>
     </View>
   )
 }

@@ -7,9 +7,7 @@ export default function SpaceDemo() {
   return (
     <Page title="Space 间距">
       <Block title="基础用法">
-        <Space>
-          111
-        </Space>
+        <Space>111</Space>
       </Block>
     </Page>
   )

@@ -21,48 +21,68 @@ export default function TransitionDemo() {
   return (
     <Page title="样式">
       <Block title="文字省略">
-        <View className={classNames("taroify-ellipsis", classes.EllipsisText)}>这是一段最多显示一行的文字，后面的内容会省略省略省略</View>
-        <View
-          className={classNames("taroify-ellipsis--l2", classes.EllipsisText)}
-        >这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。</View>
+        <View className={classNames("taroify-ellipsis", classes.EllipsisText)}>
+          这是一段最多显示一行的文字，后面的内容会省略省略省略
+        </View>
+        <View className={classNames("taroify-ellipsis--l2", classes.EllipsisText)}>
+          这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。
+        </View>
       </Block>
       <Block title="1px 边框">
         <View className={classNames("taroify-hairline--top", classes.HairlineLine)} />
       </Block>
       <Block title="动画">
-        <Cell clickable label="Fade"
+        <Cell
+          clickable
+          label="Fade"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.Fade)}
         />
-        <Cell clickable label="Fade Up"
+        <Cell
+          clickable
+          label="Fade Up"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeUp)}
         />
-        <Cell clickable label="Fade Down"
+        <Cell
+          clickable
+          label="Fade Down"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeDown)}
         />
-        <Cell clickable label="Fade Left"
+        <Cell
+          clickable
+          label="Fade Left"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeLeft)}
         />
-        <Cell clickable label="Fade Right"
+        <Cell
+          clickable
+          label="Fade Right"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeRight)}
         />
-        <Cell clickable label="Slide Up"
+        <Cell
+          clickable
+          label="Slide Up"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideUp)}
         />
-        <Cell clickable label="Slide Down"
+        <Cell
+          clickable
+          label="Slide Down"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideDown)}
         />
-        <Cell clickable label="Slide Left"
+        <Cell
+          clickable
+          label="Slide Left"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideLeft)}
         />
-        <Cell clickable label="Slide Right"
+        <Cell
+          clickable
+          label="Slide Right"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideRight)}
         />

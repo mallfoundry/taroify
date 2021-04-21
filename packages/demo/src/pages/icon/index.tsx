@@ -6,9 +6,7 @@ import "./index.scss"
 export default function IconDemo() {
   return (
     <Page title="图标">
-      <Block title="按钮类型">
-        待补充...
-      </Block>
+      <Block title="按钮类型">待补充...</Block>
     </Page>
   )
 }

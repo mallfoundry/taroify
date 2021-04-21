@@ -28,12 +28,16 @@ export default function LayoutDemo() {
           <Col span="6">span: 6</Col>
         </Row>
         <Row>
-          <Col offset="3" span="6">span: 6</Col>
+          <Col offset="3" span="6">
+            span: 6
+          </Col>
           <Col span="6">span: 6</Col>
           <Col span="6">span: 6</Col>
         </Row>
         <Row>
-          <Col offset="6" span="6">span: 6</Col>
+          <Col offset="6" span="6">
+            span: 6
+          </Col>
           <Col span="6">span: 6</Col>
           <Col span="6">span: 6</Col>
         </Row>

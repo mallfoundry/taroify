@@ -7,7 +7,7 @@ import Block from "../../components/block"
 import Page from "../../components/page"
 
 interface OpenOptions {
-  open?: boolean,
+  open?: boolean
   closeable?: boolean
   style?: CSSProperties
   placement?: PopupPlacement
@@ -31,7 +31,6 @@ export default function PopupDemo() {
       }
     } else if (placement) {
       openOptions.style = { height: "30%" }
-
     } else {
       openOptions.style = { padding: "30px 50px" }
     }
@@ -44,49 +43,69 @@ export default function PopupDemo() {
   return (
     <Page title="Popup">
       <Block title="基础用法">
-        <Cell clickable label="显示遮盖层"
+        <Cell
+          clickable
+          label="显示遮盖层"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: undefined })}
         />
       </Block>
       <Block title="弹出位置">
-        <Cell clickable label="顶部弹出"
+        <Cell
+          clickable
+          label="顶部弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Top })}
         />
-        <Cell clickable label="底部弹出"
+        <Cell
+          clickable
+          label="底部弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Bottom })}
         />
-        <Cell clickable label="左侧弹出"
+        <Cell
+          clickable
+          label="左侧弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Left })}
         />
-        <Cell clickable label="右侧弹出"
+        <Cell
+          clickable
+          label="右侧弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Right })}
         />
       </Block>
       <Block title="关闭按钮">
-        <Cell clickable label="顶部弹出"
+        <Cell
+          clickable
+          label="顶部弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Top, closeable: true })}
         />
-        <Cell clickable label="底部弹出"
+        <Cell
+          clickable
+          label="底部弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Bottom, closeable: true })}
         />
-        <Cell clickable label="左侧弹出"
+        <Cell
+          clickable
+          label="左侧弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Left, closeable: true })}
         />
-        <Cell clickable label="右侧弹出"
+        <Cell
+          clickable
+          label="右侧弹出"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Right, closeable: true })}
         />
       </Block>
       <Block title="圆角弹窗">
-        <Cell clickable label="圆角弹窗"
+        <Cell
+          clickable
+          label="圆角弹窗"
           endIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: PopupPlacement.Bottom, rounded: true })}
         />
@@ -97,10 +116,12 @@ export default function PopupDemo() {
         rounded={options.rounded}
         style={options.style}
         closeable={options.closeable}
-        onClose={() => setOptions({
-          ...options,
-          open: false,
-        })}
+        onClose={() =>
+          setOptions({
+            ...options,
+            open: false,
+          })
+        }
       />
     </Page>
   )

@@ -7,7 +7,6 @@ export enum TargetType {
   H5 = "h5",
 }
 
-
 type TargetTypeString = "h5"
 
 interface TargetProps {
@@ -17,9 +16,5 @@ interface TargetProps {
 
 export default function Target(props: TargetProps) {
   const { type, children } = props
-  return (
-    <>
-      {type === process.env.TARO_ENV && children}
-    </>
-  )
+  return <>{type === process.env.TARO_ENV && children}</>
 }

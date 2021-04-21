@@ -12,12 +12,20 @@ export default function ImageDemo() {
   const imageUrl = "https://img01.yzcdn.cn/vant/cat.jpeg"
 
   const modes = [
-    ImageMode.ScaleToFill, ImageMode.AspectFit, ImageMode.AspectFill,
-    ImageMode.WidthFix, ImageMode.HeightFix,
-    ImageMode.Top, ImageMode.Bottom, ImageMode.Center,
-    ImageMode.Left, ImageMode.Right,
-    ImageMode.TopLeft, ImageMode.TopRight,
-    ImageMode.BottomLeft, ImageMode.BottomRight,
+    ImageMode.ScaleToFill,
+    ImageMode.AspectFit,
+    ImageMode.AspectFill,
+    ImageMode.WidthFix,
+    ImageMode.HeightFix,
+    ImageMode.Top,
+    ImageMode.Bottom,
+    ImageMode.Center,
+    ImageMode.Left,
+    ImageMode.Right,
+    ImageMode.TopLeft,
+    ImageMode.TopRight,
+    ImageMode.BottomLeft,
+    ImageMode.BottomRight,
   ]
 
   return (
@@ -27,42 +35,32 @@ export default function ImageDemo() {
       </Block>
       <Block title="填充模式">
         <Row gutter="20">
-          {
-            modes.map(mode => (
-              <Col span="8" key={mode}>
-                <Image className={classes.Image} mode={mode} src={imageUrl} />
-                <Text className={classes.Text}>{mode}</Text>
-              </Col>
-            ))
-          }
+          {modes.map((mode) => (
+            <Col span="8" key={mode}>
+              <Image className={classes.Image} mode={mode} src={imageUrl} />
+              <Text className={classes.Text}>{mode}</Text>
+            </Col>
+          ))}
         </Row>
       </Block>
       <Block title="圆形图片">
         <Row gutter="20">
-          {
-            modes.map(mode => (
-              <Col span="8" key={mode}>
-                <Image className={classes.Image} mode={mode} src={imageUrl} round />
-                <Text className={classes.Text}>{mode}</Text>
-              </Col>
-            ))
-          }
+          {modes.map((mode) => (
+            <Col span="8" key={mode}>
+              <Image className={classes.Image} mode={mode} src={imageUrl} round />
+              <Text className={classes.Text}>{mode}</Text>
+            </Col>
+          ))}
         </Row>
       </Block>
       <Block title="加载中提示">
         <Row gutter="20">
           <Col span="8">
-            <Image
-              className={classes.Image}
-              placeholder={<Photo />}
-            />
+            <Image className={classes.Image} placeholder={<Photo />} />
             <Text className={classes.Text}>默认提示</Text>
           </Col>
           <Col span="8">
-            <Image
-              className={classes.Image}
-              placeholder="加载中..."
-            />
+            <Image className={classes.Image} placeholder="加载中..." />
             <Text className={classes.Text}>自定义提示</Text>
           </Col>
         </Row>
@@ -70,17 +68,11 @@ export default function ImageDemo() {
       <Block title="加载失败提示">
         <Row gutter="20">
           <Col span="8">
-            <Image
-              className={classes.Image} src="error"
-              fallback={<PhotoFail />}
-            />
+            <Image className={classes.Image} src="error" fallback={<PhotoFail />} />
             <Text className={classes.Text}>默认提示</Text>
           </Col>
           <Col span="8">
-            <Image
-              className={classes.Image} src="error"
-              fallback="加载失败"
-            />
+            <Image className={classes.Image} src="error" fallback="加载失败" />
             <Text className={classes.Text}>自定义提示</Text>
           </Col>
         </Row>
