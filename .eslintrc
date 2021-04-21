@@ -1,25 +1,6 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
   "extends": [
-    "react-app",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "rules": {
-    "prettier/prettier": "error",
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
-    "import/order": [
-      "error"
-    ]
-  }
+    "@taroify"
+  ]
 }
