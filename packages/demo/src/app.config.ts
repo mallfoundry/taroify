@@ -6,12 +6,15 @@ export default {
     "pages/cell/index",
     "pages/image/index",
     "pages/layout/index",
-    "pages/loading/index",
-    "pages/backdrop/index",
     "pages/popup/index",
     "pages/style/index",
     "pages/toast/index",
     "pages/space/index",
+    // Action Pages
+    "pages/backdrop/index",
+    "pages/loading/index",
+    // Navigation Pages
+    "pages/nav-bar/index",
   ],
   window: {
     backgroundTextStyle: "light",

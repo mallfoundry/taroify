@@ -35,10 +35,12 @@ const COMPONENT_NAMES = [
   "Layout",
   "Popup",
   "Style",
-  "Toast", //
+  "Toast",
+  // Action Components
   "Backdrop",
-  "Loading", //
-  "NavBar", //
+  "Loading",
+  // Navigation Components
+  "NavBar",
 ]
 
 function navigateToComponent(component: string) {
@@ -52,6 +54,6 @@ interface NavigateToOptions {
 function handleSimulatorNavigateTo(payload: NavigateToOptions) {
   const { component } = payload
   if (component && COMPONENT_NAMES.includes(component)) {
-    navigateToComponent(component)
+    navigateToComponent(_.kebabCase(component))
   }
 }

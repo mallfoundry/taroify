@@ -70,4 +70,13 @@ export default [
       },
     ],
   },
+  {
+    title: "导航组件",
+    children: [
+      {
+        title: "NavBar 导航栏",
+        to: "/components/nav-bar/",
+      },
+    ],
+  },
 ]
