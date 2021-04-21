@@ -8,41 +8,30 @@ const sourcemaps = require("gulp-sourcemaps")
 // Set compiler
 sass.compiler = require("sass")
 
-function lintScss(bundle, dist) {
-  const stylelint = require("gulp-stylelint")
-  const copyScssTask = () => gulp.src(`./packages/${bundle}/src/**/*.scss`)
-    .pipe(stylelint({
-      fix: true,
-      reporters: [
-        { formatter: "string", console: true },
-      ],
-    }))
-    .pipe(gulp.dest(`./packages/${dist ?? bundle}/src`))
-  copyScssTask.displayName = `lint scss files`
-  return copyScssTask
-}
-
 function copyScssFiles(bundle, dist) {
-  const copyScssFilesTask = () => gulp.src(`./packages/${bundle}/src/**/*.scss`)
-    .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
-  copyScssFilesTask.displayName = `copy scss files to bundles/${dist ?? bundle} from packages/${bundle}`
+  const copyScssFilesTask = () =>
+    gulp.src(`./packages/${bundle}/src/**/*.scss`).pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
+  copyScssFilesTask.displayName = `copy scss files to bundles/${
+    dist ?? bundle
+  } from packages/${bundle}`
   return copyScssFilesTask
 }
 
 function compileScss(bundle, dist) {
-  const plugins = [
-    autoprefixer(),
-    cssnano(),
-  ]
+  const plugins = [autoprefixer(), cssnano()]
 
-  const compileScssTask = () => gulp.src(`./packages/${bundle}/src/**/*.scss`)
-    .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(postcss(plugins))
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
+  const compileScssTask = () =>
+    gulp
+      .src(`./packages/${bundle}/src/**/index.scss`)
+      .pipe(sourcemaps.init())
+      .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+      .pipe(postcss(plugins))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
 
-  compileScssTask.displayName = `compile scss files to bundles/${dist ?? bundle} from packages/${bundle}`
+  compileScssTask.displayName = `compile scss files to bundles/${
+    dist ?? bundle
+  } from packages/${bundle}`
   return compileScssTask
 }
 
@@ -51,10 +40,14 @@ function buildScss(module, dist) {
 }
 
 function watchScss(module) {
-  watch([`./packages/${module}/src/**/*.scss`], {
-    // events: "all",
-    ignoreInitial: false,
-  }, series(copyScssFiles(module), compileScss(module)))
+  watch(
+    [`./packages/${module}/src/**/*.scss`],
+    {
+      // events: "all",
+      ignoreInitial: false,
+    },
+    series(copyScssFiles(module), compileScss(module)),
+  )
 }
 
 exports.buildScss = buildScss
