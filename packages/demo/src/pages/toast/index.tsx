@@ -47,7 +47,6 @@ export default function ToastDemo() {
         backdrop={false}
         open={options.open}
         type={options.type}
-        duration={200000}
         onClose={() => setOptions({
           ...options,
           open: false,
