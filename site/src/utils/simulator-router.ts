@@ -1,5 +1,5 @@
-import * as _ from "lodash"
 import { navigate } from "gatsby"
+import * as _ from "lodash"
 
 const SOURCE_PROPERTY_NAME = "source"
 const SIMULATOR_SOURCE_NAME = "taroify-simulator"
@@ -14,8 +14,11 @@ interface Message {
 export function listeningSimulatorEvents() {
   window.addEventListener("message", (event) => {
     const { data } = event
-    if (_.isPlainObject(data) && _.has(data, SOURCE_PROPERTY_NAME)
-      && _.isEqual(_.get(data, SOURCE_PROPERTY_NAME), SIMULATOR_SOURCE_NAME)) {
+    if (
+      _.isPlainObject(data) &&
+      _.has(data, SOURCE_PROPERTY_NAME) &&
+      _.isEqual(_.get(data, SOURCE_PROPERTY_NAME), SIMULATOR_SOURCE_NAME)
+    ) {
       const message = event.data as Message
       if (message.event === NAVIGATE_TO_EVENT) {
         handleSimulatorNavigateTo(message.payload)
@@ -25,8 +28,17 @@ export function listeningSimulatorEvents() {
 }
 
 const COMPONENT_NAMES = [
-  "button", "cell", "icon", "image", "layout", "popup", "style", "toast",//
-  "backdrop", "loading",
+  "Button",
+  "Cell",
+  "Icon",
+  "Image",
+  "Layout",
+  "Popup",
+  "Style",
+  "Toast", //
+  "Backdrop",
+  "Loading", //
+  "NavBar", //
 ]
 
 function navigateToComponent(component: string) {
@@ -43,4 +55,3 @@ function handleSimulatorNavigateTo(payload: NavigateToOptions) {
     navigateToComponent(component)
   }
 }
-
