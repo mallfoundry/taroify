@@ -1,19 +1,27 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import "./simulator.scss"
-import useScroll from "../hooks/useScroll"
 import classNames from "classnames"
 import * as _ from "lodash"
+import * as React from "react"
+import { useEffect, useState } from "react"
+import useScroll from "../hooks/useScroll"
 import { listeningSimulatorEvents } from "../utils/simulator-router"
+import "./simulator.scss"
+
+function resolveComponentName(path: string, pattern: RegExp | string) {
+  return _.replace(path, pattern, "")
+}
+
+function resolveComponentPath(componentName: string) {
+  return `#/pages/${_.endsWith(componentName, "/") ? componentName : `${componentName}/`}index`
+}
 
 function getIframePath(path?: string) {
   if (path && _.startsWith(path, "/components/")) {
-    const componentName = _.replace(path, "/components/", "")
-    return `#/pages/${_.endsWith(componentName, "/") ? componentName : `${componentName}/`}index`
+    const componentName = resolveComponentName(path, "/components/")
+    return resolveComponentPath(componentName)
   }
   if (path && _.startsWith(path, "/taroify.com/components/")) {
-    const componentName = _.replace(path, "/taroify.com/components/", "")
-    return `#/pages/${_.endsWith(componentName, "/") ? componentName : `${componentName}/`}index`
+    const componentName = resolveComponentName(path, "/taroify.com/components/")
+    return resolveComponentPath(componentName)
   }
   return "#/pages/home/index"
 }
@@ -36,7 +44,9 @@ interface SimulatorProps {
 
 export default function Simulator(props: SimulatorProps) {
   const { slug } = props
-  const { position: { y: positionY } } = useScroll()
+  const {
+    position: { y: positionY },
+  } = useScroll()
   const [iframeUrl, setIframeUrl] = useState("")
 
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
@@ -44,9 +54,11 @@ export default function Simulator(props: SimulatorProps) {
   useEffect(listeningSimulatorEvents, [])
 
   return (
-    <div className={classNames("vant-simulator", {
-      [`vant-simulator-fixed`]: positionY > 60,
-    })}>
+    <div
+      className={classNames("vant-simulator", {
+        [`vant-simulator-fixed`]: positionY > 60,
+      })}
+    >
       <iframe src={iframeUrl} frameBorder="0" />
     </div>
   )
