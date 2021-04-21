@@ -29,9 +29,7 @@ yarn add @taroify/core --production
 import { Button } from "@taroify/core"
 
 function ButtonExample() {
-  return (
-    <Button color="primary">按钮</Button>
-  )
+  return <Button color="primary">按钮</Button>
 }
 ```
 
