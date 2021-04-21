@@ -1,6 +1,7 @@
-/* stylelint-disable selector-class-pattern */
-.Page {
-  .Nav {
+@import "../styles/prefix";
+
+.#{$demo-prefix}page {
+  &__nav {
     position: relative;
     display: flex;
     align-items: center;
@@ -8,13 +9,7 @@
     height: 56px * 2;
     background-color: #fff;
 
-    .NavTitle {
-      font-size: 16px * 2;
-      font-weight: 600;
-      text-transform: capitalize;
-    }
-
-    .NavBack {
+    &__back {
       position: absolute;
       top: 16px * 2;
       left: 16px * 2;
@@ -23,11 +18,15 @@
       color: #969799;
       cursor: pointer;
     }
+
+    &__title {
+      font-size: 16px * 2;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
   }
 
-  .PageContent {
+  &__content {
     padding: 0 16px;
   }
 }
-
-/* stylelint-enable selector-class-pattern */

@@ -1,0 +1,17 @@
+@import "../styles/prefix";
+
+.#{$demo-prefix}block {
+  padding: 32px 0 16px * 2 0;
+  margin: 0;
+  font-size: 16px * 2;
+  font-weight: normal;
+  line-height: 16px * 2;
+  color: rgba(69, 90, 100, 0.6);
+
+  &__title {
+    margin-bottom: 16px * 2;
+    font-size: 14px * 2;
+    line-height: 16px * 2;
+  }
+
+}

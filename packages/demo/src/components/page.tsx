@@ -4,7 +4,8 @@ import { navigateBack } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
-import classes from "./page.module.scss"
+import { demoPrefixClassname } from "../styles/prefix"
+import "./page.scss"
 import Target from "./target"
 
 interface PageProps {
@@ -17,14 +18,17 @@ export default function Page(props: PageProps) {
   const { className, title, children } = props
 
   return (
-    <View className={classNames(classes.Page, className)}>
+    <View className={classNames(demoPrefixClassname("page"), className)}>
       <Target type="h5">
-        <View className={classes.Nav}>
-          <ArrowLeft className={classes.NavBack} onClick={() => navigateBack()} />
-          <View className={classes.NavTitle}>{title} </View>
+        <View className={demoPrefixClassname("page__nav")}>
+          <ArrowLeft
+            className={demoPrefixClassname("page__nav__back")}
+            onClick={() => navigateBack()}
+          />
+          <View className={demoPrefixClassname("page__nav__title")}>{title} </View>
         </View>
       </Target>
-      <View className={classes.PageContent}>{children}</View>
+      <View className={demoPrefixClassname("page__content")}>{children}</View>
     </View>
   )
 }
