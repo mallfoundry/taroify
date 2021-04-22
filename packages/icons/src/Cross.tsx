@@ -1,8 +1,4 @@
-import * as React from "react"
-import { IconProps } from "./shared"
-import { VanIcon } from "./van"
+import { createVanIconComponent } from "./van"
 
-export default function Cross(props: IconProps) {
-  const { ...rest } = props
-  return <VanIcon children="cross" {...rest} />
-}
+const Cross = createVanIconComponent("cross")
+export default Cross
