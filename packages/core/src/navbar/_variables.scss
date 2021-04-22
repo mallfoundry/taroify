@@ -1,0 +1,13 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+$navbar-height: 46px * $hd;
+$navbar-background-color: $white-color;
+$navbar-icon-size: 16px * $hd;
+$navbar-icon-color: $blue-color;
+$navbar-text-color: $blue-color;
+$navbar-title-font-size: $font-size-lg;
+$navbar-title-text-color: $text-color;
+$navbar-z-index: 1;
