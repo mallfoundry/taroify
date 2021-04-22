@@ -2,7 +2,14 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties } from "react"
-import { IconColor, IconColorString, IconSize, IconSizeString } from "../shared"
+import {
+  ICON_TYPE,
+  IconColor,
+  IconColorString,
+  IconProps,
+  IconSize,
+  IconSizeString,
+} from "../shared"
 
 interface VanIconProps {
   className?: string
@@ -39,4 +46,15 @@ export default function VanIcon(props: VanIconProps) {
       onClick={onClick}
     />
   )
+}
+
+export function createVanIconComponent(name: string) {
+  function VanIconWrapper(props: IconProps) {
+    const { ...rest } = props
+    return <VanIcon children={name} {...rest} />
+  }
+
+  // @ts-ignore
+  VanIconWrapper[ICON_TYPE] = ICON_TYPE
+  return VanIconWrapper
 }
