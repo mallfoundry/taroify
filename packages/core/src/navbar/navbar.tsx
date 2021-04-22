@@ -7,46 +7,6 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BOTTOM } from "../styles/hairline"
 import { findChildren } from "../utils/children"
 
-interface NavbarLeftProps {
-  icon?: ReactNode
-  text?: ReactNode
-  children?: ReactNode
-}
-
-function NavbarLeft(props: NavbarLeftProps) {
-  const { icon, text, children } = props
-  // If children is not undefined, return left view
-  if (children) {
-    return <View className={prefixClassname("navbar__left")} children={children} />
-  }
-  return (
-    <View className={prefixClassname("navbar__left")}>
-      {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
-      {text && <View className={prefixClassname("navbar__text")} children={text} />}
-    </View>
-  )
-}
-
-interface NavbarRightProps {
-  icon?: ReactNode
-  text?: ReactNode
-  children?: ReactNode
-}
-
-function NavbarRight(props: NavbarRightProps) {
-  const { icon, text, children } = props
-  // If children is not undefined, return right view
-  if (children) {
-    return <View className={prefixClassname("navbar__right")} children={children} />
-  }
-  return (
-    <View className={prefixClassname("navbar__right")}>
-      {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
-      {text && <View className={prefixClassname("navbar__text")} children={text} />}
-    </View>
-  )
-}
-
 interface NavbarProps {
   bordered?: boolean
   fixed?: boolean
@@ -56,8 +16,8 @@ interface NavbarProps {
 
 function Navbar(props: NavbarProps) {
   const { bordered, title, children } = props
-  const LeftRender = findChildren(children, NavbarLeft)
-  const RightRender = findChildren(children, NavbarRight)
+  const LeftRender = findChildren(children, Navbar.Left)
+  const RightRender = findChildren(children, Navbar.Right)
   return (
     <View
       className={classNames(prefixClassname("navbar"), {
@@ -74,8 +34,45 @@ function Navbar(props: NavbarProps) {
 }
 
 namespace Navbar {
-  export const Left = NavbarLeft
-  export const Right = NavbarRight
+  interface LeftProps {
+    icon?: ReactNode
+    text?: ReactNode
+    children?: ReactNode
+  }
+
+  export function Left(props: LeftProps) {
+    const { icon, text, children } = props
+    // If children is not undefined, return left view
+    if (children) {
+      return <View className={prefixClassname("navbar__left")} children={children} />
+    }
+    return (
+      <View className={prefixClassname("navbar__left")}>
+        {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
+        {text && <View className={prefixClassname("navbar__text")} children={text} />}
+      </View>
+    )
+  }
+
+  interface RightProps {
+    icon?: ReactNode
+    text?: ReactNode
+    children?: ReactNode
+  }
+
+  export function Right(props: RightProps) {
+    const { icon, text, children } = props
+    // If children is not undefined, return right view
+    if (children) {
+      return <View className={prefixClassname("navbar__right")} children={children} />
+    }
+    return (
+      <View className={prefixClassname("navbar__right")}>
+        {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
+        {text && <View className={prefixClassname("navbar__text")} children={text} />}
+      </View>
+    )
+  }
 }
 
 export default Navbar
