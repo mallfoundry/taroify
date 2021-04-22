@@ -14,7 +14,7 @@ export default {
     "pages/backdrop/index",
     "pages/loading/index",
     // Navigation Pages
-    "pages/nav-bar/index",
+    "pages/navbar/index",
   ],
   window: {
     backgroundTextStyle: "light",

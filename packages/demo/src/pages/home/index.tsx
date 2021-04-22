@@ -31,7 +31,7 @@ export default function Home() {
         <NavBlock component="Backdrop" href="/pages/backdrop/index" title="Backdrop 背景暗化" />
       </Nav>
       <Nav title="导航组件">
-        <NavBlock component="NavBar" href="/pages/nav-bar/index" title="NavBar 导航栏" />
+        <NavBlock component="Navbar" href="/pages/navbar/index" title="NavBar 导航栏" />
       </Nav>
     </View>
   )

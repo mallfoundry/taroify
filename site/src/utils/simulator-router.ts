@@ -40,7 +40,7 @@ const COMPONENT_NAMES = [
   "Backdrop",
   "Loading",
   // Navigation Components
-  "NavBar",
+  "Navbar",
 ]
 
 function navigateToComponent(component: string) {
