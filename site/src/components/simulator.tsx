@@ -56,7 +56,7 @@ export default function Simulator(props: SimulatorProps) {
   return (
     <div
       className={classNames("vant-simulator", {
-        [`vant-simulator-fixed`]: positionY > 60,
+        "vant-simulator-fixed": positionY > 60,
       })}
     >
       <iframe src={iframeUrl} frameBorder="0" />
