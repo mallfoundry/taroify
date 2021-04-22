@@ -1,5 +1,7 @@
 import { CSSProperties } from "react"
 
+export const ICON_TYPE = Symbol("__iconType__")
+
 export enum IconSize {
   Inherit = "inherit",
   Mini = "mini",
@@ -34,7 +36,7 @@ export interface IconProps {
   style?: CSSProperties
   size?: IconSize | IconSizeString
   color?: IconColor | IconColorString
-  children?: string
+  // children?: string // TODO private children
   // events
   onClick?: () => void
 }
