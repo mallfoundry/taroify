@@ -1,1 +1,1 @@
-export { default as VanIcon } from "./VanIcon"
+export { default as VanIcon, createVanIconComponent } from "./VanIcon"
