@@ -16,8 +16,8 @@ interface NavbarProps {
 
 function Navbar(props: NavbarProps) {
   const { bordered, title, children } = props
-  const LeftRender = findChildren(children, Navbar.Left)
-  const RightRender = findChildren(children, Navbar.Right)
+  const NavLeftRender = findChildren(children, Navbar.NavLeft)
+  const NavRightRender = findChildren(children, Navbar.NavRight)
   return (
     <View
       className={classNames(prefixClassname("navbar"), {
@@ -25,22 +25,22 @@ function Navbar(props: NavbarProps) {
       })}
     >
       <View className={classNames(prefixClassname("navbar__content"))}>
-        {LeftRender}
+        {NavLeftRender}
         <View className={classNames(prefixClassname("navbar__title"))} children={title} />
-        {RightRender}
+        {NavRightRender}
       </View>
     </View>
   )
 }
 
 namespace Navbar {
-  interface LeftProps {
+  interface NavLeftProps {
     icon?: ReactNode
     text?: ReactNode
     children?: ReactNode
   }
 
-  export function Left(props: LeftProps) {
+  export function NavLeft(props: NavLeftProps) {
     const { icon, text, children } = props
     // If children is not undefined, return left view
     if (children) {
@@ -54,13 +54,13 @@ namespace Navbar {
     )
   }
 
-  interface RightProps {
+  interface NavRightProps {
     icon?: ReactNode
     text?: ReactNode
     children?: ReactNode
   }
 
-  export function Right(props: RightProps) {
+  export function NavRight(props: NavRightProps) {
     const { icon, text, children } = props
     // If children is not undefined, return right view
     if (children) {

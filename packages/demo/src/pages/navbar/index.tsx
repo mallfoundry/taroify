@@ -11,10 +11,10 @@ export default function NavbarDemo() {
       <Block title="基础用法">
         <Navbar title="标题" />
       </Block>
-      <Block title="使用 Left 和 Right">
+      <Block title="使用 NavLeft 和 NavRight">
         <Navbar title="标题">
-          <Navbar.Left icon={<ArrowLeft />} text="返回" />
-          <Navbar.Right icon={<Search />} />
+          <Navbar.NavLeft icon={<ArrowLeft />} text="返回" />
+          <Navbar.NavRight icon={<Search />} />
         </Navbar>
       </Block>
     </Page>

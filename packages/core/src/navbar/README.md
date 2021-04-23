@@ -20,12 +20,12 @@ import Navbar from "@taroify/core/navbar"
 <Navbar title="标题" />
 ```
 
-### 使用 Left 和 Right
+### 使用 NavLeft 和 NavRight
 
 ```jsx
 <Navbar title="标题">
-  <Navbar.Left icon={<ArrowLeft />} text="返回" />
-  <Navbar.Right icon={<Search />} />
+  <Navbar.NavLeft icon={<ArrowLeft />} text="返回" />
+  <Navbar.NavRight icon={<Search />} />
 </Navbar>
 ```
 
@@ -40,27 +40,27 @@ import Navbar from "@taroify/core/navbar"
 | fixed | 是否固定在顶部 | _boolean_ | `false` |
 | children | 固定在顶部时，是否在标签位置生成一个等高的占位元素 | _ReactNode_ | - |
 
-### Navbar.Left Props
+### Navbar.NavLeft Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | icon | 左侧图标 | _Icon_ | - |
 | text | 左侧文案 | _ReactNode_ | - |
 
-### Navbar.Left Events
+### Navbar.NavLeft Events
 
 | 事件名      | 说明               | 回调参数            |
 | ----------- | ------------------ | ------------------- |
 | onClick  | 点击左侧按钮时触发 | _event: MouseEvent_ |
 
-### Navbar.Right Props
+### Navbar.NavRight Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | icon | 右侧图标 | _Icon_ | - |
 | text | 右侧文案 | _ReactNode_ | - |
 
-### Navbar.Right Events
+### Navbar.NavRight Events
 
 | 事件名      | 说明               | 回调参数            |
 | ----------- | ------------------ | ------------------- |
