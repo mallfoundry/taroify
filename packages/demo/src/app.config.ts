@@ -1,22 +1,21 @@
+import componentPages from "./component-pages"
+
+function obtainComponentPagePaths() {
+  const pagePaths: string[] = []
+  for (const { children } of componentPages) {
+    if (children) {
+      for (const { path } of children) {
+        if (path) {
+          pagePaths.push(path)
+        }
+      }
+    }
+  }
+  return pagePaths
+}
+
 export default {
-  pages: [
-    "pages/home/index",
-    "pages/button/index",
-    "pages/icon/index",
-    "pages/cell/index",
-    "pages/image/index",
-    "pages/layout/index",
-    "pages/popup/index",
-    "pages/style/index",
-    "pages/toast/index",
-    "pages/space/index",
-    // Action Pages
-    "pages/backdrop/index",
-    "pages/loading/index",
-    // Navigation Pages
-    "pages/navbar/index",
-    "pages/tabbar/index",
-  ],
+  pages: ["pages/home/index", ...obtainComponentPagePaths()],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#4fc08d",
