@@ -15,3 +15,4 @@ export { default as Backdrop } from "./backdrop"
 export { default as Loading } from "./loading"
 // Navigation Components
 export { default as Navbar } from "./navbar"
+export { default as Tabbar } from "./tabbar"

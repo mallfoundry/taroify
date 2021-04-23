@@ -1,4 +1,4 @@
-export default [
+const menus = [
   {
     title: "开发指南",
     children: [
@@ -77,6 +77,12 @@ export default [
         title: "Navbar 导航栏",
         to: "/components/navbar/",
       },
+      {
+        title: "Tabbar 标签栏",
+        to: "/components/tabbar/",
+      },
     ],
   },
 ]
+
+export default menus

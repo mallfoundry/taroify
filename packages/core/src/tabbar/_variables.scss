@@ -1,0 +1,18 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+// tabbar styles
+$tabbar-height: 50px * $hd;
+$tabbar-z-index: 1;
+$tabbar-background-color: $white-color;
+
+// tabbar-item styles
+$tabbar-item-font-size: $font-size-sm;
+$tabbar-item-text-color: $gray-7;
+$tabbar-item-active-color: $blue-color;
+$tabbar-item-active-background-color: $white-color;
+$tabbar-item-line-height: 1;
+$tabbar-item-icon-size: 22px * $hd;
+$tabbar-item-margin-bottom: 4px * $hd;

@@ -32,6 +32,7 @@ export default function Home() {
       </Nav>
       <Nav title="导航组件">
         <NavBlock component="Navbar" href="/pages/navbar/index" title="Navbar 导航栏" />
+        <NavBlock component="Navbar" href="/pages/tabbar/index" title="Tabbar 标签栏" />
       </Nav>
     </View>
   )

@@ -15,6 +15,7 @@ export default {
     "pages/loading/index",
     // Navigation Pages
     "pages/navbar/index",
+    "pages/tabbar/index",
   ],
   window: {
     backgroundTextStyle: "light",
