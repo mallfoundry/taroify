@@ -1,0 +1,15 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+$badge-size: 16px * $hd;
+$badge-color: $white-color;
+$badge-padding: 0 3px * $hd;
+$badge-font-size: $font-size-sm;
+$badge-font-weight: $font-weight-bold;
+$badge-border-width: $border-width-base;
+$badge-background-color: $red-color;
+$badge-dot-color: $red-color;
+$badge-dot-size: 8px * $hd;
+$badge-font-family: -apple-system-font, Helvetica Neue, Arial, sans-serif;
