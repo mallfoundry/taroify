@@ -1,17 +1,22 @@
 @import "../styles/prefix";
+@import "../styles/variables";
 
 .#{$demo-prefix}block {
-  padding: 32px 0 16px * 2 0;
   margin: 0;
-  font-size: 16px * 2;
+  font-size: 16px * $hd;
+  line-height: 16px * $hd;
   font-weight: normal;
-  line-height: 16px * 2;
   color: rgba(69, 90, 100, 0.6);
 
   &__title {
-    margin-bottom: 16px * 2;
-    font-size: 14px * 2;
-    line-height: 16px * 2;
+    padding: 32px * $hd 16px * $hd 16px * $hd;
+    font-size: 14px * $hd;
+    line-height: 16px * $hd;
   }
 
+  &:first-of-type {
+    &__title {
+      padding-top: 20px * $hd;
+    }
+  }
 }
