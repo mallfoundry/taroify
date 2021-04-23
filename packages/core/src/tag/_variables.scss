@@ -1,0 +1,33 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+
+$tag-padding: 0 $padding-base;
+$tag-text-color: $white-color;
+$tag-font-size: $font-size-sm;
+$tag-border-radius: 2px * $hd;
+$tag-line-height: 16px * $hd;
+$tag-medium-padding: 2px * $hd 6px * $hd;
+$tag-large-padding: $padding-base $padding-xs;
+$tag-large-border-radius: $border-radius-md;
+$tag-large-font-size: $font-size-md;
+$tag-round-border-radius: $border-radius-max;
+// Default RoundRight, RoundLeft
+$tag-round-right-padding: 0 ($padding-base + 2px * $hd) 0 $padding-base;
+$tag-round-left-padding: 0 $padding-base 0 ($padding-base + 2px * $hd);
+// Medium RoundRight, RoundLeft
+$tag-round-right-medium-padding: 2px * $hd (6px * $hd + 2px * $hd) 2px * $hd 6px * $hd;
+$tag-round-left-medium-padding: 2px * $hd 6px * $hd 2px * $hd (6px * $hd + 2px * $hd);
+// Large RoundRight, RoundLeft
+$tag-round-right-large-padding: $padding-base ($padding-xs + 2px * $hd) $padding-base $padding-xs;
+$tag-round-left-large-padding: $padding-base $padding-xs $padding-base ($padding-xs + 2px * $hd);
+// Color
+$tag-default-color: $gray-6;
+$tag-primary-color: $primary-color;
+$tag-info-color: $info-color;
+$tag-success-color: $success-color;
+$tag-warning-color: $orange-color;
+$tag-danger-color: $danger-color;
+$tag-outlined-background-color: $white-color;

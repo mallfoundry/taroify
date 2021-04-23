@@ -1,0 +1,122 @@
+@import "./variables";
+
+.#{$component-prefix}tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: $tag-padding;
+  color: $tag-text-color;
+  font-size: $tag-font-size;
+  line-height: $tag-line-height;
+  border-radius: $tag-border-radius;
+
+  &--default {
+    background-color: $tag-default-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-default-color;
+    }
+  }
+
+  &--primary {
+    background-color: $tag-primary-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-primary-color;
+    }
+  }
+
+  &--info {
+    background-color: $tag-info-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-info-color;
+    }
+  }
+
+  &--success {
+    background-color: $tag-success-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-success-color;
+    }
+  }
+
+  &--warning {
+    background-color: $tag-warning-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-warning-color;
+    }
+  }
+
+  &--danger {
+    background-color: $tag-danger-color;
+
+    &.#{$component-prefix}tag--outlined {
+      color: $tag-danger-color;
+    }
+  }
+
+  &--outlined {
+    background-color: $tag-outlined-background-color;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px * $hd solid currentColor;
+      border-radius: inherit;
+      content: '';
+      pointer-events: none;
+    }
+  }
+
+  &--medium {
+    padding: $tag-medium-padding;
+
+    &.#{$component-prefix}tag--round-right {
+      padding: $tag-round-right-medium-padding;
+    }
+
+    &.#{$component-prefix}tag--round-left {
+      padding: $tag-round-left-medium-padding;
+    }
+  }
+
+  &--large {
+    padding: $tag-large-padding;
+    font-size: $tag-large-font-size;
+    border-radius: $tag-large-border-radius;
+
+    &.#{$component-prefix}tag--round-right {
+      padding: $tag-round-right-large-padding;
+    }
+
+    &.#{$component-prefix}tag--round-left {
+      padding: $tag-round-left-large-padding;
+    }
+
+  }
+
+  &--round {
+    border-radius: $tag-round-border-radius;
+  }
+
+  &--round-left {
+    border-radius: $tag-round-border-radius 0 0 $tag-round-border-radius;
+    padding: $tag-round-left-padding;
+  }
+
+  &--round-right {
+    border-radius: 0 $tag-round-border-radius $tag-round-border-radius 0;
+    padding: $tag-round-right-padding;
+  }
+
+  &__close {
+    margin-left: 2px * $hd;
+    cursor: pointer;
+  }
+}

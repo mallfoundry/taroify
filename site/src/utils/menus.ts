@@ -77,6 +77,10 @@ const menus = [
         title: "Badge 徽标",
         to: "/components/badge/",
       },
+      {
+        title: "Tag 标签",
+        to: "/components/tag/",
+      },
     ],
   },
   {

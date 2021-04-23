@@ -72,6 +72,11 @@ const componentPages = [
         name: "Badge",
         path: "/pages/badge/index",
       },
+      {
+        title: "Tag 标签",
+        name: "Tag",
+        path: "/pages/tag/index",
+      },
     ],
   },
   {

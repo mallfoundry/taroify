@@ -15,6 +15,7 @@ export { default as Backdrop } from "./backdrop"
 export { default as Loading } from "./loading"
 // Display Components
 export { default as Badge } from "./badge"
+export { default as Tag } from "./tag"
 // Navigation Components
 export { default as Navbar } from "./navbar"
 export { default as Tabbar } from "./tabbar"
