@@ -1,9 +1,29 @@
 import { navigate } from "gatsby"
 import * as _ from "lodash"
 
+import menus from "./menus"
+
 const SOURCE_PROPERTY_NAME = "source"
 const SIMULATOR_SOURCE_NAME = "taroify-simulator"
 const NAVIGATE_TO_EVENT = "navigateTo"
+
+function obtainComponentNames() {
+  const componentNames: string[] = []
+  for (const { children } of menus) {
+    for (const { to } of children) {
+      if (_.startsWith(to, "/components/")) {
+        let componentName = _.replace(to, "/components/", "") // "/components/button-group/" to "button-group/"
+        componentName = _.replace(componentName, "/", "") // "button-group/" to "button-group"
+        componentName = _.camelCase(componentName) // "button-group" to "buttonGroup"
+        componentName = _.upperFirst(componentName) // "buttonGroup" to "ButtonGroup"
+        componentNames.push(componentName)
+      }
+    }
+  }
+  return componentNames
+}
+
+const COMPONENT_NAMES = obtainComponentNames()
 
 interface Message {
   source: string
@@ -26,22 +46,6 @@ export function listeningSimulatorEvents() {
     }
   })
 }
-
-const COMPONENT_NAMES = [
-  "Button",
-  "Cell",
-  "Icon",
-  "Image",
-  "Layout",
-  "Popup",
-  "Style",
-  "Toast",
-  // Action Components
-  "Backdrop",
-  "Loading",
-  // Navigation Components
-  "Navbar",
-]
 
 function navigateToComponent(component: string) {
   navigate(`/components/${component}`)

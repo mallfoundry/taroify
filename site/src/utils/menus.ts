@@ -71,6 +71,15 @@ const menus = [
     ],
   },
   {
+    title: "展示组件",
+    children: [
+      {
+        title: "Badge 徽标",
+        to: "/components/badge/",
+      },
+    ],
+  },
+  {
     title: "导航组件",
     children: [
       {
