@@ -46,34 +46,14 @@ import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify
 function KeyTabbar() {
   const [activeKey, setActiveKey] = useState<Tabbar.Key>("1")
   return (
-    <Block title="通过 key 匹配">
-      <Tabbar activeKey={activeKey} onChange={setActiveKey}>
-        <Tabbar.TabItem key="1" icon={<HomeOutlined />} label="标签" />
-        <Tabbar.TabItem key="2" icon={<Search />} label="标签" />
-        <Tabbar.TabItem key="3" icon={<FriendsOutlined />} label="标签" />
-        <Tabbar.TabItem key="4" icon={<SettingOutlined />} label="标签" />
-      </Tabbar>
-    </Block>
+    <Tabbar activeKey={activeKey} onChange={setActiveKey}>
+      <Tabbar.TabItem key="1" icon={<HomeOutlined />} label="标签" />
+      <Tabbar.TabItem key="2" icon={<Search />} label="标签" />
+      <Tabbar.TabItem key="3" icon={<FriendsOutlined />} label="标签" />
+      <Tabbar.TabItem key="4" icon={<SettingOutlined />} label="标签" />
+    </Tabbar>
   )
 }
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const active = ref(0);
-    const icon = {
-      active: 'https://img.yzcdn.cn/vant/user-active.png',
-      inactive: 'https://img.yzcdn.cn/vant/user-inactive.png',
-    };
-    return {
-      icon,
-      active,
-    };
-  },
-};
 ```
 
 ### 自定义颜色
