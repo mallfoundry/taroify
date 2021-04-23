@@ -8,11 +8,11 @@ import classes from "./index.module.scss"
 import Nav, { NavBlock } from "./nav"
 
 function renderNavs(pages: any[]) {
-  return _.map(pages, ({ component, path, title, children }) => {
+  return _.map(pages, ({ name, path, title, children }) => {
     if (!children) {
-      return <NavBlock key={path} component={component} href={path} title={title} />
+      return <NavBlock key={title} component={name} href={path} title={title} />
     }
-    return <Nav key={path} title={title} children={renderNavs(children)} />
+    return <Nav key={title} title={title} children={renderNavs(children)} />
   })
 }
 
