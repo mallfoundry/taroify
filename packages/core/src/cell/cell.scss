@@ -12,8 +12,15 @@
   color: $text-color;
   background-color: #fff;
 
-  &__label {
+  &__title {
     flex: 1;
+  }
+
+  &__subtitle {
+    margin-top: $cell-subtitle-margin-top;
+    font-size: $cell-subtitle-font-size;
+    line-height: $cell-subtitle-line-height;
+    color: $cell-subtitle-color;
   }
 
   &::after {
@@ -45,20 +52,13 @@
     padding-top: $cell-large-vertical-padding;
     padding-bottom: $cell-large-vertical-padding;
 
-    .#{$component-prefix}cell__label {
-      font-size: $cell-large-label-font-size;
+    .#{$component-prefix}cell__title {
+      font-size: $cell-large-title-font-size;
     }
 
-    .#{$component-prefix}cell__description {
-      font-size: $cell-large-description-font-size;
+    .#{$component-prefix}cell__subtitle {
+      font-size: $cell-large-subtitle-font-size;
     }
-  }
-
-  &__description {
-    margin-top: $cell-description-margin-top;
-    font-size: $cell-description-font-size;
-    line-height: $cell-description-line-height;
-    color: $cell-description-color;
   }
 
   &--clickable {

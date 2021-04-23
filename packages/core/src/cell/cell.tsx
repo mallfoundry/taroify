@@ -24,8 +24,8 @@ interface CellProps {
   className?: string
   size?: CellSize | CellSizeString
   align?: CellAlign | CellAlignString
-  label?: ReactNode
-  description?: ReactNode
+  title?: ReactNode
+  subtitle?: ReactNode
   startIcon?: ReactNode
   endIcon?: ReactNode
   bordered?: boolean
@@ -39,8 +39,8 @@ export default function Cell(props: CellProps) {
     className,
     size = CellSize.Medium,
     align,
-    label,
-    description,
+    title,
+    subtitle,
     clickable = false,
     bordered = true,
     startIcon,
@@ -66,17 +66,15 @@ export default function Cell(props: CellProps) {
       onClick={onClick}
     >
       {startIcon && <View className={prefixClassname("cell-start-icon")}>{startIcon}</View>}
-      {label && (
-        <View className={prefixClassname("cell__label")}>
-          {label}
-          {description && (
-            <View className={prefixClassname("cell__description")} children={description} />
-          )}
+      {title && (
+        <View className={prefixClassname("cell__title")}>
+          {title}
+          {subtitle && <View className={prefixClassname("cell__subtitle")} children={subtitle} />}
         </View>
       )}
       <View
         className={classNames(prefixClassname("cell__value"), {
-          [prefixClassname("cell__value--alone")]: !label,
+          [prefixClassname("cell__value--alone")]: !title,
         })}
       >
         {children}
