@@ -1,4 +1,4 @@
-import { Tabbar } from "@taroify/core"
+import { Tabbar, Toast } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 import * as React from "react"
 import { useState } from "react"
@@ -48,12 +48,35 @@ function CustomColorTabbar() {
   )
 }
 
+function EventTabbar() {
+  const [activeKey, setActiveKey] = useState<Tabbar.Key>(0)
+  const [open, setOpen] = useState<boolean>(false)
+
+  function handleChange(__activeKey__: Tabbar.Key) {
+    setActiveKey(__activeKey__)
+    setOpen(true)
+  }
+
+  return (
+    <Block title="监听切换事件">
+      <Tabbar activeKey={activeKey} onChange={handleChange}>
+        <Tabbar.TabItem icon={<HomeOutlined />} label="标签1" />
+        <Tabbar.TabItem icon={<Search />} label="标签2" />
+        <Tabbar.TabItem icon={<FriendsOutlined />} label="标签3" />
+        <Tabbar.TabItem icon={<SettingOutlined />} label="标签4" />
+      </Tabbar>
+      <Toast open={open} onClose={() => setOpen(false)} children={`标签${Number(activeKey) + 1}`} />
+    </Block>
+  )
+}
+
 export default function TabbarDemo() {
   return (
     <Page title="Tabbar 标签栏" className={classes.TabbarDemo}>
       <BasicTabbar />
       <KeyTabbar />
       <CustomColorTabbar />
+      <EventTabbar />
     </Page>
   )
 }
