@@ -4,7 +4,7 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { HAIRLINE_BOTTOM } from "../styles/hairline"
+import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { findChildren } from "../utils/children"
 
 interface NavbarProps {
@@ -21,7 +21,7 @@ function Navbar(props: NavbarProps) {
   return (
     <View
       className={classNames(prefixClassname("navbar"), {
-        [HAIRLINE_BOTTOM]: bordered,
+        [HAIRLINE_BORDER_BOTTOM]: bordered,
       })}
     >
       <View className={classNames(prefixClassname("navbar__content"))}>
