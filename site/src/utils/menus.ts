@@ -87,6 +87,10 @@ const menus = [
     title: "导航组件",
     children: [
       {
+        title: "Grid 宫格",
+        to: "/components/grid/",
+      },
+      {
         title: "Navbar 导航栏",
         to: "/components/navbar/",
       },

@@ -18,4 +18,5 @@ export { default as Badge } from "./badge"
 export { default as Tag } from "./tag"
 // Navigation Components
 export { default as Navbar } from "./navbar"
+export { default as Grid } from "./grid"
 export { default as Tabbar } from "./tabbar"

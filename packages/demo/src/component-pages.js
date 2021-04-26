@@ -83,6 +83,11 @@ const componentPages = [
     title: "导航组件",
     children: [
       {
+        title: "Grid 宫格",
+        name: "Grid",
+        path: "/pages/grid/index",
+      },
+      {
         title: "Navbar 导航栏",
         name: "Navbar",
         path: "/pages/navbar/index",
