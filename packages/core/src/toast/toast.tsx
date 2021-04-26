@@ -56,34 +56,28 @@ interface ToastProps {
 
 export default function Toast(props: ToastProps) {
   const {
-    open: openProp,
+    open: openProp = false,
     type = ToastType.Text,
     backdrop = false,
     duration = 3000,
     children,
     onClose,
   } = props
-  const [open, setOpen] = useState(openProp)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => setOpen(openProp), [openProp])
+
   const icon = appendIconClassName(defaultIcon(props.icon, type))
-
-  // function handleClose() {
-  //   if (onClose) {
-  //     onClose()
-  //   }
-  // }
-
   useEffect(() => {
     setOpen(openProp)
     let timer: any
     if (openProp) {
       timer = setTimeout(() => {
         setOpen(false)
-        if (onClose) {
-          onClose()
-        }
+        onClose?.()
         clearTimeout(timer)
       }, duration)
-    } else {
+    } else if (timer) {
       clearTimeout(timer)
     }
     return () => clearTimeout(timer)
