@@ -1,10 +1,8 @@
 @import "../styles/prefix";
-@import "../styles/variables";
+@import "~@taroify/core/styles/variables";
 
 .#{$demo-prefix}block {
   margin: 0;
-  font-size: 16px * $hd;
-  line-height: 16px * $hd;
   font-weight: normal;
   color: rgba(69, 90, 100, 0.6);
 
