@@ -76,7 +76,7 @@ namespace Tabbar {
     const { activeKey, activeColor, inactiveColor, emitClick } = useContext(TabbarContext)
     const active = activeKey === __dataKey__
     // Default activeColor, inactiveColor is undefined
-    // TODO Taro does not set undefined, use an empty string instead of undefined
+    // TODO Taro can not support setting to undefined, use an empty string instead of undefined
     const color = activeColor && active ? activeColor ?? "" : inactiveColor ?? ""
 
     return (
