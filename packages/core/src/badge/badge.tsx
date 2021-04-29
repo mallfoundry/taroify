@@ -33,13 +33,14 @@ function Badge(props: BadgeProps) {
     >
       {children}
       {noneChildren && !dot && content}
-      {hasChildren && (
+      {hasChildren && (dot || content) && (
         <View
           style={{ background: color }}
           className={classNames(
             prefixClassname("badge"),
             {
               [prefixClassname("badge--dot")]: dot,
+              [prefixClassname("badge--content")]: content,
             },
             prefixClassname("badge--fixed"),
           )}
