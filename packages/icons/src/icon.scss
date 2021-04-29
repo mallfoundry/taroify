@@ -1,20 +1,6 @@
 @import "./variables";
 
 .taroify-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-
   &--inherit {
     font-size: inherit;
     color: inherit;
