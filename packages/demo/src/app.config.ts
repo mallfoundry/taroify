@@ -6,7 +6,7 @@ function obtainComponentPagePaths() {
     if (children) {
       for (const { path } of children) {
         if (path) {
-          pagePaths.push(path)
+          pagePaths.push(path.replace("/", ""))
         }
       }
     }
