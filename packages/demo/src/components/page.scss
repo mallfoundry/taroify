@@ -1,6 +1,8 @@
 @import "../styles/prefix";
 
 .#{$demo-prefix}page {
+  height: 100%;
+
   &__nav {
     position: relative;
     display: flex;
