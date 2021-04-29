@@ -29,7 +29,7 @@ function arrayChildren(children?: ReactNode) {
 interface TabbarProps {
   fixed?: boolean
   bordered?: boolean
-  activeKey?: Tabbar.Key
+  activeKey?: Tabbar.TabKey
   activeColor?: string
   inactiveColor?: string
   children?: ReactNode
@@ -63,10 +63,10 @@ function Tabbar(props: TabbarProps) {
 }
 
 namespace Tabbar {
-  export type Key = string | number | undefined
+  export type TabKey = string | number | undefined
 
   interface TabItemProps {
-    __dataKey__?: Key
+    __dataKey__?: TabKey
     icon?: ReactNode
     label?: ReactNode
   }
