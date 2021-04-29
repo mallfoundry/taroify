@@ -17,8 +17,10 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "peerDependencies": {
+    "@tarojs/components": "^3.2.0"
+  },
   "dependencies": {
-    "@tarojs/components": "3.2.2",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

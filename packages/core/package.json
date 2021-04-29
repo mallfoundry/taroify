@@ -17,12 +17,12 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
+    "@tarojs/components": "^3.2.0",
+    "@tarojs/taro": "^3.2.0",
     "react": "^17.0.2"
   },
   "dependencies": {
     "@taroify/icons": "^0.0.1-alpha.0",
-    "@tarojs/components": "3.2.2",
-    "@tarojs/taro": "3.2.2",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "react-transition-group": "^4.4.1"
