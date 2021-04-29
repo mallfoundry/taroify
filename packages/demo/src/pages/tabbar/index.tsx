@@ -7,7 +7,7 @@ import Page from "../../components/page"
 import classes from "./index.module.scss"
 
 function BasicTabbar() {
-  const [activeKey, setActiveKey] = useState<Tabbar.Key>(0)
+  const [activeKey, setActiveKey] = useState<Tabbar.TabKey>(0)
   return (
     <Block title="基础用法">
       <Tabbar activeKey={activeKey} onChange={setActiveKey}>
@@ -21,7 +21,7 @@ function BasicTabbar() {
 }
 
 function KeyTabbar() {
-  const [activeKey, setActiveKey] = useState<Tabbar.Key>("1")
+  const [activeKey, setActiveKey] = useState<Tabbar.TabKey>("1")
   return (
     <Block title="通过标识匹配">
       <Tabbar activeKey={activeKey} onChange={setActiveKey}>
@@ -35,7 +35,7 @@ function KeyTabbar() {
 }
 
 function CustomColorTabbar() {
-  const [activeKey, setActiveKey] = useState<Tabbar.Key>("1")
+  const [activeKey, setActiveKey] = useState<Tabbar.TabKey>("1")
   return (
     <Block title="自定义颜色">
       <Tabbar activeKey={activeKey} activeColor="#ee0a24" onChange={setActiveKey}>
@@ -49,10 +49,10 @@ function CustomColorTabbar() {
 }
 
 function EventTabbar() {
-  const [activeKey, setActiveKey] = useState<Tabbar.Key>(0)
+  const [activeKey, setActiveKey] = useState<Tabbar.TabKey>(0)
   const [open, setOpen] = useState<boolean>(false)
 
-  function handleChange(__activeKey__: Tabbar.Key) {
+  function handleChange(__activeKey__: Tabbar.TabKey) {
     setActiveKey(__activeKey__)
     setOpen(true)
   }
