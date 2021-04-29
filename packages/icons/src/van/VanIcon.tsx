@@ -24,7 +24,7 @@ export default function VanIcon(props: VanIconProps) {
   const {
     className,
     style,
-    size = IconSize.Medium,
+    size = IconSize.Inherit,
     color = IconColor.Inherit,
     children,
     onClick,
