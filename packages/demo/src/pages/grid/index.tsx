@@ -3,11 +3,11 @@ import { HomeOutlined, PhotoOutlined, Search } from "@taroify/icons"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function GridDemo() {
   return (
-    <Page title="Grid 宫格" className={classes.GridDemo}>
+    <Page title="Grid 宫格" className="grid-demo">
       <Block title="基础用法">
         <Grid columns={4}>
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
@@ -29,13 +29,13 @@ export default function GridDemo() {
       <Block title="自定义内容">
         <Grid columns={3} bordered={false}>
           <Grid.Item>
-            <Image className={classes.GridImage} src="https://img.yzcdn.cn/vant/apple-1.jpg" />
+            <Image className="grid-image" src="https://img.yzcdn.cn/vant/apple-1.jpg" />
           </Grid.Item>
           <Grid.Item>
-            <Image className={classes.GridImage} src="https://img.yzcdn.cn/vant/apple-2.jpg" />
+            <Image className="grid-image" src="https://img.yzcdn.cn/vant/apple-2.jpg" />
           </Grid.Item>
           <Grid.Item>
-            <Image className={classes.GridImage} src="https://img.yzcdn.cn/vant/apple-3.jpg" />
+            <Image className="grid-image" src="https://img.yzcdn.cn/vant/apple-3.jpg" />
           </Grid.Item>
         </Grid>
       </Block>
