@@ -34,55 +34,55 @@ export default function TransitionDemo() {
       <Block title="动画">
         <Cell
           clickable
-          label="Fade"
+          title="Fade"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.Fade)}
         />
         <Cell
           clickable
-          label="Fade Up"
+          title="Fade Up"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeUp)}
         />
         <Cell
           clickable
-          label="Fade Down"
+          title="Fade Down"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeDown)}
         />
         <Cell
           clickable
-          label="Fade Left"
+          title="Fade Left"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeLeft)}
         />
         <Cell
           clickable
-          label="Fade Right"
+          title="Fade Right"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.FadeRight)}
         />
         <Cell
           clickable
-          label="Slide Up"
+          title="Slide Up"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideUp)}
         />
         <Cell
           clickable
-          label="Slide Down"
+          title="Slide Down"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideDown)}
         />
         <Cell
           clickable
-          label="Slide Left"
+          title="Slide Left"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideLeft)}
         />
         <Cell
           clickable
-          label="Slide Right"
+          title="Slide Right"
           endIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
