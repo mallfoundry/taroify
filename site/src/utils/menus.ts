@@ -95,6 +95,10 @@ const menus = [
         to: "/components/navbar/",
       },
       {
+        title: "Sidebar 侧边导航",
+        to: "/components/sidebar/",
+      },
+      {
         title: "Tabs 标签页",
         name: "Tabs",
         to: "/components/tabs/",

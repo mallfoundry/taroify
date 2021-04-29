@@ -93,6 +93,11 @@ const componentPages = [
         path: "/pages/navbar/index",
       },
       {
+        title: "Sidebar 侧边导航",
+        name: "Sidebar",
+        path: "/pages/sidebar/index",
+      },
+      {
         title: "Tabs 标签页",
         name: "Tabs",
         path: "/pages/tabs/index",

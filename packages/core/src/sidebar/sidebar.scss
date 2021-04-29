@@ -1,0 +1,65 @@
+@import "./variables";
+
+.#{$component-prefix}sidebar {
+  width: $sidebar-width;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+
+  &__item {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    padding: $sidebar-padding;
+    overflow: hidden;
+    color: $sidebar-text-color;
+    font-size: $sidebar-font-size;
+    line-height: $sidebar-line-height;
+    background-color: $sidebar-background-color;
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+      background-color: $sidebar-active-color;
+    }
+
+    &__children {
+      // https://github.com/youzan/vant/issues/7455
+      word-break: break-all;
+    }
+
+    &--active {
+      color: $sidebar-active-text-color;
+      font-weight: $sidebar-active-font-weight;
+
+      &,
+      &:active {
+        background-color: $sidebar-active-background-color;
+      }
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: $sidebar-active-border-width;
+        height: $sidebar-active-border-height;
+        background-color: $sidebar-active-border-color;
+        transform: translateY(-50%);
+        content: '';
+      }
+    }
+
+    &:not(:last-child)::after {
+      border-bottom-width: 1px;
+    }
+
+    &--disabled {
+      color: $sidebar-disabled-text-color;
+      cursor: not-allowed;
+
+      &:active {
+        background-color: $sidebar-background-color;
+      }
+    }
+  }
+}
