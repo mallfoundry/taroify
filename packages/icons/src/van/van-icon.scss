@@ -1,14 +1,13 @@
 /* stylelint-disable selector-pseudo-element-colon-notation */
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
-  font-display: auto;
+  font-weight: normal;
   font-family: 'vant-icon';
   font-style: normal;
-  font-weight: normal;
-  src:
-    url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff2') format('woff2'),
-    url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff') format('woff'),
-    url('https://b.yzcdn.cn/vant/vant-icon-f463a9.ttf') format('truetype');
+  font-display: auto;
+  src: url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff2') format('woff2'),
+  url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff') format('woff'),
+  url('https://b.yzcdn.cn/vant/vant-icon-f463a9.ttf') format('truetype');
 }
 
 .van-icon {
@@ -16,8 +15,8 @@
   display: inline-block;
   font: normal normal normal 14px/1 'vant-icon';
   font-size: inherit;
-  -webkit-font-smoothing: antialiased;
   text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 
   &::before {
     display: inline-block;
