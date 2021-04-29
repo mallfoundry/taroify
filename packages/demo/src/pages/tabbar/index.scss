@@ -1,0 +1,7 @@
+@import "../../styles/prefix";
+
+.tabbar-demo {
+  .#{$demo-prefix}page__content {
+    padding: 0;
+  }
+}

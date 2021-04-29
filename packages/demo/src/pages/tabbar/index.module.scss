@@ -1,9 +1,0 @@
-@import "../../styles/prefix";
-
-.TabbarDemo {
-  :global {
-    .#{$demo-prefix}page__content {
-      padding: 0;
-    }
-  }
-}

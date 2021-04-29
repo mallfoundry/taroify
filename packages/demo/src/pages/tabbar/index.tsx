@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 function BasicTabbar() {
   const [activeKey, setActiveKey] = useState<Tabbar.TabKey>(0)
@@ -72,7 +72,7 @@ function EventTabbar() {
 
 export default function TabbarDemo() {
   return (
-    <Page title="Tabbar 标签栏" className={classes.TabbarDemo}>
+    <Page title="Tabbar 标签栏" className="tabbar-demo">
       <BasicTabbar />
       <KeyTabbar />
       <CustomColorTabbar />
