@@ -9,7 +9,7 @@ export default function GridDemo() {
   return (
     <Page title="Grid 宫格" className={classes.GridDemo}>
       <Block title="基础用法">
-        <Grid columns={4} clickable>
+        <Grid columns={4}>
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
@@ -17,7 +17,7 @@ export default function GridDemo() {
         </Grid>
       </Block>
       <Block title="自定义列数">
-        <Grid columns={3} clickable>
+        <Grid columns={3}>
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
           <Grid.Item icon={<PhotoOutlined />} text="文字" />
