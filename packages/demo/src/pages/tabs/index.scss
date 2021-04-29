@@ -1,0 +1,20 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../styles/prefix";
+
+.tabs-demo {
+  .#{$demo-prefix}page__content {
+    padding: 0;
+    background: #fff;
+  }
+
+  .#{$component-prefix}tabs__tab-pane {
+    padding: 24px * $hd 20px * $hd;
+    font-size: 16px * $hd;
+  }
+
+  .#{$component-prefix}icon {
+    margin-right: 5px * $hd;
+    vertical-align: -2px * $hd;
+  }
+}

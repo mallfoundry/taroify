@@ -1,0 +1,17 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+// Tab styles
+$tab-text-color: $gray-7;
+$tab-active-text-color: $text-color;
+$tab-disabled-text-color: $gray-5;
+$tab-font-size: $font-size-md;
+$tab-line-height: $line-height-md;
+// Tabs styles
+$tabs-default-color: $red-color;
+$tabs-line-height: 44px * $hd;
+$tabs-card-height: 30px * $hd;
+$tabs-nav-background-color: $white-color;
+$tabs-bottom-bar-width: 40px * $hd;
+$tabs-bottom-bar-height: 3px * $hd;
+$tabs-bottom-bar-color: $tabs-default-color;

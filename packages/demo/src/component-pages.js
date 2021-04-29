@@ -93,6 +93,11 @@ const componentPages = [
         path: "/pages/navbar/index",
       },
       {
+        title: "Tabs 标签页",
+        name: "Tabs",
+        path: "/pages/tabs/index",
+      },
+      {
         title: "Tabbar 标签栏",
         name: "Tabbar",
         path: "/pages/tabbar/index",

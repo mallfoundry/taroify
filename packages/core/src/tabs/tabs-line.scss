@@ -1,0 +1,15 @@
+@import "./variables";
+
+.#{$component-prefix}tabs {
+
+  &__line {
+    position: absolute;
+    bottom: 15px * $hd;
+    left: 0;
+    z-index: 1;
+    width: $tabs-bottom-bar-width;
+    height: $tabs-bottom-bar-height;
+    background-color: $tabs-bottom-bar-color;
+    border-radius: $tabs-bottom-bar-height;
+  }
+}

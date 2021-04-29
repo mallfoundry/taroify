@@ -1,0 +1,88 @@
+@import "./variables";
+
+.#{$component-prefix}tabs {
+  &--line {
+    .#{$component-prefix}tabs__wrap {
+      height: $tabs-line-height;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    overflow: hidden;
+
+    &--page-top {
+      position: fixed;
+    }
+
+    &--content-bottom {
+      top: auto;
+      bottom: 0;
+    }
+
+    &__scroll {
+
+      &--line {
+        box-sizing: content-box;
+        height: 100%;
+      }
+
+      &--card {
+        box-sizing: border-box;
+        height: $tabs-card-height;
+        margin: 0 $padding-md;
+        border: $border-width-base solid $tabs-default-color;
+        border-radius: $border-radius-sm;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &--scrollable {
+      .#{$component-prefix}tabs__tab {
+        flex: 1 0 auto;
+        padding: 0 $padding-sm;
+      }
+    }
+  }
+
+  &__nav {
+    position: relative;
+    display: flex;
+    background-color: $tabs-nav-background-color;
+    user-select: none;
+
+    &--line {
+      box-sizing: content-box;
+      height: 100%;
+      padding-bottom: 15px * $hd; /* 15px padding to hide scrollbar in mobile safari */
+    }
+
+    &--card {
+      box-sizing: content-box;
+      height: 100%;
+
+      .#{$component-prefix}tabs__tab {
+        color: $tabs-default-color;
+        border-right: $border-width-base solid $tabs-default-color;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        &--active {
+          color: $white-color;
+          background-color: $tabs-default-color;
+        }
+
+        &--disabled {
+          color: $tab-disabled-text-color;
+        }
+      }
+    }
+
+  }
+
+}

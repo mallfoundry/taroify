@@ -95,6 +95,11 @@ const menus = [
         to: "/components/navbar/",
       },
       {
+        title: "Tabs 标签页",
+        name: "Tabs",
+        to: "/components/tabs/",
+      },
+      {
         title: "Tabbar 标签栏",
         to: "/components/tabbar/",
       },
