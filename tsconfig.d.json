@@ -1,33 +1,8 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowJs": false,
-    "strict": true,
-    "noUnusedLocals": true,
     "noImplicitAny": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "removeComments": true,
     "emitDeclarationOnly": true,
-    "declaration": true,
-    "types": [
-      "jest",
-      "node"
-    ],
-    "rootDir": ".",
-    "paths": {
-    },
-    "jsx": "react"
-  },
-  "include": [
-    "packages/*/src",
-    "typings.d.ts"
-  ]
+    "declaration": true
+  }
 }
