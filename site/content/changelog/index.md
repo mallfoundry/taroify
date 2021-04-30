@@ -12,6 +12,29 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.3-alpha.0
+
+`2021-04-30`
+
+**New Component**
+
+- 新增 Badge 组件
+- 新增 Tag 组件
+- 新增 Grid 组件
+- 新增 Navbar 组件
+- 新增 Sidebar 组件
+- 新增 Tabs 组件
+- 新增 Tabbar 组件
+
+**Breaking Changes**
+
+- Cell：label 属性重命名为 title
+- Cell：description 属性重命名为 subtitle
+
+**Bug Fixes**
+
+- 修复使用 babel-plugin-import 无法导入依赖组件样式问题
+
 ### v0.0.1-alpha.0
 
 `2021-04-19`
