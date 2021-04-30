@@ -1,10 +1,10 @@
 /* stylelint-disable selector-pseudo-element-colon-notation */
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
-  font-weight: normal;
+  font-display: auto;
   font-family: 'vant-icon';
   font-style: normal;
-  font-display: auto;
+  font-weight: normal;
   src: url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff2') format('woff2'),
   url('https://b.yzcdn.cn/vant/vant-icon-f463a9.woff') format('woff'),
   url('https://b.yzcdn.cn/vant/vant-icon-f463a9.ttf') format('truetype');
@@ -15,8 +15,8 @@
   display: inline-block;
   font: normal normal normal 14px/1 'vant-icon';
   font-size: inherit;
-  text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+  text-rendering: auto;
 
   &::before {
     display: inline-block;

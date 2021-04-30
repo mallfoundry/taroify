@@ -5,9 +5,9 @@
   display: inline-flex;
   align-items: center;
   padding: $tag-padding;
-  color: $tag-text-color;
   font-size: $tag-font-size;
   line-height: $tag-line-height;
+  color: $tag-text-color;
   border-radius: $tag-border-radius;
 
   &--default {
@@ -67,10 +67,10 @@
       right: 0;
       bottom: 0;
       left: 0;
+      pointer-events: none;
+      content: '';
       border: 1px * $hd solid currentColor;
       border-radius: inherit;
-      content: '';
-      pointer-events: none;
     }
   }
 
@@ -106,18 +106,18 @@
   }
 
   &--round-left {
-    border-radius: $tag-round-border-radius 0 0 $tag-round-border-radius;
     padding: $tag-round-left-padding;
+    border-radius: $tag-round-border-radius 0 0 $tag-round-border-radius;
   }
 
   &--round-right {
-    border-radius: 0 $tag-round-border-radius $tag-round-border-radius 0;
     padding: $tag-round-right-padding;
+    border-radius: 0 $tag-round-border-radius $tag-round-border-radius 0;
   }
 
   &__close {
     margin-left: 2px * $hd;
-    cursor: pointer;
     color: inherit;
+    cursor: pointer;
   }
 }

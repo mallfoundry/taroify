@@ -8,16 +8,16 @@
 
   &__item {
     position: relative;
-    display: block;
     box-sizing: border-box;
+    display: block;
     padding: $sidebar-padding;
     overflow: hidden;
-    color: $sidebar-text-color;
     font-size: $sidebar-font-size;
     line-height: $sidebar-line-height;
-    background-color: $sidebar-background-color;
+    color: $sidebar-text-color;
     cursor: pointer;
     user-select: none;
+    background-color: $sidebar-background-color;
 
     &:active {
       background-color: $sidebar-active-color;
@@ -29,8 +29,8 @@
     }
 
     &--active {
-      color: $sidebar-active-text-color;
       font-weight: $sidebar-active-font-weight;
+      color: $sidebar-active-text-color;
 
       &,
       &:active {
@@ -43,9 +43,9 @@
         left: 0;
         width: $sidebar-active-border-width;
         height: $sidebar-active-border-height;
+        content: '';
         background-color: $sidebar-active-border-color;
         transform: translateY(-50%);
-        content: '';
       }
     }
 

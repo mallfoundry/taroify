@@ -5,8 +5,8 @@
   z-index: $navbar-z-index;
   line-height: $line-height-lg;
   text-align: center;
-  background-color: $navbar-background-color;
   user-select: none;
+  background-color: $navbar-background-color;
 
   .#{$component-prefix}icon {
     color: $navbar-icon-color;
@@ -27,9 +27,9 @@
   &__title {
     max-width: 60%;
     margin: 0 auto;
-    color: $navbar-title-text-color;
-    font-weight: $font-weight-bold;
     font-size: $navbar-title-font-size;
+    font-weight: $font-weight-bold;
+    color: $navbar-title-text-color;
   }
 
   &__left,

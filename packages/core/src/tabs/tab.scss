@@ -2,21 +2,21 @@
 
 .#{$component-prefix}tabs__tab {
   position: relative;
+  box-sizing: border-box;
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   min-width: 0;
   padding: 0 $padding-base;
-  color: $tab-text-color;
   font-size: $tab-font-size;
   line-height: $tab-line-height;
+  color: $tab-text-color;
   cursor: pointer;
 
   &--active {
-    color: $tab-active-text-color;
     font-weight: $font-weight-bold;
+    color: $tab-active-text-color;
   }
 
   &--disabled {

@@ -1,13 +1,13 @@
 @import "./variables";
 
 .#{$component-prefix}badge {
-  display: inline-block;
   box-sizing: border-box;
+  display: inline-block;
   min-width: $badge-size;
-  color: $badge-color;
-  font-weight: $badge-font-weight;
-  font-size: $badge-font-size;
   font-family: $badge-font-family;
+  font-size: $badge-font-size;
+  font-weight: $badge-font-weight;
+  color: $badge-color;
   text-align: center;
   background-color: $badge-background-color;
   border: $badge-border-width solid $white-color;
