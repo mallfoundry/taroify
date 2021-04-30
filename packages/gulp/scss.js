@@ -1,6 +1,5 @@
 const autoprefixer = require("autoprefixer")
 const cssnano = require("cssnano")
-const vfs = require("vinyl-fs")
 const gulp = require("gulp")
 const { watch, series } = require("gulp")
 const postcss = require("gulp-postcss")
