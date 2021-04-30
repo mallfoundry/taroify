@@ -130,6 +130,7 @@ export default function Image(props: ImageProps) {
           mode={(taroMode as unknown) as undefined}
           lazyLoad={lazyLoad}
           className={classNames(
+            prefixClassname("image"),
             {
               [prefixClassname("image--round")]: round,
               [prefixClassname("image--loading")]: loading,
