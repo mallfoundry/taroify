@@ -50,6 +50,7 @@ export enum ButtonShape {
 type ButtonShapeString = "square" | "circle" | "round"
 
 interface ButtonProps {
+  className?: string
   variant?: ButtonVariant | ButtonVariantString
   shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
@@ -66,6 +67,7 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
   const {
+    className,
     variant = ButtonVariant.Contained,
     shape,
     size = ButtonSize.Medium,
@@ -81,31 +83,35 @@ export default function Button(props: ButtonProps) {
 
   return (
     <View
-      className={classNames(prefixClassname("button"), {
-        [prefixClassname("button--disabled")]: disabled,
-        [prefixClassname("button--block")]: block,
-        // Set hairline style
-        [prefixClassname("button--hairline")]: hairline,
-        [prefixClassname("hairline--surround")]: hairline,
-        // Set variant style
-        [prefixClassname("button--text")]: variant === ButtonVariant.Text,
-        [prefixClassname("button--contained")]: variant === ButtonVariant.Contained,
-        [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
-        // Set shape style
-        [prefixClassname("button--round")]: shape === ButtonShape.Round,
-        // Set size style
-        [prefixClassname("button--mini")]: size === ButtonSize.Mini,
-        [prefixClassname("button--small")]: size === ButtonSize.Small,
-        [prefixClassname("button--medium")]: size === ButtonSize.Medium,
-        [prefixClassname("button--large")]: size === ButtonSize.Large,
-        // Set color style
-        [prefixClassname("button--default")]: color === ButtonColor.Default,
-        [prefixClassname("button--primary")]: color === ButtonColor.Primary,
-        [prefixClassname("button--info")]: color === ButtonColor.Info,
-        [prefixClassname("button--success")]: color === ButtonColor.Success,
-        [prefixClassname("button--warning")]: color === ButtonColor.Warning,
-        [prefixClassname("button--danger")]: color === ButtonColor.Danger,
-      })}
+      className={classNames(
+        prefixClassname("button"),
+        {
+          [prefixClassname("button--disabled")]: disabled,
+          [prefixClassname("button--block")]: block,
+          // Set hairline style
+          [prefixClassname("button--hairline")]: hairline,
+          [prefixClassname("hairline--surround")]: hairline,
+          // Set variant style
+          [prefixClassname("button--text")]: variant === ButtonVariant.Text,
+          [prefixClassname("button--contained")]: variant === ButtonVariant.Contained,
+          [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
+          // Set shape style
+          [prefixClassname("button--round")]: shape === ButtonShape.Round,
+          // Set size style
+          [prefixClassname("button--mini")]: size === ButtonSize.Mini,
+          [prefixClassname("button--small")]: size === ButtonSize.Small,
+          [prefixClassname("button--medium")]: size === ButtonSize.Medium,
+          [prefixClassname("button--large")]: size === ButtonSize.Large,
+          // Set color style
+          [prefixClassname("button--default")]: color === ButtonColor.Default,
+          [prefixClassname("button--primary")]: color === ButtonColor.Primary,
+          [prefixClassname("button--info")]: color === ButtonColor.Info,
+          [prefixClassname("button--success")]: color === ButtonColor.Success,
+          [prefixClassname("button--warning")]: color === ButtonColor.Warning,
+          [prefixClassname("button--danger")]: color === ButtonColor.Danger,
+        },
+        className,
+      )}
       onClick={onClick}
     >
       <TaroButton
