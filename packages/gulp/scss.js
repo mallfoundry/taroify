@@ -1,5 +1,6 @@
 const autoprefixer = require("autoprefixer")
 const cssnano = require("cssnano")
+const vfs = require("vinyl-fs")
 const gulp = require("gulp")
 const { watch, series } = require("gulp")
 const postcss = require("gulp-postcss")
@@ -10,11 +11,24 @@ sass.compiler = require("sass")
 
 function copyScssFiles(bundle, dist) {
   const copyScssFilesTask = () =>
-    gulp.src(`./packages/${bundle}/src/**/*.scss`).pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
+    gulp
+      .src(`./packages/${bundle}/src/**/*.scss`) //
+      .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   copyScssFilesTask.displayName = `copy scss files to bundles/${
     dist ?? bundle
   } from packages/${bundle}`
   return copyScssFilesTask
+}
+
+function symlinkScssFiles(bundle, dist) {
+  const symlinkScssFilesTask = () =>
+    gulp
+      .src(`./packages/${bundle}/src/**/*.scss`) //
+      .pipe(gulp.symlink(`./bundles/${dist ?? bundle}`))
+  symlinkScssFilesTask.displayName = `symlink scss files to bundles/${
+    dist ?? bundle
+  } from packages/${bundle}`
+  return symlinkScssFilesTask
 }
 
 function compileScss(bundle, dist) {
@@ -43,12 +57,23 @@ function watchScss(module) {
   watch(
     [`./packages/${module}/src/**/*.scss`],
     {
-      // events: "all",
       ignoreInitial: false,
     },
-    series(copyScssFiles(module), compileScss(module)),
+    series(copyScssFiles(module) /*, compileScss(module)*/),
+  )
+}
+
+function watchScssSymlink(module) {
+  watch(
+    [`./packages/${module}/src/**/*.scss`],
+    {
+      events: ["add", "addDir", "unlink", "unlinkDir"],
+      ignoreInitial: false,
+    },
+    series(symlinkScssFiles(module)),
   )
 }
 
 exports.buildScss = buildScss
 exports.watchScss = watchScss
+exports.watchScssSymlink = watchScssSymlink
