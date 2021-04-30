@@ -35,6 +35,7 @@
     "cross-env": "^7.0.3",
     "lerna": "^3.22.1",
     "typescript": "^4.2.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "stylelint": "^13.12.0"
   }
 }
