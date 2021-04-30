@@ -16,6 +16,7 @@ export { default as Loading } from "./loading"
 // Display Components
 export { default as Badge } from "./badge"
 export { default as Tag } from "./tag"
+export { default as Divider } from "./divider"
 // Navigation Components
 export { default as Navbar } from "./navbar"
 export { default as Sidebar } from "./sidebar"

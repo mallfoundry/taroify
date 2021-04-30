@@ -81,6 +81,10 @@ const menus = [
         title: "Tag 标签",
         to: "/components/tag/",
       },
+      {
+        title: "Divider 分割线",
+        to: "/components/divider/",
+      },
     ],
   },
   {

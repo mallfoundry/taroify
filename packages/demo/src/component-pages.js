@@ -77,6 +77,11 @@ const componentPages = [
         name: "Tag",
         path: "/pages/tag/index",
       },
+      {
+        title: "Divider 分割线",
+        name: "Divider",
+        path: "/pages/divider/index",
+      },
     ],
   },
   {
