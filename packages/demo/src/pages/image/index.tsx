@@ -6,7 +6,7 @@ import { Text } from "@tarojs/components"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function ImageDemo() {
   const imageUrl = "https://img01.yzcdn.cn/vant/cat.jpeg"
@@ -29,16 +29,16 @@ export default function ImageDemo() {
   ]
 
   return (
-    <Page title="Image 图片" className={classes.ImageDemo}>
+    <Page title="Image 图片" className="image-demo">
       <Block title="基础用法">
-        <Image className={classes.BasicImage} src={imageUrl} />
+        <Image className="basic-image" src={imageUrl} />
       </Block>
       <Block title="填充模式">
         <Row gutter="20">
           {modes.map((mode) => (
             <Col span="8" key={mode}>
-              <Image className={classes.Image} mode={mode} src={imageUrl} />
-              <Text className={classes.Text}>{mode}</Text>
+              <Image mode={mode} src={imageUrl} />
+              <Text className="text">{mode}</Text>
             </Col>
           ))}
         </Row>
@@ -47,8 +47,8 @@ export default function ImageDemo() {
         <Row gutter="20">
           {modes.map((mode) => (
             <Col span="8" key={mode}>
-              <Image className={classes.Image} mode={mode} src={imageUrl} round />
-              <Text className={classes.Text}>{mode}</Text>
+              <Image mode={mode} src={imageUrl} round />
+              <Text className="text">{mode}</Text>
             </Col>
           ))}
         </Row>
@@ -56,24 +56,24 @@ export default function ImageDemo() {
       <Block title="加载中提示">
         <Row gutter="20">
           <Col span="8">
-            <Image className={classes.Image} placeholder={<Photo />} />
-            <Text className={classes.Text}>默认提示</Text>
+            <Image placeholder={<Photo />} />
+            <Text className="text">默认提示</Text>
           </Col>
           <Col span="8">
-            <Image className={classes.Image} placeholder="加载中..." />
-            <Text className={classes.Text}>自定义提示</Text>
+            <Image placeholder="加载中..." />
+            <Text className="text">自定义提示</Text>
           </Col>
         </Row>
       </Block>
       <Block title="加载失败提示">
         <Row gutter="20">
           <Col span="8">
-            <Image className={classes.Image} src="error" fallback={<PhotoFail />} />
-            <Text className={classes.Text}>默认提示</Text>
+            <Image src="error" fallback={<PhotoFail />} />
+            <Text className="text">默认提示</Text>
           </Col>
           <Col span="8">
-            <Image className={classes.Image} src="error" fallback="加载失败" />
-            <Text className={classes.Text}>自定义提示</Text>
+            <Image src="error" fallback="加载失败" />
+            <Text className="text">自定义提示</Text>
           </Col>
         </Row>
       </Block>

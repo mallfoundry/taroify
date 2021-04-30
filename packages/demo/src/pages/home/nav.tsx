@@ -2,8 +2,9 @@ import ArrowRight from "@taroify/icons/ArrowRight"
 import { Navigator, View } from "@tarojs/components"
 import * as React from "react"
 import { ReactNode } from "react"
+import { demoPrefixClassname } from "../../styles/prefix"
 import { framedWrapper, navigateTo } from "../../utils/framed-router"
-import classes from "./nav.module.scss"
+import "./nav.scss"
 
 interface NavBlockProps {
   title?: ReactNode
@@ -21,7 +22,7 @@ export function NavBlock(props: NavBlockProps) {
     }
 
     return (
-      <View className={classes.NavBlock} onClick={handleClick}>
+      <View className={demoPrefixClassname("nav__block")} onClick={handleClick}>
         {title}
         <ArrowRight size="small" />
       </View>
@@ -29,7 +30,7 @@ export function NavBlock(props: NavBlockProps) {
   }
 
   return (
-    <Navigator className={classes.NavBlock} url={href}>
+    <Navigator className={demoPrefixClassname("nav__block")} url={href}>
       {title}
       <ArrowRight size="small" />
     </Navigator>
@@ -44,9 +45,9 @@ interface NavProps {
 export default function Nav(props: NavProps) {
   const { title, children } = props
   return (
-    <View className={classes.Nav}>
-      <View className={classes.NavTitle}>{title}</View>
-      <View className={classes.NavBlocks}>{children}</View>
+    <View className={demoPrefixClassname("nav")}>
+      <View className={demoPrefixClassname("nav__title")}>{title}</View>
+      <View className={demoPrefixClassname("nav__blocks")}>{children}</View>
     </View>
   )
 }

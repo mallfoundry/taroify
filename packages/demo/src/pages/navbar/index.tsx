@@ -3,11 +3,11 @@ import { ArrowLeft, Search } from "@taroify/icons"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function NavbarDemo() {
   return (
-    <Page title="Navbar 导航栏" className={classes.NavbarDemo}>
+    <Page title="Navbar 导航栏" className="navbar-demo">
       <Block title="基础用法">
         <Navbar title="标题" />
       </Block>

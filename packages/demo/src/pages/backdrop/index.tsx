@@ -5,14 +5,14 @@ import { useState } from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
 
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function BackdropDemo() {
   const [open, setOpen] = useState(false)
   const [opened2, setOpened2] = useState(false)
 
   return (
-    <Page title="Backdrop">
+    <Page title="Backdrop" className="backdrop-demo">
       <Block title="基础用法">
         <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
           显示背景板
@@ -24,8 +24,8 @@ export default function BackdropDemo() {
           嵌入内容
         </Button>
         <Backdrop open={opened2} closeable onClose={() => setOpened2(false)}>
-          <View className={classes.ContentWrapper}>
-            <View className={classes.ContentBlock} />
+          <View className="content-wrapper">
+            <View className="content-block" />
           </View>
         </Backdrop>
       </Block>

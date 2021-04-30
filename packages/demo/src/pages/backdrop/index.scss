@@ -1,0 +1,14 @@
+.backdrop-demo {
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .content-block {
+      width: 120px;
+      height: 120px;
+      background-color: #fff;
+    }
+  }
+}

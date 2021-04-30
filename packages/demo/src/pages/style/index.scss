@@ -1,0 +1,36 @@
+@import "~@taroify/core/styles/hairline";
+
+.style-demo {
+
+  .animate-block {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100px * 2;
+    height: 100px * 2;
+    margin: -50px * 2 0 0 -50px * 2;
+    background-color: #1989fa;
+    border-radius: 8px * 2;
+  }
+
+  .ellipsis-text {
+    margin-bottom: 16px * 2;
+    font-size: 14px * 2;
+    line-height: 18px * 2;
+    color: #323233;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .hairline-line {
+    height: 30px * 2;
+    background-color: #fff;
+
+    &::after {
+      top: 5px * 2;
+    }
+  }
+
+}

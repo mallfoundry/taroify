@@ -1,0 +1,21 @@
+@import "~@taroify/core/styles/prefix";
+
+.layout-demo {
+  .#{$component-prefix}col {
+    height: 30px * 2;
+    margin-bottom: 10px;
+    font-size: 13px * 2;
+    line-height: 30px * 2;
+    color: #fff;
+    text-align: center;
+    background-clip: content-box;
+
+    &:nth-child(odd) {
+      background-color: #39a9ed;
+    }
+
+    &:nth-child(even) {
+      background-color: #66c6f2;
+    }
+  }
+}

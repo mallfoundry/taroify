@@ -1,0 +1,28 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+
+.image-demo {
+  background: #fff;
+
+  .#{$component-prefix}col {
+    margin-bottom: 10px * $hd;
+  }
+
+  .text {
+    display: block;
+    margin-top: 5px * $hd;
+    color: #646566;
+    font-size: 14px * $hd;
+    text-align: center;
+  }
+
+  .#{$component-prefix}image {
+    width: 100%;
+    height: 27vw;
+  }
+
+  .basic-image {
+    width: 100px * $hd;
+    height: 100px * $hd;
+  }
+}

@@ -2,11 +2,11 @@ import { Col, Row } from "@taroify/core"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function LayoutDemo() {
   return (
-    <Page title="布局" className={classes.Layout}>
+    <Page title="布局" className="layout-demo">
       <Block title="基础用法">
         <Row>
           <Col span="8">span: 8</Col>

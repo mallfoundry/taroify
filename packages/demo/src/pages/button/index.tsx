@@ -3,11 +3,11 @@ import ShopOutlined from "@taroify/icons/ShopOutlined"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function ButtonDemo() {
   return (
-    <Page title="Button 按钮" className={classes.ButtonDemo}>
+    <Page title="Button 按钮" className="button-demo">
       <Block title="按钮颜色">
         <Space>
           <Button variant="contained" color="primary">

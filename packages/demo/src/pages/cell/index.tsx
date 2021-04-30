@@ -5,11 +5,11 @@ import LocationOutlined from "@taroify/icons/LocationOutlined"
 import * as React from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
-import classes from "./index.module.scss"
+import "./index.scss"
 
 export default function CellDemo() {
   return (
-    <Page title="Cell 单元格" className={classes.CellDemo}>
+    <Page title="Cell 单元格" className="cell-demo">
       <Block title="基础用法">
         <Cell title="单元格">内容</Cell>
         <Cell title="单元格" subtitle="描述信息" children="内容" />
