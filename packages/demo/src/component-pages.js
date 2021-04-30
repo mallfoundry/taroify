@@ -82,6 +82,11 @@ const componentPages = [
         name: "Divider",
         path: "/pages/divider/index",
       },
+      {
+        title: "Empty 空状态",
+        name: "Empty",
+        path: "/pages/empty/index",
+      },
     ],
   },
   {

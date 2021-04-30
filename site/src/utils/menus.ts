@@ -85,6 +85,10 @@ const menus = [
         title: "Divider 分割线",
         to: "/components/divider/",
       },
+      {
+        title: "Empty 空状态",
+        to: "/components/empty/",
+      },
     ],
   },
   {

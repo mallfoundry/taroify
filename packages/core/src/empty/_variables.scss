@@ -1,0 +1,12 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+@import "../styles/hairline";
+
+$empty-padding: $padding-xl 0;
+$empty-image-size: 160px * $hd;
+$empty-description-margin-top: $padding-md;
+$empty-description-padding: 0 60px * $hd;
+$empty-description-color: $gray-6;
+$empty-description-font-size: $font-size-md;
+$empty-description-line-height: $line-height-md;
+$empty-bottom-margin-top: 24px * $hd;
