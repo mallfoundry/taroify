@@ -6,8 +6,10 @@
 
 ### 引入
 
-```jsx
+```tsx
 import { Popup } from "@taroify/core"
+// or
+import Popup from "@taroify/core/popup"
 ```
 
 ## 代码演示
@@ -16,7 +18,7 @@ import { Popup } from "@taroify/core"
 
 通过 `open` 控制弹出层是否展示。
 
-```jsx
+```tsx
 <Popup open>内容</Popup>
 ```
 
@@ -24,44 +26,61 @@ import { Popup } from "@taroify/core"
 
 通过 `placement` 属性设置弹出位置，默认居中弹出，可以设置为 `top`、`bottom`、`left`、`right`。
 
-```jsx
+```tsx
 <Popup open placement="top" style={{ height: '30%' }} />
 ```
 
 ### 关闭图标
 
-设置 `closeable` 属性后，会在弹出层的右上角显示关闭图标，并且可以通过 `closeIcon` 属性自定义图标。
+设置 `Popup.Close` 属性后，会在弹出层的右上角显示关闭图标，并且可以通过 `closeIcon` 属性自定义图标。
 
-```jsx
-<Popup open closeable placement="bottom" style={{ height: '30%' }} />
+```tsx
+<Popup open placement="bottom" style={{ height: '30%' }}>
+  <Popup.Close />
+</Popup>
 
 <!-- 自定义图标 -->
-<Popup open closeable closeIcon={<Cross />} placement="bottom" style={{ height: '30%' }} />
+<Popup open placement="bottom" style={{ height: '30%' }}>
+  <Popup.Close>
+    <Cross />
+  </Popup.Close>
+</Popup>
 ```
 
 ### 圆角弹窗
 
 设置 `rounded` 属性后，弹窗会根据弹出位置添加不同的圆角样式。
 
-```jsx
+```tsx
 <Popup open rounded placement="bottom" style={{ height: '30%' }} />
 ```
 
 ## API
 
-### Props
+### Popup Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | placement | 弹出位置，可选值为 `top` `bottom` `right` `left` | _string_ | `center` |
-| duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
+| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
 | rounded | 是否显示圆角 | _boolean_ | `false` |
-| backdrop | 是否显示遮罩层 | _boolean \| static_ | `true` |
-| closeable | 是否显示关闭图标 | _boolean_ | `false` |
-| closeIcon | 是否显示关闭图标 | ReactNode | `<Cross />` |
-| lockScroll | 是否锁定背景滚动 | _boolean_ | `true` |
-| lazyRender | 是否在显示弹层时才渲染节点 | _boolean_ | `true` |
+
+### Popup.Backdrop Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| className | 背景板类名 | _string_ | `false` |
+| style | 背景板样式 | _CSSProperties_ | `false` |
+| closeable | 是否在点击遮罩层后关闭 | _boolean_ | `true` |
+| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
+
+### Popup.Close Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| placement | 关闭图标位置，可选值为 `top-left`<br>`bottom-left` `bottom-right` | _string_ | `top-right`
+| children | 图标内容 | _ReactNode_ | `<Cross />` |
 
 ### Events
 
