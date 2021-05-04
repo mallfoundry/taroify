@@ -1,1 +1,2 @@
-export { default, PopupPlacement } from "./popup"
+export { PopupPlacement } from "./shared"
+export { default } from "./popup"
