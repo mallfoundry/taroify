@@ -53,6 +53,11 @@ const componentPages = [
     title: "反馈组件",
     children: [
       {
+        title: "Dialog 弹出框",
+        name: "Dialog",
+        path: "/pages/dialog/index",
+      },
+      {
         title: "Loading 加载",
         name: "Loading",
         path: "/pages/loading/index",

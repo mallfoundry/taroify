@@ -61,6 +61,10 @@ const menus = [
     title: "反馈组件",
     children: [
       {
+        title: "Dialog 弹出框",
+        to: "/components/dialog/",
+      },
+      {
         title: "Loading 加载",
         to: "/components/loading/",
       },

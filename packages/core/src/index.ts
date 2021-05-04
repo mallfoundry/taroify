@@ -11,8 +11,9 @@ export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 // Action Components
-export { default as Backdrop } from "./backdrop"
+export { default as Dialog } from "./dialog"
 export { default as Loading } from "./loading"
+export { default as Backdrop } from "./backdrop"
 // Display Components
 export { default as Badge } from "./badge"
 export { default as Tag } from "./tag"

@@ -1,0 +1,28 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$dialog-width: 320px * $hd;
+$dialog-small-screen-width: 90%;
+$dialog-font-size: $font-size-lg;
+$dialog-transition: $animation-duration-base;
+$dialog-border-radius: 16px * $hd;
+$dialog-background-color: $white-color;
+$dialog-header-font-weight: $font-weight-bold;
+$dialog-header-line-height: 24px * $hd;
+$dialog-header-padding-top: 26px * $hd;
+$dialog-header-isolated-padding: $padding-lg 0;
+$dialog-message-padding: $padding-lg;
+$dialog-message-font-size: $font-size-md;
+$dialog-message-line-height: $line-height-md;
+$dialog-message-max-height: 60vh;
+$dialog-has-title-message-text-color: $gray-7;
+$dialog-has-title-message-padding-top: $padding-xs;
+
+
+$dialog-button-height: 48px * $hd;
+$dialog-confirm-button-text-color: $red-color;
+
+$dialog-round-button-font-size: $font-size-md;
+$dialog-round-button-height: 36px * $hd;
+$dialog-round-confirm-button-background-color: $gradient-red;
+$dialog-round-cancel-button-background-color: $gradient-orange;
