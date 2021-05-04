@@ -5,6 +5,25 @@ import * as React from "react"
 import { CSSProperties, useState } from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
+import "./index.scss"
+
+function BasicPopup() {
+  const [open, setOpen] = useState(false)
+  return (
+    <Block title="基础用法">
+      <Cell clickable title="显示遮盖层" endIcon={<ArrowRight />} onClick={() => setOpen(true)} />
+      <Popup
+        open={open}
+        style={{
+          padding: "30px 50px",
+        }}
+        onClose={setOpen}
+      >
+        内容
+      </Popup>
+    </Block>
+  )
+}
 
 interface OpenOptions {
   open?: boolean
@@ -31,8 +50,6 @@ export default function PopupDemo() {
       }
     } else if (placement) {
       openOptions.style = { height: "30%" }
-    } else {
-      openOptions.style = { padding: "30px 50px" }
     }
     setOptions({
       ...options,
@@ -41,15 +58,8 @@ export default function PopupDemo() {
   }
 
   return (
-    <Page title="Popup">
-      <Block title="基础用法">
-        <Cell
-          clickable
-          title="显示遮盖层"
-          endIcon={<ArrowRight />}
-          onClick={() => handleOpen({ placement: undefined })}
-        />
-      </Block>
+    <Page title="Popup 弹出层" className="popup-demo">
+      <BasicPopup />
       <Block title="弹出位置">
         <Cell
           clickable
@@ -115,14 +125,16 @@ export default function PopupDemo() {
         placement={options.placement}
         rounded={options.rounded}
         style={options.style}
-        closeable={options.closeable}
         onClose={() =>
           setOptions({
             ...options,
             open: false,
           })
         }
-      />
+      >
+        <Popup.Backdrop />
+        {options.closeable && <Popup.Close />}
+      </Popup>
     </Page>
   )
 }
