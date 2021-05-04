@@ -1,6 +1,5 @@
-@import "../styles/prefix";
+@import "./variables";
 
-$backdrop-z-index: 1;
 
 .#{$component-prefix}backdrop {
   position: fixed;
@@ -11,7 +10,7 @@ $backdrop-z-index: 1;
   z-index: $backdrop-z-index;
   height: 100%;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: $backdrop-background-color;
   opacity: 0;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: opacity, visibility;

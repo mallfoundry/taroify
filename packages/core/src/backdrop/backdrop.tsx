@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
@@ -9,15 +9,15 @@ interface BackdropProps {
   closeable?: boolean
   duration?: number
   children?: ReactNode
-  onClose?: (event: ITouchEvent) => void
+  onClose?: (opened: boolean) => void
 }
 
 export default function Backdrop(props: BackdropProps) {
   const { open = false, closeable = false, duration = 300, children, onClose } = props
 
-  function handleClose(event: ITouchEvent) {
-    if (closeable && onClose) {
-      onClose(event)
+  function handleClose() {
+    if (closeable) {
+      onClose?.(false)
     }
   }
 
