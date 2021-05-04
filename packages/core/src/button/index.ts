@@ -1,5 +1,5 @@
 import Button from "./button"
 
-export { ButtonVariant, ButtonSize, ButtonColor } from "./button"
+export { ButtonColor, ButtonShape, ButtonSize, ButtonVariant } from "./button"
 
 export default Button
