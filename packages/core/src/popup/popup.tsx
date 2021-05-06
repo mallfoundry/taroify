@@ -1,5 +1,6 @@
 import Cross from "@taroify/icons/Cross"
 import { View } from "@tarojs/components"
+import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -47,6 +48,8 @@ function findPopupChildren(node?: ReactNode): PopupChildren {
     if (isValidElement(child)) {
       const element = child as ReactElement
       if (element.type === Popup.Backdrop) {
+        children.backdrop = element
+      } else if (_.isFunction(element.type) && element.type.name === Popup.Backdrop.name) {
         children.backdrop = element
       } else if (element.type === Popup.Close) {
         children.close = element
@@ -125,15 +128,16 @@ function Popup(props: PopupProps) {
 }
 
 namespace Popup {
-  interface BackdropProps {
+  export interface BackdropProps {
     className?: string
     style?: CSSProperties
     duration?: number
     closeable?: boolean
+    onClick?: (event: ITouchEvent) => void
   }
 
   export function Backdrop(props: BackdropProps) {
-    const { className, style, duration = 300, closeable = true } = props
+    const { className, style, duration = 300, closeable = true, onClick } = props
     const { open, emitClose } = useContext(PopupContext)
     return (
       <SharedBackdrop
@@ -142,6 +146,7 @@ namespace Popup {
         open={open}
         duration={duration}
         closeable={closeable}
+        onClick={onClick}
         onClose={emitClose}
       />
     )
