@@ -34,7 +34,7 @@ interface CellProps {
   onClick?: (event: ITouchEvent) => void
 }
 
-export default function Cell(props: CellProps) {
+function Cell(props: CellProps) {
   const {
     className,
     size = CellSize.Medium,
@@ -83,3 +83,28 @@ export default function Cell(props: CellProps) {
     </View>
   )
 }
+
+namespace Cell {
+  interface GroupProps {
+    title?: string
+    bordered?: boolean
+    children?: ReactNode
+  }
+
+  export function Group(props: GroupProps) {
+    const { title, bordered = true, children } = props
+    return (
+      <>
+        <View className={prefixClassname("cell-group__title")} children={title} />
+        <View
+          className={classNames(prefixClassname("cell-group"), {
+            [prefixClassname("hairline--top-bottom")]: bordered,
+          })}
+          children={children}
+        />
+      </>
+    )
+  }
+}
+
+export default Cell

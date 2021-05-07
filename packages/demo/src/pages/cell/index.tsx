@@ -1,4 +1,4 @@
-import { Cell, CellGroup } from "@taroify/core"
+import { Cell } from "@taroify/core"
 import ArrowDown from "@taroify/icons/ArrowDown"
 import ArrowRight from "@taroify/icons/ArrowRight"
 import LocationOutlined from "@taroify/icons/LocationOutlined"
@@ -30,12 +30,12 @@ export default function CellDemo() {
         <Cell title="单元格" endIcon={<ArrowDown />} clickable children="内容" />
       </Block>
       <Block title="分组标题">
-        <CellGroup title="分组 1">
+        <Cell.Group title="分组 1">
           <Cell title="单元格">内容</Cell>
-        </CellGroup>
-        <CellGroup title="分组 2">
+        </Cell.Group>
+        <Cell.Group title="分组 2">
           <Cell title="单元格">内容</Cell>
-        </CellGroup>
+        </Cell.Group>
       </Block>
       <Block title="对齐方式">
         <Cell title="单元格" subtitle="align start" size="large" align="start" children="内容" />

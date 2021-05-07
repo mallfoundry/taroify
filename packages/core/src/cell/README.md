@@ -7,14 +7,14 @@
 ### 引入
 
 ```jsx
-import { Cell, CellGroup } from "@taroify/core"
+import { Cell } from "@taroify/core"
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-`Cell` 可以单独使用，也可以与 `CellGroup` 搭配使用，`CellGroup` 可以为 `Cell` 提供上下外边框。
+`Cell` 可以单独使用，也可以与 `Cell.Group` 搭配使用，`Cell.Group` 可以为 `Cell` 提供上下外边框。
 
 ```jsx
 <Cell label="单元格">内容</Cell>
@@ -58,15 +58,15 @@ import { Cell, CellGroup } from "@taroify/core"
 
 ### 分组标题
 
-通过 `CellGroup` 的 `title` 属性可以指定分组标题。
+通过 `Cell.Group` 的 `title` 属性可以指定分组标题。
 
 ```jsx
-<CellGroup title="分组 1">
+<Cell.Group title="分组 1">
   <Cell label="单元格">内容</Cell>
-</CellGroup>
-<CellGroup title="分组 2">
+</Cell.Group>
+<Cell.Group title="分组 2">
   <Cell label="单元格">内容</Cell>
-</CellGroup>
+</Cell.Group>
 ```
 
 ### 对齐方式
