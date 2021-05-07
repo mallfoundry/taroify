@@ -153,7 +153,7 @@ function ActionSheetWithStatuses() {
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| onSelect | 点击选项时触发，禁用或加载状态下不会触发 | _event: ActionEvent_ |
+| onSelect | 点击选项时触发，禁用或加载状态下不会触发 | _event: ActionSheet.ActionEvent_ |
 | onCancel | 点击取消按钮时触发 | - |
 | onClose | 关闭面板时触发 | - |
 
