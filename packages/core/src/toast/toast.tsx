@@ -48,7 +48,6 @@ interface ToastProps {
   open?: boolean
   type?: ToastType | ToastTypeString
   icon?: ReactNode
-  backdrop?: boolean
   duration?: number
   children?: ReactNode
   onClose?: () => void
@@ -58,7 +57,6 @@ export default function Toast(props: ToastProps) {
   const {
     open: openProp = false,
     type = ToastType.Text,
-    backdrop = false,
     duration = 3000,
     children,
     onClose,
@@ -86,11 +84,11 @@ export default function Toast(props: ToastProps) {
   return (
     <Popup
       open={open}
-      backdrop={backdrop}
       className={classNames(prefixClassname("toast"), {
         [prefixClassname(`toast--${type}`)]: type,
       })}
     >
+      <Popup.Backdrop open={false} />
       {icon}
       {icon ? <View className={prefixClassname("toast__message")} children={children} /> : children}
     </Popup>

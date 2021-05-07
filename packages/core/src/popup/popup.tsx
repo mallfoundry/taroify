@@ -131,19 +131,27 @@ namespace Popup {
   export interface BackdropProps {
     className?: string
     style?: CSSProperties
+    open?: boolean
     duration?: number
     closeable?: boolean
     onClick?: (event: ITouchEvent) => void
   }
 
   export function Backdrop(props: BackdropProps) {
-    const { className, style, duration = 300, closeable = true, onClick } = props
+    const {
+      className,
+      style,
+      open: openProp = true,
+      duration = 300,
+      closeable = true,
+      onClick,
+    } = props
     const { open, emitClose } = useContext(PopupContext)
     return (
       <SharedBackdrop
         className={className}
         style={style}
-        open={open}
+        open={openProp && open}
         duration={duration}
         closeable={closeable}
         onClick={onClick}
