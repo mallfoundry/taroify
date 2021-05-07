@@ -2,10 +2,18 @@
 
 .#{$component-prefix}action-sheet {
 
+  .#{$component-prefix}sheet__description {
+    padding-bottom: $padding-md;
+
+    &::after {
+      @include hairline-bottom($border-color, $padding-md, $padding-md);
+    }
+  }
+
   &__subname {
     margin-top: $padding-xs;
-    color: $action-sheet-subname-color;
     font-size: $action-sheet-subname-font-size;
     line-height: $action-sheet-subname-line-height;
+    color: $action-sheet-subname-color;
   }
 }
