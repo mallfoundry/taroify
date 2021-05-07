@@ -4,18 +4,18 @@
   display: flex;
   align-items: center;
   margin: $divider-margin;
-  color: $divider-text-color;
   font-size: $divider-font-size;
   line-height: $divider-line-height;
+  color: $divider-text-color;
   border-color: $divider-border-color;
   border-style: solid;
   border-width: 0;
 
   &::before,
   &::after {
+    box-sizing: border-box;
     display: block;
     flex: 1;
-    box-sizing: border-box;
     height: 1px * $hd;
     border-color: inherit;
     border-style: inherit;

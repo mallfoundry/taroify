@@ -4,6 +4,7 @@
 
 $sheet-max-height: 80%;
 
+$sheet-header-padding: $padding-sm $padding-md $padding-base;
 $sheet-header-height: 48px * $hd;
 $sheet-header-font-size: $font-size-lg;
 $sheet-title-color: $text-color;
@@ -11,7 +12,7 @@ $sheet-title-font-size: $font-size-md;
 $sheet-title-line-height: $line-height-md;
 $sheet-description-color: $gray-6;
 $sheet-description-font-size: $font-size-md;
-$sheet-description-line-height: $line-height-md;
+$sheet-description-line-height: 16px * $hd;
 
 $sheet-item-background: $white-color;
 $sheet-item-font-size: $font-size-lg;

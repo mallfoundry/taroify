@@ -1,11 +1,11 @@
 @import "./variables";
 
 .#{$component-prefix}empty {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   padding: $empty-padding;
 
   &__image {
@@ -19,10 +19,10 @@
   }
 
   &__description {
-    margin-top: $empty-description-margin-top;
     padding: $empty-description-padding;
-    color: $empty-description-color;
+    margin-top: $empty-description-margin-top;
     font-size: $empty-description-font-size;
     line-height: $empty-description-line-height;
+    color: $empty-description-color;
   }
 }

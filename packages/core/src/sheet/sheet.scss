@@ -1,7 +1,6 @@
 @import "./variables";
 
 .#{$component-prefix}sheet {
-
   display: flex;
   flex-direction: column;
   max-height: $sheet-max-height;
@@ -10,28 +9,28 @@
 
   &__header {
     flex-shrink: 0;
-    font-weight: $font-weight-bold;
-    font-size: $sheet-header-font-size;
-    line-height: $sheet-header-height;
     padding: $sheet-header-padding;
+    font-size: $sheet-header-font-size;
+    font-weight: $font-weight-bold;
+    line-height: $sheet-header-height;
     text-align: center;
   }
 
   &__title {
     margin-top: $padding-xs;
-    color: $sheet-title-color;
-    font-weight: normal;
     font-size: $sheet-title-font-size;
+    font-weight: normal;
     line-height: $sheet-title-line-height;
+    color: $sheet-title-color;
   }
 
   &__description {
     position: relative;
     flex-shrink: 0;
     margin-top: $padding-xs;
-    color: $sheet-description-color;
     font-size: $sheet-description-font-size;
     line-height: $sheet-description-line-height;
+    color: $sheet-description-color;
     text-align: center;
   }
 
@@ -43,16 +42,16 @@
 
   &__item,
   &__button {
+    box-sizing: border-box;
     display: block;
     width: 100%;
     padding: 14px * $hd $padding-md;
     font-size: $sheet-item-font-size;
-    background-color: $sheet-item-background;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    box-sizing: border-box;
     line-height: $sheet-item-line-height;
+    text-align: center;
+    cursor: pointer;
+    background-color: $sheet-item-background;
+    border: 0 none;
 
     &:active {
       background-color: $active-color;
@@ -68,7 +67,10 @@
     }
 
     &--loading {
-      .#{$component-prefix}loading__spinner, .#{$component-prefix}loading__circular {
+      cursor: default;
+
+      .#{$component-prefix}loading__spinner,
+      .#{$component-prefix}loading__circular {
         width: $sheet-loading-icon-size;
         height: $sheet-loading-icon-size;
       }
@@ -77,15 +79,11 @@
     &--disabled {
       cursor: not-allowed;
     }
-
-    &--loading {
-      cursor: default;
-    }
   }
 
   &__button--cancel {
-    flex-shrink: 0;
     box-sizing: border-box;
+    flex-shrink: 0;
     color: $sheet-cancel-text-color;
   }
 

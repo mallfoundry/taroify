@@ -5,10 +5,10 @@ import { CSSProperties, ReactNode } from "react"
 import { default as TaroImage } from "../image"
 import { prefixClassname } from "../styles"
 
-const IMAGE_PRESETS = ["default", "error", "search", "network"]
+const PRESET_IMAGES = ["default", "error", "search", "network"]
 
 function obtainImageUrl(image?: string) {
-  if (image && IMAGE_PRESETS.includes(image)) {
+  if (image && PRESET_IMAGES.includes(image)) {
     return `https://img.yzcdn.cn/vant/empty-image-${image}.png`
   }
   return image
