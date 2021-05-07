@@ -1,0 +1,69 @@
+@import "./variables";
+
+.#{$component-prefix}share-sheet {
+
+  .#{$component-prefix}sheet__description {
+    font-size: $font-size-sm;
+
+  }
+
+  &__options {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    padding: $padding-md 0 $padding-md $padding-xs;
+    -webkit-overflow-scrolling: touch;
+
+    &::before {
+      @include hairline-top($border-color, $padding-md, $padding-md);
+    }
+
+    &:first-of-type {
+      &::before {
+        content: none;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  &__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: initial;
+    // Remove sheet__item style
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+      background-color: transparent;
+      opacity: $active-opacity;
+    }
+
+    &-icon {
+      width: $share-sheet-icon-size;
+      height: $share-sheet-icon-size;
+      margin: 0 $padding-md;
+      font-size: $share-sheet-icon-size;
+      line-height: 1;
+    }
+
+    &-name {
+      padding: 0 $padding-base;
+      margin-top: $padding-xs;
+      font-size: $share-sheet-option-name-font-size;
+      line-height: $share-sheet-option-name-line-height;
+      color: $share-sheet-option-name-color;
+    }
+
+    &-description {
+      padding: 0 $padding-base;
+      font-size: $share-sheet-option-description-font-size;
+      color: $share-sheet-option-description-color;
+    }
+  }
+}

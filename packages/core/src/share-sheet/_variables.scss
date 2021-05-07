@@ -1,0 +1,10 @@
+@import "../styles/prefix";
+@import "../styles/mixins/hairline";
+@import "../styles/variables";
+
+$share-sheet-icon-size: 48px * $hd;
+$share-sheet-option-name-color: $gray-7;
+$share-sheet-option-name-font-size: $font-size-sm;
+$share-sheet-option-name-line-height: 1.4;
+$share-sheet-option-description-color: $gray-5;
+$share-sheet-option-description-font-size: $font-size-sm;

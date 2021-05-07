@@ -72,6 +72,11 @@ const componentPages = [
         name: "Backdrop",
         path: "/pages/backdrop/index",
       },
+      {
+        title: "ShareSheet 分享面板",
+        name: "ShareSheet",
+        path: "/pages/share-sheet/index",
+      },
     ],
   },
   {

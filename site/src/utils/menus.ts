@@ -76,6 +76,10 @@ const menus = [
         title: "Backdrop 背景板",
         to: "/components/backdrop/",
       },
+      {
+        title: "ShareSheet 分享面板",
+        to: "/components/share-sheet/",
+      },
     ],
   },
   {

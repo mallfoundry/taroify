@@ -16,6 +16,7 @@ export { default as ActionSheet } from "./action-sheet"
 export { default as Dialog } from "./dialog"
 export { default as Loading } from "./loading"
 export { default as Backdrop } from "./backdrop"
+export { default as ShareSheet } from "./share-sheet"
 // Display Components
 export { default as Badge } from "./badge"
 export { default as Tag } from "./tag"
