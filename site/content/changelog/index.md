@@ -25,6 +25,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Breaking Changes**
 
 - Cell.Group：重命名 CellGroup 组件为 Cell.Group
+- Popup：去除 backdrop 属性，将 backdrop 属性设计为 Popup.Backdrop 组件
+
+**Bug Fixes**
+
+- Popup：修复点击关闭图标无反应的问题
 
 ### v0.0.3-alpha.0
 
