@@ -1,0 +1,100 @@
+@import "./variables";
+
+.#{$component-prefix}sheet {
+
+  display: flex;
+  flex-direction: column;
+  max-height: $sheet-max-height;
+  overflow: hidden;
+  color: $sheet-item-text-color;
+
+  &__header {
+    flex-shrink: 0;
+    font-weight: $font-weight-bold;
+    font-size: $sheet-header-font-size;
+    line-height: $sheet-header-height;
+    text-align: center;
+  }
+
+  &__title {
+    margin-top: $padding-xs;
+    color: $sheet-title-color;
+    font-weight: normal;
+    font-size: $sheet-title-font-size;
+    line-height: $sheet-title-line-height;
+  }
+
+  &__description {
+    position: relative;
+    flex-shrink: 0;
+    padding: 20px * $hd $padding-md;
+    color: $sheet-description-color;
+    font-size: $sheet-description-font-size;
+    line-height: $sheet-description-line-height;
+    text-align: center;
+
+    &::after {
+      @include hairline-bottom($border-color, $padding-md, $padding-md);
+    }
+  }
+
+  &__content {
+    flex: 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__item,
+  &__button {
+    display: block;
+    width: 100%;
+    padding: 14px * $hd $padding-md;
+    font-size: $sheet-item-font-size;
+    background-color: $sheet-item-background;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: $sheet-item-line-height;
+
+    &:active {
+      background-color: $active-color;
+    }
+
+    &--loading,
+    &--disabled {
+      color: $sheet-item-disabled-text-color;
+
+      &:active {
+        background-color: $sheet-item-background;
+      }
+    }
+
+    &--loading {
+      .#{$component-prefix}loading__spinner, .#{$component-prefix}loading__circular {
+        width: $sheet-loading-icon-size;
+        height: $sheet-loading-icon-size;
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+    }
+
+    &--loading {
+      cursor: default;
+    }
+  }
+
+  &__button--cancel {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    color: $sheet-cancel-text-color;
+  }
+
+  &__gap {
+    display: block;
+    height: $sheet-cancel-padding-top;
+    background-color: $sheet-cancel-padding-color;
+  }
+}

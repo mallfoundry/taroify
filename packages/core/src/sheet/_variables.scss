@@ -1,0 +1,26 @@
+@import "../styles/prefix";
+@import "../styles/mixins/hairline";
+@import "../styles/variables";
+
+$sheet-max-height: 80%;
+
+$sheet-header-height: 48px * $hd;
+$sheet-header-font-size: $font-size-lg;
+$sheet-title-color: $text-color;
+$sheet-title-font-size: $font-size-md;
+$sheet-title-line-height: $line-height-md;
+$sheet-description-color: $gray-6;
+$sheet-description-font-size: $font-size-md;
+$sheet-description-line-height: $line-height-md;
+
+$sheet-item-background: $white-color;
+$sheet-item-font-size: $font-size-lg;
+$sheet-item-line-height: $line-height-md;
+$sheet-item-text-color: $text-color;
+$sheet-item-disabled-text-color: $gray-5;
+
+$sheet-cancel-text-color: $gray-7;
+$sheet-cancel-padding-top: $padding-xs;
+$sheet-cancel-padding-color: $background-color;
+
+$sheet-loading-icon-size: 22px * $hd;
