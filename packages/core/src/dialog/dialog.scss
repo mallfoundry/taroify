@@ -8,9 +8,9 @@
   font-size: $dialog-font-size;
   background-color: $dialog-background-color;
   border-radius: $dialog-border-radius;
-  backface-visibility: hidden; // avoid blurry text after scale animation
   transition: $dialog-transition;
   transition-property: transform, opacity;
+  backface-visibility: hidden; // avoid blurry text after scale animation
 
   @media (max-width: 321px) {
     width: $dialog-small-screen-width;
@@ -50,11 +50,11 @@
     overflow-y: auto;
     font-size: $dialog-message-font-size;
     line-height: $dialog-message-line-height;
+    text-align: center;
+    word-wrap: break-word;
 
     // allow newline character
     white-space: pre-wrap;
-    text-align: center;
-    word-wrap: break-word;
     -webkit-overflow-scrolling: touch;
 
     &--left {
@@ -93,8 +93,8 @@
     padding: $padding-xs $padding-lg $padding-md;
 
     .#{$component-prefix}dialog__confirm, .#{$component-prefix}dialog__cancel {
-      font-size: $dialog-round-button-font-size;
       height: $dialog-round-button-height;
+      font-size: $dialog-round-button-font-size;
       border-radius: unset;
 
       &,
@@ -123,12 +123,12 @@
   }
 
   &-bounce-enter {
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
     opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
   }
 
   &-bounce-exit-active {
-    transform: translate3d(-50%, -50%, 0) scale(0.9);
     opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.9);
   }
 }
