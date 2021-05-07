@@ -13,6 +13,7 @@
     font-weight: $font-weight-bold;
     font-size: $sheet-header-font-size;
     line-height: $sheet-header-height;
+    padding: $sheet-header-padding;
     text-align: center;
   }
 
@@ -27,15 +28,11 @@
   &__description {
     position: relative;
     flex-shrink: 0;
-    padding: 20px * $hd $padding-md;
+    margin-top: $padding-xs;
     color: $sheet-description-color;
     font-size: $sheet-description-font-size;
     line-height: $sheet-description-line-height;
     text-align: center;
-
-    &::after {
-      @include hairline-bottom($border-color, $padding-md, $padding-md);
-    }
   }
 
   &__content {
