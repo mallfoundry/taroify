@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.4-alpha.0
+
+`2021-05-07`
+
+**New Component**
+
+- 新增 ActionSheet 组件
+- 新增 Dialog 组件
+- 新增 ShareSheet 组件
+
+**Breaking Changes**
+
+- Cell.Group：重命名 CellGroup 组件为 Cell.Group
+
 ### v0.0.3-alpha.0
 
 `2021-04-30`
