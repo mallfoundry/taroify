@@ -72,6 +72,7 @@ import Popup from "@taroify/core/popup"
 | --- | --- | --- | --- |
 | className | 背景板类名 | _string_ | `false` |
 | style | 背景板样式 | _CSSProperties_ | `false` |
+| open | 是否显示背景板 | _boolean_ | `false` |
 | closeable | 是否在点击遮罩层后关闭 | _boolean_ | `true` |
 | duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
 
