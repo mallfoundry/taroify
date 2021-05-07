@@ -61,6 +61,10 @@ const menus = [
     title: "反馈组件",
     children: [
       {
+        title: "ActionSheet 动作面板",
+        to: "/components/action-sheet/",
+      },
+      {
         title: "Dialog 弹出框",
         to: "/components/dialog/",
       },
