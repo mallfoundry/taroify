@@ -68,6 +68,11 @@ const componentPages = [
         path: "/pages/loading/index",
       },
       {
+        title: "Notify 消息提示",
+        name: "Notify",
+        path: "/pages/notify/index",
+      },
+      {
         title: "Backdrop 背景暗化",
         name: "Backdrop",
         path: "/pages/backdrop/index",

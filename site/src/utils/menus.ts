@@ -73,6 +73,10 @@ const menus = [
         to: "/components/loading/",
       },
       {
+        title: "Notify 消息提示",
+        to: "/components/notify/",
+      },
+      {
         title: "Backdrop 背景板",
         to: "/components/backdrop/",
       },
