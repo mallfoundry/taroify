@@ -118,6 +118,11 @@ const componentPages = [
         path: "/pages/navbar/index",
       },
       {
+        title: "Pagination 分页",
+        name: "Pagination",
+        path: "/pages/pagination/index",
+      },
+      {
         title: "Sidebar 侧边导航",
         name: "Sidebar",
         path: "/pages/sidebar/index",

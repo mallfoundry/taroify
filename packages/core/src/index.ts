@@ -23,6 +23,7 @@ export { default as Divider } from "./divider"
 export { default as Empty } from "./empty"
 // Navigation Components
 export { default as Navbar } from "./navbar"
+export { default as Pagination } from "./pagination"
 export { default as Sidebar } from "./sidebar"
 export { default as Grid } from "./grid"
 export { default as Tabs } from "./tabs"

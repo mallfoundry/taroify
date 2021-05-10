@@ -115,6 +115,10 @@ const menus = [
         to: "/components/navbar/",
       },
       {
+        title: "Pagination 分页",
+        to: "/components/pagination/",
+      },
+      {
         title: "Sidebar 侧边导航",
         to: "/components/sidebar/",
       },

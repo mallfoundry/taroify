@@ -1,0 +1,12 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$pagination-height: 40px * $hd;
+$pagination-font-size: $font-size-md;
+$pagination-item-width: 36px * $hd;
+$pagination-item-default-color: $blue;
+$pagination-item-disabled-color: $gray-7;
+$pagination-item-disabled-background-color: $background-color;
+$pagination-background-color: $white;
+$pagination-desc-color: $gray-7;
+$pagination-disabled-opacity: $disabled-opacity;
