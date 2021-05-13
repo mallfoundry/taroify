@@ -93,11 +93,6 @@ const componentPages = [
         path: "/pages/badge/index",
       },
       {
-        title: "Tag 标签",
-        name: "Tag",
-        path: "/pages/tag/index",
-      },
-      {
         title: "Divider 分割线",
         name: "Divider",
         path: "/pages/divider/index",
@@ -111,6 +106,11 @@ const componentPages = [
         title: "Sticky 粘性布局",
         name: "Sticky",
         path: "/pages/sticky/index",
+      },
+      {
+        title: "Tag 标签",
+        name: "Tag",
+        path: "/pages/tag/index",
       },
     ],
   },

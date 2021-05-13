@@ -94,10 +94,6 @@ const menus = [
         to: "/components/badge/",
       },
       {
-        title: "Tag 标签",
-        to: "/components/tag/",
-      },
-      {
         title: "Divider 分割线",
         to: "/components/divider/",
       },
@@ -108,6 +104,10 @@ const menus = [
       {
         title: "Sticky 粘性布局",
         to: "/components/sticky/",
+      },
+      {
+        title: "Tag 标签",
+        to: "/components/tag/",
       },
     ],
   },
