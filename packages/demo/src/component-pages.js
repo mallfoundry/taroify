@@ -107,6 +107,11 @@ const componentPages = [
         name: "Empty",
         path: "/pages/empty/index",
       },
+      {
+        title: "Sticky 粘性布局",
+        name: "Sticky",
+        path: "/pages/sticky/index",
+      },
     ],
   },
   {

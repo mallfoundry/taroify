@@ -105,6 +105,10 @@ const menus = [
         title: "Empty 空状态",
         to: "/components/empty/",
       },
+      {
+        title: "Sticky 粘性布局",
+        to: "/components/sticky/",
+      },
     ],
   },
   {
