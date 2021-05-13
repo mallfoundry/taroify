@@ -16,7 +16,7 @@ export default function Block(props: BlockProps) {
   return (
     <View className={classNames(demoPrefixClassname("block"), className)}>
       <View className={demoPrefixClassname("block__title")}>{title}</View>
-      <View>{children}</View>
+      <View className={demoPrefixClassname("block__content")}>{children}</View>
     </View>
   )
 }
