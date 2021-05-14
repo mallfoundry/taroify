@@ -46,6 +46,7 @@ function BottomSticky() {
       <Sticky position="bottom" offset={{ bottom: "50px" }}>
         <Button color="primary">吸底距离</Button>
       </Sticky>
+      <View className="sticky-demo__bottom-sticky__padding" />
     </Block>
   )
 }
