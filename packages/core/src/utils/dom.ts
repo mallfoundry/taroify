@@ -1,14 +1,16 @@
+import { createSelectorQuery } from "@tarojs/taro"
 import { MutableRefObject } from "react"
+import { inBrowser } from "./base"
 
 export interface BoundingClientRect {
-  bottom: number
   dataset: Record<string, any>
-  height: number
   id: string
-  left: number
-  right: number
   top: number
+  right: number
+  bottom: number
+  left: number
   width: number
+  height: number
 }
 
 function makeBoundingClientRect(width: number, height: number) {
@@ -22,16 +24,34 @@ function makeBoundingClientRect(width: number, height: number) {
   } as BoundingClientRect
 }
 
-function unref(elementOrRef: any): Element {
-  const ref = elementOrRef as MutableRefObject<Element | Window | undefined>
-  return ref?.current as Element
+interface TaroElement extends Element {
+  uid: string
 }
 
-export function getBoundingClientRect(elementOrRef: any): BoundingClientRect {
+function unref(elementOrRef: any): TaroElement {
+  const ref = elementOrRef as MutableRefObject<TaroElement | undefined>
+  return ref?.current as TaroElement
+}
+
+export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClientRect> {
   const element = unref(elementOrRef)
-  if (element && element.getBoundingClientRect) {
-    return (element.getBoundingClientRect() as unknown) as BoundingClientRect
+  if (element) {
+    if (inBrowser) {
+      return Promise.resolve((element.getBoundingClientRect() as unknown) as BoundingClientRect)
+    } else {
+      return new Promise<BoundingClientRect>((resolve) => {
+        createSelectorQuery()
+          .select("#" + element.uid)
+          .boundingClientRect(resolve)
+          .exec()
+      })
+    }
   }
-
-  return makeBoundingClientRect(0, 0)
+  return Promise.resolve(makeBoundingClientRect(0, 0))
 }
+
+// export function useBoundingClientRect(elementOrRef: any): BoundingClientRect {
+//   const [rect, setRect] = useState<BoundingClientRect>(makeBoundingClientRect(0, 0))
+//   useReady(() => setRect(getBoundingClientRect(elementOrRef)))
+//   return rect
+// }
