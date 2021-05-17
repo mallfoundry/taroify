@@ -85,13 +85,13 @@ export default function Sticky(props: StickyProps) {
     return style
   }, [fixed, rootRect.height, rootRect.width, transform, position, offsetValue])
 
-  function onScroll() {
-    const __rootRect__ = getBoundingClientRect(rootRef)
+  async function onScroll() {
+    const __rootRect__ = await getBoundingClientRect(rootRef)
     setRootRect(__rootRect__)
 
     if (position === StickyPosition.Top) {
       if (containerRef) {
-        const containerRect = getBoundingClientRect(containerRef)
+        const containerRect = await getBoundingClientRect(containerRef)
         const difference = containerRect.bottom - offsetValue - __rootRect__.height
         setTransform(difference < 0 ? difference : 0)
         setFixed(offsetValue > __rootRect__.top && containerRect.bottom > 0)
@@ -99,18 +99,17 @@ export default function Sticky(props: StickyProps) {
         setFixed(offsetValue > __rootRect__.top)
       }
     } else {
-      getSystemRect().then(({ windowHeight }) => {
-        if (containerRef) {
-          const containerRect = getBoundingClientRect(containerRef)
-          const difference = windowHeight - containerRect.top - offsetValue - __rootRect__.height
-          setTransform(difference < 0 ? difference : 0)
-          setFixed(
-            windowHeight - offsetValue < __rootRect__.bottom && windowHeight > containerRect.top,
-          )
-        } else {
-          setFixed(windowHeight - offsetValue < __rootRect__.bottom)
-        }
-      })
+      const { windowHeight } = await getSystemRect()
+      if (containerRef) {
+        const containerRect = await getBoundingClientRect(containerRef)
+        const difference = windowHeight - containerRect.top - offsetValue - __rootRect__.height
+        setTransform(difference < 0 ? difference : 0)
+        setFixed(
+          windowHeight - offsetValue < __rootRect__.bottom && windowHeight > containerRect.top,
+        )
+      } else {
+        setFixed(windowHeight - offsetValue < __rootRect__.bottom)
+      }
     }
   }
 
