@@ -102,6 +102,10 @@ const menus = [
         to: "/components/empty/",
       },
       {
+        title: "Progress 进度条",
+        to: "/components/progress/",
+      },
+      {
         title: "Sticky 粘性布局",
         to: "/components/sticky/",
       },

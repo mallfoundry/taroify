@@ -103,6 +103,11 @@ const componentPages = [
         path: "/pages/empty/index",
       },
       {
+        title: "Progress 进度条",
+        name: "Progress",
+        path: "/pages/progress/index",
+      },
+      {
         title: "Sticky 粘性布局",
         name: "Sticky",
         path: "/pages/sticky/index",

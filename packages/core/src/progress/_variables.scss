@@ -1,0 +1,8 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$progress-height: 14px * $hd;
+$progress-background-color: $gray-3;
+$progress-inactive-background-color: #cacaca;
+$progress-text-text-color: $white;
+$progress-text-font-size: $font-size-xs;
