@@ -1,5 +1,4 @@
-// @ts-ignore
-const { createSelectorQuery } = require("@tarojs/taro-h5/src/api/createSelectorQuery")
+import { createSelectorQuery } from "@tarojs/taro"
 
 interface BoundingClientRect {
   bottom: number
