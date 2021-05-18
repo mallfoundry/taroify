@@ -1,3 +1,4 @@
+@import "~@taroify/core/styles/variables";
 @import "../styles/prefix";
 
 .#{$demo-prefix}page {
@@ -8,27 +9,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 56px * 2;
+    height: 56px * $hd;
     background-color: #fff;
 
     &__back {
       position: absolute;
-      top: 16px * 2;
-      left: 16px * 2;
-      width: 24px * 2;
-      height: 24px * 2;
+      top: 16px * $hd;
+      left: 16px * $hd;
+      width: 24px * $hd;
+      height: 24px * $hd;
       color: #969799;
       cursor: pointer;
     }
 
     &__title {
-      font-size: 16px * 2;
+      font-size: 16px * $hd;
       font-weight: 600;
       text-transform: capitalize;
     }
   }
 
   &__content {
-    padding: 0 16px;
+    padding: 0 16px * $hd;
   }
 }
