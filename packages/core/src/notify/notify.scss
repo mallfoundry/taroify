@@ -1,19 +1,19 @@
 @import "./variables";
 
 .#{$component-prefix}notify {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   padding: $notify-padding;
-  color: $notify-text-color;
   font-size: $notify-font-size;
   line-height: $notify-line-height;
+  color: $notify-text-color;
+  text-align: center;
+  word-wrap: break-word;
 
   // allow newline character
   white-space: pre-wrap;
-  text-align: center;
-  word-wrap: break-word;
 
 
   &--primary {

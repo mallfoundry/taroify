@@ -1,3 +1,7 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../styles/prefix";
+
 .backdrop-demo {
   .content-wrapper {
     display: flex;
@@ -6,9 +10,10 @@
     height: 100%;
 
     .content-block {
-      width: 120px;
-      height: 120px;
-      background-color: #fff;
+      width: 120px * $hd;
+      height: 120px * $hd;
+      background: #fff;
+      border-radius: $border-radius-md;
     }
   }
 }
