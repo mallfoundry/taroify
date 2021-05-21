@@ -1,5 +1,12 @@
 import { CSSProperties } from "react"
 
+export function addUnit(value?: string | number): string | undefined {
+  if (value === undefined) {
+    return undefined
+  }
+  return `${unitToPx(value)}px`
+}
+
 export function getZIndexStyle(zIndex?: string | number) {
   const style: CSSProperties = {}
   if (zIndex !== undefined) {
