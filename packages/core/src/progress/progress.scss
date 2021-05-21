@@ -3,9 +3,9 @@
 .#{$component-prefix}progress {
   position: relative;
   height: $progress-height;
+  overflow: hidden;
   background: $progress-background-color;
   border-radius: $progress-height;
-  overflow: hidden;
 
   &__portion {
     position: absolute;
@@ -14,11 +14,11 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    overflow: hidden;
     font-size: $progress-text-font-size;
     color: $progress-text-text-color;
     text-align: center;
     word-break: keep-all;
-    overflow: hidden;
   }
 
   &--primary {
