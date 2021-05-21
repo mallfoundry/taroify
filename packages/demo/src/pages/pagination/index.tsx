@@ -7,12 +7,10 @@ import Page from "../../components/page"
 import "./index.scss"
 
 export default function PaginationDemo() {
-  const [current, setCurrent] = useState(1)
+  const [current, setCurrent] = useState<number>(1)
   const { /*hasPrevious, hasNext,*/ count, items } = usePagination({
     current,
   })
-
-  console.log(items)
   return (
     <Page title="Pagination 分页" className="pagination-demo">
       <Block title="基础用法">

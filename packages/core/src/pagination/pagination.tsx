@@ -58,8 +58,6 @@ function Pagination(props: PaginationProps) {
   const { current = 0, count = 0, limit = 10, total = 0, children, onChange } = props
   const { previous, items, next } = findPaginationChildren(children)
 
-  // console.log(previous, items, next)
-
   function emitClick(page: Pagination.Page) {
     if (page.type === ItemType.Page) {
       onChange?.(page)
@@ -90,7 +88,6 @@ function Pagination(props: PaginationProps) {
         {previous}
         {items}
         {next}
-        {/*{children}*/}
       </PaginationContext.Provider>
     </View>
   )

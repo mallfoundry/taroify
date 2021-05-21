@@ -80,15 +80,12 @@ export default {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| v-model | 当前页码 | _number_ | - |
+| current | 当前页码 | _number_ | - |
 | mode | 显示模式，可选值为 `simple` | _string_ | `multi` |
-| prev-text | 上一页按钮文字 | _string_ | `上一页` |
-| next-text | 下一页按钮文字 | _string_ | `下一页` |
-| page-count | 总页数 | _number \| string_ | 根据页数计算 |
-| total-items | 总记录数 | _number \| string_ | `0` |
-| items-per-page | 每页记录数 | _number \| string_ | `10` |
-| show-page-size | 显示的页码个数 | _number \| string_ | `5` |
-| force-ellipses | 是否显示省略号 | _boolean_ | `false` |
+| count | 总页数 | _number \| string_ | 根据页数计算 |
+| total | 总记录数 | _number \| string_ | `0` |
+| limit | 每页记录数 | _number \| string_ | `10` |
+| forceEllipses | 是否显示省略号 | _boolean_ | `false` |
 
 ### Events
 
@@ -96,26 +93,3 @@ export default {
 | ------ | -------------- | -------- |
 | change | 页码改变时触发 | -        |
 
-### Slots
-
-| 名称 | 描述 | 参数 |
-| --- | --- | --- |
-| page | 自定义页码 | _{ number: number, text: string, active: boolean }_ |
-| prev-text | 自定义上一页按钮文字 | `-` |
-| next-text | 自定义下一页按钮文字 | `-` |
-
-### 样式变量
-
-组件提供了下列 Less 变量，可用于自定义样式，使用方法请参考[主题定制](#/zh-CN/theme)。
-
-| 名称                                       | 默认值              | 描述 |
-| ------------------------------------------ | ------------------- | ---- |
-| @pagination-height                         | `40px`              | -    |
-| @pagination-font-size                      | `@font-size-md`     | -    |
-| @pagination-item-width                     | `36px`              | -    |
-| @pagination-item-default-color             | `@blue`             | -    |
-| @pagination-item-disabled-color            | `@gray-7`           | -    |
-| @pagination-item-disabled-background-color | `@background-color` | -    |
-| @pagination-background-color               | `@white`            | -    |
-| @pagination-desc-color                     | `@gray-7`           | -    |
-| @pagination-disabled-opacity               | `@disabled-opacity` | -    |

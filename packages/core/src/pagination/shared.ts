@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export enum ItemType {
   Page = "page",
   First = "first",
@@ -13,4 +15,5 @@ export interface Page {
   limit?: number
   type?: ItemType
   disabled?: boolean
+  children?: ReactNode
 }

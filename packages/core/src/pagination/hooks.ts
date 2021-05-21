@@ -31,16 +31,18 @@ export function usePagination(options?: UsePaginationOptions): UsePagination {
     type: ItemType.Page,
   }))
 
-  const items = [
+  const items: Page[] = [
     {
+      page: 0,
       type: ItemType.Previous,
-      page: "上一页",
+      children: "上一页",
       disabled: !hasPrevious,
     },
     ...pageItems,
     {
+      page: 0,
       type: ItemType.Next,
-      page: "下一页",
+      children: "下一页",
       disabled: !hasNext,
     },
   ]
