@@ -113,6 +113,11 @@ const componentPages = [
         path: "/pages/sticky/index",
       },
       {
+        title: "Swiper 轮播",
+        name: "Swiper",
+        path: "/pages/swiper/index",
+      },
+      {
         title: "Tag 标签",
         name: "Tag",
         path: "/pages/tag/index",

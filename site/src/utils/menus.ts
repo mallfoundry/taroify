@@ -110,6 +110,10 @@ const menus = [
         to: "/components/sticky/",
       },
       {
+        title: "Swiper 轮播",
+        to: "/components/swiper/",
+      },
+      {
         title: "Tag 标签",
         to: "/components/tag/",
       },
