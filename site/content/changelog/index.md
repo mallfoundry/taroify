@@ -12,6 +12,23 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.5-alpha.0
+
+`2021-05-21`
+
+**New Component**
+
+- 新增 Notify 组件
+- 新增 Progress 组件
+- 新增 Sticky 组件
+- 新增 Swiper 组件
+- 新增 Pagination 组件
+
+**Breaking Changes**
+
+- Cell：重命名 subtitle 属性为 brief
+- Toast：重命名 placement 属性为 position
+
 ### v0.0.4-alpha.0
 
 `2021-05-07`
