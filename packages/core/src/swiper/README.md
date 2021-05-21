@@ -25,10 +25,6 @@ import Swiper from "@taroify/core/swiper"
   <Swiper.Item>3</Swiper.Item>
   <Swiper.Item>4</Swiper.Item>
 </Swiper>
-
-<style>
-
-</style>
 ```
 
 ```scss
