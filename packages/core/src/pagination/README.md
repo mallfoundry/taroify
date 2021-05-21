@@ -16,62 +16,33 @@ import Pagination from "@taroify/core/pagination"
 
 ### 基础用法
 
-通过 `v-model` 来绑定当前页码。
+通过 `current` 来绑定当前页码。
 
-```html
+```tsx
+export default function PaginationDemo() {
+  const [current, setCurrent] = useState<number>(1)
+  const [total] = useState(60)
+  const [limit] = useState(10)
+  const { count, items } = usePagination({
+    current,
+    total,
+    limit,
+  })
+  return (
+    <Pagination
+      current={current}
+      limit={limit}
+      total={total}
+      count={count}
+      onChange={({ page }) => setCurrent(page)}
+    >
+      {items?.map((item) => (
+        <Pagination.Item key={item.page} {...item} />
+      ))}
+    </Pagination>
+  )
+}
 
-<van-pagination v-model="currentPage" :total-items="24" :items-per-page="5" />
-```
-
-```js
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const currentPage = ref(1);
-    return { currentPage };
-  },
-};
-```
-
-### 简单模式
-
- 将 `mode` 设置为 `simple` 来切换到简单模式，此时分页器不会展示具体的页码按钮。
-
-```html
-
-<van-pagination v-model="currentPage" :page-count="12" mode="simple" />
-```
-
-### 显示省略号
-
-设置 `force-ellipses` 后会展示省略号按钮，点击后可以快速跳转。
-
-```html
-
-<van-pagination
-  v-model="currentPage"
-  :total-items="125"
-  :show-page-size="3"
-  force-ellipses
-/>
-```
-
-### 自定义按钮
-
-通过 `prev-text`、`next-text` 等插槽来自定义分页按钮的内容。
-
-```html
-
-<van-pagination v-model="currentPage" :total-items="50" :show-page-size="5">
-  <template #prev-text>
-    <van-icon name="arrow-left" />
-  </template>
-  <template #next-text>
-    <van-icon name="arrow" />
-  </template>
-  <template #page="{ text }">{{ text }}</template>
-</van-pagination>
 ```
 
 ## API

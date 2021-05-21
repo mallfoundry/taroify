@@ -8,16 +8,20 @@ import "./index.scss"
 
 export default function PaginationDemo() {
   const [current, setCurrent] = useState<number>(1)
-  const { /*hasPrevious, hasNext,*/ count, items } = usePagination({
+  const [total] = useState(60)
+  const [limit] = useState(10)
+  const { count, items } = usePagination({
     current,
+    total,
+    limit,
   })
   return (
     <Page title="Pagination 分页" className="pagination-demo">
       <Block title="基础用法">
         <Pagination
           current={current}
-          limit={10}
-          total={50}
+          limit={limit}
+          total={total}
           count={count}
           onChange={({ page }) => setCurrent(page)}
         >
