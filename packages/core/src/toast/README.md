@@ -46,11 +46,11 @@ import { Toast } from "@taroify/core"
 
 ### 自定义位置
 
-Toast 默认渲染在屏幕正中位置，通过 `placement` 属性可以控制 Toast 展示的位置。
+Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 Toast 展示的位置。
 
 ```jsx
-<Toast open placement="top">顶部展示</Toast>
-<Toast open placement="bottom">底部展示</Toast>
+<Toast open position="top">顶部展示</Toast>
+<Toast open position="bottom">底部展示</Toast>
 ```
 
 ## API
@@ -62,7 +62,7 @@ Toast 默认渲染在屏幕正中位置，通过 `placement` 属性可以控制 
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
 | icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | _ |
-| placement | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
+| position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
 | duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
 | backdrop | 是否显示遮罩层 | _boolean \| static_ | `true` |
 | children | 文本内容 | _ReactNode_ | `""` |
