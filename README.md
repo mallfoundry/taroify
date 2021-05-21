@@ -33,6 +33,12 @@ function ButtonExample() {
 }
 ```
 
+## 微信交流群
+
+<img src="https://gitee.com/mallfoundry/taroify/raw/master/wechat-qrcode.png" width="200" />
+<br />
+备注 "taroify" 加好友后邀请进群
+
 ## 链接
 
 * [文档地址](https://taroify.gitee.io/taroify.com/introduce/)
