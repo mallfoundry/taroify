@@ -12,11 +12,11 @@ export default function CellDemo() {
     <Page title="Cell 单元格" className="cell-demo">
       <Block title="基础用法">
         <Cell title="单元格">内容</Cell>
-        <Cell title="单元格" subtitle="描述信息" children="内容" />
+        <Cell title="单元格" brief="描述信息" children="内容" />
       </Block>
       <Block title="单元格大小">
         <Cell title="单元格">内容</Cell>
-        <Cell title="单元格" subtitle="描述信息" size="large" children="内容" />
+        <Cell title="单元格" brief="描述信息" size="large" children="内容" />
       </Block>
       <Block title="展示图标">
         <Cell startIcon={<LocationOutlined />} title="单元格" children="内容" />
@@ -38,9 +38,9 @@ export default function CellDemo() {
         </Cell.Group>
       </Block>
       <Block title="对齐方式">
-        <Cell title="单元格" subtitle="align start" size="large" align="start" children="内容" />
-        <Cell title="单元格" subtitle="align center" size="large" align="center" children="内容" />
-        <Cell title="单元格" subtitle="align end" size="large" align="end" children="内容" />
+        <Cell title="单元格" brief="align start" size="large" align="start" children="内容" />
+        <Cell title="单元格" brief="align center" size="large" align="center" children="内容" />
+        <Cell title="单元格" brief="align end" size="large" align="end" children="内容" />
       </Block>
     </Page>
   )

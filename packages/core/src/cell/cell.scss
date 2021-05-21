@@ -16,11 +16,11 @@
     flex: 1;
   }
 
-  &__subtitle {
-    margin-top: $cell-subtitle-margin-top;
-    font-size: $cell-subtitle-font-size;
-    line-height: $cell-subtitle-line-height;
-    color: $cell-subtitle-color;
+  &__brief {
+    margin-top: $cell-brief-margin-top;
+    font-size: $cell-brief-font-size;
+    line-height: $cell-brief-line-height;
+    color: $cell-brief-color;
   }
 
   &::after {

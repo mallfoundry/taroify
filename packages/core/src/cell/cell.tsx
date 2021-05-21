@@ -25,7 +25,7 @@ interface CellProps {
   size?: CellSize | CellSizeString
   align?: CellAlign | CellAlignString
   title?: ReactNode
-  subtitle?: ReactNode
+  brief?: ReactNode
   startIcon?: ReactNode
   endIcon?: ReactNode
   bordered?: boolean
@@ -40,7 +40,7 @@ function Cell(props: CellProps) {
     size = CellSize.Medium,
     align,
     title,
-    subtitle,
+    brief,
     clickable = false,
     bordered = true,
     startIcon,
@@ -69,7 +69,7 @@ function Cell(props: CellProps) {
       {title && (
         <View className={prefixClassname("cell__title")}>
           {title}
-          {subtitle && <View className={prefixClassname("cell__subtitle")} children={subtitle} />}
+          {brief && <View className={prefixClassname("cell__brief")} children={brief} />}
         </View>
       )}
       <View
