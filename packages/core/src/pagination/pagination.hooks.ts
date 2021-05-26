@@ -1,4 +1,16 @@
-import { ItemType, Page } from "./shared"
+import { ItemType, Page } from "./pagination.shared"
+
+export function makePages(count: number): Page[] {
+  const range = (start: number, end: number) => {
+    const length = end - start + 1
+    return Array.from({ length }, (_, i) => start + i)
+  }
+
+  return range(1, count).map((page) => ({
+    page,
+    type: ItemType.Page,
+  }))
+}
 
 interface UsePaginationOptions {
   current?: number
@@ -20,27 +32,18 @@ export function usePagination(options?: UsePaginationOptions): UsePagination {
   const hasPrevious = current > 1
   const hasNext = current < count
 
-  const range = (start: number, end: number) => {
-    const length = end - start + 1
-    return Array.from({ length }, (_, i) => start + i)
-  }
-
-  const pages = range(1, count)
-  const pageItems: Page[] = pages.map((page) => ({
-    page,
-    type: ItemType.Page,
-  }))
+  const pageItems = makePages(count)
 
   const items: Page[] = [
     {
-      page: 0,
+      page: Number.MIN_SAFE_INTEGER,
       type: ItemType.Previous,
       children: "上一页",
       disabled: !hasPrevious,
     },
     ...pageItems,
     {
-      page: 0,
+      page: Number.MAX_SAFE_INTEGER,
       type: ItemType.Next,
       children: "下一页",
       disabled: !hasNext,

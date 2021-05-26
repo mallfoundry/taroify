@@ -1,18 +1,16 @@
 import { createContext } from "react"
-import { Page } from "./shared"
+import { Page } from "./pagination.shared"
 
 interface PaginationContextProps {
   current: number
-  limit: number
-  totalPage: number
-  total: number
+  count: number
+  siblingCount: number
   emitClick?: (page: Page) => void
 }
 
 const PaginationContext = createContext<PaginationContextProps>({
   current: 0,
-  limit: 0,
-  totalPage: 0,
-  total: 0,
+  count: 0,
+  siblingCount: 0,
 })
 export default PaginationContext

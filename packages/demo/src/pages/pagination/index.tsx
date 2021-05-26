@@ -1,38 +1,60 @@
 import { Pagination } from "@taroify/core"
-import { usePagination } from "@taroify/core/pagination"
+import ArrowLeft from "@taroify/icons/ArrowLeft"
+import ArrowRight from "@taroify/icons/ArrowRight"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../components/block"
 import Page from "../../components/page"
 import "./index.scss"
 
-export default function PaginationDemo() {
+function BasicPagination() {
   const [current, setCurrent] = useState<number>(1)
-  const [total] = useState(60)
-  const [limit] = useState(10)
-  const { count, items } = usePagination({
-    current,
-    total,
-    limit,
-  })
+  return (
+    <Block title="基础用法">
+      <Pagination current={current} count={10} onChange={(page) => setCurrent(page)} />
+    </Block>
+  )
+}
+
+function PaginationWithEllipses() {
+  const [current, setCurrent] = useState<number>(1)
+  return (
+    <Block title="显示省略号">
+      <Pagination
+        current={current}
+        siblingCount={1}
+        count={13}
+        onChange={(page) => setCurrent(page)}
+      >
+        <Pagination.Item type="start-ellipsis" />
+        <Pagination.Item type="end-ellipsis" />
+      </Pagination>
+    </Block>
+  )
+}
+
+function PaginationWithCustomButton() {
+  const [current, setCurrent] = useState<number>(1)
+  return (
+    <Block title="自定义按钮">
+      <Pagination current={current} count={6} onChange={(page) => setCurrent(page)}>
+        <Pagination.Item type="previous">
+          <ArrowLeft />
+        </Pagination.Item>
+        <Pagination.Item type="next">
+          <ArrowRight />
+        </Pagination.Item>
+      </Pagination>
+    </Block>
+  )
+}
+
+export default function PaginationDemo() {
   return (
     <Page title="Pagination 分页" className="pagination-demo">
-      <Block title="基础用法">
-        <Pagination
-          current={current}
-          limit={limit}
-          total={total}
-          count={count}
-          onChange={({ page }) => setCurrent(page)}
-        >
-          {/*<Pagination.Item type="previous" hidden />*/}
-          {/*<Pagination.Item type="previous" disabled={!hasPrevious} children="上一页" />*/}
-          {items?.map((item) => (
-            <Pagination.Item key={item.page} {...item} />
-          ))}
-          {/*<Pagination.Item type="next" disabled={!hasNext} children="下一页" />*/}
-        </Pagination>
-      </Block>
+      <BasicPagination />
+      <PaginationWithEllipses />
+      <PaginationWithCustomButton />
     </Page>
   )
 }

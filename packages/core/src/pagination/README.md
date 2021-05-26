@@ -19,30 +19,51 @@ import Pagination from "@taroify/core/pagination"
 通过 `current` 来绑定当前页码。
 
 ```tsx
-export default function PaginationDemo() {
+export default function BasicPagination() {
   const [current, setCurrent] = useState<number>(1)
-  const [total] = useState(60)
-  const [limit] = useState(10)
-  const { count, items } = usePagination({
-    current,
-    total,
-    limit,
-  })
+  return <Pagination current={current} count={10} onChange={(page) => setCurrent(page)} />
+}
+```
+
+### 显示省略号
+
+设置 `Pagination.Item.type` 为 `start-ellipsis` 或者 `end-ellipsis` 展示省略号按钮，点击后可以快速跳转。
+
+```tsx
+function PaginationWithEllipses() {
+  const [current, setCurrent] = useState<number>(1)
   return (
     <Pagination
       current={current}
-      limit={limit}
-      total={total}
-      count={count}
-      onChange={({ page }) => setCurrent(page)}
+      siblingCount={1}
+      count={13}
+      onChange={(page) => setCurrent(page)}
     >
-      {items?.map((item) => (
-        <Pagination.Item key={item.page} {...item} />
-      ))}
+      <Pagination.Item type="start-ellipsis" />
+      <Pagination.Item type="end-ellipsis" />
     </Pagination>
   )
 }
+```
 
+### 自定义按钮
+
+通过 `Pagination.Item` 组件来自定义分页按钮的内容。
+
+```tsx
+function PaginationWithCustomButton() {
+  const [current, setCurrent] = useState<number>(1)
+  return (
+    <Pagination current={current} count={6} onChange={(page) => setCurrent(page)}>
+      <Pagination.Item type="previous">
+        <ArrowLeft />
+      </Pagination.Item>
+      <Pagination.Item type="next">
+        <ArrowRight />
+      </Pagination.Item>
+    </Pagination>
+  )
+}
 ```
 
 ## API
@@ -52,15 +73,12 @@ export default function PaginationDemo() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | current | 当前页码 | _number_ | - |
-| mode | 显示模式，可选值为 `simple` | _string_ | `multi` |
-| count | 总页数 | _number \| string_ | 根据页数计算 |
-| total | 总记录数 | _number \| string_ | `0` |
-| limit | 每页记录数 | _number \| string_ | `10` |
-| forceEllipses | 是否显示省略号 | _boolean_ | `false` |
+| siblingCount | 当前页码两侧显示的数字个数 | _number_ | `2` |
+| count | 总页数 | _number_ | - |
 
 ### Events
 
 | 事件名 | 说明           | 回调参数 |
 | ------ | -------------- | -------- |
-| change | 页码改变时触发 | -        |
+| onChange | 页码改变时触发 | -        |
 

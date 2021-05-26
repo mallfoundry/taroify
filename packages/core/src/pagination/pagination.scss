@@ -54,7 +54,9 @@
     }
   }
 
-  &__page {
+  &__page,
+  &__start-ellipsis,
+  &__end-ellipsis {
     flex-grow: 0;
   }
 

@@ -1,28 +1,59 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode, useContext } from "react"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import PaginationContext from "./pagination.context"
-import { ItemType, Page as SharedPage } from "./shared"
+import { ItemType, Page as SharedPage } from "./pagination.shared"
 
 interface PaginationChildren {
   previous?: ReactNode
+  startEllipsis?: ReactNode
   items?: ReactNode
+  endEllipsis?: ReactNode
   next?: ReactNode
 }
 
-function findPaginationChildren(children: ReactNode): PaginationChildren {
+interface UsePaginationOptions {
+  current: number
+  count: number
+  siblingCount: number
+  children?: ReactNode
+}
+
+function usePagination(options: UsePaginationOptions): PaginationChildren {
+  const { current, count, siblingCount, children } = options
+  const siblingRange = siblingCount * 2 + 1
+  let start = Math.max(current - siblingCount, 1)
+  let end = start + siblingRange - 1
+  if (end > count) {
+    end = count
+    start = end - siblingRange + 1
+  }
+  const hasPrevious = current > 1
+  const hasStartEllipsis = start > 1
+  const hasEndEllipsis = end < count
+  const hasNext = current < count
+
+  const items = useMemo(() => makePageItems(start, end), [start, end])
+
   const __children__: PaginationChildren = {
     previous: undefined,
-    items: [],
+    startEllipsis: undefined,
+    items,
     next: undefined,
   }
-
-  const items = __children__.items as ReactNode[]
-
-  Children.forEach(children, (child) => {
+  Children.forEach(children, (child: ReactNode) => {
     // Skip is not Item of Pagination
     if (!isValidElement(child)) {
       return
@@ -34,43 +65,74 @@ function findPaginationChildren(children: ReactNode): PaginationChildren {
     if (elementType === Pagination.Item) {
       const { type: itemType } = element.props
       if (itemType === ItemType.Previous && __children__.previous === undefined) {
-        __children__.previous = element
-      } else if (itemType === ItemType.Next && __children__.next === undefined) {
-        __children__.next = element
-      } else if (itemType === ItemType.Page) {
-        items.push(element)
+        __children__.previous = cloneElement(element, { disabled: !hasPrevious })
+      } else if (
+        itemType === ItemType.StartEllipsis &&
+        __children__.startEllipsis === undefined &&
+        hasStartEllipsis
+      ) {
+        __children__.startEllipsis = element
+      } else if (itemType === ItemType.EndEllipsis && hasEndEllipsis) {
+        __children__.endEllipsis = element
+      } else if (itemType === ItemType.Next) {
+        __children__.next = cloneElement(element, { disabled: !hasNext })
       }
     }
   })
+
+  if (__children__.previous === undefined) {
+    __children__.previous = (
+      <Pagination.Item page={Number.MIN_SAFE_INTEGER} type="previous" disabled={!hasPrevious} />
+    )
+  }
+  if (__children__.next === undefined) {
+    __children__.next = (
+      <Pagination.Item page={Number.MAX_SAFE_INTEGER} type="next" disabled={!hasNext} />
+    )
+  }
+
   return __children__
+}
+
+function rangePages(start: number, end: number) {
+  const length = end - start + 1
+  return Array.from({ length }, (_, i) => start + i)
+}
+
+export function makePageItems(start: number, end: number): ReactElement[] {
+  return rangePages(start, end).map((page) => <Pagination.Item key={page} page={page} />)
 }
 
 interface PaginationProps {
   current?: number
-  limit?: number
   count?: number
-  total?: number
+  siblingCount?: number
   children?: ReactNode
-  onChange?: (page: Pagination.Page) => void
+  onChange?: (page: number) => void
 }
 
 function Pagination(props: PaginationProps) {
-  const { current = 0, count = 0, limit = 10, total = 0, children, onChange } = props
-  const { previous, items, next } = findPaginationChildren(children)
+  const { current = 1, siblingCount = 2, count = 1, children, onChange } = props
+  const { previous, startEllipsis, items, endEllipsis, next } = usePagination({
+    current,
+    siblingCount,
+    count,
+    children,
+  })
 
   function emitClick(page: Pagination.Page) {
-    if (page.type === ItemType.Page) {
-      onChange?.(page)
-    } else if (page.type === ItemType.Previous) {
-      onChange?.({
-        ...page,
-        page: Math.max(current - 1, 1),
-      })
+    const { page: pageNumber } = page
+    const siblingRange = siblingCount * 2 + 1
+    if (page.type === ItemType.Previous) {
+      onChange?.(Math.max(current - 1, 1))
+    } else if (page.type === ItemType.StartEllipsis) {
+      onChange?.(Math.max(current - siblingRange, 1))
+    } else if (page.type === ItemType.Page) {
+      onChange?.(pageNumber)
+    } else if (page.type === ItemType.EndEllipsis) {
+      onChange?.(Math.min(current + siblingRange, count))
     } else if (page.type === ItemType.Next) {
-      onChange?.({
-        ...page,
-        page: Math.min(current + 1, count),
-      })
+      onChange?.(Math.min(current + 1, count))
     }
   }
 
@@ -79,14 +141,15 @@ function Pagination(props: PaginationProps) {
       <PaginationContext.Provider
         value={{
           current,
-          limit,
-          totalPage: Math.ceil(total / limit),
-          total,
+          count,
+          siblingCount,
           emitClick,
         }}
       >
         {previous}
+        {startEllipsis}
         {items}
+        {endEllipsis}
         {next}
       </PaginationContext.Provider>
     </View>
@@ -149,8 +212,24 @@ namespace Pagination {
       onClick,
       ...restProps
     } = props
-    const { current, limit, emitClick } = useContext(PaginationContext)
+    const { current, emitClick } = useContext(PaginationContext)
     const active = page === current
+
+    function renderChildren() {
+      let __children__ = children
+      if (__children__ === undefined) {
+        if (type === ItemType.Previous) {
+          __children__ = "上一页"
+        } else if (type === ItemType.StartEllipsis || type === ItemType.EndEllipsis) {
+          __children__ = "..."
+        } else if (type === ItemType.Next) {
+          __children__ = "下一页"
+        } else if (type === ItemType.Page) {
+          __children__ = page
+        }
+      }
+      return __children__
+    }
 
     return (
       <BaseItem
@@ -158,58 +237,19 @@ namespace Pagination {
           {
             [prefixClassname("pagination__item--active")]: !disabled && active,
             [prefixClassname("pagination__page")]: type === ItemType.Page,
+            [prefixClassname("pagination__start-ellipsis")]: type === ItemType.StartEllipsis,
+            [prefixClassname("pagination__end-ellipsis")]: type === ItemType.EndEllipsis,
             [prefixClassname("pagination__button")]: type === ItemType.Previous || ItemType.Next,
           },
           className,
         )}
         disabled={disabled && !active}
-        children={children ?? page}
-        onClick={() => emitClick?.({ page, limit, type: type as ItemType, disabled })}
+        children={renderChildren()}
+        onClick={() => emitClick?.({ page, type: type as ItemType })}
         {...restProps}
       />
     )
   }
-
-  // export enum ButtonType {
-  //   Previous = "previous",
-  //   Next = "next",
-  // }
-  //
-  // type ButtonTypeString = "previous" | "next"
-  //
-  // interface ButtonProps extends BaseItemProps {
-  //   type?: ButtonType | ButtonTypeString
-  // }
-  //
-  // export function Button(props: ButtonProps) {
-  //   const { className, type, ...restProps } = props
-  //   const { current, limit, totalPage, emitClick } = useContext(PaginationContext)
-  //
-  //   function hasDisabled() {
-  //     if (type === ButtonType.Previous) {
-  //       return current <= 1
-  //     } else if (type === ButtonType.Next) {
-  //       return current >= totalPage
-  //     }
-  //   }
-  //
-  //   function handleClick() {
-  //     if (type === ButtonType.Previous) {
-  //       emitClick?.({ page: Math.max(current - 1, 1), limit })
-  //     } else if (type === ButtonType.Next) {
-  //       emitClick?.({ page: Math.min(current + 1, totalPage), limit })
-  //     }
-  //   }
-  //
-  //   return (
-  //     <BaseItem
-  //       className={classNames(prefixClassname("pagination__button"), className)}
-  //       disabled={hasDisabled()}
-  //       onClick={handleClick}
-  //       {...restProps}
-  //     />
-  //   )
-  // }
 }
 
 export default Pagination
