@@ -8,7 +8,6 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "allowSyntheticDefaultImports": false,
     "outDir": "lib",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
