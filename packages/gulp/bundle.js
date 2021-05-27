@@ -6,6 +6,9 @@ const { series } = require("gulp")
 function cleanBundle(name) {
   const cleanTask = (cb) => {
     const bundlePath = `./bundles/${name}`
+    if (!fs.existsSync(bundlePath)) {
+      fs.mkdirSync(bundlePath, { recursive: true })
+    }
     const files = fs.readdirSync(bundlePath)
     if (files) {
       for (const file of files) {
@@ -39,9 +42,10 @@ function initBundle(name) {
 
 function copyBundleFiles(name, filename) {
   const copyBundleFilesTask = () => {
-    return gulp.src(`./packages/${name}/${filename}`, {
-      allowEmpty: true,
-    })
+    return gulp
+      .src(`./packages/${name}/${filename}`, {
+        allowEmpty: true,
+      })
       .pipe(gulp.dest(`./bundles/${name}`))
   }
   copyBundleFilesTask.displayName = `copy file(${filename}) to bundles/${name}`
@@ -49,9 +53,12 @@ function copyBundleFiles(name, filename) {
 }
 
 function createBundle(name) {
-  return series(cleanBundle(name), initBundle(name),//
-    copyBundleFiles(name, ".npmignore"),//
-    copyBundleFiles(name, "README.md"))
+  return series(
+    cleanBundle(name),
+    initBundle(name), //
+    copyBundleFiles(name, ".npmignore"), //
+    copyBundleFiles(name, "README.md"),
+  )
 }
 
 exports.createBundle = createBundle
