@@ -5,7 +5,7 @@ import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, MutableRefObject, ReactNode, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
-import { getBoundingClientRect } from "../utils/dom"
+import { getBoundingClientRect } from "../utils/rect"
 import { unitToPx } from "../utils/format/unit"
 import { getSystemRect } from "../utils/system"
 
