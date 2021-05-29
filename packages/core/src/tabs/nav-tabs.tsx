@@ -3,10 +3,20 @@ import { nextTick, offWindowResize, onWindowResize, useReady } from "@tarojs/tar
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, ReactElement, ReactNode, useCallback, useEffect, useMemo, useState } from "react"
+import {
+  Children,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
-import { selectAllRect, selectRect } from "../utils/selector"
+import { getBoundingClientRect } from "../utils/rect"
+import { selectAllRect } from "../utils/selector"
 import { TabKey, TabsTheme, TabsThemeString } from "./shared"
 import Tab, { TabEvent } from "./tab"
 import Tabs from "./tabs"
@@ -66,6 +76,7 @@ export default function NavTabs(props: NavTabsProps) {
   const themeLine = theme === TabsTheme.Line
   const themeCard = theme === TabsTheme.Card
   const [nowTime] = useState(Date.now())
+  const navRef = useRef()
   const navId = `__tabs-nav-${nowTime}__`
   const tabs = useMemo(() => obtainTabs(props.children), [props.children])
   const [navOffset, setNavOffset] = useState<NavOffset>({})
@@ -100,7 +111,7 @@ export default function NavTabs(props: NavTabsProps) {
     nextTick(() => {
       Promise.all([
         selectAllRect(`#${navId} .${prefixClassname("tabs__tab")}`),
-        selectRect(`#${navId}`),
+        getBoundingClientRect(navRef),
       ]).then(([tabRects, navRect]) => {
         setTabOffsets(tabRects)
         setNavOffset(navRect)
@@ -142,6 +153,7 @@ export default function NavTabs(props: NavTabsProps) {
       >
         <View
           id={navId}
+          ref={navRef}
           className={classNames(prefixClassname("tabs__nav"), {
             [prefixClassname("tabs__nav--line")]: themeLine,
             [prefixClassname("tabs__nav--card")]: themeCard,

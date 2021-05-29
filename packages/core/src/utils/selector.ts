@@ -11,16 +11,6 @@ interface BoundingClientRect {
   width: number
 }
 
-export function selectRect(selector: string) {
-  return new Promise<BoundingClientRect>((resolve) => {
-    createSelectorQuery()
-      .select(selector)
-      // @ts-ignore
-      .boundingClientRect(resolve)
-      .exec()
-  })
-}
-
 export function selectAllRect(selector: string) {
   return new Promise<BoundingClientRect[]>((resolve) => {
     createSelectorQuery()
