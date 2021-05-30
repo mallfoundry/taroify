@@ -1,6 +1,6 @@
 import { CSSProperties } from "react"
 
-export function addUnit(value?: string | number): string | undefined {
+export function addUnitPx(value?: string | number): string | undefined {
   if (value === undefined) {
     return undefined
   }
