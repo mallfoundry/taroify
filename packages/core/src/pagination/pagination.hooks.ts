@@ -38,15 +38,11 @@ export function usePagination(options?: UsePaginationOptions): UsePagination {
     {
       page: Number.MIN_SAFE_INTEGER,
       type: ItemType.Previous,
-      children: "上一页",
-      disabled: !hasPrevious,
     },
     ...pageItems,
     {
       page: Number.MAX_SAFE_INTEGER,
       type: ItemType.Next,
-      children: "下一页",
-      disabled: !hasNext,
     },
   ]
 
