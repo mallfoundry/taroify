@@ -2,7 +2,7 @@ module.exports = {
   pathPrefix: process.env.NODE_ENV === "development" ? "/" : "/taroify.com",
   siteMetadata: {
     title: "Taroify",
-    siteUrl: `https://www.taroify.com`,
+    siteUrl: "https://www.taroify.com",
   },
   plugins: [
     "gatsby-plugin-sass",
@@ -10,22 +10,22 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
-      resolve: `gatsby-plugin-typescript`,
+      resolve: "gatsby-plugin-typescript",
       options: {
         isTSX: true, // defaults to false
-        jsxPragma: `jsx`, // defaults to "React"
+        jsxPragma: "jsx", // defaults to "React"
         allExtensions: true, // defaults to false
       },
     },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: `Taroify`,
-        short_name: `Taroify`,
-        start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#4fc08d`,
-        display: `minimal-ui`,
+        name: "Taroify",
+        short_name: "Taroify",
+        start_url: "/",
+        background_color: "#ffffff",
+        theme_color: "#4fc08d",
+        display: "minimal-ui",
         icon: "src/images/icon.png",
         theme_color_in_head: false,
       },
@@ -66,15 +66,15 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-images`,
+            resolve: "gatsby-remark-images",
             options: {
               maxWidth: 590,
             },
           },
           {
-            resolve: `gatsby-remark-responsive-iframe`,
+            resolve: "gatsby-remark-responsive-iframe",
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
+              wrapperStyle: "margin-bottom: 1.0725rem",
             },
           },
           "gatsby-remark-autolink-headers",
@@ -95,5 +95,4 @@ module.exports = {
       },
     },
   ],
-
 }
