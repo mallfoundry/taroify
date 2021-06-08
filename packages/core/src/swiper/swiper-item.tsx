@@ -1,8 +1,9 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useEffect, useMemo, useState } from "react"
+import { CSSProperties, ReactNode, useContext, useEffect, useState } from "react"
 import { prefixClassname } from "../styles"
+import { useComputed } from "../utils/computed"
 import { addUnitPx } from "../utils/format/unit"
 import SwiperContext from "./swiper.context"
 import { SwiperDirection } from "./swiper.shared"
@@ -20,11 +21,11 @@ export default function SwiperItem(props: SwiperItemProps) {
 
   const [offset, setOffset] = useState(0)
 
-  const rootStyle = useMemo(() => {
+  const rootStyle = useComputed(() => {
     const style: CSSProperties = {}
-    if (size) {
+    if (size?.value) {
       const mainAxis = vertical ? "height" : "width"
-      style[mainAxis] = addUnitPx(size)
+      style[mainAxis] = addUnitPx(size?.value)
     }
     if (offset) {
       style.transform = `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`
@@ -43,7 +44,7 @@ export default function SwiperItem(props: SwiperItemProps) {
   return (
     <View
       className={classNames(prefixClassname("swiper-item"), className)}
-      style={rootStyle}
+      style={rootStyle.value}
       children={props.children}
     />
   )
