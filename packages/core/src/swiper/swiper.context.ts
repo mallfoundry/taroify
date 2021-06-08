@@ -1,4 +1,5 @@
 import { createContext } from "react"
+import { ComputedRef } from "../utils/computed"
 import { SwiperDirection } from "./swiper.shared"
 
 export type SwiperChildren = SwiperItemChild[]
@@ -9,7 +10,7 @@ export interface SwiperItemChild {
 
 interface SwiperContextValue {
   direction?: SwiperDirection
-  size?: number
+  size?: ComputedRef<number>
   children: SwiperChildren
 }
 
