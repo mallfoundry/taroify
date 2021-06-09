@@ -28,6 +28,7 @@ import { doubleRaf } from "../utils/raf"
 import { BoundingClientRect, getBoundingClientRect } from "../utils/rect"
 import { usePrevious } from "../utils/state"
 import { useTouch } from "../utils/touch"
+import SwiperIndicator from "./swiper-indicator"
 import SwiperItem from "./swiper-item"
 import SwiperContext, { SwiperItemChild } from "./swiper.context"
 import { SwiperDirection, SwiperInstance, SwiperItemEvent } from "./swiper.shared"
@@ -40,11 +41,16 @@ function range(num: number, min: number, max: number): number {
 
 interface SwiperChildren {
   items: ReactNode[]
+  indicator: ReactNode
   count: number
 }
 
 function useChildren(children: ReactNode): SwiperChildren {
-  const items: ReactNode[] = []
+  const __children__: SwiperChildren = {
+    items: [],
+    indicator: undefined,
+    count: 0,
+  }
   let index = 0
   Children.forEach(children, (child: ReactNode, i) => {
     // Skip is not Item of Swiper
@@ -55,7 +61,7 @@ function useChildren(children: ReactNode): SwiperChildren {
     const elementType = element.type
     if (elementType === SwiperItem) {
       const { key } = element
-      items.push(
+      __children__.items.push(
         cloneElement(child, {
           ...element.props,
           key: key ?? i,
@@ -63,11 +69,14 @@ function useChildren(children: ReactNode): SwiperChildren {
         }),
       )
     }
+
+    if (elementType === SwiperIndicator) {
+      __children__.indicator = element
+    }
   })
-  return {
-    items,
-    count: items.length,
-  }
+
+  __children__.count = __children__.items.length
+  return __children__
 }
 
 export interface SwiperProps {
@@ -100,7 +109,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     onChange,
   } = props
 
-  const { count, items } = useChildren(props.children)
+  const { count, indicator, items } = useChildren(props.children)
 
   const children = useMemo<SwiperItemChild[]>(() => [], [])
 
@@ -441,7 +450,9 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
       <SwiperContext.Provider
         value={{
           direction: direction as SwiperDirection,
+          activeIndicator,
           size,
+          count,
           children,
         }}
       >
@@ -456,6 +467,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
           style={trackStyle.value}
           children={items}
         />
+        {indicator}
       </SwiperContext.Provider>
     </View>
   )

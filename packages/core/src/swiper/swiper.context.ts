@@ -10,7 +10,9 @@ export interface SwiperItemChild {
 
 interface SwiperContextValue {
   direction?: SwiperDirection
+  activeIndicator?: ComputedRef<number>
   size?: ComputedRef<number>
+  count?: number
   children: SwiperChildren
 }
 

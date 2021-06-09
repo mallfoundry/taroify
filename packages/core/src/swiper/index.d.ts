@@ -1,5 +1,6 @@
 import { LegacyRef } from "react"
 import { SwiperProps } from "./swiper"
+import { SwiperIndicatorProps } from "./swiper-indicator"
 import { SwiperItemProps } from "./swiper-item"
 import { SwiperInstance, SwiperItemEvent } from "./swiper.shared"
 
@@ -16,7 +17,11 @@ declare namespace Swiper {
 
   export type ItemProps = SwiperItemProps
 
+  export type IndicatorProps = SwiperIndicatorProps
+
   export function Item(props: ItemProps): JSX.Element
+
+  export function Indicator(props: IndicatorProps): JSX.Element
 }
 
 export default Swiper

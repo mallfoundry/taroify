@@ -29,9 +29,9 @@
       flex-direction: column;
       transform: translateY(-50%);
 
-      /* .van-swipe__indicator:not(:last-child) {
+      .#{$component-prefix}swiper__indicator:not(:last-child) {
         margin-bottom: $swiper-indicator-size;
-      } */
+      }
     }
   }
 
