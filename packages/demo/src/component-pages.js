@@ -103,6 +103,11 @@ const componentPages = [
         path: "/pages/empty/index",
       },
       {
+        title: "NoticeBar 通知栏",
+        name: "NoticeBar",
+        path: "/pages/notice-bar/index",
+      },
+      {
         title: "Progress 进度条",
         name: "Progress",
         path: "/pages/progress/index",

@@ -102,6 +102,10 @@ const menus = [
         to: "/components/empty/",
       },
       {
+        title: "NoticeBar 通知栏",
+        to: "/components/notice-bar/",
+      },
+      {
         title: "Progress 进度条",
         to: "/components/progress/",
       },
