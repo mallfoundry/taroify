@@ -113,6 +113,11 @@ const componentPages = [
         path: "/pages/progress/index",
       },
       {
+        title: "Skeleton 骨架屏",
+        name: "Skeleton",
+        path: "/pages/skeleton/index",
+      },
+      {
         title: "Sticky 粘性布局",
         name: "Sticky",
         path: "/pages/sticky/index",

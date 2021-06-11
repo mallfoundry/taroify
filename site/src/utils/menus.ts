@@ -110,6 +110,10 @@ const menus = [
         to: "/components/progress/",
       },
       {
+        title: "Skeleton 骨架屏",
+        to: "/components/skeleton/",
+      },
+      {
         title: "Sticky 粘性布局",
         to: "/components/sticky/",
       },

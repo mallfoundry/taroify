@@ -1,0 +1,59 @@
+@import './variables';
+
+.#{$component-prefix}skeleton {
+  height: $skeleton-height;
+  background: $skeleton-background-color;
+
+  &--circle {
+    width: $skeleton-circle-size;
+    height: $skeleton-circle-size;
+    border-radius: $border-radius-max;
+  }
+
+  &--pulse {
+    animation: #{$component-prefix}skeleton-pulse $skeleton-pulse-animation-duration $skeleton-pulse-animation-timing-function $skeleton-pulse-animation-delay infinite;
+  }
+
+  &--wave {
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "";
+      position: absolute;
+      animation: #{$component-prefix}skeleton-wave $skeleton-wave-animation-duration $skeleton-wave-animation-timing-function $skeleton-wave-animation-delay infinite;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+    }
+  }
+}
+
+@keyframes #{$component-prefix}skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes #{$component-prefix}skeleton-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    /* +0.5s of delay between each loop */
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

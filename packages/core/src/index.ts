@@ -24,6 +24,7 @@ export { default as Divider } from "./divider"
 export { default as Empty } from "./empty"
 export { default as NoticeBar } from "./notice-bar"
 export { default as Progress } from "./progress"
+export { default as Skeleton } from "./skeleton"
 export { default as Sticky } from "./sticky"
 export { default as Swiper } from "./swiper"
 // Navigation Components
