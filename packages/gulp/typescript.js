@@ -19,6 +19,19 @@ function copyTypescriptFiles(bundle, dist) {
   return copyTypescriptFilesTask
 }
 
+function copyDeclarationFiles(bundle, dist) {
+  const copyDeclarationFilesTask = () =>
+    gulp
+      .src([`./packages/${bundle}/src/**/*.d.ts`], {
+        ignore,
+      })
+      .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
+  copyDeclarationFilesTask.displayName = `copy typescript declaration files to bundles/${
+    dist ?? bundle
+  } from packages/${bundle}`
+  return copyDeclarationFilesTask
+}
+
 function symlinkTypescriptFiles(bundle, dist) {
   const symlinkTypescriptFilesTask = () =>
     gulp
@@ -34,10 +47,12 @@ function symlinkTypescriptFiles(bundle, dist) {
 
 function compileTypescript(bundle, dist) {
   // const tsProject = ts.createProject("tsconfig.json", { noImplicitAny: false, declaration: true })
+  const dtsIgnore = [...ignore, "**/swiper/index.d.ts"]
   const compileTypescriptTask = () =>
     gulp
       .src([`./packages/${bundle}/src/**/*.[jt]s?(x)`], {
-        ignore,
+        ignore: dtsIgnore,
+        // ignore,
       })
       .pipe(sourcemaps.init())
       // .pipe(tsProject())
@@ -52,23 +67,24 @@ function compileTypescript(bundle, dist) {
 
 function generateDeclarationFiles(bundle, dist) {
   const dtsProject = ts.createProject("tsconfig.d.json")
-  const compileTypescriptTask = () =>
+  const generateTypescriptDeclarationTask = () =>
     gulp
-      .src([`./packages/${bundle}/src/**/*.[jt]s?(x)`], {
+      .src([`./packages/${bundle}/src/**/*.[t]s?(x)`], {
         ignore,
       })
       .pipe(dtsProject())
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
-  compileTypescriptTask.displayName = `generate typescript declaration files to bundles/${
+  generateTypescriptDeclarationTask.displayName = `generate typescript declaration files to bundles/${
     dist ?? bundle
   } from packages/${bundle}`
-  return compileTypescriptTask
+  return generateTypescriptDeclarationTask
 }
 
 function buildTypescript(module, dist) {
   return series(
     //
     // copyTypescriptFiles(module, dist), //
+    copyDeclarationFiles(module, dist), //
     compileTypescript(module, dist), //
     generateDeclarationFiles(module, dist), //
   )
