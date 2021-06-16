@@ -114,6 +114,10 @@ const menus = [
         to: "/components/skeleton/",
       },
       {
+        title: "Steps 步骤条",
+        to: "/components/steps/",
+      },
+      {
         title: "Sticky 粘性布局",
         to: "/components/sticky/",
       },

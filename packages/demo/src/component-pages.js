@@ -118,6 +118,11 @@ const componentPages = [
         path: "/pages/skeleton/index",
       },
       {
+        title: "Steps 步骤条",
+        name: "Steps",
+        path: "/pages/steps/index",
+      },
+      {
         title: "Sticky 粘性布局",
         name: "Sticky",
         path: "/pages/sticky/index",

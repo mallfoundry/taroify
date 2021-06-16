@@ -1,0 +1,16 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+$step-text-color: $gray-6;
+$step-active-color: $green;
+$step-process-text-color: $text-color;
+$step-font-size: $font-size-md;
+$step-line-color: $border-color;
+$step-completed-line-color: $green;
+$step-completed-text-color: $text-color;
+$step-icon-size: 12px * $hd;
+$step-circle-size: 5px * $hd;
+$step-circle-color: $gray-6;
+$step-horizontal-title-font-size: $font-size-sm;

@@ -1,0 +1,171 @@
+@import './variables';
+
+.#{$component-prefix}step {
+  position: relative;
+  flex: 1;
+  color: $step-text-color;
+  font-size: $step-font-size;
+
+  &__circle {
+    display: block;
+    width: $step-circle-size;
+    height: $step-circle-size;
+    margin: 3px * $hd;
+    background-color: $step-circle-color;
+    border-radius: 50%;
+  }
+
+  &__line {
+    position: absolute;
+    background-color: $step-line-color;
+    transition: background-color $animation-duration-base;
+  }
+
+  &--horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:last-child {
+      .#{$component-prefix}step__line {
+        width: 0;
+      }
+    }
+
+    .#{$component-prefix}step__circle-container {
+      z-index: 2;
+      margin-top: 8px * $hd;
+      padding: 0 $padding-xs;
+      background: $white;
+    }
+
+    .#{$component-prefix}step__circle {
+      position: relative;
+      bottom: 1px;
+    }
+
+    .#{$component-prefix}step__label {
+      display: inline-block;
+      font-size: $step-horizontal-title-font-size;
+
+      @media (max-width: 321px) {
+        font-size: $step-horizontal-title-font-size - 1px * $hd;
+      }
+    }
+
+    .#{$component-prefix}step__icon {
+      display: block;
+      font-size: $step-icon-size;
+    }
+
+    .#{$component-prefix}step--process {
+      color: $step-process-text-color;
+    }
+
+    .#{$component-prefix}step__line {
+      left: 50%;
+      bottom: 5px * $hd + 1px;
+      width: 100%;
+      height: 1px * $hd;
+    }
+  }
+
+  &--alternative-label {
+    flex-direction: column-reverse;
+
+    .#{$component-prefix}step__circle-container {
+      margin-top: 0;
+    }
+
+    .#{$component-prefix}step__circle {
+      bottom: 0;
+    }
+
+    .#{$component-prefix}step__label {
+      margin-top: 8px * $hd;
+    }
+
+    .#{$component-prefix}step__line {
+      top: 5px * $hd + 1px;
+      bottom: 0;
+    }
+  }
+
+  &--vertical {
+    display: block;
+    float: none;
+    padding: 10px * $hd 10px * $hd 10px * $hd 0;
+    line-height: $line-height-sm;
+
+    &:not(:last-child)::after {
+      border-bottom-width: 1px * $hd;
+    }
+
+    &:first-child {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: -16px * $hd;
+        z-index: 1;
+        width: 1px * $hd;
+        height: 20px * $hd;
+        background-color: $white;
+        content: '';
+      }
+    }
+
+    .#{$component-prefix}step__circle-container {
+      position: absolute;
+      top: 19px * $hd;
+      left: -16px * $hd;
+      z-index: 2;
+      font-size: $step-icon-size;
+      line-height: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    .#{$component-prefix}step__line {
+      top: 16px * $hd;
+      left: -16px * $hd + -0.5px;
+      width: 1px * $hd;
+      height: 100%;
+    }
+
+    &:last-child {
+      .#{$component-prefix}step__line {
+        width: 0;
+      }
+    }
+  }
+
+  &--completed {
+    color: $step-completed-text-color;
+
+    .#{$component-prefix}step__circle,
+    .#{$component-prefix}step__line {
+      background-color: $step-completed-line-color;
+    }
+
+    .#{$component-prefix}step__icon {
+      color: $step-active-color;
+    }
+  }
+
+  &--active {
+    color: $step-completed-text-color;
+
+    .#{$component-prefix}step__circle {
+      background-color: $step-active-color;
+    }
+
+    .#{$component-prefix}step__icon,
+    .#{$component-prefix}step__label {
+      color: $step-active-color;
+    }
+  }
+
+  &__icon,
+  &__label {
+    transition: color $animation-duration-base;
+  }
+}
