@@ -28,13 +28,9 @@
   }
 
   &:last-child::after,
-  &-borderless::after {
+  &--borderless::after {
     display: none;
   }
-
-  /* &--borderless {
-
-  } */
 
   &--start {
     align-items: flex-start;
