@@ -97,6 +97,7 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
           // Set shape style
           [prefixClassname("button--round")]: shape === ButtonShape.Round,
+          [prefixClassname("button--square")]: shape === ButtonShape.Square,
           // Set size style
           [prefixClassname("button--mini")]: size === ButtonSize.Mini,
           [prefixClassname("button--small")]: size === ButtonSize.Small,
