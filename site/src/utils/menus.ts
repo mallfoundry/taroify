@@ -98,6 +98,10 @@ const menus = [
         to: "/components/badge/",
       },
       {
+        title: "CountDown 倒计时",
+        to: "/components/count-down/",
+      },
+      {
         title: "Divider 分割线",
         to: "/components/divider/",
       },

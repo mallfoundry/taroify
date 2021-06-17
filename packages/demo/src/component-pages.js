@@ -98,6 +98,11 @@ const componentPages = [
         path: "/pages/badge/index",
       },
       {
+        title: "CountDown 倒计时",
+        name: "CountDown",
+        path: "/pages/count-down/index",
+      },
+      {
         title: "Divider 分割线",
         name: "Divider",
         path: "/pages/divider/index",
