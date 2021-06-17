@@ -19,7 +19,7 @@ function getDirection(x: number, y: number): TouchDirection | undefined {
 
 function emptyFunction() {}
 
-interface TouchRef {
+export interface TouchRef {
   startX: number
   startY: number
   deltaX: number
