@@ -84,6 +84,10 @@ const menus = [
         title: "ShareSheet 分享面板",
         to: "/components/share-sheet/",
       },
+      {
+        title: "SwipeCell 滑动单元格",
+        to: "/components/swipe-cell/",
+      },
     ],
   },
   {

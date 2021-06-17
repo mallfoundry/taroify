@@ -17,6 +17,8 @@ export { default as Loading } from "./loading"
 export { default as Notify } from "./notify"
 export { default as Backdrop } from "./backdrop"
 export { default as ShareSheet } from "./share-sheet"
+export { default as SwipeCell } from "./swipe-cell"
+export { default as SwipeCellActions } from "./swipe-cell-actions"
 // Display Components
 export { default as Badge } from "./badge"
 export { default as Tag } from "./tag"

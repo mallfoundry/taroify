@@ -82,6 +82,11 @@ const componentPages = [
         name: "ShareSheet",
         path: "/pages/share-sheet/index",
       },
+      {
+        title: "SwipeCell 滑动单元格",
+        name: "SwipeCell",
+        path: "/pages/swipe-cell/index",
+      },
     ],
   },
   {
