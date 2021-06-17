@@ -18,7 +18,10 @@ class GetterRef<T> implements ComputedRef<T> {
 
 type ComputedGetter<T> = () => T
 
-export function useComputed<T>(getter: ComputedGetter<T>, deps: DependencyList): ComputedRef<T> {
+export function useComputed<T>(
+  getter: ComputedGetter<T>,
+  deps: DependencyList | undefined = [],
+): ComputedRef<T> {
   const __getter__ = useCallback(getter, [getter, ...deps])
   return useMemo(() => {
     return new GetterRef(__getter__)
