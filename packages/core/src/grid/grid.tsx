@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -94,10 +94,11 @@ namespace Grid {
     icon?: ReactNode
     text?: ReactNode
     children?: ReactNode
+    onClick?: (event: ITouchEvent) => void
   }
 
   export function Item(props: ItemProps) {
-    const { __dataIndex__ = 0, icon, text, dot, badge, children } = props
+    const { __dataIndex__ = 0, icon, text, dot, badge, children, onClick } = props
     const { columns, gutter, bordered, centered, clickable, direction, square } = useContext(
       GridContext,
     )
@@ -136,6 +137,7 @@ namespace Grid {
           [prefixClassname("grid-item--square")]: square,
         })}
         style={rootStyle}
+        onClick={onClick}
       >
         <View
           style={contentStyle}
