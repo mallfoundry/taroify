@@ -98,6 +98,11 @@ const componentPages = [
         path: "/pages/badge/index",
       },
       {
+        title: "Collapse 折叠面板",
+        name: "Collapse",
+        path: "/pages/collapse/index",
+      },
+      {
         title: "CountDown 倒计时",
         name: "CountDown",
         path: "/pages/count-down/index",

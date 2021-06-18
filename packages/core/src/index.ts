@@ -1,6 +1,7 @@
 // Basic Components
 export { default as Button } from "./button"
 export { default as Cell } from "./cell"
+export { default as CellGroup } from "./cell-group"
 export { default as Col } from "./col"
 export { default as Row } from "./row"
 export { default as Image } from "./image"
@@ -21,6 +22,8 @@ export { default as SwipeCell } from "./swipe-cell"
 export { default as SwipeCellActions } from "./swipe-cell-actions"
 // Display Components
 export { default as Badge } from "./badge"
+export { default as Collapse } from "./collapse"
+export { default as CollapseItem } from "./collapse-item"
 export { default as CountDown } from "./count-down"
 export { default as Divider } from "./divider"
 export { default as Empty } from "./empty"

@@ -98,6 +98,10 @@ const menus = [
         to: "/components/badge/",
       },
       {
+        title: "Collapse 折叠面板",
+        to: "/components/collapse/",
+      },
+      {
         title: "CountDown 倒计时",
         to: "/components/count-down/",
       },

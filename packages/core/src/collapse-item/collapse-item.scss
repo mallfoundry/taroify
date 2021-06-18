@@ -1,0 +1,65 @@
+@import "./variables";
+
+
+.#{$component-prefix}collapse-item {
+  position: relative;
+
+  &--bordered {
+    &::after {
+      @include hairline-top($border-color, $padding-md, $padding-md);
+    }
+  }
+
+  &__title {
+    .#{$component-prefix}cell__right-icon::before {
+      // using translateZ to fix safari rendering issues
+      // see: https://github.com/youzan/vant/issues/8608
+      transform: rotate(90deg) translateZ(0);
+      transition: transform $collapse-item-transition-duration;
+    }
+
+    &::after {
+      right: $padding-md;
+      display: none;
+    }
+
+    &--expanded {
+      .#{$component-prefix}cell__right-icon::before {
+        transform: rotate(-90deg);
+      }
+
+      &::after {
+        display: block;
+      }
+    }
+
+    &--borderless {
+      &::after {
+        display: none;
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+
+      &,
+      & .#{$component-prefix}cell__right-icon {
+        color: $collapse-item-title-disabled-color;
+      }
+    }
+  }
+
+  &__wrapper {
+    overflow: hidden;
+    transition: height $collapse-item-transition-duration ease-in-out;
+    will-change: height;
+  }
+
+  &__content {
+    padding: $collapse-item-content-padding;
+    color: $collapse-item-content-text-color;
+    font-size: $collapse-item-content-font-size;
+    line-height: $collapse-item-content-line-height;
+    background-color: $collapse-item-content-background-color;
+  }
+}
