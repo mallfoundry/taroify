@@ -1,5 +1,5 @@
-import { View } from "@tarojs/components"
-import { ITouchEvent } from "@tarojs/components/types/common"
+import { cloneIconComponent } from "@taroify/icons/utils"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
@@ -26,8 +26,8 @@ interface CellProps {
   align?: CellAlign | CellAlignString
   title?: ReactNode
   brief?: ReactNode
-  startIcon?: ReactNode
-  endIcon?: ReactNode
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
   bordered?: boolean
   clickable?: boolean
   children?: ReactNode
@@ -43,8 +43,8 @@ function Cell(props: CellProps) {
     brief,
     clickable = false,
     bordered = true,
-    startIcon,
-    endIcon,
+    leftIcon,
+    rightIcon,
     children,
     onClick,
   } = props
@@ -65,7 +65,7 @@ function Cell(props: CellProps) {
       )}
       onClick={onClick}
     >
-      {startIcon && <View className={prefixClassname("cell-start-icon")}>{startIcon}</View>}
+      {leftIcon && cloneIconComponent(leftIcon, { className: prefixClassname("cell__left-icon") })}
       {title && (
         <View className={prefixClassname("cell__title")}>
           {title}
@@ -79,32 +79,10 @@ function Cell(props: CellProps) {
       >
         {children}
       </View>
-      {endIcon && <View className={prefixClassname("cell__end-icon")}>{endIcon}</View>}
+      {rightIcon &&
+        cloneIconComponent(rightIcon, { className: prefixClassname("cell__right-icon") })}
     </View>
   )
-}
-
-namespace Cell {
-  interface GroupProps {
-    title?: string
-    bordered?: boolean
-    children?: ReactNode
-  }
-
-  export function Group(props: GroupProps) {
-    const { title, bordered = true, children } = props
-    return (
-      <>
-        <View className={prefixClassname("cell-group__title")} children={title} />
-        <View
-          className={classNames(prefixClassname("cell-group"), {
-            [prefixClassname("hairline--top-bottom")]: bordered,
-          })}
-          children={children}
-        />
-      </>
-    )
-  }
 }
 
 export default Cell

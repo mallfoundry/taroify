@@ -76,20 +76,20 @@
     }
   }
 
-  &__start-icon,
-  &__end-icon {
+  &__left-icon,
+  &__right-icon {
     height: $cell-line-height;
     font-size: $cell-icon-size;
     line-height: $cell-line-height;
   }
 
-  &__start-icon {
+  &__left-icon {
     display: flex;
     align-items: center;
     margin-right: $cell-start-icon-margin-left;
   }
 
-  &__end-icon {
+  &__right-icon {
     display: flex;
     align-items: center;
     margin-left: $cell-end-icon-margin-right;
