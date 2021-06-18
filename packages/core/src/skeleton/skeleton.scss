@@ -15,20 +15,20 @@
   }
 
   &--wave {
+    position: relative;
     display: block;
     overflow: hidden;
-    position: relative;
 
     &::after {
+      position: absolute;
       top: 0;
-      left: 0;
       right: 0;
       bottom: 0;
+      left: 0;
       content: "";
-      position: absolute;
-      animation: #{$component-prefix}skeleton-wave $skeleton-wave-animation-duration $skeleton-wave-animation-timing-function $skeleton-wave-animation-delay infinite;
-      transform: translateX(-100%);
       background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+      transform: translateX(-100%);
+      animation: #{$component-prefix}skeleton-wave $skeleton-wave-animation-duration $skeleton-wave-animation-timing-function $skeleton-wave-animation-delay infinite;
     }
   }
 }

@@ -22,7 +22,7 @@
       box-sizing: border-box;
       padding: 8px * $hd 16px * $hd;
       color: #323233;
-      font-size: 12px;
+      font-size: 12px * $hd;
       display: flex;
 
       &__thumb {

@@ -3,8 +3,8 @@
 .#{$component-prefix}step {
   position: relative;
   flex: 1;
-  color: $step-text-color;
   font-size: $step-font-size;
+  color: $step-text-color;
 
   &__circle {
     display: block;
@@ -34,8 +34,8 @@
 
     .#{$component-prefix}step__circle-container {
       z-index: 2;
-      margin-top: 8px * $hd;
       padding: 0 $padding-xs;
+      margin-top: 8px * $hd;
       background: $white;
     }
 
@@ -63,8 +63,8 @@
     }
 
     .#{$component-prefix}step__line {
-      left: 50%;
       bottom: 5px * $hd + 1px;
+      left: 50%;
       width: 100%;
       height: 1px * $hd;
     }
@@ -109,8 +109,8 @@
         z-index: 1;
         width: 1px * $hd;
         height: 20px * $hd;
-        background-color: $white;
         content: '';
+        background-color: $white;
       }
     }
 

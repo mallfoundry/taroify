@@ -6,9 +6,9 @@
   align-items: center;
   height: $notice-bar-height;
   padding: $notice-bar-padding;
-  color: $notice-bar-text-color;
   font-size: $notice-bar-font-size;
   line-height: $notice-bar-line-height;
+  color: $notice-bar-text-color;
   background-color: $notice-bar-background-color;
 
   &__icon,
@@ -52,8 +52,8 @@
 
       &__content {
         position: relative;
-        white-space: normal;
         word-wrap: break-word;
+        white-space: normal;
       }
     }
   }
