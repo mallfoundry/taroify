@@ -19,8 +19,8 @@
     width: 100%;
     height: 100%;
     content: ' ';
-    background-color: $black-color;
-    border-color: $black-color;
+    background-color: $black;
+    border-color: $black;
     border-style: inherit;
     border-width: inherit;
     border-radius: inherit; /* inherit parent's border radius */
@@ -59,7 +59,7 @@
   }
 
   &--outlined {
-    background: $white-color;
+    background: $white;
 
     &.#{$component-prefix}button--default {
       //border: $button-border-width solid $button-default-border-color;

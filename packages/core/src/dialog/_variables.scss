@@ -6,7 +6,7 @@ $dialog-small-screen-width: 90%;
 $dialog-font-size: $font-size-lg;
 $dialog-transition: $animation-duration-base;
 $dialog-border-radius: 16px * $hd;
-$dialog-background-color: $white-color;
+$dialog-background-color: $white;
 $dialog-header-font-weight: $font-weight-bold;
 $dialog-header-line-height: 24px * $hd;
 $dialog-header-padding-top: 26px * $hd;
@@ -20,7 +20,7 @@ $dialog-has-title-message-padding-top: $padding-xs;
 
 
 $dialog-button-height: 48px * $hd;
-$dialog-confirm-button-text-color: $red-color;
+$dialog-confirm-button-text-color: $red;
 
 $dialog-round-button-font-size: $font-size-md;
 $dialog-round-button-height: 36px * $hd;
