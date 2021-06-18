@@ -1,0 +1,45 @@
+@import "./variables";
+
+.#{$component-prefix}sidebar-tab {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  padding: $sidebar-padding;
+  overflow: hidden;
+  font-size: $sidebar-font-size;
+  line-height: $sidebar-line-height;
+  color: $sidebar-text-color;
+  cursor: pointer;
+  user-select: none;
+  background-color: $sidebar-background-color;
+
+  &:active {
+    background-color: $sidebar-active-color;
+  }
+
+  &__children {
+    // https://github.com/youzan/vant/issues/7455
+    word-break: break-all;
+  }
+
+  &--active {
+    font-weight: $sidebar-active-font-weight;
+    color: $sidebar-active-text-color;
+
+    &,
+    &:active {
+      background-color: $sidebar-active-background-color;
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: $sidebar-active-border-width;
+      height: $sidebar-active-border-height;
+      content: '';
+      background-color: $sidebar-active-border-color;
+      transform: translateY(-50%);
+    }
+  }
+}

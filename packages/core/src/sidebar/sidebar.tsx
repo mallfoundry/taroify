@@ -1,17 +1,18 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, ReactElement, ReactNode, useContext, useMemo } from "react"
+import { cloneElement, ReactElement, ReactNode, useMemo } from "react"
+import SidebarTab, { SidebarTabEvent, SidebarTabKey } from "../sidebar-tab"
 import { prefixClassname } from "../styles"
 import SidebarContext from "./sidebar.context"
 
 function arrayChildren(children?: ReactNode) {
-  return React.Children.map(children, (node, index) => {
+  return React.Children.map(children, (node: ReactNode, index) => {
     if (!React.isValidElement(node)) {
       return node
     }
     const element = node as ReactElement
-    if (element.type !== Sidebar.Tab) {
+    if (element.type !== SidebarTab) {
       return element
     }
     const { props } = element
@@ -24,9 +25,9 @@ function arrayChildren(children?: ReactNode) {
 }
 
 interface SidebarProps {
-  activeKey?: Sidebar.TabKey
+  activeKey?: SidebarTabKey
   children?: ReactNode
-  onChange?: (event: Sidebar.TabEvent) => void
+  onChange?: (event: SidebarTabEvent) => void
 }
 
 function Sidebar(props: SidebarProps) {
@@ -34,7 +35,7 @@ function Sidebar(props: SidebarProps) {
 
   const children = useMemo(() => arrayChildren(props.children), [props.children])
 
-  function emitClick(event: Sidebar.TabEvent) {
+  function emitClick(event: SidebarTabEvent) {
     if (!event.active && !event.disabled) {
       onChange?.(event)
     }
@@ -45,61 +46,6 @@ function Sidebar(props: SidebarProps) {
       <SidebarContext.Provider value={{ activeKey, emitClick }} children={children} />
     </View>
   )
-}
-
-namespace Sidebar {
-  export type TabKey = string | number | undefined
-
-  export interface TabEvent {
-    key?: TabKey
-    index?: number
-    title?: ReactNode
-    disabled?: boolean
-    active?: boolean
-  }
-
-  interface TabProps {
-    __dataKey__?: TabKey
-    __dataIndex__?: number
-    active?: boolean
-    disabled?: boolean
-    dot?: boolean
-    badge?: ReactNode
-    children?: ReactNode
-    onClick?: (event: TabEvent) => void
-  }
-
-  export function Tab(props: TabProps) {
-    const { __dataKey__, __dataIndex__, active, disabled, children, onClick } = props
-    const { activeKey, emitClick } = useContext(SidebarContext)
-    const __active__ = active || __dataKey__ === activeKey
-
-    function handleClick() {
-      const event = {
-        key: __dataKey__,
-        index: __dataIndex__,
-        active: __active__,
-        disabled,
-        title: children,
-      }
-      onClick?.(event)
-      emitClick?.(event)
-    }
-
-    return (
-      <View
-        className={classNames(prefixClassname("sidebar__item"), {
-          [prefixClassname("sidebar__item--active")]: __active__,
-          [prefixClassname("sidebar__item--disabled")]: disabled,
-        })}
-        onClick={handleClick}
-      >
-        {children && (
-          <View className={prefixClassname("sidebar__item__content")} children={children} />
-        )}
-      </View>
-    )
-  }
 }
 
 export default Sidebar
