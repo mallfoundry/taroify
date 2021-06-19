@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { CSSProperties, ReactNode, useCallback, useContext } from "react"
 import SidebarContext from "../sidebar/sidebar.context"
 import { prefixClassname } from "../styles"
 import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
@@ -9,6 +9,8 @@ import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
 interface SidebarTabProps {
   __dataKey__?: SidebarTabKey
   __dataIndex__?: number
+  className?: string
+  style?: CSSProperties
   active?: boolean
   disabled?: boolean
   dot?: boolean
@@ -18,28 +20,46 @@ interface SidebarTabProps {
 }
 
 function SidebarTab(props: SidebarTabProps) {
-  const { __dataKey__, __dataIndex__, active, disabled, children, onClick } = props
-  const { activeKey, emitClick } = useContext(SidebarContext)
-  const __active__ = active || __dataKey__ === activeKey
+  const {
+    __dataKey__: key,
+    __dataIndex__: index,
+    className,
+    style,
+    active: activeProp,
+    disabled,
+    children,
+    onClick,
+  } = props
 
-  function handleClick() {
+  const { isTabActive, changeTab } = useContext(SidebarContext)
+
+  const active = activeProp || isTabActive?.(key)
+
+  const handleClick = useCallback(() => {
     const event = {
-      key: __dataKey__,
-      index: __dataIndex__,
-      active: __active__,
+      key,
+      index,
+      active,
       disabled,
       title: children,
     }
     onClick?.(event)
-    emitClick?.(event)
-  }
+    if (active && !disabled) {
+      changeTab?.(event)
+    }
+  }, [active, changeTab, children, disabled, index, key, onClick])
 
   return (
     <View
-      className={classNames(prefixClassname("sidebar-tab"), {
-        [prefixClassname("sidebar-tab--active")]: __active__,
-        [prefixClassname("sidebar-tab--disabled")]: disabled,
-      })}
+      className={classNames(
+        prefixClassname("sidebar-tab"),
+        {
+          [prefixClassname("sidebar-tab--active")]: active,
+          [prefixClassname("sidebar-tab--disabled")]: disabled,
+        },
+        className,
+      )}
+      style={style}
       onClick={handleClick}
     >
       {children && <View className={prefixClassname("sidebar-tab__content")} children={children} />}

@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react"
+import { cloneElement, CSSProperties, ReactElement, ReactNode, useCallback, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import SidebarTab from "./sidebar-tab"
 import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
@@ -38,15 +38,13 @@ function Sidebar(props: SidebarProps) {
 
   const children = useMemo(() => arrayChildren(props.children), [props.children])
 
-  function emitClick(event: SidebarTabEvent) {
-    if (!event.active && !event.disabled) {
-      onChange?.(event)
-    }
-  }
+  const isTabActive = useCallback((tabKey: SidebarTabKey) => tabKey === activeKey, [activeKey])
+
+  const changeTab = useCallback((event: SidebarTabEvent) => onChange?.(event), [onChange])
 
   return (
     <View className={classNames(prefixClassname("sidebar"), className)} style={style}>
-      <SidebarContext.Provider value={{ activeKey, emitClick }} children={children} />
+      <SidebarContext.Provider value={{ isTabActive, changeTab }} children={children} />
     </View>
   )
 }

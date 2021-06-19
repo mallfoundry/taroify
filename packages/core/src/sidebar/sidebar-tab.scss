@@ -42,4 +42,13 @@
       transform: translateY(-50%);
     }
   }
+
+  &--disabled {
+    color: $sidebar-disabled-text-color;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: $sidebar-background-color;
+    }
+  }
 }
