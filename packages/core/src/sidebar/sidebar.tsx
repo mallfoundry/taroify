@@ -1,9 +1,10 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, ReactElement, ReactNode, useMemo } from "react"
-import SidebarTab, { SidebarTabEvent, SidebarTabKey } from "../sidebar-tab"
+import { cloneElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
+import SidebarTab from "./sidebar-tab"
+import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
 import SidebarContext from "./sidebar.context"
 
 function arrayChildren(children?: ReactNode) {
@@ -24,14 +25,16 @@ function arrayChildren(children?: ReactNode) {
   })
 }
 
-interface SidebarProps {
+export interface SidebarProps {
+  className?: string
+  style?: CSSProperties
   activeKey?: SidebarTabKey
   children?: ReactNode
   onChange?: (event: SidebarTabEvent) => void
 }
 
 function Sidebar(props: SidebarProps) {
-  const { activeKey, onChange } = props
+  const { className, style, activeKey, onChange } = props
 
   const children = useMemo(() => arrayChildren(props.children), [props.children])
 
@@ -42,7 +45,7 @@ function Sidebar(props: SidebarProps) {
   }
 
   return (
-    <View className={classNames(prefixClassname("sidebar"))}>
+    <View className={classNames(prefixClassname("sidebar"), className)} style={style}>
       <SidebarContext.Provider value={{ activeKey, emitClick }} children={children} />
     </View>
   )

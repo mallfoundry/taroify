@@ -15,11 +15,11 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import SwipeCellActions from "../swipe-cell-actions"
 import { preventDefault } from "../utils/dom/event"
 import { minmax } from "../utils/format/number"
 import { getBoundingClientRect } from "../utils/rect"
 import { TouchDirection, useTouch } from "../utils/touch"
+import SwipeCellActions from "./swipe-cell-actions"
 
 enum SwipeCellPosition {
   Left = "left",
@@ -82,7 +82,7 @@ function useSwipeCellChildren(
   return __children__
 }
 
-interface SwipeCellProps {
+export interface SwipeCellProps {
   className?: string
   style?: CSSProperties
   // open?: boolean

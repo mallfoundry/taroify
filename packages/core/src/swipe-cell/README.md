@@ -9,30 +9,29 @@
 通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
 
 ```tsx
-import { SwipeCell, SwipeCellActions } from "@taroify/core"
+import { SwipeCell } from "@taroify/core"
 // or
 import SwipeCell from "@taroify/core/swipe-cell"
-import SwipeCellActions from "@taroify/core/swipe-cell-actions"
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-`SwipeCell` 组件提供了 `SwipeCellActions` 组件，用于定义两侧滑动区域的内容。
+`SwipeCell` 组件提供了 `SwipeCell.Actions` 组件，用于定义两侧滑动区域的内容。
 
 ```tsx
 <SwipeCell>
-  <SwipeCellActions side="left">
+  <SwipeCell.Actions side="left">
     <Button variant="contained" shape="square" color="primary">选择</Button>
-  </SwipeCellActions>
+  </SwipeCell.Actions>
   <Cell bordered={false} title="单元格">
     内容
   </Cell>
-  <SwipeCellActions side="right">
+  <SwipeCell.Actions side="right">
     <Button variant="contained" shape="square" color="danger">删除</Button>
     <Button variant="contained" shape="square" color="primary">收藏</Button>
-  </SwipeCellActions>
+  </SwipeCell.Actions>
 </SwipeCell>
 ```
 
@@ -48,14 +47,14 @@ import SwipeCellActions from "@taroify/core/swipe-cell-actions"
       <View className="custom-card__title">商品标题</View>
     </View>
   </View>
-  <SwipeCellActions side="right">
+  <SwipeCell.Actions side="right">
     <Button variant="contained" shape="square" color="danger">
       删除
     </Button>
     <Button variant="contained" shape="square" color="primary">
       收藏
     </Button>
-  </SwipeCellActions>
+  </SwipeCell.Actions>
 </SwipeCell>
 ```
 

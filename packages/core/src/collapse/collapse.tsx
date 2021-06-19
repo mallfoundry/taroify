@@ -10,9 +10,9 @@ import {
   ReactNode,
   useCallback,
 } from "react"
-import CollapseItem from "../collapse-item"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
+import CollapseItem from "./collapse-item"
 import CollapseContext from "./collapse.context"
 
 function validateActiveKey(
@@ -64,7 +64,7 @@ function useCollapseChildren(children?: ReactNode): CollapseChildren {
   return __children__
 }
 
-interface CollapseProps {
+export interface CollapseProps {
   className?: string
   style?: CSSProperties
   activeKey?: number | string | number[] | string[]

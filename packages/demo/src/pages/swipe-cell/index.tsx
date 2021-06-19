@@ -1,4 +1,4 @@
-import { Button, Cell, Image, SwipeCell, SwipeCellActions } from "@taroify/core"
+import { Button, Cell, Image, SwipeCell } from "@taroify/core"
 import { View } from "@tarojs/components"
 import * as React from "react"
 import Block from "../../components/block"
@@ -9,22 +9,22 @@ function BasicSwipeCell() {
   return (
     <Block title="基础用法">
       <SwipeCell>
-        <SwipeCellActions side="left">
+        <SwipeCell.Actions side="left">
           <Button variant="contained" shape="square" color="primary">
             选择
           </Button>
-        </SwipeCellActions>
+        </SwipeCell.Actions>
         <Cell bordered={false} title="单元格">
           内容
         </Cell>
-        <SwipeCellActions side="right">
+        <SwipeCell.Actions side="right">
           <Button variant="contained" shape="square" color="danger">
             删除
           </Button>
           <Button variant="contained" shape="square" color="primary">
             收藏
           </Button>
-        </SwipeCellActions>
+        </SwipeCell.Actions>
       </SwipeCell>
     </Block>
   )
@@ -40,14 +40,14 @@ function SwipeCellWithCustomContent() {
             <View className="custom-card__title">商品标题</View>
           </View>
         </View>
-        <SwipeCellActions side="right">
+        <SwipeCell.Actions side="right">
           <Button variant="contained" shape="square" color="danger">
             删除
           </Button>
           <Button variant="contained" shape="square" color="primary">
             收藏
           </Button>
-        </SwipeCellActions>
+        </SwipeCell.Actions>
       </SwipeCell>
     </Block>
   )

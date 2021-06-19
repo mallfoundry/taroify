@@ -7,7 +7,7 @@
 ### 引入
 
 ```tsx
-import { Collapse, CollapseItem } from "@taroify/core"
+import { Collapse } from "@taroify/core"
 ```
 
 ## 代码演示
@@ -21,9 +21,9 @@ function CollapseExemple() {
   const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
   return (
     <Collapse activeKey={activeKey} onChange={setActiveKey}>
-      <CollapseItem title="标题1">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
-      <CollapseItem title="标题2">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
-      <CollapseItem title="标题3">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
+      <Collapse.Item title="标题1">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
+      <Collapse.Item title="标题2">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
+      <Collapse.Item title="标题3">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
     </Collapse>
   )
 }
@@ -38,9 +38,9 @@ function CollapseExemple() {
   const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>(0)
   return (
     <Collapse accordion activeKey={activeKey} onChange={setActiveKey}>
-      <CollapseItem title="标题1">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
-      <CollapseItem title="标题2">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
-      <CollapseItem title="标题3">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
+      <Collapse.Item title="标题1">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
+      <Collapse.Item title="标题2">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
+      <Collapse.Item title="标题3">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
     </Collapse>
   )
 }
@@ -55,13 +55,13 @@ function CollapseExemple() {
   const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
   return (
     <Collapse activeKey={activeKey} onChange={setActiveKey}>
-      <CollapseItem title="正常状态">代码是写出来给人看的，附带能在机器上运行</CollapseItem>
-      <CollapseItem title="只读状态" clickable={false}>
+      <Collapse.Item title="正常状态">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
+      <Collapse.Item title="只读状态" clickable={false}>
         代码是写出来给人看的，附带能在机器上运行
-      </CollapseItem>
-      <CollapseItem title="禁用状态" disabled>
+      </Collapse.Item>
+      <Collapse.Item title="禁用状态" disabled>
         代码是写出来给人看的，附带能在机器上运行
-      </CollapseItem>
+      </Collapse.Item>
     </Collapse>
   )
 }
@@ -76,7 +76,7 @@ function CollapseExemple() {
   const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
   return (
     <Collapse activeKey={activeKey} onChange={setActiveKey}>
-      <CollapseItem
+      <Collapse.Item
         title={
           <>
             标题1
@@ -85,10 +85,10 @@ function CollapseExemple() {
         }
       >
         代码是写出来给人看的，附带能在机器上运行
-      </CollapseItem>
-      <CollapseItem icon={<ShopOutlined />} title="标题2" extra="内容" clickable={false}>
+      </Collapse.Item>
+      <Collapse.Item icon={<ShopOutlined />} title="标题2" extra="内容" clickable={false}>
         代码是写出来给人看的，附带能在机器上运行
-      </CollapseItem>
+      </Collapse.Item>
     </Collapse>
   )
 }
@@ -110,7 +110,7 @@ function CollapseExemple() {
 | ------ | -------------- | ---------------------------------------- |
 | onChange | 切换面板时触发 | activeKey: 类型与 activeKey 绑定的值一致 |
 
-### CollapseItem Props
+### Collapse.Item Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |

@@ -20,7 +20,7 @@ enum CellAlign {
 
 type CellAlignString = "start" | "center" | "end"
 
-interface CellProps {
+export interface CellProps {
   className?: string
   size?: CellSize | CellSizeString
   align?: CellAlign | CellAlignString

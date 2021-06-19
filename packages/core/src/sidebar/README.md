@@ -7,10 +7,9 @@
 ### 引入
 
 ```ts
-import { Sidebar, SidebarTab } from "@taroify/core"
+import { Sidebar } from "@taroify/core"
 // or
 import Sidebar from "@taroify/core/sidebar"
-import SidebarTab from "@taroify/core/sidebar-tab"
 ```
 
 ## 代码演示
@@ -20,16 +19,15 @@ import SidebarTab from "@taroify/core/sidebar-tab"
 通过 `activeKey` 绑定当前选中项的索引。
 
 ```tsx
-import { Sidebar, SidebarTab } from "@taroify/core"
-import { SidebarTabKey } from "@taroify/core/sidebar-tab"
+import { Sidebar } from "@taroify/core"
 
 function BasicSidebar() {
-  const [activeKey, setActiveKey] = useState<SidebarTabKey>(0)
+  const [activeKey, setActiveKey] = useState<Sidebar.TabKey>(0)
   return (
     <Sidebar activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
-      <SidebarTab>标签名</SidebarTab>
-      <SidebarTab>标签名</SidebarTab>
-      <SidebarTab>标签名</SidebarTab>
+      <Sidebar.Tab>标签名</Sidebar.Tab>
+      <Sidebar.Tab>标签名</Sidebar.Tab>
+      <Sidebar.Tab>标签名</Sidebar.Tab>
     </Sidebar>
   )
 }
@@ -40,16 +38,15 @@ function BasicSidebar() {
 设置 `dot` 属性后，会在右上角展示一个小红点；设置 `badge` 属性后，会在右上角展示相应的徽标。
 
 ```tsx
-import { Sidebar, SidebarTab } from "@taroify/core"
-import { SidebarTabKey } from "@taroify/core/sidebar-tab"
+import { Sidebar } from "@taroify/core"
 
 function BadgeSidebar() {
-  const [activeKey, setActiveKey] = useState<SidebarTabKey>(0)
+  const [activeKey, setActiveKey] = useState<Sidebar.TabKey>(0)
   return (
     <Sidebar activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
-      <SidebarTab dot>标签名</SidebarTab>
-      <SidebarTab badge="5">标签名</SidebarTab>
-      <SidebarTab badge="20">标签名</SidebarTab>
+      <Sidebar.Tab dot>标签名</Sidebar.Tab>
+      <Sidebar.Tab badge="5">标签名</Sidebar.Tab>
+      <Sidebar.Tab badge="20">标签名</Sidebar.Tab>
     </Sidebar>
   )
 }
@@ -60,16 +57,15 @@ function BadgeSidebar() {
 通过 `disabled` 属性禁用选项。
 
 ```tsx
-import { Sidebar, SidebarTab } from "@taroify/core"
-import { SidebarTabKey } from "@taroify/core/sidebar-tab"
+import { Sidebar } from "@taroify/core"
 
 function DisableSidebar() {
-  const [activeKey, setActiveKey] = useState<SidebarTabKey>(0)
+  const [activeKey, setActiveKey] = useState<Sidebar.TabKey>(0)
   return (
     <Sidebar activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
-      <SidebarTab>标签名</SidebarTab>
-      <SidebarTab disabled>标签名</SidebarTab>
-      <SidebarTab>标签名</SidebarTab>
+      <Sidebar.Tab>标签名</Sidebar.Tab>
+      <Sidebar.Tab disabled>标签名</Sidebar.Tab>
+      <Sidebar.Tab>标签名</Sidebar.Tab>
     </Sidebar>
   )
 }
@@ -81,15 +77,14 @@ function DisableSidebar() {
 设置 `change` 方法来监听切换导航项时的事件。
 
 ```tsx
-import { Sidebar, SidebarTab, Toast } from "@taroify/core"
-import { SidebarTabEvent, SidebarTabKey } from "@taroify/core/sidebar-tab"
+import { Sidebar } from "@taroify/core"
 
 function EventSidebar() {
-  const [activeKey, setActiveKey] = useState<SidebarTabKey>(0)
+  const [activeKey, setActiveKey] = useState<Sidebar.TabKey>(0)
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState<ReactNode>()
 
-  function handleChange(event: SidebarTabEvent) {
+  function handleChange(event: Sidebar.TabEvent) {
     setActiveKey(event.key)
     setOpen(true)
     setMessage(event.title)
@@ -98,9 +93,9 @@ function EventSidebar() {
   return (
     <>
       <Sidebar activeKey={activeKey} onChange={handleChange}>
-        <SidebarTab>标签名 1</SidebarTab>
-        <SidebarTab>标签名 2</SidebarTab>
-        <SidebarTab>标签名 3</SidebarTab>
+        <Sidebar.Tab>标签名 1</Sidebar.Tab>
+        <Sidebar.Tab>标签名 2</Sidebar.Tab>
+        <Sidebar.Tab>标签名 3</Sidebar.Tab>
       </Sidebar>
       <Toast open={open} children={message} onClose={() => setOpen(false)} />
     </>
@@ -123,7 +118,7 @@ function EventSidebar() {
 | onChange | 切换导航项时触发 | _event: Sidebar.TabEvent_ |
 | onClick | 点击导航项时触发 | _event: Sidebar.TabEvent_ |
 
-### SidebarTab Props
+### Sidebar.Tab Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -132,7 +127,7 @@ function EventSidebar() {
 | disabled | 是否禁用该项 | _boolean_ | `false` |
 | children | 内容 | _ReactNode_ | `''` |
 
-### SidebarTab Events
+### Sidebar.Tab Events
 
 | 事件名 | 说明       | 回调参数        |
 | ------ | ---------- | --------------- |

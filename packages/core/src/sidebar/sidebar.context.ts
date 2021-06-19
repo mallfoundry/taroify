@@ -1,9 +1,9 @@
 import { createContext } from "react"
-import Sidebar from "./sidebar"
+import { SidebarTabEvent } from "./sidebar-tab.shared"
 
 interface SidebarContextProps {
   activeKey?: number | string
-  emitClick?: (event: Sidebar.TabEvent) => void
+  emitClick?: (event: SidebarTabEvent) => void
 }
 
 const SidebarContext = createContext<SidebarContextProps>({})
