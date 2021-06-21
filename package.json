@@ -4,6 +4,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",
+    "install:node_modules": "yarn install && cd ./site && yarn install",
     "develop": "gulp develop",
     "watch": "gulp watch",
     "build": "gulp build",
