@@ -1,6 +1,6 @@
 {
   "name": "taroify",
-  "version": "0.0.5-alpha.11",
+  "version": "0.0.5-alpha.12",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -12,7 +12,6 @@
     "lerna:prepatch": "lerna version prepatch --no-git-tag-version --conventional-graduate",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
     "version:prerelease": "yarn run lerna:prerelease && node scripts/version.js",
-    "version:version": "node scripts/version.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint packages --fix --ext .ts,.tsx",
