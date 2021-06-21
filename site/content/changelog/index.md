@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.6-alpha.0
+
+`2021-06-21`
+
+**New Component**
+
+- 新增 SwipeCell 组件
+- 新增 Collapse 组件
+- 新增 CountDown 组件
+- 新增 NoticeBar 组件
+- 新增 Skeleton 组件
+- 新增 Steps 组件
+- 新增 TreeSelect 组件
+
 ### v0.0.5-alpha.0
 
 `2021-05-21`

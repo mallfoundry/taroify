@@ -1,6 +1,6 @@
 {
   "name": "taroify",
-  "version": "0.0.5-alpha.14",
+  "version": "0.0.6-alpha.0",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -9,9 +9,10 @@
     "develop": "gulp develop",
     "watch": "gulp watch",
     "build": "gulp build",
-    "lerna:prepatch": "lerna version prepatch --no-git-tag-version --conventional-graduate",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
+    "lerna:prepatch": "lerna version prepatch --yes --no-git-tag-version --conventional-graduate",
     "version:prerelease": "yarn run lerna:prerelease && node scripts/version.js",
+    "version:prepatch": "yarn run lerna:prepatch && node scripts/version.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint packages --fix --ext .ts,.tsx",
@@ -34,7 +35,7 @@
     "*.{css,scss}": "stylelint --fix"
   },
   "devDependencies": {
-    "@taroify/cli": "^0.0.5-alpha.8",
+    "@taroify/cli": "0.0.6-alpha.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "cross-env": "^7.0.3",
