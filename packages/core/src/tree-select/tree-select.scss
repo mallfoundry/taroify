@@ -1,0 +1,22 @@
+@import "./variables";
+
+.#{$component-prefix}tree-select {
+  position: relative;
+  display: flex;
+  font-size: $tree-select-font-size;
+  user-select: none;
+
+  &__sidebar {
+    flex: 1;
+    overflow-y: auto;
+    background-color: $tree-select-sidebar-background-color;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__content {
+    flex: 2;
+    overflow-y: auto;
+    background-color: $tree-select-content-background-color;
+    -webkit-overflow-scrolling: touch;
+  }
+}

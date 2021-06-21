@@ -187,6 +187,11 @@ const componentPages = [
         name: "Tabbar",
         path: "/pages/tabbar/index",
       },
+      {
+        title: "TreeSelect 分类选择",
+        name: "TreeSelect",
+        path: "/pages/tree-select/index",
+      },
     ],
   },
 ]

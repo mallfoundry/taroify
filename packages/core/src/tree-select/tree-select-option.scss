@@ -1,0 +1,34 @@
+@import "./variables";
+
+.#{$component-prefix}tree-select-option {
+  position: relative;
+  padding: 0 32px 0 $padding-md;
+  font-weight: $font-weight-bold;
+  line-height: $tree-select-option-height;
+  cursor: pointer;
+
+  &--active {
+    color: $tree-select-option-active-color;
+
+    .#{$component-prefix}tree-select-option__icon {
+      position: absolute;
+      top: 50%;
+      right: $padding-md;
+      margin-top: -$padding-xs;
+      font-size: $tree-select-option-selected-size;
+    }
+  }
+
+  &:active {
+    background-color: $active-color;
+  }
+
+  &--disabled {
+    color: $tree-select-option-disabled-color;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+}

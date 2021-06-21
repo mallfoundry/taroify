@@ -171,6 +171,10 @@ const menus = [
         title: "Tabbar 标签栏",
         to: "/components/tabbar/",
       },
+      {
+        title: "TreeSelect 分类选择",
+        to: "/components/tree-select/",
+      },
     ],
   },
 ]
