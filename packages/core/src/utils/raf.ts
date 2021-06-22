@@ -10,7 +10,8 @@ export function cancelRaf(rafId: number | number[]) {
 }
 
 export function raf(cb: FrameRequestCallback) {
-  return requestAnimationFrame(cb)
+  // @ts-ignore
+  return requestAnimationFrame.default(cb)
 }
 
 export function doubleRaf(cb: FrameRequestCallback): [number, number] {
