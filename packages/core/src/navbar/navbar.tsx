@@ -1,4 +1,4 @@
-import { cloneIconComponent } from "@taroify/icons"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
@@ -48,7 +48,7 @@ namespace Navbar {
     }
     return (
       <View className={prefixClassname("navbar__left")}>
-        {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
+        {icon && cloneIconElement(icon, { className: prefixClassname("navbar__icon") })}
         {text && <View className={prefixClassname("navbar__text")} children={text} />}
       </View>
     )
@@ -68,7 +68,7 @@ namespace Navbar {
     }
     return (
       <View className={prefixClassname("navbar__right")}>
-        {icon && cloneIconComponent(icon, { className: prefixClassname("navbar__icon") })}
+        {icon && cloneIconElement(icon, { className: prefixClassname("navbar__icon") })}
         {text && <View className={prefixClassname("navbar__text")} children={text} />}
       </View>
     )

@@ -1,4 +1,4 @@
-import { cloneIconComponent } from "@taroify/icons/utils"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
@@ -65,7 +65,7 @@ function Cell(props: CellProps) {
       )}
       onClick={onClick}
     >
-      {leftIcon && cloneIconComponent(leftIcon, { className: prefixClassname("cell__left-icon") })}
+      {leftIcon && cloneIconElement(leftIcon, { className: prefixClassname("cell__left-icon") })}
       {title && (
         <View className={prefixClassname("cell__title")}>
           {title}
@@ -79,8 +79,7 @@ function Cell(props: CellProps) {
       >
         {children}
       </View>
-      {rightIcon &&
-        cloneIconComponent(rightIcon, { className: prefixClassname("cell__right-icon") })}
+      {rightIcon && cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })}
     </View>
   )
 }

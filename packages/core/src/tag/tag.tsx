@@ -1,4 +1,5 @@
-import { cloneIconComponent, Cross } from "@taroify/icons"
+import { Cross } from "@taroify/icons"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -130,7 +131,7 @@ function Tag(props: TagProps) {
     >
       {children}
       {closeable &&
-        cloneIconComponent(closeIcon, {
+        cloneIconElement(closeIcon, {
           className: prefixClassname("tag__close"),
           onClick: onClose,
         })}

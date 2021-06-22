@@ -1,4 +1,4 @@
-import { cloneIconComponent } from "@taroify/icons"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { nextTick, useReady } from "@tarojs/taro"
 import classNames from "classnames"
@@ -168,7 +168,7 @@ namespace NoticeBar {
   }
 
   export function Icon(props: IconProps): JSX.Element {
-    return cloneIconComponent(props.children, {
+    return cloneIconElement(props.children, {
       className: prefixClassname("notice-bar__icon"),
     }) as JSX.Element
   }
@@ -179,7 +179,7 @@ namespace NoticeBar {
   }
 
   export function Action(props: ActionProps): JSX.Element {
-    return cloneIconComponent(props.children, {
+    return cloneIconElement(props.children, {
       className: prefixClassname("notice-bar__action"),
     }) as JSX.Element
   }

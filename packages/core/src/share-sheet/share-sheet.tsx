@@ -1,4 +1,4 @@
-import { cloneIconComponent, isIconComponent } from "@taroify/icons"
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { ScrollView, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -99,8 +99,8 @@ namespace ShareSheet {
       return cloneElement(element, {
         className: classNames(element.props.className, prefixClassname("share-sheet__option-icon")),
       })
-    } else if (isIconComponent(element)) {
-      return cloneIconComponent(element, { className: prefixClassname("share-sheet__option-icon") })
+    } else if (isIconElement(element)) {
+      return cloneIconElement(element, { className: prefixClassname("share-sheet__option-icon") })
     }
     return node
   }

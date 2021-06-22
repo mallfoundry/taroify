@@ -1,4 +1,4 @@
-import { cloneIconComponent } from "@taroify/icons/utils"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
@@ -50,7 +50,7 @@ function TreeSelectOption(props: TreeSelectOptionProps) {
         <>
           {children}
           {active &&
-            cloneIconComponent(activeIcon, {
+            cloneIconElement(activeIcon, {
               className: prefixClassname("tree-select-option__icon"),
             })}
         </>
