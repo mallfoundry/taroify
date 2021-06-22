@@ -11,10 +11,10 @@
 
   &__title {
     .#{$component-prefix}cell__right-icon::before {
+      transition: transform $collapse-item-transition-duration;
       // using translateZ to fix safari rendering issues
       // see: https://github.com/youzan/vant/issues/8608
       transform: rotate(90deg) translateZ(0);
-      transition: transform $collapse-item-transition-duration;
     }
 
     &::after {
@@ -42,7 +42,7 @@
       cursor: not-allowed;
 
       &,
-      & .#{$component-prefix}cell__right-icon {
+      .#{$component-prefix}cell__right-icon {
         color: $collapse-item-title-disabled-color;
       }
     }
@@ -56,9 +56,9 @@
 
   &__content {
     padding: $collapse-item-content-padding;
-    color: $collapse-item-content-text-color;
     font-size: $collapse-item-content-font-size;
     line-height: $collapse-item-content-line-height;
+    color: $collapse-item-content-text-color;
     background-color: $collapse-item-content-background-color;
   }
 }
