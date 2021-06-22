@@ -106,7 +106,7 @@ function BadgeTreeSelect() {
         </TreeSelect.Option>
         <TreeSelect.Option value={3}>义乌</TreeSelect.Option>
       </TreeSelect.Tab>
-      <TreeSelect.Tab title="江苏">
+      <TreeSelect.Tab badge="5" title="江苏">
         <TreeSelect.Option value={4}>南京</TreeSelect.Option>
         <TreeSelect.Option value={5}>无锡</TreeSelect.Option>
         <TreeSelect.Option value={6}>徐州</TreeSelect.Option>
