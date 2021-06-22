@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
 import { ICON_TYPE, IconProps } from "../shared"
 
-export function isIconComponent(node?: ReactNode): boolean {
+export function isIconElement(node?: ReactNode): boolean {
   // Is`t not ReactElement
   if (!isValidElement(node)) {
     return false
@@ -12,8 +12,8 @@ export function isIconComponent(node?: ReactNode): boolean {
   return _.hasIn(element.type, ICON_TYPE)
 }
 
-export function cloneIconComponent(node: ReactNode, props: IconProps): ReactNode {
-  if (!isIconComponent(node)) {
+export function cloneIconElement(node: ReactNode, props: IconProps): ReactNode {
+  if (!isIconElement(node)) {
     return node
   }
   const { className, ...restProps } = props

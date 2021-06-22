@@ -1,4 +1,3 @@
-export { cloneIconComponent, isIconComponent } from "./utils"
 export { default as Arrow } from "./Arrow"
 export { default as ArrowDown } from "./ArrowDown"
 export { default as ArrowLeft } from "./ArrowLeft"
