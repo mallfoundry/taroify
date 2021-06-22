@@ -9,8 +9,8 @@ import {
   ReactElement,
   ReactNode,
 } from "react"
-import Step from "../step"
 import { prefixClassname } from "../styles"
+import Step from "./step"
 import StepsContext from "./steps.context"
 import { StepsDirection } from "./steps.shared"
 
@@ -47,7 +47,7 @@ function useStepsChildren(children: ReactNode): StepsChildren {
 
 type StepsDirectionString = "horizontal" | "vertical"
 
-interface StepsProps {
+export interface StepsProps {
   className?: string
   style?: CSSProperties
   activeStep?: number

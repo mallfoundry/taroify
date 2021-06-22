@@ -1,4 +1,4 @@
-import { Button, Step, Steps } from "@taroify/core"
+import { Button, Steps } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import * as React from "react"
@@ -15,10 +15,10 @@ function BasicSteps(props: ActiveStepsProps) {
   return (
     <Block title="基础用法">
       <Steps activeStep={props.activeStep}>
-        <Step label="买家下单" />
-        <Step label="商家接单" />
-        <Step label="买家提货" />
-        <Step label="交易完成" />
+        <Steps.Step>买家下单</Steps.Step>
+        <Steps.Step>商家接单</Steps.Step>
+        <Steps.Step>买家提货</Steps.Step>
+        <Steps.Step>交易完成</Steps.Step>
       </Steps>
     </Block>
   )
@@ -28,10 +28,10 @@ function AlternativeLabelSteps(props: ActiveStepsProps) {
   return (
     <Block title="下方标签">
       <Steps activeStep={props.activeStep} alternativeLabel>
-        <Step label="买家下单" />
-        <Step label="商家接单" />
-        <Step label="买家提货" />
-        <Step label="交易完成" />
+        <Steps.Step>买家下单</Steps.Step>
+        <Steps.Step>商家接单</Steps.Step>
+        <Steps.Step>买家提货</Steps.Step>
+        <Steps.Step>交易完成</Steps.Step>
       </Steps>
     </Block>
   )
@@ -41,10 +41,10 @@ function StepsWithCustomStyle(props: ActiveStepsProps) {
   return (
     <Block title="自定义样式">
       <Steps activeStep={props.activeStep} activeColor="#38f">
-        <Step label="买家下单" icon={<ArrowRight />} />
-        <Step label="商家接单" icon={<ArrowRight />} />
-        <Step label="买家提货" icon={<ArrowRight />} />
-        <Step label="交易完成" icon={<ArrowRight />} />
+        <Steps.Step icon={<ArrowRight />}>买家下单</Steps.Step>
+        <Steps.Step icon={<ArrowRight />}>商家接单</Steps.Step>
+        <Steps.Step icon={<ArrowRight />}>买家提货</Steps.Step>
+        <Steps.Step icon={<ArrowRight />}>交易完成</Steps.Step>
       </Steps>
     </Block>
   )
@@ -54,22 +54,22 @@ function VerticalSteps() {
   return (
     <Block title="竖向步骤条">
       <Steps activeStep={0} direction="vertical">
-        <Step>
+        <Steps.Step>
           <View>【城市】物流状态2</View>
           <View>2016-07-12 12:40</View>
-        </Step>
-        <Step>
+        </Steps.Step>
+        <Steps.Step>
           <View>【城市】物流状态1</View>
           <View>2016-07-11 10:00</View>
-        </Step>
-        <Step>
+        </Steps.Step>
+        <Steps.Step>
           <View>【城市】物流状态</View>
           <View>2016-07-10 12:00</View>
-        </Step>
-        <Step>
+        </Steps.Step>
+        <Steps.Step>
           <View>快件已发货</View>
           <View>2016-07-10 09:30</View>
-        </Step>
+        </Steps.Step>
       </Steps>
     </Block>
   )

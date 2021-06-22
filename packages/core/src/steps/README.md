@@ -7,9 +7,8 @@
 ### 引入
 
 ```tsx
-import { Step, Steps } from "@taroify/core"
+import { Steps } from "@taroify/core"
 // or
-import Step from "@taroify/core/step"
 import Steps from "@taroify/core/steps"
 ```
 
@@ -21,10 +20,10 @@ import Steps from "@taroify/core/steps"
 
 ```tsx
 <Steps activeStep={0}>
-  <Step label="买家下单" />
-  <Step label="商家接单" />
-  <Step label="买家提货" />
-  <Step label="交易完成" />
+  <Steps.Step>买家下单</Steps.Step>
+  <Steps.Step>商家接单</Steps.Step>
+  <Steps.Step>买家提货</Steps.Step>
+  <Steps.Step>交易完成</Steps.Step>
 </Steps>
 ```
 
@@ -34,10 +33,10 @@ import Steps from "@taroify/core/steps"
 
 ```tsx
 <Steps activeStep={0} alternativeLabel>
-  <Step label="买家下单" />
-  <Step label="商家接单" />
-  <Step label="买家提货" />
-  <Step label="交易完成" />
+  <Steps.Step>买家下单</Steps.Step>
+  <Steps.Step>商家接单</Steps.Step>
+  <Steps.Step>买家提货</Steps.Step>
+  <Steps.Step>交易完成</Steps.Step>
 </Steps>
 ```
 
@@ -47,10 +46,10 @@ import Steps from "@taroify/core/steps"
 
 ```tsx
 <Steps activeStep={0} activeColor="#38f">
-  <Step label="买家下单" icon={<ArrowRight />} />
-  <Step label="商家接单" icon={<ArrowRight />} />
-  <Step label="买家提货" icon={<ArrowRight />} />
-  <Step label="交易完成" icon={<ArrowRight />} />
+  <Steps.Step icon={<ArrowRight />}>买家下单</Steps.Step>
+  <Steps.Step icon={<ArrowRight />}>商家接单</Steps.Step>
+  <Steps.Step icon={<ArrowRight />}>买家提货</Steps.Step>
+  <Steps.Step icon={<ArrowRight />}>交易完成</Steps.Step>
 </Steps>
 ```
 
@@ -60,22 +59,22 @@ import Steps from "@taroify/core/steps"
 
 ```tsx
 <Steps activeStep={0} direction="vertical">
-  <Step>
+  <Steps.Step>
     <View>【城市】物流状态2</View>
     <View>2016-07-12 12:40</View>
-  </Step>
-  <Step>
+  </Steps.Step>
+  <Steps.Step>
     <View>【城市】物流状态1</View>
     <View>2016-07-11 10:00</View>
-  </Step>
-  <Step>
+  </Steps.Step>
+  <Steps.Step>
     <View>【城市】物流状态</View>
     <View>2016-07-10 12:00</View>
-  </Step>
-  <Step>
+  </Steps.Step>
+  <Steps.Step>
     <View>快件已发货</View>
     <View>2016-07-10 09:30</View>
-  </Step>
+  </Steps.Step>
 </Steps>
 ```
 

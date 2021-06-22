@@ -1,12 +1,12 @@
-import { cloneIconComponent } from "@taroify/icons"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext, useMemo } from "react"
-import StepsContext from "../steps/steps.context"
-import { StepsDirection } from "../steps/steps.shared"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
+import StepsContext from "./steps.context"
+import { StepsDirection } from "./steps.shared"
 
 interface StepProps {
   className?: string
@@ -88,7 +88,7 @@ function Step(props: StepProps) {
       />
       <View className={prefixClassname("step__circle-container")}>
         {icon ? (
-          cloneIconComponent(icon, { className: prefixClassname("step__icon"), style: iconStyle })
+          cloneIconElement(icon, { className: prefixClassname("step__icon"), style: iconStyle })
         ) : (
           <View className={prefixClassname("step__circle")} style={circleStyle} />
         )}
