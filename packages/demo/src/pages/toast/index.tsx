@@ -29,30 +29,29 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="文字提示"
-          endIcon={<ArrowRight />}
+          rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ type: ToastType.Text, message: "文字提示" })}
         />
         <Cell
           clickable
           title="加载提示"
-          endIcon={<ArrowRight />}
+          rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ type: ToastType.Loading, message: "加载中..." })}
         />
         <Cell
           clickable
           title="成功提示"
-          endIcon={<ArrowRight />}
+          rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ type: ToastType.Success, message: "成功文案" })}
         />
         <Cell
           clickable
           title="失败提示"
-          endIcon={<ArrowRight />}
+          rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ type: ToastType.Fail, message: "失败文案" })}
         />
       </Block>
       <Toast
-        backdrop={false}
         open={options.open}
         type={options.type}
         onClose={() =>
