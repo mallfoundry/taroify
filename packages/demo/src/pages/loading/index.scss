@@ -4,6 +4,10 @@
 
 .loading-demo {
 
+  .#{$demo-prefix}page__content {
+    background: #fff;
+  }
+
   .#{$component-prefix}loading--vertical {
     display: inline-flex;
   }
