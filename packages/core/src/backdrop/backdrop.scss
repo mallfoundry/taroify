@@ -15,7 +15,7 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: opacity, visibility;
 
-  &-open {
+  &--open {
     visibility: visible;
     opacity: 1;
   }

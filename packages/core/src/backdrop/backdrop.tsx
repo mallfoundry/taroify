@@ -40,7 +40,7 @@ export default function Backdrop(props: BackdropProps) {
       className={classNames(
         prefixClassname("backdrop"),
         {
-          [prefixClassname("backdrop-open")]: open,
+          [prefixClassname("backdrop--open")]: open,
         },
         className,
       )}
