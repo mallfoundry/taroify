@@ -76,14 +76,14 @@
     }
   }
 
-  &__left-icon,
+  &__icon,
   &__right-icon {
     height: $cell-line-height;
     font-size: $cell-icon-size;
     line-height: $cell-line-height;
   }
 
-  &__left-icon {
+  &__icon {
     display: flex;
     align-items: center;
     margin-right: $cell-start-icon-margin-left;

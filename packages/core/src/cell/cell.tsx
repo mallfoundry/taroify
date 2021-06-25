@@ -2,7 +2,7 @@ import { cloneIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 export enum CellSize {
@@ -22,11 +22,13 @@ type CellAlignString = "start" | "center" | "end"
 
 export interface CellProps {
   className?: string
+  style?: CSSProperties
   size?: CellSize | CellSizeString
   align?: CellAlign | CellAlignString
   title?: ReactNode
   brief?: ReactNode
   leftIcon?: ReactNode
+  icon?: ReactNode
   rightIcon?: ReactNode
   bordered?: boolean
   clickable?: boolean
@@ -37,13 +39,14 @@ export interface CellProps {
 function Cell(props: CellProps) {
   const {
     className,
+    style,
     size = CellSize.Medium,
     align,
     title,
     brief,
     clickable = false,
     bordered = true,
-    leftIcon,
+    icon,
     rightIcon,
     children,
     onClick,
@@ -63,9 +66,10 @@ function Cell(props: CellProps) {
         },
         className,
       )}
+      style={style}
       onClick={onClick}
     >
-      {leftIcon && cloneIconElement(leftIcon, { className: prefixClassname("cell__left-icon") })}
+      {icon && cloneIconElement(icon, { className: prefixClassname("cell__icon") })}
       {title && (
         <View className={prefixClassname("cell__title")}>
           {title}
