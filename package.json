@@ -17,7 +17,8 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint packages --fix --ext .ts,.tsx",
     "stylelint": "stylelint packages/**/*.scss --fix --color --syntax scss",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "sort": "npx sort-package-json \"package.json\" \"packages/*/package.json\""
   },
   "workspaces": [
     "packages/*",
