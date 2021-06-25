@@ -19,7 +19,7 @@ export default function CellDemo() {
         <Cell title="单元格" brief="描述信息" size="large" children="内容" />
       </Block>
       <Block title="展示图标">
-        <Cell leftIcon={<LocationOutlined />} title="单元格" children="内容" />
+        <Cell icon={<LocationOutlined />} title="单元格" children="内容" />
       </Block>
       <Block title="只设置 value">
         <Cell>内容</Cell>
