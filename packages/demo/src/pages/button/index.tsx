@@ -98,10 +98,9 @@ export default function ButtonDemo() {
       </Block>
       <Block title="加载状态">
         <Space>
-          <Button color="primary" loading></Button>
-          <Button loading loadingText="加载中"></Button>
-          <Button color="success" loading loadingText="加载中" loadingType="spinner">
-          </Button>
+          <Button color="primary" loading />
+          <Button loading loadingText="加载中" />
+          <Button color="success" loading loadingText="加载中" loadingType="spinner" />
         </Space>
       </Block>
       <Block title="按钮形状">
@@ -116,11 +115,11 @@ export default function ButtonDemo() {
       </Block>
       <Block title="图标按钮">
         <Space>
-          <Button variant="contained" color="primary" startIcon={<ShopOutlined />} />
-          <Button variant="contained" color="primary" startIcon={<ShopOutlined />}>
+          <Button variant="contained" color="primary" icon={<ShopOutlined />} />
+          <Button variant="contained" color="primary" icon={<ShopOutlined />}>
             主要按钮
           </Button>
-          <Button variant="outlined" color="primary" startIcon={<ShopOutlined />}>
+          <Button variant="outlined" color="primary" icon={<ShopOutlined />}>
             轮廓按钮
           </Button>
         </Space>

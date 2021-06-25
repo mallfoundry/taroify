@@ -89,9 +89,9 @@ import { Button } from "@taroify/core"
 通过 `icon` 属性设置按钮图标，支持 Icon 组件里的所有图标，也可以传入图标 URL。
 
 ```jsx
-<Button variant="contained" color="primary" startIcon={<DoneOutlined />} />
-<Button variant="contained" color="primary" startIcon={<DoneOutlined />}>主要按钮</Button>
-<Button variant="outlined" color="primary" startIcon={<DoneOutlined />}>轮廓按钮</Button>
+<Button variant="contained" color="primary" icon={<DoneOutlined />} />
+<Button variant="contained" color="primary" icon={<DoneOutlined />}>主要按钮</Button>
+<Button variant="outlined" color="primary" icon={<DoneOutlined />}>轮廓按钮</Button>
 ```
 
 ### 按钮尺寸
@@ -136,7 +136,7 @@ import { Button } from "@taroify/core"
 | color | 按钮颜色，可选值为 `primary` `success` `warning` `danger` | _string_ | `default` |
 | size | 尺寸，可选值为 `large` `small` `mini` | _string_ | `medium` |
 | shape | 按钮形状，可选值为 `circle` `round` | _string_ | `square` |
-| startIcon | 左侧[图标名称](/components/icon)或图片链接 | _string_ | - |
+| icon | 左侧图标或图片 | _ReactNode_ | - |
 | formType | 原生 button 标签的 type 属性 | _string_ | `button` |
 | block | 是否为块级元素 | _boolean_ | `false` |
 | disabled | 是否禁用按钮 | _boolean_ | `false` |

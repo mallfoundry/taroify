@@ -61,7 +61,7 @@ interface ButtonProps {
   block?: boolean
   hairline?: boolean
   disabled?: boolean
-  startIcon?: ReactNode
+  icon?: ReactNode
   children?: ReactNode
   loading?: boolean
   loadingText?: string
@@ -81,7 +81,7 @@ export default function Button(props: ButtonProps) {
     block,
     hairline,
     disabled,
-    startIcon,
+    icon,
     children,
     loading,
     loadingText = "",
@@ -133,7 +133,7 @@ export default function Button(props: ButtonProps) {
         }
       />
       <View className={prefixClassname("button__content")}>
-        {loading ? <Loading type={loadingType} /> : startIcon}
+        {loading ? <Loading type={loadingType} /> : icon}
         {(children || (loading && loadingText)) && (
           <View
             className={prefixClassname("button__text")}
