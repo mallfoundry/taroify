@@ -63,6 +63,11 @@ const componentPages = [
         path: "/pages/dialog/index",
       },
       {
+        title: "DropdownMenu 下拉菜单",
+        name: "Dropdown",
+        path: "/pages/dropdown-menu/index",
+      },
+      {
         title: "Loading 加载",
         name: "Loading",
         path: "/pages/loading/index",

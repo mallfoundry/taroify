@@ -69,6 +69,10 @@ const menus = [
         to: "/components/dialog/",
       },
       {
+        title: "DropdownMenu 下拉菜单",
+        to: "/components/dropdown-menu/",
+      },
+      {
         title: "Loading 加载",
         to: "/components/loading/",
       },

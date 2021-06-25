@@ -1,0 +1,19 @@
+@import "./variables";
+
+.#{$component-prefix}dropdown-menu-option {
+  text-align: left;
+
+  &--active {
+    color: $dropdown-menu-option-active-color;
+
+    .#{$component-prefix}dropdown-menu-option__icon {
+      color: $dropdown-menu-option-active-color;
+    }
+  }
+
+  &__icon {
+    display: block;
+    line-height: inherit;
+  }
+
+}

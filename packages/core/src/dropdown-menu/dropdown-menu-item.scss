@@ -1,0 +1,27 @@
+@import "./variables";
+
+.#{$component-prefix}dropdown-menu-item {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: $dropdown-menu-item-z-index;
+  overflow: hidden;
+
+  &__icon {
+    display: block;
+    line-height: inherit;
+  }
+
+  &--up {
+    top: 0;
+  }
+
+  &--down {
+    bottom: 0;
+  }
+
+  &__content {
+    position: absolute;
+    max-height: $dropdown-menu-item-content-max-height;
+  }
+}

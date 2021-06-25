@@ -1,0 +1,17 @@
+@import "./variables";
+
+.#{$component-prefix}dropdown-menu {
+  user-select: none;
+
+  &__bar {
+    position: relative;
+    display: flex;
+    height: $dropdown-menu-height;
+    background-color: $dropdown-menu-background-color;
+    box-shadow: $dropdown-menu-box-shadow;
+
+    &--opened {
+      z-index: $dropdown-menu-z-index;
+    }
+  }
+}
