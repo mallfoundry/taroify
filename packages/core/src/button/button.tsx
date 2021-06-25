@@ -3,6 +3,8 @@ import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
+import Loading from "../loading"
+import { LoadingType } from "../loading/loading"
 import { prefixClassname } from "../styles"
 
 export enum ButtonFormType {
@@ -61,6 +63,9 @@ interface ButtonProps {
   disabled?: boolean
   startIcon?: ReactNode
   children?: ReactNode
+  loading?: boolean
+  loadingText?: string
+  loadingType?: LoadingType | "spinner" | "circular"
   // events
   onClick?: (event: ITouchEvent) => void
 }
@@ -78,6 +83,9 @@ export default function Button(props: ButtonProps) {
     disabled,
     startIcon,
     children,
+    loading,
+    loadingText = "",
+    loadingType = "circular",
     onClick,
   } = props
 
@@ -113,7 +121,7 @@ export default function Button(props: ButtonProps) {
         },
         className,
       )}
-      onClick={onClick}
+      onClick={(e) => !loading && onClick && onClick(e)}
     >
       <TaroButton
         formType={
@@ -125,8 +133,13 @@ export default function Button(props: ButtonProps) {
         }
       />
       <View className={prefixClassname("button__content")}>
-        {startIcon}
-        {children && <View className={prefixClassname("button__text")} children={children} />}
+        {loading ? <Loading type={loadingType} /> : startIcon}
+        {(children || (loading && loadingText)) && (
+          <View
+            className={prefixClassname("button__text")}
+            children={loading ? loadingText : children}
+          />
+        )}
       </View>
     </View>
   )
