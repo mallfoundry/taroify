@@ -96,6 +96,14 @@ export default function ButtonDemo() {
           </Button>
         </Space>
       </Block>
+      <Block title="加载状态">
+        <Space>
+          <Button color="primary" loading></Button>
+          <Button loading loadingText="加载中"></Button>
+          <Button color="success" loading loadingText="加载中" loadingType="spinner">
+          </Button>
+        </Space>
+      </Block>
       <Block title="按钮形状">
         <Space>
           <Button variant="contained" color="primary" shape="square">
