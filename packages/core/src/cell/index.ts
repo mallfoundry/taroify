@@ -1,4 +1,4 @@
-import CellElement, { CellProps } from "./cell"
+import CellComponent, { CellProps } from "./cell"
 import CellGroup from "./cell-group"
 
 interface CellInterface {
@@ -7,7 +7,7 @@ interface CellInterface {
   Group: typeof CellGroup
 }
 
-const Cell = CellElement as CellInterface
+const Cell = CellComponent as CellInterface
 Cell.Group = CellGroup
 
 export default Cell
