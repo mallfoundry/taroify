@@ -9,7 +9,7 @@ import { default as SharedBackdrop } from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
 import PopupContext from "./popup.context"
-import { PopupPlacement, PopupPlacementString } from "./shared"
+import { PopupPlacement, PopupPlacementString } from "./popup.shared"
 
 function toTransactionName(placement?: PopupPlacement | PopupPlacementString) {
   if (placement === PopupPlacement.Top) {
@@ -73,7 +73,9 @@ interface PopupProps {
   rounded?: boolean
   duration?: number
   children?: ReactNode
+  onOpen?: (opened: boolean) => void
   onClose?: (opened: boolean) => void
+  onClosed?: () => void
 }
 
 function Popup(props: PopupProps) {
@@ -86,7 +88,9 @@ function Popup(props: PopupProps) {
     rounded = false,
     duration,
     children,
+    onOpen,
     onClose,
+    onClosed,
   } = props
 
   const transactionName = transaction ?? toTransactionName(placement)
@@ -102,12 +106,18 @@ function Popup(props: PopupProps) {
       }}
     >
       {backdrop}
-      <Transition in={open} name={transactionName} duration={duration}>
+      <Transition
+        in={open}
+        name={transactionName}
+        duration={duration}
+        onEnter={() => onOpen?.(true)}
+        onExited={onClosed}
+      >
         <View
           className={classNames(
             prefixClassname("popup"),
             {
-              [prefixClassname("popup--open")]: open,
+              // [prefixClassname("popup--open")]: open,
               [prefixClassname("popup--rounded")]: rounded,
               [prefixClassname("popup--center")]: _.isUndefined(placement),
               [prefixClassname("popup--top")]: placement === PopupPlacement.Top,
