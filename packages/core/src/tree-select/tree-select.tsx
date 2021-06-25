@@ -97,7 +97,7 @@ export interface TreeSelectProps {
   className?: string
   style?: CSSProperties
   activeTab?: TreeSelectTabKey
-  activeValue?: TreeSelectOptionValue | TreeSelectOptionValue[]
+  value?: TreeSelectOptionValue | TreeSelectOptionValue[]
   activeIcon?: ReactNode
   children?: ReactNode
 
@@ -107,32 +107,30 @@ export interface TreeSelectProps {
 }
 
 function TreeSelect(props: TreeSelectProps) {
-  const { activeTab, activeValue, activeIcon = <Success />, onTabChange, onChange } = props
+  const { activeTab, value, activeIcon = <Success />, onTabChange, onChange } = props
   const { tabs, options } = useTreeSelectChildren(props.children, activeTab)
 
   const hasValuesActive = useCallback(
-    (value: TreeSelectOptionValue) =>
-      _.isArray(activeValue) ? activeValue.includes(value) : activeValue === value,
-    [activeValue],
+    (aValue: TreeSelectOptionValue) =>
+      _.isArray(value) ? value.includes(aValue) : value === aValue,
+    [value],
   )
 
   const changeValuesActive = useCallback(
-    (event: TreeSelectOptionEvent) => {
-      const { value, active } = event
-
-      const multiselect = _.isArray(activeValue)
+    ({ value: evtValue, active }: TreeSelectOptionEvent) => {
+      const multiselect = _.isArray(value)
 
       if (multiselect) {
         if (active) {
-          onChange?.((activeValue as any[]).concat(value))
+          onChange?.((value as any[]).concat(evtValue))
         } else {
-          onChange?.((activeValue as any[]).filter((activeValue) => activeValue !== value))
+          onChange?.((value as any[]).filter((aValue) => aValue !== evtValue))
         }
       } else {
-        onChange?.(activeValue === value && !active ? undefined : value)
+        onChange?.(value === evtValue && !active ? undefined : evtValue)
       }
     },
-    [activeValue, onChange],
+    [value, onChange],
   )
 
   return (

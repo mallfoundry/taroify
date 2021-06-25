@@ -8,14 +8,14 @@ import "./index.scss"
 
 function RadioTreeSelect() {
   const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [activeValue, setActiveValue] = useState<TreeSelect.Value>(0)
+  const [value, setValue] = useState<TreeSelect.Value>(0)
 
   return (
     <TreeSelect
       activeTab={activeTab}
-      activeValue={activeValue}
+      value={value}
       onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(value: TreeSelect.Value) => setActiveValue(value)}
+      onChange={(aValue: TreeSelect.Value) => setValue(aValue)}
     >
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
@@ -41,14 +41,14 @@ function RadioTreeSelect() {
 
 function MultiselectTreeSelect() {
   const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [activeValue, setActiveValue] = useState<TreeSelect.Value[]>([0, 1])
+  const [value, setValue] = useState<TreeSelect.Value[]>([0, 1])
 
   return (
     <TreeSelect
       activeTab={activeTab}
-      activeValue={activeValue}
+      value={value}
       onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(value: TreeSelect.Value[]) => setActiveValue(value)}
+      onChange={(values: TreeSelect.Value[]) => setValue(values)}
     >
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
@@ -89,14 +89,14 @@ function TreeSelectWithCustomContent() {
 
 function BadgeTreeSelect() {
   const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [activeValue, setActiveValue] = useState<TreeSelect.Value>(0)
+  const [value, setValue] = useState<TreeSelect.Value>(0)
 
   return (
     <TreeSelect
       activeTab={activeTab}
-      activeValue={activeValue}
+      value={value}
       onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(value: TreeSelect.Value) => setActiveValue(value)}
+      onChange={(aValue: TreeSelect.Value) => setValue(aValue)}
     >
       <TreeSelect.Tab dot title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
