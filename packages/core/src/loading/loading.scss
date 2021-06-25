@@ -73,4 +73,23 @@
       }
     }
   }
+
+  &__text {
+    display: inline-block;
+    margin-left: $padding-xs;
+    color: $loading-text-color;
+    font-size: $loading-text-font-size;
+    vertical-align: middle;
+  }
+
+
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .#{$component-prefix}loading__text {
+      margin: $padding-xs 0 0;
+    }
+  }
 }

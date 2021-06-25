@@ -1,3 +1,1 @@
-import Loading from "./loading"
-
-export default Loading
+export { default, LoadingType } from "./loading"

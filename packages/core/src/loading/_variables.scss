@@ -2,5 +2,8 @@
 @import "../styles/variables";
 @import "../styles/animation";
 
-$loading-color: #c8c9cc;
-$loading-size: 60px;
+$loading-color: $gray-5;
+$loading-size: 30px * $hd;
+
+$loading-text-color: $gray-6;
+$loading-text-font-size: $font-size-md;

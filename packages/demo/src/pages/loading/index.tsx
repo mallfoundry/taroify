@@ -6,7 +6,7 @@ import "./index.scss"
 
 export default function LoadingDemo() {
   return (
-    <Page title="Loading">
+    <Page title="Loading 加载" className="loading-demo">
       <Block title="加载类型">
         <Space>
           <Loading />
@@ -23,6 +23,24 @@ export default function LoadingDemo() {
         <Space>
           <Loading size="24" />
           <Loading type="spinner" size="24" />
+        </Space>
+      </Block>
+      <Block title="加载文案">
+        <Loading size="24">加载中...</Loading>
+      </Block>
+      <Block title="垂直排列">
+        <Loading direction="vertical" size="24">
+          加载中...
+        </Loading>
+      </Block>
+      <Block title="垂直排列">
+        <Space size="large">
+          <Loading direction="vertical" color="#0094ff">
+            加载中...
+          </Loading>
+          <Loading direction="vertical" textColor="#0094ff">
+            加载中...
+          </Loading>
         </Space>
       </Block>
     </Page>

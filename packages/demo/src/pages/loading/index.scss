@@ -1,1 +1,10 @@
-// none
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../styles/prefix";
+
+.loading-demo {
+
+  .#{$component-prefix}loading--vertical {
+    display: inline-flex;
+  }
+}
