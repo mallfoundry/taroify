@@ -1,1 +1,1 @@
-export { default, LoadingType } from "./loading"
+export { default, LoadingType, LoadingDirection } from "./loading"
