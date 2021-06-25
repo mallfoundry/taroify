@@ -66,13 +66,12 @@ import { Button } from "@taroify/core"
 
 ### 加载状态
 
-通过 `loading` 属性设置按钮为加载状态，加载状态下默认会隐藏按钮文字，可以通过 `loading-text` 设置加载状态下的文字。
+通过 `loading` 属性设置按钮为加载状态，可以通过 `{type: "spinner"}` 设置加载类型。
 
-```html
-
-<van-button loading type="primary" />
-<van-button loading type="primary" loading-type="spinner" />
-<van-button loading type="primary" loading-text="加载中..." />
+```tsx
+<Button color="success" loading />
+<Button color="success" loading={{ type: "spinner" }} />
+<Button color="primary" loading>加载中...</Button>
 ```
 
 ### 按钮形状
@@ -117,13 +116,10 @@ import { Button } from "@taroify/core"
 
 通过 `color` 属性可以自定义按钮的颜色。
 
-```html
-
-<van-button color="#7232dd">单色按钮</van-button>
-<van-button color="#7232dd" plain>单色按钮</van-button>
-<van-button color="linear-gradient(to right, #ff6034, #ee0a24)">
-  渐变色按钮
-</van-button>
+```tsx
+<Button color="#7232dd">单色按钮</Button>
+<Button color="#7232dd" variant="outlined">单色按钮</Button>
+<Button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</Button>
 ```
 
 ## API

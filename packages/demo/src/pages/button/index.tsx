@@ -98,9 +98,11 @@ export default function ButtonDemo() {
       </Block>
       <Block title="加载状态">
         <Space>
-          <Button color="primary" loading />
-          <Button loading loadingText="加载中" />
-          <Button color="success" loading loadingText="加载中" loadingType="spinner" />
+          <Button color="success" loading />
+          <Button color="success" loading={{ type: "spinner" }} />
+          <Button color="primary" loading>
+            加载中...
+          </Button>
         </Space>
       </Block>
       <Block title="按钮形状">
@@ -145,6 +147,15 @@ export default function ButtonDemo() {
         <Button color="primary" block>
           块级按钮
         </Button>
+      </Block>
+      <Block title="按钮尺寸">
+        <Space>
+          <Button color="#7232dd">单色按钮</Button>
+          <Button color="#7232dd" variant="outlined">
+            单色按钮
+          </Button>
+          <Button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</Button>
+        </Space>
       </Block>
     </Page>
   )

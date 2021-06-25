@@ -49,7 +49,7 @@ export enum LoadingType {
   Spinner = "spinner",
 }
 
-type LoadingTypeString = "circular" | "spinner"
+export type LoadingTypeString = "circular" | "spinner"
 
 export enum LoadingDirection {
   Horizontal = "horizontal",

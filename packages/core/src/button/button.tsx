@@ -1,10 +1,10 @@
 import { Button as TaroButton, View } from "@tarojs/components"
 import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode } from "react"
-import Loading from "../loading"
-import { LoadingType } from "../loading/loading"
+import { CSSProperties, ReactNode, useMemo } from "react"
+import Loading, { LoadingType, LoadingTypeString } from "../loading"
 import { prefixClassname } from "../styles"
 
 export enum ButtonFormType {
@@ -43,6 +43,12 @@ export enum ButtonColor {
 
 type ButtonColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
+const BUTTON_PRESET_COLORS = ["default", "primary", "info", "success", "warning", "danger"]
+
+function isPresetButtonColor(color?: ButtonColor | ButtonColorString | string): boolean {
+  return BUTTON_PRESET_COLORS.includes(color as string)
+}
+
 export enum ButtonShape {
   Square = "square",
   Circle = "circle",
@@ -51,21 +57,30 @@ export enum ButtonShape {
 
 type ButtonShapeString = "square" | "circle" | "round"
 
+interface ButtonLoadingProps {
+  type?: LoadingType | LoadingTypeString
+}
+
+function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoadingProps | undefined {
+  if (_.isBoolean(loading)) {
+    return loading ? {} : undefined
+  }
+  return loading
+}
+
 interface ButtonProps {
   className?: string
   variant?: ButtonVariant | ButtonVariantString
   shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
-  color?: ButtonColor | ButtonColorString
+  color?: ButtonColor | ButtonColorString | string
   formType?: ButtonFormType | ButtonFormTypeString
+  loading?: boolean | ButtonLoadingProps
   block?: boolean
   hairline?: boolean
   disabled?: boolean
   icon?: ReactNode
   children?: ReactNode
-  loading?: boolean
-  loadingText?: string
-  loadingType?: LoadingType | "spinner" | "circular"
   // events
   onClick?: (event: ITouchEvent) => void
 }
@@ -83,11 +98,26 @@ export default function Button(props: ButtonProps) {
     disabled,
     icon,
     children,
-    loading,
-    loadingText = "",
-    loadingType = "circular",
     onClick,
   } = props
+
+  const loadingProps = useButtonLoading(props.loading)
+
+  const rootStyle = useMemo(() => {
+    const style: CSSProperties = {}
+    if (!isPresetButtonColor(color)) {
+      if (variant === ButtonVariant.Contained) {
+        style.color = "#fff"
+        style.background = color
+      } else if (variant === ButtonVariant.Outlined) {
+        style.borderColor = color
+        style.color = color
+      } else {
+        style.background = ""
+      }
+    }
+    return style
+  }, [color, variant])
 
   return (
     <View
@@ -95,6 +125,7 @@ export default function Button(props: ButtonProps) {
         prefixClassname("button"),
         {
           [prefixClassname("button--disabled")]: disabled,
+          [prefixClassname("button--loading")]: loadingProps,
           [prefixClassname("button--block")]: block,
           // Set hairline style
           [prefixClassname("button--hairline")]: hairline,
@@ -112,17 +143,22 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button--medium")]: size === ButtonSize.Medium,
           [prefixClassname("button--large")]: size === ButtonSize.Large,
           // Set color style
-          [prefixClassname("button--default")]: color === ButtonColor.Default,
-          [prefixClassname("button--primary")]: color === ButtonColor.Primary,
-          [prefixClassname("button--info")]: color === ButtonColor.Info,
-          [prefixClassname("button--success")]: color === ButtonColor.Success,
-          [prefixClassname("button--warning")]: color === ButtonColor.Warning,
-          [prefixClassname("button--danger")]: color === ButtonColor.Danger,
+          [prefixClassname(`button--${color}`)]: isPresetButtonColor(color),
+          [prefixClassname("button--default")]: !isPresetButtonColor(color),
         },
         className,
       )}
-      onClick={(e) => !loading && onClick && onClick(e)}
+      style={rootStyle}
+      onClick={(e) => !loadingProps && onClick?.(e)}
     >
+      <View className={prefixClassname("button__content")}>
+        {loadingProps ? (
+          <Loading className={prefixClassname("button__loading")} {...loadingProps} />
+        ) : (
+          icon
+        )}
+        {children && <View className={prefixClassname("button__text")} children={children} />}
+      </View>
       <TaroButton
         formType={
           formType === ButtonFormType.Submit
@@ -132,15 +168,6 @@ export default function Button(props: ButtonProps) {
             : undefined
         }
       />
-      <View className={prefixClassname("button__content")}>
-        {loading ? <Loading type={loadingType} /> : icon}
-        {(children || (loading && loadingText)) && (
-          <View
-            className={prefixClassname("button__text")}
-            children={loading ? loadingText : children}
-          />
-        )}
-      </View>
     </View>
   )
 }
