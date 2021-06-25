@@ -6,10 +6,9 @@
 
   .#{$component-prefix}popup--center {
     font-size: $font-size-lg;
-
   }
 
-  .#{$demo-prefix}page__content {
-    padding-bottom: 10px * $hd;
+  .#{$demo-prefix}block__content {
+    padding: 0;
   }
 }
