@@ -92,6 +92,26 @@ function DisabledDropdownMenu() {
   )
 }
 
+function UpDropdownMenu() {
+  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
+  const [option1, setOption1] = useState<DropdownMenu.Value>()
+  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  return (
+    <DropdownMenu activeKey={activeKey} direction="up" onChange={setActiveKey}>
+      <DropdownMenu.Item value={option1} onChange={setOption1}>
+        <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
+      </DropdownMenu.Item>
+      <DropdownMenu.Item value={option2} onChange={setOption2}>
+        <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
+      </DropdownMenu.Item>
+    </DropdownMenu>
+  )
+}
+
 export default function DropdownMenuDemo() {
   return (
     <Page className="dropdown-menu-demo" title="DropdownMenu 下拉菜单">
@@ -100,9 +120,12 @@ export default function DropdownMenuDemo() {
       </Block>
       <Block title="自定义菜单内容">
         <DropdownMenuWithCustomContent />
-      </Block>{" "}
+      </Block>
       <Block title="自定义选中态颜色">
         <DropdownMenuWithCustomColor />
+      </Block>
+      <Block title="向上展开">
+        <UpDropdownMenu />
       </Block>
       <Block title="禁用菜单">
         <DisabledDropdownMenu />

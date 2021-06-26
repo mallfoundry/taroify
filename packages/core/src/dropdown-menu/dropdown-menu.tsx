@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -11,19 +12,19 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
 import { getBoundingClientRect } from "../utils/rect"
-import DropdownItem, {
-  DropdownItemProps,
-} from "@taroify/~core/src/dropdown-menu/dropdown-menu-item"
+import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
 import DropdownMenuContext from "./dropdown-menu.context"
 import {
   DropdownMenuDirection,
+  DropdownMenuDirectionString,
   DropdownMenuKey,
   DropdownMenuValue,
   DropdownMenuValues,
@@ -85,9 +86,9 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
 
     const element = child as ReactElement
     const elementType = element.type
-    if (elementType === DropdownItem) {
+    if (elementType === DropdownMenuItem) {
       const { key, props } = element
-      const { disabled, title, value }: DropdownItemProps = props
+      const { disabled, title, value }: DropdownMenuItemProps = props
       const itemKey = key ?? index
       __children__.items.push(
         cloneElement(element, {
@@ -113,7 +114,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
 export interface DropdownMenuProps {
   activeKey?: DropdownMenuKey
   activeColor?: string
-  direction?: DropdownMenuDirection
+  direction?: DropdownMenuDirection | DropdownMenuDirectionString
   children?: ReactNode
   onChange?: (key?: DropdownMenuKey) => void
 }
@@ -127,23 +128,31 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   const toggleKeyRef = useRef<DropdownMenuKey>()
 
+  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
+
+  const updateItemOffset = useCallback(() => {
+    getBoundingClientRect(barRef).then((rect) => {
+      if (direction === DropdownMenuDirection.Down) {
+        setItemOffset(rect.bottom)
+      } else {
+        setItemOffset(windowHeight - rect.top)
+      }
+    })
+  }, [direction, windowHeight])
+
   const toggleItem = useCallback(
     ({ dataKey: itemKey, disabled: itemDisabled }) => {
       if (itemDisabled) {
         return
       }
       toggleKeyRef.current = itemKey
-      onChange?.(activeKey === itemKey ? undefined : itemKey)
-
-      getBoundingClientRect(barRef).then((rect) => {
-        if (direction === DropdownMenuDirection.Down) {
-          setItemOffset(rect.bottom)
-        } /*else {
-        offset.value = window.innerHeight - rect.top
-      }*/
-      })
+      const itemActive = activeKey === itemKey ? undefined : itemKey
+      if (itemActive !== undefined) {
+        updateItemOffset()
+      }
+      onChange?.(itemActive)
     },
-    [activeKey, direction, onChange],
+    [activeKey, onChange, updateItemOffset],
   )
 
   const isItemToggle = useCallback(
@@ -159,11 +168,13 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   useEffect(() => setOpened(activeKey !== undefined), [activeKey, isItemToggle])
 
+  usePageScroll(updateItemOffset)
+
   return (
     <DropdownMenuContext.Provider
       value={{
         activeColor,
-        direction,
+        direction: direction as DropdownMenuDirection,
         itemOffset,
         toggleItem,
         isItemToggle,

@@ -80,6 +80,8 @@ function DropdownMenuWithCustomContent() {
 通过 `activeColor` 属性可以自定义菜单标题和选项的选中态颜色。
 
 ```tsx
+import { DropdownMenu } from "@taroify/core"
+
 function DropdownMenuWithCustomColor() {
   const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
   const [option1, setOption1] = useState<DropdownMenu.Value>()
@@ -105,17 +107,35 @@ function DropdownMenuWithCustomColor() {
 
 将 `direction` 属性值设置为 `up`，菜单即可向上展开。
 
-```html
+```tsx
+import { DropdownMenu } from "@taroify/core"
 
-<van-dropdown-menu direction="up">
-  <van-dropdown-item v-model="value1" :options="option1" />
-  <van-dropdown-item v-model="value2" :options="option2" />
-</van-dropdown-menu>
+function UpDropdownMenu() {
+  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
+  const [option1, setOption1] = useState<DropdownMenu.Value>()
+  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  return (
+    <DropdownMenu activeKey={activeKey} direction="up" onChange={setActiveKey}>
+      <DropdownMenu.Item value={option1} onChange={setOption1}>
+        <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
+      </DropdownMenu.Item>
+      <DropdownMenu.Item value={option2} onChange={setOption2}>
+        <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
+      </DropdownMenu.Item>
+    </DropdownMenu>
+  )
+}
 ```
 
 ### 禁用菜单
 
 ```tsx
+import { DropdownMenu } from "@taroify/core"
+
 function DisabledDropdownMenu() {
   const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
   return (

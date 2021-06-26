@@ -6,6 +6,8 @@ export enum DropdownMenuDirection {
   Down = "down",
 }
 
+export type DropdownMenuDirectionString = "up" | "down"
+
 export type DropdownMenuKey = React.Key | undefined
 
 export type DropdownMenuValue = number | string | undefined

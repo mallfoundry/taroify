@@ -68,10 +68,12 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
 
   const rootStyle = useMemo(() => {
     const style: CSSProperties = {}
-    if (down) {
-      style.top = itemOffset ? addUnitPx(itemOffset) : ""
-    } else {
-      style.bottom = itemOffset ? addUnitPx(itemOffset) : ""
+    if (opened) {
+      if (down) {
+        style.top = itemOffset ? addUnitPx(itemOffset) : ""
+      } else {
+        style.bottom = itemOffset ? addUnitPx(itemOffset) : ""
+      }
     }
     // if is undefined, state is closing
     if (_.isUndefined(active)) {
