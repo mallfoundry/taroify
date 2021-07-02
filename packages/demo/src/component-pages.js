@@ -83,6 +83,11 @@ const componentPages = [
         path: "/pages/backdrop/index",
       },
       {
+        title: "PullRefresh 下拉刷新",
+        name: "PullRefresh",
+        path: "/pages/pull-refresh/index",
+      },
+      {
         title: "ShareSheet 分享面板",
         name: "ShareSheet",
         path: "/pages/share-sheet/index",

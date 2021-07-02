@@ -85,6 +85,10 @@ const menus = [
         to: "/components/backdrop/",
       },
       {
+        title: "PullRefresh 下拉刷新",
+        to: "/components/pull-refresh/",
+      },
+      {
         title: "ShareSheet 分享面板",
         to: "/components/share-sheet/",
       },

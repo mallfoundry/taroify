@@ -1,0 +1,7 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$pull-refresh-head-height: 50px * $hd;
+$pull-refresh-head-font-size: $font-size-md;
+$pull-refresh-head-text-color: $gray-6;
+$pull-refresh-loading-icon-size: 16px * $hd;
