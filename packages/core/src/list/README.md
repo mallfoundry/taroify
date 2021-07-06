@@ -106,7 +106,7 @@ function ErrorList() {
 
 ### 下拉刷新
 
-List 组件可以与 [PullRefresh](#/zh-CN/pull-refresh) 组件结合使用，实现下拉刷新的效果。
+List 组件可以与 [PullRefresh](#/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。
 
 ```tsx
 function PullRefreshList() {
@@ -159,9 +159,9 @@ function PullRefreshList() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| loading | 是否处于加载状态，加载过程中不触发 `load` 事件 | _boolean_ | `false` |
-| hasMore | 是否已加载完成，加载完成后不再触发 `load` 事件 | _boolean_ | `false` |
-| offset | 滚动条与底部距离小于 offset 时触发 `load` 事件 | _number \| string_ | `300` |
+| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
+| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
+| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number \| string_ | `300` |
 | immediateCheck | 是否在初始化时立即执行滚动位置检查 | _boolean_ | `true` |
 | direction | 滚动触发加载的方向，可选值为 `up` | _string_ | `down` |
 
