@@ -69,20 +69,15 @@ function List(props: ListProps) {
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
-  const scrollParentRef = useRef<HTMLElement>()
   const loadingRef = useRef(false)
-
-  useReady(async () => {
-    scrollParentRef.current = await getScrollParent(rootRef.current)
-  })
 
   const loadCheck = useCallback(() => {
     nextTick(async () => {
       if (loadingRef.current || !hasMore) {
         return
       }
-      const scrollParentRect = await getBoundingClientRect(scrollParentRef)
-
+      const scrollParent = await getScrollParent(rootRef.current)
+      const scrollParentRect = await getBoundingClientRect(scrollParent)
       if (!scrollParentRect.height) {
         return
       }
