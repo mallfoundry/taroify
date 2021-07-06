@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, cloneElement, ReactElement, ReactNode } from "react"
+import { Children, cloneElement, ReactElement, ReactNode, useCallback, useRef } from "react"
 import { prefixClassname } from "../styles"
 import NavTabs from "./nav-tabs"
 import { TabKey, TabKey as SharedTabKey, TabsTheme, TabsThemeString } from "./shared"
@@ -106,12 +106,19 @@ namespace Tabs {
 
   export function TabPane(props: TabPaneProps) {
     const { active, children } = props
+    const initializedRef = useRef(false)
 
+    const shouldRender = useCallback(() => {
+      if (active && !initializedRef.current) {
+        initializedRef.current = true
+      }
+      return active && initializedRef.current
+    }, [active])
     return (
       <View
         style={{ display: active ? "" : "none" }}
         className={prefixClassname("tabs__tab-pane")}
-        children={children}
+        children={shouldRender() ? children : undefined}
       />
     )
   }
