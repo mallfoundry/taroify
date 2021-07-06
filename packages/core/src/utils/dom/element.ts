@@ -2,6 +2,10 @@ import { createSelectorQuery } from "@tarojs/taro"
 
 export const ELEMENT_NODE_TYPE = 1
 
+export function isWindow(val: unknown): val is Window {
+  return val === window
+}
+
 export interface TaroElement extends HTMLElement {
   uid: string
 }

@@ -1,6 +1,6 @@
 import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "./base"
-import { elementUnref } from "./dom/element"
+import { elementUnref, isWindow } from "./dom/element"
 
 export interface BoundingClientRect {
   dataset: Record<string, any>
@@ -28,6 +28,12 @@ export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClient
   const element = elementUnref(elementOrRef)
   if (element) {
     if (inBrowser) {
+      if (isWindow(element)) {
+        const width = element.innerWidth
+        const height = element.innerHeight
+        return Promise.resolve(makeBoundingClientRect(width, height))
+      }
+
       return Promise.resolve((element.getBoundingClientRect() as unknown) as BoundingClientRect)
     } else {
       return new Promise<BoundingClientRect>((resolve) => {
