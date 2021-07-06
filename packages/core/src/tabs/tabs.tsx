@@ -97,12 +97,6 @@ namespace Tabs {
   export type TabEvent = __TabEvent__
   export type TabKey = SharedTabKey
 
-  // interface TabTitleProps {
-  //   children?: ReactNode
-  // }
-  //
-  // export function TabTitle(props: TabTitleProps) {}
-
   interface TabPaneProps {
     active?: boolean
     disabled?: boolean
