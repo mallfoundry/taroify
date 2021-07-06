@@ -1,4 +1,4 @@
-import { default as DropdownMenuComponent, DropdownMenuProps } from "./dropdown-menu"
+import { default as DropdownMenuElement, DropdownMenuProps } from "./dropdown-menu"
 import DropdownMenuItem from "./dropdown-menu-item"
 import DropdownMenuOption from "./dropdown-menu-option"
 import { DropdownMenuKey, DropdownMenuValue, DropdownMenuValues } from "./dropdown-menu.shared"
@@ -10,7 +10,7 @@ interface DropdownMenuInterface {
   Option: typeof DropdownMenuOption
 }
 
-const DropdownMenu = DropdownMenuComponent as DropdownMenuInterface
+const DropdownMenu = DropdownMenuElement as DropdownMenuInterface
 
 DropdownMenu.Item = DropdownMenuItem
 DropdownMenu.Option = DropdownMenuOption
