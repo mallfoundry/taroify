@@ -122,6 +122,10 @@ const menus = [
         to: "/components/empty/",
       },
       {
+        title: "List 列表",
+        to: "/components/list/",
+      },
+      {
         title: "NoticeBar 通知栏",
         to: "/components/notice-bar/",
       },

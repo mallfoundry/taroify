@@ -1,0 +1,10 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+
+.list-demo {
+  background: #fff;
+
+  .#{$component-prefix}cell__value {
+    text-align: center;
+  }
+}

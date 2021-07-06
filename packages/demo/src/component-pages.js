@@ -133,6 +133,11 @@ const componentPages = [
         path: "/pages/notice-bar/index",
       },
       {
+        title: "List 列表",
+        name: "List",
+        path: "/pages/list/index",
+      },
+      {
         title: "Progress 进度条",
         name: "Progress",
         path: "/pages/progress/index",
