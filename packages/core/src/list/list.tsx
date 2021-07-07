@@ -6,40 +6,6 @@ import { prefixClassname } from "../styles"
 import { getScrollParent } from "../utils/dom/scroll"
 import { getBoundingClientRect } from "../utils/rect"
 
-// interface ListChildren {
-//   content?: ReactNode[]
-//   loading?: ReactNode
-//   error?: ReactNode
-//   finished?: ReactNode
-// }
-//
-// function useListChildren(children?: ReactNode) {
-//   const __children__: ListChildren = {
-//     content: [],
-//   }
-//
-//   Children.forEach(children, (child: ReactNode) => {
-//     if (!isValidElement(child)) {
-//       __children__.content?.push(child)
-//       return
-//     }
-//     const element = child as ReactElement
-//     const elementType = element.type
-//
-//     if (elementType === ListLoading) {
-//       __children__.loading = element
-//     } else if (elementType === ListFinished) {
-//       __children__.finished = element
-//     } else if (elementType === ListError) {
-//       __children__.error = element
-//     } else {
-//       __children__.content?.push(element)
-//     }
-//   })
-//
-//   return __children__
-// }
-
 enum ListDirection {
   Up = "up",
   Down = "down",
@@ -50,7 +16,6 @@ type ListDirectionString = "up" | "down"
 export interface ListProps {
   loading?: boolean
   hasMore?: boolean
-  noMore?: boolean
   direction?: ListDirection | ListDirectionString
   offset?: number
   children?: ReactNode
