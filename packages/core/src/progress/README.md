@@ -19,7 +19,7 @@ import Progress from "@taroify/core/progress"
 进度条默认为蓝色，使用 `percentage` 属性来设置当前进度。
 
 ```tsx
-<Progress percentage={50} />
+<Progress percent={50} />
 ```
 
 ### 线条粗细
@@ -36,7 +36,7 @@ import Progress from "@taroify/core/progress"
 设置 `inactive` 属性后进度条将置灰。
 
 ```tsx
-<Progress percentage={50} inactive />
+<Progress percent={50} inactive />
 ```
 
 ### 样式定制
@@ -44,9 +44,9 @@ import Progress from "@taroify/core/progress"
 可以使用 `pivot-text` 属性自定义文字，`color` 属性自定义进度条颜色。
 
 ```tsx
-<Progress percentage={25} color="#f2826a" />
-<Progress percentage={50} color="#ee0a24" />
-<Progress percentage={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
+<Progress percent={25} color="#f2826a" />
+<Progress percent={50} color="#ee0a24" />
+<Progress percent={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
 ```
 
 ## API
@@ -55,7 +55,7 @@ import Progress from "@taroify/core/progress"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| percentage | 进度百分比 | _number \| string_ | `0` |
+| percent | 进度百分比 | _number \| string_ | `0` |
 | strokeWidth | 进度条粗细，默认单位为`px` | _number \| string_ | `4px` |
 | color | 进度条颜色 | _string_ | `#1989fa` |
 | trackColor | 轨道颜色 | _string_ | `#e5e5e5` |

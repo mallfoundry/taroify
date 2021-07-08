@@ -26,7 +26,7 @@ interface ProgressProps {
   striped?: boolean
   inactive?: boolean
   label?: ReactNode | boolean
-  percentage?: number
+  percent?: number
   color?: ProgressColor | ProgressColorString | string
   trackColor?: string
   textColor?: string
@@ -40,13 +40,13 @@ function Progress(props: ProgressProps) {
     inactive,
     label,
     color = ProgressColor.Primary,
-    percentage: percentageProp = 0,
+    percent: percentProp = 0,
   } = props
-  const percentage = Math.min(Math.max(0, percentageProp), 100)
+  const percent = Math.min(Math.max(0, percentProp), 100)
 
   function renderLabel() {
     if (label === undefined) {
-      return `${percentage}%`
+      return `${percent}%`
     } else if (!label) {
       return undefined
     }
@@ -55,10 +55,10 @@ function Progress(props: ProgressProps) {
 
   const barStyle = useMemo(() => {
     const style: CSSProperties = {}
-    style.width = `${percentage}%`
+    style.width = `${percent}%`
     style.background = !inactive && isPresetColor(color) ? "" : color
     return style
-  }, [inactive, percentage, color])
+  }, [inactive, percent, color])
 
   return (
     <View

@@ -7,7 +7,7 @@ import "./index.scss"
 function BasicProgress() {
   return (
     <Block title="基础用法">
-      <Progress percentage={50} />
+      <Progress percent={50} />
     </Block>
   )
 }
@@ -15,7 +15,7 @@ function BasicProgress() {
 function StripedProgress() {
   return (
     <Block title="条纹线条">
-      <Progress percentage={50} striped />
+      <Progress percent={50} striped />
     </Block>
   )
 }
@@ -23,7 +23,7 @@ function StripedProgress() {
 function AnimatedProgress() {
   return (
     <Block title="动画条纹">
-      <Progress percentage={50} striped animated />
+      <Progress percent={50} striped animated />
     </Block>
   )
 }
@@ -31,7 +31,7 @@ function AnimatedProgress() {
 function InactiveProgress() {
   return (
     <Block title="置灰">
-      <Progress percentage={50} inactive />
+      <Progress percent={50} inactive />
     </Block>
   )
 }
@@ -39,9 +39,9 @@ function InactiveProgress() {
 function ProgressWithCustomColors() {
   return (
     <Block title="样式定制">
-      <Progress percentage={25} color="#f2826a" />
-      <Progress percentage={50} color="#ee0a24" />
-      <Progress percentage={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
+      <Progress percent={25} color="#f2826a" />
+      <Progress percent={50} color="#ee0a24" />
+      <Progress percent={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
     </Block>
   )
 }
