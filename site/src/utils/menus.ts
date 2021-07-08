@@ -106,6 +106,11 @@ const menus = [
         to: "/components/badge/",
       },
       {
+        title: "Circle 环形进度条",
+        name: "Circle",
+        path: "/components/circle/",
+      },
+      {
         title: "Collapse 折叠面板",
         to: "/components/collapse/",
       },

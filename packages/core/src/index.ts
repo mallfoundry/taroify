@@ -22,6 +22,7 @@ export { default as ShareSheet } from "./share-sheet"
 export { default as SwipeCell } from "./swipe-cell"
 // Display Components
 export { default as Badge } from "./badge"
+export { default as Circle } from "./circle"
 export { default as Collapse } from "./collapse"
 export { default as CountDown } from "./count-down"
 export { default as Divider } from "./divider"

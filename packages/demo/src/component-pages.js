@@ -108,6 +108,11 @@ const componentPages = [
         path: "/pages/badge/index",
       },
       {
+        title: "Circle 环形进度条",
+        name: "Circle",
+        path: "/pages/circle/index",
+      },
+      {
         title: "Collapse 折叠面板",
         name: "Collapse",
         path: "/pages/collapse/index",
