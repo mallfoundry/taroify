@@ -107,8 +107,7 @@ const menus = [
       },
       {
         title: "Circle 环形进度条",
-        name: "Circle",
-        path: "/components/circle/",
+        to: "/components/circle/",
       },
       {
         title: "Collapse 折叠面板",
