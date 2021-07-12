@@ -21,7 +21,7 @@ function BasicCircle({ percent }: PercentProps) {
   const [currentPercent, setCurrentPercent] = useState(0)
 
   return (
-    <Circle percent={70} speed={100} onChange={setCurrentPercent}>
+    <Circle percent={70} onChange={setCurrentPercent}>
       {currentPercent.toFixed(0)}%
     </Circle>
   )
@@ -33,7 +33,7 @@ function BasicCircle({ percent }: PercentProps) {
 通过 `strokeWidth` 属性来控制进度条宽度。
 
 ```tsx
-<Circle percent={70} speed={100} strokeWidth={60}>
+<Circle percent={70} strokeWidth={60}>
   宽度定制
 </Circle>
 ```
@@ -43,7 +43,7 @@ function BasicCircle({ percent }: PercentProps) {
 通过 `color` 属性来控制进度条颜色，`layerColor` 属性来控制轨道颜色。
 
 ```tsx
-<Circle percent={70} speed={100} color="#ee0a24" layerColor="#ebedf0">
+<Circle percent={70} color="#ee0a24" layerColor="#ebedf0">
   颜色定制
 </Circle>
 ```
@@ -55,7 +55,6 @@ function BasicCircle({ percent }: PercentProps) {
 ```tsx
 <Circle
   percent={70}
-  speed={100}
   color={{
     "0%": "#3fecff",
     "100%": "#6149f6",
@@ -70,7 +69,7 @@ function BasicCircle({ percent }: PercentProps) {
 将 `clockwise` 设置为 `false`，进度会从逆时针方向开始。
 
 ```tsx
-<Circle percent={70} speed={100} clockwise={false} color="#07c160">
+<Circle percent={70} clockwise={false} color="#07c160">
   逆时针方向
 </Circle>
 ```
@@ -80,7 +79,7 @@ function BasicCircle({ percent }: PercentProps) {
 通过 `size` 属性设置圆环直径。
 
 ```tsx
-<Circle percent={70} speed={100} size={120} color="#7232dd">
+<Circle percent={70} size={120} color="#7232dd">
   大小定制
 </Circle>
 ```
