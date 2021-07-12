@@ -13,7 +13,7 @@ function BasicCircle({ percent }: PercentProps) {
   const [currentPercent, setCurrentPercent] = useState(0)
 
   return (
-    <Circle percent={percent} speed={100} onChange={setCurrentPercent}>
+    <Circle percent={percent} onChange={setCurrentPercent}>
       {currentPercent.toFixed(0)}%
     </Circle>
   )
@@ -22,15 +22,14 @@ function BasicCircle({ percent }: PercentProps) {
 function CustomCircle({ percent }: PercentProps) {
   return (
     <Space>
-      <Circle percent={percent} speed={100} strokeWidth={60}>
+      <Circle percent={percent} strokeWidth={60}>
         宽度定制
       </Circle>
-      <Circle percent={percent} speed={100} color="#ee0a24" layerColor="#ebedf0">
+      <Circle percent={percent} color="#ee0a24" layerColor="#ebedf0">
         颜色定制
       </Circle>
       <Circle
         percent={percent}
-        speed={100}
         color={{
           "0%": "#3fecff",
           "100%": "#6149f6",
@@ -38,10 +37,10 @@ function CustomCircle({ percent }: PercentProps) {
       >
         渐变色
       </Circle>
-      <Circle percent={percent} speed={100} clockwise={false} color="#07c160">
+      <Circle percent={percent} clockwise={false} color="#07c160">
         逆时针方向
       </Circle>
-      <Circle percent={percent} speed={100} size={120} color="#7232dd">
+      <Circle percent={percent} size={120} color="#7232dd">
         大小定制
       </Circle>
     </Space>

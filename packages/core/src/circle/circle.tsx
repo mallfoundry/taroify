@@ -4,7 +4,7 @@ import { CSSProperties } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import CircleCanvas from "./circle-canvas"
-import { CircleProps } from "./circle.shared"
+import { CircleProps, CircleStrokeLinecap } from "./circle.shared"
 
 function getCircleSizeStyle(originSize?: string | number): CSSProperties | undefined {
   if (originSize !== undefined && originSize !== null) {
@@ -17,10 +17,25 @@ function getCircleSizeStyle(originSize?: string | number): CSSProperties | undef
 }
 
 function Circle(props: CircleProps) {
-  const { children, size, ...restProps } = props
+  const {
+    speed = 100,
+    clockwise = true,
+    strokeWidth = 40,
+    strokeLinecap = CircleStrokeLinecap.Round,
+    size,
+    children,
+    ...restProps
+  } = props
   return (
     <View className={prefixClassname("circle")} style={getCircleSizeStyle(size)}>
-      <CircleCanvas {...restProps} />
+      <CircleCanvas
+        speed={speed}
+        clockwise={clockwise}
+        strokeWidth={strokeWidth}
+        strokeLinecap={strokeLinecap}
+        size={size}
+        {...restProps}
+      />
       {children && <View className={prefixClassname("circle__text")} children={children} />}
     </View>
   )

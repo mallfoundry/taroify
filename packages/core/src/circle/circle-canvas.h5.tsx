@@ -1,16 +1,11 @@
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, useCallback, useEffect, useMemo, useState } from "react"
+import { CSSProperties, useCallback, useEffect, useMemo } from "react"
 import { prefixClassname } from "../styles"
-import { cancelRaf, raf } from "../utils/raf"
-import { useToRef } from "../utils/state"
-import { CircleProps, CircleStrokeLinecap } from "./circle.shared"
+import { useAnimatePercent } from "./circle.hooks"
+import { CircleProps } from "./circle.shared"
 
 let uid = 0
-
-function format(rate: string | number) {
-  return Math.min(Math.max(+rate, 0), 100)
-}
 
 function getPath(clockwise: boolean, viewBoxSize: number) {
   const sweepFlag = clockwise ? 1 : 0
@@ -27,13 +22,12 @@ function CircleCanvasH5(props: CircleProps) {
     layerColor,
     fill = "none",
     clockwise = true,
-    strokeWidth = 40,
-    strokeLinecap = CircleStrokeLinecap.Round,
+    strokeWidth = 0,
+    strokeLinecap,
     onChange,
   } = props
 
-  const [percent, setPercent] = useState(percentProp)
-  const currentRateRef = useToRef(percent)
+  const percent = useAnimatePercent(percentProp, speed)
 
   useEffect(() => onChange?.(percent), [onChange, percent])
 
@@ -42,36 +36,6 @@ function CircleCanvasH5(props: CircleProps) {
   const viewBoxSize = useMemo(() => +strokeWidth + 1000, [strokeWidth])
 
   const path = useMemo(() => getPath(clockwise, viewBoxSize), [clockwise, viewBoxSize])
-
-  useEffect(() => {
-    let rafId: number | undefined
-    const startTime = Date.now()
-    const startRate = currentRateRef.current
-    const endRate = format(percentProp)
-    const duration = Math.abs(((startRate - endRate) * 1000) / speed)
-
-    const animate = () => {
-      const now = Date.now()
-      let progress = (now - startTime) / duration
-      progress = Math.min(_.isNaN(progress) ? 1 : progress, 1)
-
-      const rate = progress * (endRate - startRate) + startRate
-      setPercent(rate)
-
-      if (endRate > startRate ? rate < endRate : rate > endRate) {
-        rafId = raf(animate)
-      }
-    }
-
-    if (speed) {
-      if (rafId) {
-        cancelRaf(rafId)
-      }
-      rafId = raf(animate)
-    } else {
-      setPercent(endRate)
-    }
-  }, [currentRateRef, speed, percentProp])
 
   const renderHover = useCallback(() => {
     const PERIMETER = 3140
