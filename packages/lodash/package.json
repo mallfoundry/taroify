@@ -2,5 +2,24 @@
   "name": "@taroify/lodash",
   "version": "0.0.6-alpha.0",
   "license": "MIT",
-  "private": "true"
+  "private": true,
+  "keywords": [
+    "ui",
+    "taro",
+    "react",
+    "mobile",
+    "frontend",
+    "component",
+    "components"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.171"
+  }
 }
