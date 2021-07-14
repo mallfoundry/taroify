@@ -264,7 +264,7 @@ function PullRefresh(props: PullRefreshProps) {
       return statusSlot
     }
 
-    const nodes = []
+    const nodes: ReactElement[] = []
 
     if (TEXT_STATUS.includes(status)) {
       nodes.push(
