@@ -18,8 +18,7 @@
     "declarationMap": true,
     "types": [
       "jest",
-      "node",
-      "miniprogram-api-typings"
+      "node"
     ],
     "rootDir": ".",
     "jsx": "react",

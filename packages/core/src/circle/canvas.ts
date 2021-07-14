@@ -1,4 +1,4 @@
-type CanvasContext = WechatMiniprogram.CanvasContext
+import { CanvasContext } from "@tarojs/taro"
 
 export function canvasContextAdaptor(ctx: CanvasContext & Record<string, unknown>): CanvasContext {
   // @ts-ignore
