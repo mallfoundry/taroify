@@ -3,15 +3,24 @@ import * as _ from "lodash"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import useScroll from "../hooks/useScroll"
+
+import menus from "../utils/menus"
 import { listeningSimulatorEvents } from "../utils/simulator-router"
+
 import "./simulator.scss"
+
+function getSubpackage(componentName: string) {
+  for (const menu of menus) {
+    for (const page of menu.children) {
+      if (page.to.endsWith(componentName)) {
+        return menu.subpackage
+      }
+    }
+  }
+}
 
 function resolveComponentName(path: string, pattern: RegExp | string) {
   return _.replace(path, pattern, "")
-}
-
-function resolveComponentPath(componentName: string) {
-  return `#/pages/${_.endsWith(componentName, "/") ? componentName : `${componentName}/`}index`
 }
 
 function getIframePath(path?: string) {
@@ -24,6 +33,12 @@ function getIframePath(path?: string) {
     return resolveComponentPath(componentName)
   }
   return "#/pages/home/index"
+}
+
+function resolveComponentPath(componentName: string) {
+  const subpackage = getSubpackage(componentName)
+  const componentPath = _.endsWith(componentName, "/") ? componentName : `${componentName}/`
+  return `#/pages/${(subpackage ? subpackage + "/" : subpackage) + componentPath}index`
 }
 
 function h5Root() {

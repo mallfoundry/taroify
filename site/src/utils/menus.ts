@@ -22,6 +22,7 @@ const menus = [
   },
   {
     title: "基础组件",
+    subpackage: "basic",
     children: [
       {
         title: "Button 按钮",
@@ -59,6 +60,7 @@ const menus = [
   },
   {
     title: "反馈组件",
+    subpackage: "action",
     children: [
       {
         title: "ActionSheet 动作面板",
@@ -100,6 +102,7 @@ const menus = [
   },
   {
     title: "展示组件",
+    subpackage: "display",
     children: [
       {
         title: "Badge 徽标",
@@ -161,10 +164,15 @@ const menus = [
   },
   {
     title: "导航组件",
+    subpackage: "navigation",
     children: [
       {
         title: "Grid 宫格",
         to: "/components/grid/",
+      },
+      {
+        title: "IndexBar 索引栏",
+        to: "/components/index-bar/",
       },
       {
         title: "Navbar 导航栏",
