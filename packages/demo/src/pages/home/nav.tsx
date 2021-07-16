@@ -28,7 +28,7 @@ export function NavBlock(props: NavBlockProps) {
       </View>
     )
   }
-
+  console.log(href)
   return (
     <Navigator className={demoPrefixClassname("nav__block")} url={href}>
       {title}

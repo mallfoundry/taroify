@@ -1,19 +1,22 @@
 import { Image, Text, View } from "@tarojs/components"
 import * as _ from "lodash"
 import * as React from "react"
-import componentPages from "../../component-pages"
-import "./index.scss"
 import { demoPrefixClassname } from "../../styles/prefix"
+import subpackages, { Page } from "../../subpackages"
 
+import "./index.scss"
 import Nav, { NavBlock } from "./nav"
 
-function renderNavs(pages: any[]) {
-  return _.map(pages, ({ name, path, title, children }) => {
-    if (!children) {
-      return <NavBlock key={title} component={name} href={path} title={title} />
-    }
-    return <Nav key={title} title={title} children={renderNavs(children)} />
-  })
+function renderNavBlocks(root: string, pages: Page[]) {
+  return _.map(pages, ({ name, path, title }) => (
+    <NavBlock key={title} component={name} href={"../../" + root + path} title={title} />
+  ))
+}
+
+function renderNavs() {
+  return _.map(subpackages, ({ root, title, pages }) => (
+    <Nav key={root} title={title} children={renderNavBlocks(root, pages)} />
+  ))
 }
 
 export default function Home() {
@@ -30,7 +33,7 @@ export default function Home() {
       <View className={demoPrefixClassname("home__description")}>
         轻量、可靠的小程序端 Taro 组件库
       </View>
-      {renderNavs(componentPages)}
+      {renderNavs()}
     </View>
   )
 }

@@ -1,0 +1,18 @@
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.notice-bar-demo {
+
+  .#{$demo-prefix}page__content {
+    background: #fff;
+  }
+
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+
+  .notice-swiper {
+    height: 40px * $hd;
+    line-height: 40px * $hd;
+  }
+}

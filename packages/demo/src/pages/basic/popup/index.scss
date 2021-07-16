@@ -1,0 +1,14 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.popup-demo {
+
+  .#{$component-prefix}popup--center {
+    font-size: $font-size-lg;
+  }
+
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}

@@ -1,0 +1,7 @@
+@import "../../../styles/prefix";
+
+.toast-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}

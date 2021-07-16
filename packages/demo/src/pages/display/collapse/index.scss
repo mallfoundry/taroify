@@ -1,0 +1,21 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.collapse-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+
+  .custom-collapse-item1 {
+    .#{$component-prefix}cell__title {
+      display: flex;
+      align-items: center;
+
+      .van-icon-question-o {
+        margin-left: 5px * $hd;
+        color: $primary-color;
+      }
+    }
+  }
+}

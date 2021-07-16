@@ -1,0 +1,12 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.sidebar-demo {
+  height: 100%;
+  background: #fff;
+
+  .#{$demo-prefix}block__title {
+    padding-left: 0;
+  }
+}

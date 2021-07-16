@@ -1,0 +1,22 @@
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.empty-demo {
+  background: #fff;
+
+  .#{$demo-prefix}page__content {
+    background: inherit;
+    padding: 0 0 20px * $hd 0;
+  }
+
+  .custom-empty__image {
+    width: 90px * $hd;
+    height: 90px * $hd;
+  }
+
+  .bottom-button {
+    margin-top: 24px * $hd;
+    width: 160px * $hd;
+    height: 40px * $hd;
+  }
+}

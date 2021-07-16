@@ -1,0 +1,42 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.swiper-demo {
+  .#{$taroify-prefix}swiper-item {
+    &:nth-child(even) {
+      background-color: #39a9ed;
+    }
+
+    &:nth-child(odd) {
+      background-color: #66c6f2;
+    }
+  }
+
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+
+  .basic-swiper {
+    .#{$taroify-prefix}swiper-item {
+      color: #fff;
+      font-size: 20px * $hd;
+      line-height: 150px * $hd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .vertical-swiper {
+    height: 200px * $hd;
+
+    .#{$taroify-prefix}swiper-item {
+      color: #fff;
+      font-size: 20px * $hd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

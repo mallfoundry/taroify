@@ -1,0 +1,19 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.backdrop-demo {
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .content-block {
+      width: 120px * $hd;
+      height: 120px * $hd;
+      background: #fff;
+      border-radius: $border-radius-md;
+    }
+  }
+}

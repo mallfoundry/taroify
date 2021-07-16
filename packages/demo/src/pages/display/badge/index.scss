@@ -1,0 +1,32 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.badge-demo {
+  background: #fff;
+  height: 100%;
+
+  .#{$component-prefix}badge__wrapper {
+    margin-left: 16px * $hd;
+  }
+
+  .badge-icon {
+    display: block;
+    margin-left: 0;
+    font-size: 10px * $hd;
+    line-height: 16px * $hd;
+  }
+
+  .badge-block {
+    width: 40px * $hd;
+    height: 40px* $hd;
+    background: $gray-2;
+    border-radius: 4px * $hd;
+  }
+
+  .independent-badges {
+    .#{$component-prefix}badge {
+      margin-left: 16px * $hd;
+    }
+  }
+}

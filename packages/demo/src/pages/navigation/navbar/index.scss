@@ -1,0 +1,7 @@
+@import "../../../styles/prefix";
+
+.navbar-demo {
+  .#{$demo-prefix}page__content {
+    padding: 0;
+  }
+}

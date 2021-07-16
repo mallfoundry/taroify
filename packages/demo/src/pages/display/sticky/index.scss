@@ -1,0 +1,33 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.sticky-demo {
+  height: 200vh;
+
+  .#{$component-prefix}button {
+    margin-left: 16px * $hd;
+  }
+
+  &__offset-sticky {
+    .#{$component-prefix}button {
+      margin-left: 116px * $hd;
+    }
+  }
+
+  &__container-sticky {
+    height: 150px * $hd;
+    background: #fff;
+
+    .#{$component-prefix}button {
+      margin-left: 216px * $hd;
+    }
+  }
+
+  &__bottom-sticky {
+
+    &__padding {
+      height: 100vh;
+    }
+  }
+}

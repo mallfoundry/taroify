@@ -1,0 +1,8 @@
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.skeleton-demo {
+  .#{$demo-prefix}page__content {
+    background: #fff;
+  }
+}

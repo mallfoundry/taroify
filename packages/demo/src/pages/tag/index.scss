@@ -1,9 +1,0 @@
-@import "../../styles/prefix";
-
-.tag-demo {
-  :global {
-    .#{$demo-prefix}page__content {
-      padding: 0;
-    }
-  }
-}

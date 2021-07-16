@@ -1,0 +1,23 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.pull-refresh-demo {
+  background: #fff;
+
+  .#{$component-prefix}pull-refresh {
+    height: calc(100vh + 100px);
+
+    .pull-text {
+      font-size: 16px * $hd;
+      padding: 16px * $hd 0 0 16px * $hd;
+    }
+  }
+
+  .doge {
+    width: 140px * $hd;
+    height: 72px * $hd;
+    margin-top: 8px * $hd;
+    border-radius: 4px * $hd;
+  }
+}

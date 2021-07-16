@@ -1,25 +1,17 @@
-import componentPages from "./component-pages"
+import __subpackages__ from "./subpackages"
 
-function obtainComponentPagePaths() {
-  const pagePaths: string[] = []
-  for (const { children } of componentPages) {
-    if (children) {
-      for (const { path } of children) {
-        if (path) {
-          pagePaths.push(path.replace("/", ""))
-        }
-      }
-    }
-  }
-  return pagePaths
-}
+const subpackages = __subpackages__.map(({ root, pages }) => ({
+  root,
+  pages: pages.map(({ path }) => path),
+}))
 
 export default {
-  pages: ["pages/home/index", ...obtainComponentPagePaths()],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#4fc08d",
     navigationBarTitleText: "Taroify",
     navigationBarTextStyle: "black",
   },
+  pages: ["pages/home/index"],
+  subpackages,
 }
