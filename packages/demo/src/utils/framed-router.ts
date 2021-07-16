@@ -20,16 +20,15 @@ function sendMessage(message: Message) {
 }
 
 interface NavigateOptions {
-  subpackage: string
   component: string
 }
 
-export function navigateTo({ component, subpackage }: NavigateOptions) {
+export function navigateTo({ component }: NavigateOptions) {
   if (component) {
     sendMessage({
       source: SOURCE_NAME,
       event: "navigateTo",
-      payload: { component, subpackage },
+      payload: { component },
     })
   }
 }
