@@ -6,6 +6,10 @@ export function isWindow(val: unknown): val is Window {
   return val === window
 }
 
+export function isBodyElement(val: unknown): boolean {
+  return val === document.body
+}
+
 export interface TaroElement extends HTMLElement {
   uid: string
 }
@@ -20,8 +24,8 @@ export function elementUnref(elementOrRef: any): TaroElement {
   return elementOrRef
 }
 
-export function isRootElement(node: TaroElement) {
-  return node.nodeType === ELEMENT_NODE_TYPE && node.tagName === "ROOT"
+export function isRootElement(node?: HTMLElement) {
+  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
 export function createNodesRef(element: TaroElement) {
