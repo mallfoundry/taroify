@@ -1,0 +1,8 @@
+@import "~@taroify/core/styles/prefix";
+@import "../../../styles/prefix";
+
+.index-bar-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}

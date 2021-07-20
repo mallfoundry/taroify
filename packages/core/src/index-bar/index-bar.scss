@@ -1,0 +1,41 @@
+@import "./variables";
+
+.#{$component-prefix}index-bar {
+  &__sidebar {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: $index-bar-sidebar-z-index;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+  }
+
+  &__index {
+    position: relative;
+    padding: 0 $padding-xs 0 $padding-md;
+    font-weight: $font-weight-bold;
+    font-size: $index-bar-index-font-size;
+    line-height: $index-bar-index-line-height;
+
+    &--active {
+      color: $index-bar-index-active-color;
+    }
+  }
+
+  &__alert {
+    position: absolute;
+    top: -20px;
+    right: 60px;
+    height: 40px * $hd;
+    width: 40px * $hd;
+    background: #7f7f7f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
