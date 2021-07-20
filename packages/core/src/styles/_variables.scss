@@ -49,12 +49,6 @@ $padding-md: $padding-base * 4;
 $padding-lg: $padding-base * 6;
 $padding-xl: $padding-base * 8;
 
-// Font
-$font-size-xs: 10px * $hd;
-$font-size-sm: 12px * $hd;
-$font-size-md: 14px * $hd;
-$font-size-lg: 16px * $hd;
-
 // Height
 $height-xs: 16px * $hd;
 $height-sm: 18px * $hd;
@@ -63,11 +57,16 @@ $height-lg: 22px * $hd;
 
 $font-weight-bold: 500;
 
+// Font
+$font-size-xs: 10px * $hd;
+$font-size-sm: 12px * $hd;
+$font-size-md: 14px * $hd;
+$font-size-lg: 16px * $hd;
 // Line Height
-$line-height-xs: 18px * $hd;
-$line-height-sm: 20px * $hd;
-$line-height-md: 22px * $hd;
-$line-height-lg: 24px * $hd;
+$line-height-xs: 14px * $hd;
+$line-height-sm: 18px * $hd;
+$line-height-md: 20px * $hd;
+$line-height-lg: 22px * $hd;
 
 $base-font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
 helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB',
