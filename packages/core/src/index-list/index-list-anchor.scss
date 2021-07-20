@@ -1,6 +1,6 @@
 @import "./variables";
 
-.#{$component-prefix}index-anchor {
+.#{$component-prefix}index-list__anchor {
   z-index: $index-anchor-z-index;
   box-sizing: border-box;
   padding: $index-anchor-padding;

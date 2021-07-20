@@ -1,11 +1,11 @@
 @import "./variables";
 
-.#{$component-prefix}index-bar {
+.#{$component-prefix}index-list {
   &__sidebar {
     position: fixed;
     top: 50%;
     right: 0;
-    z-index: $index-bar-sidebar-z-index;
+    z-index: $index-list-sidebar-z-index;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -19,11 +19,11 @@
     position: relative;
     padding: 0 $padding-xs 0 $padding-md;
     font-weight: $font-weight-bold;
-    font-size: $index-bar-index-font-size;
-    line-height: $index-bar-index-line-height;
+    font-size: $index-list-index-font-size;
+    line-height: $index-list-index-line-height;
 
     &--active {
-      color: $index-bar-index-active-color;
+      color: $index-list-index-active-color;
     }
   }
 

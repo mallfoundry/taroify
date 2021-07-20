@@ -24,15 +24,15 @@ import {
   getBoundingClientRects,
   makeBoundingClientRect,
 } from "../utils/rect"
-import IndexAnchor, { IndexAnchorInstance, IndexAnchorProps } from "./index-anchor"
+import IndexListAnchor, { IndexListAnchorInstance, IndexListAnchorProps } from "./index-list-anchor"
 import IndexListIndex from "./index-list-index"
 import IndexListSidebar from "./index-list-sidebar"
 import IndexListContext from "./index-list.context"
 
 interface IndexBarChildren {
   children: ReactNode[]
-  anchorRefs: RefObject<IndexAnchorInstance>[]
-  anchorProps: IndexAnchorProps[]
+  anchorRefs: RefObject<IndexListAnchorInstance>[]
+  anchorProps: IndexListAnchorProps[]
 }
 
 function childrenIndexBar(
@@ -54,9 +54,9 @@ function childrenIndexBar(
       childrenIndexBar(childrenProp, __children__, key ?? index)
       return
     }
-    if (elementType === IndexAnchor) {
+    if (elementType === IndexListAnchor) {
       const { index: indexProp } = props
-      const anchorRef = createRef<IndexAnchorInstance>()
+      const anchorRef = createRef<IndexListAnchorInstance>()
       const { length: arrayedIndex } = __children__.anchorRefs
       __children__.anchorRefs.push(anchorRef)
       __children__.anchorProps.push(props)
@@ -130,7 +130,7 @@ function IndexList(props: IndexBarProps) {
   const getSidebarRect = useCallback(() => getBoundingClientRect(sidebarRef), [])
 
   const getAnchorRects = useCallback(
-    () => getBoundingClientRects(listRef, ` .${prefixClassname("index-anchor-wrapper")}`),
+    () => getBoundingClientRects(listRef, ` .${prefixClassname("index-list__anchor-wrapper")}`),
     [],
   )
 
@@ -246,7 +246,7 @@ function IndexList(props: IndexBarProps) {
         getAnchorRects: () => anchorRectsRef.current,
       }}
     >
-      <View ref={listRef} className={prefixClassname("index-bar")}>
+      <View ref={listRef} className={prefixClassname("index-list")}>
         <IndexListSidebar
           ref={sidebarRef}
           onClick={onSidebarClick}

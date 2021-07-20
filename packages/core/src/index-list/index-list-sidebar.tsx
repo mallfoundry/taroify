@@ -18,7 +18,7 @@ const IndexListSidebar = forwardRef(
       <View
         ref={ref}
         catchMove
-        className={prefixClassname("index-bar__sidebar")}
+        className={prefixClassname("index-list__sidebar")}
         children={children}
         onClick={onClick}
         onTouchMove={onTouchMove}

@@ -18,22 +18,22 @@ import { addUnitPx } from "../utils/format/unit"
 import { getBoundingClientRect } from "../utils/rect"
 import IndexListContext from "./index-list.context"
 
-export interface IndexAnchorInstance {
+export interface IndexListAnchorInstance {
   scrollIntoView(scrollTop: number): void
 }
 
-export interface IndexAnchorProps {
+export interface IndexListAnchorProps {
   index: number | string
   children?: ReactNode
 }
 
-interface InternalIndexAnchorProps extends IndexAnchorProps {
+interface InternalIndexListAnchorProps extends IndexListAnchorProps {
   arrayedIndex?: number
 }
 
-const IndexAnchor = forwardRef(
-  (props: IndexAnchorProps, ref: ForwardedRef<IndexAnchorInstance>) => {
-    const { arrayedIndex, index, children } = props as InternalIndexAnchorProps
+const IndexListAnchor = forwardRef(
+  (props: IndexListAnchorProps, ref: ForwardedRef<IndexListAnchorInstance>) => {
+    const { arrayedIndex, index, children } = props as InternalIndexListAnchorProps
 
     const {
       activeArrayedIndex,
@@ -58,7 +58,7 @@ const IndexAnchor = forwardRef(
       [],
     )
 
-    useImperativeHandle(ref as ForwardedRef<IndexAnchorInstance>, () => ({
+    useImperativeHandle(ref, () => ({
       scrollIntoView,
     }))
 
@@ -115,10 +115,14 @@ const IndexAnchor = forwardRef(
     }
 
     return (
-      <View ref={rootRef} className={prefixClassname("index-anchor-wrapper")} style={wrapperStyle}>
+      <View
+        ref={rootRef}
+        className={prefixClassname("index-list__anchor-wrapper")}
+        style={wrapperStyle}
+      >
         <View
-          className={classNames(prefixClassname("index-anchor"), {
-            [prefixClassname("index-anchor--sticky")]: active,
+          className={classNames(prefixClassname("index-list__anchor"), {
+            [prefixClassname("index-list__anchor--sticky")]: active,
             [HAIRLINE_BORDER_BOTTOM]: active,
           })}
           style={anchorStyle}
@@ -129,4 +133,4 @@ const IndexAnchor = forwardRef(
   },
 )
 
-export default IndexAnchor
+export default IndexListAnchor

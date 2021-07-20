@@ -1,14 +1,14 @@
-import IndexAnchor from "./index-anchor"
 import { default as IndexBarElement, IndexBarProps } from "./index-list"
+import IndexListAnchor from "./index-list-anchor"
 
 interface IndexListInterface {
   (props: IndexBarProps): JSX.Element
 
-  Anchor: typeof IndexAnchor
+  Anchor: typeof IndexListAnchor
 }
 
 const IndexList = IndexBarElement as IndexListInterface
 
-IndexList.Anchor = IndexAnchor
+IndexList.Anchor = IndexListAnchor
 
 export default IndexList

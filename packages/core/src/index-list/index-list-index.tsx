@@ -14,8 +14,8 @@ export default function IndexListIndex(props: IndexListIndexProps) {
   const { activeIndex } = useContext(IndexListContext)
   return (
     <View
-      className={classNames(prefixClassname("index-bar__index"), {
-        [prefixClassname("index-bar__index--active")]: activeIndex === index,
+      className={classNames(prefixClassname("index-list__index"), {
+        [prefixClassname("index-list__index--active")]: activeIndex === index,
       })}
       children={index}
     />
