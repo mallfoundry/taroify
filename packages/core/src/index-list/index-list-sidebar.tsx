@@ -3,7 +3,7 @@ import * as React from "react"
 import { ForwardedRef, forwardRef, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-interface IndexBarSidebarProps {
+interface IndexListSidebarProps {
   children?: ReactNode
   onClick?: (event: ITouchEvent) => void
   onTouchMove?: (event: ITouchEvent) => void
@@ -11,8 +11,8 @@ interface IndexBarSidebarProps {
   onTouchEnd?: (event: ITouchEvent) => void
 }
 
-const IndexBarSidebar = forwardRef(
-  (props: IndexBarSidebarProps, ref: ForwardedRef<HTMLElement | undefined>) => {
+const IndexListSidebar = forwardRef(
+  (props: IndexListSidebarProps, ref: ForwardedRef<HTMLElement | undefined>) => {
     const { children, onClick, onTouchMove, onTouchCancel, onTouchEnd } = props
     return (
       <View
@@ -29,4 +29,4 @@ const IndexBarSidebar = forwardRef(
   },
 )
 
-export default IndexBarSidebar
+export default IndexListSidebar

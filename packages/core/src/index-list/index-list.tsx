@@ -1,5 +1,4 @@
-import { View } from "@tarojs/components"
-import { ITouchEvent } from "@tarojs/components/types/common"
+import { ITouchEvent, View } from "@tarojs/components"
 import { usePageScroll } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
@@ -26,9 +25,9 @@ import {
   makeBoundingClientRect,
 } from "../utils/rect"
 import IndexAnchor, { IndexAnchorInstance, IndexAnchorProps } from "./index-anchor"
-import IndexBarIndex from "./index-bar-index"
-import IndexBarSidebar from "./index-bar-sidebar"
-import IndexBarContext from "./index-bar.context"
+import IndexListIndex from "./index-list-index"
+import IndexListSidebar from "./index-list-sidebar"
+import IndexListContext from "./index-list.context"
 
 interface IndexBarChildren {
   children: ReactNode[]
@@ -36,7 +35,11 @@ interface IndexBarChildren {
   anchorProps: IndexAnchorProps[]
 }
 
-function childrenIndexBar(children: ReactNode, __children__: IndexBarChildren) {
+function childrenIndexBar(
+  children: ReactNode,
+  __children__: IndexBarChildren,
+  parentIndex?: React.Key,
+) {
   Children.forEach(children, (child: ReactNode, index: number) => {
     if (!isValidElement(child)) {
       return
@@ -48,7 +51,7 @@ function childrenIndexBar(children: ReactNode, __children__: IndexBarChildren) {
     const { children: childrenProp } = props
 
     if (isFragment(element)) {
-      childrenIndexBar(childrenProp, __children__)
+      childrenIndexBar(childrenProp, __children__, key ?? index)
       return
     }
     if (elementType === IndexAnchor) {
@@ -67,7 +70,7 @@ function childrenIndexBar(children: ReactNode, __children__: IndexBarChildren) {
     } else {
       __children__.children?.push(
         cloneElement(element, {
-          key: key ?? index,
+          key: key ?? `${parentIndex}-${index}`,
         }),
       )
     }
@@ -94,7 +97,7 @@ export interface IndexBarProps {
   children?: ReactNode
 }
 
-function IndexBar(props: IndexBarProps) {
+function IndexList(props: IndexBarProps) {
   const { sticky = true, stickyOffsetTop = 0, zIndex = 1, highlightColor } = props
   const { anchorProps, anchorRefs, children } = useIndexBarChildren(props.children)
 
@@ -225,13 +228,13 @@ function IndexBar(props: IndexBarProps) {
   const sidebarIndexes = useMemo(
     () =>
       _.map(anchorProps, (anchorProp) => (
-        <IndexBarIndex key={anchorProp.index} index={anchorProp.index} />
+        <IndexListIndex key={anchorProp.index} index={anchorProp.index} />
       )),
     [anchorProps],
   )
 
   return (
-    <IndexBarContext.Provider
+    <IndexListContext.Provider
       value={{
         sticky,
         stickyOffsetTop,
@@ -244,7 +247,7 @@ function IndexBar(props: IndexBarProps) {
       }}
     >
       <View ref={listRef} className={prefixClassname("index-bar")}>
-        <IndexBarSidebar
+        <IndexListSidebar
           ref={sidebarRef}
           onClick={onSidebarClick}
           onTouchMove={onTouchMove}
@@ -252,11 +255,11 @@ function IndexBar(props: IndexBarProps) {
           onTouchEnd={onTouchStop}
         >
           {sidebarIndexes}
-        </IndexBarSidebar>
+        </IndexListSidebar>
         {children}
       </View>
-    </IndexBarContext.Provider>
+    </IndexListContext.Provider>
   )
 }
 
-export default IndexBar
+export default IndexList

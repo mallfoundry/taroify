@@ -3,15 +3,15 @@ import classNames from "classnames"
 import * as React from "react"
 import { useContext } from "react"
 import { prefixClassname } from "../styles"
-import IndexBarContext from "./index-bar.context"
+import IndexListContext from "./index-list.context"
 
-interface IndexBarIndexProps {
+interface IndexListIndexProps {
   index?: number | string
 }
 
-export default function IndexBarIndex(props: IndexBarIndexProps) {
+export default function IndexListIndex(props: IndexListIndexProps) {
   const { index } = props
-  const { activeIndex } = useContext(IndexBarContext)
+  const { activeIndex } = useContext(IndexListContext)
   return (
     <View
       className={classNames(prefixClassname("index-bar__index"), {

@@ -1,4 +1,4 @@
-import { Cell, IndexBar, Tabs } from "@taroify/core"
+import { Cell, IndexList, Tabs } from "@taroify/core"
 import * as _ from "lodash"
 import * as React from "react"
 import { Fragment, useState } from "react"
@@ -14,18 +14,18 @@ function BasicIndexBar() {
   }
 
   return (
-    <IndexBar>
+    <IndexList>
       {_.map(indexList, (index) => {
         return (
           <Fragment key={index}>
-            <IndexBar.Anchor index={index} />
+            <IndexList.Anchor index={index} />
             <Cell title="文本" />
             <Cell title="文本" />
             <Cell title="文本" />
           </Fragment>
         )
       })}
-    </IndexBar>
+    </IndexList>
   )
 }
 
@@ -33,25 +33,25 @@ function CustomIndexBar() {
   const customIndexList = [1, 2, 3, 4, 5, 6, 8, 9, 10]
 
   return (
-    <IndexBar>
+    <IndexList>
       {_.map(customIndexList, (index) => {
         return (
           <Fragment key={index}>
-            <IndexBar.Anchor index={index}>标题{index}</IndexBar.Anchor>
+            <IndexList.Anchor index={index}>标题{index}</IndexList.Anchor>
             <Cell title="文本" />
             <Cell title="文本" />
             <Cell title="文本" />
           </Fragment>
         )
       })}
-    </IndexBar>
+    </IndexList>
   )
 }
 
 export default function IndexBarDemo() {
   const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
   return (
-    <Page title="IndexBar 索引栏" className="index-bar-demo">
+    <Page title="IndexList 索引栏" className="index-list-demo">
       <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
         <Tabs.TabPane title="基础用法">
           <BasicIndexBar />

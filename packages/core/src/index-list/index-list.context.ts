@@ -1,7 +1,7 @@
 import { createContext } from "react"
 import { BoundingClientRect, makeBoundingClientRect } from "../utils/rect"
 
-interface IndexBarContextValue {
+interface IndexListContextValue {
   sticky?: boolean
   stickyOffsetTop?: number
   zIndex?: number
@@ -14,10 +14,10 @@ interface IndexBarContextValue {
   getAnchorRects(): BoundingClientRect[]
 }
 
-const IndexBarContext = createContext<IndexBarContextValue>({
+const IndexListContext = createContext<IndexListContextValue>({
   activeIndex: -1,
   activeArrayedIndex: -1,
   getListRect: () => makeBoundingClientRect(0, 0),
   getAnchorRects: () => [],
 })
-export default IndexBarContext
+export default IndexListContext

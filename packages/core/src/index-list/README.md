@@ -1,4 +1,4 @@
-# IndexBar 索引栏
+# IndexList 索引栏
 
 ### 介绍
 
@@ -7,17 +7,17 @@
 ### 引入
 
 ```tsx
-import { IndexBar } from '@taroify/core';
+import { IndexList } from '@taroify/core';
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-点击索引栏时，会自动跳转到对应的 `IndexBar.Anchor` 锚点位置。
+点击索引栏时，会自动跳转到对应的 `IndexList.Anchor` 锚点位置。
 
 ```tsx
-function BasicIndexBar() {
+function BasicIndexList() {
   const indexList: string[] = []
   const charCodeOfA = "A".charCodeAt(0)
 
@@ -26,18 +26,18 @@ function BasicIndexBar() {
   }
 
   return (
-    <IndexBar>
+    <IndexList>
       {_.map(indexList, (index) => {
         return (
           <Fragment key={index}>
-            <IndexBar.Anchor index={index} />
+            <IndexList.Anchor index={index} />
             <Cell title="文本" />
             <Cell title="文本" />
             <Cell title="文本" />
           </Fragment>
         )
       })}
-    </IndexBar>
+    </IndexList>
   )
 }
 ```
@@ -45,29 +45,29 @@ function BasicIndexBar() {
 ### 自定义索引列表
 
 ```tsx
-function CustomIndexBar() {
+function CustomIndexList() {
   const customIndexList = [1, 2, 3, 4, 5, 6, 8, 9, 10]
 
   return (
-    <IndexBar>
+    <IndexList>
       {_.map(customIndexList, (index) => {
         return (
           <Fragment key={index}>
-            <IndexBar.Anchor index={index}>标题{index}</IndexBar.Anchor>
+            <IndexList.Anchor index={index}>标题{index}</IndexList.Anchor>
             <Cell title="文本" />
             <Cell title="文本" />
             <Cell title="文本" />
           </Fragment>
         )
       })}
-    </IndexBar>
+    </IndexList>
   )
 }
 ```
 
 ## API
 
-### IndexBar Props
+### IndexList Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -76,14 +76,14 @@ function CustomIndexBar() {
 | stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | _number_ | `0` |
 | highlightColor | 索引字符高亮颜色 | _string_ | `#ee0a24` |
 
-### IndexBar.Anchor Props
+### IndexList.Anchor Props
 
 | 参数  | 说明     | 类型               | 默认值 |
 | ----- | -------- | ------------------ | ------ |
 | index | 索引字符 | _number \| string_ | -      |
 | children | 索引内容 | _ReactNode_ | -      |
 
-### IndexBar Events
+### IndexList Events
 
 | 事件名 | 说明                         | 回调参数                  |
 | ------ | ---------------------------- | ------------------------- |

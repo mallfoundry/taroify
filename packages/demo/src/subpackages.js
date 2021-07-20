@@ -187,9 +187,9 @@ const subpackages = [
         path: "grid/index",
       },
       {
-        title: "IndexBar 索引栏",
-        name: "IndexBar",
-        path: "index-bar/index",
+        title: "IndexList 索引栏",
+        name: "IndexList",
+        path: "index-list/index",
       },
       {
         title: "Navbar 导航栏",

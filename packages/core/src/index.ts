@@ -37,7 +37,7 @@ export { default as Swiper } from "./swiper"
 export { default as Tag } from "./tag"
 // Navigation Components
 export { default as Grid } from "./grid"
-export { default as IndexBar } from "./index-bar"
+export { default as IndexList } from "./index-list"
 export { default as Navbar } from "./navbar"
 export { default as Pagination } from "./pagination"
 export { default as Sidebar } from "./sidebar"

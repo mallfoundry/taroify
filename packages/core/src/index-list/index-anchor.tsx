@@ -16,7 +16,7 @@ import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { TaroElement } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
 import { getBoundingClientRect } from "../utils/rect"
-import IndexBarContext from "./index-bar.context"
+import IndexListContext from "./index-list.context"
 
 export interface IndexAnchorInstance {
   scrollIntoView(scrollTop: number): void
@@ -43,7 +43,7 @@ const IndexAnchor = forwardRef(
       highlightColor,
       getAnchorRects,
       getListRect,
-    } = useContext(IndexBarContext)
+    } = useContext(IndexListContext)
 
     const rootRef = useRef<TaroElement>()
 

@@ -171,8 +171,8 @@ const menus = [
         to: "/components/grid/",
       },
       {
-        title: "IndexBar 索引栏",
-        to: "/components/index-bar/",
+        title: "IndexList 索引栏",
+        to: "/components/index-list/",
       },
       {
         title: "Navbar 导航栏",
