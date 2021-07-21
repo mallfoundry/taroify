@@ -51,6 +51,17 @@ const subpackages = [
     ],
   },
   {
+    root: "pages/form/",
+    title: "表单组件",
+    pages: [
+      {
+        title: "Switch 开关",
+        name: "Switch",
+        path: "switch/index",
+      },
+    ],
+  },
+  {
     root: "pages/action/",
     title: "反馈组件",
     pages: [

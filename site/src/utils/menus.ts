@@ -58,6 +58,17 @@ const menus = [
       },
     ],
   },
+
+  {
+    title: "表单组件",
+    subpackage: "form",
+    children: [
+      {
+        title: "Switch 开关",
+        to: "/components/switch/",
+      },
+    ],
+  },
   {
     title: "反馈组件",
     subpackage: "action",

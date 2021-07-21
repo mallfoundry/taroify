@@ -9,6 +9,8 @@ export { default as Space } from "./space"
 export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
+// Form Components
+export { default as Switch } from "./switch"
 // Action Components
 export { default as Sheet } from "./sheet"
 export { default as ActionSheet } from "./action-sheet"
