@@ -12,6 +12,18 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.7-alpha.0
+
+`2021-07-21`
+
+**New Component**
+
+- 新增 DropdownMenu 组件
+- 新增 PullRefresh 组件
+- 新增 Circle 组件
+- 新增 List 组件
+- 新增 IndexList 组件
+
 ### v0.0.6-alpha.0
 
 `2021-06-21`
