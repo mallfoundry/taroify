@@ -55,6 +55,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "Stepper 步进器",
+        name: "Stepper",
+        path: "stepper/index",
+      },
+      {
         title: "Switch 开关",
         name: "Switch",
         path: "switch/index",
