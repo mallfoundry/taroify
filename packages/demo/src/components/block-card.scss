@@ -1,0 +1,8 @@
+@import "../styles/prefix";
+@import "~@taroify/core/styles/variables";
+
+.#{$demo-prefix}block-card {
+  margin: 12px * $hd 12px * $hd 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
