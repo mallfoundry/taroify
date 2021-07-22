@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.8-alpha.0
+
+`2021-07-22`
+
+**New Component**
+
+- 新增 Stepper 组件
+- 新增 Switch 组件
+
 ### v0.0.7-alpha.0
 
 `2021-07-21`
