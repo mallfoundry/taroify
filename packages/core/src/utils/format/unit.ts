@@ -1,7 +1,19 @@
+import * as _ from "lodash"
 import { CSSProperties } from "react"
 
 export function addUnitPx(value?: string | number): string {
   return value === undefined ? "" : `${unitToPx(value)}px`
+}
+
+export function getSizeStyle(originSize?: string | number): CSSProperties | string | undefined {
+  if (_.isNumber(originSize) || _.isString(originSize)) {
+    const size = addUnitPx(originSize)
+    return {
+      width: size,
+      height: size,
+    }
+  }
+  return ""
 }
 
 export function getZIndexStyle(zIndex?: string | number) {
