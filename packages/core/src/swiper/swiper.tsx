@@ -23,7 +23,7 @@ import {
 import { prefixClassname } from "../styles"
 import { useComputed } from "../utils/computed"
 import { preventDefault } from "../utils/dom/event"
-import { minmax } from "../utils/format/number"
+import { clamp } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
 import { BoundingClientRect, getBoundingClientRect } from "../utils/rect"
@@ -163,9 +163,9 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     (pace: number) => {
       if (pace) {
         if (loop) {
-          return minmax(activeIndexRef.current + pace, -1, count)
+          return clamp(activeIndexRef.current + pace, -1, count)
         }
-        return minmax(activeIndexRef.current + pace, 0, maxCount.value)
+        return clamp(activeIndexRef.current + pace, 0, maxCount.value)
       }
       return activeIndexRef.current
     },
@@ -181,7 +181,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
 
       let targetOffset = offset - currentPosition
       if (!loop) {
-        targetOffset = minmax(targetOffset, minOffset.value, 0)
+        targetOffset = clamp(targetOffset, minOffset.value, 0)
       }
       return targetOffset
     },
