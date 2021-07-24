@@ -64,6 +64,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "Slider 滑块",
+        to: "/components/slider/",
+      },
+      {
         title: "Stepper 步进器",
         to: "/components/stepper/",
       },

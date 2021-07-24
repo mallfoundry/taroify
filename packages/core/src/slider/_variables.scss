@@ -1,0 +1,14 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$slider-active-background-color: $primary-color;
+$slider-inactive-background-color: $gray-3;
+$slider-disabled-opacity: $disabled-opacity;
+$slider-bar-height: 2px * $hd;
+$slider-button-width: 24px * $hd;
+$slider-button-height: 24px * $hd;
+$slider-button-border-radius: 50%;
+$slider-button-background-color: $white;
+$slider-button-box-shadow: 0 1px * $hd 2px * $hd rgba(0, 0, 0, 0.5);
+
+

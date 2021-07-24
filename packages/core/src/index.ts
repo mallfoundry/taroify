@@ -10,6 +10,7 @@ export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 // Form Components
+export { default as Slider } from "./slider"
 export { default as Stepper } from "./stepper"
 export { default as Switch } from "./switch"
 // Action Components
