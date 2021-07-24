@@ -55,6 +55,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "Rate 评分",
+        name: "Rate",
+        path: "rate/index",
+      },
+      {
         title: "Stepper 步进器",
         name: "Stepper",
         path: "stepper/index",
