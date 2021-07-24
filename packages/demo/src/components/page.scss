@@ -3,6 +3,7 @@
 
 .#{$demo-prefix}page {
   height: 100%;
+  overflow: auto;
 
   &__nav {
     position: relative;
