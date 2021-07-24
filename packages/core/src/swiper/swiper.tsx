@@ -133,9 +133,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
 
   const delta = useComputed(() => (vertical ? touch.deltaY : touch.deltaX), [vertical])
 
-  const correctDirection = useComputed(() => {
-    return touch.direction === direction
-  }, [direction])
+  const correctDirection = useComputed(() => touch.direction === direction, [direction])
 
   const size = useComputed(
     () => (vertical ? customRectRef.current?.height : customRectRef.current?.width) ?? 0,

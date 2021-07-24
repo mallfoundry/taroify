@@ -19,7 +19,7 @@ import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { getScrollParent, getScrollTop } from "../utils/dom/scroll"
 import { addUnitPx } from "../utils/format/unit"
-import { TouchDirection, useTouch } from "../utils/touch"
+import { useTouch } from "../utils/touch"
 import {
   PullRefreshCompleted,
   PullRefreshCompletedProps,
@@ -197,7 +197,7 @@ function PullRefresh(props: PullRefreshProps) {
         const { deltaY } = touch
         touch.move(event)
 
-        if (reachTopRef.current && deltaY >= 0 && touch.direction === TouchDirection.Vertical) {
+        if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
           preventDefault(event)
           updateStatus(easeDistance(deltaY))
         }

@@ -28,9 +28,15 @@ export interface TouchRef {
   offsetY: number
   direction?: TouchDirection
 
-  start: (event: ITouchEvent) => void
-  move: (event: ITouchEvent) => void
-  reset: () => void
+  isVertical(): boolean
+
+  isHorizontal(): boolean
+
+  start(event: ITouchEvent): void
+
+  move(event: ITouchEvent): void
+
+  reset(): void
 }
 
 export function useTouch() {
@@ -41,10 +47,19 @@ export function useTouch() {
     deltaY: 0,
     offsetX: 0,
     offsetY: 0,
+    isVertical: () => false,
+    isHorizontal: () => false,
     start: emptyFunction,
     move: emptyFunction,
     reset: emptyFunction,
   })
+
+  const isVertical = useCallback(() => touchRef.current.direction === TouchDirection.Vertical, [])
+
+  const isHorizontal = useCallback(
+    () => touchRef.current.direction === TouchDirection.Horizontal,
+    [],
+  )
 
   const reset = useCallback(function () {
     touchRef.current.deltaX = 0
@@ -75,6 +90,18 @@ export function useTouch() {
       touchRef.current.direction = getDirection(touchRef.current.offsetX, touchRef.current.offsetY)
     }
   }, [])
+
+  useEffect(() => {
+    if (touchRef.current.isHorizontal !== isHorizontal) {
+      touchRef.current.isHorizontal = isHorizontal
+    }
+  }, [touchRef, isHorizontal])
+
+  useEffect(() => {
+    if (touchRef.current.isVertical !== isVertical) {
+      touchRef.current.isVertical = isVertical
+    }
+  }, [touchRef, isVertical])
 
   useEffect(() => {
     if (touchRef.current.reset !== reset) {

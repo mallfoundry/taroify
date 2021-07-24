@@ -18,7 +18,7 @@ import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { clamp } from "../utils/format/number"
 import { getBoundingClientRect } from "../utils/rect"
-import { TouchDirection, useTouch } from "../utils/touch"
+import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
 enum SwipeCellPosition {
@@ -172,7 +172,7 @@ function SwipeCell(props: SwipeCellProps) {
 
       touch.move(event)
 
-      if (touch.direction === TouchDirection.Horizontal) {
+      if (touch.isHorizontal()) {
         const offset = clamp(
           deltaX + startOffsetRef.current,
           -(await getRightWidth()),
