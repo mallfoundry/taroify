@@ -2,6 +2,8 @@
 @import "../../../styles/prefix";
 
 .index-list-demo {
+  overflow: initial;
+
   .#{$demo-prefix}block__content {
     padding: 0;
   }
