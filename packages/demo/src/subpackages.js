@@ -60,6 +60,11 @@ const subpackages = [
         path: "rate/index",
       },
       {
+        title: "Slider 滑块",
+        name: "Slider",
+        path: "slider/index",
+      },
+      {
         title: "Stepper 步进器",
         name: "Stepper",
         path: "stepper/index",

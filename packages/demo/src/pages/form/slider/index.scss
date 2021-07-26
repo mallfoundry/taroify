@@ -1,0 +1,28 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.slider-demo {
+  background: #fff;
+
+  .#{$demo-prefix}block__content {
+    padding: 0 16px * $hd 20px * $hd;
+  }
+
+  .vertical-slider {
+    .#{$demo-prefix}block__content {
+      padding-left: 30px * $hd;
+      height: 150px * $hd;
+    }
+  }
+
+  .custom-thumb {
+    width: 26px * $hd;
+    color: #fff;
+    font-size: 10px * $hd;
+    line-height: 18px * $hd;
+    text-align: center;
+    background-color: #ee0a24;
+    border-radius: 100px * $hd;
+  }
+}

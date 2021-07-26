@@ -68,6 +68,10 @@ const menus = [
         to: "/components/rate/",
       },
       {
+        title: "Slider 滑块",
+        to: "/components/slider/",
+      },
+      {
         title: "Stepper 步进器",
         to: "/components/stepper/",
       },
