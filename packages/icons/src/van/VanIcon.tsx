@@ -3,6 +3,8 @@ import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties } from "react"
 import {
+  ICON_PRESET_COLORS,
+  ICON_PRESET_SIZES,
   ICON_TYPE,
   IconColor,
   IconColorString,
@@ -10,12 +12,13 @@ import {
   IconSize,
   IconSizeString,
 } from "../shared"
+import { addUnitPx } from "../utils/unit"
 
 interface VanIconProps {
   className?: string
   style?: CSSProperties
-  size?: IconSize | IconSizeString
-  color?: IconColor | IconColorString
+  size?: IconSize | IconSizeString | number | string
+  color?: IconColor | IconColorString | string
   children?: string
   onClick?: () => void
 }
@@ -30,6 +33,10 @@ export default function VanIcon(props: VanIconProps) {
     onClick,
   } = props
 
+  const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
+
+  const presetSize = ICON_PRESET_SIZES.includes(color as IconSize)
+
   return (
     <View
       className={classNames(
@@ -37,12 +44,16 @@ export default function VanIcon(props: VanIconProps) {
         `van-icon-${children}`,
         "taroify-icon",
         {
-          [`taroify-icon--${color}`]: color,
-          [`taroify-icon--${size}`]: size,
+          [`taroify-icon--${color}`]: presetColor,
+          [`taroify-icon--${size}`]: presetSize,
         },
         className,
       )}
-      style={style}
+      style={{
+        color: presetColor ? "" : color,
+        fontSize: presetSize ? "" : addUnitPx(size),
+        ...style,
+      }}
       onClick={onClick}
     />
   )
