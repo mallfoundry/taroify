@@ -1,9 +1,10 @@
 import { createContext, ReactNode } from "react"
 
 interface RateContextValue {
-  voidIcon?: ReactNode
-  fullIcon?: ReactNode
-  halfIcon?: ReactNode
+  gutter?: number
+  count?: number
+  icon?: ReactNode
+  emptyIcon?: ReactNode
 }
 
 const RateContext = createContext<RateContextValue>({})

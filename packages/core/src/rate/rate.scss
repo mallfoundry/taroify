@@ -7,9 +7,7 @@
 
   &__item {
     position: relative;
-
-    width: $rate-icon-size;
-    height: $rate-icon-size;
+    pointer-events: none;
 
     &:not(:last-child) {
       padding-right: $rate-icon-gutter;
@@ -19,7 +17,7 @@
   &__icon {
     display: block;
     width: 1em;
-    color: $rate-icon-void-color;
+    color: $rate-icon-empty-color;
     font-size: $rate-icon-size;
 
     &--half {

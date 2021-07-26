@@ -53,10 +53,11 @@ interface RateProps {
   readonly?: boolean
   disabled?: boolean
   touchable?: boolean
-
-  voidIcon?: ReactNode
-  fullIcon?: ReactNode
-  halfIcon?: ReactNode
+  icon?: ReactNode
+  emptyIcon?: ReactNode
+  color?: string
+  emptyColor?: string
+  disabledColor?: string
 
   onChange?(value: number): void
 }
@@ -66,17 +67,19 @@ function Rate(props: RateProps) {
     className,
     value = 0,
     count = 5,
-    // gutter,
+    size,
+    gutter,
     allowHalf = false,
     readonly = false,
     disabled = false,
     touchable = true,
-    voidIcon = <StarOutlined />,
-    fullIcon = <Star />,
-    halfIcon = <Star />,
+    color,
+    emptyColor,
+    disabledColor,
+    icon = <Star />,
+    emptyIcon = <StarOutlined />,
     onChange,
   } = props
-  console.log("value", value)
   const rootRef = useRef<HTMLElement>()
 
   const untouchable = readonly || disabled || !touchable
@@ -115,12 +118,15 @@ function Rate(props: RateProps) {
     [allowHalf, getRanges],
   )
 
-  const emitChange = useCallback(
-    (aValue: number) => {
-      // nextTick(() => onChange?.(aValue))
-      onChange?.(aValue)
+  const onItemClick = useCallback(
+    (event: ITouchEvent) => {
+      if (untouchable) {
+        return
+      }
+      const { clientX } = getClientCoordinates(event)
+      getScoreByPosition(clientX).then(onChange)
     },
-    [onChange],
+    [untouchable, getScoreByPosition, onChange],
   )
 
   const onTouchStart = useCallback(
@@ -138,58 +144,59 @@ function Rate(props: RateProps) {
       if (untouchable) {
         return
       }
-      // touch.move(event)
-      //
-      // if (touch.isHorizontal()) {
-      //   const { clientX } = getClientCoordinates(event)
-      //   preventDefault(event)
-      //   getScoreByPosition(clientX).then(emitChange)
-      // }
-      const { clientX } = getClientCoordinates(event)
-      preventDefault(event)
-      getScoreByPosition(clientX).then(emitChange)
-    },
-    [emitChange, getScoreByPosition, untouchable],
-  )
+      touch.move(event)
 
-  const onItemClick = useCallback(
-    (event: ITouchEvent) => {
-      const { clientX } = getClientCoordinates(event)
-      getScoreByPosition(clientX).then(emitChange)
+      if (touch.isHorizontal()) {
+        preventDefault(event)
+        onItemClick(event)
+      }
     },
-    [emitChange, getScoreByPosition],
+    [untouchable, touch, onItemClick],
   )
 
   const renderStar = useCallback(
     (item: RateListItem, index: number) => {
-      const score = index + 1
       const renderHalf = allowHalf && item.value > 0 && item.value < 1
 
       return (
         <RateItem
           key={index}
-          value={item.value}
+          score={index + 1}
+          disabled={disabled}
+          size={size}
           half={renderHalf}
+          value={item.value}
+          color={color}
+          emptyColor={emptyColor}
+          disabledColor={disabledColor}
           status={item.status}
-          onClick={onItemClick}
         />
       )
     },
-    [allowHalf, onItemClick],
+    [allowHalf, color, disabled, disabledColor, emptyColor, size],
   )
 
   return (
     <View
       ref={rootRef}
-      className={classNames(prefixClassname("rate"), className)}
+      className={classNames(
+        prefixClassname("rate"),
+        {
+          [prefixClassname("rate--disabled")]: disabled,
+          [prefixClassname("rate--readonly")]: readonly,
+        },
+        className,
+      )}
+      onClick={onItemClick}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
     >
       <RateContext.Provider
         value={{
-          voidIcon,
-          fullIcon,
-          halfIcon,
+          gutter,
+          count,
+          icon,
+          emptyIcon,
         }}
       >
         {_.map(list, renderStar)}

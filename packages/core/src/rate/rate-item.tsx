@@ -4,29 +4,56 @@ import classNames from "classnames"
 import * as React from "react"
 import { useContext } from "react"
 import { prefixClassname } from "../styles"
+import { addUnitPx } from "../utils/format/unit"
 import RateContext from "./rate.context"
 import { RateStatus } from "./rate.shared"
 
 interface RateItemProps {
+  score: number
   value: number
   half?: boolean
+  disabled?: boolean
+  size?: number
+  color?: string
+  emptyColor?: string
+  disabledColor?: string
   status: RateStatus
 
   onClick?(event: ITouchEvent): void
 }
 
 function RateItem(props: RateItemProps) {
-  const { value, half, status, onClick } = props
-  const { voidIcon, fullIcon, halfIcon } = useContext(RateContext)
+  const {
+    score,
+    value,
+    half,
+    disabled,
+    size,
+    color,
+    emptyColor,
+    disabledColor,
+    status,
+    onClick,
+  } = props
+  const { gutter, count, emptyIcon, icon } = useContext(RateContext)
+
   const empty = status === RateStatus.Void
   const full = status === RateStatus.Full
-
   return (
-    <View className={prefixClassname("rate__item")} onClick={onClick}>
+    <View
+      className={prefixClassname("rate__item")}
+      style={{
+        paddingRight: score !== count ? addUnitPx(gutter) : "",
+      }}
+      onClick={onClick}
+    >
       {
         //
-        cloneIconElement(full ? fullIcon : voidIcon, {
+        cloneIconElement(full ? icon : emptyIcon, {
+          color: disabled ? disabledColor : full ? color : emptyColor,
+          size,
           className: classNames(prefixClassname("rate__icon"), {
+            [prefixClassname("rate__icon--disabled")]: disabled,
             [prefixClassname("rate__icon--full")]: full,
           }),
         })
@@ -34,12 +61,15 @@ function RateItem(props: RateItemProps) {
       {
         //
         half &&
-          cloneIconElement(halfIcon, {
+          cloneIconElement(icon, {
             style: { width: value + "em" },
+            color: disabled ? disabledColor : full ? color : emptyColor,
+            size,
             className: classNames(
               prefixClassname("rate__icon"),
               prefixClassname("rate__icon--half"),
               {
+                [prefixClassname("rate__icon--disabled")]: disabled,
                 [prefixClassname("rate__icon--full")]: !empty,
               },
             ),
