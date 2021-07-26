@@ -13,9 +13,8 @@ page {
   background: #f7f8fa;
 }
 
-
 .taro_router {
   .taro_page {
-    height: 100vh;
+    min-height: 100vh;
   }
 }
