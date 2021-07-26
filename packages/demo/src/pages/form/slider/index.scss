@@ -15,4 +15,14 @@
       height: 150px * $hd;
     }
   }
+
+  .custom-thumb {
+    width: 26px * $hd;
+    color: #fff;
+    font-size: 10px * $hd;
+    line-height: 18px * $hd;
+    text-align: center;
+    background-color: #ee0a24;
+    border-radius: 100px * $hd;
+  }
 }

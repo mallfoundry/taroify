@@ -3,7 +3,7 @@
 .#{$component-prefix}slider {
   position: relative;
   width: 100%;
-  height: $slider-bar-height;
+  height: $slider-track-height;
   background-color: $slider-inactive-background-color;
   border-radius: $border-radius-max;
   cursor: pointer;
@@ -27,12 +27,12 @@
     transition: all $animation-duration-fast;
   }
 
-  &__button {
-    width: $slider-button-width;
-    height: $slider-button-height;
-    background-color: $slider-button-background-color;
-    border-radius: $slider-button-border-radius;
-    box-shadow: $slider-button-box-shadow;
+  &__thumb {
+    width: $slider-thumb-width;
+    height: $slider-thumb-height;
+    background-color: $slider-thumb-background-color;
+    border-radius: $slider-thumb-border-radius;
+    box-shadow: $slider-thumb-box-shadow;
 
     &-wrapper,
     &-wrapper-right {
@@ -56,27 +56,27 @@
     cursor: not-allowed;
     opacity: $slider-disabled-opacity;
 
-    .#{$component-prefix}slider__button-wrapper,
-    .#{$component-prefix}slider__button-wrapper-left,
-    .#{$component-prefix}slider__button-wrapper-right {
+    .#{$component-prefix}slider__thumb-wrapper,
+    .#{$component-prefix}slider__thumb-wrapper-left,
+    .#{$component-prefix}slider__thumb-wrapper-right {
       cursor: not-allowed;
     }
   }
 
   &--vertical {
     display: inline-block;
-    width: $slider-bar-height;
+    width: $slider-track-height;
     height: 100%;
 
-    .#{$component-prefix}slider__button-wrapper,
-    .#{$component-prefix}slider__button-wrapper-right {
+    .#{$component-prefix}slider__thumb-wrapper,
+    .#{$component-prefix}slider__thumb-wrapper-right {
       top: auto;
       right: 50%;
       bottom: 0;
       transform: translate3d(50%, 50%, 0);
     }
 
-    .#{$component-prefix}slider__button-wrapper-left {
+    .#{$component-prefix}slider__thumb-wrapper-left {
       top: 0;
       right: 50%;
       left: auto;

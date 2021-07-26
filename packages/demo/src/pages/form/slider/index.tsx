@@ -1,4 +1,5 @@
 import { Slider } from "@taroify/core"
+import { View } from "@tarojs/components"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
@@ -28,6 +29,17 @@ function StepSlider() {
 function StyledSlider() {
   const [value, setValue] = useState(50)
   return <Slider size={4} activeColor="#ee0a24" value={value} onChange={setValue} />
+}
+
+function StyledThumbSlider() {
+  const [value, setValue] = useState(50)
+  return (
+    <Slider activeColor="#ee0a24" value={value} onChange={setValue}>
+      <Slider.Thumb>
+        <View className="custom-thumb">{value}</View>
+      </Slider.Thumb>
+    </Slider>
+  )
 }
 
 function VerticalSlider() {
@@ -68,6 +80,9 @@ export default function SliderDemo() {
       </Block>
       <Block title="自定义样式">
         <StyledSlider />
+      </Block>
+      <Block title="自定义按钮">
+        <StyledThumbSlider />
       </Block>
       <Block title="自定义样式" className="vertical-slider">
         <VerticalSlider />

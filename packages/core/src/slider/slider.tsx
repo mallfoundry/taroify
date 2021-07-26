@@ -1,7 +1,17 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, useCallback, useMemo, useRef } from "react"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/dom/event"
 import { addNumber, clamp } from "../utils/format/number"
@@ -9,8 +19,9 @@ import { addUnitPx } from "../utils/format/unit"
 import { getBoundingClientRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import SliderThumb from "./slider-thumb"
+import SliderContext from "./slider.context"
 
-type SliderValue = number | [number, number]
+type SliderValue = number | [number, number] | number[]
 
 enum SliderDragStatus {
   Start = "start",
@@ -25,26 +36,83 @@ enum SliderOrientation {
 
 type SliderOrientationString = "horizontal" | "vertical"
 
-interface SliderProps {
+interface SliderChildren {
+  thumb1: ReactNode
+  thumb2: ReactNode
+}
+
+function useSliderChildren(children?: ReactNode, range?: boolean): SliderChildren {
+  return useMemo(() => {
+    const __children__: SliderChildren = {
+      thumb1: undefined,
+      thumb2: undefined,
+    }
+
+    Children.forEach(children, (child: ReactNode) => {
+      if (!isValidElement(child)) {
+        return
+      }
+      const element = child as ReactElement
+
+      if (__children__.thumb1 === undefined) {
+        __children__.thumb1 = element
+      } else if (__children__.thumb2 === undefined) {
+        __children__.thumb2 = element
+      }
+    })
+
+    __children__.thumb1 = __children__.thumb1 ?? <SliderThumb />
+
+    if (range) {
+      __children__.thumb1 = cloneElement(__children__.thumb1 as ReactElement, {
+        key: 0,
+        index: 0,
+      })
+
+      __children__.thumb2 = __children__.thumb2 ?? <SliderThumb />
+      __children__.thumb2 = cloneElement(__children__.thumb2 as ReactElement, {
+        key: 1,
+        index: 1,
+      })
+    } else {
+      __children__.thumb1 = cloneElement(__children__.thumb1 as ReactElement, {
+        index: undefined,
+      })
+    }
+
+    return __children__
+  }, [children, range])
+}
+
+interface SliderBaseProps {
   className?: string
   style?: CSSProperties
-  value?: SliderValue
   step?: number
   min?: number
   max?: number
-  range?: boolean
   size?: number
   activeColor?: string
   inactiveColor?: string
-
   orientation?: SliderOrientation | SliderOrientationString
-
   disabled?: boolean
-
-  onChange?(value: SliderValue): void
+  children?: ReactNode
 }
 
-function Slider(props: SliderProps) {
+export interface SliderSingleProps extends SliderBaseProps {
+  range?: false
+  value?: number
+
+  onChange?(value: number): void
+}
+
+export interface SliderRangeProps extends SliderBaseProps {
+  range?: boolean
+  value?: [number, number] | number[]
+
+  onChange?(value: [number, number] | number[]): void
+}
+
+function Slider(props: SliderSingleProps | SliderRangeProps) {
   const {
     className,
     style = {},
@@ -58,10 +126,13 @@ function Slider(props: SliderProps) {
     inactiveColor,
     orientation = SliderOrientation.Horizontal,
     disabled = false,
+    children,
     onChange,
   } = props
+
+  const { thumb1, thumb2 } = useSliderChildren(children, range)
+
   const vertical = orientation === SliderOrientation.Vertical
-  console.log(valueProp)
 
   const rootRef = useRef<HTMLElement>()
 
@@ -87,7 +158,7 @@ function Slider(props: SliderProps) {
     if (isRange(valueProp)) {
       return `${((valueProp[1] - valueProp[0]) * 100) / scope}%`
     }
-    return `${((valueProp - Number(min)) * 100) / scope}%`
+    return `${(((valueProp as number) - Number(min)) * 100) / scope}%`
   }, [isRange, min, scope, valueProp])
 
   // 计算选中条的开始位置的偏移量
@@ -134,15 +205,15 @@ function Slider(props: SliderProps) {
     return value
   }
 
-  const updateValue = (value: SliderValue, end?: boolean) => {
+  const updateValue = (value: SliderValue) => {
     if (isRange(value)) {
       value = handleOverlap(value).map(formatValue) as [number, number]
     } else {
-      value = formatValue(value)
+      value = formatValue(value as number)
     }
 
     if (!isSameValue(value, valueProp)) {
-      onChange?.(value)
+      onChange?.(value as any)
     }
   }
 
@@ -165,17 +236,22 @@ function Slider(props: SliderProps) {
         const middle = (left + right) / 2
 
         if (newValue <= middle) {
-          updateValue([newValue, right], true)
+          updateValue([newValue, right])
         } else {
-          updateValue([left, newValue], true)
+          updateValue([left, newValue])
         }
       } else {
-        updateValue(newValue, true)
+        updateValue(newValue)
       }
     })
   }
 
-  const onTouchStart = (event: ITouchEvent) => {
+  const onTouchStart = (event: ITouchEvent, index?: number) => {
+    if (typeof index === "number") {
+      // save index of current button
+      buttonIndexRef.current = index
+    }
+
     if (disabled) {
       return
     }
@@ -197,10 +273,6 @@ function Slider(props: SliderProps) {
       return
     }
 
-    // if (dragStatusRef.current === SliderDragStatus.Start) {
-    //   emit("drag-start", event)
-    // }
-
     preventDefault(event, true)
     touch.move(event)
     dragStatusRef.current = SliderDragStatus.Dragging
@@ -220,34 +292,16 @@ function Slider(props: SliderProps) {
     })
   }
 
-  const onTouchEnd = (event: ITouchEvent) => {
+  const onTouchEnd = () => {
     if (disabled) {
       return
     }
 
     if (dragStatusRef.current === SliderDragStatus.Dragging) {
-      updateValue(currentValueRef.current, true)
+      updateValue(currentValueRef.current)
     }
 
     dragStatusRef.current = SliderDragStatus.End
-  }
-
-  const renderButton = (index?: 0 | 1) => {
-    return (
-      <SliderThumb
-        key={index}
-        index={index}
-        onTouchStart={(event) => {
-          if (typeof index === "number") {
-            // save index of current button
-            buttonIndexRef.current = index
-          }
-          onTouchStart(event)
-        }}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      />
-    )
   }
 
   return (
@@ -263,9 +317,17 @@ function Slider(props: SliderProps) {
       style={wrapperStyle}
       onClick={onClick}
     >
-      <View className={prefixClassname("slider__track")} style={trackStyle}>
-        {range ? [renderButton(0), renderButton(1)] : renderButton()}
-      </View>
+      <SliderContext.Provider
+        value={{
+          onTouchStart,
+          onTouchMove,
+          onTouchEnd,
+        }}
+      >
+        <View className={prefixClassname("slider__track")} style={trackStyle}>
+          {range ? [thumb1, thumb2] : thumb1}
+        </View>
+      </SliderContext.Provider>
     </View>
   )
 }
