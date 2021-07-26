@@ -1,17 +1,17 @@
-.vant-header {
+.van-header {
   width: 100%;
   background-color: #001938;
   -webkit-user-select: none;
   user-select: none;
 
   @media (min-width: 1680px) {
-    &-top {
+    &__top {
       width: 1680px;
       margin: 0 auto;
     }
   }
 
-  &-top {
+  &__top {
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -20,7 +20,7 @@
     line-height: 60px;
   }
 
-  &-logo {
+  &__logo {
 
     img, span {
       display: inline-block;
@@ -35,6 +35,30 @@
     span {
       color: #fff;
       font-size: 22px;
+    }
+  }
+
+  &__top-nav {
+    flex: 1;
+    font-size: 0;
+    text-align: right;
+  }
+
+  &__top-nav-item {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 16px;
+
+    img {
+      display: block;
+      width: 30px;
+      height: 30px;
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 }
