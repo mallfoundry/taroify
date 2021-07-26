@@ -16,6 +16,15 @@ import { HAIRLINE_BORDER } from "../styles/hairline"
 import PaginationContext from "./pagination.context"
 import { ItemType, Page as SharedPage } from "./pagination.shared"
 
+function rangePages(start: number, end: number) {
+  const length = end - start + 1
+  return Array.from({ length }, (_, i) => start + i)
+}
+
+export function makePageItems(start: number, end: number): ReactElement[] {
+  return rangePages(start, end).map((page) => <Pagination.Item key={page} page={page} />)
+}
+
 interface PaginationChildren {
   previous?: ReactNode
   startEllipsis?: ReactNode
@@ -92,15 +101,6 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
   }
 
   return __children__
-}
-
-function rangePages(start: number, end: number) {
-  const length = end - start + 1
-  return Array.from({ length }, (_, i) => start + i)
-}
-
-export function makePageItems(start: number, end: number): ReactElement[] {
-  return rangePages(start, end).map((page) => <Pagination.Item key={page} page={page} />)
 }
 
 interface PaginationProps {
