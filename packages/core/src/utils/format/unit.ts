@@ -5,7 +5,7 @@ export function addUnitPx(value?: string | number): string {
   return value === undefined ? "" : `${unitToPx(value)}px`
 }
 
-export function getSizeStyle(originSize?: string | number): CSSProperties | string | undefined {
+export function getSizeStyle(originSize?: string | number): CSSProperties | undefined {
   if (_.isNumber(originSize) || _.isString(originSize)) {
     const size = addUnitPx(originSize)
     return {
@@ -13,7 +13,7 @@ export function getSizeStyle(originSize?: string | number): CSSProperties | stri
       height: size,
     }
   }
-  return ""
+  return {}
 }
 
 export function getZIndexStyle(zIndex?: string | number) {
