@@ -64,6 +64,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "PasswordInput 密码输入框",
+        to: "/components/password-input/",
+      },
+      {
         title: "Rate 评分",
         to: "/components/rate/",
       },

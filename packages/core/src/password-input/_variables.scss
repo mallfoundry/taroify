@@ -1,0 +1,17 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$password-input-height: 50px * $hd;
+$password-input-margin: 0 $padding-md;
+$password-input-font-size: 20px * $hd;
+$password-input-border-radius: 6px * $hd;
+$password-input-background-color: $white;
+$password-input-info-color: $gray-6;
+$password-input-info-font-size: $font-size-md;
+$password-input-error-info-color: $danger-color;
+$password-input-dot-size: 10px * $hd;
+$password-input-dot-color: $black;
+$password-input-cursor-color: $text-color;
+$password-input-cursor-width: 1px * $hd;
+$password-input-cursor-height: 40%;
+$password-input-cursor-animation-duration: 1s;

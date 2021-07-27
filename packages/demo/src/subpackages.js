@@ -55,6 +55,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "PasswordInput 密码输入框",
+        name: "PasswordInput",
+        path: "password-input/index",
+      },
+      {
         title: "Rate 评分",
         name: "Rate",
         path: "rate/index",
