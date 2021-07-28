@@ -22,9 +22,6 @@ yarn add @taroify/core
 
 ### 方式一. 自动按需引入组件 (推荐)
 
-> Tips: 目前存在内部组件样式依赖时，尚未自动导入问题。  
-> 比如：Toast 组件内部依赖 Popup 组件，暂不支持自动导入 Popup 组件的样式。
-
 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 babel 插件，它会在编译过程中将 import 的写法自动转换为按需引入的方式。
 
 ```bash
@@ -40,9 +37,7 @@ module.exports = {
       {
         "libraryName": "@taroify/core",
         "libraryDirectory": "",
-        "style": (name) => {
-          return `${name}/index.scss`
-        },
+        "style": (name) => `${name}/index.scss`,
       },
       "@taroify/core",
     ],
