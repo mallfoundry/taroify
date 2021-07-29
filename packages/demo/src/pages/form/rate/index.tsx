@@ -57,7 +57,7 @@ function ReadonlyHalfRate() {
 
 export default function RateDemo() {
   return (
-    <Page title="Rate 评分" className="switch-demo">
+    <Page title="Rate 评分" className="rate-demo">
       <Block title="基础用法">
         <BasicRate />
       </Block>
