@@ -5,18 +5,14 @@
   flex-wrap: wrap;
   align-items: center;
 
-  /* &-horizontal {
+  /* &--horizontal {
 
   }
-
-  &-vertical {
-
-  } */
+*/
+  &--vertical {
+    flex-direction: column;
+  }
 
   &-item {
-    box-sizing: border-box;
-    display: inline-block;
-    margin-right: 8px * $hd;
-    margin-bottom: 8px * $hd;
   }
 }

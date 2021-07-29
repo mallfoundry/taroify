@@ -40,9 +40,10 @@ export default function Space(props: SpaceProps) {
   return (
     <View
       className={classNames(prefixClassname("space"), {
-        [prefixClassname(`space-${direction}`)]:
+        [prefixClassname(`space--${direction}`)]:
           direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
       })}
+      style={{ gap: "8px" }}
     >
       {React.Children.map(children, (item, index) => (
         <SpaceItem key={index} children={item} />
