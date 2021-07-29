@@ -2,8 +2,9 @@ import { cloneIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
+import CellGroupContext from "./cell-group.context"
 
 export enum CellSize {
   Medium = "medium",
@@ -44,13 +45,15 @@ function Cell(props: CellProps) {
     align,
     title,
     brief,
-    clickable = false,
+    clickable: clickableProp = false,
     bordered = true,
     icon,
     rightIcon,
     children,
     onClick,
   } = props
+
+  const { clickable } = useContext(CellGroupContext)
 
   return (
     <View
@@ -61,7 +64,7 @@ function Cell(props: CellProps) {
           [prefixClassname("cell--center")]: align === CellAlign.Center,
           [prefixClassname("cell--end")]: align === CellAlign.End,
           [prefixClassname("cell--large")]: size === CellSize.Large,
-          [prefixClassname("cell--clickable")]: clickable,
+          [prefixClassname("cell--clickable")]: clickableProp || clickable,
           [prefixClassname("cell--borderless")]: !bordered,
         },
         className,
