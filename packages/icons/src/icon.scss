@@ -1,11 +1,6 @@
 @import "./variables";
 
 .taroify-icon {
-  &--inherit {
-    font-size: inherit;
-    color: inherit;
-  }
-
   &--mini {
     font-size: 10px * 2;
   }
@@ -44,5 +39,10 @@
 
   &--danger {
     color: $danger-color;
+  }
+
+  &--inherit {
+    font-size: inherit;
+    color: inherit;
   }
 }
