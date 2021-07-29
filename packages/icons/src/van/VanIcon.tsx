@@ -35,7 +35,7 @@ export default function VanIcon(props: VanIconProps) {
 
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
 
-  const presetSize = ICON_PRESET_SIZES.includes(color as IconSize)
+  const presetSize = ICON_PRESET_SIZES.includes(size as IconSize)
 
   return (
     <View
