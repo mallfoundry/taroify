@@ -64,6 +64,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "Checkbox 复选框",
+        to: "/components/checkbox/",
+      },
+      {
         title: "PasswordInput 密码输入框",
         to: "/components/password-input/",
       },

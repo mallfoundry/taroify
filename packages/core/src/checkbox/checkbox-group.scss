@@ -1,0 +1,18 @@
+@import "./variables";
+
+.#{$component-prefix}checkbox-group {
+  &--horizontal {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--vertical {
+    .#{$component-prefix}checkbox {
+      display: flex;
+    }
+  }
+
+  .#{$component-prefix}cell__value {
+    flex: 0;
+  }
+}

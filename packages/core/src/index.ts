@@ -10,6 +10,7 @@ export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 // Form Components
+export { default as Checkbox } from "./checkbox"
 export { default as PasswordInput } from "./password-input"
 export { default as Rate } from "./rate"
 export { default as Slider } from "./slider"

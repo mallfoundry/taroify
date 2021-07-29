@@ -55,6 +55,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "Checkbox 复选框",
+        name: "Checkbox",
+        path: "checkbox/index",
+      },
+      {
         title: "PasswordInput 密码输入框",
         name: "PasswordInput",
         path: "password-input/index",

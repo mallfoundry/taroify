@@ -1,0 +1,24 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.checkbox-demo {
+
+  .basic-checkbox-group {
+    .#{$component-prefix}checkbox {
+      margin-bottom: 8px * 2;
+    }
+  }
+
+  .horizontal-checkbox-group {
+    .#{$component-prefix}checkbox {
+      margin-right: 8px * 2;
+    }
+  }
+
+  .checkbox-cell-group {
+    .#{$demo-prefix}block__content {
+      padding: 0;
+    }
+  }
+}
