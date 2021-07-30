@@ -12,6 +12,7 @@ export { default as WhiteSpace } from "./white-space"
 // Form Components
 export { default as Checkbox } from "./checkbox"
 export { default as PasswordInput } from "./password-input"
+export { default as Radio } from "./radio"
 export { default as Rate } from "./rate"
 export { default as Slider } from "./slider"
 export { default as Stepper } from "./stepper"

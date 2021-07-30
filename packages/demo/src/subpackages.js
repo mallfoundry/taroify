@@ -65,6 +65,11 @@ const subpackages = [
         path: "password-input/index",
       },
       {
+        title: "Radio 单选框",
+        name: "Radio",
+        path: "radio/index",
+      },
+      {
         title: "Rate 评分",
         name: "Rate",
         path: "rate/index",

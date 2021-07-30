@@ -1,0 +1,13 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+@import "../styles/hairline";
+
+$radio-size: 20px * $hd;
+$radio-border-color: $gray-5;
+$radio-transition-duration: $animation-duration-fast;
+$radio-label-margin: $padding-xs;
+$radio-label-color: $text-color;
+$radio-checked-icon-color: $primary-color;
+$radio-disabled-icon-color: $gray-5;
+$radio-disabled-label-color: $gray-5;
+$radio-disabled-background-color: $border-color;

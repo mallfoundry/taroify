@@ -1,0 +1,18 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.radio-demo {
+
+  .#{$component-prefix}radio-group--vertical {
+    .#{$component-prefix}radio {
+      margin-bottom: 8px * 2;
+    }
+  }
+
+  .radio-cell-group {
+    .#{$demo-prefix}block__content {
+      padding: 0;
+    }
+  }
+}

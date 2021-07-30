@@ -1,0 +1,18 @@
+@import "./variables";
+
+.#{$component-prefix}radio-group {
+  &--horizontal {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--vertical {
+    .#{$component-prefix}radio {
+      display: flex;
+    }
+  }
+
+  .#{$component-prefix}cell__value {
+    flex: 0;
+  }
+}

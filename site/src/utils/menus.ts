@@ -72,6 +72,10 @@ const menus = [
         to: "/components/password-input/",
       },
       {
+        title: "Radio 单选框",
+        to: "/components/radio/",
+      },
+      {
         title: "Rate 评分",
         to: "/components/rate/",
       },
