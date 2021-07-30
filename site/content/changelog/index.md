@@ -12,6 +12,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.10-alpha.0
+
+`2021-07-30`
+
+**New Component**
+
+- 新增 Checkbox 组件
+- 新增 Radio 组件
+- 新增 PasswordInput 组件
+
 ### v0.0.9-alpha.0
 
 `2021-07-26`
