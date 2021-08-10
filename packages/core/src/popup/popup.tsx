@@ -71,7 +71,7 @@ interface PopupProps {
   transaction?: string
   placement?: PopupPlacement | PopupPlacementString
   rounded?: boolean
-  duration?: number
+  duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
   onOpen?: (opened: boolean) => void
   onClose?: (opened: boolean) => void

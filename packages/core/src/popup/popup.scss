@@ -43,24 +43,17 @@
     }
 
     &.#{$component-prefix}transition-slide-right {
-      &-enter {
-        transform: translate3d(100%, -50%, 0);
+
+      @keyframes #{$component-prefix}slide-right-enter {
+        from {
+          transform: translate3d(100%, -50%, 0);
+        }
       }
 
-      &-enter-active {
-        transition-timing-function: ease;
-        transition-property: opacity, transform;
-        transform: translate3d(0, -50%, 0);
-      }
-
-      &-exit {
-        transform: translate3d(0, -50%, 0);
-      }
-
-      &-exit-active {
-        transition-timing-function: ease;
-        transition-property: opacity, transform;
-        transform: translate3d(100%, -50%, 0);
+      @keyframes #{$component-prefix}slide-right-exit {
+        to {
+          transform: translate3d(100%, -50%, 0);
+        }
       }
     }
   }
@@ -75,24 +68,17 @@
     }
 
     &.#{$component-prefix}transition-slide-left {
-      &-enter {
-        transform: translate3d(-100%, -50%, 0);
+
+      @keyframes #{$component-prefix}slide-left-enter {
+        from {
+          transform: translate3d(-100%, -50%, 0);
+        }
       }
 
-      &-enter-active {
-        transition-timing-function: ease;
-        transition-property: opacity, transform;
-        transform: translate3d(0, -50%, 0);
-      }
-
-      &-exit {
-        transform: translate3d(0, -50%, 0);
-      }
-
-      &-exit-active {
-        transition-timing-function: ease;
-        transition-property: opacity, transform;
-        transform: translate3d(-100%, -50%, 0);
+      @keyframes #{$component-prefix}slide-left-exit {
+        to {
+          transform: translate3d(-100%, -50%, 0);
+        }
       }
     }
   }
