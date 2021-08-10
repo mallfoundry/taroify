@@ -11,6 +11,7 @@ export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 // Form Components
 export { default as Checkbox } from "./checkbox"
+export { default as NumberKeyboard } from "./number-keyboard"
 export { default as PasswordInput } from "./password-input"
 export { default as Radio } from "./radio"
 export { default as Rate } from "./rate"

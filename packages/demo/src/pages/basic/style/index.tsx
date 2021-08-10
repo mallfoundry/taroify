@@ -40,30 +40,6 @@ export default function TransitionDemo() {
         />
         <Cell
           clickable
-          title="Fade Up"
-          rightIcon={<ArrowRight />}
-          onClick={() => toggleTransition(TransitionName.FadeUp)}
-        />
-        <Cell
-          clickable
-          title="Fade Down"
-          rightIcon={<ArrowRight />}
-          onClick={() => toggleTransition(TransitionName.FadeDown)}
-        />
-        <Cell
-          clickable
-          title="Fade Left"
-          rightIcon={<ArrowRight />}
-          onClick={() => toggleTransition(TransitionName.FadeLeft)}
-        />
-        <Cell
-          clickable
-          title="Fade Right"
-          rightIcon={<ArrowRight />}
-          onClick={() => toggleTransition(TransitionName.FadeRight)}
-        />
-        <Cell
-          clickable
           title="Slide Up"
           rightIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideUp)}
@@ -86,7 +62,12 @@ export default function TransitionDemo() {
           rightIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
-        <Transition in={state} name={name}>
+        <Transition
+          in={state}
+          duration={{ enter: 500, exit: 300 }}
+          name={name}
+          onEntered={() => setState(false)}
+        >
           <View className="animate-block" />
         </Transition>
       </Block>

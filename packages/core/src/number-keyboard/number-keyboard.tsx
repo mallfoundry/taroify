@@ -1,0 +1,185 @@
+import { View } from "@tarojs/components"
+import * as classNames from "classnames"
+import * as _ from "lodash"
+import * as React from "react"
+import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { prefixClassname } from "../styles"
+import Transition from "../transition"
+import NumberKeyboardHeader from "./number-keyboard-header"
+import NumberKeyboardKey, { NumberKeyboardKeyProps } from "./number-keyboard-key"
+import {
+  isNumberKeyboardKeyElement,
+  NumberKeyboardKeyCode,
+  NumberKeyboardKeyCodeString,
+  NumberKeyboardKeyOnPress,
+} from "./number-keyboard-key.shared"
+import NumberKeyboardKeys from "./number-keyboard-keys"
+import NumberKeyboardSidebar from "./number-keyboard-sidebar"
+import NumberKeyboardContext from "./number-keyboard.context"
+
+function createBasicKeys(random: boolean): ReactNode[] {
+  const keys = Array(9)
+    .fill("")
+    .map((_, i) => <NumberKeyboardKey key={i + 1} children={i + 1} />)
+
+  if (random) {
+    keys.sort(() => (Math.random() > 0.5 ? 1 : -1))
+  }
+
+  return keys
+}
+
+export function createExtraNumberKeyboardKey(extraKey: ReactNode): ReactNode {
+  if (_.isString(extraKey) || _.isNumber(extraKey)) {
+    return <NumberKeyboardKey key={extraKey} children={extraKey} />
+  } else if (isNumberKeyboardKeyElement(extraKey)) {
+    const element = extraKey as ReactElement
+    const elementProps = element.props as NumberKeyboardKeyProps
+    return cloneElement(extraKey as ReactElement, {
+      key: element.key ?? elementProps.children ?? elementProps.code,
+    })
+  }
+  return undefined
+}
+
+function createCustomKeys(extraKey?: ReactNode | [ReactNode, ReactNode]): ReactNode[] {
+  if (extraKey === undefined) {
+    return [
+      <NumberKeyboardKey
+        key={NumberKeyboardKeyCode.KeyboardHide}
+        code={NumberKeyboardKeyCode.KeyboardHide}
+      />,
+      <NumberKeyboardKey key={0} children={0} />,
+      <NumberKeyboardKey
+        key={NumberKeyboardKeyCode.Backspace}
+        code={NumberKeyboardKeyCode.Backspace}
+      />,
+    ]
+  }
+
+  if (_.isString(extraKey) || _.isNumber(extraKey) || isNumberKeyboardKeyElement(extraKey)) {
+    return [
+      createExtraNumberKeyboardKey(extraKey),
+      <NumberKeyboardKey key={0} children={0} />,
+      <NumberKeyboardKey
+        key={NumberKeyboardKeyCode.Backspace}
+        code={NumberKeyboardKeyCode.Backspace}
+      />,
+    ]
+  }
+
+  if (_.isArray(extraKey) && _.size(extraKey) === 1) {
+    return [
+      createExtraNumberKeyboardKey(extraKey[0]),
+      <NumberKeyboardKey key={0} wider children={0} />,
+    ]
+  }
+
+  if (_.isArray(extraKey) && _.size(extraKey) === 2) {
+    const wider = extraKey.filter((key) => key !== undefined).length === 1
+    return [
+      createExtraNumberKeyboardKey(extraKey[0]),
+      <NumberKeyboardKey key={0} wider={wider} children={0} />,
+      createExtraNumberKeyboardKey(extraKey[1]),
+    ]
+  }
+
+  return []
+}
+
+interface NumberKeyboardChildren {
+  header?: ReactNode
+  sidebar?: ReactNode
+}
+
+function useNumberKeyboardChildren(
+  children?: ReactNode,
+  title?: ReactNode,
+): NumberKeyboardChildren {
+  return useMemo(() => {
+    const __children__: NumberKeyboardChildren = {
+      sidebar: undefined,
+    }
+
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+
+        const elementType = element.type
+        if (elementType === NumberKeyboardHeader) {
+          __children__.header = element
+        }
+
+        if (elementType === NumberKeyboardSidebar) {
+          __children__.sidebar = element
+        }
+      }
+    })
+
+    if (title && !__children__.header) {
+      __children__.header = <NumberKeyboardHeader />
+    }
+
+    return __children__
+  }, [children, title])
+}
+
+export interface NumberKeyboardProps {
+  className?: string
+  open?: boolean
+  value?: string
+  title?: ReactNode
+  extraKey?: ReactNode | [ReactNode, ReactNode]
+  random?: boolean
+  children?: ReactNode
+
+  onKeyPress?: NumberKeyboardKeyOnPress
+
+  onChange?(value: string): void
+
+  onBackspace?(): void
+
+  onHide?(): void
+}
+
+function NumberKeyboard(props: NumberKeyboardProps) {
+  const { open, title, extraKey, random = false, onKeyPress, onBackspace, onHide } = props
+  const { header, sidebar } = useNumberKeyboardChildren(props.children, title)
+  const keys = [...createBasicKeys(random), ...createCustomKeys(extraKey)]
+
+  const handleKeyPress = (
+    value: string | number,
+    code: NumberKeyboardKeyCode | NumberKeyboardKeyCodeString,
+  ) => {
+    onKeyPress?.(value, code)
+    if (code === NumberKeyboardKeyCode.Backspace) {
+      onBackspace?.()
+    } else if (code === NumberKeyboardKeyCode.KeyboardHide) {
+      onHide?.()
+    }
+  }
+  return (
+    <Transition in={open} name="slide-up" duration={10000}>
+      <NumberKeyboardContext.Provider
+        value={{
+          title,
+          onKeyPress: handleKeyPress,
+        }}
+      >
+        <View
+          className={classNames(prefixClassname("number-keyboard"), {
+            [prefixClassname("number-keyboard--with-title")]: header,
+          })}
+        >
+          {header}
+          <View className={prefixClassname("number-keyboard__body")}>
+            <NumberKeyboardKeys children={keys} />
+            {sidebar}
+          </View>
+        </View>
+      </NumberKeyboardContext.Provider>
+    </Transition>
+  )
+}
+
+export default NumberKeyboard

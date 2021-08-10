@@ -68,6 +68,10 @@ const menus = [
         to: "/components/checkbox/",
       },
       {
+        title: "NumberKeyboard 数字键盘",
+        to: "/components/number-keyboard/",
+      },
+      {
         title: "PasswordInput 密码输入框",
         to: "/components/password-input/",
       },

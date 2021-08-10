@@ -1,0 +1,62 @@
+@import "./variables";
+
+.#{$component-prefix}key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $number-keyboard-key-height;
+  font-size: $number-keyboard-key-font-size;
+  line-height: 1.5;
+  cursor: pointer;
+  background-color: $white;
+  border-radius: $border-radius-lg;
+
+  &--large {
+    // height: 100% can't fill flex parent on legacy safari
+    // see: https://stackoverflow.com/questions/33636796
+    position: absolute;
+    top: 0;
+    right: 6px * $hd;
+    bottom: 6px * $hd;
+    left: 0;
+    height: auto;
+    font-size: $number-keyboard-delete-font-size;
+  }
+
+  &--active {
+    background-color: $number-keyboard-key-active-color;
+  }
+
+  &--blue {
+    color: $number-keyboard-button-text-color;
+    background-color: $number-keyboard-button-background-color;
+
+    &.#{$component-prefix}key--active {
+      opacity: $active-opacity;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    box-sizing: border-box;
+    flex: 1;
+    flex-basis: 33%;
+    padding: 0 6px * $hd 6px * $hd 0;
+
+    &--wider {
+      flex-basis: 66%;
+    }
+  }
+
+  .#{$component-prefix}keyboard-hide {
+    font-size: $number-keyboard-key-keyboard-hide-font-size;
+  }
+
+  .#{$component-prefix}backspace {
+    font-size: $number-keyboard-key-backspace-font-size;
+  }
+
+  &__loading-icon {
+    color: $number-keyboard-button-text-color;
+  }
+}

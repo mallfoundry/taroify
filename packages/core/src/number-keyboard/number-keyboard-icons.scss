@@ -1,0 +1,35 @@
+@font-face {
+  font-display: block;
+  font-family: 'taroify-number-keyboard';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./fonts/number-keyboard.eot?o8m3qv');
+  src: url('./fonts/number-keyboard.eot?o8m3qv#iefix') format('embedded-opentype'),
+  url('./fonts/number-keyboard.ttf?o8m3qv') format('truetype'),
+  url('./fonts/number-keyboard.woff?o8m3qv') format('woff'),
+  url('./fonts/number-keyboard.svg?o8m3qv#taroify-number-keyboard') format('svg');
+}
+
+[class^="taroify-backspace"], [class*=" taroify-backspace"],
+[class^="taroify-keyboard-hide"], [class*=" taroify-keyboard-hide"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'taroify-number-keyboard', serif !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  speak: never;
+}
+
+.taroify-backspace::before {
+  content: "\e900";
+}
+
+.taroify-keyboard-hide::before {
+  content: "\e901";
+}

@@ -1,0 +1,19 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$number-keyboard-background-color: $gray-2;
+$number-keyboard-key-height: 48px * $hd;
+$number-keyboard-key-font-size: 28px * $hd;
+$number-keyboard-key-keyboard-hide-font-size: 24px * $hd;
+$number-keyboard-key-backspace-font-size: 22px * $hd;
+$number-keyboard-key-active-color: $gray-3;
+$number-keyboard-delete-font-size: $font-size-lg;
+$number-keyboard-title-color: $gray-7;
+$number-keyboard-title-height: 34px * $hd;
+$number-keyboard-title-font-size: $font-size-lg;
+$number-keyboard-hide-padding: 0 $padding-md;
+$number-keyboard-hide-color: $text-link-color;
+$number-keyboard-hide-font-size: $font-size-md;
+$number-keyboard-button-text-color: $white;
+$number-keyboard-button-background-color: $primary-color;
+$number-keyboard-z-index: 100;
