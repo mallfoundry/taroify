@@ -28,7 +28,6 @@ export interface CellProps {
   align?: CellAlign | CellAlignString
   title?: ReactNode
   brief?: ReactNode
-  leftIcon?: ReactNode
   icon?: ReactNode
   rightIcon?: ReactNode
   bordered?: boolean
@@ -79,13 +78,14 @@ function Cell(props: CellProps) {
           {brief && <View className={prefixClassname("cell__brief")} children={brief} />}
         </View>
       )}
-      <View
-        className={classNames(prefixClassname("cell__value"), {
-          [prefixClassname("cell__value--alone")]: !title,
-        })}
-      >
-        {children}
-      </View>
+      {children && (
+        <View
+          className={classNames(prefixClassname("cell__value"), {
+            [prefixClassname("cell__value--alone")]: !title,
+          })}
+          children={children}
+        />
+      )}
       {rightIcon && cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })}
     </View>
   )
