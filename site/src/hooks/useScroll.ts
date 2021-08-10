@@ -12,7 +12,7 @@ export default function useScroll() {
 
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+    }, [position])
 
     return {
         position
