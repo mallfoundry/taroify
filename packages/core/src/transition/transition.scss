@@ -1,222 +1,132 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
+@keyframes #{$component-prefix}slide-up-enter {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-up-exit {
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-down-enter {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-down-exit {
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-left-enter {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-left-exit {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-right-enter {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes #{$component-prefix}slide-right-exit {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes #{$component-prefix}fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes #{$component-prefix}fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes #{$component-prefix}rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 // Fade Animation
 .#{$component-prefix}transition-fade {
-  &-enter {
-    opacity: 0;
-  }
-
   &-enter-active {
-    opacity: 1;
-    transition-timing-function: ease;
-    transition-property: opacity;
-  }
-
-  &-exit {
-    opacity: 1;
+    animation: $animation-duration-base #{$component-prefix}fade-in both $animation-timing-function-enter;
   }
 
   &-exit-active {
-    opacity: 0;
-    transition-timing-function: ease;
-    transition-property: opacity;
-  }
-}
-
-// Fade Up Animation
-.#{$component-prefix}transition-fade-up {
-  &-enter {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-// Fade Down Animation
-.#{$component-prefix}transition-fade-down {
-  &-enter {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, -100%, 0);
-  }
-}
-
-// Fade Left Animation
-.#{$component-prefix}transition-fade-left {
-  &-enter {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-// Fade Right Animation
-.#{$component-prefix}transition-fade-right {
-  &-enter {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(100%, 0, 0);
+    animation: $animation-duration-base #{$component-prefix}fade-out both $animation-timing-function-exit;
   }
 }
 
 // Slide Animation
 .#{$component-prefix}transition-slide-up {
-  &-enter {
-    transform: translate3d(0, 100%, 0);
-  }
-
   &-enter-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    transform: translate3d(0, 0, 0);
+    animation: #{$component-prefix}slide-up-enter $animation-duration-base both $animation-timing-function-enter;
   }
 
   &-exit-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 100%, 0);
+    animation: #{$component-prefix}slide-up-exit $animation-duration-base both $animation-timing-function-exit;
   }
 }
 
 .#{$component-prefix}transition-slide-down {
-  &-enter {
-    transform: translate3d(0, -100%, 0);
-  }
-
   &-enter-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    transform: translate3d(0, 0, 0);
+    animation: #{$component-prefix}slide-down-enter $animation-duration-base both $animation-timing-function-enter;
   }
 
   &-exit-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, -100%, 0);
+    animation: #{$component-prefix}slide-down-exit $animation-duration-base both $animation-timing-function-exit;
   }
 }
 
 .#{$component-prefix}transition-slide-left {
-  &-enter {
-    transform: translate3d(-100%, 0, 0);
-  }
-
   &-enter-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    transform: translate3d(0, 0, 0);
+    animation: #{$component-prefix}slide-left-enter $animation-duration-base both $animation-timing-function-enter;
   }
 
   &-exit-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(-100%, 0, 0);
+    animation: #{$component-prefix}slide-left-exit $animation-duration-base both $animation-timing-function-exit;
   }
 }
 
 .#{$component-prefix}transition-slide-right {
-  &-enter {
-    transform: translate3d(100%, 0, 0);
-  }
-
   &-enter-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-exit {
-    transform: translate3d(0, 0, 0);
+    animation: #{$component-prefix}slide-right-enter $animation-duration-base both $animation-timing-function-enter;
   }
 
   &-exit-active {
-    transition-timing-function: ease;
-    transition-property: opacity, transform;
-    transform: translate3d(100%, 0, 0);
+    animation: #{$component-prefix}slide-right-exit $animation-duration-base both $animation-timing-function-exit;
   }
 }

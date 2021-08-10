@@ -6,10 +6,6 @@ import { prefixClassname } from "../styles"
 
 export enum TransitionName {
   Fade = "fade",
-  FadeUp = "fade-up",
-  FadeDown = "fade-down",
-  FadeLeft = "fade-left",
-  FadeRight = "fade-right",
   SlideUp = "slide-up",
   SlideDown = "slide-down",
   SlideLeft = "slide-left",
@@ -18,10 +14,6 @@ export enum TransitionName {
 
 const TRANSITION_PRESETS: string[] = [
   TransitionName.Fade,
-  TransitionName.FadeUp,
-  TransitionName.FadeDown,
-  TransitionName.FadeLeft,
-  TransitionName.FadeRight,
   TransitionName.SlideUp,
   TransitionName.SlideDown,
   TransitionName.SlideLeft,
@@ -44,7 +36,7 @@ function elementStyle(children?: ReactNode) {
 interface TransitionProps {
   name?: TransitionName | string
   in?: boolean
-  duration?: number
+  duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
   onEnter?: EnterHandler<HTMLElement>
   onEntered?: EnterHandler<HTMLElement>
@@ -64,7 +56,6 @@ export default function Transition(props: TransitionProps) {
       classNames={transactionName}
       style={{
         ...childrenStyle,
-        transitionDuration: `${duration}ms`,
       }}
       children={children}
       onEnter={onEnter}
