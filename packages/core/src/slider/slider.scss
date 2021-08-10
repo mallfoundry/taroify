@@ -4,9 +4,9 @@
   position: relative;
   width: 100%;
   height: $slider-track-height;
+  cursor: pointer;
   background-color: $slider-inactive-background-color;
   border-radius: $border-radius-max;
-  cursor: pointer;
 
   // use pseudo element to expand click area
   &::before {
@@ -39,16 +39,16 @@
       position: absolute;
       top: 50%;
       right: 0;
-      transform: translate3d(50%, -50%, 0);
       cursor: grab;
+      transform: translate3d(50%, -50%, 0);
     }
 
     &-wrapper-left {
       position: absolute;
       top: 50%;
       left: 0;
-      transform: translate3d(-50%, -50%, 0);
       cursor: grab;
+      transform: translate3d(-50%, -50%, 0);
     }
   }
 

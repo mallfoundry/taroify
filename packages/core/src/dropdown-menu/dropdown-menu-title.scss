@@ -44,20 +44,20 @@
     box-sizing: border-box;
     max-width: 100%;
     padding: $dropdown-menu-title-padding;
-    color: $dropdown-menu-title-text-color;
     font-size: $dropdown-menu-title-font-size;
     line-height: $dropdown-menu-title-line-height;
+    color: $dropdown-menu-title-text-color;
 
     &::after {
       position: absolute;
       top: 50%;
       right: -4px * $hd;
       margin-top: -5px * $hd;
+      content: '';
       border: 3px * $hd solid;
       border-color: transparent transparent $gray-4 $gray-4;
-      transform: rotate(-45deg);
       opacity: 0.8;
-      content: '';
+      transform: rotate(-45deg);
     }
   }
 }

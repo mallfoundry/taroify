@@ -2,15 +2,15 @@
 
 .#{$component-prefix}switch {
   position: relative;
-  display: inline-block;
   box-sizing: content-box;
+  display: inline-block;
   width: $switch-width;
   height: $switch-height;
   font-size: $switch-size;
+  cursor: pointer;
   background-color: $switch-background-color;
   border: $switch-border;
   border-radius: $switch-node-size;
-  cursor: pointer;
   transition: background-color $switch-transition-duration;
 
   &__node {

@@ -210,14 +210,14 @@
   }
 
   &__loading {
-    color: inherit;
     font-size: inherit;
+    color: inherit;
 
     .#{$component-prefix}loading__circular,
     .#{$component-prefix}loading__spinner {
-      color: currentColor;
       width: $button-loading-icon-size;
       height: $button-loading-icon-size;
+      color: currentColor;
     }
   }
 }

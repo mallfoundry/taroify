@@ -16,9 +16,9 @@
     width: 100%;
     height: $pull-refresh-head-height;
     overflow: hidden;
-    color: $pull-refresh-head-text-color;
     font-size: $pull-refresh-head-font-size;
     line-height: $pull-refresh-head-height;
+    color: $pull-refresh-head-text-color;
     text-align: center;
     transform: translateY(-100%);
   }

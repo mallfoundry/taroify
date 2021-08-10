@@ -27,26 +27,28 @@
   &--light {
     color: $popover-light-text-color;
 
-    .van-popover__content {
-      background-color: $popover-light-background-color;
-      box-shadow: 0 2px 12px rgba(50, 50, 51, 0.12);
-    }
-
-    .van-popover__arrow {
-      color: $popover-light-background-color;
-    }
-
-    .van-popover__action {
-      &:active {
-        background-color: $active-color;
+    .#{$component-prefix}popover {
+      &__content {
+        background-color: $popover-light-background-color;
+        box-shadow: 0 2px 12px rgba(50, 50, 51, 0.12);
       }
 
-      &--disabled {
-        color: $popover-light-action-disabled-text-color;
-        cursor: not-allowed;
+      &__arrow {
+        color: $popover-light-background-color;
+      }
 
+      &__action {
         &:active {
-          background-color: transparent;
+          background-color: $active-color;
+        }
+
+        &--disabled {
+          color: $popover-light-action-disabled-text-color;
+          cursor: not-allowed;
+
+          &:active {
+            background-color: transparent;
+          }
         }
       }
     }
@@ -54,8 +56,8 @@
 
   &-zoom-enter-from,
   &-zoom-leave-active {
-    transform: scale(0.8);
     opacity: 0;
+    transform: scale(0.8);
   }
 
   &-zoom-enter-active {

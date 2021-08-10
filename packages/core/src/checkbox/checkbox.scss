@@ -4,9 +4,9 @@
   display: inline-flex;
   align-items: center;
   overflow: hidden;
+  font-size: $font-size-lg;
   cursor: pointer;
   user-select: none;
-  font-size: $font-size-lg;
 
   &--disabled {
     cursor: not-allowed;
@@ -20,13 +20,13 @@
     cursor: pointer;
 
     .#{$component-prefix}icon {
-      display: block;
       box-sizing: border-box;
+      display: block;
       width: 1.25em;
       height: 1.25em;
-      color: transparent;
       font-size: 0.8em;
       line-height: 1.25;
+      color: transparent;
       text-align: center;
       border: 1px solid $checkbox-border-color;
       transition-duration: $checkbox-transition-duration;
@@ -59,8 +59,8 @@
 
   &__label {
     margin-left: $checkbox-label-margin;
-    color: $checkbox-label-color;
     line-height: $checkbox-size;
+    color: $checkbox-label-color;
 
     &--left {
       margin: 0 $checkbox-label-margin 0 0;

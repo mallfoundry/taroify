@@ -33,10 +33,10 @@
     box-sizing: border-box;
     width: 100%;
     padding: 0 $padding-base;
-    color: $circle-text-color;
-    font-weight: $circle-text-font-weight;
     font-size: $circle-text-font-size;
+    font-weight: $circle-text-font-weight;
     line-height: $circle-text-line-height;
+    color: $circle-text-color;
     transform: translateY(-50%);
   }
 }

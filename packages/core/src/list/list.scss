@@ -4,16 +4,16 @@
   &__loading,
   &__finished,
   &__error {
-    color: $list-text-color;
     font-size: $list-text-font-size;
     line-height: $list-text-line-height;
+    color: $list-text-color;
     text-align: center;
   }
 
   &__placeholder {
-    color: $list-text-color;
     font-size: $list-text-font-size;
     line-height: $list-text-line-height;
+    color: $list-text-color;
     text-align: center;
 
     .#{$component-prefix}loading__spinner,
