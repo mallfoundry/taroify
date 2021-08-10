@@ -160,6 +160,7 @@ export default function Button(props: ButtonProps) {
         {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
       <TaroButton
+        className={prefixClassname("button__button")}
         formType={
           formType === ButtonFormType.Submit
             ? "submit"
