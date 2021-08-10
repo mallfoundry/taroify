@@ -19,7 +19,7 @@ module.exports = {
       },
     ],
     "max-nesting-depth": [
-      3,
+      5,
       {
         ignoreAtRules: ["each", "media", "supports", "include"],
       },
