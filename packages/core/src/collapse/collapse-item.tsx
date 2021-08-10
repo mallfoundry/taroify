@@ -139,7 +139,7 @@ function CollapseItem(props: CollapseItemProps) {
           [prefixClassname("collapse-item__title--borderless")]: !bordered,
         })}
         size={size}
-        leftIcon={icon}
+        icon={icon}
         rightIcon={expandIcon}
         title={title}
         clickable={!disabled && clickable}
