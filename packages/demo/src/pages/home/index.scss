@@ -3,30 +3,30 @@
 @import "../../styles/prefix";
 
 .#{$demo-prefix}home {
-  padding: 0 16px 16px;
+  padding: 46px * $hd 20px * $hd 20px * $hd;
   background: #fff;
 
   &__title {
     display: flex;
     align-items: center;
-    padding-top: 1.2rem;
+    margin: 0 0 16px * $hd;
+    font-size: 32px * $hd;
   }
 
   &__logo {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 32px * $hd;
+    height: 32px * $hd;
   }
 
   &__name {
     display: inline-block;
-    margin-left: 14px * 2;
-    font-size: 1.4rem;
+    margin-left: 16px * $hd;
   }
 
   &__description {
     display: block;
-    margin: 10px 0 40px;
-    font-size: 14px * 2;
+    margin: 0 0 40px * $hd;
+    font-size: 14px * $hd;
     color: rgba(69, 90, 100, 0.6);
   }
 }

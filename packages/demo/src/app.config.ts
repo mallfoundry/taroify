@@ -1,6 +1,6 @@
 import __subpackages__ from "./subpackages"
 
-const subpackages = __subpackages__.map(({ root, pages }) => ({
+const subPackages = __subpackages__.map(({ root, pages }) => ({
   root,
   pages: pages.map(({ path }) => path),
 }))
@@ -13,5 +13,5 @@ export default {
     navigationBarTextStyle: "black",
   },
   pages: ["pages/home/index"],
-  subpackages,
+  subPackages,
 }
