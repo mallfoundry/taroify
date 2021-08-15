@@ -95,6 +95,10 @@ const menus = [
         title: "Switch 开关",
         to: "/components/switch/",
       },
+      {
+        title: "Uploader 文件上传",
+        to: "/components/uploader/",
+      },
     ],
   },
   {
