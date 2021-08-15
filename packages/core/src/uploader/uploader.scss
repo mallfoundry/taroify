@@ -1,0 +1,149 @@
+@import "./variables";
+
+.#{$component-prefix}uploader {
+  position: relative;
+  display: inline-block;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    &--disabled {
+      opacity: $uploader-disabled-opacity;
+
+      .#{$component-prefix}uploader__upload {
+        &:active {
+          background-color: $uploader-upload-background-color;
+        }
+      }
+    }
+  }
+
+  &__upload {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $uploader-size;
+    height: $uploader-size;
+    margin: 0 $padding-xs $padding-xs 0;
+    background-color: $uploader-upload-background-color;
+
+    &:active {
+      background-color: $uploader-upload-active-color;
+    }
+
+    &--readonly:active {
+      background-color: $uploader-upload-background-color;
+    }
+
+    &-icon {
+      color: $uploader-icon-color;
+      font-size: $uploader-icon-size;
+    }
+
+    &-text {
+      margin-top: $padding-xs;
+      color: $uploader-text-color;
+      font-size: $uploader-text-font-size;
+    }
+  }
+
+  &__preview {
+    position: relative;
+    margin: 0 $padding-xs $padding-xs 0;
+    cursor: pointer;
+
+    &-image {
+      display: block;
+      width: $uploader-size;
+      height: $uploader-size;
+      overflow: hidden;
+    }
+
+    &-remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: $uploader-remove-icon-size;
+      height: $uploader-remove-icon-size;
+      background-color: $uploader-remove-background-color;
+      border-radius: 0 0 0 12px * $hd;
+
+      &-icon {
+        position: absolute;
+        top: -2px * $hd;
+        right: -2px * $hd;
+        color: $uploader-remove-color;
+        font-size: 16px * $hd;
+        transform: scale(0.5);
+      }
+    }
+
+    &-cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  &__mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $uploader-mask-text-color;
+    background-color: $uploader-mask-background-color;
+
+    &-icon {
+      font-size: $uploader-mask-icon-size;
+    }
+
+    &-message {
+      margin-top: 6px * $hd;
+      padding: 0 $padding-base;
+      font-size: $uploader-mask-message-font-size;
+      line-height: $uploader-mask-message-line-height;
+    }
+  }
+
+  &__loading {
+    width: $uploader-loading-icon-size;
+    height: $uploader-loading-icon-size;
+    color: $uploader-loading-icon-color;
+  }
+
+  &__file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: $uploader-size;
+    height: $uploader-size;
+    background-color: $uploader-file-background-color;
+
+    &-icon {
+      color: $uploader-file-icon-color;
+      font-size: $uploader-file-icon-size;
+    }
+
+    &-name {
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: $uploader-file-name-margin-top;
+      padding: $uploader-file-name-padding;
+      color: $uploader-file-name-text-color;
+      font-size: $uploader-file-name-font-size;
+      text-align: center;
+    }
+  }
+}

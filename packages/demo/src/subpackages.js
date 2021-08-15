@@ -94,6 +94,11 @@ const subpackages = [
         name: "Switch",
         path: "switch/index",
       },
+      {
+        title: "Uploader 文件上传",
+        name: "Uploader",
+        path: "uploader/index",
+      },
     ],
   },
   {

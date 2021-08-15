@@ -18,6 +18,7 @@ export { default as Rate } from "./rate"
 export { default as Slider } from "./slider"
 export { default as Stepper } from "./stepper"
 export { default as Switch } from "./switch"
+export { default as Uploader } from "./uploader"
 // Action Components
 export { default as Sheet } from "./sheet"
 export { default as ActionSheet } from "./action-sheet"
