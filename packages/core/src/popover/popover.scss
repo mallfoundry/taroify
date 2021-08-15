@@ -65,6 +65,6 @@
   }
 
   &-zoom-leave-active {
-    transition-timing-function: $animation-timing-function-leave;
+    transition-timing-function: $animation-timing-function-exit;
   }
 }

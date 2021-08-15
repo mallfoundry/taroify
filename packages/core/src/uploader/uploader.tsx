@@ -1,7 +1,7 @@
 import { Close } from "@taroify/icons"
-import { filter, isEmpty, map } from "@taroify/lodash"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode } from "react"
 import Loading from "../loading"
@@ -57,7 +57,7 @@ function renderUploaderMask(file: UploadFile) {
 function renderUploadFiles(props: UploaderProps) {
   const { value = [], disabled, multiple, maxFiles = Number.MAX_VALUE, onChange } = props
 
-  if (isEmpty(value)) {
+  if (_.isEmpty(value)) {
     return <UploaderUpload />
   }
 
@@ -76,20 +76,16 @@ function renderUploadFiles(props: UploaderProps) {
     )
   }
 
-  const files = map(
-    //
-    getUploadFiles(value),
-    (file, index) => (
-      <UploaderImage
-        key={index}
-        url={file?.url}
-        name={file?.name}
-        removable={(file?.removable ?? true) && file?.status !== UploadStatus.Uploading}
-        children={renderUploaderMask(file)}
-        onRemove={() => !disabled && onChange?.(filter(value, (item) => item !== file))}
-      />
-    ),
-  )
+  const files = _.map(getUploadFiles(value) as UploadFile[], (file, index) => (
+    <UploaderImage
+      key={index}
+      url={file?.url}
+      name={file?.name}
+      removable={(file?.removable ?? true) && file?.status !== UploadStatus.Uploading}
+      children={renderUploaderMask(file)}
+      onRemove={() => !disabled && onChange?.(_.filter(value, (item) => item !== file))}
+    />
+  ))
 
   if (files.length < maxFiles) {
     files.push(<UploaderUpload key="upload" />)

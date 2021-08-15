@@ -1,14 +1,14 @@
 module.exports = () => {
   return {
     presets: [
-      [
-        "@babel/preset-env",
-        {
-          // targets: {
-          //   esmodules: true,
-          // },
-        },
-      ],
+      // [
+      //   "@babel/preset-env",
+      //   {
+      //     targets: {
+      //       esmodules: true,
+      //     },
+      //   },
+      // ],
       "@babel/preset-react",
       "@babel/preset-typescript",
     ],
@@ -21,6 +21,7 @@ module.exports = () => {
       ],
       ["@babel/plugin-proposal-decorators", { legacy: true }],
       ["@babel/plugin-proposal-class-properties", { loose: true }],
+      "lodash",
     ],
   }
 }
