@@ -1,1 +1,0 @@
-export { isObject } from "lodash"
