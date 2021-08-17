@@ -1,25 +1,8 @@
-import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
-import classNames from "classnames"
+import { ITouchEvent } from "@tarojs/components"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext } from "react"
-import { prefixClassname } from "../styles"
-import CellGroupContext from "./cell-group.context"
-
-export enum CellSize {
-  Medium = "medium",
-  Large = "large",
-}
-
-type CellSizeString = "medium" | "large"
-
-enum CellAlign {
-  Start = "start",
-  Center = "center",
-  End = "end",
-}
-
-type CellAlignString = "start" | "center" | "end"
+import { CSSProperties, ReactNode } from "react"
+import BaseCell from "./base-cell"
+import { CellAlign, CellAlignString, CellSize, CellSizeString } from "./cell.shared"
 
 export interface CellProps {
   className?: string
@@ -37,58 +20,7 @@ export interface CellProps {
 }
 
 function Cell(props: CellProps) {
-  const {
-    className,
-    style,
-    size = CellSize.Medium,
-    align,
-    title,
-    brief,
-    clickable: clickableProp = false,
-    bordered = true,
-    icon,
-    rightIcon,
-    children,
-    onClick,
-  } = props
-
-  const { clickable } = useContext(CellGroupContext)
-
-  return (
-    <View
-      className={classNames(
-        prefixClassname("cell"),
-        {
-          [prefixClassname("cell--start")]: align === CellAlign.Start,
-          [prefixClassname("cell--center")]: align === CellAlign.Center,
-          [prefixClassname("cell--end")]: align === CellAlign.End,
-          [prefixClassname("cell--large")]: size === CellSize.Large,
-          [prefixClassname("cell--clickable")]: clickableProp || clickable,
-          [prefixClassname("cell--borderless")]: !bordered,
-        },
-        className,
-      )}
-      style={style}
-      onClick={onClick}
-    >
-      {icon && cloneIconElement(icon, { className: prefixClassname("cell__icon") })}
-      {title && (
-        <View className={prefixClassname("cell__title")}>
-          {title}
-          {brief && <View className={prefixClassname("cell__brief")} children={brief} />}
-        </View>
-      )}
-      {children && (
-        <View
-          className={classNames(prefixClassname("cell__value"), {
-            [prefixClassname("cell__value--alone")]: !title,
-          })}
-          children={children}
-        />
-      )}
-      {rightIcon && cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })}
-    </View>
-  )
+  return <BaseCell {...props} />
 }
 
 export default Cell
