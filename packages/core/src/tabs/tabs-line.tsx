@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import * as React from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
-import { TabOffset } from "./nav-tabs"
+import { TabOffset } from "./tabs-header"
 
 interface TabsLineProps {
   offset?: TabOffset
