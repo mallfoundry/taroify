@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.11-alpha.0
+
+`2021-07-30`
+
+**New Component**
+
+- 新增 NumberKeyboard 组件
+- 新增 Uploader 组件
+
+**Feature**
+
+- Tabs: 新增 animated 属性
+- Tabs: 新增 swipeable 属性
+
 ### v0.0.10-alpha.0
 
 `2021-07-30`
