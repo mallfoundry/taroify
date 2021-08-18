@@ -1,127 +1,116 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, cloneElement, ReactElement, ReactNode, useCallback, useRef } from "react"
+import { Children, ReactElement, ReactNode, useMemo, useRef } from "react"
+import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
-import NavTabs from "./nav-tabs"
-import { TabKey, TabKey as SharedTabKey, TabsTheme, TabsThemeString } from "./shared"
-import { TabEvent as __TabEvent__ } from "./tab"
+import TabPane from "./tab-pane"
+import { TabsContent } from "./tabs-content"
+import TabsHeader from "./tabs-header"
+import TabsContext from "./tabs.context"
+import { TabEvent, TabKey, TabObject, TabsTheme, TabsThemeString } from "./tabs.shared"
 
-function obtainTabPanes(children?: ReactNode, activeKey?: TabKey) {
-  return Children.map(children, (node: ReactNode, __dataIndex__: number) => {
-    if (!React.isValidElement(node)) {
-      return node
-    }
-    const element = node as ReactElement
-    if (element.type !== Tabs.TabPane) {
-      return element
-    }
-    const __dataKey__ = element.key ?? __dataIndex__
-    return cloneElement(element, { active: activeKey === __dataKey__ })
-  })
+function useTabObjects(children: ReactNode) {
+  return useMemo(() => {
+    const tabObjects: TabObject[] = []
+
+    let index = 0
+    Children.forEach(children, (node: ReactNode, i: number) => {
+      if (!React.isValidElement(node)) {
+        return node
+      }
+      const element = node as ReactElement
+      if (element.type !== TabPane) {
+        return element
+      }
+      const { props } = element
+      const { title, disabled } = props
+      const key = element.key ?? i
+      tabObjects.push({
+        key,
+        index: index++,
+        disabled,
+        title,
+      })
+    })
+
+    return tabObjects
+  }, [children])
 }
 
-interface TabsContentProps {
+export interface TabsProps {
   activeKey?: TabKey
-  children?: ReactNode
-}
-
-function TabsContent(props: TabsContentProps) {
-  const { activeKey, children } = props
-  const panes = obtainTabPanes(children, activeKey)
-  return <View className={prefixClassname("tabs__content")}>{panes}</View>
-}
-
-interface TabsProps {
-  activeKey?: TabKey
+  duration?: number
+  animated?: boolean
+  swipeable?: boolean
+  sticky?: boolean
   theme?: TabsTheme | TabsThemeString
-  themeColor?: string
-  background?: string
-  duration?: number | string
   bordered?: boolean
   ellipsis?: boolean
-  activeColor?: string
-  inactiveColor?: string
   children?: ReactNode
-  onClick?: (event: Tabs.TabEvent) => void
-  onChange?: (event: Tabs.TabEvent) => void
+
+  onChange?(event: TabEvent): void
+
+  onTabClick?(event: TabEvent): void
 }
 
 function Tabs(props: TabsProps) {
   const {
     activeKey = -1,
+    duration,
+    animated = false,
+    swipeable = false,
+    sticky = false,
     theme = TabsTheme.Line,
     ellipsis = true,
-    activeColor,
-    inactiveColor,
     bordered,
     children,
-    onClick,
+    onTabClick,
     onChange,
   } = props
+  const rootRef = useRef()
+  const tabObjects = useTabObjects(props.children)
 
-  function handleClick(event: Tabs.TabEvent) {
+  function handleTabClick(event: TabEvent) {
     const { key: __activeKey__, disabled } = event
     if (__activeKey__ !== activeKey && !disabled) {
       onChange?.(event)
     }
-    onClick?.(event)
+    onTabClick?.(event)
   }
 
   return (
-    <View
-      className={classNames(
-        prefixClassname("tabs"), //
-        {
+    <TabsContext.Provider
+      value={{
+        activeKey,
+        duration,
+        animated,
+        swipeable,
+        theme,
+        ellipsis,
+        bordered,
+        tabObjects,
+        onTabClick: handleTabClick,
+      }}
+    >
+      <View
+        ref={rootRef}
+        className={classNames(prefixClassname("tabs"), {
           [prefixClassname("tabs--line")]: theme === TabsTheme.Line,
           [prefixClassname("tabs--card")]: theme === TabsTheme.Card,
-        },
-      )}
-    >
-      <NavTabs
-        activeKey={activeKey}
-        theme={theme}
-        ellipsis={ellipsis}
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-        bordered={bordered}
-        onClick={handleClick}
-        children={children}
-      />
-      <TabsContent activeKey={activeKey} children={children} />
-    </View>
+        })}
+      >
+        {sticky ? (
+          <Sticky container={rootRef}>
+            <TabsHeader />
+          </Sticky>
+        ) : (
+          <TabsHeader />
+        )}
+        <TabsContent children={children} />
+      </View>
+    </TabsContext.Provider>
   )
-}
-
-namespace Tabs {
-  export type TabEvent = __TabEvent__
-  export type TabKey = SharedTabKey
-
-  interface TabPaneProps {
-    active?: boolean
-    disabled?: boolean
-    title?: ReactNode
-    children?: ReactNode
-  }
-
-  export function TabPane(props: TabPaneProps) {
-    const { active, children } = props
-    const initializedRef = useRef(false)
-
-    const shouldRender = useCallback(() => {
-      if (active && !initializedRef.current) {
-        initializedRef.current = true
-      }
-      return active && initializedRef.current
-    }, [active])
-    return (
-      <View
-        style={{ display: active ? "" : "none" }}
-        className={prefixClassname("tabs__tab-pane")}
-        children={shouldRender() ? children : undefined}
-      />
-    )
-  }
 }
 
 export default Tabs

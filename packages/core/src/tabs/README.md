@@ -97,6 +97,7 @@ import { Tabs } from "@taroify/core"
 
 function DisableTabs() {
   const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -132,7 +133,7 @@ function CardTabs() {
 
 ### 点击事件
 
-可以在 `Tabs` 上绑定 `onClick` 事件，事件传参为标签对应的标识符和标题。
+可以在 `Tabs` 上绑定 `onTabClick` 事件，事件传参为标签对应的标识符和标题。
 
 ```tsx
 import { Tabs, Toast } from "@taroify/core"
@@ -142,14 +143,14 @@ function ClickTabs() {
   const [message, setMessage] = useState<ReactNode>("")
   const [open, setOpen] = useState(false)
 
-  function handleClick(event: Tabs.TabEvent) {
+  function onTabClick(event: Tabs.TabEvent) {
     setOpen(true)
     setMessage(event.title)
   }
 
   return (
     <>
-      <Tabs activeKey={activeKey} onClick={handleClick} onChange={({ key }) => setActiveKey(key)}>
+      <Tabs activeKey={activeKey} onTabClick={onTabClick} onChange={({ key }) => setActiveKey(key)}>
         <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
         <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
         <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -158,6 +159,26 @@ function ClickTabs() {
         {message}
       </Toast>
     </>
+  )
+}
+```
+
+### 粘性布局
+
+通过 `sticky` 属性可以开启粘性布局，粘性布局下，标签页滚动到顶部时会自动吸顶。
+
+```tsx
+import { Tabs } from "@taroify/core"
+
+function StickyTabs() {
+  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  return (
+    <Tabs activeKey={activeKey} sticky onChange={({ key }) => setActiveKey(key)}>
+      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+    </Tabs>
   )
 }
 ```
@@ -214,6 +235,46 @@ function CustomTitleTabs() {
 }
 ```
 
+### 切换动画
+
+通过 `animated` 属性可以开启切换标签内容时的转场动画。
+
+```tsx
+import { Tabs } from "@taroify/core"
+
+function AnimatedTabs() {
+  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  return (
+    <Tabs activeKey={activeKey} animated onChange={({ key }) => setActiveKey(key)}>
+      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+    </Tabs>
+  )
+}
+```
+
+### 滑动切换
+
+通过 `swipeable` 属性可以开启滑动切换标签页。
+
+```tsx
+import { Tabs } from "@taroify/core"
+
+function SwipeableTabs() {
+  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  return (
+    <Tabs activeKey={activeKey} animated swipeable onChange={({ key }) => setActiveKey(key)}>
+      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+    </Tabs>
+  )
+}
+```
+
 ## API
 
 ### Tabs Props
@@ -222,36 +283,25 @@ function CustomTitleTabs() {
 | --- | --- | --- | --- |
 | activeKey | 绑定当前选中标签的标识符 | _number \| string_ | `0` |
 | theme | 样式风格类型，可选值为 `card` | _string_ | `line` |
-| themeColor | 标签主题色 | _string_ | `#ee0a24` |
-| background | 标签栏背景色 | _string_ | `white` |
 | duration | 动画时间，单位秒 | _number \| string_ | `0.3` |
-| lineWidth | 底部条宽度，默认单位 `px` | _number \| string_ | `40px` |
-| lineHeight | 底部条高度，默认单位 `px` | _number \| string_ | `3px` |
 | animated | 是否开启切换标签内容时的转场动画 | _boolean_ | `false` |
 | bordered | 是否显示标签栏外边框，仅在 `type="line"` 时有效 | _boolean_ | `false` |
 | ellipsis | 是否省略过长的标题文字 | _boolean_ | `true` |
 | sticky | 是否使用粘性定位布局 | _boolean_ | `false` |
 | swipeable | 是否开启手势左右滑动切换 | _boolean_ | `false` |
-| scrollspy | 是否开启滚动导航 | _boolean_ | `false` |
-| offsetTop | 粘性定位布局下与顶部的最小距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px` | _number \| string_ | `0` |
-| swipeThreshold | 滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动 | _number \| string_ | `5` |
-| activeColor | 标题选中态颜色 | _string_ | - |
-| inactiveColor | 标题默认态颜色 | _string_ | - |
-| before-change | 切换标签前的回调函数，返回 `false` 可阻止切换，支持返回 Promise | _(name) => boolean \| Promise_ | - |
 
-### TabPane Props
+### Tabs.Pane Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | key | 标签标识，作为匹配的标识符 | _number \| string_ | 标签的索引值 |
-| title | 标题 | _string_ | - |
+| title | 标题 | _ReactNode_ | - |
 | disabled | 是否禁用标签 | _boolean_ | `false` |
-| dot | 是否在标题右上角显示小红点 | _boolean_ | `false` |
-| badge | 图标右上角徽标的内容 | _number \| string_ | - |
+| children | 标签面板内容 | _ReactNode_ | - |
 
 ### Tabs Events
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| onClick | 点击标签时触发 | _event : Tabs.TabEvent_ |
+| onTabClick | 点击标签时触发 | _event : Tabs.TabEvent_ |
 | onChange | 当前激活的标签改变时触发 | _event : Tabs.TabEvent_ |

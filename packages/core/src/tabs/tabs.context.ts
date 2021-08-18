@@ -1,15 +1,24 @@
 import { createContext } from "react"
+import { TabEvent, TabKey, TabObject, TabsTheme, TabsThemeString } from "./tabs.shared"
 
-export interface TabOffset {
-  left?: number
-  width?: number
+interface TabsContextValue {
+  activeKey: TabKey
+  duration?: number
+  animated: boolean
+  swipeable: boolean
+  theme?: TabsTheme | TabsThemeString
+  bordered?: boolean
+  ellipsis?: boolean
+  tabObjects: TabObject[]
+
+  onTabClick?(event: TabEvent): void
 }
 
-interface TabsContextProps {
-  navOffset?: TabOffset
-  tabOffsets?: TabOffset[]
-}
-
-const TabsContext = createContext<TabsContextProps>({})
+const TabsContext = createContext<TabsContextValue>({
+  activeKey: undefined,
+  animated: false,
+  swipeable: false,
+  tabObjects: [],
+})
 
 export default TabsContext
