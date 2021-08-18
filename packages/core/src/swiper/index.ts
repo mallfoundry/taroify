@@ -1,4 +1,4 @@
-import SwiperComponent, { SwiperProps } from "./swiper"
+import SwiperElement, { SwiperProps } from "./swiper"
 import SwiperIndicator, { SwiperIndicatorProps } from "./swiper-indicator"
 import SwiperItem, { SwiperItemProps } from "./swiper-item"
 import { SwiperItemEvent } from "./swiper.shared"
@@ -10,7 +10,7 @@ interface SwiperInterface {
   Indicator: typeof SwiperIndicator
 }
 
-const Swiper = (SwiperComponent as unknown) as SwiperInterface
+const Swiper = (SwiperElement as unknown) as SwiperInterface
 
 Swiper.Item = SwiperItem
 Swiper.Indicator = SwiperIndicator

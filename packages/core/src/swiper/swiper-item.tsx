@@ -9,13 +9,13 @@ import SwiperContext from "./swiper.context"
 import { SwiperDirection } from "./swiper.shared"
 
 export interface SwiperItemProps {
+  __dataIndex__?: number
   className?: string
-  index?: number
   children?: ReactNode
 }
 
 export default function SwiperItem(props: SwiperItemProps) {
-  const { className, index = 0 } = props
+  const { __dataIndex__ = 0, className } = props
   const { size, direction, children } = useContext(SwiperContext)
   const vertical = direction === SwiperDirection.Vertical
 
@@ -27,19 +27,15 @@ export default function SwiperItem(props: SwiperItemProps) {
       const mainAxis = vertical ? "height" : "width"
       style[mainAxis] = addUnitPx(size?.value)
     }
-    if (offset) {
-      style.transform = `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`
-    } else {
-      style.transform = ""
-    }
+    style.transform = offset ? `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})` : ""
     return style
   }, [offset, size, vertical])
 
   useEffect(() => {
-    if (!children[index]) {
-      children[index] = { setOffset }
+    if (!children[__dataIndex__]) {
+      children[__dataIndex__] = { setOffset }
     }
-  }, [children, index])
+  }, [children, __dataIndex__])
 
   return (
     <View

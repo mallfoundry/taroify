@@ -56,19 +56,19 @@ function useSwiperChildren(children: ReactNode): SwiperChildren {
     }
     const element = child as ReactElement
     const elementType = element.type
-    if (elementType === SwiperItem) {
-      const { key } = element
-      __children__.items.push(
-        cloneElement(child, {
-          ...element.props,
-          key: key ?? i,
-          index: index++,
-        }),
-      )
-    }
-
     if (elementType === SwiperIndicator) {
       __children__.indicator = element
+    } else if (elementType === SwiperItem) {
+      const { key } = element
+      __children__.items.push(
+        cloneElement(element, {
+          ...element.props,
+          key: key ?? i,
+          __dataIndex__: index++,
+        }),
+      )
+    } else {
+      __children__.items.push(element)
     }
   })
 
