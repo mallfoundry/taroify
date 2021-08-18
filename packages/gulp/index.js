@@ -4,6 +4,7 @@ const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
 const { buildScss, watchScss, watchScssSymlink } = require("./scss")
 const { createBundle } = require("./bundle")
 const { serveDemo, serveSite } = require("./serve")
+const { copyFontFiles } = require("./font")
 
 function watch() {
   watchScss("icons")
@@ -41,7 +42,8 @@ exports.watch = watch
 exports.build = series(
   createBundle("icons"),
   createBundle("core"), //
-  buildScss("icons"),
+  copyFontFiles("core"), //
+  buildScss("icons"), //
   buildScss("core"), //
   buildTypescript("icons"),
   buildTypescript("core"), //
