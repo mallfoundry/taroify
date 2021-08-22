@@ -68,7 +68,7 @@ function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoading
   return loading
 }
 
-interface ButtonProps {
+export interface ButtonProps {
   className?: string
   variant?: ButtonVariant | ButtonVariantString
   shape?: ButtonShape | ButtonShapeString
