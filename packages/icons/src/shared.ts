@@ -1,3 +1,4 @@
+import { ITouchEvent } from "@tarojs/components"
 import { CSSProperties } from "react"
 
 export const ICON_TYPE = Symbol("__iconType__")
@@ -54,7 +55,6 @@ export interface IconProps {
   style?: CSSProperties
   size?: IconSize | IconSizeString | number | string
   color?: IconColor | IconColorString | string
-  // children?: string // TODO private children
-  // events
-  onClick?: () => void
+
+  onClick?(event: ITouchEvent): void
 }
