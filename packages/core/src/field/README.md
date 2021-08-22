@@ -110,6 +110,8 @@ function DisabledField() {
 通过 `icon` 和 `rightIcon` 配置输入框两侧的图标，通过设置 `clearable` 在输入过程中展示清除图标。
 
 ```tsx
+import { Cell, Field } from "@taroify/core"
+
 function IconField() {
   const [value2, setValue2] = useState("")
 
@@ -139,6 +141,8 @@ function IconField() {
 设置 `required` 属性表示这是一个必填项，可以配合 `error` 或 `message` 属性显示对应的错误提示。
 
 ```tsx
+import { Cell, Field } from "@taroify/core"
+
 function ErrorField() {
   return (
     <Cell.Group inset>
@@ -155,6 +159,8 @@ function ErrorField() {
 通过 `Field.Button` 可以在输入框尾部插入按钮。
 
 ```tsx
+import { Cell, Field } from "@taroify/core"
+
 function ButtonField() {
   return (
     <Cell.Group inset>
@@ -168,49 +174,6 @@ function ButtonField() {
     </Cell.Group>
   )
 }
-```
-
-### 格式化输入内容
-
-通过 `formatter` 属性可以对输入的内容进行格式化，通过 `format-trigger` 属性可以指定执行格式化的时机，默认在输入时进行格式化。
-
-```html
-
-<van-cell-group inset>
-  <van-field
-    v-model="state.value1"
-    label="文本"
-    :formatter="formatter"
-    placeholder="在输入时执行格式化"
-  />
-  <van-field
-    v-model="state.value2"
-    label="文本"
-    :formatter="formatter"
-    format-trigger="onBlur"
-    placeholder="在失焦时执行格式化"
-  />
-</van-cell-group>
-```
-
-```js
-import { reactive } from 'vue';
-
-export default {
-  setup() {
-    const state = reactive({
-      value1: '',
-      value2: '',
-    });
-    // 过滤输入的数字
-    const formatter = (value) => value.replace(/\d/g, '');
-
-    return {
-      state,
-      formatter,
-    };
-  },
-};
 ```
 
 ## API
