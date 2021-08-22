@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties } from "react"
@@ -17,22 +17,21 @@ import { addUnitPx } from "../utils/unit"
 interface VanIconProps {
   className?: string
   style?: CSSProperties
+  name?: string
   size?: IconSize | IconSizeString | number | string
   color?: IconColor | IconColorString | string
-  children?: string
-  onClick?: () => void
+  onClick?: (event: ITouchEvent) => void
 }
 
 export default function VanIcon(props: VanIconProps) {
   const {
     className,
     style,
+    name,
     size = IconSize.Inherit,
     color = IconColor.Inherit,
-    children,
     onClick,
   } = props
-
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
 
   const presetSize = ICON_PRESET_SIZES.includes(size as IconSize)
@@ -41,7 +40,7 @@ export default function VanIcon(props: VanIconProps) {
     <View
       className={classNames(
         "van-icon",
-        `van-icon-${children}`,
+        `van-icon-${name}`,
         "taroify-icon",
         {
           [`taroify-icon--${color}`]: presetColor,
@@ -61,8 +60,7 @@ export default function VanIcon(props: VanIconProps) {
 
 export function createVanIconComponent(name: string) {
   function VanIconWrapper(props: IconProps) {
-    const { ...rest } = props
-    return <VanIcon children={name} {...rest} />
+    return <VanIcon name={name} {...props} />
   }
 
   // @ts-ignore
