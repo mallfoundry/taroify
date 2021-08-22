@@ -3,10 +3,20 @@
 .#{$component-prefix}cell-group {
   background-color: $cell-group-background-color;
 
+  &--inset {
+    margin: $cell-group-inset-padding;
+    border-radius: $cell-group-inset-border-radius;
+    overflow: hidden;
+  }
+
   &__title {
     padding: $cell-group-title-padding;
     font-size: $cell-group-title-font-size;
     line-height: $cell-group-title-line-height;
     color: $cell-group-title-color;
+
+    &--inset {
+      padding: $cell-group-inset-title-padding;
+    }
   }
 }

@@ -8,25 +8,39 @@ import CellGroupContext from "./cell-group.context"
 interface CellGroupProps {
   title?: string
   clickable?: boolean
+  inset?: boolean
   bordered?: boolean
   children?: ReactNode
 }
 
 export function CellGroup(props: CellGroupProps) {
-  const { title, clickable = false, bordered = true, children } = props
+  const { title, clickable = false, inset = false, bordered = true, children } = props
   return (
     <CellGroupContext.Provider
       value={{
         clickable,
       }}
     >
-      {title && <View className={prefixClassname("cell-group__title")} children={title} />}
       <View
         className={classNames(prefixClassname("cell-group"), {
-          [prefixClassname("hairline--top-bottom")]: bordered,
+          [prefixClassname("cell-group--inset")]: inset,
         })}
-        children={children}
-      />
+      >
+        {title && (
+          <View
+            className={classNames(prefixClassname("cell-group__title"), {
+              [prefixClassname("cell-group__title--inset")]: inset,
+            })}
+            children={title}
+          />
+        )}
+        <View
+          className={classNames(prefixClassname("cell-group"), {
+            [prefixClassname("hairline--top-bottom")]: bordered,
+          })}
+          children={children}
+        />
+      </View>
     </CellGroupContext.Provider>
   )
 }
