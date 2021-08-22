@@ -60,6 +60,11 @@ const subpackages = [
         path: "checkbox/index",
       },
       {
+        title: "Field 输入框",
+        name: "Field",
+        path: "field/index",
+      },
+      {
         title: "NumberKeyboard 数字键盘",
         name: "NumberKeyboard",
         path: "number-keyboard/index",
