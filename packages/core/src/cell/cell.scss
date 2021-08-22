@@ -65,6 +65,19 @@
     }
   }
 
+  &--required {
+    overflow: visible;
+
+    &::before {
+      position: absolute;
+      left: $padding-xs;
+      color: $cell-required-color;
+      font-size: $cell-font-size;
+      content: '*';
+    }
+  }
+
+
   &__value {
     flex: 1;
     color: $cell-value-color;
@@ -86,13 +99,13 @@
   &__icon {
     display: flex;
     align-items: center;
-    margin-right: $cell-start-icon-margin-left;
+    margin-right: $cell-icon-margin-left;
   }
 
   &__right-icon {
     display: flex;
     align-items: center;
-    margin-left: $cell-end-icon-margin-right;
+    margin-left: $cell-right-icon-margin-right;
     color: $cell-value-color;
   }
 }

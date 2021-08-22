@@ -8,10 +8,11 @@ $cell-line-height: 24px * $hd;
 $cell-border-color: $border-color;
 $cell-value-color: $gray-6;
 $cell-active-color: $active-color;
+$cell-required-color: $danger-color;
 
 $cell-icon-size: 16px * $hd;
-$cell-start-icon-margin-left: 4px * $hd;
-$cell-end-icon-margin-right: 4px * $hd;
+$cell-icon-margin-left: 4px * $hd;
+$cell-right-icon-margin-right: 4px * $hd;
 
 $cell-brief-color: $gray-6;
 $cell-brief-font-size: $font-size-sm;

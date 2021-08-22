@@ -20,6 +20,7 @@ export interface BaseCellProps {
   icon?: ReactNode
   rightIcon?: ReactNode
   bordered?: boolean
+  required?: boolean
   clickable?: boolean
   children?: ReactNode
   onClick?: (event: ITouchEvent) => void
@@ -37,6 +38,7 @@ function BaseCell(props: BaseCellProps) {
     title,
     brief,
     clickable: clickableProp = false,
+    required = false,
     bordered = true,
     icon,
     rightIcon,
@@ -56,6 +58,7 @@ function BaseCell(props: BaseCellProps) {
           [prefixClassname("cell--end")]: align === CellAlign.End,
           [prefixClassname("cell--large")]: size === CellSize.Large,
           [prefixClassname("cell--clickable")]: clickableProp || clickable,
+          [prefixClassname("cell--required")]: required,
           [prefixClassname("cell--borderless")]: !bordered,
         },
         className,
