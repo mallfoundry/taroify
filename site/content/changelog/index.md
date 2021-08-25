@@ -14,7 +14,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ### v0.0.11-alpha.0
 
-`2021-07-30`
+`2021-08-18`
 
 **New Component**
 
