@@ -1,0 +1,16 @@
+@import "../styles/prefix";
+@import "../styles/ellipsis";
+@import "../styles/hairline";
+@import "../styles/variables";
+
+$search-padding: 10px * $hd $padding-sm;
+$search-background-color: $white;
+$search-content-background-color: $gray-1;
+$search-input-height: 34px * $hd;
+$search-label-padding: 0 5px * $hd;
+$search-label-color: $text-color;
+$search-label-font-size: $font-size-md;
+$search-left-icon-color: $gray-6;
+$search-action-padding: 0 $padding-xs;
+$search-action-text-color: $text-color;
+$search-action-font-size: $font-size-md;

@@ -85,6 +85,11 @@ const subpackages = [
         path: "rate/index",
       },
       {
+        title: "Search 搜索",
+        name: "Search",
+        path: "search/index",
+      },
+      {
         title: "Slider 滑块",
         name: "Slider",
         path: "slider/index",

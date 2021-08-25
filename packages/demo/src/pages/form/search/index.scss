@@ -1,0 +1,13 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.search-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+
+  .background {
+    background: #4fc08d;
+  }
+}

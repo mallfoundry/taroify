@@ -88,6 +88,10 @@ const menus = [
         to: "/components/rate/",
       },
       {
+        title: "Search 搜索",
+        to: "/components/search/",
+      },
+      {
         title: "Slider 滑块",
         to: "/components/slider/",
       },
