@@ -105,7 +105,9 @@
       }
     }
 
-    &--center {
+    &--center,
+    &--center input,
+    &--center textarea {
       justify-content: center;
       text-align: center;
     }

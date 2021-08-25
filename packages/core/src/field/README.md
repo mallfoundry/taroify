@@ -223,6 +223,6 @@ function ButtonField() {
 | 事件               | 说明                 | 回调参数                       |
 | ------------------ | -------------------- | ------------------------------ |
 | onChange | 输入框内容变化时触发 | _event.detail: 当前输入值_ |
-| onFocus              | 输入框获得焦点时触发 | _event: Event_                 |
-| onBlur               | 输入框失去焦点时触发 | _event: Event_                 |
-| onClear              | 点击清除按钮时触发   | _event: MouseEvent_            |
+| onFocus              | 输入框获得焦点时触发 | _event: BaseEventOrig<InputProps.inputValueEventDetail>_                 |
+| onBlur               | 输入框失去焦点时触发 | _event: BaseEventOrig<InputProps.inputValueEventDetail>_                 |
+| onClear              | 点击清除按钮时触发   | _event: ITouchEvent_            |

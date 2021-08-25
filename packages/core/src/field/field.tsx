@@ -11,7 +11,20 @@ import { Children, isValidElement, ReactElement, ReactNode, useMemo, useState } 
 import { BaseCell, CellAlign, CellAlignString } from "../cell"
 import { prefixClassname } from "../styles"
 import FieldButton from "./field-button"
-import { FieldType, FieldTypeString } from "./field.shared"
+import {
+  FieldAutosize,
+  FieldClearTrigger,
+  FieldClearTriggerString,
+  FieldConfirmType,
+  FieldInputAlign,
+  FieldInputAlignString,
+  FieldLabelAlign,
+  FieldLabelAlignString,
+  FieldMessageAlign,
+  FieldMessageAlignString,
+  FieldType,
+  FieldTypeString,
+} from "./field.shared"
 
 export function resolveOnChange<
   E extends InputProps.inputEventDetail | InputProps.inputValueEventDetail,
@@ -77,44 +90,6 @@ function useFieldChildren(children?: ReactNode): FieldChildren {
 
 type TaroInputType = "text" | "number" | "idcard" | "digit"
 
-enum FieldClearTrigger {
-  Always = "always",
-  Focus = "focus",
-}
-
-type FieldClearTriggerString = "always" | "focus"
-
-enum FieldLabelAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
-
-type FieldLabelAlignString = "left" | "center" | "right"
-
-enum FieldInputAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
-
-type FieldInputAlignString = "left" | "center" | "right"
-
-enum FieldMessageAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
-
-type FieldMessageAlignString = "left" | "center" | "right"
-
-interface FieldAutosize {
-  maxHeight: number
-  minHeight: number
-}
-
-type FieldConfirmType = "send" | "search" | "next" | "go" | "done"
-
 export interface FieldProps {
   className?: string
   value?: string
@@ -139,6 +114,7 @@ export interface FieldProps {
   messageAlign?: FieldMessageAlign | FieldMessageAlignString
   message?: ReactNode
   clearable?: boolean
+  clearIcon?: ReactNode
   clearTrigger?: FieldClearTrigger | FieldClearTriggerString
   autosize?: boolean | FieldAutosize
 
@@ -153,6 +129,8 @@ export interface FieldProps {
   children?: ReactNode
 
   onClear?(event: ITouchEvent): void
+
+  onConfirm?(event: BaseEventOrig<InputProps.inputValueEventDetail>): void
 
   onChange?(event: BaseEventOrig<InputProps.inputEventDetail>): void
 
@@ -186,6 +164,7 @@ function Field(props: FieldProps) {
     message,
     messageAlign = FieldLabelAlign.Left,
     clearable,
+    clearIcon = <Clear />,
     clearTrigger = FieldClearTrigger.Focus,
     cursorSpacing,
     confirmType,
@@ -196,6 +175,7 @@ function Field(props: FieldProps) {
     adjustPosition,
     holdKeyboard,
     onClear,
+    onConfirm,
     onChange,
     onFocus,
     onBlur,
@@ -294,8 +274,13 @@ function Field(props: FieldProps) {
           onFocus={handleFocus}
           onBlur={handleBlur}
           onInput={onChange}
+          onConfirm={onConfirm}
         />
-        {allowClear && <Clear className={prefixClassname("field__clear")} onClick={handleClear} />}
+        {allowClear &&
+          cloneIconElement(clearIcon, {
+            className: prefixClassname("field__clear"),
+            onClick: handleClear,
+          })}
         {button}
       </View>
       {message && (
