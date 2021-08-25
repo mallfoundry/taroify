@@ -86,6 +86,7 @@ import { Cell } from "@taroify/core"
 | 参数   | 说明           | 类型      | 默认值 |
 | ------ | -------------- | --------- | ------ |
 | title  | 分组标题       | _string_  | `-`    |
+| inset  | 是否展示为圆角卡片风格 | _boolean_ | `false` |
 | bordered | 是否显示外边框 | _boolean_ | `true` |
 
 ### Cell Props
