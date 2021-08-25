@@ -12,6 +12,19 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.0
+
+`2021-08-25`
+
+**New Component**
+
+- 新增 Field 组件
+- 新增 Search 组件
+
+**Feature**
+
+- Cell.Group: 新增 inset 属性
+
 ### v0.0.11-alpha.0
 
 `2021-08-18`
