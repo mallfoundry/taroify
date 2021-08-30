@@ -30,6 +30,7 @@ npm i babel-plugin-import -D
 ```
 
 ```js
+// babel.config.js
 module.exports = {
   plugins: [
     [
