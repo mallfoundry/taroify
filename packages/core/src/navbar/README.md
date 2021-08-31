@@ -6,7 +6,7 @@
 
 ### 引入
 
-```js
+```tsx
 import { Navbar } from "@taroify/core"
 // or
 import Navbar from "@taroify/core/navbar"
@@ -16,15 +16,18 @@ import Navbar from "@taroify/core/navbar"
 
 ### 基础用法
 
-```jsx
-<Navbar title="标题" />
+```tsx
+<Navbar title="标题">
+  <Navbar.NavLeft>返回</Navbar.NavLeft>
+  <Navbar.NavRight>按钮</Navbar.NavRight>
+</Navbar>
 ```
 
 ### 使用 NavLeft 和 NavRight
 
-```jsx
+```tsx
 <Navbar title="标题">
-  <Navbar.NavLeft icon={<ArrowLeft />} text="返回" />
+  <Navbar.NavLeft>返回</Navbar.NavLeft>
   <Navbar.NavRight icon={<Search />} />
 </Navbar>
 ```
@@ -45,7 +48,7 @@ import Navbar from "@taroify/core/navbar"
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | icon | 左侧图标 | _Icon_ | - |
-| text | 左侧文案 | _ReactNode_ | - |
+| children | 左侧文案 | _ReactNode_ | - |
 
 ### Navbar.NavLeft Events
 
@@ -58,7 +61,7 @@ import Navbar from "@taroify/core/navbar"
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | icon | 右侧图标 | _Icon_ | - |
-| text | 右侧文案 | _ReactNode_ | - |
+| children | 右侧文案 | _ReactNode_ | - |
 
 ### Navbar.NavRight Events
 

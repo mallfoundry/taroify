@@ -1,8 +1,9 @@
+import { ArrowLeft } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { isValidElement, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { findChildren } from "../utils/children"
@@ -36,40 +37,43 @@ function Navbar(props: NavbarProps) {
 namespace Navbar {
   interface NavLeftProps {
     icon?: ReactNode
-    text?: ReactNode
     children?: ReactNode
+
+    onClick?(event: ITouchEvent): void
   }
 
   export function NavLeft(props: NavLeftProps) {
-    const { icon, text, children } = props
-    // If children is not undefined, return left view
-    if (children) {
-      return <View className={prefixClassname("navbar__left")} children={children} />
-    }
+    const { icon = <ArrowLeft />, children, onClick } = props
     return (
-      <View className={prefixClassname("navbar__left")}>
+      <View className={prefixClassname("navbar__left")} onClick={onClick}>
         {icon && cloneIconElement(icon, { className: prefixClassname("navbar__icon") })}
-        {text && <View className={prefixClassname("navbar__text")} children={text} />}
+        {isValidElement(children) ? (
+          children
+        ) : (
+          <View className={prefixClassname("navbar__text")} children={children} />
+        )}
       </View>
     )
   }
 
   interface NavRightProps {
     icon?: ReactNode
-    text?: ReactNode
     children?: ReactNode
+
+    onClick?(event: ITouchEvent): void
   }
 
   export function NavRight(props: NavRightProps) {
-    const { icon, text, children } = props
-    // If children is not undefined, return right view
-    if (children) {
-      return <View className={prefixClassname("navbar__right")} children={children} />
-    }
+    const { icon, children, onClick } = props
+
     return (
-      <View className={prefixClassname("navbar__right")}>
+      <View className={prefixClassname("navbar__right")} onClick={onClick}>
         {icon && cloneIconElement(icon, { className: prefixClassname("navbar__icon") })}
-        {text && <View className={prefixClassname("navbar__text")} children={text} />}
+        {isValidElement(children) ? (
+          children
+        ) : (
+          <View className={prefixClassname("navbar__text")} children={children} />
+        )}
       </View>
     )
   }
