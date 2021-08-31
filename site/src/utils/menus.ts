@@ -80,6 +80,10 @@ const menus = [
         to: "/components/password-input/",
       },
       {
+        title: "Picker 选择器",
+        to: "/components/picker/",
+      },
+      {
         title: "Radio 单选框",
         to: "/components/radio/",
       },
