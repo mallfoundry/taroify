@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.1
+
+`2021-08-31`
+
+**Feature**
+
+- Search：新增 icon 属性
+- Navbar：新增 NavLeft onClick 事件
+- Navbar：新增 NavRight onClick 事件
+- Navbar：使用 NavLeft.children 代替 NavLeft.text
+- Navbar：使用 NavRight.children 代替 NavRight.text
+
+**Bug Fixes**
+
+- Tabs：修复 设置 sticky 时 container 为 undefined 的问题
+
 ### v0.0.12-alpha.0
 
 `2021-08-25`
