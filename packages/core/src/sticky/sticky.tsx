@@ -5,8 +5,9 @@ import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, MutableRefObject, ReactNode, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
+import { addUnitPx, unitToPx } from "../utils/format/unit"
+import { raf } from "../utils/raf"
 import { getBoundingClientRect } from "../utils/rect"
-import { unitToPx } from "../utils/format/unit"
 import { getSystemRect } from "../utils/system"
 
 interface RootReact {
@@ -57,10 +58,10 @@ export default function Sticky(props: StickyProps) {
     }
     const style: CSSProperties = {}
     if (rootRect.height) {
-      style.height = `${rootRect.height}px`
+      style.height = addUnitPx(rootRect.height)
     }
     if (rootRect.width) {
-      style.width = `${rootRect.width}px`
+      style.width = addUnitPx(rootRect.width)
     }
     return style
   }, [fixed, rootRect.height, rootRect.width])
@@ -75,20 +76,19 @@ export default function Sticky(props: StickyProps) {
     }
     const style: CSSProperties = {}
     if (rootRect.height) {
-      style.height = `${rootRect.height}px`
+      style.height = addUnitPx(rootRect.height)
     }
     if (rootRect.width) {
-      style.width = `${rootRect.width}px`
+      style.width = addUnitPx(rootRect.width)
     }
-    style.transform = transform ? `translate3d(0, ${transform}px, 0)` : ""
-    style[position] = `${offsetValue}px`
+    style.transform = transform ? `translate3d(0, ${addUnitPx(transform)}, 0)` : ""
+    style[position] = addUnitPx(offsetValue)
     return style
   }, [fixed, rootRect.height, rootRect.width, transform, position, offsetValue])
 
   async function onScroll() {
     const __rootRect__ = await getBoundingClientRect(rootRef)
     setRootRect(__rootRect__)
-
     if (position === StickyPosition.Top) {
       if (containerRef) {
         const containerRect = await getBoundingClientRect(containerRef)
@@ -114,7 +114,7 @@ export default function Sticky(props: StickyProps) {
   }
 
   usePageScroll(onScroll)
-  useReady(onScroll)
+  useReady(() => raf(onScroll))
 
   return (
     <View ref={rootRef} style={rootStyle}>

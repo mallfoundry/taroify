@@ -62,11 +62,11 @@ export default function TabsHeader() {
   const resize = useCallback(() => {
     nextTick(() => {
       Promise.all([
-        getBoundingClientRects(navRef, ` .${prefixClassname("tabs__tab")}`),
         getBoundingClientRect(navRef),
-      ]).then(([tabRects, navRect]) => {
-        setTabOffsets(tabRects)
+        getBoundingClientRects(navRef, ` .${prefixClassname("tabs__tab")}`),
+      ]).then(([navRect, tabRects]) => {
         setNavOffset(navRect)
+        setTabOffsets(tabRects)
       })
     })
   }, [])
