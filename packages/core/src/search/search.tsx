@@ -21,6 +21,7 @@ type SearchShapeString = "square" | "round"
 interface SearchProps {
   className?: string
   value?: string
+  icon?: ReactNode
   label?: ReactNode
   shape?: SearchShape | SearchShapeString
   maxlength?: number
@@ -54,6 +55,7 @@ function Search(props: SearchProps) {
   const {
     className,
     value,
+    icon = <SearchIcon />,
     label,
     shape = SearchShape.Square,
     maxlength,
@@ -102,7 +104,7 @@ function Search(props: SearchProps) {
           className={prefixClassname("search__field")}
           placeholderClassName={placeholderClassName}
           value={value}
-          icon={<SearchIcon />}
+          icon={icon}
           maxlength={maxlength}
           placeholder={placeholder}
           clearable={clearable}
