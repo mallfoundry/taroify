@@ -1,6 +1,6 @@
 import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "./base"
-import { createNodesRef, elementUnref, isWindow } from "./dom/element"
+import { createNodesRef, elementUnref, isRootElement, isWindow } from "./dom/element"
 
 export interface BoundingClientRect {
   dataset: Record<string, any>
@@ -37,7 +37,16 @@ export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClient
       return Promise.resolve((element.getBoundingClientRect() as unknown) as BoundingClientRect)
     } else {
       return new Promise<BoundingClientRect>((resolve) => {
-        createNodesRef(element).boundingClientRect(resolve).exec()
+        createNodesRef(element)
+          .boundingClientRect((rect) => {
+            if (isRootElement(element)) {
+              const { width, height } = rect
+              resolve(makeBoundingClientRect(width, height))
+            } else {
+              resolve(rect)
+            }
+          })
+          .exec()
       })
     }
   }
