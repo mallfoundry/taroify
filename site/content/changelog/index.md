@@ -12,6 +12,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.2
+
+`2021-09-03`
+
+**Bug Fixes**
+
+- List：修复 nextTick 在微信小程序不执行的问题[#3](https://github.com/mallfoundry/taroify/issues/3)
+
 ### v0.0.12-alpha.1
 
 `2021-08-31`
