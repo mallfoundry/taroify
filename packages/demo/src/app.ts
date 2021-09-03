@@ -1,5 +1,5 @@
-import "@taroify/icons/index.scss"
 import { ReactNode } from "react"
+import "@taroify/icons/index.scss"
 import "./app.scss"
 import "./emulator"
 
