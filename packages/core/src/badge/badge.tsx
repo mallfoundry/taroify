@@ -5,7 +5,7 @@ import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-interface BadgeProps {
+export interface BadgeProps {
   className?: string
   color?: string
   content?: ReactNode
@@ -15,10 +15,10 @@ interface BadgeProps {
 }
 
 function Badge(props: BadgeProps) {
-  const { color = "", className, max, dot, children } = props
+  const { className, color = "", content: contentProp, max, dot, children } = props
   const hasChildren = children !== undefined
   const noneChildren = children === undefined
-  const content = _.isNumber(props.content) && _.gt(props.content, max) ? `${max}+` : props.content
+  const content = _.isNumber(contentProp) && _.gt(contentProp, max) ? `${max}+` : contentProp
 
   return (
     <View
