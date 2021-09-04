@@ -41,30 +41,3 @@ export enum ButtonShape {
 }
 
 export type ButtonShapeString = "square" | "circle" | "round"
-
-export enum ButtonOpenType {
-  Contact = "contact",
-  ContactShare = "contactShare",
-  share = "share",
-  GetRealnameAuthInfo = "getRealnameAuthInfo",
-  GetAuthorize = "getAuthorize",
-  GetPhoneNumber = "getPhoneNumber",
-  GetUserInfo = "getUserInfo",
-  Lifestyle = "lifestyle",
-  LaunchApp = "launchApp",
-  OpenSetting = "openSetting",
-  Feedback = "feedback",
-}
-
-export type ButtonOpenTypeString =
-  | "contact"
-  | "contactShare"
-  | "share"
-  | "getRealnameAuthInfo"
-  | "getAuthorize"
-  | "getPhoneNumber"
-  | "getUserInfo"
-  | "lifestyle"
-  | "launchApp"
-  | "openSetting"
-  | "feedback"

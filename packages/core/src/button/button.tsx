@@ -1,5 +1,5 @@
-import { Button as TaroButton, View } from "@tarojs/components"
-import { ITouchEvent } from "@tarojs/components/types/common"
+import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
+import { CommonEventFunction, ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -39,6 +39,7 @@ function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoading
 
 export interface ButtonProps {
   className?: string
+  // style?: CSSProperties
   variant?: ButtonVariant | ButtonVariantString
   shape?: ButtonShape | ButtonShapeString
   size?: ButtonSize | ButtonSizeString
@@ -50,8 +51,31 @@ export interface ButtonProps {
   disabled?: boolean
   icon?: ReactNode
   children?: ReactNode
+  // miniprogram props
+  openType?: TaroButtonProps.openType | string
+  hoverStopPropagation?: boolean
+  hoverStartTime?: number
+  hoverStayTime?: number
+  lang?: TaroButtonProps.lang
+  sessionFrom?: string
+  sendMessageTitle?: string
+  sendMessagePath?: string
+  sendMessageImg?: string
+  appParameter?: string
+  businessId?: string
+  scope?: "userInfo" | "phoneNumber"
+  showMessageCard?: boolean
   // events
   onClick?: (event: ITouchEvent) => void
+  // miniprogram events
+  onGetUserInfo?: CommonEventFunction<TaroButtonProps.onGetUserInfoEventDetail>
+  onGetAuthorize?: CommonEventFunction
+  onContact?: CommonEventFunction<TaroButtonProps.onContactEventDetail>
+  onGetPhoneNumber?: CommonEventFunction<TaroButtonProps.onGetPhoneNumberEventDetail>
+  onGetRealnameAuthInfo?: CommonEventFunction
+  onError?: CommonEventFunction
+  onOpenSetting?: CommonEventFunction<TaroButtonProps.onOpenSettingEventDetail>
+  onLaunchapp?: CommonEventFunction
 }
 
 export default function Button(props: ButtonProps) {
@@ -67,7 +91,27 @@ export default function Button(props: ButtonProps) {
     disabled,
     icon,
     children,
+    openType,
+    hoverStopPropagation,
+    hoverStartTime,
+    hoverStayTime,
+    sessionFrom,
+    sendMessageTitle,
+    sendMessagePath,
+    sendMessageImg,
+    appParameter,
+    businessId,
+    scope,
+    showMessageCard,
     onClick,
+    onGetUserInfo,
+    onGetAuthorize,
+    onContact,
+    onGetPhoneNumber,
+    onGetRealnameAuthInfo,
+    onError,
+    onOpenSetting,
+    onLaunchapp,
   } = props
 
   const loadingProps = useButtonLoading(props.loading)
@@ -137,6 +181,26 @@ export default function Button(props: ButtonProps) {
             ? "reset"
             : undefined
         }
+        openType={openType}
+        hoverStopPropagation={hoverStopPropagation}
+        hoverStartTime={hoverStartTime}
+        hoverStayTime={hoverStayTime}
+        sessionFrom={sessionFrom}
+        sendMessageTitle={sendMessageTitle}
+        sendMessagePath={sendMessagePath}
+        sendMessageImg={sendMessageImg}
+        appParameter={appParameter}
+        businessId={businessId}
+        scope={scope}
+        showMessageCard={showMessageCard}
+        onGetUserInfo={onGetUserInfo}
+        onGetAuthorize={onGetAuthorize}
+        onContact={onContact}
+        onGetPhoneNumber={onGetPhoneNumber}
+        onGetRealnameAuthInfo={onGetRealnameAuthInfo}
+        onError={onError}
+        onOpenSetting={onOpenSetting}
+        onLaunchapp={onLaunchapp}
       />
     </View>
   )
