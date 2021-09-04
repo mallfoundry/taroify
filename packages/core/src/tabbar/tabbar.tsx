@@ -1,21 +1,21 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, ReactElement, ReactNode, useContext } from "react"
+import { cloneElement, ReactElement, ReactNode, useRef } from "react"
+import { usePlaceholder } from "../composables"
 import { prefixClassname } from "../styles"
+import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
+import TabbarItem from "./tabbar-item"
 import TabbarContext from "./tabbar.context"
-
-// const __ACTIVE_COLOR__ = "#1989fa"
-// const __INACTIVE_COLOR__ = "#646566"
 
 // TODO fragment, array children do not process
 function arrayChildren(children?: ReactNode) {
-  return React.Children.map(children, (node, index) => {
+  return React.Children.map(children, (node: ReactNode, index) => {
     if (!React.isValidElement(node)) {
       return node
     }
     const element = node as ReactElement
-    if (element.type !== Tabbar.TabItem) {
+    if (element.type !== TabbarItem) {
       return element
     }
     const { props } = element
@@ -26,72 +26,65 @@ function arrayChildren(children?: ReactNode) {
   })
 }
 
-interface TabbarProps {
+export interface TabbarProps {
+  className?: string
+  value?: any
   fixed?: boolean
   bordered?: boolean
-  activeKey?: Tabbar.TabKey
-  activeColor?: string
-  inactiveColor?: string
+  placeholder?: boolean
   children?: ReactNode
-  onChange?: (activeKey?: string | number) => void
+
+  onChange?(event: ITouchEvent, value: any): void
 }
 
 function Tabbar(props: TabbarProps) {
-  const { activeKey, activeColor, inactiveColor, onChange } = props
+  const { className, value, bordered, fixed, placeholder, onChange } = props
   const children = arrayChildren(props.children)
 
-  function emitClick(__activeKey__?: string | number) {
-    if (__activeKey__ !== activeKey) {
-      onChange?.(__activeKey__)
+  const rootRef = useRef()
+
+  const PlaceHolder = usePlaceholder(rootRef, {
+    className: prefixClassname("tabbar__placeholder"),
+  })
+
+  function onItemClick(event: ITouchEvent, dataKey?: any) {
+    if (dataKey !== value) {
+      onChange?.(event, dataKey)
     }
   }
 
-  return (
-    <View className={classNames(prefixClassname("tabbar"))}>
+  function TabbarRender() {
+    return (
       <TabbarContext.Provider
         value={{
-          activeKey,
-          activeColor,
-          inactiveColor,
-          emitClick,
+          value,
+          onItemClick,
         }}
       >
-        {children}
+        <View
+          ref={rootRef}
+          className={classNames(
+            prefixClassname("tabbar"),
+            {
+              [HAIRLINE_BORDER_TOP_BOTTOM]: bordered,
+              [prefixClassname("tabbar--fixed")]: fixed,
+            },
+            className,
+          )}
+          children={children}
+        />
       </TabbarContext.Provider>
-    </View>
-  )
-}
-
-namespace Tabbar {
-  export type TabKey = string | number | undefined
-
-  interface TabItemProps {
-    __dataKey__?: TabKey
-    icon?: ReactNode
-    label?: ReactNode
-  }
-
-  export function TabItem(props: TabItemProps) {
-    const { icon, label, __dataKey__ } = props
-    const { activeKey, activeColor, inactiveColor, emitClick } = useContext(TabbarContext)
-    const active = activeKey === __dataKey__
-    // Default activeColor, inactiveColor is undefined
-    // TODO Taro can not support setting to undefined, use an empty string instead of undefined
-    const color = activeColor && active ? activeColor ?? "" : inactiveColor ?? ""
-
-    return (
-      <View
-        className={classNames(prefixClassname("tabbar-item"), {
-          [prefixClassname("tabbar-item--active")]: active,
-        })}
-        style={{ color }}
-        onClick={() => emitClick?.(__dataKey__)}
-      >
-        <View className={prefixClassname("tabbar-item__icon")} children={icon} />
-        <View className={prefixClassname("tabbar-item__label")} children={label} />
-      </View>
     )
   }
+
+  if (fixed && placeholder) {
+    return (
+      <PlaceHolder>
+        <TabbarRender />
+      </PlaceHolder>
+    )
+  }
+  return <TabbarRender />
 }
 
 export default Tabbar

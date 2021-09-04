@@ -8,33 +8,9 @@
   height: $tabbar-height;
   background-color: $tabbar-background-color;
 
-  &-item {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: $tabbar-item-font-size;
-    line-height: $tabbar-item-line-height;
-    color: $tabbar-item-text-color;
-    cursor: pointer;
-
-    &__icon {
-      margin-bottom: $tabbar-item-margin-bottom;
-      font-size: $tabbar-item-icon-size;
-
-      .#{$component-prefix}icon {
-        display: block;
-      }
-    }
-
-    &--active {
-      color: $tabbar-item-active-color;
-      background-color: $tabbar-item-active-background-color;
-    }
-
-    /* &__label {
-
-     } */
+  &--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
 }

@@ -1,10 +1,9 @@
+import { ITouchEvent } from "@tarojs/components"
 import { createContext } from "react"
 
 interface TabbarContextProps {
-  activeKey?: string | number
-  activeColor?: string
-  inactiveColor?: string
-  emitClick?: (activeKey?: string | number) => void
+  value?: string | number
+  onItemClick?: (event: ITouchEvent, value?: any) => void
 }
 
 const TabbarContext = createContext<TabbarContextProps>({})
