@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.4
+
+`2021-09-04`
+
+**Feature**
+
+- Button：新增小程序属性[#2](https://github.com/mallfoundry/taroify/issues/2)
+- Tabbar：新增 fixed 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+- Tabbar：新增 placeholder 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+- Tabbar：新增 bordered 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+- Tabbar.Item：新增 badge 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+
+### v0.0.12-alpha.3
+
+`2021-09-03`
+
 ### v0.0.12-alpha.2
 
 `2021-09-03`
