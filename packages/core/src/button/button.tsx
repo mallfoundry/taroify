@@ -7,55 +7,24 @@ import { CSSProperties, ReactNode, useMemo } from "react"
 import Loading, { LoadingType, LoadingTypeString } from "../loading"
 import { prefixClassname } from "../styles"
 
-export enum ButtonFormType {
-  Button = "button",
-  Submit = "submit",
-  Reset = "reset",
-}
-
-type ButtonFormTypeString = "button" | "submit" | "reset"
-
-export enum ButtonVariant {
-  Contained = "contained",
-  Text = "text",
-  Outlined = "outlined",
-}
-
-type ButtonVariantString = "contained" | "text" | "outlined"
-
-export enum ButtonSize {
-  Mini = "mini",
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
-
-type ButtonSizeString = "mini" | "small" | "medium" | "large"
-
-export enum ButtonColor {
-  Default = "default",
-  Primary = "primary",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
-  Danger = "danger",
-}
-
-type ButtonColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
+import {
+  ButtonColor,
+  ButtonColorString,
+  ButtonFormType,
+  ButtonFormTypeString,
+  ButtonShape,
+  ButtonShapeString,
+  ButtonSize,
+  ButtonSizeString,
+  ButtonVariant,
+  ButtonVariantString,
+} from "./button.shared"
 
 const BUTTON_PRESET_COLORS = ["default", "primary", "info", "success", "warning", "danger"]
 
 function isPresetButtonColor(color?: ButtonColor | ButtonColorString | string): boolean {
   return BUTTON_PRESET_COLORS.includes(color as string)
 }
-
-export enum ButtonShape {
-  Square = "square",
-  Circle = "circle",
-  Round = "round",
-}
-
-type ButtonShapeString = "square" | "circle" | "round"
 
 interface ButtonLoadingProps {
   type?: LoadingType | LoadingTypeString
