@@ -142,7 +142,7 @@ function TabbarWithCustomColor() {
 | ------ | -------------- | -------------------------- |
 | onChange | 切换标签时触发 | _event: ITouchEvent, value: any_ |
 
-### Tabbar.TabItem Props
+### Tabbar.Item Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
