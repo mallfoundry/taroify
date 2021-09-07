@@ -63,7 +63,7 @@ function RateItem(props: RateItemProps) {
         half &&
           cloneIconElement(icon, {
             style: { width: value + "em" },
-            color: disabled ? disabledColor : full ? color : emptyColor,
+            color: disabled ? disabledColor : half ? color : emptyColor,
             size,
             className: classNames(
               prefixClassname("rate__icon"),
