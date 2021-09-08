@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, ReactElement, ReactNode, useMemo, useRef } from "react"
+import { Children, isValidElement, ReactElement, ReactNode, useMemo, useRef } from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
 import TabPane from "./tab-pane"
@@ -16,7 +16,7 @@ function useTabObjects(children: ReactNode) {
 
     let index = 0
     Children.forEach(children, (node: ReactNode, i: number) => {
-      if (!React.isValidElement(node)) {
+      if (!isValidElement(node)) {
         return node
       }
       const element = node as ReactElement
