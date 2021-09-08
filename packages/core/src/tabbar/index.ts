@@ -4,10 +4,10 @@ import TabbarItem from "./tabbar-item"
 interface TabbarInterface {
   (props: TabbarProps): JSX.Element
 
-  Item: typeof TabbarItem
+  TabItem: typeof TabbarItem
 }
 
 const Tabbar = TabbarElement as TabbarInterface
-Tabbar.Item = TabbarItem
+Tabbar.TabItem = TabbarItem
 
 export default Tabbar

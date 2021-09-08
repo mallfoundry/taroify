@@ -25,11 +25,11 @@ import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify
 function BasicTabbar() {
   const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={(_, newValue) => setValue(newValue)}>
-      <Tabbar.Item icon={<HomeOutlined />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<Search />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<FriendsOutlined />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<SettingOutlined />}>标签</Tabbar.Item>
+    <Tabbar value={value} onChange={setValue}>
+      <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<SettingOutlined />}>标签</Tabbar.TabItem>
     </Tabbar>
   )
 }
@@ -46,23 +46,22 @@ import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify
 function KeyTabbar() {
   const [value, setValue] = useState("1")
   return (
-    <Tabbar value={value} onChange={(_, newValue) => setValue(newValue)}>
-      <Tabbar.Item key="1" icon={<HomeOutlined />}>
+    <Tabbar value={value} onChange={setValue}>
+      <Tabbar.TabItem key="1" icon={<HomeOutlined />}>
         标签
-      </Tabbar.Item>
-      <Tabbar.Item key="2" icon={<Search />}>
+      </Tabbar.TabItem>
+      <Tabbar.TabItem key="2" icon={<Search />}>
         标签
-      </Tabbar.Item>
-      <Tabbar.Item key="3" icon={<FriendsOutlined />}>
+      </Tabbar.TabItem>
+      <Tabbar.TabItem key="3" icon={<FriendsOutlined />}>
         标签
-      </Tabbar.Item>
-      <Tabbar.Item key="4" icon={<SettingOutlined />}>
+      </Tabbar.TabItem>
+      <Tabbar.TabItem key="4" icon={<SettingOutlined />}>
         标签
-      </Tabbar.Item>
+      </Tabbar.TabItem>
     </Tabbar>
   )
 }
-
 ```
 ### 徽标提示
 
@@ -75,17 +74,17 @@ import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify
 function BadgeTabbar() {
   const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={(_, newValue) => setValue(newValue)}>
-      <Tabbar.Item icon={<HomeOutlined />}>标签</Tabbar.Item>
-      <Tabbar.Item badge icon={<Search />}>
+    <Tabbar value={value} onChange={setValue}>
+      <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem badge icon={<Search />}>
         标签
-      </Tabbar.Item>
-      <Tabbar.Item badge="5" icon={<FriendsOutlined />}>
+      </Tabbar.TabItem>
+      <Tabbar.TabItem badge="5" icon={<FriendsOutlined />}>
         标签
-      </Tabbar.Item>
-      <Tabbar.Item badge={<Badge content={100} max={99} />} icon={<SettingOutlined />}>
+      </Tabbar.TabItem>
+      <Tabbar.TabItem badge={<Badge content={100} max={99} />} icon={<SettingOutlined />}>
         标签
-      </Tabbar.Item>
+      </Tabbar.TabItem>
     </Tabbar>
   )
 }
@@ -102,11 +101,11 @@ import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify
 function TabbarWithCustomColor() {
   const [value, setValue] = useState(0)
   return (
-    <Tabbar className="custom-color" value={value} onChange={(_, newValue) => setValue(newValue)}>
-      <Tabbar.Item icon={<HomeOutlined />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<Search />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<FriendsOutlined />}>标签</Tabbar.Item>
-      <Tabbar.Item icon={<SettingOutlined />}>标签</Tabbar.Item>
+    <Tabbar className="custom-color" value={value} onChange={setValue}>
+      <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
+      <Tabbar.TabItem icon={<SettingOutlined />}>标签</Tabbar.TabItem>
     </Tabbar>
   )
 }
@@ -140,9 +139,9 @@ function TabbarWithCustomColor() {
 
 | 事件名 | 说明           | 回调参数                   |
 | ------ | -------------- | -------------------------- |
-| onChange | 切换标签时触发 | _event: ITouchEvent, value: any_ |
+| onChange | 切换标签时触发 | _value: any_ |
 
-### Tabbar.Item Props
+### Tabbar.TabItem Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |

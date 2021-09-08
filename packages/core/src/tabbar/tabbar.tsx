@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { cloneElement, ReactElement, ReactNode, useRef } from "react"
@@ -34,7 +34,7 @@ export interface TabbarProps {
   placeholder?: boolean
   children?: ReactNode
 
-  onChange?(event: ITouchEvent, value: any): void
+  onChange?(value: any): void
 }
 
 function Tabbar(props: TabbarProps) {
@@ -47,9 +47,9 @@ function Tabbar(props: TabbarProps) {
     className: prefixClassname("tabbar__placeholder"),
   })
 
-  function onItemClick(event: ITouchEvent, dataKey?: any) {
+  function onItemClick(dataKey?: any) {
     if (dataKey !== value) {
-      onChange?.(event, dataKey)
+      onChange?.(dataKey)
     }
   }
 
