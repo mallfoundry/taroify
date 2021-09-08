@@ -1,9 +1,17 @@
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { usePageScroll, useReady } from "@tarojs/taro"
+import { PageScrollObject, usePageScroll, useReady } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, MutableRefObject, ReactNode, useMemo, useRef, useState } from "react"
+import {
+  CSSProperties,
+  MutableRefObject,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { raf } from "../utils/raf"
@@ -33,11 +41,23 @@ interface StickyProps {
   offset?: StickyOffset
   container?: MutableRefObject<Element | undefined>
   children?: ReactNode
+
+  onChange?(fixed: boolean): void
+
+  onScroll?(scroll: PageScrollObject): void
 }
 
 export default function Sticky(props: StickyProps) {
-  const { position = StickyPosition.Top, offset, container: containerRef, children } = props
+  const {
+    position = StickyPosition.Top,
+    offset,
+    container: containerRef,
+    children,
+    onChange,
+  } = props
+
   const rootRef = useRef<ViewProps>()
+  const counterRef = useRef(0)
 
   const [rootRect, setRootRect] = useState<RootReact>({})
 
@@ -112,6 +132,13 @@ export default function Sticky(props: StickyProps) {
       }
     }
   }
+
+  useEffect(() => {
+    if (counterRef.current > 0) {
+      onChange?.(fixed)
+    }
+    counterRef.current++
+  }, [fixed, onChange])
 
   usePageScroll(onScroll)
   useReady(() => raf(onScroll))
