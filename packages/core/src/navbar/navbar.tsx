@@ -11,7 +11,7 @@ import { findChildren } from "../utils/children"
 interface NavbarProps {
   bordered?: boolean
   fixed?: boolean
-  title?: string
+  title?: ReactNode
   children?: ReactNode
 }
 
