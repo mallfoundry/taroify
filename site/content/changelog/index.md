@@ -12,17 +12,35 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.5
+
+`2021-09-08`
+
+**Feature**
+
+- Navbar
+    - title 提升为 ReactNode 类型[#7](https://github.com/mallfoundry/taroify/issues/7)
+- Sticky
+    - 新增 onChange 事件[#6](https://github.com/mallfoundry/taroify/issues/6)
+
+**Breaking Change**
+
+- Tabbar
+    - 重命名 Tabbar.Item 为 Tabbar.TabItem[#8](https://github.com/mallfoundry/taroify/issues/8)
+
 ### v0.0.12-alpha.4
 
 `2021-09-04`
 
 **Feature**
 
-- Button：新增小程序属性[#2](https://github.com/mallfoundry/taroify/issues/2)
-- Tabbar：新增 fixed 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
-- Tabbar：新增 placeholder 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
-- Tabbar：新增 bordered 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
-- Tabbar.Item：新增 badge 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+- Button
+    - 新增小程序属性[#2](https://github.com/mallfoundry/taroify/issues/2)
+- Tabbar
+    - 新增 fixed 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+    - Tabbar：新增 placeholder 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+    - Tabbar：新增 bordered 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
+    - Tabbar.Item：新增 badge 属性[#5](https://github.com/mallfoundry/taroify/issues/5)
 
 ### v0.0.12-alpha.3
 
