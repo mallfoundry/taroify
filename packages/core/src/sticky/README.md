@@ -76,5 +76,4 @@ function StickyWithContainer() {
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| change `v3.0.10` | 当吸顶状态改变时触发 | _isFixed: boolean_ |
-| scroll | 滚动时触发 | _{ scrollTop: number, isFixed: boolean }_ |
+| onChange | 当吸顶状态改变时触发 | _fixed: boolean_ |
