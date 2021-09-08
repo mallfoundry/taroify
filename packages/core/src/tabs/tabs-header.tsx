@@ -1,5 +1,5 @@
 import { ScrollView, View } from "@tarojs/components"
-import { nextTick, offWindowResize, onWindowResize, useReady } from "@tarojs/taro"
+import { offWindowResize, onWindowResize, useReady } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -35,9 +35,10 @@ export default function TabsHeader() {
   const [navOffset, setNavOffset] = useState<NavOffset>({})
   const [tabOffsets, setTabOffsets] = useState<TabOffset[]>([])
 
-  const activeIndex = useMemo(() => {
-    return _.find(tabObjects, (tab) => tab.key === activeKey)?.index ?? -1
-  }, [tabObjects, activeKey])
+  const activeIndex = useMemo(
+    () => _.find(tabObjects, (tab) => tab.key === activeKey)?.index ?? -1,
+    [tabObjects, activeKey],
+  )
 
   const activeOffset = useMemo(() => {
     if (_.isEmpty(tabOffsets) || activeIndex === -1) {
@@ -60,14 +61,12 @@ export default function TabsHeader() {
   }, [navOffset, activeOffset])
 
   const resize = useCallback(() => {
-    nextTick(() => {
-      Promise.all([
-        getBoundingClientRect(navRef),
-        getBoundingClientRects(navRef, ` .${prefixClassname("tabs__tab")}`),
-      ]).then(([navRect, tabRects]) => {
-        setNavOffset(navRect)
-        setTabOffsets(tabRects)
-      })
+    Promise.all([
+      getBoundingClientRect(navRef),
+      getBoundingClientRects(navRef, ` .${prefixClassname("tabs__tab")}`),
+    ]).then(([navRect, tabRects]) => {
+      setNavOffset(navRect)
+      setTabOffsets(tabRects)
     })
   }, [])
 
