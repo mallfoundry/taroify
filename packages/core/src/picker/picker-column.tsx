@@ -63,24 +63,24 @@ export default function PickerColumn(props: PickerColumnProps) {
     index = adjustIndex(index) || 0
 
     const offset = -index * itemHeight
-    const trigger = () => {
-      if (index !== activeIndex) {
-        setActiveIndex(index)
+    // const trigger = () => {
+    //   if (index !== activeIndex) {
+    //     setActiveIndex(index)
+    //
+    //     // if (emitChange) {
+    //     //   emit("change", index)
+    //     // }
+    //   }
+    // }
+    //
+    // // trigger the change event after transitionend when moving
+    // if (movingRef.current && offset !== activeOffset) {
+    //   transitionEndTriggerRef.current = trigger
+    // } else {
+    //   trigger()
+    // }
 
-        // if (emitChange) {
-        //   emit("change", index)
-        // }
-      }
-    }
-
-    // trigger the change event after transitionend when moving
-    if (movingRef.current && offset !== activeOffset) {
-      transitionEndTriggerRef.current = trigger
-    } else {
-      trigger()
-    }
-
-    // state.offset = offset;
+    setActiveOffset(offset)
   }
 
   const getIndexByOffset = useCallback(
@@ -93,11 +93,8 @@ export default function PickerColumn(props: PickerColumnProps) {
       const speed = Math.abs(distance / duration)
 
       distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
-
       const index = getIndexByOffset(distance)
-      console.log(index)
-
-      // duration = +props.swipeDuration;
+      setDuration(1000)
       setIndex(index, true)
     },
     [activeOffset, getIndexByOffset, setIndex],
@@ -164,22 +161,22 @@ export default function PickerColumn(props: PickerColumnProps) {
     const duration = Date.now() - touchStartTimeRef.current
     const allowMomentum =
       duration < MOMENTUM_LIMIT_TIME && Math.abs(distance) > MOMENTUM_LIMIT_DISTANCE
-
+    console.log(allowMomentum)
     if (allowMomentum) {
       momentum(distance, duration)
       return
     }
 
-    const index = getIndexByOffset(activeOffset)
-    // state.duration = DEFAULT_DURATION
-    setDuration(DEFAULT_DURATION)
-    setIndex(index, true)
-
-    // compatible with desktop scenario
-    // use setTimeout to skip the click event Emitted after touchstart
-    setTimeout(() => {
-      movingRef.current = false
-    }, 0)
+    // const index = getIndexByOffset(activeOffset)
+    // // state.duration = DEFAULT_DURATION
+    // setDuration(DEFAULT_DURATION)
+    // setIndex(index, true)
+    //
+    // // compatible with desktop scenario
+    // // use setTimeout to skip the click event Emitted after touchstart
+    // setTimeout(() => {
+    //   movingRef.current = false
+    // }, 0)
   }, [getIndexByOffset, momentum, activeOffset, readonly, setIndex])
 
   const wrapperStyle = useMemo(
