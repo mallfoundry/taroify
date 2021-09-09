@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components"
-import * as classNames from "classnames"
+import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
