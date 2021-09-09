@@ -12,6 +12,10 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.7
+
+`2021-09-09`
+
 ### v0.0.12-alpha.6
 
 `2021-09-09`

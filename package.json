@@ -1,14 +1,16 @@
 {
   "name": "taroify",
-  "version": "0.0.12-alpha.6",
+  "version": "0.0.12-alpha.7",
   "license": "MIT",
   "private": true,
   "scripts": {
     "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",
     "install:node_modules": "yarn install && cd ./site && yarn install",
+    "clean": "gulp clean",
     "develop": "gulp develop",
     "watch": "gulp watch",
-    "build": "gulp build",
+    "build": "yarn run clean && gulp build",
+    "publish": "yarn run clean  && yarn run build && lerna publish from-package",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
     "lerna:prepatch": "lerna version prepatch --yes --no-git-tag-version --conventional-graduate",
     "version:prerelease": "yarn run lerna:prerelease && node scripts/version.js",
@@ -17,7 +19,6 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint packages --fix --ext .ts,.tsx",
     "stylelint": "stylelint packages/**/*.scss --fix --color --syntax scss",
-    "clean": "gulp clean",
     "sort": "npx sort-package-json \"package.json\" \"packages/*/package.json\""
   },
   "workspaces": [
@@ -36,7 +37,7 @@
     "*.{css,scss}": "stylelint --fix"
   },
   "devDependencies": {
-    "@taroify/cli": "0.0.12-alpha.6",
+    "@taroify/cli": "0.0.12-alpha.7",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "cross-env": "^7.0.3",
