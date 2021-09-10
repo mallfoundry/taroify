@@ -32,10 +32,10 @@ import { Cell } from "@taroify/core"
 
 ### 展示图标
 
-通过 `leftIcon` 属性在标题左侧展示图标。
+通过 `icon` 属性在标题左侧展示图标。
 
 ```tsx
-<Cell leftIcon={<LocationOutlined />} title="单元格">内容</Cell>
+<Cell icon={<LocationOutlined />} title="单元格">内容</Cell>
 ```
 
 ### 只设置 value
@@ -97,7 +97,7 @@ import { Cell } from "@taroify/core"
 | children | 右侧内容 | _number \| string_ | - |
 | brief | 标题下方的描述信息 | _string_ | - |
 | size | 单元格大小，可选值为 `large` | _string_ | - |
-| leftIcon | 左侧图标或图片链接 | _ReactNode_ | - |
+| icon | 左侧图标或图片链接 | _ReactNode_ | - |
 | rightIcon | 右侧图标或图片链接 | _ReactNode_ | - |
 | bordered | 是否显示内边框 | _boolean_ | `true` |
 | clickable | 是否开启点击反馈 | _boolean_ | `false` |
