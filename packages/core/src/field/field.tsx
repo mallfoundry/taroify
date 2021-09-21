@@ -128,6 +128,8 @@ export interface FieldProps {
   holdKeyboard?: boolean
   children?: ReactNode
 
+  onClick?(event: ITouchEvent): void
+
   onClear?(event: ITouchEvent): void
 
   onConfirm?(event: BaseEventOrig<InputProps.inputValueEventDetail>): void
@@ -174,6 +176,7 @@ function Field(props: FieldProps) {
     selectionEnd,
     adjustPosition,
     holdKeyboard,
+    onClick,
     onClear,
     onConfirm,
     onChange,
@@ -231,6 +234,7 @@ function Field(props: FieldProps) {
       icon={cloneIconElement(icon, { className: prefixClassname("field__icon") })}
       rightIcon={cloneIconElement(rightIcon, { className: prefixClassname("field__right-icon") })}
       required={required}
+      onClick={onClick}
     >
       <View
         className={classNames(prefixClassname("field__body"), {
