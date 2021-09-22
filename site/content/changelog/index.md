@@ -16,10 +16,9 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 `2021-09-22`
 
-**Bug Fixes**
+**Feature**
 
-- TreeSelect
-  - 修复设置 className 无作用的问题[#15](https://github.com/mallfoundry/taroify/issues/15)
+- 所有组件新增 className 属性[#15](https://github.com/mallfoundry/taroify/issues/15)
 
 ### v0.0.12-alpha.9
 
