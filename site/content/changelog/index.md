@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.8
+
+`2021-09-22`
+
+**Feature**
+
+- Field
+    - 新增 name 属性[#11](https://github.com/mallfoundry/taroify/issues/11)
+
+**Bug Fixes**
+
+- Import on demand
+    - 修复重复导入样式的问题[#13](https://github.com/mallfoundry/taroify/issues/13)
+- NoticeBar
+    - 修复 NoticeBar 全局样式引入问题[#14](https://github.com/mallfoundry/taroify/issues/14)
+
 ### v0.0.12-alpha.7
 
 `2021-09-09`
@@ -23,7 +39,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - NumberKeyboard
-  - 修复 classNames 导入方式不正确的问题[#10](https://github.com/mallfoundry/taroify/issues/10)
+    - 修复 classNames 导入方式不正确的问题[#10](https://github.com/mallfoundry/taroify/issues/10)
 
 ### v0.0.12-alpha.5
 
