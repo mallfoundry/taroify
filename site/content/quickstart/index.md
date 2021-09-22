@@ -36,9 +36,9 @@ module.exports = {
     [
       "import",
       {
-        "libraryName": "@taroify/core",
-        "libraryDirectory": "",
-        "style": (name) => `${name}/index.scss`,
+        libraryName: "@taroify/core",
+        libraryDirectory: "",
+        style: true,
       },
       "@taroify/core",
     ],
