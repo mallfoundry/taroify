@@ -92,6 +92,7 @@ type TaroInputType = "text" | "number" | "idcard" | "digit"
 
 export interface FieldProps {
   className?: string
+  name?: string
   value?: string
   maxlength?: number
   type?: FieldType | FieldTypeString
@@ -144,6 +145,7 @@ export interface FieldProps {
 function Field(props: FieldProps) {
   const {
     className,
+    name,
     value: valueProp,
     maxlength = -1,
     type = FieldType.Text,
@@ -259,6 +261,7 @@ function Field(props: FieldProps) {
             },
             placeholderClassName,
           )}
+          name={name}
           value={valueProp}
           autoFocus={autoFocus}
           focus={focus}
