@@ -107,7 +107,7 @@ export interface TreeSelectProps {
 }
 
 function TreeSelect(props: TreeSelectProps) {
-  const { activeTab, value, activeIcon = <Success />, onTabChange, onChange } = props
+  const { className, activeTab, value, activeIcon = <Success />, onTabChange, onChange } = props
   const { tabs, options } = useTreeSelectChildren(props.children, activeTab)
 
   const hasValuesActive = useCallback(
@@ -141,7 +141,7 @@ function TreeSelect(props: TreeSelectProps) {
         changeValuesActive,
       }}
     >
-      <View className={classNames(prefixClassname("tree-select"))}>
+      <View className={classNames(prefixClassname("tree-select"), className)}>
         <Sidebar
           className={prefixClassname("tree-select__sidebar")}
           activeKey={activeTab}
