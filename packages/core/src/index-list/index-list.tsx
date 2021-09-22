@@ -1,5 +1,6 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import { usePageScroll } from "@tarojs/taro"
+import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
@@ -90,6 +91,7 @@ function useIndexBarChildren(children?: ReactNode): IndexBarChildren {
 }
 
 export interface IndexBarProps {
+  className?: string
   sticky?: boolean
   stickyOffsetTop?: number
   zIndex?: number
@@ -98,7 +100,7 @@ export interface IndexBarProps {
 }
 
 function IndexList(props: IndexBarProps) {
-  const { sticky = true, stickyOffsetTop = 0, zIndex = 1, highlightColor } = props
+  const { className, sticky = true, stickyOffsetTop = 0, zIndex = 1, highlightColor } = props
   const { anchorProps, anchorRefs, children } = useIndexBarChildren(props.children)
 
   const scrollTopRef = useRef(0)
@@ -246,7 +248,7 @@ function IndexList(props: IndexBarProps) {
         getAnchorRects: () => anchorRectsRef.current,
       }}
     >
-      <View ref={listRef} className={prefixClassname("index-list")}>
+      <View ref={listRef} className={classNames(prefixClassname("index-list"), className)}>
         <IndexListSidebar
           ref={sidebarRef}
           onClick={onSidebarClick}

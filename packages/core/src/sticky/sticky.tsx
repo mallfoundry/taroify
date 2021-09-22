@@ -36,6 +36,7 @@ interface StickyOffset {
 }
 
 interface StickyProps {
+  className?: string
   zIndex?: number
   position?: StickyPosition | StickyPositionString
   offset?: StickyOffset
@@ -49,6 +50,7 @@ interface StickyProps {
 
 export default function Sticky(props: StickyProps) {
   const {
+    className,
     position = StickyPosition.Top,
     offset,
     container: containerRef,
@@ -147,9 +149,13 @@ export default function Sticky(props: StickyProps) {
     <View ref={rootRef} style={rootStyle}>
       <View
         style={stickyStyle}
-        className={classNames(prefixClassname("sticky"), {
-          [prefixClassname("sticky--fixed")]: fixed,
-        })}
+        className={classNames(
+          prefixClassname("sticky"),
+          {
+            [prefixClassname("sticky--fixed")]: fixed,
+          },
+          className,
+        )}
         children={children}
       />
     </View>

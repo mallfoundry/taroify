@@ -9,6 +9,7 @@ import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { findChildren } from "../utils/children"
 
 interface NavbarProps {
+  className?: boolean
   bordered?: boolean
   fixed?: boolean
   title?: ReactNode
@@ -16,14 +17,18 @@ interface NavbarProps {
 }
 
 function Navbar(props: NavbarProps) {
-  const { bordered, title, children } = props
+  const { className, bordered, title, children } = props
   const NavLeftRender = findChildren(children, Navbar.NavLeft)
   const NavRightRender = findChildren(children, Navbar.NavRight)
   return (
     <View
-      className={classNames(prefixClassname("navbar"), {
-        [HAIRLINE_BORDER_BOTTOM]: bordered,
-      })}
+      className={classNames(
+        prefixClassname("navbar"),
+        {
+          [HAIRLINE_BORDER_BOTTOM]: bordered,
+        },
+        className,
+      )}
     >
       <View className={classNames(prefixClassname("navbar__content"))}>
         {NavLeftRender}

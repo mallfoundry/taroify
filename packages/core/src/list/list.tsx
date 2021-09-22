@@ -1,5 +1,6 @@
 import { View } from "@tarojs/components"
 import { nextTick, usePageScroll, useReady } from "@tarojs/taro"
+import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
 import { prefixClassname } from "../styles"
@@ -14,6 +15,7 @@ enum ListDirection {
 type ListDirectionString = "up" | "down"
 
 export interface ListProps {
+  className?: string
   loading?: boolean
   hasMore?: boolean
   direction?: ListDirection | ListDirectionString
@@ -24,6 +26,7 @@ export interface ListProps {
 
 function List(props: ListProps) {
   const {
+    className,
     loading: loadingProp = false,
     hasMore = true,
     direction = ListDirection.Down,
@@ -75,7 +78,7 @@ function List(props: ListProps) {
   const listEdge = <View ref={edgeRef} className={prefixClassname("list__edge")} />
 
   return (
-    <View ref={rootRef} className={prefixClassname("list")}>
+    <View ref={rootRef} className={classNames(prefixClassname("list"), className)}>
       {direction === ListDirection.Down ? children : listEdge}
       {direction === ListDirection.Up ? children : listEdge}
     </View>

@@ -84,6 +84,7 @@ enum StepperShape {
 type StepperShapeString = "square" | "round"
 
 export interface StepperProps {
+  className?: string
   value?: number | string
   min?: number
   max?: number
@@ -100,6 +101,7 @@ export interface StepperProps {
 
 function Stepper(props: StepperProps) {
   const {
+    className,
     value: valueProp = 0,
     min = 1,
     max = Number.MAX_VALUE,
@@ -162,9 +164,13 @@ function Stepper(props: StepperProps) {
       }}
     >
       <View
-        className={classNames(prefixClassname("stepper"), {
-          [prefixClassname("stepper--round")]: shape === StepperShape.Round,
-        })}
+        className={classNames(
+          prefixClassname("stepper"),
+          {
+            [prefixClassname("stepper--round")]: shape === StepperShape.Round,
+          },
+          className,
+        )}
       >
         {decrease}
         {input}

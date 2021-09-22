@@ -143,7 +143,16 @@ export interface NumberKeyboardProps {
 }
 
 function NumberKeyboard(props: NumberKeyboardProps) {
-  const { open, title, extraKey, random = false, onKeyPress, onBackspace, onHide } = props
+  const {
+    className,
+    open,
+    title,
+    extraKey,
+    random = false,
+    onKeyPress,
+    onBackspace,
+    onHide,
+  } = props
   const { header, sidebar } = useNumberKeyboardChildren(props.children, title)
   const keys = [...createBasicKeys(random), ...createCustomKeys(extraKey)]
 
@@ -167,9 +176,13 @@ function NumberKeyboard(props: NumberKeyboardProps) {
         }}
       >
         <View
-          className={classNames(prefixClassname("number-keyboard"), {
-            [prefixClassname("number-keyboard--with-title")]: header,
-          })}
+          className={classNames(
+            prefixClassname("number-keyboard"),
+            {
+              [prefixClassname("number-keyboard--with-title")]: header,
+            },
+            className,
+          )}
         >
           {header}
           <View className={prefixClassname("number-keyboard__body")}>

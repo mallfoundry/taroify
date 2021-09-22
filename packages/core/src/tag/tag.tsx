@@ -79,6 +79,7 @@ function createCustomTextColor(
 }
 
 interface TagProps {
+  className?: string
   variant?: TagVariant | TagVariantString
   size?: TagSize | TagSizeString
   color?: TagColor | TagColorString | string
@@ -93,6 +94,7 @@ interface TagProps {
 
 function Tag(props: TagProps) {
   const {
+    className,
     variant = TagVariant.Contained,
     size = TagSize.Small,
     color = TagColor.Default,
@@ -111,23 +113,27 @@ function Tag(props: TagProps) {
         background: createCustomColor(variant, color),
         color: createCustomTextColor(variant, textColor, color),
       }}
-      className={classNames(prefixClassname("tag"), {
-        [prefixClassname("tag--outlined")]: variant === TagVariant.Outlined,
-        // Set size styles
-        [prefixClassname("tag--medium")]: size === TagSize.Medium,
-        [prefixClassname("tag--large")]: size === TagSize.Large,
-        // Set color styles
-        [prefixClassname("tag--default")]: color === TagColor.Default,
-        [prefixClassname("tag--primary")]: color === TagColor.Primary,
-        [prefixClassname("tag--info")]: color === TagColor.Info,
-        [prefixClassname("tag--success")]: color === TagColor.Success,
-        [prefixClassname("tag--warning")]: color === TagColor.Warning,
-        [prefixClassname("tag--danger")]: color === TagColor.Danger,
-        // Set shape styles
-        [prefixClassname("tag--round")]: shape === TagShape.Round,
-        [prefixClassname("tag--round-right")]: shape === TagShape.RoundRight,
-        [prefixClassname("tag--round-left")]: shape === TagShape.RoundLeft,
-      })}
+      className={classNames(
+        prefixClassname("tag"),
+        {
+          [prefixClassname("tag--outlined")]: variant === TagVariant.Outlined,
+          // Set size styles
+          [prefixClassname("tag--medium")]: size === TagSize.Medium,
+          [prefixClassname("tag--large")]: size === TagSize.Large,
+          // Set color styles
+          [prefixClassname("tag--default")]: color === TagColor.Default,
+          [prefixClassname("tag--primary")]: color === TagColor.Primary,
+          [prefixClassname("tag--info")]: color === TagColor.Info,
+          [prefixClassname("tag--success")]: color === TagColor.Success,
+          [prefixClassname("tag--warning")]: color === TagColor.Warning,
+          [prefixClassname("tag--danger")]: color === TagColor.Danger,
+          // Set shape styles
+          [prefixClassname("tag--round")]: shape === TagShape.Round,
+          [prefixClassname("tag--round-right")]: shape === TagShape.RoundRight,
+          [prefixClassname("tag--round-left")]: shape === TagShape.RoundLeft,
+        },
+        className,
+      )}
     >
       {children}
       {closeable &&

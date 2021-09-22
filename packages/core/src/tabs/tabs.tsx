@@ -39,6 +39,7 @@ function useTabObjects(children: ReactNode) {
 }
 
 export interface TabsProps {
+  className?: string
   activeKey?: TabKey
   duration?: number
   animated?: boolean
@@ -56,6 +57,7 @@ export interface TabsProps {
 
 function Tabs(props: TabsProps) {
   const {
+    className,
     activeKey = -1,
     duration,
     animated = false,
@@ -95,10 +97,14 @@ function Tabs(props: TabsProps) {
     >
       <View
         ref={rootRef}
-        className={classNames(prefixClassname("tabs"), {
-          [prefixClassname("tabs--line")]: theme === TabsTheme.Line,
-          [prefixClassname("tabs--card")]: theme === TabsTheme.Card,
-        })}
+        className={classNames(
+          prefixClassname("tabs"),
+          {
+            [prefixClassname("tabs--line")]: theme === TabsTheme.Line,
+            [prefixClassname("tabs--card")]: theme === TabsTheme.Card,
+          },
+          className,
+        )}
       >
         {sticky ? (
           <Sticky container={rootRef}>

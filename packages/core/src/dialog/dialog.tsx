@@ -87,13 +87,13 @@ interface DialogProps {
 }
 
 function Dialog(props: DialogProps) {
-  const { backdrop = true, open, children, onClose } = props
+  const { className, backdrop = true, open, children, onClose } = props
   const { header, content, actions } = findDialogChildren(children)
   const hasHeader = header !== undefined
   const hasContent = content !== undefined
   return (
     <Popup
-      className={classNames(prefixClassname("dialog"), {})}
+      className={classNames(prefixClassname("dialog"), className)}
       duration={160}
       transaction={prefixClassname("dialog-bounce")}
       open={open}

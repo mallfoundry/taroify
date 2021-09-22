@@ -6,6 +6,7 @@ import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 
 interface SwitchProps {
+  className?: string
   checked?: boolean
   loading?: boolean
   disabled?: boolean
@@ -20,6 +21,7 @@ interface SwitchProps {
 
 function Switch(props: SwitchProps) {
   const {
+    className,
     checked = false,
     loading = false,
     disabled = false,
@@ -42,11 +44,15 @@ function Switch(props: SwitchProps) {
 
   return (
     <View
-      className={classNames(prefixClassname("switch"), {
-        [prefixClassname("switch--checked")]: checked,
-        [prefixClassname("switch--loading")]: loading,
-        [prefixClassname("switch--disabled")]: disabled,
-      })}
+      className={classNames(
+        prefixClassname("switch"),
+        {
+          [prefixClassname("switch--checked")]: checked,
+          [prefixClassname("switch--loading")]: loading,
+          [prefixClassname("switch--disabled")]: disabled,
+        },
+        className,
+      )}
       style={{
         fontSize: addUnitPx(size),
         backgroundColor: color,

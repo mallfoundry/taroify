@@ -45,6 +45,7 @@ function appendIconClassName(node?: ReactNode) {
 }
 
 interface ToastProps {
+  className?: string
   open?: boolean
   type?: ToastType | ToastTypeString
   icon?: ReactNode
@@ -55,6 +56,7 @@ interface ToastProps {
 
 export default function Toast(props: ToastProps) {
   const {
+    className,
     open: openProp = false,
     type = ToastType.Text,
     duration = 3000,
@@ -84,9 +86,13 @@ export default function Toast(props: ToastProps) {
   return (
     <Popup
       open={open}
-      className={classNames(prefixClassname("toast"), {
-        [prefixClassname(`toast--${type}`)]: type,
-      })}
+      className={classNames(
+        prefixClassname("toast"),
+        {
+          [prefixClassname(`toast--${type}`)]: type,
+        },
+        className,
+      )}
     >
       <Popup.Backdrop open={false} />
       {icon}

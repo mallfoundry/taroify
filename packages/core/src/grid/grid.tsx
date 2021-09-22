@@ -25,6 +25,7 @@ export enum GridDirection {
 type GridDirectionString = "horizontal" | "vertical"
 
 interface GridProps {
+  className?: string
   columns?: number
   gutter?: number | string
   bordered?: boolean
@@ -37,6 +38,7 @@ interface GridProps {
 
 function Grid(props: GridProps) {
   const {
+    className,
     columns = DEFAULT_GRID_COLUMNS,
     gutter,
     bordered = true,
@@ -61,9 +63,13 @@ function Grid(props: GridProps) {
   return (
     <View
       style={rootStyle}
-      className={classNames(prefixClassname("grid"), {
-        [HAIRLINE_BORDER_TOP]: bordered && gutter === undefined,
-      })}
+      className={classNames(
+        prefixClassname("grid"),
+        {
+          [HAIRLINE_BORDER_TOP]: bordered && gutter === undefined,
+        },
+        className,
+      )}
     >
       <GridContext.Provider
         value={{

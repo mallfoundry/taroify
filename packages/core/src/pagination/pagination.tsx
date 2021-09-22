@@ -104,6 +104,7 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
 }
 
 interface PaginationProps {
+  className?: string
   current?: number
   count?: number
   siblingCount?: number
@@ -112,7 +113,7 @@ interface PaginationProps {
 }
 
 function Pagination(props: PaginationProps) {
-  const { current = 1, siblingCount = 2, count = 1, children, onChange } = props
+  const { className, current = 1, siblingCount = 2, count = 1, children, onChange } = props
   const { previous, startEllipsis, items, endEllipsis, next } = usePagination({
     current,
     siblingCount,
@@ -137,7 +138,7 @@ function Pagination(props: PaginationProps) {
   }
 
   return (
-    <View className={classNames(prefixClassname("pagination"))}>
+    <View className={classNames(prefixClassname("pagination"), className)}>
       <PaginationContext.Provider
         value={{
           current,
