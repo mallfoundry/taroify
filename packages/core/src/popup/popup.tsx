@@ -1,4 +1,4 @@
-import Cross from "@taroify/icons/Cross"
+import { Cross } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"

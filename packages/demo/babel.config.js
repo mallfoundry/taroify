@@ -17,9 +17,23 @@ module.exports = {
       {
         libraryName: "@taroify/core",
         libraryDirectory: "",
-        style: (name) => {
-          return `${name}/index.scss`
-        },
+        style: true,
+        // style: (name) => {
+        //   if (
+        //     [
+        //       "@taroify/core/button",
+        //       "@taroify/core/transition",
+        //       "@taroify/core/backdrop",
+        //       "@taroify/core/toast",
+        //       "@taroify/core/popup",
+        //       "@taroify/core/loading",
+        //       "@taroify/core/picker",
+        //     ].includes(name)
+        //   ) {
+        //     return `${name}/style`
+        //   }
+        //   return `${name}/index.scss`
+        // },
       },
       "@taroify/core",
     ],

@@ -1,1 +1,1 @@
-interface Form {}
+export default interface Form {}
