@@ -55,9 +55,12 @@ export default function TabsHeader() {
   }, [tabOffsets, activeIndex])
 
   const scrollLeft = useMemo(() => {
-    const { width: navOffsetWidth = 0 } = navOffset
-    const { left: offsetLeft = 0, width: offsetWidth = 0 } = activeOffset
-    return offsetLeft - (navOffsetWidth - offsetWidth) / 2
+    if (navOffset) {
+      const { width: navOffsetWidth = 0 } = navOffset
+      const { left: offsetLeft = 0, width: offsetWidth = 0 } = activeOffset
+      return offsetLeft - (navOffsetWidth - offsetWidth) / 2
+    }
+    return 0
   }, [navOffset, activeOffset])
 
   const resize = useCallback(() => {
