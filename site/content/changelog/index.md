@@ -12,6 +12,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.11
+
+`2021-09-23`
+
+**Bug Fixes**
+
+- Divider
+  - 修复 className 放置错误问题[#16](https://github.com/mallfoundry/taroify/pull/16)
+
+
 ### v0.0.12-alpha.10
 
 `2021-09-22`
