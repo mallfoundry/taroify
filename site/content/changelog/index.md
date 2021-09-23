@@ -19,8 +19,9 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Sheet
-  - 修复按需导入样式的问题[#18](https://github.com/mallfoundry/taroify/issues/18)
-
+    - 修复按需导入样式的问题[#18](https://github.com/mallfoundry/taroify/issues/18)
+- Tabs
+    - 修复 navOffset 为 null 导致报错的问题[#17](https://github.com/mallfoundry/taroify/pull/17)
 
 ### v0.0.12-alpha.11
 
@@ -29,8 +30,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Divider
-  - 修复 className 放置错误问题[#16](https://github.com/mallfoundry/taroify/pull/16)
-
+    - 修复 className 放置错误问题[#16](https://github.com/mallfoundry/taroify/pull/16)
 
 ### v0.0.12-alpha.10
 
