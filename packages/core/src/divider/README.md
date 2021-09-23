@@ -53,7 +53,7 @@ import Divider from "@taroify/core/divider"
 
 ### 自定义样式
 
-可以直接通过 `style` 属性设置分割线的样式。
+可以使用 `className` 属性，也可以直接通过 `style` 属性设置分割线的样式。
 
 ```tsx
 <Divider style={{ color: "#1989fa", borderColor: "#1989fa", padding: "0 16px" }}>

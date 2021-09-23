@@ -57,8 +57,8 @@ function Divider(props: DividerProps) {
           children && orientation === Divider.TextOrientation.Center,
         [prefixClassname("divider--content-right")]:
           children && orientation === Divider.TextOrientation.Right,
-        className,
-      })}
+      },
+      className)}
       style={style}
     >
       {children}
