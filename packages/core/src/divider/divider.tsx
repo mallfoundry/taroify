@@ -48,21 +48,23 @@ function Divider(props: DividerProps) {
   const { orientation = Divider.TextOrientation.Center, children } = findDividerText(props.children)
   return (
     <View
-      className={classNames(prefixClassname("divider"), {
-        [prefixClassname("divider--hairline")]: hairline && !dashed,
-        [prefixClassname("divider--dashed")]: dashed,
-        [prefixClassname("divider--content-left")]:
-          children && orientation === Divider.TextOrientation.Left,
-        [prefixClassname("divider--content-center")]:
-          children && orientation === Divider.TextOrientation.Center,
-        [prefixClassname("divider--content-right")]:
-          children && orientation === Divider.TextOrientation.Right,
-      },
-      className)}
+      className={classNames(
+        prefixClassname("divider"),
+        {
+          [prefixClassname("divider--hairline")]: hairline && !dashed,
+          [prefixClassname("divider--dashed")]: dashed,
+          [prefixClassname("divider--content-left")]:
+            children && orientation === Divider.TextOrientation.Left,
+          [prefixClassname("divider--content-center")]:
+            children && orientation === Divider.TextOrientation.Center,
+          [prefixClassname("divider--content-right")]:
+            children && orientation === Divider.TextOrientation.Right,
+        },
+        className,
+      )}
       style={style}
-    >
-      {children}
-    </View>
+      children={children}
+    />
   )
 }
 
