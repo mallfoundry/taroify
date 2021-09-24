@@ -17,6 +17,10 @@
   &--active {
     font-weight: $font-weight-bold;
     color: $tab-active-text-color;
+
+    .#{$component-prefix}tabs__line {
+      transform: scale(1);
+    }
   }
 
   &--disabled {

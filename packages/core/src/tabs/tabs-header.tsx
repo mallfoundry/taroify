@@ -117,10 +117,14 @@ export default function TabsHeader() {
               flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
               disabled={tabObject.disabled}
               ellipsis={themeLine && ellipsis}
-              children={tabObject.title}
+              children={
+                <>
+                {tabObject.title}
+                {themeLine && <TabsLine />}
+                </>
+              }
             />
           ))}
-          {themeLine && <TabsLine offset={activeOffset} />}
         </View>
       </ScrollView>
     </View>
