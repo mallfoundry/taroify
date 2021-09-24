@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
 import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
-import { clamp } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
 import { useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
@@ -62,7 +61,7 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
 
   const adjustIndex = useCallback(
     (index: number) => {
-      index = clamp(index, 0, count)
+      index = _.clamp(index, 0, count)
       for (let i = index; i < count; i++) {
         if (!options[i].disabled) return i
       }
@@ -105,12 +104,11 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
   )
 
   useEffect(() => {
-    console.log(value)
     setIndex(getIndexByValue(value))
   }, [getIndexByValue, setIndex, value])
 
   const getIndexByOffset = useCallback(
-    (offset: number) => clamp(Math.round(-offset / itemHeight), 0, count - 1),
+    (offset: number) => _.clamp(Math.round(-offset / itemHeight), 0, count - 1),
     [count],
   )
 
@@ -193,7 +191,7 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
       }
 
       setActiveOffset(
-        clamp(startOffsetRef.current + touch.deltaY, -(count * itemHeight), itemHeight),
+        _.clamp(startOffsetRef.current + touch.deltaY, -(count * itemHeight), itemHeight),
       )
     },
     [activeOffset, count, readonly, touch],
