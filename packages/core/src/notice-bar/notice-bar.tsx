@@ -11,6 +11,7 @@ import {
   ReactNode,
   useRef,
   useState,
+  useEffect
 } from "react"
 import { prefixClassname } from "../styles"
 import { useComputed } from "../utils/computed"
@@ -131,7 +132,8 @@ function NoticeBar(props: NoticeBarProps) {
     }, +delay)
   }
 
-  useReady(start)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(start, [])
 
   return (
     <View
