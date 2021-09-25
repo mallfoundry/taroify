@@ -1,6 +1,5 @@
-import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { nextTick, useReady } from "@tarojs/taro"
+import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -9,14 +8,17 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
+  useEffect,
+  useMemo,
   useRef,
   useState,
-  useEffect
 } from "react"
 import { prefixClassname } from "../styles"
-import { useComputed } from "../utils/computed"
+import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
 import { getBoundingClientRect } from "../utils/rect"
+import { NoticeBarAction } from "./notice-bar-action"
+import { NoticeBarIcon } from "./notice-bar-icon"
 
 interface NoticeBarChildren {
   icon: ReactNode
@@ -34,9 +36,9 @@ function useChildren(children: ReactNode): NoticeBarChildren {
     if (isValidElement(child)) {
       const element = child as ReactElement
       const elementType = element.type
-      if (elementType === NoticeBar.Icon) {
+      if (elementType === NoticeBarIcon) {
         __children__.icon = element
-      } else if (elementType === NoticeBar.Action) {
+      } else if (elementType === NoticeBarAction) {
         __children__.action = element
       } else {
         __children__.text.push(child)
@@ -48,7 +50,7 @@ function useChildren(children: ReactNode): NoticeBarChildren {
   return __children__
 }
 
-interface NoticeBarProps {
+export interface NoticeBarProps {
   className?: string
   style?: CSSProperties
   delay?: number
@@ -66,67 +68,62 @@ function NoticeBar(props: NoticeBarProps) {
   const startTimerRef = useRef<NodeJS.Timeout>()
   const wrapRef = useRef()
   const contentRef = useRef()
-  const offsetRef = useRef(0)
-  const durationRef = useRef(0)
+
+  const [offset, setOffset] = useState(0)
+  const [duration, setDuration] = useState(0)
+
   const wrapWidthRef = useRef(0)
   const contentWidthRef = useRef(0)
-  const [, setForceRefresh] = useState(0)
 
-  const contentStyle = useComputed<CSSProperties>(
+  const contentStyle = useMemo<CSSProperties>(
     () => ({
-      transform: offsetRef.current ? `translateX(${offsetRef.current}px)` : "",
-      transitionDuration: `${durationRef.current}s`,
+      transform: offset ? `translateX(${addUnitPx(offset)})` : "",
+      transitionDuration: `${duration}s`,
     }),
-    [offsetRef, durationRef],
+    [offset, duration],
   )
 
-  function forceRefresh() {
-    setForceRefresh(Date.now())
-  }
-
   function reset() {
-    offsetRef.current = 0
-    durationRef.current = 0
     wrapWidthRef.current = 0
     contentWidthRef.current = 0
-    forceRefresh()
+    setOffset(0)
+    setDuration(0)
   }
 
   function onTransitionEnd() {
-    offsetRef.current = wrapWidthRef.current
-    durationRef.current = 0
-    forceRefresh()
+    setOffset(wrapWidthRef.current)
+    setDuration(0)
 
     nextTick(() => {
       // use double raf to ensure animation can start
       doubleRaf(() => {
-        offsetRef.current = -contentWidthRef.current
-        durationRef.current = (contentWidthRef.current + wrapWidthRef.current) / +speed
-        forceRefresh()
+        setOffset(-contentWidthRef.current)
+        setDuration((contentWidthRef.current + wrapWidthRef.current) / +speed)
       })
     })
   }
 
   function start() {
     reset()
+
     if (startTimerRef.current) {
       clearTimeout(startTimerRef.current)
     }
+
     startTimerRef.current = setTimeout(async () => {
       if (!wrapRef.current || !contentRef.current || !scrollable) {
         return
       }
 
-      const wrapRefWidth = (await getBoundingClientRect(wrapRef)).width
-      const contentRefWidth = (await getBoundingClientRect(contentRef)).width
+      const { width: wrapRefWidth } = await getBoundingClientRect(wrapRef)
+      const { width: contentRefWidth } = await getBoundingClientRect(contentRef)
 
       if (scrollable || contentRefWidth > wrapRefWidth) {
         doubleRaf(() => {
           wrapWidthRef.current = wrapRefWidth
           contentWidthRef.current = contentRefWidth
-          offsetRef.current = -contentRefWidth
-          durationRef.current = contentRefWidth / +speed
-          forceRefresh()
+          setOffset(-contentRefWidth)
+          setDuration(contentRefWidth / +speed)
         })
       }
     }, +delay)
@@ -150,7 +147,7 @@ function NoticeBar(props: NoticeBarProps) {
       <View ref={wrapRef} className={prefixClassname("notice-bar__wrap")}>
         <View
           ref={contentRef}
-          style={contentStyle.value}
+          style={contentStyle}
           className={classNames(prefixClassname("notice-bar__content"), {
             [prefixClassname("ellipsis")]: ellipsis,
           })}
@@ -161,30 +158,6 @@ function NoticeBar(props: NoticeBarProps) {
       {action}
     </View>
   )
-}
-
-namespace NoticeBar {
-  interface IconProps {
-    children?: ReactNode
-    // onClick?: () => void
-  }
-
-  export function Icon(props: IconProps): JSX.Element {
-    return cloneIconElement(props.children, {
-      className: prefixClassname("notice-bar__icon"),
-    }) as JSX.Element
-  }
-
-  interface ActionProps {
-    children?: ReactNode
-    // onClick?: () => void
-  }
-
-  export function Action(props: ActionProps): JSX.Element {
-    return cloneIconElement(props.children, {
-      className: prefixClassname("notice-bar__action"),
-    }) as JSX.Element
-  }
 }
 
 export default NoticeBar
