@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { navigate } from "gatsby"
+import { Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode } from "react"
@@ -25,14 +25,14 @@ interface MenuItemProps {
 
 function MenuItem({ title, to, active }: MenuItemProps) {
   return (
-    <div
+    <Link
       className={classNames("vant-side-nav-item", {
         "vant-side-nav-item-active": active,
       })}
-      onClick={() => navigate(to)}
+      to={to}
     >
       <span>{title}</span>
-    </div>
+    </Link>
   )
 }
 
