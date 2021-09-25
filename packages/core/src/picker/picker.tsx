@@ -15,6 +15,7 @@ import {
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_UNSET_TOP_BOTTOM } from "../styles/hairline"
+import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import PickerColumn, { PickerColumnProps } from "./picker-column"
 import PickerColumnBase from "./picker-column-base"
@@ -96,6 +97,7 @@ function usePickerValues(value?: any): any[] {
 export interface PickerProps {
   value?: any | any[]
   className?: string
+  readonly?: boolean
   loading?: boolean
   siblingCount?: number
   children?: ReactNode
@@ -112,6 +114,7 @@ export default function Picker(props: PickerProps) {
     value: valueProp,
     className,
     loading,
+    readonly,
     siblingCount = 3,
     onChange,
     onCancel,
@@ -183,12 +186,18 @@ export default function Picker(props: PickerProps) {
         {toolbar}
       </PickerContext.Provider>
       {loading && <Loading className={prefixClassname("picker__loading")} />}
-      <View className={prefixClassname("picker__columns")} style={columnsStyle}>
+      <View
+        className={prefixClassname("picker__columns")}
+        style={columnsStyle}
+        catchMove
+        onTouchMove={preventDefault}
+      >
         {
           //
           _.map(columns, (column, columnIndex) => (
             <PickerColumnBase
               {...column}
+              readonly={readonly}
               value={_.get(values, columnIndex)}
               onChange={(option, emitChange) => onColumnChange(option, column, emitChange)}
             />

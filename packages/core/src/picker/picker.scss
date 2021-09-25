@@ -3,8 +3,10 @@
 
 .#{$component-prefix}picker {
   position: relative;
-  background-color: $picker-background-color;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%; /* avoid iOS text size adjust */
   user-select: none;
+  background-color: $picker-background-color;
 
   &__toolbar {
     display: flex;
