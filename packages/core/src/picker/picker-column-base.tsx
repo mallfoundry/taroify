@@ -225,8 +225,7 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
   const wrapperStyle = useMemo(
     () => ({
       transform: `translate3d(0, ${addUnitPx(activeOffset + baseOffset)}, 0)`,
-      transitionDuration: `${duration}ms`,
-      transitionProperty: duration ? "all" : "none",
+      transition: `transform ${duration}ms`,
     }),
     [activeOffset, baseOffset, duration],
   )
