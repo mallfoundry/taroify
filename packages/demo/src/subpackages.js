@@ -65,6 +65,11 @@ const subpackages = [
         path: "field/index",
       },
       {
+        title: "DatetimePicker 时间选择",
+        name: "DatetimePicker ",
+        path: "datetime-picker/index",
+      },
+      {
         title: "NumberKeyboard 数字键盘",
         name: "NumberKeyboard",
         path: "number-keyboard/index",

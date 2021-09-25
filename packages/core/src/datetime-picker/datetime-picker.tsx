@@ -5,9 +5,7 @@ import Picker from "../picker"
 import {
   clampDate,
   DatetimePickerColumnType,
-  DatetimePickerColumnTypeString,
   DatetimePickerType,
-  DatetimePickerTypeString,
   getDatetime,
   MAX_DATE,
   MIN_DATE,
@@ -15,63 +13,60 @@ import {
 } from "./datetime-picker.shared"
 
 interface UseDatetimePicker {
+  type?: DatetimePickerType
   value?: Date
-  minDate?: Date
-  maxDate?: Date
-  type?: DatetimePickerType | DatetimePickerTypeString
+  min?: Date
+  max?: Date
+  fields?: DatetimePickerColumnType[]
 
-  filter?(
-    type: DatetimePickerColumnType | DatetimePickerColumnTypeString,
-    values: string[],
-  ): string[]
+  filter?(type: DatetimePickerColumnType, values: string[]): string[]
 
-  formatter?(type: DatetimePickerColumnType | DatetimePickerColumnTypeString, value: string): string
+  formatter?(type: DatetimePickerColumnType, value: string): string
 }
 
-const defaultFormatter = (
-  type: DatetimePickerColumnType | DatetimePickerColumnTypeString,
-  value: string,
-) => value
+const defaultFormatter = (type: DatetimePickerColumnType, value: string) => value
 
 export function useDatetimePicker(options: UseDatetimePicker = {}) {
   const {
     value = new Date(),
-    minDate = MIN_DATE,
-    maxDate = MAX_DATE,
-    type = DatetimePickerType.Datetime,
+    min: minDate = MIN_DATE,
+    max: maxDate = MAX_DATE,
+    type = "datetime",
+    fields = [],
     filter,
     formatter = defaultFormatter,
   } = options
 
   const clampValue = clampDate(value, minDate, maxDate)
 
-  const ranges = useDatetimeRanges(type, clampValue, minDate, maxDate)
+  const ranges = useDatetimeRanges(clampValue, minDate, maxDate, type, fields)
 
   const columns = useMemo(
     () =>
-      _.map(ranges, ({ type, range: rangeArr }) => {
-        let values = _.times(rangeArr[1] - rangeArr[0] + 1, (index) =>
-          _.padStart(`${rangeArr[0] + index}`, 2, "0"),
+      _.map(ranges, ({ type, range }) => {
+        let values = _.times(range[1] - range[0] + 1, (index) =>
+          _.padStart(`${range[0] + index}`, 2, "0"),
         )
 
         if (filter) {
           values = filter(type, values)
         }
 
-        if (formatter !== defaultFormatter) {
-          values = _.map(values, (value) => formatter(type, value))
-        }
+        const options = _.map(values, (value) => ({
+          value,
+          children: formatter(type, value),
+        }))
 
         return {
           type,
-          values,
+          options,
         }
       }),
     [filter, formatter, ranges],
   )
 
   function toDate(datetimeValue: string[]): Date {
-    const date = new Date()
+    const date = new Date(minDate.getTime())
     _.forEach(columns, ({ type }, index) => {
       switch (type) {
         case "year":
@@ -103,17 +98,17 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     return _.map(columns, (column) => {
       switch (column.type) {
         case "year":
-          return formatter("year", `${year}`)
+          return _.toString(year)
         case "month":
-          return formatter("month", _.padStart(`${month}`, 2, "0"))
+          return _.padStart(_.toString(month), 2, "0")
         case "day":
-          return formatter("day", _.padStart(`${day}`, 2, "0"))
+          return _.padStart(_.toString(day), 2, "0")
         case "hour":
-          return formatter("hour", _.padStart(`${hour}`, 2, "0"))
+          return _.padStart(_.toString(hour), 2, "0")
         case "minute":
-          return formatter("minute", _.padStart(`${minute}`, 2, "0"))
+          return _.padStart(_.toString(minute), 2, "0")
         case "second":
-          return formatter("second", _.padStart(`${second}`, 2, "0"))
+          return _.padStart(_.toString(second), 2, "0")
         default:
           return ""
       }
@@ -129,20 +124,19 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
 
 export interface DatetimePickerProps {
   className?: string
-  type?: DatetimePickerType | DatetimePickerTypeString
+  type?: DatetimePickerType
+  fields?: DatetimePickerColumnType[]
   value?: Date
-  minDate?: Date
-  maxDate?: Date
+  min?: Date
+  max?: Date
+  readonly?: boolean
   loading?: boolean
   siblingCount?: number
   children?: ReactNode
 
-  filter?(
-    type: DatetimePickerColumnType | DatetimePickerColumnTypeString,
-    values: string[],
-  ): string[]
+  filter?(type: DatetimePickerColumnType, values: string[]): string[]
 
-  formatter?(type: DatetimePickerColumnType | DatetimePickerColumnTypeString, value: string): string
+  formatter?(type: DatetimePickerColumnType, value: string): string
 
   onChange?(date: Date): void
 
@@ -152,11 +146,22 @@ export interface DatetimePickerProps {
 }
 
 function DatetimePicker(props: DatetimePickerProps) {
-  const { className, loading, siblingCount, children, onChange, onConfirm, onCancel } = props
+  const {
+    className,
+    readonly,
+    loading,
+    siblingCount,
+    children,
+    onChange,
+    onConfirm,
+    onCancel,
+  } = props
   const { value, columns, toDate } = useDatetimePicker(props)
+
   return (
     <Picker
       className={className}
+      readonly={readonly}
       loading={loading}
       siblingCount={siblingCount}
       value={value}
@@ -167,12 +172,12 @@ function DatetimePicker(props: DatetimePickerProps) {
       {children}
       {
         //
-        _.map(columns, ({ type, values }) => (
+        _.map(columns, ({ type, options }) => (
           <Picker.Column key={type}>
             {
               //
-              _.map(values, (option) => (
-                <Picker.Option key={option} children={option} />
+              _.map(options, ({ value, children }) => (
+                <Picker.Option key={value} value={value} children={children} />
               ))
             }
           </Picker.Column>

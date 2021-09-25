@@ -1,35 +1,16 @@
 import * as _ from "lodash"
 import { useMemo } from "react"
 
-export enum DatetimePickerType {
-  Date = "date",
-  Time = "time",
-  Datetime = "datetime",
-  DateHour = "date-hour",
-  HourMinute = "hour-minute",
-  MonthDay = "month-day",
-  YearMonth = "year-month",
-}
-
-export type DatetimePickerTypeString =
+export type DatetimePickerType =
   | "date"
   | "time"
   | "datetime"
   | "date-hour"
-  | "hour-minute"
-  | "month-day"
   | "year-month"
+  | "month-day"
+  | "hour-minute"
 
-export enum DatetimePickerColumnType {
-  Year = "year",
-  Month = "month",
-  Day = "day",
-  Hour = "hour",
-  Minute = "minute",
-  Second = "second",
-}
-
-export type DatetimePickerColumnTypeString = "year" | "month" | "day" | "hour" | "minute" | "second"
+export type DatetimePickerColumnType = "year" | "month" | "day" | "hour" | "minute" | "second"
 
 type Datetime = [number, number, number, number, number, number]
 
@@ -102,7 +83,7 @@ function getMaxDatetime(boundary: Date, current: Date): Datetime {
 }
 
 interface DatetimeRange {
-  type: DatetimePickerColumnType | DatetimePickerColumnTypeString
+  type: DatetimePickerColumnType
   range: [number, number]
 }
 
@@ -119,27 +100,27 @@ function useAllDatetimeRanges(date: Date, minDate: Date, maxDate: Date): Datetim
   return useMemo(
     () => [
       {
-        type: DatetimePickerColumnType.Year,
+        type: "year",
         range: [minYear, maxYear],
       },
       {
-        type: DatetimePickerColumnType.Month,
+        type: "month",
         range: [minMonth, maxMonth],
       },
       {
-        type: DatetimePickerColumnType.Day,
+        type: "day",
         range: [minDay, maxDay],
       },
       {
-        type: DatetimePickerColumnType.Hour,
+        type: "hour",
         range: [minHour, maxHour],
       },
       {
-        type: DatetimePickerColumnType.Minute,
+        type: "minute",
         range: [minMinute, maxMinute],
       },
       {
-        type: DatetimePickerColumnType.Second,
+        type: "second",
         range: [minSecond, maxSecond],
       },
     ],
@@ -160,35 +141,54 @@ function useAllDatetimeRanges(date: Date, minDate: Date, maxDate: Date): Datetim
   )
 }
 
-function useSpecifiedDatetimeRanges(
-  ranges: DatetimeRange[],
-  type: DatetimePickerType | DatetimePickerTypeString,
-) {
+function useSpecifiedDatetimeRanges(ranges: DatetimeRange[], type: DatetimePickerType) {
   return useMemo(() => {
     switch (type) {
-      case DatetimePickerType.Date:
+      case "date":
         return _.slice(ranges, 0, 3)
-      case DatetimePickerType.Time:
+      case "time":
         return _.slice(ranges, 3, 6)
-      case DatetimePickerType.YearMonth:
+      case "year-month":
         return _.slice(ranges, 0, 2)
-      case DatetimePickerType.MonthDay:
+      case "month-day":
         return _.slice(ranges, 1, 3)
-      case DatetimePickerType.DateHour:
+      case "date-hour":
         return _.slice(ranges, 0, 4)
-      case DatetimePickerType.HourMinute:
+      case "hour-minute":
         return _.slice(ranges, 3, 5)
     }
     return ranges
   }, [ranges, type])
 }
 
+function useOrderedDatetimeRanges(ranges: DatetimeRange[], fields: DatetimePickerColumnType[]) {
+  return useMemo(() => {
+    if (_.isEmpty(fields)) {
+      return ranges
+    }
+
+    const fieldsOrder = _.concat(
+      fields,
+      _.map(ranges, ({ type }) => type),
+    )
+
+    return ranges.sort((a, b) => fieldsOrder.indexOf(a.type) - fieldsOrder.indexOf(b.type))
+  }, [fields, ranges])
+}
+
 export function useDatetimeRanges(
-  type: DatetimePickerType | DatetimePickerTypeString,
   date: Date,
   minDate: Date,
   maxDate: Date,
+  type: DatetimePickerType,
+  fields: DatetimePickerColumnType[],
 ) {
-  const ranges = useAllDatetimeRanges(date, minDate, maxDate)
-  return useSpecifiedDatetimeRanges(ranges, type)
+  return useOrderedDatetimeRanges(
+    useSpecifiedDatetimeRanges(
+      //
+      useAllDatetimeRanges(date, minDate, maxDate),
+      type,
+    ),
+    fields,
+  )
 }
