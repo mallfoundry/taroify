@@ -19,6 +19,7 @@ export default function PickerOption(props: PickerOptionProps) {
   return (
     <View
       className={classNames(
+        prefixClassname("ellipsis"),
         prefixClassname("picker-column__item"),
         {
           [prefixClassname("picker-column__item--disabled")]: disabled,
