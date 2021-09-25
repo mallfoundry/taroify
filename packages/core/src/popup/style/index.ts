@@ -1,3 +1,3 @@
-import "../../transition/index.scss"
-import "../../backdrop/index.scss"
+import "../../transition/style"
+import "../../backdrop/style"
 import "../index.scss"
