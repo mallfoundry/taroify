@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.13
+
+`2021-09-26`
+
+**Bug Fixes**
+
+- NoticeBar
+  - 修复动态渲染时，useReady 不执行的问题[#20](https://github.com/mallfoundry/taroify/pull/20)
+
 ### v0.0.12-alpha.12
 
 `2021-09-23`
