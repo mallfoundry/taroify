@@ -13,7 +13,7 @@
   background-color: var(--cell-background-color, $cell-background-color);
 
   &::after {
-    @include hairline-bottom($cell-border-color, $padding-sm, $padding-sm);
+    @include hairline-bottom(var(--cell-border-color, $cell-border-color), var(--padding-sm, $padding-sm), var(--padding-sm, $padding-sm));
   }
 
   &:last-child::after,

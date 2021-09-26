@@ -5,7 +5,7 @@
     position: fixed;
     top: 50%;
     right: 0;
-    z-index: $index-list-sidebar-z-index;
+    z-index: var(--index-list-sidebar-z-index, $index-list-sidebar-z-index);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -17,25 +17,13 @@
 
   &__index {
     position: relative;
-    padding: 0 $padding-xs 0 $padding-md;
-    font-size: $index-list-index-font-size;
-    font-weight: $font-weight-bold;
-    line-height: $index-list-index-line-height;
+    padding: 0 var(--padding-xs, $padding-xs) 0 var(--padding-md, $padding-md);
+    font-size: var(--index-list-index-font-size, $index-list-index-font-size);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    line-height: var(--index-list-index-line-height, $index-list-index-line-height);
 
     &--active {
-      color: $index-list-index-active-color;
+      color: var(--index-list-index-active-color, $index-list-index-active-color);
     }
-  }
-
-  &__alert {
-    position: absolute;
-    top: -20px;
-    right: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px * $hd;
-    height: 40px * $hd;
-    background: #7f7f7f;
   }
 }

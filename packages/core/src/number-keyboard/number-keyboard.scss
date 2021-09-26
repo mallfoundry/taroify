@@ -4,11 +4,11 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: $number-keyboard-z-index;
+  z-index: var(--number-keyboard-z-index, $number-keyboard-z-index);
   width: 100%;
-  padding-bottom: 22px;
+  padding-bottom: 22px * $hd;
   user-select: none;
-  background-color: $number-keyboard-background-color;
+  background-color: var(--number-keyboard-background-color, $number-keyboard-background-color);
 
   &--with-title {
     border-radius: 20px * $hd 20px * $hd 0 0;
@@ -20,10 +20,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $number-keyboard-title-height;
-    padding-top: 6px;
-    font-size: $number-keyboard-title-font-size;
-    color: $number-keyboard-title-color;
+    height: var(--number-keyboard-title-height, $number-keyboard-title-height);
+    padding-top: 6px * $hd;
+    font-size: var(--number-keyboard-title-font-size, $number-keyboard-title-font-size);
+    color: var(--number-keyboard-title-color, $number-keyboard-title-color);
   }
 
   &__title {
@@ -53,9 +53,9 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: $number-keyboard-hide-padding;
-    font-size: $number-keyboard-hide-font-size;
-    color: $number-keyboard-hide-color;
+    padding: var(--number-keyboard-hide-padding, $number-keyboard-hide-padding);
+    font-size: var(--number-keyboard-hide-font-size, $number-keyboard-hide-font-size);
+    color: var(--number-keyboard-hide-color, $number-keyboard-hide-color);
     cursor: pointer;
     background-color: transparent;
     border: 0 none;

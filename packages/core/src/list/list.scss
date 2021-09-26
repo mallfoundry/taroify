@@ -4,22 +4,22 @@
   &__loading,
   &__finished,
   &__error {
-    font-size: $list-text-font-size;
-    line-height: $list-text-line-height;
-    color: $list-text-color;
+    font-size: var(--list-text-font-size, $list-text-font-size);
+    line-height: var(--list-text-line-height, $list-text-line-height);
+    color: var(--list-text-color, $list-text-color);
     text-align: center;
   }
 
   &__placeholder {
-    font-size: $list-text-font-size;
-    line-height: $list-text-line-height;
-    color: $list-text-color;
+    font-size: var(--list-text-font-size, $list-text-font-size);
+    line-height: var(--list-text-line-height, $list-text-line-height);
+    color: var(--list-text-color, $list-text-color);
     text-align: center;
 
     .#{$component-prefix}loading__spinner,
     .#{$component-prefix}loading__circular {
-      width: $list-loading-icon-size;
-      height: $list-loading-icon-size;
+      width: var(--list-loading-icon-size, $list-loading-icon-size);
+      height: var(--list-loading-icon-size, $list-loading-icon-size);
     }
   }
 

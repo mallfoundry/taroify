@@ -4,12 +4,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: $number-keyboard-key-height;
-  font-size: $number-keyboard-key-font-size;
+  height: var(--number-keyboard-key-height, $number-keyboard-key-height);
+  font-size: var(--number-keyboard-key-font-size, $number-keyboard-key-font-size);
   line-height: 1.5;
   cursor: pointer;
-  background-color: $white;
-  border-radius: $border-radius-lg;
+  background-color: var(--white, $white);
+  border-radius: var(--border-radius-lg, $border-radius-lg);
 
   &--large {
     // height: 100% can't fill flex parent on legacy safari
@@ -20,19 +20,19 @@
     bottom: 6px * $hd;
     left: 0;
     height: auto;
-    font-size: $number-keyboard-delete-font-size;
+    font-size: var(--number-keyboard-delete-font-size, $number-keyboard-delete-font-size);
   }
 
   &--active {
-    background-color: $number-keyboard-key-active-color;
+    background-color: var(--number-keyboard-key-active-color, $number-keyboard-key-active-color);
   }
 
   &--blue {
-    color: $number-keyboard-button-text-color;
-    background-color: $number-keyboard-button-background-color;
+    color: var(--number-keyboard-button-text-color, $number-keyboard-button-text-color);
+    background-color: var(--number-keyboard-button-background-color, $number-keyboard-button-background-color);
 
     &.#{$component-prefix}key--active {
-      opacity: $active-opacity;
+      opacity: var(--active-opacity, $active-opacity);
     }
   }
 
@@ -49,14 +49,14 @@
   }
 
   .#{$component-prefix}keyboard-hide {
-    font-size: $number-keyboard-key-keyboard-hide-font-size;
+    font-size: var(--number-keyboard-key-keyboard-hide-font-size, $number-keyboard-key-keyboard-hide-font-size);
   }
 
   .#{$component-prefix}backspace {
-    font-size: $number-keyboard-key-backspace-font-size;
+    font-size: var(--number-keyboard-key-backspace-font-size, $number-keyboard-key-backspace-font-size);
   }
 
   &__loading-icon {
-    color: $number-keyboard-button-text-color;
+    color: var(--number-keyboard-button-text-color, $number-keyboard-button-text-color);
   }
 }

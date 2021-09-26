@@ -18,13 +18,13 @@
     }
 
     .#{$component-prefix}dropdown-menu-title__content {
-      color: $dropdown-menu-title-disabled-text-color;
+      color: var(--dropdown-menu-title-disabled-text-color, $dropdown-menu-title-disabled-text-color);
     }
   }
 
   &--active {
     .#{$component-prefix}dropdown-menu-title__content {
-      color: $dropdown-menu-title-active-text-color;
+      color: var(--dropdown-menu-title-active-text-color, $dropdown-menu-title-active-text-color);
 
       &::after {
         border-color: transparent transparent currentColor currentColor;
@@ -43,10 +43,10 @@
     position: relative;
     box-sizing: border-box;
     max-width: 100%;
-    padding: $dropdown-menu-title-padding;
-    font-size: $dropdown-menu-title-font-size;
-    line-height: $dropdown-menu-title-line-height;
-    color: $dropdown-menu-title-text-color;
+    padding: var(--dropdown-menu-title-padding, $dropdown-menu-title-padding);
+    font-size: var(--dropdown-menu-title-font-size, $dropdown-menu-title-font-size);
+    line-height: var(--dropdown-menu-title-line-height, $dropdown-menu-title-line-height);
+    color: var(--dropdown-menu-title-text-color, $dropdown-menu-title-text-color);
 
     &::after {
       position: absolute;
@@ -55,7 +55,7 @@
       margin-top: -5px * $hd;
       content: '';
       border: 3px * $hd solid;
-      border-color: transparent transparent $gray-4 $gray-4;
+      border-color: transparent transparent var(--gray-4, $gray-4) var(--gray-4, $gray-4);
       opacity: 0.8;
       transform: rotate(-45deg);
     }

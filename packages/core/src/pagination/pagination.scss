@@ -2,7 +2,7 @@
 
 .#{$component-prefix}pagination {
   display: flex;
-  font-size: $pagination-font-size;
+  font-size: var(--pagination-font-size, $pagination-font-size);
 
   &__item,
   &__page-desc {
@@ -14,38 +14,38 @@
   &__item {
     box-sizing: border-box;
     flex: 1;
-    min-width: $pagination-item-width;
-    height: $pagination-height;
-    color: $pagination-item-default-color;
+    min-width: var(--pagination-item-width, $pagination-item-width);
+    height: var(--pagination-height, $pagination-height);
+    color: var(--pagination-item-default-color, $pagination-item-default-color);
     cursor: pointer;
     user-select: none;
-    background-color: $pagination-background-color;
+    background-color: var(--pagination-background-color, $pagination-background-color);
 
     &:active {
-      color: $white;
-      background-color: $pagination-item-default-color;
+      color: var(--white, $white);
+      background-color: var(--pagination-item-default-color, $pagination-item-default-color);
     }
 
     &::after {
-      border-width: $border-width-base 0 $border-width-base $border-width-base;
+      border-width: var(--border-width-base, $border-width-base) 0 var(--border-width-base, $border-width-base) var(--border-width-base, $border-width-base);
     }
 
     &:last-child::after {
-      border-right-width: $border-width-base;
+      border-right-width: var(--border-width-base, $border-width-base);
     }
 
     &--active {
-      color: $white;
-      background-color: $pagination-item-default-color;
+      color: var(--white, $white);
+      background-color: var(--pagination-item-default-color, $pagination-item-default-color);
     }
 
     &--disabled {
       &,
       &:active {
-        color: $pagination-item-disabled-color;
+        color: var(--pagination-item-disabled-color, $pagination-item-disabled-color);
         cursor: not-allowed;
-        background-color: $pagination-item-disabled-background-color;
-        opacity: $pagination-disabled-opacity;
+        background-color: var(--pagination-item-disabled-background-color, $pagination-item-disabled-background-color);
+        opacity: var(--pagination-disabled-opacity, $pagination-disabled-opacity);
       }
     }
 
@@ -61,7 +61,7 @@
   }
 
   &__button {
-    padding: 0 $padding-base;
+    padding: 0 var(--padding-base, $padding-base);
     cursor: pointer;
   }
 }

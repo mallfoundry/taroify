@@ -3,11 +3,11 @@
 .#{$component-prefix}divider {
   display: flex;
   align-items: center;
-  margin: $divider-margin;
-  font-size: $divider-font-size;
-  line-height: $divider-line-height;
-  color: $divider-text-color;
-  border-color: $divider-border-color;
+  margin: var(--divider-margin, $divider-margin);
+  font-size: var(--divider-font-size, $divider-font-size);
+  line-height: var(--divider-line-height, $divider-line-height);
+  color: var(--divider-text-color, $divider-text-color);
+  border-color: var(--divider-border-color, $divider-border-color);
   border-style: solid;
   border-width: 0;
 
@@ -19,7 +19,7 @@
     height: 1px * $hd;
     border-color: inherit;
     border-style: inherit;
-    border-width: $border-width-base 0 0;
+    border-width: var(--border-width-base, $border-width-base) 0 0;
   }
 
   &::before {
@@ -41,24 +41,24 @@
   &--content-left,
   &--content-right {
     &::before {
-      margin-right: $divider-content-padding;
+      margin-right: var(--divider-content-padding, $divider-content-padding);
     }
 
     &::after {
-      margin-left: $divider-content-padding;
+      margin-left: var(--divider-content-padding, $divider-content-padding);
       content: '';
     }
   }
 
   &--content-left {
     &::before {
-      max-width: $divider-content-left-width;
+      max-width: var(--divider-content-left-width, $divider-content-left-width);
     }
   }
 
   &--content-right {
     &::after {
-      max-width: $divider-content-right-width;
+      max-width: var(--divider-content-right-width, $divider-content-right-width);
     }
   }
 }
