@@ -260,7 +260,7 @@ function DatePickerWithFields() {
 | fields | 自定义列排序数组, 子项可选值为<br> `year`、`month`、`day`、`hour`、`minute` | _string[]_ | - |
 | loading | 是否显示加载状态 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
-| siblingCount | 可见的选项相邻个数 | _number \| string_ | `3` |
+| siblingCount | 可见的选项相邻个数 | _number_ | `3` |
 
 ### Events
 
