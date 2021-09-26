@@ -4,9 +4,9 @@
 .#{$component-prefix}picker {
   position: relative;
   overflow: hidden;
-  -webkit-text-size-adjust: 100%; /* avoid iOS text size adjust */
   user-select: none;
   background-color: $picker-background-color;
+  text-size-adjust: 100%; /* avoid iOS text size adjust */
 
   &__toolbar {
     display: flex;
@@ -23,9 +23,9 @@
     height: 100%;
     padding: $picker-action-padding;
     font-size: $picker-action-font-size;
-    background-color: transparent;
-    border: none;
     cursor: pointer;
+    background-color: transparent;
+    border: none 0;
 
     &:active {
       opacity: $active-opacity;
@@ -42,8 +42,8 @@
 
   &__title {
     max-width: 50%;
-    font-weight: $font-weight-bold;
     font-size: $picker-title-font-size;
+    font-weight: $font-weight-bold;
     line-height: $picker-title-line-height;
     text-align: center;
   }
@@ -75,6 +75,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     background-image: linear-gradient(
                     180deg,
                     hsla(0, 0%, 100%, 0.9),
@@ -85,7 +86,6 @@
     background-position: top, bottom;
     // fix rendering failure during animation on safari
     transform: translateZ(0);
-    pointer-events: none;
   }
 
   &__frame {
@@ -94,7 +94,7 @@
     right: $padding-md;
     left: $padding-md;
     z-index: 2;
-    transform: translateY(-50%);
     pointer-events: none;
+    transform: translateY(-50%);
   }
 }

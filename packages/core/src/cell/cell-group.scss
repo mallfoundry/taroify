@@ -5,8 +5,8 @@
 
   &--inset {
     margin: $cell-group-inset-padding;
-    border-radius: $cell-group-inset-border-radius;
     overflow: hidden;
+    border-radius: $cell-group-inset-border-radius;
   }
 
   &__title {

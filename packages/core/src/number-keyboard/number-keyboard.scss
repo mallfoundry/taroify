@@ -50,6 +50,8 @@
   &__hide {
     position: absolute;
     right: 0;
+    display: flex;
+    align-items: center;
     height: 100%;
     padding: $number-keyboard-hide-padding;
     font-size: $number-keyboard-hide-font-size;
@@ -57,8 +59,6 @@
     cursor: pointer;
     background-color: transparent;
     border: 0 none;
-    display: flex;
-    align-items: center;
 
     &:active {
       opacity: $active-opacity;

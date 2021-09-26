@@ -1,9 +1,9 @@
 @import "./variables";
 
 .#{$component-prefix}search {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  box-sizing: border-box;
   padding: $search-padding;
   background-color: $search-background-color;
 
@@ -21,9 +21,9 @@
 
   &__label {
     padding: $search-label-padding;
-    color: $search-label-color;
     font-size: $search-label-font-size;
     line-height: $search-input-height;
+    color: $search-label-color;
   }
 
   &__field {
@@ -51,9 +51,9 @@
 
   &__action {
     padding: $search-action-padding;
-    color: $search-action-text-color;
     font-size: $search-action-font-size;
     line-height: $search-input-height;
+    color: $search-action-text-color;
     cursor: pointer;
     user-select: none;
 

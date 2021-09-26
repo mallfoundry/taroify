@@ -3,8 +3,8 @@
 .#{$component-prefix}field {
 
   &__label {
-    flex: none;
     box-sizing: border-box;
+    flex: none;
     width: $field-label-width;
     margin-right: $field-label-margin-right;
     color: $field-label-color;
@@ -45,9 +45,9 @@
 
   &__body--textarea {
     box-sizing: border-box;
-    line-height: 1.2em;
     min-height: 24px * $hd;
     padding: 3.6px * $hd 0;
+    line-height: 1.2em;
   }
 
   input.#{$component-prefix}field__control,
@@ -57,27 +57,27 @@
 
   textarea.#{$component-prefix}field__control,
   &__control textarea {
+    display: block;
     height: 18px * $hd;
     min-height: 18px * $hd;
-    display: block;
   }
 
 
   &__control,
   &__control input,
   &__control textarea {
-    display: block;
     box-sizing: border-box;
+    display: block;
     width: 100%;
     min-width: 0; // for flex-shrink in field__button
-    margin: 0;
     padding: 0;
-    color: $field-input-text-color;
+    margin: 0;
     line-height: inherit;
+    color: $field-input-text-color;
     text-align: left;
+    resize: none;
     background-color: transparent;
     border: 0;
-    resize: none;
     outline: none;
 
     &__placeholder,
@@ -143,7 +143,7 @@
 
     // for safari
     &[type='search'] {
-      -webkit-appearance: none;
+      appearance: none;
     }
   }
 
@@ -156,14 +156,14 @@
 
   &__clear,
   &__right-icon {
-    margin-right: -$padding-xs;
     padding: 0 $padding-xs;
+    margin-right: -$padding-xs;
     line-height: inherit;
   }
 
   &__clear {
-    color: $field-clear-icon-color;
     font-size: $field-clear-icon-size;
+    color: $field-clear-icon-color;
     cursor: pointer;
   }
 

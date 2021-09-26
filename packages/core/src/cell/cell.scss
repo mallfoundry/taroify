@@ -71,8 +71,8 @@
     &::before {
       position: absolute;
       left: $padding-xs;
-      color: $cell-required-color;
       font-size: $cell-font-size;
+      color: $cell-required-color;
       content: '*';
     }
   }

@@ -21,11 +21,11 @@
 
   &__upload {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
     width: $uploader-size;
     height: $uploader-size;
     margin: 0 $padding-xs $padding-xs 0;
@@ -40,14 +40,14 @@
     }
 
     &-icon {
-      color: $uploader-icon-color;
       font-size: $uploader-icon-size;
+      color: $uploader-icon-color;
     }
 
     &-text {
       margin-top: $padding-xs;
-      color: $uploader-text-color;
       font-size: $uploader-text-font-size;
+      color: $uploader-text-color;
     }
   }
 
@@ -76,8 +76,8 @@
         position: absolute;
         top: -2px * $hd;
         right: -2px * $hd;
-        color: $uploader-remove-color;
         font-size: 16px * $hd;
+        color: $uploader-remove-color;
         transform: scale(0.5);
       }
     }
@@ -109,8 +109,8 @@
     }
 
     &-message {
-      margin-top: 6px * $hd;
       padding: 0 $padding-base;
+      margin-top: 6px * $hd;
       font-size: $uploader-mask-message-font-size;
       line-height: $uploader-mask-message-line-height;
     }
@@ -132,17 +132,17 @@
     background-color: $uploader-file-background-color;
 
     &-icon {
-      color: $uploader-file-icon-color;
       font-size: $uploader-file-icon-size;
+      color: $uploader-file-icon-color;
     }
 
     &-name {
       box-sizing: border-box;
       width: 100%;
-      margin-top: $uploader-file-name-margin-top;
       padding: $uploader-file-name-padding;
-      color: $uploader-file-name-text-color;
+      margin-top: $uploader-file-name-margin-top;
       font-size: $uploader-file-name-font-size;
+      color: $uploader-file-name-text-color;
       text-align: center;
     }
   }
