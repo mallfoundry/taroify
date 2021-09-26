@@ -1,3 +1,2 @@
-import "../../styles/ellipsis.scss"
-import "../../styles/hairline.scss"
+import "../../styles/base.scss"
 import "../index.scss"

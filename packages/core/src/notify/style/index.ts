@@ -1,3 +1,3 @@
-import "../../styles/hairline.scss"
+import "../../styles/base.scss"
 import "../../popup/style"
 import "../index.scss"
