@@ -19,8 +19,8 @@
     width: 100%;
     height: 100%;
     content: ' ';
-    background-color: $black;
-    border-color: $black;
+    background-color: var(--black, $black);
+    border-color: var(--black, $black);
     border-style: inherit;
     border-width: inherit;
     border-radius: inherit; /* inherit parent's border radius */
