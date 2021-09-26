@@ -10,7 +10,6 @@ function copyScssFiles(bundle, dist) {
   const copyScssFilesTask = () =>
     gulp
       .src(`./packages/${bundle}/src/**/*.scss`) //
-      .pipe(sass().on("error", sass.logError))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   copyScssFilesTask.displayName = `copy scss files to bundles/${
     dist ?? bundle
@@ -48,7 +47,7 @@ function compileScss(bundle, dist) {
 }
 
 function buildScss(module, dist) {
-  return series(copyScssFiles(module, dist), compileScss(module, dist))
+  return series(copyScssFiles(module, dist) /*, compileScss(module, dist)*/)
 }
 
 function watchScss(module) {
@@ -57,7 +56,7 @@ function watchScss(module) {
     {
       ignoreInitial: false,
     },
-    series(copyScssFiles(module) /*, compileScss(module)*/),
+    series(copyScssFiles(module), compileScss(module)),
   )
 }
 
