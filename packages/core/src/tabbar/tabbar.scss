@@ -1,12 +1,12 @@
 @import "./variables";
 
 .#{$component-prefix}tabbar {
-  z-index: $tabbar-z-index;
+  z-index: var(--tabbar-z-index, $tabbar-z-index);
   box-sizing: content-box;
   display: flex;
   width: 100%;
-  height: $tabbar-height;
-  background-color: $tabbar-background-color;
+  height: var(--tabbar-height, $tabbar-height);
+  background-color: var(--tabbar-background-color, $tabbar-background-color);
 
   &--fixed {
     position: fixed;

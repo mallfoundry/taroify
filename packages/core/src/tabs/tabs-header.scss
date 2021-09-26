@@ -4,7 +4,7 @@
 
   &--line {
     .#{$component-prefix}tabs__wrap {
-      height: $tabs-line-height;
+      height: var(--tabs-line-height, $tabs-line-height);
     }
   }
 }
@@ -32,10 +32,10 @@
 
     &--card {
       box-sizing: border-box;
-      height: $tabs-card-height;
-      margin: 0 $padding-md;
-      border: $border-width-base solid $tabs-default-color;
-      border-radius: $border-radius-sm;
+      height: var(--tabs-card-height, $tabs-card-height);
+      margin: 0 var(--padding-md, $padding-md);
+      border: var(--border-width-base, $border-width-base) solid var(--tabs-default-color, $tabs-default-color);
+      border-radius: var(--border-radius-sm, $border-radius-sm);
     }
 
     &::-webkit-scrollbar {
@@ -46,7 +46,7 @@
   &--scrollable {
     .#{$component-prefix}tabs__tab {
       flex: 1 0 auto;
-      padding: 0 $padding-sm;
+      padding: 0 var(--padding-sm, $padding-sm);
     }
   }
 }
@@ -55,7 +55,7 @@
   position: relative;
   display: flex;
   user-select: none;
-  background-color: $tabs-nav-background-color;
+  background-color: var(--tabs-nav-background-color, $tabs-nav-background-color);
 
   &--line {
     box-sizing: content-box;
@@ -68,20 +68,20 @@
     height: 100%;
 
     .#{$component-prefix}tabs__tab {
-      color: $tabs-default-color;
-      border-right: $border-width-base solid $tabs-default-color;
+      color: var(--tabs-default-color, $tabs-default-color);
+      border-right: var(--border-width-base, $border-width-base) solid var(--tabs-default-color, $tabs-default-color);
 
       &:last-child {
         border-right: 0 none;
       }
 
       &--active {
-        color: $white;
-        background-color: $tabs-default-color;
+        color: var(--white, $white);
+        background-color: var(--tabs-default-color, $tabs-default-color);
       }
 
       &--disabled {
-        color: $tab-disabled-text-color;
+        color: var(--tab-disabled-text-color, $tab-disabled-text-color);
       }
     }
   }

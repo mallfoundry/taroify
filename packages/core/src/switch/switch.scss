@@ -4,25 +4,25 @@
   position: relative;
   box-sizing: content-box;
   display: inline-block;
-  width: $switch-width;
-  height: $switch-height;
-  font-size: $switch-size;
+  width: var(--switch-width, $switch-width);
+  height: var(--switch-height, $switch-height);
+  font-size: var(--switch-size, $switch-size);
   cursor: pointer;
-  background-color: $switch-background-color;
-  border: $switch-border;
-  border-radius: $switch-node-size;
-  transition: background-color $switch-transition-duration;
+  background-color: var(--switch-background-color, $switch-background-color);
+  border: var(--switch-border, $switch-border);
+  border-radius: var(--switch-node-size, $switch-node-size);
+  transition: background-color var(--switch-transition-duration, $switch-transition-duration);
 
   &__node {
     position: absolute;
     top: 0;
     left: 0;
-    width: $switch-node-size;
-    height: $switch-node-size;
-    background-color: $switch-node-background-color;
+    width: var(--switch-node-size, $switch-node-size);
+    height: var(--switch-node-size, $switch-node-size);
+    background-color: var(--switch-node-background-color, $switch-node-background-color);
     border-radius: 100%;
-    box-shadow: $switch-node-box-shadow;
-    transition: transform $switch-transition-duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
+    box-shadow: var(--switch-node-box-shadow, $switch-node-box-shadow);
+    transition: transform var(--switch-transition-duration, $switch-transition-duration) cubic-bezier(0.3, 1.05, 0.4, 1.05);
   }
 
   &__loading {
@@ -40,20 +40,20 @@
   }
 
   &--checked {
-    background-color: $switch-on-background-color;
+    background-color: var(--switch-on-background-color, $switch-on-background-color);
 
     .#{$component-prefix}switch__node {
-      transform: translateX($switch-node-translate-x);
+      transform: translateX(var(--switch-node-translate-x, $switch-node-translate-x));
     }
 
     .#{$component-prefix}switch__loading {
-      color: $switch-on-background-color;
+      color: var(--switch-on-background-color, $switch-on-background-color);
     }
   }
 
   &--disabled {
     cursor: not-allowed;
-    opacity: $switch-disabled-opacity;
+    opacity: var(--switch-disabled-opacity, $switch-disabled-opacity);
   }
 
   &--loading {

@@ -4,17 +4,17 @@
   position: relative;
   box-sizing: border-box;
   display: block;
-  padding: $sidebar-padding;
+  padding: var(--sidebar-padding, $sidebar-padding);
   overflow: hidden;
-  font-size: $sidebar-font-size;
-  line-height: $sidebar-line-height;
-  color: $sidebar-text-color;
+  font-size: var(--sidebar-font-size, $sidebar-font-size);
+  line-height: var(--sidebar-line-height, $sidebar-line-height);
+  color: var(--sidebar-text-color, $sidebar-text-color);
   cursor: pointer;
   user-select: none;
-  background-color: $sidebar-background-color;
+  background-color: var(--sidebar-background-color, $sidebar-background-color);
 
   &:active {
-    background-color: $sidebar-active-color;
+    background-color: var(--sidebar-active-color, $sidebar-active-color);
   }
 
   &__children {
@@ -23,32 +23,32 @@
   }
 
   &--active {
-    font-weight: $sidebar-active-font-weight;
-    color: $sidebar-active-text-color;
+    font-weight: var(--sidebar-active-font-weight, $sidebar-active-font-weight);
+    color: var(--sidebar-active-text-color, $sidebar-active-text-color);
 
     &,
     &:active {
-      background-color: $sidebar-active-background-color;
+      background-color: var(--sidebar-active-background-color, $sidebar-active-background-color);
     }
 
     &::before {
       position: absolute;
       top: 50%;
       left: 0;
-      width: $sidebar-active-border-width;
-      height: $sidebar-active-border-height;
+      width: var(--sidebar-active-border-width, $sidebar-active-border-width);
+      height: var(--sidebar-active-border-height, $sidebar-active-border-height);
       content: '';
-      background-color: $sidebar-active-border-color;
+      background-color: var(--sidebar-active-border-color, $sidebar-active-border-color);
       transform: translateY(-50%);
     }
   }
 
   &--disabled {
-    color: $sidebar-disabled-text-color;
+    color: var(--sidebar-disabled-text-color, $sidebar-disabled-text-color);
     cursor: not-allowed;
 
     &:active {
-      background-color: $sidebar-background-color;
+      background-color: var(--sidebar-background-color, $sidebar-background-color);
     }
   }
 }

@@ -3,7 +3,7 @@
 .#{$component-prefix}share-sheet {
 
   .#{$component-prefix}sheet__description {
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm, $font-size-sm);
 
   }
 
@@ -11,11 +11,11 @@
     position: relative;
     box-sizing: border-box;
     display: flex;
-    padding: $padding-md 0 $padding-md $padding-xs;
+    padding: var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
     -webkit-overflow-scrolling: touch;
 
     &::before {
-      @include hairline-top($border-color, $padding-md, $padding-md);
+      @include hairline-top(var(--border-color, $border-color), var(--padding-md, $padding-md), var(--padding-md, $padding-md));
     }
 
     &:first-of-type {
@@ -41,29 +41,29 @@
 
     &:active {
       background-color: transparent;
-      opacity: $active-opacity;
+      opacity: var(--active-opacity, $active-opacity);
     }
 
     &-icon {
-      width: $share-sheet-icon-size;
-      height: $share-sheet-icon-size;
-      margin: 0 $padding-md;
-      font-size: $share-sheet-icon-size;
+      width: var(--share-sheet-icon-size, $share-sheet-icon-size);
+      height: var(--share-sheet-icon-size, $share-sheet-icon-size);
+      margin: 0 var(--padding-md, $padding-md);
+      font-size: var(--share-sheet-icon-size, $share-sheet-icon-size);
       line-height: 1;
     }
 
     &-name {
-      padding: 0 $padding-base;
-      margin-top: $padding-xs;
-      font-size: $share-sheet-option-name-font-size;
-      line-height: $share-sheet-option-name-line-height;
-      color: $share-sheet-option-name-color;
+      padding: 0 var(--padding-base, $padding-base);
+      margin-top: var(--padding-xs, $padding-xs);
+      font-size: var(--share-sheet-option-name-font-size, $share-sheet-option-name-font-size);
+      line-height: var(--share-sheet-option-name-line-height, $share-sheet-option-name-line-height);
+      color: var(--share-sheet-option-name-color, $share-sheet-option-name-color);
     }
 
     &-description {
-      padding: 0 $padding-base;
-      font-size: $share-sheet-option-description-font-size;
-      color: $share-sheet-option-description-color;
+      padding: 0 var(--padding-base, $padding-base);
+      font-size: var(--share-sheet-option-description-font-size, $share-sheet-option-description-font-size);
+      color: var(--share-sheet-option-description-color, $share-sheet-option-description-color);
     }
   }
 }

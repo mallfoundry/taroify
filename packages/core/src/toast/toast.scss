@@ -6,34 +6,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: $toast-font-size;
-  line-height: $toast-line-height;
-  color: $toast-text-color;
-  background: $toast-background-color;
-  border-radius: $toast-border-radius;
+  font-size: var(--toast-font-size, $toast-font-size);
+  line-height: var(--toast-line-height, $toast-line-height);
+  color: var(--toast-text-color, $toast-text-color);
+  background: var(--toast-background-color, $toast-background-color);
+  border-radius: var(--toast-border-radius, $toast-border-radius);
 
   &--text {
     width: fit-content;
-    min-width: $toast-text-min-width;
+    min-width: var(--toast-text-min-width, $toast-text-min-width);
     min-height: 0;
-    padding: $toast-text-padding;
+    padding: var(--toast-text-padding, $toast-text-padding);
   }
 
   &--loading,
   &--success,
   &--fail {
-    width: $toast-default-width;
-    max-width: $toast-max-width;
-    min-height: $toast-default-min-height;
-    padding: $toast-default-padding;
+    width: var(--toast-default-width, $toast-default-width);
+    max-width: var(--toast-max-width, $toast-max-width);
+    min-height: var(--toast-default-min-height, $toast-default-min-height);
+    padding: var(--toast-default-padding, $toast-default-padding);
   }
 
   &__icon {
     font-size: 36px * $hd !important;
-    color: $toast-icon-color;
+    color: var(--toast-icon-color, $toast-icon-color);
   }
 
   &__message {
-    margin-top: $padding-xs;
+    margin-top: var(--padding-xs, $padding-xs);
   }
 }

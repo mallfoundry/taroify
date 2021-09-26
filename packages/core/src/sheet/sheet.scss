@@ -3,34 +3,34 @@
 .#{$component-prefix}sheet {
   display: flex;
   flex-direction: column;
-  max-height: $sheet-max-height;
+  max-height: var(--sheet-max-height, $sheet-max-height);
   overflow: hidden;
-  color: $sheet-item-text-color;
+  color: var(--sheet-item-text-color, $sheet-item-text-color);
 
   &__header {
     flex-shrink: 0;
-    padding: $sheet-header-padding;
-    font-size: $sheet-header-font-size;
-    font-weight: $font-weight-bold;
-    line-height: $sheet-header-height;
+    padding: var(--sheet-header-padding, $sheet-header-padding);
+    font-size: var(--sheet-header-font-size, $sheet-header-font-size);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    line-height: var(--sheet-header-height, $sheet-header-height);
     text-align: center;
   }
 
   &__title {
-    margin-top: $padding-xs;
-    font-size: $sheet-title-font-size;
+    margin-top: var(--padding-xs, $padding-xs);
+    font-size: var(--sheet-title-font-size, $sheet-title-font-size);
     font-weight: normal;
-    line-height: $sheet-title-line-height;
-    color: $sheet-title-color;
+    line-height: var(--sheet-title-line-height, $sheet-title-line-height);
+    color: var(--sheet-title-color, $sheet-title-color);
   }
 
   &__description {
     position: relative;
     flex-shrink: 0;
-    margin-top: $padding-xs;
-    font-size: $sheet-description-font-size;
-    line-height: $sheet-description-line-height;
-    color: $sheet-description-color;
+    margin-top: var(--padding-xs, $padding-xs);
+    font-size: var(--sheet-description-font-size, $sheet-description-font-size);
+    line-height: var(--sheet-description-line-height, $sheet-description-line-height);
+    color: var(--sheet-description-color, $sheet-description-color);
     text-align: center;
   }
 
@@ -45,24 +45,24 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
-    padding: 14px * $hd $padding-md;
-    font-size: $sheet-item-font-size;
-    line-height: $sheet-item-line-height;
+    padding: 14px * $hd var(--padding-md, $padding-md);
+    font-size: var(--sheet-item-font-size, $sheet-item-font-size);
+    line-height: var(--sheet-item-line-height, $sheet-item-line-height);
     text-align: center;
     cursor: pointer;
-    background-color: $sheet-item-background;
+    background-color: var(--sheet-item-background, $sheet-item-background);
     border: 0 none;
 
     &:active {
-      background-color: $active-color;
+      background-color: var(--active-color, $active-color);
     }
 
     &--loading,
     &--disabled {
-      color: $sheet-item-disabled-text-color;
+      color: var(--sheet-item-disabled-text-color, $sheet-item-disabled-text-color);
 
       &:active {
-        background-color: $sheet-item-background;
+        background-color: var(--sheet-item-background, $sheet-item-background);
       }
     }
 
@@ -71,8 +71,8 @@
 
       .#{$component-prefix}loading__spinner,
       .#{$component-prefix}loading__circular {
-        width: $sheet-loading-icon-size;
-        height: $sheet-loading-icon-size;
+        width: var(--sheet-loading-icon-size, $sheet-loading-icon-size);
+        height: var(--sheet-loading-icon-size, $sheet-loading-icon-size);
       }
     }
 
@@ -84,12 +84,12 @@
   &__button--cancel {
     box-sizing: border-box;
     flex-shrink: 0;
-    color: $sheet-cancel-text-color;
+    color: var(--sheet-cancel-text-color, $sheet-cancel-text-color);
   }
 
   &__gap {
     display: block;
-    height: $sheet-cancel-padding-top;
-    background-color: $sheet-cancel-padding-color;
+    height: var(--sheet-cancel-padding-top, $sheet-cancel-padding-top);
+    background-color: var(--sheet-cancel-padding-color, $sheet-cancel-padding-color);
   }
 }

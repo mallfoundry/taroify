@@ -2,7 +2,7 @@
 
 .#{$component-prefix}steps {
   overflow: hidden;
-  background-color: $steps-background-color;
+  background-color: var(--steps-background-color, $steps-background-color);
 
   &--horizontal {
     padding: 10px * $hd 0;
@@ -14,6 +14,6 @@
   }
 
   &--vertical {
-    padding: 0 0 0 $padding-xl;
+    padding: 0 0 0 var(--padding-xl, $padding-xl);
   }
 }
