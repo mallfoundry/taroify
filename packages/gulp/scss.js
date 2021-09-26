@@ -47,7 +47,7 @@ function compileScss(bundle, dist) {
 }
 
 function buildScss(module, dist) {
-  return series(copyScssFiles(module, dist) /*, compileScss(module, dist)*/)
+  return series(copyScssFiles(module, dist), compileScss(module, dist))
 }
 
 function watchScss(module) {
