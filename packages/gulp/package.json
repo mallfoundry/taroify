@@ -3,6 +3,9 @@
   "version": "0.0.12-alpha.12",
   "license": "MIT",
   "private": "true",
+  "peerDependencies": {
+    "postcss": "^8.2.10"
+  },
   "dependencies": {
     "autoprefixer": "^10.2.5",
     "cssnano": "^5.0.1",
@@ -12,14 +15,11 @@
     "gulp-execa": "^2.0.0",
     "gulp-postcss": "^9.0.0",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-stylelint": "^13.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "postcss": "^8.2.10",
     "rimraf": "^3.0.2"
-  },
-  "peerDependencies": {
-    "postcss": "^8.2.10"
   }
 }

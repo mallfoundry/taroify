@@ -3,15 +3,14 @@ const cssnano = require("cssnano")
 const gulp = require("gulp")
 const { watch, series } = require("gulp")
 const postcss = require("gulp-postcss")
-const sass = require("gulp-sass")
+const sass = require("gulp-sass")(require("sass"))
 const sourcemaps = require("gulp-sourcemaps")
-// Set compiler
-sass.compiler = require("sass")
 
 function copyScssFiles(bundle, dist) {
   const copyScssFilesTask = () =>
     gulp
       .src(`./packages/${bundle}/src/**/*.scss`) //
+      .pipe(sass().on("error", sass.logError))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   copyScssFilesTask.displayName = `copy scss files to bundles/${
     dist ?? bundle
