@@ -69,7 +69,7 @@ function PasswordInput(props: PasswordInputProps) {
           ) : (
             char
           )}
-          {showCursor && <div className={prefixClassname("password-input__cursor")} />}
+          {showCursor && <View className={prefixClassname("password-input__cursor")} />}
         </View>,
       )
     }
