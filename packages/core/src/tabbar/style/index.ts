@@ -1,3 +1,3 @@
-import "../../styles/hairline.scss"
+import "../../styles/base.scss"
 import "../../badge/style"
 import "../index.scss"

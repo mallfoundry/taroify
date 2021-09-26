@@ -1,4 +1,4 @@
-import { Button, Cell, DropdownMenu } from "@taroify/core"
+import { Button, Cell, DropdownMenu, Switch } from "@taroify/core"
 import { View } from "@tarojs/components"
 import * as React from "react"
 import { useState } from "react"
@@ -30,6 +30,8 @@ function BasicDropdownMenu() {
 function DropdownMenuWithCustomContent() {
   const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
   const [option1, setOption1] = useState<DropdownMenu.Value>()
+  const [switch1, setSwitch1] = useState(true)
+  const [switch2, setSwitch2] = useState(false)
   return (
     <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
@@ -39,10 +41,10 @@ function DropdownMenuWithCustomContent() {
       </DropdownMenu.Item>
       <DropdownMenu.Item title="筛选">
         <Cell title="包邮" align="center">
-          switch
+          <Switch size="24" checked={switch1} onChange={setSwitch1} />
         </Cell>
         <Cell title="团购" align="center">
-          switch
+          <Switch size="24" checked={switch2} onChange={setSwitch2} />
         </Cell>
         <View style="padding: 5px 16px;">
           <Button color="danger" block shape="round" onClick={() => setActiveKey(undefined)}>

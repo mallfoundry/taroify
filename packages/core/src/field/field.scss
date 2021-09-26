@@ -3,11 +3,11 @@
 .#{$component-prefix}field {
 
   &__label {
-    flex: none;
     box-sizing: border-box;
-    width: $field-label-width;
-    margin-right: $field-label-margin-right;
-    color: $field-label-color;
+    flex: none;
+    width: var(--field-label-width, $field-label-width);
+    margin-right: var(--field-label-margin-right, $field-label-margin-right);
+    color: var(--field-label-color, $field-label-color);
     text-align: left;
     word-wrap: break-word;
 
@@ -22,7 +22,7 @@
     &--required {
       &::before {
         margin-right: 2px * $hd;
-        color: $field-required-mark-color;
+        color: var(--field-required-mark-color, $field-required-mark-color);
         content: '*';
       }
     }
@@ -30,7 +30,7 @@
 
   &--disabled {
     .#{$component-prefix}field__label {
-      color: $field-disabled-text-color;
+      color: var(--field-disabled-text-color, $field-disabled-text-color);
     }
   }
 
@@ -45,44 +45,44 @@
 
   &__body--textarea {
     box-sizing: border-box;
-    line-height: 1.2em;
     min-height: 24px * $hd;
     padding: 3.6px * $hd 0;
+    line-height: 1.2em;
   }
 
   input.#{$component-prefix}field__control,
   &__control input {
-    height: $field-input-height;
+    height: var(--field-input-height, $field-input-height);
   }
 
   textarea.#{$component-prefix}field__control,
   &__control textarea {
+    display: block;
     height: 18px * $hd;
     min-height: 18px * $hd;
-    display: block;
   }
 
 
   &__control,
   &__control input,
   &__control textarea {
-    display: block;
     box-sizing: border-box;
+    display: block;
     width: 100%;
     min-width: 0; // for flex-shrink in field__button
-    margin: 0;
     padding: 0;
-    color: $field-input-text-color;
+    margin: 0;
     line-height: inherit;
+    color: var(--field-input-text-color, $field-input-text-color);
     text-align: left;
+    resize: none;
     background-color: transparent;
     border: 0;
-    resize: none;
     outline: none;
 
     &__placeholder,
     &::placeholder {
-      color: $field-placeholder-text-color;
+      color: var(--field-placeholder-text-color, $field-placeholder-text-color);
     }
 
     &__placeholder--readonly {
@@ -90,11 +90,11 @@
     }
 
     &--disabled {
-      color: $field-input-disabled-text-color;
+      color: var(--field-input-disabled-text-color, $field-input-disabled-text-color);
       cursor: not-allowed;
       opacity: 1;
       // fix disabled color in mobile safari
-      -webkit-text-fill-color: $field-input-disabled-text-color;
+      -webkit-text-fill-color: var(--field-input-disabled-text-color, $field-input-disabled-text-color);
     }
 
     &--readonly {
@@ -120,30 +120,30 @@
     &--custom {
       display: flex;
       align-items: center;
-      min-height: $cell-line-height;
+      min-height: var(--cell-line-height, $cell-line-height);
     }
 
     &--error,
     &__placeholder--error,
     &--error::placeholder {
-      color: $field-input-error-text-color;
+      color: var(--field-input-error-text-color, $field-input-error-text-color);
       -webkit-text-fill-color: currentColor;
     }
 
     &--min-height {
-      min-height: $field-text-area-min-height;
+      min-height: var(--field-text-area-min-height, $field-text-area-min-height);
     }
 
     // for ios wechat
     &[type='date'],
     &[type='time'],
     &[type='datetime-local'] {
-      min-height: $cell-line-height;
+      min-height: var(--cell-line-height, $cell-line-height);
     }
 
     // for safari
     &[type='search'] {
-      -webkit-appearance: none;
+      appearance: none;
     }
   }
 
@@ -156,34 +156,34 @@
 
   &__clear,
   &__right-icon {
-    margin-right: -$padding-xs;
-    padding: 0 $padding-xs;
+    padding: 0 var(--padding-xs, $padding-xs);
+    margin-right: calc(var(--padding-xs, $padding-xs) * -1);
     line-height: inherit;
   }
 
   &__clear {
-    color: $field-clear-icon-color;
-    font-size: $field-clear-icon-size;
+    font-size: var(--field-clear-icon-size, $field-clear-icon-size);
+    color: var(--field-clear-icon-color, $field-clear-icon-color);
     cursor: pointer;
   }
 
   &__icon.#{$component-prefix}icon,
   &__right-icon.#{$component-prefix}icon {
     display: block;
-    font-size: $field-icon-size;
+    font-size: var(--field-icon-size, $field-icon-size);
     line-height: inherit;
   }
 
   &__button {
-    padding-left: $padding-xs;
+    padding-left: var(--padding-xs, $padding-xs);
   }
 
   &__message {
-    font-size: $field-error-message-font-size;
+    font-size: var(--field-error-message-font-size, $field-error-message-font-size);
     text-align: left;
 
     &--error {
-      color: $field-error-message-color;
+      color: var(--field-error-message-color, $field-error-message-color);
     }
 
     &--center {

@@ -8,15 +8,15 @@
   align-items: center;
   justify-content: center;
   min-width: 0;
-  padding: 0 $padding-base;
-  font-size: $tab-font-size;
-  line-height: $tab-line-height;
-  color: $tab-text-color;
+  padding: 0 var(--padding-base, $padding-base);
+  font-size: var(--tab-font-size, $tab-font-size);
+  line-height: var(--tab-line-height, $tab-line-height);
+  color: var(--tab-text-color, $tab-text-color);
   cursor: pointer;
 
   &--active {
-    font-weight: $font-weight-bold;
-    color: $tab-active-text-color;
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    color: var(--tab-active-text-color, $tab-active-text-color);
 
     .#{$component-prefix}tabs__line {
       transform: scale(1);
@@ -24,7 +24,7 @@
   }
 
   &--disabled {
-    color: $tab-disabled-text-color;
+    color: var(--tab-disabled-text-color, $tab-disabled-text-color);
     cursor: not-allowed;
   }
 

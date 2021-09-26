@@ -3,27 +3,27 @@
 .#{$component-prefix}dialog {
   top: 45%;
   left: 50%;
-  width: $dialog-width;
+  width: var(--dialog-width, $dialog-width);
   overflow: hidden;
-  font-size: $dialog-font-size;
-  background-color: $dialog-background-color;
-  border-radius: $dialog-border-radius;
-  transition: $dialog-transition;
+  font-size: var(--dialog-font-size, $dialog-font-size);
+  background-color: var(--dialog-background-color, $dialog-background-color);
+  border-radius: var(--dialog-border-radius, $dialog-border-radius);
+  transition: var(--dialog-transition, $dialog-transition);
   transition-property: transform, opacity;
   backface-visibility: hidden; // avoid blurry text after scale animation
 
   @media (max-width: 321px) {
-    width: $dialog-small-screen-width;
+    width: var(--dialog-small-screen-width, $dialog-small-screen-width);
   }
 
   &__header {
-    padding-top: $dialog-header-padding-top;
-    font-weight: $dialog-header-font-weight;
-    line-height: $dialog-header-line-height;
+    padding-top: var(--dialog-header-padding-top, $dialog-header-padding-top);
+    font-weight: var(--dialog-header-font-weight, $dialog-header-font-weight);
+    line-height: var(--dialog-header-line-height, $dialog-header-line-height);
     text-align: center;
 
     &--isolated {
-      padding: $dialog-header-isolated-padding;
+      padding: var(--dialog-header-isolated-padding, $dialog-header-isolated-padding);
     }
   }
 
@@ -38,18 +38,18 @@
   // Has title, set padding, color of message
   &__header + &__content {
     .#{$component-prefix}dialog__message {
-      padding-top: $dialog-has-title-message-padding-top;
-      color: $dialog-has-title-message-text-color;
+      padding-top: var(--dialog-has-title-message-padding-top, $dialog-has-title-message-padding-top);
+      color: var(--dialog-has-title-message-text-color, $dialog-has-title-message-text-color);
     }
   }
 
   &__message {
     flex: 1;
-    max-height: $dialog-message-max-height;
-    padding: 26px * $hd $dialog-message-padding;
+    max-height: var(--dialog-message-max-height, $dialog-message-max-height);
+    padding: 26px * $hd var(--dialog-message-padding, $dialog-message-padding);
     overflow-y: auto;
-    font-size: $dialog-message-font-size;
-    line-height: $dialog-message-line-height;
+    font-size: var(--dialog-message-font-size, $dialog-message-font-size);
+    line-height: var(--dialog-message-line-height, $dialog-message-line-height);
     text-align: center;
     word-wrap: break-word;
 
@@ -74,7 +74,7 @@
 
     .#{$component-prefix}dialog__confirm, .#{$component-prefix}dialog__cancel {
       flex: 1;
-      height: $dialog-button-height;
+      height: var(--dialog-button-height, $dialog-button-height);
       margin: 0;
       border: 0;
     }
@@ -82,7 +82,7 @@
     .#{$component-prefix}dialog__confirm {
       &,
       &:active {
-        color: $dialog-confirm-button-text-color;
+        color: var(--dialog-confirm-button-text-color, $dialog-confirm-button-text-color);
       }
     }
   }
@@ -90,35 +90,35 @@
   &__footer--round {
     position: relative;
     height: auto;
-    padding: $padding-xs $padding-lg $padding-md;
+    padding: var(--padding-xs, $padding-xs) var(--padding-lg, $padding-lg) var(--padding-md, $padding-md);
 
     .#{$component-prefix}dialog__confirm, .#{$component-prefix}dialog__cancel {
-      height: $dialog-round-button-height;
-      font-size: $dialog-round-button-font-size;
+      height: var(--dialog-round-button-height, $dialog-round-button-height);
+      font-size: var(--dialog-round-button-font-size, $dialog-round-button-font-size);
       border-radius: unset;
 
       &,
       &:active {
-        color: $white;
+        color: var(--white, $white);
       }
 
       &:first-child {
-        border-top-left-radius: $border-radius-max;
-        border-bottom-left-radius: $border-radius-max;
+        border-top-left-radius: var(--border-radius-max, $border-radius-max);
+        border-bottom-left-radius: var(--border-radius-max, $border-radius-max);
       }
 
       &:last-child {
-        border-top-right-radius: $border-radius-max;
-        border-bottom-right-radius: $border-radius-max;
+        border-top-right-radius: var(--border-radius-max, $border-radius-max);
+        border-bottom-right-radius: var(--border-radius-max, $border-radius-max);
       }
     }
 
     .#{$component-prefix}dialog__confirm {
-      background: $dialog-round-confirm-button-background-color;
+      background: var(--dialog-round-confirm-button-background-color, $dialog-round-confirm-button-background-color);
     }
 
     .#{$component-prefix}dialog__cancel {
-      background: $dialog-round-cancel-button-background-color;
+      background: var(--dialog-round-cancel-button-background-color, $dialog-round-cancel-button-background-color);
     }
   }
 

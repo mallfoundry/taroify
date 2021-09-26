@@ -3,15 +3,15 @@
 .#{$component-prefix}badge {
   box-sizing: border-box;
   display: inline-block;
-  min-width: $badge-size;
-  font-family: $badge-font-family;
-  font-size: $badge-font-size;
-  font-weight: $badge-font-weight;
-  color: $badge-color;
+  min-width: var(--badge-size, $badge-size);
+  font-family: var(--badge-font-family, $badge-font-family);
+  font-size: var(--badge-font-size, $badge-font-size);
+  font-weight: var(--badge-font-weight, $badge-font-weight);
+  color: var(--badge-color, $badge-color);
   text-align: center;
-  background-color: $badge-background-color;
-  border: $badge-border-width solid $white;
-  border-radius: $border-radius-max;
+  background-color: var(--badge-background-color, $badge-background-color);
+  border: var(--badge-border-width, $badge-border-width) solid $white;
+  border-radius: var(--border-radius-max, $border-radius-max);
 
   &__wrapper {
     position: relative;
@@ -22,7 +22,7 @@
   > .#{$component-prefix}icon {
     width: unset;
     height: unset;
-    color: $badge-color;
+    color: var(--badge-color, $badge-color);
   }
 
   &--fixed {
@@ -34,15 +34,15 @@
   }
 
   &--content {
-    padding: $badge-padding;
+    padding: var(--badge-padding, $badge-padding);
     line-height: 1.2;
   }
 
   &--dot {
-    width: $badge-dot-size;
+    width: var(--badge-dot-size, $badge-dot-size);
     min-width: 0;
-    height: $badge-dot-size;
-    background-color: $badge-dot-color;
+    height: var(--badge-dot-size, $badge-dot-size);
+    background-color: var(--badge-dot-color, $badge-dot-color);
     border-radius: 100%;
   }
 }

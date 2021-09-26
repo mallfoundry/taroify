@@ -3,16 +3,16 @@
 .#{$component-prefix}loading {
   position: relative;
   font-size: 0;
-  color: $loading-color;
+  color: var(--loading-color, $loading-color);
   vertical-align: middle;
 
   &__spinner,
   &__circular {
     position: relative;
     display: inline-block;
-    width: $loading-size;
+    width: var(--loading-size, $loading-size);
     max-width: 100%;
-    height: $loading-size;
+    height: var(--loading-size, $loading-size);
     max-height: 100%;
     vertical-align: middle;
   }
@@ -76,9 +76,9 @@
 
   &__text {
     display: inline-block;
-    margin-left: $padding-xs;
-    font-size: $loading-text-font-size;
-    color: $loading-text-color;
+    margin-left: var(--padding-xs, $padding-xs);
+    font-size: var(--loading-text-font-size, $loading-text-font-size);
+    color: var(--loading-text-color, $loading-text-color);
     vertical-align: middle;
   }
 
@@ -89,7 +89,7 @@
     align-items: center;
 
     .#{$component-prefix}loading__text {
-      margin: $padding-xs 0 0;
+      margin: var(--padding-xs, $padding-xs) 0 0;
     }
   }
 }

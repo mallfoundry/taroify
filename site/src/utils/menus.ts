@@ -58,7 +58,6 @@ const menus = [
       },
     ],
   },
-
   {
     title: "表单组件",
     subpackage: "form",
@@ -66,6 +65,10 @@ const menus = [
       {
         title: "Checkbox 复选框",
         to: "/components/checkbox/",
+      },
+      {
+        title: "DatetimePicker 时间选择",
+        to: "/components/datetime-picker/",
       },
       {
         title: "Field 输入框",

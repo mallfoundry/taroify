@@ -1,5 +1,5 @@
 @import "./variables";
 
 .#{$component-prefix}tree-select-tab {
-  padding: $tree-select-tab-padding;
+  padding: var(--tree-select-tab-padding, $tree-select-tab-padding);
 }

@@ -6,10 +6,10 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: $backdrop-z-index;
+  z-index: var(--backdrop-z-index, $backdrop-z-index);
   height: 100%;
   visibility: hidden;
-  background-color: $backdrop-background-color;
+  background-color: var(--backdrop-background-color, $backdrop-background-color);
   opacity: 0;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: opacity, visibility;

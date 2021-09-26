@@ -7,7 +7,8 @@ export function stopPropagation(event: CommonEvent) {
 
 export function preventDefault(event: CommonEvent, isStopPropagation?: boolean) {
   if (inBrowser) {
-    if (event.preventDefault && ((event as unknown) as TouchEvent).cancelable) {
+    // @ts-ignore
+    if (typeof event.cancelable !== "boolean" || event.cancelable) {
       event.preventDefault()
     }
   } else {

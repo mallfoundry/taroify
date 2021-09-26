@@ -4,6 +4,7 @@ import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
+import { preventDefault } from "../utils/dom/event"
 
 interface BackdropProps {
   className?: string
@@ -49,6 +50,8 @@ export default function Backdrop(props: BackdropProps) {
         ...style,
       }}
       onClick={handleClick}
+      catchMove
+      onTouchMove={preventDefault}
       children={children}
     />
   )

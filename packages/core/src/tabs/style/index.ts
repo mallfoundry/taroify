@@ -1,5 +1,4 @@
-import "../../styles/hairline.scss"
-import "../../styles/ellipsis.scss"
+import "../../styles/base.scss"
 import "../../sticky/style"
 import "../../swiper/style"
 import "../index.scss"

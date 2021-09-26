@@ -2,29 +2,29 @@
 
 .#{$component-prefix}tree-select-option {
   position: relative;
-  padding: 0 32px 0 $padding-md;
-  font-weight: $font-weight-bold;
-  line-height: $tree-select-option-height;
+  padding: 0 32px * $hd 0 var(--padding-md, $padding-md);
+  font-weight: var(--font-weight-bold, $font-weight-bold);
+  line-height: var(--tree-select-option-height, $tree-select-option-height);
   cursor: pointer;
 
   &--active {
-    color: $tree-select-option-active-color;
+    color: var(--tree-select-option-active-color, $tree-select-option-active-color);
 
     .#{$component-prefix}tree-select-option__icon {
       position: absolute;
       top: 50%;
-      right: $padding-md;
-      margin-top: -$padding-xs;
-      font-size: $tree-select-option-selected-size;
+      right: var(--padding-md, $padding-md);
+      margin-top: calc(var(--padding-xs, $padding-xs) * -1);
+      font-size: var(--tree-select-option-selected-size, $tree-select-option-selected-size);
     }
   }
 
   &:active {
-    background-color: $active-color;
+    background-color: var(--active-color, $active-color);
   }
 
   &--disabled {
-    color: $tree-select-option-disabled-color;
+    color: var(--tree-select-option-disabled-color, $tree-select-option-disabled-color);
     cursor: not-allowed;
 
     &:active {

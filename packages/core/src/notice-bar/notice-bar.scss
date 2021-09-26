@@ -4,17 +4,17 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: $notice-bar-height;
-  padding: $notice-bar-padding;
-  font-size: $notice-bar-font-size;
-  line-height: $notice-bar-line-height;
-  color: $notice-bar-text-color;
-  background-color: $notice-bar-background-color;
+  height: var(--notice-bar-height, $notice-bar-height);
+  padding: var(--notice-bar-padding, $notice-bar-padding);
+  font-size: var(--notice-bar-font-size, $notice-bar-font-size);
+  line-height: var(--notice-bar-line-height, $notice-bar-line-height);
+  color: var(--notice-bar-text-color, $notice-bar-text-color);
+  background-color: var(--notice-bar-background-color, $notice-bar-background-color);
 
   &__icon,
   &__action {
-    min-width: $notice-bar-icon-min-width;
-    font-size: $notice-bar-icon-size;
+    min-width: var(--notice-bar-icon-min-width, $notice-bar-icon-min-width);
+    font-size: var(--notice-bar-icon-size, $notice-bar-icon-size);
   }
 
   &__action {
@@ -43,7 +43,7 @@
 
   &--wordwrap {
     height: auto;
-    padding: $notice-bar-wordwrap-padding;
+    padding: var(--notice-bar-wordwrap-padding, $notice-bar-wordwrap-padding);
 
     .#{$component-prefix}notice-bar {
       &__wrap {

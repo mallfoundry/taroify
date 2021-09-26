@@ -2,34 +2,34 @@
 
 .#{$component-prefix}navbar {
   position: relative;
-  z-index: $navbar-z-index;
-  line-height: $line-height-lg;
+  z-index: var(--navbar-z-index, $navbar-z-index);
+  line-height: var(--line-height-lg, $line-height-lg);
   text-align: center;
   user-select: none;
-  background-color: $navbar-background-color;
+  background-color: var(--navbar-background-color, $navbar-background-color);
 
   .#{$component-prefix}icon {
-    color: $navbar-icon-color;
+    color: var(--navbar-icon-color, $navbar-icon-color);
   }
 
   &__content {
     position: relative;
     display: flex;
     align-items: center;
-    height: $navbar-height;
+    height: var(--navbar-height, $navbar-height);
   }
 
   &__icon {
-    margin-right: $padding-base;
-    font-size: $navbar-icon-size;
+    margin-right: var(--padding-base, $padding-base);
+    font-size: var(--navbar-icon-size, $navbar-icon-size);
   }
 
   &__title {
     max-width: 60%;
     margin: 0 auto;
-    font-size: $navbar-title-font-size;
-    font-weight: $font-weight-bold;
-    color: $navbar-title-text-color;
+    font-size: var(--navbar-title-font-size, $navbar-title-font-size);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    color: var(--navbar-title-text-color, $navbar-title-text-color);
   }
 
   &__left,
@@ -39,12 +39,12 @@
     bottom: 0;
     display: flex;
     align-items: center;
-    padding: 0 $padding-md;
-    font-size: $font-size-md;
+    padding: 0 var(--padding-md, $padding-md);
+    font-size: var(--font-size-md, $font-size-md);
     cursor: pointer;
 
     &:active {
-      opacity: $active-opacity;
+      opacity: var(--active-opacity, $active-opacity);
     }
   }
 
@@ -57,6 +57,6 @@
   }
 
   &__text {
-    color: $navbar-text-color;
+    color: var(--navbar-text-color, $navbar-text-color);
   }
 }

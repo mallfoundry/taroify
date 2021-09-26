@@ -82,51 +82,51 @@
 // Fade Animation
 .#{$component-prefix}transition-fade {
   &-enter-active {
-    animation: $animation-duration-base #{$component-prefix}fade-in both $animation-timing-function-enter;
+    animation: var(--animation-duration-base, $animation-duration-base) #{$component-prefix}fade-in both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
 
   &-exit-active {
-    animation: $animation-duration-base #{$component-prefix}fade-out both $animation-timing-function-exit;
+    animation: var(--animation-duration-base, $animation-duration-base) #{$component-prefix}fade-out both var(--animation-timing-function-exit, $animation-timing-function-exit);
   }
 }
 
 // Slide Animation
 .#{$component-prefix}transition-slide-up {
   &-enter-active {
-    animation: #{$component-prefix}slide-up-enter $animation-duration-base both $animation-timing-function-enter;
+    animation: #{$component-prefix}slide-up-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
 
   &-exit-active {
-    animation: #{$component-prefix}slide-up-exit $animation-duration-base both $animation-timing-function-exit;
+    animation: #{$component-prefix}slide-up-exit var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-exit, $animation-timing-function-exit);
   }
 }
 
 .#{$component-prefix}transition-slide-down {
   &-enter-active {
-    animation: #{$component-prefix}slide-down-enter $animation-duration-base both $animation-timing-function-enter;
+    animation: #{$component-prefix}slide-down-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
 
   &-exit-active {
-    animation: #{$component-prefix}slide-down-exit $animation-duration-base both $animation-timing-function-exit;
+    animation: #{$component-prefix}slide-down-exit var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-exit, $animation-timing-function-exit);
   }
 }
 
 .#{$component-prefix}transition-slide-left {
   &-enter-active {
-    animation: #{$component-prefix}slide-left-enter $animation-duration-base both $animation-timing-function-enter;
+    animation: #{$component-prefix}slide-left-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
 
   &-exit-active {
-    animation: #{$component-prefix}slide-left-exit $animation-duration-base both $animation-timing-function-exit;
+    animation: #{$component-prefix}slide-left-exit var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-exit, $animation-timing-function-exit);
   }
 }
 
 .#{$component-prefix}transition-slide-right {
   &-enter-active {
-    animation: #{$component-prefix}slide-right-enter $animation-duration-base both $animation-timing-function-enter;
+    animation: #{$component-prefix}slide-right-enter $animation-duration-base both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
 
   &-exit-active {
-    animation: #{$component-prefix}slide-right-exit $animation-duration-base both $animation-timing-function-exit;
+    animation: #{$component-prefix}slide-right-exit $animation-duration-base both var(--animation-timing-function-exit, $animation-timing-function-exit);
   }
 }

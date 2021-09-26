@@ -3,17 +3,17 @@
 .#{$component-prefix}slider {
   position: relative;
   width: 100%;
-  height: $slider-track-height;
+  height: var(--slider-track-height, $slider-track-height);
   cursor: pointer;
-  background-color: $slider-inactive-background-color;
-  border-radius: $border-radius-max;
+  background-color: var(--slider-inactive-background-color, $slider-inactive-background-color);
+  border-radius: var(--border-radius-max, $border-radius-max);
 
   // use pseudo element to expand click area
   &::before {
     position: absolute;
-    top: -$padding-xs;
+    top: calc(var(--padding-xs, $padding-xs) * -1);
     right: 0;
-    bottom: -$padding-xs;
+    bottom: calc(var(--padding-xs, $padding-xs) * -1);
     left: 0;
     content: '';
   }
@@ -22,17 +22,17 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: $slider-active-background-color;
+    background-color: var(--slider-active-background-color, $slider-active-background-color);
     border-radius: inherit;
-    transition: all $animation-duration-fast;
+    transition: all var(--animation-duration-fast, $animation-duration-fast);
   }
 
   &__thumb {
-    width: $slider-thumb-width;
-    height: $slider-thumb-height;
-    background-color: $slider-thumb-background-color;
-    border-radius: $slider-thumb-border-radius;
-    box-shadow: $slider-thumb-box-shadow;
+    width: var(--slider-thumb-width, $slider-thumb-width);
+    height: var(--slider-thumb-height, $slider-thumb-height);
+    background-color: var(--slider-thumb-background-color, $slider-thumb-background-color);
+    border-radius: var(--slider-thumb-border-radius, $slider-thumb-border-radius);
+    box-shadow: var(--slider-thumb-box-shadow, $slider-thumb-box-shadow);
 
     &-wrapper,
     &-wrapper-right {
@@ -54,7 +54,7 @@
 
   &--disabled {
     cursor: not-allowed;
-    opacity: $slider-disabled-opacity;
+    opacity: var(--slider-disabled-opacity, $slider-disabled-opacity);
 
     .#{$component-prefix}slider__thumb-wrapper,
     .#{$component-prefix}slider__thumb-wrapper-left,
@@ -65,7 +65,7 @@
 
   &--vertical {
     display: inline-block;
-    width: $slider-track-height;
+    width: var(--slider-track-height, $slider-track-height);
     height: 100%;
 
     .#{$component-prefix}slider__thumb-wrapper,

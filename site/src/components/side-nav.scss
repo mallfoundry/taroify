@@ -42,7 +42,9 @@
   }
 
   &-item {
+    display: block;
     margin: 8px 0;
+    text-decoration: none;
 
     span {
       display: block;

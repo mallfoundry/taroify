@@ -3,10 +3,8 @@ const cssnano = require("cssnano")
 const gulp = require("gulp")
 const { watch, series } = require("gulp")
 const postcss = require("gulp-postcss")
-const sass = require("gulp-sass")
+const sass = require("gulp-sass")(require("sass"))
 const sourcemaps = require("gulp-sourcemaps")
-// Set compiler
-sass.compiler = require("sass")
 
 function copyScssFiles(bundle, dist) {
   const copyScssFilesTask = () =>
@@ -58,7 +56,7 @@ function watchScss(module) {
     {
       ignoreInitial: false,
     },
-    series(copyScssFiles(module) /*, compileScss(module)*/),
+    series(copyScssFiles(module), compileScss(module)),
   )
 }
 

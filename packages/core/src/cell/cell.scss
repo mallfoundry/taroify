@@ -5,31 +5,31 @@
   box-sizing: border-box;
   display: flex;
   width: 100%;
-  padding: $cell-vertical-padding $cell-horizontal-padding;
+  padding: var(--cell-vertical-padding, $cell-vertical-padding) var(--cell-horizontal-padding, $cell-horizontal-padding);
   overflow: hidden;
-  font-size: $cell-font-size;
-  line-height: $cell-line-height;
-  color: $text-color;
-  background-color: #fff;
+  font-size: var(--cell-font-size, $cell-font-size);
+  line-height: var(--cell-line-height, $cell-line-height);
+  color: var(--cell-text-color, $cell-text-color);
+  background-color: var(--cell-background-color, $cell-background-color);
+
+  &::after {
+    @include hairline-bottom(var(--cell-border-color, $cell-border-color), var(--padding-sm, $padding-sm), var(--padding-sm, $padding-sm));
+  }
+
+  &:last-child::after,
+  &--borderless::after {
+    display: none;
+  }
 
   &__title {
     flex: 1;
   }
 
   &__brief {
-    margin-top: $cell-brief-margin-top;
-    font-size: $cell-brief-font-size;
-    line-height: $cell-brief-line-height;
-    color: $cell-brief-color;
-  }
-
-  &::after {
-    @include hairline-bottom($cell-border-color, $padding-sm, $padding-sm);
-  }
-
-  &:last-child::after,
-  &--borderless::after {
-    display: none;
+    margin-top: var(--cell-brief-margin-top, $cell-brief-margin-top);
+    font-size: var(--cell-brief-font-size, $cell-brief-font-size);
+    line-height: var(--cell-brief-line-height, $cell-brief-line-height);
+    color: var(--cell-brief-color, $cell-brief-color);
   }
 
   &--start {
@@ -45,15 +45,15 @@
   }
 
   &--large {
-    padding-top: $cell-large-vertical-padding;
-    padding-bottom: $cell-large-vertical-padding;
+    padding-top: var(--cell-large-vertical-padding, $cell-large-vertical-padding);
+    padding-bottom: var(--cell-large-vertical-padding, $cell-large-vertical-padding);
 
     .#{$component-prefix}cell__title {
-      font-size: $cell-large-title-font-size;
+      font-size: var(--cell-large-title-font-size, $cell-large-title-font-size);
     }
 
     .#{$component-prefix}cell__subtitle {
-      font-size: $cell-large-subtitle-font-size;
+      font-size: var(--cell-large-subtitle-font-size, $cell-large-subtitle-font-size);
     }
   }
 
@@ -61,7 +61,7 @@
     cursor: pointer;
 
     &:active {
-      background-color: $cell-active-color;
+      background-color: var(--cell-active-color, $cell-active-color);
     }
   }
 
@@ -70,9 +70,9 @@
 
     &::before {
       position: absolute;
-      left: $padding-xs;
-      color: $cell-required-color;
-      font-size: $cell-font-size;
+      left: var(--padding-xs, $padding-xs);
+      font-size: var(--cell-font-size, $cell-font-size);
+      color: var(--cell-required-color, $cell-required-color);
       content: '*';
     }
   }
@@ -91,21 +91,21 @@
 
   &__icon,
   &__right-icon {
-    height: $cell-line-height;
-    font-size: $cell-icon-size;
-    line-height: $cell-line-height;
+    height: var(--cell-line-height, $cell-line-height);
+    font-size: var(--cell-icon-size, $cell-icon-size);
+    line-height: var(--cell-line-height, $cell-line-height);
   }
 
   &__icon {
     display: flex;
     align-items: center;
-    margin-right: $cell-icon-margin-left;
+    margin-right: var(--cell-icon-margin-left, $cell-icon-margin-left);
   }
 
   &__right-icon {
     display: flex;
     align-items: center;
-    margin-left: $cell-right-icon-margin-right;
-    color: $cell-value-color;
+    margin-left: var(--cell-right-icon-margin-right, $cell-right-icon-margin-right);
+    color: var(--cell-value-color, $cell-value-color);
   }
 }
