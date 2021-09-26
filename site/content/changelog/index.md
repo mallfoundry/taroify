@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.14
+
+`2021-09-26`
+
+**Feature**
+
+- @taroify/icons
+  - 在使用 @taroify/core 组件时，自动导入图标样式[#24](https://github.com/mallfoundry/taroify/issues/24)
+
 ### v0.0.12-alpha.13
 
 `2021-09-26`
