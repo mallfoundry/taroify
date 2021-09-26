@@ -1,6 +1,6 @@
 {
   "name": "@taroify/eslint-config",
-  "version": "0.0.12-alpha.14",
+  "version": "0.0.12-alpha.15",
   "license": "MIT",
   "private": "true",
   "main": "index.js",

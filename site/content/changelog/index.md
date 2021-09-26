@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.15
+
+`2021-09-27`
+
+**Bug Fixes**
+
+- Tabs
+    - 修复在微信小程序获得 navRect 为空的问题[#19](https://github.com/mallfoundry/taroify/pull/19)
+
 ### v0.0.12-alpha.14
 
 `2021-09-26`
@@ -19,7 +28,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - @taroify/icons
-  - 在使用 @taroify/core 组件时，自动导入图标样式[#24](https://github.com/mallfoundry/taroify/issues/24)
+    - 在使用 @taroify/core 组件时，自动导入图标样式[#24](https://github.com/mallfoundry/taroify/issues/24)
 
 ### v0.0.12-alpha.13
 
@@ -28,7 +37,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - NoticeBar
-  - 修复动态渲染时，useReady 不执行的问题[#20](https://github.com/mallfoundry/taroify/pull/20)
+    - 修复动态渲染时，useReady 不执行的问题[#20](https://github.com/mallfoundry/taroify/pull/20)
 
 ### v0.0.12-alpha.12
 
