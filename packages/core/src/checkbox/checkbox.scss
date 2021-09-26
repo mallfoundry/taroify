@@ -15,7 +15,7 @@
   &__icon {
     flex: none;
     height: 1em;
-    font-size: $checkbox-size;
+    font-size: var(--checkbox-size, $checkbox-size);
     line-height: 1em;
     cursor: pointer;
 
@@ -28,8 +28,8 @@
       line-height: 1.25;
       color: transparent;
       text-align: center;
-      border: 1px solid $checkbox-border-color;
-      transition-duration: $checkbox-transition-duration;
+      border: 1px solid var(--checkbox-border-color, $checkbox-border-color);
+      transition-duration: var(--checkbox-transition-duration, $checkbox-transition-duration);
       transition-property: color, border-color, background-color;
     }
 
@@ -41,9 +41,9 @@
 
     &--checked {
       .#{$component-prefix}icon {
-        color: $white;
-        background-color: $checkbox-checked-icon-color;
-        border-color: $checkbox-checked-icon-color;
+        color: var(--white, $white);
+        background-color: var(--checkbox-checked-icon-color, $checkbox-checked-icon-color);
+        border-color: var(--checkbox-checked-icon-color, $checkbox-checked-icon-color);
       }
     }
 
@@ -51,23 +51,23 @@
       cursor: not-allowed;
 
       .#{$component-prefix}icon {
-        background-color: $checkbox-disabled-background-color;
-        border-color: $checkbox-disabled-icon-color;
+        background-color: var(--checkbox-disabled-background-color, $checkbox-disabled-background-color);
+        border-color: var(--checkbox-disabled-icon-color, $checkbox-disabled-icon-color);
       }
     }
   }
 
   &__label {
-    margin-left: $checkbox-label-margin;
-    line-height: $checkbox-size;
-    color: $checkbox-label-color;
+    margin-left: var(--checkbox-label-margin, $checkbox-label-margin);
+    line-height: var(--checkbox-size, $checkbox-size);
+    color: var(--checkbox-label-color, $checkbox-label-color);
 
     &--left {
-      margin: 0 $checkbox-label-margin 0 0;
+      margin: 0 var(--checkbox-label-margin, $checkbox-label-margin) 0 0;
     }
 
     &--disabled {
-      color: $checkbox-disabled-label-color;
+      color: var(--checkbox-disabled-label-color, $checkbox-disabled-label-color);
     }
   }
 }
