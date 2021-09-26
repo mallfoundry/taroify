@@ -59,7 +59,7 @@ function Tabs(props: TabsProps) {
   const {
     className,
     activeKey = -1,
-    duration,
+    duration = 300,
     animated = false,
     swipeable = false,
     sticky = false,

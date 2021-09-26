@@ -1,15 +1,24 @@
 import { View } from "@tarojs/components"
+import classNames from "classnames"
 import * as React from "react"
+import { useContext } from "react"
 import { prefixClassname } from "../styles"
+import TabsContext from "./tabs.context"
 
 interface TabsLineProps {
-  transitionDuration?: string
+  active?: boolean
 }
 
 export default function TabsLine(props: TabsLineProps) {
-  const { transitionDuration = "0.3s" } = props
-  
+  const { active } = props
+  const { duration } = useContext(TabsContext)
+
   return (
-    <View className={prefixClassname("tabs__line")} style={{ transitionDuration }} />
+    <View
+      className={classNames(prefixClassname("tabs__line"), {
+        [prefixClassname("tabs__line--active")]: active,
+      })}
+      style={{ transitionDuration: `${duration}ms` }}
+    />
   )
 }

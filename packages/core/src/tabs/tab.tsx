@@ -3,8 +3,9 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
+import TabsLine from "./tabs-line"
 import TabsContext from "./tabs.context"
-import { TabKey } from "./tabs.shared"
+import { TabKey, TabsTheme } from "./tabs.shared"
 
 interface TabProps {
   __dataKey__?: TabKey
@@ -17,8 +18,9 @@ interface TabProps {
 
 export default function Tab(props: TabProps) {
   const { __dataIndex__, __dataKey__, disabled, ellipsis, flexBasis, children } = props
-  const { activeKey, onTabClick } = useContext(TabsContext)
+  const { activeKey, theme, onTabClick } = useContext(TabsContext)
   const active = __dataKey__ === activeKey
+  const themeLine = theme === TabsTheme.Line
 
   return (
     <View
@@ -42,6 +44,7 @@ export default function Tab(props: TabProps) {
         })}
         children={children}
       />
+      {themeLine && <TabsLine active={active} />}
     </View>
   )
 }

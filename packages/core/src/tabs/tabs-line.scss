@@ -11,5 +11,9 @@
     background-color: $tabs-bottom-bar-color;
     border-radius: $tabs-bottom-bar-height;
     transform: scale(0);
+
+    &--active {
+      transform: scale(1);
+    }
   }
 }

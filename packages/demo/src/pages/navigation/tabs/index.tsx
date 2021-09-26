@@ -7,7 +7,7 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -19,7 +19,7 @@ function BasicTabs() {
 }
 
 function KeyedTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>("a")
+  const [activeKey, setActiveKey] = useState("a")
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane key="a" title="标签 1">
@@ -39,7 +39,7 @@ function KeyedTabs() {
 }
 
 function ScrollTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(4)
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -54,7 +54,7 @@ function ScrollTabs() {
 }
 
 function DisableTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -67,7 +67,7 @@ function DisableTabs() {
 }
 
 function CardTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} theme="card" onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -78,7 +78,7 @@ function CardTabs() {
 }
 
 function TabsWithTabClick() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   const [message, setMessage] = useState<ReactNode>("")
   const [open, setOpen] = useState(false)
 
@@ -102,7 +102,7 @@ function TabsWithTabClick() {
 }
 
 function StickyTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} sticky onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -114,7 +114,7 @@ function StickyTabs() {
 }
 
 function TabsWithCustomTitle() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
 
   return (
     <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
@@ -150,7 +150,7 @@ function TabsWithCustomTitle() {
 }
 
 function AnimatedTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} animated onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
@@ -162,7 +162,7 @@ function AnimatedTabs() {
 }
 
 function SwipeableTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [activeKey, setActiveKey] = useState(0)
   return (
     <Tabs activeKey={activeKey} animated swipeable onChange={({ key }) => setActiveKey(key)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>

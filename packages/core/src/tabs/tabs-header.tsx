@@ -1,5 +1,5 @@
 import { ScrollView, View } from "@tarojs/components"
-import { offWindowResize, onWindowResize, useReady } from "@tarojs/taro"
+import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -8,7 +8,6 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import { getBoundingClientRect, getBoundingClientRects } from "../utils/rect"
 import Tab from "./tab"
-import TabsLine from "./tabs-line"
 import TabsContext from "./tabs.context"
 import { TabsTheme } from "./tabs.shared"
 
@@ -73,8 +72,9 @@ export default function TabsHeader() {
     })
   }, [])
 
-  // ready
-  useReady(resize)
+  useEffect(() => {
+    nextTick(resize)
+  }, [resize, tabObjects])
 
   // resize
   useEffect(() => {
@@ -117,12 +117,7 @@ export default function TabsHeader() {
               flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
               disabled={tabObject.disabled}
               ellipsis={themeLine && ellipsis}
-              children={
-                <>
-                {tabObject.title}
-                {themeLine && <TabsLine />}
-                </>
-              }
+              children={tabObject.title}
             />
           ))}
         </View>

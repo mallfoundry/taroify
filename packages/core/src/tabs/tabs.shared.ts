@@ -10,14 +10,14 @@ export type TabsThemeString = "line" | "card"
 export type TabKey = string | number | undefined
 
 export interface TabEvent {
-  key?: TabKey
+  key?: any
   index?: number
   disabled?: boolean
   title?: ReactNode
 }
 
 export interface TabObject {
-  key?: TabKey
+  key?: any
   index?: number
   disabled?: boolean
   title?: ReactNode
