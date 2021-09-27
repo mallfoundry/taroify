@@ -19,6 +19,11 @@ export interface TabEvent {
 export interface TabObject {
   key?: any
   index?: number
-  disabled?: boolean
+  className?: string
+  titleClassName?: string
   title?: ReactNode
+  disabled?: boolean
+  dot?: boolean
+  badge?: ReactNode
+  children?: ReactNode
 }

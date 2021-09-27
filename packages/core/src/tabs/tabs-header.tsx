@@ -21,8 +21,6 @@ export interface TabOffset {
   width?: number
 }
 
-// interface TabsHeaderProps {}
-
 export default function TabsHeader() {
   const { activeKey, theme, ellipsis, bordered, tabObjects } = useContext(TabsContext)
 
@@ -115,6 +113,9 @@ export default function TabsHeader() {
               __dataIndex__={tabObject.index}
               // TODO swipeThreshold does not support
               flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
+              className={tabObject.titleClassName}
+              dot={tabObject.dot}
+              badge={tabObject.badge}
               disabled={tabObject.disabled}
               ellipsis={themeLine && ellipsis}
               children={tabObject.title}

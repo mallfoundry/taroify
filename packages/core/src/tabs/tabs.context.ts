@@ -4,6 +4,7 @@ import { TabEvent, TabKey, TabObject, TabsTheme, TabsThemeString } from "./tabs.
 interface TabsContextValue {
   activeKey: TabKey
   duration?: number
+  lazyRender: boolean
   animated: boolean
   swipeable: boolean
   theme?: TabsTheme | TabsThemeString
@@ -16,6 +17,7 @@ interface TabsContextValue {
 
 const TabsContext = createContext<TabsContextValue>({
   activeKey: undefined,
+  lazyRender: true,
   animated: false,
   swipeable: false,
   tabObjects: [],

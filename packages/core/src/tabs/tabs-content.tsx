@@ -1,42 +1,28 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, ReactElement, ReactNode, useContext } from "react"
+import { ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
-import TabPane from "./tab-pane"
+import TabPaneBase from "./tab-pane-base"
 import TabsContext from "./tabs.context"
-import { TabKey } from "./tabs.shared"
+import { TabKey, TabObject } from "./tabs.shared"
 
-interface TabsChildren {
-  panes: ReactNode[]
-}
-
-function useTabsChildren(children?: ReactNode) {
-  const __children__: TabsChildren = {
-    panes: [],
-  }
-
-  let index = 0
-  Children.forEach(children, (node: ReactNode, i: number) => {
-    if (!React.isValidElement(node)) {
-      return node
-    }
-    const element = node as ReactElement
-    if (element.type !== TabPane) {
-      return element
-    }
-    const __dataKey__ = element.key ?? i
-    __children__.panes.push(
-      cloneElement(element, {
-        key: __dataKey__,
-        __dataKey__: __dataKey__,
-        __dataIndex__: index++,
-      }),
-    )
-  })
-
-  return __children__
+function useTabPanes(tabObjects?: TabObject[]): ReactNode {
+  return useMemo(
+    () =>
+      _.map(tabObjects, (tab) => (
+        <TabPaneBase
+          key={tab.key}
+          __dataKey__={tab.key}
+          __dataIndex__={tab.index}
+          className={tab.className}
+          children={tab.children}
+        />
+      )),
+    [tabObjects],
+  )
 }
 
 interface TabsContentProps {
@@ -48,7 +34,8 @@ export function TabsContent(props: TabsContentProps) {
   const { activeKey, duration, animated, swipeable, tabObjects, onTabClick } = useContext(
     TabsContext,
   )
-  const { panes } = useTabsChildren(props.children)
+
+  const panes = useTabPanes(tabObjects)
 
   function onSwiperChange({ index }: Swiper.ItemEvent) {
     const tabObject = tabObjects.find((tab) => tab.index === index)

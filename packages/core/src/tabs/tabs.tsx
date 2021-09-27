@@ -24,13 +24,11 @@ function useTabObjects(children: ReactNode) {
         return element
       }
       const { props } = element
-      const { title, disabled } = props
       const key = element.key ?? i
       tabObjects.push({
         key,
         index: index++,
-        disabled,
-        title,
+        ...props,
       })
     })
 
@@ -42,6 +40,7 @@ export interface TabsProps {
   className?: string
   activeKey?: TabKey
   duration?: number
+  lazyRender?: boolean
   animated?: boolean
   swipeable?: boolean
   sticky?: boolean
@@ -60,13 +59,13 @@ function Tabs(props: TabsProps) {
     className,
     activeKey = -1,
     duration = 300,
+    lazyRender = true,
     animated = false,
     swipeable = false,
     sticky = false,
     theme = TabsTheme.Line,
     ellipsis = true,
     bordered,
-    children,
     onTabClick,
     onChange,
   } = props
@@ -86,6 +85,7 @@ function Tabs(props: TabsProps) {
       value={{
         activeKey,
         duration,
+        lazyRender,
         animated,
         swipeable,
         theme,
@@ -113,7 +113,7 @@ function Tabs(props: TabsProps) {
         ) : (
           <TabsHeader />
         )}
-        <TabsContent children={children} />
+        <TabsContent />
       </View>
     </TabsContext.Provider>
   )

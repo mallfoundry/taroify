@@ -10,6 +10,9 @@ import { TabKey, TabsTheme } from "./tabs.shared"
 interface TabProps {
   __dataKey__?: TabKey
   __dataIndex__?: number
+  className?: string
+  dot?: boolean
+  badge?: ReactNode
   disabled?: boolean
   ellipsis?: boolean
   flexBasis?: string
@@ -17,7 +20,7 @@ interface TabProps {
 }
 
 export default function Tab(props: TabProps) {
-  const { __dataIndex__, __dataKey__, disabled, ellipsis, flexBasis, children } = props
+  const { __dataIndex__, __dataKey__, className, disabled, ellipsis, flexBasis, children } = props
   const { activeKey, theme, onTabClick } = useContext(TabsContext)
   const active = __dataKey__ === activeKey
   const themeLine = theme === TabsTheme.Line
@@ -25,10 +28,14 @@ export default function Tab(props: TabProps) {
   return (
     <View
       style={{ flexBasis }}
-      className={classNames(prefixClassname("tabs__tab"), {
-        [prefixClassname("tabs__tab--active")]: active,
-        [prefixClassname("tabs__tab--disabled")]: disabled,
-      })}
+      className={classNames(
+        prefixClassname("tabs__tab"),
+        {
+          [prefixClassname("tabs__tab--active")]: active,
+          [prefixClassname("tabs__tab--disabled")]: disabled,
+        },
+        className,
+      )}
       onClick={() =>
         onTabClick?.({
           key: __dataKey__,
