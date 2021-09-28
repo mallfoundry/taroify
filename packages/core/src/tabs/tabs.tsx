@@ -109,12 +109,33 @@ function Tabs(props: TabsProps) {
       >
         {sticky ? (
           <Sticky container={rootRef}>
-            <TabsHeader />
+            <TabsHeader
+              value={value}
+              theme={theme}
+              bordered={bordered}
+              ellipsis={ellipsis}
+              tabObjects={tabObjects}
+              onTabClick={onTabClick}
+            />
           </Sticky>
         ) : (
-          <TabsHeader />
+          <TabsHeader
+            value={value}
+            theme={theme}
+            bordered={bordered}
+            ellipsis={ellipsis}
+            tabObjects={tabObjects}
+            onTabClick={handleTabClick}
+          />
         )}
-        <TabsContent />
+        <TabsContent
+          value={value}
+          lazyRender={lazyRender}
+          duration={duration}
+          animated={animated}
+          swipeable={swipeable}
+          tabObjects={tabObjects}
+        />
       </View>
     </TabsContext.Provider>
   )

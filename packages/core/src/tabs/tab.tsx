@@ -1,27 +1,26 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import TabsLine from "./tabs-line"
-import TabsContext from "./tabs.context"
 
 interface TabProps {
   className?: string
-  value?: any
+  active?: boolean
+  disabled?: boolean
+  underline?: boolean
   dot?: boolean
   badge?: ReactNode
-  disabled?: boolean
   ellipsis?: boolean
   flexBasis?: string
   children?: ReactNode
+
+  onClick?(event: ITouchEvent): void
 }
 
 export default function Tab(props: TabProps) {
-  const { className, value, disabled, ellipsis, flexBasis, children: title } = props
-  const { value: activeValue, theme, onTabClick } = useContext(TabsContext)
-  const active = activeValue === value
-  const themeLine = theme === "line"
+  const { className, active, disabled, underline, ellipsis, flexBasis, children, onClick } = props
 
   return (
     <View
@@ -34,21 +33,15 @@ export default function Tab(props: TabProps) {
         },
         className,
       )}
-      onClick={() =>
-        onTabClick?.({
-          value,
-          title,
-          disabled,
-        })
-      }
+      onClick={onClick}
     >
       <View
         className={classNames(prefixClassname("tabs__tab__content"), {
           [prefixClassname("ellipsis")]: ellipsis,
         })}
-        children={title}
+        children={children}
       />
-      {themeLine && <TabsLine active={active} />}
+      {underline && <TabsLine active={active} />}
     </View>
   )
 }

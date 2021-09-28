@@ -2,12 +2,11 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import TabPaneBase from "./tab-pane-base"
-import TabsContext from "./tabs.context"
-import { TabObject } from "./tabs.shared"
+import { TabEvent, TabObject } from "./tabs.shared"
 
 function useTabPanes(tabObjects?: TabObject[]): ReactNode {
   return useMemo(
@@ -20,13 +19,18 @@ function useTabPanes(tabObjects?: TabObject[]): ReactNode {
 }
 
 interface TabsContentProps {
-  children?: ReactNode
+  value: any
+  lazyRender: boolean
+  duration?: number
+  animated: boolean
+  swipeable: boolean
+  tabObjects: TabObject[]
+
+  onTabClick?(event: TabEvent): void
 }
 
 export function TabsContent(props: TabsContentProps) {
-  const { value: activeValue, duration, animated, swipeable, tabObjects, onTabClick } = useContext(
-    TabsContext,
-  )
+  const { value: activeValue, duration, animated, swipeable, tabObjects, onTabClick } = props
 
   const panes = useTabPanes(tabObjects)
 

@@ -7,8 +7,8 @@ import Swiper from "../swiper"
 import TabsContext from "./tabs.context"
 
 interface TabPaneBaseProps {
-  value?: any
   className?: string
+  value?: any
   children?: ReactNode
 }
 
@@ -37,7 +37,11 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
         })}
       >
         <View
-          className={classNames(prefixClassname("tabs__tab-pane"), className)}
+          className={classNames(
+            prefixClassname("tabs__tab-pane"),
+            prefixClassname(`tabs__tab-pane--${value}`),
+            className,
+          )}
           children={children}
         />
       </Swiper.Item>
@@ -47,7 +51,11 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
   return (
     <View
       style={{ display: active ? "" : "none" }}
-      className={classNames(prefixClassname("tabs__tab-pane"), className)}
+      className={classNames(
+        prefixClassname("tabs__tab-pane"),
+        prefixClassname(`tabs__tab-pane--${value}`),
+        className,
+      )}
       children={shouldRender ? children : undefined}
     />
   )

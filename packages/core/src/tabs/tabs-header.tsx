@@ -3,12 +3,12 @@ import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import { getBoundingClientRect, getBoundingClientRects } from "../utils/rect"
 import Tab from "./tab"
-import TabsContext from "./tabs.context"
+import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 export interface NavOffset {
   left?: number
@@ -20,8 +20,18 @@ export interface TabOffset {
   width?: number
 }
 
-export default function TabsHeader() {
-  const { value: activeValue, theme, ellipsis, bordered, tabObjects } = useContext(TabsContext)
+interface TabsHeaderProps {
+  value: any
+  theme?: TabsTheme
+  bordered?: boolean
+  ellipsis?: boolean
+  tabObjects: TabObject[]
+
+  onTabClick?(event: TabEvent): void
+}
+
+export default function TabsHeader(props: TabsHeaderProps) {
+  const { value: activeValue, theme, ellipsis, bordered, tabObjects, onTabClick } = props
   const themeLine = theme === "line"
   const themeCard = theme === "card"
 
@@ -102,20 +112,31 @@ export default function TabsHeader() {
             [prefixClassname("tabs__nav--card")]: themeCard,
           })}
         >
-          {_.map(tabObjects, (tabObject) => (
-            <Tab
-              key={tabObject.key}
-              value={tabObject.value}
-              // TODO swipeThreshold does not support
-              flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
-              className={tabObject.titleClassName}
-              dot={tabObject.dot}
-              badge={tabObject.badge}
-              disabled={tabObject.disabled}
-              ellipsis={themeLine && ellipsis}
-              children={tabObject.title}
-            />
-          ))}
+          {
+            //
+            _.map(tabObjects, (tabObject) => (
+              <Tab
+                key={tabObject.key}
+                // TODO swipeThreshold does not support
+                flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
+                className={tabObject.titleClassName}
+                dot={tabObject.dot}
+                badge={tabObject.badge}
+                active={activeValue === tabObject.value}
+                disabled={tabObject.disabled}
+                underline={themeLine}
+                ellipsis={themeLine && ellipsis}
+                children={tabObject.title}
+                onClick={() =>
+                  onTabClick?.({
+                    value: tabObject.value,
+                    title: tabObject.title,
+                    disabled: tabObject.disabled,
+                  })
+                }
+              />
+            ))
+          }
         </View>
       </ScrollView>
     </View>
