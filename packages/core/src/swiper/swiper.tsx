@@ -1,5 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
-import { offWindowResize, onWindowResize, useReady } from "@tarojs/taro"
+import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -438,7 +438,8 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     next,
   }))
 
-  useReady(initialize)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => nextTick(initialize), [])
 
   return (
     <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)}>
