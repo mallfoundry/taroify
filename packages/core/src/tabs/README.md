@@ -16,16 +16,15 @@ import Tabs from "@taroify/core/tabs"
 
 ### 基础用法
 
-通过 `activeKey` 绑定当前激活标签对应的索引值，默认情况下启用第一个标签。
+通过 `value` 绑定当前激活标签对应的索引值，默认情况下启用第一个标签。
 
 ```tsx
 import { Tabs } from "@taroify/core"
 
 function BasicTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
-
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} ellipsis={false} onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -37,26 +36,25 @@ function BasicTabs() {
 
 ### 通过标识匹配
 
-在标签指定 `key` 属性的情况下，`activeKey` 的值为当前标签的 `key`（此时无法通过索引值来匹配标签）。
+在标签指定 `value` 属性的情况下，`Tabs.value` 的值为当前标签的 `value`。
 
 ```tsx
 import { Tabs } from "@taroify/core"
 
 function KeyedTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>("a")
-
+  const [value, setValue] = useState("a")
   return (
-    <Tabs activeKey={activeKey} ellipsis={false} onChange={({ key }) => setActiveKey(key)}>
-      <Tabs.TabPane key="a" title="标签 1">
+    <Tabs value={value} onChange={setValue}>
+      <Tabs.TabPane value="a" title="标签 1">
         内容 1
       </Tabs.TabPane>
-      <Tabs.TabPane key="b" title="标签 2">
+      <Tabs.TabPane value="b" title="标签 2">
         内容 2
       </Tabs.TabPane>
-      <Tabs.TabPane key="c" title="标签 3">
+      <Tabs.TabPane value="c" title="标签 3">
         内容 3
       </Tabs.TabPane>
-      <Tabs.TabPane key="d" title="标签 4">
+      <Tabs.TabPane value="d" title="标签 4">
         内容 4
       </Tabs.TabPane>
     </Tabs>
@@ -72,10 +70,9 @@ function KeyedTabs() {
 import { Tabs } from "@taroify/core"
 
 function ScrollTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
-
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -86,6 +83,7 @@ function ScrollTabs() {
     </Tabs>
   )
 }
+
 ```
 
 ### 禁用标签
@@ -96,10 +94,9 @@ function ScrollTabs() {
 import { Tabs } from "@taroify/core"
 
 function DisableTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
-
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2" disabled>
         内容 2
@@ -118,17 +115,15 @@ function DisableTabs() {
 import { Tabs } from "@taroify/core"
 
 function CardTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
-
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} theme="card" onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} theme="card" onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
     </Tabs>
   )
 }
-
 ```
 
 ### 点击事件
@@ -138,19 +133,21 @@ function CardTabs() {
 ```tsx
 import { Tabs, Toast } from "@taroify/core"
 
-function ClickTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+function TabsWithTabClick() {
+  const [value, setValue] = useState(0)
   const [message, setMessage] = useState<ReactNode>("")
   const [open, setOpen] = useState(false)
 
-  function onTabClick(event: Tabs.TabEvent) {
-    setOpen(true)
-    setMessage(event.title)
-  }
-
   return (
     <>
-      <Tabs activeKey={activeKey} onTabClick={onTabClick} onChange={({ key }) => setActiveKey(key)}>
+      <Tabs
+        value={value}
+        onChange={setValue}
+        onTabClick={({ title }) => {
+          setOpen(true)
+          setMessage(title)
+        }}
+      >
         <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
         <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
         <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -171,9 +168,9 @@ function ClickTabs() {
 import { Tabs } from "@taroify/core"
 
 function StickyTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} sticky onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} sticky onChange={(tab) => setValue(tab.value)}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -191,11 +188,10 @@ function StickyTabs() {
 import { Tabs } from "@taroify/core"
 import { MoreOutlined } from "@taroify/icons"
 
-function CustomTitleTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
-
+function TabsWithCustomTitle() {
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} onChange={(tab) => setValue(tab.value)}>
       <Tabs.TabPane
         title={
           <>
@@ -243,9 +239,9 @@ function CustomTitleTabs() {
 import { Tabs } from "@taroify/core"
 
 function AnimatedTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} animated onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} animated onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -263,9 +259,9 @@ function AnimatedTabs() {
 import { Tabs } from "@taroify/core"
 
 function SwipeableTabs() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [value, setValue] = useState(0)
   return (
-    <Tabs activeKey={activeKey} animated swipeable onChange={({ key }) => setActiveKey(key)}>
+    <Tabs value={value} animated swipeable onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -281,7 +277,7 @@ function SwipeableTabs() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| activeKey | 绑定当前选中标签的标识符 | _number \| string_ | `0` |
+| value | 绑定当前选中标签的标识符 | _number \| string_ | `0` |
 | theme | 样式风格类型，可选值为 `card` | _string_ | `line` |
 | duration | 动画时间，单位秒 | _number \| string_ | `0.3` |
 | animated | 是否开启切换标签内容时的转场动画 | _boolean_ | `false` |
@@ -294,7 +290,7 @@ function SwipeableTabs() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| key | 标签标识，作为匹配的标识符 | _number \| string_ | 标签的索引值 |
+| value | 标签值，作为匹配的值 | _number \| string_ | 标签的索引值 |
 | title | 标题 | _ReactNode_ | - |
 | disabled | 是否禁用标签 | _boolean_ | `false` |
 | children | 标签面板内容 | _ReactNode_ | - |
@@ -304,4 +300,4 @@ function SwipeableTabs() {
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
 | onTabClick | 点击标签时触发 | _event : Tabs.TabEvent_ |
-| onChange | 当前激活的标签改变时触发 | _event : Tabs.TabEvent_ |
+| onChange | 当前激活的标签改变时触发 | _value: any, event : Tabs.TabEvent_ |

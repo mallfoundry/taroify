@@ -39,7 +39,7 @@ function KeyedTabs() {
 }
 
 function ScrollTabs() {
-  const [value, setValue] = useState(4)
+  const [value, setValue] = useState(0)
   return (
     <Tabs value={value} onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
