@@ -12,6 +12,25 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.16
+
+`2021-09-27`
+
+**Feature**
+
+- Tabs.TabPane
+  - 新增 value 属性[#26](https://github.com/mallfoundry/taroify/issues/26)
+
+**Bug Fixes**
+
+- Button
+  - 修复 disabled 为 true 时，依然可以点击的问题[#27](https://github.com/mallfoundry/taroify/issues/27)
+
+**Breaking Changes**
+
+- Tabs
+  - activeKey 属性重命名为 value[#26](https://github.com/mallfoundry/taroify/issues/26)
+  
 ### v0.0.12-alpha.15
 
 `2021-09-27`
