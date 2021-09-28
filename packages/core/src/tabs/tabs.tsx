@@ -135,6 +135,7 @@ function Tabs(props: TabsProps) {
           animated={animated}
           swipeable={swipeable}
           tabObjects={tabObjects}
+          onTabClick={handleTabClick}
         />
       </View>
     </TabsContext.Provider>
