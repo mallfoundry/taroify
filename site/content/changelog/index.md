@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.17
+
+`2021-09-27`
+
+**Bug Fixes**
+
+- Tabs
+  - 修复滑动切换时 Tab 没有效果的问题[#28](https://github.com/mallfoundry/taroify/issues/28)
+
 ### v0.0.12-alpha.16
 
 `2021-09-27`
