@@ -7,40 +7,36 @@ import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import TabPaneBase from "./tab-pane-base"
 import TabsContext from "./tabs.context"
-import { TabKey, TabObject } from "./tabs.shared"
+import { TabObject } from "./tabs.shared"
 
 function useTabPanes(tabObjects?: TabObject[]): ReactNode {
   return useMemo(
     () =>
-      _.map(tabObjects, (tab) => (
-        <TabPaneBase
-          key={tab.key}
-          __dataKey__={tab.key}
-          __dataIndex__={tab.index}
-          className={tab.className}
-          children={tab.children}
-        />
+      _.map(tabObjects, ({ key, value, className, children }) => (
+        <TabPaneBase key={key} value={value} className={className} children={children} />
       )),
     [tabObjects],
   )
 }
 
 interface TabsContentProps {
-  activeKey?: TabKey
   children?: ReactNode
 }
 
 export function TabsContent(props: TabsContentProps) {
-  const { activeKey, duration, animated, swipeable, tabObjects, onTabClick } = useContext(
+  const { value: activeValue, duration, animated, swipeable, tabObjects, onTabClick } = useContext(
     TabsContext,
   )
 
   const panes = useTabPanes(tabObjects)
 
   function onSwiperChange({ index }: Swiper.ItemEvent) {
-    const tabObject = tabObjects.find((tab) => tab.index === index)
+    const tabObject = _.get(tabObjects, index)
     if (tabObject) {
-      onTabClick?.(tabObject)
+      const { value, title, disabled } = tabObject
+      if (!disabled) {
+        onTabClick?.({ value, title, disabled })
+      }
     }
   }
 
@@ -48,7 +44,7 @@ export function TabsContent(props: TabsContentProps) {
     if (animated || swipeable) {
       return (
         <Swiper
-          activeIndex={activeKey as number}
+          activeIndex={activeValue as number}
           loop={false}
           className={prefixClassname("tabs__track")}
           duration={duration}

@@ -5,19 +5,17 @@ import { ReactNode, useContext, useMemo, useRef } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import TabsContext from "./tabs.context"
-import { TabKey as SharedTabKey } from "./tabs.shared"
 
 interface TabPaneBaseProps {
-  __dataKey__?: SharedTabKey
-  __dataIndex__?: number
+  value?: any
   className?: string
   children?: ReactNode
 }
 
 export default function TabPaneBase(props: TabPaneBaseProps) {
-  const { __dataKey__, __dataIndex__, className, children } = props
-  const { activeKey, lazyRender, animated, swipeable } = useContext(TabsContext)
-  const active = __dataKey__ === activeKey
+  const { className, value, children } = props
+  const { value: activeValue, lazyRender, animated, swipeable } = useContext(TabsContext)
+  const active = activeValue === value
 
   const initializedRef = useRef(false)
 
@@ -34,7 +32,6 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
   if (animated || swipeable) {
     return (
       <Swiper.Item
-        __dataIndex__={__dataIndex__}
         className={classNames(prefixClassname("tabs__tab-pane-wrapper"), {
           [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
         })}

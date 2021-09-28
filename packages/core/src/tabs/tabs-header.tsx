@@ -9,7 +9,6 @@ import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import { getBoundingClientRect, getBoundingClientRects } from "../utils/rect"
 import Tab from "./tab"
 import TabsContext from "./tabs.context"
-import { TabsTheme } from "./tabs.shared"
 
 export interface NavOffset {
   left?: number
@@ -22,23 +21,22 @@ export interface TabOffset {
 }
 
 export default function TabsHeader() {
-  const { activeKey, theme, ellipsis, bordered, tabObjects } = useContext(TabsContext)
+  const { value: activeValue, theme, ellipsis, bordered, tabObjects } = useContext(TabsContext)
+  const themeLine = theme === "line"
+  const themeCard = theme === "card"
 
   const navRef = useRef()
-
-  const themeLine = theme === TabsTheme.Line
-  const themeCard = theme === TabsTheme.Card
 
   const [navOffset, setNavOffset] = useState<NavOffset>({})
   const [tabOffsets, setTabOffsets] = useState<TabOffset[]>([])
 
-  const activeIndex = useMemo(
-    () => _.find(tabObjects, (tab) => tab.key === activeKey)?.index ?? -1,
-    [tabObjects, activeKey],
-  )
+  const activeIndex = useMemo(() => _.findIndex(tabObjects, (tab) => tab.value === activeValue), [
+    tabObjects,
+    activeValue,
+  ])
 
   const activeOffset = useMemo(() => {
-    if (_.isEmpty(tabOffsets) || activeIndex === -1) {
+    if (_.isEmpty(tabOffsets) || activeIndex === -1 || activeIndex >= _.size(tabOffsets)) {
       return {}
     }
     const { width } = tabOffsets[activeIndex]
@@ -70,9 +68,7 @@ export default function TabsHeader() {
     })
   }, [])
 
-  useEffect(() => {
-    nextTick(resize)
-  }, [resize, tabObjects])
+  useEffect(() => nextTick(resize), [resize, tabObjects])
 
   // resize
   useEffect(() => {
@@ -109,8 +105,7 @@ export default function TabsHeader() {
           {_.map(tabObjects, (tabObject) => (
             <Tab
               key={tabObject.key}
-              __dataKey__={tabObject.key}
-              __dataIndex__={tabObject.index}
+              value={tabObject.value}
               // TODO swipeThreshold does not support
               flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
               className={tabObject.titleClassName}

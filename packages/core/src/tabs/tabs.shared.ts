@@ -1,24 +1,17 @@
-import { ReactNode } from "react"
+import { Key, ReactNode } from "react"
 
-export enum TabsTheme {
-  Line = "line",
-  Card = "card",
-}
-
-export type TabsThemeString = "line" | "card"
-
-export type TabKey = string | number | undefined
+export type TabsTheme = "line" | "card"
 
 export interface TabEvent {
-  key?: any
-  index?: number
-  disabled?: boolean
+  value?: any
   title?: ReactNode
+  disabled?: boolean
 }
 
 export interface TabObject {
-  key?: any
-  index?: number
+  key: Key
+  index: number
+  value: any
   className?: string
   titleClassName?: string
   title?: ReactNode

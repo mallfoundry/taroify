@@ -5,12 +5,10 @@ import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import TabsLine from "./tabs-line"
 import TabsContext from "./tabs.context"
-import { TabKey, TabsTheme } from "./tabs.shared"
 
 interface TabProps {
-  __dataKey__?: TabKey
-  __dataIndex__?: number
   className?: string
+  value?: any
   dot?: boolean
   badge?: ReactNode
   disabled?: boolean
@@ -20,10 +18,10 @@ interface TabProps {
 }
 
 export default function Tab(props: TabProps) {
-  const { __dataIndex__, __dataKey__, className, disabled, ellipsis, flexBasis, children } = props
-  const { activeKey, theme, onTabClick } = useContext(TabsContext)
-  const active = __dataKey__ === activeKey
-  const themeLine = theme === TabsTheme.Line
+  const { className, value, disabled, ellipsis, flexBasis, children: title } = props
+  const { value: activeValue, theme, onTabClick } = useContext(TabsContext)
+  const active = activeValue === value
+  const themeLine = theme === "line"
 
   return (
     <View
@@ -38,9 +36,8 @@ export default function Tab(props: TabProps) {
       )}
       onClick={() =>
         onTabClick?.({
-          key: __dataKey__,
-          index: __dataIndex__,
-          title: children,
+          value,
+          title,
           disabled,
         })
       }
@@ -49,7 +46,7 @@ export default function Tab(props: TabProps) {
         className={classNames(prefixClassname("tabs__tab__content"), {
           [prefixClassname("ellipsis")]: ellipsis,
         })}
-        children={children}
+        children={title}
       />
       {themeLine && <TabsLine active={active} />}
     </View>

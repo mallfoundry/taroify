@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 
 interface TabPaneProps {
   className?: string
+  value?: any
   titleClassName?: string
   title?: ReactNode
   disabled?: boolean

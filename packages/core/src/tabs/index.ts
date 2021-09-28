@@ -1,6 +1,6 @@
 import TabPane from "./tab-pane"
 import TabsElement, { TabsProps } from "./tabs"
-import { TabEvent as SharedTabEvent, TabKey as SharedTabKey } from "./tabs.shared"
+import { TabEvent as SharedTabEvent } from "./tabs.shared"
 
 interface TabsInterface {
   (props: TabsProps): JSX.Element
@@ -15,8 +15,6 @@ Tabs.TabPane = TabPane
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Tabs {
   export type TabEvent = SharedTabEvent
-
-  export type TabKey = SharedTabKey
 }
 
 export default Tabs

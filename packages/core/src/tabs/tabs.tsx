@@ -1,5 +1,6 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import { Children, isValidElement, ReactElement, ReactNode, useMemo, useRef } from "react"
 import Sticky from "../sticky"
@@ -8,14 +9,13 @@ import TabPane from "./tab-pane"
 import { TabsContent } from "./tabs-content"
 import TabsHeader from "./tabs-header"
 import TabsContext from "./tabs.context"
-import { TabEvent, TabKey, TabObject, TabsTheme, TabsThemeString } from "./tabs.shared"
+import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 function useTabObjects(children: ReactNode) {
   return useMemo(() => {
     const tabObjects: TabObject[] = []
 
-    let index = 0
-    Children.forEach(children, (node: ReactNode, i: number) => {
+    Children.forEach(children, (node: ReactNode) => {
       if (!isValidElement(node)) {
         return node
       }
@@ -23,12 +23,14 @@ function useTabObjects(children: ReactNode) {
       if (element.type !== TabPane) {
         return element
       }
-      const { props } = element
-      const key = element.key ?? i
+      const { key, props } = element
+      const index = _.size(tabObjects)
+      const { value, ...restProps } = props
       tabObjects.push({
-        key,
-        index: index++,
-        ...props,
+        key: key ?? index,
+        index,
+        value: value ?? index,
+        ...restProps,
       })
     })
 
@@ -38,18 +40,18 @@ function useTabObjects(children: ReactNode) {
 
 export interface TabsProps {
   className?: string
-  activeKey?: TabKey
+  value?: any
   duration?: number
   lazyRender?: boolean
   animated?: boolean
   swipeable?: boolean
   sticky?: boolean
-  theme?: TabsTheme | TabsThemeString
+  theme?: TabsTheme
   bordered?: boolean
   ellipsis?: boolean
   children?: ReactNode
 
-  onChange?(event: TabEvent): void
+  onChange?(value: any, event: TabEvent): void
 
   onTabClick?(event: TabEvent): void
 }
@@ -57,13 +59,13 @@ export interface TabsProps {
 function Tabs(props: TabsProps) {
   const {
     className,
-    activeKey = -1,
+    value = -1,
     duration = 300,
     lazyRender = true,
     animated = false,
     swipeable = false,
     sticky = false,
-    theme = TabsTheme.Line,
+    theme = "line",
     ellipsis = true,
     bordered,
     onTabClick,
@@ -73,9 +75,8 @@ function Tabs(props: TabsProps) {
   const tabObjects = useTabObjects(props.children)
 
   function handleTabClick(event: TabEvent) {
-    const { key: __activeKey__, disabled } = event
-    if (__activeKey__ !== activeKey && !disabled) {
-      onChange?.(event)
+    if (!event.disabled) {
+      onChange?.(event.value, event)
     }
     onTabClick?.(event)
   }
@@ -83,7 +84,7 @@ function Tabs(props: TabsProps) {
   return (
     <TabsContext.Provider
       value={{
-        activeKey,
+        value,
         duration,
         lazyRender,
         animated,
@@ -100,8 +101,8 @@ function Tabs(props: TabsProps) {
         className={classNames(
           prefixClassname("tabs"),
           {
-            [prefixClassname("tabs--line")]: theme === TabsTheme.Line,
-            [prefixClassname("tabs--card")]: theme === TabsTheme.Card,
+            [prefixClassname("tabs--line")]: theme === "line",
+            [prefixClassname("tabs--card")]: theme === "card",
           },
           className,
         )}

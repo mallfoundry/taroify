@@ -1,13 +1,13 @@
 import { createContext } from "react"
-import { TabEvent, TabKey, TabObject, TabsTheme, TabsThemeString } from "./tabs.shared"
+import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 interface TabsContextValue {
-  activeKey: TabKey
+  value: any
   duration?: number
   lazyRender: boolean
   animated: boolean
   swipeable: boolean
-  theme?: TabsTheme | TabsThemeString
+  theme?: TabsTheme
   bordered?: boolean
   ellipsis?: boolean
   tabObjects: TabObject[]
@@ -16,7 +16,7 @@ interface TabsContextValue {
 }
 
 const TabsContext = createContext<TabsContextValue>({
-  activeKey: undefined,
+  value: undefined,
   lazyRender: true,
   animated: false,
   swipeable: false,
