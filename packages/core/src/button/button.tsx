@@ -162,7 +162,7 @@ export default function Button(props: ButtonProps) {
         className,
       )}
       style={rootStyle}
-      onClick={(e) => !loadingProps && onClick?.(e)}
+      onClick={(e) => !disabled && !loadingProps && onClick?.(e)}
     >
       <View className={prefixClassname("button__content")}>
         {loadingProps ? (
@@ -181,6 +181,7 @@ export default function Button(props: ButtonProps) {
             ? "reset"
             : undefined
         }
+        disabled={disabled}
         openType={openType}
         hoverStopPropagation={hoverStopPropagation}
         hoverStartTime={hoverStartTime}
