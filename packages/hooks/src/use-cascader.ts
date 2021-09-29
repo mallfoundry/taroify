@@ -37,7 +37,7 @@ export default function useCascader({
 
       for (const value of values) {
         const { children: nextOptions } = findOption(cursorOptions, value)
-        if (!nextOptions || !_.isEmpty(nextOptions)) {
+        if (!nextOptions || _.isEmpty(nextOptions)) {
           break
         }
         cursorOptions = nextOptions
