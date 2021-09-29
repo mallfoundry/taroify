@@ -63,6 +63,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "Cascader 级联选择",
+        to: "/components/cascader/",
+      },
+      {
         title: "Checkbox 复选框",
         to: "/components/checkbox/",
       },

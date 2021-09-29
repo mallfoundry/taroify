@@ -1,0 +1,17 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$cascader-header-height: 48px * $hd;
+$cascader-header-padding: 0 var(--padding-md, $padding-md);
+$cascader-title-font-size: var(--font-size-lg, $font-size-lg);
+$cascader-title-line-height: 20px * $hd;
+$cascader-close-icon-size: 22px  * $hd;
+$cascader-close-icon-color: $gray-5;
+$cascader-close-icon-active-color: $gray-6;
+$cascader-active-icon-size: 18px * $hd;
+$cascader-tabs-height: 48px * $hd;
+$cascader-active-color: var(--danger-color, $danger-color);
+$cascader-options-height: 384px * $hd;
+$cascader-option-disabled-color: $gray-5;
+$cascader-tab-color: $text-color;
+$cascader-unselected-tab-color: $gray-6;
