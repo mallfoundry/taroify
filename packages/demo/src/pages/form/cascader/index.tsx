@@ -1,39 +1,54 @@
 import { Cascader, Field, Popup } from "@taroify/core"
+import { useCascader } from "@taroify/hooks"
+import * as _ from "lodash"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
+import area from "./area"
 import "./index.scss"
 
 function BasicCascader() {
-  const [popupOpen, setPopupOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const [value, setValue] = useState<string[]>([])
+  const [fieldValue, setFieldValue] = useState("")
+  const columns = useCascader({ value, depth: 3, options: area })
+  console.log(columns)
   return (
     <>
-      <Field label="选项值" onClick={() => setPopupOpen(true)} />
-      <Popup open={popupOpen} rounded placement="bottom" onClose={setPopupOpen}>
+      <Field readonly label="选项值" value={fieldValue} onClick={() => setOpen(true)} />
+      <Popup open={open} rounded placement="bottom" onClose={setOpen}>
         <Cascader
           title="请选择所在地区"
           value={value}
-          onClose={() => setPopupOpen(false)}
-          onChange={setValue}
+          onClose={() => setOpen(false)}
+          onSelect={setValue}
+          onChange={(values, options) => {
+            console.log(values)
+            setOpen(false)
+            setFieldValue(
+              _.join(
+                _.map(options, ({ children }) => children),
+                "/",
+              ),
+            )
+          }}
         >
-          <Cascader.Tab>
-            <Cascader.Option value="330101">浙江省</Cascader.Option>
-            <Cascader.Option value="330102">江苏省</Cascader.Option>
-          </Cascader.Tab>
-          <Cascader.Tab>
-            <Cascader.Option value="330101">绿藤市</Cascader.Option>
-            <Cascader.Option value="330102">绿藤市1</Cascader.Option>
-          </Cascader.Tab>
-          <Cascader.Tab>
-            <Cascader.Option value="330101">淮阴市</Cascader.Option>
-            <Cascader.Option value="330102">淮阴市1</Cascader.Option>
-          </Cascader.Tab>
-          <Cascader.Tab>
-            <Cascader.Option value="330101">淄博市</Cascader.Option>
-            <Cascader.Option value="330102">淄博市1</Cascader.Option>
-          </Cascader.Tab>
+          {
+            //
+            _.map(columns, (options, index) => (
+              <Cascader.Tab key={index}>
+                {
+                  //
+                  _.map(options, (option) => (
+                    <Cascader.Option key={option.value} value={option.value}>
+                      {option.label}
+                    </Cascader.Option>
+                  ))
+                }
+              </Cascader.Tab>
+            ))
+          }
         </Cascader>
       </Popup>
     </>
