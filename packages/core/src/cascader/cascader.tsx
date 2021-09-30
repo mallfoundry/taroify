@@ -16,6 +16,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import Tabs from "../tabs"
+import { useToRef } from "../utils/state"
 import CascaderHeader from "./cascader-header"
 import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
@@ -81,9 +82,9 @@ export interface CascaderProps {
   closeIcon?: ReactNode
   children?: ReactNode
 
-  onChange?(values: any[]): void
+  onChange?(values: any[], options: CascaderOptionObject[]): void
 
-  onSelect?(values: any[]): void
+  onSelect?(values: any[], options: CascaderOptionObject[]): void
 
   onTabClick?(event: Tabs.TabEvent): void
 
@@ -107,20 +108,40 @@ function Cascader(props: CascaderProps) {
 
   const [values, setValues] = useState<any[]>([])
 
+  const valuesRef = useToRef(values)
+
   const [activeTab, setActiveTab] = useState(0)
 
   const lastTab = useMemo(() => _.size(tabs) - 1, [tabs])
 
   const activeTabs = useMemo(() => _.slice(tabs, 0, _.size(values) + 1), [tabs, values])
 
-  const activeLabels = useMemo(
-    () =>
+  const findOptions = useCallback(
+    (aValues: any[]) =>
       _.map(
         tabs,
         ({ options }) =>
-          _.find(options, (option) => option.value === values[option.tabIndex])?.children,
+          _.find(
+            options,
+            (option) => option.value === aValues[option.tabIndex],
+          ) as CascaderOptionObject,
       ),
-    [tabs, values],
+    [tabs],
+  )
+
+  const activeOptions = useMemo(() => findOptions(values), [findOptions, values])
+
+  const emitChange = useCallback(
+    (newValues: any[]) => {
+      const newActiveOptions = findOptions(newValues)
+      if (!_.isEqual(newValues, value)) {
+        onSelect?.(newValues, newActiveOptions)
+        if (_.size(tabs) === _.size(newValues)) {
+          onChange?.(newValues, newActiveOptions)
+        }
+      }
+    },
+    [findOptions, onChange, onSelect, tabs, value],
   )
 
   const handleSelect = useCallback(
@@ -133,9 +154,11 @@ function Cascader(props: CascaderProps) {
       const newValues = _.slice(values, 0, tabIndex + 1)
 
       newValues[tabIndex] = value
+
       setValues(newValues)
+      emitChange(newValues)
     },
-    [values],
+    [emitChange, values],
   )
 
   useEffect(() => {
@@ -145,17 +168,10 @@ function Cascader(props: CascaderProps) {
   }, [lastTab, values])
 
   useEffect(() => {
-    if (!_.isEqual(values, value)) {
-      onSelect?.(values)
-      if (_.size(tabs) === _.size(values)) {
-        onChange?.(values)
-      }
+    if (!_.isEqual(value, valuesRef.current)) {
+      setValues(value)
     }
-  }, [onChange, onSelect, tabs, value, values])
-
-  useEffect(() => {
-    setValues(value)
-  }, [value])
+  }, [value, valuesRef])
 
   return (
     <View className={classNames(prefixClassname("cascader"), className)}>
@@ -181,9 +197,11 @@ function Cascader(props: CascaderProps) {
             <Tabs.TabPane
               key={index}
               value={index}
-              title={_.get(activeLabels, index) ?? placeholder}
+              title={_.get(activeOptions, index)?.children ?? placeholder}
               titleClassName={classNames(prefixClassname("cascader__tab"), {
-                [prefixClassname("cascader__tab--inactive")]: _.isEmpty(_.get(activeLabels, index)),
+                [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
+                  _.get(activeOptions, index)?.children,
+                ),
               })}
             >
               <View className={prefixClassname("cascader__options")}>
