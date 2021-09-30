@@ -9,20 +9,15 @@ import { prefixClassname } from "../styles"
 
 import {
   ButtonColor,
-  ButtonColorString,
   ButtonFormType,
-  ButtonFormTypeString,
   ButtonShape,
-  ButtonShapeString,
   ButtonSize,
-  ButtonSizeString,
   ButtonVariant,
-  ButtonVariantString,
 } from "./button.shared"
 
 const BUTTON_PRESET_COLORS = ["default", "primary", "info", "success", "warning", "danger"]
 
-function isPresetButtonColor(color?: ButtonColor | ButtonColorString | string): boolean {
+function isPresetButtonColor(color?: ButtonColor | string): boolean {
   return BUTTON_PRESET_COLORS.includes(color as string)
 }
 
@@ -40,11 +35,11 @@ function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoading
 export interface ButtonProps {
   className?: string
   // style?: CSSProperties
-  variant?: ButtonVariant | ButtonVariantString
-  shape?: ButtonShape | ButtonShapeString
-  size?: ButtonSize | ButtonSizeString
-  color?: ButtonColor | ButtonColorString | string
-  formType?: ButtonFormType | ButtonFormTypeString
+  variant?: ButtonVariant
+  shape?: ButtonShape
+  size?: ButtonSize
+  color?: ButtonColor | string
+  formType?: ButtonFormType
   loading?: boolean | ButtonLoadingProps
   block?: boolean
   hairline?: boolean
@@ -81,11 +76,11 @@ export interface ButtonProps {
 export default function Button(props: ButtonProps) {
   const {
     className,
-    variant = ButtonVariant.Contained,
+    variant = "contained",
     shape,
-    size = ButtonSize.Medium,
-    color = ButtonColor.Default,
-    formType = ButtonFormType.Button,
+    size = "medium",
+    color = "default",
+    formType = "button",
     block,
     hairline,
     disabled,
@@ -119,10 +114,10 @@ export default function Button(props: ButtonProps) {
   const rootStyle = useMemo(() => {
     const style: CSSProperties = {}
     if (!isPresetButtonColor(color)) {
-      if (variant === ButtonVariant.Contained) {
+      if (variant === "contained") {
         style.color = "#fff"
         style.background = color
-      } else if (variant === ButtonVariant.Outlined) {
+      } else if (variant === "outlined") {
         style.borderColor = color
         style.color = color
       } else {
@@ -137,27 +132,26 @@ export default function Button(props: ButtonProps) {
       className={classNames(
         prefixClassname("button"),
         {
-          [prefixClassname("button--disabled")]: disabled,
-          [prefixClassname("button--loading")]: loadingProps,
-          [prefixClassname("button--block")]: block,
+          // Set variant style
+          [prefixClassname("button--text")]: variant === "text",
+          [prefixClassname("button--contained")]: variant === "contained",
+          [prefixClassname("button--outlined")]: variant === "outlined",
+          // Set color style
+          [prefixClassname(`button--${color}`)]: isPresetButtonColor(color),
+          // Set shape style
+          [prefixClassname("button--round")]: shape === "round",
+          [prefixClassname("button--square")]: shape === "square",
+          // Set size style
+          [prefixClassname("button--mini")]: size === "mini",
+          [prefixClassname("button--small")]: size === "small",
+          [prefixClassname("button--medium")]: size === "medium",
+          [prefixClassname("button--large")]: size === "large",
           // Set hairline style
           [prefixClassname("button--hairline")]: hairline,
           [prefixClassname("hairline--surround")]: hairline,
-          // Set variant style
-          [prefixClassname("button--text")]: variant === ButtonVariant.Text,
-          [prefixClassname("button--contained")]: variant === ButtonVariant.Contained,
-          [prefixClassname("button--outlined")]: variant === ButtonVariant.Outlined,
-          // Set shape style
-          [prefixClassname("button--round")]: shape === ButtonShape.Round,
-          [prefixClassname("button--square")]: shape === ButtonShape.Square,
-          // Set size style
-          [prefixClassname("button--mini")]: size === ButtonSize.Mini,
-          [prefixClassname("button--small")]: size === ButtonSize.Small,
-          [prefixClassname("button--medium")]: size === ButtonSize.Medium,
-          [prefixClassname("button--large")]: size === ButtonSize.Large,
-          // Set color style
-          [prefixClassname(`button--${color}`)]: isPresetButtonColor(color),
-          [prefixClassname("button--default")]: !isPresetButtonColor(color),
+          [prefixClassname("button--disabled")]: disabled,
+          [prefixClassname("button--loading")]: loadingProps,
+          [prefixClassname("button--block")]: block,
         },
         className,
       )}
@@ -174,13 +168,7 @@ export default function Button(props: ButtonProps) {
       </View>
       <TaroButton
         className={prefixClassname("button__button")}
-        formType={
-          formType === ButtonFormType.Submit
-            ? "submit"
-            : formType === ButtonFormType.Reset
-            ? "reset"
-            : undefined
-        }
+        formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
         disabled={disabled}
         openType={openType}
         hoverStopPropagation={hoverStopPropagation}
