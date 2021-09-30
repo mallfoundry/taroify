@@ -4,7 +4,15 @@ import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode, useContext } from "react"
+import {
+  Children,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import { default as SharedBackdrop } from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
@@ -37,31 +45,33 @@ interface PopupChildren {
   content: ReactNode[]
 }
 
-function findPopupChildren(node?: ReactNode): PopupChildren {
-  const children: PopupChildren = {
-    backdrop: undefined,
-    close: undefined,
-    content: [],
-  }
-
-  Children.forEach(node, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      if (element.type === Popup.Backdrop) {
-        children.backdrop = element
-      } else if (_.isFunction(element.type) && element.type.name === Popup.Backdrop.name) {
-        children.backdrop = element
-      } else if (element.type === Popup.Close) {
-        children.close = element
-      } else {
-        children.content.push(child)
-      }
-    } else {
-      children.content.push(child)
+function usePopupChildren(children?: ReactNode): PopupChildren {
+  return useMemo(() => {
+    const __children__: PopupChildren = {
+      backdrop: undefined,
+      close: undefined,
+      content: [],
     }
-  })
 
-  return children
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        if (element.type === Popup.Backdrop) {
+          __children__.backdrop = element
+        } else if (_.isFunction(element.type) && element.type.name === Popup.Backdrop.name) {
+          __children__.backdrop = element
+        } else if (element.type === Popup.Close) {
+          __children__.close = element
+        } else {
+          __children__.content.push(child)
+        }
+      } else {
+        __children__.content.push(child)
+      }
+    })
+
+    return __children__
+  }, [children])
 }
 
 interface PopupProps {
@@ -73,9 +83,12 @@ interface PopupProps {
   rounded?: boolean
   duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
-  onOpen?: (opened: boolean) => void
-  onClose?: (opened: boolean) => void
-  onClosed?: () => void
+
+  onOpen?(opened: boolean): void
+
+  onClose?(opened: boolean): void
+
+  onClosed?(): void
 }
 
 function Popup(props: PopupProps) {
@@ -92,17 +105,15 @@ function Popup(props: PopupProps) {
     onClose,
     onClosed,
   } = props
-
   const transactionName = transaction ?? toTransactionName(placement)
-
-  const { backdrop = <Popup.Backdrop />, close, content } = findPopupChildren(children)
+  const { backdrop = <Popup.Backdrop />, close, content } = usePopupChildren(children)
 
   return (
     <PopupContext.Provider
       value={{
         open,
         placement,
-        emitClose: onClose,
+        onClose,
       }}
     >
       {backdrop}
@@ -156,7 +167,7 @@ namespace Popup {
       closeable = true,
       onClick,
     } = props
-    const { open, emitClose } = useContext(PopupContext)
+    const { open, onClose } = useContext(PopupContext)
     return (
       <SharedBackdrop
         className={className}
@@ -165,7 +176,7 @@ namespace Popup {
         duration={duration}
         closeable={closeable}
         onClick={onClick}
-        onClose={emitClose}
+        onClose={onClose}
       />
     )
   }
@@ -203,7 +214,7 @@ namespace Popup {
 
   export function Close(props: CloseProps) {
     const { children = <Cross /> } = props
-    const { emitClose } = useContext(PopupContext)
+    const { onClose } = useContext(PopupContext)
     const placement = useClosePlacement(props.placement)
 
     if (React.isValidElement(children)) {
@@ -217,7 +228,7 @@ namespace Popup {
           [prefixClassname("popup__close-icon--bottom-left")]:
             placement === ClosePlacement.BottomRight,
         }),
-        onClick: () => emitClose?.(false),
+        onClick: () => onClose?.(false),
       })
     }
     return <>{children}</>
