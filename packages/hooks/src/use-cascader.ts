@@ -13,13 +13,16 @@ interface CascaderOption extends CascaderColumn {
 
 interface UseCascaderOptions {
   value?: any[]
+  depth?: number
   options: CascaderOption[]
 }
 
 export default function useCascader({
   value: values = [],
+  depth = 0,
   options,
 }: UseCascaderOptions): CascaderOption[][] {
+  depth = _.clamp(depth, 0, depth)
   const [columns, setColumns] = useState<CascaderOption[][]>([])
 
   const findOption = useCallback(
@@ -44,8 +47,13 @@ export default function useCascader({
         newColumns.push(nextOptions)
       }
     }
+    if (depth !== 0 && depth > _.size(newColumns)) {
+      _.range(depth - _.size(newColumns))
+        .map(() => [])
+        .forEach((e) => newColumns.push(e))
+    }
     setColumns(newColumns)
-  }, [findOption, options, values])
+  }, [depth, findOption, options, values])
 
   return columns
 }
