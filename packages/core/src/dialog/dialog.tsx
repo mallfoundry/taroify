@@ -2,7 +2,6 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode } from "react"
-import { ButtonShape, ButtonSize, ButtonVariant } from "../button"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_TOP } from "../styles/hairline"
@@ -201,9 +200,9 @@ namespace Dialog {
 
       return cloneElement(action, {
         className: classNames(action.props.className, actionClassNames),
-        size: ButtonSize.Large,
-        shape: ButtonShape.Square,
-        variant: __round__ ? ButtonVariant.Contained : ButtonVariant.Text,
+        size: "large",
+        shape: "square",
+        variant: __round__ ? "contained" : "text",
       })
     })
   }
