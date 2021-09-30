@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.12-alpha.18
+
+`2021-09-30`
+
+**Bug Fixes**
+
+- Button
+  - 修复细边框样式模糊问题[#29](https://github.com/mallfoundry/taroify/issues/29)
+
 ### v0.0.12-alpha.17
 
 `2021-09-27`
