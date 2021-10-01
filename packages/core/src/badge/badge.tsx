@@ -1,8 +1,9 @@
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode } from "react"
+import { ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 
 export interface BadgeProps {
@@ -14,41 +15,43 @@ export interface BadgeProps {
   children?: ReactNode
 }
 
-function Badge(props: BadgeProps) {
+function Badge(props: BadgeProps): JSX.Element {
   const { className, color = "", content: contentProp, max, dot, children } = props
+  const isIcon = useMemo(() => isIconElement(children), [children])
   const hasChildren = children !== undefined
   const noneChildren = children === undefined
   const content = _.isNumber(contentProp) && _.gt(contentProp, max) ? `${max}+` : contentProp
 
-  return (
-    <View
-      className={classNames(
-        {
-          [prefixClassname("badge__wrapper")]: hasChildren,
-          [prefixClassname("badge")]: noneChildren,
-          [prefixClassname("badge--dot")]: noneChildren && dot,
-        },
-        className,
-      )}
-    >
-      {children}
-      {noneChildren && !dot && content}
-      {hasChildren && (dot || content) && (
-        <View
-          style={{ background: color }}
-          className={classNames(
-            prefixClassname("badge"),
-            {
-              [prefixClassname("badge--dot")]: dot,
-              [prefixClassname("badge--content")]: content,
-            },
-            prefixClassname("badge--fixed"),
-          )}
-          children={!dot && content}
-        />
-      )}
-    </View>
-  )
+  return cloneIconElement(isIcon ? children : <View />, {
+    className: classNames(
+      {
+        [prefixClassname("badge__wrapper")]: hasChildren,
+        [prefixClassname("badge")]: noneChildren,
+        [prefixClassname("badge--dot")]: noneChildren && dot,
+      },
+      className,
+    ),
+    children: (
+      <>
+        {!isIcon && children}
+        {noneChildren && !dot && content}
+        {hasChildren && (dot || content) && (
+          <View
+            style={{ background: color }}
+            className={classNames(
+              prefixClassname("badge"),
+              {
+                [prefixClassname("badge--dot")]: dot,
+                [prefixClassname("badge--content")]: content,
+              },
+              prefixClassname("badge--fixed"),
+            )}
+            children={!dot && content}
+          />
+        )}
+      </>
+    ),
+  }) as React.ReactElement
 }
 
 export default Badge
