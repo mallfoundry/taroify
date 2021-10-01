@@ -17,6 +17,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "scripts": {
+    "icons:generate": "node ./scripts/generate.js"
+  },
   "peerDependencies": {
     "@tarojs/components": "^3.3.6"
   },
@@ -25,6 +28,8 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
-    "@types/node": "^14.14.25"
+    "@types/node": "^14.14.25",
+    "@types/lodash": "^4.14.175",
+    "lodash": "^4.17.21"
   }
 }
