@@ -5,6 +5,12 @@
   margin: 0;
   font-weight: normal;
 
+  &:first-of-type {
+    .#{$demo-prefix}block__title {
+      padding-top: 20px * $hd;
+    }
+  }
+
   &__title {
     padding: 32px * $hd 16px * $hd 16px * $hd;
     font-size: 14px * $hd;
