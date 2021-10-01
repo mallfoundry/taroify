@@ -1,7 +1,7 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties } from "react"
+import { CSSProperties, ReactNode } from "react"
 import {
   ICON_PRESET_COLORS,
   ICON_PRESET_SIZES,
@@ -20,7 +20,9 @@ interface VanIconProps {
   name?: string
   size?: IconSize | IconSizeString | number | string
   color?: IconColor | IconColorString | string
-  onClick?: (event: ITouchEvent) => void
+  children?: ReactNode
+
+  onClick?(event: ITouchEvent): void
 }
 
 export default function VanIcon(props: VanIconProps) {
@@ -30,6 +32,7 @@ export default function VanIcon(props: VanIconProps) {
     name,
     size = IconSize.Inherit,
     color = IconColor.Inherit,
+    children,
     onClick,
   } = props
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
@@ -53,6 +56,7 @@ export default function VanIcon(props: VanIconProps) {
         fontSize: presetSize ? "" : addUnitPx(size),
         ...style,
       }}
+      children={children}
       onClick={onClick}
     />
   )
