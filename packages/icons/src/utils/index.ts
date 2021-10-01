@@ -14,7 +14,7 @@ export function isIconElement(node?: ReactNode): boolean {
 
 export function cloneIconElement(node: ReactNode, props: IconProps): ReactNode {
   if (!isIconElement(node)) {
-    return node
+    return isValidElement(node) ? cloneElement(node, props) : node
   }
   const { className, ...restProps } = props
   const element = node as ReactElement
