@@ -100,8 +100,8 @@ function watchTypescript(module, dist) {
     series(
       //
       copyTypescriptFiles(module, dist), //
-      // compileTypescript(module, dist),//
-      // generateDeclarationFiles(module, dist)
+      compileTypescript(module, dist), //
+      generateDeclarationFiles(module, dist),
     ), //
   )
 }
