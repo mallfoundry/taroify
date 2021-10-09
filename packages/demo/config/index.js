@@ -38,6 +38,7 @@ const config = {
     },
   },
   h5: {
+    esnextModules: ["@taroify"],
     publicPath: process.env.NODE_ENV === "development" ? "/" : "/taroify-demo/h5",
     staticDirectory: "static",
     postcss: {
