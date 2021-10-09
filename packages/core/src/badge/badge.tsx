@@ -8,7 +8,6 @@ import { prefixClassname } from "../styles"
 
 export interface BadgeProps {
   className?: string
-  color?: string
   content?: ReactNode
   max?: number
   dot?: boolean
@@ -16,7 +15,7 @@ export interface BadgeProps {
 }
 
 function Badge(props: BadgeProps): JSX.Element {
-  const { className, color = "", content: contentProp, max, dot, children } = props
+  const { className, content: contentProp, max, dot, children } = props
   const isIcon = useMemo(() => isIconElement(children), [children])
   const hasChildren = children !== undefined
   const noneChildren = children === undefined
@@ -37,7 +36,6 @@ function Badge(props: BadgeProps): JSX.Element {
         {noneChildren && !dot && content}
         {hasChildren && (dot || content) && (
           <View
-            style={{ background: color }}
             className={classNames(
               prefixClassname("badge"),
               {

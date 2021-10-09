@@ -1,7 +1,7 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$badge-size: 16px * $hd;
+$badge-size: 16px;
 $badge-color: var(--white, $white);
 $badge-padding: 0 3px * $hd;
 $badge-font-size: var(--font-size-sm, $font-size-sm);

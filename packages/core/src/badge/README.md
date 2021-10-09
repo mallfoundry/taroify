@@ -63,18 +63,26 @@ import Badge from "@taroify/core/badge"
 通过 `color` 属性来设置徽标的颜色。
 
 ```tsx
-<Badge content={5} color="#1989fa">
+<Badge className="custom-color" content={5}>
   <View className="badge-block" />
 </Badge>
-<Badge content={10} color="#1989fa">
+<Badge className="custom-color" content={10}>
   <View className="badge-block" />
 </Badge>
-<Badge content="Hot" color="#1989fa">
+<Badge className="custom-color" content="Hot">
   <View className="badge-block" />
 </Badge>
-<Badge dot color="#1989fa">
+<Badge className="custom-color" dot>
   <View className="badge-block" />
 </Badge>
+```
+
+```scss
+.custom-color {
+  .taroify-badge {
+    background: #1989fa;
+  }
+}
 ```
 
 ### 自定义徽标内容
@@ -118,7 +126,6 @@ import Badge from "@taroify/core/badge"
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | content | 徽标内容 | _ReactNode_ | - |
-| color | 徽标背景颜色 | _string_ | `#ee0a24` |
 | dot | 是否展示为小红点 | _boolean_ | `false` |
 | max | 最大值，超过最大值会显示 `{max}+`，仅当 content 为数字时有效 | _number \| string_ | - |
 | offset | 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为 `px` | _[number \| string, number \| string]_ | - |

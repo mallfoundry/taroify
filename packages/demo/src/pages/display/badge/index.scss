@@ -10,6 +10,12 @@
     margin-left: 16px * $hd;
   }
 
+  .custom-color {
+    .#{$component-prefix}badge {
+      background: #1989fa;
+    }
+  }
+
   .badge-icon {
     display: block;
     margin-left: 0;
