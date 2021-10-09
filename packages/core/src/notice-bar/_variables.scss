@@ -2,11 +2,11 @@
 @import "../styles/variables";
 
 $notice-bar-height: 40px * $hd;
-$notice-bar-padding: 0 $padding-md;
-$notice-bar-wordwrap-padding: $padding-xs $padding-md;
-$notice-bar-text-color: $orange-dark;
-$notice-bar-font-size: $font-size-md;
+$notice-bar-padding: 0 var(--padding-md, $padding-md);
+$notice-bar-wordwrap-padding: var(--padding-xs, $padding-xs) var(--padding-md, $padding-md);
+$notice-bar-text-color: var(--orange-dark, $orange-dark);
+$notice-bar-font-size: var(--font-size-md, $font-size-md);
 $notice-bar-line-height: 24px * $hd;
-$notice-bar-background-color: $orange-light;
+$notice-bar-background-color: var(--orange-light, $orange-light);
 $notice-bar-icon-size: 16px * $hd;
 $notice-bar-icon-min-width: 24px * $hd;

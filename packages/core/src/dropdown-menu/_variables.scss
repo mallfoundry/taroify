@@ -3,19 +3,19 @@
 
 // dropdown-menu
 $dropdown-menu-height: 48px * $hd;
-$dropdown-menu-background-color: $white;
+$dropdown-menu-background-color: var(--white, $white);
 $dropdown-menu-z-index: 11;
 $dropdown-menu-box-shadow: 0 2px * $hd 12px * $hd rgba(100, 101, 102, 0.12);
 // dropdown-menu title
 $dropdown-menu-title-font-size: 15px * $hd;
-$dropdown-menu-title-text-color: $text-color;
-$dropdown-menu-title-active-text-color: $danger-color;
-$dropdown-menu-title-disabled-text-color: $gray-6;
-$dropdown-menu-title-padding: 0 $padding-xs;
-$dropdown-menu-title-line-height: $line-height-lg;
+$dropdown-menu-title-text-color: var(--text-color, $text-color);
+$dropdown-menu-title-active-text-color: var(--danger-color, $danger-color);
+$dropdown-menu-title-disabled-text-color: var(--gray-6, $gray-6);
+$dropdown-menu-title-padding: 0 var(--padding-xs, $padding-xs);
+$dropdown-menu-title-line-height: var(--line-height-lg, $line-height-lg);
 //
 $dropdown-menu-item-z-index: $dropdown-menu-z-index - 1;
 
 $dropdown-menu-item-content-max-height: 80%;
 //
-$dropdown-menu-option-active-color: $danger-color;
+$dropdown-menu-option-active-color: var(--danger-color, $danger-color);

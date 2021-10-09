@@ -2,11 +2,11 @@
 @import "../styles/variables";
 
 $pagination-height: 40px * $hd;
-$pagination-font-size: $font-size-md;
+$pagination-font-size: var(--font-size-md, $font-size-md);
 $pagination-item-width: 36px * $hd;
-$pagination-item-default-color: $blue;
-$pagination-item-disabled-color: $gray-7;
-$pagination-item-disabled-background-color: $background-color;
-$pagination-background-color: $white;
-$pagination-desc-color: $gray-7;
-$pagination-disabled-opacity: $disabled-opacity;
+$pagination-item-default-color: var(--blue, $blue);
+$pagination-item-disabled-color: var(--gray-7, $gray-7);
+$pagination-item-disabled-background-color: var(--background-color, $background-color);
+$pagination-background-color: var(--white, $white);
+$pagination-desc-color: var(--gray-7, $gray-7);
+$pagination-disabled-opacity: var(--disabled-opacity, $disabled-opacity);

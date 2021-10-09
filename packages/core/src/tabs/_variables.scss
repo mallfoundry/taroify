@@ -2,13 +2,13 @@
 @import "../styles/variables";
 
 // Tab styles
-$tab-text-color: $gray-7;
-$tab-active-text-color: $text-color;
-$tab-disabled-text-color: $gray-5;
-$tab-font-size: $font-size-md;
-$tab-line-height: $line-height-md;
+$tab-text-color: var(--gray-7, $gray-7);
+$tab-active-text-color: var(--text-color, $text-color);
+$tab-disabled-text-color: var(--gray-5, $gray-5);
+$tab-font-size: var(--font-size-md, $font-size-md);
+$tab-line-height: var(--line-height-md, $line-height-md);
 // Tabs styles
-$tabs-default-color: $red;
+$tabs-default-color: var(--danger-color, $danger-color);
 $tabs-line-height: 44px * $hd;
 $tabs-card-height: 30px * $hd;
 $tabs-nav-background-color: $white;

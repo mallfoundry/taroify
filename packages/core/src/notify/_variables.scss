@@ -1,11 +1,11 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$notify-text-color: $white;
-$notify-padding: $padding-xs $padding-md;
-$notify-font-size: $font-size-md;
-$notify-line-height: $line-height-md;
-$notify-primary-background-color: $blue;
-$notify-success-background-color: $green;
-$notify-danger-background-color: $red;
-$notify-warning-background-color: $orange;
+$notify-text-color: var(--white, $white);
+$notify-padding: var(--padding-xs, $padding-xs) var(--padding-md, $padding-md);
+$notify-font-size: var(--font-size-md, $font-size-md);
+$notify-line-height: var(--line-height-md, $line-height-md);
+$notify-primary-background-color: var(--blue, $blue);
+$notify-success-background-color: var(--green, $green);
+$notify-danger-background-color: var(--red, $red);
+$notify-warning-background-color: var(--orange, $orange);

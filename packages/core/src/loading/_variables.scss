@@ -1,8 +1,8 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$loading-color: $gray-5;
+$loading-color: var(--gray-5, $gray-5);
 $loading-size: 30px * $hd;
 
-$loading-text-color: $gray-6;
-$loading-text-font-size: $font-size-md;
+$loading-text-color: var(--gray-6, $gray-6);
+$loading-text-font-size: var(--font-size-md, $font-size-md);

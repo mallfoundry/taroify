@@ -2,17 +2,17 @@
 @import "../styles/variables";
 
 $stepper-active-color: #e8e8e8;
-$stepper-background-color: $active-color;
-$stepper-button-icon-color: $text-color;
-$stepper-button-disabled-color: $background-color;
-$stepper-button-disabled-icon-color: $gray-5;
-$stepper-button-round-color: $danger-color;
+$stepper-background-color: var(--active-color, $active-color);
+$stepper-button-icon-color: var(--text-color, $text-color);
+$stepper-button-disabled-color: var(--background-color, $background-color);
+$stepper-button-disabled-icon-color: var(--gray-5, $gray-5);
+$stepper-button-round-color: var(--danger-color, $danger-color);
 $stepper-input-width: 32px * $hd;
 $stepper-input-height: 28px * $hd;
-$stepper-input-font-size: $font-size-md;
+$stepper-input-font-size: var(--font-size-md, $font-size-md);
 $stepper-input-line-height: normal;
-$stepper-input-text-color: $text-color;
-$stepper-input-disabled-text-color: $gray-5;
-$stepper-input-disabled-background-color: $active-color;
-$stepper-border-radius: $border-radius-md;
+$stepper-input-text-color: var(--text-color, $text-color);
+$stepper-input-disabled-text-color: var(--gray-5, $gray-5);
+$stepper-input-disabled-background-color: var(--active-color, $active-color);
+$stepper-border-radius: var(--border-radius-md, $border-radius-md);
 

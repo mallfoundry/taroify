@@ -2,19 +2,19 @@
 @import "../styles/variables";
 
 $toast-max-width: 70%;
-$toast-font-size: $font-size-md;
-$toast-text-color: $white;
-$toast-icon-color: $white;
-$toast-loading-icon-color: $white;
-$toast-line-height: $line-height-md;
+$toast-font-size: var(--font-size-md, $font-size-md);
+$toast-text-color: var(--white, $white);
+$toast-icon-color: var(--white, $white);
+$toast-loading-icon-color: var(--white, $white);
+$toast-line-height: var(--line-height-md, $line-height-md);
 
-$toast-text-color: $white;
-$toast-border-radius: $border-radius-lg;
+$toast-text-color: var(--white, $white);
+$toast-border-radius: var(--border-radius-lg, $border-radius-lg);
 $toast-background-color: rgba($black, $alpha: 0.7);
 
-$toast-default-padding: $padding-md;
+$toast-default-padding: var(--padding-md, $padding-md);
 $toast-default-width: 88px * 2;
 $toast-default-min-height: 88px * 2;
 
 $toast-text-min-width: 96px * 2;
-$toast-text-padding: $padding-xs $padding-sm;
+$toast-text-padding: var(--padding-xs, $padding-xs) var(--padding-sm, $padding-sm);

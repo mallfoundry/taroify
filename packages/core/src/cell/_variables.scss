@@ -2,41 +2,41 @@
 @import "../styles/variables";
 @import "../styles/mixins/hairline";
 
-$cell-font-size: $font-size-md;
+$cell-font-size: var(--font-size-md, $font-size-md);
 $cell-line-height: 24px * $hd;
 
-$cell-text-color: $text-color;
-$cell-background-color: $white;
-$cell-border-color: $border-color;
-$cell-value-color: $gray-6;
-$cell-active-color: $active-color;
-$cell-required-color: $danger-color;
+$cell-text-color: var(--text-color, $text-color);
+$cell-background-color: var(--white, $white);
+$cell-border-color: var(--border-color, $border-color);
+$cell-value-color: var(--gray-6, $gray-6);
+$cell-active-color: var(--active-color, $active-color);
+$cell-required-color: var(--danger-color, $danger-color);
 
 $cell-icon-size: 16px * $hd;
 $cell-icon-margin-left: 4px * $hd;
 $cell-right-icon-margin-right: 4px * $hd;
 
-$cell-brief-color: $gray-6;
-$cell-brief-font-size: $font-size-sm;
-$cell-brief-line-height: $line-height-sm;
-$cell-brief-margin-top: $padding-base;
+$cell-brief-color: var(--gray-6, $gray-6);
+$cell-brief-font-size: var(--font-size-sm, $font-size-sm);
+$cell-brief-line-height: var(--line-height-sm, $line-height-sm);
+$cell-brief-margin-top: var(--padding-base, $padding-base);
 
 $cell-vertical-padding: 10px * $hd;
-$cell-horizontal-padding: $padding-md;
+$cell-horizontal-padding: var(--padding-md, $padding-md);
 
-$cell-medium-vertical-padding: $padding-sm;
-$cell-medium-title-font-size: $font-size-lg;
-$cell-medium-title-font-size: $font-size-md;
+$cell-medium-vertical-padding: var(--padding-sm, $padding-sm);
+$cell-medium-title-font-size: var(--font-size-lg, $font-size-lg);
+$cell-medium-title-font-size: var(--font-size-md, $font-size-md);
 
-$cell-large-vertical-padding: $padding-sm;
-$cell-large-title-font-size: $font-size-lg;
-$cell-large-subtitle-font-size: $font-size-md;
+$cell-large-vertical-padding: var(--padding-sm, $padding-sm);
+$cell-large-title-font-size: var(--font-size-lg, $font-size-lg);
+$cell-large-subtitle-font-size: var(--font-size-md, $font-size-md);
 
-$cell-group-background-color: $white;
-$cell-group-title-color: $gray-6;
-$cell-group-title-padding: $padding-md $padding-md $padding-xs;
-$cell-group-title-font-size: $font-size-md;
+$cell-group-background-color: var(--white, $white);
+$cell-group-title-color: var(--gray-, $gray-6);
+$cell-group-title-padding: var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
+$cell-group-title-font-size: var(--font-size-md, $font-size-md);
 $cell-group-title-line-height: 16px * $hd;
-$cell-group-inset-padding: 0 $padding-md;
-$cell-group-inset-border-radius: $border-radius-lg;
-$cell-group-inset-title-padding: $padding-md $padding-md $padding-xs $padding-xl;
+$cell-group-inset-padding: 0 var(--padding-md, $padding-md);
+$cell-group-inset-border-radius: var(--border-radius-lg, $border-radius-lg);
+$cell-group-inset-title-padding: var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs) var(--padding-xl, $padding-xl);

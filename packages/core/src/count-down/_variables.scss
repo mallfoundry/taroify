@@ -1,6 +1,6 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$count-down-text-color: $text-color;
-$count-down-font-size: $font-size-md;
-$count-down-line-height: $line-height-md;
+$count-down-text-color: var(--text-color, $text-color);
+$count-down-font-size: var(--font-size-md, $font-size-md);
+$count-down-line-height: var(--line-height-md, $line-height-md);

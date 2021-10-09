@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 $rate-icon-size: 20px * $hd;
-$rate-icon-gutter: $padding-base;
-$rate-icon-empty-color: $gray-5;
-$rate-icon-full-color: $danger-color;
-$rate-icon-disabled-color: $gray-5;
+$rate-icon-gutter: var(--padding-base, $padding-base);
+$rate-icon-empty-color: var(--gray-5, $gray-5);
+$rate-icon-full-color: var(--danger-color, $danger-color);
+$rate-icon-disabled-color: var(--gray-5, $gray-5);

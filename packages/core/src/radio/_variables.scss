@@ -2,11 +2,11 @@
 @import "../styles/variables";
 
 $radio-size: 20px * $hd;
-$radio-border-color: $gray-5;
-$radio-transition-duration: $animation-duration-fast;
-$radio-label-margin: $padding-xs;
-$radio-label-color: $text-color;
-$radio-checked-icon-color: $primary-color;
-$radio-disabled-icon-color: $gray-5;
-$radio-disabled-label-color: $gray-5;
-$radio-disabled-background-color: $border-color;
+$radio-border-color: var(--gray-5, $gray-5);
+$radio-transition-duration: var(--animation-duration-fast, $animation-duration-fast);
+$radio-label-margin: var(--padding-xs, $padding-xs);
+$radio-label-color: var(--text-color, $text-color);
+$radio-checked-icon-color: var(--primary-color, $primary-color);
+$radio-disabled-icon-color: var(--gray-5, $gray-5);
+$radio-disabled-label-color: var(--gray-5, $gray-5);
+$radio-disabled-background-color: var(--border-color, $border-color);

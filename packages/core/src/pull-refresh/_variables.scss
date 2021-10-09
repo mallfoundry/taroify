@@ -2,6 +2,6 @@
 @import "../styles/variables";
 
 $pull-refresh-head-height: 50px * $hd;
-$pull-refresh-head-font-size: $font-size-md;
-$pull-refresh-head-text-color: $gray-6;
+$pull-refresh-head-font-size: var(--font-size-md, $font-size-md);
+$pull-refresh-head-text-color: var(--gray-6, $gray-6);
 $pull-refresh-loading-icon-size: 16px * $hd;

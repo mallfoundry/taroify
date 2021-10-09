@@ -1,14 +1,14 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$tree-select-font-size: $font-size-md;
-$tree-select-sidebar-background-color: $background-color;
+$tree-select-font-size: var(--font-size-md, $font-size-md);
+$tree-select-sidebar-background-color: var(--background-color, $background-color);
 
-$tree-select-tab-padding: 14px * $hd $padding-sm;
+$tree-select-tab-padding: 14px * $hd var(--padding-sm, $padding-sm);
 
-$tree-select-content-background-color: $white;
+$tree-select-content-background-color: var(--white, $white);
 
 $tree-select-option-height: 48px * $hd;
-$tree-select-option-active-color: $danger-color;
-$tree-select-option-disabled-color: $gray-5;
+$tree-select-option-active-color: var(--danger-color, $danger-color);
+$tree-select-option-disabled-color: var(--gray-5, $gray-5);
 $tree-select-option-selected-size: 16px * $hd;

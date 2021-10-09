@@ -68,7 +68,6 @@ export default function Checkbox(props: CheckboxProps) {
     onChange?.(!checked)
 
     if (name) {
-      console.log(names)
       if (names?.includes(name)) {
         onNamesChange?.(names.filter((aName) => aName !== name))
       } else if (namesMax === 0 || names.length < namesMax) {
