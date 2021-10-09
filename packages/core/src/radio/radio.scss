@@ -45,7 +45,7 @@
 
     &--checked {
       .#{$component-prefix}icon {
-        color: var(--white);
+        color: var(--white, $white);
         background-color: var(--radio-checked-icon-color, $radio-checked-icon-color);
         border-color: var(--radio-checked-icon-color, $radio-checked-icon-color);
       }

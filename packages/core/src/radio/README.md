@@ -88,11 +88,22 @@ function SquareRadio() {
 function CustomColorRadio() {
   const [value, setValue] = useState("1")
   return (
-    <Radio.Group color="#ee0a24" value={value} onChange={setValue}>
+    <Radio.Group className="custom-color" value={value} onChange={setValue}>
       <Radio name="1">单选框 1</Radio>
       <Radio name="2">单选框 2</Radio>
     </Radio.Group>
   )
+}
+```
+
+```scss
+.custom-color {
+  .taroify-radio__icon--checked {
+    .taroify-icon {
+      border-color: #ee0a24;
+      background: #ee0a24;
+    }
+  }
 }
 ```
 
@@ -187,7 +198,6 @@ function RadioCellGroup() {
 | shape          | 形状，可选值为 `square`   | _string_           | `round`   |
 | disabled       | 是否为禁用状态            | _boolean_          | `false`   |
 | size           | 图标大小，默认单位为`px`  | _number \| string_ | `20px`    |
-| color          | 选中状态颜色              | _string_           | `#1989fa` |
 
 ### RadioGroup Props
 
@@ -197,7 +207,6 @@ function RadioCellGroup() {
 | disabled | 是否禁用所有单选框 | _boolean_ | `false` |
 | direction | 排列方向，可选值为`horizontal` | _string_ | `vertical` |
 | size | 所有单选框的图标大小，默认单位为`px` | _number \| string_ | `20px` |
-| color | 所有单选框的选中状态颜色 | _string_ | `#1989fa` |
 
 ### Radio Events
 

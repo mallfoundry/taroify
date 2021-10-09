@@ -15,4 +15,13 @@
       padding: 0;
     }
   }
+
+  .custom-color {
+    .taroify-radio__icon--checked {
+      .taroify-icon {
+        border-color: #ee0a24;
+        background: #ee0a24;
+      }
+    }
+  }
 }
