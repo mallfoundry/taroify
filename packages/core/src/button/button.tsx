@@ -4,7 +4,7 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useMemo } from "react"
-import Loading, { LoadingType, LoadingTypeString } from "../loading"
+import Loading, { LoadingType } from "../loading"
 import { prefixClassname } from "../styles"
 
 import {
@@ -22,7 +22,7 @@ function isPresetButtonColor(color?: ButtonColor | string): boolean {
 }
 
 interface ButtonLoadingProps {
-  type?: LoadingType | LoadingTypeString
+  type?: LoadingType
 }
 
 function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoadingProps | undefined {
