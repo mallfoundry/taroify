@@ -20,9 +20,9 @@ function CustomStyledRate() {
   const [value, setValue] = useState(3)
   return (
     <Rate
+      className="custom-color"
+      allowHalf
       size={25}
-      color="#ffd21e"
-      emptyColor="#eee"
       emptyIcon={<Star />}
       value={value}
       onChange={setValue}

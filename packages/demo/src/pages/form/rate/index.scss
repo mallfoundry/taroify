@@ -4,4 +4,13 @@
 
 .rate-demo {
 
+  .custom-color {
+    .#{$component-prefix}rate__icon {
+      color: #eee;
+
+      &--full {
+        color: #ffd21e;
+      }
+    }
+  }
 }
