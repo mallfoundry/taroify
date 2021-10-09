@@ -26,13 +26,9 @@ function Switch(props: SwitchProps) {
     loading = false,
     disabled = false,
     size,
-    activeColor,
-    inactiveColor,
     onChange,
     onClick,
   } = props
-
-  const color = checked ? activeColor : inactiveColor
 
   function handleClick(event: ITouchEvent) {
     onClick?.(event)
@@ -55,12 +51,11 @@ function Switch(props: SwitchProps) {
       )}
       style={{
         fontSize: addUnitPx(size),
-        backgroundColor: color,
       }}
       onClick={handleClick}
     >
       <View className={prefixClassname("switch__node")}>
-        {loading && <Loading className={prefixClassname("switch__loading")} color={color} />}
+        {loading && <Loading className={prefixClassname("switch__loading")} />}
       </View>
     </View>
   )

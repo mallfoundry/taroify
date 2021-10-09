@@ -49,10 +49,24 @@ function BasicSwitch() {
 
 ### 自定义颜色
 
-`activeColor` 属性表示打开时的背景色，`inactiveColor` 表示关闭时的背景色。
+通过 `css` 设置打开与关闭时的背景色。
 
 ```tsx
-<Switch checked activeColor="#ee0a24" inactiveColor="#dcdee0" />
+<Switch className="custom-color" checked />
+```
+
+```scss
+.custom-color.taroify-switch {
+  background: #dcdee0;
+
+  &--checked {
+    background: #ee0a24;
+
+    .taroify-switch__loading {
+      color: #ee0a24;
+    }
+  }
+}
 ```
 
 ### 搭配单元格使用
@@ -80,8 +94,6 @@ function SwitchWithCell() {
 | loading        | 是否为加载状态           | _boolean_          | `false`   |
 | disabled       | 是否为禁用状态           | _boolean_          | `false`   |
 | size           | 开关尺寸，默认单位为`px` | _number \| string_ | `30px`    |
-| activeColor   | 打开时的背景色           | _string_           | `#1989fa` |
-| inactiveColor | 关闭时的背景色           | _string_           | `white`   |
 
 ### Events
 

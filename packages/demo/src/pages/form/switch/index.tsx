@@ -47,9 +47,7 @@ function CustomSizeSwitch() {
 
 function CustomColorSwitch() {
   const [checked, setChecked] = useState(false)
-  return (
-    <Switch checked={checked} onChange={setChecked} activeColor="#ee0a24" inactiveColor="#dcdee0" />
-  )
+  return <Switch className="custom-color" checked={checked} onChange={setChecked} />
 }
 
 function SwitchWithCell() {
