@@ -28,13 +28,13 @@ function StepSlider() {
 
 function StyledSlider() {
   const [value, setValue] = useState(50)
-  return <Slider size={4} activeColor="#ee0a24" value={value} onChange={setValue} />
+  return <Slider className="custom-color" size={4} value={value} onChange={setValue} />
 }
 
 function StyledThumbSlider() {
   const [value, setValue] = useState(50)
   return (
-    <Slider activeColor="#ee0a24" value={value} onChange={setValue}>
+    <Slider className="custom-color" value={value} onChange={setValue}>
       <Slider.Thumb>
         <View className="custom-thumb">{value}</View>
       </Slider.Thumb>

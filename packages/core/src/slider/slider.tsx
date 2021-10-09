@@ -1,5 +1,6 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -14,7 +15,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/dom/event"
-import { addNumber, clamp } from "../utils/format/number"
+import { addNumber } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
 import { getBoundingClientRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
@@ -91,8 +92,6 @@ interface SliderBaseProps {
   min?: number
   max?: number
   size?: number
-  activeColor?: string
-  inactiveColor?: string
   orientation?: SliderOrientation | SliderOrientationString
   disabled?: boolean
   children?: ReactNode
@@ -122,8 +121,6 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     step = 1,
     range = false,
     size,
-    activeColor,
-    inactiveColor,
     orientation = SliderOrientation.Horizontal,
     disabled = false,
     children,
@@ -173,10 +170,9 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     const crossAxis = vertical ? "width" : "height"
     return {
       ...style,
-      background: inactiveColor ?? "",
       [crossAxis]: addUnitPx(size) ?? "",
     }
-  }, [inactiveColor, size, style, vertical])
+  }, [size, style, vertical])
 
   const trackStyle = useMemo<CSSProperties>(() => {
     const mainAxis = vertical ? "height" : "width"
@@ -184,13 +180,12 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
       [mainAxis]: calcMainAxis(),
       left: vertical ? "" : calcOffset(),
       top: vertical ? calcOffset() : "",
-      background: activeColor ?? "",
       transition: dragStatusRef.current ? "none" : "",
     }
-  }, [activeColor, calcMainAxis, calcOffset, vertical])
+  }, [calcMainAxis, calcOffset, vertical])
 
   const formatValue = (value: number) => {
-    value = clamp(value, min, max)
+    value = _.clamp(value, min, max)
     const diff = Math.round((value - min) / step) * step
     return addNumber(min, diff)
   }

@@ -1,5 +1,6 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -16,7 +17,6 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
-import { clamp } from "../utils/format/number"
 import { getBoundingClientRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
@@ -173,7 +173,7 @@ function SwipeCell(props: SwipeCellProps) {
       touch.move(event)
 
       if (touch.isHorizontal()) {
-        const offset = clamp(
+        const offset = _.clamp(
           deltaX + startOffsetRef.current,
           -(await getRightWidth()),
           await getLeftWidth(),

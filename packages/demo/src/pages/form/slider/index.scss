@@ -16,6 +16,12 @@
     }
   }
 
+  .custom-color {
+    .#{$component-prefix}slider__track {
+      background-color: #ee0a24;
+    }
+  }
+
   .custom-thumb {
     width: 26px * $hd;
     color: #fff;
