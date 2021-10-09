@@ -95,12 +95,11 @@ export interface IndexBarProps {
   sticky?: boolean
   stickyOffsetTop?: number
   zIndex?: number
-  highlightColor?: string
   children?: ReactNode
 }
 
 function IndexList(props: IndexBarProps) {
-  const { className, sticky = true, stickyOffsetTop = 0, zIndex = 1, highlightColor } = props
+  const { className, sticky = true, stickyOffsetTop = 0, zIndex = 1 } = props
   const { anchorProps, anchorRefs, children } = useIndexBarChildren(props.children)
 
   const scrollTopRef = useRef(0)
@@ -241,7 +240,6 @@ function IndexList(props: IndexBarProps) {
         sticky,
         stickyOffsetTop,
         zIndex,
-        highlightColor,
         activeIndex: activeAnchor?.index ?? -1,
         activeArrayedIndex: activeAnchor?.arrayedIndex ?? -1,
         getListRect: () => listRectRef.current,

@@ -5,7 +5,6 @@ interface IndexListContextValue {
   sticky?: boolean
   stickyOffsetTop?: number
   zIndex?: number
-  highlightColor?: string
   activeIndex: number | string
   activeArrayedIndex: number
 
