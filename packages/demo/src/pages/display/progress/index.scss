@@ -10,4 +10,28 @@
   .#{$component-prefix}progress {
     margin: 16px * $hd;
   }
+
+  .custom-color1 {
+    &:not(.#{$component-prefix}progress--inactive) {
+      .#{$component-prefix}progress__portion {
+        background: #f2826a;
+      }
+    }
+  }
+
+  .custom-color2 {
+    &:not(.#{$component-prefix}progress--inactive) {
+      .#{$component-prefix}progress__portion {
+        background: #ee0a24;
+      }
+    }
+  }
+
+  .custom-color3 {
+    &:not(.#{$component-prefix}progress--inactive) {
+      .#{$component-prefix}progress__portion {
+        background: linear-gradient(to right, #be99ff, #7232dd);
+      }
+    }
+  }
 }

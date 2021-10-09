@@ -44,9 +44,35 @@ import Progress from "@taroify/core/progress"
 可以使用 `pivot-text` 属性自定义文字，`color` 属性自定义进度条颜色。
 
 ```tsx
-<Progress percent={25} color="#f2826a" />
-<Progress percent={50} color="#ee0a24" />
-<Progress percent={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
+<Progress className="custom-color1" percent={25} />
+<Progress className="custom-color2" percent={50} />
+<Progress className="custom-color3" percent={75} />
+```
+
+```scss
+.custom-color1 {
+  &:not(.taroify-progress--inactive) {
+    .taroify-progress__portion {
+      background: #f2826a;
+    }
+  }
+}
+
+.custom-color2 {
+  &:not(.taroify-progress--inactive) {
+    .taroify-progress__portion {
+      background: #ee0a24;
+    }
+  }
+}
+
+.custom-color3 {
+  &:not(.taroify-progress--inactive) {
+    .taroify-progress__portion {
+      background: linear-gradient(to right, #be99ff, #7232dd);
+    }
+  }
+}
 ```
 
 ## API
@@ -57,8 +83,6 @@ import Progress from "@taroify/core/progress"
 | --- | --- | --- | --- |
 | percent | 进度百分比 | _number \| string_ | `0` |
 | strokeWidth | 进度条粗细，默认单位为`px` | _number \| string_ | `4px` |
-| color | 进度条颜色 | _string_ | `#1989fa` |
-| trackColor | 轨道颜色 | _string_ | `#e5e5e5` |
-| textColor | 进度文字颜色 | _string_ | `white` |
+| color | 进度条颜色 | _string_ | `primary` |
 | inactive | 是否置灰 | _boolean_ | `false` |
 | label | 进度文字 | _boolean \| ReactNode_ | `true` |
