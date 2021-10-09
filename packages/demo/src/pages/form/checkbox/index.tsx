@@ -26,7 +26,7 @@ function SquareCheckbox() {
 function CheckboxWithCustomColor() {
   const [value, setValue] = useState(false)
   return (
-    <Checkbox color="#ee0a24" checked={value} onChange={setValue}>
+    <Checkbox className="custom-color" checked={value} onChange={setValue}>
       自定义颜色
     </Checkbox>
   )
