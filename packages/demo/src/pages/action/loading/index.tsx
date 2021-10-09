@@ -15,8 +15,8 @@ export default function LoadingDemo() {
       </Block>
       <Block title="自定义颜色">
         <Space>
-          <Loading color="#1989fa" />
-          <Loading type="spinner" color="#1989fa" />
+          <Loading className="custom-color" />
+          <Loading className="custom-color" type="spinner" />
         </Space>
       </Block>
       <Block title="自定义大小">
@@ -35,10 +35,10 @@ export default function LoadingDemo() {
       </Block>
       <Block title="垂直排列">
         <Space size="large">
-          <Loading direction="vertical" color="#0094ff">
+          <Loading className="custom-color" direction="vertical">
             加载中...
           </Loading>
-          <Loading direction="vertical" textColor="#0094ff">
+          <Loading className="custom-text-color" direction="vertical">
             加载中...
           </Loading>
         </Space>

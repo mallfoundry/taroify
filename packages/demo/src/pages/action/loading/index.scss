@@ -11,4 +11,14 @@
   .#{$component-prefix}loading--vertical {
     display: inline-flex;
   }
+
+  .custom-color {
+    color: #1989fa;
+  }
+
+  .custom-text-color {
+    .#{$component-prefix}loading__text {
+      color: #1989fa;
+    }
+  }
 }
