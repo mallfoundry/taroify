@@ -49,10 +49,10 @@ function CustomIndexBar() {
 }
 
 export default function IndexBarDemo() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [tab, setTab] = useState(0)
   return (
     <Page title="IndexList 索引栏" className="index-list-demo">
-      <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+      <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="基础用法">
           <BasicIndexBar />
         </Tabs.TabPane>

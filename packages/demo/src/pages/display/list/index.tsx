@@ -128,11 +128,11 @@ function PullRefreshList() {
 }
 
 export default function ListDemo() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [tab, setTab] = useState(0)
 
   return (
     <Page title="List 列表" className="list-demo">
-      <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+      <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="基础用法">
           <BasicList />
         </Tabs.TabPane>
