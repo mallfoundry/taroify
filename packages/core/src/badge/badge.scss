@@ -41,6 +41,7 @@
   }
 
   &--dot {
+    padding: 0;
     width: var(--badge-dot-size, $badge-dot-size);
     min-width: 0;
     height: var(--badge-dot-size, $badge-dot-size);
