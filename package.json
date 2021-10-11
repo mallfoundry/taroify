@@ -1,6 +1,6 @@
 {
   "name": "taroify",
-  "version": "0.0.14-alpha.0",
+  "version": "0.0.14-alpha.1",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -37,7 +37,7 @@
     "*.{css,scss}": "stylelint --fix"
   },
   "devDependencies": {
-    "@taroify/cli": "0.0.14-alpha.0",
+    "@taroify/cli": "0.0.14-alpha.1",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "cross-env": "^7.0.3",
