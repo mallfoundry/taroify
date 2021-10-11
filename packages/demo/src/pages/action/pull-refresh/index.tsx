@@ -86,10 +86,10 @@ function CustomPullRefresh() {
 }
 
 export default function PullRefreshDemo() {
-  const [activeTab, setActiveTab] = useState<Tabs.TabKey>(0)
+  const [tab, setTab] = useState(0)
   return (
     <Page title="PullRefresh 下拉刷新" className="pull-refresh-demo">
-      <Tabs activeKey={activeTab} onChange={({ key }) => setActiveTab(key)}>
+      <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="基本用法">
           <BasicPullRefresh />
         </Tabs.TabPane>
