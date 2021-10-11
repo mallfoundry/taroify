@@ -82,7 +82,7 @@ function SquareRadio() {
 
 ### 自定义颜色
 
-通过 `color` 属性设置选中状态的图标颜色。
+通过 `css` 属性设置选中状态的图标颜色。
 
 ```tsx
 function CustomColorRadio() {

@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.14-alpha.0
+
+`2021-10-11`
+
+**Breaking Changes**
+
+- DropdownMenu
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- Collapse
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- Sidebar
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- TreeSelect
+  - activeTab 属性重命名为 tabValue[#34](https://github.com/mallfoundry/taroify/issues/34)
+  - activeValue 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+
 ### v0.0.13-alpha.0
 
 `2021-10-09`
