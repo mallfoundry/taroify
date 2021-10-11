@@ -1,6 +1,6 @@
 const subpackages = [
   {
-    root: "pages/basic/",
+    root: "pages/basic",
     title: "基础组件",
     pages: [
       {
@@ -43,15 +43,15 @@ const subpackages = [
         name: "Toast",
         path: "toast/index",
       },
-      {
-        title: "Space 间距",
-        name: "Space",
-        path: "space/index",
-      },
+      // {
+      //   title: "Space 间距",
+      //   name: "Space",
+      //   path: "space/index",
+      // },
     ],
   },
   {
-    root: "pages/form/",
+    root: "pages/form",
     title: "表单组件",
     pages: [
       {
@@ -122,7 +122,7 @@ const subpackages = [
     ],
   },
   {
-    root: "pages/action/",
+    root: "pages/action",
     title: "反馈组件",
     pages: [
       {
@@ -173,7 +173,7 @@ const subpackages = [
     ],
   },
   {
-    root: "pages/display/",
+    root: "pages/display",
     title: "展示组件",
     pages: [
       {
@@ -249,7 +249,7 @@ const subpackages = [
     ],
   },
   {
-    root: "pages/navigation/",
+    root: "pages/navigation",
     title: "导航组件",
     pages: [
       {
