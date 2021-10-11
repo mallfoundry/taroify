@@ -17,8 +17,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@tarojs/components": "^3.3.6",
-    "@tarojs/taro": "^3.3.6",
+    "@tarojs/components": "^3.3.9",
+    "@tarojs/taro": "^3.3.9",
     "react": "^17.0.2"
   },
   "dependencies": {
