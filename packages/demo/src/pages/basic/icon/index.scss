@@ -1,10 +1,19 @@
 @import "~@taroify/core/styles/prefix";
 @import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
 
 .icon-demo {
 
   &-notify {
     font-size: 13px * $hd;
+  }
+
+  .#{$demo-prefix}page__content {
+    .#{$component-prefix}icon {
+      margin: 16px * $hd 0;
+      color: $text-color;
+      font-size: 32px  * $hd;
+    }
   }
 
   .#{$component-prefix}tabs__tab-pane {
@@ -35,11 +44,5 @@
       line-height: 18px * $hd;
       word-break: break-word;
     }
-  }
-
-  .#{$component-prefix}icon {
-    margin: 16px * $hd 0;
-    color: $text-color;
-    font-size: 32px  * $hd;
   }
 }
