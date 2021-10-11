@@ -11,8 +11,6 @@ interface SwitchProps {
   loading?: boolean
   disabled?: boolean
   size?: number | string
-  activeColor?: string
-  inactiveColor?: string
 
   onChange?(checked: boolean): void
 

@@ -45,38 +45,24 @@ function useStepsChildren(children: ReactNode): StepsChildren {
   return __children__
 }
 
-type StepsDirectionString = "horizontal" | "vertical"
-
 export interface StepsProps {
   className?: string
   style?: CSSProperties
-  activeStep?: number
-  activeColor?: string
-  inactiveColor?: string
-  direction?: StepsDirection | StepsDirectionString
+  value?: number
+  direction?: StepsDirection
   alternativeLabel?: boolean
   children?: ReactNode
 }
 
 function Steps(props: StepsProps) {
-  const {
-    className,
-    style,
-    activeStep,
-    activeColor,
-    inactiveColor,
-    direction = StepsDirection.Horizontal,
-    alternativeLabel = false,
-  } = props
+  const { className, style, value, direction = "horizontal", alternativeLabel = false } = props
   const { steps } = useStepsChildren(props.children)
 
   return (
     <StepsContext.Provider
       value={{
-        activeStep,
-        activeColor,
-        inactiveColor,
-        direction: direction as StepsDirection,
+        value,
+        direction,
         alternativeLabel,
       }}
     >
@@ -84,8 +70,8 @@ function Steps(props: StepsProps) {
         className={classNames(
           prefixClassname("steps"),
           {
-            [prefixClassname("steps--horizontal")]: direction === StepsDirection.Horizontal,
-            [prefixClassname("steps--vertical")]: direction === StepsDirection.Vertical,
+            [prefixClassname("steps--horizontal")]: direction === "horizontal",
+            [prefixClassname("steps--vertical")]: direction === "vertical",
           },
           className,
         )}

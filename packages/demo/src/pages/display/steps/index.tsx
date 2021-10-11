@@ -14,7 +14,7 @@ interface ActiveStepsProps {
 function BasicSteps(props: ActiveStepsProps) {
   return (
     <Block title="基础用法">
-      <Steps activeStep={props.activeStep}>
+      <Steps value={props.activeStep}>
         <Steps.Step>买家下单</Steps.Step>
         <Steps.Step>商家接单</Steps.Step>
         <Steps.Step>买家提货</Steps.Step>
@@ -27,7 +27,7 @@ function BasicSteps(props: ActiveStepsProps) {
 function AlternativeLabelSteps(props: ActiveStepsProps) {
   return (
     <Block title="下方标签">
-      <Steps activeStep={props.activeStep} alternativeLabel>
+      <Steps value={props.activeStep} alternativeLabel>
         <Steps.Step>买家下单</Steps.Step>
         <Steps.Step>商家接单</Steps.Step>
         <Steps.Step>买家提货</Steps.Step>
@@ -40,7 +40,7 @@ function AlternativeLabelSteps(props: ActiveStepsProps) {
 function StepsWithCustomStyle(props: ActiveStepsProps) {
   return (
     <Block title="自定义样式">
-      <Steps activeStep={props.activeStep} activeColor="#38f">
+      <Steps className="custom-color" value={props.activeStep}>
         <Steps.Step icon={<ArrowRight />}>买家下单</Steps.Step>
         <Steps.Step icon={<ArrowRight />}>商家接单</Steps.Step>
         <Steps.Step icon={<ArrowRight />}>买家提货</Steps.Step>
@@ -50,10 +50,10 @@ function StepsWithCustomStyle(props: ActiveStepsProps) {
   )
 }
 
-function VerticalSteps() {
+function VerticalSteps(props: ActiveStepsProps) {
   return (
     <Block title="竖向步骤条">
-      <Steps activeStep={0} direction="vertical">
+      <Steps value={props.activeStep} direction="vertical">
         <Steps.Step>
           <View>【城市】物流状态2</View>
           <View>2016-07-12 12:40</View>
@@ -88,7 +88,7 @@ export default function StepsDemo() {
       </Block>
       <AlternativeLabelSteps activeStep={activeStep} />
       <StepsWithCustomStyle activeStep={activeStep} />
-      <VerticalSteps />
+      <VerticalSteps activeStep={activeStep} />
     </Page>
   )
 }

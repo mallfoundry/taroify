@@ -1,4 +1,1 @@
-export enum StepsDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
+export type StepsDirection = "horizontal" | "vertical"

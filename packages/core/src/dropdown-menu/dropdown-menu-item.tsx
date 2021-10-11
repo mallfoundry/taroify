@@ -8,42 +8,32 @@ import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
-import {
-  DropdownMenuDirection,
-  DropdownMenuKey,
-  DropdownMenuOptionEvent,
-  DropdownMenuValue,
-  DropdownMenuValues,
-} from "./dropdown-menu.shared"
+import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
 
 export interface DropdownMenuItemProps {
-  __dataKey__?: DropdownMenuKey
+  __dataKey__?: any
   disabled?: boolean
   title?: ReactNode
-  value?: DropdownMenuValue | DropdownMenuValues
+  value?: any | any[]
   children?: ReactNode
-  onChange?: (value: DropdownMenuValue | DropdownMenuValues) => void
+  onChange?: (value: any | any[]) => void
 }
 
 function DropdownMenuItem(props: DropdownMenuItemProps) {
   const { __dataKey__: dataKey, disabled, value, children, onChange } = props
 
-  const {
-    direction = DropdownMenuDirection.Down,
-    itemOffset,
-    isItemToggle,
-    toggleItem,
-  } = useContext(DropdownMenuContext)
+  const { direction = "down", itemOffset, isItemToggle, toggleItem } = useContext(
+    DropdownMenuContext,
+  )
 
   const active = isItemToggle?.(dataKey)
 
   const [opened, setOpened] = useState(false)
 
-  const down = direction === DropdownMenuDirection.Down
+  const down = direction === "down"
 
   const isOptionToggle = useCallback(
-    (aValue?: DropdownMenuValue) =>
-      _.isArray(value) ? (value as any[]).includes(aValue) : value === aValue,
+    (aValue?: any) => (_.isArray(value) ? (value as any[]).includes(aValue) : value === aValue),
     [value],
   )
 

@@ -1,12 +1,11 @@
 import { createContext, ReactNode } from "react"
-import { TreeSelectOptionEvent, TreeSelectOptionValue } from "./tree-select.shared"
+import { TreeSelectOptionObject } from "./tree-select.shared"
 
 interface TreeSelectContextValue {
   activeIcon?: ReactNode
+  value?: any | any[]
 
-  hasValuesActive?(value: TreeSelectOptionValue): boolean
-
-  changeValuesActive?(event: TreeSelectOptionEvent): void
+  onOptionClick?(event: TreeSelectOptionObject): void
 }
 
 const TreeSelectContext = createContext<TreeSelectContextValue>({})

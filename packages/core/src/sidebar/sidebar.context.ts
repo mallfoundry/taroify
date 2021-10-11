@@ -1,10 +1,10 @@
 import { createContext } from "react"
-import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
+import { SidebarTabObject } from "./sidebar-tab.shared"
 
 interface SidebarContextProps {
-  isTabActive?(key: SidebarTabKey): boolean
+  value?: any
 
-  changeTab?(event: SidebarTabEvent): void
+  onTabClick?(tab: SidebarTabObject): void
 }
 
 const SidebarContext = createContext<SidebarContextProps>({})

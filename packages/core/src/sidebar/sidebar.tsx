@@ -1,50 +1,71 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, CSSProperties, ReactElement, ReactNode, useCallback, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
 import SidebarTab from "./sidebar-tab"
-import { SidebarTabEvent, SidebarTabKey } from "./sidebar-tab.shared"
+import { SidebarTabObject } from "./sidebar-tab.shared"
 import SidebarContext from "./sidebar.context"
 
-function arrayChildren(children?: ReactNode) {
-  return React.Children.map(children, (node: ReactNode, index) => {
-    if (!React.isValidElement(node)) {
-      return node
-    }
-    const element = node as ReactElement
-    if (element.type !== SidebarTab) {
-      return element
-    }
-    const { props } = element
-    return cloneElement(element, {
-      ...props,
-      __dataKey__: element.key ?? index,
-      __dataIndex__: index,
-    })
-  })
+function useSidebarChildren(children: ReactNode) {
+  return useMemo(
+    () =>
+      Children.map(children, (node: ReactNode, index) => {
+        if (!isValidElement(node)) {
+          return node
+        }
+        const element = node as ReactElement
+        if (element.type !== SidebarTab) {
+          return element
+        }
+        const { key, props } = element
+        const { value: oldValue, ...restProps } = props
+        const value = oldValue ?? index
+        return cloneElement(element, {
+          key: key ?? value,
+          value: value,
+          ...restProps,
+        })
+      }),
+    [children],
+  )
 }
 
 export interface SidebarProps {
   className?: string
   style?: CSSProperties
-  activeKey?: SidebarTabKey
+  value?: any
   children?: ReactNode
-  onChange?: (event: SidebarTabEvent) => void
+
+  onChange?(value: any, tab: SidebarTabObject): void
 }
 
 function Sidebar(props: SidebarProps) {
-  const { className, style, activeKey, onChange } = props
+  const { className, style, value, onChange } = props
+  const children = useSidebarChildren(props.children)
 
-  const children = useMemo(() => arrayChildren(props.children), [props.children])
-
-  const isTabActive = useCallback((tabKey: SidebarTabKey) => tabKey === activeKey, [activeKey])
-
-  const changeTab = useCallback((event: SidebarTabEvent) => onChange?.(event), [onChange])
+  const onTabClick = useCallback(
+    (tab: SidebarTabObject) => {
+      const { disabled, value } = tab
+      if (!disabled) {
+        onChange?.(value, tab)
+      }
+    },
+    [onChange],
+  )
 
   return (
     <View className={classNames(prefixClassname("sidebar"), className)} style={style}>
-      <SidebarContext.Provider value={{ isTabActive, changeTab }} children={children} />
+      <SidebarContext.Provider value={{ value, onTabClick }} children={children} />
     </View>
   )
 }
