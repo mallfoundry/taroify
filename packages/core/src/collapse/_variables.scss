@@ -2,10 +2,10 @@
 @import "../styles/variables";
 @import '../styles/mixins/hairline';
 
-$collapse-item-transition-duration: $animation-duration-base;
-$collapse-item-content-padding: $padding-sm $padding-md;
-$collapse-item-content-font-size: $font-size-md;
+$collapse-item-transition-duration: var(--animation-duration-base, $animation-duration-base);
+$collapse-item-content-padding: var(--padding-sm, $padding-sm) var(--padding-md, $padding-md);
+$collapse-item-content-font-size: var(--font-size-md, $font-size-md);
 $collapse-item-content-line-height: 1.5;
-$collapse-item-content-text-color: $gray-6;
-$collapse-item-content-background-color: $white;
-$collapse-item-title-disabled-color: $gray-5;
+$collapse-item-content-text-color: var(--gray-6, $gray-6);
+$collapse-item-content-background-color: var(--white, $white);
+$collapse-item-title-disabled-color: var(--gray-5, $gray-5);

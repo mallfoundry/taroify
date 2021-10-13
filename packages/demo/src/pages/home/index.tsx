@@ -9,7 +9,7 @@ import Nav, { NavBlock } from "./nav"
 
 function renderNavBlocks(root: string, pages: Page[]) {
   return _.map(pages, ({ name, path, title }) => (
-    <NavBlock key={title} component={name} href={"/" + root + path} title={title} />
+    <NavBlock key={title} component={name} href={"/" + root + "/" + path} title={title} />
   ))
 }
 

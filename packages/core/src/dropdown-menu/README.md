@@ -20,11 +20,11 @@ import DropdownMenu from "@taroify/core/dropdown-menu"
 import { DropdownMenu } from "@taroify/core"
 
 function BasicDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -48,10 +48,12 @@ function BasicDropdownMenu() {
 import { DropdownMenu } from "@taroify/core"
 
 function DropdownMenuWithCustomContent() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [switch1, setSwitch1] = useState(true)
+  const [switch2, setSwitch2] = useState(false)
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -59,13 +61,13 @@ function DropdownMenuWithCustomContent() {
       </DropdownMenu.Item>
       <DropdownMenu.Item title="筛选">
         <Cell title="包邮" align="center">
-          switch
+          <Switch size="24" checked={switch1} onChange={setSwitch1} />
         </Cell>
         <Cell title="团购" align="center">
-          switch
+          <Switch size="24" checked={switch2} onChange={setSwitch2} />
         </Cell>
         <View style="padding: 5px 16px;">
-          <Button color="danger" block shape="round">
+          <Button color="danger" block shape="round" onClick={() => setValue(undefined)}>
             确认
           </Button>
         </View>
@@ -77,17 +79,17 @@ function DropdownMenuWithCustomContent() {
 
 ### 自定义选中态颜色
 
-通过 `activeColor` 属性可以自定义菜单标题和选项的选中态颜色。
+通过 `css` 可以自定义菜单标题和选项的选中态颜色。
 
 ```tsx
 import { DropdownMenu } from "@taroify/core"
 
 function DropdownMenuWithCustomColor() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} activeColor="#1989fa" onChange={setActiveKey}>
+    <DropdownMenu className="custom-color" value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -100,6 +102,24 @@ function DropdownMenuWithCustomColor() {
       </DropdownMenu.Item>
     </DropdownMenu>
   )
+}
+```
+
+```scss
+.custom-color {
+  .taroify-dropdown-menu-title--active {
+    .taroify-dropdown-menu-title__content {
+      color: #1989fa;
+    }
+  }
+
+  .taroify-dropdown-menu-option--active {
+    color: #1989fa;
+
+    .taroify-dropdown-menu-option__icon {
+      color: #1989fa;
+    }
+  }
 }
 ```
 
@@ -111,11 +131,11 @@ function DropdownMenuWithCustomColor() {
 import { DropdownMenu } from "@taroify/core"
 
 function UpDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} direction="up" onChange={setActiveKey}>
+    <DropdownMenu value={value} direction="up" onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -129,6 +149,7 @@ function UpDropdownMenu() {
     </DropdownMenu>
   )
 }
+
 ```
 
 ### 禁用菜单
@@ -137,9 +158,9 @@ function UpDropdownMenu() {
 import { DropdownMenu } from "@taroify/core"
 
 function DisabledDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
+  const [value, setValue] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item disabled>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -161,17 +182,15 @@ function DisabledDropdownMenu() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| activeKey | 当前选中的 DropdownMenu.Item key | _number \| string_ | - |
-| activeColor | 菜单标题和选项的选中态颜色 | _string_ | `#ee0a24` |
+| value | 当前选中的 DropdownMenu.Item 的 标识 | _React.Key_ | - |
 | direction | 菜单展开方向，可选值为`up` | _string_ | `down` |
 | zIndex | 菜单栏 z-index 层级 | _number \| string_ | `10` |
-| duration | 动画时长，单位秒 | _number \| string_ | `0.2` |
 
 ### DropdownMenu.Item Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| value | 当前选中项对应的 value | _number \| string_ | - |
+| value | 当前选中项对应的 value | _any_ | - |
 | title | 菜单项标题 | _string_ | 当前选中项文字 |
 | disabled | 是否禁用菜单 | _boolean_ | `false` |
 
@@ -179,33 +198,12 @@ function DisabledDropdownMenu() {
 
 | 事件名 | 说明                          | 回调参数 |
 | ------ | ----------------------------- | -------- |
-| change | 点击选项导致 value 变化时触发 | value    |
-| open   | 打开菜单栏时触发              | -        |
-| close  | 关闭菜单栏时触发              | -        |
-| opened | 打开菜单栏且动画结束后触发    | -        |
-| closed | 关闭菜单栏且动画结束后触发    | -        |
+| onChange | 点击选项导致 value 变化时触发 | _value: any_    |
 
 ### DropdownMenu.Option Props
 
 | 键名  | 说明                                   | 类型               |
 | ----- | -------------------------------------- | ------------------ |
-| value | 标识符                                 | _number \| string_  |
+| value | 标识符                                 | _any_  |
 | icon  | 左侧图标或图片                           |   _ReactNode_       |
 | title | 展示 DropdownMenu 选中的 title 内容      | _ReactNode_         |
-
-## 常见问题
-
-### 父元素设置 transform 后，下拉菜单的位置错误？
-
-把 `DropdownItem` 嵌套在 `Tabs` 等组件内部使用时，可能会遇到下拉菜单位置错误的问题。这是因为在 Chrome 浏览器中，transform 元素内部的 fixed 布局会降级成 absolute
-布局，导致下拉菜单的布局异常。
-
-将 `DropdownItem` 的 `teleport` 属性设置为 `body` 即可避免此问题：
-
-```html
-
-<van-dropdown-menu>
-  <van-dropdown-item teleport="body" />
-  <van-dropdown-item teleport="body" />
-</van-dropdown-menu>
-```

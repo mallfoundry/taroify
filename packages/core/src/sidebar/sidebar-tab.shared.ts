@@ -2,10 +2,8 @@ import { ReactNode } from "react"
 
 export type SidebarTabKey = string | number | undefined
 
-export interface SidebarTabEvent {
-  key?: SidebarTabKey
-  index?: number
-  title?: ReactNode
+export interface SidebarTabObject {
+  value?: any
+  children?: ReactNode
   disabled?: boolean
-  active?: boolean
 }

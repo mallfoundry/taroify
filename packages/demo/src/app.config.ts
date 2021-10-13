@@ -13,5 +13,6 @@ export default {
     navigationBarTextStyle: "black",
   },
   pages: ["pages/home/index"],
+  subpackages: subPackages,
   subPackages,
 }

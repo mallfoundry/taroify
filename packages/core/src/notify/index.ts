@@ -1,1 +1,2 @@
-export { default, NotifyColor } from "./notify"
+export { default } from "./notify"
+export type { NotifyColor } from "./notify"

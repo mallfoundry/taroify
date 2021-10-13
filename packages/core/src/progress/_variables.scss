@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 $progress-height: 14px * $hd;
-$progress-background-color: $gray-3;
+$progress-background-color: var(--gray-3, $gray-3);
 $progress-inactive-background-color: #cacaca;
-$progress-text-text-color: $white;
-$progress-text-font-size: $font-size-xs;
+$progress-text-text-color: var(--white, $white);
+$progress-text-font-size: var(--font-size-xs, $font-size-xs);

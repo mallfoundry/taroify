@@ -30,7 +30,7 @@ type CollapseItemSizeString = "medium" | "large"
 interface CollapseItemProps {
   className?: string
   style?: CSSProperties
-  __dataKey__?: string
+  value?: any
   size?: CollapseItemSize | CollapseItemSizeString
   bordered?: boolean
   clickable?: boolean
@@ -47,7 +47,7 @@ function CollapseItem(props: CollapseItemProps) {
   const {
     className,
     style,
-    __dataKey__: dataKey = "",
+    value,
     size = CollapseItemSize.Medium,
     bordered = true,
     disabled = false,
@@ -62,7 +62,7 @@ function CollapseItem(props: CollapseItemProps) {
 
   const contentRef = useRef<HTMLElement>()
   const { isExpanded, toggleItem } = useContext(CollapseContext)
-  const expanded = isExpanded?.(dataKey)
+  const expanded = isExpanded?.(value)
 
   const [visibility, setVisibility] = useState(expanded)
   const [expandHeight, setExpandHeight] = useState("0")
@@ -102,9 +102,9 @@ function CollapseItem(props: CollapseItemProps) {
 
   const toggle = useCallback(
     (newExpanded = !expanded) => {
-      toggleItem?.(dataKey, newExpanded)
+      toggleItem?.(value, newExpanded)
     },
-    [dataKey, expanded, toggleItem],
+    [value, expanded, toggleItem],
   )
 
   const onTitleClick = useCallback(() => {
@@ -126,7 +126,7 @@ function CollapseItem(props: CollapseItemProps) {
       className={classNames(
         prefixClassname("collapse-item"),
         {
-          [prefixClassname("collapse-item--bordered")]: dataKey && bordered,
+          [prefixClassname("collapse-item--bordered")]: value && bordered,
         },
         className,
       )}

@@ -1,7 +1,7 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$list-text-color: $gray-6;
-$list-text-font-size: $font-size-md;
+$list-text-color: var(--gray-6, $gray-6);
+$list-text-font-size: var(--font-size-md, $font-size-md);
 $list-text-line-height: 50px * $hd;
 $list-loading-icon-size: 16px * $hd;

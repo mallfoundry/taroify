@@ -126,7 +126,7 @@
 
     .#{$component-prefix}step__line {
       top: 16px * $hd;
-      left: -16px * $hd + -0.5px;
+      left: -16px * $hd;
       width: 1px * $hd;
       height: 100%;
     }

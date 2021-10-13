@@ -69,22 +69,22 @@ function NotifyWithPresetColors() {
       <Cell
         title="主要通知"
         clickable
-        onClick={() => setOptions({ open: true, color: NotifyColor.Primary })}
+        onClick={() => setOptions({ open: true, color: "primary" })}
       />
       <Cell
         title="成功通知"
         clickable
-        onClick={() => setOptions({ open: true, color: NotifyColor.Success })}
+        onClick={() => setOptions({ open: true, color: "success" })}
       />
       <Cell
         title="危险通知"
         clickable
-        onClick={() => setOptions({ open: true, color: NotifyColor.Danger })}
+        onClick={() => setOptions({ open: true, color: "danger" })}
       />
       <Cell
         title="警告通知"
         clickable
-        onClick={() => setOptions({ open: true, color: NotifyColor.Warning })}
+        onClick={() => setOptions({ open: true, color: "warning" })}
       />
       <Notify
         open={options.open}

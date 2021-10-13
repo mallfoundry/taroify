@@ -6,7 +6,7 @@
     padding-bottom: var(--padding-md, $padding-md);
 
     &::after {
-      @include hairline-bottom($border-color, $padding-md, $padding-md);
+      @include hairline-bottom(var(--border-color, $border-color), var(--padding-md, $padding-md), var(--padding-md, $padding-md));
     }
   }
 

@@ -6,12 +6,7 @@ import { prefixClassname } from "../styles"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
 
-export enum NotifyColor {
-  Primary = "primary",
-  Success = "success",
-  Warning = "warning",
-  Danger = "danger",
-}
+export type NotifyColor = "primary" | "success" | "warning" | "danger"
 
 interface NotifyProps {
   className?: string
@@ -29,7 +24,7 @@ function Notify(props: NotifyProps) {
     style,
     open: openProp = false,
     duration = 3000,
-    color = NotifyColor.Danger,
+    color = "danger",
     children,
     onClose,
   } = props
@@ -43,7 +38,7 @@ function Notify(props: NotifyProps) {
     if (openProp) {
       timer = setTimeout(() => {
         setOpen(false)
-        onClose?.(openProp)
+        onClose?.(false)
         clearTimeout(timer)
       }, duration)
     } else if (timer) {

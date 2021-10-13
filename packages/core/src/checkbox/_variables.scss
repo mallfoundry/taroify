@@ -2,11 +2,11 @@
 @import "../styles/variables";
 
 $checkbox-size: 20px * $hd;
-$checkbox-border-color: $gray-5;
-$checkbox-transition-duration: $animation-duration-fast;
-$checkbox-label-margin: $padding-xs;
-$checkbox-label-color: $text-color;
-$checkbox-checked-icon-color: $primary-color;
-$checkbox-disabled-icon-color: $gray-5;
-$checkbox-disabled-label-color: $gray-5;
-$checkbox-disabled-background-color: $border-color;
+$checkbox-border-color: var(--gray-5, $gray-5);
+$checkbox-transition-duration: var(--animation-duration-fast, $animation-duration-fast);
+$checkbox-label-margin: var(--padding-xs, $padding-xs);
+$checkbox-label-color: var(--text-color, $text-color);
+$checkbox-checked-icon-color: var(--primary-color, $primary-color);
+$checkbox-disabled-icon-color: var(--gray-5, $gray-5);
+$checkbox-disabled-label-color: var(--gray-5, $gray-5);
+$checkbox-disabled-background-color: var(--border-color, $border-color);

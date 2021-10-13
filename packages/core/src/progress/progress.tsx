@@ -4,21 +4,7 @@ import * as React from "react"
 import { CSSProperties, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 
-export enum ProgressColor {
-  Primary = "primary",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
-  Danger = "danger",
-}
-
-type ProgressColorString = "primary" | "info" | "success" | "warning" | "danger"
-
-const PRESET_COLORS = ["primary", "info", "success", "warning", "danger"]
-
-function isPresetColor(color: string) {
-  return PRESET_COLORS.includes(color)
-}
+type ProgressColor = "primary" | "info" | "success" | "warning" | "danger"
 
 interface ProgressProps {
   className?: string
@@ -27,9 +13,7 @@ interface ProgressProps {
   inactive?: boolean
   label?: ReactNode | boolean
   percent?: number
-  color?: ProgressColor | ProgressColorString | string
-  trackColor?: string
-  textColor?: string
+  color?: ProgressColor
 }
 
 function Progress(props: ProgressProps) {
@@ -39,7 +23,7 @@ function Progress(props: ProgressProps) {
     striped,
     inactive,
     label,
-    color = ProgressColor.Primary,
+    color = "primary",
     percent: percentProp = 0,
   } = props
   const percent = Math.min(Math.max(0, percentProp), 100)
@@ -53,12 +37,12 @@ function Progress(props: ProgressProps) {
     return label
   }
 
-  const barStyle = useMemo(() => {
-    const style: CSSProperties = {}
-    style.width = `${percent}%`
-    style.background = !inactive && isPresetColor(color) ? "" : color
-    return style
-  }, [inactive, percent, color])
+  const barStyle = useMemo<CSSProperties>(
+    () => ({
+      width: `${percent}%`,
+    }),
+    [percent],
+  )
 
   return (
     <View
@@ -68,11 +52,11 @@ function Progress(props: ProgressProps) {
           [prefixClassname("progress--inactive")]: inactive,
           [prefixClassname("progress--striped")]: !inactive && striped,
           [prefixClassname("progress--animated")]: !inactive && striped && animated,
-          [prefixClassname("progress--primary")]: !inactive && color === ProgressColor.Primary,
-          [prefixClassname("progress--info")]: !inactive && color === ProgressColor.Info,
-          [prefixClassname("progress--success")]: !inactive && color === ProgressColor.Success,
-          [prefixClassname("progress--warning")]: !inactive && color === ProgressColor.Warning,
-          [prefixClassname("progress--danger")]: !inactive && color === ProgressColor.Danger,
+          [prefixClassname("progress--primary")]: !inactive && color === "primary",
+          [prefixClassname("progress--info")]: !inactive && color === "info",
+          [prefixClassname("progress--success")]: !inactive && color === "success",
+          [prefixClassname("progress--warning")]: !inactive && color === "warning",
+          [prefixClassname("progress--danger")]: !inactive && color === "danger",
         },
         className,
       )}

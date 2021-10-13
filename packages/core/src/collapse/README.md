@@ -14,13 +14,13 @@ import { Collapse } from "@taroify/core"
 
 ### 基础用法
 
-通过 `activeKey` 控制展开的面板列表，`activeKey` 为数组格式。
+通过 `value` 控制展开的面板列表，`value` 为数组格式。
 
 ```tsx
-function CollapseExemple() {
-  const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
+function BasicCollapse() {
+  const [value, setValue] = useState([0])
   return (
-    <Collapse activeKey={activeKey} onChange={setActiveKey}>
+    <Collapse value={value} onChange={setValue}>
       <Collapse.Item title="标题1">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题2">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题3">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
@@ -34,10 +34,10 @@ function CollapseExemple() {
 通过 `accordion` 可以设置为手风琴模式，最多展开一个面板，此时 `activeKey` 为字符串格式。
 
 ```tsx
-function CollapseExemple() {
-  const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>(0)
+function AccordionCollapse() {
+  const [value, setValue] = useState(0)
   return (
-    <Collapse accordion activeKey={activeKey} onChange={setActiveKey}>
+    <Collapse accordion value={value} onChange={setValue}>
       <Collapse.Item title="标题1">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题2">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题3">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
@@ -51,10 +51,10 @@ function CollapseExemple() {
 通过 `clickable=false` 属性禁止显示反馈动画，通过 `disabled` 属性来禁用单个面板。
 
 ```tsx
-function CollapseExemple() {
-  const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
+function CollapseWithDisabledWithReadonly() {
+  const [value, setValue] = useState([0])
   return (
-    <Collapse activeKey={activeKey} onChange={setActiveKey}>
+    <Collapse value={value} onChange={setValue}>
       <Collapse.Item title="正常状态">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="只读状态" clickable={false}>
         代码是写出来给人看的，附带能在机器上运行
@@ -72,11 +72,12 @@ function CollapseExemple() {
 通过 `title` 属性可以自定义标题栏的内容。
 
 ```tsx
-function CollapseExemple() {
-  const [activeKey, setActiveKey] = useState<number | number[] | string | string[]>([0])
+function CustomCollapse() {
+  const [value, setValue] = useState([0])
   return (
-    <Collapse activeKey={activeKey} onChange={setActiveKey}>
+    <Collapse value={value} onChange={setValue}>
       <Collapse.Item
+        className="custom-collapse-item1"
         title={
           <>
             标题1
@@ -100,7 +101,7 @@ function CollapseExemple() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| activeKey | 当前展开面板的 key | 手风琴模式：_number \| string_<br>非手风琴模式：_(number \| string)[]_ | - |
+| value | 当前展开面板的 key | 手风琴模式：_number \| string_<br>非手风琴模式：_(number \| string)[]_ | - |
 | accordion | 是否开启手风琴模式 | _boolean_ | `false` |
 | bordered | 是否显示外边框 | _boolean_ | `true` |
 
@@ -108,13 +109,13 @@ function CollapseExemple() {
 
 | 事件名 | 说明           | 回调参数                                 |
 | ------ | -------------- | ---------------------------------------- |
-| onChange | 切换面板时触发 | activeKey: 类型与 activeKey 绑定的值一致 |
+| onChange | 切换面板时触发 | _value: any_ |
 
 ### Collapse.Item Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| key | 唯一标识符，默认为索引值 | _number \| string_ | `index` |
+| value | 唯一标识符，默认为索引值 | _number \| string_ | `index` |
 | icon | 标题栏左侧图标或图片 | _ReactNode_ | - |
 | expandIcon | 标题栏右侧图标或图片 | _ReactNode_ | - |
 | size | 标题栏大小，可选值为 `large` | _string_ | - |

@@ -1,13 +1,13 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$badge-size: 16px * $hd;
-$badge-color: $white;
+$badge-size: 16px;
+$badge-color: var(--white, $white);
 $badge-padding: 0 3px * $hd;
-$badge-font-size: $font-size-sm;
-$badge-font-weight: $font-weight-bold;
-$badge-border-width: $border-width-base;
-$badge-background-color: $red;
-$badge-dot-color: $red;
-$badge-dot-size: 8Px;
+$badge-font-size: var(--font-size-sm, $font-size-sm);
+$badge-font-weight: var(--font-weight-bold, $font-weight-bold);
+$badge-border-width: var(--border-width-base, $border-width-base);
+$badge-background-color: var(--red, $red);
+$badge-dot-color: var(--red, $red);
+$badge-dot-size: 8PX;
 $badge-font-family: -apple-system-font, helvetica neue, arial, sans-serif;

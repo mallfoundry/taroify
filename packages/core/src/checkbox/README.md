@@ -46,16 +46,27 @@ function BasicCheckbox() {
 
 ### 自定义颜色
 
-通过 `color` 属性设置选中状态的图标颜色。
+通过 `css` 设置选中状态的图标颜色。
 
 ```tsx
 function CheckboxWithCustomColor() {
   const [value, setValue] = useState(false)
   return (
-    <Checkbox color="#ee0a24" checked={value} onChange={setValue}>
+    <Checkbox className="custom-color" checked={value} onChange={setValue}>
       自定义颜色
     </Checkbox>
   )
+}
+```
+
+```scss
+.custom-color {
+  .taroify-checkbox__icon--checked {
+    .taroify-icon {
+      border-color: #ee0a24;
+      background: #ee0a24;
+    }
+  }
 }
 ```
 
@@ -64,7 +75,7 @@ function CheckboxWithCustomColor() {
 通过 `size` 属性可以自定义图标的大小。
 
 ```tsx
-<Checkbox size={24} checked>自定义大小</Checkbox>
+<Checkbox size={24}>自定义大小</Checkbox>
 ```
 
 ### 自定义图标
@@ -181,7 +192,6 @@ function CheckboxCellGroup() {
 | shape          | 形状，可选值为 `square`   | _string_           | `round`   |
 | disabled       | 是否禁用复选框            | _boolean_          | `false`   |
 | size      | 图标大小，默认单位为 `px` | _number \| string_ | `20px`    |
-| color  | 选中状态颜色              | _string_           | `#1989fa` |
 
 ### CheckboxGroup Props
 
@@ -192,7 +202,6 @@ function CheckboxCellGroup() {
 | max | 最大可选数，`0` 为无限制 | _number \| string_ | `0` |
 | direction | 排列方向，可选值为 `horizontal` | _string_ | `vertical` |
 | size | 所有复选框的图标大小，默认单位为 `px` | _number \| string_ | `20px` |
-| color | 所有复选框的选中状态颜色 | _string_ | `#1989fa` |
 
 ### Checkbox Events
 

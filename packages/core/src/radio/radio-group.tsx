@@ -11,7 +11,6 @@ interface RadioGroupProps {
   value?: any
   disabled?: boolean
   direction?: RadioGroupDirection | RadioGroupDirectionString
-  color?: string
   size?: number
   children?: ReactNode
 
@@ -24,7 +23,6 @@ function RadioGroup(props: RadioGroupProps) {
     value,
     disabled,
     direction = RadioGroupDirection.Vertical,
-    color,
     size,
     children,
     onChange,
@@ -35,7 +33,6 @@ function RadioGroup(props: RadioGroupProps) {
         value,
         disabled,
         direction,
-        color,
         size,
         onChange,
       }}

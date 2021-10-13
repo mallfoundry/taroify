@@ -12,6 +12,41 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.14-alpha.1
+
+`2021-10-11`
+
+**Bug Fixes**
+
+- Tabbar
+  - 修复图标为空时，Badge 组件未清理的问题[#35](https://github.com/mallfoundry/taroify/issues/35)
+
+### v0.0.14-alpha.0
+
+`2021-10-11`
+
+**Breaking Changes**
+
+- DropdownMenu
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- Collapse
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- Sidebar
+  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+- TreeSelect
+  - activeTab 属性重命名为 tabValue[#34](https://github.com/mallfoundry/taroify/issues/34)
+  - activeValue 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+
+### v0.0.13-alpha.0
+
+`2021-10-09`
+
+**Feature**
+
+- 完善 css var 自定义主题[#23](https://github.com/mallfoundry/taroify/issues/23)
+- 新增所有的 vant 图标[#30](https://github.com/mallfoundry/taroify/issues/30)
+
+
 ### v0.0.12-alpha.18
 
 `2021-09-30`

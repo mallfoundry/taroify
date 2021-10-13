@@ -6,7 +6,6 @@ import { ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import StepsContext from "./steps.context"
-import { StepsDirection } from "./steps.shared"
 
 interface StepProps {
   className?: string
@@ -30,41 +29,9 @@ function Step(props: StepProps) {
     label,
     children,
   } = props
-  const { activeStep = -1, activeColor, direction, alternativeLabel } = useContext(StepsContext)
-  const active = useMemo(() => activeProp || index === activeStep, [activeProp, index, activeStep])
-  const completed = useMemo(() => completedProp || index < activeStep, [
-    completedProp,
-    index,
-    activeStep,
-  ])
-
-  const labelStyle = useMemo(
-    () => ({
-      color: active ? activeColor : "",
-    }),
-    [active, activeColor],
-  )
-
-  const circleStyle = useMemo(
-    () => ({
-      background: active || completed ? activeColor : "",
-    }),
-    [active, completed, activeColor],
-  )
-
-  const iconStyle = useMemo(
-    () => ({
-      color: active || completed ? activeColor : "",
-    }),
-    [active, completed, activeColor],
-  )
-
-  const lineStyle = useMemo(
-    () => ({
-      background: completed ? activeColor : "",
-    }),
-    [completed, activeColor],
-  )
+  const { value = -1, direction, alternativeLabel } = useContext(StepsContext)
+  const active = useMemo(() => activeProp || index === value, [activeProp, index, value])
+  const completed = useMemo(() => completedProp || index < value, [completedProp, index, value])
 
   return (
     <View
@@ -74,26 +41,22 @@ function Step(props: StepProps) {
         prefixClassname(`step--${direction}`),
         {
           [prefixClassname("step--alternative-label")]:
-            alternativeLabel && direction === StepsDirection.Horizontal,
+            alternativeLabel && direction === "horizontal",
           [prefixClassname("step--active")]: active,
           [prefixClassname("step--completed")]: completed,
         },
         className,
       )}
     >
-      <View
-        className={classNames(prefixClassname("step__label"))}
-        style={labelStyle}
-        children={children ?? label}
-      />
+      <View className={classNames(prefixClassname("step__label"))} children={children ?? label} />
       <View className={prefixClassname("step__circle-container")}>
         {icon ? (
-          cloneIconElement(icon, { className: prefixClassname("step__icon"), style: iconStyle })
+          cloneIconElement(icon, { className: prefixClassname("step__icon") })
         ) : (
-          <View className={prefixClassname("step__circle")} style={circleStyle} />
+          <View className={prefixClassname("step__circle")} />
         )}
       </View>
-      <View className={classNames(prefixClassname("step__line"))} style={lineStyle} />
+      <View className={classNames(prefixClassname("step__line"))} />
     </View>
   )
 }

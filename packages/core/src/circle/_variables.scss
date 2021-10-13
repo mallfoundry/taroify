@@ -2,10 +2,10 @@
 @import "../styles/variables";
 
 $circle-size: 100px * $hd;
-$circle-color: $primary-color;
-$circle-layer-color: $white;
-$circle-text-color: $text-color;
-$circle-text-font-weight: $font-weight-bold;
-$circle-text-font-size: $font-size-md;
-$circle-text-line-height: $line-height-md;
+$circle-color: var(--primary-color, $primary-color);
+$circle-layer-color: var(--white, $white);
+$circle-text-color: var(--text-color, $text-color);
+$circle-text-font-weight: var(--font-weight-bold, $font-weight-bold);
+$circle-text-font-size: var(--font-size-md, $font-size-md);
+$circle-text-line-height: var(--line-height-md, $line-height-md);
 

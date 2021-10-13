@@ -1,9 +1,9 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$grid-item-content-padding: $padding-md $padding-xs;
-$grid-item-content-background-color: $white;
-$grid-item-content-active-color: $active-color;
+$grid-item-content-padding: var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
+$grid-item-content-background-color: var(--white, $white);
+$grid-item-content-active-color: var(--active-color, $active-color);
 $grid-item-icon-size: 28px * $hd;
-$grid-item-text-color: $gray-7;
-$grid-item-text-font-size: $font-size-sm;
+$grid-item-text-color: var(--gray-7, $gray-7);
+$grid-item-text-font-size: var(--font-size-sm, $font-size-sm);

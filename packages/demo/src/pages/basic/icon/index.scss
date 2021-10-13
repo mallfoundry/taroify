@@ -1,1 +1,48 @@
-// none
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.icon-demo {
+
+  &-notify {
+    font-size: 13px * $hd;
+  }
+
+  .#{$demo-prefix}page__content {
+    .#{$component-prefix}icon {
+      margin: 16px * $hd 0;
+      color: $text-color;
+      font-size: 32px  * $hd;
+    }
+  }
+
+  .#{$component-prefix}tabs__tab-pane {
+    width: auto;
+    margin: 20px * $hd;
+    background-color: #fff;
+    border-radius: 12px * $hd;
+  }
+
+  .#{$component-prefix}col {
+    display: inline-block;
+    float: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &:active {
+      background-color: $active-color;
+    }
+
+    .icon-name {
+      display: block;
+      height: 36px * $hd;
+      margin: -4px * $hd 0 4px * $hd;
+      padding: 0 5px * $hd;
+      color: $gray-7;
+      font-size: 12px * $hd;
+      line-height: 18px * $hd;
+      word-break: break-word;
+    }
+  }
+}

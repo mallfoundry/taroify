@@ -61,7 +61,15 @@ function StepSlider() {
 ```tsx
 function StyledSlider() {
   const [value, setValue] = useState(50)
-  return <Slider size={4} activeColor="#ee0a24" value={value} onChange={setValue} />
+  return <Slider className="custom-color" size={4} value={value} onChange={setValue} />
+}
+```
+
+```scss
+.custom-color {
+  .taroify-slider__track {
+    background-color: #ee0a24;
+  }
 }
 ```
 
@@ -71,7 +79,7 @@ function StyledSlider() {
 function StyledThumbSlider() {
   const [value, setValue] = useState(50)
   return (
-    <Slider activeColor="#ee0a24" value={value} onChange={setValue}>
+    <Slider className="custom-color" value={value} onChange={setValue}>
       <Slider.Thumb>
         <View className="custom-thumb">{value}</View>
       </Slider.Thumb>
@@ -127,8 +135,6 @@ function VerticalRangeSlider() {
 | min | 最小值 | _number \| string_ | `0` |
 | step | 步长 | _number \| string_ | `1` |
 | size | 进度条高度，默认单位为 `px` | _number \| string_ | `2px` |
-| activeColor | 进度条激活态颜色 | _string_ | `#1989fa` |
-| inactiveColor | 进度条非激活态颜色 | _string_ | `#e5e5e5` |
 | range | 是否开启双滑块模式 | _boolean_ | `false` |
 | disabled | 是否禁用滑块 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法修改滑块的值 | _boolean_ | `false` |

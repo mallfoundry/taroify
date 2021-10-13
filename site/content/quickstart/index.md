@@ -48,7 +48,7 @@ module.exports = {
 
 接着你可以在代码中直接引入 Taroify 组件：
 
-```js
+```tsx
 // 插件会自动将代码转化为方式二中的按需引入形式
 import { Button } from "@taroify/core"
 ```
@@ -61,8 +61,8 @@ import { Button } from "@taroify/core"
 
 在不使用插件的情况下，可以手动引入需要的组件。
 
-```js
-import "@taroify/core/button/index.scss"
+```tsx
+import "@taroify/core/button/style"
 import Button from "@taroify/core/button"
 ```
 
@@ -70,10 +70,25 @@ import Button from "@taroify/core/button"
 
 Taroify 支持一次性导入所有组件，引入所有组件会增加代码包体积，因此不推荐这种做法。
 
-```js
+```tsx
 // app.ts
 import "@taroify/icons/index.scss"
 import "@taroify/core/index.scss"
 ```
 
 > Tips: 配置按需引入后，将不允许直接导入所有组件。
+
+## 浏览器适配
+
+### Rem 布局适配
+
+Taroify 默认采用 `rem` 单位，需要对 `@taroify` 里的样式单位进行转换适配。
+
+```js
+// config/index.js
+const config = {
+  h5: {
+    esnextModules: ["@taroify"],
+  }
+}
+```

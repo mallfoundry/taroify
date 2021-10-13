@@ -1,7 +1,7 @@
 import TreeSelectElement, { TreeSelectProps } from "./tree-select"
 import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
-import { TreeSelectOptionValue, TreeSelectTabEvent, TreeSelectTabKey } from "./tree-select.shared"
+import { TreeSelectTabObject } from "./tree-select.shared"
 
 interface TreeSelectInterface {
   (props: TreeSelectProps): JSX.Element
@@ -17,9 +17,7 @@ TreeSelect.Option = TreeSelectOption
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace TreeSelect {
-  export type TabKey = TreeSelectTabKey
-  export type TabEvent = TreeSelectTabEvent
-  export type Value = TreeSelectOptionValue
+  export type TabObject = TreeSelectTabObject
 }
 
 export default TreeSelect

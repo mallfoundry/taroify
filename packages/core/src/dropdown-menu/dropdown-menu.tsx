@@ -7,6 +7,7 @@ import {
   Children,
   cloneElement,
   isValidElement,
+  Key,
   MutableRefObject,
   ReactElement,
   ReactNode,
@@ -22,18 +23,9 @@ import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
 import DropdownMenuContext from "./dropdown-menu.context"
-import {
-  DropdownMenuDirection,
-  DropdownMenuDirectionString,
-  DropdownMenuKey,
-  DropdownMenuValue,
-  DropdownMenuValues,
-} from "./dropdown-menu.shared"
+import { DropdownMenuDirection } from "./dropdown-menu.shared"
 
-function getDropdownMenuTitle(
-  options?: ReactNode,
-  dropdownValue?: DropdownMenuValue | DropdownMenuValues,
-): ReactNode {
+function getDropdownMenuTitle(options?: ReactNode, dropdownValue?: any | any[]): ReactNode {
   const firstRef: MutableRefObject<ReactNode> = {
     current: undefined,
   }
@@ -78,7 +70,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
     items: [],
   }
 
-  Children.forEach(children, (child: ReactNode, index) => {
+  Children.forEach(children, (child: ReactNode) => {
     // Skip is not DropdownItem
     if (!isValidElement(child)) {
       return
@@ -89,7 +81,9 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
     if (elementType === DropdownMenuItem) {
       const { key, props } = element
       const { disabled, title, value }: DropdownMenuItemProps = props
+      const index = _.size(__children__.items)
       const itemKey = key ?? index
+
       __children__.items.push(
         cloneElement(element, {
           key: itemKey,
@@ -112,27 +106,28 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
 }
 
 export interface DropdownMenuProps {
-  activeKey?: DropdownMenuKey
-  activeColor?: string
-  direction?: DropdownMenuDirection | DropdownMenuDirectionString
+  className?: string
+  value?: any
+  direction?: DropdownMenuDirection
   children?: ReactNode
-  onChange?: (key?: DropdownMenuKey) => void
+
+  onChange?(value: any): void
 }
 
 function DropdownMenu(props: DropdownMenuProps) {
-  const { activeKey, activeColor, direction = DropdownMenuDirection.Down, onChange } = props
+  const { className, value, direction = "down", onChange } = props
   const barRef = useRef<HTMLElement>()
   const [opened, setOpened] = useState<boolean>()
   const [itemOffset, setItemOffset] = useState(0)
   const { titles, items } = useDropdownMenuChildren(props.children)
 
-  const toggleKeyRef = useRef<DropdownMenuKey>()
+  const toggleKeyRef = useRef<Key>()
 
   const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
 
   const updateItemOffset = useCallback(() => {
     getBoundingClientRect(barRef).then((rect) => {
-      if (direction === DropdownMenuDirection.Down) {
+      if (direction === "down") {
         setItemOffset(rect.bottom)
       } else {
         setItemOffset(windowHeight - rect.top)
@@ -146,41 +141,40 @@ function DropdownMenu(props: DropdownMenuProps) {
         return
       }
       toggleKeyRef.current = itemKey
-      const itemActive = activeKey === itemKey ? undefined : itemKey
+      const itemActive = value === itemKey ? undefined : itemKey
       if (itemActive !== undefined) {
         updateItemOffset()
       }
       onChange?.(itemActive)
     },
-    [activeKey, onChange, updateItemOffset],
+    [onChange, updateItemOffset, value],
   )
 
   const isItemToggle = useCallback(
-    (key?: DropdownMenuKey) => {
-      const active = toggleKeyRef.current === key
-      if (active && _.isUndefined(activeKey)) {
+    (itemKey?: any) => {
+      const active = toggleKeyRef.current === itemKey
+      if (active && _.isUndefined(value)) {
         return undefined
       }
-      return activeKey === key
+      return value === itemKey
     },
-    [activeKey],
+    [value],
   )
 
-  useEffect(() => setOpened(activeKey !== undefined), [activeKey, isItemToggle])
+  useEffect(() => setOpened(value !== undefined), [value])
 
   usePageScroll(updateItemOffset)
 
   return (
     <DropdownMenuContext.Provider
       value={{
-        activeColor,
-        direction: direction as DropdownMenuDirection,
+        direction,
         itemOffset,
         toggleItem,
         isItemToggle,
       }}
     >
-      <View className={prefixClassname("dropdown-menu")}>
+      <View className={classnames(prefixClassname("dropdown-menu"), className)}>
         <View
           ref={barRef}
           className={classnames(prefixClassname("dropdown-menu__bar"), {

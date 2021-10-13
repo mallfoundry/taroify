@@ -7,16 +7,11 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function RadioTreeSelect() {
-  const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [value, setValue] = useState<TreeSelect.Value>(0)
+  const [tabValue, setTabValue] = useState(0)
+  const [value, setValue] = useState(0)
 
   return (
-    <TreeSelect
-      activeTab={activeTab}
-      value={value}
-      onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(aValue: TreeSelect.Value) => setValue(aValue)}
-    >
+    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>
@@ -40,16 +35,11 @@ function RadioTreeSelect() {
 }
 
 function MultiselectTreeSelect() {
-  const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [value, setValue] = useState<TreeSelect.Value[]>([0, 1])
+  const [tabValue, setTabValue] = useState(0)
+  const [value, setValue] = useState([0, 1])
 
   return (
-    <TreeSelect
-      activeTab={activeTab}
-      value={value}
-      onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(values: TreeSelect.Value[]) => setValue(values)}
-    >
+    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>
@@ -73,10 +63,10 @@ function MultiselectTreeSelect() {
 }
 
 function TreeSelectWithCustomContent() {
-  const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
+  const [tabValue, setTabValue] = useState(0)
 
   return (
-    <TreeSelect activeTab={activeTab} onTabChange={({ key }) => setActiveTab(key)}>
+    <TreeSelect tabValue={tabValue} onTabChange={setTabValue}>
       <TreeSelect.Tab title="分组 1">
         <Image src="https://img.yzcdn.cn/vant/apple-1.jpg" />
       </TreeSelect.Tab>
@@ -88,17 +78,12 @@ function TreeSelectWithCustomContent() {
 }
 
 function BadgeTreeSelect() {
-  const [activeTab, setActiveTab] = useState<TreeSelect.TabKey>(0)
-  const [value, setValue] = useState<TreeSelect.Value>(0)
+  const [tabValue, setTabValue] = useState(0)
+  const [value, setValue] = useState(0)
 
   return (
-    <TreeSelect
-      activeTab={activeTab}
-      value={value}
-      onTabChange={({ key }) => setActiveTab(key)}
-      onChange={(aValue: TreeSelect.Value) => setValue(aValue)}
-    >
-      <TreeSelect.Tab dot title="浙江">
+    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
+      <TreeSelect.Tab badge title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>
         <TreeSelect.Option value={2} disabled>

@@ -74,7 +74,6 @@ function CustomIndexList() {
 | zIndex | z-index 层级 | _number \| string_ | `1` |
 | sticky | 是否开启锚点自动吸顶 | _boolean_ | `true` |
 | stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | _number_ | `0` |
-| highlightColor | 索引字符高亮颜色 | _string_ | `#ee0a24` |
 
 ### IndexList.Anchor Props
 

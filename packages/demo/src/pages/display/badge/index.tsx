@@ -35,16 +35,16 @@ export default function BadgeDemo() {
         </Badge>
       </Block>
       <Block title="自定义颜色">
-        <Badge content={5} color="#1989fa">
+        <Badge className="custom-color" content={5}>
           <View className="badge-block" />
         </Badge>
-        <Badge content={10} color="#1989fa">
+        <Badge className="custom-color" content={10}>
           <View className="badge-block" />
         </Badge>
-        <Badge content="Hot" color="#1989fa">
+        <Badge className="custom-color" content="Hot">
           <View className="badge-block" />
         </Badge>
-        <Badge dot color="#1989fa">
+        <Badge className="custom-color" dot>
           <View className="badge-block" />
         </Badge>
       </Block>

@@ -3,7 +3,7 @@
 
 $skeleton-height: 16px * $hd;
 $skeleton-circle-size: 32px * $hd;
-$skeleton-background-color: $active-color;
+$skeleton-background-color: var(--active-color, $active-color);
 $skeleton-pulse-animation-duration: 1.5s;
 $skeleton-pulse-animation-timing-function: ease-in-out;
 $skeleton-pulse-animation-delay: 0.5s;

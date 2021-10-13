@@ -2,9 +2,7 @@ import { createContext } from "react"
 import { StepsDirection } from "./steps.shared"
 
 interface StepsContextValue {
-  activeStep?: number
-  activeColor?: string
-  inactiveColor?: string
+  value?: number
   direction?: StepsDirection
   alternativeLabel?: boolean
 }

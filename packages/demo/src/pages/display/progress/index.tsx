@@ -39,9 +39,9 @@ function InactiveProgress() {
 function ProgressWithCustomColors() {
   return (
     <Block title="样式定制">
-      <Progress percent={25} color="#f2826a" />
-      <Progress percent={50} color="#ee0a24" />
-      <Progress percent={75} color="linear-gradient(to right, #be99ff, #7232dd)" />
+      <Progress className="custom-color1" percent={25} />
+      <Progress className="custom-color2" percent={50} />
+      <Progress className="custom-color3" percent={75} />
     </Block>
   )
 }

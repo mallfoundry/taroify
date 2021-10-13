@@ -5,7 +5,6 @@ interface RadioGroupContextValue {
   value?: any
   disabled?: boolean
   direction?: RadioGroupDirection | RadioGroupDirectionString
-  color?: string
   size?: number
 
   onChange?(value: any): void

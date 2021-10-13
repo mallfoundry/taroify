@@ -4,13 +4,13 @@
 // tabbar styles
 $tabbar-height: 50px * $hd;
 $tabbar-z-index: 1;
-$tabbar-background-color: $white;
+$tabbar-background-color: var(--white, $white);
 
 // tabbar-item styles
-$tabbar-item-font-size: $font-size-sm;
-$tabbar-item-text-color: $gray-7;
-$tabbar-item-active-color: $blue;
-$tabbar-item-active-background-color: $white;
+$tabbar-item-font-size: var(--font-size-sm, $font-size-sm);
+$tabbar-item-text-color: var(--gray-7, $gray-7);
+$tabbar-item-active-color: var(--blue, $blue);
+$tabbar-item-active-background-color: var(--white, $white);
 $tabbar-item-line-height: 1;
 $tabbar-item-icon-size: 22px * $hd;
 $tabbar-item-margin-bottom: 4px * $hd;

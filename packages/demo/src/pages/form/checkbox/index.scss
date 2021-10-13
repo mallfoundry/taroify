@@ -4,6 +4,16 @@
 
 .checkbox-demo {
 
+  .custom-color {
+    .#{$component-prefix}checkbox__icon--checked {
+
+      .#{$component-prefix}icon {
+        border-color: #ee0a24;
+        background: #ee0a24;
+      }
+    }
+  }
+
   .basic-checkbox-group {
     .#{$component-prefix}checkbox {
       margin-bottom: 8px * 2;

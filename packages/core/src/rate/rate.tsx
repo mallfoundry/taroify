@@ -55,9 +55,6 @@ interface RateProps {
   touchable?: boolean
   icon?: ReactNode
   emptyIcon?: ReactNode
-  color?: string
-  emptyColor?: string
-  disabledColor?: string
 
   onChange?(value: number): void
 }
@@ -73,9 +70,6 @@ function Rate(props: RateProps) {
     readonly = false,
     disabled = false,
     touchable = true,
-    color,
-    emptyColor,
-    disabledColor,
     icon = <Star />,
     emptyIcon = <StarOutlined />,
     onChange,
@@ -166,14 +160,11 @@ function Rate(props: RateProps) {
           size={size}
           half={renderHalf}
           value={item.value}
-          color={color}
-          emptyColor={emptyColor}
-          disabledColor={disabledColor}
           status={item.status}
         />
       )
     },
-    [allowHalf, color, disabled, disabledColor, emptyColor, size],
+    [allowHalf, disabled, size],
   )
 
   return (
@@ -199,7 +190,10 @@ function Rate(props: RateProps) {
           emptyIcon,
         }}
       >
-        {_.map(list, renderStar)}
+        {
+          //
+          _.map(list, renderStar)
+        }
       </RateContext.Provider>
     </View>
   )

@@ -14,27 +14,13 @@ interface RateItemProps {
   half?: boolean
   disabled?: boolean
   size?: number
-  color?: string
-  emptyColor?: string
-  disabledColor?: string
   status: RateStatus
 
   onClick?(event: ITouchEvent): void
 }
 
 function RateItem(props: RateItemProps) {
-  const {
-    score,
-    value,
-    half,
-    disabled,
-    size,
-    color,
-    emptyColor,
-    disabledColor,
-    status,
-    onClick,
-  } = props
+  const { score, value, half, disabled, size, status, onClick } = props
   const { gutter, count, emptyIcon, icon } = useContext(RateContext)
 
   const empty = status === RateStatus.Void
@@ -50,7 +36,6 @@ function RateItem(props: RateItemProps) {
       {
         //
         cloneIconElement(full ? icon : emptyIcon, {
-          color: disabled ? disabledColor : full ? color : emptyColor,
           size,
           className: classNames(prefixClassname("rate__icon"), {
             [prefixClassname("rate__icon--disabled")]: disabled,
@@ -63,7 +48,6 @@ function RateItem(props: RateItemProps) {
         half &&
           cloneIconElement(icon, {
             style: { width: value + "em" },
-            color: disabled ? disabledColor : half ? color : emptyColor,
             size,
             className: classNames(
               prefixClassname("rate__icon"),

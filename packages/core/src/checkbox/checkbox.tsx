@@ -1,9 +1,8 @@
 import { Success } from "@taroify/icons"
-import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import CheckboxGroupContext from "./checkbox-group.context"
@@ -22,7 +21,6 @@ export interface CheckboxProps {
   disabled?: boolean
   shape?: CheckboxShape | CheckboxShapeString
   icon?: ReactNode
-  color?: string
   size?: number
   children?: ReactNode
 
@@ -37,7 +35,6 @@ export default function Checkbox(props: CheckboxProps) {
     disabled,
     shape = CheckboxShape.Round,
     icon = <Success />,
-    color,
     size,
     children,
     onChange,
@@ -48,19 +45,6 @@ export default function Checkbox(props: CheckboxProps) {
   )
   const checked = checkedProp || (name && names?.includes(name))
 
-  const iconStyle = useMemo(() => {
-    if (color && checked && !disabled) {
-      return {
-        borderColor: color,
-        backgroundColor: color,
-      }
-    }
-    return {
-      borderColor: "",
-      backgroundColor: "",
-    }
-  }, [checked, color, disabled])
-
   function handleClick() {
     if (disabled) {
       return
@@ -68,7 +52,6 @@ export default function Checkbox(props: CheckboxProps) {
     onChange?.(!checked)
 
     if (name) {
-      console.log(names)
       if (names?.includes(name)) {
         onNamesChange?.(names.filter((aName) => aName !== name))
       } else if (namesMax === 0 || names.length < namesMax) {
@@ -89,7 +72,7 @@ export default function Checkbox(props: CheckboxProps) {
           },
         )}
         style={{ fontSize: size ? addUnitPx(size) : "" }}
-        children={cloneIconElement(icon, { style: iconStyle })}
+        children={icon}
       />
       {children && (
         <View

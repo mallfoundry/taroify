@@ -17,12 +17,7 @@ import { prefixClassname } from "../styles"
 import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
 import TreeSelectContext from "./tree-select.context"
-import {
-  TreeSelectOptionEvent,
-  TreeSelectOptionValue,
-  TreeSelectTabEvent,
-  TreeSelectTabKey,
-} from "./tree-select.shared"
+import { TreeSelectOptionObject, TreeSelectTabObject } from "./tree-select.shared"
 
 interface TreeSelectChildren {
   tabs: ReactNode[]
@@ -56,10 +51,7 @@ function getTreeSelectOptions(children: ReactNode) {
   return options
 }
 
-function useTreeSelectChildren(
-  children: ReactNode,
-  activeTab?: TreeSelectTabKey,
-): TreeSelectChildren {
+function useTreeSelectChildren(children: ReactNode, tabValue?: any): TreeSelectChildren {
   const __children__: TreeSelectChildren = {
     tabs: [],
     options: [],
@@ -76,16 +68,18 @@ function useTreeSelectChildren(
     const elementType = element.type
     if (elementType === TreeSelectTab) {
       const { key, props } = element
-      const tabKey = key ?? index
+      const { value: oldValue, ...restProps } = props
+      const value = oldValue ?? index
+
       __children__.tabs.push(
         cloneElement(element, {
-          key: tabKey,
-          __dataKey__: tabKey,
-          __dataIndex__: index,
+          key: key ?? value,
+          value: value,
+          ...restProps,
         }),
       )
 
-      if (activeTab === tabKey) {
+      if (tabValue === value) {
         __children__.options.push(...getTreeSelectOptions(props.children))
       }
     }
@@ -96,28 +90,25 @@ function useTreeSelectChildren(
 export interface TreeSelectProps {
   className?: string
   style?: CSSProperties
-  activeTab?: TreeSelectTabKey
-  value?: TreeSelectOptionValue | TreeSelectOptionValue[]
+  tabValue?: any
+  value?: any | any[]
   activeIcon?: ReactNode
   children?: ReactNode
 
-  onTabChange?(event: TreeSelectTabEvent): void
+  onTabChange?(value: any, tabObject: TreeSelectTabObject): void
 
-  onChange?(values: TreeSelectOptionValue | TreeSelectOptionValue[]): void
+  onChange?(values: any | any[]): void
 }
 
 function TreeSelect(props: TreeSelectProps) {
-  const { className, activeTab, value, activeIcon = <Success />, onTabChange, onChange } = props
-  const { tabs, options } = useTreeSelectChildren(props.children, activeTab)
+  const { className, tabValue, value, activeIcon = <Success />, onTabChange, onChange } = props
+  const { tabs, options } = useTreeSelectChildren(props.children, tabValue)
 
-  const hasValuesActive = useCallback(
-    (aValue: TreeSelectOptionValue) =>
-      _.isArray(value) ? value.includes(aValue) : value === aValue,
-    [value],
-  )
-
-  const changeValuesActive = useCallback(
-    ({ value: evtValue, active }: TreeSelectOptionEvent) => {
+  const onOptionClick = useCallback(
+    ({ disabled, active, value: evtValue }: TreeSelectOptionObject) => {
+      if (disabled) {
+        return
+      }
       const multiselect = _.isArray(value)
 
       if (multiselect) {
@@ -137,14 +128,14 @@ function TreeSelect(props: TreeSelectProps) {
     <TreeSelectContext.Provider
       value={{
         activeIcon,
-        hasValuesActive,
-        changeValuesActive,
+        value,
+        onOptionClick,
       }}
     >
       <View className={classNames(prefixClassname("tree-select"), className)}>
         <Sidebar
           className={prefixClassname("tree-select__sidebar")}
-          activeKey={activeTab}
+          value={tabValue}
           onChange={onTabChange}
           children={tabs}
         />

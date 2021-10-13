@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useContext } from "react"
@@ -11,10 +11,12 @@ interface ColProps {
   span?: string | number
   offset?: string | number
   children?: ReactNode
+
+  onClick?(event: ITouchEvent): void
 }
 
 export default function Col(props: ColProps) {
-  const { className, style, span, offset, children } = props
+  const { className, style, span, offset, children, onClick } = props
   const { gutter: gutters } = useContext(RowContext)
   const [horizontalGutter] = gutters
 
@@ -41,6 +43,7 @@ export default function Col(props: ColProps) {
         ...gutterStyle,
       }}
       children={children}
+      onClick={onClick}
     />
   )
 }

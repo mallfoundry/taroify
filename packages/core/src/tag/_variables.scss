@@ -1,30 +1,30 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$tag-padding: 0 $padding-base;
-$tag-text-color: $white;
-$tag-font-size: $font-size-sm;
+$tag-padding: 0 var(--padding-base, $padding-base);
+$tag-text-color: var(--white, $white);
+$tag-font-size: var(--font-size-sm, $font-size-sm);
 $tag-border-radius: 2px * $hd;
 $tag-line-height: 16px * $hd;
 $tag-medium-padding: 2px * $hd 6px * $hd;
-$tag-large-padding: $padding-base $padding-xs;
-$tag-large-border-radius: $border-radius-md;
-$tag-large-font-size: $font-size-md;
-$tag-round-border-radius: $border-radius-max;
+$tag-large-padding: var(--padding-base, $padding-base) var(--padding-xs, $padding-xs);
+$tag-large-border-radius: var(--border-radius-md, $border-radius-md);
+$tag-large-font-size: var(--font-size-md, $font-size-md);
+$tag-round-border-radius: var(--border-radius-max, $border-radius-max);
 // Default RoundRight, RoundLeft
-$tag-round-right-padding: 0 ($padding-base + 2px * $hd) 0 $padding-base;
-$tag-round-left-padding: 0 $padding-base 0 ($padding-base + 2px * $hd);
+$tag-round-right-padding: 0 ($padding-base + 2px * $hd) 0 var(--padding-base, $padding-base);
+$tag-round-left-padding: 0 var(--padding-base, $padding-base) 0 ($padding-base + 2px * $hd);
 // Medium RoundRight, RoundLeft
 $tag-round-right-medium-padding: 2px * $hd (6px * $hd + 2px * $hd) 2px * $hd 6px * $hd;
 $tag-round-left-medium-padding: 2px * $hd 6px * $hd 2px * $hd (6px * $hd + 2px * $hd);
 // Large RoundRight, RoundLeft
-$tag-round-right-large-padding: $padding-base ($padding-xs + 2px * $hd) $padding-base $padding-xs;
-$tag-round-left-large-padding: $padding-base $padding-xs $padding-base ($padding-xs + 2px * $hd);
+$tag-round-right-large-padding: var(--padding-base, $padding-base) ($padding-xs + 2px * $hd) var(--padding-base, $padding-base) var(--padding-xs, $padding-xs);
+$tag-round-left-large-padding: var(--padding-base, $padding-base) var(--padding-xs, $padding-xs) var(--padding-base, $padding-base) ($padding-xs + 2px * $hd);
 // Color
-$tag-default-color: $gray-6;
-$tag-primary-color: $primary-color;
-$tag-info-color: $info-color;
-$tag-success-color: $success-color;
-$tag-warning-color: $warning-color;
-$tag-danger-color: $danger-color;
-$tag-outlined-background-color: $white;
+$tag-default-color: var(--gray-6, $gray-6);
+$tag-primary-color: var(--primary-color, $primary-color);
+$tag-info-color: var(--info-color, $info-color);
+$tag-success-color: var(--success-color, $success-color);
+$tag-warning-color: var(--warning-color, $warning-color);
+$tag-danger-color: var(--danger-color, $danger-color);
+$tag-outlined-background-color: var(--white, $white);

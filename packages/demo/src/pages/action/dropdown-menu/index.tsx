@@ -8,11 +8,11 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -28,12 +28,12 @@ function BasicDropdownMenu() {
 }
 
 function DropdownMenuWithCustomContent() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
   const [switch1, setSwitch1] = useState(true)
   const [switch2, setSwitch2] = useState(false)
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -47,7 +47,7 @@ function DropdownMenuWithCustomContent() {
           <Switch size="24" checked={switch2} onChange={setSwitch2} />
         </Cell>
         <View style="padding: 5px 16px;">
-          <Button color="danger" block shape="round" onClick={() => setActiveKey(undefined)}>
+          <Button color="danger" block shape="round" onClick={() => setValue(undefined)}>
             确认
           </Button>
         </View>
@@ -57,11 +57,11 @@ function DropdownMenuWithCustomContent() {
 }
 
 function DropdownMenuWithCustomColor() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} activeColor="#1989fa" onChange={setActiveKey}>
+    <DropdownMenu className="custom-color" value={value} onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -77,9 +77,9 @@ function DropdownMenuWithCustomColor() {
 }
 
 function DisabledDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
+  const [value, setValue] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} onChange={setActiveKey}>
+    <DropdownMenu value={value} onChange={setValue}>
       <DropdownMenu.Item disabled>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -95,11 +95,11 @@ function DisabledDropdownMenu() {
 }
 
 function UpDropdownMenu() {
-  const [activeKey, setActiveKey] = useState<DropdownMenu.Key>()
-  const [option1, setOption1] = useState<DropdownMenu.Value>()
-  const [option2, setOption2] = useState<DropdownMenu.Value>()
+  const [value, setValue] = useState()
+  const [option1, setOption1] = useState()
+  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu activeKey={activeKey} direction="up" onChange={setActiveKey}>
+    <DropdownMenu value={value} direction="up" onChange={setValue}>
       <DropdownMenu.Item value={option1} onChange={setOption1}>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>

@@ -2,8 +2,8 @@
 @import "../styles/variables";
 
 $swiper-indicator-size: 6px * $hd;
-$swiper-indicator-margin: $padding-sm;
+$swiper-indicator-margin: var(--padding-sm, $padding-sm);
 $swiper-indicator-active-opacity: 1;
 $swiper-indicator-inactive-opacity: 0.3;
-$swiper-indicator-active-background-color: $blue;
-$swiper-indicator-inactive-background-color: $border-color;
+$swiper-indicator-active-background-color: var(--blue, $blue);
+$swiper-indicator-inactive-background-color: var(--border-color, $border-color);

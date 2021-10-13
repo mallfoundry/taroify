@@ -2,6 +2,6 @@
 @import "../styles/mixins/hairline";
 @import "../styles/variables";
 
-$action-sheet-subname-color: $gray-6;
-$action-sheet-subname-font-size: $font-size-sm;
-$action-sheet-subname-line-height: $line-height-sm;
+$action-sheet-subname-color: var(--gray-6, $gray-6);
+$action-sheet-subname-font-size: var(--font-size-sm, $font-size-sm);
+$action-sheet-subname-line-height: var(--line-height-sm, $line-height-sm);

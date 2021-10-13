@@ -10,4 +10,15 @@
     }
   }
 
+  .custom-color.#{$component-prefix}switch {
+    background: #dcdee0;
+
+    &--checked {
+      background: #ee0a24;
+
+      .#{$component-prefix}switch__loading {
+        color: #ee0a24;
+      }
+    }
+  }
 }

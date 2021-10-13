@@ -1,17 +1,17 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$step-text-color: $gray-6;
-$step-active-color: $green;
-$step-process-text-color: $text-color;
-$step-font-size: $font-size-md;
-$step-line-color: $border-color;
-$step-completed-line-color: $green;
-$step-completed-text-color: $text-color;
+$step-text-color: var(--gray-6, $gray-6);
+$step-active-color: var(--green, $green);
+$step-process-text-color: var(--text-color, $text-color);
+$step-font-size: var(--font-size-md, $font-size-md);
+$step-line-color: var(--border-color, $border-color);
+$step-completed-line-color: var(--green, $green);
+$step-completed-text-color: var(--text-color, $text-color);
 $step-icon-size: 12px * $hd;
-$step-circle-size: 5px * $hd;
-$step-circle-color: $gray-6;
-$step-horizontal-title-font-size: $font-size-sm;
+$step-circle-size: 5PX;
+$step-circle-color: var(--gray-6, $gray-6);
+$step-horizontal-title-font-size: var(--font-size-sm, $font-size-sm);
 
-$steps-background-color: $white;
+$steps-background-color: var(--white, $white);
 

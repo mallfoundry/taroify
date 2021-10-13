@@ -3,6 +3,7 @@ import { pageScrollTo } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
+  CSSProperties,
   ForwardedRef,
   forwardRef,
   ReactNode,
@@ -40,7 +41,6 @@ const IndexListAnchor = forwardRef(
       sticky: stickyProp,
       stickyOffsetTop,
       zIndex,
-      highlightColor,
       getAnchorRects,
       getListRect,
     } = useContext(IndexListContext)
@@ -62,9 +62,9 @@ const IndexListAnchor = forwardRef(
       scrollIntoView,
     }))
 
-    let wrapperStyle: string = ""
+    let wrapperStyle: CSSProperties = {}
 
-    let anchorStyle = ""
+    let anchorStyle: CSSProperties = {}
 
     let active: boolean = false
 
@@ -73,20 +73,16 @@ const IndexListAnchor = forwardRef(
         const { top, height } = getAnchorRects()[arrayedIndex]
 
         const activeAnchorSticky = top <= 0
-        anchorStyle = `
-              color: ${highlightColor};
-            `
 
         if (activeAnchorSticky) {
-          wrapperStyle = `
-                height: ${addUnitPx(height)};
-              `
-          anchorStyle = `
-                position: fixed;
-                top: ${addUnitPx(stickyOffsetTop)};
-                z-index: ${zIndex};
-                color: ${highlightColor};
-              `
+          wrapperStyle = {
+            height: addUnitPx(height),
+          }
+          anchorStyle = {
+            position: "fixed",
+            top: addUnitPx(stickyOffsetTop),
+            zIndex,
+          }
         }
 
         active = true
@@ -99,17 +95,16 @@ const IndexListAnchor = forwardRef(
           arrayedIndex === anchorRects.length - 1 ? listRect.top : anchorRects[arrayedIndex + 1].top
         const parentOffsetHeight = targetOffsetTop - currentOffsetTop
         const translateY = parentOffsetHeight - currentAnchor.height
-        anchorStyle = `
-              position: relative;
-              transform: translate3d(0, ${addUnitPx(translateY)}, 0);
-              z-index: ${zIndex};
-              color: ${highlightColor};
-            `
+        anchorStyle = {
+          position: "relative",
+          transform: `translate3d(0, ${addUnitPx(translateY)}, 0)`,
+          zIndex,
+        }
 
         active = true
       } else {
-        wrapperStyle = ""
-        anchorStyle = ""
+        wrapperStyle = {}
+        anchorStyle = {}
         active = false
       }
     }

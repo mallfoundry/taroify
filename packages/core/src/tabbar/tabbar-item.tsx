@@ -33,7 +33,7 @@ export default function TabbarItem(props: TabbarItemProps) {
       )}
       onClick={() => onItemClick?.(__dataKey__)}
     >
-      <Badge children={icon} />
+      {icon && <Badge children={icon} />}
       <View className={prefixClassname("tabbar-item__label")} children={children} />
     </View>
   )

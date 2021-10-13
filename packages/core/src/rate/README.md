@@ -43,14 +43,26 @@ function CustomStyledRate() {
   const [value, setValue] = useState(3)
   return (
     <Rate
+      className="custom-color"
+      allowHalf
       size={25}
-      color="#ffd21e"
-      voidColor="#eee"
       voidIcon={<Star />}
       value={value}
       onChange={setValue}
     />
   )
+}
+```
+
+```scss
+.custom-color {
+  .taroify-rate__icon {
+    color: #eee;
+
+    &--full {
+      color: #ffd21e;
+    }
+  }
 }
 ```
 
@@ -122,9 +134,6 @@ function ReadonlyHalfRate() {
 | gutter | 图标间距，默认单位为`px` | _number \| string_ | `4px` |
 | icon | 选中时的图标 | _string_ | `<Star />` |
 | emptyIcon | 未选中时的图标 | _string_ | `<StarOutlined />` |
-| color | 选中时的颜色 | _string_ | `#ee0a24` |
-| emptyColor | 未选中时的颜色 | _string_ | `#c8c9cc` |
-| disabledColor | 禁用时的颜色 | _string_ | `#c8c9cc` |
 | allowHalf | 是否允许半选 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法修改评分 | _boolean_ | `false` |
 | disabled | 是否禁用评分 | _boolean_ | `false` |

@@ -1,11 +1,11 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$divider-margin: $padding-md 0;
-$divider-text-color: $gray-6;
-$divider-font-size: $font-size-md;
+$divider-margin: var(--padding-md, $padding-md) 0;
+$divider-text-color: var(--gray-6, $gray-6);
+$divider-font-size: var(--font-size-md, $font-size-md);
 $divider-line-height: 24px * $hd;
-$divider-border-color: $border-color;
-$divider-content-padding: $padding-md;
+$divider-border-color: var(--border-color, $border-color);
+$divider-content-padding: var(--padding-md, $padding-md);
 $divider-content-left-width: 10%;
 $divider-content-right-width: 10%;

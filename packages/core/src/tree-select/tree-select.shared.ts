@@ -1,14 +1,11 @@
 import { ReactNode } from "react"
 import Sidebar from "../sidebar"
 
-export type TreeSelectTabKey = number | string | undefined
+export type TreeSelectTabObject = Sidebar.TabObject
 
-export type TreeSelectTabEvent = Sidebar.TabEvent
-
-export type TreeSelectOptionValue = string | number | undefined
-
-export interface TreeSelectOptionEvent {
+export interface TreeSelectOptionObject {
   active: boolean
-  value: TreeSelectOptionValue
+  disabled: boolean
+  value: any
   children?: ReactNode
 }

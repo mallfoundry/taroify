@@ -1,9 +1,8 @@
 import { Success } from "@taroify/icons"
-import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import RadioGroupContext from "./radio-group.context"
@@ -22,7 +21,6 @@ export interface RadioProps {
   disabled?: boolean
   shape?: RadioShape | RadioShapeString
   icon?: ReactNode
-  color?: string
   size?: number
   children?: ReactNode
 }
@@ -34,40 +32,19 @@ export default function Radio(props: RadioProps) {
     disabled: disabledProp,
     shape = RadioShape.Round,
     icon = <Success />,
-    color: colorProp,
     size: sizeProp,
     children,
   } = props
 
-  const {
-    value,
-    direction,
-    disabled: disabledGroup,
-    color: colorGroup,
-    size: sizeGroup,
-    onChange,
-  } = useContext(RadioGroupContext)
-
-  const color = colorProp ?? colorGroup
+  const { value, direction, disabled: disabledGroup, size: sizeGroup, onChange } = useContext(
+    RadioGroupContext,
+  )
 
   const size = sizeProp ?? sizeGroup
 
   const disabled = disabledProp || disabledGroup
 
   const checked = name === value
-
-  const iconStyle = useMemo(() => {
-    if (color && checked && !disabled) {
-      return {
-        borderColor: color,
-        backgroundColor: color,
-      }
-    }
-    return {
-      borderColor: "",
-      backgroundColor: "",
-    }
-  }, [checked, color, disabled])
 
   function handleClick() {
     if (!disabled && name !== value) {
@@ -96,7 +73,7 @@ export default function Radio(props: RadioProps) {
           },
         )}
         style={{ fontSize: size ? addUnitPx(size) : "" }}
-        children={cloneIconElement(icon, { style: iconStyle })}
+        children={icon}
       />
       {children && (
         <View

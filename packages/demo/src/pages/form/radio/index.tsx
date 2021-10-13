@@ -52,7 +52,7 @@ function SquareRadio() {
 function CustomColorRadio() {
   const [value, setValue] = useState("1")
   return (
-    <Radio.Group color="#ee0a24" value={value} onChange={setValue}>
+    <Radio.Group className="custom-color" value={value} onChange={setValue}>
       <Radio name="1">单选框 1</Radio>
       <Radio name="2">单选框 2</Radio>
     </Radio.Group>

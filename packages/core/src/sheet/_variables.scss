@@ -4,24 +4,24 @@
 
 $sheet-max-height: 80%;
 
-$sheet-header-padding: $padding-sm $padding-md $padding-base;
+$sheet-header-padding: var(--padding-sm, $padding-sm) var(--padding-md, $padding-md) var(--padding-base, $padding-base);
 $sheet-header-height: 48px * $hd;
-$sheet-header-font-size: $font-size-lg;
-$sheet-title-color: $text-color;
-$sheet-title-font-size: $font-size-md;
-$sheet-title-line-height: $line-height-md;
-$sheet-description-color: $gray-6;
-$sheet-description-font-size: $font-size-md;
+$sheet-header-font-size: var(--font-size-lg, $font-size-lg);
+$sheet-title-color: var(--text-color, $text-color);
+$sheet-title-font-size: var(--font-size-md, $font-size-md);
+$sheet-title-line-height: var(--line-height-md, $line-height-md);
+$sheet-description-color: var(--gray-6, $gray-6);
+$sheet-description-font-size: var(--font-size-md, $font-size-md);
 $sheet-description-line-height: 16px * $hd;
 
-$sheet-item-background: $white;
-$sheet-item-font-size: $font-size-lg;
-$sheet-item-line-height: $line-height-md;
-$sheet-item-text-color: $text-color;
-$sheet-item-disabled-text-color: $gray-5;
+$sheet-item-background: var(--white, $white);
+$sheet-item-font-size: var(--font-size-lg, $font-size-lg);
+$sheet-item-line-height: var(--line-height-md, $line-height-md);
+$sheet-item-text-color: var(--text-color, $text-color);
+$sheet-item-disabled-text-color: var(--gray-5, $gray-5);
 
-$sheet-cancel-text-color: $gray-7;
-$sheet-cancel-padding-top: $padding-xs;
-$sheet-cancel-padding-color: $background-color;
+$sheet-cancel-text-color: var(--gray-7, $gray-7);
+$sheet-cancel-padding-top: var(--padding-xs, $padding-xs);
+$sheet-cancel-padding-color: var(--background-color, $background-color);
 
 $sheet-loading-icon-size: 22px * $hd;

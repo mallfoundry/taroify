@@ -44,40 +44,20 @@ function LoadingCircular(props: LoadingProps) {
   )
 }
 
-export enum LoadingType {
-  Circular = "circular",
-  Spinner = "spinner",
-}
+export type LoadingType = "circular" | "spinner"
 
-export type LoadingTypeString = "circular" | "spinner"
-
-export enum LoadingDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-type LoadingDirectionString = "horizontal" | "vertical"
+type LoadingDirection = "horizontal" | "vertical"
 
 interface LoadingProps {
   className?: string
-  color?: string
-  textColor?: string
   size?: number | string
-  type?: LoadingType | LoadingTypeString
-  direction?: LoadingDirection | LoadingDirectionString
+  type?: LoadingType
+  direction?: LoadingDirection
   children?: ReactNode
 }
 
 export default function Loading(props: LoadingProps) {
-  const {
-    className,
-    color,
-    textColor,
-    size,
-    type = LoadingType.Circular,
-    direction = LoadingDirection.Horizontal,
-    children,
-  } = props
+  const { className, size, type = "circular", direction = "horizontal", children } = props
 
   return (
     <View
@@ -87,21 +67,10 @@ export default function Loading(props: LoadingProps) {
         prefixClassname(`loading--${type}`),
         className,
       )}
-      style={{
-        color: color ?? "",
-      }}
     >
-      {type === LoadingType.Spinner && <LoadingSpinner size={size} />}
-      {type === LoadingType.Circular && <LoadingCircular size={size} />}
-      {children && (
-        <View
-          className={prefixClassname("loading__text")}
-          style={{
-            color: textColor ?? "",
-          }}
-          children={children}
-        />
-      )}
+      {type === "spinner" && <LoadingSpinner size={size} />}
+      {type === "circular" && <LoadingCircular size={size} />}
+      {children && <View className={prefixClassname("loading__text")} children={children} />}
     </View>
   )
 }

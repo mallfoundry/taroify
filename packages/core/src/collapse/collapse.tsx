@@ -1,5 +1,6 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -15,18 +16,15 @@ import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import CollapseItem from "./collapse-item"
 import CollapseContext from "./collapse.context"
 
-function validateActiveKey(
-  activeKey: string | number | Array<string | number>,
-  accordion: boolean,
-) {
-  if (accordion && Array.isArray(activeKey)) {
+function validateActiveValue(value: string | number | Array<string | number>, accordion: boolean) {
+  if (accordion && Array.isArray(value)) {
     // eslint-disable-next-line
-    console.error('[Taroify] Collapse: "activeKey" should not be Array in accordion mode')
+    console.error('[Taroify] Collapse: "value" should not be Array in accordion mode')
     return false
   }
-  if (!accordion && !Array.isArray(activeKey)) {
+  if (!accordion && !Array.isArray(value)) {
     // eslint-disable-next-line
-    console.error('[Taroify] Collapse: "activeKey" should be Array in non-accordion mode')
+    console.error('[Taroify] Collapse: "value" should be Array in non-accordion mode')
     return false
   }
   return true
@@ -41,16 +39,18 @@ function useCollapseChildren(children?: ReactNode): CollapseChildren {
     items: [],
   }
 
-  Children.forEach(children, (child: ReactNode, index) => {
+  Children.forEach(children, (child: ReactNode) => {
     if (isValidElement(child)) {
       const element = child as ReactElement
       const elementType = element.type
       if (elementType === CollapseItem) {
-        const { key } = element
+        const { key, props } = element
+        const index = _.size(__children__.items)
+        const { value } = props
         __children__.items?.push(
           cloneElement(element, {
             key: key ?? index,
-            __dataKey__: key ?? index,
+            value: value ?? index,
           }),
         )
       } else {
@@ -67,41 +67,39 @@ function useCollapseChildren(children?: ReactNode): CollapseChildren {
 export interface CollapseProps {
   className?: string
   style?: CSSProperties
-  activeKey?: number | string | number[] | string[]
+  value?: any
   accordion?: boolean
   bordered?: boolean
   children?: ReactNode
-  onChange?: (activeKey: number | string | number[] | string[]) => void
+  onChange?: (value: any) => void
 }
 
 function Collapse(props: CollapseProps) {
-  const { className, style, bordered, activeKey = "", accordion = false, onChange } = props
+  const { className, style, bordered, value = "", accordion = false, onChange } = props
   const { items } = useCollapseChildren(props.children)
 
   const toggleItem = useCallback(
-    (dataKey: number | string, expanded: boolean) => {
+    (itemValue: number | string, expanded: boolean) => {
       if (accordion) {
-        onChange?.(dataKey === activeKey ? "" : dataKey)
+        onChange?.(itemValue === value ? "" : itemValue)
       } else if (expanded) {
-        onChange?.((activeKey as any[]).concat(dataKey))
+        onChange?.((value as any[]).concat(itemValue))
       } else {
-        onChange?.((activeKey as any[]).filter((activeKey) => activeKey !== dataKey))
+        onChange?.((value as any[]).filter((activeKey) => activeKey !== itemValue))
       }
     },
-    [accordion, activeKey, onChange],
+    [accordion, value, onChange],
   )
 
   const isExpanded = useCallback(
-    (dataKey: number | string) => {
-      if (process.env.NODE_ENV !== "production" && !validateActiveKey(activeKey, accordion)) {
+    (itemValue: number | string) => {
+      if (process.env.NODE_ENV !== "production" && !validateActiveValue(value, accordion)) {
         return false
       }
 
-      return accordion
-        ? activeKey === dataKey
-        : (activeKey as Array<number | string>).includes(dataKey)
+      return accordion ? value === itemValue : (value as Array<number | string>).includes(itemValue)
     },
-    [accordion, activeKey],
+    [accordion, value],
   )
 
   return (
