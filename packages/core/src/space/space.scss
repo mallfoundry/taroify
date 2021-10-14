@@ -13,6 +13,11 @@
     flex-direction: column;
   }
 
-  /* &-item {
-  } */
+  &__item {
+    box-sizing: border-box;
+    display: flex;
+    flex: none;
+    margin-right: 8px * $hd;
+    margin-bottom: 8px * $hd;
+  }
 }
