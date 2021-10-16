@@ -33,6 +33,10 @@ const menus = [
         to: "/components/cell/",
       },
       {
+        title: "ConfigProvider 全局配置",
+        to: "/components/config-provider/",
+      },
+      {
         title: "Icon 图标",
         to: "/components/icon/",
       },
