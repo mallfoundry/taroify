@@ -13,29 +13,31 @@ $gray-8: #323233;
 
 $red: #ee0a24;
 $blue: #1989fa;
+$cyan: #2db7f5;
 $green: #07c160;
 $orange: #ff976a;
 
 $orange-dark: #ed6a0c;
 $orange-light: #fffbe8;
 
-$hd: 2; // Base Unit
+// Base Unit
+$hd: 2;
 
 // Gradient Colors
 $gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
 $gradient-orange: linear-gradient(to right, #ffd01e, #ff8917);
 
 // Component Colors
-$primary-color: $blue;
-$info-color: #2db7f5;
-$success-color: $green;
-$warning-color: $orange;
-$danger-color: $red;
-$text-color: $gray-8;
-$active-color: $gray-2;
+$primary-color: var(--blue, $blue);
+$info-color: var(--cyan, $cyan);
+$success-color: var(--green, $green);
+$warning-color: var(--orange, $orange);
+$danger-color: var(--red, $red);
+$text-color: var(--gray-8, $gray-8);
+$active-color: var(--gray-2, $gray-2);
 $active-opacity: 0.7;
 $disabled-opacity: 0.5;
-$background-color: $gray-1;
+$background-color: var(--gray-1, $gray-1);
 $background-color-light: #fafafa;
 $text-link-color: #576b95;
 
@@ -79,7 +81,7 @@ $animation-timing-function-enter: ease-out;
 $animation-timing-function-exit: ease-in;
 
 // Border
-$border-color: $gray-3;
+$border-color: var(--gray-3, $gray-3);
 $border-width-base: 1px * $hd;
 $border-radius-sm: 2px * $hd;
 $border-radius-md: 4px * $hd;

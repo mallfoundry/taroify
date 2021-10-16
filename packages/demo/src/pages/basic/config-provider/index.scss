@@ -1,0 +1,7 @@
+@import "../../../styles/prefix";
+
+.config-provider-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}

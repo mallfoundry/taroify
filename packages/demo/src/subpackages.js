@@ -14,6 +14,11 @@ const subpackages = [
         path: "cell/index",
       },
       {
+        title: "ConfigProvider 全局配置",
+        name: "ConfigProvider",
+        path: "config-provider/index",
+      },
+      {
         title: "Icon 图标",
         name: "Icon",
         path: "icon/index",

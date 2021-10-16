@@ -70,11 +70,14 @@ export function resolveOnChange<
 }
 
 interface FieldChildren {
+  children?: ReactNode[]
   button?: ReactNode
 }
 
 function useFieldChildren(children?: ReactNode): FieldChildren {
-  const __children__: FieldChildren = {}
+  const __children__: FieldChildren = {
+    children: [],
+  }
   Children.forEach(children, (child: ReactNode) => {
     if (!isValidElement(child)) {
       return
@@ -83,6 +86,8 @@ function useFieldChildren(children?: ReactNode): FieldChildren {
     const elementType = element.type
     if (elementType === FieldButton) {
       __children__.button = element
+    } else {
+      __children__.children?.push(element)
     }
   })
   return __children__
@@ -185,7 +190,7 @@ function Field(props: FieldProps) {
     onFocus,
     onBlur,
   } = props
-  const { button } = useFieldChildren(props.children)
+  const { children, button } = useFieldChildren(props.children)
 
   const [focused, setFocused] = useState(false)
 
@@ -243,46 +248,51 @@ function Field(props: FieldProps) {
           [prefixClassname("field__body--textarea")]: type === FieldType.Textarea,
         })}
       >
-        <Input
-          className={classNames(
-            prefixClassname("field__control"),
-            {
-              [prefixClassname("field__control--disabled")]: disabled,
-              [prefixClassname("field__control--readonly")]: readonly,
-              [prefixClassname("field__control--error")]: error,
-            },
-            prefixClassname(`field__control--${inputAlign}`),
-          )}
-          placeholderClass={classNames(
-            prefixClassname("field__control__placeholder"),
-            {
-              [prefixClassname("field__control__placeholder--readonly")]: readonly,
-              [prefixClassname("field__control__placeholder--error")]: error,
-            },
-            placeholderClassName,
-          )}
-          name={name}
-          value={valueProp}
-          autoFocus={autoFocus}
-          focus={focus}
-          type={type as TaroInputType}
-          password={type === FieldType.Password}
-          placeholder={placeholder}
-          disabled={disabled || readonly}
-          maxlength={maxlength}
-          cursorSpacing={cursorSpacing}
-          confirmType={confirmType}
-          confirmHold={confirmHold}
-          cursor={cursor}
-          selectionStart={selectionStart}
-          selectionEnd={selectionEnd}
-          adjustPosition={adjustPosition}
-          holdKeyboard={holdKeyboard}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onInput={onChange}
-          onConfirm={onConfirm}
-        />
+        {_.isEmpty(children) ? (
+          <Input
+            className={classNames(
+              prefixClassname("field__control"),
+              {
+                [prefixClassname("field__control--disabled")]: disabled,
+                [prefixClassname("field__control--readonly")]: readonly,
+                [prefixClassname("field__control--error")]: error,
+              },
+              prefixClassname(`field__control--${inputAlign}`),
+            )}
+            placeholderClass={classNames(
+              prefixClassname("field__control__placeholder"),
+              {
+                [prefixClassname("field__control__placeholder--readonly")]: readonly,
+                [prefixClassname("field__control__placeholder--error")]: error,
+              },
+              placeholderClassName,
+            )}
+            name={name}
+            value={valueProp}
+            autoFocus={autoFocus}
+            focus={focus}
+            type={type as TaroInputType}
+            password={type === FieldType.Password}
+            placeholder={placeholder}
+            disabled={disabled || readonly}
+            maxlength={maxlength}
+            cursorSpacing={cursorSpacing}
+            confirmType={confirmType}
+            confirmHold={confirmHold}
+            cursor={cursor}
+            selectionStart={selectionStart}
+            selectionEnd={selectionEnd}
+            adjustPosition={adjustPosition}
+            holdKeyboard={holdKeyboard}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onInput={onChange}
+            onConfirm={onConfirm}
+          />
+        ) : (
+          children
+        )}
+
         {allowClear &&
           cloneIconElement(clearIcon, {
             className: prefixClassname("field__clear"),

@@ -11,7 +11,7 @@ interface SpaceItemProps {
 function SpaceItem(props: SpaceItemProps) {
   const { children } = props
 
-  return <View className={classNames(prefixClassname("space-item"))}>{children}</View>
+  return <View className={classNames(prefixClassname("space__item"))}>{children}</View>
 }
 
 export enum SpaceDirection {
@@ -43,7 +43,6 @@ export default function Space(props: SpaceProps) {
         [prefixClassname(`space--${direction}`)]:
           direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
       })}
-      style={{ gap: "8px" }}
     >
       {React.Children.map(children, (item, index) => (
         <SpaceItem key={index} children={item} />

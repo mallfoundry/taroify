@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -17,6 +18,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
+import { addUnitPx } from "../utils/format/unit"
 import { getBoundingClientRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
@@ -112,19 +114,19 @@ function SwipeCell(props: SwipeCellProps) {
   const leftRef = useRef<typeof View>()
   const rightRef = useRef<typeof View>()
 
+  const leftWidthRef = useRef(0)
+  const rightWidthRef = useRef(0)
+
   const [dragging, setDragging] = useState(false)
   const [offset, setOffset] = useState(0)
   const [position, setPosition] = useState<SwipeCellPosition>(SwipeCellPosition.Outside)
 
   const touch = useTouch()
 
-  const getLeftWidth = async () => (await getBoundingClientRect(leftRef)).width
-  const getRightWidth = async () => (await getBoundingClientRect(rightRef)).width
-
   const open = useCallback(
-    async (side: SwipeCellPosition) => {
+    (side: SwipeCellPosition) => {
       openedRef.current = true
-      setOffset(side === SwipeCellPosition.Left ? await getLeftWidth() : -(await getRightWidth()))
+      setOffset(side === SwipeCellPosition.Left ? leftWidthRef.current : -rightWidthRef.current)
       onOpen?.(side)
     },
     [onOpen],
@@ -140,13 +142,13 @@ function SwipeCell(props: SwipeCellProps) {
   )
 
   const toggle = useCallback(
-    async (side: SwipeCellPosition) => {
+    (side: SwipeCellPosition) => {
       const THRESHOLD = 0.15
       const threshold = openedRef.current ? 1 - THRESHOLD : THRESHOLD
-      const width = side === SwipeCellPosition.Left ? await getLeftWidth() : await getRightWidth()
+      const width = side === SwipeCellPosition.Left ? leftWidthRef.current : rightWidthRef.current
       const offsetAbs = Math.abs(offset)
       if (width && offsetAbs > width * threshold) {
-        await open(side)
+        open(side)
       } else {
         close(side)
       }
@@ -175,8 +177,8 @@ function SwipeCell(props: SwipeCellProps) {
       if (touch.isHorizontal()) {
         const offset = _.clamp(
           deltaX + startOffsetRef.current,
-          -(await getRightWidth()),
-          await getLeftWidth(),
+          -rightWidthRef.current,
+          leftWidthRef.current,
         )
 
         const position = offset > 0 ? SwipeCellPosition.Left : SwipeCellPosition.Right
@@ -205,12 +207,11 @@ function SwipeCell(props: SwipeCellProps) {
 
   useEffect(() => {
     if (!dragging) {
-      toggle(position).then(() => {
-        // compatible with desktop scenario
-        setTimeout(() => {
-          lockClickRef.current = false
-        }, 0)
-      })
+      toggle(position)
+      // compatible with desktop scenario
+      setTimeout(() => {
+        lockClickRef.current = false
+      }, 0)
     }
   }, [dragging, position, toggle])
 
@@ -234,6 +235,22 @@ function SwipeCell(props: SwipeCellProps) {
     handleClick,
   )
 
+  const getLeftWidth = async () => (await getBoundingClientRect(leftRef))?.width ?? 0
+
+  const getRightWidth = async () => (await getBoundingClientRect(rightRef))?.width ?? 0
+
+  useEffect(() => {
+    nextTick(() => {
+      getLeftWidth().then((width) => (leftWidthRef.current = width))
+    })
+  }, [left])
+
+  useEffect(() => {
+    nextTick(() => {
+      getRightWidth().then((width) => (rightWidthRef.current = width))
+    })
+  }, [right])
+
   return (
     <View
       ref={rootRef}
@@ -248,7 +265,7 @@ function SwipeCell(props: SwipeCellProps) {
       <View
         className={prefixClassname("swipe-cell__wrapper")}
         style={{
-          transform: `translate3d(${offset}px, 0, 0)`,
+          transform: `translate3d(${addUnitPx(offset)}, 0, 0)`,
           transitionDuration: dragging ? "0s" : ".6s",
         }}
       >
