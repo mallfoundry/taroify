@@ -81,7 +81,7 @@ $animation-timing-function-enter: ease-out;
 $animation-timing-function-exit: ease-in;
 
 // Border
-$border-color: $gray-3;
+$border-color: var(--gray-3, $gray-3);
 $border-width-base: 1px * $hd;
 $border-radius-sm: 2px * $hd;
 $border-radius-md: 4px * $hd;
