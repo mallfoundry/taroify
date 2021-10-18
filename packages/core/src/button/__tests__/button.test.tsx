@@ -152,7 +152,7 @@ describe("<Button />", () => {
 
   it("should have startIcon", () => {
     const { container } = render(
-      <Button color="danger" startIcon="icon">
+      <Button color="danger" icon="icon">
         Test
       </Button>,
     )
