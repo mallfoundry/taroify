@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.1
+
+`2021-10-18`
+
+**Feature**
+
+- Tabs
+  - 新增 bottomBar 的 css 变量[#40](https://github.com/mallfoundry/taroify/issues/40)
+
 ### v0.0.15-alpha.0
 
 `2021-10-16`
@@ -62,7 +71,6 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - 完善 css var 自定义主题[#23](https://github.com/mallfoundry/taroify/issues/23)
 - 新增所有的 vant 图标[#30](https://github.com/mallfoundry/taroify/issues/30)
-
 
 ### v0.0.12-alpha.18
 
