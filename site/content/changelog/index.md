@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.2
+
+`2021-10-19`
+
+**Bug Fixes**
+
+- Transition
+  - 修复因为 unmountOnExit 导致小程序渲染错乱的问题[#42](https://github.com/mallfoundry/taroify/issues/42)
+
 ### v0.0.15-alpha.1
 
 `2021-10-18`
