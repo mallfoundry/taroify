@@ -1,10 +1,11 @@
-import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode } from "react"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
-import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_TOP } from "../styles/hairline"
+import DialogActions from "./dialog-actions"
+import DialogContent from "./dialog-content"
+import DialogHeader from "./dialog-header"
 
 interface DialogChildren {
   header?: ReactElement
@@ -34,11 +35,11 @@ function findDialogChildren(nodes?: ReactNode): DialogChildren {
     }
 
     const element = node as ReactElement
-    if (element.type === Dialog.Header) {
+    if (element.type === DialogHeader) {
       children.header = element
-    } else if (element.type === Dialog.Content) {
+    } else if (element.type === DialogContent) {
       children.content = element
-    } else if (element.type === Dialog.Actions) {
+    } else if (element.type === DialogActions) {
       children.actions = element
     }
   })
@@ -77,7 +78,7 @@ function renderDialogContent(
   return cloneElement(content, props)
 }
 
-interface DialogProps {
+export interface DialogProps {
   className?: string
   backdrop?: boolean
   open?: boolean
@@ -119,107 +120,4 @@ function Dialog(props: DialogProps) {
   )
 }
 
-namespace Dialog {
-  interface HeaderProps {
-    children?: ReactNode
-  }
-
-  export function Header(props: HeaderProps) {
-    const { children } = props
-    return <View className={classNames(prefixClassname("dialog__header"), {})}>{children}</View>
-  }
-
-  export enum ContentAlign {
-    Left = "left",
-    Center = "center",
-    Right = "right",
-  }
-
-  type ContentAlignString = "left" | "center" | "right"
-
-  interface ContentProps {
-    align?: ContentAlign | ContentAlignString
-    isolated?: boolean
-    children?: ReactNode
-  }
-
-  export function Content(props: ContentProps) {
-    const { isolated, align = ContentAlign.Center, children } = props
-    return (
-      <View
-        className={classNames(prefixClassname("dialog__content"), {
-          [prefixClassname("dialog__content--isolated")]: isolated,
-        })}
-      >
-        <View
-          className={classNames(prefixClassname("dialog__message"), {
-            [prefixClassname("dialog__message--left")]: align === ContentAlign.Left,
-            [prefixClassname("dialog__message--right")]: align === ContentAlign.Right,
-          })}
-          children={children}
-        />
-      </View>
-    )
-  }
-
-  export enum ActionsTheme {
-    Round = "round",
-  }
-
-  type ActionsThemeString = "round"
-
-  interface ActionsProps {
-    theme?: ActionsTheme | ActionsThemeString
-    children?: ReactNode
-  }
-
-  function renderActionButtons(props: ActionsProps) {
-    const { children, theme } = props
-    if (children === undefined) {
-      return children
-    }
-
-    const __round__ = theme === ActionsTheme.Round
-    const count = Children.count(children)
-    const zeroIndex = 0
-    const lastIndex = count - 1
-    return Children.map(children as ReactElement, (action: ReactElement, index) => {
-      const actionClassNames = [action.props.className]
-
-      if (index !== zeroIndex && !__round__) {
-        actionClassNames.push(HAIRLINE_BORDER_LEFT)
-      }
-
-      if (index !== lastIndex) {
-        actionClassNames.push(prefixClassname("dialog__cancel"))
-      }
-
-      if (index === lastIndex) {
-        actionClassNames.push(prefixClassname("dialog__confirm"))
-      }
-
-      return cloneElement(action, {
-        className: classNames(action.props.className, actionClassNames),
-        size: "large",
-        shape: "square",
-        variant: __round__ ? "contained" : "text",
-      })
-    })
-  }
-
-  export function Actions(props: ActionsProps) {
-    const { theme } = props
-    const children = renderActionButtons(props)
-    return (
-      <View
-        className={classNames(prefixClassname("dialog__footer"), {
-          [HAIRLINE_BORDER_TOP]: theme !== ActionsTheme.Round,
-          [prefixClassname("dialog__footer--round")]: theme === ActionsTheme.Round,
-        })}
-      >
-        {children}
-      </View>
-    )
-  }
-}
 export default Dialog
