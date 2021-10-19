@@ -45,6 +45,10 @@ function ButtonExample() {
 * [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
 * [意见反馈](https://gitee.com/mallfoundry/taroify/issues)
 
+## 感谢
+
+Taroify 采用 [Webstorm](https://www.jetbrains.com/webstorm/) 作为主要的开发工具，特别感谢 [JetBrains](https://www.jetbrains.com/) 对开源软件提供的便捷支持。
+
 ## 开源协议
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
