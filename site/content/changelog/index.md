@@ -19,7 +19,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Transition
-  - 修复因为 unmountOnExit 导致小程序渲染错乱的问题[#42](https://github.com/mallfoundry/taroify/issues/42)
+  - 修复设置 unmountOnExit 属性，导致小程序渲染错乱的问题[#42](https://github.com/mallfoundry/taroify/issues/42)
 
 ### v0.0.15-alpha.1
 
