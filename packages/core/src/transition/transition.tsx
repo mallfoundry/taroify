@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ReactElement, ReactNode } from "react"
+import { ReactElement, ReactNode, useMemo, useState } from "react"
 import { CSSTransition } from "react-transition-group"
 import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import { prefixClassname } from "../styles"
@@ -44,23 +44,44 @@ interface TransitionProps {
 }
 
 export default function Transition(props: TransitionProps) {
-  const { name, in: inProp = false, duration = 300, children, onEnter, onEntered, onExited } = props
+  const {
+    name,
+    in: inProp = false,
+    duration = 300,
+    children: childrenProp,
+    onEnter,
+    onEntered,
+    onExited,
+  } = props
+  const children = useMemo(() => childrenProp, [childrenProp])
   const childrenStyle = elementStyle(children)
   const transactionName = isTransitionPreset(name) ? prefixClassname(`transition-${name}`) : name
+  const [enter, setEnter] = useState(false)
+  const [exited, setExited] = useState(false)
 
   return (
     <CSSTransition
       in={inProp}
       timeout={duration}
-      unmountOnExit
       classNames={transactionName}
       style={{
         ...childrenStyle,
+        display: enter && !exited ? "" : "none",
       }}
       children={children}
-      onEnter={onEnter}
+      onEnter={(node, isAppearing) => {
+        setEnter(true)
+        setExited(false)
+        // @ts-ignore
+        onEnter?.(node, isAppearing)
+      }}
       onEntered={onEntered}
-      onExited={onExited}
+      onExited={(node) => {
+        setEnter(false)
+        setExited(true)
+        // @ts-ignore
+        onExited?.(node)
+      }}
     />
   )
 }
