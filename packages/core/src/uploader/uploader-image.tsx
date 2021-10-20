@@ -57,9 +57,8 @@ function UploaderImage(props: UploaderImageProps) {
             prefixClassname("uploader__file-name"),
             prefixClassname("ellipsis"),
           )}
-        >
-          {name ?? url}
-        </View>
+          children={name ?? url}
+        />
       </View>
     )
   }
