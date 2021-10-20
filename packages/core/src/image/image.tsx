@@ -5,24 +5,24 @@ import * as React from "react"
 import { CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react"
 import { prefixClassname } from "../styles"
 
-export enum ImageMode {
-  ScaleToFill = "scaleToFill",
-  AspectFit = "aspectFit",
-  AspectFill = "aspectFill",
-  WidthFix = "widthFix",
-  HeightFix = "heightFix",
-  Top = "top",
-  Bottom = "bottom",
-  Center = "center",
-  Left = "left",
-  Right = "right",
-  TopLeft = "topLeft",
-  TopRight = "topRight",
-  BottomLeft = "bottomLeft",
-  BottomRight = "bottomRight",
-}
+// export enum ImageMode {
+//   ScaleToFill = "scaleToFill",
+//   AspectFit = "aspectFit",
+//   AspectFill = "aspectFill",
+//   WidthFix = "widthFix",
+//   HeightFix = "heightFix",
+//   Top = "top",
+//   Bottom = "bottom",
+//   Center = "center",
+//   Left = "left",
+//   Right = "right",
+//   TopLeft = "topLeft",
+//   TopRight = "topRight",
+//   BottomLeft = "bottomLeft",
+//   BottomRight = "bottomRight",
+// }
 
-type ImageModeString =
+export type ImageMode =
   | "scaleToFill"
   | "aspectFit"
   | "aspectFill"
@@ -38,17 +38,17 @@ type ImageModeString =
   | "bottomLeft"
   | "bottomRight"
 
-function toTaroMode(mode: ImageMode | ImageModeString): string {
-  if (mode === ImageMode.TopLeft) {
+function toTaroMode(mode: ImageMode): string {
+  if (mode === "topLeft") {
     return "top left"
   }
-  if (mode === ImageMode.TopRight) {
+  if (mode === "topRight") {
     return "top right"
   }
-  if (mode === ImageMode.BottomLeft) {
+  if (mode === "bottomLeft") {
     return "bottom left"
   }
-  if (mode === ImageMode.BottomRight) {
+  if (mode === "bottomRight") {
     return "bottom right"
   }
   return mode
@@ -85,7 +85,7 @@ interface ImageProps {
   style?: CSSProperties
   src?: string
   alt?: string
-  mode?: ImageMode | ImageModeString
+  mode?: ImageMode
   round?: boolean
   lazyLoad?: boolean
   placeholder?: boolean | ReactNode
@@ -98,7 +98,7 @@ export default function Image(props: ImageProps) {
     style,
     src,
     alt,
-    mode = ImageMode.ScaleToFill,
+    mode = "scaleToFill",
     round = false,
     lazyLoad = false,
     placeholder = true,
