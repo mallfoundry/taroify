@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.3
+
+`2021-10-20`
+
+**Feature**
+
+- Uploader.Image
+  - 新增 mode, alt, round 属性[#45](https://github.com/mallfoundry/taroify/issues/45)
+
 ### v0.0.15-alpha.2
 
 `2021-10-19`
