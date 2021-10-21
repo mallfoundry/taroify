@@ -92,11 +92,9 @@ function CloseTag() {
 
 通过 `color` 和 `textColor` 属性设置标签颜色。
 
-```html
-
+```tsx
 <Tag style={{ backgroundColor: "#7232dd" }} children="标签" />
 <Tag style={{ backgroundColor: "#ffe1e1", color: "#ad0000" }} children="标签" />
-<Tag color="#7232dd" variant="outlined">标签</Tag>
 <Tag style={{ color: "#7232dd" }} variant="outlined" children="标签" />
 ```
 
