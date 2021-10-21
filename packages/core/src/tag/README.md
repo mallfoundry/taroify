@@ -94,9 +94,10 @@ function CloseTag() {
 
 ```html
 
-<Tag color="#7232dd">标签</Tag>
-<Tag color="#ffe1e1" textColor="#ad0000">标签</Tag>
+<Tag style={{ backgroundColor: "#7232dd" }} children="标签" />
+<Tag style={{ backgroundColor: "#ffe1e1", color: "#ad0000" }} children="标签" />
 <Tag color="#7232dd" variant="outlined">标签</Tag>
+<Tag style={{ color: "#7232dd" }} variant="outlined" children="标签" />
 ```
 
 ## API
@@ -105,15 +106,16 @@ function CloseTag() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| className | 自定义 CSS class  | _string_ | - |
+| style | 自定义 CSS 样式 | _CSSProperties_ | - |
 | size | 大小，可选值为 `large` `medium` | _string_ | - |
 | color | 类型，可选值为 `primary` `info` `success` `danger` `warning` | _string_ | `default` |
 | shape | 形状，可选值为 `round` `roundRight` `roundLeft` | _string_ | `square` |
-| textColor | 文本颜色，优先级高于 `color` 属性 | _string_ | `white` |
 | closeable | 是否为可关闭标签 | _boolean_ | `false` |
 
 ### Events
 
 | 事件名 | 说明           | 回调参数            |
 | ------ | -------------- | ------------------- |
-| onClick  | 点击时触发     | _event: MouseEvent_ |
-| onClose  | 关闭标签时触发 | _event: MouseEvent_ |
+| onClick  | 点击时触发     | _event: ITouchEvent_ |
+| onClose  | 关闭标签时触发 | _event: ITouchEvent_ |

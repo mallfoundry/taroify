@@ -71,13 +71,13 @@ export default function TagDemo() {
       </Block>
       <Block title="自定义颜色">
         <Cell title="背景颜色">
-          <Tag color="#7232dd" children="标签" />
+          <Tag style={{ backgroundColor: "#7232dd" }} children="标签" />
         </Cell>
         <Cell title="文字颜色">
-          <Tag color="#ffe1e1" textColor="#ad0000" children="标签" />
+          <Tag style={{ backgroundColor: "#ffe1e1", color: "#ad0000" }} children="标签" />
         </Cell>
         <Cell title="空心颜色">
-          <Tag color="#7232dd" variant="outlined" children="标签" />
+          <Tag style={{ color: "#7232dd" }} variant="outlined" children="标签" />
         </Cell>
       </Block>
     </Page>

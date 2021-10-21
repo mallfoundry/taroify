@@ -1,139 +1,75 @@
 import { Cross } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-export enum TagVariant {
-  Contained = "contained",
-  Outlined = "outlined",
-}
+type TagVariant = "contained" | "outlined"
 
-type TagVariantString = "contained" | "outlined"
+type TagColor = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
-export enum TagColor {
-  Default = "default",
-  Primary = "primary",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
-  Danger = "danger",
-}
+type TagSize = "small" | "medium" | "large"
 
-type TagColorString = "default" | "primary" | "info" | "success" | "warning" | "danger"
-
-export enum TagSize {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
-
-type TagSizeString = "small" | "medium" | "large"
-
-export enum TagShape {
-  Square = "square",
-  Round = "round",
-  RoundRight = "roundRight",
-  RoundLeft = "roundLeft",
-}
-
-type TagShapeString = "square" | "round" | "roundRight" | "roundLeft"
-
-const TAG_PRESET_COLORS: string[] = [
-  TagColor.Default,
-  TagColor.Primary,
-  TagColor.Info,
-  TagColor.Success,
-  TagColor.Warning,
-  TagColor.Danger,
-]
-
-function isPresetTagColor(color?: string | TagColor) {
-  return _.includes(TAG_PRESET_COLORS, color)
-}
-
-function createCustomColor(
-  variant?: TagVariant | TagVariantString,
-  color?: TagColor | TagColorString | string,
-) {
-  return color && variant === TagVariant.Contained && !isPresetTagColor(color) ? color : ""
-}
-
-function createCustomTextColor(
-  variant?: TagVariant | TagVariantString,
-  textColor?: TagColor | TagColorString | string,
-  color?: TagColor | TagColorString | string,
-) {
-  if (textColor && variant === TagVariant.Contained && !isPresetTagColor(textColor)) {
-    return textColor
-  }
-
-  if (color && variant === TagVariant.Outlined && !isPresetTagColor(color)) {
-    return color
-  }
-
-  return ""
-}
+type TagShape = "square" | "round" | "roundRight" | "roundLeft"
 
 interface TagProps {
   className?: string
-  variant?: TagVariant | TagVariantString
-  size?: TagSize | TagSizeString
-  color?: TagColor | TagColorString | string
-  textColor?: string
-  // borderColor?: TagColor | TagColorString | string
-  shape?: TagShape | TagShapeString
+  style?: CSSProperties
+  variant?: TagVariant
+  size?: TagSize
+  color?: TagColor
+  shape?: TagShape
   closeIcon?: ReactNode
   closeable?: boolean
   children?: ReactNode
-  onClose?: () => void
+
+  onClose?(event: ITouchEvent): void
+
+  onClick?(event: ITouchEvent): void
 }
 
 function Tag(props: TagProps) {
   const {
     className,
-    variant = TagVariant.Contained,
-    size = TagSize.Small,
-    color = TagColor.Default,
-    textColor,
-    shape = TagShape.Square,
+    style,
+    variant = "contained",
+    size = "small",
+    color = "default",
+    shape = "square",
     closeable,
     closeIcon = <Cross />,
+    onClick,
     onClose,
     children,
   } = props
 
   return (
     <View
-      style={{
-        // Set custom color
-        background: createCustomColor(variant, color),
-        color: createCustomTextColor(variant, textColor, color),
-      }}
       className={classNames(
         prefixClassname("tag"),
         {
-          [prefixClassname("tag--outlined")]: variant === TagVariant.Outlined,
+          [prefixClassname("tag--outlined")]: variant === "outlined",
           // Set size styles
-          [prefixClassname("tag--medium")]: size === TagSize.Medium,
-          [prefixClassname("tag--large")]: size === TagSize.Large,
+          [prefixClassname("tag--medium")]: size === "medium",
+          [prefixClassname("tag--large")]: size === "large",
           // Set color styles
-          [prefixClassname("tag--default")]: color === TagColor.Default,
-          [prefixClassname("tag--primary")]: color === TagColor.Primary,
-          [prefixClassname("tag--info")]: color === TagColor.Info,
-          [prefixClassname("tag--success")]: color === TagColor.Success,
-          [prefixClassname("tag--warning")]: color === TagColor.Warning,
-          [prefixClassname("tag--danger")]: color === TagColor.Danger,
+          [prefixClassname("tag--default")]: color === "default",
+          [prefixClassname("tag--primary")]: color === "primary",
+          [prefixClassname("tag--info")]: color === "info",
+          [prefixClassname("tag--success")]: color === "success",
+          [prefixClassname("tag--warning")]: color === "warning",
+          [prefixClassname("tag--danger")]: color === "danger",
           // Set shape styles
-          [prefixClassname("tag--round")]: shape === TagShape.Round,
-          [prefixClassname("tag--round-right")]: shape === TagShape.RoundRight,
-          [prefixClassname("tag--round-left")]: shape === TagShape.RoundLeft,
+          [prefixClassname("tag--round")]: shape === "round",
+          [prefixClassname("tag--round-right")]: shape === "roundRight",
+          [prefixClassname("tag--round-left")]: shape === "roundLeft",
         },
         className,
       )}
+      style={style}
+      onClick={onClick}
     >
       {children}
       {closeable &&
