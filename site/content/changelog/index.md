@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.4
+
+`2021-10-21`
+
+**Feature**
+
+- Tag 
+  - 新增 onClick 事件[#46](https://github.com/mallfoundry/taroify/issues/46)
+
+**Breaking Changes**
+
+- Tag
+  - 删除 textColor 属性，使用 CSS className 和 style 代替 textColor 属性[#47](https://github.com/mallfoundry/taroify/issues/47)
+  
 ### v0.0.15-alpha.3
 
 `2021-10-20`
