@@ -12,25 +12,49 @@
   background: var(--toast-background-color, $toast-background-color);
   border-radius: var(--toast-border-radius, $toast-border-radius);
 
-  &--text {
+  width: var(--toast-width, $toast-width);
+  max-width: var(--toast-max-width, $toast-max-width);
+  min-height: var(--toast-min-height, $toast-min-height);
+  padding: var(--toast-padding, $toast-padding);
+
+  transition: all var(--animation-duration-fast, $animation-duration-fast);
+
+  // allow newline character
+  white-space: pre-wrap;
+  text-align: center;
+  // https://github.com/youzan/vant/issues/8959
+  word-break: break-all;
+  background-color: var(--toast-background-color, $toast-background-color);
+
+  &--text,
+  &--html {
     width: fit-content;
     min-width: var(--toast-text-min-width, $toast-text-min-width);
     min-height: 0;
     padding: var(--toast-text-padding, $toast-text-padding);
+
+    .#{$component-prefix}toast__message {
+      margin-top: 0;
+    }
   }
 
-  &--loading,
-  &--success,
-  &--fail {
-    width: var(--toast-default-width, $toast-default-width);
-    max-width: var(--toast-max-width, $toast-max-width);
-    min-height: var(--toast-default-min-height, $toast-default-min-height);
-    padding: var(--toast-default-padding, $toast-default-padding);
+  &--top {
+    top: var(--toast-position-top-distance, $toast-position-top-distance);
+  }
+
+  &--bottom {
+    top: auto;
+    bottom: var(--toast-position-bottom-distance, $toast-position-bottom-distance);
   }
 
   &__icon {
     font-size: 36px * $hd !important;
     color: var(--toast-icon-color, $toast-icon-color);
+  }
+
+  &__loading {
+    padding: var(padding-base, $padding-base);
+    color: var(--toast-loading-icon-color, $toast-loading-icon-color);
   }
 
   &__message {

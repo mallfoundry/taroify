@@ -1,5 +1,6 @@
 import Fail from "@taroify/icons/Fail"
 import Success from "@taroify/icons/Success"
+import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
@@ -8,27 +9,21 @@ import Loading from "../loading"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 
-export enum ToastType {
-  Text = "text",
-  Loading = "loading",
-  Success = "success",
-  Fail = "fail",
-  Html = "html",
-}
+export type ToastType = "text" | "loading" | "success" | "fail" | "html"
 
-type ToastTypeString = "text" | "loading" | "success" | "fail" | "html"
+export type ToastPosition = "top" | "middle" | "bottom"
 
-function defaultIcon(icon?: ReactNode, type?: ToastType | ToastTypeString) {
+function defaultIcon(icon?: ReactNode, type?: ToastType) {
   if (icon) {
     return icon
   }
-  if (type === ToastType.Success) {
+  if (type === "success") {
     return <Success />
   }
-  if (type === ToastType.Loading) {
+  if (type === "loading") {
     return <Loading />
   }
-  if (type === ToastType.Fail) {
+  if (type === "fail") {
     return <Fail />
   }
   return undefined
@@ -47,7 +42,8 @@ function appendIconClassName(node?: ReactNode) {
 interface ToastProps {
   className?: string
   open?: boolean
-  type?: ToastType | ToastTypeString
+  type?: ToastType
+  position?: ToastPosition
   icon?: ReactNode
   duration?: number
   children?: ReactNode
@@ -58,7 +54,8 @@ export default function Toast(props: ToastProps) {
   const {
     className,
     open: openProp = false,
-    type = ToastType.Text,
+    type = "text",
+    position = "middle",
     duration = 3000,
     children,
     onClose,
@@ -89,13 +86,20 @@ export default function Toast(props: ToastProps) {
       className={classNames(
         prefixClassname("toast"),
         {
-          [prefixClassname(`toast--${type}`)]: type,
+          [prefixClassname(`toast--${position}`)]: position,
+          [prefixClassname(`toast--${type}`)]: !icon,
         },
         className,
       )}
     >
       <Popup.Backdrop open={false} />
-      {icon}
+      {
+        //
+        icon &&
+          cloneIconElement(icon, {
+            className: prefixClassname("toast__icon"),
+          })
+      }
       {icon ? <View className={prefixClassname("toast__message")} children={children} /> : children}
     </Popup>
   )

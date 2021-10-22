@@ -1,4 +1,2 @@
-import Toast from "./toast"
-
-export { ToastType } from "./toast"
-export default Toast
+export { default } from "./toast"
+export type { ToastType, ToastPosition } from "./toast"

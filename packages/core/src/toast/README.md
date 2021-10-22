@@ -41,6 +41,10 @@ import { Toast } from "@taroify/core"
 
 ```jsx
 <Toast open icon={<LikeOutlined />}>自定义图标</Toast>
+<Toast open icon={<Image style={{ width: "1em", height: "1em" }}
+                         src="https://img01.yzcdn.cn/vant/logo.png" />}>
+  自定义图片
+</Toast>
 <Toast open icon={<Loading />}>加载中...</Toast>
 ```
 
