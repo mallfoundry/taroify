@@ -426,9 +426,8 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   useEffect(startAutoplay, [startAutoplay])
 
   useEffect(() => {
-    const __resize__ = _.debounce(resize, 100)
-    onWindowResize(__resize__)
-    return () => offWindowResize(__resize__)
+    onWindowResize?.(resize)
+    return () => offWindowResize?.(resize)
   }, [resize])
 
   // Forward swiper ref

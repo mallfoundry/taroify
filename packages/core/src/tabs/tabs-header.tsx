@@ -82,8 +82,8 @@ export default function TabsHeader(props: TabsHeaderProps) {
 
   // resize
   useEffect(() => {
-    onWindowResize(resize)
-    return () => offWindowResize(resize)
+    onWindowResize?.(resize)
+    return () => offWindowResize?.(resize)
   }, [resize])
 
   return (
