@@ -62,6 +62,7 @@ export default function Transition(props: TransitionProps) {
   return (
     <CSSTransition
       in={inProp}
+      mountOnEnter
       timeout={duration}
       classNames={transactionName}
       style={{
