@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.6
+
+`2021-10-22`
+
+**Feature**
+
+- Toast
+  - 新增 position 属性[#49](https://github.com/mallfoundry/taroify/issues/49)
+
 ### v0.0.15-alpha.5
 
 `2021-10-22`
