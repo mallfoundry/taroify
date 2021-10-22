@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.5
+
+`2021-10-22`
+
+**Bug Fixes**
+
+- Transition
+  - 修复 DOM 在 enter 之前已挂载的问题[#48](https://github.com/mallfoundry/taroify/issues/48)
+
 ### v0.0.15-alpha.4
 
 `2021-10-21`
