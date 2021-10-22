@@ -11,6 +11,13 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - 主版本号：发布时间不定，包含不兼容更新。
 
 ## 更新内容
+### v0.0.15-alpha.7
+
+`2021-10-22`
+
+**Feature**
+
+  - 使用 esm 作为默认打包方式[#50](https://github.com/mallfoundry/taroify/issues/50)
 
 ### v0.0.15-alpha.6
 
