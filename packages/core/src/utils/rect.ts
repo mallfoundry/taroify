@@ -38,7 +38,8 @@ export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClient
     } else {
       return new Promise<BoundingClientRect>((resolve) => {
         createNodesRef(element)
-          .boundingClientRect((rect) => {
+          .boundingClientRect()
+          .exec(([rect]) => {
             if (isRootElement(element)) {
               const { width, height } = rect
               resolve(makeBoundingClientRect(width, height))
@@ -46,7 +47,6 @@ export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClient
               resolve(rect)
             }
           })
-          .exec()
       })
     }
   }
@@ -71,8 +71,8 @@ export function getBoundingClientRects(
       return new Promise<BoundingClientRect[]>((resolve) => {
         createSelectorQuery()
           .selectAll("#" + element.uid + selector)
-          .boundingClientRect((rects) => resolve((rects as unknown) as BoundingClientRect[]))
-          .exec()
+          .boundingClientRect()
+          .exec(([rects]) => resolve((rects as unknown) as BoundingClientRect[]))
       })
     }
   }
