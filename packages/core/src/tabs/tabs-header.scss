@@ -28,9 +28,11 @@
       box-sizing: content-box;
       height: 100%;
       background: #fff;
+      width: 100%;
     }
 
     &--card {
+      width: 100%;
       box-sizing: border-box;
       height: var(--tabs-card-height, $tabs-card-height);
       margin: 0 var(--padding-md, $padding-md);
