@@ -1,13 +1,13 @@
-import { Cross } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { ITouchEvent } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode, useContext } from "react"
-import { default as SharedBackdrop } from "../backdrop"
+import { Children, CSSProperties, isValidElement, ReactElement, ReactNode } from "react"
+import { isBackdropElement } from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
+import PopupBackdrop from "./popup-backdrop"
+import PopupClose from "./popup-close"
 import PopupContext from "./popup.context"
 import { PopupPlacement, PopupPlacementString } from "./popup.shared"
 
@@ -47,11 +47,9 @@ function findPopupChildren(node?: ReactNode): PopupChildren {
   Children.forEach(node, (child: ReactNode) => {
     if (isValidElement(child)) {
       const element = child as ReactElement
-      if (element.type === Popup.Backdrop) {
+      if (isBackdropElement(element)) {
         children.backdrop = element
-      } else if (_.isFunction(element.type) && element.type.name === Popup.Backdrop.name) {
-        children.backdrop = element
-      } else if (element.type === Popup.Close) {
+      } else if (element.type === PopupClose) {
         children.close = element
       } else {
         children.content.push(child)
@@ -64,7 +62,7 @@ function findPopupChildren(node?: ReactNode): PopupChildren {
   return children
 }
 
-interface PopupProps {
+export interface PopupProps {
   className?: string
   style?: CSSProperties
   open?: boolean
@@ -95,7 +93,7 @@ function Popup(props: PopupProps) {
 
   const transactionName = transaction ?? toTransactionName(placement)
 
-  const { backdrop = <Popup.Backdrop />, close, content } = findPopupChildren(children)
+  const { backdrop = <PopupBackdrop />, close, content } = findPopupChildren(children)
 
   return (
     <PopupContext.Provider
@@ -135,93 +133,6 @@ function Popup(props: PopupProps) {
       </Transition>
     </PopupContext.Provider>
   )
-}
-
-namespace Popup {
-  export interface BackdropProps {
-    className?: string
-    style?: CSSProperties
-    open?: boolean
-    duration?: number
-    closeable?: boolean
-    onClick?: (event: ITouchEvent) => void
-  }
-
-  export function Backdrop(props: BackdropProps) {
-    const {
-      className,
-      style,
-      open: openProp = true,
-      duration = 300,
-      closeable = true,
-      onClick,
-    } = props
-    const { open, emitClose } = useContext(PopupContext)
-    return (
-      <SharedBackdrop
-        className={className}
-        style={style}
-        open={openProp && open}
-        duration={duration}
-        closeable={closeable}
-        onClick={onClick}
-        onClose={emitClose}
-      />
-    )
-  }
-
-  export enum ClosePlacement {
-    TopRight = "top-right",
-    TopLeft = "top-left",
-    BottomRight = "bottom-right",
-    BottomLeft = "bottom-left",
-  }
-
-  type ClosePlacementString = "top-right" | "top-left" | "bottom-right" | "bottom-left"
-
-  interface CloseProps {
-    placement?: ClosePlacement | ClosePlacementString
-    children?: ReactNode
-  }
-
-  function useClosePlacement(placement?: ClosePlacement | ClosePlacementString) {
-    const { placement: ctxPlacement } = useContext(PopupContext)
-    if (placement) {
-      return placement
-    }
-
-    if (ctxPlacement === PopupPlacement.Right) {
-      return ClosePlacement.TopLeft
-    } else if (
-      ctxPlacement === PopupPlacement.Left ||
-      ctxPlacement === PopupPlacement.Top ||
-      ctxPlacement === PopupPlacement.Bottom
-    ) {
-      return ClosePlacement.TopRight
-    }
-  }
-
-  export function Close(props: CloseProps) {
-    const { children = <Cross /> } = props
-    const { emitClose } = useContext(PopupContext)
-    const placement = useClosePlacement(props.placement)
-
-    if (React.isValidElement(children)) {
-      const iconElement = children as ReactElement
-      return React.cloneElement(iconElement, {
-        className: classNames(iconElement.props.classNames, prefixClassname("popup__close-icon"), {
-          [prefixClassname("popup__close-icon--top-left")]: placement === ClosePlacement.TopLeft,
-          [prefixClassname("popup__close-icon--top-right")]: placement === ClosePlacement.TopRight,
-          [prefixClassname("popup__close-icon--bottom-left")]:
-            placement === ClosePlacement.BottomLeft,
-          [prefixClassname("popup__close-icon--bottom-left")]:
-            placement === ClosePlacement.BottomRight,
-        }),
-        onClick: () => emitClose?.(false),
-      })
-    }
-    return <>{children}</>
-  }
 }
 
 export default Popup
