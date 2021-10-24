@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { PageScrollObject, usePageScroll, useReady } from "@tarojs/taro"
+import { nextTick, PageScrollObject, usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -14,7 +14,6 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
-import { raf } from "../utils/raf"
 import { getBoundingClientRect } from "../utils/rect"
 import { getSystemRect } from "../utils/system"
 
@@ -23,12 +22,7 @@ interface RootReact {
   width?: number
 }
 
-enum StickyPosition {
-  Top = "top",
-  Bottom = "bottom",
-}
-
-type StickyPositionString = "top" | "bottom"
+type StickyPosition = "top" | "bottom"
 
 interface StickyOffset {
   top?: number | string
@@ -38,7 +32,7 @@ interface StickyOffset {
 interface StickyProps {
   className?: string
   zIndex?: number
-  position?: StickyPosition | StickyPositionString
+  position?: StickyPosition
   offset?: StickyOffset
   container?: MutableRefObject<Element | undefined>
   children?: ReactNode
@@ -51,11 +45,12 @@ interface StickyProps {
 export default function Sticky(props: StickyProps) {
   const {
     className,
-    position = StickyPosition.Top,
+    position = "top",
     offset,
     container: containerRef,
     children,
     onChange,
+    onScroll,
   } = props
 
   const rootRef = useRef<ViewProps>()
@@ -67,7 +62,7 @@ export default function Sticky(props: StickyProps) {
   const [transform, setTransform] = useState(0)
 
   const offsetValue = useMemo(
-    () => unitToPx((position === StickyPosition.Top ? offset?.top : offset?.bottom) ?? 0),
+    () => unitToPx((position === "top" ? offset?.top : offset?.bottom) ?? 0),
     [offset?.bottom, offset?.top, position],
   )
 
@@ -108,10 +103,10 @@ export default function Sticky(props: StickyProps) {
     return style
   }, [fixed, rootRect.height, rootRect.width, transform, position, offsetValue])
 
-  async function onScroll() {
+  async function invokeScroll({ scrollTop }: PageScrollObject) {
     const __rootRect__ = await getBoundingClientRect(rootRef)
     setRootRect(__rootRect__)
-    if (position === StickyPosition.Top) {
+    if (position === "top") {
       if (containerRef) {
         const containerRect = await getBoundingClientRect(containerRef)
         const difference = containerRect.bottom - offsetValue - __rootRect__.height
@@ -133,6 +128,7 @@ export default function Sticky(props: StickyProps) {
         setFixed(windowHeight - offsetValue < __rootRect__.bottom)
       }
     }
+    onScroll?.({ scrollTop })
   }
 
   useEffect(() => {
@@ -142,8 +138,11 @@ export default function Sticky(props: StickyProps) {
     counterRef.current++
   }, [fixed, onChange])
 
-  usePageScroll(onScroll)
-  useReady(() => raf(onScroll))
+  // TODO onMounted in */hooks package
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => nextTick(() => invokeScroll({ scrollTop: 0 })), [])
+
+  usePageScroll(({ scrollTop }) => invokeScroll({ scrollTop }))
 
   return (
     <View ref={rootRef} style={rootStyle}>
