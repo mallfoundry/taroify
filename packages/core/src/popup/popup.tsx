@@ -3,9 +3,10 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, CSSProperties, isValidElement, ReactElement, ReactNode } from "react"
-import { isBackdropElement } from "../backdrop"
+import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
+import { isElementOf } from "../utils/validate"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 import PopupContext from "./popup.context"
@@ -47,7 +48,7 @@ function findPopupChildren(node?: ReactNode): PopupChildren {
   Children.forEach(node, (child: ReactNode) => {
     if (isValidElement(child)) {
       const element = child as ReactElement
-      if (isBackdropElement(element)) {
+      if (isElementOf(element, Backdrop)) {
         children.backdrop = element
       } else if (element.type === PopupClose) {
         children.close = element
