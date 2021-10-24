@@ -20,7 +20,16 @@ interface TabProps {
 }
 
 export default function Tab(props: TabProps) {
-  const { className, active, disabled, underline, ellipsis, flexBasis, children, onClick } = props
+  const {
+    className,
+    active,
+    disabled = false,
+    underline,
+    ellipsis,
+    flexBasis,
+    children,
+    onClick,
+  } = props
 
   return (
     <View

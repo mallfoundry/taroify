@@ -2,7 +2,15 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo, useRef } from "react"
+import {
+  Children,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
 import TabPane from "./tab-pane"
@@ -74,12 +82,29 @@ function Tabs(props: TabsProps) {
   const rootRef = useRef()
   const tabObjects = useTabObjects(props.children)
 
-  function handleTabClick(event: TabEvent) {
-    if (!event.disabled) {
-      onChange?.(event.value, event)
-    }
-    onTabClick?.(event)
-  }
+  const handleTabClick = useCallback(
+    (event: TabEvent) => {
+      if (!event.disabled) {
+        onChange?.(event.value, event)
+      }
+      onTabClick?.(event)
+    },
+    [onChange, onTabClick],
+  )
+
+  const headerRender = useMemo(
+    () => (
+      <TabsHeader
+        value={value}
+        theme={theme}
+        bordered={bordered}
+        ellipsis={ellipsis}
+        tabObjects={tabObjects}
+        onTabClick={handleTabClick}
+      />
+    ),
+    [bordered, ellipsis, handleTabClick, tabObjects, theme, value],
+  )
 
   return (
     <TabsContext.Provider
@@ -107,27 +132,7 @@ function Tabs(props: TabsProps) {
           className,
         )}
       >
-        {sticky ? (
-          <Sticky container={rootRef}>
-            <TabsHeader
-              value={value}
-              theme={theme}
-              bordered={bordered}
-              ellipsis={ellipsis}
-              tabObjects={tabObjects}
-              onTabClick={onTabClick}
-            />
-          </Sticky>
-        ) : (
-          <TabsHeader
-            value={value}
-            theme={theme}
-            bordered={bordered}
-            ellipsis={ellipsis}
-            tabObjects={tabObjects}
-            onTabClick={handleTabClick}
-          />
-        )}
+        {sticky ? <Sticky container={rootRef} children={headerRender} /> : headerRender}
         <TabsContent
           value={value}
           lazyRender={lazyRender}

@@ -106,7 +106,7 @@ function TabsWithTabClick() {
 function StickyTabs() {
   const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} sticky onChange={(tab) => setValue(tab.value)}>
+    <Tabs value={value} sticky onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -118,7 +118,7 @@ function StickyTabs() {
 function TabsWithCustomTitle() {
   const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={(tab) => setValue(tab.value)}>
+    <Tabs value={value} onChange={setValue}>
       <Tabs.TabPane
         title={
           <>
