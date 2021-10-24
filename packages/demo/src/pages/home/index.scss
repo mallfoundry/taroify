@@ -6,6 +6,13 @@
   padding: 46px * $hd 20px * $hd 20px * $hd;
   background: #fff;
 
+  &__title, &__description {
+    padding-left: 16px * $hd;
+    font-weight: normal;
+    line-height: 1;
+    user-select: none;
+  }
+
   &__title {
     display: flex;
     align-items: center;

@@ -15,28 +15,30 @@
   &__block {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
-    margin: 0 0 20px;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 40px;
+    margin: 0 0 12px * $hd;
+    padding-left: 20px * $hd;
     color: #323233;
-    cursor: pointer;
+    font-weight: 600;
+    font-size: 14PX;
+    line-height: 40px * $hd;
     background: #f7f8fa;
-    border-radius: 99px;
+    border-radius: 99px * $hd;
     transition: background 0.3s;
 
-    &:active {
-      background: #e4e8ee;
+    &:hover {
+      background: darken(#f7f8fa, 3%);
     }
 
-    &:hover {
-      background: #eef0f4;
+    &:active {
+      background: darken(#f7f8fa, 6%);
     }
 
     .#{$component-prefix}icon {
+      position: absolute;
+      top: 50%;
+      right: 16px * $hd;
+      font-size: 16px * $hd;
+      margin-top: -8px * $hd;
       color: #b6c3d2;
     }
   }
