@@ -1,26 +1,10 @@
 import { Image as TaroImage, View } from "@tarojs/components"
+import { StandardProps } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react"
+import { ReactElement, ReactNode, useEffect, useState } from "react"
 import { prefixClassname } from "../styles"
-
-// export enum ImageMode {
-//   ScaleToFill = "scaleToFill",
-//   AspectFit = "aspectFit",
-//   AspectFill = "aspectFill",
-//   WidthFix = "widthFix",
-//   HeightFix = "heightFix",
-//   Top = "top",
-//   Bottom = "bottom",
-//   Center = "center",
-//   Left = "left",
-//   Right = "right",
-//   TopLeft = "topLeft",
-//   TopRight = "topRight",
-//   BottomLeft = "bottomLeft",
-//   BottomRight = "bottomRight",
-// }
 
 export type ImageMode =
   | "scaleToFill"
@@ -80,9 +64,7 @@ function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholder
   return <></>
 }
 
-interface ImageProps {
-  className?: string
-  style?: CSSProperties
+interface ImageProps extends StandardProps {
   src?: string
   alt?: string
   mode?: ImageMode
@@ -95,7 +77,6 @@ interface ImageProps {
 export default function Image(props: ImageProps) {
   const {
     className,
-    style,
     src,
     alt,
     mode = "scaleToFill",
@@ -103,6 +84,7 @@ export default function Image(props: ImageProps) {
     lazyLoad = false,
     placeholder = true,
     fallback = true,
+    ...restProps
   } = props
   const taroMode = toTaroMode(mode)
 
@@ -137,19 +119,19 @@ export default function Image(props: ImageProps) {
             },
             className,
           )}
-          style={style}
           imgProps={{ alt }}
           onError={handleError}
           onLoad={handleLoad}
+          {...restProps}
         />
       )}
       {loading && placeholder && (
-        <View className={classNames(prefixClassname("image"), className)} style={style}>
+        <View className={classNames(prefixClassname("image"), className)} {...restProps}>
           <ImagePlaceholder prefix="placeholder" children={placeholder} />
         </View>
       )}
       {failed && fallback && (
-        <View className={classNames(prefixClassname("image"), className)} style={style}>
+        <View className={classNames(prefixClassname("image"), className)} {...restProps}>
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
       )}
