@@ -17,7 +17,7 @@ function BasicDialog() {
         rightIcon={<ArrowRight />}
         onClick={() => setOpen(true)}
       />
-      <Dialog open={open} onClose={setOpen}>
+      <Dialog open={open} onClose={setOpen} backdrop={false}>
         <Dialog.Header>标题</Dialog.Header>
         <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
         <Dialog.Actions>

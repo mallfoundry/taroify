@@ -46,7 +46,7 @@ export default function PopupDemo() {
     if (placement === PopupPlacement.Left || placement === PopupPlacement.Right) {
       openOptions.style = {
         height: "20%",
-        width: "20%",
+        width: "100%",
       }
     } else if (placement) {
       openOptions.style = { height: "30%" }

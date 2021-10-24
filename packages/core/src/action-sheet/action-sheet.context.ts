@@ -1,8 +1,8 @@
 import { createContext } from "react"
-import ActionSheet from "./action-sheet"
+import { ActionSheetActionObject } from "./action-sheet.shared"
 
 interface ActionSheetContextProps {
-  emitSelect?: (event: ActionSheet.ActionEvent) => void
+  onSelect?: (object: ActionSheetActionObject) => void
 }
 
 const ActionSheetContext = createContext<ActionSheetContextProps>({})
