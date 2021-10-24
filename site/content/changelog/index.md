@@ -11,13 +11,32 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - 主版本号：发布时间不定，包含不兼容更新。
 
 ## 更新内容
+
+### v0.0.15-alpha.8
+
+`2021-10-24`
+
+**Feature**
+
+- Sticky
+    - 新增 onScroll 事件[#51](https://github.com/mallfoundry/taroify/issues/51)
+- Image
+  - 新增 onClick 事件[#54](https://github.com/mallfoundry/taroify/issues/54)
+
+**Bug Fixes**
+
+- Tabs
+    - 修复设置 sticky 无法切换 Tab 的问题[#52](https://github.com/mallfoundry/taroify/issues/52)
+- Styles
+  - 修复 tap-highlight-color 默认为淡蓝的问题[#54](https://github.com/mallfoundry/taroify/issues/53)
+
 ### v0.0.15-alpha.7
 
 `2021-10-22`
 
 **Feature**
 
-  - 使用 esm 作为默认打包方式[#50](https://github.com/mallfoundry/taroify/issues/50)
+- 使用 esm 作为默认打包方式[#50](https://github.com/mallfoundry/taroify/issues/50)
 
 ### v0.0.15-alpha.6
 
@@ -26,7 +45,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Toast
-  - 新增 position 属性[#49](https://github.com/mallfoundry/taroify/issues/49)
+    - 新增 position 属性[#49](https://github.com/mallfoundry/taroify/issues/49)
 
 ### v0.0.15-alpha.5
 
@@ -35,7 +54,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Transition
-  - 修复 DOM 在 enter 之前已挂载的问题[#48](https://github.com/mallfoundry/taroify/issues/48)
+    - 修复 DOM 在 enter 之前已挂载的问题[#48](https://github.com/mallfoundry/taroify/issues/48)
 
 ### v0.0.15-alpha.4
 
@@ -43,14 +62,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **Feature**
 
-- Tag 
-  - 新增 onClick 事件[#46](https://github.com/mallfoundry/taroify/issues/46)
+- Tag
+    - 新增 onClick 事件[#46](https://github.com/mallfoundry/taroify/issues/46)
 
 **Breaking Changes**
 
 - Tag
-  - 删除 textColor 属性，使用 CSS className 和 style 代替 textColor 属性[#47](https://github.com/mallfoundry/taroify/issues/47)
-  
+    - 删除 textColor 属性，使用 CSS className 和 style 代替 textColor 属性[#47](https://github.com/mallfoundry/taroify/issues/47)
+
 ### v0.0.15-alpha.3
 
 `2021-10-20`
@@ -58,7 +77,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Uploader.Image
-  - 新增 mode, alt, round 属性[#45](https://github.com/mallfoundry/taroify/issues/45)
+    - 新增 mode, alt, round 属性[#45](https://github.com/mallfoundry/taroify/issues/45)
 
 ### v0.0.15-alpha.2
 
@@ -67,7 +86,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Transition
-  - 修复因设置 unmountOnExit 属性，而导致小程序渲染错乱的问题[#42](https://github.com/mallfoundry/taroify/issues/42)
+    - 修复因设置 unmountOnExit 属性，而导致小程序渲染错乱的问题[#42](https://github.com/mallfoundry/taroify/issues/42)
 
 ### v0.0.15-alpha.1
 
@@ -76,7 +95,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Tabs
-  - 新增 bottomBar 的 css 变量[#40](https://github.com/mallfoundry/taroify/issues/40)
+    - 新增 bottomBar 的 css 变量[#40](https://github.com/mallfoundry/taroify/issues/40)
 
 ### v0.0.15-alpha.0
 
@@ -93,7 +112,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - SwipeCell
-  - 修复动画卡顿和 rightRect 为空的问题[#37](https://github.com/mallfoundry/taroify/issues/37)
+    - 修复动画卡顿和 rightRect 为空的问题[#37](https://github.com/mallfoundry/taroify/issues/37)
 
 ### v0.0.14-alpha.1
 
@@ -102,7 +121,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Tabbar
-  - 修复图标为空时，Badge 组件未清理的问题[#35](https://github.com/mallfoundry/taroify/issues/35)
+    - 修复图标为空时，Badge 组件未清理的问题[#35](https://github.com/mallfoundry/taroify/issues/35)
 
 ### v0.0.14-alpha.0
 
@@ -111,14 +130,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Breaking Changes**
 
 - DropdownMenu
-  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+    - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
 - Collapse
-  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+    - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
 - Sidebar
-  - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+    - activeKey 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
 - TreeSelect
-  - activeTab 属性重命名为 tabValue[#34](https://github.com/mallfoundry/taroify/issues/34)
-  - activeValue 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
+    - activeTab 属性重命名为 tabValue[#34](https://github.com/mallfoundry/taroify/issues/34)
+    - activeValue 属性重命名为 value[#34](https://github.com/mallfoundry/taroify/issues/34)
 
 ### v0.0.13-alpha.0
 
@@ -136,7 +155,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Button
-  - 修复细边框样式模糊问题[#29](https://github.com/mallfoundry/taroify/issues/29)
+    - 修复细边框样式模糊问题[#29](https://github.com/mallfoundry/taroify/issues/29)
 
 ### v0.0.12-alpha.17
 
@@ -145,7 +164,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Tabs
-  - 修复滑动切换时 Tab 没有效果的问题[#28](https://github.com/mallfoundry/taroify/issues/28)
+    - 修复滑动切换时 Tab 没有效果的问题[#28](https://github.com/mallfoundry/taroify/issues/28)
 
 ### v0.0.12-alpha.16
 
@@ -154,18 +173,18 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Tabs.TabPane
-  - 新增 value 属性[#26](https://github.com/mallfoundry/taroify/issues/26)
+    - 新增 value 属性[#26](https://github.com/mallfoundry/taroify/issues/26)
 
 **Bug Fixes**
 
 - Button
-  - 修复 disabled 为 true 时，依然可以点击的问题[#27](https://github.com/mallfoundry/taroify/issues/27)
+    - 修复 disabled 为 true 时，依然可以点击的问题[#27](https://github.com/mallfoundry/taroify/issues/27)
 
 **Breaking Changes**
 
 - Tabs
-  - activeKey 属性重命名为 value[#26](https://github.com/mallfoundry/taroify/issues/26)
-  
+    - activeKey 属性重命名为 value[#26](https://github.com/mallfoundry/taroify/issues/26)
+
 ### v0.0.12-alpha.15
 
 `2021-09-27`
