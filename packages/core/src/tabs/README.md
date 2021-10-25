@@ -283,7 +283,7 @@ function SwipeableTabs() {
 | animated | 是否开启切换标签内容时的转场动画 | _boolean_ | `false` |
 | bordered | 是否显示标签栏外边框，仅在 `type="line"` 时有效 | _boolean_ | `false` |
 | ellipsis | 是否省略过长的标题文字 | _boolean_ | `true` |
-| sticky | 是否使用粘性定位布局 | _boolean_ | `false` |
+| sticky | 是否使用粘性定位布局 | _boolean \| { offsetTop }_ | `false` |
 | swipeable | 是否开启手势左右滑动切换 | _boolean_ | `false` |
 
 ### Tabs.Pane Props

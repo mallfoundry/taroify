@@ -106,7 +106,7 @@ function TabsWithTabClick() {
 function StickyTabs() {
   const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} sticky onChange={setValue}>
+    <Tabs value={value} sticky={{ offsetTop: 50 }} onChange={setValue}>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
