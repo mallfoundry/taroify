@@ -18,7 +18,7 @@ import CollapseContext from "../collapse/collapse.context"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf, raf } from "../utils/raf"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 
 enum CollapseItemSize {
   Medium = "medium",
@@ -85,7 +85,7 @@ function CollapseItem(props: CollapseItemProps) {
     const tickRaf = expanded ? nextTick : raf
 
     tickRaf(async () => {
-      const { height } = await getBoundingClientRect(contentRef)
+      const { height } = await getRect(contentRef)
       if (height) {
         const heightPx = addUnitPx(height)
         setExpandHeight(expanded ? "0" : heightPx)

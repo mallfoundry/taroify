@@ -16,7 +16,7 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { TaroElement } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import IndexListContext from "./index-list.context"
 
 export interface IndexListAnchorInstance {
@@ -49,7 +49,7 @@ const IndexListAnchor = forwardRef(
 
     const scrollIntoView = useCallback(
       (scrollTop: number) =>
-        getBoundingClientRect(rootRef).then(({ top }) =>
+        getRect(rootRef).then(({ top }) =>
           pageScrollTo({
             duration: 0,
             scrollTop: Math.ceil(scrollTop + top),

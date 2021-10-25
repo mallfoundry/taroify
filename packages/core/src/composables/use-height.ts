@@ -1,11 +1,11 @@
 import { useReady } from "@tarojs/taro"
 import { useState } from "react"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 
 export default function useHeight(elementOrRef: any) {
   const [height, setHeight] = useState<number>()
   useReady(() =>
-    getBoundingClientRect(elementOrRef)
+    getRect(elementOrRef)
       .then(({ height }) => height)
       .then(setHeight),
   )

@@ -19,12 +19,7 @@ import {
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import {
-  BoundingClientRect,
-  getBoundingClientRect,
-  getBoundingClientRects,
-  makeBoundingClientRect,
-} from "../utils/rect"
+import { Rect, getRect, getRects, makeRect } from "../utils/rect"
 import IndexListAnchor, { IndexListAnchorInstance, IndexListAnchorProps } from "./index-list-anchor"
 import IndexListIndex from "./index-list-index"
 import IndexListSidebar from "./index-list-sidebar"
@@ -108,11 +103,11 @@ function IndexList(props: IndexBarProps) {
 
   const sidebarRef = useRef<HTMLElement>()
 
-  const listRectRef = useRef<BoundingClientRect>(makeBoundingClientRect(0, 0))
+  const listRectRef = useRef<Rect>(makeRect(0, 0))
 
-  const sidebarRectRef = useRef<BoundingClientRect>(makeBoundingClientRect(0, 0))
+  const sidebarRectRef = useRef<Rect>(makeRect(0, 0))
 
-  const anchorRectsRef = useRef<BoundingClientRect[]>([])
+  const anchorRectsRef = useRef<Rect[]>([])
 
   const [activeAnchor, setActiveAnchor] = useState<{
     index?: number | string
@@ -121,17 +116,17 @@ function IndexList(props: IndexBarProps) {
 
   const getListRect = useCallback(
     () =>
-      getBoundingClientRect(listRef).then((rect) => ({
+      getRect(listRef).then((rect) => ({
         ...rect,
         top: rect.top + scrollTopRef.current,
       })),
     [],
   )
 
-  const getSidebarRect = useCallback(() => getBoundingClientRect(sidebarRef), [])
+  const getSidebarRect = useCallback(() => getRect(sidebarRef), [])
 
   const getAnchorRects = useCallback(
-    () => getBoundingClientRects(listRef, ` .${prefixClassname("index-list__anchor-wrapper")}`),
+    () => getRects(listRef, ` .${prefixClassname("index-list__anchor-wrapper")}`),
     [],
   )
 

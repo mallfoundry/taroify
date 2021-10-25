@@ -6,7 +6,7 @@ import * as React from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
-import { getBoundingClientRect, getBoundingClientRects } from "../utils/rect"
+import { getRect, getRects } from "../utils/rect"
 import Tab from "./tab"
 import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
@@ -69,13 +69,12 @@ export default function TabsHeader(props: TabsHeaderProps) {
   }, [navOffset, activeOffset])
 
   const resize = useCallback(() => {
-    Promise.all([
-      getBoundingClientRect(navRef),
-      getBoundingClientRects(navRef, ` .${prefixClassname("tabs__tab")}`),
-    ]).then(([navRect, tabRects]) => {
-      setNavOffset(navRect)
-      setTabOffsets(tabRects)
-    })
+    Promise.all([getRect(navRef), getRects(navRef, ` .${prefixClassname("tabs__tab")}`)]).then(
+      ([navRect, tabRects]) => {
+        setNavOffset(navRect)
+        setTabOffsets(tabRects)
+      },
+    )
   }, [])
 
   useEffect(() => nextTick(resize), [resize, tabObjects])

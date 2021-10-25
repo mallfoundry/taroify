@@ -17,7 +17,7 @@ import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/dom/event"
 import { addNumber } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import SliderThumb from "./slider-thumb"
 import SliderContext from "./slider.context"
@@ -219,7 +219,7 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
       return
     }
 
-    getBoundingClientRect(rootRef).then((rect) => {
+    getRect(rootRef).then((rect) => {
       const { clientX, clientY } = getClientCoordinates(event)
 
       const delta = vertical ? clientY - rect.top : clientX - rect.left
@@ -272,7 +272,7 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     touch.move(event)
     dragStatusRef.current = SliderDragStatus.Dragging
 
-    getBoundingClientRect(rootRef).then((rect) => {
+    getRect(rootRef).then((rect) => {
       const delta = vertical ? touch.deltaY : touch.deltaX
       const total = vertical ? rect.height : rect.width
       const diff = (delta / total) * scope

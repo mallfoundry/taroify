@@ -6,7 +6,7 @@ import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import { getBoundingClientRects } from "../utils/rect"
+import { getRects } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import RateItem from "./rate-item"
 import RateContext from "./rate.context"
@@ -86,7 +86,7 @@ function Rate(props: RateProps) {
 
   const getRanges = useCallback(
     () =>
-      getBoundingClientRects(rootRef, ` .${prefixClassname("rate__item")}`).then((rects) =>
+      getRects(rootRef, ` .${prefixClassname("rate__item")}`).then((rects) =>
         rects.flatMap((rect, index) =>
           allowHalf
             ? [

@@ -16,7 +16,7 @@ import {
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
 
@@ -115,8 +115,8 @@ function NoticeBar(props: NoticeBarProps) {
         return
       }
 
-      const { width: wrapRefWidth } = await getBoundingClientRect(wrapRef)
-      const { width: contentRefWidth } = await getBoundingClientRect(contentRef)
+      const { width: wrapRefWidth } = await getRect(wrapRef)
+      const { width: contentRefWidth } = await getRect(contentRef)
 
       if (scrollable || contentRefWidth > wrapRefWidth) {
         doubleRaf(() => {

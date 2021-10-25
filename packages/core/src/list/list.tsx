@@ -5,7 +5,7 @@ import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getScrollParent } from "../utils/dom/scroll"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 
 enum ListDirection {
   Up = "up",
@@ -45,13 +45,13 @@ function List(props: ListProps) {
         return
       }
       const scrollParent = await getScrollParent(rootRef.current)
-      const scrollParentRect = await getBoundingClientRect(scrollParent)
+      const scrollParentRect = await getRect(scrollParent)
       if (!scrollParentRect.height) {
         return
       }
 
       let isReachEdge: boolean
-      const edgeRect = await getBoundingClientRect(edgeRef)
+      const edgeRect = await getRect(edgeRef)
 
       if (direction === ListDirection.Up) {
         isReachEdge = scrollParentRect.top - edgeRect.top <= offset

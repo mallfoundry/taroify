@@ -25,7 +25,7 @@ import { useComputed } from "../utils/computed"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { BoundingClientRect, getBoundingClientRect } from "../utils/rect"
+import { Rect, getRect } from "../utils/rect"
 import { usePrevious } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
@@ -112,8 +112,8 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   const vertical = direction === SwiperDirection.Vertical
 
   const rootRef = useRef()
-  const customRectRef = useRef<BoundingClientRect>()
-  const [, forceSetRootRect] = useState<BoundingClientRect>()
+  const customRectRef = useRef<Rect>()
+  const [, forceSetRootRect] = useState<Rect>()
   const [offset, setOffset] = useState<number>(0)
   const swipingRef = useRef(false) // Whether to swiping manually
   const activeIndexPropRef = useRef(0)
@@ -316,7 +316,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
       if (!rootRef.current) {
         return
       }
-      customRectRef.current = await getBoundingClientRect(rootRef)
+      customRectRef.current = await getRect(rootRef)
       if (count) {
         activeIndex = Math.min(count - 1, activeIndex)
       }

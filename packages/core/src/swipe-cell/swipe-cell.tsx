@@ -19,7 +19,7 @@ import {
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
@@ -235,9 +235,9 @@ function SwipeCell(props: SwipeCellProps) {
     handleClick,
   )
 
-  const getLeftWidth = async () => (await getBoundingClientRect(leftRef))?.width ?? 0
+  const getLeftWidth = async () => (await getRect(leftRef))?.width ?? 0
 
-  const getRightWidth = async () => (await getBoundingClientRect(rightRef))?.width ?? 0
+  const getRightWidth = async () => (await getRect(rightRef))?.width ?? 0
 
   useEffect(() => {
     nextTick(() => {

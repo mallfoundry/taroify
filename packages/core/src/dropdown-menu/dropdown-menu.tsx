@@ -18,7 +18,7 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
@@ -126,7 +126,7 @@ function DropdownMenu(props: DropdownMenuProps) {
   const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
 
   const updateItemOffset = useCallback(() => {
-    getBoundingClientRect(barRef).then((rect) => {
+    getRect(barRef).then((rect) => {
       if (direction === "down") {
         setItemOffset(rect.bottom)
       } else {

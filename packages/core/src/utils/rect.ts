@@ -2,7 +2,7 @@ import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "./base"
 import { createNodesRef, elementUnref, isRootElement, isWindow } from "./dom/element"
 
-export interface BoundingClientRect {
+export interface Rect {
   dataset: Record<string, any>
   id: string
   top: number
@@ -13,7 +13,7 @@ export interface BoundingClientRect {
   height: number
 }
 
-export function makeBoundingClientRect(width: number, height: number) {
+export function makeRect(width: number, height: number) {
   return {
     top: 0,
     left: 0,
@@ -21,28 +21,28 @@ export function makeBoundingClientRect(width: number, height: number) {
     bottom: height,
     width,
     height,
-  } as BoundingClientRect
+  } as Rect
 }
 
-export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClientRect> {
+export function getRect(elementOrRef: any): Promise<Rect> {
   const element = elementUnref(elementOrRef)
   if (element) {
     if (inBrowser) {
       if (isWindow(element)) {
         const width = element.innerWidth
         const height = element.innerHeight
-        return Promise.resolve(makeBoundingClientRect(width, height))
+        return Promise.resolve(makeRect(width, height))
       }
 
-      return Promise.resolve((element.getBoundingClientRect() as unknown) as BoundingClientRect)
+      return Promise.resolve((element.getBoundingClientRect() as unknown) as Rect)
     } else {
-      return new Promise<BoundingClientRect>((resolve) => {
+      return new Promise<Rect>((resolve) => {
         createNodesRef(element)
           .boundingClientRect()
           .exec(([rect]) => {
             if (isRootElement(element)) {
               const { width, height } = rect
-              resolve(makeBoundingClientRect(width, height))
+              resolve(makeRect(width, height))
             } else {
               resolve(rect)
             }
@@ -50,29 +50,26 @@ export function getBoundingClientRect(elementOrRef: any): Promise<BoundingClient
       })
     }
   }
-  return Promise.resolve(makeBoundingClientRect(0, 0))
+  return Promise.resolve(makeRect(0, 0))
 }
 
-export function getBoundingClientRects(
-  elementOrRef: any,
-  selector: string,
-): Promise<BoundingClientRect[]> {
+export function getRects(elementOrRef: any, selector: string): Promise<Rect[]> {
   const element = elementUnref(elementOrRef)
   if (element) {
     if (inBrowser) {
-      const rects: BoundingClientRect[] = []
+      const rects: Rect[] = []
       element
         .querySelectorAll(selector)
         .forEach((oneElement) =>
-          rects.push((oneElement.getBoundingClientRect() as unknown) as BoundingClientRect),
+          rects.push((oneElement.getBoundingClientRect() as unknown) as Rect),
         )
       return Promise.resolve(rects)
     } else {
-      return new Promise<BoundingClientRect[]>((resolve) => {
+      return new Promise<Rect[]>((resolve) => {
         createSelectorQuery()
           .selectAll("#" + element.uid + selector)
           .boundingClientRect()
-          .exec(([rects]) => resolve((rects as unknown) as BoundingClientRect[]))
+          .exec(([rects]) => resolve((rects as unknown) as Rect[]))
       })
     }
   }

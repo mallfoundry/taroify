@@ -14,7 +14,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/rect"
 import { getSystemRect } from "../utils/system"
 
 interface RootReact {
@@ -103,11 +103,11 @@ export default function Sticky(props: StickyProps) {
   }, [fixed, rootRect.height, rootRect.width, transform, position, offsetValue])
 
   async function invokeScroll({ scrollTop }: PageScrollObject) {
-    const __rootRect__ = await getBoundingClientRect(rootRef)
+    const __rootRect__ = await getRect(rootRef)
     setRootRect(__rootRect__)
     if (position === "top") {
       if (containerRef) {
-        const containerRect = await getBoundingClientRect(containerRef)
+        const containerRect = await getRect(containerRef)
         const difference = containerRect.bottom - offsetValue - __rootRect__.height
         setTransform(difference < 0 ? difference : 0)
         setFixed(offsetValue > __rootRect__.top && containerRect.bottom > 0)
@@ -117,7 +117,7 @@ export default function Sticky(props: StickyProps) {
     } else {
       const { windowHeight } = await getSystemRect()
       if (containerRef) {
-        const containerRect = await getBoundingClientRect(containerRef)
+        const containerRect = await getRect(containerRef)
         const difference = windowHeight - containerRect.top - offsetValue - __rootRect__.height
         setTransform(difference < 0 ? difference : 0)
         setFixed(
