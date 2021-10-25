@@ -1,4 +1,4 @@
-import { cloneIconElement, isIconElement } from "@taroify/~icons/src/utils"
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
