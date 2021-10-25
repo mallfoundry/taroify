@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.9
+
+`2021-10-25`
+
+**Bug Fixes**
+
+- Button
+    - 修复文本按钮存在边框的问题[#55](https://github.com/mallfoundry/taroify/issues/55)
+
+**Breaking Changes**
+
+- Button
+    - 删除 color 自定义属性，使用 CSS className 和 style 代替 color 属性[#56](https://github.com/mallfoundry/taroify/issues/56)
+
 ### v0.0.15-alpha.8
 
 `2021-10-24`
@@ -21,14 +35,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Sticky
     - 新增 onScroll 事件[#51](https://github.com/mallfoundry/taroify/issues/51)
 - Image
-  - 新增 onClick 事件[#54](https://github.com/mallfoundry/taroify/issues/54)
+    - 新增 onClick 事件[#54](https://github.com/mallfoundry/taroify/issues/54)
 
 **Bug Fixes**
 
 - Tabs
     - 修复设置 sticky 无法切换 Tab 的问题[#52](https://github.com/mallfoundry/taroify/issues/52)
 - Styles
-  - 修复 tap-highlight-color 默认为淡蓝的问题[#54](https://github.com/mallfoundry/taroify/issues/53)
+    - 修复 tap-highlight-color 默认为淡蓝的问题[#54](https://github.com/mallfoundry/taroify/issues/53)
 
 ### v0.0.15-alpha.7
 
