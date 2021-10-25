@@ -31,7 +31,6 @@ interface StickyOffset {
 
 interface StickyProps {
   className?: string
-  zIndex?: number
   position?: StickyPosition
   offset?: StickyOffset
   container?: MutableRefObject<Element | undefined>
