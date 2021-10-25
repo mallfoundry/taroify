@@ -14,7 +14,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import { getSystemRect } from "../utils/system"
 
 interface RootReact {

@@ -18,7 +18,7 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"

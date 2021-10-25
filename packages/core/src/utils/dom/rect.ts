@@ -1,6 +1,6 @@
 import { createSelectorQuery } from "@tarojs/taro"
-import { inBrowser } from "./base"
-import { createNodesRef, elementUnref, isRootElement, isWindow } from "./dom/element"
+import { inBrowser } from "../base"
+import { createNodesRef, elementUnref, isRootElement, isWindow } from "./element"
 
 export interface Rect {
   dataset: Record<string, any>

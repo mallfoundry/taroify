@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { Rect, makeRect } from "../utils/rect"
+import { Rect, makeRect } from "../utils/dom/rect"
 
 interface IndexListContextValue {
   sticky?: boolean

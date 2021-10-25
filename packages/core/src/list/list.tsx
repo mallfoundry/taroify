@@ -5,7 +5,7 @@ import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getScrollParent } from "../utils/dom/scroll"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 
 enum ListDirection {
   Up = "up",

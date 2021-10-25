@@ -16,7 +16,7 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { TaroElement } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import IndexListContext from "./index-list.context"
 
 export interface IndexListAnchorInstance {

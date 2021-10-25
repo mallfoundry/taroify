@@ -6,7 +6,7 @@ import * as React from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
-import { getRect, getRects } from "../utils/rect"
+import { getRect, getRects } from "../utils/dom/rect"
 import Tab from "./tab"
 import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 

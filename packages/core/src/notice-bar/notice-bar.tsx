@@ -16,7 +16,7 @@ import {
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
 

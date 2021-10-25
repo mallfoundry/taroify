@@ -18,7 +18,7 @@ import CollapseContext from "../collapse/collapse.context"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf, raf } from "../utils/raf"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 
 enum CollapseItemSize {
   Medium = "medium",

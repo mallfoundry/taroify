@@ -19,7 +19,7 @@ import {
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import { Rect, getRect, getRects, makeRect } from "../utils/rect"
+import { Rect, getRect, getRects, makeRect } from "../utils/dom/rect"
 import IndexListAnchor, { IndexListAnchorInstance, IndexListAnchorProps } from "./index-list-anchor"
 import IndexListIndex from "./index-list-index"
 import IndexListSidebar from "./index-list-sidebar"

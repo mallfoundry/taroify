@@ -19,7 +19,7 @@ import {
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
-import { getRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
