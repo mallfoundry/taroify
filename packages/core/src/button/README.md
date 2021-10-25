@@ -25,9 +25,22 @@ import { Button } from "@taroify/core"
 <Button color="default">默认按钮</Button>
 ```
 
+### 文本按钮
+
+通过 `variant="text"` 属性将按钮设置为文本按钮。
+
+```jsx
+<Button variant="text" color="primary">主要按钮</Button>
+<Button variant="text" color="info">信息按钮</Button>
+<Button variant="text" color="success">成功按钮</Button>
+<Button variant="text" color="warning">警告按钮</Button>
+<Button variant="text" color="danger">危险按钮</Button>
+<Button variant="text" color="default">默认按钮</Button>
+```
+
 ### 轮廓按钮
 
-通过 `variant="contained"` 属性将按钮设置为轮廓按钮，轮廓按钮的文字为按钮颜色，背景为白色。
+通过 `variant="contained"` 属性将按钮设置为轮廓按钮。
 
 ```jsx
 <Button variant="outlined" color="primary">主要按钮</Button>
@@ -114,12 +127,12 @@ import { Button } from "@taroify/core"
 
 ### 自定义颜色
 
-通过 `color` 属性可以自定义按钮的颜色。
+通过 `css` 属性可以自定义按钮的颜色。
 
 ```tsx
-<Button color="#7232dd">单色按钮</Button>
-<Button color="#7232dd" variant="outlined">单色按钮</Button>
-<Button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</Button>
+<Button style={{ backgroundColor: "#7232dd", color: "#fff" }}>单色按钮</Button>
+<Button style={{ borderColor: "#7232dd", color: "#7232dd" }}>单色按钮</Button>
+<Button style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>渐变色按钮</Button>
 ```
 
 ## API
@@ -139,10 +152,3 @@ import { Button } from "@taroify/core"
 | hairline | 是否使用 0.5px 边框 | _boolean_ | `false` |
 | loading | 是否显示为加载状态 | _boolean_ | `false` |
 | children | 按钮文字 | _string_ | - |
-
-### Events
-
-| 事件名      | 说明                                   | 回调参数            |
-| ---------- | ------------------------------------- | ------------------- |
-| click      | 点击按钮，且按钮状态不为加载或禁用时触发      | _event: MouseEvent_ |
-| touchstart | 开始触摸按钮时触发                       | _event: TouchEvent_ |

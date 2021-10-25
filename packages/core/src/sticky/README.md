@@ -26,10 +26,10 @@ import Sticky from "@taroify/core/sticky"
 
 ### 吸顶距离
 
-通过 `offset.top` 属性可以设置组件在吸顶时与顶部的距离。
+通过 `offsetTop` 属性可以设置组件在吸顶时与顶部的距离。
 
 ```tsx
-<Sticky offset={{ top: "50px" }}>
+<Sticky offsetTop={100}>
   <Button color="primary">吸顶距离</Button>
 </Sticky>
 ```
@@ -53,10 +53,10 @@ function StickyWithContainer() {
 
 ### 吸底距离
 
-将 `position` 设置为 `bottom` 可以让组件吸附在底部。通过 `offset.bottom` 属性可以设置组件在吸底时与底部的距离。
+将 `position` 设置为 `bottom` 可以让组件吸附在底部。通过 `offsetBottom` 属性可以设置组件在吸底时与底部的距离。
 
 ```tsx
-<Sticky position="bottom" offset={{ bottom: "50px" }}>
+<Sticky position="bottom" offsetBottom={50}>
   <Button color="primary">吸底距离</Button>
 </Sticky>
 ```
@@ -68,8 +68,8 @@ function StickyWithContainer() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | position | 吸附位置，可选值为 `bottom` | _string_ | `top` |
-| offset | 吸顶时的距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px` | _{ top, bottom }_ | `0` |
-| zIndex | 吸顶时的 zIndex | _number \| string_ | `99` |
+| offsetTop | 吸顶时与顶部的距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px` | _number \| string | `0` |
+| offsetBottom | 吸底时与底部的距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px` | _number \| string_ | `0` |
 | container | 容器对应的 HTML 节点 | _Element_ | - |
 
 ### Events

@@ -13,8 +13,8 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { getRect } from "../utils/dom/rect"
+import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { getSystemRect } from "../utils/system"
 
 interface RootReact {
@@ -33,6 +33,8 @@ interface StickyProps {
   className?: string
   position?: StickyPosition
   offset?: StickyOffset
+  offsetTop?: number | string
+  offsetBottom?: number | string
   container?: MutableRefObject<Element | undefined>
   children?: ReactNode
 
@@ -45,12 +47,25 @@ export default function Sticky(props: StickyProps) {
   const {
     className,
     position = "top",
-    offset,
+    offset: offsetProp,
     container: containerRef,
     children,
     onChange,
     onScroll,
   } = props
+
+  if (offsetProp) {
+    const { top, bottom } = offsetProp
+    if (top) {
+      console.warn("[Deprecated] Use the 'offsetTop' prop instead of the 'offset.top' prop.")
+    }
+    if (bottom) {
+      console.warn("[Deprecated] Use the 'offsetBottom' prop instead of the 'offset.bottom' prop.")
+    }
+  }
+
+  const offsetTop = props.offsetTop ?? offsetProp?.top
+  const offsetBottom = props.offsetBottom ?? offsetProp?.bottom
 
   const rootRef = useRef<ViewProps>()
   const counterRef = useRef(0)
@@ -61,8 +76,8 @@ export default function Sticky(props: StickyProps) {
   const [transform, setTransform] = useState(0)
 
   const offsetValue = useMemo(
-    () => unitToPx((position === "top" ? offset?.top : offset?.bottom) ?? 0),
-    [offset?.bottom, offset?.top, position],
+    () => unitToPx((position === "top" ? offsetTop : offsetBottom) ?? 0),
+    [offsetBottom, offsetTop, position],
   )
 
   const rootStyle: CSSProperties | undefined = useMemo(() => {

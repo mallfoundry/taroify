@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { PageScrollObject } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -46,6 +47,22 @@ function useTabObjects(children: ReactNode) {
   }, [children])
 }
 
+interface TabsSticky {
+  offsetTop?: string | number
+}
+
+function useTabsSticky(sticky?: boolean | TabsSticky): TabsSticky | undefined {
+  if (sticky === false) {
+    return undefined
+  }
+  if (_.isBoolean(sticky) && sticky) {
+    return {
+      offsetTop: 0,
+    }
+  }
+  return sticky
+}
+
 export interface TabsProps {
   className?: string
   value?: any
@@ -54,7 +71,7 @@ export interface TabsProps {
   lazyRender?: boolean
   animated?: boolean
   swipeable?: boolean
-  sticky?: boolean
+  sticky?: boolean | TabsSticky
   bordered?: boolean
   ellipsis?: boolean
   children?: ReactNode
@@ -62,6 +79,8 @@ export interface TabsProps {
   onChange?(value: any, event: TabEvent): void
 
   onTabClick?(event: TabEvent): void
+
+  onScroll?(scroll: PageScrollObject): void
 }
 
 function Tabs(props: TabsProps) {
@@ -78,8 +97,10 @@ function Tabs(props: TabsProps) {
     bordered,
     onTabClick,
     onChange,
+    onScroll,
   } = props
   const rootRef = useRef()
+  const stickyProps = useTabsSticky(sticky)
   const tabObjects = useTabObjects(props.children)
 
   const handleTabClick = useCallback(
@@ -132,7 +153,16 @@ function Tabs(props: TabsProps) {
           className,
         )}
       >
-        {sticky ? <Sticky container={rootRef} children={headerRender} /> : headerRender}
+        {stickyProps ? (
+          <Sticky
+            container={rootRef}
+            offsetTop={stickyProps.offsetTop}
+            children={headerRender}
+            onScroll={onScroll}
+          />
+        ) : (
+          headerRender
+        )}
         <TabsContent
           value={value}
           lazyRender={lazyRender}

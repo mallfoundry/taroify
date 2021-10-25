@@ -30,6 +30,28 @@ export default function ButtonDemo() {
           </Button>
         </Space>
       </Block>
+      <Block title="文本按钮">
+        <Space>
+          <Button variant="text" color="primary">
+            主要按钮
+          </Button>
+          <Button variant="text" color="info">
+            信息按钮
+          </Button>
+          <Button variant="text" color="success">
+            成功按钮
+          </Button>
+          <Button variant="text" color="warning">
+            警告按钮
+          </Button>
+          <Button variant="text" color="danger">
+            危险按钮
+          </Button>
+          <Button variant="text" color="default">
+            默认按钮
+          </Button>
+        </Space>
+      </Block>
       <Block title="轮廓按钮">
         <Space>
           <Button variant="outlined" color="primary">
@@ -150,11 +172,16 @@ export default function ButtonDemo() {
       </Block>
       <Block title="按钮尺寸">
         <Space>
-          <Button color="#7232dd">单色按钮</Button>
-          <Button color="#7232dd" variant="outlined">
-            单色按钮
+          <Button style={{ backgroundColor: "#7232dd", color: "#fff" }}>单色按钮</Button>
+          <Button style={{ borderColor: "#7232dd", color: "#7232dd" }}>单色按钮</Button>
+          <Button
+            style={{
+              background: "linear-gradient(to right, #ff6034, #ee0a24)",
+              color: "#fff",
+            }}
+          >
+            渐变色按钮
           </Button>
-          <Button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</Button>
         </Space>
       </Block>
     </Page>
