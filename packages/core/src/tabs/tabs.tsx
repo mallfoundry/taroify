@@ -49,12 +49,12 @@ function useTabObjects(children: ReactNode) {
 export interface TabsProps {
   className?: string
   value?: any
+  theme?: TabsTheme
   duration?: number
   lazyRender?: boolean
   animated?: boolean
   swipeable?: boolean
   sticky?: boolean
-  theme?: TabsTheme
   bordered?: boolean
   ellipsis?: boolean
   children?: ReactNode
