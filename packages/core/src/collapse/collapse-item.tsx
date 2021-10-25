@@ -1,4 +1,4 @@
-import ArrowRight from "@taroify/icons/ArrowRight"
+import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
@@ -14,11 +14,11 @@ import {
   useState,
 } from "react"
 import Cell from "../cell"
-import CollapseContext from "../collapse/collapse.context"
 import { prefixClassname } from "../styles"
+import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf, raf } from "../utils/raf"
-import { getRect } from "../utils/dom/rect"
+import CollapseContext from "./collapse.context"
 
 enum CollapseItemSize {
   Medium = "medium",
