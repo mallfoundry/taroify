@@ -1,4 +1,4 @@
-import { Cross } from "@taroify/~icons/src"
+import { Cross } from "@taroify/icons"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactElement, ReactNode, useContext } from "react"

@@ -6,7 +6,7 @@ import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
 
 interface CellGroupProps {
-  title?: string
+  title?: ReactNode
   clickable?: boolean
   inset?: boolean
   bordered?: boolean
