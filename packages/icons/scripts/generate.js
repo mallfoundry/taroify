@@ -1,4 +1,4 @@
-const { writeFileSync, appendFileSync, rmSync, truncateSync } = require("fs")
+const { writeFileSync, appendFileSync, truncateSync } = require("fs")
 const _ = require("lodash")
 const names = require("../src/van/names")
 
