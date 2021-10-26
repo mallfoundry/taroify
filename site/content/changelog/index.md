@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.15-alpha.12
+
+`2021-10-26`
+
+**Breaking Changes**
+
+- Cell.Group
+  - title 属性的类型调整为 ReactNode[#60](https://github.com/mallfoundry/taroify/issues/60)
+
 ### v0.0.15-alpha.11
 
 `2021-10-25`
