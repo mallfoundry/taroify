@@ -60,6 +60,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "Calendar 日历",
+        name: "Calendar",
+        path: "calendar/index",
+      },
+      {
         title: "Checkbox 复选框",
         name: "Checkbox",
         path: "checkbox/index",
