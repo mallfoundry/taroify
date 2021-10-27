@@ -35,7 +35,7 @@ function ButtonExample() {
 
 ## 微信交流群
 
-<img src="https://gitee.com/mallfoundry/taroify/raw/master/wechat-qrcode.png" width="200" />
+  <img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" />
 <br />
 备注 "taroify" 加好友后邀请进群
 
