@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { nextTick } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
 import {
@@ -6,19 +7,20 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
 } from "react"
-import { useHeight } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
+import { usePrevious } from "../utils/state"
 import CalendarDay from "./calendar-day"
 import CalendarContext from "./calendar.context"
 import {
   CalendarDayObject,
   CalendarDayType,
+  CalendarType,
   compareDate,
   createNextDay,
   createPreviousDay,
@@ -37,38 +39,54 @@ function CalendarMonthWatermark(props: CalendarMonthWatermarkProps) {
 export interface CalendarMonthInstance {
   disabledDays: CalendarDayObject[]
 
-  getTitle(): any
+  getValue(): Date
 
   getHeight(): number
 
-  setVisible(value?: boolean | undefined): void
+  getScrollTop(subtitle: any): Promise<number>
+}
 
-  getScrollTop(): Promise<number>
+function getBottom(type: CalendarType, dayType: CalendarDayType) {
+  if (type === "range") {
+    if (dayType === "start") {
+      return "开始"
+    }
+    if (dayType === "end") {
+      return "结束"
+    }
+    if (dayType === "active") {
+      return "开始/结束"
+    }
+  }
 }
 
 interface CalendarMonthProps {
   value?: Date
-  subtitle?: boolean
+  top?: boolean
   readonly?: boolean
   watermark?: boolean
-  lazyRender?: boolean
   children?: ReactNode
 }
 
 const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
   (props: CalendarMonthProps, ref) => {
-    const { value: monthValue = new Date(), watermark, lazyRender, subtitle } = props
-    const { type, firstDayOfWeek, min, max, value: currentValue } = useContext(CalendarContext)
+    const { value: monthValue = new Date(), watermark, top } = props
+    const { type, firstDayOfWeek, min, max, value: currentValue, subtitle, formatter } = useContext(
+      CalendarContext,
+    )
+    const previousTop = usePrevious(top)
+    const previousSubtitle = usePrevious(subtitle)
 
     const monthRef = useRef()
     const daysRef = useRef()
 
-    const height = useHeight(monthRef)
-    const [visible, setVisible] = useState<boolean | undefined>(false)
+    const heightRef = useRef(0)
 
-    const shouldRender = useMemo(() => visible && !lazyRender, [lazyRender, visible])
+    const month = useMemo(() => monthValue.getMonth() + 1, [monthValue])
 
-    const month = useMemo(() => ((monthValue as Date)?.getMonth() ?? 0) + 1, [monthValue])
+    const title = useMemo(() => `${monthValue.getFullYear()}年${monthValue.getMonth() + 1}月`, [
+      monthValue,
+    ])
 
     const offset = useMemo(() => {
       const realDay = monthValue.getDay()
@@ -82,11 +100,6 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       () => getEndDayOfMonth(monthValue.getFullYear(), monthValue.getMonth() + 1),
       [monthValue],
     )
-
-    const placeholders = useMemo<CalendarDayObject[]>(() => {
-      const count = Math.ceil((totalDay + offset) / 7)
-      return Array(count).fill({ type: "placeholder" })
-    }, [offset, totalDay])
 
     const getMultipleDayType = useCallback(
       (day: Date) => {
@@ -172,6 +185,17 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       [currentValue, getMultipleDayType, getRangeDayType, max, min, type],
     )
 
+    // const getBottomInfo = (dayType: CalendarDayType) => {
+    //   if (props.type === 'range') {
+    //     if (dayType === 'start' || dayType === 'end') {
+    //       return t(dayType);
+    //     }
+    //     if (dayType === 'start-end') {
+    //       return t('startEnd');
+    //     }
+    //   }
+    // }
+
     const days = useMemo<CalendarDayObject[]>(() => {
       const days: CalendarDayObject[] = []
       const year = monthValue?.getFullYear()
@@ -179,63 +203,74 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
 
       for (let dayValue = 1; dayValue <= totalDay; dayValue++) {
         const dateValue = new Date(year, month, dayValue)
-        const type = getDayType(dateValue)
-        const object: CalendarDayObject = {
+        const dayType = getDayType(dateValue)
+        const oldDay: CalendarDayObject = {
           value: dateValue,
-          type,
+          type: dayType,
+          bottom: getBottom(type, dayType),
           children: dayValue,
         }
-        days.push(object)
+        const newDay = formatter ? formatter(oldDay) : oldDay
+        days.push(newDay)
       }
       return days
-    }, [getDayType, totalDay, monthValue])
+    }, [monthValue, totalDay, getDayType, type, formatter])
 
     const disabledDays = useMemo<CalendarDayObject[]>(
       () => days.filter((day) => day.type === "disabled"),
       [days],
     )
 
-    const getScrollTop = useCallback(
-      () => getRect(subtitle ? daysRef : monthRef).then(({ top }) => top),
-      [subtitle],
-    )
+    const getScrollTop = useCallback((subtitle: any) => {
+      return getRect(subtitle ? daysRef : monthRef).then(({ top }) => top)
+    }, [])
 
     useImperativeHandle(
       ref,
       () => ({
         getScrollTop,
         disabledDays,
-        setVisible,
-        getHeight: () => height,
-        getTitle: () => "2021年" + month + "月",
+        getHeight: () => heightRef.current,
+        getValue: () => monthValue,
       }),
-      [disabledDays, getScrollTop, height, month],
+      [disabledDays, getScrollTop, monthValue],
     )
+
+    // Get height of month when top || subtitle
+    useEffect(() => {
+      if (!top || subtitle !== !previousTop || previousSubtitle) {
+        nextTick(() =>
+          getRect(monthRef) //
+            .then(({ height }) => (heightRef.current = height)),
+        )
+      }
+    }, [top, subtitle, previousTop, previousSubtitle])
 
     const content = useMemo(
       () =>
-        _.map(shouldRender ? days : placeholders, (day, index) => (
+        _.map(days, (day, index) => (
           <CalendarDay
-            key={shouldRender ? day.value.getTime() : index}
+            key={day.value.getTime()}
             style={{ marginLeft: index === 0 ? `${(100 * offset) / 7}%` : "" }}
             value={day.value}
             type={day.type}
+            top={day.top}
+            bottom={day.bottom}
             children={day.children}
           />
         )),
-      [days, offset, placeholders, shouldRender],
+      [days, offset],
     )
-
     return (
       <View ref={monthRef} className={prefixClassname("calendar__month")}>
-        {subtitle && (
-          <View
-            className={prefixClassname("calendar__month-title")}
-            children={`${monthValue.getFullYear()}年${month}月`}
-          />
-        )}
+        {
+          //
+          (!top || !subtitle) && (
+            <View className={prefixClassname("calendar__month-title")} children={title} />
+          )
+        }
         <View ref={daysRef} className={prefixClassname("calendar__days")}>
-          {watermark && shouldRender && <CalendarMonthWatermark children={month} />}
+          {watermark && <CalendarMonthWatermark children={month} />}
           {content}
         </View>
       </View>

@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100%;
   background: $calendar-background-color;
-
+  //background: $calendar-background-color;
   //&__popup {
   //  &.van-popup--top,
   //  &.van-popup--bottom {
@@ -169,8 +169,8 @@
     border-radius: $border-radius-md;
   }
 
-  &__top-info,
-  &__bottom-info {
+  &__top,
+  &__bottom {
     position: absolute;
     right: 0;
     left: 0;
@@ -182,11 +182,11 @@
     }
   }
 
-  &__top-info {
+  &__top {
     top: 6px;
   }
 
-  &__bottom-info {
+  &__bottom {
     bottom: 6px;
   }
 

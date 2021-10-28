@@ -1,13 +1,15 @@
-import { createContext } from "react"
+import { createContext, ReactNode } from "react"
 import { CalendarDayObject, CalendarType, MAX_DATE, MIN_DATE } from "./calendar.shared"
 
 interface CalendarContextValue {
   type: CalendarType
+  subtitle?: ReactNode
   firstDayOfWeek: number
   value?: Date | Date[]
   min: Date
   max: Date
-  subtitle?: boolean
+
+  formatter?(day: CalendarDayObject): CalendarDayObject
 
   onDayClick?(day: CalendarDayObject): void
 }

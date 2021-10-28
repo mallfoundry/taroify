@@ -9,7 +9,7 @@ interface CalendarHeaderProps {
   subtitle?: ReactNode
 }
 
-function CalendarHeader(props: CalendarHeaderProps) {
+function CalendarHeader(props: CalendarHeaderProps): JSX.Element {
   const { title, subtitle } = props
   return (
     <View className={prefixClassname("calendar__header")}>
@@ -21,7 +21,12 @@ function CalendarHeader(props: CalendarHeaderProps) {
           </View>
         )
       }
-      <View className={prefixClassname("calendar__header-subtitle")} children={subtitle} />
+      {
+        //
+        subtitle && (
+          <View className={prefixClassname("calendar__header-subtitle")} children={subtitle} />
+        )
+      }
       <CalendarWeekdays />
     </View>
   )

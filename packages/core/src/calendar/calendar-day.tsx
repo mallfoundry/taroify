@@ -16,7 +16,7 @@ export interface CalendarDayProps extends ViewProps {
 }
 
 function CalendarDay(props: CalendarDayProps) {
-  const { style, type, value, children } = props
+  const { style, type, value, top, bottom, children } = props
   const { type: ctxType, onDayClick } = useContext(CalendarContext)
   const single = ctxType === "single"
   const disabled = type === "disabled"
@@ -33,9 +33,21 @@ function CalendarDay(props: CalendarDayProps) {
 
   const renderContent = () => {
     if (single && type === "active") {
-      return <View className={prefixClassname("calendar__active-day")} children={children} />
+      return (
+        <>
+          {top && <View className={prefixClassname("calendar__top")} children={top} />}
+          <View className={prefixClassname("calendar__active-day")} children={children} />
+          {bottom && <View className={prefixClassname("calendar__bottom")} children={bottom} />}
+        </>
+      )
     }
-    return children
+    return (
+      <>
+        {top && <View className={prefixClassname("calendar__top")} children={top} />}
+        {children}
+        {bottom && <View className={prefixClassname("calendar__bottom")} children={bottom} />}
+      </>
+    )
   }
 
   return (

@@ -4,7 +4,7 @@ import { nextTick } from "@tarojs/taro"
 import * as classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react"
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
@@ -26,10 +26,41 @@ import {
   MIN_DATE,
 } from "./calendar.shared"
 
+type CalendarSubtitleRender = (date: Date) => ReactNode
+
+function defaultSubtitleRender(date: Date) {
+  return `${date.getFullYear()}年${date.getMonth() + 1}月`
+}
+
+function useSubtitleRender(subtitle?: ReactNode | CalendarSubtitleRender): CalendarSubtitleRender {
+  const renderRef = useRef<CalendarSubtitleRender>()
+
+  const getRender = useCallback(() => {
+    if (_.isBoolean(subtitle) && subtitle) {
+      return defaultSubtitleRender
+    } else if (_.isBoolean(subtitle) && !subtitle) {
+      return () => undefined
+    } else if (_.isFunction(subtitle)) {
+      return subtitle
+    }
+    return () => subtitle
+  }, [subtitle])
+
+  useEffect(() => {
+    renderRef.current = getRender()
+  }, [getRender, subtitle])
+
+  return useCallback((date: Date) => renderRef.current?.(date), [])
+}
+
+function defaultFamtter(day: CalendarDayObject) {
+  return day
+}
+
 interface CalendarProps extends ViewProps {
   type?: CalendarType
   title?: ReactNode
-  subtitle?: ReactNode
+  subtitle?: ReactNode | CalendarSubtitleRender
   defaultValue?: CalendarValueType
   value?: CalendarValueType
   min?: Date
@@ -37,10 +68,9 @@ interface CalendarProps extends ViewProps {
   firstDayOfWeek?: number
   watermark?: boolean
   readonly?: boolean
-  lazyRender?: boolean
-  maxRange?: number
-  rangePrompt?: boolean
   children?: ReactNode
+
+  formatter?(day: CalendarDayObject): CalendarDayObject
 
   onChange?(value: any): void
 }
@@ -50,6 +80,7 @@ function Calendar(props: CalendarProps) {
     className,
     style,
     title = true,
+    subtitle: subtitleProp,
     type = "single",
     defaultValue,
     value: currentValue,
@@ -58,59 +89,68 @@ function Calendar(props: CalendarProps) {
     firstDayOfWeek,
     readonly = false,
     watermark = true,
-    lazyRender = false,
+    formatter = defaultFamtter,
     onChange,
   } = props
 
-  // const currentValueRef = useToRef(currentValue)
+  const bodyRef = useRef()
+
+  const subtitleRender = useSubtitleRender(subtitleProp)
 
   const changeValueRef = useRef<CalendarValueType>()
 
-  const bodyRef = useRef()
-  const [subtitle, setSubtitle] = useState("222")
+  const [subtitle, setSubtitle] = useState<ReactNode>()
+
   const [bodyScrollTop, setBodyScrollTop] = useState(0)
   const bodyScrollTopRef = useRef(0)
   const [monthRefs, setMonthRefs] = useRefs<CalendarMonthInstance>()
+
   const dayOffset = useMemo(() => (firstDayOfWeek ? +firstDayOfWeek % 7 : 0), [firstDayOfWeek])
 
-  const limitDateRange = (date: Date, minDate = minValue, maxDate = maxValue) => {
-    if (compareDate(date, minDate) === -1) {
-      return minDate
-    }
-    if (compareDate(date, maxDate) === 1) {
-      return maxDate
-    }
-    return date
-  }
-
-  const getInitialDate = (defaultDate = defaultValue) => {
-    if (defaultDate === null) {
-      return defaultDate
-    }
-
-    const now = createToday()
-
-    if (type === "range") {
-      if (!Array.isArray(defaultDate)) {
-        defaultDate = []
+  const limitDateRange = useCallback(
+    (date: Date, minDate = minValue, maxDate = maxValue) => {
+      if (compareDate(date, minDate) === -1) {
+        return minDate
       }
-      const start = limitDateRange(defaultDate[0] || now, minValue, createPreviousDay(maxValue))
-      const end = limitDateRange(defaultDate[1] || now, createNextDay(minValue))
-      return [start, end]
-    }
-
-    if (type === "multiple") {
-      if (Array.isArray(defaultDate)) {
-        return defaultDate.map((date) => limitDateRange(date))
+      if (compareDate(date, maxDate) === 1) {
+        return maxDate
       }
-      return [limitDateRange(now)]
-    }
+      return date
+    },
+    [maxValue, minValue],
+  )
 
-    if (!defaultDate || Array.isArray(defaultDate)) {
-      defaultDate = now
-    }
-    return limitDateRange(defaultDate)
-  }
+  const getInitialDate = useCallback(
+    (defaultDate = defaultValue) => {
+      if (defaultDate === null) {
+        return defaultDate
+      }
+
+      const now = createToday()
+
+      if (type === "range") {
+        if (!Array.isArray(defaultDate)) {
+          defaultDate = []
+        }
+        const start = limitDateRange(defaultDate[0] || now, minValue, createPreviousDay(maxValue))
+        const end = limitDateRange(defaultDate[1] || now, createNextDay(minValue))
+        return [start, end]
+      }
+
+      if (type === "multiple") {
+        if (Array.isArray(defaultDate)) {
+          return defaultDate.map((date) => limitDateRange(date))
+        }
+        return [limitDateRange(now)]
+      }
+
+      if (!defaultDate || Array.isArray(defaultDate)) {
+        defaultDate = now
+      }
+      return limitDateRange(defaultDate)
+    },
+    [defaultValue, limitDateRange, maxValue, minValue, type],
+  )
 
   const months = useMemo<Date[]>(() => {
     const months: Date[] = []
@@ -143,26 +183,13 @@ function Calendar(props: CalendarProps) {
       return arr
     }, [] as CalendarDayObject[])
 
-  const change = (dateValue: Date | Date[], complete?: boolean) => {
-    // if (complete && type === "range") {
-    //   const valid = checkRange(date as [Date, Date])
-    //
-    //   if (!valid) {
-    //     // auto selected to max range if showConfirm
-    //     if (props.showConfirm) {
-    //       setCurrentDate([
-    //         (date as Date[])[0],
-    //         getDayByOffset((date as Date[])[0], +props.maxRange - 1),
-    //       ])
-    //     } else {
-    //       setCurrentDate(date)
-    //     }
-    //     return
-    //   }
-    // }
-    changeValueRef.current = dateValue
-    onChange?.(dateValue)
-  }
+  const change = useCallback(
+    (dateValue: Date | Date[]) => {
+      changeValueRef.current = dateValue
+      onChange?.(dateValue)
+    },
+    [onChange],
+  )
 
   const onDayClick = (day: CalendarDayObject) => {
     const { value: date } = day
@@ -189,12 +216,12 @@ function Calendar(props: CalendarProps) {
           if (disabledDay) {
             change([startDay, createPreviousDay(disabledDay)])
           } else {
-            change([startDay, date], true)
+            change([startDay, date])
           }
         } else if (compareToStart === -1) {
           change([date])
         } else {
-          change([date, date], true)
+          change([date, date])
         }
       } else {
         change([date])
@@ -209,10 +236,7 @@ function Calendar(props: CalendarProps) {
       const newDates = _.filter(dates, (dateItem) => compareDate(dateItem, date) !== 0)
       if (_.size(newDates) !== _.size(dates)) {
         change(newDates)
-        // emit("unselect", cloneDate(unselectedDate))
-      } /*else if (maxRange && dates.length >= maxRange) {
-          // Toast(props.rangePrompt || t("rangePrompt", props.maxRange))
-        } */ else {
+      } else {
         change([...dates, date])
       }
     } else {
@@ -224,7 +248,7 @@ function Calendar(props: CalendarProps) {
     const top = await getScrollTop(bodyRef)
     const bodyHeight = (await getRect(bodyRef)).height
     const bottom = top + bodyHeight
-    const heights = months.map((item, index) => monthRefs[index].current.getHeight!())
+    const heights = months.map((item, index) => monthRefs[index].current.getHeight())
     const heightSum = heights.reduce((a, b) => a + b, 0)
 
     // iOS scroll bounce may exceed the range
@@ -234,71 +258,69 @@ function Calendar(props: CalendarProps) {
 
     let height = 0
     let currentMonth
-    const visibleRange = [-1, -1]
 
     for (let i = 0; i < months.length; i++) {
       const month = monthRefs[i]
       const visible = height <= bottom && height + heights[i] >= top
-
       if (visible) {
-        visibleRange[1] = i
-
-        if (!currentMonth) {
-          currentMonth = month
-          visibleRange[0] = i
-        }
+        currentMonth = month
+        break
       }
-
       height += heights[i]
     }
+    if (currentMonth) {
+      const subtitle = subtitleRender(currentMonth.current.getValue())
+      setMonthSubtitle(currentMonth.current, subtitle)
+    }
+  }
 
-    months.forEach((month, index) => {
-      const visible = index >= visibleRange[0] - 1 && index <= visibleRange[1] + 1
-      monthRefs[index].current?.setVisible(visible)
-    })
-
+  function setMonthSubtitle(currentMonth: CalendarMonthInstance, subtitle: ReactNode) {
     /* istanbul ignore else */
     if (currentMonth) {
-      setSubtitle(currentMonth.current.getTitle())
+      setSubtitle(subtitle)
     }
   }
 
   const scrollToDate = async (targetDate: Date) => {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate) === 0) {
-        if (bodyRef.current) {
-          Promise.all([
-            getRect(bodyRef), //
-            getScrollTop(bodyRef),
-            monthRefs[index].current?.getScrollTop(),
-          ]).then(([{ top: bodyTop }, bodyScrollTop, monthScrollTop]) => {
-            const newBodyScrollTop = monthScrollTop - bodyTop + bodyScrollTop
-            if (bodyScrollTopRef.current !== newBodyScrollTop) {
-              setBodyScrollTop(bodyScrollTopRef.current)
-              setBodyScrollTop(newBodyScrollTop)
-            } else {
-              setBodyScrollTop(newBodyScrollTop)
-            }
-          })
-        }
+        const currentMonth = monthRefs[index].current
+        const subtitle = subtitleRender(currentMonth.getValue())
+        setMonthSubtitle(currentMonth, subtitle)
+        nextTick(() => {
+          if (bodyRef.current) {
+            Promise.all([
+              getRect(bodyRef), //
+              getScrollTop(bodyRef),
+              currentMonth?.getScrollTop(subtitle),
+            ]).then(([{ top: bodyTop }, bodyScrollTop, monthScrollTop]) => {
+              const newBodyScrollTop = monthScrollTop - bodyTop + bodyScrollTop
+              if (bodyScrollTopRef.current !== newBodyScrollTop) {
+                setBodyScrollTop(bodyScrollTopRef.current)
+                setBodyScrollTop(newBodyScrollTop)
+              } else {
+                setBodyScrollTop(newBodyScrollTop)
+              }
+            })
+          }
+        })
+
         return true
       }
-
       return false
     })
-
-    await onScroll()
   }
 
   // scroll to current month
-  const scrollIntoView = async (newValue?: Date | Date[]) => {
+  const scrollIntoView = useCallback(async (newValue?: Date | Date[]) => {
     if (newValue) {
       const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0]
       await scrollToDate(targetDate)
     } else {
       await onScroll()
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const reset = (date = getInitialDate()) => nextTick(() => scrollIntoView(date).then())
 
@@ -306,15 +328,15 @@ function Calendar(props: CalendarProps) {
 
   useEffect(() => {
     if (currentValue !== changeValueRef.current) {
-      nextTick(() => reset(currentValue))
+      reset(currentValue)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentValue])
 
   useEffect(() => {
-    nextTick(() => reset(getInitialDate(currentValue)))
+    reset(getInitialDate(currentValue))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, minValue, maxValue])
+  }, [type, subtitleRender, minValue, maxValue])
 
   useMounted(init)
 
@@ -324,20 +346,21 @@ function Calendar(props: CalendarProps) {
         ref={setMonthRefs(index)}
         key={month.getTime()}
         value={month}
-        subtitle={index !== 0}
+        top={index === 0}
         watermark={watermark}
-        lazyRender={lazyRender}
       />
     ))
-  }, [lazyRender, months, setMonthRefs, watermark])
+  }, [months, setMonthRefs, watermark])
   return (
     <CalendarContext.Provider
       value={{
         type,
+        subtitle,
         firstDayOfWeek: dayOffset,
         min: minValue,
         max: maxValue,
         value: currentValue,
+        formatter,
         onDayClick,
       }}
     >
@@ -349,7 +372,7 @@ function Calendar(props: CalendarProps) {
         )}
         style={style}
       >
-        <CalendarHeader title={title} subtitle={subtitle} />
+        {(title || subtitle) && <CalendarHeader title={title} subtitle={subtitle} />}
         <ScrollView
           ref={bodyRef}
           className={prefixClassname("calendar__body")}
