@@ -1,5 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
-import { nextTick, useReady } from "@tarojs/taro"
+import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -14,6 +14,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { useMounted } from "../hooks"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
@@ -116,9 +117,10 @@ function PullRefresh(props: PullRefreshProps) {
 
   const scrollParentRef = useRef<HTMLElement>()
 
-  useReady(async () => {
-    scrollParentRef.current = await getScrollParent(rootRef.current)
-  })
+  useMounted(() =>
+    getScrollParent(rootRef.current) //
+      .then((parent) => (scrollParentRef.current = parent)),
+  )
 
   const reachTopRef = useRef<boolean>()
   const [status, setStatus] = useState(PullRefreshStatus.Awaiting)

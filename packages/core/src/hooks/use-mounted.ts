@@ -1,6 +1,6 @@
 import { nextTick } from "@tarojs/taro"
-import { EffectCallback, useEffect } from "react"
+import { useEffect } from "react"
 
-export default function useMounted(cb: EffectCallback) {
+export default function useMounted(cb: () => any) {
   useEffect(() => nextTick(cb), [])
 }

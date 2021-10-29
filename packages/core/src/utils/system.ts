@@ -1,5 +1,6 @@
-import { getSystemInfo, useReady } from "@tarojs/taro"
+import { getSystemInfo } from "@tarojs/taro"
 import { useState } from "react"
+import { useMounted } from "../hooks"
 
 const INITIAL_RECT: SystemRect = {
   screenHeight: 0,
@@ -26,6 +27,6 @@ export function getSystemRect(): Promise<SystemRect> {
 
 export function useSystemRect(): SystemRect {
   const [rect, setRect] = useState<SystemRect>(INITIAL_RECT)
-  useReady(() => getSystemRect().then(setRect))
+  useMounted(() => getSystemRect().then(setRect))
   return rect
 }

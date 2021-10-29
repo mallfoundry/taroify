@@ -1,11 +1,12 @@
 import { View } from "@tarojs/components"
-import { nextTick, usePageScroll, useReady } from "@tarojs/taro"
+import { nextTick, usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
+import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
-import { getScrollParent } from "../utils/dom/scroll"
 import { getRect } from "../utils/dom/rect"
+import { getScrollParent } from "../utils/dom/scroll"
 
 enum ListDirection {
   Up = "up",
@@ -66,14 +67,14 @@ function List(props: ListProps) {
     })
   }, [direction, hasMore, offset, onLoad])
 
-  useReady(loadCheck)
+  useMounted(loadCheck)
 
   usePageScroll(loadCheck)
 
   useEffect(() => {
     loadingRef.current = loadingProp
     loadCheck()
-  }, [loadingProp, hasMore, loadCheck])
+  }, [loadingProp, loadCheck])
 
   const listEdge = <View ref={edgeRef} className={prefixClassname("list__edge")} />
 
