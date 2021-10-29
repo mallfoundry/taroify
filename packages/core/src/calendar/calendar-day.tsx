@@ -16,7 +16,7 @@ export interface CalendarDayProps extends ViewProps {
 }
 
 function CalendarDay(props: CalendarDayProps) {
-  const { style, type, value, top, bottom, children } = props
+  const { className, style, type, value, top, bottom, children, ...restProps } = props
   const { type: ctxType, onDayClick } = useContext(CalendarContext)
   const single = ctxType === "single"
   const disabled = type === "disabled"
@@ -52,11 +52,16 @@ function CalendarDay(props: CalendarDayProps) {
 
   return (
     <View
-      className={classNames(prefixClassname("calendar__day"), {
-        [prefixClassname(`calendar__day--${type}`)]: type,
-      })}
+      className={classNames(
+        prefixClassname("calendar__day"),
+        {
+          [prefixClassname(`calendar__day--${type}`)]: type,
+        },
+        className,
+      )}
       style={style}
       onClick={onClick}
+      {...restProps}
     >
       {renderContent()}
     </View>

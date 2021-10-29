@@ -1,3 +1,4 @@
+import { ITouchEvent } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { useContext, useMemo } from "react"
@@ -5,7 +6,7 @@ import Button, { ButtonProps } from "../button"
 import { prefixClassname } from "../styles"
 import CalendarContext from "./calendar.context"
 
-interface CalendarButtonProps extends ButtonProps {
+export interface CalendarButtonProps extends ButtonProps {
   type?: "confirm"
 }
 
@@ -39,15 +40,19 @@ function CalendarButton(props: CalendarButtonProps) {
       disabled={confirm && disabled}
       color="danger"
       children={children}
-      onClick={(event) => {
+      onClick={(event: ITouchEvent) => {
         onClick?.(event)
-        if (confirm) {
-          onConfirm?.(event)
+        if (confirm && !disabled) {
+          onConfirm?.()
         }
       }}
       {...restProps}
     />
   )
+}
+
+CalendarButton.defaultProps = {
+  type: "confirm",
 }
 
 export default CalendarButton

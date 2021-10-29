@@ -241,6 +241,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
         _.map(days, (day, index) => (
           <CalendarDay
             key={index}
+            className={day.className}
             style={{ marginLeft: index === 0 ? `${(100 * offset) / 7}%` : "" }}
             value={day.value}
             type={day.type}

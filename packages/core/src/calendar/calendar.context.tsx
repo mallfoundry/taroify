@@ -1,12 +1,17 @@
-import { ITouchEvent } from "@tarojs/components"
 import { createContext, ReactNode } from "react"
-import { CalendarDayObject, CalendarType, MAX_DATE, MIN_DATE } from "./calendar.shared"
+import {
+  CalendarDayObject,
+  CalendarType,
+  CalendarValueType,
+  MAX_DATE,
+  MIN_DATE,
+} from "./calendar.shared"
 
 interface CalendarContextValue {
   type: CalendarType
   subtitle?: ReactNode
   firstDayOfWeek: number
-  value?: Date | Date[]
+  value?: CalendarValueType
   min: Date
   max: Date
 
@@ -14,7 +19,9 @@ interface CalendarContextValue {
 
   onDayClick?(day: CalendarDayObject): void
 
-  onConfirm?(event: ITouchEvent): void
+  notifyConfirm?(confirm: boolean): void
+
+  onConfirm?(): void
 }
 
 const CalendarContext = createContext<CalendarContextValue>({

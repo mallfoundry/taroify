@@ -1,4 +1,4 @@
-import { ITouchEvent, ScrollView, View } from "@tarojs/components"
+import { ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import * as classNames from "classnames"
@@ -105,7 +105,7 @@ export interface CalendarProps extends ViewProps {
 
   onChange?(value: any): void
 
-  onConfirm?(event: ITouchEvent): void
+  onConfirm?(value: any): void
 }
 
 function Calendar(props: CalendarProps) {
@@ -132,63 +132,21 @@ function Calendar(props: CalendarProps) {
 
   const bodyRef = useRef()
 
-  const subtitleRender = useSubtitleRender(subtitleProp)
+  const hasConfirmRef = useRef(false)
 
-  const changeValueRef = useRef<CalendarValueType>()
+  const subtitleRender = useSubtitleRender(subtitleProp)
 
   const [subtitle, setSubtitle] = useState<ReactNode>()
 
+  const changeValueRef = useRef<CalendarValueType>()
+
   const [bodyScrollTop, setBodyScrollTop] = useState(0)
+
   const bodyScrollTopRef = useRef(0)
 
   const [monthRefs, setMonthRefs] = useRefs<CalendarMonthInstance>()
 
   const dayOffset = useMemo(() => (firstDayOfWeek ? +firstDayOfWeek % 7 : 0), [firstDayOfWeek])
-
-  const limitDateRange = useCallback(
-    (date: Date, minDate = minValue, maxDate = maxValue) => {
-      if (compareDate(date, minDate) === -1) {
-        return minDate
-      }
-      if (compareDate(date, maxDate) === 1) {
-        return maxDate
-      }
-      return date
-    },
-    [maxValue, minValue],
-  )
-
-  const getInitialDate = useCallback(
-    (defaultDate) => {
-      if (defaultDate === null) {
-        return defaultDate
-      }
-
-      const now = createToday()
-
-      if (type === "range") {
-        if (!Array.isArray(defaultDate)) {
-          defaultDate = []
-        }
-        const start = limitDateRange(defaultDate[0] || now, minValue, createPreviousDay(maxValue))
-        const end = limitDateRange(defaultDate[1] || now, createNextDay(minValue))
-        return [start, end]
-      }
-
-      if (type === "multiple") {
-        if (Array.isArray(defaultDate)) {
-          return defaultDate.map((date) => limitDateRange(date))
-        }
-        return [limitDateRange(now)]
-      }
-
-      if (!defaultDate || Array.isArray(defaultDate)) {
-        defaultDate = now
-      }
-      return limitDateRange(defaultDate)
-    },
-    [limitDateRange, maxValue, minValue, type],
-  )
 
   const months = useMemo<Date[]>(() => {
     const months: Date[] = []
@@ -204,32 +162,74 @@ function Calendar(props: CalendarProps) {
     return months
   }, [maxValue, minValue])
 
+  function limitDateRange(date: Date, minDate = minValue, maxDate = maxValue) {
+    if (compareDate(date, minDate) === -1) {
+      return minDate
+    }
+    if (compareDate(date, maxDate) === 1) {
+      return maxDate
+    }
+    return date
+  }
+
+  function getInitialDate(defaultDate?: CalendarValueType) {
+    if (defaultDate === null) {
+      return defaultDate
+    }
+
+    const now = createToday()
+
+    if (type === "range") {
+      if (!Array.isArray(defaultDate)) {
+        defaultDate = []
+      }
+      const start = limitDateRange(defaultDate[0] || now, minValue, createPreviousDay(maxValue))
+      const end = limitDateRange(defaultDate[1] || now, createNextDay(minValue))
+      return [start, end]
+    }
+
+    if (type === "multiple") {
+      if (Array.isArray(defaultDate)) {
+        return defaultDate.map((date) => limitDateRange(date))
+      }
+      return [limitDateRange(now)]
+    }
+
+    if (!defaultDate || Array.isArray(defaultDate)) {
+      defaultDate = now
+    }
+    return limitDateRange(defaultDate)
+  }
+
   // get first disabled calendarDay between date range
-  const getDisabledDate = (
+  function getDisabledDate(
     disabledDays: CalendarDayObject[],
     startDay: Date,
     date: Date,
-  ): Date | undefined =>
-    disabledDays.find(
+  ): Date | undefined {
+    return disabledDays.find(
       (day) => compareDate(startDay, day.value!) === -1 && compareDate(day.value!, date) === -1,
     )?.value
+  }
 
   // disabled calendarDay
-  const getDisabledDays = () =>
-    monthRefs.reduce((arr, ref) => {
+  function getDisabledDays() {
+    return monthRefs.reduce((arr, ref) => {
       arr.push(...(ref.current?.disabledDays ?? []))
       return arr
     }, [] as CalendarDayObject[])
+  }
 
-  const change = useCallback(
-    (dateValue: Date | Date[]) => {
-      changeValueRef.current = dateValue
-      onChange?.(dateValue)
-    },
-    [onChange],
-  )
+  function change(dateValue: CalendarValueType, complete?: boolean) {
+    changeValueRef.current = dateValue
+    onChange?.(dateValue)
 
-  const onDayClick = (day: CalendarDayObject) => {
+    if (complete && !hasConfirmRef.current) {
+      onConfirm?.(dateValue)
+    }
+  }
+
+  function onDayClick(day: CalendarDayObject) {
     const { value: date } = day
     if (readonly || !date) {
       return
@@ -254,12 +254,12 @@ function Calendar(props: CalendarProps) {
           if (disabledDay) {
             change([startDay, createPreviousDay(disabledDay)])
           } else {
-            change([startDay, date])
+            change([startDay, date], true)
           }
         } else if (compareToStart === -1) {
           change([date])
         } else {
-          change([date, date])
+          change([date, date], true)
         }
       } else {
         change([date])
@@ -278,11 +278,11 @@ function Calendar(props: CalendarProps) {
         change([...dates, date])
       }
     } else {
-      change(date)
+      change(date, true)
     }
   }
 
-  const onScroll = async () => {
+  async function onScroll() {
     const top = await getScrollTop(bodyRef)
     const bodyHeight = (await getRect(bodyRef)).height
     const bottom = top + bodyHeight
@@ -322,7 +322,7 @@ function Calendar(props: CalendarProps) {
     }
   }
 
-  const scrollToDate = async (targetDate?: Date) => {
+  async function scrollToDate(targetDate?: Date) {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate as Date) === 0) {
         const currentMonth = monthRefs[index].current
@@ -353,7 +353,7 @@ function Calendar(props: CalendarProps) {
   }
 
   // scroll to current month
-  const scrollIntoView = useCallback(async (newValue?: CalendarValueType) => {
+  async function scrollIntoView(newValue?: CalendarValueType) {
     if (newValue) {
       const targetDate = (() => {
         if (type === "single" && _.isDate(newValue)) {
@@ -366,8 +366,7 @@ function Calendar(props: CalendarProps) {
     } else {
       await onScroll()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
   const reset = (date?: CalendarValueType) => nextTick(() => scrollIntoView(date).then())
 
@@ -399,6 +398,14 @@ function Calendar(props: CalendarProps) {
     ))
   }, [months, setMonthRefs, watermark])
 
+  function notifyConfirm(hasConfirm: boolean) {
+    hasConfirmRef.current = hasConfirm
+  }
+
+  function handleConfirm() {
+    onConfirm?.(currentValue as CalendarValueType)
+  }
+
   return (
     <CalendarContext.Provider
       value={{
@@ -410,7 +417,8 @@ function Calendar(props: CalendarProps) {
         value: currentValue,
         formatter,
         onDayClick,
-        onConfirm,
+        notifyConfirm,
+        onConfirm: handleConfirm,
       }}
     >
       <View
