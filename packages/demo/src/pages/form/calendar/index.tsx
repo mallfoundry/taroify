@@ -171,58 +171,58 @@ export default function CalendarDemo() {
   }, [options])
 
   const updateOptions = useCallback(
-    (valueType: CalendarValueType) => {
+    (type: CalendarValueType) => {
       const newOptions = getNewOptions()
-      if (valueType === "single") {
+      if (type === "single") {
         newOptions.open = true
         newOptions.type = "single"
-      } else if (valueType === "multiple") {
+      } else if (type === "multiple") {
         newOptions.open = true
         newOptions.type = "multiple"
-      } else if (valueType === "range") {
+      } else if (type === "range") {
         newOptions.open = true
         newOptions.type = "range"
-      } else if (valueType === "singleQuickly") {
+      } else if (type === "singleQuickly") {
         newOptions.open = true
         newOptions.quickly = true
         newOptions.type = "single"
-      } else if (valueType === "rangeQuickly") {
+      } else if (type === "rangeQuickly") {
         newOptions.open = true
         newOptions.quickly = true
         newOptions.type = "range"
-      } else if (valueType === "customColor") {
+      } else if (type === "customColor") {
         newOptions.open = true
         newOptions.type = "range"
         newOptions.style = {
           // @ts-ignore
           "--calendar-active-color": "#1989fa",
         }
-      } else if (valueType === "customRange") {
+      } else if (type === "customRange") {
         newOptions.open = true
         newOptions.type = "range"
         newOptions.minDate = new Date(2010, 0, 1)
         newOptions.maxDate = new Date(2010, 0, 31)
-      } else if (valueType === "customConfirm") {
+      } else if (type === "customConfirm") {
         newOptions.open = true
         newOptions.type = "range"
         newOptions.confirm = "请选择结束时间"
-      } else if (valueType === "customDay") {
+      } else if (type === "customDay") {
         newOptions.open = true
         newOptions.type = "range"
         newOptions.minDate = new Date(2010, 4, 1)
         newOptions.maxDate = new Date(2010, 4, 31)
         newOptions.formatter = dayFormatter
-      } else if (valueType === "customPosition") {
+      } else if (type === "customPosition") {
         newOptions.open = true
         newOptions.type = "single"
         newOptions.placement = "right"
-      } else if (valueType === "customFirstDayOfWeek") {
+      } else if (type === "customFirstDayOfWeek") {
         newOptions.open = true
         newOptions.type = "single"
         newOptions.firstDayOfWeek = 1
       }
       setOptions(newOptions)
-      setValueType(valueType)
+      setValueType(type)
     },
     [getNewOptions],
   )
