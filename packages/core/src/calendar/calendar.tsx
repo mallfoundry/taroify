@@ -140,6 +140,7 @@ function Calendar(props: CalendarProps) {
 
   const [bodyScrollTop, setBodyScrollTop] = useState(0)
   const bodyScrollTopRef = useRef(0)
+
   const [monthRefs, setMonthRefs] = useRefs<CalendarMonthInstance>()
 
   const dayOffset = useMemo(() => (firstDayOfWeek ? +firstDayOfWeek % 7 : 0), [firstDayOfWeek])
@@ -299,12 +300,15 @@ function Calendar(props: CalendarProps) {
     for (let i = 0; i < months.length; i++) {
       const month = monthRefs[i]
       const visible = height <= bottom && height + heights[i] >= top
-      if (visible) {
+
+      if (visible && !currentMonth) {
         currentMonth = month
         break
       }
+
       height += heights[i]
     }
+
     if (currentMonth) {
       const subtitle = subtitleRender(currentMonth.current.getValue())
       setMonthSubtitle(currentMonth.current, subtitle)

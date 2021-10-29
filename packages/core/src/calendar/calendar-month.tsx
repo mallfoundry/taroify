@@ -74,6 +74,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     const { type, firstDayOfWeek, min, max, value: currentValue, subtitle, formatter } = useContext(
       CalendarContext,
     )
+
     const previousTop = usePrevious(top)
     const previousSubtitle = usePrevious(subtitle)
 
@@ -239,7 +240,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       () =>
         _.map(days, (day, index) => (
           <CalendarDay
-            key={day.value.getTime()}
+            key={index}
             style={{ marginLeft: index === 0 ? `${(100 * offset) / 7}%` : "" }}
             value={day.value}
             type={day.type}
@@ -250,6 +251,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
         )),
       [days, offset],
     )
+
     return (
       <View ref={monthRef} className={prefixClassname("calendar__month")}>
         {

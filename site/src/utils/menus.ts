@@ -67,6 +67,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "Calendar 日历",
+        to: "/components/calendar/",
+      },
+      {
         title: "Checkbox 复选框",
         to: "/components/checkbox/",
       },
