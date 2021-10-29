@@ -145,7 +145,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
 
         const compareToEnd = compareDate(day, endDay)
 
-        if (/*props.allowSameDay && */ compareToStart === 0 && compareToEnd === 0) {
+        if (compareToStart === 0 && compareToEnd === 0) {
           return "active"
         }
         if (compareToStart === 0) {
@@ -184,17 +184,6 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       },
       [currentValue, getMultipleDayType, getRangeDayType, max, min, type],
     )
-
-    // const getBottomInfo = (dayType: CalendarDayType) => {
-    //   if (props.type === 'range') {
-    //     if (dayType === 'start' || dayType === 'end') {
-    //       return t(dayType);
-    //     }
-    //     if (dayType === 'start-end') {
-    //       return t('startEnd');
-    //     }
-    //   }
-    // }
 
     const days = useMemo<CalendarDayObject[]>(() => {
       const days: CalendarDayObject[] = []

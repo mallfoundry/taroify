@@ -1,15 +1,26 @@
-import { ScrollView, View } from "@tarojs/components"
+import { ITouchEvent, ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import * as classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  Children,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
 import { useRefs } from "../utils/state"
+import CalendarFooter from "./calendar-footer"
 import CalendarHeader from "./calendar-header"
 import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
 import CalendarContext from "./calendar.context"
@@ -53,11 +64,31 @@ function useSubtitleRender(subtitle?: ReactNode | CalendarSubtitleRender): Calen
   return useCallback((date: Date) => renderRef.current?.(date), [])
 }
 
-function defaultFamtter(day: CalendarDayObject) {
+function defaultFormatter(day: CalendarDayObject) {
   return day
 }
 
-interface CalendarProps extends ViewProps {
+interface CalendarChildren {
+  footer?: ReactNode
+}
+
+function useCalendarChildren(children?: ReactNode): CalendarChildren {
+  const __children__: CalendarChildren = {}
+
+  Children.forEach(children, (child: ReactNode) => {
+    if (isValidElement(child)) {
+      const element = child as ReactElement
+      const { type: elementType } = element
+      if (elementType === CalendarFooter) {
+        __children__.footer = element
+      }
+    }
+  })
+
+  return __children__
+}
+
+export interface CalendarProps extends ViewProps {
   type?: CalendarType
   title?: ReactNode
   subtitle?: ReactNode | CalendarSubtitleRender
@@ -73,6 +104,8 @@ interface CalendarProps extends ViewProps {
   formatter?(day: CalendarDayObject): CalendarDayObject
 
   onChange?(value: any): void
+
+  onConfirm?(event: ITouchEvent): void
 }
 
 function Calendar(props: CalendarProps) {
@@ -80,7 +113,7 @@ function Calendar(props: CalendarProps) {
     className,
     style,
     title = true,
-    subtitle: subtitleProp,
+    subtitle: subtitleProp = true,
     type = "single",
     defaultValue,
     value: currentValue,
@@ -89,9 +122,13 @@ function Calendar(props: CalendarProps) {
     firstDayOfWeek,
     readonly = false,
     watermark = true,
-    formatter = defaultFamtter,
+    formatter = defaultFormatter,
+    children: childrenProp,
     onChange,
+    onConfirm,
   } = props
+
+  const { footer } = useCalendarChildren(childrenProp)
 
   const bodyRef = useRef()
 
@@ -121,7 +158,7 @@ function Calendar(props: CalendarProps) {
   )
 
   const getInitialDate = useCallback(
-    (defaultDate = defaultValue) => {
+    (defaultDate) => {
       if (defaultDate === null) {
         return defaultDate
       }
@@ -149,7 +186,7 @@ function Calendar(props: CalendarProps) {
       }
       return limitDateRange(defaultDate)
     },
-    [defaultValue, limitDateRange, maxValue, minValue, type],
+    [limitDateRange, maxValue, minValue, type],
   )
 
   const months = useMemo<Date[]>(() => {
@@ -179,7 +216,7 @@ function Calendar(props: CalendarProps) {
   // disabled calendarDay
   const getDisabledDays = () =>
     monthRefs.reduce((arr, ref) => {
-      arr.push(...(ref.current.disabledDays ?? []))
+      arr.push(...(ref.current?.disabledDays ?? []))
       return arr
     }, [] as CalendarDayObject[])
 
@@ -281,9 +318,9 @@ function Calendar(props: CalendarProps) {
     }
   }
 
-  const scrollToDate = async (targetDate: Date) => {
+  const scrollToDate = async (targetDate?: Date) => {
     months.some((month, index) => {
-      if (compareYearMonth(month, targetDate) === 0) {
+      if (compareYearMonth(month, targetDate as Date) === 0) {
         const currentMonth = monthRefs[index].current
         const subtitle = subtitleRender(currentMonth.getValue())
         setMonthSubtitle(currentMonth, subtitle)
@@ -312,9 +349,15 @@ function Calendar(props: CalendarProps) {
   }
 
   // scroll to current month
-  const scrollIntoView = useCallback(async (newValue?: Date | Date[]) => {
+  const scrollIntoView = useCallback(async (newValue?: CalendarValueType) => {
     if (newValue) {
-      const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0]
+      const targetDate = (() => {
+        if (type === "single" && _.isDate(newValue)) {
+          return newValue as Date
+        } else if (_.isArray(newValue)) {
+          return newValue[0] as Date
+        }
+      })()
       await scrollToDate(targetDate)
     } else {
       await onScroll()
@@ -322,19 +365,19 @@ function Calendar(props: CalendarProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const reset = (date = getInitialDate()) => nextTick(() => scrollIntoView(date).then())
+  const reset = (date?: CalendarValueType) => nextTick(() => scrollIntoView(date).then())
 
   const init = () => reset(currentValue ?? defaultValue)
 
   useEffect(() => {
     if (currentValue !== changeValueRef.current) {
-      reset(currentValue)
+      reset(getInitialDate(currentValue))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentValue])
 
   useEffect(() => {
-    reset(getInitialDate(currentValue))
+    reset(getInitialDate(currentValue ?? defaultValue))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, subtitleRender, minValue, maxValue])
 
@@ -351,6 +394,7 @@ function Calendar(props: CalendarProps) {
       />
     ))
   }, [months, setMonthRefs, watermark])
+
   return (
     <CalendarContext.Provider
       value={{
@@ -362,6 +406,7 @@ function Calendar(props: CalendarProps) {
         value: currentValue,
         formatter,
         onDayClick,
+        onConfirm,
       }}
     >
       <View
@@ -385,6 +430,7 @@ function Calendar(props: CalendarProps) {
         >
           {monthsRender}
         </ScrollView>
+        {footer}
       </View>
     </CalendarContext.Provider>
   )

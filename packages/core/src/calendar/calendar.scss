@@ -5,22 +5,6 @@
   flex-direction: column;
   height: 100%;
   background: $calendar-background-color;
-  //background: $calendar-background-color;
-  //&__popup {
-  //  &.van-popup--top,
-  //  &.van-popup--bottom {
-  //    height: $calendar-popup-height;
-  //  }
-  //
-  //  &.van-popup--left,
-  //  &.van-popup--right {
-  //    height: 100%;
-  //  }
-  //
-  //  .van-popup__close-icon {
-  //    top: 11px;
-  //  }
-  //}
 
   &__header {
     flex-shrink: 0;
@@ -199,5 +183,7 @@
   &__confirm {
     height: $calendar-confirm-button-height;
     margin: $calendar-confirm-button-margin;
+    border-color: $calendar-confirm-button-color;
+    background: $calendar-confirm-button-color;
   }
 }
