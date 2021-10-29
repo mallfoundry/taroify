@@ -14,6 +14,8 @@ export function raf(cb: FrameRequestCallback) {
   return requestAnimationFrame.default(cb)
 }
 
+export default raf
+
 export function doubleRaf(cb: FrameRequestCallback): [number, number] {
   const rafIds: [number, number] = [0, 0]
   rafIds[1] = raf(() => {
