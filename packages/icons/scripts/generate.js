@@ -10,14 +10,14 @@ function convertIconComponentName(name) {
 
 function createVanIconTsxContent(componentName, name) {
   return `import { createVanIconComponent } from "./van"
+import "./style"
 
 const ${componentName} = createVanIconComponent("${name}")
 export default ${componentName}
 `
 }
 
-function createVanIconTsxFile(name) {
-  const componentName = convertIconComponentName(name)
+function createVanIconTsxFile(componentName, name) {
   const tsxContent = createVanIconTsxContent(componentName, name)
   writeFileSync(`./src/${componentName}.tsx`, tsxContent)
   appendFileSync(
@@ -25,18 +25,18 @@ function createVanIconTsxFile(name) {
     `export { default as ${componentName} } from "./${componentName}"
 `,
   )
+}
 
+function createIconTsxFile(name) {
+  const componentName = convertIconComponentName(name)
+  createVanIconTsxFile(componentName, name)
   if (componentName === "Arrow") {
-    appendFileSync(
-      "./src/index.ts",
-      `export { default as ArrowRight } from "./ArrowRight"
-`,
-    )
+    createVanIconTsxFile("ArrowRight", "arrow")
   }
 }
 
 truncateSync("./src/index.ts")
 
-_.forEach(names.basic, createVanIconTsxFile)
-_.forEach(names.outlined, createVanIconTsxFile)
-_.forEach(names.filled, createVanIconTsxFile)
+_.forEach(names.basic, createIconTsxFile)
+_.forEach(names.outlined, createIconTsxFile)
+_.forEach(names.filled, createIconTsxFile)
