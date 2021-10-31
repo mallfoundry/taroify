@@ -3,6 +3,10 @@
 @import "../../../styles/prefix";
 
 .calendar-demo {
+  .#{$component-prefix}popup {
+    overflow: hidden;
+  }
+
   .#{$demo-prefix}block__content {
     padding: 0;
   }

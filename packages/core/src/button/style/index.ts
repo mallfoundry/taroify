@@ -1,4 +1,4 @@
-import "../../styles/base.scss"
+import "../../styles/style"
 import "../../loading/style"
 
 import "../index.scss"

@@ -1,1 +1,1 @@
-import "../../styles/base.scss"
+import "../../styles/style"

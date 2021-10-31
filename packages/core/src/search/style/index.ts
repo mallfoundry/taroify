@@ -1,3 +1,3 @@
-import "../../styles/base.scss"
+import "../../styles/style"
 import "../../field/style"
 import "../index.scss"
