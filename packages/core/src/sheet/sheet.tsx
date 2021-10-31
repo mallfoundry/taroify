@@ -1,9 +1,10 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode } from "react"
+import { Children, isValidElement, ReactElement, ReactNode } from "react"
 import Backdrop from "../backdrop"
-import Popup, { PopupPlacement } from "../popup"
+import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
 import SheetHeader from "./sheet-header"
@@ -50,9 +51,7 @@ function SheetContent(props: SheetContentProps) {
   return <View className={prefixClassname("sheet__content")} children={children} />
 }
 
-export interface SheetProps {
-  className?: string
-  style?: CSSProperties
+export interface SheetProps extends ViewProps {
   open?: boolean
   rounded?: boolean
   children?: ReactNode
@@ -65,18 +64,27 @@ export interface SheetProps {
 }
 
 function Sheet(props: SheetProps) {
-  const { className, style, open, rounded = true, children, onSelect, onCancel, onClose } = props
+  const {
+    className,
+    open,
+    rounded = true,
+    children,
+    onSelect,
+    onCancel,
+    onClose,
+    ...restProps
+  } = props
   const { backdrop, header, content } = findSheetChildren(children)
 
   return (
     <SheetContext.Provider value={{ onSelect, onCancel }}>
       <Popup
         className={classNames(prefixClassname("sheet"), className)}
-        style={style}
-        placement={PopupPlacement.Bottom}
+        placement="bottom"
         rounded={rounded}
         open={open}
         onClose={onClose}
+        {...restProps}
       >
         {backdrop}
         {header}

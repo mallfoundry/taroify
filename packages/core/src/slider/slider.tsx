@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -15,9 +16,9 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/dom/event"
+import { getRect } from "../utils/dom/rect"
 import { addNumber } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
-import { getRect } from "../utils/dom/rect"
 import { useTouch } from "../utils/touch"
 import SliderThumb from "./slider-thumb"
 import SliderContext from "./slider.context"
@@ -30,12 +31,7 @@ enum SliderDragStatus {
   End = "end",
 }
 
-enum SliderOrientation {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-type SliderOrientationString = "horizontal" | "vertical"
+type SliderOrientation = "horizontal" | "vertical"
 
 interface SliderChildren {
   thumb1: ReactNode
@@ -85,14 +81,13 @@ function useSliderChildren(children?: ReactNode, range?: boolean): SliderChildre
   }, [children, range])
 }
 
-interface SliderBaseProps {
-  className?: string
+interface SliderBaseProps extends ViewProps {
   style?: CSSProperties
   step?: number
   min?: number
   max?: number
   size?: number
-  orientation?: SliderOrientation | SliderOrientationString
+  orientation?: SliderOrientation
   disabled?: boolean
   children?: ReactNode
 }
@@ -121,15 +116,17 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     step = 1,
     range = false,
     size,
-    orientation = SliderOrientation.Horizontal,
+    orientation = "horizontal",
     disabled = false,
     children,
+    onClick,
     onChange,
+    ...restProps
   } = props
 
   const { thumb1, thumb2 } = useSliderChildren(children, range)
 
-  const vertical = orientation === SliderOrientation.Vertical
+  const vertical = orientation === "vertical"
 
   const rootRef = useRef<HTMLElement>()
 
@@ -212,7 +209,8 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     }
   }
 
-  const onClick = (event: ITouchEvent) => {
+  const handleClick = (event: ITouchEvent) => {
+    onClick?.(event)
     stopPropagation(event)
 
     if (disabled) {
@@ -310,7 +308,8 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
         className,
       )}
       style={wrapperStyle}
-      onClick={onClick}
+      onClick={handleClick}
+      {...restProps}
     >
       <SliderContext.Provider
         value={{

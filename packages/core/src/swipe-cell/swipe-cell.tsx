@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -18,8 +19,8 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
-import { addUnitPx } from "../utils/format/unit"
 import { getRect } from "../utils/dom/rect"
+import { addUnitPx } from "../utils/format/unit"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
@@ -84,10 +85,9 @@ function useSwipeCellChildren(
   return __children__
 }
 
-export interface SwipeCellProps {
+export interface SwipeCellProps extends ViewProps {
   className?: string
   style?: CSSProperties
-  // open?: boolean
   disabled?: boolean
   stopPropagation?: boolean
   children?: ReactNode
@@ -98,12 +98,16 @@ export interface SwipeCellProps {
 function SwipeCell(props: SwipeCellProps) {
   const {
     className,
-    style,
-    // open: openProp = undefined,
     disabled,
     stopPropagation,
     onOpen,
     onClose,
+    onClick: onClickProp,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+    onTouchCancel,
+    ...restProps
   } = props
 
   const openedRef = useRef(false)
@@ -156,7 +160,7 @@ function SwipeCell(props: SwipeCellProps) {
     [close, offset, open],
   )
 
-  const onTouchStart = (event: ITouchEvent) => {
+  const handleTouchStart = (event: ITouchEvent) => {
     if (disabled) {
       return
     }
@@ -164,7 +168,7 @@ function SwipeCell(props: SwipeCellProps) {
     touch.start(event)
   }
 
-  const onTouchMove = useCallback(
+  const handleTouchMove = useCallback(
     async (event: ITouchEvent) => {
       if (disabled) {
         return
@@ -198,7 +202,7 @@ function SwipeCell(props: SwipeCellProps) {
     [disabled, stopPropagation, touch],
   )
 
-  const onTouchEnd = () => {
+  const handleTouchEnd = () => {
     if (disabled) {
       return
     }
@@ -255,12 +259,27 @@ function SwipeCell(props: SwipeCellProps) {
     <View
       ref={rootRef}
       className={classNames(prefixClassname("swipe-cell"), className)}
-      style={style}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      onTouchCancel={onTouchEnd}
-      onClick={handleClick(SwipeCellPosition.Cell)}
+      onTouchStart={(event) => {
+        onTouchStart?.(event)
+        handleTouchStart(event)
+      }}
+      onTouchMove={(event) => {
+        onTouchMove?.(event)
+        handleTouchMove?.(event)
+      }}
+      onTouchEnd={(event) => {
+        onTouchEnd?.(event)
+        handleTouchEnd()
+      }}
+      onTouchCancel={(event) => {
+        onTouchCancel?.(event)
+        handleTouchEnd()
+      }}
+      onClick={(event) => {
+        onClickProp?.(event)
+        handleClick(SwipeCellPosition.Cell)
+      }}
+      {...restProps}
     >
       <View
         className={prefixClassname("swipe-cell__wrapper")}

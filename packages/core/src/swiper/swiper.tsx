@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -23,9 +24,9 @@ import {
 import { prefixClassname } from "../styles"
 import { useComputed } from "../utils/computed"
 import { preventDefault } from "../utils/dom/event"
+import { getRect, Rect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { Rect, getRect } from "../utils/dom/rect"
 import { usePrevious } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
@@ -75,7 +76,7 @@ function useSwiperChildren(children: ReactNode): SwiperChildren {
   return __children__
 }
 
-export interface SwiperProps {
+export interface SwiperProps extends ViewProps {
   className?: string
   activeIndex?: number
   autoplay?: number
@@ -103,6 +104,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     width,
     height,
     onChange,
+    ...restProps
   } = props
 
   const { count, indicator, items } = useSwiperChildren(props.children)
@@ -440,7 +442,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   useEffect(() => nextTick(initialize), [])
 
   return (
-    <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)}>
+    <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)} {...restProps}>
       <SwiperContext.Provider
         value={{
           direction: direction as SwiperDirection,

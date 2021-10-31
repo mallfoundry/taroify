@@ -1,7 +1,7 @@
 import CellElement, { CellProps } from "./cell"
 import CellGroup from "./cell-group"
 
-export type { CellAlign, CellAlignString, CellSize, CellSizeString } from "./cell.shared"
+export type { CellAlign, CellSize } from "./cell.shared"
 export { default as BaseCell } from "./base-cell"
 
 interface CellInterface {

@@ -1,3 +1,4 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo } from "react"
@@ -122,8 +123,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
   }
 }
 
-export interface DatetimePickerProps {
-  className?: string
+export interface DatetimePickerProps extends ViewProps {
   type?: DatetimePickerType
   fields?: DatetimePickerColumnType[]
   value?: Date
@@ -155,6 +155,7 @@ function DatetimePicker(props: DatetimePickerProps) {
     onChange,
     onConfirm,
     onCancel,
+    ...restProps
   } = props
   const { value, columns, toDate } = useDatetimePicker(props)
 
@@ -168,6 +169,7 @@ function DatetimePicker(props: DatetimePickerProps) {
       onChange={(aValue) => onChange?.(toDate(aValue))}
       onConfirm={(aValue) => onConfirm?.(toDate(aValue))}
       onCancel={(aValue) => onCancel?.(toDate(aValue))}
+      {...restProps}
     >
       {children}
       {

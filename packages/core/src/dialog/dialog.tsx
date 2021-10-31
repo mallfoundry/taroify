@@ -1,3 +1,4 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode } from "react"
@@ -78,8 +79,7 @@ function renderDialogContent(
   return cloneElement(content, props)
 }
 
-export interface DialogProps {
-  className?: string
+export interface DialogProps extends ViewProps {
   backdrop?: boolean
   open?: boolean
   children?: ReactNode
@@ -87,7 +87,7 @@ export interface DialogProps {
 }
 
 function Dialog(props: DialogProps) {
-  const { className, backdrop = true, open, children, onClose } = props
+  const { className, backdrop = true, open, children, onClose, ...restProps } = props
   const { header, content, actions } = findDialogChildren(children)
   const hasHeader = header !== undefined
   const hasContent = content !== undefined
@@ -98,6 +98,7 @@ function Dialog(props: DialogProps) {
       transaction={prefixClassname("dialog-bounce")}
       open={open}
       onClose={onClose}
+      {...restProps}
     >
       {backdrop && <Popup.Backdrop />}
       {

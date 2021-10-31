@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
@@ -86,8 +87,7 @@ function getCompletedProps(node?: ReactNode): PullRefreshCompletedProps {
   return {}
 }
 
-export interface PullRefreshProps {
-  className?: string
+export interface PullRefreshProps extends ViewProps {
   style?: CSSProperties
   loading?: boolean
   disabled?: boolean
@@ -95,19 +95,20 @@ export interface PullRefreshProps {
   headHeight?: number
   pullDistance?: number
   children?: ReactNode
-  onRefresh?: () => void
+
+  onRefresh?(): void
 }
 
 function PullRefresh(props: PullRefreshProps) {
   const {
     className,
-    style,
     loading,
     disabled = false,
     headHeight = 50,
     pullDistance: pullDistanceProp,
     duration: durationProp = 300,
     onRefresh,
+    ...restProps
   } = props
 
   const children = usePullRefreshChildren(props.children)
@@ -313,7 +314,7 @@ function PullRefresh(props: PullRefreshProps) {
       <View
         ref={rootRef}
         className={classNames(prefixClassname("pull-refresh"), className)}
-        style={style}
+        {...restProps}
       >
         <View
           className={prefixClassname("pull-refresh__track")}

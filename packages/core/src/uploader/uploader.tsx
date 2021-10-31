@@ -1,5 +1,6 @@
 import { Close } from "@taroify/icons"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -12,7 +13,7 @@ import UploaderUpload from "./uploader-upload"
 import UploaderContext from "./uploader.context"
 import { getOneUploadFile, getUploadFiles, UploadFile, UploadStatus } from "./uploader.shared"
 
-interface BaseUploaderProps {
+interface BaseUploaderProps extends ViewProps {
   className?: string
   value?: UploadFile[] | UploadFile
   disabled?: boolean
@@ -95,7 +96,7 @@ function renderUploadFiles(props: UploaderProps) {
 }
 
 export default function Uploader(props: UploaderProps) {
-  const { className, disabled = false, children, onUpload } = props
+  const { className, disabled = false, children, onUpload, ...restProps } = props
 
   return (
     <UploaderContext.Provider
@@ -104,7 +105,7 @@ export default function Uploader(props: UploaderProps) {
         onUpload,
       }}
     >
-      <View className={classNames(prefixClassname("uploader"), className)}>
+      <View className={classNames(prefixClassname("uploader"), className)} {...restProps}>
         <View
           className={classNames(prefixClassname("uploader__wrapper"), {
             [prefixClassname("uploader__wrapper--disabled")]: disabled,

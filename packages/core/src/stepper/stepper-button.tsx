@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { useCallback, useContext, useRef } from "react"
@@ -12,8 +13,7 @@ const LONG_PRESS_INTERVAL = 200
 
 const LONG_PRESS_START_TIME = 600
 
-interface StepperButtonProps {
-  className?: string
+interface StepperButtonProps extends ViewProps {
   disabled?: boolean
 
   onClick?(event: ITouchEvent): void
@@ -26,8 +26,14 @@ interface InternalStepperButtonProps extends StepperButtonProps {
 function StepperButton(props: StepperButtonProps) {
   const {
     className,
+    style,
     type = StepperActionType.Decrease,
     disabled: disabledProp,
+    onClick,
+    onTouchStart,
+    onTouchEnd,
+    onTouchCancel,
+    ...restProps
   } = props as InternalStepperButtonProps
 
   const {
@@ -57,7 +63,7 @@ function StepperButton(props: StepperButtonProps) {
     }, LONG_PRESS_INTERVAL)
   }, [onStep, type])
 
-  const onTouchStart = useCallback(() => {
+  const handleTouchStart = useCallback(() => {
     if (longPress) {
       longPressRef.current = false
       if (longPressTimerRef.current) {
@@ -71,7 +77,7 @@ function StepperButton(props: StepperButtonProps) {
     }
   }, [longPress, longPressStep, onStep, type])
 
-  const onTouchEnd = useCallback(
+  const handleTouchEnd = useCallback(
     (event: ITouchEvent) => {
       if (longPress) {
         if (longPressTimerRef.current) {
@@ -98,10 +104,18 @@ function StepperButton(props: StepperButtonProps) {
       onClick={(event) => {
         preventDefault(event)
         onStep?.(type)
+        onClick?.(event)
       }}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onTouchCancel={onTouchEnd}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={(event) => {
+        onTouchEnd?.(event)
+        handleTouchEnd(event)
+      }}
+      onTouchCancel={(event) => {
+        onTouchCancel?.(event)
+        handleTouchEnd(event)
+      }}
+      {...restProps}
     />
   )
 }

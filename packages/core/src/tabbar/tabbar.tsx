@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { cloneElement, ReactElement, ReactNode, useRef } from "react"
@@ -26,7 +27,7 @@ function arrayChildren(children?: ReactNode) {
   })
 }
 
-export interface TabbarProps {
+export interface TabbarProps extends ViewProps {
   className?: string
   value?: any
   fixed?: boolean
@@ -38,8 +39,17 @@ export interface TabbarProps {
 }
 
 function Tabbar(props: TabbarProps) {
-  const { className, value, bordered, fixed, placeholder, onChange } = props
-  const children = arrayChildren(props.children)
+  const {
+    className,
+    value,
+    bordered,
+    fixed,
+    placeholder,
+    children: childrenProp,
+    onChange,
+    ...restProps
+  } = props
+  const children = arrayChildren(childrenProp)
 
   const rootRef = useRef()
 
@@ -72,6 +82,7 @@ function Tabbar(props: TabbarProps) {
             className,
           )}
           children={children}
+          {...restProps}
         />
       </TabbarContext.Provider>
     )

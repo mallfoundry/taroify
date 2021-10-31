@@ -1,14 +1,12 @@
-import { ITouchEvent } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { ReactNode } from "react"
 import BaseCell from "./base-cell"
-import { CellAlign, CellAlignString, CellSize, CellSizeString } from "./cell.shared"
+import { CellAlign, CellSize } from "./cell.shared"
 
-export interface CellProps {
-  className?: string
-  style?: CSSProperties
-  size?: CellSize | CellSizeString
-  align?: CellAlign | CellAlignString
+export interface CellProps extends ViewProps {
+  size?: CellSize
+  align?: CellAlign
   title?: ReactNode
   brief?: ReactNode
   icon?: ReactNode
@@ -16,7 +14,6 @@ export interface CellProps {
   bordered?: boolean
   clickable?: boolean
   children?: ReactNode
-  onClick?: (event: ITouchEvent) => void
 }
 
 function Cell(props: CellProps) {

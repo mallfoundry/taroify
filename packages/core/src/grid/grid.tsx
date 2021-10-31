@@ -1,64 +1,60 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import {
-  Children,
-  cloneElement,
-  CSSProperties,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useMemo,
-} from "react"
-import Badge from "../badge"
+import { Children, cloneElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
-import { HAIRLINE_BORDER, HAIRLINE_BORDER_TOP } from "../styles/hairline"
+import { HAIRLINE_BORDER_TOP } from "../styles/hairline"
+import { addUnitPx } from "../utils/format/unit"
 import GridContext from "./grid.context"
+import { GridDirection } from "./grid.shared"
 
 const DEFAULT_GRID_COLUMNS = 4
 
-export enum GridDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-type GridDirectionString = "horizontal" | "vertical"
-
-interface GridProps {
-  className?: string
+export interface GridProps extends ViewProps {
+  style?: CSSProperties
   columns?: number
   gutter?: number | string
   bordered?: boolean
   centered?: boolean
   clickable?: boolean
   square?: boolean
-  direction?: GridDirection | GridDirectionString
+  direction?: GridDirection
   children?: ReactNode
 }
 
 function Grid(props: GridProps) {
   const {
     className,
+    style: styleProp,
     columns = DEFAULT_GRID_COLUMNS,
     gutter,
     bordered = true,
     centered = true,
     clickable = false,
-    direction = GridDirection.Vertical,
+    direction = "vertical",
     square,
+    children: childrenProp,
+    ...restProps
   } = props
 
-  const children = Children.map(props.children, (item, index) =>
-    cloneElement(item as ReactElement, { __dataIndex__: index }),
+  const children = useMemo(
+    () =>
+      Children.map(childrenProp, (item, index) =>
+        cloneElement(item as ReactElement, { __dataIndex__: index }),
+      ),
+    [childrenProp],
   )
 
   const rootStyle = useMemo(() => {
-    const style: CSSProperties = {}
+    const style: CSSProperties = {
+      ...styleProp,
+    }
     if (gutter) {
-      style.paddingLeft = `${gutter}px`
+      style.paddingLeft = addUnitPx(gutter)
     }
     return style
-  }, [gutter])
+  }, [gutter, styleProp])
 
   return (
     <View
@@ -70,6 +66,7 @@ function Grid(props: GridProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <GridContext.Provider
         value={{
@@ -86,95 +83,6 @@ function Grid(props: GridProps) {
       </GridContext.Provider>
     </View>
   )
-}
-
-namespace Grid {
-  function usePercent(columns: number) {
-    return useMemo(() => `${100 / columns}%`, [columns])
-  }
-
-  interface ItemProps {
-    __dataIndex__?: number
-    dot?: boolean
-    badge?: ReactNode
-    icon?: ReactNode
-    text?: ReactNode
-    children?: ReactNode
-    onClick?: (event: ITouchEvent) => void
-  }
-
-  export function Item(props: ItemProps) {
-    const { __dataIndex__ = 0, icon, text, dot, badge, children, onClick } = props
-    const { columns, gutter, bordered, centered, clickable, direction, square } = useContext(
-      GridContext,
-    )
-    const percent = usePercent(columns)
-
-    const rootStyle = useMemo(() => {
-      const style: CSSProperties = {}
-      style.flexBasis = `${percent}`
-      if (square) {
-        style.paddingTop = percent
-      } else if (gutter) {
-        const gutterValue = `${gutter}px`
-        style.paddingRight = gutterValue
-
-        if (__dataIndex__ >= columns) {
-          style.marginTop = gutterValue
-        }
-      }
-      return style
-    }, [__dataIndex__, percent, columns, square, gutter])
-
-    const contentStyle = useMemo(() => {
-      if (square && gutter) {
-        const gutterValue = `${gutter}px`
-        return {
-          right: gutterValue,
-          bottom: gutterValue,
-          height: "auto",
-        }
-      }
-    }, [square, gutter])
-
-    return (
-      <View
-        className={classNames(prefixClassname("grid-item"), {
-          [prefixClassname("grid-item--square")]: square,
-        })}
-        style={rootStyle}
-        onClick={onClick}
-      >
-        <View
-          style={contentStyle}
-          className={classNames(prefixClassname("grid-item__content"), {
-            [prefixClassname("grid-item__content--square")]: square,
-            [prefixClassname("grid-item__content--centered")]: centered,
-            [prefixClassname("grid-item__content--clickable")]: clickable,
-            [prefixClassname("grid-item__content--horizontal")]:
-              direction === GridDirection.Horizontal,
-            [prefixClassname("grid-item__content--surround")]: bordered && gutter,
-            [HAIRLINE_BORDER]: bordered,
-          })}
-        >
-          {!children && (
-            <>
-              {icon && (
-                <Badge
-                  className={prefixClassname("grid-item__icon")}
-                  dot={dot}
-                  content={badge}
-                  children={icon}
-                />
-              )}
-              <View className={prefixClassname("grid-item__text")}>{text}</View>
-            </>
-          )}
-          {children}
-        </View>
-      </View>
-    )
-  }
 }
 
 export default Grid

@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -48,7 +49,7 @@ export type LoadingType = "circular" | "spinner"
 
 type LoadingDirection = "horizontal" | "vertical"
 
-interface LoadingProps {
+interface LoadingProps extends ViewProps {
   className?: string
   size?: number | string
   type?: LoadingType
@@ -57,7 +58,14 @@ interface LoadingProps {
 }
 
 export default function Loading(props: LoadingProps) {
-  const { className, size, type = "circular", direction = "horizontal", children } = props
+  const {
+    className,
+    size,
+    type = "circular",
+    direction = "horizontal",
+    children,
+    ...restProps
+  } = props
 
   return (
     <View
@@ -67,6 +75,7 @@ export default function Loading(props: LoadingProps) {
         prefixClassname(`loading--${type}`),
         className,
       )}
+      {...restProps}
     >
       {type === "spinner" && <LoadingSpinner size={size} />}
       {type === "circular" && <LoadingCircular size={size} />}

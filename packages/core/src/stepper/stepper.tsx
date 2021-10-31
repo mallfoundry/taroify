@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -76,15 +77,9 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
   }, [children])
 }
 
-enum StepperShape {
-  Square = "square",
-  Round = "round",
-}
+type StepperShape = "square" | "round"
 
-type StepperShapeString = "square" | "round"
-
-export interface StepperProps {
-  className?: string
+export interface StepperProps extends ViewProps {
   value?: number | string
   min?: number
   max?: number
@@ -93,7 +88,7 @@ export interface StepperProps {
   disabled?: boolean
   precision?: number
   longPress?: boolean
-  shape?: StepperShape | StepperShapeString
+  shape?: StepperShape
   children?: ReactNode
 
   onChange?(value: number | string): void
@@ -110,8 +105,9 @@ function Stepper(props: StepperProps) {
     disabled,
     precision = 0,
     longPress = true,
-    shape = StepperShape.Square,
+    shape = "square",
     onChange,
+    ...restProps
   } = props
 
   const { decrease, input, increase } = useStepperChildren(props.children)
@@ -167,10 +163,11 @@ function Stepper(props: StepperProps) {
         className={classNames(
           prefixClassname("stepper"),
           {
-            [prefixClassname("stepper--round")]: shape === StepperShape.Round,
+            [prefixClassname("stepper--round")]: shape === "round",
           },
           className,
         )}
+        {...restProps}
       >
         {decrease}
         {input}

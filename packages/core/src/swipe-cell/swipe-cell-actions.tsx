@@ -1,41 +1,35 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ForwardedRef, forwardRef, ReactNode } from "react"
+import { ForwardedRef, forwardRef, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-enum SwipeCellSide {
-  Left = "left",
-  Right = "right",
-}
+type SwipeCellSide = "left" | "right"
 
-type SwipeCellSideString = "left" | "right"
-
-interface SwipeCellActionsProps {
-  className?: string
-  style?: CSSProperties
-  side?: SwipeCellSide | SwipeCellSideString
+interface SwipeCellActionsProps extends ViewProps {
+  side?: SwipeCellSide
   children?: ReactNode
-  onClick?: (event: ITouchEvent) => void
 }
 
 const SwipeCellActions = forwardRef(function (
   props: SwipeCellActionsProps,
   ref: ForwardedRef<typeof View>,
 ) {
-  const { className, style, side, children, onClick } = props
+  const { className, side, ...restProps } = props
 
   return (
     <View
       ref={ref}
       className={classNames(
         prefixClassname("swipe-cell__actions"),
-        prefixClassname(`swipe-cell__${side}`),
+        {
+          [prefixClassname("swipe-cell__left")]: side === "left",
+          [prefixClassname("swipe-cell__right")]: side === "right",
+        },
         className,
       )}
-      style={style}
-      children={children}
-      onClick={onClick}
+      {...restProps}
     />
   )
 })

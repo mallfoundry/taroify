@@ -1,8 +1,9 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode } from "react"
+import { Children, isValidElement, ReactElement, ReactNode } from "react"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
@@ -10,22 +11,22 @@ import { isElementOf } from "../utils/validate"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 import PopupContext from "./popup.context"
-import { PopupPlacement, PopupPlacementString } from "./popup.shared"
+import { PopupPlacement } from "./popup.shared"
 
-function toTransactionName(placement?: PopupPlacement | PopupPlacementString) {
-  if (placement === PopupPlacement.Top) {
+function toTransactionName(placement?: PopupPlacement) {
+  if (placement === "top") {
     return TransitionName.SlideDown
   }
 
-  if (placement === PopupPlacement.Bottom) {
+  if (placement === "bottom") {
     return TransitionName.SlideUp
   }
 
-  if (placement === PopupPlacement.Right) {
+  if (placement === "right") {
     return TransitionName.SlideRight
   }
 
-  if (placement === PopupPlacement.Left) {
+  if (placement === "left") {
     return TransitionName.SlideLeft
   }
 
@@ -63,12 +64,10 @@ function findPopupChildren(node?: ReactNode): PopupChildren {
   return children
 }
 
-export interface PopupProps {
-  className?: string
-  style?: CSSProperties
+export interface PopupProps extends ViewProps {
   open?: boolean
   transaction?: string
-  placement?: PopupPlacement | PopupPlacementString
+  placement?: PopupPlacement
   rounded?: boolean
   duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
@@ -80,7 +79,6 @@ export interface PopupProps {
 function Popup(props: PopupProps) {
   const {
     className,
-    style,
     open,
     transaction,
     placement,
@@ -90,6 +88,7 @@ function Popup(props: PopupProps) {
     onOpen,
     onClose,
     onClosed,
+    ...restProps
   } = props
 
   const transactionName = transaction ?? toTransactionName(placement)
@@ -116,17 +115,16 @@ function Popup(props: PopupProps) {
           className={classNames(
             prefixClassname("popup"),
             {
-              // [prefixClassname("popup--open")]: open,
               [prefixClassname("popup--rounded")]: rounded,
               [prefixClassname("popup--center")]: _.isUndefined(placement),
-              [prefixClassname("popup--top")]: placement === PopupPlacement.Top,
-              [prefixClassname("popup--right")]: placement === PopupPlacement.Right,
-              [prefixClassname("popup--bottom")]: placement === PopupPlacement.Bottom,
-              [prefixClassname("popup--left")]: placement === PopupPlacement.Left,
+              [prefixClassname("popup--top")]: placement === "top",
+              [prefixClassname("popup--right")]: placement === "right",
+              [prefixClassname("popup--bottom")]: placement === "bottom",
+              [prefixClassname("popup--left")]: placement === "left",
             },
             className,
           )}
-          style={style}
+          {...restProps}
         >
           {close}
           {content}

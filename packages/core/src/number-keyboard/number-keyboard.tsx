@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -10,7 +11,6 @@ import NumberKeyboardKey, { NumberKeyboardKeyProps } from "./number-keyboard-key
 import {
   isNumberKeyboardKeyElement,
   NumberKeyboardKeyCode,
-  NumberKeyboardKeyCodeString,
   NumberKeyboardKeyOnPress,
 } from "./number-keyboard-key.shared"
 import NumberKeyboardKeys from "./number-keyboard-keys"
@@ -45,15 +45,9 @@ export function createExtraNumberKeyboardKey(extraKey: ReactNode): ReactNode {
 function createCustomKeys(extraKey?: ReactNode | [ReactNode, ReactNode]): ReactNode[] {
   if (extraKey === undefined) {
     return [
-      <NumberKeyboardKey
-        key={NumberKeyboardKeyCode.KeyboardHide}
-        code={NumberKeyboardKeyCode.KeyboardHide}
-      />,
+      <NumberKeyboardKey key="keyboard-hide" code="keyboard-hide" />,
       <NumberKeyboardKey key={0} children={0} />,
-      <NumberKeyboardKey
-        key={NumberKeyboardKeyCode.Backspace}
-        code={NumberKeyboardKeyCode.Backspace}
-      />,
+      <NumberKeyboardKey key="backspace" code="backspace" />,
     ]
   }
 
@@ -61,10 +55,7 @@ function createCustomKeys(extraKey?: ReactNode | [ReactNode, ReactNode]): ReactN
     return [
       createExtraNumberKeyboardKey(extraKey),
       <NumberKeyboardKey key={0} children={0} />,
-      <NumberKeyboardKey
-        key={NumberKeyboardKeyCode.Backspace}
-        code={NumberKeyboardKeyCode.Backspace}
-      />,
+      <NumberKeyboardKey key="backspace" code="backspace" />,
     ]
   }
 
@@ -124,7 +115,7 @@ function useNumberKeyboardChildren(
   }, [children, title])
 }
 
-export interface NumberKeyboardProps {
+export interface NumberKeyboardProps extends ViewProps {
   className?: string
   open?: boolean
   value?: string
@@ -152,18 +143,16 @@ function NumberKeyboard(props: NumberKeyboardProps) {
     onKeyPress,
     onBackspace,
     onHide,
+    ...restProps
   } = props
   const { header, sidebar } = useNumberKeyboardChildren(props.children, title)
   const keys = [...createBasicKeys(random), ...createCustomKeys(extraKey)]
 
-  const handleKeyPress = (
-    value: string | number,
-    code: NumberKeyboardKeyCode | NumberKeyboardKeyCodeString,
-  ) => {
+  const handleKeyPress = (value: string | number, code: NumberKeyboardKeyCode) => {
     onKeyPress?.(value, code)
-    if (code === NumberKeyboardKeyCode.Backspace) {
+    if (code === "backspace") {
       onBackspace?.()
-    } else if (code === NumberKeyboardKeyCode.KeyboardHide) {
+    } else if (code === "keyboard-hide") {
       onHide?.()
     }
   }
@@ -183,6 +172,7 @@ function NumberKeyboard(props: NumberKeyboardProps) {
             },
             className,
           )}
+          {...restProps}
         >
           {header}
           <View className={prefixClassname("number-keyboard__body")}>

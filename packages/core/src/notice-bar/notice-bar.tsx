@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
@@ -14,9 +15,9 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
+import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { getRect } from "../utils/dom/rect"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
 
@@ -50,7 +51,7 @@ function useChildren(children: ReactNode): NoticeBarChildren {
   return __children__
 }
 
-export interface NoticeBarProps {
+export interface NoticeBarProps extends ViewProps {
   className?: string
   style?: CSSProperties
   delay?: number
@@ -61,7 +62,7 @@ export interface NoticeBarProps {
 }
 
 function NoticeBar(props: NoticeBarProps) {
-  const { className, style, delay = 1000, speed = 60, wordwrap, scrollable = false } = props
+  const { className, delay = 1000, speed = 60, wordwrap, scrollable = false, ...restProps } = props
 
   const { icon, text, action } = useChildren(props.children)
   const ellipsis = !scrollable && !wordwrap
@@ -141,7 +142,7 @@ function NoticeBar(props: NoticeBarProps) {
         },
         className,
       )}
-      style={style}
+      {...restProps}
     >
       {icon}
       <View ref={wrapRef} className={prefixClassname("notice-bar__wrap")}>

@@ -1,12 +1,12 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import TabsLine from "./tabs-line"
 
-interface TabProps {
-  className?: string
+interface TabProps extends ViewProps {
   active?: boolean
   disabled?: boolean
   underline?: boolean
@@ -15,8 +15,6 @@ interface TabProps {
   ellipsis?: boolean
   flexBasis?: string
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 export default function Tab(props: TabProps) {
@@ -28,7 +26,7 @@ export default function Tab(props: TabProps) {
     ellipsis,
     flexBasis,
     children,
-    onClick,
+    ...restProps
   } = props
 
   return (
@@ -42,7 +40,7 @@ export default function Tab(props: TabProps) {
         },
         className,
       )}
-      onClick={onClick}
+      {...restProps}
     >
       <View
         className={classNames(prefixClassname("tabs__tab__content"), {

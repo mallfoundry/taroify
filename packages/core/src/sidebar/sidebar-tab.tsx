@@ -1,7 +1,8 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext } from "react"
+import { ReactNode, useCallback, useContext } from "react"
 import { useBadge } from "../badge"
 import SidebarContext from "../sidebar/sidebar.context"
 import { prefixClassname } from "../styles"
@@ -20,19 +21,16 @@ function SidebarTabContent(props: SidebarTabContentProps) {
   return <Badge children={children} />
 }
 
-interface SidebarTabProps {
+interface SidebarTabProps extends ViewProps {
   className?: string
-  style?: CSSProperties
   value?: any
   disabled?: boolean
   badge?: boolean | string | number | ReactNode
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 function SidebarTab(props: SidebarTabProps) {
-  const { value, className, style, disabled, badge, children, onClick } = props
+  const { value, className, disabled, badge, children, onClick, ...restProps } = props
   const { value: activeValue, onTabClick } = useContext(SidebarContext)
   const active = activeValue === value
 
@@ -54,8 +52,8 @@ function SidebarTab(props: SidebarTabProps) {
         },
         className,
       )}
-      style={style}
       onClick={handleClick}
+      {...restProps}
     >
       <SidebarTabContent badge={badge} children={children} />
     </View>

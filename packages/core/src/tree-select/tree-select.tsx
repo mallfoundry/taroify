@@ -1,17 +1,10 @@
 import Success from "@taroify/icons/Success"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import {
-  Children,
-  cloneElement,
-  CSSProperties,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useCallback,
-} from "react"
+import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import Sidebar from "../sidebar"
 import { prefixClassname } from "../styles"
 import TreeSelectOption from "./tree-select-option"
@@ -87,9 +80,7 @@ function useTreeSelectChildren(children: ReactNode, tabValue?: any): TreeSelectC
   return __children__
 }
 
-export interface TreeSelectProps {
-  className?: string
-  style?: CSSProperties
+export interface TreeSelectProps extends ViewProps {
   tabValue?: any
   value?: any | any[]
   activeIcon?: ReactNode
@@ -101,7 +92,15 @@ export interface TreeSelectProps {
 }
 
 function TreeSelect(props: TreeSelectProps) {
-  const { className, tabValue, value, activeIcon = <Success />, onTabChange, onChange } = props
+  const {
+    className,
+    tabValue,
+    value,
+    activeIcon = <Success />,
+    onTabChange,
+    onChange,
+    ...restProps
+  } = props
   const { tabs, options } = useTreeSelectChildren(props.children, tabValue)
 
   const onOptionClick = useCallback(
@@ -132,7 +131,7 @@ function TreeSelect(props: TreeSelectProps) {
         onOptionClick,
       }}
     >
-      <View className={classNames(prefixClassname("tree-select"), className)}>
+      <View className={classNames(prefixClassname("tree-select"), className)} {...restProps}>
         <Sidebar
           className={prefixClassname("tree-select__sidebar")}
           value={tabValue}

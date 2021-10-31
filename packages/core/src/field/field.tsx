@@ -16,7 +16,7 @@ import {
   useMemo,
   useState,
 } from "react"
-import { BaseCell, CellAlign, CellAlignString } from "../cell"
+import { BaseCell, CellAlign } from "../cell"
 import { prefixClassname } from "../styles"
 import FieldButton from "./field-button"
 import {
@@ -110,7 +110,7 @@ export interface FieldProps {
   value?: string
   maxlength?: number
   type?: FieldType | FieldTypeString
-  align?: CellAlign | CellAlignString
+  align?: CellAlign
   bordered?: boolean
   focus?: boolean
   autoFocus?: boolean

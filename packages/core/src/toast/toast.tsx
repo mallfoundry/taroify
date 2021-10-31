@@ -2,6 +2,7 @@ import Fail from "@taroify/icons/Fail"
 import Success from "@taroify/icons/Success"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactElement, ReactNode, useEffect, useState } from "react"
@@ -39,7 +40,7 @@ function appendIconClassName(node?: ReactNode) {
   })
 }
 
-interface ToastProps {
+interface ToastProps extends ViewProps {
   className?: string
   open?: boolean
   type?: ToastType
@@ -59,6 +60,7 @@ export default function Toast(props: ToastProps) {
     duration = 3000,
     children,
     onClose,
+    ...restProps
   } = props
   const [open, setOpen] = useState(false)
 
@@ -91,6 +93,7 @@ export default function Toast(props: ToastProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <Popup.Backdrop open={false} />
       {

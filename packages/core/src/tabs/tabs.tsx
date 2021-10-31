@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { PageScrollObject } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -63,7 +64,7 @@ function useTabsSticky(sticky?: boolean | TabsSticky): TabsSticky | undefined {
   return sticky
 }
 
-export interface TabsProps {
+export interface TabsProps extends ViewProps {
   className?: string
   value?: any
   theme?: TabsTheme
@@ -98,6 +99,7 @@ function Tabs(props: TabsProps) {
     onTabClick,
     onChange,
     onScroll,
+    ...restProps
   } = props
   const rootRef = useRef()
   const stickyProps = useTabsSticky(sticky)
@@ -152,6 +154,7 @@ function Tabs(props: TabsProps) {
           },
           className,
         )}
+        {...restProps}
       >
         {stickyProps ? (
           <Sticky

@@ -1,5 +1,6 @@
 import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
@@ -20,18 +21,13 @@ import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf, raf } from "../utils/raf"
 import CollapseContext from "./collapse.context"
 
-enum CollapseItemSize {
-  Medium = "medium",
-  Large = "large",
-}
+type CollapseItemSize = "medium" | "large"
 
-type CollapseItemSizeString = "medium" | "large"
-
-interface CollapseItemProps {
+interface CollapseItemProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: any
-  size?: CollapseItemSize | CollapseItemSizeString
+  size?: CollapseItemSize
   bordered?: boolean
   clickable?: boolean
   disabled?: boolean
@@ -46,9 +42,8 @@ interface CollapseItemProps {
 function CollapseItem(props: CollapseItemProps) {
   const {
     className,
-    style,
     value,
-    size = CollapseItemSize.Medium,
+    size = "medium",
     bordered = true,
     disabled = false,
     clickable = true,
@@ -58,6 +53,7 @@ function CollapseItem(props: CollapseItemProps) {
     brief,
     extra,
     children,
+    ...restProps
   } = props
 
   const contentRef = useRef<HTMLElement>()
@@ -130,7 +126,7 @@ function CollapseItem(props: CollapseItemProps) {
         },
         className,
       )}
-      style={style}
+      {...restProps}
     >
       <Cell
         className={classNames(prefixClassname("collapse-item__title"), {

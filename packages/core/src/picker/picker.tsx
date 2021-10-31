@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -94,9 +95,8 @@ function usePickerValues(value?: any): any[] {
   return _.isArray(value) ? value : [value]
 }
 
-export interface PickerProps {
+export interface PickerProps extends ViewProps {
   value?: any | any[]
-  className?: string
   readonly?: boolean
   loading?: boolean
   siblingCount?: number
@@ -119,6 +119,7 @@ export default function Picker(props: PickerProps) {
     onChange,
     onCancel,
     onConfirm,
+    ...restProps
   } = props
   const values = usePickerValues(valueProp)
   const { columns, toolbar } = usePickerChildren(props.children)
@@ -176,7 +177,7 @@ export default function Picker(props: PickerProps) {
     )
 
   return (
-    <View className={classNames(prefixClassname("picker"), className)}>
+    <View className={classNames(prefixClassname("picker"), className)} {...restProps}>
       <PickerContext.Provider
         value={{
           onConfirm: handleAction(onConfirm),

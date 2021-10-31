@@ -1,5 +1,6 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -47,7 +48,7 @@ function renderOptionIcon(node?: ReactNode): ReactNode {
   return node
 }
 
-interface ShareSheetOptionProps {
+interface ShareSheetOptionProps extends ViewProps {
   className?: string
   style?: CSSProperties
   loading?: boolean

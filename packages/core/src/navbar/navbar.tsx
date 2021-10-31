@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { Children, isValidElement, ReactElement, ReactNode, useMemo } from "react"
@@ -35,8 +36,7 @@ function useNavbarChildren(children?: ReactNode): NavbarChildren {
   }, [children])
 }
 
-export interface NavbarProps {
-  className?: boolean
+export interface NavbarProps extends ViewProps {
   bordered?: boolean
   fixed?: boolean
   title?: ReactNode
@@ -44,7 +44,7 @@ export interface NavbarProps {
 }
 
 function Navbar(props: NavbarProps) {
-  const { className, bordered, title } = props
+  const { className, bordered, title, ...restProps } = props
   const { left, right } = useNavbarChildren(props.children)
   return (
     <View
@@ -55,6 +55,7 @@ function Navbar(props: NavbarProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <View className={classNames(prefixClassname("navbar__content"))}>
         {left}

@@ -1,40 +1,41 @@
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
-import { NumberKeyboardKeyCode } from "./number-keyboard-key.shared"
 import NumberKeyboardContext from "./number-keyboard.context"
 
-export enum NumberKeyboardButtonType {
-  Hide = "hide",
-}
+export type NumberKeyboardButtonType = "hide"
 
-export type NumberKeyboardButtonTypeString = "hide"
-
-export interface NumberKeyboardButtonProps {
-  type?: NumberKeyboardButtonType | NumberKeyboardButtonTypeString
+export interface NumberKeyboardButtonProps extends ViewProps {
+  type?: NumberKeyboardButtonType
   children?: ReactNode
 }
 
 function NumberKeyboardButton(props: NumberKeyboardButtonProps) {
-  const { type = NumberKeyboardButtonType.Hide, children } = props
+  const { className, type = "hide", children, onClick, ...restProps } = props
 
   const { onKeyPress } = useContext(NumberKeyboardContext)
 
-  function onClick() {
-    if (type === NumberKeyboardButtonType.Hide) {
-      onKeyPress?.(children as string, NumberKeyboardKeyCode.KeyboardHide)
+  function handleClick(event: ITouchEvent) {
+    onClick?.(event)
+    if (type === "hide") {
+      onKeyPress?.(children as string, "keyboard-hide")
     }
   }
 
   return (
     <View
-      className={classNames({
-        [prefixClassname("number-keyboard__hide")]: type === NumberKeyboardButtonType.Hide,
-      })}
+      className={classNames(
+        {
+          [prefixClassname("number-keyboard__hide")]: type === "hide",
+        },
+        className,
+      )}
       children={children}
-      onClick={onClick}
+      onClick={handleClick}
+      {...restProps}
     />
   )
 }

@@ -1,4 +1,5 @@
 import { Success } from "@taroify/icons"
+import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as React from "react"
 import { ReactNode, useCallback, useContext, useMemo } from "react"
@@ -6,7 +7,7 @@ import Cell from "../cell"
 import { prefixClassname } from "../styles"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 
-export interface DropdownMenuOptionProps {
+export interface DropdownMenuOptionProps extends ViewProps {
   value?: any
   disabled?: boolean
   clickable?: boolean
@@ -17,7 +18,16 @@ export interface DropdownMenuOptionProps {
 }
 
 function DropdownMenuOption(props: DropdownMenuOptionProps) {
-  const { value, disabled, clickable = true, icon, children, onClick } = props
+  const {
+    className,
+    value,
+    disabled,
+    clickable = true,
+    icon,
+    children,
+    onClick,
+    ...restProps
+  } = props
   const { isOptionToggle, toggleOption } = useContext(DropdownMenuItemContext)
 
   const active = useMemo(() => isOptionToggle?.(value), [isOptionToggle, value])
@@ -36,14 +46,19 @@ function DropdownMenuOption(props: DropdownMenuOptionProps) {
 
   return (
     <Cell
-      className={classnames(prefixClassname("dropdown-menu-option"), {
-        [prefixClassname("dropdown-menu-option--active")]: active,
-        [prefixClassname("dropdown-menu-option--disabled")]: disabled,
-      })}
+      className={classnames(
+        prefixClassname("dropdown-menu-option"),
+        {
+          [prefixClassname("dropdown-menu-option--active")]: active,
+          [prefixClassname("dropdown-menu-option--disabled")]: disabled,
+        },
+        className,
+      )}
       clickable={clickable}
       icon={icon}
       title={children}
       onClick={handleClick}
+      {...restProps}
     >
       {active && <Success className={prefixClassname("dropdown-menu-option__icon")} />}
     </Cell>

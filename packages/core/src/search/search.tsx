@@ -11,19 +11,14 @@ import { FieldInputAlign, FieldInputAlignString } from "../field/field.shared"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 
-enum SearchShape {
-  Square = "square",
-  Round = "round",
-}
-
-type SearchShapeString = "square" | "round"
+type SearchShape = "square" | "round"
 
 interface SearchProps {
   className?: string
   value?: string
   icon?: ReactNode
   label?: ReactNode
-  shape?: SearchShape | SearchShapeString
+  shape?: SearchShape
   maxlength?: number
   placeholder?: string
   placeholderClassName?: string
@@ -57,7 +52,7 @@ function Search(props: SearchProps) {
     value,
     icon = <SearchIcon />,
     label,
-    shape = SearchShape.Square,
+    shape = "square",
     maxlength,
     placeholder,
     placeholderClassName,
@@ -76,6 +71,7 @@ function Search(props: SearchProps) {
     onChange,
     onFocus,
     onBlur,
+    ...restProps
   } = props
 
   function handleSearch(event: BaseEventOrig<InputProps.inputValueEventDetail>) {
@@ -92,6 +88,7 @@ function Search(props: SearchProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <View
         className={classNames(

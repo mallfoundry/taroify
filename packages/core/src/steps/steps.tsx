@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -45,7 +46,7 @@ function useStepsChildren(children: ReactNode): StepsChildren {
   return __children__
 }
 
-export interface StepsProps {
+export interface StepsProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: number
@@ -55,7 +56,13 @@ export interface StepsProps {
 }
 
 function Steps(props: StepsProps) {
-  const { className, style, value, direction = "horizontal", alternativeLabel = false } = props
+  const {
+    className,
+    value,
+    direction = "horizontal",
+    alternativeLabel = false,
+    ...restProps
+  } = props
   const { steps } = useStepsChildren(props.children)
 
   return (
@@ -75,7 +82,7 @@ function Steps(props: StepsProps) {
           },
           className,
         )}
-        style={style}
+        {...restProps}
       >
         <View className={prefixClassname("steps__items")} children={steps} />
       </View>

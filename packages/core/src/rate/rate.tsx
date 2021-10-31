@@ -1,5 +1,6 @@
 import { Star, StarOutlined } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -42,7 +43,7 @@ function getRateStatus(
   return { status: RateStatus.Void, value: 0 }
 }
 
-interface RateProps {
+interface RateProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: number
@@ -72,8 +73,13 @@ function Rate(props: RateProps) {
     touchable = true,
     icon = <Star />,
     emptyIcon = <StarOutlined />,
+    onClick,
+    onTouchStart,
+    onTouchMove,
     onChange,
+    ...restProps
   } = props
+
   const rootRef = useRef<HTMLElement>()
 
   const untouchable = readonly || disabled || !touchable
@@ -114,16 +120,17 @@ function Rate(props: RateProps) {
 
   const onItemClick = useCallback(
     (event: ITouchEvent) => {
+      onClick?.(event)
       if (untouchable) {
         return
       }
       const { clientX } = getClientCoordinates(event)
       getScoreByPosition(clientX).then(onChange)
     },
-    [untouchable, getScoreByPosition, onChange],
+    [onClick, untouchable, getScoreByPosition, onChange],
   )
 
-  const onTouchStart = useCallback(
+  const handleTouchStart = useCallback(
     (event: ITouchEvent) => {
       if (untouchable) {
         return
@@ -133,7 +140,7 @@ function Rate(props: RateProps) {
     [touch, untouchable],
   )
 
-  const onTouchMove = useCallback(
+  const handleTouchMove = useCallback(
     (event: ITouchEvent) => {
       if (untouchable) {
         return
@@ -179,8 +186,9 @@ function Rate(props: RateProps) {
         className,
       )}
       onClick={onItemClick}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      {...restProps}
     >
       <RateContext.Provider
         value={{

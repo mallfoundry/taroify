@@ -1,16 +1,15 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useEffect, useState } from "react"
-import Popup, { PopupPlacement } from "../popup"
+import { ReactNode, useEffect, useState } from "react"
+import Popup from "../popup"
 import { prefixClassname } from "../styles"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
 
 export type NotifyColor = "primary" | "success" | "warning" | "danger"
 
-interface NotifyProps {
-  className?: string
-  style?: CSSProperties
+interface NotifyProps extends ViewProps {
   open?: boolean
   duration?: number
   color?: NotifyColor
@@ -21,12 +20,12 @@ interface NotifyProps {
 function Notify(props: NotifyProps) {
   const {
     className,
-    style,
     open: openProp = false,
     duration = 3000,
     color = "danger",
     children,
     onClose,
+    ...restProps
   } = props
   const [open, setOpen] = useState(false)
 
@@ -56,10 +55,10 @@ function Notify(props: NotifyProps) {
         },
         className,
       )}
-      style={style}
-      placement={PopupPlacement.Top}
+      placement="top"
       duration={200}
       open={open}
+      {...restProps}
     >
       <Popup.Backdrop open={false} />
       {children}

@@ -4,32 +4,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import { prefixClassname } from "../styles"
 import { useTouch } from "../utils/touch"
-import {
-  NumberKeyboardKeyCode,
-  NumberKeyboardKeyCodeString,
-  NumberKeyboardKeyOnPress,
-} from "./number-keyboard-key.shared"
+import { NumberKeyboardKeyCode, NumberKeyboardKeyOnPress } from "./number-keyboard-key.shared"
 import NumberKeyboardContext from "./number-keyboard.context"
 
-export enum NumberKeyboardKeySize {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
+type NumberKeyboardKeySize = "small" | "medium" | "large"
 
-type NumberKeyboardKeySizeString = "small" | "medium" | "large"
-
-export enum NumberKeyboardKeyColor {
-  Blue = "blue",
-}
-
-type NumberKeyboardKeyColorString = "blue"
+type NumberKeyboardKeyColor = "blue"
 
 export interface NumberKeyboardKeyProps {
   className?: string
-  code?: NumberKeyboardKeyCode | NumberKeyboardKeyCodeString
-  size?: NumberKeyboardKeySize | NumberKeyboardKeySizeString
-  color?: NumberKeyboardKeyColor | NumberKeyboardKeyColorString
+  code?: NumberKeyboardKeyCode
+  size?: NumberKeyboardKeySize
+  color?: NumberKeyboardKeyColor
   wider?: boolean
   children?: string | number
 
@@ -37,7 +23,7 @@ export interface NumberKeyboardKeyProps {
 }
 
 function NumberKeyboardKey(props: NumberKeyboardKeyProps) {
-  const { wider, code = NumberKeyboardKeyCode.Extra, size, color, children, onPress } = props
+  const { wider, code = "extra", size, color, children, onPress } = props
   const { onKeyPress } = useContext(NumberKeyboardContext)
   const value = children ?? ""
   const [active, setActive] = useState(false)
@@ -72,9 +58,9 @@ function NumberKeyboardKey(props: NumberKeyboardKeyProps) {
 
   const renderContent = () => {
     switch (code) {
-      case NumberKeyboardKeyCode.Backspace:
+      case "backspace":
         return children ?? <View className="taroify-backspace" />
-      case NumberKeyboardKeyCode.KeyboardHide:
+      case "keyboard-hide":
         return children ?? <View className="taroify-keyboard-hide" />
       default:
         return children
@@ -94,8 +80,8 @@ function NumberKeyboardKey(props: NumberKeyboardKeyProps) {
       <View
         className={classNames(prefixClassname("key"), {
           [prefixClassname("key--active")]: active,
-          [prefixClassname("key--large")]: size === NumberKeyboardKeySize.Large,
-          [prefixClassname("key--blue")]: color === NumberKeyboardKeyColor.Blue,
+          [prefixClassname("key--large")]: size === "large",
+          [prefixClassname("key--blue")]: color === "blue",
         })}
       >
         {renderContent()}

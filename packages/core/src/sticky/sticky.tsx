@@ -29,8 +29,9 @@ interface StickyOffset {
   bottom?: number | string
 }
 
-interface StickyProps {
+interface StickyProps extends ViewProps {
   className?: string
+  style?: CSSProperties
   position?: StickyPosition
   offset?: StickyOffset
   offsetTop?: number | string
@@ -46,12 +47,14 @@ interface StickyProps {
 export default function Sticky(props: StickyProps) {
   const {
     className,
+    style: styleProp,
     position = "top",
     offset: offsetProp,
     container: containerRef,
     children,
     onChange,
     onScroll,
+    ...restProps
   } = props
 
   if (offsetProp) {
@@ -159,7 +162,14 @@ export default function Sticky(props: StickyProps) {
   usePageScroll(({ scrollTop }) => invokeScroll({ scrollTop }))
 
   return (
-    <View ref={rootRef} style={rootStyle}>
+    <View
+      ref={rootRef}
+      style={{
+        ...styleProp,
+        ...rootStyle,
+      }}
+      {...restProps}
+    >
       <View
         style={stickyStyle}
         className={classNames(

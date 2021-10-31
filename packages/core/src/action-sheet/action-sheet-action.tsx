@@ -19,7 +19,6 @@ export default function ActionSheetAction(props: ActionSheetActionProps) {
       className={classNames(prefixClassname("action-sheet__action"), className)}
       disabled={disabled}
       loading={loading}
-      {...restProps}
       onClick={(event) => {
         onClick?.(event)
         if (!disabled && !loading) {
@@ -31,6 +30,7 @@ export default function ActionSheetAction(props: ActionSheetActionProps) {
           })
         }
       }}
+      {...restProps}
     >
       {name && <View className={prefixClassname("action-sheet__name")} children={name} />}
       {children && (

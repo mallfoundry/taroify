@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
 import classnames from "classnames"
 import * as _ from "lodash"
@@ -105,8 +106,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
   return __children__
 }
 
-export interface DropdownMenuProps {
-  className?: string
+export interface DropdownMenuProps extends ViewProps {
   value?: any
   direction?: DropdownMenuDirection
   children?: ReactNode
@@ -115,7 +115,7 @@ export interface DropdownMenuProps {
 }
 
 function DropdownMenu(props: DropdownMenuProps) {
-  const { className, value, direction = "down", onChange } = props
+  const { className, value, direction = "down", onChange, ...restProps } = props
   const barRef = useRef<HTMLElement>()
   const [opened, setOpened] = useState<boolean>()
   const [itemOffset, setItemOffset] = useState(0)
@@ -174,7 +174,7 @@ function DropdownMenu(props: DropdownMenuProps) {
         isItemToggle,
       }}
     >
-      <View className={classnames(prefixClassname("dropdown-menu"), className)}>
+      <View className={classnames(prefixClassname("dropdown-menu"), className)} {...restProps}>
         <View
           ref={barRef}
           className={classnames(prefixClassname("dropdown-menu__bar"), {

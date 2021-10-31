@@ -1,21 +1,21 @@
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
 import * as React from "react"
 import { isValidElement, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-interface NavBarRightProps {
+interface NavBarRightProps extends ViewProps {
   icon?: ReactNode
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 export function NavBarRight(props: NavBarRightProps) {
-  const { icon, children, onClick } = props
+  const { className, icon, children, ...restProps } = props
 
   return (
-    <View className={prefixClassname("navbar__right")} onClick={onClick}>
+    <View className={classNames(prefixClassname("navbar__right"), className)} {...restProps}>
       {icon && cloneIconElement(icon, { className: prefixClassname("navbar__icon") })}
       {isValidElement(children) ? (
         children

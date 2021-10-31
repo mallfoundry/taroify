@@ -1,9 +1,10 @@
 import { Cross } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 type TagVariant = "contained" | "outlined"
@@ -14,9 +15,7 @@ type TagSize = "small" | "medium" | "large"
 
 type TagShape = "square" | "round" | "roundRight" | "roundLeft"
 
-interface TagProps {
-  className?: string
-  style?: CSSProperties
+interface TagProps extends ViewProps {
   variant?: TagVariant
   size?: TagSize
   color?: TagColor
@@ -26,23 +25,20 @@ interface TagProps {
   children?: ReactNode
 
   onClose?(event: ITouchEvent): void
-
-  onClick?(event: ITouchEvent): void
 }
 
 function Tag(props: TagProps) {
   const {
     className,
-    style,
     variant = "contained",
     size = "small",
     color = "default",
     shape = "square",
     closeable,
     closeIcon = <Cross />,
-    onClick,
     onClose,
     children,
+    ...restProps
   } = props
 
   return (
@@ -68,8 +64,7 @@ function Tag(props: TagProps) {
         },
         className,
       )}
-      style={style}
-      onClick={onClick}
+      {...restProps}
     >
       {children}
       {closeable &&

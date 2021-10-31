@@ -1,14 +1,3 @@
-export enum CellSize {
-  Medium = "medium",
-  Large = "large",
-}
+export type CellSize = "medium" | "large"
 
-export type CellSizeString = "medium" | "large"
-
-export enum CellAlign {
-  Start = "start",
-  Center = "center",
-  End = "end",
-}
-
-export type CellAlignString = "start" | "center" | "end"
+export type CellAlign = "start" | "center" | "end"

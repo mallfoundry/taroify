@@ -5,7 +5,6 @@ import * as React from "react"
 import { ReactNode } from "react"
 import Loading, { LoadingType } from "../loading"
 import { prefixClassname } from "../styles"
-
 import {
   ButtonColor,
   ButtonFormType,

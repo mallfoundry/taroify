@@ -1,25 +1,19 @@
 import { Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import CheckboxGroupContext from "./checkbox-group.context"
+import { CheckboxShape } from "./checkbox.shared"
 
-enum CheckboxShape {
-  Square = "square",
-  Round = "round",
-}
-
-type CheckboxShapeString = "square" | "round"
-
-export interface CheckboxProps {
-  className?: string
+export interface CheckboxProps extends ViewProps {
   name?: any
   checked?: boolean
   disabled?: boolean
-  shape?: CheckboxShape | CheckboxShapeString
+  shape?: CheckboxShape
   icon?: ReactNode
   size?: number
   children?: ReactNode
@@ -33,11 +27,12 @@ export default function Checkbox(props: CheckboxProps) {
     name,
     checked: checkedProp,
     disabled,
-    shape = CheckboxShape.Round,
+    shape = "round",
     icon = <Success />,
     size,
     children,
     onChange,
+    ...restProps
   } = props
 
   const { value: names = [], max: namesMax = 0, onChange: onNamesChange } = useContext(
@@ -61,7 +56,11 @@ export default function Checkbox(props: CheckboxProps) {
   }
 
   return (
-    <View className={classNames(prefixClassname("checkbox"), className)} onClick={handleClick}>
+    <View
+      className={classNames(prefixClassname("checkbox"), className)}
+      onClick={handleClick}
+      {...restProps}
+    >
       <View
         className={classNames(
           prefixClassname("checkbox__icon"),
