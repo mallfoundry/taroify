@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.16-alpha.0
+
+`2021-10-31`
+
+**New Component**
+
+- 新增 Calendar 组件[#66](https://github.com/mallfoundry/taroify/issues/66)
+
+**Feature**
+
+- 提供完全属性集，为所有组件的属性继承自 StandardProps 接口[#65](https://github.com/mallfoundry/taroify/issues/65)
+- 使用 useMounted 代替 useReady 钩子[#62](https://github.com/mallfoundry/taroify/issues/62)
+- @taroify/icons 增强自动导入图标样式[#63](https://github.com/mallfoundry/taroify/issues/63)
+
 ### v0.0.15-alpha.12
 
 `2021-10-26`
