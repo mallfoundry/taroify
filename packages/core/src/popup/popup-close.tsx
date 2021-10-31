@@ -4,7 +4,6 @@ import * as React from "react"
 import { ReactElement, ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import PopupContext from "./popup.context"
-import { PopupPlacement } from "./popup.shared"
 
 export type PopupClosePlacement = "top-right" | "top-left" | "bottom-right" | "bottom-left"
 
@@ -18,7 +17,7 @@ function usePopupClosePlacement(placement?: PopupClosePlacement) {
   if (placement) {
     return placement
   }
-  if (ctxPlacement === PopupPlacement.Right) {
+  if (ctxPlacement === "right") {
     return "top-left"
   }
   return "top-right"

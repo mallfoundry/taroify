@@ -1,10 +1,10 @@
 import { createContext } from "react"
-import { RadioGroupDirection, RadioGroupDirectionString } from "./radio-group.shared"
+import { RadioGroupDirection } from "./radio-group.shared"
 
 interface RadioGroupContextValue {
   value?: any
   disabled?: boolean
-  direction?: RadioGroupDirection | RadioGroupDirectionString
+  direction?: RadioGroupDirection
   size?: number
 
   onChange?(value: any): void

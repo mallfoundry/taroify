@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { Children, CSSProperties, isValidElement, ReactElement, ReactNode } from "react"
-import Popup, { PopupPlacement } from "../popup"
+import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import PopoverTrigger from "./popover-trigger"
 import PopoverContext from "./popover.context"
@@ -72,7 +72,7 @@ function Popover(props: PopoverProps) {
       <Popup
         className={classNames(prefixClassname("popover"), prefixClassname("popover"), className)}
         style={style}
-        placement={PopupPlacement.Top}
+        placement="top"
         duration={duration}
         open={open}
       >
