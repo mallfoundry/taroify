@@ -12,6 +12,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.16-alpha.1
+
+`2021-11-01`
+
+**Bug Fixes**
+
+- 修复`@taroify/icons`样式问题[#67](https://github.com/mallfoundry/taroify/issues/67)
+
 ### v0.0.16-alpha.0
 
 `2021-10-31`
