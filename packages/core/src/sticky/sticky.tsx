@@ -49,6 +49,8 @@ export default function Sticky(props: StickyProps) {
     className,
     style: styleProp,
     position = "top",
+    offsetTop: offsetTopProp,
+    offsetBottom: offsetBottomProp,
     offset: offsetProp,
     container: containerRef,
     children,
@@ -67,8 +69,8 @@ export default function Sticky(props: StickyProps) {
     }
   }
 
-  const offsetTop = props.offsetTop ?? offsetProp?.top
-  const offsetBottom = props.offsetBottom ?? offsetProp?.bottom
+  const offsetTop = offsetTopProp ?? offsetProp?.top
+  const offsetBottom = offsetBottomProp ?? offsetProp?.bottom
 
   const rootRef = useRef<ViewProps>()
   const counterRef = useRef(0)
