@@ -71,7 +71,7 @@ function List(props: ListProps) {
   useEffect(() => {
     loadingRef.current = loadingProp
     loadCheck()
-  }, [loadingProp, loadCheck])
+  }, [loadingProp, loadCheck, hasMore, children])
 
   const listEdge = <View ref={edgeRef} className={prefixClassname("list__edge")} />
 
