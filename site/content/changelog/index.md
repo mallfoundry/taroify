@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.16-alpha.3
+
+`2021-11-01`
+
+**Bug Fixes**
+
+- List
+  - 修复因 children 改变未触发 onLoad 事件的问题[#70](https://github.com/mallfoundry/taroify/issues/70)
+
 ### v0.0.16-alpha.2
 
 `2021-11-01`
