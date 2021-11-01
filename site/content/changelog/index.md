@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.16-alpha.2
+
+`2021-11-01`
+
+**Bug Fixes**
+
+- Sticky
+  - 修复因 offsetTop, offsetBottom 未显示解构而导致的设置属性错误的问题[#68](https://github.com/mallfoundry/taroify/issues/68)
+
 ### v0.0.16-alpha.1
 
 `2021-11-01`
