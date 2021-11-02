@@ -117,6 +117,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | duration | 动画时长，单位秒 | _number \| string_ | `300` |
 | backdrop | 是否显示遮罩层 | _boolean_ | `false` |
 | children | 文本内容 | _ReactNode_ | - |
+| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
 
 ### Options
 
@@ -129,6 +130,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
 | backdrop | 是否显示遮罩层 | _boolean_ | `false` |
 | message | 文本内容 | _ReactNode_ | - |
+| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
 
 ### 方法
 
