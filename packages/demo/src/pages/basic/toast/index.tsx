@@ -7,20 +7,6 @@ import Page from "../../../components/page"
 
 import "./index.scss"
 
-function TextToast() {
-  return (
-    <>
-      <Toast id="toast1" />
-      <Cell
-        clickable
-        title="文字提示"
-        rightIcon={<ArrowRight />}
-        onClick={() => Toast.open({ selector: "#toast1", message: "文字提示" })}
-      />
-    </>
-  )
-}
-
 export default function ToastDemo() {
   function handleOpen({ type, position, message, icon }: ToastOptions) {
     Toast.open({
@@ -33,8 +19,6 @@ export default function ToastDemo() {
 
   return (
     <Page title="Toast 轻提示" className="toast-demo">
-      {/*<Toast id="toast" />*/}
-      <TextToast />
       <Block title="基础用法">
         <Cell
           clickable
