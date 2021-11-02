@@ -1,20 +1,34 @@
-import Fail from "@taroify/icons/Fail"
-import Success from "@taroify/icons/Success"
+import { Fail, Success } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { ReactElement, ReactNode, useEffect, useState } from "react"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useMemo,
+} from "react"
+import Backdrop from "../backdrop"
 import Loading from "../loading"
-import Popup from "../popup"
+import Popup, { PopupBackdropProps } from "../popup"
 import { prefixClassname } from "../styles"
+import { useObject } from "../utils/state"
+import { isElementOf } from "../utils/validate"
+import { ToastOptions, useToastOpened } from "./toast.imperative"
+import { ToastPosition, ToastType } from "./toast.shared"
 
-export type ToastType = "text" | "loading" | "success" | "fail" | "html"
+function matchToast(selector?: string, id?: string) {
+  return _.replace(selector as string, "#", "") === id
+}
 
-export type ToastPosition = "top" | "middle" | "bottom"
-
-function defaultIcon(icon?: ReactNode, type?: ToastType) {
+function defaultToastIcon(icon?: ReactNode, type?: ToastType): ReactNode {
   if (icon) {
     return icon
   }
@@ -30,49 +44,105 @@ function defaultIcon(icon?: ReactNode, type?: ToastType) {
   return undefined
 }
 
-function appendIconClassName(node?: ReactNode) {
-  if (!React.isValidElement(node)) {
-    return node
-  }
-  const element = node as ReactElement
-  return React.cloneElement(node, {
-    className: classNames(prefixClassname("toast__icon"), element.props.className),
-  })
+function useToastIcon(node?: ReactNode, type?: ToastType) {
+  return useMemo(() => {
+    const icon = defaultToastIcon(node, type)
+    if (!isValidElement(icon)) {
+      return icon
+    }
+    const element = icon as ReactElement
+    return cloneElement(icon, {
+      className: classNames(prefixClassname("toast__icon"), element.props.className),
+    })
+  }, [node, type])
 }
 
-interface ToastProps extends ViewProps {
+interface ToastChildren {
+  backdrop?: ReactNode
+  content?: ReactNode[]
+}
+
+function useToastChildren(children?: ReactNode): ToastChildren {
+  return useMemo(() => {
+    const __children__: ToastChildren = {
+      content: [],
+    }
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        if (isElementOf(element, Backdrop)) {
+          __children__.backdrop = element
+        } else {
+          __children__.content?.push(child)
+        }
+      } else {
+        __children__.content?.push(child)
+      }
+    })
+    if (!__children__.backdrop) {
+      __children__.backdrop = <Popup.Backdrop open={false} />
+    }
+    return __children__
+  }, [children])
+}
+
+function useToastBackdrop(
+  backdrop?: ReactNode,
+  options?: boolean | Omit<PopupBackdropProps, "open">,
+) {
+  return useMemo(() => {
+    if (_.isUndefined(options) || _.isNull(options) || _.isEmpty(options)) {
+      return backdrop
+    }
+    if (_.isBoolean(options) && options) {
+      return cloneElement(backdrop as ReactElement, { open: true })
+    }
+    if (_.isBoolean(options) && !options) {
+      return cloneElement(backdrop as ReactElement, { open: false })
+    }
+    return cloneElement(backdrop as ReactElement, { ...options, open: true })
+  }, [backdrop, options])
+}
+
+export interface ToastProps extends ViewProps {
   className?: string
+  style?: CSSProperties
   open?: boolean
   type?: ToastType
   position?: ToastPosition
   icon?: ReactNode
   duration?: number
   children?: ReactNode
-  onClose?: () => void
+
+  onClose?(): void
 }
 
 export default function Toast(props: ToastProps) {
-  const {
-    className,
-    open: openProp = false,
-    type = "text",
-    position = "middle",
-    duration = 3000,
-    children,
-    onClose,
-    ...restProps
-  } = props
-  const [open, setOpen] = useState(false)
+  const [
+    {
+      id,
+      className,
+      open = false,
+      icon: iconProp,
+      type = "text",
+      position = "middle",
+      duration = 3000,
+      children: childrenProp,
+      backdrop: backdropOptions,
+      onClose,
+      ...restProps
+    },
+    setState,
+  ] = useObject<ToastProps & ToastOptions>(props)
+  const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
+  const backdrop = useToastBackdrop(backdropElement, backdropOptions)
+  const icon = useToastIcon(iconProp, type)
 
-  useEffect(() => setOpen(openProp), [openProp])
-
-  const icon = appendIconClassName(defaultIcon(props.icon, type))
   useEffect(() => {
-    setOpen(openProp)
     let timer: any
-    if (openProp) {
+    if (open) {
       timer = setTimeout(() => {
-        setOpen(false)
+        setState({ open: false })
         onClose?.()
         clearTimeout(timer)
       }, duration)
@@ -80,11 +150,22 @@ export default function Toast(props: ToastProps) {
       clearTimeout(timer)
     }
     return () => clearTimeout(timer)
-  }, [openProp, duration, onClose])
+  }, [duration, onClose, open, setState])
+
+  useToastOpened(({ selector, message, ...restOptions }: ToastOptions) => {
+    if (matchToast(selector as string, id)) {
+      setState({
+        open: true,
+        children: message,
+        ...restOptions,
+      })
+    }
+  })
 
   return (
     <Popup
       open={open}
+      id={id}
       className={classNames(
         prefixClassname("toast"),
         {
@@ -95,7 +176,7 @@ export default function Toast(props: ToastProps) {
       )}
       {...restProps}
     >
-      <Popup.Backdrop open={false} />
+      {backdrop}
       {
         //
         icon &&
@@ -103,7 +184,7 @@ export default function Toast(props: ToastProps) {
             className: prefixClassname("toast__icon"),
           })
       }
-      {icon ? <View className={prefixClassname("toast__message")} children={children} /> : children}
+      {icon ? <View className={prefixClassname("toast__message")} children={content} /> : content}
     </Popup>
   )
 }

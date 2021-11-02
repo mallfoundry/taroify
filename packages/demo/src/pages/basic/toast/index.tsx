@@ -1,27 +1,29 @@
 import { Cell, Image, Loading, Toast } from "@taroify/core"
-import { ToastPosition, ToastType } from "@taroify/core/toast"
+import { ToastOptions } from "@taroify/core/toast"
 import { ArrowRight, LikeOutlined } from "@taroify/icons"
 import * as React from "react"
-import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 
 import "./index.scss"
 
-interface ToastOptions {
-  open?: boolean
-  type?: ToastType
-  position?: ToastPosition
-  icon?: ReactNode
-  message?: string
+function TextToast() {
+  return (
+    <>
+      <Toast id="toast1" />
+      <Cell
+        clickable
+        title="文字提示"
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open({ selector: "#toast1", message: "文字提示" })}
+      />
+    </>
+  )
 }
 
 export default function ToastDemo() {
-  const [options, setOptions] = useState<ToastOptions>({})
-
   function handleOpen({ type, position, message, icon }: ToastOptions) {
-    setOptions({
-      open: true,
+    Toast.open({
       type,
       position,
       message,
@@ -31,6 +33,8 @@ export default function ToastDemo() {
 
   return (
     <Page title="Toast 轻提示" className="toast-demo">
+      {/*<Toast id="toast" />*/}
+      <TextToast />
       <Block title="基础用法">
         <Cell
           clickable
@@ -114,20 +118,6 @@ export default function ToastDemo() {
           }
         />
       </Block>
-      <Toast
-        open={options.open}
-        type={options.type}
-        icon={options.icon}
-        position={options.position}
-        onClose={() =>
-          setOptions({
-            ...options,
-            open: false,
-          })
-        }
-      >
-        {options.message}
-      </Toast>
     </Page>
   )
 }

@@ -6,7 +6,7 @@
 
 ### 引入
 
-```jsx
+```tsx
 import { Toast } from "@taroify/core"
 ```
 
@@ -14,15 +14,49 @@ import { Toast } from "@taroify/core"
 
 ### 文字提示
 
-```jsx
-<Toast open>文字提示</Toast>
+由于小程序不支持 DOM 操作，因此需要手动挂载一个 Toast 组件并指定 id 为 `toast`。
+
+```tsx
+function TextToast() {
+  return (
+    <>
+      <Toast id="toast" />
+      <Cell
+        clickable
+        title="文字提示"
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open("文字提示")}
+      />
+    </>
+  )
+}
+```
+
+### 自定义 selector
+
+默认情况下的 `Toast.open()` 方法的 `selector` 属性为 `#toast`，可以通过手动指定 `selector` 支持多实例。
+
+```tsx
+function TextToast() {
+  return (
+    <>
+      <Toast id="toast1" />
+      <Cell
+        clickable
+        title="文字提示"
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open({ selector: "#toast1", message: "文字提示" })}
+      />
+    </>
+  )
+}
 ```
 
 ### 加载提示
 
-使用 `type="loading"` 方法展示加载提示，通过 `forbidClick` 属性可以禁用背景点击。
+使用 `type="loading"` 方法展示加载提示。
 
-```jsx
+```tsx
 <Toast open type="loading">加载中...</Toast>
 ```
 
@@ -30,7 +64,7 @@ import { Toast } from "@taroify/core"
 
 使用 `type="success"` 展示成功提示，使用 `type="fail"` 展示失败提示。
 
-```jsx
+```tsx
 <Toast open type="success">成功文案</Toast>
 <Toast open type="fail">失败文案</Toast>
 ```
@@ -39,7 +73,7 @@ import { Toast } from "@taroify/core"
 
 通过 `icon` 选项可以自定义图标，支持传入[图标名称](/components/icon)或图片链接。
 
-```jsx
+```tsx
 <Toast open icon={<LikeOutlined />}>自定义图标</Toast>
 <Toast open icon={<Image style={{ width: "1em", height: "1em" }}
                          src="https://img01.yzcdn.cn/vant/logo.png" />}>
@@ -52,7 +86,7 @@ import { Toast } from "@taroify/core"
 
 Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 Toast 展示的位置。
 
-```jsx
+```tsx
 <Toast open position="top">顶部展示</Toast>
 <Toast open position="bottom">底部展示</Toast>
 ```
@@ -65,8 +99,28 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | --- | --- | --- | --- |
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
-| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | _ |
+| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
+| position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
+| duration | 动画时长，单位秒 | _number \| string_ | `300` |
+| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
+| children | 文本内容 | _ReactNode_ | - |
+
+### Options
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
+| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
 | duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
-| backdrop | 是否显示遮罩层 | _boolean \| static_ | `true` |
-| children | 文本内容 | _ReactNode_ | `""` |
+| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
+| message | 文本内容 | _ReactNode_ | - |
+
+### 方法
+
+| 方法名 | 参数 | 返回值 | 介绍 |
+| --- | --- | --- | --- |
+| Toast.open | _options \| message_ | - | 展示提示 |
+| Toast.loading | _options \| message_ | - | 展示加载提示 |
+| Toast.success | _options \| message_ | - | 展示成功提示 |
+| Toast.fail | _options \| message_ | - | 展示失败提示 |
