@@ -4,17 +4,50 @@
 
 在页面中间弹出黑色半透明提示，用于消息通知、加载提示、操作结果提示等场景。
 
-### 引入
+### 函数调用
+
+由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Toast 组件并指定 id 为 `toast`。
 
 ```tsx
-import { Toast } from "@taroify/core"
+import { Cell, Toast } from "@taroify/core"
+
+function ImperativeToast() {
+  return (
+    <>
+      <Toast id="toast" />
+      <Cell
+        title="函数调用"
+        clickable
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open("文字提示")}
+      />
+    </>
+  )
+}
+```
+
+### 组件调用
+
+```tsx
+import { Cell, Toast } from "@taroify/core"
+
+function BasicToast() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Toast open={open} onClose={setOpen}>文字提示</Toast>
+      <Cell title="基础用法" clickable onClick={() => setOpen(true)} />
+    </>
+  )
+}
 ```
 
 ## 代码演示
 
 ### 文字提示
 
-由于小程序不支持 DOM 操作，因此需要手动挂载一个 Toast 组件并指定 id 为 `toast`。
+由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Toast 组件并指定 id 为 `toast`。
 
 ```tsx
 function TextToast() {
@@ -26,26 +59,6 @@ function TextToast() {
         title="文字提示"
         rightIcon={<ArrowRight />}
         onClick={() => Toast.open("文字提示")}
-      />
-    </>
-  )
-}
-```
-
-### 自定义 selector
-
-默认情况下的 `Toast.open()` 方法的 `selector` 属性为 `#toast`，可以通过手动指定 `selector` 支持多实例。
-
-```tsx
-function TextToast() {
-  return (
-    <>
-      <Toast id="toast1" />
-      <Cell
-        clickable
-        title="文字提示"
-        rightIcon={<ArrowRight />}
-        onClick={() => Toast.open({ selector: "#toast1", message: "文字提示" })}
       />
     </>
   )
@@ -109,6 +122,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| selector | 自定义节点选择器 | _string_ | `toast` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
 | icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
