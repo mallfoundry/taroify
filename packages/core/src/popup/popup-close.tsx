@@ -25,7 +25,7 @@ function usePopupClosePlacement(placement?: PopupClosePlacement) {
 
 export default function PopupClose(props: PopupCloseProps) {
   const { children = <Cross /> } = props
-  const { emitClose } = useContext(PopupContext)
+  const { onClose } = useContext(PopupContext)
   const placement = usePopupClosePlacement(props.placement)
 
   if (React.isValidElement(children)) {
@@ -37,7 +37,7 @@ export default function PopupClose(props: PopupCloseProps) {
         [prefixClassname("popup__close-icon--bottom-left")]:
           placement === "bottom-left" || placement === "bottom-right",
       }),
-      onClick: () => emitClose?.(false),
+      onClick: () => onClose?.(false),
     })
   }
   return <>{children}</>

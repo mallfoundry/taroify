@@ -1,3 +1,4 @@
+import { ForwardRefExoticComponent } from "react"
 import PopupComponent, { PopupProps } from "./popup"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
@@ -5,7 +6,7 @@ import PopupClose from "./popup-close"
 export type { PopupBackdropProps } from "./popup-backdrop"
 export type { PopupCloseProps } from "./popup-close"
 
-interface PopupInterface {
+interface PopupInterface extends ForwardRefExoticComponent<PopupProps> {
   (props: PopupProps): JSX.Element
 
   Backdrop: typeof PopupBackdrop

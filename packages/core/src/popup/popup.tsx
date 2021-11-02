@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode } from "react"
+import { Children, forwardRef, isValidElement, ReactElement, ReactNode, useMemo } from "react"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
@@ -39,29 +39,31 @@ interface PopupChildren {
   content: ReactNode[]
 }
 
-function findPopupChildren(node?: ReactNode): PopupChildren {
-  const children: PopupChildren = {
-    backdrop: undefined,
-    close: undefined,
-    content: [],
-  }
-
-  Children.forEach(node, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      if (isElementOf(element, Backdrop)) {
-        children.backdrop = element
-      } else if (element.type === PopupClose) {
-        children.close = element
-      } else {
-        children.content.push(child)
-      }
-    } else {
-      children.content.push(child)
+function usePopupChildren(children?: ReactNode): PopupChildren {
+  return useMemo(() => {
+    const __children__: PopupChildren = {
+      backdrop: undefined,
+      close: undefined,
+      content: [],
     }
-  })
 
-  return children
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        if (isElementOf(element, Backdrop)) {
+          __children__.backdrop = element
+        } else if (element.type === PopupClose) {
+          __children__.close = element
+        } else {
+          __children__.content.push(child)
+        }
+      } else {
+        __children__.content.push(child)
+      }
+    })
+
+    return __children__
+  }, [children])
 }
 
 export interface PopupProps extends ViewProps {
@@ -71,12 +73,15 @@ export interface PopupProps extends ViewProps {
   rounded?: boolean
   duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
-  onOpen?: (opened: boolean) => void
-  onClose?: (opened: boolean) => void
-  onClosed?: () => void
+
+  onOpen?(opened: boolean): void
+
+  onClose?(opened: boolean): void
+
+  onClosed?(): void
 }
 
-function Popup(props: PopupProps) {
+const Popup = forwardRef<any, PopupProps>((props, ref) => {
   const {
     className,
     open,
@@ -92,15 +97,14 @@ function Popup(props: PopupProps) {
   } = props
 
   const transactionName = transaction ?? toTransactionName(placement)
-
-  const { backdrop = <PopupBackdrop />, close, content } = findPopupChildren(children)
+  const { backdrop = <PopupBackdrop />, close, content } = usePopupChildren(children)
 
   return (
     <PopupContext.Provider
       value={{
         open,
         placement,
-        emitClose: onClose,
+        onClose,
       }}
     >
       {backdrop}
@@ -112,6 +116,7 @@ function Popup(props: PopupProps) {
         onExited={onClosed}
       >
         <View
+          ref={ref}
           className={classNames(
             prefixClassname("popup"),
             {
@@ -132,6 +137,6 @@ function Popup(props: PopupProps) {
       </Transition>
     </PopupContext.Provider>
   )
-}
+})
 
 export default Popup

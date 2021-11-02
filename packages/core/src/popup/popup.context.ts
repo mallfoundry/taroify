@@ -4,7 +4,8 @@ import { PopupPlacement } from "./popup.shared"
 interface PopupContextProps {
   open?: boolean
   placement?: PopupPlacement
-  emitClose?: (opened: boolean) => void
+
+  onClose?(opened: boolean): void
 }
 
 const PopupContext = createContext<PopupContextProps>({})
