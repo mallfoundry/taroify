@@ -19,8 +19,6 @@ interface ToastInterface {
   success(option: ReactNode | Omit<ToastOptions, "type">): void
 
   fail(option: ReactNode | Omit<ToastOptions, "type">): void
-
-  close(): void
 }
 
 const Toast = ToastComponent as ToastInterface
