@@ -27,4 +27,10 @@
   &__content {
     padding: 0 16px * $hd;
   }
+
+  &__card {
+    margin: 12px * $hd 12px * $hd 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
 }
