@@ -2,14 +2,45 @@
 
 ### 介绍
 
-在页面顶部展示消息提示。
+在页面顶部展示消息提示，支持函数调用和组件调用两种方式。
 
 ### 函数调用
 
-```js
-import { Notify } from "@taroify/core"
-// or
-import Notify from "@taroify/core/notify"
+由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Notify 组件并指定 id 为 `notify`。
+
+```tsx
+import { Cell, Notify } from "@taroify/core"
+
+function ImperativeNotify() {
+  return (
+    <>
+      <Notify id="notify" />
+      <Cell
+        title="函数调用"
+        clickable
+        rightIcon={<ArrowRight />}
+        onClick={() => Notify.open("通知内容")}
+      />
+    </>
+  )
+}
+```
+
+### 组件调用
+
+```tsx
+import { Cell, Notify } from "@taroify/core"
+
+function BasicNotify() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Notify open={open} onClose={setOpen}>通知内容</Notify>
+      <Cell title="基础用法" clickable onClick={() => setOpen(true)} />
+    </>
+  )
+}
 ```
 
 ## 代码演示
@@ -17,7 +48,7 @@ import Notify from "@taroify/core/notify"
 ### 基础用法
 
 ```tsx
-<Notify open>通知内容</Notify>
+<Notify id="notify" open>通知内容</Notify>
 ```
 
 ### 通知颜色
@@ -37,7 +68,6 @@ import Notify from "@taroify/core/notify"
 
 ```tsx
 <Notify open style={{ color: "#ad0000", background: "#ffe1e1" }}>自定义颜色</Notify>
-
 <Notify open duration={1000}>自定义时长</Notify>
 ```
 
