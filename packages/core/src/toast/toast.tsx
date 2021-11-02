@@ -24,6 +24,10 @@ import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastOpened } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
 
+const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
+
+const TOAST_PRESET_POSITIONS = ["top", "middle", "bottom"]
+
 function matchToast(selector?: string, id?: string) {
   return _.replace(selector as string, "#", "") === id
 }
@@ -169,8 +173,8 @@ export default function Toast(props: ToastProps) {
       className={classNames(
         prefixClassname("toast"),
         {
-          [prefixClassname(`toast--${position}`)]: position,
-          [prefixClassname(`toast--${type}`)]: !icon,
+          [prefixClassname(`toast--${position}`)]: TOAST_PRESET_POSITIONS.includes(position),
+          [prefixClassname(`toast--${type}`)]: !icon && TOAST_PRESET_TYPES.includes(type),
         },
         className,
       )}
