@@ -118,7 +118,7 @@ export interface ToastProps extends ViewProps {
   duration?: number
   children?: ReactNode
 
-  onClose?(): void
+  onClose?(opened: boolean): void
 }
 
 export default function Toast(props: ToastProps) {
@@ -147,7 +147,7 @@ export default function Toast(props: ToastProps) {
     if (open) {
       timer = setTimeout(() => {
         setState({ open: false })
-        onClose?.()
+        onClose?.(false)
         clearTimeout(timer)
       }, duration)
     } else if (timer) {

@@ -37,7 +37,7 @@ export interface ToastOptions {
   duration?: number
   message?: ReactNode
 
-  onClose?(): void
+  onClose?(opened: boolean): void
 }
 
 function parseOptions(message: string | ToastOptions): ToastOptions {
