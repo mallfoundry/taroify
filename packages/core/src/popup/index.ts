@@ -3,6 +3,7 @@ import PopupComponent, { PopupProps } from "./popup"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 
+export { usePopupBackdrop } from "./popup-backdrop"
 export type { PopupBackdropProps } from "./popup-backdrop"
 export type { PopupCloseProps } from "./popup-close"
 
