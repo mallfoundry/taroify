@@ -61,7 +61,6 @@ function usePopupChildren(children?: ReactNode): PopupChildren {
         __children__.content.push(child)
       }
     })
-
     return __children__
   }, [children])
 }

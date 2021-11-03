@@ -57,3 +57,5 @@ export default function Backdrop(props: BackdropProps) {
     />
   )
 }
+
+Backdrop.displayName = "Backdrop"

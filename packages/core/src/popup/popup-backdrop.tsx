@@ -24,3 +24,5 @@ export default function PopupBackdrop(props: PopupBackdropProps) {
     />
   )
 }
+
+PopupBackdrop.displayName = "PopupBackdrop"
