@@ -5,7 +5,7 @@ import { NotifyColor } from "./notify.shared"
 
 const notifyEvents = new Events()
 
-export function useNotifyOpened(cb: (options: NotifyOptions) => void) {
+export function useNotifyOpen(cb: (options: NotifyOptions) => void) {
   useEffect(() => {
     notifyEvents.on("open", cb)
     return () => {

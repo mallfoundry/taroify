@@ -6,7 +6,7 @@ import { CSSProperties, ReactNode, useEffect } from "react"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { useObject } from "../utils/state"
-import { NotifyOptions, useNotifyOpened } from "./notify.imperative"
+import { NotifyOptions, useNotifyOpen } from "./notify.imperative"
 import { NotifyColor } from "./notify.shared"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
@@ -54,7 +54,7 @@ function Notify(props: NotifyProps) {
     return () => clearTimeout(timer)
   }, [duration, onClose, open, setState])
 
-  useNotifyOpened(({ selector, message, ...restOptions }: NotifyOptions) => {
+  useNotifyOpen(({ selector, message, ...restOptions }: NotifyOptions) => {
     if (matchNotify(selector as string, id)) {
       setState({
         open: true,
