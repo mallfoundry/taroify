@@ -2,9 +2,10 @@ import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tar
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode } from "react"
+import { ReactNode, useContext } from "react"
 import Loading, { LoadingType } from "../loading"
 import { prefixClassname } from "../styles"
+import ButtonContext from "./button.context"
 import {
   ButtonColor,
   ButtonFormType,
@@ -57,8 +58,8 @@ export default function Button(props: ButtonProps) {
     onClick,
     ...restProps
   } = props
-
   const loadingProps = useButtonLoading(loadingProp)
+  const { onClick: onCtxClick } = useContext(ButtonContext)
 
   return (
     <View
@@ -89,7 +90,12 @@ export default function Button(props: ButtonProps) {
         className,
       )}
       style={style}
-      onClick={(e) => !disabled && !loadingProps && onClick?.(e)}
+      onClick={(e) => {
+        if (!disabled && !loadingProps) {
+          onClick?.(e)
+          onCtxClick?.(e, props)
+        }
+      }}
     >
       <View className={prefixClassname("button__content")}>
         {loadingProps ? (
@@ -108,4 +114,11 @@ export default function Button(props: ButtonProps) {
       />
     </View>
   )
+}
+
+export function createButton(children: ReactNode | ButtonProps, props?: ButtonProps) {
+  if (_.isPlainObject(children)) {
+    return <Button {...(children as ButtonProps)} {...props} />
+  }
+  return <Button children={children} {...props} />
 }
