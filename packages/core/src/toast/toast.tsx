@@ -17,11 +17,11 @@ import {
 } from "react"
 import Backdrop from "../backdrop"
 import Loading from "../loading"
-import Popup, { PopupBackdropProps } from "../popup"
+import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import { useObject } from "../utils/state"
 import { isElementOf } from "../utils/validate"
-import { ToastOptions, useToastOpened } from "./toast.imperative"
+import { ToastOptions, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
 
 const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
@@ -90,24 +90,6 @@ function useToastChildren(children?: ReactNode): ToastChildren {
   }, [children])
 }
 
-function useToastBackdrop(
-  backdrop?: ReactNode,
-  options?: boolean | Omit<PopupBackdropProps, "open">,
-) {
-  return useMemo(() => {
-    if (_.isUndefined(options) || _.isNull(options) || _.isEmpty(options)) {
-      return backdrop
-    }
-    if (_.isBoolean(options) && options) {
-      return cloneElement(backdrop as ReactElement, { open: true })
-    }
-    if (_.isBoolean(options) && !options) {
-      return cloneElement(backdrop as ReactElement, { open: false })
-    }
-    return cloneElement(backdrop as ReactElement, { ...options, open: true })
-  }, [backdrop, options])
-}
-
 export interface ToastProps extends ViewProps {
   className?: string
   style?: CSSProperties
@@ -139,7 +121,7 @@ export default function Toast(props: ToastProps) {
     setState,
   ] = useObject<ToastProps & ToastOptions>(props)
   const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
-  const backdrop = useToastBackdrop(backdropElement, backdropOptions)
+  const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
   const icon = useToastIcon(iconProp, type)
 
   useEffect(() => {
@@ -156,7 +138,7 @@ export default function Toast(props: ToastProps) {
     return () => clearTimeout(timer)
   }, [duration, onClose, open, setState])
 
-  useToastOpened(({ selector, message, ...restOptions }: ToastOptions) => {
+  useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
     if (matchToast(selector as string, id)) {
       setState({
         open: true,

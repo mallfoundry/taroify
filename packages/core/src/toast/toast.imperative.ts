@@ -6,7 +6,7 @@ import { ToastPosition, ToastType } from "./toast.shared"
 
 const events = new Events()
 
-export function useToastOpened(cb: (options: ToastOptions) => void) {
+export function useToastOpen(cb: (options: ToastOptions) => void) {
   useEffect(() => {
     events.on("open", cb)
     return () => {
@@ -16,7 +16,7 @@ export function useToastOpened(cb: (options: ToastOptions) => void) {
   }, [])
 }
 
-// export function useToastClosed(cb: (options: ToastOptions) => void) {
+// export function useToastClose(cb: (options: ToastOptions) => void) {
 //   useEffect(() => {
 //     events.on("close", cb)
 //     return () => {
