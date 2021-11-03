@@ -2,6 +2,7 @@ import { Search as SearchIcon } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { InputProps } from "@tarojs/components/types/Input"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -13,7 +14,7 @@ import { preventDefault } from "../utils/dom/event"
 
 type SearchShape = "square" | "round"
 
-interface SearchProps {
+interface SearchProps extends ViewProps {
   className?: string
   value?: string
   icon?: ReactNode
@@ -27,6 +28,7 @@ interface SearchProps {
   clearTrigger?: FieldClearTrigger | FieldClearTriggerString
   inputAlign?: FieldInputAlign | FieldInputAlignString
   autoFocus?: boolean
+  focus?: boolean
   disabled?: boolean
   readonly?: boolean
   error?: boolean
@@ -60,6 +62,8 @@ function Search(props: SearchProps) {
     clearIcon,
     clearTrigger,
     inputAlign,
+    autoFocus,
+    focus,
     disabled,
     readonly,
     error,
@@ -108,6 +112,8 @@ function Search(props: SearchProps) {
           clearIcon={clearIcon}
           clearTrigger={clearTrigger}
           inputAlign={inputAlign}
+          autoFocus={autoFocus}
+          focus={focus}
           disabled={disabled}
           readonly={readonly}
           error={error}
