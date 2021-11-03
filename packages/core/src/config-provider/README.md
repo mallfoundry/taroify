@@ -41,6 +41,8 @@ Taroify 组件通过丰富的 [CSS 变量](https://developer.mozilla.org/zh-CN/d
 }
 ```
 
+> 注意：小程序不存在 `:root` 元素，只能在 `page` 根元素里覆盖 CSS 变量。
+
 #### 通过 ConfigProvider 覆盖
 
 `ConfigProvider` 组件提供了覆盖 CSS 变量的能力，你需要在根节点包裹一个 `ConfigProvider` 组件，并通过 `theme` 属性来配置一些主题变量。
@@ -79,7 +81,7 @@ function CustomThemeVars() {
 
 ```
 
-> 注意：ConfigProvider 仅影响它的子组件的样式，不影响全局 root 节点。
+> 注意：ConfigProvider 仅影响它的子组件的样式，不影响全局 root 节点。在小程序中 ConfigProvider 不能放置在 `app.ts` 文件里，因为 `app.ts` 文件不能渲染任何内容。
 
 ### 基础变量
 
