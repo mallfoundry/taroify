@@ -4,13 +4,13 @@ import { CSSProperties, ReactNode, useEffect } from "react"
 import { PopupBackdropProps } from "../popup"
 import { ToastPosition, ToastType } from "./toast.shared"
 
-const events = new Events()
+const toastEvents = new Events()
 
 export function useToastOpen(cb: (options: ToastOptions) => void) {
   useEffect(() => {
-    events.on("open", cb)
+    toastEvents.on("open", cb)
     return () => {
-      events.off("open", cb)
+      toastEvents.off("open", cb)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -18,9 +18,9 @@ export function useToastOpen(cb: (options: ToastOptions) => void) {
 
 // export function useToastClose(cb: (options: ToastOptions) => void) {
 //   useEffect(() => {
-//     events.on("close", cb)
+//     toastEvents.on("close", cb)
 //     return () => {
-//       events.off("close", cb)
+//       toastEvents.off("close", cb)
 //     }
 //     // eslint-disable-next-line react-hooks/exhaustive-deps
 //   }, [])
@@ -49,14 +49,14 @@ function parseOptions(message: string | ToastOptions): ToastOptions {
 
 export function openToast(args: string | ToastOptions) {
   const { selector = "#toast", ...restOptions } = parseOptions(args)
-  events.trigger("open", {
+  toastEvents.trigger("open", {
     selector,
     ...restOptions,
   })
 }
 
 // export function closeAllToast() {
-//   events.trigger("close")
+//   toastEvents.trigger("close")
 // }
 
 export function createToast(type: ToastType) {
