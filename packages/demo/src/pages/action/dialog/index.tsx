@@ -7,23 +7,16 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicDialog() {
-  const [open, setOpen] = useState(false)
   return (
     <>
+      <Dialog id="dialog" />
       <Cell
         title="提示弹窗"
         clickable
         bordered
         rightIcon={<ArrowRight />}
-        onClick={() => setOpen(true)}
+        onClick={() => Dialog.alert("提示")}
       />
-      <Dialog open={open} onClose={setOpen}>
-        <Dialog.Header>标题</Dialog.Header>
-        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions>
-          <Button onClick={() => setOpen(false)}>确认</Button>
-        </Dialog.Actions>
-      </Dialog>
     </>
   )
 }

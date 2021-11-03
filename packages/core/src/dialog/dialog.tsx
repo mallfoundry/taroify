@@ -1,51 +1,77 @@
+import { ITouchEvent } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode } from "react"
-import Popup from "../popup"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useMemo,
+} from "react"
+import Backdrop from "../backdrop"
+import { ButtonProps, createButton } from "../button"
+import ButtonContext from "../button/button.context"
+import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
+import { useObject } from "../utils/state"
+import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
 import DialogHeader from "./dialog-header"
+import { DialogOptions, useDialogOpen } from "./dialog.imperative"
+
+function matchDialog(selector?: string, id?: string) {
+  return _.replace(selector as string, "#", "") === id
+}
 
 interface DialogChildren {
+  backdrop?: ReactElement
   header?: ReactElement
   content?: ReactElement
   actions?: ReactElement
 }
 
-function findDialogChildren(nodes?: ReactNode): DialogChildren {
-  const children: DialogChildren = {
-    header: undefined,
-    content: undefined,
-    actions: undefined,
-  }
-
-  if (nodes === undefined) {
-    return children
-  }
-
-  Children.forEach(nodes, (node: ReactNode) => {
-    if (!isValidElement(node)) {
-      return
+function useDialogChildren(nodes?: ReactNode): DialogChildren {
+  return useMemo(() => {
+    const __children__: DialogChildren = {
+      header: undefined,
+      content: undefined,
+      actions: undefined,
     }
 
-    const { header, content, actions } = children
-    if (header !== undefined && content !== undefined && actions !== undefined) {
-      return
+    if (nodes === undefined) {
+      return __children__
     }
 
-    const element = node as ReactElement
-    if (element.type === DialogHeader) {
-      children.header = element
-    } else if (element.type === DialogContent) {
-      children.content = element
-    } else if (element.type === DialogActions) {
-      children.actions = element
-    }
-  })
+    Children.forEach(nodes, (node: ReactNode) => {
+      if (!isValidElement(node)) {
+        return
+      }
 
-  return children
+      const { header, content, actions } = __children__
+      if (header !== undefined && content !== undefined && actions !== undefined) {
+        return
+      }
+
+      const element = node as ReactElement
+      if (isElementOf(element, Backdrop)) {
+        __children__.backdrop = element
+      } else if (element.type === DialogHeader) {
+        __children__.header = element
+      } else if (element.type === DialogContent) {
+        __children__.content = element
+      } else if (element.type === DialogActions) {
+        __children__.actions = element
+      }
+    })
+
+    return __children__
+  }, [nodes])
 }
 
 interface DialogHeaderProps {
@@ -80,44 +106,118 @@ function renderDialogContent(
 }
 
 export interface DialogProps extends ViewProps {
-  backdrop?: boolean
+  style?: CSSProperties
   open?: boolean
   children?: ReactNode
   onClose?: (opened: boolean) => void
 }
 
 function Dialog(props: DialogProps) {
-  const { className, backdrop = true, open, children, onClose, ...restProps } = props
-  const { header, content, actions } = findDialogChildren(children)
+  const [
+    {
+      id,
+      className,
+      open,
+      children,
+      backdrop: backdropOptions,
+      onClose,
+      onConfirm,
+      onCancel,
+      ...restProps
+    },
+    setState,
+  ] = useObject<DialogProps & DialogOptions>(props)
+  const { onClick } = useContext(ButtonContext)
+  const { backdrop: backdropElement, header, content, actions } = useDialogChildren(children)
+  const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
+
   const hasHeader = header !== undefined
   const hasContent = content !== undefined
+
+  const handleClick = (event: ITouchEvent, btnProps: ButtonProps) => {
+    onClick?.(event, btnProps)
+    const { className } = btnProps
+    if (className?.includes(prefixClassname("dialog__confirm"))) {
+      onConfirm?.()
+    }
+    if (className?.includes(prefixClassname("dialog__cancel"))) {
+      onCancel?.()
+    }
+    setState({ open: false })
+  }
+
+  useDialogOpen(
+    ({
+      selector,
+      title,
+      message,
+      messageAlign,
+      confirm,
+      cancel,
+      ...restOptions
+    }: DialogOptions) => {
+      if (matchDialog(selector as string, id)) {
+        const children: ReactNode[] = []
+        const actions: ReactNode[] = []
+
+        if (title) {
+          children.push(<DialogHeader key={0} children={title} />)
+        }
+        if (message) {
+          children.push(<DialogContent key={1} align={messageAlign} children={message} />)
+        }
+        if (cancel) {
+          actions.push(createButton(cancel, { key: 1 }))
+        }
+        if (confirm) {
+          actions.push(createButton(confirm, { key: 0 }))
+        }
+        if (!_.isEmpty(actions)) {
+          children.push(<DialogActions key={2} children={actions} />)
+        }
+        setState({
+          open: true,
+          children,
+          ...restOptions,
+        })
+      }
+    },
+  )
+
   return (
-    <Popup
-      className={classNames(prefixClassname("dialog"), className)}
-      duration={160}
-      transaction={prefixClassname("dialog-bounce")}
-      open={open}
-      onClose={onClose}
-      {...restProps}
+    <ButtonContext.Provider
+      value={{
+        onClick: handleClick,
+      }}
     >
-      {backdrop && <Popup.Backdrop />}
-      {
-        // Render header
-        renderDialogHeader(header, {
-          isolated: hasHeader && !hasContent,
-        })
-      }
-      {
-        // Render content
-        renderDialogContent(content, {
-          isolated: !hasHeader && hasContent,
-        })
-      }
-      {
-        // Render actions
-        actions
-      }
-    </Popup>
+      <Popup
+        id={id}
+        className={classNames(prefixClassname("dialog"), className)}
+        duration={160}
+        transaction={prefixClassname("dialog-bounce")}
+        open={open}
+        onClose={onClose}
+        {...restProps}
+      >
+        {backdrop}
+        {
+          // Render header
+          renderDialogHeader(header, {
+            isolated: hasHeader && !hasContent,
+          })
+        }
+        {
+          // Render content
+          renderDialogContent(content, {
+            isolated: !hasHeader && hasContent,
+          })
+        }
+        {
+          // Render actions
+          actions
+        }
+      </Popup>
+    </ButtonContext.Provider>
   )
 }
 
