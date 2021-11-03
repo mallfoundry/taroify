@@ -2,7 +2,6 @@ import { DatetimePicker } from "@taroify/core"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
-import BlockCard from "../../../components/block-card"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -196,45 +195,29 @@ function DatePickerWithFields() {
 export default function PickerDemo() {
   return (
     <Page title="DatetimePicker 时间选择" className="datetime-picker-demo">
-      <Block title="选择年月日">
-        <BlockCard>
-          <DatePicker />
-        </BlockCard>
+      <Block variant="card" title="选择年月日">
+        <DatePicker />
       </Block>
-      <Block title="选择年月">
-        <BlockCard>
-          <YearMonthPicker />
-        </BlockCard>
+      <Block variant="card" title="选择年月">
+        <YearMonthPicker />
       </Block>
-      <Block title="选择月日">
-        <BlockCard>
-          <MonthDayPicker />
-        </BlockCard>
+      <Block variant="card" title="选择月日">
+        <MonthDayPicker />
       </Block>
-      <Block title="选择时间">
-        <BlockCard>
-          <TimePicker />
-        </BlockCard>
+      <Block variant="card" title="选择时间">
+        <TimePicker />
       </Block>
-      <Block title="选择完整时间">
-        <BlockCard>
-          <DateTimePicker />
-        </BlockCard>
+      <Block variant="card" title="选择完整时间">
+        <DateTimePicker />
       </Block>
-      <Block title="选项过滤器">
-        <BlockCard>
-          <TimePickerWithFilter />
-        </BlockCard>
+      <Block variant="card" title="选项过滤器">
+        <TimePickerWithFilter />
       </Block>
-      <Block title="选择年月日小时">
-        <BlockCard>
-          <DateHourPicker />
-        </BlockCard>
+      <Block variant="card" title="选择年月日小时">
+        <DateHourPicker />
       </Block>
-      <Block title="自定义列排序">
-        <BlockCard>
-          <DatePickerWithFields />
-        </BlockCard>
+      <Block variant="card" title="自定义列排序">
+        <DatePickerWithFields />
       </Block>
     </Page>
   )

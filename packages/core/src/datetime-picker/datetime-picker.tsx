@@ -71,22 +71,34 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     _.forEach(columns, ({ type }, index) => {
       switch (type) {
         case "year":
-          date.setFullYear(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setFullYear(_.toNumber(datetimeValue[index]))
+          }
           break
         case "month":
-          date.setMonth(_.toNumber(_.get(datetimeValue, index)) - 1)
+          if (_.size(datetimeValue) > index) {
+            date.setMonth(_.toNumber(datetimeValue[index]) - 1)
+          }
           break
         case "day":
-          date.setDate(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setDate(_.toNumber(datetimeValue[index]))
+          }
           break
         case "hour":
-          date.setHours(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setHours(_.toNumber(datetimeValue[index]))
+          }
           break
         case "minute":
-          date.setMinutes(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setMinutes(_.toNumber(datetimeValue[index]))
+          }
           break
         case "second":
-          date.setSeconds(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setSeconds(_.toNumber(datetimeValue[index]))
+          }
           break
       }
     })
@@ -150,6 +162,13 @@ function DatetimePicker(props: DatetimePickerProps) {
     className,
     readonly,
     loading,
+    type,
+    fields,
+    filter,
+    formatter,
+    min,
+    max,
+    value: valueProp,
     siblingCount,
     children,
     onChange,
@@ -157,7 +176,16 @@ function DatetimePicker(props: DatetimePickerProps) {
     onCancel,
     ...restProps
   } = props
-  const { value, columns, toDate } = useDatetimePicker(props)
+
+  const { value, columns, toDate } = useDatetimePicker({
+    value: valueProp,
+    min,
+    max,
+    type,
+    fields,
+    filter,
+    formatter,
+  })
 
   return (
     <Picker
