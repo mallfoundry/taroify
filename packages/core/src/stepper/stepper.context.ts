@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { StepperActionType, StepperActionTypeString } from "./stepper.shared"
+import { StepperActionType } from "./stepper.shared"
 
 interface StepperContextValue {
   value?: number | string
@@ -12,7 +12,7 @@ interface StepperContextValue {
 
   formatValue?(value?: number | string): number | string
 
-  onStep?(action: StepperActionType | StepperActionTypeString): void
+  onStep?(action: StepperActionType): void
 
   onChange?(value?: number | string): void
 }

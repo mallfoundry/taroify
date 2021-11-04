@@ -5,7 +5,6 @@ import * as React from "react"
 import {
   Children,
   cloneElement,
-  createElement,
   isValidElement,
   ReactElement,
   ReactNode,
@@ -41,11 +40,11 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
       if (elementType === StepperButton) {
         if (__children__.decrease === undefined) {
           __children__.decrease = cloneElement(element, {
-            type: StepperActionType.Decrease,
+            type: "decrease",
           })
         } else if (__children__.increase === undefined) {
           __children__.increase = cloneElement(element, {
-            type: StepperActionType.Increase,
+            type: "increase",
           })
         }
       } else if (elementType === StepperInput) {
@@ -54,11 +53,9 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
     })
 
     if (!children) {
+      const element = <StepperButton />
       if (__children__.decrease === undefined) {
-        __children__.decrease = createElement(StepperButton, {
-          // @ts-ignore
-          type: StepperActionType.Decrease,
-        })
+        __children__.decrease = cloneElement(element, { type: "decrease" })
       }
 
       if (__children__.input === undefined) {
@@ -66,10 +63,7 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
       }
 
       if (__children__.increase === undefined) {
-        __children__.increase = createElement(StepperButton, {
-          // @ts-ignore
-          type: StepperActionType.Increase,
-        })
+        __children__.increase = cloneElement(element, { type: "increase" })
       }
     }
 
@@ -106,14 +100,10 @@ function Stepper(props: StepperProps) {
     precision = 0,
     longPress = true,
     shape = "square",
+    children: childrenProp,
     onChange,
     ...restProps
   } = props
-
-  const { decrease, input, increase } = useStepperChildren(props.children)
-
-  const valueRef = useToRef(valueProp)
-
   const formatValue = useCallback(
     (value: string | number) => {
       if (value === "") {
@@ -134,12 +124,13 @@ function Stepper(props: StepperProps) {
     },
     [max, min, precision],
   )
+  const { decrease, input, increase } = useStepperChildren(childrenProp)
+  const valueRef = useToRef(formatValue(valueProp))
 
   const onStep = useCallback(
     (actionType: StepperActionType) => {
-      const diff = actionType === StepperActionType.Decrease ? -step : +step
-      const value = formatValue(addNumber(valueRef.current as number, diff))
-      onChange?.(value)
+      const diff = actionType === "decrease" ? -step : +step
+      onChange?.(formatValue(addNumber(valueRef.current as number, diff)))
     },
     [formatValue, onChange, step, valueRef],
   )
@@ -147,7 +138,7 @@ function Stepper(props: StepperProps) {
   return (
     <StepperContext.Provider
       value={{
-        value: formatValue(valueProp),
+        value: valueRef.current,
         min,
         max,
         size,

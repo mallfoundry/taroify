@@ -7,7 +7,7 @@ import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { getSizeStyle } from "../utils/format/unit"
 import StepperContext from "./stepper.context"
-import { StepperActionType, StepperActionTypeString } from "./stepper.shared"
+import { StepperActionType } from "./stepper.shared"
 
 const LONG_PRESS_INTERVAL = 200
 
@@ -20,14 +20,14 @@ interface StepperButtonProps extends ViewProps {
 }
 
 interface InternalStepperButtonProps extends StepperButtonProps {
-  type?: StepperActionType | StepperActionTypeString
+  type?: StepperActionType
 }
 
 function StepperButton(props: StepperButtonProps) {
   const {
     className,
     style,
-    type = StepperActionType.Decrease,
+    type = "decrease",
     disabled: disabledProp,
     onClick,
     onTouchStart,
@@ -49,8 +49,8 @@ function StepperButton(props: StepperButtonProps) {
   const disabled =
     disabledProp ||
     disabledCtx ||
-    (type === StepperActionType.Decrease && value <= min) ||
-    (type === StepperActionType.Increase && value >= max)
+    (type === "decrease" && value <= min) ||
+    (type === "increase" && value >= max)
 
   const longPressRef = useRef(false)
 
