@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.17-alpha.1
+
+`2021-11-04`
+
+**Bug Fixes**
+
+- Stepper
+  - 修复第一次点击无反应的问题 [#76](https://github.com/mallfoundry/taroify/issues/76)
+
 ### v0.0.17-alpha.0
 
 `2021-11-03`
