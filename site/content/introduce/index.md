@@ -68,6 +68,14 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
 - [更新日志](/changelog/)
 
+### 贡献者
+
+<a href="https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+  <img style="width: 200px" src="https://contrib.rocks/image?repo=mallfoundry/taroify"/>
+</a>
+
+- 部分图形设计来自[BiscuitCoder](https://github.com/BiscuitCoder)
+
 ### 开源协议
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
