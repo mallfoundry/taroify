@@ -21,9 +21,7 @@ export function usePrevious<T = any>(value: T): T {
 
 export function useToRef<T = any>(value: T): MutableRefObject<T> {
   const stateRef = useRef<T>(value)
-  useEffect(() => {
-    stateRef.current = value
-  }, [value])
+  stateRef.current = value
   return stateRef
 }
 
