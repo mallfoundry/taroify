@@ -146,7 +146,6 @@ function Rate(props: RateProps) {
         return
       }
       touch.move(event)
-
       if (touch.isHorizontal()) {
         preventDefault(event)
         onItemClick(event)
@@ -185,6 +184,7 @@ function Rate(props: RateProps) {
         },
         className,
       )}
+      catchMove
       onClick={onItemClick}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}

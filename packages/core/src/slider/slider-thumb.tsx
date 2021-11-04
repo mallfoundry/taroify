@@ -31,6 +31,7 @@ function SliderThumb(props: SliderThumbProps) {
       style={{
         ...getSizeStyle(size),
       }}
+      catchMove
       onTouchStart={(event) => onTouchStart?.(event, index)}
       onTouchMove={(event) => onTouchMove?.(event, index)}
       onTouchEnd={(event) => onTouchEnd?.(event, index)}
