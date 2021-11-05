@@ -3,7 +3,6 @@ import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -19,18 +18,15 @@ import Backdrop from "../backdrop"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
+import { matchSelector } from "../utils/dom/element"
 import { useObject } from "../utils/state"
 import { isElementOf } from "../utils/validate"
-import { ToastOptions, useToastOpen } from "./toast.imperative"
+import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
 
 const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
 
 const TOAST_PRESET_POSITIONS = ["top", "middle", "bottom"]
-
-function matchToast(selector?: string, id?: string) {
-  return _.replace(selector as string, "#", "") === id
-}
 
 function defaultToastIcon(icon?: ReactNode, type?: ToastType): ReactNode {
   if (icon) {
@@ -120,6 +116,7 @@ export default function Toast(props: ToastProps) {
     },
     setState,
   ] = useObject<ToastProps & ToastOptions>(props)
+
   const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
   const icon = useToastIcon(iconProp, type)
@@ -139,11 +136,19 @@ export default function Toast(props: ToastProps) {
   }, [duration, onClose, open, setState])
 
   useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
-    if (matchToast(selector as string, id)) {
+    if (matchSelector(selector, id)) {
       setState({
         open: true,
         children: message,
         ...restOptions,
+      })
+    }
+  })
+
+  useToastClose((selector) => {
+    if (matchSelector(selector, id)) {
+      setState({
+        open: false,
       })
     }
   })

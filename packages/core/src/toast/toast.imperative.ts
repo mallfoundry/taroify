@@ -1,8 +1,25 @@
 import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties, ReactNode, useEffect } from "react"
+import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { PopupBackdropProps } from "../popup"
 import { ToastPosition, ToastType } from "./toast.shared"
+
+const DEFAULT_TOAST_SELECTOR = "#toast"
+
+const defaultToastOptions: ToastOptions = {}
+
+// First, Once
+resetDefaultToastOptions()
+
+export function setDefaultToastOptions(options: ToastOptions) {
+  _.assign(defaultToastOptions, options)
+}
+
+export function resetDefaultToastOptions() {
+  _.assign(defaultToastOptions, {
+    selector: DEFAULT_TOAST_SELECTOR,
+  })
+}
 
 const toastEvents = new Events()
 
@@ -16,15 +33,15 @@ export function useToastOpen(cb: (options: ToastOptions) => void) {
   }, [])
 }
 
-// export function useToastClose(cb: (options: ToastOptions) => void) {
-//   useEffect(() => {
-//     toastEvents.on("close", cb)
-//     return () => {
-//       toastEvents.off("close", cb)
-//     }
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [])
-// }
+export function useToastClose(cb: (selector: string) => void) {
+  useEffect(() => {
+    toastEvents.on("close", cb)
+    return () => {
+      toastEvents.off("close", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
 
 export interface ToastOptions {
   selector?: string
@@ -40,29 +57,27 @@ export interface ToastOptions {
   onClose?(opened: boolean): void
 }
 
-function parseOptions(message: string | ToastOptions): ToastOptions {
-  if (_.isPlainObject(message)) {
-    return message as ToastOptions
-  }
-  return { message }
+function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
+  const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
+  return _.assign({}, defaultToastOptions, options)
 }
 
-export function openToast(args: string | ToastOptions) {
-  const { selector = "#toast", ...restOptions } = parseOptions(args)
+export function openToast(args: ReactNode | ToastOptions) {
+  const { selector, ...restOptions } = parseToastOptions(args)
   toastEvents.trigger("open", {
     selector,
     ...restOptions,
   })
 }
 
-// export function closeAllToast() {
-//   toastEvents.trigger("close")
-// }
-
 export function createToast(type: ToastType) {
   return (args: string | Omit<ToastOptions, "type">) => {
-    const options = parseOptions(args)
+    const options = parseToastOptions(args)
     options.type = type
     openToast(options)
   }
+}
+
+export function closeToast(selector?: string) {
+  toastEvents.trigger("close", selector ?? defaultToastOptions.selector)
 }
