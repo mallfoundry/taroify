@@ -18,11 +18,11 @@ const subpackages = [
         name: "ConfigProvider",
         path: "config-provider/index",
       },
-      {
-        title: "Icon 图标",
-        name: "Icon",
-        path: "icon/index",
-      },
+      // {
+      //   title: "Icon 图标",
+      //   name: "Icon",
+      //   path: "icon/index",
+      // },
       {
         title: "Image 图片",
         name: "Image",
