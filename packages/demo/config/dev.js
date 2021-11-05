@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-commonjs
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   env: {
     // eslint-disable-next-line
@@ -46,6 +47,24 @@ module.exports = {
               },
             },
           },
+          // turn on below `minimize`, `minimizer` settings if bundle size is way too large
+          // to do remote debug in wechatdevtools
+          minimize: true,
+          minimizer: [
+            new TerserPlugin({
+              // add those `bundle`s your want to do size reduction
+              // refer to https://webpack.js.org/plugins/terser-webpack-plugin/#test
+              test: ['common.js', 'taro.js', 'vendors.js', 'lodash.js', 'taroify.js'],
+              parallel: true,
+              // minify: TerserPlugin.swcMinify,
+              cache: true,
+              extractComments: true,
+              parallel: true,
+              // should work with `mini.sourceMapType='source-map'`
+              // refer to https://webpack.js.org/plugins/terser-webpack-plugin/#note-about-source-maps
+              sourceMap: true,
+            }),
+          ]
         },
       });
       // enable webpack-bundle-analyzer
@@ -61,6 +80,9 @@ module.exports = {
       commonChunks.push('taroify')
       return commonChunks
     },
+    // turn to source-map if TerserPlugin is on
+    // refer to http://taro-docs.jd.com/taro/docs/config-detail/#minisourcemaptype
+    sourceMapType: 'source-map',
   },
   h5: {},
 }
