@@ -1,4 +1,5 @@
 import { createSelectorQuery } from "@tarojs/taro"
+import * as _ from "lodash"
 
 export const ELEMENT_NODE_TYPE = 1
 
@@ -26,6 +27,10 @@ export function elementUnref(elementOrRef: any): TaroElement {
 
 export function isRootElement(node?: HTMLElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
+}
+
+export function matchSelector(aSelector?: string, bSelector?: string) {
+  return _.replace(aSelector as string, "#", "") === bSelector
 }
 
 export function createNodesRef(element: TaroElement) {
