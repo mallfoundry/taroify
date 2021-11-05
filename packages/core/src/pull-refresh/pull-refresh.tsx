@@ -2,6 +2,7 @@ import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -30,6 +31,13 @@ import {
   PullRefreshPulling,
 } from "./pull-refresh-children"
 import PullRefreshContext from "./pull-refresh.context"
+
+// eslint-disable-next-line import/no-commonjs
+const lodashRoot = require("lodash/_root")
+
+if (!lodashRoot.Date) {
+  lodashRoot.Date = Date
+}
 
 enum PullRefreshStatus {
   Awaiting = "awaiting",
@@ -115,18 +123,19 @@ function PullRefresh(props: PullRefreshProps) {
   const { completed: completedElement, content } = children
   const { duration: completedDuration = 500 } = getCompletedProps(completedElement)
   const rootRef = useRef<HTMLElement>()
-
   const scrollParentRef = useRef<HTMLElement>()
 
   useMounted(() =>
     getScrollParent(rootRef.current) //
-      .then((parent) => (scrollParentRef.current = parent)),
+      .then((parent) => {
+        scrollParentRef.current = parent
+      }),
   )
 
   const reachTopRef = useRef<boolean>()
   const [status, setStatus] = useState(PullRefreshStatus.Awaiting)
   const [distance, setDistance] = useState(0)
-  const durationRef = useRef(0)
+  const durationRef = useRef(10)
 
   const touch = useTouch()
 
@@ -155,9 +164,10 @@ function PullRefresh(props: PullRefreshProps) {
 
   const checkPosition = useCallback(
     async (event: ITouchEvent) => {
-      reachTopRef.current = (await getScrollTop(scrollParentRef.current)) === 0
+      const scrollTop = await getScrollTop(scrollParentRef.current)
+      reachTopRef.current = scrollTop === 0
       if (reachTopRef.current) {
-        durationRef.current = 0
+        durationRef.current = 10
         touch.start(event)
       }
     },
@@ -190,22 +200,23 @@ function PullRefresh(props: PullRefreshProps) {
     [headHeight, pullDistanceProp],
   )
 
-  const onTouchMove = useCallback(
-    async (event: ITouchEvent) => {
-      if (isTouchable()) {
-        if (!reachTopRef.current) {
-          await checkPosition(event)
-        }
+  const onTouchMove = useMemo(
+    () =>
+      _.throttle(async (event: ITouchEvent) => {
+        if (isTouchable()) {
+          if (!reachTopRef.current) {
+            await checkPosition(event)
+          }
 
-        const { deltaY } = touch
-        touch.move(event)
+          const { deltaY } = touch
+          touch.move(event)
 
-        if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
-          preventDefault(event)
-          updateStatus(easeDistance(deltaY))
+          if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
+            preventDefault(event)
+            updateStatus(easeDistance(deltaY))
+          }
         }
-      }
-    },
+      }, 16.7),
     [checkPosition, easeDistance, isTouchable, touch, updateStatus],
   )
 
@@ -319,6 +330,7 @@ function PullRefresh(props: PullRefreshProps) {
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
+          catchMove
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
