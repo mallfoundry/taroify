@@ -12,6 +12,28 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.17-alpha.2
+
+`2021-11-05`
+
+**Feature**
+
+- Toast
+  - 新增命令式调用 `Toast.close()`、`Toast.setDefaultOptions()`、`Toast.resetDefaultOptions()` 方法 [#78](https://github.com/mallfoundry/taroify/issues/78)
+- Notify
+  - 新增命令式调用 `Notify.close()`、`Notify.setDefaultOptions()`、`Notify.resetDefaultOptions()` 方法 [#71](https://github.com/mallfoundry/taroify/issues/71)
+- Dialog
+  - 新增命令式调用 `Dialog.close()`、`Dialog.setDefaultOptions()`、`Dialog.resetDefaultOptions()` 方法 [#71](https://github.com/mallfoundry/taroify/issues/71)
+
+**Bug Fixes**
+
+- Image
+  - 修复因 `display: none` 导致重复加载的问题 [#79](https://github.com/mallfoundry/taroify/pull/79) [@Pingren](https://github.com/Pingren)
+- ShareSheet
+  - 修复 ShareSheet.Option 在小程序上存在垂直展示的问题 [#82](https://github.com/mallfoundry/taroify/issues/82)
+- PullRefresh
+  - 修复在小程序真机下拉刷新时存在卡帧的问题 [#74](https://github.com/mallfoundry/taroify/issues/74)
+
 ### v0.0.17-alpha.1
 
 `2021-11-04`
