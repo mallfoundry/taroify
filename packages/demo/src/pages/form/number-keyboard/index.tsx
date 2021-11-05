@@ -11,7 +11,7 @@ interface KeyboardProps {
 
   onKeyboard?(keyboard: string): void
 
-  onKeyPress?(value: string | number, code: NumberKeyboard.KeyCode): void
+  onKeyPress?(value: string | number, code: string): void
 }
 
 function BasicNumberKeyboard(props: KeyboardProps) {
@@ -161,11 +161,11 @@ export default function NumberKeyboardDemo() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<any>()
 
-  const onKeyPress = (aValue: string | number, code: NumberKeyboard.KeyCode) => {
-    setOpen(code !== NumberKeyboard.KeyCode.KeyboardHide)
-    if (code === NumberKeyboard.KeyCode.Backspace) {
-      setValue(NumberKeyboard.KeyCode.Backspace)
-    } else if (code === NumberKeyboard.KeyCode.Extra) {
+  const onKeyPress = (aValue: string | number, code: string) => {
+    setOpen(code !== "keyboard-hide")
+    if (code === "backspace") {
+      setValue("backspace")
+    } else if (code === "extra") {
       setValue(`输入：${aValue}`)
     }
   }
