@@ -1,5 +1,4 @@
 import { createSelectorQuery } from "@tarojs/taro"
-import { useEffect, useState } from "react"
 import { inBrowser } from "../base"
 import { getComputedStyle } from "./computed-style"
 import { createNodesRef, elementUnref, isRootElement, TaroElement } from "./element"
@@ -36,19 +35,6 @@ export async function getScrollParent(
   }
 
   return root
-}
-
-export function useScrollParent(elementOrRef?: any, rootOrRef?: any) {
-  const el = elementUnref(elementOrRef)
-  const root = elementUnref(rootOrRef)
-
-  const [scrollParent, setScrollParent] = useState<HTMLElement>()
-
-  useEffect(() => {
-    getScrollParent(el, root).then(setScrollParent)
-  }, [el, root])
-
-  return scrollParent
 }
 
 interface ScrollOffset {
