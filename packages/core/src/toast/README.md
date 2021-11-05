@@ -4,25 +4,72 @@
 
 在页面中间弹出黑色半透明提示，用于消息通知、加载提示、操作结果提示等场景。
 
-### 引入
+### 函数调用
 
-```jsx
-import { Toast } from "@taroify/core"
+由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Toast 组件并指定 id 为 `toast`。
+
+```tsx
+import { Cell, Toast } from "@taroify/core"
+
+function ImperativeToast() {
+  return (
+    <>
+      <Toast id="toast" />
+      <Cell
+        title="函数调用"
+        clickable
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open("文字提示")}
+      />
+    </>
+  )
+}
+```
+
+### 组件调用
+
+```tsx
+import { Cell, Toast } from "@taroify/core"
+
+function BasicToast() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Toast open={open} onClose={setOpen}>文字提示</Toast>
+      <Cell title="基础用法" clickable onClick={() => setOpen(true)} />
+    </>
+  )
+}
 ```
 
 ## 代码演示
 
 ### 文字提示
 
-```jsx
-<Toast open>文字提示</Toast>
+由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Toast 组件并指定 id 为 `toast`。
+
+```tsx
+function TextToast() {
+  return (
+    <>
+      <Toast id="toast" />
+      <Cell
+        clickable
+        title="文字提示"
+        rightIcon={<ArrowRight />}
+        onClick={() => Toast.open("文字提示")}
+      />
+    </>
+  )
+}
 ```
 
 ### 加载提示
 
-使用 `type="loading"` 方法展示加载提示，通过 `forbidClick` 属性可以禁用背景点击。
+使用 `type="loading"` 方法展示加载提示。
 
-```jsx
+```tsx
 <Toast open type="loading">加载中...</Toast>
 ```
 
@@ -30,7 +77,7 @@ import { Toast } from "@taroify/core"
 
 使用 `type="success"` 展示成功提示，使用 `type="fail"` 展示失败提示。
 
-```jsx
+```tsx
 <Toast open type="success">成功文案</Toast>
 <Toast open type="fail">失败文案</Toast>
 ```
@@ -39,8 +86,12 @@ import { Toast } from "@taroify/core"
 
 通过 `icon` 选项可以自定义图标，支持传入[图标名称](/components/icon)或图片链接。
 
-```jsx
+```tsx
 <Toast open icon={<LikeOutlined />}>自定义图标</Toast>
+<Toast open icon={<Image style={{ width: "1em", height: "1em" }}
+                         src="https://img01.yzcdn.cn/vant/logo.png" />}>
+  自定义图片
+</Toast>
 <Toast open icon={<Loading />}>加载中...</Toast>
 ```
 
@@ -48,7 +99,7 @@ import { Toast } from "@taroify/core"
 
 Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 Toast 展示的位置。
 
-```jsx
+```tsx
 <Toast open position="top">顶部展示</Toast>
 <Toast open position="bottom">底部展示</Toast>
 ```
@@ -61,8 +112,31 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | --- | --- | --- | --- |
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
-| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | _ |
+| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
+| position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
+| duration | 动画时长，单位秒 | _number \| string_ | `300` |
+| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
+| children | 文本内容 | _ReactNode_ | - |
+| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+
+### Options
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| selector | 自定义节点选择器 | _string_ | `toast` |
+| type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
+| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
 | duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
-| backdrop | 是否显示遮罩层 | _boolean \| static_ | `true` |
-| children | 文本内容 | _ReactNode_ | `""` |
+| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
+| message | 文本内容 | _ReactNode_ | - |
+| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+
+### 方法
+
+| 方法名 | 参数 | 返回值 | 介绍 |
+| --- | --- | --- | --- |
+| Toast.open | _options \| message_ | - | 展示提示 |
+| Toast.loading | _options \| message_ | - | 展示加载提示 |
+| Toast.success | _options \| message_ | - | 展示成功提示 |
+| Toast.fail | _options \| message_ | - | 展示失败提示 |

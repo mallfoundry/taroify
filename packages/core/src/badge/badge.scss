@@ -8,8 +8,8 @@
   font-family: var(--badge-font-family, $badge-font-family);
   font-size: var(--badge-font-size, $badge-font-size);
   font-weight: var(--badge-font-weight, $badge-font-weight);
-  color: var(--badge-color, $badge-color);
   line-height: 1.2;
+  color: var(--badge-color, $badge-color);
   text-align: center;
   background-color: var(--badge-background-color, $badge-background-color);
   border: var(--badge-border-width, $badge-border-width) solid $white;
@@ -41,10 +41,10 @@
   }
 
   &--dot {
-    padding: 0;
     width: var(--badge-dot-size, $badge-dot-size);
     min-width: 0;
     height: var(--badge-dot-size, $badge-dot-size);
+    padding: 0;
     background-color: var(--badge-dot-color, $badge-dot-color);
     border-radius: 100%;
   }

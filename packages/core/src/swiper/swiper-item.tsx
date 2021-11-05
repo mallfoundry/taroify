@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useContext, useEffect, useState } from "react"
@@ -8,14 +9,15 @@ import { addUnitPx } from "../utils/format/unit"
 import SwiperContext from "./swiper.context"
 import { SwiperDirection } from "./swiper.shared"
 
-export interface SwiperItemProps {
+export interface SwiperItemProps extends ViewProps {
   __dataIndex__?: number
   className?: string
+  style?: CSSProperties
   children?: ReactNode
 }
 
 export default function SwiperItem(props: SwiperItemProps) {
-  const { __dataIndex__ = 0, className } = props
+  const { __dataIndex__ = 0, className, style: styleProp, ...restProps } = props
   const { size, direction, children } = useContext(SwiperContext)
   const vertical = direction === SwiperDirection.Vertical
 
@@ -40,8 +42,11 @@ export default function SwiperItem(props: SwiperItemProps) {
   return (
     <View
       className={classNames(prefixClassname("swiper-item"), className)}
-      style={rootStyle.value}
-      children={props.children}
+      style={{
+        ...styleProp,
+        ...rootStyle.value,
+      }}
+      {...restProps}
     />
   )
 }

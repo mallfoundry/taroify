@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
@@ -14,42 +15,26 @@ function obtainImageUrl(image?: string) {
   return image
 }
 
-interface EmptyProps {
+interface EmptyProps extends ViewProps {
   className?: string
-  children?: ReactNode
 }
 
 function Empty(props: EmptyProps) {
-  const { className, children } = props
-  return (
-    <View
-      className={classNames(prefixClassname("empty"), {
-        className,
-      })}
-    >
-      {children}
-    </View>
-  )
+  const { className, ...restProps } = props
+  return <View className={classNames(prefixClassname("empty"), className)} {...restProps} />
 }
 
 namespace Empty {
-  enum ImagePreset {
-    Default = "default",
-    Error = "error",
-    Search = "search",
-    Network = "network",
-  }
-
-  type ImagePresetString = "default" | "error" | "search" | "network"
+  type ImagePreset = "default" | "error" | "search" | "network"
 
   interface ImageProps {
     className?: string
     style?: CSSProperties
-    src?: ImagePreset | ImagePresetString | string
+    src?: ImagePreset | string
   }
 
   export function Image(props: ImageProps) {
-    const { className, style, src = ImagePreset.Default } = props
+    const { className, style, src = "default" } = props
     const __src__ = obtainImageUrl(src)
     return (
       <TaroImage
@@ -60,19 +45,16 @@ namespace Empty {
     )
   }
 
-  interface DescriptionProps {
-    className?: string
-    style?: CSSProperties
+  interface DescriptionProps extends ViewProps {
     children?: ReactNode
   }
 
   export function Description(props: DescriptionProps) {
-    const { className, style, children } = props
+    const { className, ...restProps } = props
     return (
       <View
         className={classNames(prefixClassname("empty__description"), className)}
-        style={style}
-        children={children}
+        {...restProps}
       />
     )
   }

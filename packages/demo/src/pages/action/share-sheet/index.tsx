@@ -17,6 +17,7 @@ function BasicShareSheet() {
         onClick={() => setOpen(true)}
       />
       <ShareSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
+        <ShareSheet.Backdrop />
         <ShareSheet.Header title="立即分享给好友" />
         <ShareSheet.Options>
           <ShareSheet.Option icon="wechat" name="微信" />

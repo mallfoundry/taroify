@@ -1,5 +1,6 @@
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext, useMemo } from "react"
@@ -7,7 +8,7 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import StepsContext from "./steps.context"
 
-interface StepProps {
+interface StepProps extends ViewProps {
   className?: string
   index?: number
   active?: boolean
@@ -28,6 +29,7 @@ function Step(props: StepProps) {
     icon,
     label,
     children,
+    ...restProps
   } = props
   const { value = -1, direction, alternativeLabel } = useContext(StepsContext)
   const active = useMemo(() => activeProp || index === value, [activeProp, index, value])
@@ -47,6 +49,7 @@ function Step(props: StepProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <View className={classNames(prefixClassname("step__label"))} children={children ?? label} />
       <View className={prefixClassname("step__circle-container")}>

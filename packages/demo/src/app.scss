@@ -1,7 +1,6 @@
 body {
   height: 100vh;
   overflow: auto;
-  background: #f7f8fa;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -9,6 +8,7 @@ body {
   }
 }
 
+body,
 page {
   background: #f7f8fa;
 }

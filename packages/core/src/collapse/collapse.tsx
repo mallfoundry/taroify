@@ -1,16 +1,9 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import {
-  Children,
-  cloneElement,
-  CSSProperties,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useCallback,
-} from "react"
+import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import CollapseItem from "./collapse-item"
@@ -64,9 +57,7 @@ function useCollapseChildren(children?: ReactNode): CollapseChildren {
   return __children__
 }
 
-export interface CollapseProps {
-  className?: string
-  style?: CSSProperties
+export interface CollapseProps extends ViewProps {
   value?: any
   accordion?: boolean
   bordered?: boolean
@@ -75,7 +66,7 @@ export interface CollapseProps {
 }
 
 function Collapse(props: CollapseProps) {
-  const { className, style, bordered, value = "", accordion = false, onChange } = props
+  const { className, bordered, value = "", accordion = false, onChange, ...restProps } = props
   const { items } = useCollapseChildren(props.children)
 
   const toggleItem = useCallback(
@@ -117,8 +108,8 @@ function Collapse(props: CollapseProps) {
           },
           className,
         )}
-        style={style}
         children={items}
+        {...restProps}
       />
     </CollapseContext.Provider>
   )

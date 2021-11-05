@@ -8,10 +8,10 @@ $tab-disabled-text-color: var(--gray-5, $gray-5);
 $tab-font-size: var(--font-size-md, $font-size-md);
 $tab-line-height: var(--line-height-md, $line-height-md);
 // Tabs styles
-$tabs-default-color: var(--danger-color, $danger-color);
+$tabs-active-color: var(--danger-color, $danger-color);
 $tabs-line-height: 44px * $hd;
 $tabs-card-height: 30px * $hd;
 $tabs-nav-background-color: $white;
 $tabs-bottom-bar-width: 40px * $hd;
 $tabs-bottom-bar-height: 3px * $hd;
-$tabs-bottom-bar-color: $tabs-default-color;
+$tabs-bottom-bar-color: var(--tabs-active-color, $tabs-active-color);

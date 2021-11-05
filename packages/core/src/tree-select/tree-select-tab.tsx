@@ -1,10 +1,11 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
 import SidebarTab from "../sidebar/sidebar-tab"
 import { prefixClassname } from "../styles"
 
-interface TreeSelectTabProps {
+interface TreeSelectTabProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: any

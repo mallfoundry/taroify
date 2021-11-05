@@ -1,11 +1,10 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
 import * as React from "react"
 import { Children, isValidElement, ReactElement, ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
-import NumberKeyboardButton, {
-  NumberKeyboardButtonProps,
-  NumberKeyboardButtonType,
-} from "./number-keyboard-button"
+import NumberKeyboardButton, { NumberKeyboardButtonProps } from "./number-keyboard-button"
 import NumberKeyboardContext from "./number-keyboard.context"
 
 interface NumberKeyboardHeaderChildren {
@@ -30,7 +29,7 @@ function useNumberKeyboardHeaderChildren(children?: ReactNode) {
         const elementType = element.type
         if (elementType === NumberKeyboardButton) {
           const { type } = element.props as NumberKeyboardButtonProps
-          if (type === undefined || type === NumberKeyboardButtonType.Hide) {
+          if (type === undefined || type === "hide") {
             __children__.right = element
           }
         }
@@ -41,15 +40,19 @@ function useNumberKeyboardHeaderChildren(children?: ReactNode) {
   }, [children, title])
 }
 
-export interface NumberKeyboardHeaderProps {
+export interface NumberKeyboardHeaderProps extends ViewProps {
   children?: ReactNode
 }
 
 function NumberKeyboardHeader(props: NumberKeyboardHeaderProps) {
-  const { left, title, right } = useNumberKeyboardHeaderChildren(props.children)
+  const { className, children: childrenProp, ...restProps } = props
+  const { left, title, right } = useNumberKeyboardHeaderChildren(childrenProp)
 
   return (
-    <View className={prefixClassname("number-keyboard__header")}>
+    <View
+      className={classNames(prefixClassname("number-keyboard__header"), className)}
+      {...restProps}
+    >
       {left}
       {title}
       {right}

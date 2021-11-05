@@ -1,25 +1,20 @@
 import { Success } from "@taroify/icons"
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import RadioGroupContext from "./radio-group.context"
-import { RadioGroupDirection } from "./radio-group.shared"
 
-enum RadioShape {
-  Square = "square",
-  Round = "round",
-}
+type RadioShape = "square" | "round"
 
-type RadioShapeString = "square" | "round"
-
-export interface RadioProps {
+export interface RadioProps extends ViewProps {
   className?: string
   name?: any
   disabled?: boolean
-  shape?: RadioShape | RadioShapeString
+  shape?: RadioShape
   icon?: ReactNode
   size?: number
   children?: ReactNode
@@ -30,10 +25,12 @@ export default function Radio(props: RadioProps) {
     className,
     name,
     disabled: disabledProp,
-    shape = RadioShape.Round,
+    shape = "round",
     icon = <Success />,
     size: sizeProp,
     children,
+    onClick,
+    ...restProps
   } = props
 
   const { value, direction, disabled: disabledGroup, size: sizeGroup, onChange } = useContext(
@@ -46,7 +43,8 @@ export default function Radio(props: RadioProps) {
 
   const checked = name === value
 
-  function handleClick() {
+  function handleClick(event: ITouchEvent) {
+    onClick?.(event)
     if (!disabled && name !== value) {
       onChange?.(name)
     }
@@ -57,11 +55,12 @@ export default function Radio(props: RadioProps) {
       className={classNames(
         prefixClassname("radio"),
         {
-          [prefixClassname("radio--horizontal")]: direction === RadioGroupDirection.Horizontal,
+          [prefixClassname("radio--horizontal")]: direction === "horizontal",
         },
         className,
       )}
       onClick={handleClick}
+      {...restProps}
     >
       <View
         className={classNames(

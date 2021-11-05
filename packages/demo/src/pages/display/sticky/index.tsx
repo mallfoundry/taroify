@@ -19,7 +19,7 @@ function BasicSticky() {
 function OffsetSticky() {
   return (
     <Block title="吸顶距离" className="sticky-demo__offset-sticky">
-      <Sticky offset={{ top: "50px" }}>
+      <Sticky offsetTop={50}>
         <Button color="primary">吸顶距离</Button>
       </Sticky>
     </Block>
@@ -43,7 +43,7 @@ function BottomSticky() {
   return (
     <Block title="吸底距离" className="sticky-demo__bottom-sticky">
       <View className="sticky-demo__bottom-sticky__padding" />
-      <Sticky position="bottom" offset={{ bottom: "50px" }}>
+      <Sticky position="bottom" offsetBottom={50}>
         <Button color="primary">吸底距离</Button>
       </Sticky>
       <View className="sticky-demo__bottom-sticky__padding" />

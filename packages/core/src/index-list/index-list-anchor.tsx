@@ -15,8 +15,8 @@ import {
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import { TaroElement } from "../utils/dom/element"
+import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
-import { getBoundingClientRect } from "../utils/rect"
 import IndexListContext from "./index-list.context"
 
 export interface IndexListAnchorInstance {
@@ -40,7 +40,6 @@ const IndexListAnchor = forwardRef(
       activeArrayedIndex,
       sticky: stickyProp,
       stickyOffsetTop,
-      zIndex,
       getAnchorRects,
       getListRect,
     } = useContext(IndexListContext)
@@ -49,7 +48,7 @@ const IndexListAnchor = forwardRef(
 
     const scrollIntoView = useCallback(
       (scrollTop: number) =>
-        getBoundingClientRect(rootRef).then(({ top }) =>
+        getRect(rootRef).then(({ top }) =>
           pageScrollTo({
             duration: 0,
             scrollTop: Math.ceil(scrollTop + top),
@@ -81,7 +80,6 @@ const IndexListAnchor = forwardRef(
           anchorStyle = {
             position: "fixed",
             top: addUnitPx(stickyOffsetTop),
-            zIndex,
           }
         }
 
@@ -98,7 +96,6 @@ const IndexListAnchor = forwardRef(
         anchorStyle = {
           position: "relative",
           transform: `translate3d(0, ${addUnitPx(translateY)}, 0)`,
-          zIndex,
         }
 
         active = true

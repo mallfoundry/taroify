@@ -12,9 +12,12 @@ $toast-text-color: var(--white, $white);
 $toast-border-radius: var(--border-radius-lg, $border-radius-lg);
 $toast-background-color: rgba($black, $alpha: 0.7);
 
-$toast-default-padding: var(--padding-md, $padding-md);
-$toast-default-width: 88px * 2;
-$toast-default-min-height: 88px * 2;
+$toast-padding: var(--padding-md, $padding-md);
+$toast-width: 88px * 2;
+$toast-min-height: 88px * 2;
 
 $toast-text-min-width: 96px * 2;
 $toast-text-padding: var(--padding-xs, $padding-xs) var(--padding-sm, $padding-sm);
+
+$toast-position-top-distance: 20%;
+$toast-position-bottom-distance: 20%;

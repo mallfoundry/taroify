@@ -1,19 +1,18 @@
 import { View } from "@tarojs/components"
 import { ITouchEvent } from "@tarojs/components/types/common"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 
-interface BackdropProps {
-  className?: string
+interface BackdropProps extends ViewProps {
   style?: CSSProperties
   open?: boolean
   closeable?: boolean
   duration?: number
   children?: ReactNode
-  onClick?: (event: ITouchEvent) => void
   onClose?: (opened: boolean) => void
 }
 
@@ -27,6 +26,7 @@ export default function Backdrop(props: BackdropProps) {
     children,
     onClick,
     onClose,
+    ...restProps
   } = props
 
   function handleClick(event: ITouchEvent) {
@@ -53,6 +53,9 @@ export default function Backdrop(props: BackdropProps) {
       catchMove
       onTouchMove={preventDefault}
       children={children}
+      {...restProps}
     />
   )
 }
+
+Backdrop.displayName = "Backdrop"

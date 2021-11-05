@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -23,9 +24,9 @@ import {
 import { prefixClassname } from "../styles"
 import { useComputed } from "../utils/computed"
 import { preventDefault } from "../utils/dom/event"
+import { getRect, Rect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { BoundingClientRect, getBoundingClientRect } from "../utils/rect"
 import { usePrevious } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
@@ -75,7 +76,7 @@ function useSwiperChildren(children: ReactNode): SwiperChildren {
   return __children__
 }
 
-export interface SwiperProps {
+export interface SwiperProps extends ViewProps {
   className?: string
   activeIndex?: number
   autoplay?: number
@@ -103,6 +104,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     width,
     height,
     onChange,
+    ...restProps
   } = props
 
   const { count, indicator, items } = useSwiperChildren(props.children)
@@ -112,8 +114,8 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   const vertical = direction === SwiperDirection.Vertical
 
   const rootRef = useRef()
-  const customRectRef = useRef<BoundingClientRect>()
-  const [, forceSetRootRect] = useState<BoundingClientRect>()
+  const customRectRef = useRef<Rect>()
+  const [, forceSetRootRect] = useState<Rect>()
   const [offset, setOffset] = useState<number>(0)
   const swipingRef = useRef(false) // Whether to swiping manually
   const activeIndexPropRef = useRef(0)
@@ -316,7 +318,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
       if (!rootRef.current) {
         return
       }
-      customRectRef.current = await getBoundingClientRect(rootRef)
+      customRectRef.current = await getRect(rootRef)
       if (count) {
         activeIndex = Math.min(count - 1, activeIndex)
       }
@@ -426,9 +428,8 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   useEffect(startAutoplay, [startAutoplay])
 
   useEffect(() => {
-    const __resize__ = _.debounce(resize, 100)
-    onWindowResize(__resize__)
-    return () => offWindowResize(__resize__)
+    onWindowResize?.(resize)
+    return () => offWindowResize?.(resize)
   }, [resize])
 
   // Forward swiper ref
@@ -441,7 +442,7 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
   useEffect(() => nextTick(initialize), [])
 
   return (
-    <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)}>
+    <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)} {...restProps}>
       <SwiperContext.Provider
         value={{
           direction: direction as SwiperDirection,

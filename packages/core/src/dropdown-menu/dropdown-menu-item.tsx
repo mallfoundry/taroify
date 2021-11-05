@@ -1,16 +1,18 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState } from "react"
-import Popup, { PopupPlacement } from "../popup"
+import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
 import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
 
-export interface DropdownMenuItemProps {
+export interface DropdownMenuItemProps extends ViewProps {
+  style?: CSSProperties
   __dataKey__?: any
   disabled?: boolean
   title?: ReactNode
@@ -20,7 +22,15 @@ export interface DropdownMenuItemProps {
 }
 
 function DropdownMenuItem(props: DropdownMenuItemProps) {
-  const { __dataKey__: dataKey, disabled, value, children, onChange } = props
+  const {
+    __dataKey__: dataKey,
+    disabled,
+    value,
+    children,
+    onChange,
+    style: styleProp,
+    ...restProps
+  } = props
 
   const { direction = "down", itemOffset, isItemToggle, toggleItem } = useContext(
     DropdownMenuContext,
@@ -57,7 +67,9 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
   )
 
   const rootStyle = useMemo(() => {
-    const style: CSSProperties = {}
+    const style: CSSProperties = {
+      ...styleProp,
+    }
     if (opened) {
       if (down) {
         style.top = itemOffset ? addUnitPx(itemOffset) : ""
@@ -74,7 +86,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
       style.display = active ? "" : "none"
     }
     return style
-  }, [active, opened, down, itemOffset])
+  }, [styleProp, opened, active, down, itemOffset])
 
   return (
     <DropdownMenuItemContext.Provider
@@ -89,11 +101,12 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
           prefixClassname("dropdown-menu-item"),
           prefixClassname(`dropdown-menu-item--${direction}`),
         )}
+        {...restProps}
       >
         <Popup
           open={active}
           className={prefixClassname("dropdown-menu-item__content")}
-          placement={down ? PopupPlacement.Top : PopupPlacement.Bottom}
+          placement={down ? "top" : "bottom"}
           onOpen={() => setOpened(true)}
           onClosed={() => setOpened(false)}
         >

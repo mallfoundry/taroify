@@ -1,52 +1,34 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties } from "react"
 import { prefixClassname } from "../styles"
 
-enum SkeletonVariant {
-  Rect = "rect",
-  Circle = "circle",
-}
+type SkeletonVariant = "rect" | "circle"
 
-type SkeletonVariantString = "rect" | "circle"
+type SkeletonAnimation = "pulse" | "wave"
 
-enum SkeletonAnimation {
-  Pulse = "pulse",
-  Wave = "wave",
-}
-
-type SkeletonAnimationString = "pulse" | "wave"
-
-interface SkeletonProps {
-  className?: string
-  style?: CSSProperties
-  variant?: SkeletonVariant | SkeletonVariantString
-  animation?: boolean | SkeletonAnimation | SkeletonAnimationString
+interface SkeletonProps extends Omit<ViewProps, "animation"> {
+  variant?: SkeletonVariant
+  animation?: boolean | SkeletonAnimation
 }
 
 function Skeleton(props: SkeletonProps) {
-  const {
-    className,
-    style,
-    variant = SkeletonVariant.Rect,
-    animation = SkeletonAnimation.Pulse,
-  } = props
+  const { className, variant = "rect", animation = "rect", ...restProps } = props
 
   return (
     <View
       className={classNames(
         prefixClassname("skeleton"),
         {
-          [prefixClassname("skeleton--rect")]: variant === SkeletonVariant.Rect,
-          [prefixClassname("skeleton--circle")]: variant === SkeletonVariant.Circle,
-          [prefixClassname("skeleton--pulse")]:
-            animation === SkeletonAnimation.Pulse || animation === true,
-          [prefixClassname("skeleton--wave")]: animation === SkeletonAnimation.Wave,
+          [prefixClassname("skeleton--rect")]: variant === "rect",
+          [prefixClassname("skeleton--circle")]: variant === "circle",
+          [prefixClassname("skeleton--pulse")]: animation === "pulse" || animation === true,
+          [prefixClassname("skeleton--wave")]: animation === "pulse",
         },
         className,
       )}
-      style={style}
+      {...restProps}
     />
   )
 }

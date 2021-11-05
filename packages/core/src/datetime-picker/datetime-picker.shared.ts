@@ -183,12 +183,7 @@ export function useDatetimeRanges(
   type: DatetimePickerType,
   fields: DatetimePickerColumnType[],
 ) {
-  return useOrderedDatetimeRanges(
-    useSpecifiedDatetimeRanges(
-      //
-      useAllDatetimeRanges(date, minDate, maxDate),
-      type,
-    ),
-    fields,
-  )
+  const allRanges = useAllDatetimeRanges(date, minDate, maxDate)
+  const specifiedRanges = useSpecifiedDatetimeRanges(allRanges, type)
+  return useOrderedDatetimeRanges(specifiedRanges, fields)
 }

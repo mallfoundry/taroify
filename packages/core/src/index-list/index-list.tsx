@@ -1,4 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -19,12 +20,7 @@ import {
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import {
-  BoundingClientRect,
-  getBoundingClientRect,
-  getBoundingClientRects,
-  makeBoundingClientRect,
-} from "../utils/rect"
+import { getRect, getRects, makeRect, Rect } from "../utils/dom/rect"
 import IndexListAnchor, { IndexListAnchorInstance, IndexListAnchorProps } from "./index-list-anchor"
 import IndexListIndex from "./index-list-index"
 import IndexListSidebar from "./index-list-sidebar"
@@ -90,16 +86,14 @@ function useIndexBarChildren(children?: ReactNode): IndexBarChildren {
   }, [children])
 }
 
-export interface IndexBarProps {
-  className?: string
+export interface IndexListProps extends ViewProps {
   sticky?: boolean
   stickyOffsetTop?: number
-  zIndex?: number
   children?: ReactNode
 }
 
-function IndexList(props: IndexBarProps) {
-  const { className, sticky = true, stickyOffsetTop = 0, zIndex = 1 } = props
+function IndexList(props: IndexListProps) {
+  const { className, sticky = true, stickyOffsetTop = 0, ...restProps } = props
   const { anchorProps, anchorRefs, children } = useIndexBarChildren(props.children)
 
   const scrollTopRef = useRef(0)
@@ -108,11 +102,11 @@ function IndexList(props: IndexBarProps) {
 
   const sidebarRef = useRef<HTMLElement>()
 
-  const listRectRef = useRef<BoundingClientRect>(makeBoundingClientRect(0, 0))
+  const listRectRef = useRef<Rect>(makeRect(0, 0))
 
-  const sidebarRectRef = useRef<BoundingClientRect>(makeBoundingClientRect(0, 0))
+  const sidebarRectRef = useRef<Rect>(makeRect(0, 0))
 
-  const anchorRectsRef = useRef<BoundingClientRect[]>([])
+  const anchorRectsRef = useRef<Rect[]>([])
 
   const [activeAnchor, setActiveAnchor] = useState<{
     index?: number | string
@@ -121,17 +115,17 @@ function IndexList(props: IndexBarProps) {
 
   const getListRect = useCallback(
     () =>
-      getBoundingClientRect(listRef).then((rect) => ({
+      getRect(listRef).then((rect) => ({
         ...rect,
         top: rect.top + scrollTopRef.current,
       })),
     [],
   )
 
-  const getSidebarRect = useCallback(() => getBoundingClientRect(sidebarRef), [])
+  const getSidebarRect = useCallback(() => getRect(sidebarRef), [])
 
   const getAnchorRects = useCallback(
-    () => getBoundingClientRects(listRef, ` .${prefixClassname("index-list__anchor-wrapper")}`),
+    () => getRects(listRef, ` .${prefixClassname("index-list__anchor-wrapper")}`),
     [],
   )
 
@@ -239,14 +233,17 @@ function IndexList(props: IndexBarProps) {
       value={{
         sticky,
         stickyOffsetTop,
-        zIndex,
         activeIndex: activeAnchor?.index ?? -1,
         activeArrayedIndex: activeAnchor?.arrayedIndex ?? -1,
         getListRect: () => listRectRef.current,
         getAnchorRects: () => anchorRectsRef.current,
       }}
     >
-      <View ref={listRef} className={classNames(prefixClassname("index-list"), className)}>
+      <View
+        ref={listRef}
+        className={classNames(prefixClassname("index-list"), className)}
+        {...restProps}
+      >
         <IndexListSidebar
           ref={sidebarRef}
           onClick={onSidebarClick}

@@ -1,15 +1,13 @@
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_SURROUND } from "../styles/hairline"
 import { stopPropagation } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 
-interface PasswordInputProps {
-  className?: string
-  style?: CSSProperties
+interface PasswordInputProps extends ViewProps {
   value?: string
   length?: number
   gutter?: number
@@ -32,6 +30,7 @@ function PasswordInput(props: PasswordInputProps) {
     error,
     info,
     onFocus,
+    ...restProps
   } = props
 
   const onTouchStart = (event: ITouchEvent) => {
@@ -77,7 +76,7 @@ function PasswordInput(props: PasswordInputProps) {
     return Points
   }
   return (
-    <View className={classNames(prefixClassname("password-input"), className)}>
+    <View className={classNames(prefixClassname("password-input"), className)} {...restProps}>
       <View
         className={classNames(prefixClassname("password-input__security"), {
           [HAIRLINE_BORDER_SURROUND]: !gutter,

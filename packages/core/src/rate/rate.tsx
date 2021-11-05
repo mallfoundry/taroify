@@ -1,12 +1,13 @@
 import { Star, StarOutlined } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import { getBoundingClientRects } from "../utils/rect"
+import { getRects } from "../utils/dom/rect"
 import { useTouch } from "../utils/touch"
 import RateItem from "./rate-item"
 import RateContext from "./rate.context"
@@ -42,7 +43,7 @@ function getRateStatus(
   return { status: RateStatus.Void, value: 0 }
 }
 
-interface RateProps {
+interface RateProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: number
@@ -72,8 +73,13 @@ function Rate(props: RateProps) {
     touchable = true,
     icon = <Star />,
     emptyIcon = <StarOutlined />,
+    onClick,
+    onTouchStart,
+    onTouchMove,
     onChange,
+    ...restProps
   } = props
+
   const rootRef = useRef<HTMLElement>()
 
   const untouchable = readonly || disabled || !touchable
@@ -86,7 +92,7 @@ function Rate(props: RateProps) {
 
   const getRanges = useCallback(
     () =>
-      getBoundingClientRects(rootRef, ` .${prefixClassname("rate__item")}`).then((rects) =>
+      getRects(rootRef, ` .${prefixClassname("rate__item")}`).then((rects) =>
         rects.flatMap((rect, index) =>
           allowHalf
             ? [
@@ -114,16 +120,17 @@ function Rate(props: RateProps) {
 
   const onItemClick = useCallback(
     (event: ITouchEvent) => {
+      onClick?.(event)
       if (untouchable) {
         return
       }
       const { clientX } = getClientCoordinates(event)
       getScoreByPosition(clientX).then(onChange)
     },
-    [untouchable, getScoreByPosition, onChange],
+    [onClick, untouchable, getScoreByPosition, onChange],
   )
 
-  const onTouchStart = useCallback(
+  const handleTouchStart = useCallback(
     (event: ITouchEvent) => {
       if (untouchable) {
         return
@@ -133,13 +140,12 @@ function Rate(props: RateProps) {
     [touch, untouchable],
   )
 
-  const onTouchMove = useCallback(
+  const handleTouchMove = useCallback(
     (event: ITouchEvent) => {
       if (untouchable) {
         return
       }
       touch.move(event)
-
       if (touch.isHorizontal()) {
         preventDefault(event)
         onItemClick(event)
@@ -178,9 +184,11 @@ function Rate(props: RateProps) {
         },
         className,
       )}
+      catchMove
       onClick={onItemClick}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      {...restProps}
     >
       <RateContext.Provider
         value={{

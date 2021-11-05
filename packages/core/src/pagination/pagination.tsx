@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -103,7 +104,7 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
   return __children__
 }
 
-interface PaginationProps {
+interface PaginationProps extends ViewProps {
   className?: string
   current?: number
   count?: number
@@ -113,7 +114,15 @@ interface PaginationProps {
 }
 
 function Pagination(props: PaginationProps) {
-  const { className, current = 1, siblingCount = 2, count = 1, children, onChange } = props
+  const {
+    className,
+    current = 1,
+    siblingCount = 2,
+    count = 1,
+    children,
+    onChange,
+    ...restProps
+  } = props
   const { previous, startEllipsis, items, endEllipsis, next } = usePagination({
     current,
     siblingCount,
@@ -138,7 +147,7 @@ function Pagination(props: PaginationProps) {
   }
 
   return (
-    <View className={classNames(prefixClassname("pagination"), className)}>
+    <View className={classNames(prefixClassname("pagination"), className)} {...restProps}>
       <PaginationContext.Provider
         value={{
           current,

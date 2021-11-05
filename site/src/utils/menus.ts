@@ -71,6 +71,10 @@ const menus = [
         to: "/components/cascader/",
       },
       {
+        title: "Calendar 日历",
+        to: "/components/calendar/",
+      },
+      {
         title: "Checkbox 复选框",
         to: "/components/checkbox/",
       },

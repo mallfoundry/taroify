@@ -1,13 +1,12 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import { CurrentTime, parseFormat } from "./count-down.shared"
 
-interface CountDownProps {
-  className?: string
-  style?: CSSProperties
+interface CountDownProps extends ViewProps {
   current?: CurrentTime
   format?: string
   autostart?: boolean
@@ -16,7 +15,7 @@ interface CountDownProps {
 }
 
 function CountDown(props: CountDownProps) {
-  const { className, style, current, format = "HH:mm:ss", children } = props
+  const { className, current, format = "HH:mm:ss", children, ...restProps } = props
 
   const timeFormatter = () => {
     if (!current) {
@@ -28,8 +27,8 @@ function CountDown(props: CountDownProps) {
   return (
     <View
       className={classNames(prefixClassname("count-down"), className)}
-      style={style}
       children={children ?? timeFormatter()}
+      {...restProps}
     />
   )
 }

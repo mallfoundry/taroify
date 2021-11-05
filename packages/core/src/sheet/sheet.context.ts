@@ -1,7 +1,10 @@
 import { createContext } from "react"
+import { SheetItemObject } from "./sheet.shared"
 
 interface SheetContextProps {
-  emitCancel?: () => void
+  onSelect?(item: SheetItemObject): void
+
+  onCancel?(): void
 }
 
 const SheetContext = createContext<SheetContextProps>({})

@@ -1,22 +1,21 @@
 import { createContext } from "react"
-import { BoundingClientRect, makeBoundingClientRect } from "../utils/rect"
+import { Rect, makeRect } from "../utils/dom/rect"
 
 interface IndexListContextValue {
   sticky?: boolean
   stickyOffsetTop?: number
-  zIndex?: number
   activeIndex: number | string
   activeArrayedIndex: number
 
-  getListRect(): BoundingClientRect
+  getListRect(): Rect
 
-  getAnchorRects(): BoundingClientRect[]
+  getAnchorRects(): Rect[]
 }
 
 const IndexListContext = createContext<IndexListContextValue>({
   activeIndex: -1,
   activeArrayedIndex: -1,
-  getListRect: () => makeBoundingClientRect(0, 0),
+  getListRect: () => makeRect(0, 0),
   getAnchorRects: () => [],
 })
 export default IndexListContext

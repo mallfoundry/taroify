@@ -1,0 +1,10 @@
+@import "./prefix";
+@import "./variables";
+
+body, page {
+  font-family: $base-font-family;
+}
+
+[class*="#{$component-prefix}"] {
+  -webkit-tap-highlight-color: transparent;
+}

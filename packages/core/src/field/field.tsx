@@ -7,8 +7,16 @@ import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo, useState } from "react"
-import { BaseCell, CellAlign, CellAlignString } from "../cell"
+import {
+  Children,
+  CSSProperties,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useMemo,
+  useState,
+} from "react"
+import { BaseCell, CellAlign } from "../cell"
 import { prefixClassname } from "../styles"
 import FieldButton from "./field-button"
 import {
@@ -97,11 +105,12 @@ type TaroInputType = "text" | "number" | "idcard" | "digit"
 
 export interface FieldProps {
   className?: string
+  style?: CSSProperties
   name?: string
   value?: string
   maxlength?: number
   type?: FieldType | FieldTypeString
-  align?: CellAlign | CellAlignString
+  align?: CellAlign
   bordered?: boolean
   focus?: boolean
   autoFocus?: boolean
@@ -150,6 +159,7 @@ export interface FieldProps {
 function Field(props: FieldProps) {
   const {
     className,
+    style,
     name,
     value: valueProp,
     maxlength = -1,
@@ -230,6 +240,7 @@ function Field(props: FieldProps) {
         },
         className,
       )}
+      style={style}
       bordered={bordered}
       align={align}
       clickable={clickable}

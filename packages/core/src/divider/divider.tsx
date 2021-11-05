@@ -1,7 +1,8 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactElement, ReactNode } from "react"
+import { ReactElement, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface DividerText {
@@ -35,17 +36,15 @@ function findDividerText(node?: ReactNode): DividerText {
   }
 }
 
-interface DividerProps {
-  className?: string
-  style?: CSSProperties
+interface DividerProps extends ViewProps {
   dashed?: boolean
   hairline?: boolean
   children?: ReactNode
 }
 
 function Divider(props: DividerProps) {
-  const { className, style, dashed = false, hairline = true } = props
-  const { orientation = Divider.TextOrientation.Center, children } = findDividerText(props.children)
+  const { className, dashed = false, hairline = true, children: childrenProp, ...restProps } = props
+  const { orientation = "center", children } = findDividerText(childrenProp)
   return (
     <View
       className={classNames(
@@ -53,32 +52,23 @@ function Divider(props: DividerProps) {
         {
           [prefixClassname("divider--hairline")]: hairline && !dashed,
           [prefixClassname("divider--dashed")]: dashed,
-          [prefixClassname("divider--content-left")]:
-            children && orientation === Divider.TextOrientation.Left,
-          [prefixClassname("divider--content-center")]:
-            children && orientation === Divider.TextOrientation.Center,
-          [prefixClassname("divider--content-right")]:
-            children && orientation === Divider.TextOrientation.Right,
+          [prefixClassname("divider--content-left")]: children && orientation === "left",
+          [prefixClassname("divider--content-center")]: children && orientation === "center",
+          [prefixClassname("divider--content-right")]: children && orientation === "right",
         },
         className,
       )}
-      style={style}
       children={children}
+      {...restProps}
     />
   )
 }
 
 namespace Divider {
-  export enum TextOrientation {
-    Left = "left",
-    Right = "right",
-    Center = "center",
-  }
-
-  type TextOrientationString = "left" | "right" | "center"
+  export type TextOrientation = "left" | "right" | "center"
 
   interface TextProps {
-    orientation?: TextOrientation | TextOrientationString
+    orientation?: TextOrientation
     children?: ReactNode
   }
 

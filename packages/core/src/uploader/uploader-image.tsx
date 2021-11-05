@@ -3,7 +3,7 @@ import { ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
-import Image from "../image"
+import Image, { ImageMode } from "../image"
 import { prefixClassname } from "../styles"
 import UploaderRemove from "./uploader-remove"
 import { isImageFile } from "./uploader.utils"
@@ -14,17 +14,39 @@ interface UploaderImageProps {
   url?: string
   name?: string
   removable?: boolean
+  mode?: ImageMode
+  alt?: string
+  round?: boolean
   children?: ReactNode
 
   onRemove?(event: ITouchEvent): void
 }
 
 function UploaderImage(props: UploaderImageProps) {
-  const { className, type, url, name, removable = true, children, onRemove } = props
+  const {
+    className,
+    type,
+    url,
+    name,
+    removable = true,
+    mode,
+    alt,
+    round,
+    children,
+    onRemove,
+  } = props
 
   function renderFile() {
     if (isImageFile({ type, url })) {
-      return <Image className={prefixClassname("uploader__preview-image")} src={url} />
+      return (
+        <Image
+          className={prefixClassname("uploader__preview-image")}
+          src={url}
+          mode={mode}
+          alt={alt}
+          round={round}
+        />
+      )
     }
 
     return (
@@ -35,9 +57,8 @@ function UploaderImage(props: UploaderImageProps) {
             prefixClassname("uploader__file-name"),
             prefixClassname("ellipsis"),
           )}
-        >
-          {name ?? url}
-        </View>
+          children={name ?? url}
+        />
       </View>
     )
   }

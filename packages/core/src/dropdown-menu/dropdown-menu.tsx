@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
 import classnames from "classnames"
 import * as _ from "lodash"
@@ -18,7 +19,7 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import { getBoundingClientRect } from "../utils/rect"
+import { getRect } from "../utils/dom/rect"
 import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
@@ -105,8 +106,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
   return __children__
 }
 
-export interface DropdownMenuProps {
-  className?: string
+export interface DropdownMenuProps extends ViewProps {
   value?: any
   direction?: DropdownMenuDirection
   children?: ReactNode
@@ -115,7 +115,7 @@ export interface DropdownMenuProps {
 }
 
 function DropdownMenu(props: DropdownMenuProps) {
-  const { className, value, direction = "down", onChange } = props
+  const { className, value, direction = "down", onChange, ...restProps } = props
   const barRef = useRef<HTMLElement>()
   const [opened, setOpened] = useState<boolean>()
   const [itemOffset, setItemOffset] = useState(0)
@@ -126,7 +126,7 @@ function DropdownMenu(props: DropdownMenuProps) {
   const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
 
   const updateItemOffset = useCallback(() => {
-    getBoundingClientRect(barRef).then((rect) => {
+    getRect(barRef).then((rect) => {
       if (direction === "down") {
         setItemOffset(rect.bottom)
       } else {
@@ -174,7 +174,7 @@ function DropdownMenu(props: DropdownMenuProps) {
         isItemToggle,
       }}
     >
-      <View className={classnames(prefixClassname("dropdown-menu"), className)}>
+      <View className={classnames(prefixClassname("dropdown-menu"), className)} {...restProps}>
         <View
           ref={barRef}
           className={classnames(prefixClassname("dropdown-menu__bar"), {

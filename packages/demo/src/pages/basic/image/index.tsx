@@ -10,21 +10,21 @@ import "./index.scss"
 export default function ImageDemo() {
   const imageUrl = "https://img01.yzcdn.cn/vant/cat.jpeg"
 
-  const modes = [
-    ImageMode.ScaleToFill,
-    ImageMode.AspectFit,
-    ImageMode.AspectFill,
-    ImageMode.WidthFix,
-    ImageMode.HeightFix,
-    ImageMode.Top,
-    ImageMode.Bottom,
-    ImageMode.Center,
-    ImageMode.Left,
-    ImageMode.Right,
-    ImageMode.TopLeft,
-    ImageMode.TopRight,
-    ImageMode.BottomLeft,
-    ImageMode.BottomRight,
+  const modes: ImageMode[] = [
+    "scaleToFill",
+    "aspectFit",
+    "aspectFill",
+    "widthFix",
+    "heightFix",
+    "top",
+    "bottom",
+    "center",
+    "left",
+    "right",
+    "topLeft",
+    "topRight",
+    "bottomLeft",
+    "bottomRight",
   ]
 
   return (

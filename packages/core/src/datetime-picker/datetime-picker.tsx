@@ -1,3 +1,4 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo } from "react"
@@ -70,22 +71,34 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     _.forEach(columns, ({ type }, index) => {
       switch (type) {
         case "year":
-          date.setFullYear(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setFullYear(_.toNumber(datetimeValue[index]))
+          }
           break
         case "month":
-          date.setMonth(_.toNumber(_.get(datetimeValue, index)) - 1)
+          if (_.size(datetimeValue) > index) {
+            date.setMonth(_.toNumber(datetimeValue[index]) - 1)
+          }
           break
         case "day":
-          date.setDate(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setDate(_.toNumber(datetimeValue[index]))
+          }
           break
         case "hour":
-          date.setHours(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setHours(_.toNumber(datetimeValue[index]))
+          }
           break
         case "minute":
-          date.setMinutes(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setMinutes(_.toNumber(datetimeValue[index]))
+          }
           break
         case "second":
-          date.setSeconds(_.toNumber(_.get(datetimeValue, index)))
+          if (_.size(datetimeValue) > index) {
+            date.setSeconds(_.toNumber(datetimeValue[index]))
+          }
           break
       }
     })
@@ -122,8 +135,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
   }
 }
 
-export interface DatetimePickerProps {
-  className?: string
+export interface DatetimePickerProps extends ViewProps {
   type?: DatetimePickerType
   fields?: DatetimePickerColumnType[]
   value?: Date
@@ -150,13 +162,30 @@ function DatetimePicker(props: DatetimePickerProps) {
     className,
     readonly,
     loading,
+    type,
+    fields,
+    filter,
+    formatter,
+    min,
+    max,
+    value: valueProp,
     siblingCount,
     children,
     onChange,
     onConfirm,
     onCancel,
+    ...restProps
   } = props
-  const { value, columns, toDate } = useDatetimePicker(props)
+
+  const { value, columns, toDate } = useDatetimePicker({
+    value: valueProp,
+    min,
+    max,
+    type,
+    fields,
+    filter,
+    formatter,
+  })
 
   return (
     <Picker
@@ -168,6 +197,7 @@ function DatetimePicker(props: DatetimePickerProps) {
       onChange={(aValue) => onChange?.(toDate(aValue))}
       onConfirm={(aValue) => onConfirm?.(toDate(aValue))}
       onCancel={(aValue) => onCancel?.(toDate(aValue))}
+      {...restProps}
     >
       {children}
       {

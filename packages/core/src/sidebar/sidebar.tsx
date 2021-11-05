@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -40,7 +41,7 @@ function useSidebarChildren(children: ReactNode) {
   )
 }
 
-export interface SidebarProps {
+export interface SidebarProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: any
@@ -50,7 +51,7 @@ export interface SidebarProps {
 }
 
 function Sidebar(props: SidebarProps) {
-  const { className, style, value, onChange } = props
+  const { className, value, onChange, ...restProps } = props
   const children = useSidebarChildren(props.children)
 
   const onTabClick = useCallback(
@@ -64,7 +65,7 @@ function Sidebar(props: SidebarProps) {
   )
 
   return (
-    <View className={classNames(prefixClassname("sidebar"), className)} style={style}>
+    <View className={classNames(prefixClassname("sidebar"), className)} {...restProps}>
       <SidebarContext.Provider value={{ value, onTabClick }} children={children} />
     </View>
   )

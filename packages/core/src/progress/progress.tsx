@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useMemo } from "react"
@@ -6,8 +7,7 @@ import { prefixClassname } from "../styles"
 
 type ProgressColor = "primary" | "info" | "success" | "warning" | "danger"
 
-interface ProgressProps {
-  className?: string
+interface ProgressProps extends ViewProps {
   animated?: boolean
   striped?: boolean
   inactive?: boolean
@@ -25,6 +25,7 @@ function Progress(props: ProgressProps) {
     label,
     color = "primary",
     percent: percentProp = 0,
+    ...restProps
   } = props
   const percent = Math.min(Math.max(0, percentProp), 100)
 
@@ -60,6 +61,7 @@ function Progress(props: ProgressProps) {
         },
         className,
       )}
+      {...restProps}
     >
       <View className={classNames(prefixClassname("progress__portion"))} style={barStyle}>
         {renderLabel()}

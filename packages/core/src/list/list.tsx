@@ -1,24 +1,21 @@
 import { View } from "@tarojs/components"
-import { nextTick, usePageScroll, useReady } from "@tarojs/taro"
+import { ViewProps } from "@tarojs/components/types/View"
+import { nextTick, usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
+import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
+import { getRect } from "../utils/dom/rect"
 import { getScrollParent } from "../utils/dom/scroll"
-import { getBoundingClientRect } from "../utils/rect"
 
-enum ListDirection {
-  Up = "up",
-  Down = "down",
-}
+type ListDirection = "up" | "down"
 
-type ListDirectionString = "up" | "down"
-
-export interface ListProps {
+export interface ListProps extends ViewProps {
   className?: string
   loading?: boolean
   hasMore?: boolean
-  direction?: ListDirection | ListDirectionString
+  direction?: ListDirection
   offset?: number
   children?: ReactNode
   onLoad?: () => void
@@ -29,10 +26,11 @@ function List(props: ListProps) {
     className,
     loading: loadingProp = false,
     hasMore = true,
-    direction = ListDirection.Down,
+    direction = "down",
     offset = 300,
     children,
     onLoad,
+    ...restProps
   } = props
 
   const rootRef = useRef<HTMLElement>()
@@ -45,15 +43,15 @@ function List(props: ListProps) {
         return
       }
       const scrollParent = await getScrollParent(rootRef.current)
-      const scrollParentRect = await getBoundingClientRect(scrollParent)
+      const scrollParentRect = await getRect(scrollParent)
       if (!scrollParentRect.height) {
         return
       }
 
       let isReachEdge: boolean
-      const edgeRect = await getBoundingClientRect(edgeRef)
+      const edgeRect = await getRect(edgeRef)
 
-      if (direction === ListDirection.Up) {
+      if (direction === "up") {
         isReachEdge = scrollParentRect.top - edgeRect.top <= offset
       } else {
         isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
@@ -66,21 +64,21 @@ function List(props: ListProps) {
     })
   }, [direction, hasMore, offset, onLoad])
 
-  useReady(loadCheck)
+  useMounted(loadCheck)
 
   usePageScroll(loadCheck)
 
   useEffect(() => {
     loadingRef.current = loadingProp
     loadCheck()
-  }, [loadingProp, hasMore, loadCheck])
+  }, [loadingProp, loadCheck, hasMore, children])
 
   const listEdge = <View ref={edgeRef} className={prefixClassname("list__edge")} />
 
   return (
-    <View ref={rootRef} className={classNames(prefixClassname("list"), className)}>
-      {direction === ListDirection.Down ? children : listEdge}
-      {direction === ListDirection.Up ? children : listEdge}
+    <View ref={rootRef} className={classNames(prefixClassname("list"), className)} {...restProps}>
+      {direction === "down" ? children : listEdge}
+      {direction === "up" ? children : listEdge}
     </View>
   )
 }

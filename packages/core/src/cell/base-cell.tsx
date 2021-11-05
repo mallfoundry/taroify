@@ -1,20 +1,19 @@
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext } from "react"
+import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
-import { CellAlign, CellAlignString, CellSize, CellSizeString } from "./cell.shared"
+import { CellAlign, CellSize } from "./cell.shared"
 
-export interface BaseCellProps {
-  className?: string
+export interface BaseCellProps extends ViewProps {
   titleClassName?: string
   briefClassName?: string
   valueClassName?: string
-  style?: CSSProperties
-  size?: CellSize | CellSizeString
-  align?: CellAlign | CellAlignString
+  size?: CellSize
+  align?: CellAlign
   title?: ReactNode
   brief?: ReactNode
   icon?: ReactNode
@@ -23,7 +22,6 @@ export interface BaseCellProps {
   required?: boolean
   clickable?: boolean
   children?: ReactNode
-  onClick?: (event: ITouchEvent) => void
 }
 
 function BaseCell(props: BaseCellProps) {
@@ -32,8 +30,7 @@ function BaseCell(props: BaseCellProps) {
     titleClassName,
     briefClassName,
     valueClassName,
-    style,
-    size = CellSize.Medium,
+    size = "medium",
     align,
     title,
     brief,
@@ -43,7 +40,7 @@ function BaseCell(props: BaseCellProps) {
     icon,
     rightIcon,
     children,
-    onClick,
+    ...restProps
   } = props
 
   const { clickable } = useContext(CellGroupContext)
@@ -53,18 +50,17 @@ function BaseCell(props: BaseCellProps) {
       className={classNames(
         prefixClassname("cell"),
         {
-          [prefixClassname("cell--start")]: align === CellAlign.Start,
-          [prefixClassname("cell--center")]: align === CellAlign.Center,
-          [prefixClassname("cell--end")]: align === CellAlign.End,
-          [prefixClassname("cell--large")]: size === CellSize.Large,
+          [prefixClassname("cell--start")]: align === "start",
+          [prefixClassname("cell--center")]: align === "center",
+          [prefixClassname("cell--end")]: align === "end",
+          [prefixClassname("cell--large")]: size === "large",
           [prefixClassname("cell--clickable")]: clickableProp || clickable,
           [prefixClassname("cell--required")]: required,
           [prefixClassname("cell--borderless")]: !bordered,
         },
         className,
       )}
-      style={style}
-      onClick={onClick}
+      {...restProps}
     >
       {icon && cloneIconElement(icon, { className: prefixClassname("cell__icon") })}
       {title && (

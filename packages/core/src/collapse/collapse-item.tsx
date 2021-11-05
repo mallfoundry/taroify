@@ -1,5 +1,6 @@
-import ArrowRight from "@taroify/icons/ArrowRight"
+import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
@@ -14,24 +15,19 @@ import {
   useState,
 } from "react"
 import Cell from "../cell"
-import CollapseContext from "../collapse/collapse.context"
 import { prefixClassname } from "../styles"
+import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf, raf } from "../utils/raf"
-import { getBoundingClientRect } from "../utils/rect"
+import CollapseContext from "./collapse.context"
 
-enum CollapseItemSize {
-  Medium = "medium",
-  Large = "large",
-}
+type CollapseItemSize = "medium" | "large"
 
-type CollapseItemSizeString = "medium" | "large"
-
-interface CollapseItemProps {
+interface CollapseItemProps extends ViewProps {
   className?: string
   style?: CSSProperties
   value?: any
-  size?: CollapseItemSize | CollapseItemSizeString
+  size?: CollapseItemSize
   bordered?: boolean
   clickable?: boolean
   disabled?: boolean
@@ -46,9 +42,8 @@ interface CollapseItemProps {
 function CollapseItem(props: CollapseItemProps) {
   const {
     className,
-    style,
     value,
-    size = CollapseItemSize.Medium,
+    size = "medium",
     bordered = true,
     disabled = false,
     clickable = true,
@@ -58,6 +53,7 @@ function CollapseItem(props: CollapseItemProps) {
     brief,
     extra,
     children,
+    ...restProps
   } = props
 
   const contentRef = useRef<HTMLElement>()
@@ -85,7 +81,7 @@ function CollapseItem(props: CollapseItemProps) {
     const tickRaf = expanded ? nextTick : raf
 
     tickRaf(async () => {
-      const { height } = await getBoundingClientRect(contentRef)
+      const { height } = await getRect(contentRef)
       if (height) {
         const heightPx = addUnitPx(height)
         setExpandHeight(expanded ? "0" : heightPx)
@@ -130,7 +126,7 @@ function CollapseItem(props: CollapseItemProps) {
         },
         className,
       )}
-      style={style}
+      {...restProps}
     >
       <Cell
         className={classNames(prefixClassname("collapse-item__title"), {

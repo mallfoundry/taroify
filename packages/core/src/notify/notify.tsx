@@ -1,43 +1,46 @@
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useEffect, useState } from "react"
-import Popup, { PopupPlacement } from "../popup"
+import { CSSProperties, ReactNode, useEffect } from "react"
+import Popup from "../popup"
 import { prefixClassname } from "../styles"
+import { matchSelector } from "../utils/dom/element"
+import { useObject } from "../utils/state"
+import { NotifyOptions, useNotifyClose, useNotifyOpen } from "./notify.imperative"
+import { NotifyColor } from "./notify.shared"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
 
-export type NotifyColor = "primary" | "success" | "warning" | "danger"
-
-interface NotifyProps {
-  className?: string
+export interface NotifyProps extends ViewProps {
   style?: CSSProperties
   open?: boolean
   duration?: number
   color?: NotifyColor
   children?: ReactNode
-  onClose?: (opened: boolean) => void
+
+  onClose?(opened: boolean): void
 }
 
 function Notify(props: NotifyProps) {
-  const {
-    className,
-    style,
-    open: openProp = false,
-    duration = 3000,
-    color = "danger",
-    children,
-    onClose,
-  } = props
-  const [open, setOpen] = useState(false)
-
-  useEffect(() => setOpen(openProp), [openProp])
+  const [
+    {
+      id,
+      className,
+      open = false,
+      duration = 3000,
+      color = "danger",
+      children,
+      onClose,
+      ...restProps
+    },
+    setState,
+  ] = useObject<NotifyProps & NotifyOptions>(props)
 
   useEffect(() => {
-    setOpen(openProp)
     let timer: any
-    if (openProp) {
+    if (open) {
       timer = setTimeout(() => {
-        setOpen(false)
+        setState({ open: false })
         onClose?.(false)
         clearTimeout(timer)
       }, duration)
@@ -45,7 +48,25 @@ function Notify(props: NotifyProps) {
       clearTimeout(timer)
     }
     return () => clearTimeout(timer)
-  }, [openProp, duration, onClose])
+  }, [duration, onClose, open, setState])
+
+  useNotifyOpen(({ selector, message, ...restOptions }: NotifyOptions) => {
+    if (matchSelector(selector, id)) {
+      setState({
+        open: true,
+        children: message,
+        ...restOptions,
+      })
+    }
+  })
+
+  useNotifyClose((selector) => {
+    if (matchSelector(selector, id)) {
+      setState({
+        open: false,
+      })
+    }
+  })
 
   return (
     <Popup
@@ -56,10 +77,10 @@ function Notify(props: NotifyProps) {
         },
         className,
       )}
-      style={style}
-      placement={PopupPlacement.Top}
+      placement="top"
       duration={200}
       open={open}
+      {...restProps}
     >
       <Popup.Backdrop open={false} />
       {children}

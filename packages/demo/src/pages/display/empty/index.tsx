@@ -6,10 +6,10 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function PresetEmpty() {
-  const [activeKey, setActiveKey] = useState<Tabs.TabKey>(0)
+  const [tab, setTab] = useState(0)
   return (
     <Block title="图片类型">
-      <Tabs activeKey={activeKey} onChange={({ key }) => setActiveKey(key)}>
+      <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="通用错误">
           <Empty>
             <Empty.Image src="error" />

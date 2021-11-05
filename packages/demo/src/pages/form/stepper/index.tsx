@@ -1,7 +1,7 @@
 import { Cell, Stepper } from "@taroify/core"
 import * as React from "react"
 import { useState } from "react"
-import BlockCard from "../../../components/block-card"
+import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -59,7 +59,7 @@ function RoundStepper() {
 export default function StepperDemo() {
   return (
     <Page title="Stepper 步进器" className="stepper-demo">
-      <BlockCard>
+      <Block variant="card">
         <Cell title="基本用法">
           <BasicStepper />
         </Cell>
@@ -87,7 +87,7 @@ export default function StepperDemo() {
         <Cell title="圆角风格">
           <RoundStepper />
         </Cell>
-      </BlockCard>
+      </Block>
     </Page>
   )
 }

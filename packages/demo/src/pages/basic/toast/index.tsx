@@ -1,70 +1,98 @@
-import { Cell, Toast } from "@taroify/core"
-import { ToastType } from "@taroify/core/toast"
-import { ArrowRight } from "@taroify/icons"
+import { Cell, Image, Loading, Toast } from "@taroify/core"
+import { ArrowRight, LikeOutlined } from "@taroify/icons"
 import * as React from "react"
-import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 
 import "./index.scss"
 
-interface ToastOptions {
-  open?: boolean
-  type?: ToastType
-  message?: string
-}
-
 export default function ToastDemo() {
-  const [options, setOptions] = useState<ToastOptions>({})
-
-  function handleOpen({ type, message }: ToastOptions) {
-    setOptions({
-      open: true,
-      type,
-      message,
-    })
-  }
-
   return (
     <Page title="Toast 轻提示" className="toast-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
+        <Toast id="toast" />
         <Cell
           clickable
           title="文字提示"
           rightIcon={<ArrowRight />}
-          onClick={() => handleOpen({ type: ToastType.Text, message: "文字提示" })}
+          onClick={() => Toast.open({ type: "text", message: "文字提示" })}
         />
         <Cell
           clickable
           title="加载提示"
           rightIcon={<ArrowRight />}
-          onClick={() => handleOpen({ type: ToastType.Loading, message: "加载中..." })}
+          onClick={() => Toast.open({ type: "loading", message: "加载中..." })}
         />
         <Cell
           clickable
           title="成功提示"
           rightIcon={<ArrowRight />}
-          onClick={() => handleOpen({ type: ToastType.Success, message: "成功文案" })}
+          onClick={() => Toast.open({ type: "success", message: "成功文案" })}
         />
         <Cell
           clickable
           title="失败提示"
           rightIcon={<ArrowRight />}
-          onClick={() => handleOpen({ type: ToastType.Fail, message: "失败文案" })}
+          onClick={() => Toast.open({ type: "fail", message: "失败文案" })}
         />
       </Block>
-      <Toast
-        open={options.open}
-        type={options.type}
-        onClose={() =>
-          setOptions({
-            ...options,
-            open: false,
-          })
-        }
-      >
-        {options.message}
-      </Toast>
+      <Block variant="card" title="自定义图标">
+        <Cell
+          clickable
+          title="自定义图标"
+          rightIcon={<ArrowRight />}
+          onClick={() => Toast.open({ message: "自定义图标", icon: <LikeOutlined /> })}
+        />
+        <Cell
+          clickable
+          title="自定义图片"
+          rightIcon={<ArrowRight />}
+          onClick={() =>
+            Toast.open({
+              message: "自定义图片",
+              icon: (
+                <Image
+                  style={{
+                    width: "1em",
+                    height: "1em",
+                  }}
+                  src="https://img01.yzcdn.cn/vant/logo.png"
+                />
+              ),
+            })
+          }
+        />
+        <Cell
+          clickable
+          title="自定义加载图标"
+          rightIcon={<ArrowRight />}
+          onClick={() => Toast.open({ message: "加载中...", icon: <Loading type="spinner" /> })}
+        />
+      </Block>
+      <Block variant="card" title="自定义位置">
+        <Cell
+          clickable
+          title="顶部展示"
+          rightIcon={<ArrowRight />}
+          onClick={() =>
+            Toast.open({
+              position: "top",
+              message: "顶部展示",
+            })
+          }
+        />
+        <Cell
+          clickable
+          title="底部展示"
+          rightIcon={<ArrowRight />}
+          onClick={() =>
+            Toast.open({
+              position: "bottom",
+              message: "底部展示",
+            })
+          }
+        />
+      </Block>
     </Page>
   )
 }

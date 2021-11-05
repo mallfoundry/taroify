@@ -12,6 +12,7 @@ export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 // Form Components
 export { default as Cascader } from "./cascader"
+export { default as Calendar } from "./calendar"
 export { default as Checkbox } from "./checkbox"
 export { default as DatetimePicker } from "./datetime-picker"
 export { default as Field } from "./field"

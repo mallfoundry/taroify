@@ -1,24 +1,23 @@
 import { cloneIconElement } from "@taroify/icons/utils"
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import TreeSelectContext from "./tree-select.context"
-import { TreeSelectOptionObject } from "./tree-select.shared"
 
-interface TreeSelectOptionProps {
+interface TreeSelectOptionProps extends ViewProps {
   className?: string
   style?: CSSProperties
   disabled?: boolean
   value?: any
   children?: ReactNode
-  onClick?: (event: TreeSelectOptionObject) => void
 }
 
 function TreeSelectOption(props: TreeSelectOptionProps) {
-  const { className, style, disabled = false, value, children, onClick } = props
+  const { className, style, disabled = false, value, children, onClick, ...restProps } = props
   const { activeIcon, value: ctxValue, onOptionClick } = useContext(TreeSelectContext)
 
   const active = useMemo(
@@ -26,16 +25,18 @@ function TreeSelectOption(props: TreeSelectOptionProps) {
     [ctxValue, value],
   )
 
-  const handleClick = useCallback(() => {
-    const event = {
-      active: !active,
-      disabled,
-      value,
-      children,
-    }
-    onClick?.(event)
-    onOptionClick?.(event)
-  }, [active, children, disabled, onClick, onOptionClick, value])
+  const handleClick = useCallback(
+    (event: ITouchEvent) => {
+      onClick?.(event)
+      onOptionClick?.({
+        active: !active,
+        disabled,
+        value,
+        children,
+      })
+    },
+    [active, children, disabled, onClick, onOptionClick, value],
+  )
 
   return (
     <View
@@ -50,6 +51,7 @@ function TreeSelectOption(props: TreeSelectOptionProps) {
       )}
       style={style}
       onClick={handleClick}
+      {...restProps}
     >
       {children}
       {

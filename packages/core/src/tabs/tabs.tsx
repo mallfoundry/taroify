@@ -1,8 +1,18 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import { PageScrollObject } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo, useRef } from "react"
+import {
+  Children,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
 import TabPane from "./tab-pane"
@@ -38,15 +48,31 @@ function useTabObjects(children: ReactNode) {
   }, [children])
 }
 
-export interface TabsProps {
+interface TabsSticky {
+  offsetTop?: string | number
+}
+
+function useTabsSticky(sticky?: boolean | TabsSticky): TabsSticky | undefined {
+  if (sticky === false) {
+    return undefined
+  }
+  if (_.isBoolean(sticky) && sticky) {
+    return {
+      offsetTop: 0,
+    }
+  }
+  return sticky
+}
+
+export interface TabsProps extends ViewProps {
   className?: string
   value?: any
+  theme?: TabsTheme
   duration?: number
   lazyRender?: boolean
   animated?: boolean
   swipeable?: boolean
-  sticky?: boolean
-  theme?: TabsTheme
+  sticky?: boolean | TabsSticky
   bordered?: boolean
   ellipsis?: boolean
   children?: ReactNode
@@ -54,6 +80,8 @@ export interface TabsProps {
   onChange?(value: any, event: TabEvent): void
 
   onTabClick?(event: TabEvent): void
+
+  onScroll?(scroll: PageScrollObject): void
 }
 
 function Tabs(props: TabsProps) {
@@ -70,16 +98,36 @@ function Tabs(props: TabsProps) {
     bordered,
     onTabClick,
     onChange,
+    onScroll,
+    ...restProps
   } = props
   const rootRef = useRef()
+  const stickyProps = useTabsSticky(sticky)
   const tabObjects = useTabObjects(props.children)
 
-  function handleTabClick(event: TabEvent) {
-    if (!event.disabled) {
-      onChange?.(event.value, event)
-    }
-    onTabClick?.(event)
-  }
+  const handleTabClick = useCallback(
+    (event: TabEvent) => {
+      if (!event.disabled) {
+        onChange?.(event.value, event)
+      }
+      onTabClick?.(event)
+    },
+    [onChange, onTabClick],
+  )
+
+  const headerRender = useMemo(
+    () => (
+      <TabsHeader
+        value={value}
+        theme={theme}
+        bordered={bordered}
+        ellipsis={ellipsis}
+        tabObjects={tabObjects}
+        onTabClick={handleTabClick}
+      />
+    ),
+    [bordered, ellipsis, handleTabClick, tabObjects, theme, value],
+  )
 
   return (
     <TabsContext.Provider
@@ -106,27 +154,17 @@ function Tabs(props: TabsProps) {
           },
           className,
         )}
+        {...restProps}
       >
-        {sticky ? (
-          <Sticky container={rootRef}>
-            <TabsHeader
-              value={value}
-              theme={theme}
-              bordered={bordered}
-              ellipsis={ellipsis}
-              tabObjects={tabObjects}
-              onTabClick={onTabClick}
-            />
-          </Sticky>
-        ) : (
-          <TabsHeader
-            value={value}
-            theme={theme}
-            bordered={bordered}
-            ellipsis={ellipsis}
-            tabObjects={tabObjects}
-            onTabClick={handleTabClick}
+        {stickyProps ? (
+          <Sticky
+            container={rootRef}
+            offsetTop={stickyProps.offsetTop}
+            children={headerRender}
+            onScroll={onScroll}
           />
+        ) : (
+          headerRender
         )}
         <TabsContent
           value={value}

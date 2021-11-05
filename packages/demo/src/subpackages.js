@@ -65,6 +65,11 @@ const subpackages = [
         path: "cascader/index",
       },
       {
+        title: "Calendar 日历",
+        name: "Calendar",
+        path: "calendar/index",
+      },
+      {
         title: "Checkbox 复选框",
         name: "Checkbox",
         path: "checkbox/index",

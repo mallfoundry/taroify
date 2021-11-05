@@ -1,10 +1,11 @@
 import { createContext } from "react"
-import { PopupPlacement, PopupPlacementString } from "./popup.shared"
+import { PopupPlacement } from "./popup.shared"
 
 interface PopupContextProps {
   open?: boolean
-  placement?: PopupPlacement | PopupPlacementString
-  onClose?: (opened: boolean) => void
+  placement?: PopupPlacement
+
+  onClose?(opened: boolean): void
 }
 
 const PopupContext = createContext<PopupContextProps>({})

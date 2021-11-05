@@ -233,6 +233,7 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
   return (
     <View
       className={classNames(prefixClassname("picker-column"), className)}
+      catchMove
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

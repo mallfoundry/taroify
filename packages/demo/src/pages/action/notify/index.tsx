@@ -1,5 +1,5 @@
 import { Cell, Notify } from "@taroify/core"
-import { NotifyColor } from "@taroify/core/notify"
+import { ArrowRight } from "@taroify/~icons/src"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
@@ -10,8 +10,8 @@ function BasicNotify() {
   const [open, setOpen] = useState(false)
 
   return (
-    <Block title="基础用法">
-      <Cell title="基础用法" clickable onClick={() => setOpen(true)} />
+    <Block variant="card" title="基础用法">
+      <Cell title="基础用法" clickable rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
       <Notify open={open} onClose={setOpen} children="通知内容" />
     </Block>
   )
@@ -28,6 +28,7 @@ function CustomNotify() {
       <Cell
         title="自定义颜色"
         clickable
+        rightIcon={<ArrowRight />}
         onClick={() => {
           setOptions({
             open: true,
@@ -37,6 +38,7 @@ function CustomNotify() {
       <Cell
         title="自定义时长"
         clickable
+        rightIcon={<ArrowRight />}
         onClick={() =>
           setOptions({
             open: true,
@@ -59,38 +61,32 @@ function CustomNotify() {
 }
 
 function NotifyWithPresetColors() {
-  const [options, setOptions] = useState<{ open: boolean; color?: NotifyColor }>({
-    open: false,
-    color: undefined,
-  })
-
   return (
-    <Block title="通知颜色">
+    <Block variant="card" title="通知颜色">
+      <Notify id="notify" />
       <Cell
         title="主要通知"
         clickable
-        onClick={() => setOptions({ open: true, color: "primary" })}
+        rightIcon={<ArrowRight />}
+        onClick={() => Notify.open({ color: "primary", message: "通知内容" })}
       />
       <Cell
         title="成功通知"
         clickable
-        onClick={() => setOptions({ open: true, color: "success" })}
+        rightIcon={<ArrowRight />}
+        onClick={() => Notify.open({ color: "success", message: "通知内容" })}
       />
       <Cell
         title="危险通知"
         clickable
-        onClick={() => setOptions({ open: true, color: "danger" })}
+        rightIcon={<ArrowRight />}
+        onClick={() => Notify.open({ color: "danger", message: "通知内容" })}
       />
       <Cell
         title="警告通知"
         clickable
-        onClick={() => setOptions({ open: true, color: "warning" })}
-      />
-      <Notify
-        open={options.open}
-        color={options.color}
-        children="通知内容"
-        onClose={(open) => setOptions({ open })}
+        rightIcon={<ArrowRight />}
+        onClick={() => Notify.open({ color: "warning", message: "通知内容" })}
       />
     </Block>
   )

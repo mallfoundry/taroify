@@ -1,16 +1,16 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import RadioGroupContext from "./radio-group.context"
-import { RadioGroupDirection, RadioGroupDirectionString } from "./radio-group.shared"
+import { RadioGroupDirection } from "./radio-group.shared"
 
-interface RadioGroupProps {
-  className?: string
+interface RadioGroupProps extends ViewProps {
   value?: any
   disabled?: boolean
-  direction?: RadioGroupDirection | RadioGroupDirectionString
+  direction?: RadioGroupDirection
   size?: number
   children?: ReactNode
 
@@ -22,10 +22,11 @@ function RadioGroup(props: RadioGroupProps) {
     className,
     value,
     disabled,
-    direction = RadioGroupDirection.Vertical,
+    direction = "vertical",
     size,
     children,
     onChange,
+    ...restProps
   } = props
   return (
     <RadioGroupContext.Provider
@@ -44,6 +45,7 @@ function RadioGroup(props: RadioGroupProps) {
           className,
         )}
         children={children}
+        {...restProps}
       />
     </RadioGroupContext.Provider>
   )
