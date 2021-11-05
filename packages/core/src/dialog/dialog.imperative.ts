@@ -1,8 +1,25 @@
 import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties, ReactNode, useEffect } from "react"
+import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { ButtonProps } from "../button"
 import { PopupBackdropProps } from "../popup"
+
+const DEFAULT_DIALOG_SELECTOR = "#dialog"
+
+const defaultDialogOptions: DialogOptions = {}
+
+// First, Once
+resetDefaultDialogOptions()
+
+export function setDefaultDialogOptions(options: DialogOptions) {
+  _.assign(defaultDialogOptions, options)
+}
+
+export function resetDefaultDialogOptions() {
+  _.assign(defaultDialogOptions, {
+    selector: DEFAULT_DIALOG_SELECTOR,
+  })
+}
 
 const dialogEvents = new Events()
 
@@ -11,6 +28,16 @@ export function useDialogOpen(cb: (options: DialogOptions) => void) {
     dialogEvents.on("open", cb)
     return () => {
       dialogEvents.off("open", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
+
+export function useDialogCancel(cb: (selector: string) => void) {
+  useEffect(() => {
+    dialogEvents.on("cancel", cb)
+    return () => {
+      dialogEvents.off("cancel", cb)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -33,16 +60,16 @@ export interface DialogOptions {
   onConfirm?(): void
 
   onCancel?(): void
+
+  onClose?(opened: boolean): void
 }
 
-function parseDialogOptions(message: string | DialogOptions): DialogOptions {
-  if (_.isPlainObject(message)) {
-    return message as DialogOptions
-  }
-  return { message }
+function parseDialogOptions(message: ReactNode | DialogOptions): DialogOptions {
+  const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
+  return _.assign({}, defaultDialogOptions, options)
 }
 
-export function openDialog(args: string | DialogOptions) {
+export function openDialog(args: ReactNode | DialogOptions) {
   const { selector = "#dialog", ...restOptions } = parseDialogOptions(args)
   dialogEvents.trigger("open", {
     selector,
@@ -50,7 +77,7 @@ export function openDialog(args: string | DialogOptions) {
   })
 }
 
-export function confirmDialog(args: string | DialogOptions) {
+export function confirmDialog(args: ReactNode | DialogOptions) {
   const { cancel = "取消", confirm = "确定", ...restOptions } = parseDialogOptions(args)
   return openDialog({
     confirm,
@@ -59,10 +86,14 @@ export function confirmDialog(args: string | DialogOptions) {
   })
 }
 
-export function alertDialog(args: string | Omit<DialogOptions, "confirm">) {
+export function alertDialog(args: ReactNode | Omit<DialogOptions, "confirm">) {
   const { confirm = "确定", ...restOptions } = parseDialogOptions(args)
   return openDialog({
     confirm,
     ...restOptions,
   })
+}
+
+export function cancelDialog(selector?: string) {
+  dialogEvents.trigger("cancel", selector ?? defaultDialogOptions.selector)
 }

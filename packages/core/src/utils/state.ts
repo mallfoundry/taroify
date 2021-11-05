@@ -43,14 +43,16 @@ export function useRefs<T = Element>() {
 
 export function useObject<S>(props: S): [S, Dispatch<SetStateAction<S>>] {
   const [state, setState] = useState<S>(props)
+  const stateRef = useToRef(state)
   const deps = useMemo(() => _.values(props), [props])
+
   useEffect(() => {
     setState(props)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 
   function dispatchState(newState: SetStateAction<S>) {
-    setState({ ...state, ...newState })
+    setState({ ...stateRef.current, ...newState })
   }
 
   return [state as S, dispatchState]

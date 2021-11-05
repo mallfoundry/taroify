@@ -10,6 +10,7 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
+  useCallback,
   useContext,
   useMemo,
 } from "react"
@@ -18,16 +19,13 @@ import { ButtonProps, createButton } from "../button"
 import ButtonContext from "../button/button.context"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
-import { useObject } from "../utils/state"
+import { matchSelector } from "../utils/dom/element"
+import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
 import DialogHeader from "./dialog-header"
-import { DialogOptions, useDialogOpen } from "./dialog.imperative"
-
-function matchDialog(selector?: string, id?: string) {
-  return _.replace(selector as string, "#", "") === id
-}
+import { DialogOptions, useDialogCancel, useDialogOpen } from "./dialog.imperative"
 
 interface DialogChildren {
   backdrop?: ReactElement
@@ -109,7 +107,8 @@ export interface DialogProps extends ViewProps {
   style?: CSSProperties
   open?: boolean
   children?: ReactNode
-  onClose?: (opened: boolean) => void
+
+  onClose?(opened: boolean): void
 }
 
 function Dialog(props: DialogProps) {
@@ -127,6 +126,8 @@ function Dialog(props: DialogProps) {
     },
     setState,
   ] = useObject<DialogProps & DialogOptions>(props)
+  const onCancelRef = useToRef(onCancel)
+
   const { onClick } = useContext(ButtonContext)
   const { backdrop: backdropElement, header, content, actions } = useDialogChildren(children)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
@@ -146,6 +147,14 @@ function Dialog(props: DialogProps) {
     setState({ open: false })
   }
 
+  const handleClose = useCallback(
+    (opened: boolean) => {
+      onClose?.(opened)
+      setState({ open: false })
+    },
+    [onClose, setState],
+  )
+
   useDialogOpen(
     ({
       selector,
@@ -156,7 +165,7 @@ function Dialog(props: DialogProps) {
       cancel,
       ...restOptions
     }: DialogOptions) => {
-      if (matchDialog(selector as string, id)) {
+      if (matchSelector(selector, id)) {
         const children: ReactNode[] = []
         const actions: ReactNode[] = []
 
@@ -184,6 +193,15 @@ function Dialog(props: DialogProps) {
     },
   )
 
+  useDialogCancel((selector) => {
+    if (matchSelector(selector, id)) {
+      onCancelRef.current?.()
+      setState({
+        open: false,
+      })
+    }
+  })
+
   return (
     <ButtonContext.Provider
       value={{
@@ -196,7 +214,7 @@ function Dialog(props: DialogProps) {
         duration={160}
         transaction={prefixClassname("dialog-bounce")}
         open={open}
-        onClose={onClose}
+        onClose={handleClose}
         {...restProps}
       >
         {backdrop}

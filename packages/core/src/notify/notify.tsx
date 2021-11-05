@@ -1,19 +1,15 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useEffect } from "react"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
+import { matchSelector } from "../utils/dom/element"
 import { useObject } from "../utils/state"
-import { NotifyOptions, useNotifyOpen } from "./notify.imperative"
+import { NotifyOptions, useNotifyClose, useNotifyOpen } from "./notify.imperative"
 import { NotifyColor } from "./notify.shared"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
-
-function matchNotify(selector?: string, id?: string) {
-  return _.replace(selector as string, "#", "") === id
-}
 
 export interface NotifyProps extends ViewProps {
   style?: CSSProperties
@@ -55,11 +51,19 @@ function Notify(props: NotifyProps) {
   }, [duration, onClose, open, setState])
 
   useNotifyOpen(({ selector, message, ...restOptions }: NotifyOptions) => {
-    if (matchNotify(selector as string, id)) {
+    if (matchSelector(selector, id)) {
       setState({
         open: true,
         children: message,
         ...restOptions,
+      })
+    }
+  })
+
+  useNotifyClose((selector) => {
+    if (matchSelector(selector, id)) {
+      setState({
+        open: false,
       })
     }
   })
