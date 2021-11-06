@@ -9,5 +9,13 @@
     "postcss": false,
     "minified": false
   },
-  "compileType": "miniprogram"
+  "compileType": "miniprogram",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "file",
+        "value": "stats.json"
+      }
+    ]
+  }
 }
