@@ -1,14 +1,11 @@
-<div class="vant-docs-card">
-  <div style="padding-top: 20px; text-align: center" >
-    <img class="van-doc-introduce-logo" style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
-    <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Taroify</h2>
-    <p>轻量、可靠的小程序端 Taro 组件库</p>
-  </div>
-</div>
+<p align="center">
+  <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style="margin-bottom: 10px;">
+</p>
+<h3 align="center">轻量、可靠的小程序端 Taro React UI 组件库</h3>
 
 ### 介绍
 
-Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用。
+Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro React 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用。
 
 ### 特性
 
@@ -22,9 +19,34 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 - 🍭 支持按需引入和 Tree Shaking
 - 🌍 支持国际化和语言包定制
 
-### 快速上手
+## 安装
 
-请参考[快速上手](/quickstart)章节。
+### 通过 npm 安装使用（推荐）
+
+* 通过 npm 安装
+
+```bash
+npm i @taroify/core -S --production
+```
+
+* 通过 yarn 安装
+
+```bash
+yarn add @taroify/core --production
+```
+
+## 使用组件
+
+```tsx
+import { Button } from "@taroify/core"
+import "@taroify/core/button/style"
+
+function Index() {
+  return <Button color="primary">按钮</Button>
+}
+```
+
+更多使用方式，请参考[快速上手](https://taroify.gitee.io/taroify.com/quickstart/)
 
 ### 贡献代码
 
@@ -38,12 +60,13 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 现代浏览器以及 Android 4.0+, iOS 8.0+。
 
 
-### 官方生态
+### Vant 官方生态
 
 由 Vant 官方团队维护的项目如下：
 
 | 项目 | 描述 |
 | --- | --- |
+| [vant](https://github.com/youzan/vant) | Vant Vue 版 |
 | [vant-weapp](https://github.com/youzan/vant-weapp) | Vant 微信小程序版 |
 | [vant-demo](https://github.com/youzan/vant-demo) | Vant 官方示例合集 |
 | [vant-cli](https://github.com/youzan/vant/tree/dev/packages/vant-cli) | 开箱即用的组件库搭建工具 |
