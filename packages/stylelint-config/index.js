@@ -9,7 +9,7 @@ module.exports = {
     "selector-type-no-unknown": [
       true,
       {
-        ignoreTypes: ["/^taro-/"],
+        ignoreTypes: ["/^taro-/", "page"],
       },
     ],
     "selector-pseudo-class-no-unknown": [
