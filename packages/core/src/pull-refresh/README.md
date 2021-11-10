@@ -19,25 +19,29 @@ import { PullRefresh } from "@taroify/core"
 ```tsx
 function BasicPullRefresh() {
   const [loading, setLoading] = useState(false)
-  const counterRef = useRef(0)
+  const [counter, setCounter] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop }) => setReachTop(scrollTop === 0))
+
   return (
     <PullRefresh
       loading={loading}
+      reachTop={reachTop}
       onRefresh={() => {
         setLoading(true)
         setTimeout(() => {
-          counterRef.current += 1
+          setCounter(counter + 1)
           setLoading(false)
         }, 1000)
       }}
     >
-      <View className="pull-text">
-        {counterRef.current ? "刷新次数：" + counterRef.current : "下拉试试"}
-      </View>
+      <View className="pull-text">{counter ? "刷新次数：" + counter : "下拉试试"}</View>
     </PullRefresh>
   )
 }
 ```
+> 在 PullRefresh 组件内部采用 Selector API 获得父滚动元素的 scrollTop 值会带来性能问题，因此将判断 reachTop 的逻辑移动到 PullRefresh 组件外部。在页面中使用 usePageScroll() 钩子获得 scrollTop 值，在 ScrollView 组件内监听 onScroll 事件获得 scrollTop 值。
 
 ### 完成提示
 
@@ -46,22 +50,25 @@ function BasicPullRefresh() {
 ```tsx
 function CompletedPullRefresh() {
   const [loading, setLoading] = useState(false)
-  const counterRef = useRef(0)
+  const [counter, setCounter] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop }) => setReachTop(scrollTop === 0))
+
   return (
     <PullRefresh
       loading={loading}
+      reachTop={reachTop}
       onRefresh={() => {
         setLoading(true)
         setTimeout(() => {
-          counterRef.current += 1
           setLoading(false)
+          setCounter(counter + 1)
         }, 1000)
       }}
     >
       <PullRefresh.Completed>刷新成功</PullRefresh.Completed>
-      <View className="pull-text">
-        {counterRef.current ? "刷新次数：" + counterRef.current : "下拉试试"}
-      </View>
+      <View className="pull-text">{counter ? "刷新次数：" + counter : "下拉试试"}</View>
     </PullRefresh>
   )
 }
@@ -69,20 +76,25 @@ function CompletedPullRefresh() {
 
 ### 自定义提示
 
-通过插槽可以自定义下拉刷新过程中的提示内容。
+通过子组件可以自定义下拉刷新过程中的提示内容。
 
 ```tsx
 function CustomPullRefresh() {
   const [loading, setLoading] = useState(false)
-  const counterRef = useRef(0)
+  const [counter, setCounter] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop }) => setReachTop(scrollTop === 0))
+
   return (
     <PullRefresh
       loading={loading}
       headHeight={80}
+      reachTop={reachTop}
       onRefresh={() => {
         setLoading(true)
         setTimeout(() => {
-          counterRef.current += 1
+          setCounter(counter + 1)
           setLoading(false)
         }, 1000)
       }}
@@ -102,16 +114,14 @@ function CustomPullRefresh() {
       <PullRefresh.Loading>
         <Image className="doge" src="https://img.yzcdn.cn/vant/doge-fire.jpg" />
       </PullRefresh.Loading>
-      <View className="pull-text">
-        {counterRef.current ? "刷新次数：" + counterRef.current : "下拉试试"}
-      </View>
+      <View className="pull-text">{counter ? "刷新次数：" + counter : "下拉试试"}</View>
     </PullRefresh>
   )
 }
 ```
 
 ```scss
-  .doge {
+.doge {
   width: 140px * 2;
   height: 72px * 2;
   margin-top: 8px * 2;
@@ -128,6 +138,7 @@ function CustomPullRefresh() {
 | loading | 是否处于加载中状态 | _boolean_ | - |
 | duration | 动画时长 | _number \| string_ | `300` |
 | headHeight | 顶部内容高度 | _number \| string_ | `50` |
+| reachTop | 是否处于顶部下拉 | _boolean_ | `true` |
 | pullDistance | 触发下拉刷新的距离 | _number \| string_ | 与 `headHeight` 一致 |
 | disabled | 是否禁用下拉刷新 | _boolean_ | `false` |
 
