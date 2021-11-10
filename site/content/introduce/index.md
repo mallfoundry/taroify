@@ -24,11 +24,11 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 
 ### 快速上手
 
-请参考[快速上手](/quickstart)章节。
+请参考[快速上手](https://taroify.gitee.io/taroify.com/quickstart/)章节。
 
 ### 贡献代码
 
-修改代码请阅读我们的[开发指南](/contribution)。
+修改代码请阅读我们的[开发指南](https://taroify.gitee.io/taroify.com/contribution/)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
@@ -66,7 +66,7 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 ### 链接
 
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
-- [更新日志](/changelog/)
+- [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
 
 ### 贡献者
 
@@ -75,6 +75,12 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro �
 </a>
 
 - 部分图形设计来自[BiscuitCoder](https://github.com/BiscuitCoder)
+
+## 微信交流群
+
+  <img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" />
+<br />
+备注 "taroify" 加好友后邀请进群
 
 ### 开源协议
 
