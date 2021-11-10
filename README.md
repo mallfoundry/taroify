@@ -1,7 +1,10 @@
-<p align="center">
-  <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style="margin-bottom: 10px;">
-</p>
-<h3 align="center">轻量、可靠的小程序端 Taro React UI 组件库</h3>
+<div class="vant-docs-card">
+  <div style="padding-top: 20px; text-align: center" >
+    <img class="van-doc-introduce-logo" style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
+    <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Taroify</h2>
+    <p>轻量、可靠的小程序端 Taro React UI 组件库</p>
+  </div>
+</div>
 
 ### 介绍
 
@@ -35,7 +38,7 @@ npm i @taroify/core -S --production
 yarn add @taroify/core --production
 ```
 
-## 使用组件
+### 使用组件
 
 ```tsx
 import { Button } from "@taroify/core"
@@ -50,7 +53,7 @@ function Index() {
 
 ### 贡献代码
 
-修改代码请阅读我们的[开发指南](/contribution)。
+修改代码请阅读我们的[开发指南](https://taroify.gitee.io/taroify.com/contribution/)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
@@ -58,7 +61,6 @@ function Index() {
 ### 浏览器支持
 
 现代浏览器以及 Android 4.0+, iOS 8.0+。
-
 
 ### Vant 官方生态
 
@@ -88,16 +90,23 @@ function Index() {
 
 ### 链接
 
+- [仓库地址](https://github.com/mallfoundry/taroify)
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
-- [更新日志](/changelog/)
+- [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
 
 ### 贡献者
 
 <a href="https://github.com/mallfoundry/taroify/graphs/contributors">
-  <img style="width: 200px" src="https://contrib.rocks/image?repo=mallfoundry/taroify"/>
+  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
 </a>
 
 - 部分图形设计来自[BiscuitCoder](https://github.com/BiscuitCoder)
+
+### 微信交流群
+
+<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<br />
+备注 "taroify" 加好友后邀请进群
 
 ### 开源协议
 
