@@ -1,8 +1,7 @@
-<div style="text-align: center" >
-  <img style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
-  <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Taroify</h2>
-  <p>轻量、可靠的小程序端 Taro React UI 组件库</p>
-</div>
+<p align="center">
+  <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style="margin-bottom: 10px;">
+</p>
+<h3 align="center">轻量、可靠的小程序端 Taro React UI 组件库</h3>
 
 ### 介绍
 
