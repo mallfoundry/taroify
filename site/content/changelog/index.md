@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.17-alpha.3
+
+`2021-11-11`
+
+**Bug Fixes**
+
+- Dialog
+  - 修复在未按需加载内部使用 Button 组件样式的问题 [#90](https://github.com/mallfoundry/taroify/issues/90) [#93](https://github.com/mallfoundry/taroify/pull/93)
+- Collapse
+  - 修复因继承自 StandardProps 接口，而导致 value 为 undefined 的问题 [#89](https://github.com/mallfoundry/taroify/issues/89) [#94](https://github.com/mallfoundry/taroify/pull/94)
+
+**Breaking Changes**
+
+- PullRefresh
+  - 将判断 reachTop 的逻辑移动到组件外部 [#92](https://github.com/mallfoundry/taroify/issues/92) [#95](https://github.com/mallfoundry/taroify/pull/95)
+
 ### v0.0.17-alpha.2
 
 `2021-11-05`
