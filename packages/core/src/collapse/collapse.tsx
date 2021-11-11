@@ -66,8 +66,16 @@ export interface CollapseProps extends ViewProps {
 }
 
 function Collapse(props: CollapseProps) {
-  const { className, bordered, value = "", accordion = false, onChange, ...restProps } = props
-  const { items } = useCollapseChildren(props.children)
+  const {
+    className,
+    bordered,
+    value = "",
+    accordion = false,
+    onChange,
+    children: childrenProp,
+    ...restProps
+  } = props
+  const { items } = useCollapseChildren(childrenProp)
 
   const toggleItem = useCallback(
     (itemValue: number | string, expanded: boolean) => {
@@ -87,7 +95,6 @@ function Collapse(props: CollapseProps) {
       if (process.env.NODE_ENV !== "production" && !validateActiveValue(value, accordion)) {
         return false
       }
-
       return accordion ? value === itemValue : (value as Array<number | string>).includes(itemValue)
     },
     [accordion, value],
