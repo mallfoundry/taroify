@@ -41,7 +41,8 @@ function BasicPullRefresh() {
   )
 }
 ```
-> 在 PullRefresh 组件内部采用 Selector API 获得父滚动元素的 scrollTop 值会带来性能问题，因此将判断 reachTop 的逻辑移动到 PullRefresh 组件外部。在页面中使用 usePageScroll() 钩子获得 scrollTop 值，在 ScrollView 组件内监听 onScroll 事件获得 scrollTop 值。
+
+> 在 PullRefresh 组件内部采用 Selector API 获得父滚动元素的 scrollTop 值会带来性能问题，因此需要在 PullRefresh 组件外部判断 reachTop 的逻辑。在页面中使用 usePageScroll() 钩子获得 scrollTop 值，在 ScrollView 组件内监听 onScroll 事件获得 scrollTop 值。
 
 ### 完成提示
 

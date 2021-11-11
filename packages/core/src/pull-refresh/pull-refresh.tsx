@@ -19,6 +19,7 @@ import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
+import { useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import {
   PullRefreshCompleted,
@@ -105,7 +106,7 @@ function PullRefresh(props: PullRefreshProps) {
     loading,
     disabled = false,
     headHeight = 50,
-    reachTop = true,
+    reachTop: reachTopProp = true,
     pullDistance: pullDistanceProp,
     duration: durationProp = 300,
     onRefresh,
@@ -118,6 +119,7 @@ function PullRefresh(props: PullRefreshProps) {
 
   const statusRef = useRef(PullRefreshStatus.Awaiting)
   const [distance, setDistance] = useState(0)
+  const reachTopRef = useToRef(reachTopProp)
   const durationRef = useRef(0)
 
   const touch = useTouch()
@@ -153,12 +155,12 @@ function PullRefresh(props: PullRefreshProps) {
 
   const checkPosition = useCallback(
     (event: ITouchEvent) => {
-      if (reachTop) {
+      if (reachTopRef.current) {
         resetDuration()
         touch.start(event)
       }
     },
-    [reachTop, touch],
+    [reachTopRef, touch],
   )
 
   const onTouchStart = useCallback(
@@ -190,24 +192,24 @@ function PullRefresh(props: PullRefreshProps) {
   const onTouchMove = useMemo(
     () => (event: ITouchEvent) => {
       if (isTouchable()) {
-        if (!reachTop) {
+        if (!reachTopRef.current) {
           checkPosition(event)
         }
 
         const { deltaY } = touch
         touch.move(event)
 
-        if (reachTop && deltaY >= 0 && touch.isVertical()) {
+        if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
           preventDefault(event)
           updateStatus(easeDistance(deltaY))
         }
       }
     },
-    [checkPosition, easeDistance, isTouchable, reachTop, touch, updateStatus],
+    [checkPosition, easeDistance, isTouchable, reachTopRef, touch, updateStatus],
   )
 
   const onTouchEnd = useCallback(() => {
-    if (reachTop && touch.deltaY && isTouchable()) {
+    if (reachTopRef.current && touch.deltaY && isTouchable()) {
       durationRef.current = durationProp
       if (statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
@@ -218,7 +220,7 @@ function PullRefresh(props: PullRefreshProps) {
         updateStatus(0)
       }
     }
-  }, [durationProp, headHeight, isTouchable, onRefresh, reachTop, touch.deltaY, updateStatus])
+  }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, touch.deltaY, updateStatus])
 
   const showCompleted = useCallback(() => {
     statusRef.current = PullRefreshStatus.Completed
