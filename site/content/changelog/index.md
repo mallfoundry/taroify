@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.17-alpha.4
+
+`2021-11-11`
+
+**Bug Fixes**
+
+- Sticky
+  - 删除多余的 `console.log()` 打印 [#97](https://github.com/mallfoundry/taroify/issues/97) [#98](https://github.com/mallfoundry/taroify/pull/98)
+
 ### v0.0.17-alpha.3
 
 `2021-11-11`
