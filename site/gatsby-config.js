@@ -30,6 +30,15 @@ module.exports = {
         theme_color_in_head: false,
       },
     },
+    {
+      resolve: "gatsby-plugin-nprogress",
+      options: {
+        // Setting a color is optional.
+        color: "#4fc08d",
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
