@@ -2,7 +2,7 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { useEffect, useState } from "react"
-import useScroll from "../hooks/useScroll"
+import useFixed from "../hooks/useFixed"
 
 import menus from "../utils/menus"
 import { listeningSimulatorEvents } from "../utils/simulator-router"
@@ -59,9 +59,7 @@ interface SimulatorProps {
 
 export default function Simulator(props: SimulatorProps) {
   const { slug } = props
-  const {
-    position: { y: positionY },
-  } = useScroll()
+  const fixed = useFixed()
   const [iframeUrl, setIframeUrl] = useState("")
 
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
@@ -71,7 +69,7 @@ export default function Simulator(props: SimulatorProps) {
   return (
     <div
       className={classNames("vant-simulator", {
-        "vant-simulator-fixed": positionY > 60,
+        "vant-simulator-fixed": fixed,
       })}
     >
       <iframe src={iframeUrl} frameBorder="0" />
