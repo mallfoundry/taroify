@@ -1,17 +1,18 @@
 // eslint-disable-next-line import/no-commonjs
 const TerserPlugin = require("terser-webpack-plugin")
+
 module.exports = {
   env: {
     // eslint-disable-next-line
-    NODE_ENV: "\"development\"",
+    NODE_ENV: '"development"',
   },
   defineConstants: {},
   mini: {
     webpackChain(chain) {
       // lodash bundle reduction
       // `shorthands`, `coercions`, `paths` are necessary to avoid some weird things
-      chain.plugin("lodash-webpack-plugin")
-        .use(require("lodash-webpack-plugin"), [{
+      chain.plugin("lodash-webpack-plugin").use(require("lodash-webpack-plugin"), [
+        {
           shorthands: true,
           cloning: true,
           caching: true,
@@ -22,7 +23,8 @@ module.exports = {
           coercions: true,
           flattening: true,
           paths: true,
-        }])
+        },
+      ])
 
       chain.merge({
         optimization: {
@@ -69,11 +71,11 @@ module.exports = {
       })
       // enable webpack-bundle-analyzer
       // if you would like to do some bundle reduction stuff
-      chain.plugin("analyzer")
-        .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin, [{
-          analyzerPort: "auto",
-          generateStatsFile: true,
-        }])
+      // chain.plugin("analyzer")
+      //   .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin, [{
+      //     analyzerPort: "auto",
+      //     generateStatsFile: true,
+      //   }])
     },
     commonChunks(commonChunks) {
       commonChunks.push("lodash")
