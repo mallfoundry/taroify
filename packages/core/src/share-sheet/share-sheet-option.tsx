@@ -1,5 +1,5 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -11,6 +11,7 @@ import {
   ReactElement,
   ReactNode,
   useContext,
+  useMemo,
 } from "react"
 import Image from "../image"
 import Sheet from "../sheet"
@@ -28,11 +29,13 @@ const PRESET_ICONS = [
   "wechat-moments",
 ]
 
-function renderOptionIcon(node?: ReactNode): ReactNode {
+function renderShareSheetOptionIcon(node?: ReactNode): ReactNode {
   if (!isValidElement(node)) {
     // Render preset icon component
     if (_.isString(node) && PRESET_ICONS.includes(node)) {
-      return renderOptionIcon(<Image src={`https://img.yzcdn.cn/vant/share-sheet-${node}.png`} />)
+      return renderShareSheetOptionIcon(
+        <Image src={`https://img.yzcdn.cn/vant/share-sheet-${node}.png`} />,
+      )
     }
     return node
   }
@@ -48,6 +51,10 @@ function renderOptionIcon(node?: ReactNode): ReactNode {
   return node
 }
 
+function useShareSheetOptionIcon(node?: ReactNode) {
+  return useMemo(() => renderShareSheetOptionIcon(node), [node])
+}
+
 interface ShareSheetOptionProps extends ViewProps {
   className?: string
   style?: CSSProperties
@@ -56,13 +63,12 @@ interface ShareSheetOptionProps extends ViewProps {
   icon?: ReactNode
   name?: ReactNode
   description?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 export function ShareSheetOption(props: ShareSheetOptionProps) {
   const { className, loading, disabled, icon, name, description, onClick, ...restProps } = props
   const { onSelect } = useContext(ShareSheetContext)
+  const image = useShareSheetOptionIcon(icon)
 
   return (
     <Sheet.Item
@@ -81,7 +87,7 @@ export function ShareSheetOption(props: ShareSheetOptionProps) {
         })
       }}
     >
-      {icon && renderOptionIcon(icon)}
+      {icon && image}
       {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
       {description && (
         <View

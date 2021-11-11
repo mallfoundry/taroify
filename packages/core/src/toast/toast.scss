@@ -6,25 +6,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: var(--toast-font-size, $toast-font-size);
-  line-height: var(--toast-line-height, $toast-line-height);
-  color: var(--toast-text-color, $toast-text-color);
-  background: var(--toast-background-color, $toast-background-color);
-  border-radius: var(--toast-border-radius, $toast-border-radius);
-
   width: var(--toast-width, $toast-width);
   max-width: var(--toast-max-width, $toast-max-width);
   min-height: var(--toast-min-height, $toast-min-height);
   padding: var(--toast-padding, $toast-padding);
-
-  transition: all var(--animation-duration-fast, $animation-duration-fast);
-
-  // allow newline character
-  white-space: pre-wrap;
+  font-size: var(--toast-font-size, $toast-font-size);
+  line-height: var(--toast-line-height, $toast-line-height);
+  color: var(--toast-text-color, $toast-text-color);
   text-align: center;
   // https://github.com/youzan/vant/issues/8959
   word-break: break-all;
+
+  // allow newline character
+  white-space: pre-wrap;
+  background: var(--toast-background-color, $toast-background-color);
   background-color: var(--toast-background-color, $toast-background-color);
+  border-radius: var(--toast-border-radius, $toast-border-radius);
+  transition: all var(--animation-duration-fast, $animation-duration-fast);
 
   &--text,
   &--html {

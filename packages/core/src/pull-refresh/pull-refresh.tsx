@@ -15,12 +15,11 @@ import {
   useRef,
   useState,
 } from "react"
-import { useMounted } from "../hooks"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
-import { getScrollParent, getScrollTop } from "../utils/dom/scroll"
 import { addUnitPx } from "../utils/format/unit"
+import { useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import {
   PullRefreshCompleted,
@@ -93,6 +92,8 @@ export interface PullRefreshProps extends ViewProps {
   disabled?: boolean
   duration?: number
   headHeight?: number
+
+  reachTop?: boolean
   pullDistance?: number
   children?: ReactNode
 
@@ -105,6 +106,7 @@ function PullRefresh(props: PullRefreshProps) {
     loading,
     disabled = false,
     headHeight = 50,
+    reachTop: reachTopProp = true,
     pullDistance: pullDistanceProp,
     duration: durationProp = 300,
     onRefresh,
@@ -114,26 +116,24 @@ function PullRefresh(props: PullRefreshProps) {
   const children = usePullRefreshChildren(props.children)
   const { completed: completedElement, content } = children
   const { duration: completedDuration = 500 } = getCompletedProps(completedElement)
-  const rootRef = useRef<HTMLElement>()
 
-  const scrollParentRef = useRef<HTMLElement>()
-
-  useMounted(() =>
-    getScrollParent(rootRef.current) //
-      .then((parent) => (scrollParentRef.current = parent)),
-  )
-
-  const reachTopRef = useRef<boolean>()
-  const [status, setStatus] = useState(PullRefreshStatus.Awaiting)
+  const statusRef = useRef(PullRefreshStatus.Awaiting)
   const [distance, setDistance] = useState(0)
+  const reachTopRef = useToRef(reachTopProp)
   const durationRef = useRef(0)
 
   const touch = useTouch()
 
+  function resetDuration() {
+    durationRef.current = 0
+  }
+
   const isTouchable = useCallback(
     () =>
-      PullRefreshStatus.Loading !== status && PullRefreshStatus.Completed !== status && !disabled,
-    [disabled, status],
+      PullRefreshStatus.Loading !== statusRef.current &&
+      PullRefreshStatus.Completed !== statusRef.current &&
+      !disabled,
+    [disabled],
   )
 
   const easeDistance = useCallback(
@@ -154,20 +154,19 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const checkPosition = useCallback(
-    async (event: ITouchEvent) => {
-      reachTopRef.current = (await getScrollTop(scrollParentRef.current)) === 0
+    (event: ITouchEvent) => {
       if (reachTopRef.current) {
-        durationRef.current = 0
+        resetDuration()
         touch.start(event)
       }
     },
-    [touch],
+    [reachTopRef, touch],
   )
 
   const onTouchStart = useCallback(
-    async (event: ITouchEvent) => {
+    (event: ITouchEvent) => {
       if (isTouchable()) {
-        await checkPosition(event)
+        checkPosition(event)
       }
     },
     [checkPosition, isTouchable],
@@ -177,24 +176,24 @@ function PullRefresh(props: PullRefreshProps) {
     (distance: number, isLoading?: boolean) => {
       const pullDistance = +(pullDistanceProp || headHeight)
       if (isLoading) {
-        setStatus(PullRefreshStatus.Loading)
+        statusRef.current = PullRefreshStatus.Loading
       } else if (distance === 0) {
-        setStatus(PullRefreshStatus.Awaiting)
+        statusRef.current = PullRefreshStatus.Awaiting
       } else if (distance < pullDistance) {
-        setStatus(PullRefreshStatus.Pulling)
+        statusRef.current = PullRefreshStatus.Pulling
       } else {
-        setStatus(PullRefreshStatus.Loosing)
+        statusRef.current = PullRefreshStatus.Loosing
       }
       setDistance(distance)
     },
     [headHeight, pullDistanceProp],
   )
 
-  const onTouchMove = useCallback(
-    async (event: ITouchEvent) => {
+  const onTouchMove = useMemo(
+    () => (event: ITouchEvent) => {
       if (isTouchable()) {
         if (!reachTopRef.current) {
-          await checkPosition(event)
+          checkPosition(event)
         }
 
         const { deltaY } = touch
@@ -206,13 +205,13 @@ function PullRefresh(props: PullRefreshProps) {
         }
       }
     },
-    [checkPosition, easeDistance, isTouchable, touch, updateStatus],
+    [checkPosition, easeDistance, isTouchable, reachTopRef, touch, updateStatus],
   )
 
   const onTouchEnd = useCallback(() => {
     if (reachTopRef.current && touch.deltaY && isTouchable()) {
       durationRef.current = durationProp
-      if (status === PullRefreshStatus.Loosing) {
+      if (statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
 
         // ensure value change can be watched
@@ -221,11 +220,12 @@ function PullRefresh(props: PullRefreshProps) {
         updateStatus(0)
       }
     }
-  }, [durationProp, headHeight, isTouchable, onRefresh, status, touch.deltaY, updateStatus])
+  }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, touch.deltaY, updateStatus])
 
   const showCompleted = useCallback(() => {
-    setStatus(PullRefreshStatus.Completed)
-    setTimeout(() => updateStatus(0), +completedDuration)
+    statusRef.current = PullRefreshStatus.Completed
+    resetDuration()
+    setTimeout(() => nextTick(() => updateStatus(0)), +completedDuration)
   }, [completedDuration, updateStatus])
 
   useEffect(() => {
@@ -248,28 +248,28 @@ function PullRefresh(props: PullRefreshProps) {
   }, [completedElement, loading, showCompleted])
 
   const getStatusText = useCallback(() => {
-    if (status === PullRefreshStatus.Pulling) {
+    if (statusRef.current === PullRefreshStatus.Pulling) {
       return "下拉即可刷新..."
     }
-    if (status === PullRefreshStatus.Loosing) {
+    if (statusRef.current === PullRefreshStatus.Loosing) {
       return "释放即可刷新..."
     }
-    if (status === PullRefreshStatus.Loading) {
+    if (statusRef.current === PullRefreshStatus.Loading) {
       return "加载中..."
     }
     return ""
-  }, [status])
+  }, [])
 
   const renderStatus = useCallback(() => {
     // @ts-ignore
-    const statusSlot = children[status as string]
+    const statusSlot = children[statusRef.current as string]
     if (statusSlot) {
       return statusSlot
     }
 
     const nodes: ReactElement[] = []
 
-    if (TEXT_STATUS.includes(status)) {
+    if (TEXT_STATUS.includes(statusRef.current)) {
       nodes.push(
         <View
           key="text"
@@ -279,7 +279,7 @@ function PullRefresh(props: PullRefreshProps) {
       )
     }
 
-    if (status === PullRefreshStatus.Loading) {
+    if (statusRef.current === PullRefreshStatus.Loading) {
       nodes.push(
         <Loading
           key="loading"
@@ -290,7 +290,7 @@ function PullRefresh(props: PullRefreshProps) {
     }
 
     return nodes
-  }, [children, getStatusText, status])
+  }, [children, getStatusText])
 
   const trackStyle = {
     transitionDuration: `${durationRef.current}ms`,
@@ -311,14 +311,11 @@ function PullRefresh(props: PullRefreshProps) {
         distance,
       }}
     >
-      <View
-        ref={rootRef}
-        className={classNames(prefixClassname("pull-refresh"), className)}
-        {...restProps}
-      >
+      <View className={classNames(prefixClassname("pull-refresh"), className)} {...restProps}>
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
+          catchMove
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}

@@ -9,13 +9,7 @@ import TabPaneBase from "./tab-pane-base"
 import { TabEvent, TabObject } from "./tabs.shared"
 
 function useTabPanes(tabObjects?: TabObject[]): ReactNode {
-  return useMemo(
-    () =>
-      _.map(tabObjects, ({ key, value, className, children }) => (
-        <TabPaneBase key={key} value={value} className={className} children={children} />
-      )),
-    [tabObjects],
-  )
+  return useMemo(() => _.map(tabObjects, (props) => <TabPaneBase {...props} />), [tabObjects])
 }
 
 interface TabsContentProps {

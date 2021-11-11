@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick, PageScrollObject, usePageScroll } from "@tarojs/taro"
+import { PageScrollObject, usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -12,6 +12,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
@@ -124,27 +125,30 @@ export default function Sticky(props: StickyProps) {
 
   async function invokeScroll({ scrollTop }: PageScrollObject) {
     const __rootRect__ = await getRect(rootRef)
-    setRootRect(__rootRect__)
-    if (position === "top") {
-      if (containerRef) {
-        const containerRect = await getRect(containerRef)
-        const difference = containerRect.bottom - offsetValue - __rootRect__.height
-        setTransform(difference < 0 ? difference : 0)
-        setFixed(offsetValue > __rootRect__.top && containerRect.bottom > 0)
+    console.log(__rootRect__)
+    if (__rootRect__) {
+      setRootRect(__rootRect__)
+      if (position === "top") {
+        if (containerRef) {
+          const containerRect = await getRect(containerRef)
+          const difference = containerRect.bottom - offsetValue - __rootRect__.height
+          setTransform(difference < 0 ? difference : 0)
+          setFixed(offsetValue > __rootRect__.top && containerRect.bottom > 0)
+        } else {
+          setFixed(offsetValue > __rootRect__.top)
+        }
       } else {
-        setFixed(offsetValue > __rootRect__.top)
-      }
-    } else {
-      const { windowHeight } = await getSystemRect()
-      if (containerRef) {
-        const containerRect = await getRect(containerRef)
-        const difference = windowHeight - containerRect.top - offsetValue - __rootRect__.height
-        setTransform(difference < 0 ? difference : 0)
-        setFixed(
-          windowHeight - offsetValue < __rootRect__.bottom && windowHeight > containerRect.top,
-        )
-      } else {
-        setFixed(windowHeight - offsetValue < __rootRect__.bottom)
+        const { windowHeight } = await getSystemRect()
+        if (containerRef) {
+          const containerRect = await getRect(containerRef)
+          const difference = windowHeight - containerRect.top - offsetValue - __rootRect__.height
+          setTransform(difference < 0 ? difference : 0)
+          setFixed(
+            windowHeight - offsetValue < __rootRect__.bottom && windowHeight > containerRect.top,
+          )
+        } else {
+          setFixed(windowHeight - offsetValue < __rootRect__.bottom)
+        }
       }
     }
     onScroll?.({ scrollTop })
@@ -157,9 +161,7 @@ export default function Sticky(props: StickyProps) {
     counterRef.current++
   }, [fixed, onChange])
 
-  // TODO onMounted in */hooks package
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => nextTick(() => invokeScroll({ scrollTop: 0 })), [])
+  useMounted(() => invokeScroll({ scrollTop: 0 }))
 
   usePageScroll(({ scrollTop }) => invokeScroll({ scrollTop }))
 

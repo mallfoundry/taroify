@@ -61,10 +61,10 @@
     top: 50%;
     left: 50%;
     z-index: 0;
-    color: $calendar-month-watermark-color;
     font-size: $calendar-month-watermark-font-size;
-    transform: translate(-50%, -50%);
+    color: $calendar-month-watermark-color;
     pointer-events: none;
+    transform: translate(-50%, -50%);
   }
 
   &__day,
@@ -120,9 +120,9 @@
           right: 0;
           bottom: 0;
           left: 0;
+          content: '';
           background-color: currentColor;
           opacity: $calendar-range-middle-background-opacity;
-          content: '';
         }
       }
     }
@@ -176,14 +176,14 @@
 
   &__footer {
     flex-shrink: 0;
-    padding-left: $padding-md;
     padding-right: $padding-md;
+    padding-left: $padding-md;
   }
 
   &__confirm {
     height: $calendar-confirm-button-height;
     margin: $calendar-confirm-button-margin;
-    border-color: $calendar-confirm-button-color;
     background: $calendar-confirm-button-color;
+    border-color: $calendar-confirm-button-color;
   }
 }
