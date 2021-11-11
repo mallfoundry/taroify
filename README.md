@@ -85,7 +85,7 @@ function Index() {
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
-### 友链
+### 友情推荐
 
 | 项目 | 描述 |
 | --- | --- |
