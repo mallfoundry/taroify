@@ -90,7 +90,7 @@ function Index() {
 | 项目 | 描述 |
 | --- | --- |
 | [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
-| [taro-hooks](https://github.com/innocces/taro-hooks) | 为Taro而设计的Hooks Library |
+| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
 
 ### 链接
 
