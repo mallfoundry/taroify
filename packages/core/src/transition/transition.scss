@@ -81,6 +81,7 @@
 
 // Fade Animation
 .#{$component-prefix}transition-fade {
+  &-appear-active,
   &-enter-active {
     animation: var(--animation-duration-base, $animation-duration-base) #{$component-prefix}fade-in both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
@@ -92,6 +93,7 @@
 
 // Slide Animation
 .#{$component-prefix}transition-slide-up {
+  &-appear-active,
   &-enter-active {
     animation: #{$component-prefix}slide-up-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
@@ -102,6 +104,7 @@
 }
 
 .#{$component-prefix}transition-slide-down {
+  &-appear-active,
   &-enter-active {
     animation: #{$component-prefix}slide-down-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
@@ -112,6 +115,7 @@
 }
 
 .#{$component-prefix}transition-slide-left {
+  &-appear-active,
   &-enter-active {
     animation: #{$component-prefix}slide-left-enter var(--animation-duration-base, $animation-duration-base) both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }
@@ -122,6 +126,7 @@
 }
 
 .#{$component-prefix}transition-slide-right {
+  &-appear-active,
   &-enter-active {
     animation: #{$component-prefix}slide-right-enter $animation-duration-base both var(--animation-timing-function-enter, $animation-timing-function-enter);
   }

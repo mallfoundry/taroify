@@ -64,6 +64,7 @@ export default function Transition(props: TransitionProps) {
       in={inProp}
       mountOnEnter
       timeout={duration}
+      appear
       classNames={transactionName}
       style={{
         ...childrenStyle,
