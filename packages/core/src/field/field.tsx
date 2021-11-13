@@ -279,7 +279,7 @@ function Field(props: FieldProps) {
               placeholderClassName,
             )}
             name={name}
-            // value={valueProp}
+            value={valueProp}
             autoFocus={autoFocus}
             focus={focus}
             type={type as TaroInputType}
