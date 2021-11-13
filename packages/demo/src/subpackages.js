@@ -29,9 +29,9 @@ const subpackages = [
         path: "image/index",
       },
       {
-        title: "Layout 布局",
-        name: "Layout",
-        path: "layout/index",
+        title: "Flex 布局",
+        name: "Flex",
+        path: "flex/index",
       },
       {
         title: "Popup 弹出层",
