@@ -5,7 +5,7 @@ import { ReactNode } from "react"
 interface TabPaneProps extends ViewProps {
   className?: string
   value?: any
-  titleClassName?: string
+  classNames?: { title: string }
   title?: ReactNode
   disabled?: boolean
   dot?: boolean
