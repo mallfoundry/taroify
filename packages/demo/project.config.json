@@ -38,6 +38,12 @@
       "list": [
         {
           "id": -1,
+          "name": "toast",
+          "pathName": "pages/basic/toast/index",
+          "query": ""
+        },
+        {
+          "id": -1,
           "name": "cascader",
           "pathName": "pages/form/cascader/index",
           "query": ""
