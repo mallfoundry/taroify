@@ -8,8 +8,9 @@ interface CascaderOptionProps {
   children?: ReactNode
 }
 
-// eslint-disable-next-line no-empty-pattern
-function CascaderOption({}: CascaderOptionProps) {
+function CascaderOption(props: CascaderOptionProps): JSX.Element
+
+function CascaderOption() {
   return <></>
 }
 
