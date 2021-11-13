@@ -1,7 +1,7 @@
 @import "~@taroify/core/styles/prefix";
 
-.layout-demo {
-  .#{$component-prefix}col {
+.flex-demo {
+  .#{$component-prefix}flex-item {
     height: 30px * 2;
     margin-bottom: 10px;
     font-size: 13px * 2;

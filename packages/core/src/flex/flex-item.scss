@@ -1,19 +1,20 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-.#{$component-prefix}col {
+.#{$component-prefix}flex-item {
+  position: relative;
   box-sizing: border-box;
-  display: block;
-  min-height: 1px;
+  max-width: 100%;
+  min-height: 1px * $hd;
 }
 
 @for $i from 1 through 24 {
-  .#{$component-prefix}col-#{$i} {
+  .#{$component-prefix}flex-item-#{$i} {
     flex: 0 0 $i * (100% / 24);
     max-width: $i * (100% / 24);
   }
 
-  .#{$component-prefix}col-offset-#{$i} {
+  .#{$component-prefix}flex-item-offset-#{$i} {
     margin-left: $i * (100% / 24) * $hd;
   }
 }
