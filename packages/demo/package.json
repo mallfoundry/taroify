@@ -37,8 +37,8 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@taroify/core": "^0.0.17-alpha.4",
-    "@taroify/icons": "^0.0.17-alpha.4",
     "@taroify/hooks": "^0.0.17-alpha.4",
+    "@taroify/icons": "^0.0.17-alpha.4",
     "@tarojs/components": "3.3.14",
     "@tarojs/react": "3.3.14",
     "@tarojs/runtime": "3.3.14",
@@ -69,7 +69,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "lodash-webpack-plugin": "^0.11.6",
     "sass": "^1.34.0",
-    "stylelint": "9.3.0",
+    "stylelint": "9.3.0",,
+    "terser-webpack-plugin": "^5.2.5",
     "typescript": "^4.1.0",
     "webpack-bundle-analyzer": "^4.5.0"
   }
