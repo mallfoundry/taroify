@@ -1,0 +1,82 @@
+@import "./variables";
+
+.#{$component-prefix}cascader {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--cascader-header-height, $cascader-header-height);
+    padding: var(--cascader-header-padding, $cascader-header-padding);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    font-size: var(--cascader-header-font-size, $cascader-header-font-size);
+    line-height: var(--cascader-header-line-height, $cascader-header-line-height);
+  }
+
+  &__tabs {
+
+    .#{$component-prefix}tabs__tab {
+      flex: none;
+      padding: 0 10px * $hd;
+    }
+
+    &.#{$component-prefix}tabs--line .#{$component-prefix}tabs__wrap {
+      height: var(--cascader-tabs-height, $cascader-tabs-height);
+    }
+
+    .#{$component-prefix}tabs__nav--complete {
+      padding-right: 6px * $hd;
+      padding-left: 6px * $hd;
+    }
+  }
+
+  &__tab {
+    color: var(--cascader-tab-color, $cascader-tab-color);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+
+    &--inactive {
+      color: var(--cascader-unselected-tab-color, $cascader-unselected-tab-color);
+      font-weight: normal;
+    }
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px * $hd var(--padding-md, $padding-md);
+    font-size: var(--font-size-md, $font-size-md);
+    line-height: var(--line-height-md, $line-height-md);
+    cursor: pointer;
+
+    &:active, &--hover {
+      background-color: var(--active-color, $active-color);
+    }
+
+    &--active {
+      color: var(--cascader-active-color, $cascader-active-color);
+      font-weight: var(--font-weight-bold, $font-weight-bold);
+    }
+
+    &--disabled {
+      color: var(--van-cascader-option-disabled-color);
+      cursor: not-allowed;
+
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__active-icon {
+    font-size: var(--cascader-active-icon-size, $cascader-active-icon-size);
+  }
+
+  &__options {
+    box-sizing: border-box;
+    height: var(--cascader-options-height, $cascader-options-height);
+    padding-top: 6px * $hd;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

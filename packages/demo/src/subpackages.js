@@ -60,6 +60,11 @@ const subpackages = [
     title: "表单组件",
     pages: [
       {
+        title: "Cascader 级联选择",
+        name: "Cascader",
+        path: "cascader/index",
+      },
+      {
         title: "Calendar 日历",
         name: "Calendar",
         path: "calendar/index",

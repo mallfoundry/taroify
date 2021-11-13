@@ -118,7 +118,7 @@ export default function TabsHeader(props: TabsHeaderProps) {
                 key={tabObject.key}
                 // TODO swipeThreshold does not support
                 flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
-                className={tabObject.titleClassName}
+                className={tabObject?.classNames?.title}
                 dot={tabObject.dot}
                 badge={tabObject.badge}
                 active={activeValue === tabObject.value}

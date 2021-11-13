@@ -1,0 +1,11 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.cascader-demo {
+
+  .custom-color {
+    --tabs-active-color: #1989fa;
+    --cascader-active-color: #1989fa;
+  }
+}

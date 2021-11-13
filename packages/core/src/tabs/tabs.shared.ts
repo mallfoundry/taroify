@@ -13,7 +13,7 @@ export interface TabObject {
   index: number
   value: any
   className?: string
-  titleClassName?: string
+  classNames?: { title: string }
   title?: ReactNode
   disabled?: boolean
   dot?: boolean

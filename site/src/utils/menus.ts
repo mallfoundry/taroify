@@ -67,6 +67,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "Cascader 级联选择",
+        to: "/components/cascader/",
+      },
+      {
         title: "Calendar 日历",
         to: "/components/calendar/",
       },
