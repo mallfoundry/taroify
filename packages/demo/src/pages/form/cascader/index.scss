@@ -3,7 +3,9 @@
 @import "../../../styles/prefix";
 
 .cascader-demo {
-  .#{$demo-prefix}block__content {
-    padding: 0;
+
+  .custom-color {
+    --tabs-active-color: #1989fa;
+    --cascader-active-color: #1989fa;
   }
 }

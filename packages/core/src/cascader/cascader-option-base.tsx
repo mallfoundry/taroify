@@ -1,21 +1,20 @@
 import { Success } from "@taroify/icons"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-interface CascaderOptionBaseProps {
+interface CascaderOptionBaseProps extends ViewProps {
   className?: string
   active?: boolean
   disabled?: boolean
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 function CascaderOptionBase(props: CascaderOptionBaseProps) {
-  const { className, active, disabled, children, onClick } = props
+  const { className, active, disabled, children, ...restProps } = props
   return (
     <View
       className={classNames(
@@ -27,7 +26,7 @@ function CascaderOptionBase(props: CascaderOptionBaseProps) {
         className,
       )}
       hoverClass={prefixClassname("cascader__option--hover")}
-      onClick={onClick}
+      {...restProps}
     >
       <View>{children}</View>
       {active && <Success className={prefixClassname("cascader__active-icon")} />}

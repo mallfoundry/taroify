@@ -1,28 +1,18 @@
-import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import CascaderContext from "./cascader.context"
 
-interface CascaderHeaderProps {
-  className?: string
+interface CascaderHeaderProps extends ViewProps {
   children?: ReactNode
 }
 
 function CascaderHeader(props: CascaderHeaderProps) {
-  const { className, children } = props
-  const { title, closeable, closeIcon, onClose } = useContext(CascaderContext)
+  const { className, ...restProps } = props
   return (
-    <View className={classNames(prefixClassname("cascader__header"), className)}>
-      {children ?? <View className={prefixClassname("cascader__title")} children={title} />}
-      {closeable &&
-        cloneIconElement(closeIcon, {
-          className: prefixClassname("cascader__close-icon"),
-          onClick: onClose,
-        })}
-    </View>
+    <View className={classNames(prefixClassname("cascader__header"), className)} {...restProps} />
   )
 }
 

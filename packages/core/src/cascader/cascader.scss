@@ -8,21 +8,9 @@
     justify-content: space-between;
     height: var(--cascader-header-height, $cascader-header-height);
     padding: var(--cascader-header-padding, $cascader-header-padding);
-  }
-
-  &__title {
     font-weight: var(--font-weight-bold, $font-weight-bold);
-    font-size: var(--cascader-title-font-size, $cascader-title-font-size);
-    line-height: var(--cascader-title-line-height, $cascader-title-line-height);
-  }
-
-  &__close-icon {
-    color: var(--cascader-close-icon-color, $cascader-close-icon-color);
-    font-size: var(--cascader-close-icon-size, $cascader-close-icon-size);
-
-    &:active {
-      color: var(--cascader-close-icon-active-color, $cascader-close-icon-active-color);
-    }
+    font-size: var(--cascader-header-font-size, $cascader-header-font-size);
+    line-height: var(--cascader-header-line-height, $cascader-header-line-height);
   }
 
   &__tabs {

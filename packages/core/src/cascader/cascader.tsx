@@ -1,5 +1,4 @@
-import { Cross } from "@taroify/icons"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -21,7 +20,6 @@ import CascaderHeader from "./cascader-header"
 import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
 import CascaderTab from "./cascader-tab"
-import CascaderContext from "./cascader.context"
 import { CascaderOptionObject, CascaderTabObject, isActiveOption } from "./cascader.shared"
 
 function getCascaderOptions(children: ReactNode, tabIndex: number): CascaderOptionObject[] {
@@ -74,12 +72,9 @@ function useCascaderChildren(children?: ReactNode): CascaderChildren {
 
 export interface CascaderProps {
   className?: string
-  title?: ReactNode
   value?: any[]
-  placeholder?: ReactNode
   swipeable?: boolean
-  closeable?: boolean
-  closeIcon?: ReactNode
+  placeholder?: ReactNode
   children?: ReactNode
 
   onChange?(values: any[], options: CascaderOptionObject[]): void
@@ -87,24 +82,20 @@ export interface CascaderProps {
   onSelect?(values: any[], options: CascaderOptionObject[]): void
 
   onTabClick?(event: Tabs.TabEvent): void
-
-  onClose?(event: ITouchEvent): void
 }
 
 function Cascader(props: CascaderProps) {
   const {
     className,
-    title,
     value = [],
     placeholder = "请选择",
-    closeable = true,
-    closeIcon = <Cross />,
+    swipeable = false,
+    children: childrenProp,
     onChange,
     onSelect,
     onTabClick,
-    onClose,
   } = props
-  const { header = <CascaderHeader />, tabs } = useCascaderChildren(props.children)
+  const { header, tabs } = useCascaderChildren(childrenProp)
 
   const [values, setValues] = useState<any[]>([])
 
@@ -173,58 +164,57 @@ function Cascader(props: CascaderProps) {
     }
   }, [value, valuesRef])
 
+  const panes = useMemo(
+    () =>
+      _.map(activeTabs, (tab, index) => (
+        <Tabs.TabPane
+          key={index}
+          value={index}
+          title={_.get(activeOptions, index)?.children ?? placeholder}
+          classNames={{
+            title: classNames(prefixClassname("cascader__tab"), {
+              [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
+                _.get(activeOptions, index)?.children,
+              ),
+            }),
+          }}
+        >
+          <View className={prefixClassname("cascader__options")}>
+            {
+              //
+              _.map(tab.options, (option) => {
+                const { onClick, value, children, ...restProps } = option
+                return (
+                  <CascaderOptionBase
+                    {...restProps}
+                    children={children ?? value}
+                    onClick={(event) => {
+                      onClick?.(event)
+                      handleSelect(option)
+                    }}
+                    active={isActiveOption(option, values)}
+                  />
+                )
+              })
+            }
+          </View>
+        </Tabs.TabPane>
+      )),
+    [activeOptions, activeTabs, handleSelect, placeholder, values],
+  )
+
   return (
     <View className={classNames(prefixClassname("cascader"), className)}>
-      <CascaderContext.Provider
-        value={{
-          title,
-          closeable,
-          closeIcon,
-          onClose,
-        }}
-        children={header}
-      />
+      {header}
       <Tabs
         className={prefixClassname("cascader__tabs")}
         value={activeTab}
-        swipeable
+        animated
+        swipeable={swipeable}
         onChange={(value) => setActiveTab(value)}
         onTabClick={onTabClick}
-      >
-        {
-          //
-          _.map(activeTabs, (tab, index) => (
-            <Tabs.TabPane
-              key={index}
-              value={index}
-              title={_.get(activeOptions, index)?.children ?? placeholder}
-              classNames={{
-                title: classNames(prefixClassname("cascader__tab"), {
-                  [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
-                    _.get(activeOptions, index)?.children,
-                  ),
-                }),
-              }}
-            >
-              <View className={prefixClassname("cascader__options")}>
-                {
-                  //
-                  _.map(tab.options, (option) => (
-                    <CascaderOptionBase
-                      key={option.key}
-                      className={option.className}
-                      active={isActiveOption(option, values)}
-                      disabled={option.disabled}
-                      children={option.children ?? option.value}
-                      onClick={() => handleSelect(option)}
-                    />
-                  ))
-                }
-              </View>
-            </Tabs.TabPane>
-          ))
-        }
-      </Tabs>
+        children={panes}
+      />
     </View>
   )
 }

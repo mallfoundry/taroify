@@ -17,5 +17,32 @@
         "value": "stats.json"
       }
     ]
+  },
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "cascader",
+          "pathName": "pages/form/cascader/index",
+          "query": ""
+        }
+      ]
+    }
   }
 }
