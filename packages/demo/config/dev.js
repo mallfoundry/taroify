@@ -61,7 +61,6 @@ module.exports = {
               // minify: TerserPlugin.swcMinify,
               cache: true,
               extractComments: true,
-              parallel: true,
               // should work with `mini.sourceMapType='source-map'`
               // refer to https://webpack.js.org/plugins/terser-webpack-plugin/#note-about-source-maps
               sourceMap: true,
