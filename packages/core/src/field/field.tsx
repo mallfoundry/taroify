@@ -162,7 +162,7 @@ function Field(props: FieldProps) {
     style,
     name,
     value: valueProp,
-    maxlength = -1,
+    maxlength,
     type = FieldType.Text,
     align,
     bordered,
@@ -279,7 +279,7 @@ function Field(props: FieldProps) {
               placeholderClassName,
             )}
             name={name}
-            value={valueProp}
+            // value={valueProp}
             autoFocus={autoFocus}
             focus={focus}
             type={type as TaroInputType}
