@@ -45,8 +45,8 @@ const menus = [
         to: "/components/image/",
       },
       {
-        title: "Layout 布局",
-        to: "/components/layout/",
+        title: "Flex 布局",
+        to: "/components/flex/",
       },
       {
         title: "Popup 弹出层",

@@ -169,7 +169,8 @@ function PickerPopup() {
         rightIcon={<ArrowRight />}
         onClick={() => setOpenPicker(true)}
       />
-      <Popup open={openPicker} rounded placement="bottom">
+      <Popup open={openPicker} rounded placement="bottom" onClose={setOpenPicker}>
+        <Popup.Backdrop />
         <Picker
           onCancel={() => setOpenPicker(false)}
           onConfirm={(values) => {

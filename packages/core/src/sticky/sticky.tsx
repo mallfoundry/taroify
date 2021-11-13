@@ -125,7 +125,6 @@ export default function Sticky(props: StickyProps) {
 
   async function invokeScroll({ scrollTop }: PageScrollObject) {
     const __rootRect__ = await getRect(rootRef)
-    console.log(__rootRect__)
     if (__rootRect__) {
       setRootRect(__rootRect__)
       if (position === "top") {

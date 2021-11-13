@@ -1,3 +1,1 @@
-import Col from "./col"
-
-export default Col
+export { default } from "./col"

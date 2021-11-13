@@ -1,0 +1,84 @@
+@import "../styles/prefix";
+
+.#{$component-prefix}flex {
+  display: flex;
+
+  &::before,
+  &::after {
+    display: flex;
+  }
+
+  &--justify {
+
+    &-start {
+      justify-content: flex-start;
+    }
+
+    &-center {
+      justify-content: center;
+    }
+
+    &-end {
+      justify-content: flex-end;
+    }
+
+    &-space-between {
+      justify-content: space-between;
+    }
+
+    &-space-around {
+      justify-content: space-around;
+    }
+  }
+
+  &--align {
+
+    &-start {
+      align-items: flex-start;
+    }
+
+    &-center {
+      align-items: center;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-baseline {
+      align-items: baseline;
+    }
+
+    &-stretch {
+      align-items: stretch;
+    }
+  }
+
+  &--row {
+    flex-direction: row;
+  }
+
+  &--row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--column-reverse {
+    flex-direction: column-reverse;
+  }
+
+  &--nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+}

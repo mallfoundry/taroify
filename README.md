@@ -85,6 +85,14 @@ function Index() {
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
+### 友情推荐
+
+| 项目 | 描述 |
+| --- | --- |
+| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
+| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
+| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
+
 ### 链接
 
 - [仓库地址](https://github.com/mallfoundry/taroify)

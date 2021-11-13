@@ -1,49 +1,9 @@
-import { ITouchEvent, View } from "@tarojs/components"
-import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext } from "react"
-import { RowContext } from "../row/row"
-import { prefixClassname } from "../styles"
+import Flex, { FlexItemProps } from "../flex"
 
-interface ColProps {
-  className?: string
-  style?: CSSProperties
-  span?: string | number
-  offset?: string | number
-  children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
+function Col(props: FlexItemProps) {
+  console.warn("[Deprecated] The Col component is deprecated. Please use the Flex.Item component.")
+  return <Flex.Item {...props} />
 }
 
-export default function Col(props: ColProps) {
-  const { className, style, span, offset, children, onClick } = props
-  const { gutter: gutters } = useContext(RowContext)
-  const [horizontalGutter] = gutters
-
-  // Horizontal gutter use padding
-  const gutterStyle: React.CSSProperties = {}
-  if (horizontalGutter) {
-    const averagePadding = horizontalGutter / 2
-    gutterStyle.paddingLeft = `${averagePadding}px`
-    gutterStyle.paddingRight = `${averagePadding}px`
-  }
-
-  return (
-    <View
-      className={classNames(
-        prefixClassname("col"),
-        {
-          [prefixClassname(`col-${span}`)]: span !== undefined,
-          [prefixClassname(`col-offset-${offset}`)]: offset !== undefined,
-        },
-        className,
-      )}
-      style={{
-        ...style,
-        ...gutterStyle,
-      }}
-      children={children}
-      onClick={onClick}
-    />
-  )
-}
+export default Col

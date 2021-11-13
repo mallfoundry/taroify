@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react"
 
-export default function useScroll() {
-  const [x, setX] = useState(0)
-  const [y, setY] = useState(0)
+export default function useFixed() {
+  const [fixed, setFixed] = useState(false)
   useEffect(() => {
     function handleScroll() {
-      setX(window.scrollX)
-      setY(window.scrollY)
+      setFixed(window.scrollY > 64)
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  return {
-    x,
-    y,
-  }
+  return fixed
 }
