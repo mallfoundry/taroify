@@ -46,16 +46,19 @@ function symlinkTypescriptFiles(bundle, dist) {
 }
 
 function compileTypescript(bundle, dist) {
-  // const tsProject = ts.createProject("tsconfig.json", { noImplicitAny: false, declaration: true })
-  const dtsIgnore = [...ignore, "**/swiper/index.d.ts"]
+  const tsProject = ts.createProject("tsconfig.json", {
+    noImplicitAny: false,
+    declaration: false,
+    declarationMap: false,
+    allowJs: true,
+  })
   const compileTypescriptTask = () =>
     gulp
       .src([`./packages/${bundle}/src/**/*.[jt]s?(x)`], {
-        ignore: dtsIgnore,
-        // ignore,
+        ignore,
       })
       .pipe(sourcemaps.init())
-      // .pipe(tsProject())
+      .pipe(tsProject())
       .pipe(babel())
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))

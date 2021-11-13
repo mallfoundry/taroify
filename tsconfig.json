@@ -16,6 +16,7 @@
     "removeComments": true,
     "declaration": true,
     "declarationMap": true,
+    "skipLibCheck": true,
     "types": [
       "jest",
       "node"
