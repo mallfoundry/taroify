@@ -198,11 +198,13 @@ function Cascader(props: CascaderProps) {
               key={index}
               value={index}
               title={_.get(activeOptions, index)?.children ?? placeholder}
-              titleClassName={classNames(prefixClassname("cascader__tab"), {
-                [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
-                  _.get(activeOptions, index)?.children,
-                ),
-              })}
+              classNames={{
+                title: classNames(prefixClassname("cascader__tab"), {
+                  [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
+                    _.get(activeOptions, index)?.children,
+                  ),
+                }),
+              }}
             >
               <View className={prefixClassname("cascader__options")}>
                 {
