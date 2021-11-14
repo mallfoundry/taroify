@@ -69,7 +69,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "lodash-webpack-plugin": "^0.11.6",
     "sass": "^1.34.0",
-    "stylelint": "9.3.0",,
+    "stylelint": "9.3.0",
     "terser-webpack-plugin": "^5.2.5",
     "typescript": "^4.1.0",
     "webpack-bundle-analyzer": "^4.5.0"
