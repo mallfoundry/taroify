@@ -1,4 +1,4 @@
-import { Col, Image, Row } from "@taroify/core"
+import { Flex, Image } from "@taroify/core"
 import { ImageMode } from "@taroify/core/image"
 import { Photo, PhotoFail } from "@taroify/icons"
 import { Text } from "@tarojs/components"
@@ -33,48 +33,48 @@ export default function ImageDemo() {
         <Image className="basic-image" src={imageUrl} />
       </Block>
       <Block title="填充模式">
-        <Row gutter="20">
+        <Flex wrap="wrap" gutter={20}>
           {modes.map((mode) => (
-            <Col span="8" key={mode}>
+            <Flex.Item span={8} key={mode}>
               <Image mode={mode} src={imageUrl} />
               <Text className="text">{mode}</Text>
-            </Col>
+            </Flex.Item>
           ))}
-        </Row>
+        </Flex>
       </Block>
       <Block title="圆形图片">
-        <Row gutter="20">
+        <Flex wrap="wrap" gutter={20}>
           {modes.map((mode) => (
-            <Col span="8" key={mode}>
+            <Flex.Item span={8} key={mode}>
               <Image mode={mode} src={imageUrl} round />
               <Text className="text">{mode}</Text>
-            </Col>
+            </Flex.Item>
           ))}
-        </Row>
+        </Flex>
       </Block>
       <Block title="加载中提示">
-        <Row gutter="20">
-          <Col span="8">
+        <Flex wrap="wrap" gutter={20}>
+          <Flex.Item span={8}>
             <Image placeholder={<Photo />} />
             <Text className="text">默认提示</Text>
-          </Col>
-          <Col span="8">
+          </Flex.Item>
+          <Flex.Item span={8}>
             <Image placeholder="加载中..." />
             <Text className="text">自定义提示</Text>
-          </Col>
-        </Row>
+          </Flex.Item>
+        </Flex>
       </Block>
       <Block title="加载失败提示">
-        <Row gutter="20">
-          <Col span="8">
+        <Flex wrap="wrap" gutter={20}>
+          <Flex.Item span={8}>
             <Image src="error" fallback={<PhotoFail />} />
             <Text className="text">默认提示</Text>
-          </Col>
-          <Col span="8">
+          </Flex.Item>
+          <Flex.Item span={8}>
             <Image src="error" fallback="加载失败" />
             <Text className="text">自定义提示</Text>
-          </Col>
-        </Row>
+          </Flex.Item>
+        </Flex>
       </Block>
     </Page>
   )

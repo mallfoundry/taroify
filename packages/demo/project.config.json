@@ -47,6 +47,12 @@
           "name": "cascader",
           "pathName": "pages/form/cascader/index",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "list",
+          "pathName": "pages/display/list/index",
+          "query": ""
         }
       ]
     }

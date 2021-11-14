@@ -1,4 +1,4 @@
-import { Badge, Col, Notify, Row, Tabs } from "@taroify/core"
+import { Badge, Flex, Notify, Tabs } from "@taroify/core"
 import { inBrowser } from "@taroify/core/utils/base"
 import * as icons from "@taroify/icons"
 import { CartOutlined, ChatOutlined, FireOutlined } from "@taroify/icons"
@@ -54,13 +54,13 @@ function VanIcon(props: VanIconProps) {
   const { name, onClick } = props
   const iconName = convertIconComponentName(name)
   return (
-    <Col span={6} onClick={() => onClick?.(iconName)}>
+    <Flex.Item span={6} onClick={() => onClick?.(iconName)}>
       {
         // @ts-ignore
         createElement(icons[iconName])
       }
       <View className="icon-name">{iconName}</View>
-    </Col>
+    </Flex.Item>
   )
 }
 
@@ -91,82 +91,82 @@ export default function IconDemo() {
       <Tabs value={tab} lazyRender={false} onChange={setTab}>
         <Tabs.TabPane title="用法示例">
           <Block title="基础用法">
-            <Row>
-              <Col span={6}>
+            <Flex>
+              <Flex.Item span={6}>
                 <ChatOutlined />
-              </Col>
-              <Col span={6}>{createElement(icons.ChatOutlined)}</Col>
-            </Row>
+              </Flex.Item>
+              <Flex.Item span={6}>{createElement(icons.ChatOutlined)}</Flex.Item>
+            </Flex>
           </Block>
           <Block title="徽标提示">
-            <Row>
-              <Col span={6}>
+            <Flex>
+              <Flex.Item span={6}>
                 <Badge dot>
                   <ChatOutlined />
                 </Badge>
-              </Col>
-              <Col span={6}>
+              </Flex.Item>
+              <Flex.Item span={6}>
                 <Badge content="9">
                   <ChatOutlined />
                 </Badge>
-              </Col>
-              <Col span={6}>
+              </Flex.Item>
+              <Flex.Item span={6}>
                 <Badge content="99+">
                   <ChatOutlined />
                 </Badge>
-              </Col>
-            </Row>
+              </Flex.Item>
+            </Flex>
           </Block>
           <Block title="图标颜色">
-            <Row>
-              <Col span={6}>
+            <Flex>
+              <Flex.Item span={6}>
                 <CartOutlined style={{ color: "#1989fa" }} />
-              </Col>
-              <Col span={6}>
+              </Flex.Item>
+              <Flex.Item span={6}>
                 <FireOutlined style={{ color: "#ee0a24" }} />
-              </Col>
-            </Row>
+              </Flex.Item>
+            </Flex>
           </Block>
           <Block title="图标大小">
-            <Row>
-              <Col span={6}>
+            <Flex>
+              <Flex.Item span={6}>
                 <ChatOutlined size="40" />
-              </Col>
-              <Col span={6}>
+              </Flex.Item>
+              <Flex.Item span={6}>
                 <ChatOutlined size="2rem" />
-              </Col>
-            </Row>
+              </Flex.Item>
+            </Flex>
           </Block>
         </Tabs.TabPane>
         <Tabs.TabPane title="基础图标">
-          <Row>
+          <Flex wrap="wrap">
             {
               //
               _.map(names.basic, (name) => (
                 <VanIcon key={name} name={name} onClick={copyIcon} />
               ))
             }
-          </Row>
+          </Flex>
         </Tabs.TabPane>
         <Tabs.TabPane title="线框风格">
-          <Row>
+          <Flex wrap="wrap">
             {
               //
               _.map(names.outlined, (name) => (
                 <VanIcon key={name} name={name} onClick={copyIcon} />
               ))
             }
-          </Row>
+          </Flex>
         </Tabs.TabPane>
         <Tabs.TabPane title="实底风格">
-          <Row>
+          <Flex wrap="wrap">
             {
               //
               _.map(names.filled, (name) => (
                 <VanIcon key={name} name={name} onClick={copyIcon} />
               ))
             }
-          </Row>
+          </Flex>
         </Tabs.TabPane>
       </Tabs>
     </Page>
