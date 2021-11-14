@@ -1,7 +1,7 @@
 {
   "name": "@taroify/~hooks",
   "description": "Taroify hooks",
-  "version": "0.0.17-alpha.4",
+  "version": "0.0.18-alpha.0",
   "license": "MIT",
   "private": "true",
   "keywords": [
@@ -21,8 +21,8 @@
     "@tarojs/taro": "^3.3.6"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.168"

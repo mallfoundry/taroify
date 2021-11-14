@@ -12,6 +12,26 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.0
+
+`2021-11-14`
+
+**New Component**
+
+- 新增 Cascader 组件 [#96](https://github.com/mallfoundry/taroify/issues/96) [#106](https://github.com/mallfoundry/taroify/pull/106)
+
+**Bug Fixes**
+
+- Transition
+  - 修复设置 in 属性默认为 true 时不执行动画的问题 [#100](https://github.com/mallfoundry/taroify/issues/100) [#101](https://github.com/mallfoundry/taroify/issues/101)
+- Field
+  - 修复 maxlength 默认为 -1 时，导致数字或整数无法输入的问题 [#99](https://github.com/mallfoundry/taroify/issues/99) [#102](https://github.com/mallfoundry/taroify/issues/102) [#105](https://github.com/mallfoundry/taroify/pull/105)
+
+**Breaking Changes**
+
+- Flex
+  - 将 Row & Col 合并成 Flex 组件 [#103](https://github.com/mallfoundry/taroify/issues/103) [#104](https://github.com/mallfoundry/taroify/pull/104)
+
 ### v0.0.17-alpha.4
 
 `2021-11-11`
