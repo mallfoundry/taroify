@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, useContext } from "react"
+import { CSSProperties, ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
@@ -11,6 +11,7 @@ export interface FlexItemProps extends ViewProps {
   style?: CSSProperties
   span?: number
   offset?: number
+  children?: ReactNode
 }
 
 export default function FlexItem(props: FlexItemProps) {
