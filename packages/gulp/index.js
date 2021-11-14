@@ -12,8 +12,9 @@ function watch() {
   watchTypescript("icons")
   watchTypescript("hooks")
   watchTypescript("core")
-  watchReadmeFiles("core/src")
-  watchReadmeFiles("core/docs")
+  watchReadmeFiles("core/src", "components")
+  watchReadmeFiles("core/docs", "components")
+  watchReadmeFiles("hooks/src", "hooks")
 }
 
 function watchSymlink() {
@@ -22,8 +23,9 @@ function watchSymlink() {
   watchTypescriptSymlink("icons")
   watchTypescriptSymlink("hooks")
   watchTypescriptSymlink("core")
-  watchReadmeFiles("core/src")
-  watchReadmeFiles("core/docs")
+  watchReadmeFiles("core/src", "components")
+  watchReadmeFiles("core/docs", "components")
+  watchReadmeFiles("hooks/src", "hooks")
 }
 
 exports.clean = series(
@@ -56,8 +58,9 @@ exports.build = series(
 )
 
 exports.readme = series(
-  copyReadmeFiles("core/src"), //
-  copyReadmeFiles("core/docs"), //
+  copyReadmeFiles("core/src", "components"), //
+  copyReadmeFiles("core/docs", "components"), //
+  copyReadmeFiles("hooks/src", "hooks"),
 )
 
 exports.serve = parallel(serveDemo, serveSite)

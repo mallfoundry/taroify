@@ -2,28 +2,30 @@ const gulp = require("gulp")
 const { watch } = require("gulp")
 const rename = require("gulp-rename")
 
-function copyReadmeFiles(directory) {
+function copyReadmeFiles(src, dest) {
   const copyReadmeFilesTask = () =>
     gulp
-      .src([`./packages/${directory}/**/README*.md?(x)`], {})
+      .src([`./packages/${src}/**/README*.md?(x)`], {
+        ignore: "**/node_modules/**",
+      })
       .pipe(
         rename((path) => {
           path.basename = "index"
         }),
       )
-      .pipe(gulp.dest("./site/.content/components"))
-  copyReadmeFilesTask.displayName = `copy README.md?(x) files to site/.contents/components from packages/${directory}`
+      .pipe(gulp.dest(`./site/.content/${dest}`))
+  copyReadmeFilesTask.displayName = `copy README.md?(x) files to site/.contents/${dest} from packages/${src}`
   return copyReadmeFilesTask
 }
 
-function watchReadmeFiles(directory) {
+function watchReadmeFiles(src, dest) {
   watch(
-    [`./packages/${directory}/**/README*.md?(x)`],
+    [`./packages/${src}/**/README*.md?(x)`],
     {
       // events: "all",
       ignoreInitial: false,
     },
-    copyReadmeFiles(directory),
+    copyReadmeFiles(src, dest),
   )
 }
 
