@@ -9,7 +9,7 @@
 ### 基本用法
 
 ```tsx
-import { useCascader } from "@taroify/hooks";
+import { useCascader } from "@taroify/hooks"
 import area from "./area"
 
 const [value, setValue] = useState<string[]>([])
