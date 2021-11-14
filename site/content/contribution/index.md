@@ -19,14 +19,14 @@
 
 ```bash
 # 克隆仓库
-# 默认为 master 分支，包含 Taroify 的代码
-git clone https://gitee.com/mallfoundry/taroify.git
+# 默认为 main 分支，包含 Taroify 的代码
+git clone https://github.com/mallfoundry/taroify.git
 
 # 安装依赖
-cd taroify && lerna bootstrap
+cd taroify && yarn run install:node_modules
 
 # 进入开发模式，浏览器访问 http://localhost:8000
-npm run dev
+npm run develop
 ```
 
 ### 目录结构
@@ -55,7 +55,7 @@ src
 └─ button
    ├─ __tests__        # 单元测试
    ├─ variables.scss   # 组件样式变量
-   ├─ button.ts        # 具名组件
+   ├─ button.tsx       # 具名组件
    ├─ button.scss      # 组件样式
    ├─ index.ts         # 组件入口
    ├─ index.scss       # 组件样式入口
@@ -72,7 +72,7 @@ src
 ### Pull Request 流程
 
 1. fork 主仓库，如果已经 fork 过，请同步主仓库的最新代码
-2. 基于 fork 后仓库的 dev 分支新建一个分支，比如`feature/button_color`
+2. 基于 fork 后仓库的 main 分支新建一个分支，比如`feature/button-color`
 3. 在新分支上进行开发，开发完成后，提 Pull Request 到主仓库的 dev 分支
 4. Pull Request 会在 Review 通过后被合并到主仓库
 5. 等待 Taroify 发布版本，一般是每周一次
@@ -89,8 +89,8 @@ git remote add upstream https://gitee.com/mallfoundry/taroify.git
 git fetch upstream
 
 # 切换至 dev 分支
-git checkout master
+git checkout main
 
 # 合并主仓库代码
-git merge upstream/master
+git merge upstream/main
 ```
