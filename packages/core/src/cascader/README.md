@@ -29,7 +29,7 @@ function BasicCascader() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<string[]>([])
   const [fieldValue, setFieldValue] = useState("")
-  const columns = useCascader({ value, depth: 3, options: area })
+  const { columns } = useCascader({ value, depth: 3, options: area })
   return (
     <>
       <Field

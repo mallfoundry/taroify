@@ -17,11 +17,15 @@ interface UseCascaderOptions {
   options: CascaderOption[]
 }
 
+interface CascaderObject {
+  columns: CascaderOption[][]
+}
+
 export default function useCascader({
   value: values = [],
   depth = 0,
   options,
-}: UseCascaderOptions): CascaderOption[][] {
+}: UseCascaderOptions): CascaderObject {
   depth = _.clamp(depth, 0, depth)
   const [columns, setColumns] = useState<CascaderOption[][]>([])
 
@@ -55,5 +59,7 @@ export default function useCascader({
     setColumns(newColumns)
   }, [depth, findOption, options, values])
 
-  return columns
+  return {
+    columns,
+  }
 }
