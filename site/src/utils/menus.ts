@@ -271,6 +271,20 @@ const menus = [
       },
     ],
   },
+  {
+    title: "Hooks",
+    subpackage: "hooks",
+    children: [
+      {
+        title: "介绍",
+        to: "/hooks/",
+      },
+      {
+        title: "useCascader",
+        to: "/hooks/use-cascader/",
+      },
+    ],
+  },
 ]
 
 export default menus
