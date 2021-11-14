@@ -12,6 +12,19 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.2
+
+`2021-11-14`
+
+**Performance**
+
+- 优化 Demo 示例项目打包体积 [#83](https://github.com/mallfoundry/taroify/pull/83) [@Ace Han](https://github.com/ace-han)
+
+**Bug Fixes**
+
+- Flex
+  - 修复 Flex.Item 缺少 children 属性的问题 [#110](https://github.com/mallfoundry/taroify/issues/110) [#111](https://github.com/mallfoundry/taroify/pull/111)
+
 ### v0.0.18-alpha.1
 
 `2021-11-14`
