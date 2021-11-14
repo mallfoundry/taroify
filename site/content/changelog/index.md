@@ -18,7 +18,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **Feature**
 
-- 新增 @taroify/hooks 包。[#109](https://github.com/mallfoundry/taroify/issues/109)
+- 新增 @taroify/hooks 包 [#109](https://github.com/mallfoundry/taroify/issues/109)
 
 ### v0.0.18-alpha.0
 
