@@ -1,4 +1,5 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
@@ -7,36 +8,23 @@ import {
   ICON_PRESET_SIZES,
   ICON_TYPE,
   IconColor,
-  IconColorString,
   IconProps,
   IconSize,
-  IconSizeString,
 } from "../shared"
 import { addUnitPx } from "../utils/unit"
 
-interface VanIconProps {
+interface VanIconProps extends ViewProps {
   className?: string
   style?: CSSProperties
   name?: string
-  size?: IconSize | IconSizeString | number | string
-  color?: IconColor | IconColorString | string
+  size?: IconSize | number | string
+  color?: IconColor | string
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 export default function VanIcon(props: VanIconProps) {
-  const {
-    className,
-    style,
-    name,
-    size = IconSize.Inherit,
-    color = IconColor.Inherit,
-    children,
-    onClick,
-  } = props
+  const { className, style, name, size = "inherit", color = "inherit", ...restProps } = props
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
-
   const presetSize = ICON_PRESET_SIZES.includes(size as IconSize)
 
   return (
@@ -56,8 +44,7 @@ export default function VanIcon(props: VanIconProps) {
         fontSize: presetSize ? "" : addUnitPx(size),
         ...style,
       }}
-      children={children}
-      onClick={onClick}
+      {...restProps}
     />
   )
 }
