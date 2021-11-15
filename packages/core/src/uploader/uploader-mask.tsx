@@ -6,12 +6,6 @@ import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 
-interface UploaderMaskProps {
-  className?: string
-  icon?: ReactNode
-  message?: ReactNode
-}
-
 function renderIcon(icon?: ReactNode) {
   if (isIconElement(icon)) {
     return cloneIconElement(icon, { className: prefixClassname("uploader__mask-icon") })
@@ -22,6 +16,12 @@ function renderIcon(icon?: ReactNode) {
       className: classNames(prefixClassname("uploader__loading"), className),
     })
   }
+}
+
+interface UploaderMaskProps {
+  className?: string
+  icon?: ReactNode
+  message?: ReactNode
 }
 
 function UploaderMask(props: UploaderMaskProps) {
