@@ -6,7 +6,7 @@
 
 ### 引入
 
-```jsx
+```tsx
 import { Image } from "@taroify/core"
 ```
 
@@ -14,20 +14,19 @@ import { Image } from "@taroify/core"
 
 ### 基础用法
 
-基础用法与原生 `img` 标签一致，可以设置 `src`、`width`、`height`、`alt` 等原生属性。
+基础用法与原生 `img` 标签一致，可以设置 `src`、`alt` 等原生属性。
 
-```jsx
-<Image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+```tsx
+<Image style={{ width: "100px", height: "100px" }} src="https://img.yzcdn.cn/vant/cat.jpeg" />
 ```
 
 ### 填充模式
 
 通过 `mode` 属性可以设置图片填充模式，可选值见下方表格。
 
-```jsx
+```tsx
 <Image
-  width="10rem"
-  height="10rem"
+  style={{ width: "10rem", height: "10rem" }}
   mode="scaleToFill"
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
@@ -37,11 +36,10 @@ import { Image } from "@taroify/core"
 
 通过 `round` 属性可以设置图片变圆。
 
-```jsx
+```tsx
 <Image
   round
-  width="10rem"
-  height="10rem"
+  style={{ width: "10rem", height: "10rem" }}
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
@@ -50,11 +48,10 @@ import { Image } from "@taroify/core"
 
 设置 `lazyLoad` 属性来开启图片懒加载。
 
-```jsx
+```tsx
 <Image
   lazyLoad
-  width="100"
-  height="100"
+  style={{ width: "10rem", height: "10rem" }}
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
@@ -63,16 +60,16 @@ import { Image } from "@taroify/core"
 
 `Image` 组件提供了默认的加载中提示，支持通过 `placeholder` 插槽自定义内容。
 
-```jsx
-<Image src="https://img.yzcdn.cn/vant/cat.jpeg" placeholder />
+```tsx
+<Image src="https://img.yzcdn.cn/vant/cat.jpeg" placeholder="加载中..." />
 ```
 
 ### 加载失败提示
 
 `Image` 组件提供了默认的加载失败提示，支持通过 `fallback` 插槽自定义内容。
 
-```jsx
-<Image src="https://img.yzcdn.cn/vant/cat.jpeg" fallback />
+```tsx
+<Image src="https://img.yzcdn.cn/vant/cat.jpeg" fallback="加载失败" />
 ```
 
 ## API
@@ -84,8 +81,6 @@ import { Image } from "@taroify/core"
 | src | 图片链接 | _string_ | - |
 | mode | 图片填充模式 | _string_ | `fill` |
 | alt | 替代文本 | _string_ | - |
-| width | 宽度，默认单位为 `px` | _number \| string_ | - |
-| height | 高度，默认单位为 `px` | _number \| string_ | - |
 | radius | 圆角大小，默认单位为 `px` | _number \| string_ | `0` |
 | round | 是否显示为圆形 | _boolean_ | `false` |
 | lazyLoad | 是否开启图片懒加载 | _boolean_ | `false` |
