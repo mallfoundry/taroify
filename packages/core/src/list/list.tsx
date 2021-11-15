@@ -1,48 +1,54 @@
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick, usePageScroll } from "@tarojs/taro"
+import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useCallback, useEffect, useRef } from "react"
+import { ReactNode, useCallback, useEffect, useMemo, useRef } from "react"
 import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollParent } from "../utils/dom/scroll"
+import { useToRef } from "../utils/state"
 
 type ListDirection = "up" | "down"
 
 export interface ListProps extends ViewProps {
-  className?: string
   loading?: boolean
   hasMore?: boolean
   direction?: ListDirection
   offset?: number
   children?: ReactNode
-  onLoad?: () => void
+
+  scrollTop?: number
+
+  onLoad?(): void
 }
 
 function List(props: ListProps) {
   const {
     className,
     loading: loadingProp = false,
-    hasMore = true,
+    hasMore: hasMoreProp = true,
     direction = "down",
     offset = 300,
     children,
+    scrollTop,
     onLoad,
     ...restProps
   } = props
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
-  const loadingRef = useRef(false)
+  const loadingRef = useToRef(loadingProp)
+  const hasMoreRef = useToRef(hasMoreProp)
 
   const loadCheck = useCallback(() => {
     nextTick(async () => {
-      if (loadingRef.current || !hasMore) {
+      if (loadingRef.current || !hasMoreRef.current) {
         return
       }
-      const scrollParent = await getScrollParent(rootRef.current)
+
+      const scrollParent = await getScrollParent(rootRef)
       const scrollParentRect = await getRect(scrollParent)
       if (!scrollParentRect.height) {
         return
@@ -50,30 +56,26 @@ function List(props: ListProps) {
 
       let isReachEdge: boolean
       const edgeRect = await getRect(edgeRef)
-
       if (direction === "up") {
         isReachEdge = scrollParentRect.top - edgeRect.top <= offset
       } else {
         isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
       }
-
-      if (isReachEdge) {
+      if (isReachEdge && !loadingRef.current) {
         loadingRef.current = true
         onLoad?.()
       }
     })
-  }, [direction, hasMore, offset, onLoad])
+  }, [direction, hasMoreRef, loadingRef, offset, onLoad])
 
   useMounted(loadCheck)
 
-  usePageScroll(loadCheck)
+  useEffect(loadCheck, [loadingProp, hasMoreProp, loadCheck, scrollTop, children])
 
-  useEffect(() => {
-    loadingRef.current = loadingProp
-    loadCheck()
-  }, [loadingProp, loadCheck, hasMore, children])
-
-  const listEdge = <View ref={edgeRef} className={prefixClassname("list__edge")} />
+  const listEdge = useMemo(
+    () => <View ref={edgeRef} className={prefixClassname("list__edge")} />,
+    [],
+  )
 
   return (
     <View ref={rootRef} className={classNames(prefixClassname("list"), className)} {...restProps}>

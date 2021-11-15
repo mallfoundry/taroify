@@ -19,34 +19,39 @@ List 组件通过 `loading` 和 `hasMore` 两个变量控制加载状态，当�
 
 ```tsx
 function BasicList() {
-  const hasMoreRef = useRef(true)
-  const listRef = useRef<string[]>([])
+  const [hasMore, setHasMore] = useState(true)
+  const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
+
   return (
     <List
       loading={loading}
-      hasMore={hasMoreRef.current}
+      hasMore={hasMore}
+      scrollTop={scrollTop}
       onLoad={() => {
-        nextTick(() => {
-          setLoading(true)
-          setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-              const text = listRef.current.length + 1
-              listRef.current.push(text < 10 ? "0" + text : String(text))
-            }
-            listRef.current = [...listRef.current]
-            hasMoreRef.current = listRef.current.length < 40
-            setLoading(false)
-          }, 1000)
-        })
+        setLoading(true)
+        setTimeout(() => {
+          for (let i = 0; i < 10; i++) {
+            const text = list.length + 1
+            list.push(text < 10 ? "0" + text : String(text))
+          }
+          setList([...list])
+          setHasMore(list.length < 40)
+          setLoading(false)
+        }, 1000)
       }}
     >
-      {listRef.current.map((item) => (
-        <Cell key={item}>{item}</Cell>
-      ))}
+      {
+        list.map((item) => (
+          <Cell key={item}>{item}</Cell>
+        ))
+      }
       <List.Placeholder>
         {loading && <Loading>加载中...</Loading>}
-        {!hasMoreRef.current && "没有更多了"}
+        {!hasMore && "没有更多了"}
       </List.Placeholder>
     </List>
   )
@@ -63,30 +68,36 @@ function ErrorList() {
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
+
   return (
     <List
       loading={loading}
       hasMore={hasMore}
+      scrollTop={scrollTop}
       onLoad={() => {
-        nextTick(() => {
-          setLoading(true)
-          setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-              const text = list.length + 1
-              list.push(text < 10 ? "0" + text : String(text))
-            }
-            const newList = [...list]
-            setHasMore(!(newList.length <= 10 || newList.length >= 40))
-            setError(newList.length <= 10)
-            setList(newList)
-            setLoading(false)
-          }, 1000)
-        })
+        setLoading(true)
+        setTimeout(() => {
+          for (let i = 0; i < 10; i++) {
+            const text = list.length + 1
+            list.push(text < 10 ? "0" + text : String(text))
+          }
+          const newList = [...list]
+
+          setHasMore(!(newList.length <= 10 || newList.length >= 40))
+          setError(newList.length <= 10)
+          setList(newList)
+          setLoading(false)
+        }, 1000)
       }}
     >
-      {list.map((item) => (
-        <Cell key={item}>{item}</Cell>
-      ))}
+      {
+        list.map((item) => (
+          <Cell key={item}>{item}</Cell>
+        ))
+      }
       <List.Placeholder
         onClick={() => {
           if (error) {
@@ -106,47 +117,57 @@ function ErrorList() {
 
 ### 下拉刷新
 
-List 组件可以与 [PullRefresh](#/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。
+List 组件可以与 [PullRefresh](/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。
 
 ```tsx
 function PullRefreshList() {
   const [hasMore, setHasMore] = useState(true)
-  const listRef = useRef<string[]>([])
+  const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
-  const [refreshing, setRefreshing] = useState(false)
+  const refreshingRef = useRef(false)
+  const [scrollTop, setScrollTop] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => {
+    setScrollTop(aScrollTop)
+    setReachTop(aScrollTop === 0)
+  })
 
   const onLoad = () => {
-    nextTick(() => {
-      setLoading(true)
-      setTimeout(() => {
-        setRefreshing(false)
-        for (let i = 0; i < 10; i++) {
-          const text = listRef.current.length + 1
-          listRef.current.push(text < 10 ? "0" + text : String(text))
-        }
-        setLoading(false)
-        setHasMore(listRef.current.length < 40)
-      }, 1000)
-    })
+    setLoading(true)
+    const newList = refreshingRef.current ? [] : list
+    setTimeout(() => {
+      refreshingRef.current = false
+      for (let i = 0; i < 10; i++) {
+        const text = newList.length + 1
+        newList.push(text < 10 ? "0" + text : String(text))
+      }
+      setList(newList)
+      setLoading(false)
+      setHasMore(newList.length < 40)
+    }, 1000)
   }
 
   function onRefresh() {
-    setRefreshing(true)
+    refreshingRef.current = true
     setLoading(false)
-    listRef.current = []
     onLoad()
   }
 
   return (
-    <PullRefresh loading={refreshing} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
-        {listRef.current.map((item) => (
-          <Cell key={item}>{item}</Cell>
-        ))}
-        <List.Placeholder>
-          {loading && <Loading>加载中...</Loading>}
-          {!hasMore && "没有更多了"}
-        </List.Placeholder>
+    <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
+      <List loading={loading} hasMore={hasMore} scrollTop={scrollTop} onLoad={onLoad}>
+        {
+          list.map((item) => (
+            <Cell key={item}>{item}</Cell>
+          ))
+        }
+        {!refreshingRef.current && (
+          <List.Placeholder>
+            {loading && <Loading>加载中...</Loading>}
+            {!hasMore && "没有更多了"}
+          </List.Placeholder>
+        )}
       </List>
     </PullRefresh>
   )
@@ -159,10 +180,10 @@ function PullRefreshList() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| scrollTop | 距离顶部的滚动距离 | _number_ | `0` |
 | loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
 | hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
-| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number \| string_ | `300` |
-| immediateCheck | 是否在初始化时立即执行滚动位置检查 | _boolean_ | `true` |
+| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_ | `300` |
 | direction | 滚动触发加载的方向，可选值为 `up` | _string_ | `down` |
 
 ### Events

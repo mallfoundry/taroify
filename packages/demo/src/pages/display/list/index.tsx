@@ -1,39 +1,45 @@
 import { Cell, List, Loading, PullRefresh, Tabs } from "@taroify/core"
-import { nextTick } from "@tarojs/taro"
+import { usePageScroll } from "@tarojs/taro"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicList() {
-  const hasMoreRef = useRef(true)
-  const listRef = useRef<string[]>([])
+  const [hasMore, setHasMore] = useState(true)
+  const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
+
   return (
     <List
       loading={loading}
-      hasMore={hasMoreRef.current}
+      hasMore={hasMore}
+      scrollTop={scrollTop}
       onLoad={() => {
-        nextTick(() => {
-          setLoading(true)
-          setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-              const text = listRef.current.length + 1
-              listRef.current.push(text < 10 ? "0" + text : String(text))
-            }
-            listRef.current = [...listRef.current]
-            hasMoreRef.current = listRef.current.length < 40
-            setLoading(false)
-          }, 1000)
-        })
+        setLoading(true)
+        setTimeout(() => {
+          for (let i = 0; i < 10; i++) {
+            const text = list.length + 1
+            list.push(text < 10 ? "0" + text : String(text))
+          }
+          setList([...list])
+          setHasMore(list.length < 40)
+          setLoading(false)
+        }, 1000)
       }}
     >
-      {listRef.current.map((item) => (
-        <Cell key={item}>{item}</Cell>
-      ))}
+      {
+        //
+        list.map((item) => (
+          <Cell key={item}>{item}</Cell>
+        ))
+      }
       <List.Placeholder>
         {loading && <Loading>加载中...</Loading>}
-        {!hasMoreRef.current && "没有更多了"}
+        {!hasMore && "没有更多了"}
       </List.Placeholder>
     </List>
   )
@@ -44,25 +50,29 @@ function ErrorList() {
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
+
   return (
     <List
       loading={loading}
       hasMore={hasMore}
+      scrollTop={scrollTop}
       onLoad={() => {
-        nextTick(() => {
-          setLoading(true)
-          setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-              const text = list.length + 1
-              list.push(text < 10 ? "0" + text : String(text))
-            }
-            const newList = [...list]
-            setHasMore(!(newList.length <= 10 || newList.length >= 40))
-            setError(newList.length <= 10)
-            setList(newList)
-            setLoading(false)
-          }, 1000)
-        })
+        setLoading(true)
+        setTimeout(() => {
+          for (let i = 0; i < 10; i++) {
+            const text = list.length + 1
+            list.push(text < 10 ? "0" + text : String(text))
+          }
+          const newList = [...list]
+
+          setHasMore(!(newList.length <= 10 || newList.length >= 40))
+          setError(newList.length <= 10)
+          setList(newList)
+          setLoading(false)
+        }, 1000)
       }}
     >
       {list.map((item) => (
@@ -86,42 +96,53 @@ function ErrorList() {
 
 function PullRefreshList() {
   const [hasMore, setHasMore] = useState(true)
-  const listRef = useRef<string[]>([])
+  const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
-  const [refreshing, setRefreshing] = useState(false)
+  const refreshingRef = useRef(false)
+  const [scrollTop, setScrollTop] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop: aScrollTop }) => {
+    setScrollTop(aScrollTop)
+    setReachTop(aScrollTop === 0)
+  })
 
   const onLoad = () => {
-    nextTick(() => {
-      setLoading(true)
-      setTimeout(() => {
-        setRefreshing(false)
-        for (let i = 0; i < 10; i++) {
-          const text = listRef.current.length + 1
-          listRef.current.push(text < 10 ? "0" + text : String(text))
-        }
-        setLoading(false)
-        setHasMore(listRef.current.length < 40)
-      }, 1000)
-    })
+    setLoading(true)
+    const newList = refreshingRef.current ? [] : list
+    setTimeout(() => {
+      refreshingRef.current = false
+      for (let i = 0; i < 10; i++) {
+        const text = newList.length + 1
+        newList.push(text < 10 ? "0" + text : String(text))
+      }
+      setList(newList)
+      setLoading(false)
+      setHasMore(newList.length < 40)
+    }, 1000)
   }
 
   function onRefresh() {
-    setRefreshing(true)
+    refreshingRef.current = true
     setLoading(false)
-    listRef.current = []
     onLoad()
   }
 
   return (
-    <PullRefresh loading={refreshing} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
-        {listRef.current.map((item) => (
-          <Cell key={item}>{item}</Cell>
-        ))}
-        <List.Placeholder>
-          {loading && <Loading>加载中...</Loading>}
-          {!hasMore && "没有更多了"}
-        </List.Placeholder>
+    <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
+      <List loading={loading} hasMore={hasMore} scrollTop={scrollTop} onLoad={onLoad}>
+        {
+          //
+          list.map((item) => (
+            <Cell key={item}>{item}</Cell>
+          ))
+        }
+        {!refreshingRef.current && (
+          <List.Placeholder>
+            {loading && <Loading>加载中...</Loading>}
+            {!hasMore && "没有更多了"}
+          </List.Placeholder>
+        )}
       </List>
     </PullRefresh>
   )

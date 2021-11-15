@@ -42,7 +42,17 @@ module.exports = {
               },
               taroify: {
                 name: "taroify",
-                test: /node_modules[\\/]@taroify/,
+                test(module) {
+                  if (/package[\\/](core|icons|hooks)/.test(module.resource)) {
+                    return true
+                  }
+                  if (/bundles[\\/](core|icons|hooks)/.test(module.resource)) {
+                    return true
+                  }
+                  return /node_modules[\\/]@taroify/.test(module.resource)
+                },
+                //
+                // test: /node_modules[\\/]@taroify/,
                 // just higher than 10 will be fine, refer to
                 // https://github.com/NervJS/taro/blob/bc6af68bda2cbc9163fbda36c15878fc96aec8f1/packages/taro-mini-runner/src/webpack/build.conf.ts#L220-L254
                 priority: 100,
