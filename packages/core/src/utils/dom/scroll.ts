@@ -17,10 +17,10 @@ function isElementNode(node: Element) {
 
 // https://github.com/youzan/vant/issues/3823
 export async function getScrollParent(
-  el?: HTMLElement,
+  elementOrRef?: any,
   root: HTMLElement | undefined = defaultRoot,
 ) {
-  let node = el
+  let node: HTMLElement = elementUnref(elementOrRef)
 
   while (node && node !== root && isElementNode(node)) {
     const { overflowY } = await getComputedStyle(node, ["overflowY"])
