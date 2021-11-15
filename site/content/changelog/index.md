@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.3
+
+`2021-11-15`
+
+**Feature**
+
+- Uploader
+  - 补全 Uploader.Image 属性 [#113](https://github.com/mallfoundry/taroify/issues/113) [#117](https://github.com/mallfoundry/taroify/pull/117)
+- Icons
+  - 补全 Icons 属性 [#113](https://github.com/mallfoundry/taroify/issues/113) [#115](https://github.com/mallfoundry/taroify/pull/115)
+
+**Bug Fixes**
+
+- List
+  - 修复重复执行 onLoad 事件的问题 [#112](https://github.com/mallfoundry/taroify/issues/112) [#116](https://github.com/mallfoundry/taroify/pull/116)
+
 ### v0.0.18-alpha.2
 
 `2021-11-14`
