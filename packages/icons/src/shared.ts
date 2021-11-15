@@ -1,37 +1,13 @@
-import { ITouchEvent } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { CSSProperties, ReactNode } from "react"
 
 export const ICON_TYPE = Symbol("__iconType__")
 
-export enum IconSize {
-  Inherit = "inherit",
-  Mini = "mini",
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
+export type IconSize = "inherit" | "mini" | "small" | "medium" | "large"
 
-export type IconSizeString = "inherit" | "mini" | "small" | "medium" | "large"
+export const ICON_PRESET_SIZES = ["inherit", "mini", "small", "medium", "large"]
 
-export const ICON_PRESET_SIZES: Array<IconSize | IconSizeString> = [
-  "inherit",
-  "mini",
-  "small",
-  "medium",
-  "large",
-]
-
-export enum IconColor {
-  Inherit = "inherit",
-  Default = "default",
-  Primary = "primary",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
-  Danger = "danger",
-}
-
-export type IconColorString =
+export type IconColor =
   | "inherit"
   | "default"
   | "primary"
@@ -40,7 +16,7 @@ export type IconColorString =
   | "warning"
   | "danger"
 
-export const ICON_PRESET_COLORS: Array<IconColor | IconColorString> = [
+export const ICON_PRESET_COLORS = [
   "inherit",
   "default",
   "primary",
@@ -50,12 +26,10 @@ export const ICON_PRESET_COLORS: Array<IconColor | IconColorString> = [
   "danger",
 ]
 
-export interface IconProps {
+export interface IconProps extends ViewProps {
   className?: string
   style?: CSSProperties
-  size?: IconSize | IconSizeString | number | string
-  color?: IconColor | IconColorString | string
+  size?: IconSize | number | string
+  color?: IconColor | string
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
