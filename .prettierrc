@@ -1,5 +1,6 @@
 {
   "printWidth": 100,
+  "bracketSameLine": false,
   "endOfLine": "lf",
   "semi": false,
   "singleQuote": false,
