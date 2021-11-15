@@ -1,5 +1,6 @@
 import { Description } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
@@ -8,7 +9,7 @@ import { prefixClassname } from "../styles"
 import UploaderRemove from "./uploader-remove"
 import { isImageFile } from "./uploader.utils"
 
-interface UploaderImageProps {
+interface UploaderImageProps extends ViewProps {
   className?: string
   type?: string
   url?: string
@@ -34,6 +35,7 @@ function UploaderImage(props: UploaderImageProps) {
     round,
     children,
     onRemove,
+    ...restProps
   } = props
 
   function renderFile() {
@@ -64,7 +66,7 @@ function UploaderImage(props: UploaderImageProps) {
   }
 
   return (
-    <View className={classNames(prefixClassname("uploader__preview"), className)}>
+    <View className={classNames(prefixClassname("uploader__preview"), className)} {...restProps}>
       {renderFile()}
       {children}
       {removable && <UploaderRemove onClick={onRemove} />}
