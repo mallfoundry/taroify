@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.5
+
+`2021-11-17`
+
+**Bug Fixes**
+
+- Circle
+  - 修复在 useReady 里获得 CanvasNode 为 undefined 的问题 [#127](https://github.com/mallfoundry/taroify/issues/127) [#128](https://github.com/mallfoundry/taroify/issues/128)
+
 ### v0.0.18-alpha.4
 
 `2021-11-17`
