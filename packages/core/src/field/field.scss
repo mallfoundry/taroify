@@ -157,7 +157,7 @@
   &__clear,
   &__right-icon {
     padding: 0 var(--padding-xs, $padding-xs);
-    margin-right: calc(var(--padding-xs, $padding-xs) * -1);
+    margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
     line-height: inherit;
   }
 
