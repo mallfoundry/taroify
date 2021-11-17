@@ -2,7 +2,7 @@
 
 ### 介绍
 
-提供多个选项集合供用户选择，支持单列选择和多列级联，通常与[弹出层](#/components/popup/)组件配合使用。
+提供多个选项集合供用户选择，支持单列选择和多列级联，通常与[弹出层](/components/popup/)组件配合使用。
 
 ### 引入
 
@@ -243,7 +243,7 @@ function PickerPopup() {
 
 ## API
 
-### Popup Props
+### Picker Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -252,7 +252,7 @@ function PickerPopup() {
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
 | siblingCount | 可见的选项相邻个数 | _number_ | `3` |
 
-### Popup Events
+### Picker Events
 
 当选择器有多列时，事件回调参数会返回数组。
 
