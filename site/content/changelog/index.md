@@ -12,6 +12,19 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.4
+
+`2021-11-17`
+
+**Bug Fixes**
+
+- Field
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#121](https://github.com/mallfoundry/taroify/issues/121) [#126](https://github.com/mallfoundry/taroify/issues/126)
+- TreeSelect
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#122](https://github.com/mallfoundry/taroify/issues/122) [#124](https://github.com/mallfoundry/taroify/issues/124)
+- Slider
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#123](https://github.com/mallfoundry/taroify/issues/123) [#125](https://github.com/mallfoundry/taroify/issues/125)
+
 ### v0.0.18-alpha.3
 
 `2021-11-15`
