@@ -9,8 +9,7 @@ import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollParent } from "../utils/dom/scroll"
 import { useToRef } from "../utils/state"
-
-type ListDirection = "up" | "down"
+import { ListDirection } from "./list.shared"
 
 export interface ListProps extends ViewProps {
   loading?: boolean
