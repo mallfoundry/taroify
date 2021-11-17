@@ -1,8 +1,9 @@
 import { Canvas } from "@tarojs/components"
-import { getSystemInfoSync, useReady } from "@tarojs/taro"
+import { getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
 import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useMounted } from "../hooks"
 import { BLUE, WHITE } from "../styles/variables"
 import { createNodesRef, TaroElement } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
@@ -20,7 +21,8 @@ const BEGIN_ANGLE = -Math.PI / 2
 
 function useCanvasNode(canvasRef: MutableRefObject<TaroElement | undefined>) {
   const [node, setNode] = useState<Record<string, any>>()
-  useReady(() => {
+
+  useMounted(() => {
     if (canvasRef.current) {
       createNodesRef(canvasRef.current)
         .node(({ node: canvas }) => setNode(canvas))

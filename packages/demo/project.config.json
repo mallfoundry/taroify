@@ -53,6 +53,12 @@
           "name": "list",
           "pathName": "pages/display/list/index",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "circle",
+          "pathName": "pages/display/circle/index",
+          "query": ""
         }
       ]
     }
