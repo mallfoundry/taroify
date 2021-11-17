@@ -1,5 +1,7 @@
-import { default as ListElement, ListProps } from "./list"
+import ListComponent, { ListProps } from "./list"
 import ListPlaceholder from "./list-placeholder"
+
+export type { ListDirection } from "./list.shared"
 
 interface ListInterface {
   (props: ListProps): JSX.Element
@@ -7,7 +9,7 @@ interface ListInterface {
   Placeholder: typeof ListPlaceholder
 }
 
-const List = ListElement as ListInterface
+const List = ListComponent as ListInterface
 
 List.Placeholder = ListPlaceholder
 
