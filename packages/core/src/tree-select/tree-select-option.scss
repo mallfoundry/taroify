@@ -14,7 +14,7 @@
       position: absolute;
       top: 50%;
       right: var(--padding-md, $padding-md);
-      margin-top: calc(var(--padding-xs, $padding-xs) * -1);
+      margin-top: calc(var(--padding-xs, #{$padding-xs}) * -1);
       font-size: var(--tree-select-option-selected-size, $tree-select-option-selected-size);
     }
   }
