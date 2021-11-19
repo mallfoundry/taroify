@@ -2,7 +2,7 @@ import classNames from "classnames"
 import { Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useEffect, useRef } from "react"
+import { ReactNode, useCallback, useEffect, useRef } from "react"
 import useScroll from "../hooks/useScroll"
 import menus from "../utils/menus"
 
@@ -56,6 +56,14 @@ export default function SideNav(props: SideNavProps) {
   const top = positionY > 64 ? 0 : 64 - positionY
   const rootRef = useRef<HTMLElement>(null)
 
+  const onRouted = useCallback(
+    () =>
+      rootRef.current?.scrollTo({
+        top: _.toNumber(localStorage.getItem("sideNav.scrollTop")),
+      }),
+    [],
+  )
+
   return (
     <nav ref={rootRef} className="vant-side-nav" style={{ top: `${top}px` }}>
       {
@@ -76,11 +84,7 @@ export default function SideNav(props: SideNavProps) {
                       (rootRef.current?.scrollTop ?? 0)?.toString(),
                     )
                   }
-                  onRouted={() =>
-                    rootRef.current?.scrollTo({
-                      top: _.toNumber(localStorage.getItem("sideNav.scrollTop")),
-                    })
-                  }
+                  onRouted={onRouted}
                 />
               ))
             }
