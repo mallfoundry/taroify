@@ -2,6 +2,7 @@ import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -19,7 +20,7 @@ import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
-import { useToRef } from "../utils/state"
+import { usePreviousRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import {
   PullRefreshCompleted,
@@ -29,6 +30,12 @@ import {
   PullRefreshPulling,
 } from "./pull-refresh-children"
 import PullRefreshContext from "./pull-refresh.context"
+
+const lodashRoot = require("lodash/_root")
+
+if (typeof lodashRoot.Date === "undefined") {
+  lodashRoot.Date = Date
+}
 
 enum PullRefreshStatus {
   Awaiting = "awaiting",
@@ -119,6 +126,7 @@ function PullRefresh(props: PullRefreshProps) {
 
   const statusRef = useRef(PullRefreshStatus.Awaiting)
   const [distance, setDistance] = useState(0)
+  const reachTopPreviousRef = usePreviousRef(reachTopProp)
   const reachTopRef = useToRef(reachTopProp)
   const durationRef = useRef(0)
 
@@ -190,26 +198,35 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const onTouchMove = useMemo(
-    () => (event: ITouchEvent) => {
-      if (isTouchable()) {
-        if (!reachTopRef.current) {
-          checkPosition(event)
-        }
+    () =>
+      _.throttle((event: ITouchEvent) => {
+        if (isTouchable()) {
+          if (!reachTopPreviousRef.current) {
+            checkPosition(event)
+          }
 
-        const { deltaY } = touch
-        touch.move(event)
+          const { deltaY } = touch
+          touch.move(event)
 
-        if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
-          preventDefault(event)
-          updateStatus(easeDistance(deltaY))
+          if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
+            preventDefault(event)
+            updateStatus(easeDistance(deltaY))
+          }
         }
-      }
-    },
-    [checkPosition, easeDistance, isTouchable, reachTopRef, touch, updateStatus],
+      }, 16.7),
+    [
+      checkPosition,
+      easeDistance,
+      isTouchable,
+      reachTopPreviousRef,
+      reachTopRef,
+      touch,
+      updateStatus,
+    ],
   )
 
   const onTouchEnd = useCallback(() => {
-    if (reachTopRef.current && touch.deltaY && isTouchable()) {
+    if (reachTopRef.current && isTouchable()) {
       durationRef.current = durationProp
       if (statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
@@ -220,7 +237,7 @@ function PullRefresh(props: PullRefreshProps) {
         updateStatus(0)
       }
     }
-  }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, touch.deltaY, updateStatus])
+  }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, updateStatus])
 
   const showCompleted = useCallback(() => {
     statusRef.current = PullRefreshStatus.Completed
@@ -315,7 +332,6 @@ function PullRefresh(props: PullRefreshProps) {
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
-          catchMove
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
