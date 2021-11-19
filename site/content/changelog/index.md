@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.7
+
+`2021-11-19`
+
+**Feature**
+
+- Empty
+  - 新增 children 属性 [#131](https://github.com/mallfoundry/taroify/issues/131) [#132](https://github.com/mallfoundry/taroify/pull/132)
+
 ### v0.0.18-alpha.6
 
 `2021-11-19`

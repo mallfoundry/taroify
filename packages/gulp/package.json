@@ -1,6 +1,6 @@
 {
   "name": "@taroify/gulp",
-  "version": "0.0.18-alpha.6",
+  "version": "0.0.18-alpha.7",
   "license": "MIT",
   "private": "true",
   "peerDependencies": {
