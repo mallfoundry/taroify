@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.6
+
+`2021-11-19`
+
+**Bug Fixes**
+
+- PullRefresh
+  - 修复在小程序中 overflow 超出 100% 时，不能滚动下拉的问题 [#129](https://github.com/mallfoundry/taroify/issues/129) [#130](https://github.com/mallfoundry/taroify/issues/130)
+
 ### v0.0.18-alpha.5
 
 `2021-11-17`
