@@ -59,6 +59,12 @@
           "name": "circle",
           "pathName": "pages/display/circle/index",
           "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pull-refresh",
+          "pathName": "pages/action/pull-refresh/index",
+          "query": ""
         }
       ]
     }

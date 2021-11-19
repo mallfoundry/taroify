@@ -11,12 +11,16 @@ import {
   useState,
 } from "react"
 
-export function usePrevious<T = any>(value: T): T {
+export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   const previousRef = useRef<T>(value)
   useEffect(() => {
     previousRef.current = value
   })
-  return previousRef.current
+  return previousRef
+}
+
+export function usePrevious<T = any>(value: T): T {
+  return usePreviousRef(value).current
 }
 
 export function useToRef<T = any>(value: T): MutableRefObject<T> {
