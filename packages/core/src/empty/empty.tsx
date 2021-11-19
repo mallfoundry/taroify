@@ -17,6 +17,7 @@ function obtainImageUrl(image?: string) {
 
 interface EmptyProps extends ViewProps {
   className?: string
+  children?: ReactNode
 }
 
 function Empty(props: EmptyProps) {
