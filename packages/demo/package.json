@@ -1,6 +1,6 @@
 {
   "name": "@taroify/demo",
-  "version": "0.0.18-alpha.7",
+  "version": "0.0.18-alpha.8",
   "description": "",
   "author": "Taroify",
   "private": "true",
@@ -36,9 +36,9 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@taroify/core": "^0.0.18-alpha.7",
-    "@taroify/hooks": "^0.0.18-alpha.7",
-    "@taroify/icons": "^0.0.18-alpha.7",
+    "@taroify/core": "^0.0.18-alpha.8",
+    "@taroify/hooks": "^0.0.18-alpha.8",
+    "@taroify/icons": "^0.0.18-alpha.8",
     "@tarojs/components": "3.3.14",
     "@tarojs/react": "3.3.14",
     "@tarojs/runtime": "3.3.14",
