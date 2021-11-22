@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.18-alpha.9
+
+`2021-11-22`
+
+**Feature**
+
+- Icons
+  - 修复在采用导入全部样式的方式时，存在图标样式被覆盖的问题 [#134](https://github.com/mallfoundry/taroify/issues/134) [#135](https://github.com/mallfoundry/taroify/issues/135)
+  
 ### v0.0.18-alpha.8
 
 `2021-11-19`
