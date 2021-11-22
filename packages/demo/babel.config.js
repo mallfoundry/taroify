@@ -27,7 +27,7 @@ module.exports = {
     //     libraryName: "@taroify/icons",
     //     libraryDirectory: "",
     //     camel2DashComponentName: false,
-    //     style: false,
+    //     style: () => "@taroify/icons/style",
     //   },
     //   "@taroify/icons",
     // ],
