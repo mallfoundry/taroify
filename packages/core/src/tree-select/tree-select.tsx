@@ -1,4 +1,4 @@
-import Success from "@taroify/icons/Success"
+import { Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
