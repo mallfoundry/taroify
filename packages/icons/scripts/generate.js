@@ -10,7 +10,6 @@ function convertIconComponentName(name) {
 
 function createVanIconTsxContent(componentName, name) {
   return `import { createVanIconComponent } from "./van"
-import "./style"
 
 const ${componentName} = createVanIconComponent("${name}")
 export default ${componentName}
