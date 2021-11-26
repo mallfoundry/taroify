@@ -30,7 +30,11 @@ export function matchSelector(aSelector?: string, bSelector?: string) {
   return _.replace(aSelector as string, "#", "") === bSelector
 }
 
-export function createNodesRef(element: TaroElement) {
+export function createNodesRef(elementOrRef: any) {
+  if (_.isString(elementOrRef)) {
+    return createSelectorQuery().select("#" + elementOrRef)
+  }
+  const element = elementUnref(elementOrRef)
   return isRootElement(element)
     ? createSelectorQuery().selectViewport()
     : createSelectorQuery().select("#" + element.uid)
