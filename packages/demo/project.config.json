@@ -50,8 +50,8 @@
         },
         {
           "id": -1,
-          "name": "list",
-          "pathName": "pages/display/list/index",
+          "name": "pull-refresh",
+          "pathName": "pages/action/pull-refresh/index",
           "query": ""
         },
         {
@@ -62,8 +62,14 @@
         },
         {
           "id": -1,
-          "name": "pull-refresh",
-          "pathName": "pages/action/pull-refresh/index",
+          "name": "list",
+          "pathName": "pages/display/list/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "swiper",
+          "pathName": "pages/display/swiper/index",
           "query": ""
         }
       ]

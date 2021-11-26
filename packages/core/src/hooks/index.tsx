@@ -1,3 +1,5 @@
 export { default as useHeight } from "./use-height"
 export { default as usePlaceholder } from "./use-placeholder"
 export { default as useMounted } from "./use-mounted"
+export { default as useUpdate } from "./use-update"
+export { default as useWindowResize } from "./use-window-resize"

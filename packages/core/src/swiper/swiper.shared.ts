@@ -1,12 +1,4 @@
-export enum SwiperDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-export interface SwiperInstance {
-  previous: () => void
-  next: () => void
-}
+export type SwiperDirection = "horizontal" | "vertical"
 
 export interface SwiperItemEvent {
   index: number
