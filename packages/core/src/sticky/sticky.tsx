@@ -63,9 +63,11 @@ export default function Sticky(props: StickyProps) {
   if (offsetProp) {
     const { top, bottom } = offsetProp
     if (top) {
+      // eslint-disable-next-line no-console
       console.warn("[Deprecated] Use the 'offsetTop' prop instead of the 'offset.top' prop.")
     }
     if (bottom) {
+      // eslint-disable-next-line no-console
       console.warn("[Deprecated] Use the 'offsetBottom' prop instead of the 'offset.bottom' prop.")
     }
   }

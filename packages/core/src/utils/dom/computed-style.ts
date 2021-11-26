@@ -8,7 +8,7 @@ export function getComputedStyle(
   const element = elementUnref(elementOrRef)
   if (element) {
     if (inBrowser) {
-      return Promise.resolve(window.getComputedStyle(element))
+      return Promise.resolve(window.getComputedStyle(element as any))
     } else {
       return new Promise<CSSStyleDeclaration>((resolve) => {
         createNodesRef(element)

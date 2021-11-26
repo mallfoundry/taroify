@@ -34,7 +34,9 @@ export function getRect(elementOrRef: any): Promise<Rect> {
         return Promise.resolve(makeRect(width, height))
       }
 
-      return Promise.resolve((element.getBoundingClientRect() as unknown) as Rect)
+      return Promise.resolve(
+        (((element as unknown) as HTMLElement).getBoundingClientRect() as unknown) as Rect,
+      )
     } else {
       return new Promise<Rect>((resolve) => {
         createNodesRef(element)
@@ -58,7 +60,7 @@ export function getRects(elementOrRef: any, selector: string): Promise<Rect[]> {
   if (element) {
     if (inBrowser) {
       const rects: Rect[] = []
-      element
+      ;((element as unknown) as HTMLElement)
         .querySelectorAll(selector)
         .forEach((oneElement) =>
           rects.push((oneElement.getBoundingClientRect() as unknown) as Rect),

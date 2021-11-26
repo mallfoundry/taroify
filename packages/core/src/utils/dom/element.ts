@@ -1,4 +1,4 @@
-import type { TaroElement } from "@tarojs/runtime"
+import { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import * as _ from "lodash"
 

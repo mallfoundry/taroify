@@ -8,8 +8,8 @@
     justify-content: space-between;
     height: var(--cascader-header-height, $cascader-header-height);
     padding: var(--cascader-header-padding, $cascader-header-padding);
-    font-weight: var(--font-weight-bold, $font-weight-bold);
     font-size: var(--cascader-header-font-size, $cascader-header-font-size);
+    font-weight: var(--font-weight-bold, $font-weight-bold);
     line-height: var(--cascader-header-line-height, $cascader-header-line-height);
   }
 
@@ -31,12 +31,12 @@
   }
 
   &__tab {
-    color: var(--cascader-tab-color, $cascader-tab-color);
     font-weight: var(--font-weight-bold, $font-weight-bold);
+    color: var(--cascader-tab-color, $cascader-tab-color);
 
     &--inactive {
-      color: var(--cascader-unselected-tab-color, $cascader-unselected-tab-color);
       font-weight: normal;
+      color: var(--cascader-unselected-tab-color, $cascader-unselected-tab-color);
     }
   }
 
@@ -54,8 +54,8 @@
     }
 
     &--active {
-      color: var(--cascader-active-color, $cascader-active-color);
       font-weight: var(--font-weight-bold, $font-weight-bold);
+      color: var(--cascader-active-color, $cascader-active-color);
     }
 
     &--disabled {

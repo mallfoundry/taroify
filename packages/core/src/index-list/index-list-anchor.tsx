@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { TaroElement } from "@tarojs/runtime"
 import { pageScrollTo } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
@@ -14,7 +15,6 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
-import { TaroElement } from "../utils/dom/element"
 import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import IndexListContext from "./index-list.context"

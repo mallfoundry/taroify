@@ -1,7 +1,8 @@
+import { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "../base"
 import { getComputedStyle } from "./computed-style"
-import { createNodesRef, elementUnref, isRootElement, TaroElement } from "./element"
+import { createNodesRef, elementUnref, isRootElement } from "./element"
 
 const defaultRoot: HTMLElement | undefined = inBrowser
   ? ((window as unknown) as HTMLElement)
@@ -20,7 +21,7 @@ export async function getScrollParent(
   elementOrRef?: any,
   root: HTMLElement | undefined = defaultRoot,
 ) {
-  let node: HTMLElement = elementUnref(elementOrRef)
+  let node: HTMLElement = (elementUnref(elementOrRef) as unknown) as HTMLElement
 
   while (node && node !== root && isElementNode(node)) {
     const { overflowY } = await getComputedStyle(node, ["overflowY"])
@@ -28,7 +29,7 @@ export async function getScrollParent(
       return node
     }
     // Is root element
-    if (isRootElement(node as TaroElement)) {
+    if (isRootElement((node as unknown) as TaroElement)) {
       return node
     }
     node = node.parentNode as HTMLElement
@@ -71,8 +72,10 @@ export function getScrollOffset(elementOrRef: any): Promise<ScrollOffset> {
   const element = elementUnref(elementOrRef)
   if (element) {
     if (inBrowser) {
-      const top = "scrollTop" in element ? element.scrollTop : element["pageYOffset"]
-      const left = "scrollLeft" in element ? element.scrollLeft : element["pageXOffset"]
+      const $element = element as any
+
+      const top = "scrollTop" in element ? $element.scrollTop : $element["pageYOffset"]
+      const left = "scrollLeft" in element ? $element.scrollLeft : $element["pageXOffset"]
       return Promise.resolve({
         scrollTop: Math.max(top, 0),
         scrollLeft: Math.max(left, 0),

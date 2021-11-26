@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.19-alpha.0
+
+`2021-11-26`
+
+**Refactor**
+
+- Swiper
+  - 重构 Swiper 组件，增加 value 属性 [#120](https://github.com/mallfoundry/taroify/issues/120) [#137](https://github.com/mallfoundry/taroify/pull/137)
+
+**Bug Fixes**
+
+- Circle
+  - 修复在低版本的小程序中不渲染的问题 [#139](https://github.com/mallfoundry/taroify/issues/139) [#140](https://github.com/mallfoundry/taroify/pull/140)
+
 ### v0.0.18-alpha.9
 
 `2021-11-22`
