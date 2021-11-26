@@ -1,42 +1,55 @@
 import { Canvas } from "@tarojs/components"
-import { getSystemInfoSync } from "@tarojs/taro"
+import { CanvasContext, createCanvasContext, getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
-import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useMounted } from "../hooks"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { useRenderedEffect, useUniqueId } from "../hooks"
 import { BLUE, WHITE } from "../styles/variables"
-import { createNodesRef, TaroElement } from "../utils/dom/element"
+import { createNodesRef } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
+import { canIUseCanvas2d } from "../utils/version"
 import { canvasContextAdaptor } from "./canvas"
 import { useAnimatePercent } from "./circle.hooks"
 import { CircleProps } from "./circle.shared"
 
-function format(rate: number) {
-  return Math.min(Math.max(rate, 0), 100)
+function clampFormat(rate: number) {
+  return _.clamp(rate, 0, 100)
 }
 
 const PERIMETER = 2 * Math.PI
 
 const BEGIN_ANGLE = -Math.PI / 2
 
-function useCanvasNode(canvasRef: MutableRefObject<TaroElement | undefined>) {
-  const [node, setNode] = useState<Record<string, any>>()
+function useCanvasContext(canvasId: string | undefined, size: number) {
+  const [canvasContext, setCanvasContext] = useState<CanvasContext>()
 
-  useMounted(() => {
-    if (canvasRef.current) {
-      createNodesRef(canvasRef.current)
-        .node(({ node: canvas }) => setNode(canvas))
-        .exec()
+  useRenderedEffect(() => {
+    if (!canIUseCanvas2d()) {
+      if (canvasId) {
+        setCanvasContext(createCanvasContext(canvasId))
+      }
+    } else {
+      if (canvasId) {
+        createNodesRef(canvasId)
+          .fields(
+            {
+              node: true,
+            },
+            ({ node: canvas }) => {
+              const { pixelRatio: dpr } = getSystemInfoSync()
+              canvas.width = size * dpr
+              canvas.height = size * dpr
+              const canvasContext = canvasContextAdaptor(canvas.getContext("2d"))
+              canvasContext.scale(dpr, dpr)
+              setCanvasContext(canvasContext)
+            },
+          )
+          .exec()
+      }
     }
-  })
+  }, [canvasId])
 
-  return node
-}
-
-function getCanvasContext(node?: Record<string, any>) {
-  if (node) {
-    return canvasContextAdaptor(node.getContext("2d"))
-  }
+  return canvasContext
 }
 
 function CircleCanvas(props: CircleProps) {
@@ -52,25 +65,13 @@ function CircleCanvas(props: CircleProps) {
     size = 100,
     onChange,
   } = props
+  const canvasId = useUniqueId()
 
   const strokeWidth = useMemo(() => strokeWidthProp / 10, [strokeWidthProp])
 
   const percent = useAnimatePercent(percentProp, speed)
-  const canvasRef = useRef<TaroElement>()
-  const canvasNode = useCanvasNode(canvasRef)
-  const canvasContext = getCanvasContext(canvasNode)
+  const canvasContext = useCanvasContext(canvasId, size)
   const [hoverColor, setHoverColor] = useState<any>()
-
-  useEffect(() => onChange?.(percent), [onChange, percent])
-
-  useEffect(() => {
-    if (canvasContext && canvasNode) {
-      const { pixelRatio: dpr } = getSystemInfoSync()
-      canvasNode.width = size * dpr
-      canvasNode.height = size * dpr
-      canvasContext.scale(dpr, dpr)
-    }
-  }, [canvasContext, canvasNode, size])
 
   const presetCanvas = useCallback(
     (
@@ -122,7 +123,7 @@ function CircleCanvas(props: CircleProps) {
         canvasContext.clearRect(0, 0, size, size)
         renderLayerCircle(canvasContext)
 
-        const formatValue = format(currentValue)
+        const formatValue = clampFormat(currentValue)
         if (formatValue !== 0) {
           renderHoverCircle(canvasContext, formatValue)
         }
@@ -134,6 +135,12 @@ function CircleCanvas(props: CircleProps) {
   )
 
   useEffect(() => drawCircle(percent), [canvasContext, percent, hoverColor, drawCircle])
+
+  useEffect(
+    () => onChange?.(percent),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [percent],
+  )
 
   useEffect(() => {
     if (_.isObject(color)) {
@@ -153,16 +160,15 @@ function CircleCanvas(props: CircleProps) {
   }, [canvasContext, color, size])
 
   return (
-    <>
-      <Canvas
-        ref={canvasRef}
-        type="2d"
-        style={{
-          width: addUnitPx(size),
-          height: addUnitPx(size),
-        }}
-      />
-    </>
+    <Canvas
+      id={canvasId}
+      canvasId={canvasId}
+      type="2d"
+      style={{
+        width: addUnitPx(size),
+        height: addUnitPx(size),
+      }}
+    />
   )
 }
 

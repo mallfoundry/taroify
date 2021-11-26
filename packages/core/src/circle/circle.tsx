@@ -14,6 +14,7 @@ function getCircleSizeStyle(originSize?: string | number): CSSProperties | undef
       height: size,
     }
   }
+  return {}
 }
 
 function Circle(props: CircleProps) {
