@@ -28,7 +28,7 @@ export function TabsContent(props: TabsContentProps) {
 
   const panes = useTabPanes(tabObjects)
 
-  function onSwiperChange({ index }: Swiper.ItemEvent) {
+  function onSwiperChange(index: number) {
     const tabObject = _.get(tabObjects, index)
     if (tabObject) {
       const { value, title, disabled } = tabObject
@@ -42,7 +42,7 @@ export function TabsContent(props: TabsContentProps) {
     if (animated || swipeable) {
       return (
         <Swiper
-          activeIndex={activeValue as number}
+          value={activeValue as number}
           loop={false}
           className={prefixClassname("tabs__track")}
           duration={duration}

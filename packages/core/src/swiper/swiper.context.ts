@@ -1,22 +1,21 @@
 import { createContext } from "react"
-import { ComputedRef } from "../utils/computed"
 import { SwiperDirection } from "./swiper.shared"
 
-export type SwiperChildren = SwiperItemChild[]
-
-export interface SwiperItemChild {
+export interface SwiperItemInstance {
   setOffset: (offset: number) => void
 }
 
 interface SwiperContextValue {
   direction?: SwiperDirection
-  activeIndicator?: ComputedRef<number>
-  size?: ComputedRef<number>
+  lazyRender?: boolean
+  loop?: boolean
+  size?: number
+  indicator?: number
   count?: number
-  children: SwiperChildren
+  itemInstances: SwiperItemInstance[]
 }
 
 const SwiperContext = createContext<SwiperContextValue>({
-  children: [],
+  itemInstances: [],
 })
 export default SwiperContext

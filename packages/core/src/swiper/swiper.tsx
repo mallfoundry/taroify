@@ -1,6 +1,6 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick, offWindowResize, onWindowResize } from "@tarojs/taro"
+import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -8,33 +8,28 @@ import {
   Children,
   cloneElement,
   CSSProperties,
-  ForwardedRef,
-  forwardRef,
   isValidElement,
   ReactElement,
   ReactNode,
-  Ref,
   useCallback,
   useEffect,
-  useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from "react"
+import { useMounted, useUpdate, useWindowResize } from "../hooks"
 import { prefixClassname } from "../styles"
-import { useComputed } from "../utils/computed"
+import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
-import { getRect, Rect } from "../utils/dom/rect"
-import { addUnitPx } from "../utils/format/unit"
+import { getRect, makeRect, Rect } from "../utils/dom/rect"
+import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { usePrevious } from "../utils/state"
+import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
 import SwiperItem from "./swiper-item"
-import SwiperContext, { SwiperItemChild } from "./swiper.context"
-import { SwiperDirection, SwiperInstance, SwiperItemEvent } from "./swiper.shared"
-
-type SwiperDirectionString = "horizontal" | "vertical"
+import SwiperContext, { SwiperItemInstance } from "./swiper.context"
+import { SwiperDirection } from "./swiper.shared"
 
 interface SwiperChildren {
   items: ReactNode[]
@@ -76,169 +71,177 @@ function useSwiperChildren(children: ReactNode): SwiperChildren {
   return __children__
 }
 
+function getIndicatorValue(value: number, count: number) {
+  return (value + count) % count
+}
+
 export interface SwiperProps extends ViewProps {
   className?: string
-  activeIndex?: number
+  style?: CSSProperties
+  value?: number
+  lazyRender?: boolean
+  width?: number
+  height?: number
   autoplay?: number
   loop?: boolean
   touchable?: boolean
   duration?: number
-  width?: number
-  height?: number
-  direction?: SwiperDirection | SwiperDirectionString
+  direction?: SwiperDirection
   stopPropagation?: boolean
   children?: ReactNode
-  onChange?: (event: SwiperItemEvent) => void
+
+  onChange?(value: number): void
 }
 
-const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<SwiperInstance>) {
+function Swiper(props: SwiperProps) {
   const {
     className,
-    activeIndex: activeIndexProp = 0,
+    value: valueProp = 0,
+    lazyRender,
     loop = true,
     touchable = true,
     autoplay = 0,
     duration = 500,
-    direction = SwiperDirection.Horizontal,
-    stopPropagation = true,
     width,
     height,
+    direction = "horizontal",
+    stopPropagation = true,
+    children: childrenProp,
     onChange,
     ...restProps
   } = props
 
-  const { count, indicator, items } = useSwiperChildren(props.children)
+  const valueRef = useToRef(valueProp)
 
-  const children = useMemo<SwiperItemChild[]>(() => [], [])
+  const { count, indicator, items } = useSwiperChildren(childrenProp)
 
-  const vertical = direction === SwiperDirection.Vertical
-
-  const rootRef = useRef()
-  const customRectRef = useRef<Rect>()
-  const [, forceSetRootRect] = useState<Rect>()
-  const [offset, setOffset] = useState<number>(0)
-  const swipingRef = useRef(false) // Whether to swiping manually
-  const activeIndexPropRef = useRef(0)
-  const activeIndexRef = useRef(0)
-  const touchStartTimeRef = useRef(0)
-  const autoplayTimerRef = useRef<NodeJS.Timeout>()
-  const propRect = useMemo(() => ({ width, height }), [width, height])
-
-  const previousActiveIndexProp = usePrevious(activeIndexProp)
-
-  useEffect(() => {
-    activeIndexPropRef.current = activeIndexProp
-  })
+  const itemInstances = useMemo<SwiperItemInstance[]>(() => [], [])
 
   const touch = useTouch()
 
-  const delta = useComputed(() => (vertical ? touch.deltaY : touch.deltaX), [vertical])
+  const update = useUpdate()
 
-  const correctDirection = useComputed(() => touch.direction === direction, [direction])
+  const vertical = direction === "vertical"
 
-  const size = useComputed(
-    () => (vertical ? customRectRef.current?.height : customRectRef.current?.width) ?? 0,
-    [vertical],
+  const rootRef = useRef()
+
+  const rectRef = useRef<Rect>()
+
+  const [offset, setOffset] = useState<number>(0)
+
+  const swipingRef = useRef(false) // Whether to swiping manually
+
+  const activeIndexRef = useRef<number>(0)
+
+  const touchStartTimeRef = useRef(0)
+
+  const autoplayTimerRef = useRef<NodeJS.Timeout>()
+
+  const valueIndicatorRef = useRenderedRef(() => getIndicatorValue(valueProp, count))
+
+  const activeIndicatorRef = useRenderedRef(() => getIndicatorValue(activeIndexRef.current, count))
+
+  const getDelta = useCallback(
+    () => (vertical ? touch.deltaY : touch.deltaX),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   )
 
-  const trackSize = useComputed(() => count * size.value, [count, size])
+  const getCorrectDirection = useCallback(
+    () => touch.direction === direction,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  )
 
-  const activeIndicator = useComputed(() => (activeIndexRef.current + count) % count, [count])
+  const propRectRef = useRenderedRef(() => ({
+    width: width ?? rectRef.current?.width,
+    height: height ?? rectRef.current?.height,
+  }))
 
-  const minOffset = useComputed(() => {
-    if (customRectRef.current) {
-      const base = (vertical ? customRectRef.current?.height : customRectRef.current?.width) ?? 0
-      return base - size.value * count
+  const sizeRef = useRenderedRef(
+    () => (vertical ? propRectRef.current?.height : propRectRef.current?.width) ?? 0,
+  )
+
+  const trackSizeRef = useRenderedRef(() => count * sizeRef.current)
+
+  const minOffsetRef = useRenderedRef(() => {
+    if (rectRef.current) {
+      const base = (vertical ? rectRef.current?.height : rectRef.current?.width) ?? 0
+      return base - sizeRef.current * count
     }
     return 0
-  }, [size, count, vertical])
+  })
 
-  const maxCount = useComputed(() => Math.ceil(Math.abs(minOffset.value) / size.value), [
-    minOffset,
-    size,
-  ])
+  const maxCountRef = useRenderedRef(() =>
+    Math.ceil(Math.abs(minOffsetRef.current) / sizeRef.current),
+  )
 
-  const getTargetActiveIndex = useCallback(
+  const getTargetActive = useCallback(
     (pace: number) => {
       if (pace) {
         if (loop) {
           return _.clamp(activeIndexRef.current + pace, -1, count)
         }
-        return _.clamp(activeIndexRef.current + pace, 0, maxCount.value)
+        return _.clamp(activeIndexRef.current + pace, 0, maxCountRef.current)
       }
       return activeIndexRef.current
     },
-    [maxCount, count, loop],
+    [loop, maxCountRef, count],
   )
 
   const getTargetOffset = useCallback(
     (targetActive: number, offset = 0) => {
-      let currentPosition = targetActive * size.value
+      let currentPosition = targetActive * sizeRef.current
       if (!loop) {
-        currentPosition = Math.min(currentPosition, -minOffset.value)
+        currentPosition = Math.min(currentPosition, -minOffsetRef.current)
       }
 
       let targetOffset = offset - currentPosition
       if (!loop) {
-        targetOffset = _.clamp(targetOffset, minOffset.value, 0)
+        targetOffset = _.clamp(targetOffset, minOffsetRef.current, 0)
       }
       return targetOffset
     },
-    [size, loop, minOffset],
+    [sizeRef, loop, minOffsetRef],
   )
-  const trackStyle = useComputed(() => {
-    const style: CSSProperties = {
-      transitionDuration: `${swipingRef.current ? 0 : duration}ms`,
-      transform: `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`,
-    }
-    if (trackSize.value) {
-      const mainAxis = vertical ? "height" : "width"
-      style[mainAxis] = `${addUnitPx(trackSize.value)}`
-    }
-    if (size.value) {
-      const crossAxis = vertical ? "width" : "height"
-      style[crossAxis] = propRect[crossAxis] ? addUnitPx(propRect[crossAxis]) : ""
-    }
-    return style
-  }, [trackSize, size, duration, vertical, offset, propRect])
 
   const moveTo = useCallback(
     ({ pace = 0, offset = 0, emitChange = false }) => {
       if (count <= 1) {
         return
       }
-      const previousActiveIndex = activeIndexPropRef.current
 
-      const targetActiveIndex = getTargetActiveIndex(pace)
-      const targetOffset = getTargetOffset(targetActiveIndex, offset)
+      const targetActive = getTargetActive(pace)
+      const targetOffset = getTargetOffset(targetActive, offset)
       if (loop) {
-        if (children[0] && targetOffset !== minOffset.value) {
-          const outRightBound = targetOffset < minOffset.value
-          children[0].setOffset(outRightBound ? trackSize.value : 0)
+        if (itemInstances[0] && targetOffset !== minOffsetRef.current) {
+          const outRightBound = targetOffset < minOffsetRef.current
+          itemInstances[0].setOffset(outRightBound ? trackSizeRef.current : 0)
         }
 
-        if (children[count - 1] && targetOffset !== 0) {
+        if (itemInstances[count - 1] && targetOffset !== 0) {
           const outLeftBound = targetOffset > 0
-          children[count - 1].setOffset(outLeftBound ? -trackSize.value : 0)
+          itemInstances[count - 1].setOffset(outLeftBound ? -trackSizeRef.current : 0)
         }
       }
-      activeIndexRef.current = targetActiveIndex
+
+      const previousActiveIndex = activeIndexRef.current
+      activeIndexRef.current = targetActive
       setOffset(targetOffset)
 
-      if (emitChange && previousActiveIndex !== activeIndicator.value) {
-        onChange?.({ index: activeIndicator.value })
+      if (emitChange && previousActiveIndex !== targetActive) {
+        onChange?.(getIndicatorValue(targetActive, count))
       }
     },
     [
       count,
-      getTargetActiveIndex,
+      getTargetActive,
       getTargetOffset,
       loop,
-      children,
-      minOffset,
-      trackSize,
+      itemInstances,
+      minOffsetRef,
+      trackSizeRef,
       onChange,
-      activeIndicator,
     ],
   )
 
@@ -275,16 +278,16 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     [correctPosition, count, loop, moveTo, touch],
   )
 
-  const previous = useCallback(() => {
-    correctPosition()
-    doubleRaf(() => {
-      swipingRef.current = false
-      moveTo({
-        pace: -1,
-        emitChange: true,
-      })
-    })
-  }, [correctPosition, moveTo])
+  // const previous = useCallback(() => {
+  //   correctPosition()
+  //   doubleRaf(() => {
+  //     swipingRef.current = false
+  //     moveTo({
+  //       pace: -1,
+  //       emitChange: true,
+  //     })
+  //   })
+  // }, [correctPosition, moveTo])
 
   const next = useCallback(() => {
     correctPosition()
@@ -313,30 +316,6 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
     }
   }, [autoplay, count, next, stopAutoplay])
 
-  const initialize = useCallback(
-    async (activeIndex = activeIndexProp) => {
-      if (!rootRef.current) {
-        return
-      }
-      customRectRef.current = await getRect(rootRef)
-      if (count) {
-        activeIndex = Math.min(count - 1, activeIndex)
-      }
-      activeIndexRef.current = activeIndex
-      swipingRef.current = true
-      const targetOffset = getTargetOffset(activeIndex)
-      setOffset(targetOffset)
-      // Force update render
-      if (targetOffset === offset) {
-        forceSetRootRect(customRectRef.current)
-      }
-      children.forEach((item) => item.setOffset(0))
-    },
-    [activeIndexProp, children, count, getTargetOffset, offset],
-  )
-
-  const resize = useCallback(() => initialize(activeIndexRef.current), [initialize])
-
   const onTouchStart = useCallback(
     (event: ITouchEvent) => {
       if (!touchable) {
@@ -359,97 +338,147 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
       }
 
       touch.move(event)
-      if (correctDirection.value) {
+      const correctDirection = getCorrectDirection()
+      if (correctDirection) {
         preventDefault(event, stopPropagation)
-        moveTo({ offset: delta.value })
+        moveTo({ offset: getDelta() })
       }
     },
-    [correctDirection, delta, moveTo, stopPropagation, touch, touchable],
+    [getCorrectDirection, getDelta, moveTo, stopPropagation, touch, touchable],
   )
 
   const onTouchEnd = useCallback(() => {
     if (!touchable || !swipingRef.current) {
       return
     }
-
     const duration = Date.now() - touchStartTimeRef.current
-    const speed = delta.value / duration
-    const shouldSwipe = Math.abs(speed) > 0.25 || Math.abs(delta.value) > size.value / 2
+
+    const delta = getDelta()
+    const speed = delta / duration
+    const shouldSwipe = Math.abs(speed) > 0.25 || Math.abs(delta) > sizeRef.current / 2
 
     swipingRef.current = false
-    if (shouldSwipe && correctDirection.value) {
+    const correctDirection = getCorrectDirection()
+    if (shouldSwipe && correctDirection) {
       const offset = vertical ? touch.offsetY : touch.offsetX
 
       let pace: number
 
       if (loop) {
-        pace = offset > 0 ? (delta.value > 0 ? -1 : 1) : 0
+        pace = offset > 0 ? (delta > 0 ? -1 : 1) : 0
       } else {
-        pace = -Math[delta.value > 0 ? "ceil" : "floor"](delta.value / size.value)
+        pace = -Math[delta > 0 ? "ceil" : "floor"](delta / sizeRef.current)
       }
 
       moveTo({
         pace,
         emitChange: true,
       })
-    } else if (delta.value) {
+    } else if (delta) {
       moveTo({ pace: 0 })
     }
     startAutoplay()
-  }, [touchable, delta, size, correctDirection, startAutoplay, vertical, touch, loop, moveTo])
+  }, [
+    touchable,
+    getDelta,
+    sizeRef,
+    getCorrectDirection,
+    startAutoplay,
+    vertical,
+    touch.offsetY,
+    touch.offsetX,
+    loop,
+    moveTo,
+  ])
 
-  useEffect(() => {
-    const activeIndexProp = activeIndexPropRef.current
-    const activeIndexPropIndicator = (activeIndexProp + count) % count
+  const getTrackRect = useCallback(
+    () =>
+      Promise.all([
+        getRect(rootRef),
+        getComputedStyle(rootRef, ["width", "height"]),
+      ]).then(([rect, style]) =>
+        makeRect(
+          style.width === "auto" ? rect.width : unitToPx(style.width),
+          style.height === "auto" ? rect.height : unitToPx(style.height),
+        ),
+      ),
+    [],
+  )
 
-    if (
-      activeIndexPropIndicator !== previousActiveIndexProp &&
-      activeIndexPropIndicator !== activeIndicator.value
-    ) {
-      const maxActiveIndex = count - 1
-      if (
-        previousActiveIndexProp <= activeIndexProp &&
-        activeIndexPropIndicator === 0 &&
-        activeIndicator.value === maxActiveIndex
-      ) {
-        next()
-      } else if (
-        previousActiveIndexProp >= activeIndexProp &&
-        activeIndexPropIndicator === maxActiveIndex &&
-        activeIndicator.value === 0
-      ) {
-        previous()
-      } else {
-        swipeTo(activeIndexPropIndicator)
+  const initialize = useCallback(
+    async (activeIndex = valueRef.current) => {
+      if (!rootRef.current) {
+        return
       }
+      rectRef.current = await getTrackRect()
+      if (count) {
+        activeIndex = Math.min(count - 1, activeIndex)
+      }
+      activeIndexRef.current = activeIndex
+      swipingRef.current = true
+      const targetOffset = getTargetOffset(activeIndex)
+      setOffset(targetOffset)
+      // Force update render
+      if (targetOffset === offset) {
+        update()
+      }
+      itemInstances.forEach((item) => item.setOffset(0))
+    },
+    [valueRef, getTrackRect, count, getTargetOffset, offset, itemInstances, update],
+  )
+
+  const resize = useCallback(() => nextTick(() => initialize(activeIndexRef.current)), [initialize])
+
+  useMounted(initialize)
+
+  useWindowResize(resize)
+
+  useMounted(startAutoplay, stopAutoplay)
+
+  useEffect(
+    () => {
+      const valueIndicator = valueIndicatorRef.current
+      const activeIndicator = activeIndicatorRef.current
+      if (valueIndicator !== activeIndicator) {
+        try {
+          stopAutoplay()
+          swipeTo(valueIndicator)
+        } finally {
+          startAutoplay()
+        }
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [valueIndicatorRef.current],
+  )
+
+  const trackStyle = useRendered(() => {
+    const style: CSSProperties = {
+      transitionDuration: `${swipingRef.current ? 0 : duration}ms`,
+      transform: `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`,
     }
-  }, [activeIndicator, count, next, previous, previousActiveIndexProp, swipeTo])
 
-  useEffect(startAutoplay, [startAutoplay])
-
-  useEffect(() => {
-    onWindowResize?.(resize)
-    return () => offWindowResize?.(resize)
-  }, [resize])
-
-  // Forward swiper ref
-  useImperativeHandle(ref as Ref<SwiperInstance>, () => ({
-    previous,
-    next,
-  }))
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => nextTick(initialize), [])
+    if (sizeRef.current) {
+      const mainAxis = vertical ? "height" : "width"
+      style[mainAxis] = `${addUnitPx(trackSizeRef.current)}`
+      const crossAxis = vertical ? "width" : "height"
+      const crossAxisValue = propRectRef.current[crossAxis]
+      style[crossAxis] = crossAxisValue ? addUnitPx(crossAxisValue) : ""
+    }
+    return style
+  })
 
   return (
     <View ref={rootRef} className={classNames(prefixClassname("swiper"), className)} {...restProps}>
       <SwiperContext.Provider
         value={{
-          direction: direction as SwiperDirection,
-          activeIndicator,
-          size,
+          lazyRender,
+          loop,
+          direction,
+          indicator: activeIndicatorRef.current,
+          size: sizeRef.current,
           count,
-          children,
+          itemInstances,
         }}
       >
         <View
@@ -460,13 +489,13 @@ const Swiper = forwardRef(function (props: SwiperProps, ref: ForwardedRef<Swiper
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
           onTouchCancel={onTouchEnd}
-          style={trackStyle.value}
+          style={trackStyle}
           children={items}
         />
         {indicator}
       </SwiperContext.Provider>
     </View>
   )
-})
+}
 
 export default Swiper

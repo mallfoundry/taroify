@@ -28,6 +28,30 @@
     }
   }
 
+  .image-swiper {
+    .image {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      height: 240px * $hd;
+      padding: 30px * $hd 60px * $hd;
+      background: #fff;
+      pointer-events: none;
+    }
+  }
+
+
+  .onchange-swiper {
+    .#{$taroify-prefix}swiper-item {
+      color: #fff;
+      font-size: 20px * $hd;
+      line-height: 150px * $hd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   .vertical-swiper {
     height: 200px * $hd;
 
@@ -38,5 +62,15 @@
       justify-content: center;
       align-items: center;
     }
+  }
+
+  .custom-indicator {
+    position: absolute;
+    right: 5px * $hd;
+    bottom: 5px * $hd;
+    padding: 2px * $hd 5px * $hd;
+    font-size: 12px * $hd;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.1);
   }
 }
