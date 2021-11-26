@@ -433,7 +433,10 @@ function Swiper(props: SwiperProps) {
 
   useWindowResize(resize)
 
-  useMounted(startAutoplay, stopAutoplay)
+  useMounted(() => {
+    startAutoplay()
+    return stopAutoplay
+  })
 
   useEffect(
     () => {
