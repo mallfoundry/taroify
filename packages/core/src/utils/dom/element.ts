@@ -1,3 +1,4 @@
+import type { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import * as _ from "lodash"
 
@@ -11,10 +12,6 @@ export function isBodyElement(val: unknown): boolean {
   return val === document.body
 }
 
-export interface TaroElement extends HTMLElement {
-  uid: string
-}
-
 export function elementUnref(elementOrRef: any): TaroElement {
   if (elementOrRef === undefined || elementOrRef === null) {
     return elementOrRef
@@ -25,7 +22,7 @@ export function elementUnref(elementOrRef: any): TaroElement {
   return elementOrRef
 }
 
-export function isRootElement(node?: HTMLElement) {
+export function isRootElement(node?: TaroElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
