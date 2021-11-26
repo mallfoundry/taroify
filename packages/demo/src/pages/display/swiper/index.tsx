@@ -112,7 +112,7 @@ export default function SwiperDemo() {
       <Block title="自定义滑块大小">
         <SwiperWithCustomWidth />
       </Block>
-      <Block title="自定义滑块大小">
+      <Block title="自定义指示器">
         <SwiperWithCustomIndicator />
       </Block>
     </Page>
