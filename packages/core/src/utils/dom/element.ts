@@ -1,6 +1,7 @@
 import { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import * as _ from "lodash"
+import { inWechat } from "../base"
 
 export const ELEMENT_NODE_TYPE = 1
 
@@ -34,8 +35,23 @@ export function createNodesRef(elementOrRef: any) {
   if (_.isString(elementOrRef)) {
     return createSelectorQuery().select("#" + elementOrRef)
   }
+
   const element = elementUnref(elementOrRef)
-  return isRootElement(element)
-    ? createSelectorQuery().selectViewport()
-    : createSelectorQuery().select("#" + element.uid)
+
+  if (isRootElement(element)) {
+    return createSelectorQuery().selectViewport()
+  }
+
+  if (inWechat) {
+    let parentNode = element;
+    while (parentNode.parentNode && !isRootElement(parentNode.parentNode)) {
+      parentNode = parentNode.parentNode
+    }
+
+    if (parentNode && parentNode !== element) {
+      return createSelectorQuery().select(`#${parentNode.uid}>>>#${element.uid}`)
+    }
+  }
+
+  return  createSelectorQuery().select("#" + element.uid)
 }
