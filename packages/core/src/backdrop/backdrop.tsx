@@ -5,6 +5,7 @@ import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
+import Transition from "../transition"
 import { preventDefault } from "../utils/dom/event"
 
 interface BackdropProps extends ViewProps {
@@ -37,24 +38,25 @@ export default function Backdrop(props: BackdropProps) {
   }
 
   return (
-    <View
-      className={classNames(
-        prefixClassname("backdrop"),
-        {
-          [prefixClassname("backdrop--open")]: open,
-        },
-        className,
-      )}
-      style={{
-        transitionDuration: `${duration}ms`,
-        ...style,
-      }}
-      onClick={handleClick}
-      catchMove
-      onTouchMove={preventDefault}
-      children={children}
-      {...restProps}
-    />
+    <Transition in={open} duration={duration} appear mountOnEnter name="fade">
+      <View
+        className={classNames(
+          prefixClassname("backdrop"),
+          {
+            [prefixClassname("backdrop--open")]: open,
+          },
+          className,
+        )}
+        style={{
+          ...style,
+        }}
+        catchMove
+        children={children}
+        onClick={handleClick}
+        onTouchMove={preventDefault}
+        {...restProps}
+      />
+    </Transition>
   )
 }
 
