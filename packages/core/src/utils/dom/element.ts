@@ -36,6 +36,8 @@ export function createNodesRef(element: TaroElement) {
     return createSelectorQuery().selectViewport()
   }
 
+  // Fix nested in CustomWrapper is undefined
+  // See: https://github.com/mallfoundry/taroify/pull/143
   if (inWechat) {
     let ancestor = element
     while (ancestor.parentNode && !isRootElement(ancestor.parentNode as TaroElement)) {
