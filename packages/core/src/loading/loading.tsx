@@ -36,13 +36,7 @@ function LoadingCircular(props: LoadingProps) {
     }),
     [size],
   )
-  return (
-    <View className={prefixClassname("loading__circular")} style={rootStyle}>
-      <View className={prefixClassname("loading__circular__item")} />
-      <View className={prefixClassname("loading__circular__item")} />
-      <View className={prefixClassname("loading__circular__item")} />
-    </View>
-  )
+  return <View className={prefixClassname("loading__circular")} style={rootStyle} />
 }
 
 export type LoadingType = "circular" | "spinner"
