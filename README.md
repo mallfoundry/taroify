@@ -86,7 +86,7 @@ function Index() {
 | [vant-icons](https://github.com/youzan/vant/tree/dev/packages/vant-icons) | Vant 图标库 |
 | [vant-touch-emulator](https://github.com/youzan/vant/tree/dev/packages/vant-touch-emulator) | 在桌面端使用 Vant 的辅助库 |
 
-### 社区生态
+## 社区生态
 
 由社区维护的项目如下，欢迎补充：
 
