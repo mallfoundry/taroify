@@ -73,6 +73,8 @@ export interface PopupProps extends ViewProps {
   duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
 
+  mountOnEnter?: boolean
+
   onOpen?(opened: boolean): void
 
   onClose?(opened: boolean): void
@@ -89,6 +91,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     rounded = false,
     duration,
     children,
+    mountOnEnter = true,
     onOpen,
     onClose,
     onClosed,
@@ -109,6 +112,8 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
       {backdrop}
       <Transition
         in={open}
+        appear
+        mountOnEnter={mountOnEnter}
         name={transactionName}
         duration={duration}
         onEnter={() => onOpen?.(true)}
