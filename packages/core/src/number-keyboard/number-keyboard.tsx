@@ -157,7 +157,7 @@ function NumberKeyboard(props: NumberKeyboardProps) {
     }
   }
   return (
-    <Transition in={open} name="slide-up" duration={10000}>
+    <Transition in={open} appear name="slide-up" duration={10000}>
       <NumberKeyboardContext.Provider
         value={{
           title,

@@ -36,10 +36,16 @@ function elementStyle(children?: ReactNode) {
 interface TransitionProps {
   name?: TransitionName | string
   in?: boolean
+  appear?: boolean
+  mountOnEnter?: boolean
+  unmountOnExit?: boolean
   duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
   onEnter?: EnterHandler<HTMLElement>
+  onEntering?: EnterHandler<HTMLElement>
   onEntered?: EnterHandler<HTMLElement>
+  onExit?: ExitHandler<HTMLElement>
+  onExiting?: ExitHandler<HTMLElement>
   onExited?: ExitHandler<HTMLElement>
 }
 
@@ -47,10 +53,16 @@ export default function Transition(props: TransitionProps) {
   const {
     name,
     in: inProp = false,
+    appear = false,
+    mountOnEnter = false,
+    unmountOnExit,
     duration = 300,
     children: childrenProp,
     onEnter,
+    onEntering,
     onEntered,
+    onExit,
+    onExiting,
     onExited,
   } = props
   const children = useMemo(() => childrenProp, [childrenProp])
@@ -62,9 +74,10 @@ export default function Transition(props: TransitionProps) {
   return (
     <CSSTransition
       in={inProp}
-      mountOnEnter
+      mountOnEnter={mountOnEnter}
+      unmountOnExit={unmountOnExit}
       timeout={duration}
-      appear
+      appear={appear}
       classNames={transactionName}
       style={{
         ...childrenStyle,
@@ -77,7 +90,10 @@ export default function Transition(props: TransitionProps) {
         // @ts-ignore
         onEnter?.(node, isAppearing)
       }}
+      onEntering={onEntering}
       onEntered={onEntered}
+      onExit={onExit}
+      onExiting={onExiting}
       onExited={(node) => {
         setEnter(false)
         setExited(true)
