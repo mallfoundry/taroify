@@ -31,27 +31,21 @@ export function matchSelector(aSelector?: string, bSelector?: string) {
   return _.replace(aSelector as string, "#", "") === bSelector
 }
 
-export function createNodesRef(elementOrRef: any) {
-  if (_.isString(elementOrRef)) {
-    return createSelectorQuery().select("#" + elementOrRef)
-  }
-
-  const element = elementUnref(elementOrRef)
-
+export function createNodesRef(element: TaroElement) {
   if (isRootElement(element)) {
     return createSelectorQuery().selectViewport()
   }
 
   if (inWechat) {
-    let parentNode = element;
-    while (parentNode.parentNode && !isRootElement(parentNode.parentNode)) {
-      parentNode = parentNode.parentNode
+    let ancestor = element
+    while (ancestor.parentNode && !isRootElement(ancestor.parentNode as TaroElement)) {
+      ancestor = ancestor.parentNode as TaroElement
     }
 
-    if (parentNode && parentNode !== element) {
-      return createSelectorQuery().select(`#${parentNode.uid}>>>#${element.uid}`)
+    if (ancestor && ancestor !== element) {
+      return createSelectorQuery().select(`#${ancestor.uid}>>>#${element.uid}`)
     }
   }
 
-  return  createSelectorQuery().select("#" + element.uid)
+  return createSelectorQuery().select("#" + element.uid)
 }
