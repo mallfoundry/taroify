@@ -80,6 +80,7 @@ function renderUploadFiles(props: UploaderProps) {
   const files = _.map(getUploadFiles(value) as UploadFile[], (file, index) => (
     <UploaderImage
       key={index}
+      type={file?.type}
       url={file?.url}
       name={file?.name}
       removable={(file?.removable ?? true) && file?.status !== UploadStatus.Uploading}
