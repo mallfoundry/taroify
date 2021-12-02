@@ -3,14 +3,14 @@
 </p>
 <h3 align="center">轻量、可靠的小程序端 Taro React UI 组件库</h3>
 
-### 介绍
+## 介绍
 
 Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro React 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用。
 
-### 特性
+## ✨ 特性
 
 - 🚀 性能极佳，组件平均体积小于 1KB（min+gzip）
-- 🚀 60+ 个高质量组件，覆盖移动端主流场景
+- 💎 60+ 个高质量组件，覆盖移动端主流场景
 - 💪 使用 TypeScript 编写，提供完整的类型定义
 - 💪 单元测试覆盖率超过 90%，提供稳定性保障
 - 📖 提供完善的中文文档和组件示例
@@ -19,7 +19,11 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 - 🍭 支持按需引入和 Tree Shaking
 - 🌍 支持国际化和语言包定制
 
-## 安装
+## 🖥 浏览器支持
+
+现代浏览器以及 Android 4.0+, iOS 8.0+。
+
+## 📦 安装
 
 ### 通过 npm 安装使用（推荐）
 
@@ -35,7 +39,7 @@ npm i @taroify/core -S --production
 yarn add @taroify/core --production
 ```
 
-### 使用组件
+## 🚀 使用组件
 
 ```tsx
 import { Button } from "@taroify/core"
@@ -48,18 +52,28 @@ function Index() {
 
 更多使用方式，请参考[快速上手](https://taroify.gitee.io/taroify.com/quickstart/)
 
-### 贡献代码
+## 🤝 贡献代码
 
 修改代码请阅读我们的[开发指南](https://taroify.gitee.io/taroify.com/contribution/)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
 
-### 浏览器支持
+## 💭 微信交流群
 
-现代浏览器以及 Android 4.0+, iOS 8.0+。
+<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<br />
+备注 "taroify" 加好友后邀请进群
 
-### Vant 官方生态
+## 🤝 贡献者
+
+<a href="https://github.com/mallfoundry/taroify/graphs/contributors">
+  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
+</a>
+
+- 部分图形设计来自[BiscuitCoder](https://biscuitcoder.github.io)
+
+## Vant 官方生态
 
 由 Vant 官方团队维护的项目如下：
 
@@ -85,7 +99,7 @@ function Index() {
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
-### 友情推荐
+## 友情推荐
 
 | 项目 | 描述 |
 | --- | --- |
@@ -93,26 +107,11 @@ function Index() {
 | [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
 | [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
 
-### 链接
+## 🙏 鸣谢
+Vant - 感谢 Vant 团队多年来的不断维护，让 Taroify 能够站在巨人的肩膀上。
 
-- [仓库地址](https://github.com/mallfoundry/taroify)
-- [意见反馈](https://github.com/mallfoundry/taroify/issues)
-- [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
+WebStorm - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify 可以快速开发。
 
-### 贡献者
-
-<a href="https://github.com/mallfoundry/taroify/graphs/contributors">
-  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
-</a>
-
-- 部分图形设计来自[BiscuitCoder](https://biscuitcoder.github.io)
-
-### 微信交流群
-
-<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
-<br />
-备注 "taroify" 加好友后邀请进群
-
-### 开源协议
+## 📜 开源协议
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
