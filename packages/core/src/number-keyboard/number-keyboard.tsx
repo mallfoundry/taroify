@@ -157,13 +157,13 @@ function NumberKeyboard(props: NumberKeyboardProps) {
     }
   }
   return (
-    <Transition in={open} appear name="slide-up" duration={10000}>
-      <NumberKeyboardContext.Provider
-        value={{
-          title,
-          onKeyPress: handleKeyPress,
-        }}
-      >
+    <NumberKeyboardContext.Provider
+      value={{
+        title,
+        onKeyPress: handleKeyPress,
+      }}
+    >
+      <Transition in={open} appear name="slide-up">
         <View
           className={classNames(
             prefixClassname("number-keyboard"),
@@ -180,8 +180,8 @@ function NumberKeyboard(props: NumberKeyboardProps) {
             {sidebar}
           </View>
         </View>
-      </NumberKeyboardContext.Provider>
-    </Transition>
+      </Transition>
+    </NumberKeyboardContext.Provider>
   )
 }
 
