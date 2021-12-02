@@ -49,6 +49,7 @@
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
+    "@types/react-helmet": "^6.1.4",
     "gatsby-plugin-typescript": "^4.1.1"
   }
 }
