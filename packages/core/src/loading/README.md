@@ -62,7 +62,7 @@ import { Loading } from "@taroify/core"
 设置 `vertical` 属性后，图标和文案会垂直排列。
 
 ```tsx
-<Loading size="24px" vertical>加载中...</Loading>
+<Loading size="24px" direction="vertical">加载中...</Loading>
 ```
 
 ### 自定义文案颜色
@@ -93,5 +93,5 @@ import { Loading } from "@taroify/core"
 | ---------- | ----------------------------- | ------------------ | ---------- |
 | type       | 类型，可选值为 `spinner`      | _string_           | `circular` |
 | size       | 加载图标大小，默认单位为 `px` | _number \| string_ | `30px`     |
-| vertical   | 是否垂直排列图标和文字内容    | _boolean_          | `false`    |
+| direction | 排列方向，可选值为 `horizontal` | _string_ | `vertical` |
 | children   | 加载文案    | _ReactNode_          | -    |
