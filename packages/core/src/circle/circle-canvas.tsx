@@ -1,9 +1,10 @@
 import { Canvas } from "@tarojs/components"
+import { TaroElement } from "@tarojs/runtime"
 import { CanvasContext, createCanvasContext, getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { useRenderedEffect, useUniqueId } from "../hooks"
+import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useMounted, useUniqueId } from "../hooks"
 import { BLUE, WHITE } from "../styles/variables"
 import { createNodesRef } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
@@ -20,17 +21,16 @@ const PERIMETER = 2 * Math.PI
 
 const BEGIN_ANGLE = -Math.PI / 2
 
-function useCanvasContext(canvasId: string | undefined, size: number) {
+function useCanvasContext(canvasRef: MutableRefObject<TaroElement | undefined>, size: number) {
   const [canvasContext, setCanvasContext] = useState<CanvasContext>()
-
-  useRenderedEffect(() => {
+  useMounted(() => {
     if (!canIUseCanvas2d()) {
-      if (canvasId) {
-        setCanvasContext(createCanvasContext(canvasId))
+      if (canvasRef.current) {
+        setCanvasContext(createCanvasContext(canvasRef.current.id))
       }
     } else {
-      if (canvasId) {
-        createNodesRef(canvasId)
+      if (canvasRef.current) {
+        createNodesRef(canvasRef.current)
           .fields(
             {
               node: true,
@@ -39,15 +39,15 @@ function useCanvasContext(canvasId: string | undefined, size: number) {
               const { pixelRatio: dpr } = getSystemInfoSync()
               canvas.width = size * dpr
               canvas.height = size * dpr
-              const canvasContext = canvasContextAdaptor(canvas.getContext("2d"))
-              canvasContext.scale(dpr, dpr)
-              setCanvasContext(canvasContext)
+              const newCanvasContext = canvasContextAdaptor(canvas.getContext("2d"))
+              newCanvasContext.scale(dpr, dpr)
+              setCanvasContext(newCanvasContext)
             },
           )
           .exec()
       }
     }
-  }, [canvasId])
+  })
 
   return canvasContext
 }
@@ -65,12 +65,14 @@ function CircleCanvas(props: CircleProps) {
     size = 100,
     onChange,
   } = props
+
   const canvasId = useUniqueId()
+  const canvasRef = useRef<TaroElement>()
 
   const strokeWidth = useMemo(() => strokeWidthProp / 10, [strokeWidthProp])
 
   const percent = useAnimatePercent(percentProp, speed)
-  const canvasContext = useCanvasContext(canvasId, size)
+  const canvasContext = useCanvasContext(canvasRef, size)
   const [hoverColor, setHoverColor] = useState<any>()
 
   const presetCanvas = useCallback(
@@ -134,7 +136,7 @@ function CircleCanvas(props: CircleProps) {
     [canvasContext, renderHoverCircle, renderLayerCircle, size],
   )
 
-  useEffect(() => drawCircle(percent), [canvasContext, percent, hoverColor, drawCircle])
+  useEffect(() => drawCircle(percent), [drawCircle, percent])
 
   useEffect(
     () => onChange?.(percent),
@@ -161,6 +163,7 @@ function CircleCanvas(props: CircleProps) {
 
   return (
     <Canvas
+      ref={canvasRef}
       id={canvasId}
       canvasId={canvasId}
       type="2d"
