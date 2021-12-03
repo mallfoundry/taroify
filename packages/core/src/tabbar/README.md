@@ -146,6 +146,6 @@ function TabbarWithCustomColor() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | key | 标签标识，作为匹配的标识符 | _number \| string_ | 当前标签的索引值 |
-| icon | 图标或图片链接 | _ReactNode_ | - |
+| icon | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | badge | 图标右上角徽标的内容 | _boolean \| number \| string \| Badge_ | - |
 | children | 标签名 | _ReactNode_ | - |

@@ -125,7 +125,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | --- | --- | --- | --- |
 | selector | 自定义节点选择器 | _string_ | `toast` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
-| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
+| icon | 自定义图标，支持传入[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
 | duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
 | backdrop | 是否显示遮罩层 | _boolean_ | `false` |

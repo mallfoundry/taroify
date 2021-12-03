@@ -205,5 +205,5 @@ function DisabledDropdownMenu() {
 | 键名  | 说明                                   | 类型               |
 | ----- | -------------------------------------- | ------------------ |
 | value | 标识符                                 | _any_  |
-| icon  | 左侧图标或图片                           |   _ReactNode_       |
+| icon  | 左侧[图标](/components/icon)或[图片](/components/image) |   _ReactNode_       |
 | title | 展示 DropdownMenu 选中的 title 内容      | _ReactNode_         |

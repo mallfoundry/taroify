@@ -144,7 +144,7 @@ import Grid from "@taroify/core/grid"
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | text | 文字 | _string_ | - |
-| icon | [图标名称](/components/icon)或图片链接 | _string_ | - |
+| icon | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | dot | 是否显示图标右上角小红点 | _boolean_ | `false` |
 | badge | 图标右上角徽标的内容 | _number \| string_ | - |
 
