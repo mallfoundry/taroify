@@ -116,8 +116,8 @@ function CustomCollapse() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | value | 唯一标识符，默认为索引值 | _number \| string_ | `index` |
-| icon | 标题栏左侧图标或图片 | _ReactNode_ | - |
-| expandIcon | 标题栏右侧图标或图片 | _ReactNode_ | - |
+| icon | 标题栏左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
+| expandIcon | 标题栏右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | size | 标题栏大小，可选值为 `large` | _string_ | - |
 | title | 标题栏左侧内容 | _number \| string_ | - |
 | extra | 标题栏右侧内容 | _number \| string_ | - |

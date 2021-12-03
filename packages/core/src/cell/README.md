@@ -97,8 +97,8 @@ import { Cell } from "@taroify/core"
 | children | 右侧内容 | _number \| string_ | - |
 | brief | 标题下方的描述信息 | _string_ | - |
 | size | 单元格大小，可选值为 `large` | _string_ | - |
-| icon | 左侧图标或图片链接 | _ReactNode_ | - |
-| rightIcon | 右侧图标或图片链接 | _ReactNode_ | - |
+| icon | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
+| rightIcon | 右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | bordered | 是否显示内边框 | _boolean_ | `true` |
 | clickable | 是否开启点击反馈 | _boolean_ | `false` |
 | required | 是否显示表单必填星号 | _boolean_ | `false` |
