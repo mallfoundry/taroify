@@ -1,5 +1,5 @@
 import { Image, PullRefresh, Tabs } from "@taroify/core"
-import { View } from "@tarojs/components"
+import { CustomWrapper, View } from "@tarojs/components"
 import { usePageScroll } from "@tarojs/taro"
 import * as React from "react"
 import { useState } from "react"
@@ -101,13 +101,19 @@ export default function PullRefreshDemo() {
     <Page title="PullRefresh 下拉刷新" className="pull-refresh-demo">
       <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="基本用法">
-          <BasicPullRefresh />
+          <CustomWrapper>
+            <BasicPullRefresh />
+          </CustomWrapper>
         </Tabs.TabPane>
         <Tabs.TabPane title="完成提示">
-          <CompletedPullRefresh />
+          <CustomWrapper>
+            <CompletedPullRefresh />
+          </CustomWrapper>
         </Tabs.TabPane>
         <Tabs.TabPane title="自定义提示">
-          <CustomPullRefresh />
+          <CustomWrapper>
+            <CustomPullRefresh />
+          </CustomWrapper>
         </Tabs.TabPane>
       </Tabs>
     </Page>

@@ -230,9 +230,10 @@ function PullRefresh(props: PullRefreshProps) {
       durationRef.current = durationProp
       if (statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
-
+        // TODO Nested in CustomWrapper does not call.
         // ensure value change can be watched
-        nextTick(() => onRefresh?.())
+        // nextTick(() => onRefresh?.())
+        onRefresh?.()
       } else {
         updateStatus(0)
       }

@@ -19,23 +19,8 @@ export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   return previousRef
 }
 
-export type ShouldUpdateFunction<T> = (prev: T | undefined, next: T) => boolean
-
-const defaultShouldUpdate = <T>(a?: T, b?: T) => a !== b
-
-export function usePrevious<T>(
-  state: T,
-  shouldUpdate: ShouldUpdateFunction<T> = defaultShouldUpdate,
-): T | undefined {
-  const previousRef = useRef<T>()
-  const currentRef = useRef<T>()
-
-  if (shouldUpdate(currentRef.current, state)) {
-    previousRef.current = currentRef.current
-    currentRef.current = state
-  }
-
-  return previousRef.current
+export function usePrevious<T>(state: T): T | undefined {
+  return usePreviousRef(state).current
 }
 
 type UseRenderedCallback<T> = () => T
