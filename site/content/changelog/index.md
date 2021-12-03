@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.19-alpha.2
+
+`2021-12-03`
+
+**Bug Fixes**
+
+- PullRefresh
+  - 修复嵌套在 CustomWrapper 中不能触发 onRefresh 的问题 [#156](https://github.com/mallfoundry/taroify/pull/156)
+- NumberKeyboard
+  - 修复 Transition 组件未嵌套在真实元素上，而不能隐藏的的问题 [#154](https://github.com/mallfoundry/taroify/pull/154)
+
+**Breaking Changes**
+
+- PasswordInput
+  - 将 focused 属性重命名为 focus 属性 [#155](https://github.com/mallfoundry/taroify/pull/155)
+
 ### v0.0.19-alpha.1
 
 `2021-12-02`
