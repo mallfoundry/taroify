@@ -3,6 +3,8 @@
 @import "../../../styles/prefix";
 
 .password-input-demo {
+  min-height: 150vh;
+
   .#{$demo-prefix}block__content {
     padding: 0;
   }
