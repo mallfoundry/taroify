@@ -1,24 +1,23 @@
 @import "./variables";
 
 .#{$component-prefix}loading {
-  position: relative;
-  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--loading-color, $loading-color);
-  vertical-align: middle;
 
   &__spinner,
   &__circular {
     position: relative;
-    display: inline-block;
+    box-sizing: border-box;
     width: var(--loading-size, $loading-size);
     max-width: 100%;
     height: var(--loading-size, $loading-size);
     max-height: 100%;
-    vertical-align: middle;
   }
 
   &__spinner {
-    animation: #{$component-prefix}-rotate 0.8s steps(12) infinite;
+    animation: #{$component-prefix}-rotate var(--loading-animation-duration, $loading-animation-duration) steps(12) infinite;
 
     &__item {
       position: absolute;
@@ -29,7 +28,7 @@
 
       &::before {
         display: block;
-        width: 2px * 2;
+        width: 2px * $hd;
         height: 25%;
         margin: 0 auto;
         content: ' ';
@@ -48,45 +47,26 @@
   }
 
   &__circular {
-    &__item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: calc(100% - 10px);
-      height: calc(100% - 10px);
-      border-color: currentColor transparent transparent;
-      border-style: solid;
-      border-width: 5px;
-      border-radius: 50%;
-      animation: #{$component-prefix}-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-
-      &:nth-child(1) {
-        animation-delay: -0.45s;
-      }
-
-      &:nth-child(2) {
-        animation-delay: -0.3s;
-      }
-
-      &:nth-child(3) {
-        animation-delay: -0.15s;
-      }
-    }
+    border: 1px * $hd solid transparent;
+    border-top-color: currentColor;
+    border-radius: 100%;
+    animation: #{$component-prefix}-rotate var(--loading-animation-duration, $loading-animation-duration) linear infinite;
   }
 
   &__text {
-    display: inline-block;
     margin-left: var(--padding-xs, $padding-xs);
     font-size: var(--loading-text-font-size, $loading-text-font-size);
     color: var(--loading-text-color, $loading-text-color);
-    vertical-align: middle;
+    line-height: var(--loading-text-line-height, $loading-text-line-height);
+
+    &:empty {
+      display: none;
+    }
   }
 
 
   &--vertical {
-    display: flex;
     flex-direction: column;
-    align-items: center;
 
     .#{$component-prefix}loading__text {
       margin: var(--padding-xs, $padding-xs) 0 0;

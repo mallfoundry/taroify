@@ -3,6 +3,8 @@
 
 $loading-color: var(--gray-5, $gray-5);
 $loading-size: 30px * $hd;
+$loading-animation-duration: 0.8s;
 
 $loading-text-color: var(--gray-6, $gray-6);
 $loading-text-font-size: var(--font-size-md, $font-size-md);
+$loading-text-line-height: 20px * $hd;

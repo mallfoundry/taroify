@@ -12,6 +12,29 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.19-alpha.1
+
+`2021-12-02`
+
+**Feature**
+
+- Transition
+  - 新增 appear 、mountOnEnter 属性 [#148](https://github.com/mallfoundry/taroify/pull/148)
+
+**Bug Fixes**
+
+- createNodesRef
+  - 修复获得嵌套在 CustomWrapper 内的 NodesRef 为 undefined 的问题 [#143](https://github.com/mallfoundry/taroify/pull/143) [@wowhy](https://github.com/wowhy)
+- Circle
+  - 修复重复获得 CanvasContext 导致无法初始化渲染的问题 [#145](https://github.com/mallfoundry/taroify/issues/145) [#146](https://github.com/mallfoundry/taroify/issues/146)
+- Uploader
+  - 修复在多选（multiple）模式下，不能显示上传的本地图片的问题 [#152](https://github.com/mallfoundry/taroify/issues/152) [#151](https://github.com/mallfoundry/taroify/pull/151)
+
+**Performance**
+
+- Backdrop
+  - 使用 Transition 组件代替 css transition [#150](https://github.com/mallfoundry/taroify/issues/150) [#149](https://github.com/mallfoundry/taroify/issues/149)
+
 ### v0.0.19-alpha.0
 
 `2021-11-26`

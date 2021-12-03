@@ -103,5 +103,14 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: "gatsby-plugin-baidu-analytics",
+      options: {
+        // baidu analytics siteId
+        siteId: "53df1d7fd1cfda80d49b45121c1c939c",
+        // Put analytics script in the head instead of the body [default:false]
+        head: false,
+      },
+    },
   ],
 }

@@ -13,7 +13,7 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 ### 特性
 
 - 🚀 性能极佳，组件平均体积小于 1KB（min+gzip）
-- 🚀 60+ 个高质量组件，覆盖移动端主流场景
+- 💎 60+ 个高质量组件，覆盖移动端主流场景
 - 💪 使用 TypeScript 编写，提供完整的类型定义
 - 💪 单元测试覆盖率超过 90%，提供稳定性保障
 - 📖 提供完善的中文文档和组件示例
@@ -22,7 +22,9 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 - 🍭 支持按需引入和 Tree Shaking
 - 🌍 支持国际化和语言包定制
 
-## 安装
+### 浏览器支持
+
+现代浏览器以及 Android 4.0+, iOS 8.0+。
 
 ### 通过 npm 安装使用（推荐）
 
@@ -58,11 +60,21 @@ function Index() {
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
 
-### 浏览器支持
+### 微信交流群
 
-现代浏览器以及 Android 4.0+, iOS 8.0+。
+<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<br />
+备注 "taroify" 加好友后邀请进群
 
-### Vant 官方生态
+### 贡献者
+
+<a href="https://github.com/mallfoundry/taroify/graphs/contributors">
+  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
+</a>
+
+- 部分图形设计来自[BiscuitCoder](https://biscuitcoder.github.io)
+
+###  Vant 官方生态
 
 由 Vant 官方团队维护的项目如下：
 
@@ -94,19 +106,13 @@ function Index() {
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
 - [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
 
-### 贡献者
+###  友情推荐
 
-<a href="https://github.com/mallfoundry/taroify/graphs/contributors">
-  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
-</a>
-
-- 部分图形设计来自[BiscuitCoder](https://github.com/BiscuitCoder)
-
-### 微信交流群
-
-<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
-<br />
-备注 "taroify" 加好友后邀请进群
+| 项目 | 描述 |
+| --- | --- |
+| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
+| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
+| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
 
 ### 开源协议
 
