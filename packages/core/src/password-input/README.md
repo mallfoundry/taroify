@@ -17,7 +17,22 @@ import { PasswordInput } from "@taroify/core";
 搭配数字键盘组件来实现密码输入功能。
 
 ```tsx
-<PasswordInput value="123" />
+function BasicPasswordInput() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("123")
+
+  return (
+    <>
+      <PasswordInput focus value={value} onFocus={() => setOpen(true)} />
+      <NumberKeyboard
+        open={open}
+        onKeyPress={(key) => setValue(value + key)}
+        onBackspace={() => setValue(value.substring(0, value.length - 1))}
+        onHide={() => setOpen(false)}
+      />
+    </>
+  )
+}
 ```
 
 ### 自定义长度
@@ -62,7 +77,7 @@ import { PasswordInput } from "@taroify/core";
 | length | 密码最大长度 | _number \| string_ | `6` |
 | gutter | 输入框格子之间的间距，如 `20px` `2em`，默认单位为`px` | _number \| string_ | `0` |
 | mask | 是否隐藏密码内容 | _boolean_ | `true` |
-| focused | 是否已聚焦，聚焦时会显示光标 | _boolean_ | `false` |
+| focus | 是否聚焦，聚焦时会显示光标 | _boolean_ | `false` |
 | info | 输入框下方文字提示 | _string_ | - |
 | error | 输入框下方错误提示 | _boolean_ | - |
 
