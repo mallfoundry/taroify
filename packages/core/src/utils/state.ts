@@ -83,12 +83,10 @@ interface UseValueOptions<S> {
   onChange?: (value: S) => void
 }
 
-export function useValue<S>(
-  propValue: S,
-  { defaultValue, onChange }: UseValueOptions<S> = {},
-): [S, Dispatch<S>] {
+export function useValue<S>(propValue?: S, options?: UseValueOptions<S>): [S, Dispatch<S>] {
+  const { defaultValue, onChange } = options ?? {}
   const update = useUpdate()
-  const valueRef = useRef<S>(defaultValue ?? propValue)
+  const valueRef = useRef(defaultValue ?? propValue)
 
   if (propValue !== undefined) {
     valueRef.current = propValue
@@ -106,5 +104,5 @@ export function useValue<S>(
     [onChange, propValue],
   )
 
-  return [valueRef.current, dispatchValue]
+  return [valueRef.current as S, dispatchValue]
 }
