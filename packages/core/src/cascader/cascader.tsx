@@ -15,7 +15,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import Tabs from "../tabs"
-import { useToRef } from "../utils/state"
+import { useValue } from "../utils/state"
 import CascaderHeader from "./cascader-header"
 import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
@@ -28,12 +28,14 @@ function getCascaderOptions(children: ReactNode, tabIndex: number): CascaderOpti
     if (isValidElement(child)) {
       const element = child as ReactElement
       const { key, props, type } = element
+      const { value, ...restProps } = props
       if (type === CascaderOption) {
         const index = _.size(options)
         options.push({
           key: key ?? index,
           tabIndex,
-          ...props,
+          value: value ?? index,
+          ...restProps,
         })
       }
     }
@@ -48,30 +50,34 @@ interface CascaderChildren {
 }
 
 function useCascaderChildren(children?: ReactNode): CascaderChildren {
-  const __children__: CascaderChildren = {
-    header: undefined,
-    tabs: [],
-  }
-
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      const { props, type } = element
-      if (type === CascaderHeader) {
-        __children__.header = element
-      } else if (type === CascaderTab) {
-        const { children } = props
-        __children__.tabs.push({
-          options: getCascaderOptions(children, _.size(__children__.tabs)),
-        })
-      }
+  return useMemo(() => {
+    const __children__: CascaderChildren = {
+      header: undefined,
+      tabs: [],
     }
-  })
-  return __children__
+
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        const { props, type } = element
+        if (type === CascaderHeader) {
+          __children__.header = element
+        } else if (type === CascaderTab) {
+          const { children } = props
+          __children__.tabs.push({
+            options: getCascaderOptions(children, _.size(__children__.tabs)),
+          })
+        }
+      }
+    })
+
+    return __children__
+  }, [children])
 }
 
 export interface CascaderProps {
   className?: string
+  defaultValue?: any[]
   value?: any[]
   swipeable?: boolean
   placeholder?: ReactNode
@@ -87,7 +93,8 @@ export interface CascaderProps {
 function Cascader(props: CascaderProps) {
   const {
     className,
-    value = [],
+    defaultValue,
+    value: valueProp,
     placeholder = "请选择",
     swipeable = false,
     children: childrenProp,
@@ -97,9 +104,7 @@ function Cascader(props: CascaderProps) {
   } = props
   const { header, tabs } = useCascaderChildren(childrenProp)
 
-  const [values, setValues] = useState<any[]>([])
-
-  const valuesRef = useToRef(values)
+  const [values = [], setValues] = useValue(valueProp, { defaultValue })
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -125,14 +130,14 @@ function Cascader(props: CascaderProps) {
   const emitChange = useCallback(
     (newValues: any[]) => {
       const newActiveOptions = findOptions(newValues)
-      if (!_.isEqual(newValues, value)) {
+      if (!_.isEqual(newValues, valueProp)) {
         onSelect?.(newValues, newActiveOptions)
         if (_.size(tabs) === _.size(newValues)) {
           onChange?.(newValues, newActiveOptions)
         }
       }
     },
-    [findOptions, onChange, onSelect, tabs, value],
+    [findOptions, onChange, onSelect, tabs, valueProp],
   )
 
   const handleSelect = useCallback(
@@ -145,11 +150,10 @@ function Cascader(props: CascaderProps) {
       const newValues = _.slice(values, 0, tabIndex + 1)
 
       newValues[tabIndex] = value
-
       setValues(newValues)
       emitChange(newValues)
     },
-    [emitChange, values],
+    [emitChange, setValues, values],
   )
 
   useEffect(() => {
@@ -157,12 +161,6 @@ function Cascader(props: CascaderProps) {
       setActiveTab(_.clamp(_.size(values), lastTab))
     })
   }, [lastTab, values])
-
-  useEffect(() => {
-    if (!_.isEqual(value, valuesRef.current)) {
-      setValues(value)
-    }
-  }, [value, valuesRef])
 
   const panes = useMemo(
     () =>

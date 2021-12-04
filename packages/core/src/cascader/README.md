@@ -98,6 +98,7 @@ function BasicCascader() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | title | 顶部标题 | _string_ | - |
+| defaultValue | 默认选中项的值 | _any[]_ | - | 
 | value | 选中项的值 | _any[]_ | - | 
 | placeholder | 未选中时的提示文案 | _string_ | `请选择` | 
 | swipeable | 是否开启手势左右滑动切换 | _boolean_ | `false` |
