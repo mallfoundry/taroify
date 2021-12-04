@@ -3,6 +3,14 @@ import * as _ from "lodash"
 import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { NotifyColor } from "./notify.shared"
 
+const initialNotifyOptions: NotifyOptions = {
+  className: undefined,
+  style: undefined,
+  duration: undefined,
+  message: undefined,
+  color: undefined,
+}
+
 const DEFAULT_NOTIFY_SELECTOR = "#notify"
 
 const defaultNotifyOptions: NotifyOptions = {}
@@ -55,7 +63,7 @@ export interface NotifyOptions {
 
 function parseNotifyOptions(message: ReactNode | NotifyOptions): NotifyOptions {
   const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
-  return _.assign({}, defaultNotifyOptions, options)
+  return _.assign({}, initialNotifyOptions, defaultNotifyOptions, options)
 }
 
 export function openNotify(args: ReactNode | NotifyOptions) {

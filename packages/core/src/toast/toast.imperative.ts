@@ -4,6 +4,17 @@ import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { PopupBackdropProps } from "../popup"
 import { ToastPosition, ToastType } from "./toast.shared"
 
+const initialToastOptions: ToastOptions = {
+  className: undefined,
+  style: undefined,
+  backdrop: undefined,
+  type: undefined,
+  position: undefined,
+  icon: undefined,
+  duration: undefined,
+  message: undefined,
+}
+
 const DEFAULT_TOAST_SELECTOR = "#toast"
 
 const defaultToastOptions: ToastOptions = {}
@@ -59,7 +70,7 @@ export interface ToastOptions {
 
 function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
   const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
-  return _.assign({}, defaultToastOptions, options)
+  return _.assign({}, initialToastOptions, defaultToastOptions, options)
 }
 
 export function openToast(args: ReactNode | ToastOptions) {
