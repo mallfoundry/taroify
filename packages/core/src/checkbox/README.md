@@ -17,14 +17,7 @@ import { Checkbox } from "@taroify/core"
 通过 `checked` 绑定复选框的勾选状态。
 
 ```tsx
-function BasicCheckbox() {
-  const [value, setValue] = useState(false)
-  return (
-    <Checkbox checked={value} onChange={setValue}>
-      复选框
-    </Checkbox>
-  )
-}
+<Checkbox>复选框</Checkbox>
 ```
 
 ### 禁用状态
@@ -49,14 +42,9 @@ function BasicCheckbox() {
 通过 `css` 设置选中状态的图标颜色。
 
 ```tsx
-function CheckboxWithCustomColor() {
-  const [value, setValue] = useState(false)
-  return (
-    <Checkbox className="custom-color" checked={value} onChange={setValue}>
-      自定义颜色
-    </Checkbox>
-  )
-}
+<Checkbox className="custom-color">
+  自定义颜色
+</Checkbox>
 ```
 
 ```scss
@@ -111,16 +99,10 @@ function CheckboxWithCustomIcon() {
 复选框可以与复选框组一起使用，复选框组通过 `value` 数组绑定复选框的勾选状态。
 
 ```tsx
-function BasicCheckboxGroup() {
-  const [value, setValue] = useState(["a", "b"])
-
-  return (
-    <Checkbox.Group value={value} onChange={setValue}>
-      <Checkbox name="a">复选框 a</Checkbox>
-      <Checkbox name="b">复选框 b</Checkbox>
-    </Checkbox.Group>
-  )
-}
+<Checkbox.Group>
+  <Checkbox name="a">复选框 a</Checkbox>
+  <Checkbox name="b">复选框 b</Checkbox>
+</Checkbox.Group>
 ```
 
 ### 水平排列
@@ -128,16 +110,10 @@ function BasicCheckboxGroup() {
 将 `direction` 属性设置为 `horizontal` 后，复选框组会变成水平排列。
 
 ```tsx
-function HorizontalCheckboxGroup() {
-  const [value, setValue] = useState<string[]>([])
-
-  return (
-    <Checkbox.Group direction="horizontal" value={value} onChange={setValue}>
-      <Checkbox name="a">复选框 a</Checkbox>
-      <Checkbox name="b">复选框 b</Checkbox>
-    </Checkbox.Group>
-  )
-}
+<Checkbox.Group direction="horizontal">
+  <Checkbox name="a">复选框 a</Checkbox>
+  <Checkbox name="b">复选框 b</Checkbox>
+</Checkbox.Group>
 ```
 
 ### 限制最大可选数
@@ -145,17 +121,11 @@ function HorizontalCheckboxGroup() {
 通过 `max` 属性可以限制复选框组的最大可选数。
 
 ```tsx
-function MaxCheckboxGroup() {
-  const [value, setValue] = useState<string[]>([])
-
-  return (
-    <Checkbox.Group max={2} value={value} onChange={setValue}>
-      <Checkbox name="a">复选框 a</Checkbox>
-      <Checkbox name="b">复选框 b</Checkbox>
-      <Checkbox name="c">复选框 c</Checkbox>
-    </Checkbox.Group>
-  )
-}
+<Checkbox.Group max={2}>
+  <Checkbox name="a">复选框 a</Checkbox>
+  <Checkbox name="b">复选框 b</Checkbox>
+  <Checkbox name="c">复选框 c</Checkbox>
+</Checkbox.Group>
 ```
 
 ### 搭配单元格组件使用
@@ -163,22 +133,16 @@ function MaxCheckboxGroup() {
 此时你需要再引入 `Cell` 和 `Cell.Group` 组件，并通过 `Checkbox` 实例上的 toggle 方法触发切换。
 
 ```tsx
-function CheckboxCellGroup() {
-  const [value, setValue] = useState<string[]>([])
-
-  return (
-    <Checkbox.Group max={2} value={value} onChange={setValue}>
-      <Cell.Group clickable>
-        <Cell title="复选框 a">
-          <Checkbox name="a" />
-        </Cell>
-        <Cell title="复选框 b">
-          <Checkbox name="b" />
-        </Cell>
-      </Cell.Group>
-    </Checkbox.Group>
-  )
-}
+<Checkbox.Group max={2}>
+  <Cell.Group clickable>
+    <Cell title="复选框 a">
+      <Checkbox name="a" />
+    </Cell>
+    <Cell title="复选框 b">
+      <Checkbox name="b" />
+    </Cell>
+  </Cell.Group>
+</Checkbox.Group>
 ```
 
 ## API
@@ -187,6 +151,7 @@ function CheckboxCellGroup() {
 
 | 参数           | 说明                      | 类型               | 默认值    |
 | -------------- | ------------------------- | ------------------ | --------- |
+| defaultChecked | 默认是否为选中状态            | _boolean_          | `false`   |
 | checked        | 是否为选中状态            | _boolean_          | `false`   |
 | name           | 标识符                    | _any_              | -         |
 | shape          | 形状，可选值为 `square`   | _string_           | `round`   |
@@ -197,6 +162,7 @@ function CheckboxCellGroup() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 默认所有选中项的标识符 | _any[]_  | -   |
 | value | 所有选中项的标识符 | _any[]_ | - |
 | disabled | 是否禁用所有复选框 | _boolean_ | `false` |
 | max | 最大可选数，`0` 为无限制 | _number \| string_ | `0` |
@@ -208,7 +174,6 @@ function CheckboxCellGroup() {
 | 事件名 | 说明                     | 回调参数            |
 | ------ | ------------------------ | ------------------- |
 | onChange | 当绑定值变化时触发的事件 | _checked: boolean_  |
-| onClick  | 点击复选框时触发         | _event: ITouchEvent_ |
 
 ### CheckboxGroup Events
 

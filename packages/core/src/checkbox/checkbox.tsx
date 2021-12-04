@@ -3,14 +3,16 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
+import { useValue } from "../utils/state"
 import CheckboxGroupContext from "./checkbox-group.context"
 import { CheckboxShape } from "./checkbox.shared"
 
 export interface CheckboxProps extends ViewProps {
   name?: any
+  defaultChecked?: boolean
   checked?: boolean
   disabled?: boolean
   shape?: CheckboxShape
@@ -25,26 +27,34 @@ export default function Checkbox(props: CheckboxProps) {
   const {
     className,
     name,
+    defaultChecked,
     checked: checkedProp,
     disabled,
     shape = "round",
     icon = <Success />,
     size,
     children,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
+
+  const [value, setValue] = useValue(checkedProp, {
+    defaultValue: defaultChecked,
+    onChange: onChangeProp,
+  })
 
   const { value: names = [], max: namesMax = 0, onChange: onNamesChange } = useContext(
     CheckboxGroupContext,
   )
-  const checked = checkedProp || (name && names?.includes(name))
 
-  function handleClick() {
+  const checked = useMemo(() => value || (name && names?.includes(name)), [value, name, names])
+
+  function onClick() {
     if (disabled) {
       return
     }
-    onChange?.(!checked)
+
+    setValue(!checked)
 
     if (name) {
       if (names?.includes(name)) {
@@ -58,7 +68,7 @@ export default function Checkbox(props: CheckboxProps) {
   return (
     <View
       className={classNames(prefixClassname("checkbox"), className)}
-      onClick={handleClick}
+      onClick={onClick}
       {...restProps}
     >
       <View

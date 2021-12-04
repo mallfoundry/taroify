@@ -3,26 +3,33 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import CheckboxGroupContext from "./checkbox-group.context"
 
-export enum CheckboxGroupDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-export type CheckboxGroupDirectionString = "horizontal" | "vertical"
+export type CheckboxGroupDirection = "horizontal" | "vertical"
 
 interface CheckboxGroupProps {
+  defaultValue?: any[]
   value?: any[]
   max?: number
-  direction?: CheckboxGroupDirection | CheckboxGroupDirectionString
+  direction?: CheckboxGroupDirection
   children?: ReactNode
 
   onChange?(value: any[]): void
 }
 
 function CheckboxGroup(props: CheckboxGroupProps) {
-  const { value, max, direction = CheckboxGroupDirection.Vertical, children, onChange } = props
+  const {
+    defaultValue,
+    value: valueProp,
+    max,
+    direction = "vertical",
+    children,
+    onChange: onChangeProp,
+  } = props
+
+  const [value, onChange] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
+
   return (
     <CheckboxGroupContext.Provider
       value={{
