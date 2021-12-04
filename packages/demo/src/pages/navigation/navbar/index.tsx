@@ -15,8 +15,9 @@ export default function NavbarDemo() {
         </Navbar>
       </Block>
       <Block title="使用 NavLeft 和 NavRight">
-        <Navbar title="标题">
+        <Navbar>
           <Navbar.NavLeft>返回</Navbar.NavLeft>
+          <Navbar.Title>标题</Navbar.Title>
           <Navbar.NavRight icon={<Search />} />
         </Navbar>
       </Block>

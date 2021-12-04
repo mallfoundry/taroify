@@ -8,6 +8,13 @@
   user-select: none;
   background-color: var(--navbar-background-color, $navbar-background-color);
 
+  &--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
   .#{$component-prefix}icon {
     color: var(--navbar-icon-color, $navbar-icon-color);
   }
