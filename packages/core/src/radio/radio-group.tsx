@@ -4,10 +4,12 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import RadioGroupContext from "./radio-group.context"
 import { RadioGroupDirection } from "./radio-group.shared"
 
 interface RadioGroupProps extends ViewProps {
+  defaultValue?: any
   value?: any
   disabled?: boolean
   direction?: RadioGroupDirection
@@ -20,14 +22,18 @@ interface RadioGroupProps extends ViewProps {
 function RadioGroup(props: RadioGroupProps) {
   const {
     className,
-    value,
+    defaultValue,
+    value: valueProp,
     disabled,
     direction = "vertical",
     size,
     children,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
+
+  const [value, onChange] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
+
   return (
     <RadioGroupContext.Provider
       value={{
