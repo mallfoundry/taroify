@@ -50,6 +50,12 @@
         },
         {
           "id": -1,
+          "name": "dropdown-menu",
+          "pathName": "pages/action/dropdown-menu/index",
+          "query": ""
+        },
+        {
+          "id": -1,
           "name": "pull-refresh",
           "pathName": "pages/action/pull-refresh/index",
           "query": ""

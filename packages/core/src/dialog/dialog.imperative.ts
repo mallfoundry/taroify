@@ -4,6 +4,18 @@ import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { ButtonProps } from "../button"
 import { PopupBackdropProps } from "../popup"
 
+const initialDialogOptions: DialogOptions = {
+  className: undefined,
+  style: undefined,
+  backdrop: undefined,
+  duration: undefined,
+  message: undefined,
+  title: undefined,
+  messageAlign: undefined,
+  confirm: undefined,
+  cancel: undefined,
+}
+
 const DEFAULT_DIALOG_SELECTOR = "#dialog"
 
 const defaultDialogOptions: DialogOptions = {}
@@ -66,7 +78,7 @@ export interface DialogOptions {
 
 function parseDialogOptions(message: ReactNode | DialogOptions): DialogOptions {
   const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
-  return _.assign({}, defaultDialogOptions, options)
+  return _.assign({}, initialDialogOptions, defaultDialogOptions, options)
 }
 
 export function openDialog(args: ReactNode | DialogOptions) {
