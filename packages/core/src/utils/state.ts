@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { useUpdate } from "../hooks"
 
 export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   const previousRef = useRef<T>(value)
@@ -76,30 +77,34 @@ export function useObject<S>(props: S): [S, Dispatch<SetStateAction<S>>] {
   return [state as S, dispatchState]
 }
 
-export function useValue<S>(propValue: S, defaultValue: S): [S, Dispatch<S>] {
-  const [value, setValue] = useState<S>(defaultValue ?? propValue)
-  const initialRef = useRef(0)
-  const valueRef = useToRef(value)
+interface UseValueOptions<S> {
+  defaultValue?: S
 
-  useEffect(() => {
-    if (initialRef.current === 0) {
-      initialRef.current++
-      return
-    }
-    if (valueRef.current !== propValue) {
-      setValue(propValue)
-    }
-  }, [propValue, valueRef])
+  onChange?(value: S): void
+}
+
+export function useValue<S>(
+  propValue: S,
+  { defaultValue, onChange }: UseValueOptions<S> = {},
+): [S, Dispatch<S>] {
+  const update = useUpdate()
+  const valueRef = useRef<S>(defaultValue ?? propValue)
+
+  if (propValue !== undefined) {
+    valueRef.current = propValue
+  }
 
   const dispatchValue = useCallback(
-    (newValue: S) => {
-      if (!_.isUndefined(propValue)) {
-        return
+    (newValue: S, emitChange?: (aValue: S) => void) => {
+      if (_.isUndefined(propValue)) {
+        valueRef.current = newValue
+        update()
       }
-      setValue(newValue)
+      ;(emitChange ?? onChange)?.(newValue)
     },
-    [propValue],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [onChange, propValue],
   )
 
-  return [value, dispatchValue]
+  return [valueRef.current, dispatchValue]
 }
