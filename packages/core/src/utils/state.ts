@@ -80,7 +80,7 @@ export function useObject<S>(props: S): [S, Dispatch<SetStateAction<S>>] {
 interface UseValueOptions<S> {
   defaultValue?: S
 
-  onChange?(value: S): void
+  onChange?: (value: S) => void
 }
 
 export function useValue<S>(
