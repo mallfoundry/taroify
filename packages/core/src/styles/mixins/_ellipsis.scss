@@ -1,10 +1,10 @@
 @mixin multi-ellipsis($lines) {
-  /* autoprefixer: ignore next */
   /* stylelint-disable property-no-unknown */
-  box-orient: vertical;
-  /* stylelint-enable property-no-unknown */
-  display: flex;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
   -webkit-line-clamp: $lines;
+  /* stylelint-enable property-no-unknown */
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
 }
