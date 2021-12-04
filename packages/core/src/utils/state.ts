@@ -75,3 +75,31 @@ export function useObject<S>(props: S): [S, Dispatch<SetStateAction<S>>] {
 
   return [state as S, dispatchState]
 }
+
+export function useValue<S>(propValue: S, defaultValue: S): [S, Dispatch<S>] {
+  const [value, setValue] = useState<S>(defaultValue ?? propValue)
+  const initialRef = useRef(0)
+  const valueRef = useToRef(value)
+
+  useEffect(() => {
+    if (initialRef.current === 0) {
+      initialRef.current++
+      return
+    }
+    if (valueRef.current !== propValue) {
+      setValue(propValue)
+    }
+  }, [propValue, valueRef])
+
+  const dispatchValue = useCallback(
+    (newValue: S) => {
+      if (!_.isUndefined(propValue)) {
+        return
+      }
+      setValue(newValue)
+    },
+    [propValue],
+  )
+
+  return [value, dispatchValue]
+}
