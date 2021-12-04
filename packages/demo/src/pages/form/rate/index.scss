@@ -3,14 +3,8 @@
 @import "../../../styles/prefix";
 
 .rate-demo {
-
   .custom-color {
-    .#{$component-prefix}rate__icon {
-      color: #eee;
-
-      &--full {
-        color: #ffd21e;
-      }
-    }
+    --rate-icon-empty-color: #eee;
+    --rate-icon-full-color: #ffd21e;
   }
 }

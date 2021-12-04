@@ -4,10 +4,11 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useRef } from "react"
+import { CSSProperties, ReactNode, useCallback, useMemo, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
 import { getRects } from "../utils/dom/rect"
+import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import RateItem from "./rate-item"
 import RateContext from "./rate.context"
@@ -46,6 +47,7 @@ function getRateStatus(
 interface RateProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultValue?: number
   value?: number
   count?: number
   size?: number
@@ -63,7 +65,8 @@ interface RateProps extends ViewProps {
 function Rate(props: RateProps) {
   const {
     className,
-    value = 0,
+    defaultValue,
+    value: valueProp,
     count = 5,
     size,
     gutter,
@@ -80,13 +83,14 @@ function Rate(props: RateProps) {
     ...restProps
   } = props
 
+  const [value = 0, setValue] = useValue(valueProp, {
+    defaultValue,
+    onChange,
+  })
+
   const rootRef = useRef<HTMLElement>()
 
   const untouchable = readonly || disabled || !touchable
-
-  const list = Array(count)
-    .fill("")
-    .map((__, i) => getRateStatus(value, i + 1, allowHalf, readonly))
 
   const touch = useTouch()
 
@@ -125,9 +129,9 @@ function Rate(props: RateProps) {
         return
       }
       const { clientX } = getClientCoordinates(event)
-      getScoreByPosition(clientX).then(onChange)
+      getScoreByPosition(clientX).then(setValue)
     },
-    [onClick, untouchable, getScoreByPosition, onChange],
+    [onClick, untouchable, getScoreByPosition, setValue],
   )
 
   const handleTouchStart = useCallback(
@@ -173,6 +177,14 @@ function Rate(props: RateProps) {
     [allowHalf, disabled, size],
   )
 
+  const stars = useMemo(
+    () =>
+      Array(count)
+        .fill("")
+        .map((__, i) => getRateStatus(value, i + 1, allowHalf, readonly)),
+    [allowHalf, count, readonly, value],
+  )
+
   return (
     <View
       ref={rootRef}
@@ -186,8 +198,14 @@ function Rate(props: RateProps) {
       )}
       catchMove
       onClick={onItemClick}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
+      onTouchStart={(event) => {
+        onTouchStart?.(event)
+        handleTouchStart(event)
+      }}
+      onTouchMove={(event) => {
+        onTouchMove?.(event)
+        handleTouchMove(event)
+      }}
       {...restProps}
     >
       <RateContext.Provider
@@ -200,7 +218,7 @@ function Rate(props: RateProps) {
       >
         {
           //
-          _.map(list, renderStar)
+          _.map(stars, renderStar)
         }
       </RateContext.Provider>
     </View>
