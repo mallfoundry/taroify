@@ -28,14 +28,14 @@ function CheckboxGroup(props: CheckboxGroupProps) {
     onChange: onChangeProp,
   } = props
 
-  const [value, onChange] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
+  const [value, setValue] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
 
   return (
     <CheckboxGroupContext.Provider
       value={{
         value,
         max,
-        onChange,
+        onChange: setValue,
       }}
     >
       <View
