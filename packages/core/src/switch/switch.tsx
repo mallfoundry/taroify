@@ -6,10 +6,11 @@ import { CSSProperties } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
+import { useValue } from "../utils/state"
 
 interface SwitchProps extends ViewProps {
-  className?: string
   style?: CSSProperties
+  defaultChecked?: boolean
   checked?: boolean
   loading?: boolean
   disabled?: boolean
@@ -22,21 +23,27 @@ function Switch(props: SwitchProps) {
   const {
     className,
     style,
-    checked = false,
+    defaultChecked,
+    checked: checkedProp,
     loading = false,
     disabled = false,
     size,
-    onChange,
+    onChange: onChangeProp,
     onClick,
     ...restProps
   } = props
+
+  const [checked = false, setValue] = useValue(checkedProp, {
+    defaultValue: defaultChecked,
+    onChange: onChangeProp,
+  })
 
   function handleClick(event: ITouchEvent) {
     onClick?.(event)
     if (disabled || loading) {
       return
     }
-    onChange?.(!checked)
+    setValue(!checked)
   }
 
   return (

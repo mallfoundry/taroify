@@ -40,39 +40,18 @@ function SwitchList() {
   )
 }
 
-function CustomSizeSwitch() {
-  const [checked, setChecked] = useState(false)
-  return <Switch checked={checked} onChange={setChecked} size="24" />
-}
-
-function CustomColorSwitch() {
-  const [checked, setChecked] = useState(false)
-  return <Switch className="custom-color" checked={checked} onChange={setChecked} />
-}
-
-function SwitchWithCell() {
-  const [checked, setChecked] = useState(false)
-  return (
-    <Cell
-      align="center"
-      title="标题"
-      rightIcon={<Switch checked={checked} onChange={setChecked} size="24" />}
-    />
-  )
-}
-
 export default function SwitchDemo() {
   return (
     <Page title="Switch 开关" className="switch-demo">
       <SwitchList />
       <Block title="自定义大小">
-        <CustomSizeSwitch />
+        <Switch size="24" />
       </Block>
       <Block title="自定义颜色">
-        <CustomColorSwitch />
+        <Switch className="custom-color" defaultChecked />
       </Block>
       <Block title="搭配单元格使用" className="switch-with-cell">
-        <SwitchWithCell />
+        <Cell align="center" title="标题" rightIcon={<Switch size="24" />} />
       </Block>
     </Page>
   )
