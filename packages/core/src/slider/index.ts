@@ -1,13 +1,13 @@
-import { default as SliderElement, SliderRangeProps, SliderSingleProps } from "./slider"
+import SliderComponent, { SliderProps } from "./slider"
 import SliderThumb from "./slider-thumb"
 
 interface SliderInterface {
-  (props: SliderSingleProps | SliderRangeProps): JSX.Element
+  (props: SliderProps): JSX.Element
 
   Thumb: typeof SliderThumb
 }
 
-const Slider = SliderElement as SliderInterface
+const Slider = SliderComponent as SliderInterface
 
 Slider.Thumb = SliderThumb
 

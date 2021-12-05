@@ -19,6 +19,7 @@ import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/
 import { getRect } from "../utils/dom/rect"
 import { addNumber } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
+import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SliderThumb from "./slider-thumb"
 import SliderContext from "./slider.context"
@@ -81,36 +82,28 @@ function useSliderChildren(children?: ReactNode, range?: boolean): SliderChildre
   }, [children, range])
 }
 
-interface SliderBaseProps extends ViewProps {
+export interface SliderProps extends ViewProps {
   style?: CSSProperties
   step?: number
   min?: number
   max?: number
+  defaultValue?: any
+  value?: any
+  range?: boolean
   size?: number
   orientation?: SliderOrientation
   disabled?: boolean
   children?: ReactNode
+
+  onChange?(value: any): void
 }
 
-export interface SliderSingleProps extends SliderBaseProps {
-  range?: false
-  value?: number
-
-  onChange?(value: number): void
-}
-
-export interface SliderRangeProps extends SliderBaseProps {
-  range?: boolean
-  value?: [number, number] | number[]
-
-  onChange?(value: [number, number] | number[]): void
-}
-
-function Slider(props: SliderSingleProps | SliderRangeProps) {
+function Slider(props: SliderProps) {
   const {
     className,
     style = {},
-    value: valueProp = 0,
+    defaultValue,
+    value: valueProp = undefined,
     min = 0,
     max = 100,
     step = 1,
@@ -120,9 +113,14 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     disabled = false,
     children,
     onClick,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
+
+  const [value = 0, setValue] = useValue(valueProp, {
+    defaultValue,
+    onChange: onChangeProp,
+  })
 
   const { thumb1, thumb2 } = useSliderChildren(children, range)
 
@@ -140,7 +138,7 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
 
   const touch = useTouch()
 
-  const scope = Number(max) - Number(min)
+  const scope = useMemo(() => Number(max) - Number(min), [max, min])
 
   const isRange = useCallback(
     (val: unknown): val is [number, number] => range && Array.isArray(val),
@@ -149,19 +147,19 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
 
   // 计算选中条的长度百分比
   const calcMainAxis = useCallback(() => {
-    if (isRange(valueProp)) {
-      return `${((valueProp[1] - valueProp[0]) * 100) / scope}%`
+    if (isRange(value)) {
+      return `${((value[1] - value[0]) * 100) / scope}%`
     }
-    return `${(((valueProp as number) - Number(min)) * 100) / scope}%`
-  }, [isRange, min, scope, valueProp])
+    return `${(((value as number) - Number(min)) * 100) / scope}%`
+  }, [isRange, min, scope, value])
 
   // 计算选中条的开始位置的偏移量
   const calcOffset = useCallback(() => {
-    if (isRange(valueProp)) {
-      return `${((valueProp[0] - Number(min)) * 100) / scope}%`
+    if (isRange(value)) {
+      return `${((value[0] - Number(min)) * 100) / scope}%`
     }
     return "0%"
-  }, [isRange, min, scope, valueProp])
+  }, [isRange, min, scope, value])
 
   const wrapperStyle = useMemo<CSSProperties>(() => {
     const crossAxis = vertical ? "width" : "height"
@@ -197,15 +195,15 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     return value
   }
 
-  const updateValue = (value: SliderValue) => {
-    if (isRange(value)) {
-      value = handleOverlap(value).map(formatValue) as [number, number]
+  const updateValue = (newValue: SliderValue) => {
+    if (isRange(newValue)) {
+      newValue = handleOverlap(newValue).map(formatValue) as [number, number]
     } else {
-      value = formatValue(value as number)
+      newValue = formatValue(newValue as number)
     }
 
-    if (!isSameValue(value, valueProp)) {
-      onChange?.(value as any)
+    if (!isSameValue(newValue, value)) {
+      setValue(newValue as any)
     }
   }
 
@@ -224,8 +222,8 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
       const total = vertical ? rect.height : rect.width
       const newValue = Number(min) + (delta / total) * scope
 
-      if (isRange(valueProp)) {
-        const [left, right] = valueProp
+      if (isRange(value)) {
+        const [left, right] = value
         const middle = (left + right) / 2
 
         if (newValue <= middle) {
@@ -250,7 +248,7 @@ function Slider(props: SliderSingleProps | SliderRangeProps) {
     }
 
     touch.start(event)
-    currentValueRef.current = valueProp
+    currentValueRef.current = value
 
     if (isRange(currentValueRef.current)) {
       startValueRef.current = currentValueRef.current.map(formatValue) as [number, number]

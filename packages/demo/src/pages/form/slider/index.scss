@@ -17,9 +17,7 @@
   }
 
   .custom-color {
-    .#{$component-prefix}slider__track {
-      background-color: #ee0a24;
-    }
+    --slider-active-background-color: #ee0a24;
   }
 
   .custom-thumb {
@@ -28,7 +26,7 @@
     font-size: 10px * $hd;
     line-height: 18px * $hd;
     text-align: center;
-    background-color: #ee0a24;
+    background-color: var(--slider-active-background-color);
     border-radius: 100px * $hd;
   }
 }
