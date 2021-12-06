@@ -234,7 +234,8 @@ function CustomPreviewUploader() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| value | 已上传的文件列表 | _FileListItem[]_ | - |
+| defaultValue | 默认已上传的文件列表 | _UploadFile[]_ | - |
+| value | 已上传的文件列表 | _UploadFile[]_ | - |
 | name | 标识符，可以在回调函数的第二项参数中获取 | _number \| string_ | - |
 | multiple | 是否开启图片多选，部分安卓机型不支持 | _boolean_ | `false` |
 | disabled | 是否禁用文件上传 | _boolean_ | `false` |
@@ -246,6 +247,5 @@ function CustomPreviewUploader() {
 
 | 事件名                | 说明                   | 回调参数            |
 | --------------------- | ---------------------- | ------------------- |
-| onUpload              | 点击上传区域时触发     | _event: MouseEvent_ |
-| onRemove              | 删除文件预览时触发     | -     |
+| onUpload              | 点击上传区域时触发     | _event: ITouchEvent_ |
 | onChange              | 已上传图片列表改变后触发 | _file: UploadFile \| UploadFile[]_  |
