@@ -15,6 +15,7 @@ import {
 } from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import TabPane from "./tab-pane"
 import { TabsContent } from "./tabs-content"
 import TabsHeader from "./tabs-header"
@@ -66,6 +67,7 @@ function useTabsSticky(sticky?: boolean | TabsSticky): TabsSticky | undefined {
 
 export interface TabsProps extends ViewProps {
   className?: string
+  defaultValue?: any
   value?: any
   theme?: TabsTheme
   duration?: number
@@ -87,7 +89,8 @@ export interface TabsProps extends ViewProps {
 function Tabs(props: TabsProps) {
   const {
     className,
-    value = -1,
+    defaultValue,
+    value: valueProp,
     duration = 300,
     lazyRender = true,
     animated = false,
@@ -96,23 +99,33 @@ function Tabs(props: TabsProps) {
     theme = "line",
     ellipsis = true,
     bordered,
+    children: childrenProp,
     onTabClick,
     onChange,
     onScroll,
     ...restProps
   } = props
+
+  const { value = 0, setValue } = useValue({
+    defaultValue,
+    value: valueProp,
+  })
+
   const rootRef = useRef()
+
   const stickyProps = useTabsSticky(sticky)
-  const tabObjects = useTabObjects(props.children)
+
+  const tabObjects = useTabObjects(childrenProp)
 
   const handleTabClick = useCallback(
     (event: TabEvent) => {
       if (!event.disabled) {
+        setValue(event.value)
         onChange?.(event.value, event)
       }
       onTabClick?.(event)
     },
-    [onChange, onTabClick],
+    [onChange, onTabClick, setValue],
   )
 
   const headerRender = useMemo(
