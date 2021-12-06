@@ -24,20 +24,10 @@ Picker 组件通过 `Picker.Option` 属性配置选项数据。
 
 ```tsx
 function BasicPicker() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState("")
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{value}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={(values) => {
-          setToastOpen(true)
-          setValue(values)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker onChange={(value) => Toast.open(`当前值：${value}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -60,24 +50,14 @@ function BasicPicker() {
 
 ### 默认选中项
 
-单列选择时，可以通过 `value` 属性设置初始选中项的值。
+单列选择时，可以通过 `defaultValue` 属性设置初始选中项的值。
 
 ```tsx
 function DefaultPicker() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState("温州")
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{value}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={(values) => {
-          setToastOpen(true)
-          setValue(values)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker defaultValue="温州" onChange={(value) => Toast.open(`当前值：${value}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -102,22 +82,10 @@ function DefaultPicker() {
 
 ```tsx
 function PickerWithMultiColumns() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState([])
-
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{_.join(value, ",")}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={setValue}
-        onConfirm={(values) => {
-          setValue(values)
-          setToastOpen(true)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker onConfirm={(values) => Toast.open(`当前值：${_.join(values, ",")}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -247,7 +215,8 @@ function PickerPopup() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| value | 选中的值 | _Date_ | - |
+| defaultValue | 默认选中的值 | _any \| any[]_ | - |
+| value | 选中的值 | _any \| any[]_ | - |
 | loading | 是否显示加载状态 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
 | siblingCount | 可见的选项相邻个数 | _number_ | `3` |

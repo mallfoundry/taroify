@@ -18,6 +18,7 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_UNSET_TOP_BOTTOM } from "../styles/hairline"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
+import { useValue } from "../utils/state"
 import PickerColumn, { PickerColumnProps } from "./picker-column"
 import PickerColumnBase from "./picker-column-base"
 import PickerOption, { PickerOptionProps } from "./picker-option"
@@ -96,6 +97,7 @@ function usePickerValues(value?: any): any[] {
 }
 
 export interface PickerProps extends ViewProps {
+  defaultValue?: any | any[]
   value?: any | any[]
   readonly?: boolean
   loading?: boolean
@@ -111,18 +113,24 @@ export interface PickerProps extends ViewProps {
 
 export default function Picker(props: PickerProps) {
   const {
+    defaultValue,
     value: valueProp,
     className,
     loading,
     readonly,
     siblingCount = 3,
+    children: childrenProp,
     onChange,
     onCancel,
     onConfirm,
     ...restProps
   } = props
-  const values = usePickerValues(valueProp)
-  const { columns, toolbar } = usePickerChildren(props.children)
+
+  const { value, setValue } = useValue({ value: valueProp, defaultValue })
+
+  const values = usePickerValues(value)
+
+  const { columns, toolbar } = usePickerChildren(childrenProp)
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
 
@@ -164,10 +172,12 @@ export default function Picker(props: PickerProps) {
       if (emitChange) {
         const newValues = [...values]
         _.set(newValues, columnIndex, value)
-        onChange?.(getPickerValue(newValues, multiColumns), { index, value })
+        const aValues = getPickerValue(newValues, multiColumns)
+        setValue(aValues)
+        onChange?.(aValues, { index, value })
       }
     },
-    [multiColumns, onChange, values],
+    [multiColumns, onChange, setValue, values],
   )
 
   const handleAction = (action: any) => () =>
