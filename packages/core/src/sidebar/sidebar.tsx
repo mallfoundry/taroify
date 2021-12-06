@@ -13,6 +13,7 @@ import {
   useMemo,
 } from "react"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import SidebarTab from "./sidebar-tab"
 import { SidebarTabObject } from "./sidebar-tab.shared"
 import SidebarContext from "./sidebar.context"
@@ -44,6 +45,7 @@ function useSidebarChildren(children: ReactNode) {
 export interface SidebarProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultValue?: any
   value?: any
   children?: ReactNode
 
@@ -51,17 +53,28 @@ export interface SidebarProps extends ViewProps {
 }
 
 function Sidebar(props: SidebarProps) {
-  const { className, value, onChange, ...restProps } = props
-  const children = useSidebarChildren(props.children)
+  const {
+    className,
+    defaultValue,
+    value: valueProp,
+    onChange,
+    children: childrenProp,
+    ...restProps
+  } = props
+
+  const { value = 0, setValue } = useValue({ value: valueProp, defaultValue })
+
+  const children = useSidebarChildren(childrenProp)
 
   const onTabClick = useCallback(
     (tab: SidebarTabObject) => {
       const { disabled, value } = tab
       if (!disabled) {
+        setValue(value)
         onChange?.(value, tab)
       }
     },
-    [onChange],
+    [onChange, setValue],
   )
 
   return (
