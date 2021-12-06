@@ -7,6 +7,7 @@ import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import Sidebar from "../sidebar"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
 import TreeSelectContext from "./tree-select.context"
@@ -81,7 +82,9 @@ function useTreeSelectChildren(children: ReactNode, tabValue?: any): TreeSelectC
 }
 
 export interface TreeSelectProps extends ViewProps {
+  defaultTabValue?: any
   tabValue?: any
+  defaultValue?: any | any[]
   value?: any | any[]
   activeIcon?: ReactNode
   children?: ReactNode
@@ -94,14 +97,30 @@ export interface TreeSelectProps extends ViewProps {
 function TreeSelect(props: TreeSelectProps) {
   const {
     className,
-    tabValue,
-    value,
+    defaultTabValue,
+    tabValue: tabValueProp,
+    defaultValue,
+    value: valueProp,
     activeIcon = <Success />,
-    onTabChange,
-    onChange,
+    children: childrenProp,
+    onTabChange: onTabChangeProp,
+    onChange: onChangeProp,
     ...restProps
   } = props
-  const { tabs, options } = useTreeSelectChildren(props.children, tabValue)
+
+  const { value: tabValue = 0, setValue: setTabValue } = useValue({
+    value: tabValueProp,
+    defaultValue: defaultTabValue,
+    onChange: onTabChangeProp,
+  })
+
+  const { value = 0, setValue } = useValue({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
+  const { tabs, options } = useTreeSelectChildren(childrenProp, tabValue)
 
   const onOptionClick = useCallback(
     ({ disabled, active, value: evtValue }: TreeSelectOptionObject) => {
@@ -112,15 +131,15 @@ function TreeSelect(props: TreeSelectProps) {
 
       if (multiselect) {
         if (active) {
-          onChange?.((value as any[]).concat(evtValue))
+          setValue((value as any[]).concat(evtValue))
         } else {
-          onChange?.((value as any[]).filter((aValue) => aValue !== evtValue))
+          setValue((value as any[]).filter((aValue) => aValue !== evtValue))
         }
       } else {
-        onChange?.(value === evtValue && !active ? undefined : evtValue)
+        setValue(value === evtValue && !active ? undefined : evtValue)
       }
     },
-    [value, onChange],
+    [value, setValue],
   )
 
   return (
@@ -134,8 +153,9 @@ function TreeSelect(props: TreeSelectProps) {
       <View className={classNames(prefixClassname("tree-select"), className)} {...restProps}>
         <Sidebar
           className={prefixClassname("tree-select__sidebar")}
+          defaultValue={defaultTabValue}
           value={tabValue}
-          onChange={onTabChange}
+          onChange={(newTab) => setTabValue(newTab)}
           children={tabs}
         />
         <View className={prefixClassname("tree-select__content")} children={options} />
