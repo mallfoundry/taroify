@@ -6,6 +6,7 @@ import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
+import { useValue } from "../utils/state"
 import CollapseItem from "./collapse-item"
 import CollapseContext from "./collapse.context"
 
@@ -58,36 +59,42 @@ function useCollapseChildren(children?: ReactNode): CollapseChildren {
 }
 
 export interface CollapseProps extends ViewProps {
+  defaultValue?: any
   value?: any
   accordion?: boolean
   bordered?: boolean
   children?: ReactNode
-  onChange?: (value: any) => void
+
+  onChange?(value: any): void
 }
 
 function Collapse(props: CollapseProps) {
   const {
     className,
     bordered,
-    value = "",
+    defaultValue,
+    value: valueProp,
     accordion = false,
-    onChange,
+    onChange: onChangeProp,
     children: childrenProp,
     ...restProps
   } = props
+
+  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
+
   const { items } = useCollapseChildren(childrenProp)
 
   const toggleItem = useCallback(
     (itemValue: number | string, expanded: boolean) => {
       if (accordion) {
-        onChange?.(itemValue === value ? "" : itemValue)
+        setValue(itemValue === value ? "" : itemValue)
       } else if (expanded) {
-        onChange?.((value as any[]).concat(itemValue))
+        setValue((value as any[]).concat(itemValue))
       } else {
-        onChange?.((value as any[]).filter((activeKey) => activeKey !== itemValue))
+        setValue((value as any[]).filter((activeKey) => activeKey !== itemValue))
       }
     },
-    [accordion, value, onChange],
+    [accordion, setValue, value],
   )
 
   const isExpanded = useCallback(
