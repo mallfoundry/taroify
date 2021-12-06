@@ -2,33 +2,45 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, ReactElement, ReactNode, useRef } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useMemo,
+  useRef,
+} from "react"
 import { usePlaceholder } from "../hooks"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
+import { useValue } from "../utils/state"
 import TabbarItem from "./tabbar-item"
 import TabbarContext from "./tabbar.context"
 
-// TODO fragment, array children do not process
-function arrayChildren(children?: ReactNode) {
-  return React.Children.map(children, (node: ReactNode, index) => {
-    if (!React.isValidElement(node)) {
-      return node
-    }
-    const element = node as ReactElement
-    if (element.type !== TabbarItem) {
-      return element
-    }
-    const { props } = element
-    return cloneElement(element, {
-      ...props,
-      __dataKey__: element.key ?? index,
-    })
-  })
+function useTabbarChildren(children?: ReactNode) {
+  return useMemo(
+    () =>
+      Children.map(children, (node: ReactNode, index) => {
+        if (!isValidElement(node)) {
+          return node
+        }
+        const element = node as ReactElement
+        if (element.type !== TabbarItem) {
+          return element
+        }
+        const { props } = element
+        return cloneElement(element, {
+          value: element.key ?? index,
+          ...props,
+        })
+      }),
+    [children],
+  )
 }
 
 export interface TabbarProps extends ViewProps {
-  className?: string
+  defaultValue?: any
   value?: any
   fixed?: boolean
   bordered?: boolean
@@ -41,15 +53,23 @@ export interface TabbarProps extends ViewProps {
 function Tabbar(props: TabbarProps) {
   const {
     className,
-    value,
+    defaultValue,
+    value: valueProp,
     bordered,
     fixed,
     placeholder,
     children: childrenProp,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
-  const children = arrayChildren(childrenProp)
+
+  const { value = 0, setValue } = useValue({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
+  const children = useTabbarChildren(childrenProp)
 
   const rootRef = useRef()
 
@@ -59,7 +79,7 @@ function Tabbar(props: TabbarProps) {
 
   function onItemClick(dataKey?: any) {
     if (dataKey !== value) {
-      onChange?.(dataKey)
+      setValue(dataKey)
     }
   }
 

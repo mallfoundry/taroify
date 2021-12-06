@@ -7,12 +7,7 @@
   }
 
   .custom-color {
-    .#{$component-prefix}tabbar-item {
-      color: #000;
-
-      &--active {
-        color: #ee0a24;
-      }
-    }
+    --tabbar-item-color: #000;
+    --tabbar-item-active-color: #ee0a24;
   }
 }
