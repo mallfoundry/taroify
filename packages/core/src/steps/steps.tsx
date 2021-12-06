@@ -11,6 +11,7 @@ import {
   ReactNode,
 } from "react"
 import { prefixClassname } from "../styles"
+import { useValue } from "../utils/state"
 import Step from "./step"
 import StepsContext from "./steps.context"
 import { StepsDirection } from "./steps.shared"
@@ -49,6 +50,7 @@ function useStepsChildren(children: ReactNode): StepsChildren {
 export interface StepsProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultValue?: number
   value?: number
   direction?: StepsDirection
   alternativeLabel?: boolean
@@ -58,12 +60,17 @@ export interface StepsProps extends ViewProps {
 function Steps(props: StepsProps) {
   const {
     className,
-    value,
+    defaultValue,
+    value: valueProp,
     direction = "horizontal",
     alternativeLabel = false,
+    children: childrenProp,
     ...restProps
   } = props
-  const { steps } = useStepsChildren(props.children)
+
+  const { value } = useValue({ value: valueProp, defaultValue })
+
+  const { steps } = useStepsChildren(childrenProp)
 
   return (
     <StepsContext.Provider
