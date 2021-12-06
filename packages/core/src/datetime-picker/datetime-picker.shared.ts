@@ -24,7 +24,10 @@ export function getEndDayOfMonth(year: number, month: number): number {
   return 32 - new Date(year, month - 1, 32).getDate()
 }
 
-export function clampDate(value: Date, minDate: Date, maxDate: Date) {
+export function clampDate(value: Date | undefined, minDate: Date, maxDate: Date) {
+  if (_.isUndefined(value)) {
+    return value
+  }
   const timestamp = _.clamp(value.getTime(), minDate.getTime(), maxDate.getTime())
   return new Date(timestamp)
 }
@@ -87,14 +90,18 @@ interface DatetimeRange {
   range: [number, number]
 }
 
-function useAllDatetimeRanges(date: Date, minDate: Date, maxDate: Date): DatetimeRange[] {
+function useAllDatetimeRanges(
+  date: Date | undefined,
+  minDate: Date,
+  maxDate: Date,
+): DatetimeRange[] {
   const [minYear, minMonth, minDay, minHour, minMinute, minSecond] = getMinDatetime(
     minDate,
-    date || minDate,
+    date ?? minDate,
   )
   const [maxYear, maxMonth, maxDay, maxHour, maxMinute, maxSecond] = getMaxDatetime(
     maxDate,
-    date || minDate,
+    date ?? minDate,
   )
 
   return useMemo(
@@ -177,7 +184,7 @@ function useOrderedDatetimeRanges(ranges: DatetimeRange[], fields: DatetimePicke
 }
 
 export function useDatetimeRanges(
-  date: Date,
+  date: Date | undefined,
   minDate: Date,
   maxDate: Date,
   type: DatetimePickerType,
