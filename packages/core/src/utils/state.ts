@@ -82,7 +82,7 @@ interface UseValueOptions<S> {
   initialValue?: S
   value?: S
 
-  onChange?: (value: S) => void
+  onChange?: (...args: any[]) => void
 }
 
 interface UseValueReturn<S> {
