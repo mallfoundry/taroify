@@ -32,7 +32,7 @@ function RadioGroup(props: RadioGroupProps) {
     ...restProps
   } = props
 
-  const [value, setValue] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
+  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
 
   return (
     <RadioGroupContext.Provider

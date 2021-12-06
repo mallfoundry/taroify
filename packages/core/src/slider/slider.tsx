@@ -117,8 +117,9 @@ function Slider(props: SliderProps) {
     ...restProps
   } = props
 
-  const [value = 0, setValue] = useValue(valueProp, {
+  const { value = 0, setValue } = useValue({
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
 

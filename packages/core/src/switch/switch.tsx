@@ -33,7 +33,8 @@ function Switch(props: SwitchProps) {
     ...restProps
   } = props
 
-  const [checked = false, setValue] = useValue(checkedProp, {
+  const { value: checked = false, setValue } = useValue({
+    value: checkedProp,
     defaultValue: defaultChecked,
     onChange: onChangeProp,
   })

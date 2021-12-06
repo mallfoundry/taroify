@@ -28,7 +28,7 @@ function CheckboxGroup(props: CheckboxGroupProps) {
     onChange: onChangeProp,
   } = props
 
-  const [value, setValue] = useValue(valueProp, { defaultValue, onChange: onChangeProp })
+  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
 
   return (
     <CheckboxGroupContext.Provider

@@ -2,7 +2,6 @@ import { Star, StarOutlined } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useMemo, useRef } from "react"
 import { prefixClassname } from "../styles"
@@ -79,13 +78,14 @@ function Rate(props: RateProps) {
     onClick,
     onTouchStart,
     onTouchMove,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
 
-  const [value = 0, setValue] = useValue(valueProp, {
+  const { value = 0, setValue } = useValue({
+    value: valueProp,
     defaultValue,
-    onChange,
+    onChange: onChangeProp,
   })
 
   const rootRef = useRef<HTMLElement>()
@@ -129,7 +129,9 @@ function Rate(props: RateProps) {
         return
       }
       const { clientX } = getClientCoordinates(event)
-      getScoreByPosition(clientX).then(setValue)
+      getScoreByPosition(clientX).then((newValue) => {
+        setValue(newValue)
+      })
     },
     [onClick, untouchable, getScoreByPosition, setValue],
   )
@@ -181,8 +183,9 @@ function Rate(props: RateProps) {
     () =>
       Array(count)
         .fill("")
-        .map((__, i) => getRateStatus(value, i + 1, allowHalf, readonly)),
-    [allowHalf, count, readonly, value],
+        .map((__, i) => getRateStatus(value, i + 1, allowHalf, readonly))
+        .map(renderStar),
+    [allowHalf, count, readonly, renderStar, value],
   )
 
   return (
@@ -199,12 +202,12 @@ function Rate(props: RateProps) {
       catchMove
       onClick={onItemClick}
       onTouchStart={(event) => {
-        onTouchStart?.(event)
         handleTouchStart(event)
+        onTouchStart?.(event)
       }}
       onTouchMove={(event) => {
-        onTouchMove?.(event)
         handleTouchMove(event)
+        onTouchMove?.(event)
       }}
       {...restProps}
     >
@@ -215,12 +218,8 @@ function Rate(props: RateProps) {
           icon,
           emptyIcon,
         }}
-      >
-        {
-          //
-          _.map(stars, renderStar)
-        }
-      </RateContext.Provider>
+        children={stars}
+      />
     </View>
   )
 }

@@ -79,30 +79,44 @@ export function useObject<S>(props: S): [S, Dispatch<SetStateAction<S>>] {
 
 interface UseValueOptions<S> {
   defaultValue?: S
+  initialValue?: S
+  value?: S
 
   onChange?: (value: S) => void
 }
 
-export function useValue<S>(propValue?: S, options?: UseValueOptions<S>): [S, Dispatch<S>] {
-  const { defaultValue, onChange } = options ?? {}
-  const update = useUpdate()
-  const valueRef = useRef(defaultValue ?? propValue)
+interface UseValueReturn<S> {
+  value: S | undefined
+  getValue: () => S
+  setValue: (newValue: S, emitChange?: (aValue: S) => void) => void
+}
 
-  if (propValue !== undefined) {
-    valueRef.current = propValue
+export function useValue<S>(options: UseValueOptions<S> = {}): UseValueReturn<S> {
+  const { defaultValue, value, initialValue, onChange } = options
+  const update = useUpdate()
+  const stateRef = useRef(defaultValue ?? value ?? initialValue)
+
+  if (value !== undefined) {
+    stateRef.current = value
   }
 
-  const dispatchValue = useCallback(
+  const setValue = useCallback(
     (newValue: S, emitChange?: (aValue: S) => void) => {
-      if (_.isUndefined(propValue)) {
-        valueRef.current = newValue
+      if (_.isUndefined(value)) {
+        stateRef.current = newValue
         update()
       }
       ;(emitChange ?? onChange)?.(newValue)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [onChange, propValue],
+    [onChange],
   )
 
-  return [valueRef.current as S, dispatchValue]
+  const getValue = useCallback(() => stateRef.current as S, [])
+
+  return useMemo(() => ({ value: stateRef.current, getValue, setValue }), [
+    stateRef.current,
+    getValue,
+    setValue,
+  ])
 }

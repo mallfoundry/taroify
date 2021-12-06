@@ -38,7 +38,8 @@ export default function Checkbox(props: CheckboxProps) {
     ...restProps
   } = props
 
-  const [value, setValue] = useValue(checkedProp, {
+  const { value, setValue } = useValue({
+    value: checkedProp,
     defaultValue: defaultChecked,
     onChange: onChangeProp,
   })

@@ -104,7 +104,7 @@ function Cascader(props: CascaderProps) {
   } = props
   const { header, tabs } = useCascaderChildren(childrenProp)
 
-  const [values = [], setValues] = useValue(valueProp, { defaultValue })
+  const { value: values = [], setValue: setValues } = useValue({ defaultValue, value: valueProp })
 
   const [activeTab, setActiveTab] = useState(0)
 
