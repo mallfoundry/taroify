@@ -103,10 +103,17 @@ function StepperButton(props: StepperButtonProps) {
       style={getSizeStyle(size)}
       onClick={(event) => {
         preventDefault(event)
-        onStep?.(type)
         onClick?.(event)
+        if (!disabled) {
+          onStep?.(type)
+        }
       }}
-      onTouchStart={handleTouchStart}
+      onTouchStart={(event) => {
+        onTouchStart?.(event)
+        if (!disabled) {
+          handleTouchStart()
+        }
+      }}
       onTouchEnd={(event) => {
         onTouchEnd?.(event)
         handleTouchEnd(event)

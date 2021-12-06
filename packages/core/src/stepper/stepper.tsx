@@ -13,7 +13,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addNumber, formatNumber } from "../utils/format/number"
-import { useToRef } from "../utils/state"
+import { useToRef, useValue } from "../utils/state"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
 import StepperContext from "./stepper.context"
@@ -74,6 +74,7 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
 type StepperShape = "square" | "round"
 
 export interface StepperProps extends ViewProps {
+  defaultValue?: number | string
   value?: number | string
   min?: number
   max?: number
@@ -91,7 +92,8 @@ export interface StepperProps extends ViewProps {
 function Stepper(props: StepperProps) {
   const {
     className,
-    value: valueProp = 0,
+    defaultValue,
+    value: valueProp,
     min = 1,
     max = Number.MAX_VALUE,
     step = 1,
@@ -101,9 +103,18 @@ function Stepper(props: StepperProps) {
     longPress = true,
     shape = "square",
     children: childrenProp,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
+
+  const { decrease, input, increase } = useStepperChildren(childrenProp)
+
+  const { value = 0, setValue } = useValue({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
   const formatValue = useCallback(
     (value: string | number) => {
       if (value === "") {
@@ -124,15 +135,15 @@ function Stepper(props: StepperProps) {
     },
     [max, min, precision],
   )
-  const { decrease, input, increase } = useStepperChildren(childrenProp)
-  const valueRef = useToRef(formatValue(valueProp))
+
+  const valueRef = useToRef(formatValue(value))
 
   const onStep = useCallback(
     (actionType: StepperActionType) => {
       const diff = actionType === "decrease" ? -step : +step
-      onChange?.(formatValue(addNumber(valueRef.current as number, diff)))
+      setValue(formatValue(addNumber(valueRef.current as number, diff)))
     },
-    [formatValue, onChange, step, valueRef],
+    [formatValue, setValue, step, valueRef],
   )
 
   return (
@@ -146,7 +157,7 @@ function Stepper(props: StepperProps) {
         precision,
         longPress,
         formatValue,
-        onChange,
+        onChange: setValue,
         onStep,
       }}
     >
