@@ -6,9 +6,8 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicSwiper() {
-  const [value, setValue] = useState(0)
   return (
-    <Swiper className="basic-swiper" autoplay={4000} value={value} onChange={setValue}>
+    <Swiper className="basic-swiper" autoplay={4000}>
       <Swiper.Indicator />
       <Swiper.Item>1</Swiper.Item>
       <Swiper.Item>2</Swiper.Item>

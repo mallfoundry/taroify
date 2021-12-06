@@ -24,7 +24,7 @@ import { preventDefault } from "../utils/dom/event"
 import { getRect, makeRect, Rect } from "../utils/dom/rect"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { useRendered, useRenderedRef, useToRef } from "../utils/state"
+import { useRendered, useRenderedRef, useToRef, useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
 import SwiperItem from "./swiper-item"
@@ -78,6 +78,7 @@ function getIndicatorValue(value: number, count: number) {
 export interface SwiperProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultValue?: number
   value?: number
   lazyRender?: boolean
   width?: number
@@ -96,7 +97,8 @@ export interface SwiperProps extends ViewProps {
 function Swiper(props: SwiperProps) {
   const {
     className,
-    value: valueProp = 0,
+    defaultValue,
+    value: valueProp,
     lazyRender,
     loop = true,
     touchable = true,
@@ -107,11 +109,17 @@ function Swiper(props: SwiperProps) {
     direction = "horizontal",
     stopPropagation = true,
     children: childrenProp,
-    onChange,
+    onChange: onChangeProp,
     ...restProps
   } = props
 
-  const valueRef = useToRef(valueProp)
+  const { value = 0, setValue } = useValue({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
+  const valueRef = useToRef(value)
 
   const { count, indicator, items } = useSwiperChildren(childrenProp)
 
@@ -137,7 +145,7 @@ function Swiper(props: SwiperProps) {
 
   const autoplayTimerRef = useRef<NodeJS.Timeout>()
 
-  const valueIndicatorRef = useRenderedRef(() => getIndicatorValue(valueProp, count))
+  const valueIndicatorRef = useRenderedRef(() => getIndicatorValue(value, count))
 
   const activeIndicatorRef = useRenderedRef(() => getIndicatorValue(activeIndexRef.current, count))
 
@@ -153,13 +161,18 @@ function Swiper(props: SwiperProps) {
     [],
   )
 
-  const propRectRef = useRenderedRef(() => ({
+  const customRectRef = useRenderedRef(() => ({
     width: width ?? rectRef.current?.width,
     height: height ?? rectRef.current?.height,
   }))
 
+  const propRectRef = useRenderedRef(() => ({
+    width,
+    height,
+  }))
+
   const sizeRef = useRenderedRef(
-    () => (vertical ? propRectRef.current?.height : propRectRef.current?.width) ?? 0,
+    () => (vertical ? customRectRef.current?.height : customRectRef.current?.width) ?? 0,
   )
 
   const trackSizeRef = useRenderedRef(() => count * sizeRef.current)
@@ -230,7 +243,7 @@ function Swiper(props: SwiperProps) {
       setOffset(targetOffset)
 
       if (emitChange && previousActiveIndex !== targetActive) {
-        onChange?.(getIndicatorValue(targetActive, count))
+        setValue(getIndicatorValue(targetActive, count))
       }
     },
     [
@@ -241,7 +254,7 @@ function Swiper(props: SwiperProps) {
       itemInstances,
       minOffsetRef,
       trackSizeRef,
-      onChange,
+      setValue,
     ],
   )
 
