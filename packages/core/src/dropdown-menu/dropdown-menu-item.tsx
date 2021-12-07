@@ -4,9 +4,11 @@ import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState } from "react"
+import { ExitHandler } from "react-transition-group/Transition"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
+import { useValue } from "../utils/state"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
 import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
@@ -14,62 +16,80 @@ import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
 export interface DropdownMenuItemProps extends ViewProps {
   style?: CSSProperties
   __dataKey__?: any
+  defaultValue?: any | any[]
+  value?: any | any[]
   disabled?: boolean
   title?: ReactNode
-  value?: any | any[]
   children?: ReactNode
-  onChange?: (value: any | any[]) => void
+
+  onChange?(value: any | any[]): void
+
+  onTransitionExited?: ExitHandler<HTMLElement>
 }
 
 function DropdownMenuItem(props: DropdownMenuItemProps) {
   const {
-    __dataKey__: dataKey,
-    disabled,
-    value,
-    children,
-    onChange,
     style: styleProp,
+    __dataKey__: dataKey,
+    defaultValue,
+    value: valueProp,
+    disabled,
+    children,
+    onChange: onChangeProp,
+    onTransitionExited,
     ...restProps
   } = props
 
-  const { direction = "down", itemOffset, isItemToggle, toggleItem } = useContext(
+  const { getValue, setValue } = useValue({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
+  const { direction = "down", itemOffset, isItemToggle, toggleItem: triggerItem } = useContext(
     DropdownMenuContext,
   )
 
-  const active = isItemToggle?.(dataKey)
+  const active = useMemo(() => isItemToggle?.(dataKey), [dataKey, isItemToggle])
 
   const [opened, setOpened] = useState(false)
 
   const down = direction === "down"
 
+  const toggleItem = useCallback(() => {
+    if (!disabled) {
+      triggerItem?.(dataKey)
+    }
+  }, [dataKey, disabled, triggerItem])
+
   const isOptionToggle = useCallback(
-    (aValue?: any) => (_.isArray(value) ? (value as any[]).includes(aValue) : value === aValue),
-    [value],
+    (aValue?: any) =>
+      _.isArray(getValue()) ? (getValue() as any[]).includes(aValue) : getValue() === aValue,
+    [getValue],
   )
 
   const toggleOption = useCallback(
     ({ value: evtValue, active }: DropdownMenuOptionEvent) => {
+      const value = getValue()
       const multiselect = _.isArray(value)
 
       if (multiselect) {
         if (active) {
-          onChange?.((value as any[]).concat(evtValue))
+          setValue((value as any[]).concat(evtValue))
         } else {
-          onChange?.((value as any[]).filter((aValue) => aValue !== evtValue))
+          setValue((value as any[]).filter((aValue) => aValue !== evtValue))
         }
       } else {
-        onChange?.(value === evtValue && !active ? undefined : evtValue)
+        setValue(value === evtValue && !active ? undefined : evtValue)
       }
 
-      toggleItem?.({ dataKey, disabled })
+      toggleItem()
     },
-    [dataKey, disabled, onChange, toggleItem, value],
+    [getValue, setValue, toggleItem],
   )
 
   const rootStyle = useMemo(() => {
-    const style: CSSProperties = {
-      ...styleProp,
-    }
+    const style: CSSProperties = {}
     if (opened) {
       if (down) {
         style.top = itemOffset ? addUnitPx(itemOffset) : ""
@@ -77,16 +97,9 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
         style.bottom = itemOffset ? addUnitPx(itemOffset) : ""
       }
     }
-    // if is undefined, state is closing
-    if (_.isUndefined(active)) {
-      if (!active && !opened) {
-        style.display = "none"
-      }
-    } else {
-      style.display = active ? "" : "none"
-    }
+    style.display = !active && !opened ? "none" : ""
     return style
-  }, [styleProp, opened, active, down, itemOffset])
+  }, [opened, active, down, itemOffset])
 
   return (
     <DropdownMenuItemContext.Provider
@@ -96,7 +109,10 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
       }}
     >
       <View
-        style={rootStyle}
+        style={{
+          ...styleProp,
+          ...rootStyle,
+        }}
         className={classnames(
           prefixClassname("dropdown-menu-item"),
           prefixClassname(`dropdown-menu-item--${direction}`),
@@ -104,16 +120,16 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
         {...restProps}
       >
         <Popup
-          open={active}
+          open={_.isBoolean(active) && active}
           className={prefixClassname("dropdown-menu-item__content")}
           placement={down ? "top" : "bottom"}
           onOpen={() => setOpened(true)}
-          onClosed={() => setOpened(false)}
+          onTransitionExited={(...args) => {
+            setOpened(false)
+            onTransitionExited?.(...args)
+          }}
         >
-          <Popup.Backdrop
-            style={{ position: "absolute" }}
-            onClick={() => toggleItem?.({ dataKey, disabled })}
-          />
+          <Popup.Backdrop style={{ position: "absolute" }} onClick={toggleItem} />
           {children}
         </Popup>
       </View>
