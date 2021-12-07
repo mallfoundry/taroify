@@ -77,7 +77,8 @@ function BackdropExample() {
 | className | 自定义类名 | _string_ | - |
 | children | 用于在遮罩层上方嵌入内容| _ReactNode_ | - |
 | open | 是否展示遮罩层 | _boolean_ | `false` |
-| duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
+| open | 是否展示遮罩层 | _boolean_ | `false` |
+| duration | 动画时长，单位毫秒 | _number_ | `300` |
 
 ### Events
 

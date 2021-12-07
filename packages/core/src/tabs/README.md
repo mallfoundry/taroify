@@ -215,7 +215,7 @@ function TabsWithCustomTitle() {
 | defaultValue | 绑定默认选中标签的标识符 | _number \| string_ | `0` |
 | value | 绑定当前选中标签的标识符 | _number \| string_ | `0` |
 | theme | 样式风格类型，可选值为 `card` | _string_ | `line` |
-| duration | 动画时间，单位秒 | _number \| string_ | `0.3` |
+| duration | 动画时间，单位毫秒 | _number \| string_ | `300` |
 | animated | 是否开启切换标签内容时的转场动画 | _boolean_ | `false` |
 | bordered | 是否显示标签栏外边框，仅在 `type="line"` 时有效 | _boolean_ | `false` |
 | ellipsis | 是否省略过长的标题文字 | _boolean_ | `true` |

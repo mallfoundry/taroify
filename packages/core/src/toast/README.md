@@ -114,7 +114,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
 | icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
-| duration | 动画时长，单位秒 | _number \| string_ | `300` |
+| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
 | backdrop | 是否显示遮罩层 | _boolean_ | `false` |
 | children | 文本内容 | _ReactNode_ | - |
 | onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
@@ -127,7 +127,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
 | icon | 自定义图标，支持传入[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
-| duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
+| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
 | backdrop | 是否显示遮罩层 | _boolean_ | `false` |
 | message | 文本内容 | _ReactNode_ | - |
 | onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
