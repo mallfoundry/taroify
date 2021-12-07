@@ -11,15 +11,16 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
+  useEffect,
   useMemo,
 } from "react"
 import Backdrop from "../backdrop"
-import { useTimeoutEffect } from "../hooks"
+import { useTimeout } from "../hooks"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import { matchSelector } from "../utils/dom/element"
-import { useObject } from "../utils/state"
+import { useObject, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
@@ -105,7 +106,8 @@ export default function Toast(props: ToastProps) {
     object: {
       id,
       className,
-      open = false,
+      defaultOpen,
+      open: openProp,
       icon: iconProp,
       type = "text",
       position = "middle",
@@ -118,37 +120,44 @@ export default function Toast(props: ToastProps) {
     setObject,
   } = useObject<ToastProps & ToastOptions>(props)
 
+  const { value: open = false, setValue: setOpen } = useValue({
+    defaultValue: defaultOpen,
+    value: openProp,
+    onChange: (aOpened) => !aOpened && onClose?.(aOpened),
+  })
+
   const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
   const icon = useToastIcon(iconProp, type)
 
-  const { stop: stopAutoClose } = useTimeoutEffect(
-    () => {
-      if (open) {
-        setObject({ open: false })
-        onClose?.(false)
-      }
-    },
-    duration,
-    [open],
-  )
+  const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
+
+  useEffect(() => {
+    if (open) {
+      restartAutoClose(() => {
+        setOpen(false)
+        stopAutoClose()
+      }, duration)
+    } else {
+      stopAutoClose()
+    }
+    return () => stopAutoClose()
+  }, [duration, open, restartAutoClose, setObject, setOpen, stopAutoClose])
 
   useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
     if (matchSelector(selector, id)) {
-      stopAutoClose()
+      restartAutoClose()
       setObject({
-        open: true,
         children: message,
         ...restOptions,
       })
+      setOpen(true)
     }
   })
 
   useToastClose((selector) => {
     if (matchSelector(selector, id)) {
-      setObject({
-        open: false,
-      })
+      setOpen(false)
     }
   })
 

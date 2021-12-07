@@ -1,7 +1,7 @@
 import { Cell, Notify } from "@taroify/core"
 import { ArrowRight } from "@taroify/~icons/src"
 import * as React from "react"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -20,6 +20,7 @@ function CustomNotify() {
   const [options, setOptions] = useState<{
     open?: boolean
     duration?: number
+    children?: ReactNode
   }>({})
 
   return (
@@ -31,6 +32,7 @@ function CustomNotify() {
         onClick={() => {
           setOptions({
             open: true,
+            children: "自定义颜色",
           })
         }}
       />
@@ -42,6 +44,7 @@ function CustomNotify() {
           setOptions({
             open: true,
             duration: 1000,
+            children: "自定义时长",
           })
         }
       />
@@ -52,7 +55,7 @@ function CustomNotify() {
           background: "#ffe1e1",
         }}
         duration={options.duration}
-        children="自定义内容"
+        children={options.children}
         onClose={() => setOptions({ open: false })}
       />
     </Block>

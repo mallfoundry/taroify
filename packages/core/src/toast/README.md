@@ -110,6 +110,7 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultOpen | 默认是否显示弹出层 | _boolean_ | `false` |
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
 | icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
