@@ -179,7 +179,7 @@ function DropdownMenu(props: DropdownMenuProps) {
     [value],
   )
 
-  useEffect(() => setOpened(value !== null && value !== undefined), [value])
+  useEffect(() => setOpened(value !== false && value !== null && value !== undefined), [value])
 
   usePageScroll(updateItemOffset)
 
