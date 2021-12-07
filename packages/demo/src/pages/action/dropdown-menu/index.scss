@@ -7,18 +7,8 @@
     padding: 0;
   }
 
-.custom-color {
-  .#{$component-prefix}dropdown-menu-title--active {
-    .#{$component-prefix}dropdown-menu-title__content {
-      color: #1989fa;
-    }
+  .custom-color {
+    --dropdown-menu-title-active-color: #1989fa;
+    --dropdown-menu-option-active-color: #1989fa;
   }
-
-  .#{$component-prefix}dropdown-menu-option--active {
-    color: #1989fa;
-    .#{$component-prefix}dropdown-menu-option__icon {
-      color: #1989fa;
-    }
-  }
-}
 }
