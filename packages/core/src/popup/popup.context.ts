@@ -3,6 +3,7 @@ import { PopupPlacement } from "./popup.shared"
 
 interface PopupContextProps {
   open?: boolean
+  duration?: number
   placement?: PopupPlacement
 
   onClose?(opened: boolean): void

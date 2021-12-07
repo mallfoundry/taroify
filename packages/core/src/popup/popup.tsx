@@ -70,13 +70,15 @@ function usePopupChildren(children?: ReactNode): PopupChildren {
 export interface PopupProps extends ViewProps {
   defaultOpen?: boolean
   open?: boolean
-  transaction?: string
   placement?: PopupPlacement
   rounded?: boolean
-  duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
 
+  duration?: number
   mountOnEnter?: boolean
+  transaction?: string
+  transactionTimeout?: number | { appear?: number; enter?: number; exit?: number }
+  transitionAppear?: boolean
 
   onClose?(opened: boolean): void
 
@@ -90,11 +92,13 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     className,
     defaultOpen,
     open: openProp,
-    transaction,
     placement,
     rounded = false,
-    duration,
     children,
+    duration,
+    transaction,
+    transactionTimeout,
+    transitionAppear = true,
     mountOnEnter = true,
     onClose,
     onTransitionEnter,
@@ -113,6 +117,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     <PopupContext.Provider
       value={{
         open,
+        duration,
         placement,
         onClose,
       }}
@@ -120,10 +125,11 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
       {backdrop}
       <Transition
         in={open}
-        appear
-        mountOnEnter={mountOnEnter}
+        duration={transactionName === "fade" ? undefined : duration}
         name={transactionName}
-        duration={duration}
+        appear={transitionAppear}
+        timeout={transactionTimeout}
+        mountOnEnter={mountOnEnter}
         onEnter={onTransitionEnter}
         onEntered={onTransitionEntered}
         onExited={onTransitionExited}
