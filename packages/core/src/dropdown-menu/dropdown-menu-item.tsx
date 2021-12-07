@@ -123,7 +123,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
           open={_.isBoolean(active) && active}
           className={prefixClassname("dropdown-menu-item__content")}
           placement={down ? "top" : "bottom"}
-          onOpen={() => setOpened(true)}
+          onTransitionEnter={() => setOpened(true)}
           onTransitionExited={(...args) => {
             setOpened(false)
             onTransitionExited?.(...args)
