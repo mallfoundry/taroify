@@ -3,8 +3,9 @@ import PopupComponent, { PopupProps } from "./popup"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 
-export { usePopupBackdrop } from "./popup-backdrop"
+export type { PopupPlacement } from "./popup.shared"
 export type { PopupBackdropProps } from "./popup-backdrop"
+export { usePopupBackdrop } from "./popup-backdrop"
 export type { PopupCloseProps } from "./popup-close"
 
 interface PopupInterface extends ForwardRefExoticComponent<PopupProps> {
