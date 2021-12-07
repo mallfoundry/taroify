@@ -1,7 +1,8 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useEffect } from "react"
+import { CSSProperties, ReactNode } from "react"
+import { useTimeoutEffect } from "../hooks"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { matchSelector } from "../utils/dom/element"
@@ -22,8 +23,8 @@ export interface NotifyProps extends ViewProps {
 }
 
 function Notify(props: NotifyProps) {
-  const [
-    {
+  const {
+    object: {
       id,
       className,
       open = false,
@@ -33,26 +34,24 @@ function Notify(props: NotifyProps) {
       onClose,
       ...restProps
     },
-    setState,
-  ] = useObject<NotifyProps & NotifyOptions>(props)
+    setObject,
+  } = useObject<NotifyProps & NotifyOptions>(props)
 
-  useEffect(() => {
-    let timer: any
-    if (open) {
-      timer = setTimeout(() => {
-        setState({ open: false })
+  const { stop: stopAutoClose } = useTimeoutEffect(
+    () => {
+      if (open) {
+        setObject({ open: false })
         onClose?.(false)
-        clearTimeout(timer)
-      }, duration)
-    } else if (timer) {
-      clearTimeout(timer)
-    }
-    return () => clearTimeout(timer)
-  }, [duration, onClose, open, setState])
+      }
+    },
+    duration,
+    [open],
+  )
 
   useNotifyOpen(({ selector, message, ...restOptions }: NotifyOptions) => {
     if (matchSelector(selector, id)) {
-      setState({
+      stopAutoClose()
+      setObject({
         open: true,
         children: message,
         ...restOptions,
@@ -62,7 +61,7 @@ function Notify(props: NotifyProps) {
 
   useNotifyClose((selector) => {
     if (matchSelector(selector, id)) {
-      setState({
+      setObject({
         open: false,
       })
     }
@@ -70,6 +69,7 @@ function Notify(props: NotifyProps) {
 
   return (
     <Popup
+      id={id}
       className={classNames(
         prefixClassname("notify"),
         {
@@ -78,8 +78,8 @@ function Notify(props: NotifyProps) {
         className,
       )}
       placement="top"
-      duration={200}
       open={open}
+      duration={200}
       {...restProps}
     >
       <Popup.Backdrop open={false} />

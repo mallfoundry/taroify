@@ -11,10 +11,10 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
-  useEffect,
   useMemo,
 } from "react"
 import Backdrop from "../backdrop"
+import { useTimeoutEffect } from "../hooks"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
@@ -89,6 +89,7 @@ function useToastChildren(children?: ReactNode): ToastChildren {
 export interface ToastProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultOpen?: boolean
   open?: boolean
   type?: ToastType
   position?: ToastPosition
@@ -100,8 +101,8 @@ export interface ToastProps extends ViewProps {
 }
 
 export default function Toast(props: ToastProps) {
-  const [
-    {
+  const {
+    object: {
       id,
       className,
       open = false,
@@ -114,30 +115,28 @@ export default function Toast(props: ToastProps) {
       onClose,
       ...restProps
     },
-    setState,
-  ] = useObject<ToastProps & ToastOptions>(props)
+    setObject,
+  } = useObject<ToastProps & ToastOptions>(props)
 
   const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
   const icon = useToastIcon(iconProp, type)
 
-  useEffect(() => {
-    let timer: any
-    if (open) {
-      timer = setTimeout(() => {
-        setState({ open: false })
+  const { stop: stopAutoClose } = useTimeoutEffect(
+    () => {
+      if (open) {
+        setObject({ open: false })
         onClose?.(false)
-        clearTimeout(timer)
-      }, duration)
-    } else if (timer) {
-      clearTimeout(timer)
-    }
-    return () => clearTimeout(timer)
-  }, [duration, onClose, open, setState])
+      }
+    },
+    duration,
+    [open],
+  )
 
   useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
     if (matchSelector(selector, id)) {
-      setState({
+      stopAutoClose()
+      setObject({
         open: true,
         children: message,
         ...restOptions,
@@ -147,7 +146,7 @@ export default function Toast(props: ToastProps) {
 
   useToastClose((selector) => {
     if (matchSelector(selector, id)) {
-      setState({
+      setObject({
         open: false,
       })
     }

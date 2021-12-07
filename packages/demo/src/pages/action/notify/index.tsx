@@ -8,7 +8,6 @@ import "./index.scss"
 
 function BasicNotify() {
   const [open, setOpen] = useState(false)
-
   return (
     <Block variant="card" title="基础用法">
       <Cell title="基础用法" clickable rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
