@@ -8,6 +8,7 @@ import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
+import { useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
@@ -67,6 +68,7 @@ function usePopupChildren(children?: ReactNode): PopupChildren {
 }
 
 export interface PopupProps extends ViewProps {
+  defaultOpen?: boolean
   open?: boolean
   transaction?: string
   placement?: PopupPlacement
@@ -76,10 +78,9 @@ export interface PopupProps extends ViewProps {
 
   mountOnEnter?: boolean
 
-  onOpen?(opened: boolean): void
-
   onClose?(opened: boolean): void
 
+  onTransitionEnter?: EnterHandler<HTMLElement>
   onTransitionEntered?: EnterHandler<HTMLElement>
   onTransitionExited?: ExitHandler<HTMLElement>
 }
@@ -87,21 +88,25 @@ export interface PopupProps extends ViewProps {
 const Popup = forwardRef<any, PopupProps>((props, ref) => {
   const {
     className,
-    open,
+    defaultOpen,
+    open: openProp,
     transaction,
     placement,
     rounded = false,
     duration,
     children,
     mountOnEnter = true,
-    onOpen,
     onClose,
+    onTransitionEnter,
     onTransitionEntered,
     onTransitionExited,
     ...restProps
   } = props
 
+  const { value: open } = useValue({ defaultValue: defaultOpen, value: openProp })
+
   const transactionName = transaction ?? toTransactionName(placement)
+
   const { backdrop = <PopupBackdrop />, close, content } = usePopupChildren(children)
 
   return (
@@ -119,7 +124,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         mountOnEnter={mountOnEnter}
         name={transactionName}
         duration={duration}
-        onEnter={() => onOpen?.(true)}
+        onEnter={onTransitionEnter}
         onEntered={onTransitionEntered}
         onExited={onTransitionExited}
       >
