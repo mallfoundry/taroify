@@ -18,13 +18,13 @@
     }
 
     .#{$component-prefix}dropdown-menu-title__content {
-      color: var(--dropdown-menu-title-disabled-text-color, $dropdown-menu-title-disabled-text-color);
+      color: var(--dropdown-menu-title-disabled-color, $dropdown-menu-title-disabled-color);
     }
   }
 
   &--active {
     .#{$component-prefix}dropdown-menu-title__content {
-      color: var(--dropdown-menu-title-active-text-color, $dropdown-menu-title-active-text-color);
+      color: var(--dropdown-menu-title-active-color, $dropdown-menu-title-active-color);
 
       &::after {
         border-color: transparent transparent currentColor currentColor;
@@ -46,7 +46,7 @@
     padding: var(--dropdown-menu-title-padding, $dropdown-menu-title-padding);
     font-size: var(--dropdown-menu-title-font-size, $dropdown-menu-title-font-size);
     line-height: var(--dropdown-menu-title-line-height, $dropdown-menu-title-line-height);
-    color: var(--dropdown-menu-title-text-color, $dropdown-menu-title-text-color);
+    color: var(--dropdown-menu-title-color, $dropdown-menu-title-color);
 
     &::after {
       position: absolute;
