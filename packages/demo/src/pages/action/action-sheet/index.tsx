@@ -94,12 +94,12 @@ function ActionSheetWithStatuses() {
 export default function ActionSheetDemo() {
   return (
     <Page title="ActionSheet 动作面板" className="action-sheet-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
         <BasicActionSheet />
         <ActionSheetWithCancel />
         <ActionSheetWithDescription />
       </Block>
-      <Block title="选项状态">
+      <Block variant="card" title="选项状态">
         <ActionSheetWithStatuses />
       </Block>
     </Page>

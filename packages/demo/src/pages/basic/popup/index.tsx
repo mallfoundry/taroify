@@ -59,10 +59,10 @@ export default function PopupDemo() {
 
   return (
     <Page title="Popup 弹出层" className="popup-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
         <BasicPopup />
       </Block>
-      <Block title="弹出位置">
+      <Block variant="card" title="弹出位置">
         <Cell
           clickable
           title="顶部弹出"
@@ -88,7 +88,7 @@ export default function PopupDemo() {
           onClick={() => handleOpen({ placement: "right" })}
         />
       </Block>
-      <Block title="关闭按钮">
+      <Block variant="card" title="关闭按钮">
         <Cell
           clickable
           title="顶部弹出"
@@ -114,7 +114,7 @@ export default function PopupDemo() {
           onClick={() => handleOpen({ placement: "right", closeable: true })}
         />
       </Block>
-      <Block title="圆角弹窗">
+      <Block variant="card" title="圆角弹窗">
         <Cell
           clickable
           title="圆角弹窗"

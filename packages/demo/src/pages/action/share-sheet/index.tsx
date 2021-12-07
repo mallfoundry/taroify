@@ -120,16 +120,16 @@ function ShareSheetWithDescription() {
 export default function ShareSheetDemo() {
   return (
     <Page title="ShareSheet 分享面板" className="share-sheet-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
         <BasicShareSheet />
       </Block>
-      <Block title="展示多行选项">
+      <Block variant="card" title="展示多行选项">
         <MultilineShareSheet />
-      </Block>{" "}
-      <Block title="自定义图标">
+      </Block>
+      <Block variant="card" title="自定义图标">
         <CustomShareSheet />
       </Block>
-      <Block title="展示描述信息">
+      <Block variant="card" title="展示描述信息">
         <ShareSheetWithDescription />
       </Block>
     </Page>

@@ -112,12 +112,12 @@ function RoundNoTitleDialog() {
 export default function DialogDemo() {
   return (
     <Page title="Dialog 弹出框" className="dialog-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
         <BasicDialog />
         <NoTitleDialog />
         <ConfirmDialog />
       </Block>
-      <Block title="圆角按钮样式">
+      <Block variant="card" title="圆角按钮样式">
         <RoundDialog />
         <RoundNoTitleDialog />
       </Block>

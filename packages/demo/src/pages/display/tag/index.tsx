@@ -21,7 +21,7 @@ function CloseTag() {
 export default function TagDemo() {
   return (
     <Page title="Tag 标签" className="tag-demo">
-      <Block title="基础用法">
+      <Block variant="card" title="基础用法">
         <Cell title="颜色 default">
           <Tag>标签</Tag>
         </Cell>
@@ -41,7 +41,7 @@ export default function TagDemo() {
           <Tag color="danger">标签</Tag>
         </Cell>
       </Block>
-      <Block title="样式风格">
+      <Block variant="card" title="样式风格">
         <Cell title="空心样式">
           <Tag color="primary" variant="outlined" children="标签" />
         </Cell>
@@ -58,7 +58,7 @@ export default function TagDemo() {
           <CloseTag />
         </Cell>
       </Block>
-      <Block title="标签大小">
+      <Block variant="card" title="标签大小">
         <Cell title="小号标签">
           <Tag color="primary" children="标签" />
         </Cell>
@@ -69,7 +69,7 @@ export default function TagDemo() {
           <Tag color="primary" size="large" children="标签" />
         </Cell>
       </Block>
-      <Block title="自定义颜色">
+      <Block variant="card" title="自定义颜色">
         <Cell title="背景颜色">
           <Tag style={{ backgroundColor: "#7232dd" }} children="标签" />
         </Cell>

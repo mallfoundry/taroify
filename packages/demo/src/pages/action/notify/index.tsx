@@ -9,10 +9,10 @@ import "./index.scss"
 function BasicNotify() {
   const [open, setOpen] = useState(false)
   return (
-    <Block variant="card" title="基础用法">
+    <>
       <Cell title="基础用法" clickable rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
       <Notify open={open} onClose={setOpen} children="通知内容" />
-    </Block>
+    </>
   )
 }
 
@@ -24,7 +24,7 @@ function CustomNotify() {
   }>({})
 
   return (
-    <Block title="自定义配置">
+    <>
       <Cell
         title="自定义颜色"
         clickable
@@ -58,13 +58,13 @@ function CustomNotify() {
         children={options.children}
         onClose={() => setOptions({ open: false })}
       />
-    </Block>
+    </>
   )
 }
 
 function NotifyWithPresetColors() {
   return (
-    <Block variant="card" title="通知颜色">
+    <>
       <Notify id="notify" />
       <Cell
         title="主要通知"
@@ -90,16 +90,22 @@ function NotifyWithPresetColors() {
         rightIcon={<ArrowRight />}
         onClick={() => Notify.open({ color: "warning", message: "通知内容" })}
       />
-    </Block>
+    </>
   )
 }
 
 export default function NotifyDemo() {
   return (
     <Page title="Notify 消息提示" className="notify-demo">
-      <BasicNotify />
-      <NotifyWithPresetColors />
-      <CustomNotify />
+      <Block variant="card" title="基础用法">
+        <BasicNotify />
+      </Block>
+      <Block variant="card" title="通知颜色">
+        <NotifyWithPresetColors />
+      </Block>
+      <Block variant="card" title="自定义配置">
+        <CustomNotify />
+      </Block>
     </Page>
   )
 }
