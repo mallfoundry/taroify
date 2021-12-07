@@ -26,7 +26,7 @@ export default function Backdrop(props: BackdropProps) {
     defaultOpen,
     open: openProp,
     closeable = false,
-    duration = 300,
+    duration,
     children,
     onClick,
     onClose,
