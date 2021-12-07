@@ -112,8 +112,8 @@ export interface DialogProps extends ViewProps {
 }
 
 function Dialog(props: DialogProps) {
-  const [
-    {
+  const {
+    object: {
       id,
       className,
       open,
@@ -124,8 +124,9 @@ function Dialog(props: DialogProps) {
       onCancel,
       ...restProps
     },
-    setState,
-  ] = useObject<DialogProps & DialogOptions>(props)
+    setObject,
+  } = useObject<DialogProps & DialogOptions>(props)
+
   const onCancelRef = useToRef(onCancel)
 
   const { onClick } = useContext(ButtonContext)
@@ -144,15 +145,15 @@ function Dialog(props: DialogProps) {
     if (className?.includes(prefixClassname("dialog__cancel"))) {
       onCancel?.()
     }
-    setState({ open: false })
+    setObject({ open: false })
   }
 
   const handleClose = useCallback(
     (opened: boolean) => {
       onClose?.(opened)
-      setState({ open: false })
+      setObject({ open: false })
     },
-    [onClose, setState],
+    [onClose, setObject],
   )
 
   useDialogOpen(
@@ -184,7 +185,7 @@ function Dialog(props: DialogProps) {
         if (!_.isEmpty(actions)) {
           children.push(<DialogActions key={2} children={actions} />)
         }
-        setState({
+        setObject({
           open: true,
           children,
           ...restOptions,
@@ -196,7 +197,7 @@ function Dialog(props: DialogProps) {
   useDialogCancel((selector) => {
     if (matchSelector(selector, id)) {
       onCancelRef.current?.()
-      setState({
+      setObject({
         open: false,
       })
     }
@@ -210,10 +211,10 @@ function Dialog(props: DialogProps) {
     >
       <Popup
         id={id}
-        className={classNames(prefixClassname("dialog"), className)}
-        duration={160}
-        transaction={prefixClassname("dialog-bounce")}
         open={open}
+        className={classNames(prefixClassname("dialog"), className)}
+        transaction={prefixClassname("dialog-bounce")}
+        transactionTimeout={0}
         onClose={handleClose}
         {...restProps}
       >

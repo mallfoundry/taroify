@@ -122,6 +122,7 @@
     }
   }
 
+  &-bounce-appear,
   &-bounce-enter {
     opacity: 0;
     transform: translate3d(-50%, -50%, 0) scale(0.7);
