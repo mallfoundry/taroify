@@ -4,6 +4,7 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, forwardRef, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
@@ -79,7 +80,8 @@ export interface PopupProps extends ViewProps {
 
   onClose?(opened: boolean): void
 
-  onClosed?(): void
+  onTransitionEntered?: EnterHandler<HTMLElement>
+  onTransitionExited?: ExitHandler<HTMLElement>
 }
 
 const Popup = forwardRef<any, PopupProps>((props, ref) => {
@@ -94,7 +96,8 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     mountOnEnter = true,
     onOpen,
     onClose,
-    onClosed,
+    onTransitionEntered,
+    onTransitionExited,
     ...restProps
   } = props
 
@@ -117,7 +120,8 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         name={transactionName}
         duration={duration}
         onEnter={() => onOpen?.(true)}
-        onExited={onClosed}
+        onEntered={onTransitionEntered}
+        onExited={onTransitionExited}
       >
         <View
           ref={ref}
