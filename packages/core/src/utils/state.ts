@@ -119,9 +119,9 @@ export function useValue<S>(options: UseValueOptions<S> = {}): UseValueReturn<S>
 
   const getValue = useCallback(() => stateRef.current as S, [])
 
-  return useMemo(() => ({ value: stateRef.current, getValue, setValue }), [
-    stateRef.current,
-    getValue,
-    setValue,
-  ])
+  return useMemo(
+    () => ({ value: stateRef.current, getValue, setValue }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [stateRef.current, getValue, setValue],
+  )
 }
