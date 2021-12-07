@@ -10,7 +10,7 @@ import "./index.scss"
 function BasicPopup() {
   const [open, setOpen] = useState(false)
   return (
-    <Block title="基础用法">
+    <>
       <Cell clickable title="显示遮盖层" rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
       <Popup
         open={open}
@@ -21,7 +21,7 @@ function BasicPopup() {
       >
         内容
       </Popup>
-    </Block>
+    </>
   )
 }
 
@@ -59,7 +59,9 @@ export default function PopupDemo() {
 
   return (
     <Page title="Popup 弹出层" className="popup-demo">
-      <BasicPopup />
+      <Block title="基础用法">
+        <BasicPopup />
+      </Block>
       <Block title="弹出位置">
         <Cell
           clickable
