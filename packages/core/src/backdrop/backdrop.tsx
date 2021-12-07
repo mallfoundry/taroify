@@ -7,21 +7,24 @@ import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import Transition from "../transition"
 import { preventDefault } from "../utils/dom/event"
+import { useValue } from "../utils/state"
 
 interface BackdropProps extends ViewProps {
   style?: CSSProperties
+  defaultOpen?: boolean
   open?: boolean
   closeable?: boolean
   duration?: number
   children?: ReactNode
-  onClose?: (opened: boolean) => void
+
+  onClose?(opened: boolean): void
 }
 
 export default function Backdrop(props: BackdropProps) {
   const {
     className,
-    style,
-    open = false,
+    defaultOpen,
+    open: openProp,
     closeable = false,
     duration = 300,
     children,
@@ -30,9 +33,12 @@ export default function Backdrop(props: BackdropProps) {
     ...restProps
   } = props
 
+  const { value: open = false, setValue } = useValue({ defaultValue: defaultOpen, value: openProp })
+
   function handleClick(event: ITouchEvent) {
     onClick?.(event)
     if (closeable) {
+      setValue(false)
       onClose?.(false)
     }
   }
@@ -47,9 +53,6 @@ export default function Backdrop(props: BackdropProps) {
           },
           className,
         )}
-        style={{
-          ...style,
-        }}
         catchMove
         children={children}
         onClick={handleClick}
