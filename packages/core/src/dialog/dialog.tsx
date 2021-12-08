@@ -214,7 +214,7 @@ function Dialog(props: DialogProps) {
         open={open}
         className={classNames(prefixClassname("dialog"), className)}
         transaction={prefixClassname("dialog-bounce")}
-        transactionTimeout={0}
+        transactionTimeout={100}
         onClose={handleClose}
         {...restProps}
       >
