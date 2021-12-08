@@ -387,12 +387,13 @@ function CustomPositionCalendar() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | type | 选择类型:<br>`single` 表示选择单个日期，<br>`multiple` 表示选择多个日期，<br>`range` 表示选择日期区间 | _string_ | `single` |
+| defaultValue | 默认选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
+| value | 选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
+| formatter | 日期格式化函数 | _(day: Calendar.DayObject) => Calendar.DayObject_ | - |
 | title | 日历标题 | _string_ | `日期选择` |
 | subtitle | 是否展示日历副标题（年月） | _boolean_ | `true` |
 | min | 可选择的最小日期 | _Date_ | 当前日期 |
 | max | 可选择的最大日期 | _Date_ | 当前日期的六个月后 |
-| defaultValue | 默认选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
-| formatter | 日期格式化函数 | _(day: Calendar.DayObject) => Calendar.DayObject_ | - |
 | readonly | 是否为只读状态，只读状态下不能选择日期 | _boolean_ | `false` |
 | firstDayOfWeek | 设置周起始日 | _0-6_ | `0` |
 
