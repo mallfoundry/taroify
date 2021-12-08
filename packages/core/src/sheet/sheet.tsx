@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { Children, CSSProperties, isValidElement, ReactElement, ReactNode, useMemo } from "react"
 import Backdrop from "../backdrop"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
@@ -54,6 +54,7 @@ function SheetContent(props: SheetContentProps) {
 }
 
 export interface SheetProps extends ViewProps {
+  style?: CSSProperties
   defaultOpen?: boolean
   open?: boolean
   rounded?: boolean
