@@ -204,7 +204,6 @@ function RandomNumberKeyboard(props: KeyboardProps) {
 | title | 键盘标题 | _string_ | - |
 | maxlength | 输入值最大长度 | _number \| string_ | - |
 | transition | 是否开启过场动画 | _boolean_ | `true` |
-| zIndex | 键盘 z-index 层级 | _number \| string_ | `100` |
 | extraKey | 底部额外按键的内容 | _ReactNode \| [ReactNode, ReactNode]_ | `''` |
 | random | 是否将通过随机顺序展示按键 | _boolean_ | `false` |
 

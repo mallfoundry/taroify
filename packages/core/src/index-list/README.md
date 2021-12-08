@@ -71,7 +71,6 @@ function CustomIndexList() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| zIndex | z-index 层级 | _number \| string_ | `1` |
 | sticky | 是否开启锚点自动吸顶 | _boolean_ | `true` |
 | stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | _number_ | `0` |
 

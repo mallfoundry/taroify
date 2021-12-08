@@ -146,6 +146,7 @@ function RoundDialog() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultOpen | 默认是否显示弹窗 | _boolean_ | - |
 | open | 是否显示弹窗 | _boolean_ | - |
 | children | 组件内容 | _ReactNode_ | - |
 
