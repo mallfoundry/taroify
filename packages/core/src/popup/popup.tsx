@@ -3,7 +3,15 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, forwardRef, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  CSSProperties,
+  forwardRef,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useMemo,
+} from "react"
 import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
@@ -68,6 +76,7 @@ function usePopupChildren(children?: ReactNode): PopupChildren {
 }
 
 export interface PopupProps extends ViewProps {
+  style?: CSSProperties
   defaultOpen?: boolean
   open?: boolean
   placement?: PopupPlacement
@@ -90,6 +99,7 @@ export interface PopupProps extends ViewProps {
 const Popup = forwardRef<any, PopupProps>((props, ref) => {
   const {
     className,
+    style: styleProp,
     defaultOpen,
     open: openProp,
     placement,
@@ -113,6 +123,11 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
 
   const { backdrop = <PopupBackdrop />, close, content } = usePopupChildren(children)
 
+  const durationStyle = useMemo(
+    () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
+    [duration],
+  )
+
   return (
     <PopupContext.Provider
       value={{
@@ -125,7 +140,6 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
       {backdrop}
       <Transition
         in={open}
-        duration={transactionName === "fade" ? undefined : duration}
         name={transactionName}
         appear={transitionAppear}
         timeout={transactionTimeout}
@@ -148,6 +162,10 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
             },
             className,
           )}
+          style={{
+            ...durationStyle,
+            ...styleProp,
+          }}
           {...restProps}
         >
           {close}

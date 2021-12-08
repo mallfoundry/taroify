@@ -2,8 +2,9 @@ import { View } from "@tarojs/components"
 import { ITouchEvent } from "@tarojs/components/types/common"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Transition from "../transition"
 import { preventDefault } from "../utils/dom/event"
@@ -23,6 +24,7 @@ interface BackdropProps extends ViewProps {
 export default function Backdrop(props: BackdropProps) {
   const {
     className,
+    style: styleProp,
     defaultOpen,
     open: openProp,
     closeable = false,
@@ -35,6 +37,11 @@ export default function Backdrop(props: BackdropProps) {
 
   const { value: open = false, setValue } = useValue({ defaultValue: defaultOpen, value: openProp })
 
+  const durationStyle = useMemo(
+    () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
+    [duration],
+  )
+
   function handleClick(event: ITouchEvent) {
     onClick?.(event)
     if (closeable) {
@@ -44,7 +51,7 @@ export default function Backdrop(props: BackdropProps) {
   }
 
   return (
-    <Transition in={open} duration={duration} appear mountOnEnter name="fade">
+    <Transition in={open} appear mountOnEnter name="fade">
       <View
         className={classNames(
           prefixClassname("backdrop"),
@@ -53,6 +60,10 @@ export default function Backdrop(props: BackdropProps) {
           },
           className,
         )}
+        style={{
+          ...durationStyle,
+          ...styleProp,
+        }}
         catchMove
         children={children}
         onClick={handleClick}
