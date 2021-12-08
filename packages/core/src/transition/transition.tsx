@@ -1,4 +1,3 @@
-import * as _ from "lodash"
 import * as React from "react"
 import { isValidElement, ReactElement, ReactNode, useMemo, useState } from "react"
 import { CSSTransition } from "react-transition-group"
@@ -43,7 +42,6 @@ interface TransitionProps {
   mountOnEnter?: boolean
   unmountOnExit?: boolean
   timeout?: number | { appear?: number; enter?: number; exit?: number }
-  duration?: number
   children?: ReactNode
   onEnter?: EnterHandler<HTMLElement>
   onEntering?: EnterHandler<HTMLElement>
@@ -61,7 +59,6 @@ export default function Transition(props: TransitionProps) {
     mountOnEnter = false,
     unmountOnExit,
     timeout = 300,
-    duration,
     children: childrenProp,
     onEnter,
     onEntering,
@@ -76,11 +73,6 @@ export default function Transition(props: TransitionProps) {
   const [enter, setEnter] = useState(false)
   const [exited, setExited] = useState(false)
 
-  const durationStyle = useMemo(
-    () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
-    [duration],
-  )
-
   return (
     <CSSTransition
       in={inProp}
@@ -90,7 +82,6 @@ export default function Transition(props: TransitionProps) {
       appear={appear}
       classNames={transactionName}
       style={{
-        ...durationStyle,
         ...childrenStyle,
         display: enter && !exited ? "" : "none",
       }}
