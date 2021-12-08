@@ -108,6 +108,7 @@ function ActionSheetWithStatuses() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultOpen | 默认是否显示动作面板 | _boolean_ | `false` |
 | open      | 是否显示动作面板 | _boolean_ | `false` |
 | className | 样式类名 | _string_ | - |
 | style     | 样式对象 | _CSSProperties_ | - |

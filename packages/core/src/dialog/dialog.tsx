@@ -20,7 +20,7 @@ import ButtonContext from "../button/button.context"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import { matchSelector } from "../utils/dom/element"
-import { useObject, useToRef } from "../utils/state"
+import { useObject, useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
@@ -105,6 +105,7 @@ function renderDialogContent(
 
 export interface DialogProps extends ViewProps {
   style?: CSSProperties
+  defaultOpen?: boolean
   open?: boolean
   children?: ReactNode
 
@@ -116,7 +117,8 @@ function Dialog(props: DialogProps) {
     object: {
       id,
       className,
-      open,
+      defaultOpen,
+      open: openProp,
       children,
       backdrop: backdropOptions,
       onClose,
@@ -126,6 +128,11 @@ function Dialog(props: DialogProps) {
     },
     setObject,
   } = useObject<DialogProps & DialogOptions>(props)
+
+  const { value: open = false } = useValue({
+    defaultValue: defaultOpen,
+    value: openProp,
+  })
 
   const onCancelRef = useToRef(onCancel)
 
