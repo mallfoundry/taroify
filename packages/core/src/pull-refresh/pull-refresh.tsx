@@ -116,11 +116,12 @@ function PullRefresh(props: PullRefreshProps) {
     reachTop: reachTopProp = true,
     pullDistance: pullDistanceProp,
     duration: durationProp = 300,
+    children: childrenProp,
     onRefresh,
     ...restProps
   } = props
 
-  const children = usePullRefreshChildren(props.children)
+  const children = usePullRefreshChildren(childrenProp)
   const { completed: completedElement, content } = children
   const { duration: completedDuration = 500 } = getCompletedProps(completedElement)
 

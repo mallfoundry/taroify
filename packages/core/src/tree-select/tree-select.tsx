@@ -62,19 +62,20 @@ function useTreeSelectChildren(children: ReactNode, tabValue?: any): TreeSelectC
     const elementType = element.type
     if (elementType === TreeSelectTab) {
       const { key, props } = element
-      const { value: oldValue, ...restProps } = props
+      const { value: oldValue, children: childrenProp, ...restProps } = props
       const value = oldValue ?? index
 
       __children__.tabs.push(
         cloneElement(element, {
           key: key ?? value,
           value: value,
+          children: childrenProp,
           ...restProps,
         }),
       )
 
       if (tabValue === value) {
-        __children__.options.push(...getTreeSelectOptions(props.children))
+        __children__.options.push(...getTreeSelectOptions(childrenProp))
       }
     }
   })

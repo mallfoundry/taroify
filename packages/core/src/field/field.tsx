@@ -193,6 +193,7 @@ function Field(props: FieldProps) {
     selectionEnd,
     adjustPosition,
     holdKeyboard,
+    children: childrenProp,
     onClick,
     onClear,
     onConfirm,
@@ -200,7 +201,7 @@ function Field(props: FieldProps) {
     onFocus,
     onBlur,
   } = props
-  const { children, button } = useFieldChildren(props.children)
+  const { children, button } = useFieldChildren(childrenProp)
 
   const [focused, setFocused] = useState(false)
 

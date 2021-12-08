@@ -62,9 +62,18 @@ export interface NoticeBarProps extends ViewProps {
 }
 
 function NoticeBar(props: NoticeBarProps) {
-  const { className, delay = 1000, speed = 60, wordwrap, scrollable = false, ...restProps } = props
+  const {
+    className,
+    delay = 1000,
+    speed = 60,
+    wordwrap,
+    scrollable = false,
+    children: childrenProp,
+    ...restProps
+  } = props
 
-  const { icon, text, action } = useChildren(props.children)
+  const { icon, text, action } = useChildren(childrenProp)
+
   const ellipsis = !scrollable && !wordwrap
   const startTimerRef = useRef<NodeJS.Timeout>()
   const wrapRef = useRef()

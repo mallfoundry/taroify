@@ -1,4 +1,6 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
@@ -49,16 +51,17 @@ function usePickerToolbarChildren(children?: ReactNode): PickerToolbarChildren {
   }, [children])
 }
 
-interface PickerToolbarProps {
-  children?: ReactNode
+interface PickerToolbarProps extends ViewProps {
   position?: "bottom"
+  children?: ReactNode
 }
 
 export default function PickerToolbar(props: PickerToolbarProps) {
-  const { title, cancel, confirm } = usePickerToolbarChildren(props.children)
+  const { className, children: childrenProp, ...restProps } = props
+  const { title, cancel, confirm } = usePickerToolbarChildren(childrenProp)
 
   return (
-    <View className={prefixClassname("picker__toolbar")}>
+    <View className={classNames(prefixClassname("picker__toolbar"), className)} {...restProps}>
       {cancel}
       {title}
       {confirm}

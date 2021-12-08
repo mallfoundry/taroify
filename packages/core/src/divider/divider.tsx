@@ -72,8 +72,9 @@ namespace Divider {
     children?: ReactNode
   }
 
-  export function Text(props: TextProps) {
-    return <>{props.children}</>
+  export function Text(props: TextProps): JSX.Element {
+    const { children } = props
+    return children as JSX.Element
   }
 }
 

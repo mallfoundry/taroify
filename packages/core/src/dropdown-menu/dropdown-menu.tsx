@@ -84,7 +84,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
       const elementType = element.type
       if (elementType === DropdownMenuItem) {
         const { key, props } = element
-        const { disabled, title, value }: DropdownMenuItemProps = props
+        const { disabled, title, value, children: itemChildren }: DropdownMenuItemProps = props
         const index = _.size(__children__.items)
         const itemKey = key ?? index
 
@@ -100,7 +100,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
             key={itemKey}
             __dataKey__={itemKey}
             disabled={disabled}
-            children={title ?? getDropdownMenuTitle(props.children, value)}
+            children={title ?? getDropdownMenuTitle(itemChildren, value)}
           />,
         )
       }

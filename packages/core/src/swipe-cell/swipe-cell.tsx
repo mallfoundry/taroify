@@ -107,6 +107,7 @@ function SwipeCell(props: SwipeCellProps) {
     onTouchMove,
     onTouchEnd,
     onTouchCancel,
+    children: childrenProp,
     ...restProps
   } = props
 
@@ -233,7 +234,7 @@ function SwipeCell(props: SwipeCellProps) {
   }
 
   const { left, content, right } = useSwipeCellChildren(
-    props.children,
+    childrenProp,
     leftRef,
     rightRef,
     handleClick,

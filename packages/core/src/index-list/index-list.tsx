@@ -93,8 +93,14 @@ export interface IndexListProps extends ViewProps {
 }
 
 function IndexList(props: IndexListProps) {
-  const { className, sticky = true, stickyOffsetTop = 0, ...restProps } = props
-  const { anchorProps, anchorRefs, children } = useIndexBarChildren(props.children)
+  const {
+    className,
+    sticky = true,
+    stickyOffsetTop = 0,
+    children: childrenProp,
+    ...restProps
+  } = props
+  const { anchorProps, anchorRefs, children } = useIndexBarChildren(childrenProp)
 
   const scrollTopRef = useRef(0)
 
