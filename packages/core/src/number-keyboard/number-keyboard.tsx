@@ -137,13 +137,16 @@ function NumberKeyboard(props: NumberKeyboardProps) {
     title,
     extraKey,
     random = false,
+    children: childrenProp,
     onKeyPress,
     onBackspace,
     onHide,
     ...restProps
   } = props
-  const { header, sidebar } = useNumberKeyboardChildren(props.children, title)
-  const keys = [...createBasicKeys(random), ...createCustomKeys(extraKey)]
+  const { header, sidebar } = useNumberKeyboardChildren(childrenProp, title)
+
+  const basicKeys = useMemo(() => createBasicKeys(random), [random])
+  const keys = useMemo(() => [...basicKeys, ...createCustomKeys(extraKey)], [basicKeys, extraKey])
 
   const handleKeyPress = (value: string | number, code: NumberKeyboardKeyCode) => {
     onKeyPress?.(value, code)
