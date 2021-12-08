@@ -1,17 +1,13 @@
 import { Image, TreeSelect } from "@taroify/core"
 import * as React from "react"
-import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 
 import "./index.scss"
 
 function RadioTreeSelect() {
-  const [tabValue, setTabValue] = useState(0)
-  const [value, setValue] = useState(0)
-
   return (
-    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
+    <TreeSelect>
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>
@@ -35,11 +31,8 @@ function RadioTreeSelect() {
 }
 
 function MultiselectTreeSelect() {
-  const [tabValue, setTabValue] = useState(0)
-  const [value, setValue] = useState([0, 1])
-
   return (
-    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
+    <TreeSelect defaultValue={[0, 1]}>
       <TreeSelect.Tab title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>
@@ -63,10 +56,8 @@ function MultiselectTreeSelect() {
 }
 
 function TreeSelectWithCustomContent() {
-  const [tabValue, setTabValue] = useState(0)
-
   return (
-    <TreeSelect tabValue={tabValue} onTabChange={setTabValue}>
+    <TreeSelect>
       <TreeSelect.Tab title="分组 1">
         <Image src="https://img.yzcdn.cn/vant/apple-1.jpg" />
       </TreeSelect.Tab>
@@ -78,11 +69,8 @@ function TreeSelectWithCustomContent() {
 }
 
 function BadgeTreeSelect() {
-  const [tabValue, setTabValue] = useState(0)
-  const [value, setValue] = useState(0)
-
   return (
-    <TreeSelect tabValue={tabValue} value={value} onTabChange={setTabValue} onChange={setValue}>
+    <TreeSelect>
       <TreeSelect.Tab badge title="浙江">
         <TreeSelect.Option value={0}>杭州</TreeSelect.Option>
         <TreeSelect.Option value={1}>温州</TreeSelect.Option>

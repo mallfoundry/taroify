@@ -8,8 +8,6 @@
 
 ```ts
 import { Tabs } from "@taroify/core"
-// or
-import Tabs from "@taroify/core/tabs"
 ```
 
 ## 代码演示
@@ -36,30 +34,23 @@ function BasicTabs() {
 
 ### 通过标识匹配
 
-在标签指定 `value` 属性的情况下，`Tabs.value` 的值为当前标签的 `value`。
+在 `Tabs.TabPane` 标签指定 `value` 属性的情况下，`Tabs.defaultValue` 的值为当前标签的 `value`。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function KeyedTabs() {
-  const [value, setValue] = useState("a")
-  return (
-    <Tabs value={value} onChange={setValue}>
-      <Tabs.TabPane value="a" title="标签 1">
-        内容 1
-      </Tabs.TabPane>
-      <Tabs.TabPane value="b" title="标签 2">
-        内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane value="c" title="标签 3">
-        内容 3
-      </Tabs.TabPane>
-      <Tabs.TabPane value="d" title="标签 4">
-        内容 4
-      </Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs defaultValue="a">
+  <Tabs.TabPane value="a" title="标签 1">
+    内容 1
+  </Tabs.TabPane>
+  <Tabs.TabPane value="b" title="标签 2">
+    内容 2
+  </Tabs.TabPane>
+  <Tabs.TabPane value="c" title="标签 3">
+    内容 3
+  </Tabs.TabPane>
+  <Tabs.TabPane value="d" title="标签 4">
+    内容 4
+  </Tabs.TabPane>
+</Tabs>
 ```
 
 ### 标签栏滚动
@@ -67,23 +58,15 @@ function KeyedTabs() {
 标签数量超过 5 个时，标签栏可以在水平方向上滚动，切换时会自动将当前标签居中。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function ScrollTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-      <Tabs.TabPane title="标签 5">内容 5</Tabs.TabPane>
-      <Tabs.TabPane title="标签 6">内容 6</Tabs.TabPane>
-      <Tabs.TabPane title="标签 7">内容 7</Tabs.TabPane>
-    </Tabs>
-  )
-}
-
+<Tabs>
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+  <Tabs.TabPane title="标签 5">内容 5</Tabs.TabPane>
+  <Tabs.TabPane title="标签 6">内容 6</Tabs.TabPane>
+  <Tabs.TabPane title="标签 7">内容 7</Tabs.TabPane>
+</Tabs>
 ```
 
 ### 禁用标签
@@ -91,20 +74,13 @@ function ScrollTabs() {
 设置 `disabled` 属性即可禁用标签，如果需要监听禁用标签的点击事件，可以在 `Tabs` 上监听`onClick` 事件。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function DisableTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2" disabled>
-        内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs>
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2" disabled>
+    内容 2
+  </Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+</Tabs>
 ```
 
 ### 样式风格
@@ -112,18 +88,11 @@ function DisableTabs() {
 `Tabs` 支持两种样式风格：`line` 和`card`，默认为 `line` 样式，可以通过 `theme` 属性切换样式风格。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function CardTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} theme="card" onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs theme="card">
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+</Tabs>
 ```
 
 ### 点击事件
@@ -134,27 +103,15 @@ function CardTabs() {
 import { Tabs, Toast } from "@taroify/core"
 
 function TabsWithTabClick() {
-  const [value, setValue] = useState(0)
-  const [message, setMessage] = useState<ReactNode>("")
-  const [open, setOpen] = useState(false)
-
   return (
     <>
-      <Tabs
-        value={value}
-        onChange={setValue}
-        onTabClick={({ title }) => {
-          setOpen(true)
-          setMessage(title)
-        }}
-      >
+      <Toast id="toast" />
+      <Tabs onTabClick={({ title }) => Toast.open(title)}>
         <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
         <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
         <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
       </Tabs>
-      <Toast open={open} onClose={() => setOpen(false)}>
-        {message}
-      </Toast>
+      <Toast id="toast" />
     </>
   )
 }
@@ -165,19 +122,12 @@ function TabsWithTabClick() {
 通过 `sticky` 属性可以开启粘性布局，粘性布局下，标签页滚动到顶部时会自动吸顶。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function StickyTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} sticky onChange={(tab) => setValue(tab.value)}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs sticky>
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+</Tabs>
 ```
 
 ### 自定义标签
@@ -189,9 +139,8 @@ import { Tabs } from "@taroify/core"
 import { MoreOutlined } from "@taroify/icons"
 
 function TabsWithCustomTitle() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={(tab) => setValue(tab.value)}>
+    <Tabs>
       <Tabs.TabPane
         title={
           <>
@@ -236,19 +185,12 @@ function TabsWithCustomTitle() {
 通过 `animated` 属性可以开启切换标签内容时的转场动画。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function AnimatedTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} animated onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs animated>
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+</Tabs>
 ```
 
 ### 滑动切换
@@ -256,19 +198,12 @@ function AnimatedTabs() {
 通过 `swipeable` 属性可以开启滑动切换标签页。
 
 ```tsx
-import { Tabs } from "@taroify/core"
-
-function SwipeableTabs() {
-  const [value, setValue] = useState(0)
-  return (
-    <Tabs value={value} animated swipeable onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-    </Tabs>
-  )
-}
+<Tabs animated swipeable>
+  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+</Tabs>
 ```
 
 ## API
@@ -277,9 +212,10 @@ function SwipeableTabs() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 绑定默认选中标签的标识符 | _number \| string_ | `0` |
 | value | 绑定当前选中标签的标识符 | _number \| string_ | `0` |
 | theme | 样式风格类型，可选值为 `card` | _string_ | `line` |
-| duration | 动画时间，单位秒 | _number \| string_ | `0.3` |
+| duration | 动画时间，单位毫秒 | _number \| string_ | `300` |
 | animated | 是否开启切换标签内容时的转场动画 | _boolean_ | `false` |
 | bordered | 是否显示标签栏外边框，仅在 `type="line"` 时有效 | _boolean_ | `false` |
 | ellipsis | 是否省略过长的标题文字 | _boolean_ | `true` |

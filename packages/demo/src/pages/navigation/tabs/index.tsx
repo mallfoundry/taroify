@@ -1,15 +1,13 @@
 import { Tabs, Toast } from "@taroify/core"
 import { MoreOutlined } from "@taroify/icons"
 import * as React from "react"
-import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -19,9 +17,8 @@ function BasicTabs() {
 }
 
 function KeyedTabs() {
-  const [value, setValue] = useState("a")
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs defaultValue="a">
       <Tabs.TabPane value="a" title="标签 1">
         内容 1
       </Tabs.TabPane>
@@ -39,9 +36,8 @@ function KeyedTabs() {
 }
 
 function ScrollTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -54,9 +50,8 @@ function ScrollTabs() {
 }
 
 function DisableTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2" disabled>
         内容 2
@@ -67,9 +62,8 @@ function DisableTabs() {
 }
 
 function CardTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} theme="card" onChange={setValue}>
+    <Tabs theme="card">
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -78,35 +72,22 @@ function CardTabs() {
 }
 
 function TabsWithTabClick() {
-  const [value, setValue] = useState(0)
-  const [message, setMessage] = useState<ReactNode>("")
-  const [open, setOpen] = useState(false)
-
   return (
     <>
-      <Tabs
-        value={value}
-        onChange={setValue}
-        onTabClick={({ title }) => {
-          setOpen(true)
-          setMessage(title)
-        }}
-      >
+      <Toast id="toast" />
+      <Tabs onTabClick={({ title }) => Toast.open(title)}>
         <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
         <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
         <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
       </Tabs>
-      <Toast open={open} onClose={() => setOpen(false)}>
-        {message}
-      </Toast>
+      <Toast id="toast" />
     </>
   )
 }
 
 function StickyTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} sticky onChange={setValue}>
+    <Tabs sticky>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -116,9 +97,8 @@ function StickyTabs() {
 }
 
 function TabsWithCustomTitle() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} onChange={setValue}>
+    <Tabs>
       <Tabs.TabPane
         title={
           <>
@@ -151,9 +131,8 @@ function TabsWithCustomTitle() {
 }
 
 function AnimatedTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} animated onChange={setValue}>
+    <Tabs animated>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
@@ -163,9 +142,8 @@ function AnimatedTabs() {
 }
 
 function SwipeableTabs() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabs value={value} animated swipeable onChange={setValue}>
+    <Tabs animated swipeable>
       <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
       <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
       <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>

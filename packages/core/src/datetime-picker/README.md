@@ -20,9 +20,9 @@ DatetimePicker 通过 type 属性来定义需要选择的时间类型，type 为
 function DatePicker() {
   const [minDate] = useState(new Date(2020, 0, 1))
   const [maxDate] = useState(new Date(2025, 10, 1))
-  const [value, setValue] = useState(new Date(2021, 0, 17))
+  const [defaultValue] = useState(new Date(2021, 0, 17))
   return (
-    <DatetimePicker type="date" value={value} min={minDate} max={maxDate} onChange={setValue}>
+    <DatetimePicker type="date" min={minDate} max={maxDate} defaultValue={defaultValue}>
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择年月日</DatetimePicker.Title>
@@ -41,14 +41,14 @@ function DatePicker() {
 function YearMonthPicker() {
   const [minDate] = useState(new Date(2020, 0, 1))
   const [maxDate] = useState(new Date(2025, 10, 1))
-  const [value, setValue] = useState(new Date(2021, 0, 17))
+  const [defaultValue] = useState(new Date(2021, 0, 17))
 
   return (
     <DatetimePicker
       type="year-month"
-      value={value}
       min={minDate}
       max={maxDate}
+      defaultValue={defaultValue}
       formatter={(type, val) => {
         if (type === "year") {
           return `${val}年`
@@ -58,7 +58,6 @@ function YearMonthPicker() {
         }
         return val
       }}
-      onChange={setValue}
     >
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
@@ -78,14 +77,14 @@ function YearMonthPicker() {
 function MonthDayPicker() {
   const [minDate] = useState(new Date(2020, 0, 1))
   const [maxDate] = useState(new Date(2025, 10, 1))
-  const [value, setValue] = useState(new Date(2021, 0, 17))
+  const [defaultValue] = useState(new Date(2021, 0, 17))
 
   return (
     <DatetimePicker
       type="month-day"
       min={minDate}
       max={maxDate}
-      value={value}
+      defaultValue={defaultValue}
       formatter={(type, val) => {
         if (type === "month") {
           return `${val}月`
@@ -95,7 +94,6 @@ function MonthDayPicker() {
         }
         return val
       }}
-      onChange={setValue}
     >
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
@@ -115,10 +113,10 @@ function MonthDayPicker() {
 function TimePicker() {
   const [minDate] = useState(new Date(2020, 0, 1, 10, 0, 0))
   const [maxDate] = useState(new Date(2020, 0, 1, 20, 59, 59))
-  const [value, setValue] = useState(new Date(2020, 0, 1, 12, 0, 0))
+  const [defaultValue] = useState(new Date(2020, 0, 1, 12, 0, 0))
 
   return (
-    <DatetimePicker type="time" value={value} min={minDate} max={maxDate} onChange={setValue}>
+    <DatetimePicker type="time" min={minDate} max={maxDate} defaultValue={defaultValue}>
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择时间</DatetimePicker.Title>
@@ -137,10 +135,10 @@ function TimePicker() {
 function DateTimePicker() {
   const [minDate] = useState(new Date(2020, 0, 1, 10, 0, 0))
   const [maxDate] = useState(new Date(2025, 10, 1, 20, 59, 59))
-  const [value, setValue] = useState(new Date(2021, 2, 3, 12, 12, 12))
+  const [defaultValue] = useState(new Date(2021, 2, 3, 12, 12, 12))
 
   return (
-    <DatetimePicker type="datetime" value={value} min={minDate} max={maxDate} onChange={setValue}>
+    <DatetimePicker type="datetime" min={minDate} max={maxDate} defaultValue={defaultValue}>
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择完整时间</DatetimePicker.Title>
@@ -159,10 +157,10 @@ function DateTimePicker() {
 function DateHourPicker() {
   const [minDate] = useState(new Date(2020, 0, 1, 0))
   const [maxDate] = useState(new Date(2025, 10, 1, 23))
-  const [value, setValue] = useState(new Date())
+  const [defaultValue] = useState(new Date())
 
   return (
-    <DatetimePicker type="date-hour" value={value} min={minDate} max={maxDate} onChange={setValue}>
+    <DatetimePicker type="date-hour" min={minDate} max={maxDate} defaultValue={defaultValue}>
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择年月日小时</DatetimePicker.Title>
@@ -181,15 +179,14 @@ function DateHourPicker() {
 function TimePickerWithFilter() {
   const [minDate] = useState(new Date(2020, 0, 1, 0, 0, 0))
   const [maxDate] = useState(new Date(2020, 0, 1, 23, 59, 59))
-  const [value, setValue] = useState(new Date(2020, 0, 1, 12, 0, 0))
+  const [defaultValue] = useState(new Date(2020, 0, 1, 12, 0, 0))
 
   return (
     <DatetimePicker
       type="time"
-      value={value}
       min={minDate}
       max={maxDate}
-      onChange={setValue}
+      defaultValue={defaultValue}
       filter={(type, options) => {
         if (type === "minute") {
           return options.filter((option) => Number(option) % 5 === 0)
@@ -213,12 +210,12 @@ function TimePickerWithFilter() {
 function DatePickerWithFields() {
   const [minDate] = useState(new Date(2020, 0, 1))
   const [maxDate] = useState(new Date(2025, 10, 1))
-  const [value, setValue] = useState(new Date(2021, 0, 17))
+  const [defaultValue] = useState(new Date(2021, 0, 17))
   return (
     <DatetimePicker
       type="date"
       fields={["month", "day", "year"]}
-      value={value}
+      defaultValue={defaultValue}
       min={minDate}
       max={maxDate}
       formatter={(type, val) => {
@@ -233,7 +230,6 @@ function DatePickerWithFields() {
         }
         return val
       }}
-      onChange={setValue}
     >
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
@@ -252,7 +248,8 @@ function DatePickerWithFields() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | type | 时间类型，可选值为 `date` `time` <br> `year-month` `month-day` `date-hour` `hour-minute` | _string_ | `datetime` |
-| value | 选中的时间 | _Date_ | `new Date()` |
+| defaultValue | 默认选中的时间 | _Date_ | - |
+| value | 选中的时间 | _Date_ | - |
 | min | 可选的最小时间，精确到秒 | _Date_ | 十年前 |
 | max | 可选的最大时间，精确到秒 | _Date_ | 十年后 |
 | filter | 选项过滤函数 | _(type: string, values: string[]) => string[]_ | - |

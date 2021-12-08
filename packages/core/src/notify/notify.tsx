@@ -2,10 +2,11 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useEffect } from "react"
+import { useTimeout } from "../hooks"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { matchSelector } from "../utils/dom/element"
-import { useObject } from "../utils/state"
+import { useObject, useValue } from "../utils/state"
 import { NotifyOptions, useNotifyClose, useNotifyOpen } from "./notify.imperative"
 import { NotifyColor } from "./notify.shared"
 
@@ -13,6 +14,7 @@ const PRESET_COLORS = ["primary", "success", "warning", "danger"]
 
 export interface NotifyProps extends ViewProps {
   style?: CSSProperties
+  defaultOpen?: boolean
   open?: boolean
   duration?: number
   color?: NotifyColor
@@ -22,54 +24,61 @@ export interface NotifyProps extends ViewProps {
 }
 
 function Notify(props: NotifyProps) {
-  const [
-    {
+  const {
+    object: {
       id,
       className,
-      open = false,
+      defaultOpen,
+      open: openProp,
       duration = 3000,
       color = "danger",
       children,
       onClose,
       ...restProps
     },
-    setState,
-  ] = useObject<NotifyProps & NotifyOptions>(props)
+    setObject,
+  } = useObject<NotifyProps & NotifyOptions>(props)
+
+  const { value: open = false, setValue: setOpen } = useValue({
+    defaultValue: defaultOpen,
+    value: openProp,
+    onChange: (aOpened) => !aOpened && onClose?.(aOpened),
+  })
+
+  const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
 
   useEffect(() => {
-    let timer: any
     if (open) {
-      timer = setTimeout(() => {
-        setState({ open: false })
-        onClose?.(false)
-        clearTimeout(timer)
+      restartAutoClose(() => {
+        setOpen(false)
+        stopAutoClose()
       }, duration)
-    } else if (timer) {
-      clearTimeout(timer)
+    } else {
+      stopAutoClose()
     }
-    return () => clearTimeout(timer)
-  }, [duration, onClose, open, setState])
+    return () => stopAutoClose()
+  }, [duration, open, restartAutoClose, setObject, setOpen, stopAutoClose])
 
   useNotifyOpen(({ selector, message, ...restOptions }: NotifyOptions) => {
     if (matchSelector(selector, id)) {
-      setState({
-        open: true,
+      restartAutoClose()
+      setObject({
         children: message,
         ...restOptions,
       })
+      setOpen(true)
     }
   })
 
   useNotifyClose((selector) => {
     if (matchSelector(selector, id)) {
-      setState({
-        open: false,
-      })
+      setOpen(false)
     }
   })
 
   return (
     <Popup
+      id={id}
       className={classNames(
         prefixClassname("notify"),
         {
@@ -78,8 +87,8 @@ function Notify(props: NotifyProps) {
         className,
       )}
       placement="top"
-      duration={200}
       open={open}
+      duration={200}
       {...restProps}
     >
       <Popup.Backdrop open={false} />

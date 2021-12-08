@@ -1,28 +1,18 @@
 import { Field, Picker, Popup, Toast } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
+import { CustomWrapper } from "@tarojs/components"
 import * as _ from "lodash"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
-import BlockCard from "../../../components/block-card"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicPicker() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState("")
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{value}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={(values) => {
-          setToastOpen(true)
-          setValue(values)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker onChange={(value) => Toast.open(`当前值：${value}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -43,20 +33,10 @@ function BasicPicker() {
 }
 
 function DefaultPicker() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState("温州")
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{value}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={(values) => {
-          setToastOpen(true)
-          setValue(values)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker defaultValue="温州" onChange={(value) => Toast.open(`当前值：${value}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -77,22 +57,10 @@ function DefaultPicker() {
 }
 
 function PickerWithMultiColumns() {
-  const [toastOpen, setToastOpen] = useState(false)
-  const [value, setValue] = useState([])
-
   return (
     <>
-      <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
-        当前值：{_.join(value, ",")}
-      </Toast>
-      <Picker
-        value={value}
-        onChange={setValue}
-        onConfirm={(values) => {
-          setValue(values)
-          setToastOpen(true)
-        }}
-      >
+      <Toast id="toast" />
+      <Picker onConfirm={(values) => Toast.open(`当前值：${_.join(values, ",")}`)}>
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -201,35 +169,35 @@ function PickerPopup() {
 export default function PickerDemo() {
   return (
     <Page title="Picker 选择器" className="picker-demo">
-      <Block title="基础用法">
-        <BlockCard>
+      <Block variant="card" title="基础用法">
+        <CustomWrapper>
           <BasicPicker />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
-      <Block title="默认选中项">
-        <BlockCard>
+      <Block variant="card" title="默认选中项">
+        <CustomWrapper>
           <DefaultPicker />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
-      <Block title="多列选择">
-        <BlockCard>
+      <Block variant="card" title="多列选择">
+        <CustomWrapper>
           <PickerWithMultiColumns />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
-      <Block title="禁用选项">
-        <BlockCard>
+      <Block variant="card" title="禁用选项">
+        <CustomWrapper>
           <DisabledPicker />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
-      <Block title="加载状态">
-        <BlockCard>
+      <Block variant="card" title="加载状态">
+        <CustomWrapper>
           <LoadingPicker />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
-      <Block title="搭配弹出层使用">
-        <BlockCard>
+      <Block variant="card" title="搭配弹出层使用">
+        <CustomWrapper>
           <PickerPopup />
-        </BlockCard>
+        </CustomWrapper>
       </Block>
     </Page>
   )

@@ -8,7 +8,7 @@
   justify-content: center;
   font-size: var(--tabbar-item-font-size, $tabbar-item-font-size);
   line-height: var(--tabbar-item-line-height, $tabbar-item-line-height);
-  color: var(--tabbar-item-text-color, $tabbar-item-text-color);
+  color: var(--tabbar-item-color, $tabbar-item-color);
   cursor: pointer;
 
   &__icon {

@@ -4,8 +4,10 @@ import { DropdownMenuDirection } from "./dropdown-menu.shared"
 interface DropdownMenuContextValue {
   direction?: DropdownMenuDirection
   itemOffset?: number
-  toggleItem?: (options: { dataKey?: Key; disabled?: boolean }) => void
-  isItemToggle?: (value?: any) => boolean | undefined
+
+  toggleItem?(value?: Key): void
+
+  isItemToggle?(value?: any): boolean | null
 }
 
 const DropdownMenuContext = createContext<DropdownMenuContextValue>({})

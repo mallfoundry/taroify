@@ -15,10 +15,7 @@ import { Slider } from "@taroify/core"
 ### 基础用法
 
 ```tsx
-function BasicSlider() {
-  const [value, setValue] = useState(50)
-  return <Slider value={value} onChange={setValue} />
-}
+<Slider defaultValue={50} />
 ```
 
 ### 双滑块
@@ -26,50 +23,36 @@ function BasicSlider() {
 添加 `range` 属性就可以开启双滑块模式，确保 `value` 的值是一个数组。
 
 ```tsx
-function RangeSlider() {
-  const [value, setValue] = useState([20, 60])
-  return <Slider range value={value} onChange={setValue} />
-}
+<Slider range defaultValue={[20, 60]} />
 ```
 
 ### 指定选择范围
 
 ```tsx
-function ClampSlider() {
-  const [value, setValue] = useState(0)
-  return <Slider min={-50} max={50} value={value} onChange={setValue} />
-}
+<Slider min={-50} max={50} defaultValue={0} />
 ```
 
 ### 禁用
 
 ```tsx
-<Slider value={50} disabled />
+<Slider disabled defaultValue={50} />
 ```
 
 ### 指定步长
 
 ```tsx
-function StepSlider() {
-  const [value, setValue] = useState(50)
-  return <Slider step={10} value={value} onChange={setValue} />
-}
+<Slider step={10} defaultValue={50} />
 ```
 
 ### 自定义样式
 
 ```tsx
-function StyledSlider() {
-  const [value, setValue] = useState(50)
-  return <Slider className="custom-color" size={4} value={value} onChange={setValue} />
-}
+<Slider className="custom-color" size={4} defaultValue={50} />
 ```
 
 ```scss
 .custom-color {
-  .taroify-slider__track {
-    background-color: #ee0a24;
-  }
+  --slider-active-background-color: #ee0a24;
 }
 ```
 
@@ -89,13 +72,17 @@ function StyledThumbSlider() {
 ```
 
 ```scss
+.custom-color {
+  --slider-active-background-color: #ee0a24;
+}
+
 .custom-thumb {
   width: 26px * 2;
   color: #fff;
   font-size: 10px * 2;
   line-height: 18px * 2;
   text-align: center;
-  background-color: #ee0a24;
+  background-color: var(--slider-active-background-color);
   border-radius: 100px * 2;
 }
 ```
@@ -105,23 +92,13 @@ function StyledThumbSlider() {
 设置 `orientation="vertical"` 属性后，滑块会垂直展示，且高度为 100% 父元素高度。
 
 ```tsx
-function VerticalSlider() {
-  const [value, setValue] = useState(50)
-  return <Slider orientation="vertical" value={value} onChange={setValue} />
-}
-
-function VerticalRangeSlider() {
-  const [value, setValue] = useState([20, 60])
-  return (
-    <Slider
-      range
-      orientation="vertical"
-      style={{ marginLeft: "100px" }}
-      value={value}
-      onChange={setValue}
-    />
-  )
-}
+<Slider orientation="vertical" defaultValue={50} />
+<Slider
+  style={{ marginLeft: "100px" }}
+  range
+  orientation="vertical"
+  defaultValue={[20, 60]}
+/>
 ```
 
 ## API
@@ -130,6 +107,7 @@ function VerticalRangeSlider() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 当前进度百分比，在双滑块模式下为数组格式 | _number \| [number, number]_ | `0` |
 | value | 当前进度百分比，在双滑块模式下为数组格式 | _number \| [number, number]_ | `0` |
 | max | 最大值 | _number \| string_ | `100` |
 | min | 最小值 | _number \| string_ | `0` |

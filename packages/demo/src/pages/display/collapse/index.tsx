@@ -18,9 +18,8 @@ function BasicCollapse() {
 }
 
 function AccordionCollapse() {
-  const [value, setValue] = useState(0)
   return (
-    <Collapse accordion value={value} onChange={setValue}>
+    <Collapse accordion defaultValue={0}>
       <Collapse.Item title="标题1">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题2">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="标题3">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
@@ -29,9 +28,8 @@ function AccordionCollapse() {
 }
 
 function CollapseWithDisabledWithReadonly() {
-  const [value, setValue] = useState([0])
   return (
-    <Collapse value={value} onChange={setValue}>
+    <Collapse defaultValue={[0]}>
       <Collapse.Item title="正常状态">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="只读状态" clickable={false}>
         代码是写出来给人看的，附带能在机器上运行
@@ -44,9 +42,8 @@ function CollapseWithDisabledWithReadonly() {
 }
 
 function CustomCollapse() {
-  const [value, setValue] = useState([0])
   return (
-    <Collapse value={value} onChange={setValue}>
+    <Collapse defaultValue={[0]}>
       <Collapse.Item
         className="custom-collapse-item1"
         title={

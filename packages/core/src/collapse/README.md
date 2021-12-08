@@ -31,7 +31,7 @@ function BasicCollapse() {
 
 ### 手风琴
 
-通过 `accordion` 可以设置为手风琴模式，最多展开一个面板，此时 `activeKey` 为字符串格式。
+通过 `accordion` 可以设置为手风琴模式，最多展开一个面板，此时 `value` 为字符串格式。
 
 ```tsx
 function AccordionCollapse() {
@@ -52,9 +52,8 @@ function AccordionCollapse() {
 
 ```tsx
 function CollapseWithDisabledWithReadonly() {
-  const [value, setValue] = useState([0])
   return (
-    <Collapse value={value} onChange={setValue}>
+    <Collapse defaultValue={[0]}>
       <Collapse.Item title="正常状态">代码是写出来给人看的，附带能在机器上运行</Collapse.Item>
       <Collapse.Item title="只读状态" clickable={false}>
         代码是写出来给人看的，附带能在机器上运行
@@ -73,9 +72,8 @@ function CollapseWithDisabledWithReadonly() {
 
 ```tsx
 function CustomCollapse() {
-  const [value, setValue] = useState([0])
   return (
-    <Collapse value={value} onChange={setValue}>
+    <Collapse defaultValue={[0]}>
       <Collapse.Item
         className="custom-collapse-item1"
         title={
@@ -101,7 +99,8 @@ function CustomCollapse() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| value | 当前展开面板的 key | 手风琴模式：_number \| string_<br>非手风琴模式：_(number \| string)[]_ | - |
+| defaultValue | 默认展开面板的 value | 手风琴模式：_number \| string_<br>非手风琴模式：_(number \| string)[]_ | - |
+| value | 当前展开面板的 value | 手风琴模式：_number \| string_<br>非手风琴模式：_(number \| string)[]_ | - |
 | accordion | 是否开启手风琴模式 | _boolean_ | `false` |
 | bordered | 是否显示外边框 | _boolean_ | `true` |
 

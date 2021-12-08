@@ -40,10 +40,7 @@ function BackdropExample() {
   const [open, setOpen] = useState(false)
   return <>
     <Button onClick={() => setOpen(true)}>嵌入内容</Button>
-    <Backdrop
-      open={open} closeable
-      onClose={() => setOpen(false)}
-    >
+    <Backdrop open={open} closeable onClose={() => setOpen(false)}>
       <View className="content-wrapper">
         <View className="content-block" />
       </View>
@@ -53,7 +50,7 @@ function BackdropExample() {
 
 ```
 
-```css
+```scss
 .content-wrapper {
   display: flex;
   align-items: center;
@@ -62,8 +59,8 @@ function BackdropExample() {
 }
 
 .content-block {
-  width: 120px;
-  height: 120px;
+  width: 60px * 2;
+  height: 60px * 2;
   background-color: #fff;
 }
 ```
@@ -76,11 +73,6 @@ function BackdropExample() {
 | --- | --- | --- | --- |
 | className | 自定义类名 | _string_ | - |
 | children | 用于在遮罩层上方嵌入内容| _ReactNode_ | - |
+| defaultOpen | 是否默认展示遮罩层 | _boolean_ | `false` |
 | open | 是否展示遮罩层 | _boolean_ | `false` |
-| duration | 动画时长，单位秒 | _number \| string_ | `0.3` |
-
-### Events
-
-| 事件名 | 说明       | 回调参数            |
-| ------ | ---------- | ------------------- |
-| click  | 点击时触发 | _event: MouseEvent_ |
+| duration | 动画时长，单位毫秒 | _number_ | `300` |

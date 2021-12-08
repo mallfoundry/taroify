@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode } from "react"
+import { Children, isValidElement, ReactElement, ReactNode, useMemo } from "react"
 import Backdrop from "../backdrop"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
@@ -17,29 +17,31 @@ interface SheetChildren {
   content: ReactNode[]
 }
 
-function findSheetChildren(node?: ReactNode): SheetChildren {
-  const children: SheetChildren = {
-    backdrop: undefined,
-    header: undefined,
-    content: [],
-  }
-
-  Children.forEach(node, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      if (isElementOf(element, Backdrop)) {
-        children.backdrop = element
-      } else if (isElementOf(element, SheetHeader)) {
-        children.header = element
-      } else {
-        children.content.push(child)
-      }
-    } else {
-      children.content.push(child)
+function useSheetChildren(children?: ReactNode): SheetChildren {
+  return useMemo(() => {
+    const __children__: SheetChildren = {
+      backdrop: undefined,
+      header: undefined,
+      content: [],
     }
-  })
 
-  return children
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        if (isElementOf(element, Backdrop)) {
+          __children__.backdrop = element
+        } else if (isElementOf(element, SheetHeader)) {
+          __children__.header = element
+        } else {
+          __children__.content.push(child)
+        }
+      } else {
+        __children__.content.push(child)
+      }
+    })
+
+    return __children__
+  }, [children])
 }
 
 interface SheetContentProps {
@@ -52,6 +54,7 @@ function SheetContent(props: SheetContentProps) {
 }
 
 export interface SheetProps extends ViewProps {
+  defaultOpen?: boolean
   open?: boolean
   rounded?: boolean
   children?: ReactNode
@@ -66,6 +69,7 @@ export interface SheetProps extends ViewProps {
 function Sheet(props: SheetProps) {
   const {
     className,
+    defaultOpen,
     open,
     rounded = true,
     children,
@@ -74,7 +78,8 @@ function Sheet(props: SheetProps) {
     onClose,
     ...restProps
   } = props
-  const { backdrop, header, content } = findSheetChildren(children)
+
+  const { backdrop, header, content } = useSheetChildren(children)
 
   return (
     <SheetContext.Provider value={{ onSelect, onCancel }}>
@@ -82,6 +87,7 @@ function Sheet(props: SheetProps) {
         className={classNames(prefixClassname("sheet"), className)}
         placement="bottom"
         rounded={rounded}
+        defaultOpen={defaultOpen}
         open={open}
         onClose={onClose}
         {...restProps}

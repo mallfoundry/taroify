@@ -20,7 +20,7 @@ export default function TransitionDemo() {
 
   return (
     <Page title="内置样式" className="style-demo">
-      <Block title="文字省略">
+      <Block variant="card" title="文字省略">
         <View className={classNames("taroify-ellipsis", "ellipsis-text")}>
           这是一段最多显示一行的文字，后面的内容会省略省略省略
         </View>
@@ -28,10 +28,10 @@ export default function TransitionDemo() {
           这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。这是一段最多显示两行的文字，后面的内容会省略。
         </View>
       </Block>
-      <Block title="1px 边框">
+      <Block variant="card" title="1px 边框">
         <View className={classNames("taroify-hairline--top", "hairline-line")} />
       </Block>
-      <Block title="动画">
+      <Block variant="card" title="动画">
         <Cell
           clickable
           title="Fade"
@@ -62,12 +62,7 @@ export default function TransitionDemo() {
           rightIcon={<ArrowRight />}
           onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
-        <Transition
-          in={state}
-          duration={{ enter: 500, exit: 300 }}
-          name={name}
-          onEntered={() => setState(false)}
-        >
+        <Transition in={state} name={name} onEntered={() => setState(false)}>
           <View className="animate-block" />
         </Transition>
       </Block>

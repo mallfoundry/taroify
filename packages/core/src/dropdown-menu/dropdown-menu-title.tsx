@@ -30,7 +30,9 @@ function DropdownMenuTitle(props: DropdownMenuTitleProps) {
       )}
       onClick={(event) => {
         onClick?.(event)
-        toggleItem?.({ dataKey, disabled })
+        if (!disabled) {
+          toggleItem?.(dataKey)
+        }
       }}
       {...restProps}
     >

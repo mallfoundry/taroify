@@ -15,11 +15,12 @@ import {
   useMemo,
 } from "react"
 import Backdrop from "../backdrop"
+import { useTimeout } from "../hooks"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import { matchSelector } from "../utils/dom/element"
-import { useObject } from "../utils/state"
+import { useObject, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
@@ -89,6 +90,7 @@ function useToastChildren(children?: ReactNode): ToastChildren {
 export interface ToastProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultOpen?: boolean
   open?: boolean
   type?: ToastType
   position?: ToastPosition
@@ -100,11 +102,12 @@ export interface ToastProps extends ViewProps {
 }
 
 export default function Toast(props: ToastProps) {
-  const [
-    {
+  const {
+    object: {
       id,
       className,
-      open = false,
+      defaultOpen,
+      open: openProp,
       icon: iconProp,
       type = "text",
       position = "middle",
@@ -114,42 +117,47 @@ export default function Toast(props: ToastProps) {
       onClose,
       ...restProps
     },
-    setState,
-  ] = useObject<ToastProps & ToastOptions>(props)
+    setObject,
+  } = useObject<ToastProps & ToastOptions>(props)
+
+  const { value: open = false, setValue: setOpen } = useValue({
+    defaultValue: defaultOpen,
+    value: openProp,
+    onChange: (aOpened) => !aOpened && onClose?.(aOpened),
+  })
 
   const { backdrop: backdropElement, content } = useToastChildren(childrenProp)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
   const icon = useToastIcon(iconProp, type)
 
+  const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
+
   useEffect(() => {
-    let timer: any
     if (open) {
-      timer = setTimeout(() => {
-        setState({ open: false })
-        onClose?.(false)
-        clearTimeout(timer)
+      restartAutoClose(() => {
+        setOpen(false)
+        stopAutoClose()
       }, duration)
-    } else if (timer) {
-      clearTimeout(timer)
+    } else {
+      stopAutoClose()
     }
-    return () => clearTimeout(timer)
-  }, [duration, onClose, open, setState])
+    return () => stopAutoClose()
+  }, [duration, open, restartAutoClose, setObject, setOpen, stopAutoClose])
 
   useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
     if (matchSelector(selector, id)) {
-      setState({
-        open: true,
+      restartAutoClose()
+      setObject({
         children: message,
         ...restOptions,
       })
+      setOpen(true)
     }
   })
 
   useToastClose((selector) => {
     if (matchSelector(selector, id)) {
-      setState({
-        open: false,
-      })
+      setOpen(false)
     }
   })
 

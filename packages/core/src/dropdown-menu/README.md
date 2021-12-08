@@ -6,10 +6,8 @@
 
 ### 引入
 
-```js
+```tsx
 import { DropdownMenu } from "@taroify/core"
-// or
-import DropdownMenu from "@taroify/core/dropdown-menu"
 ```
 
 ## 代码演示
@@ -20,17 +18,14 @@ import DropdownMenu from "@taroify/core/dropdown-menu"
 import { DropdownMenu } from "@taroify/core"
 
 function BasicDropdownMenu() {
-  const [value, setValue] = useState()
-  const [option1, setOption1] = useState()
-  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu value={value} onChange={setValue}>
-      <DropdownMenu.Item value={option1} onChange={setOption1}>
+    <DropdownMenu>
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
       </DropdownMenu.Item>
-      <DropdownMenu.Item value={option2} onChange={setOption2}>
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
@@ -46,9 +41,10 @@ function BasicDropdownMenu() {
 
 ```tsx
 import { DropdownMenu } from "@taroify/core"
+import { Key } from "react"
 
 function DropdownMenuWithCustomContent() {
-  const [value, setValue] = useState()
+  const [value, setValue] = useState<Key | false>()
   const [option1, setOption1] = useState()
   const [switch1, setSwitch1] = useState(true)
   const [switch2, setSwitch2] = useState(false)
@@ -67,7 +63,7 @@ function DropdownMenuWithCustomContent() {
           <Switch size="24" checked={switch2} onChange={setSwitch2} />
         </Cell>
         <View style="padding: 5px 16px;">
-          <Button color="danger" block shape="round" onClick={() => setValue(undefined)}>
+          <Button color="danger" block shape="round" onClick={() => setValue(false)}>
             确认
           </Button>
         </View>
@@ -85,17 +81,14 @@ function DropdownMenuWithCustomContent() {
 import { DropdownMenu } from "@taroify/core"
 
 function DropdownMenuWithCustomColor() {
-  const [value, setValue] = useState()
-  const [option1, setOption1] = useState()
-  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu className="custom-color" value={value} onChange={setValue}>
-      <DropdownMenu.Item value={option1} onChange={setOption1}>
+    <DropdownMenu className="custom-color">
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
       </DropdownMenu.Item>
-      <DropdownMenu.Item value={option2} onChange={setOption2}>
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
@@ -107,19 +100,8 @@ function DropdownMenuWithCustomColor() {
 
 ```scss
 .custom-color {
-  .taroify-dropdown-menu-title--active {
-    .taroify-dropdown-menu-title__content {
-      color: #1989fa;
-    }
-  }
-
-  .taroify-dropdown-menu-option--active {
-    color: #1989fa;
-
-    .taroify-dropdown-menu-option__icon {
-      color: #1989fa;
-    }
-  }
+  --dropdown-menu-title-active-color: #1989fa;
+  --dropdown-menu-option-active-color: #1989fa;
 }
 ```
 
@@ -131,17 +113,14 @@ function DropdownMenuWithCustomColor() {
 import { DropdownMenu } from "@taroify/core"
 
 function UpDropdownMenu() {
-  const [value, setValue] = useState()
-  const [option1, setOption1] = useState()
-  const [option2, setOption2] = useState()
   return (
-    <DropdownMenu value={value} direction="up" onChange={setValue}>
-      <DropdownMenu.Item value={option1} onChange={setOption1}>
+    <DropdownMenu direction="up">
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
       </DropdownMenu.Item>
-      <DropdownMenu.Item value={option2} onChange={setOption2}>
+      <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
@@ -149,7 +128,6 @@ function UpDropdownMenu() {
     </DropdownMenu>
   )
 }
-
 ```
 
 ### 禁用菜单
@@ -158,9 +136,8 @@ function UpDropdownMenu() {
 import { DropdownMenu } from "@taroify/core"
 
 function DisabledDropdownMenu() {
-  const [value, setValue] = useState()
   return (
-    <DropdownMenu value={value} onChange={setValue}>
+    <DropdownMenu>
       <DropdownMenu.Item disabled>
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
@@ -182,14 +159,15 @@ function DisabledDropdownMenu() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 默认选中的 DropdownMenu.Item 的 标识 | _React.Key_ | - |
 | value | 当前选中的 DropdownMenu.Item 的 标识 | _React.Key_ | - |
 | direction | 菜单展开方向，可选值为`up` | _string_ | `down` |
-| zIndex | 菜单栏 z-index 层级 | _number \| string_ | `10` |
 
 ### DropdownMenu.Item Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 默认选中项对应的 value | _any_ | - |
 | value | 当前选中项对应的 value | _any_ | - |
 | title | 菜单项标题 | _string_ | 当前选中项文字 |
 | disabled | 是否禁用菜单 | _boolean_ | `false` |

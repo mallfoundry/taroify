@@ -1,62 +1,18 @@
 import { Grid, Sidebar, Toast } from "@taroify/core"
 import * as React from "react"
-import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
-function BasicSidebar() {
-  const [value, setValue] = useState(0)
-  return (
-    <Sidebar value={value} onChange={setValue}>
-      <Sidebar.Tab>标签名</Sidebar.Tab>
-      <Sidebar.Tab>标签名</Sidebar.Tab>
-      <Sidebar.Tab>标签名</Sidebar.Tab>
-    </Sidebar>
-  )
-}
-
-function DisableSidebar() {
-  const [value, setValue] = useState(0)
-  return (
-    <Sidebar value={value} onChange={setValue}>
-      <Sidebar.Tab>标签名</Sidebar.Tab>
-      <Sidebar.Tab disabled>标签名</Sidebar.Tab>
-      <Sidebar.Tab>标签名</Sidebar.Tab>
-    </Sidebar>
-  )
-}
-
-function BadgeSidebar() {
-  const [value, setValue] = useState(0)
-  return (
-    <Sidebar value={value} onChange={setValue}>
-      <Sidebar.Tab badge>标签名</Sidebar.Tab>
-      <Sidebar.Tab badge="5">标签名</Sidebar.Tab>
-      <Sidebar.Tab badge="20">标签名</Sidebar.Tab>
-    </Sidebar>
-  )
-}
-
 function EventSidebar() {
-  const [value, setValue] = useState(0)
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<ReactNode>()
-
-  function onChange(newValue: any, { children }: Sidebar.TabObject) {
-    setValue(newValue)
-    setOpen(true)
-    setMessage(children)
-  }
-
   return (
     <>
-      <Sidebar value={value} onChange={onChange}>
+      <Toast id="toast" />
+      <Sidebar onChange={(newValue, { children }: Sidebar.TabObject) => Toast.open(children)}>
         <Sidebar.Tab>标签名 1</Sidebar.Tab>
         <Sidebar.Tab>标签名 2</Sidebar.Tab>
         <Sidebar.Tab>标签名 3</Sidebar.Tab>
       </Sidebar>
-      <Toast open={open} children={message} onClose={() => setOpen(false)} />
     </>
   )
 }
@@ -67,17 +23,29 @@ export default function SidebarDemo() {
       <Grid columns={2} centered bordered={false}>
         <Grid.Item>
           <Block title="基础用法">
-            <BasicSidebar />
+            <Sidebar>
+              <Sidebar.Tab>标签名</Sidebar.Tab>
+              <Sidebar.Tab>标签名</Sidebar.Tab>
+              <Sidebar.Tab>标签名</Sidebar.Tab>
+            </Sidebar>
           </Block>
         </Grid.Item>
         <Grid.Item>
           <Block title="徽标提示">
-            <BadgeSidebar />
+            <Sidebar>
+              <Sidebar.Tab badge>标签名</Sidebar.Tab>
+              <Sidebar.Tab badge="5">标签名</Sidebar.Tab>
+              <Sidebar.Tab badge="20">标签名</Sidebar.Tab>
+            </Sidebar>
           </Block>
         </Grid.Item>
         <Grid.Item>
           <Block title="禁用选项">
-            <DisableSidebar />
+            <Sidebar>
+              <Sidebar.Tab>标签名</Sidebar.Tab>
+              <Sidebar.Tab disabled>标签名</Sidebar.Tab>
+              <Sidebar.Tab>标签名</Sidebar.Tab>
+            </Sidebar>
           </Block>
         </Grid.Item>
         <Grid.Item>

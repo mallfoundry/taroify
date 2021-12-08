@@ -1,19 +1,18 @@
 import { Cell, Notify } from "@taroify/core"
 import { ArrowRight } from "@taroify/~icons/src"
 import * as React from "react"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicNotify() {
   const [open, setOpen] = useState(false)
-
   return (
-    <Block variant="card" title="基础用法">
+    <>
       <Cell title="基础用法" clickable rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
       <Notify open={open} onClose={setOpen} children="通知内容" />
-    </Block>
+    </>
   )
 }
 
@@ -21,10 +20,11 @@ function CustomNotify() {
   const [options, setOptions] = useState<{
     open?: boolean
     duration?: number
+    children?: ReactNode
   }>({})
 
   return (
-    <Block title="自定义配置">
+    <>
       <Cell
         title="自定义颜色"
         clickable
@@ -32,6 +32,7 @@ function CustomNotify() {
         onClick={() => {
           setOptions({
             open: true,
+            children: "自定义颜色",
           })
         }}
       />
@@ -43,6 +44,7 @@ function CustomNotify() {
           setOptions({
             open: true,
             duration: 1000,
+            children: "自定义时长",
           })
         }
       />
@@ -53,16 +55,16 @@ function CustomNotify() {
           background: "#ffe1e1",
         }}
         duration={options.duration}
-        children="自定义内容"
+        children={options.children}
         onClose={() => setOptions({ open: false })}
       />
-    </Block>
+    </>
   )
 }
 
 function NotifyWithPresetColors() {
   return (
-    <Block variant="card" title="通知颜色">
+    <>
       <Notify id="notify" />
       <Cell
         title="主要通知"
@@ -88,16 +90,22 @@ function NotifyWithPresetColors() {
         rightIcon={<ArrowRight />}
         onClick={() => Notify.open({ color: "warning", message: "通知内容" })}
       />
-    </Block>
+    </>
   )
 }
 
 export default function NotifyDemo() {
   return (
     <Page title="Notify 消息提示" className="notify-demo">
-      <BasicNotify />
-      <NotifyWithPresetColors />
-      <CustomNotify />
+      <Block variant="card" title="基础用法">
+        <BasicNotify />
+      </Block>
+      <Block variant="card" title="通知颜色">
+        <NotifyWithPresetColors />
+      </Block>
+      <Block variant="card" title="自定义配置">
+        <CustomNotify />
+      </Block>
     </Page>
   )
 }

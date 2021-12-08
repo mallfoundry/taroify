@@ -26,28 +26,23 @@
   }
 
   &__loading {
+    position: absolute;
     top: 25%;
     left: 25%;
     width: 50%;
     height: 50%;
     line-height: 1;
-
-    .#{$component-prefix}loading__circular__item {
-      width: calc(100% - 6px);
-      height: calc(100% - 6px);
-      border-width: 2px;
-    }
   }
 
   &--checked {
-    background-color: var(--switch-on-background-color, $switch-on-background-color);
+    background-color: var(--switch-checked-background-color, $switch-checked-background-color);
 
     .#{$component-prefix}switch__node {
       transform: translateX(var(--switch-node-translate-x, $switch-node-translate-x));
     }
 
     .#{$component-prefix}switch__loading {
-      color: var(--switch-on-background-color, $switch-on-background-color);
+      color: var(--switch-loading-color, $switch-loading-color);
     }
   }
 

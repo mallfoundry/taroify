@@ -8,8 +8,6 @@
 
 ```tsx
 import { Swiper } from "@taroify/core"
-// or
-import Swiper from "@taroify/core/swiper"
 ```
 
 ## 代码演示
@@ -20,9 +18,8 @@ import Swiper from "@taroify/core/swiper"
 
 ```tsx
 function BasicSwiper() {
-  const [value, setValue] = useState(0)
   return (
-    <Swiper className="basic-swiper" autoplay={4000} value={value} onChange={setValue}>
+    <Swiper className="basic-swiper" autoplay={4000}>
       <Swiper.Indicator />
       <Swiper.Item>1</Swiper.Item>
       <Swiper.Item>2</Swiper.Item>
@@ -195,6 +192,7 @@ function SwiperWithCustomIndicator() {
 
 | 参数             | 说明                     | 类型               | 默认值    |
 | ---------------- | ------------------------ | ------------------ | --------- |
+| defaultValue     | 默认位置索引值           | _number_ | `0`       |
 | value            | 位置索引值           | _number_ | `0`       |
 | autoplay         | 自动轮播间隔，单位为 ms  | _number_ | -         |
 | duration         | 动画时长，单位为 ms      | _number_ | `500`     |

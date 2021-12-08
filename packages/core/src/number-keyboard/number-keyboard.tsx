@@ -118,15 +118,12 @@ function useNumberKeyboardChildren(
 export interface NumberKeyboardProps extends ViewProps {
   className?: string
   open?: boolean
-  value?: string
   title?: ReactNode
   extraKey?: ReactNode | [ReactNode, ReactNode]
   random?: boolean
   children?: ReactNode
 
   onKeyPress?: NumberKeyboardKeyOnPress
-
-  onChange?(value: string): void
 
   onBackspace?(): void
 

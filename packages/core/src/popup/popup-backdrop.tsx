@@ -13,12 +13,12 @@ export interface PopupBackdropProps extends ViewProps {
 }
 
 export default function PopupBackdrop(props: PopupBackdropProps) {
-  const { open: openProp = true, duration = 300, closeable = true, ...restProps } = props
-  const { open, onClose } = useContext(PopupContext)
+  const { open: openProp = true, duration, closeable = true, ...restProps } = props
+  const { open, duration: ctxDuration, onClose } = useContext(PopupContext)
   return (
     <SharedBackdrop
       open={openProp && open}
-      duration={duration}
+      duration={duration ?? ctxDuration}
       closeable={closeable}
       onClose={onClose}
       {...restProps}

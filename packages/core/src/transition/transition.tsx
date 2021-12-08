@@ -1,5 +1,6 @@
+import * as _ from "lodash"
 import * as React from "react"
-import { ReactElement, ReactNode, useMemo, useState } from "react"
+import { isValidElement, ReactElement, ReactNode, useMemo, useState } from "react"
 import { CSSTransition } from "react-transition-group"
 import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import { prefixClassname } from "../styles"
@@ -24,13 +25,15 @@ function isTransitionPreset(name?: string) {
   return name && TRANSITION_PRESETS.includes(name)
 }
 
-function elementStyle(children?: ReactNode) {
-  if (!React.isValidElement(children)) {
-    return {}
-  }
-  const element = children as ReactElement
-  const { style } = element.props
-  return style ?? {}
+function useElementStyle(children?: ReactNode) {
+  return useMemo(() => {
+    if (!isValidElement(children)) {
+      return {}
+    }
+    const element = children as ReactElement
+    const { style } = element.props
+    return style ?? {}
+  }, [children])
 }
 
 interface TransitionProps {
@@ -39,7 +42,8 @@ interface TransitionProps {
   appear?: boolean
   mountOnEnter?: boolean
   unmountOnExit?: boolean
-  duration?: number | { appear?: number; enter?: number; exit?: number }
+  timeout?: number | { appear?: number; enter?: number; exit?: number }
+  duration?: number
   children?: ReactNode
   onEnter?: EnterHandler<HTMLElement>
   onEntering?: EnterHandler<HTMLElement>
@@ -56,7 +60,8 @@ export default function Transition(props: TransitionProps) {
     appear = false,
     mountOnEnter = false,
     unmountOnExit,
-    duration = 300,
+    timeout = 300,
+    duration,
     children: childrenProp,
     onEnter,
     onEntering,
@@ -66,20 +71,26 @@ export default function Transition(props: TransitionProps) {
     onExited,
   } = props
   const children = useMemo(() => childrenProp, [childrenProp])
-  const childrenStyle = elementStyle(children)
+  const childrenStyle = useElementStyle(children)
   const transactionName = isTransitionPreset(name) ? prefixClassname(`transition-${name}`) : name
   const [enter, setEnter] = useState(false)
   const [exited, setExited] = useState(false)
+
+  const durationStyle = useMemo(
+    () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
+    [duration],
+  )
 
   return (
     <CSSTransition
       in={inProp}
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
-      timeout={duration}
+      timeout={timeout}
       appear={appear}
       classNames={transactionName}
       style={{
+        ...durationStyle,
         ...childrenStyle,
         display: enter && !exited ? "" : "none",
       }}

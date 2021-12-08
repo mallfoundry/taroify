@@ -1,15 +1,13 @@
 import { Badge, Tabbar, Toast } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 import * as React from "react"
-import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicTabbar() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={setValue}>
+    <Tabbar>
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
@@ -19,19 +17,18 @@ function BasicTabbar() {
 }
 
 function KeyTabbar() {
-  const [value, setValue] = useState("1")
   return (
-    <Tabbar value={value} onChange={setValue}>
-      <Tabbar.TabItem key="1" icon={<HomeOutlined />}>
+    <Tabbar defaultValue="1">
+      <Tabbar.TabItem value="1" icon={<HomeOutlined />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="2" icon={<Search />}>
+      <Tabbar.TabItem value="2" icon={<Search />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="3" icon={<FriendsOutlined />}>
+      <Tabbar.TabItem value="3" icon={<FriendsOutlined />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="4" icon={<SettingOutlined />}>
+      <Tabbar.TabItem value="4" icon={<SettingOutlined />}>
         标签
       </Tabbar.TabItem>
     </Tabbar>
@@ -39,9 +36,8 @@ function KeyTabbar() {
 }
 
 function BadgeTabbar() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={setValue}>
+    <Tabbar>
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem badge icon={<Search />}>
         标签
@@ -57,9 +53,8 @@ function BadgeTabbar() {
 }
 
 function TabbarWithCustomColor() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar className="custom-color" value={value} onChange={setValue}>
+    <Tabbar className="custom-color">
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
@@ -69,24 +64,15 @@ function TabbarWithCustomColor() {
 }
 
 function EventTabbar() {
-  const [value, setValue] = useState(0)
-  const [open, setOpen] = useState<boolean>(false)
-
   return (
     <>
-      <Tabbar
-        value={value}
-        onChange={(activeKey) => {
-          setValue(activeKey)
-          setOpen(true)
-        }}
-      >
+      <Toast id="toast" />
+      <Tabbar onChange={(value) => Toast.open(`标签 ${Number(value) + 1}`)}>
         <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
         <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
         <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
         <Tabbar.TabItem icon={<SettingOutlined />}>标签</Tabbar.TabItem>
       </Tabbar>
-      <Toast open={open} onClose={() => setOpen(false)} children={`标签${Number(value) + 1}`} />
     </>
   )
 }
@@ -97,7 +83,7 @@ export default function TabbarDemo() {
       <Block title="基础用法">
         <BasicTabbar />
       </Block>
-      <Block title="通过标识匹配">
+      <Block title="通过 value 匹配">
         <KeyTabbar />
       </Block>
       <Block title="徽标提示">

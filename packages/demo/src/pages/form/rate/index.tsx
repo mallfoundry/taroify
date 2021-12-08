@@ -1,86 +1,36 @@
 import { Rate } from "@taroify/core"
 import { Like, LikeOutlined, Star } from "@taroify/icons"
 import * as React from "react"
-import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
-
-function BasicRate() {
-  const [value, setValue] = useState(3)
-  return <Rate value={value} onChange={setValue} />
-}
-
-function CustomIconRate() {
-  const [value, setValue] = useState(3)
-  return <Rate icon={<Like />} emptyIcon={<LikeOutlined />} value={value} onChange={setValue} />
-}
-
-function CustomStyledRate() {
-  const [value, setValue] = useState(3)
-  return (
-    <Rate
-      className="custom-color"
-      allowHalf
-      size={25}
-      emptyIcon={<Star />}
-      value={value}
-      onChange={setValue}
-    />
-  )
-}
-
-function HalfRate() {
-  const [value, setValue] = useState(3)
-  return <Rate allowHalf value={value} onChange={setValue} />
-}
-
-function Count6Rate() {
-  const [value, setValue] = useState(3)
-  return <Rate count={6} value={value} onChange={setValue} />
-}
-
-function DisabledRate() {
-  const [value, setValue] = useState(3)
-  return <Rate disabled value={value} onChange={setValue} />
-}
-
-function ReadonlyRate() {
-  const [value, setValue] = useState(3)
-  return <Rate readonly value={value} onChange={setValue} />
-}
-
-function ReadonlyHalfRate() {
-  const [value, setValue] = useState(3.3)
-  return <Rate readonly allowHalf value={value} onChange={setValue} />
-}
 
 export default function RateDemo() {
   return (
     <Page title="Rate 评分" className="rate-demo">
       <Block title="基础用法">
-        <BasicRate />
+        <Rate defaultValue={3} />
       </Block>
       <Block title="自定义图标">
-        <CustomIconRate />
+        <Rate defaultValue={3} icon={<Like />} emptyIcon={<LikeOutlined />} />
       </Block>
       <Block title="自定义样式">
-        <CustomStyledRate />
+        <Rate className="custom-color" defaultValue={3} allowHalf size={25} emptyIcon={<Star />} />
       </Block>
       <Block title="半星">
-        <HalfRate />
+        <Rate defaultValue={3} allowHalf />
       </Block>
       <Block title="自定义数量">
-        <Count6Rate />
+        <Rate defaultValue={3} count={6} />
       </Block>
       <Block title="禁用状态">
-        <DisabledRate />
+        <Rate defaultValue={3} disabled />
       </Block>
       <Block title="只读状态">
-        <ReadonlyRate />
+        <Rate defaultValue={3} readonly />
       </Block>
       <Block title="只读状态显示小数">
-        <ReadonlyHalfRate />
+        <Rate defaultValue={3.3} readonly allowHalf />
       </Block>
     </Page>
   )

@@ -27,7 +27,7 @@ import Popup from "@taroify/core/popup"
 通过 `placement` 属性设置弹出位置，默认居中弹出，可以设置为 `top`、`bottom`、`left`、`right`。
 
 ```tsx
-<Popup open placement="top" style={{ height: '30%' }} />
+<Popup defaultOpen placement="top" style={{ height: '30%' }} />
 ```
 
 ### 关闭图标
@@ -35,12 +35,12 @@ import Popup from "@taroify/core/popup"
 设置 `Popup.Close` 属性后，会在弹出层的右上角显示关闭图标，并且可以通过 `closeIcon` 属性自定义图标。
 
 ```tsx
-<Popup open placement="bottom" style={{ height: '30%' }}>
+<Popup defaultOpen placement="bottom" style={{ height: '30%' }}>
   <Popup.Close />
 </Popup>
 
 <!-- 自定义图标 -->
-<Popup open placement="bottom" style={{ height: '30%' }}>
+<Popup defaultOpen placement="bottom" style={{ height: '30%' }}>
   <Popup.Close>
     <Cross />
   </Popup.Close>
@@ -61,6 +61,7 @@ import Popup from "@taroify/core/popup"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultOpen | 默认是否显示弹出层 | _boolean_ | `false` |
 | open | 是否显示弹出层 | _boolean_ | `false` |
 | placement | 弹出位置，可选值为 `top` `bottom` `right` `left` | _string_ | `center` |
 | duration | 动画时长，单位毫秒 | _number \| string_ | `300` |

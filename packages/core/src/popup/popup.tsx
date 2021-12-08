@@ -4,9 +4,11 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, forwardRef, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
+import { useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
@@ -66,45 +68,56 @@ function usePopupChildren(children?: ReactNode): PopupChildren {
 }
 
 export interface PopupProps extends ViewProps {
+  defaultOpen?: boolean
   open?: boolean
-  transaction?: string
   placement?: PopupPlacement
   rounded?: boolean
-  duration?: number | { appear?: number; enter?: number; exit?: number }
   children?: ReactNode
 
+  duration?: number
   mountOnEnter?: boolean
-
-  onOpen?(opened: boolean): void
+  transaction?: string
+  transactionTimeout?: number | { appear?: number; enter?: number; exit?: number }
+  transitionAppear?: boolean
 
   onClose?(opened: boolean): void
 
-  onClosed?(): void
+  onTransitionEnter?: EnterHandler<HTMLElement>
+  onTransitionEntered?: EnterHandler<HTMLElement>
+  onTransitionExited?: ExitHandler<HTMLElement>
 }
 
 const Popup = forwardRef<any, PopupProps>((props, ref) => {
   const {
     className,
-    open,
-    transaction,
+    defaultOpen,
+    open: openProp,
     placement,
     rounded = false,
-    duration,
     children,
+    duration,
+    transaction,
+    transactionTimeout,
+    transitionAppear = true,
     mountOnEnter = true,
-    onOpen,
     onClose,
-    onClosed,
+    onTransitionEnter,
+    onTransitionEntered,
+    onTransitionExited,
     ...restProps
   } = props
 
+  const { value: open } = useValue({ defaultValue: defaultOpen, value: openProp })
+
   const transactionName = transaction ?? toTransactionName(placement)
+
   const { backdrop = <PopupBackdrop />, close, content } = usePopupChildren(children)
 
   return (
     <PopupContext.Provider
       value={{
         open,
+        duration,
         placement,
         onClose,
       }}
@@ -112,12 +125,14 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
       {backdrop}
       <Transition
         in={open}
-        appear
-        mountOnEnter={mountOnEnter}
+        duration={transactionName === "fade" ? undefined : duration}
         name={transactionName}
-        duration={duration}
-        onEnter={() => onOpen?.(true)}
-        onExited={onClosed}
+        appear={transitionAppear}
+        timeout={transactionTimeout}
+        mountOnEnter={mountOnEnter}
+        onEnter={onTransitionEnter}
+        onEntered={onTransitionEntered}
+        onExited={onTransitionExited}
       >
         <View
           ref={ref}

@@ -15,6 +15,7 @@ import {
 
 interface UseDatetimePicker {
   type?: DatetimePickerType
+  defaultValue?: Date
   value?: Date
   min?: Date
   max?: Date
@@ -29,7 +30,8 @@ const defaultFormatter = (type: DatetimePickerColumnType, value: string) => valu
 
 export function useDatetimePicker(options: UseDatetimePicker = {}) {
   const {
-    value = new Date(),
+    defaultValue = undefined,
+    value = undefined,
     min: minDate = MIN_DATE,
     max: maxDate = MAX_DATE,
     type = "datetime",
@@ -38,6 +40,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     formatter = defaultFormatter,
   } = options
 
+  const clampDefaultValue = clampDate(defaultValue, minDate, maxDate)
   const clampValue = clampDate(value, minDate, maxDate)
 
   const ranges = useDatetimeRanges(clampValue, minDate, maxDate, type, fields)
@@ -106,7 +109,10 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     return date
   }
 
-  function toValue(date: Date) {
+  function toValue(date: Date | undefined) {
+    if (_.isUndefined(date)) {
+      return date
+    }
     const [year, month, day, hour, minute, second] = getDatetime(date)
     return _.map(columns, (column) => {
       switch (column.type) {
@@ -130,6 +136,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
 
   return {
     toDate,
+    defaultValue: toValue(clampDefaultValue),
     value: toValue(clampValue),
     columns,
   }
@@ -138,6 +145,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
 export interface DatetimePickerProps extends ViewProps {
   type?: DatetimePickerType
   fields?: DatetimePickerColumnType[]
+  defaultValue?: Date
   value?: Date
   min?: Date
   max?: Date
@@ -168,6 +176,7 @@ function DatetimePicker(props: DatetimePickerProps) {
     formatter,
     min,
     max,
+    defaultValue: defaultValueProp,
     value: valueProp,
     siblingCount,
     children,
@@ -177,7 +186,8 @@ function DatetimePicker(props: DatetimePickerProps) {
     ...restProps
   } = props
 
-  const { value, columns, toDate } = useDatetimePicker({
+  const { defaultValue, value, columns, toDate } = useDatetimePicker({
+    defaultValue: defaultValueProp,
     value: valueProp,
     min,
     max,
@@ -193,6 +203,7 @@ function DatetimePicker(props: DatetimePickerProps) {
       readonly={readonly}
       loading={loading}
       siblingCount={siblingCount}
+      defaultValue={defaultValue}
       value={value}
       onChange={(aValue) => onChange?.(toDate(aValue))}
       onConfirm={(aValue) => onConfirm?.(toDate(aValue))}

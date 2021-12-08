@@ -8,24 +8,19 @@
 
 ```ts
 import { Tabbar } from "@taroify/core"
-// or
-import Tabbar from "@taroify/core/tabbar"
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-`value` 默认绑定选中标签的索引值，通过 `onChange` 事件修改索引值即可切换选中的标签。
-
 ```tsx
 import { Tabbar } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 
 function BasicTabbar() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={setValue}>
+    <Tabbar>
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
@@ -33,36 +28,37 @@ function BasicTabbar() {
     </Tabbar>
   )
 }
+
 ```
 
 ### 通过标识匹配
 
-在标签指定 `key` 属性的情况下，`value` 的值为当前标签的 `key`。
+在标签 `Tabbar.TabItem` 指定 `value` 属性的情况下，`value` 的值为当前标签的 `value`。
 
 ```tsx
 import { Tabbar } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 
 function KeyTabbar() {
-  const [value, setValue] = useState("1")
   return (
-    <Tabbar value={value} onChange={setValue}>
-      <Tabbar.TabItem key="1" icon={<HomeOutlined />}>
+    <Tabbar defaultValue="1">
+      <Tabbar.TabItem value="1" icon={<HomeOutlined />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="2" icon={<Search />}>
+      <Tabbar.TabItem value="2" icon={<Search />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="3" icon={<FriendsOutlined />}>
+      <Tabbar.TabItem value="3" icon={<FriendsOutlined />}>
         标签
       </Tabbar.TabItem>
-      <Tabbar.TabItem key="4" icon={<SettingOutlined />}>
+      <Tabbar.TabItem value="4" icon={<SettingOutlined />}>
         标签
       </Tabbar.TabItem>
     </Tabbar>
   )
 }
 ```
+
 ### 徽标提示
 
 设置 `badge` 属性为 `true` 后，会在图标右上角展示一个小红点；设置 `badge` 属性为 `number` 后，会在图标右上角展示相应的徽标。
@@ -72,9 +68,8 @@ import { Badge, Tabbar } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 
 function BadgeTabbar() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar value={value} onChange={setValue}>
+    <Tabbar>
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem badge icon={<Search />}>
         标签
@@ -99,9 +94,8 @@ import { Tabbar } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
 
 function TabbarWithCustomColor() {
-  const [value, setValue] = useState(0)
   return (
-    <Tabbar className="custom-color" value={value} onChange={setValue}>
+    <Tabbar className="custom-color">
       <Tabbar.TabItem icon={<HomeOutlined />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<Search />}>标签</Tabbar.TabItem>
       <Tabbar.TabItem icon={<FriendsOutlined />}>标签</Tabbar.TabItem>
@@ -113,13 +107,8 @@ function TabbarWithCustomColor() {
 
 ```scss
 .custom-color {
-  .taroify-tabbar-item {
-    color: #000;
-
-    &--active {
-      color: #ee0a24;
-    }
-  }
+  --tabbar-item-color: #000;
+  --tabbar-item-active-color: #ee0a24;
 }
 ```
 
@@ -129,11 +118,11 @@ function TabbarWithCustomColor() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultValue | 默认选中标签的标识或索引值 | _any_ | `0` |
 | value | 当前选中标签的标识或索引值 | _any_ | `0` |
 | bordered | 是否显示外边框 | _boolean_ | `false` |
 | fixed | 是否固定在底部 | _boolean_ | `false` |
 | placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
-| zIndex | 元素 z-index | _number \| string_ | `1` |
 
 ### Tabbar Events
 
@@ -145,7 +134,7 @@ function TabbarWithCustomColor() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| key | 标签标识，作为匹配的标识符 | _number \| string_ | 当前标签的索引值 |
+| value | 标签值，作为匹配的标识符 | _any_ | - |
 | icon | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
 | badge | 图标右上角徽标的内容 | _boolean \| number \| string \| Badge_ | - |
 | children | 标签名 | _ReactNode_ | - |
