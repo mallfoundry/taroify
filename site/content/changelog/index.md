@@ -12,6 +12,69 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.0
+
+`2021-12-08`
+
+**Feature**
+
+- Popup
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Toast
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Cascader
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Calendar
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Checkbox
+  - 新增 defaultChecked 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- DatetimePicker
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Picker
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Radio
+  - 新增 defaultChecked 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Rate
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Slider
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Stepper
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Switch
+  - 新增 defaultChecked 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Uploader
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- ActionSheet
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Dialog
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- DropdownMenu
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Notify
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Backdrop
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- ShareSheet
+  - 新增 defaultOpen 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Collapse
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Collapse
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Steps
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Swiper
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Sidebar
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Tabs
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- Tabbar
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+- TreeSelect
+  - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
+
+
+
 ### v0.0.19-alpha.3
 
 `2021-12-04`
