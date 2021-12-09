@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.1
+
+`2021-12-09`
+
+**Bug Fixes**
+
+- Dialog
+  - 修复点击确认按钮导致自动关闭 [#170](https://github.com/mallfoundry/taroify/issues/170) [#169](https://github.com/mallfoundry/taroify/pull/169)
+
 ### v0.0.20-alpha.0
 
 `2021-12-08`
