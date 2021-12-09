@@ -129,7 +129,7 @@ function Dialog(props: DialogProps) {
     setObject,
   } = useObject<DialogProps & DialogOptions>(props)
 
-  const { value: open = false } = useValue({
+  const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,
     value: openProp,
   })
@@ -152,15 +152,16 @@ function Dialog(props: DialogProps) {
     if (className?.includes(prefixClassname("dialog__cancel"))) {
       onCancel?.()
     }
-    setObject({ open: false })
+
+    setOpen(false)
   }
 
   const handleClose = useCallback(
     (opened: boolean) => {
       onClose?.(opened)
-      setObject({ open: false })
+      setOpen(false)
     },
-    [onClose, setObject],
+    [onClose, setOpen],
   )
 
   useDialogOpen(
@@ -193,10 +194,10 @@ function Dialog(props: DialogProps) {
           children.push(<DialogActions key={2} children={actions} />)
         }
         setObject({
-          open: true,
           children,
           ...restOptions,
         })
+        setOpen(true)
       }
     },
   )
@@ -204,9 +205,7 @@ function Dialog(props: DialogProps) {
   useDialogCancel((selector) => {
     if (matchSelector(selector, id)) {
       onCancelRef.current?.()
-      setObject({
-        open: false,
-      })
+      setOpen(false)
     }
   })
 
