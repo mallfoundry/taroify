@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.2
+
+`2021-12-09`
+
+**Bug Fixes**
+
+- Pagination
+  - 修复页码出现负数的问题 [#171](https://github.com/mallfoundry/taroify/pull/171) [@zjwshisb](https://github.com/zjwshisb)
+
 ### v0.0.20-alpha.1
 
 `2021-12-09`
