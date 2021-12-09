@@ -48,7 +48,7 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
   let end = start + siblingRange - 1
   if (end > count) {
     end = count
-    start = end - siblingRange + 1
+    start = Math.max(end - siblingRange + 1, 1)
   }
   const hasPrevious = current > 1
   const hasStartEllipsis = start > 1
