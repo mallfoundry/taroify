@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { cancelRaf, raf } from "../utils/raf"
 import { CurrentTime } from "./count-down.shared"
 
@@ -28,23 +28,22 @@ function isSameSecond(time1: number, time2: number): boolean {
   return Math.floor(time1 / 1000) === Math.floor(time2 / 1000)
 }
 
-interface UseCountDownOptions {
+export interface UseCountDownOptions {
   time: number
-  autostart?: boolean
   millisecond?: boolean
   onChange?: (current: CurrentTime) => void
   onFinish?: () => void
 }
 
 export function useCountDown(options: UseCountDownOptions) {
-  const { time, autostart = false, millisecond, onChange, onFinish } = options
+  const { time, millisecond, onChange, onFinish } = options
 
   const rafIdRef = useRef<number>()
   const endTimeRef = useRef<number>(0)
   const countingRef = useRef<boolean>()
 
   // const remain = use(options.time)
-  const [remain, setRemain] = useState(options.time)
+  const [remain, setRemain] = useState(time)
 
   const current = useMemo(() => parseTime(remain), [remain])
 
@@ -60,11 +59,9 @@ export function useCountDown(options: UseCountDownOptions) {
   const nextRemain = useCallback(
     (value: number) => {
       setRemain(value)
-      if (value === 0) {
-        pause()
-      }
       onChange?.(current)
       if (value === 0) {
+        pause()
         onFinish?.()
       }
     },
@@ -117,20 +114,12 @@ export function useCountDown(options: UseCountDownOptions) {
   }, [remain, tick])
 
   const reset = useCallback(
-    (totalTime: number = time) => {
+    (totalTime: number) => {
       pause()
       nextRemain(totalTime)
     },
-    [nextRemain, time],
+    [nextRemain],
   )
-
-  useEffect(() => pause, [])
-
-  useEffect(() => {
-    if (autostart) {
-      start()
-    }
-  }, [autostart, start])
 
   return {
     start,
