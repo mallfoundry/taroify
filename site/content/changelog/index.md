@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.3
+
+`2021-12-11`
+
+**Feature**
+
+- Styles
+  - 新增赋值 $hd 默认变量 [#173](https://github.com/mallfoundry/taroify/issues/173) [#174](https://github.com/mallfoundry/taroify/pull/174)
+
 ### v0.0.20-alpha.2
 
 `2021-12-09`
@@ -90,8 +99,6 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
 - TreeSelect
   - 新增 defaultValue 属性 [#86](https://github.com/mallfoundry/taroify/issues/86) [#165](https://github.com/mallfoundry/taroify/pull/165)
-
-
 
 ### v0.0.19-alpha.3
 
