@@ -47,7 +47,7 @@ const CountDown = forwardRef<CountDownInstance, CountDownProps>((props, ref) => 
     if (autostart) {
       start()
     }
-  }, [])
+  }, [time, autostart])
 
   useEffect(() => {
     resetTime()
