@@ -1,7 +1,7 @@
 import { CountDown, Grid, Toast } from "@taroify/core"
+import { CountDownInstance } from "@taroify/core/count-down/count-down"
 import { PauseCircleOutlined, PlayCircleOutlined, Replay } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { CountDownInstance } from "packages/core/src/count-down/count-down"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Block from "../../../components/block"
