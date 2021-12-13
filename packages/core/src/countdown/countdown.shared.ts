@@ -1,5 +1,13 @@
 import * as _ from "lodash"
 
+export interface CountdownInstance {
+  start(): void
+  pause(): void
+  stop(): void
+  restart(): void
+  reset(): void
+}
+
 export function padZero(num: number | string, targetLength = 2): string {
   return _.padStart(_.toString(num), targetLength, "0")
 }

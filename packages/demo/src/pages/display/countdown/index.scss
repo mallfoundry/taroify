@@ -21,13 +21,13 @@
     border-radius: 4px * $hd;
   }
 
-  .manual-control {
+  .manual-control-block {
 
     .#{$demo-prefix}block__content {
       padding: 0;
     }
 
-    .#{$component-prefix}count-down {
+    .manual-control {
       margin: 0 0 16px * $hd 16px * $hd;
     }
   }

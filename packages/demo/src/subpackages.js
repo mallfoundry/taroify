@@ -207,9 +207,9 @@ const subpackages = [
         path: "collapse/index",
       },
       {
-        title: "CountDown 倒计时",
-        name: "CountDown",
-        path: "count-down/index",
+        title: "Countdown 倒计时",
+        name: "Countdown",
+        path: "countdown/index",
       },
       {
         title: "Divider 分割线",
