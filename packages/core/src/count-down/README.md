@@ -8,19 +8,17 @@
 
 ```tsx
 import { CountDown } from "@taroify/core"
-import { useCountDown } from "@taroify/core/count-down"
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-使用 `useCountDown` 获得倒计时 `current` 对象，`time` 属性表示倒计时总时长，单位为毫秒。
+`time` 属性表示倒计时总时长，单位为毫秒。
 
 ```tsx
 function CountDownExemple() {
-  const { current } = useCountDown({ autostart: true, time: 30 * 60 * 60 * 1000 })
-  return <CountDown current={current} />
+  return <CountDown time={30 * 60 * 60 * 1000} />
 }
 ```
 
@@ -30,8 +28,7 @@ function CountDownExemple() {
 
 ```tsx
 function CountDownExemple() {
-  const { current } = useCountDown({ autostart: true, time: 30 * 60 * 60 * 1000 })
-  return <CountDown current={current} format="DD 天 HH 时 mm 分 ss 秒" />
+  return <CountDown time={30 * 60 * 60 * 1000} format="DD 天 HH 时 mm 分 ss 秒" />
 }
 ```
 
@@ -41,12 +38,7 @@ function CountDownExemple() {
 
 ```tsx
 function CountDownExemple() {
-  const { current } = useCountDown({
-    autostart: true,
-    millisecond: true,
-    time: 30 * 60 * 60 * 1000,
-  })
-  return <CountDown current={current} format="HH:mm:ss:SS" />
+  return <CountDown millisecond time={30 * 60 * 60 * 1000} format="HH:mm:ss:SS" />
 }
 ```
 
@@ -56,17 +48,17 @@ function CountDownExemple() {
 
 ```tsx
 function CountDownExemple() {
-  const { current } = useCountDown({
-    millisecond: true,
-    time: 30 * 60 * 60 * 1000,
-  })
   return (
-    <CountDown>
-      <View className="block">{current.hours}</View>
-      <View className="colon">:</View>
-      <View className="block">{current.minutes}</View>
-      <View className="colon">:</View>
-      <View className="block">{current.seconds}</View>
+    <CountDown millisecond time={30 * 60 * 60 * 1000}>
+      {(current) => (
+        <>
+          <View className="block">{current.hours}</View>
+          <View className="colon">:</View>
+          <View className="block">{current.minutes}</View>
+          <View className="colon">:</View>
+          <View className="block">{current.seconds}</View>
+        </>
+      )}
     </CountDown>
   )
 }
@@ -97,22 +89,32 @@ function CountDownExemple() {
 ```tsx
 function CountDownExemple() {
   const [toastOpen, setToastOpen] = useState(false)
-  const { current, start, pause, reset } = useCountDown({
-    autostart: false,
-    millisecond: true,
-    time: 3000,
-    onFinish: () => setToastOpen(true),
-  })
+  const countRef = useRef<CountDownInstance>(null)
   return (
     <>
       <Toast open={toastOpen} onClose={() => setToastOpen(false)}>
         倒计时结束
       </Toast>
-      <CountDown current={current} format="ss:SSS" />
+      <CountDown
+        ref={countRef}
+        onFinish={() => {
+          setToastOpen(true)
+        }}
+        time={30000}
+        format="ss:SSS"
+      />
       <Grid columns={3} clickable>
-        <Grid.Item icon={<PlayCircleOutlined />} text="开始" onClick={start} />
-        <Grid.Item icon={<PauseCircleOutlined />} text="暂停" onClick={pause} />
-        <Grid.Item icon={<Replay />} text="重置" onClick={() => reset()} />
+        <Grid.Item
+          icon={<PlayCircleOutlined />}
+          text="开始"
+          onClick={() => countRef.current?.start()}
+        />
+        <Grid.Item
+          icon={<PauseCircleOutlined />}
+          text="暂停"
+          onClick={() => countRef.current?.pause()}
+        />
+        <Grid.Item icon={<Replay />} text="重置" onClick={() => countRef.current?.reset()} />
       </Grid>
     </>
   )
@@ -123,10 +125,14 @@ function CountDownExemple() {
 
 ### Props
 
-| 参数        | 说明                 | 类型               | 默认值     |
-| ----------- | -------------------- | ------------------ | ---------- |
-| time        | 倒计时时长，单位毫秒 | _number \| string_ | `0`        |
-| format      | 时间格式             | _string_           | `HH:mm:ss` |
+| 参数   | 说明                 | 类型               | 默认值     |
+| ------ | -------------------- | ------------------ | ---------- |
+| time   | 倒计时时长，单位毫秒  | _number_ | `0`        |
+| format | 时间格式             | _string_           | `HH:mm:ss` |
+| autostart   | 是否自动开始倒计时   | _boolean_                            | `true`     |
+| millisecond | 是否开启毫秒级渲染   | _boolean_                            | `false`    |
+| onChange    | 倒计时变化时触发     | _(currentTime: CurrentTime) => void_ | -          |
+| onFinish    | 倒计时结束时触发     | _() => void_                         | -          |
 
 ### format 格式
 
@@ -151,21 +157,12 @@ function CountDownExemple() {
 | seconds      | 剩余秒数               | _number_ |
 | milliseconds | 剩余毫秒               | _number_ |
 
-### useCountDown Options
+### 方法
 
-| 参数        | 说明                 | 类型               | 默认值     |
-| ----------- | -------------------- | ------------------ | ---------- |
-| time        | 倒计时时长，单位毫秒 | _number \| string_ | `0`        |
-| format      | 时间格式             | _string_         | `HH:mm:ss` |
-| autostart   | 是否自动开始倒计时   | _boolean_          | `true`     |
-| millisecond | 是否开启毫秒级渲染   | _boolean_          | `false`    |
-| onChange    | 倒计时变化时触发     | _(currentTime: CurrentTime) => void_ | -     |
-| onFinish    | 倒计时结束时触发    | _() => void_        | - |
+通过 ref 可以获取到 CountDown 实例并调用实例方法。
 
-### useCountDown Hook
-
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| start | 开始倒计时 | - | - |
-| pause | 暂停倒计时 | - | - |
-| reset | 重设倒计时，若 `autostart` 为 `true`，重设后会自动开始倒计时 | - | - |
+| 方法名 | 说明                                                         | 参数 | 返回值 |
+| ------ | ------------------------------------------------------------ | ---- | ------ |
+| start  | 开始倒计时                                                   | -    | -      |
+| pause  | 暂停倒计时                                                   | -    | -      |
+| reset  | 重设倒计时，若 `autostart` 为 `true`，重设后会自动开始倒计时 | -    | -      |
