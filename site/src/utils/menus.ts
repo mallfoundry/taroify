@@ -187,8 +187,8 @@ const menus = [
         to: "/components/collapse/",
       },
       {
-        title: "CountDown 倒计时",
-        to: "/components/count-down/",
+        title: "Countdown 倒计时",
+        to: "/components/countdown/",
       },
       {
         title: "Divider 分割线",
