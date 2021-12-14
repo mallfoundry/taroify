@@ -34,7 +34,7 @@ function Badge(props: BadgeProps): JSX.Element {
       <>
         {!isIcon && children}
         {noneChildren && !dot && content}
-        {hasChildren && (dot || content) && (
+        {hasChildren && (dot || (content || content !== 0) ) && (
           <View
             className={classNames(
               prefixClassname("badge"),
