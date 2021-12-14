@@ -19,8 +19,10 @@ function Badge(props: BadgeProps): JSX.Element {
   const isIcon = useMemo(() => isIconElement(children), [children])
   const hasChildren = children !== undefined
   const noneChildren = children === undefined
-  const content = _.isNumber(contentProp) && _.gt(contentProp, max) ? `${max}+` : contentProp
-
+  let content = _.isNumber(contentProp) && _.gt(contentProp, max) ? `${max}+` : contentProp
+  if (content === 0) {
+    content = "0"
+  }
   return cloneIconElement(isIcon ? children : <View />, {
     className: classNames(
       {
