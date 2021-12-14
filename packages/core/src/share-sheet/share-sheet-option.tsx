@@ -1,6 +1,6 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
+// import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -14,7 +14,7 @@ import {
   useMemo,
 } from "react"
 import Image from "../image"
-import Sheet from "../sheet"
+// import Sheet from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
@@ -55,7 +55,7 @@ function useShareSheetOptionIcon(node?: ReactNode) {
   return useMemo(() => renderShareSheetOptionIcon(node), [node])
 }
 
-interface ShareSheetOptionProps extends ViewProps {
+interface ShareSheetOptionProps extends TaroButtonProps {
   className?: string
   style?: CSSProperties
   loading?: boolean
@@ -66,12 +66,13 @@ interface ShareSheetOptionProps extends ViewProps {
 }
 
 export function ShareSheetOption(props: ShareSheetOptionProps) {
-  const { className, loading, disabled, icon, name, description, onClick, ...restProps } = props
+  const { className, loading, disabled, icon, name, description, onClick, ...restProps } =
+    props
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
   return (
-    <Sheet.Item
+    <TaroButton
       className={classNames(prefixClassname("share-sheet__option"), className)}
       loading={loading}
       disabled={loading}
@@ -95,7 +96,7 @@ export function ShareSheetOption(props: ShareSheetOptionProps) {
           children={description}
         />
       )}
-    </Sheet.Item>
+    </TaroButton>
   )
 }
 
