@@ -6,8 +6,6 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
-
 ```tsx
 import { SwipeCell } from "@taroify/core"
 // or
@@ -94,6 +92,8 @@ import SwipeCell from "@taroify/core/swipe-cell"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| defaultOpen | 默认是否打开滑动单元格，可选值：`left` `right` `outside`  | _string_ | - |
+| open | 是否打开滑动单元格，可选值：`left` `right` `outside`  | _string_ | - |
 | disabled | 是否禁用滑动 | _boolean_ | `false` |
 | stopPropagation | 是否阻止滑动事件冒泡 | _boolean_ | `false` |
 
@@ -101,5 +101,5 @@ import SwipeCell from "@taroify/core/swipe-cell"
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| open | 打开时触发 | _{ position: 'left' \| 'right' }_ |
-| close | 关闭时触发 | _{ position: 'left' \| 'right' \| 'cell' \| 'outside' }_ |
+| onOpen | 打开时触发 | _position: 'left' \| 'right'_ |
+| onClose | 关闭时触发 | _position: 'left' \| 'right' \| 'cell' \| 'outside' _ |
