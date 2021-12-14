@@ -3,10 +3,10 @@
 .#{$component-prefix}popup {
   position: fixed;
   z-index: var(--popup-z-index, $popup-z-index);
-  background: var(--popup-background-color, $popup-background-color);
-  transition: var(--popup-transition, $popup-transition);
   max-height: 100%;
   overflow-y: auto;
+  background: var(--popup-background-color, $popup-background-color);
+  transition: var(--popup-transition, $popup-transition);
   -webkit-overflow-scrolling: touch;
 
   &--center {
