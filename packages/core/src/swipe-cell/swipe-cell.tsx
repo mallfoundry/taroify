@@ -1,6 +1,5 @@
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -13,23 +12,22 @@ import {
   ReactElement,
   ReactNode,
   useCallback,
-  useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react"
+import { useRenderedEffect } from "../hooks"
 import { prefixClassname } from "../styles"
+import { inBrowser } from "../utils/base"
 import { preventDefault } from "../utils/dom/event"
 import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
+import { fulfillPromise } from "../utils/promisify"
+import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
-enum SwipeCellPosition {
-  Left = "left",
-  Right = "right",
-  Cell = "cell",
-  Outside = "outside",
-}
+type SwipeCellPosition = "left" | "right" | "cell" | "outside"
 
 interface SwipeCellChildren {
   left?: ReactNode
@@ -43,61 +41,69 @@ function useSwipeCellChildren(
   rightRef?: LegacyRef<typeof View | undefined>,
   handleClick?: (position: SwipeCellPosition, stop?: boolean) => void,
 ): SwipeCellChildren {
-  const __children__: SwipeCellChildren = {
-    left: undefined,
-    content: [],
-    right: undefined,
-  }
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      const elementType = element.type
-      if (elementType === SwipeCellActions) {
-        const { props } = element
-        const { side, onClick } = props
-        if (side === SwipeCellPosition.Left) {
-          __children__.left = cloneElement(element, {
-            ...props,
-            ref: leftRef,
-            onClick: (event: ITouchEvent) => {
-              onClick?.(event)
-              handleClick?.(SwipeCellPosition.Left, true)
-            },
-          })
-        } else if (side === SwipeCellPosition.Right) {
-          __children__.right = cloneElement(element, {
-            ...props,
-            ref: rightRef,
-            onClick: (event: ITouchEvent) => {
-              onClick?.(event)
-              handleClick?.(SwipeCellPosition.Right, true)
-            },
-          })
+  return useMemo(() => {
+    const __children__: SwipeCellChildren = {
+      left: undefined,
+      content: [],
+      right: undefined,
+    }
+    Children.forEach(children, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        const elementType = element.type
+        if (elementType === SwipeCellActions) {
+          const { props } = element
+          const { side, onClick } = props
+          if (side === "left") {
+            __children__.left = cloneElement(element, {
+              ...props,
+              ref: leftRef,
+              onClick: (event: ITouchEvent) => {
+                onClick?.(event)
+                handleClick?.("left", true)
+              },
+            })
+          } else if (side === "right") {
+            __children__.right = cloneElement(element, {
+              ...props,
+              ref: rightRef,
+              onClick: (event: ITouchEvent) => {
+                onClick?.(event)
+                handleClick?.("right", true)
+              },
+            })
+          }
+        } else {
+          __children__.content?.push(element)
         }
       } else {
-        __children__.content?.push(element)
+        __children__.content?.push(child)
       }
-    } else {
-      __children__.content?.push(child)
-    }
-  })
+    })
 
-  return __children__
+    return __children__
+  }, [children, handleClick, leftRef, rightRef])
 }
 
 export interface SwipeCellProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  defaultOpen?: SwipeCellPosition
+  open?: SwipeCellPosition
   disabled?: boolean
   stopPropagation?: boolean
   children?: ReactNode
-  onOpen?: (position: SwipeCellPosition) => void
-  onClose?: (position: SwipeCellPosition) => void
+
+  onOpen?(position: SwipeCellPosition): void
+
+  onClose?(position: SwipeCellPosition): void
 }
 
 function SwipeCell(props: SwipeCellProps) {
   const {
     className,
+    defaultOpen,
+    open: openProp,
     disabled,
     stopPropagation,
     onOpen,
@@ -111,6 +117,11 @@ function SwipeCell(props: SwipeCellProps) {
     ...restProps
   } = props
 
+  const { value } = useValue<SwipeCellPosition>({
+    defaultValue: defaultOpen,
+    value: openProp,
+  })
+
   const openedRef = useRef(false)
   const lockClickRef = useRef(false)
   const startOffsetRef = useRef(0)
@@ -120,28 +131,45 @@ function SwipeCell(props: SwipeCellProps) {
   const rightRef = useRef<typeof View>()
 
   const leftWidthRef = useRef(0)
+
   const rightWidthRef = useRef(0)
 
-  const [dragging, setDragging] = useState(false)
+  const positionRef = useRef<SwipeCellPosition>("outside")
+
+  const draggingRef = useRef(false)
+
   const [offset, setOffset] = useState(0)
-  const [position, setPosition] = useState<SwipeCellPosition>(SwipeCellPosition.Outside)
 
   const touch = useTouch()
 
+  const updateLeftWidth = () =>
+    getRect(leftRef)
+      .then(({ width }) => width ?? 0)
+      .then((leftWidth) => (leftWidthRef.current = leftWidth))
+
+  const updateRightWidth = () =>
+    getRect(rightRef)
+      .then(({ width }) => width ?? 0)
+      .then((rightWidth) => (rightWidthRef.current = rightWidth))
+
   const open = useCallback(
-    (side: SwipeCellPosition) => {
+    (side: SwipeCellPosition, emitOpen: boolean = true) => {
       openedRef.current = true
-      setOffset(side === SwipeCellPosition.Left ? leftWidthRef.current : -rightWidthRef.current)
-      onOpen?.(side)
+      setOffset(side === "left" ? leftWidthRef.current : -rightWidthRef.current)
+      if (emitOpen) {
+        onOpen?.(side)
+      }
     },
     [onOpen],
   )
 
   const close = useCallback(
-    (position: SwipeCellPosition) => {
+    (position: SwipeCellPosition, emitClose: boolean = true) => {
       openedRef.current = false
       setOffset(0)
-      onClose?.(position)
+      if (emitClose) {
+        onClose?.(position)
+      }
     },
     [onClose],
   )
@@ -150,7 +178,7 @@ function SwipeCell(props: SwipeCellProps) {
     (side: SwipeCellPosition) => {
       const THRESHOLD = 0.15
       const threshold = openedRef.current ? 1 - THRESHOLD : THRESHOLD
-      const width = side === SwipeCellPosition.Left ? leftWidthRef.current : rightWidthRef.current
+      const width = side === "left" ? leftWidthRef.current : rightWidthRef.current
       const offsetAbs = Math.abs(offset)
       if (width && offsetAbs > width * threshold) {
         open(side)
@@ -165,6 +193,9 @@ function SwipeCell(props: SwipeCellProps) {
     if (disabled) {
       return
     }
+
+    fulfillPromise(Promise.all([updateLeftWidth(), updateRightWidth()]))
+
     startOffsetRef.current = offset
     touch.start(event)
   }
@@ -186,18 +217,21 @@ function SwipeCell(props: SwipeCellProps) {
           leftWidthRef.current,
         )
 
-        const position = offset > 0 ? SwipeCellPosition.Left : SwipeCellPosition.Right
+        if (!draggingRef.current) {
+          draggingRef.current = true
+        }
 
         lockClickRef.current = true
-        setDragging(true)
 
         const isEdge = !openedRef.current || deltaX * startOffsetRef.current < 0
+
         if (isEdge) {
           preventDefault(event, stopPropagation)
         }
 
+        positionRef.current = offset > 0 ? "left" : "right"
+
         setOffset(offset)
-        setPosition(position)
       }
     },
     [disabled, stopPropagation, touch],
@@ -207,31 +241,32 @@ function SwipeCell(props: SwipeCellProps) {
     if (disabled) {
       return
     }
-    setDragging(false)
+    draggingRef.current = false
+    toggle(positionRef.current)
+    // compatible with desktop scenario
+    setTimeout(() => {
+      lockClickRef.current = false
+    }, 0)
   }
 
-  useEffect(() => {
-    if (!dragging) {
-      toggle(position)
-      // compatible with desktop scenario
-      setTimeout(() => {
-        lockClickRef.current = false
-      }, 0)
-    }
-  }, [dragging, position, toggle])
+  const onClick = useCallback(
+    (position: SwipeCellPosition = "outside") => {
+      if (openedRef.current && !lockClickRef.current) {
+        close(position)
+      }
+    },
+    [close],
+  )
 
-  const onClick = (position: SwipeCellPosition = SwipeCellPosition.Outside) => {
-    if (openedRef.current && !lockClickRef.current) {
-      close(position)
-    }
-  }
-
-  const handleClick = (position: SwipeCellPosition, stop?: boolean) => (event: ITouchEvent) => {
-    if (stop) {
-      event.stopPropagation()
-    }
-    onClick(position)
-  }
+  const handleClick = useCallback(
+    (position: SwipeCellPosition, stop?: boolean) => (event: ITouchEvent) => {
+      if (stop) {
+        event.stopPropagation()
+      }
+      onClick(position)
+    },
+    [onClick],
+  )
 
   const { left, content, right } = useSwipeCellChildren(
     childrenProp,
@@ -240,21 +275,42 @@ function SwipeCell(props: SwipeCellProps) {
     handleClick,
   )
 
-  const getLeftWidth = async () => (await getRect(leftRef))?.width ?? 0
+  const valueChange = (side?: SwipeCellPosition) => {
+    if (side === "left" || side === "right") {
+      new Promise((resolve) => {
+        if (inBrowser) {
+          setTimeout(() => {
+            if (side === "left") {
+              updateLeftWidth().then(resolve)
+            } else {
+              updateRightWidth().then(resolve)
+            }
+          }, 150)
+        } else {
+          resolve(true)
+        }
+      }).then(() => {
+        draggingRef.current = false
+        open(side, false)
+      })
+    } else {
+      close("outside", false)
+    }
+  }
 
-  const getRightWidth = async () => (await getRect(rightRef))?.width ?? 0
-
-  useEffect(() => {
-    nextTick(() => {
-      getLeftWidth().then((width) => (leftWidthRef.current = width))
-    })
+  useRenderedEffect(() => {
+    if (!inBrowser) {
+      fulfillPromise(updateLeftWidth())
+    }
   }, [left])
 
-  useEffect(() => {
-    nextTick(() => {
-      getRightWidth().then((width) => (rightWidthRef.current = width))
-    })
+  useRenderedEffect(() => {
+    if (!inBrowser) {
+      fulfillPromise(updateRightWidth())
+    }
   }, [right])
+
+  useRenderedEffect(() => valueChange(value), [value])
 
   return (
     <View
@@ -278,7 +334,7 @@ function SwipeCell(props: SwipeCellProps) {
       }}
       onClick={(event) => {
         onClickProp?.(event)
-        handleClick(SwipeCellPosition.Cell)
+        handleClick("cell")
       }}
       {...restProps}
     >
@@ -286,7 +342,7 @@ function SwipeCell(props: SwipeCellProps) {
         className={prefixClassname("swipe-cell__wrapper")}
         style={{
           transform: `translate3d(${addUnitPx(offset)}, 0, 0)`,
-          transitionDuration: dragging ? "0s" : ".6s",
+          transitionDuration: draggingRef.current ? "0s" : ".6s",
         }}
       >
         {left}
