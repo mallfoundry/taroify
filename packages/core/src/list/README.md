@@ -200,7 +200,7 @@ List 会监听浏览器的滚动事件并计算列表的位置，当列表底部
 
 ### 为什么 List 初始化后会立即触发 load 事件？
 
-List 初始化后会触发一次 load 事件，用于加载第一屏的数据，这个特性可以通过 `immediateCheck` 属性关闭。
+List 初始化后会触发一次 load 事件，用于加载第一屏的数据，这个特性可以通过 `hasMore={false}` 属性关闭。
 
 ### 为什么会连续触发 load 事件？
 
@@ -218,17 +218,16 @@ List 初始化后会触发一次 load 事件，用于加载第一屏的数据，
 
 ### 使用 float 布局后一直触发加载？
 
-若 List 的内容使用了 float 布局，可以在容器上添加 `van-clearfix` 类名来清除浮动，使得 List 能正确判断元素位置
+若 List 的内容使用了 float 布局，可以在容器上添加 `taroify-clearfix` 类名来清除浮动，使得 List 能正确判断元素位置
 
-```html
-
-<van-list>
-  <div class="van-clearfix">
-    <div class="float-item" />
-    <div class="float-item" />
-    <div class="float-item" />
-  </div>
-</van-list>
+```tsx
+<List>
+  <View class="taroify-clearfix">
+    <View class="float-item" />
+    <View class="float-item" />
+    <View class="float-item" />
+  </View>
+</List>
 ```
 
 ### 在 html、body 上设置 overflow 后一直触发加载？

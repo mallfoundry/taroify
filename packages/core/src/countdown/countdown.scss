@@ -1,0 +1,7 @@
+@import "./variables";
+
+.#{$component-prefix}countdown {
+  font-size: var(--countdown-font-size, $countdown-font-size);
+  line-height: var(--countdown-line-height, $countdown-line-height);
+  color: var(--countdown-color, $countdown-color);
+}

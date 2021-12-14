@@ -21,7 +21,7 @@ $orange-dark: #ed6a0c;
 $orange-light: #fffbe8;
 
 // Base Unit
-$hd: 2;
+$hd: 2 !default;
 
 // Gradient Colors
 $gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
