@@ -150,5 +150,5 @@ import { Button } from "@taroify/core"
 | block | 是否为块级元素 | _boolean_ | `false` |
 | disabled | 是否禁用按钮 | _boolean_ | `false` |
 | hairline | 是否使用 0.5px 边框 | _boolean_ | `false` |
-| loading | 是否显示为加载状态 | _boolean_ | `false` |
+| loading | 是否显示为加载状态 | _boolean_ \| _ButtonLoadingProps_ | `false` | `false` |
 | children | 按钮文字 | _string_ | - |

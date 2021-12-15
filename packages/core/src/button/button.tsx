@@ -15,7 +15,8 @@ import {
 } from "./button.shared"
 
 interface ButtonLoadingProps {
-  type?: LoadingType
+  type?: LoadingType,
+  size?: number | string,
 }
 
 function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoadingProps | undefined {
