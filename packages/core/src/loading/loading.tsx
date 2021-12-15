@@ -43,7 +43,7 @@ export type LoadingType = "circular" | "spinner"
 
 type LoadingDirection = "horizontal" | "vertical"
 
-interface LoadingProps extends ViewProps {
+export interface LoadingProps extends ViewProps {
   className?: string
   size?: number | string
   type?: LoadingType
