@@ -3,6 +3,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo } from "react"
 import Picker from "../picker"
+import { useValue } from "../utils/state"
 import {
   clampDate,
   DatetimePickerColumnType,
@@ -106,7 +107,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
       }
     })
 
-    return date
+    return clampDate(date, minDate, maxDate)
   }
 
   function toValue(date: Date | undefined) {
@@ -180,15 +181,20 @@ function DatetimePicker(props: DatetimePickerProps) {
     value: valueProp,
     siblingCount,
     children,
-    onChange,
+    onChange: onChangeProp,
     onConfirm,
     onCancel,
     ...restProps
   } = props
 
+  const { value: dateValue, setValue: setDateValue } = useValue({
+    value: valueProp,
+    onChange: onChangeProp,
+  })
+
   const { defaultValue, value, columns, toDate } = useDatetimePicker({
     defaultValue: defaultValueProp,
-    value: valueProp,
+    value: dateValue,
     min,
     max,
     type,
@@ -205,7 +211,7 @@ function DatetimePicker(props: DatetimePickerProps) {
       siblingCount={siblingCount}
       defaultValue={defaultValue}
       value={value}
-      onChange={(aValue) => onChange?.(toDate(aValue))}
+      onChange={(aValue) => setDateValue(toDate(aValue))}
       onConfirm={(aValue) => onConfirm?.(toDate(aValue))}
       onCancel={(aValue) => onCancel?.(toDate(aValue))}
       {...restProps}
