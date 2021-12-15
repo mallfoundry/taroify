@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.5
+
+`2021-12-15`
+
+**Bug Fixes**
+
+- DatetimePicker
+  - 修复 clampDate 和 useValue 的问题 [#190](https://github.com/mallfoundry/taroify/pull/190)
+
 ### v0.0.20-alpha.4
 
 `2021-12-15`
