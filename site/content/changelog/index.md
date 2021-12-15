@@ -12,6 +12,44 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.20-alpha.5
+
+`2021-12-15`
+
+**Bug Fixes**
+
+- DatetimePicker
+  - 修复 clampDate 和 useValue 的问题 [#190](https://github.com/mallfoundry/taroify/pull/190)
+
+### v0.0.20-alpha.4
+
+`2021-12-15`
+
+**Feature**
+
+- SwipeCell
+  - 新增 defaultOpen 和 open 属性 [#172](https://github.com/mallfoundry/taroify/issues/172) [#186](https://github.com/mallfoundry/taroify/pull/186)
+
+**Bug Fixes**
+
+- Badge
+  - 修复 content={0} 时，直接渲染 0 的问题 [#184](https://github.com/mallfoundry/taroify/pull/184) [@zjwshisb](https://github.com/zjwshisb)
+- Field
+  - 修复 H5 设置 inputAlign 为 right 无效的问题 [#182](https://github.com/mallfoundry/taroify/pull/182) [@zjwshisb](https://github.com/zjwshisb)
+- Picker
+  - 修复监听 onChange 事件为旧值的问题 [#189](https://github.com/mallfoundry/taroify/pull/189)
+- DatetimePicker
+  - 修复默认值为 undefined 的问题 [#188](https://github.com/mallfoundry/taroify/pull/188)
+
+**Breaking Changes**
+
+- Countdown
+  - 将 useCountDown() 和 CountDown 合并在一起 [#176](https://github.com/mallfoundry/taroify/pull/176) [@Brain777777](https://github.com/Brain777777)
+  - 将 CountDown 重命名为 Countdown [#179](https://github.com/mallfoundry/taroify/pull/179)
+  - 将 current 属性重命名为 value [#179](https://github.com/mallfoundry/taroify/pull/179)
+  - 将 millisecond 属性重命名为 interval={1} [#179](https://github.com/mallfoundry/taroify/pull/179)
+  - 将 onFinish 事件重命名为 onComplete [#179](https://github.com/mallfoundry/taroify/pull/179)
+
 ### v0.0.20-alpha.3
 
 `2021-12-11`

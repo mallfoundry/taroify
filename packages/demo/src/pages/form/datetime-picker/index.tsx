@@ -7,11 +7,19 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function DatePicker() {
-  const [minDate] = useState(new Date(2020, 0, 1))
-  const [maxDate] = useState(new Date(2025, 10, 1))
-  const [defaultValue] = useState(new Date(2021, 0, 17))
+  const [minDate] = useState(new Date(2021, 9, 14))
+  const [maxDate] = useState(new Date(2023, 11, 12))
+  const [defaultValue] = useState(new Date(2021, 9, 14))
+  const [value, setValue] = useState(new Date(2021, 9, 14))
   return (
-    <DatetimePicker type="date" min={minDate} max={maxDate} defaultValue={defaultValue}>
+    <DatetimePicker
+      type="date"
+      min={minDate}
+      max={maxDate}
+      defaultValue={defaultValue}
+      value={value}
+      onChange={setValue}
+    >
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择年月日</DatetimePicker.Title>

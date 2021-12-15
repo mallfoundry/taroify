@@ -137,6 +137,7 @@ export default function Picker(props: PickerProps) {
   const multiColumns = _.size(columns) > 1
 
   const visibleCount = siblingCount * 2
+
   const itemHeight = 44
 
   const wrapHeight = useMemo(() => itemHeight * visibleCount, [visibleCount])
@@ -170,14 +171,14 @@ export default function Picker(props: PickerProps) {
       valueOptionsRef.current[columnIndex] = option
 
       if (emitChange) {
-        const newValues = [...values]
+        const newValues = _.map(valueOptionsRef.current, ({ value }) => value)
         _.set(newValues, columnIndex, value)
         const aValues = getPickerValue(newValues, multiColumns)
         setValue(aValues)
         onChange?.(aValues, { index, value })
       }
     },
-    [multiColumns, onChange, setValue, values],
+    [multiColumns, onChange, setValue],
   )
 
   const handleAction = (action: any) => () =>

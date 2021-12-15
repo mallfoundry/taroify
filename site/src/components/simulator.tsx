@@ -45,7 +45,7 @@ function h5Root() {
   if (process.env.NODE_ENV === "development") {
     return "//localhost:10086/index.html"
   }
-  return "//taroify.gitee.io/taroify-demo/h5/index.html"
+  return "/taroify.com/h5/index.html"
 }
 
 function getIframeUrl(path?: string) {
