@@ -26,7 +26,7 @@ export function getEndDayOfMonth(year: number, month: number): number {
 
 export function clampDate(value: Date | undefined, minDate: Date, maxDate: Date) {
   if (_.isUndefined(value)) {
-    return value
+    return minDate ?? maxDate
   }
   const timestamp = _.clamp(value.getTime(), minDate.getTime(), maxDate.getTime())
   return new Date(timestamp)
