@@ -39,7 +39,7 @@ const config = {
   },
   h5: {
     esnextModules: ["@taroify"],
-    publicPath: process.env.NODE_ENV === "development" ? "/" : "/taroify-demo/h5",
+    publicPath: process.env.NODE_ENV === "development" ? "/" : "/taroify.com/h5",
     staticDirectory: "static",
     postcss: {
       autoprefixer: {
