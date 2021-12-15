@@ -12,6 +12,8 @@
     box-sizing: border-box;
     display: flex;
     padding: var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
+    overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
 
     &::before {
