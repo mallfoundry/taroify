@@ -1,4 +1,4 @@
-import { ScrollView } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
@@ -12,9 +12,8 @@ interface ShareSheetOptionsProps extends ViewProps {
 export default function ShareSheetOptions(props: ShareSheetOptionsProps) {
   const { className, ...restProps } = props
   return (
-    <ScrollView
+    <View
       className={classNames(prefixClassname("share-sheet__options"), className)}
-      scrollX
       {...restProps}
     />
   )
