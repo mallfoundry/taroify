@@ -103,9 +103,7 @@ export default function PickerColumnBase(props: PickerColumnBaseProps) {
     [options],
   )
 
-  useEffect(() => {
-    setIndex(getIndexByValue(value))
-  }, [getIndexByValue, setIndex, value])
+  useEffect(() => setIndex(getIndexByValue(value)), [getIndexByValue, setIndex, value])
 
   const getIndexByOffset = useCallback(
     (offset: number) => _.clamp(Math.round(-offset / itemHeight), 0, count - 1),
