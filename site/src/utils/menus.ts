@@ -60,6 +60,10 @@ const menus = [
         title: "Toast 轻提示",
         to: "/components/toast/",
       },
+      {
+        title: "SafeArea 安全区域",
+        to: "/components/safe-area/",
+      },
     ],
   },
   {

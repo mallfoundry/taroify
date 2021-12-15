@@ -45,6 +45,7 @@
     "@tarojs/taro": "3.3.14",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
+    "lorem-ipsum": "^2.0.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-native": "^0.65.1"
