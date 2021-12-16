@@ -59,6 +59,20 @@ export default function BadgeDemo() {
           <View className="badge-block" />
         </Badge>
       </Block>
+      <Block title="自定义徽标位置">
+        <Badge content={10} position="top-left">
+          <View className="badge-block" />
+        </Badge>
+        <Badge content={10} position="top-right">
+          <View className="badge-block" />
+        </Badge>
+        <Badge content={10} position="bottom-left">
+          <View className="badge-block" />
+        </Badge>
+        <Badge content={10} position="bottom-right">
+          <View className="badge-block" />
+        </Badge>
+      </Block>
       <Block title="独立展示" className="independent-badges">
         <Badge content="20" />
         <Badge content={100} max={99} />
