@@ -26,4 +26,4 @@ import { SafeArea } from "@taroify/core"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| position   | 安全区的位置，可选值：`top`、`bottom` | _string_ | - |
+| position   | 安全区的位置，可选值为 `top` `bottom` | _string_ | - |

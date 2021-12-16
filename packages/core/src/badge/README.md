@@ -110,6 +110,25 @@ import Badge from "@taroify/core/badge"
 }
 ```
 
+### 自定义徽标位置
+
+通过 `position` 属性来设置徽标的位置。
+
+```tsx
+<Badge content={10} position="top-left">
+  <View className="badge-block" />
+</Badge>
+<Badge content={10} position="top-right">
+  <View className="badge-block" />
+</Badge>
+<Badge content={10} position="bottom-left">
+  <View className="badge-block" />
+</Badge>
+<Badge content={10} position="bottom-right">
+  <View className="badge-block" />
+</Badge>
+```
+
 ### 独立展示
 
 当 Badge 没有子元素时，会作为一个独立的元素进行展示。
@@ -128,5 +147,4 @@ import Badge from "@taroify/core/badge"
 | content | 徽标内容 | _ReactNode_ | - |
 | dot | 是否展示为小红点 | _boolean_ | `false` |
 | max | 最大值，超过最大值会显示 `{max}+`，仅当 content 为数字时有效 | _number \| string_ | - |
-| offset | 设置徽标的偏移量，数组的两项分别对应水平和垂直方向的偏移量，默认单位为 `px` | _[number \| string, number \| string]_ | - |
-| showZero | 当 content 为数字 0 时，是否展示徽标 | _boolean_ | `true` |
+| position | 徽标位置，可选值为 `top-left` `bottom-left` `bottom-right` | _string_ | `top-right` |

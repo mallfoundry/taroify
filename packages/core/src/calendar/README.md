@@ -404,7 +404,7 @@ function CustomPositionCalendar() {
 | 键名 | 说明 | 类型 |
 | --- | --- | --- |
 | date | 日期对应的 Date 对象 | _Date_ |
-| type | 日期类型，可选值为 `active`、`start`、`middle`、`end`、`disabled` | _string_ |
+| type | 日期类型，可选值为 `active` `start` `middle` `end` `disabled` | _string_ |
 | children | 中间显示的文字 | _string_ |
 | top | 上方的提示信息 | _string_ |
 | bottom | 下方的提示信息 | _string_ |
