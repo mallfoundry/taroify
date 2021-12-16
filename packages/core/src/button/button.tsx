@@ -1,8 +1,9 @@
-import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
+import { ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useContext, useMemo } from "react"
+import ButtonBase from "../button-base"
 import Loading, { LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
 import ButtonContext from "./button.context"
@@ -109,7 +110,7 @@ export default function Button(props: ButtonProps) {
         {loading ?? icon}
         {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
-      <TaroButton
+      <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
         disabled={disabled}
