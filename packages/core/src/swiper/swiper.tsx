@@ -352,12 +352,18 @@ function Swiper(props: SwiperProps) {
 
       touch.move(event)
       const correctDirection = getCorrectDirection()
-      if (correctDirection) {
+      // if user starting to touchmove, prevent the event bubbling to
+      // avoid affecting the parent components
+      const shouldPrevent = correctDirection || touch.offsetY > touch.offsetX === vertical
+      if (shouldPrevent) {
         preventDefault(event, stopPropagation)
+      }
+
+      if (correctDirection) {
         moveTo({ offset: getDelta() })
       }
     },
-    [getCorrectDirection, getDelta, moveTo, stopPropagation, touch, touchable],
+    [getCorrectDirection, getDelta, moveTo, stopPropagation, touch, touchable, vertical],
   )
 
   const onTouchEnd = useCallback(() => {
