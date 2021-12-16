@@ -29,9 +29,6 @@
 
   &--fixed {
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
     transform-origin: 100%;
   }
 
@@ -47,5 +44,29 @@
     padding: 0;
     background-color: var(--badge-dot-color, $badge-dot-color);
     border-radius: 100%;
+  }
+
+  &--top-left {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &--top-right {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &--bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+  }
+
+  &--bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
   }
 }

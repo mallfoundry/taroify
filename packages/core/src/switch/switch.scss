@@ -19,6 +19,8 @@
     left: 0;
     width: var(--switch-node-size, $switch-node-size);
     height: var(--switch-node-size, $switch-node-size);
+    // https://github.com/youzan/vant/issues/9839
+    font-size: inherit;
     background-color: var(--switch-node-background-color, $switch-node-background-color);
     border-radius: 100%;
     box-shadow: var(--switch-node-box-shadow, $switch-node-box-shadow);
