@@ -11,8 +11,8 @@ export type BadgePosition = "top-left" | "top-right" | "bottom-left" | "bottom-r
 export interface BadgeProps {
   className?: string
   content?: ReactNode
-  max?: number
   dot?: boolean
+  max?: number
   position?: BadgePosition
   children?: ReactNode
 }
