@@ -1,6 +1,5 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
-// import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -14,7 +13,6 @@ import {
   useMemo,
 } from "react"
 import Image from "../image"
-// import Sheet from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
