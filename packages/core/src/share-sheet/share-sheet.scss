@@ -40,8 +40,17 @@
     padding: 0;
     cursor: pointer;
     user-select: none;
+    // Remove TaroButton default style
+    background-color: unset;
+    margin-top: 0px;
 
-    &:active {
+    // Remove TaroButton default style
+    &::after {
+      border: unset;
+      border-radius: unset;
+    }
+
+    &:not([disabled]):active {
       background-color: transparent;
       opacity: var(--active-opacity, $active-opacity);
     }

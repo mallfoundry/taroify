@@ -16,11 +16,18 @@ function BasicShareSheet() {
         rightIcon={<ArrowRight />}
         onClick={() => setOpen(true)}
       />
-      <ShareSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
+      <ShareSheet
+        open={open}
+        onSelect={() => setOpen(false)}
+        onClose={setOpen}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      >
         <ShareSheet.Backdrop />
         <ShareSheet.Header title="立即分享给好友" />
         <ShareSheet.Options>
-          <ShareSheet.Option icon="wechat" name="微信" />
+          <ShareSheet.Option icon="wechat" name="微信" openType="share" />
           <ShareSheet.Option icon="wechat-moments" name="朋友圈" />
           <ShareSheet.Option icon="weibo" name="微博" />
           <ShareSheet.Option icon="qq" name="QQ" />

@@ -1,6 +1,5 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -55,7 +54,7 @@ function useShareSheetOptionIcon(node?: ReactNode) {
   return useMemo(() => renderShareSheetOptionIcon(node), [node])
 }
 
-interface ShareSheetOptionProps extends ViewProps {
+interface ShareSheetOptionProps extends TaroButtonProps {
   className?: string
   style?: CSSProperties
   loading?: boolean
@@ -66,36 +65,39 @@ interface ShareSheetOptionProps extends ViewProps {
 }
 
 export function ShareSheetOption(props: ShareSheetOptionProps) {
-  const { className, loading, disabled, icon, name, description, onClick, ...restProps } = props
+  const { className, loading, disabled, icon, name, description, openType, onClick, ...restProps } =
+    props
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
   return (
-    <Sheet.Item
-      className={classNames(prefixClassname("share-sheet__option"), className)}
-      loading={loading}
-      disabled={loading}
-      {...restProps}
-      onClick={(event) => {
-        onClick?.(event)
-        onSelect?.({
-          loading,
-          disabled,
-          icon,
-          name,
-          description,
-        })
-      }}
-    >
-      {icon && image}
-      {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
-      {description && (
-        <View
-          className={prefixClassname("share-sheet__option-description")}
-          children={description}
-        />
-      )}
-    </Sheet.Item>
+    <TaroButton className={classNames(prefixClassname("share-sheet__option"))} openType={openType}>
+      <Sheet.Item
+        className={classNames(prefixClassname("share-sheet__option"), className)}
+        loading={loading}
+        disabled={loading}
+        {...restProps}
+        onClick={(event) => {
+          onClick?.(event)
+          onSelect?.({
+            loading,
+            disabled,
+            icon,
+            name,
+            description,
+          })
+        }}
+      >
+        {icon && image}
+        {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
+        {description && (
+          <View
+            className={prefixClassname("share-sheet__option-description")}
+            children={description}
+          />
+        )}
+      </Sheet.Item>
+    </TaroButton>
   )
 }
 
