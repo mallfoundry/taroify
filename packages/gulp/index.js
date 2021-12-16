@@ -5,6 +5,7 @@ const { buildScss, watchScss, watchScssSymlink } = require("./scss")
 const { createBundle } = require("./bundle")
 const { serveDemo, serveSite } = require("./serve")
 const { copyFontFiles } = require("./font")
+const { buildH5, buildSite, copyH5, copySite } = require("./dist")
 
 function watch() {
   watchScss("icons")
@@ -57,10 +58,14 @@ exports.build = series(
   buildTypescript("core"), //
 )
 
-exports.readme = series(
+const readme = series(
   copyReadmeFiles("core/src", "components"), //
   copyReadmeFiles("core/docs", "components"), //
   copyReadmeFiles("hooks/src", "hooks"),
 )
+
+exports.buildSite = series(buildH5, readme, buildSite, copyH5(), copySite())
+
+exports.readme = readme
 
 exports.serve = parallel(serveDemo, serveSite)
