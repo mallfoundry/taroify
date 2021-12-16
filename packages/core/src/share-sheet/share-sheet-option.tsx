@@ -13,6 +13,7 @@ import {
   useMemo,
 } from "react"
 import Image from "../image"
+import Sheet from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
@@ -64,36 +65,38 @@ interface ShareSheetOptionProps extends TaroButtonProps {
 }
 
 export function ShareSheetOption(props: ShareSheetOptionProps) {
-  const { className, loading, disabled, icon, name, description, onClick, ...restProps } =
+  const { className, loading, disabled, icon, name, description, openType, onClick, ...restProps } =
     props
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
   return (
-    <TaroButton
-      className={classNames(prefixClassname("share-sheet__option"), className)}
-      loading={loading}
-      disabled={loading}
-      {...restProps}
-      onClick={(event) => {
-        onClick?.(event)
-        onSelect?.({
-          loading,
-          disabled,
-          icon,
-          name,
-          description,
-        })
-      }}
-    >
-      {icon && image}
-      {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
-      {description && (
-        <View
-          className={prefixClassname("share-sheet__option-description")}
-          children={description}
-        />
-      )}
+    <TaroButton className={classNames(prefixClassname("share-sheet__option"))} openType={openType}>
+      <Sheet.Item
+        className={classNames(prefixClassname("share-sheet__option"), className)}
+        loading={loading}
+        disabled={loading}
+        {...restProps}
+        onClick={(event) => {
+          onClick?.(event)
+          onSelect?.({
+            loading,
+            disabled,
+            icon,
+            name,
+            description,
+          })
+        }}
+      >
+        {icon && image}
+        {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
+        {description && (
+          <View
+            className={prefixClassname("share-sheet__option-description")}
+            children={description}
+          />
+        )}
+      </Sheet.Item>
     </TaroButton>
   )
 }
