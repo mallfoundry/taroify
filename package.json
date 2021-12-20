@@ -9,7 +9,7 @@
     "clean": "gulp clean",
     "develop": "gulp develop",
     "watch": "gulp watch",
-    "build": "yarn run clean && gulp build && gulp buildSite",
+    "build": "yarn run clean && gulp build && gulp buildWww",
     "publish": "yarn run clean  && yarn run build && lerna publish from-package",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
     "lerna:prepatch": "lerna version prepatch --yes --no-git-tag-version --conventional-graduate",

@@ -2,10 +2,10 @@ const { series, parallel } = require("gulp")
 const { buildTypescript, watchTypescript, watchTypescriptSymlink } = require("./typescript")
 const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
 const { buildScss, watchScss, watchScssSymlink } = require("./scss")
-const { createBundle } = require("./bundle")
+const { createBundle, cleanBundle } = require("./bundle")
 const { serveDemo, serveSite } = require("./serve")
 const { copyFontFiles } = require("./font")
-const { buildH5, buildSite, copyH5, copySite } = require("./dist")
+const { buildH5, buildSite, copyH5, copySite, copyGitIgnore } = require("./www")
 
 function watch() {
   watchScss("icons")
@@ -64,8 +64,14 @@ const readme = series(
   copyReadmeFiles("hooks/src", "hooks"),
 )
 
-exports.buildSite = series(buildH5, readme, buildSite, copyH5(), copySite())
-
-exports.readme = readme
+exports.buildWww = series(
+  cleanBundle("www"),
+  buildH5,
+  readme,
+  buildSite,
+  copyGitIgnore(),
+  copyH5(),
+  copySite(),
+)
 
 exports.serve = parallel(serveDemo, serveSite)
