@@ -51,12 +51,12 @@
   }
 
   input.#{$component-prefix}field__control,
-  &__control input {
+  &__control>input {
     height: var(--field-input-height, $field-input-height);
   }
 
   textarea.#{$component-prefix}field__control,
-  &__control textarea {
+  &__control>textarea {
     display: block;
     height: 18px * $hd;
     min-height: 18px * $hd;
@@ -64,8 +64,8 @@
 
 
   &__control,
-  &__control input,
-  &__control textarea {
+  &__control>input,
+  &__control>textarea {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -100,21 +100,23 @@
     &--readonly {
       cursor: default;
 
+      & input::placeholder,
+      & textarea::placeholder,
       &::placeholder {
         color: inherit;
       }
     }
 
     &--center,
-    &--center input,
-    &--center textarea {
+    &--center>input,
+    &--center>textarea {
       justify-content: center;
       text-align: center;
     }
 
     &--right,
-    &--right input,
-    &--right textarea {
+    &--right>input,
+    &--right>textarea {
       justify-content: flex-end;
       text-align: right;
     }
@@ -127,6 +129,8 @@
 
     &--error,
     &__placeholder--error,
+    &--error>input::placeholder,
+    &--error>textarea::placeholder,
     &--error::placeholder {
       color: var(--field-input-error-text-color, $field-input-error-text-color);
       -webkit-text-fill-color: currentColor;
