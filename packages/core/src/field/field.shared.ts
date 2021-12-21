@@ -1,44 +1,14 @@
-export enum FieldType {
-  Number = "number",
-  Text = "text",
-  Idcard = "idcard",
-  Digit = "digit",
-  Textarea = "textarea",
-  Password = "password",
-}
+import { ReactNode } from "react"
 
-export type FieldTypeString = "number" | "text" | "idcard" | "digit" | "textarea" | "password"
+export type FieldType = "number" | "text" | "idcard" | "digit" | "textarea" | "password"
 
-export enum FieldClearTrigger {
-  Always = "always",
-  Focus = "focus",
-}
+export type FieldClearTrigger = "always" | "focus"
 
-export type FieldClearTriggerString = "always" | "focus"
+export type FieldLabelAlign = "left" | "center" | "right"
 
-export enum FieldLabelAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
+export type FieldInputAlign = "left" | "center" | "right"
 
-export type FieldLabelAlignString = "left" | "center" | "right"
-
-export enum FieldInputAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
-
-export type FieldInputAlignString = "left" | "center" | "right"
-
-export enum FieldMessageAlign {
-  Left = "left",
-  Center = "center",
-  Right = "right",
-}
-
-export type FieldMessageAlignString = "left" | "center" | "right"
+export type FieldMessageAlign = "left" | "center" | "right"
 
 export interface FieldAutosize {
   maxHeight: number
@@ -46,3 +16,36 @@ export interface FieldAutosize {
 }
 
 export type FieldConfirmType = "send" | "search" | "next" | "go" | "done"
+
+export type FieldFormatTrigger = "onBlur" | "onChange"
+
+export type FieldValidateTrigger = "onBlur" | "onChange" | "onSubmit"
+
+export interface FieldValidError {
+  name?: string
+  message: ReactNode
+}
+
+export type FieldRuleMessage = string | ((value: any, rule: FieldRule) => string)
+
+export type FieldRuleValidator = (
+  value: any,
+  rule: FieldRule,
+) => boolean | string | Promise<boolean | string>
+
+export type FiledRuleFormatter = (value: any, rule: FieldRule) => string
+
+export interface FieldRule {
+  pattern?: RegExp
+  trigger?: FieldValidateTrigger
+  message?: FieldRuleMessage
+  required?: boolean
+  validator?: FieldRuleValidator
+  formatter?: FiledRuleFormatter
+}
+
+export interface FieldInstance {
+  readonly name?: string
+
+  validate(rules?: FieldRule[]): Promise<void>
+}
