@@ -1,15 +1,23 @@
-import FieldElement, { FieldProps } from "./field"
+import { ForwardRefExoticComponent } from "react"
+import FieldComponent, { FieldProps } from "./field"
 import FieldButton from "./field-button"
 
-export type { FieldClearTrigger, FieldClearTriggerString } from "./field.shared"
+export type {
+  FieldLabelAlign,
+  FieldInputAlign,
+  FieldMessageAlign,
+  FieldClearTrigger,
+  FieldValidateTrigger,
+  FieldInstance,
+} from "./field.shared"
 
-interface FieldInterface {
+interface FieldInterface extends ForwardRefExoticComponent<FieldProps> {
   (props: FieldProps): JSX.Element
 
   Button: typeof FieldButton
 }
 
-const Field = FieldElement as FieldInterface
+const Field = FieldComponent as FieldInterface
 Field.Button = FieldButton
 
 export default Field

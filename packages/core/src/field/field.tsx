@@ -10,29 +10,38 @@ import * as React from "react"
 import {
   Children,
   CSSProperties,
+  forwardRef,
+  ForwardRefExoticComponent,
   isValidElement,
   ReactElement,
   ReactNode,
+  useCallback,
+  useContext,
+  useImperativeHandle,
   useMemo,
   useState,
 } from "react"
 import { BaseCell, CellAlign } from "../cell"
+import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
+import { fulfillPromise } from "../utils/promisify"
+import { useValue } from "../utils/state"
 import FieldButton from "./field-button"
+import { validateRules } from "./field.rule"
 import {
   FieldAutosize,
   FieldClearTrigger,
-  FieldClearTriggerString,
   FieldConfirmType,
   FieldInputAlign,
-  FieldInputAlignString,
+  FieldInstance,
   FieldLabelAlign,
-  FieldLabelAlignString,
   FieldMessageAlign,
-  FieldMessageAlignString,
+  FieldRule,
   FieldType,
-  FieldTypeString,
+  FieldValidateTrigger,
 } from "./field.shared"
+import useField from "./use-field"
+import useFieldValueEffect from "./use-field-value-effect"
 
 export function resolveOnChange<
   E extends InputProps.inputEventDetail | InputProps.inputValueEventDetail,
@@ -109,14 +118,14 @@ export interface FieldProps {
   name?: string
   value?: string
   maxlength?: number
-  type?: FieldType | FieldTypeString
+  type?: FieldType
   align?: CellAlign
   bordered?: boolean
   focus?: boolean
   autoFocus?: boolean
-  labelAlign?: FieldLabelAlign | FieldLabelAlignString
+  labelAlign?: FieldLabelAlign
   label?: ReactNode
-  inputAlign?: FieldInputAlign | FieldInputAlignString
+  inputAlign?: FieldInputAlign
   icon?: ReactNode
   rightIcon?: ReactNode
   placeholder?: string
@@ -126,11 +135,11 @@ export interface FieldProps {
   readonly?: boolean
   disabled?: boolean
   error?: boolean
-  messageAlign?: FieldMessageAlign | FieldMessageAlignString
+  messageAlign?: FieldMessageAlign
   message?: ReactNode
   clearable?: boolean
   clearIcon?: ReactNode
-  clearTrigger?: FieldClearTrigger | FieldClearTriggerString
+  clearTrigger?: FieldClearTrigger
   autosize?: boolean | FieldAutosize
 
   cursorSpacing?: number
@@ -142,6 +151,8 @@ export interface FieldProps {
   adjustPosition?: boolean
   holdKeyboard?: boolean
   children?: ReactNode
+
+  rules?: FieldRule[]
 
   onClick?(event: ITouchEvent): void
 
@@ -156,176 +167,243 @@ export interface FieldProps {
   onBlur?(event: BaseEventOrig<InputProps.inputValueEventDetail>): void
 }
 
-function Field(props: FieldProps) {
-  const {
-    className,
-    style,
-    name,
-    value: valueProp,
-    maxlength,
-    type = FieldType.Text,
-    align,
-    bordered,
-    focus,
-    autoFocus,
-    labelAlign = FieldLabelAlign.Left,
-    label,
-    inputAlign = FieldInputAlign.Left,
-    icon,
-    rightIcon,
-    placeholder,
-    placeholderClassName,
-    clickable,
-    required,
-    readonly,
-    disabled,
-    error,
-    message,
-    messageAlign = FieldLabelAlign.Left,
-    clearable,
-    clearIcon = <Clear />,
-    clearTrigger = FieldClearTrigger.Focus,
-    cursorSpacing,
-    confirmType,
-    confirmHold,
-    cursor,
-    selectionStart,
-    selectionEnd,
-    adjustPosition,
-    holdKeyboard,
-    children: childrenProp,
-    onClick,
-    onClear,
-    onConfirm,
-    onChange,
-    onFocus,
-    onBlur,
-  } = props
-  const { children, button } = useFieldChildren(childrenProp)
+const Field: ForwardRefExoticComponent<FieldProps> = forwardRef<FieldInstance, FieldProps>(
+  (props: FieldProps, ref) => {
+    const {
+      className,
+      style,
+      name,
+      value: valueProp,
+      maxlength,
+      type = "text",
+      align,
+      bordered,
+      focus,
+      autoFocus,
+      labelAlign = "left",
+      label,
+      inputAlign = "left",
+      icon,
+      rightIcon,
+      placeholder,
+      placeholderClassName,
+      clickable,
+      required,
+      readonly,
+      disabled,
+      error,
+      message,
+      messageAlign = "left",
+      clearable,
+      clearIcon = <Clear />,
+      clearTrigger = "focus",
+      cursorSpacing,
+      confirmType,
+      confirmHold,
+      cursor,
+      selectionStart,
+      selectionEnd,
+      adjustPosition,
+      holdKeyboard,
+      children: childrenProp,
+      rules: rulesProp,
+      onClick,
+      onClear,
+      onConfirm,
+      onChange,
+      onFocus,
+      onBlur,
+    } = props
 
-  const [focused, setFocused] = useState(false)
+    const { children, button } = useFieldChildren(childrenProp)
 
-  const allowClear = useMemo(() => {
-    if (clearable && !readonly) {
-      const hasValue = valueProp !== ""
-      const trigger =
-        clearTrigger === FieldClearTrigger.Always ||
-        (clearTrigger === FieldClearTrigger.Focus && focused)
-      return hasValue && trigger
+    const { validateTrigger } = useContext(FormContext)
+
+    const [focused, setFocused] = useState(false)
+
+    const [invalidMessage, setInvalidMessage] = useState<ReactNode>()
+
+    const resetInvalidMessage = useCallback(() => setInvalidMessage(undefined), [])
+
+    const { value, setValue } = useValue({
+      value: valueProp,
+    })
+
+    const allowClear = useMemo(() => {
+      if (clearable && !readonly) {
+        const hasValue = valueProp !== ""
+        const trigger = clearTrigger === "always" || (clearTrigger === "focus" && focused)
+        return hasValue && trigger
+      }
+      return false
+    }, [clearTrigger, clearable, focused, readonly, valueProp])
+
+    const validate = (rules = rulesProp) =>
+      new Promise<void>((resolve, reject) => {
+        if (rules) {
+          resetInvalidMessage()
+          validateRules(value, rules).then((result) => {
+            const { invalid, message } = result
+            setInvalidMessage(invalid ? message : undefined)
+            if (invalid) {
+              reject({
+                name,
+                message,
+              })
+            } else {
+              resolve()
+            }
+          })
+        } else {
+          resolve()
+        }
+      })
+
+    const validateWithTrigger = (trigger: FieldValidateTrigger) => {
+      if (validateTrigger && rulesProp) {
+        const defaultTrigger = validateTrigger === trigger
+        const rules = rulesProp.filter((rule) => {
+          if (rule.trigger) {
+            return rule.trigger === trigger
+          }
+
+          return defaultTrigger
+        })
+
+        if (rules.length) {
+          fulfillPromise(validate(rulesProp))
+        }
+      }
     }
-    return false
-  }, [clearTrigger, clearable, focused, readonly, valueProp])
 
-  const handleClear = (event: ITouchEvent) => {
-    resolveOnChange(event, onChange, "")
-    onClear?.(event)
-  }
+    const handleClear = (event: ITouchEvent) => {
+      resolveOnChange(event, onChange, "")
+      onClear?.(event)
+    }
 
-  const handleFocus = (event: BaseEventOrig<InputProps.inputForceEventDetail>) => {
-    setFocused(true)
-    onFocus?.(event)
-  }
+    const handleFocus = (event: BaseEventOrig<InputProps.inputForceEventDetail>) => {
+      setFocused(true)
+      onFocus?.(event)
+    }
 
-  const handleBlur = (event: BaseEventOrig<InputProps.inputValueEventDetail>) => {
-    nextTick(() => setFocused(false))
-    resolveOnChange(event, onChange, valueProp)
-    onBlur?.(event)
-  }
+    const handleInput = (event: BaseEventOrig<InputProps.inputEventDetail>) => {
+      setValue(event.detail.value)
+      onChange?.(event)
+    }
 
-  return (
-    <BaseCell
-      className={classNames(
-        prefixClassname("field"),
-        {
-          [prefixClassname("field--disabled")]: disabled,
-        },
-        className,
-      )}
-      style={style}
-      bordered={bordered}
-      align={align}
-      clickable={clickable}
-      titleClassName={classNames(
-        prefixClassname("field__label"),
-        prefixClassname(`field__label--${labelAlign}`),
-      )}
-      title={label}
-      icon={cloneIconElement(icon, { className: prefixClassname("field__icon") })}
-      rightIcon={cloneIconElement(rightIcon, { className: prefixClassname("field__right-icon") })}
-      required={required}
-      onClick={onClick}
-    >
-      <View
-        className={classNames(prefixClassname("field__body"), {
-          [prefixClassname("field__body--textarea")]: type === FieldType.Textarea,
-        })}
-      >
-        {_.isEmpty(children) ? (
-          <Input
-            className={classNames(
-              prefixClassname("field__control"),
-              {
-                [prefixClassname("field__control--disabled")]: disabled,
-                [prefixClassname("field__control--readonly")]: readonly,
-                [prefixClassname("field__control--error")]: error,
-              },
-              prefixClassname(`field__control--${inputAlign}`),
-            )}
-            placeholderClass={classNames(
-              prefixClassname("field__control__placeholder"),
-              {
-                [prefixClassname("field__control__placeholder--readonly")]: readonly,
-                [prefixClassname("field__control__placeholder--error")]: error,
-              },
-              placeholderClassName,
-            )}
-            name={name}
-            value={valueProp}
-            autoFocus={autoFocus}
-            focus={focus}
-            type={type as TaroInputType}
-            password={type === FieldType.Password}
-            placeholder={placeholder}
-            disabled={disabled || readonly}
-            maxlength={maxlength}
-            cursorSpacing={cursorSpacing}
-            confirmType={confirmType}
-            confirmHold={confirmHold}
-            cursor={cursor}
-            selectionStart={selectionStart}
-            selectionEnd={selectionEnd}
-            adjustPosition={adjustPosition}
-            holdKeyboard={holdKeyboard}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onInput={onChange}
-            onConfirm={onConfirm}
-          />
-        ) : (
-          children
+    const handleBlur = (event: BaseEventOrig<InputProps.inputValueEventDetail>) => {
+      nextTick(() => setFocused(false))
+      resolveOnChange(event, onChange, valueProp)
+      onBlur?.(event)
+      validateWithTrigger("onBlur")
+    }
+
+    useFieldValueEffect(() => {
+      resetInvalidMessage()
+      validateWithTrigger("onChange")
+    }, [value])
+
+    const instance = useMemo<FieldInstance>(() => ({ name, validate }), [name, validate])
+
+    useImperativeHandle(ref, () => instance)
+
+    useField(name, instance)
+
+    return (
+      <BaseCell
+        className={classNames(
+          prefixClassname("field"),
+          {
+            [prefixClassname("field--disabled")]: disabled,
+          },
+          className,
         )}
-
-        {allowClear &&
-          cloneIconElement(clearIcon, {
-            className: prefixClassname("field__clear"),
-            onClick: handleClear,
-          })}
-        {button}
-      </View>
-      {message && (
+        style={style}
+        bordered={bordered}
+        align={align}
+        clickable={clickable}
+        titleClassName={classNames(
+          prefixClassname("field__label"),
+          prefixClassname(`field__label--${labelAlign}`),
+        )}
+        title={label}
+        icon={cloneIconElement(icon, { className: prefixClassname("field__icon") })}
+        rightIcon={cloneIconElement(rightIcon, { className: prefixClassname("field__right-icon") })}
+        required={required}
+        onClick={onClick}
+      >
         <View
-          className={classNames(
-            prefixClassname("field__message"),
-            prefixClassname(`field__message--${messageAlign}`),
-            {
-              [prefixClassname("field__message--error")]: error,
-            },
+          className={classNames(prefixClassname("field__body"), {
+            [prefixClassname("field__body--textarea")]: type === "textarea",
+          })}
+        >
+          {_.isEmpty(children) ? (
+            <Input
+              className={classNames(
+                prefixClassname("field__control"),
+                {
+                  [prefixClassname("field__control--disabled")]: disabled,
+                  [prefixClassname("field__control--readonly")]: readonly,
+                  [prefixClassname("field__control--error")]: error || invalidMessage,
+                },
+                prefixClassname(`field__control--${inputAlign}`),
+              )}
+              placeholderClass={classNames(
+                prefixClassname("field__control__placeholder"),
+                {
+                  [prefixClassname("field__control__placeholder--readonly")]: readonly,
+                  [prefixClassname("field__control__placeholder--error")]: error || invalidMessage,
+                },
+                placeholderClassName,
+              )}
+              name={name}
+              value={valueProp}
+              autoFocus={autoFocus}
+              focus={focus}
+              type={type as TaroInputType}
+              password={type === "password"}
+              placeholder={placeholder}
+              disabled={disabled || readonly}
+              maxlength={maxlength}
+              cursorSpacing={cursorSpacing}
+              confirmType={confirmType}
+              confirmHold={confirmHold}
+              cursor={cursor}
+              selectionStart={selectionStart}
+              selectionEnd={selectionEnd}
+              adjustPosition={adjustPosition}
+              holdKeyboard={holdKeyboard}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onInput={handleInput}
+              onConfirm={onConfirm}
+            />
+          ) : (
+            children
           )}
-          children={message}
-        />
-      )}
-    </BaseCell>
-  )
-}
+
+          {allowClear &&
+            cloneIconElement(clearIcon, {
+              className: prefixClassname("field__clear"),
+              onClick: handleClear,
+            })}
+          {button}
+        </View>
+        {(message || invalidMessage) && (
+          <View
+            className={classNames(
+              prefixClassname("field__message"),
+              prefixClassname(`field__message--${messageAlign}`),
+              {
+                [prefixClassname("field__message--error")]: error || invalidMessage,
+              },
+            )}
+            children={message ?? invalidMessage}
+          />
+        )}
+      </BaseCell>
+    )
+  },
+)
 
 export default Field

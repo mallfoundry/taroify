@@ -205,7 +205,6 @@ function ButtonField() {
 | messageAlign | 错误提示文案对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | formatter | 输入内容格式化函数 | _(val: string) => string_ | - |
 | formatTrigger | 格式化函数触发的时机，可选值为 `onBlur` | _string_ | `onChange` |
-| labelClassName | 左侧文本额外类名 | _string \| Array \| object_ | - |
 | labelAlign | 左侧文本对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | inputAlign | 输入框对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | icon | 左侧图标 | _ReactNode_ | - |
