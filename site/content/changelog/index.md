@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.21-alpha.1
+
+`2021-12-22`
+
+**Feature**
+
+- Countdown
+  - 新增单符号（D, H, m, s）格式 [#206](https://github.com/mallfoundry/taroify/issues/206) [#208](https://github.com/mallfoundry/taroify/pull/208)
+
+**Bug Fixes**
+
+- Countdown
+  - 修复 value 无法更新的问题 [#205](https://github.com/mallfoundry/taroify/issues/205) [#208](https://github.com/mallfoundry/taroify/pull/208)
+- SafeArea
+  - 修复 ios11 兼容性 constant(safe-area-inset-*) 的问题 [#199](https://github.com/mallfoundry/taroify/pull/199) [@Brain777777](https://github.com/Brain777777)
+
 ### v0.0.21-alpha.0
 
 `2021-12-16`
