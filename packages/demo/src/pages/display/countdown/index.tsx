@@ -17,6 +17,7 @@ function CountdownWithManualControl() {
         className="manual-control"
         ref={countRef}
         value={30 * 1000}
+        interval={1}
         format="ss:SSS"
         onComplete={() => Toast.open("倒计时结束")}
       />
