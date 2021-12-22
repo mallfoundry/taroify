@@ -50,13 +50,15 @@ const Countdown = forwardRef<CountdownInstance, CountdownProps>((props, ref) => 
     if (_.isFunction(children)) {
       return children(current)
     }
+    if (children) {
+      return children
+    }
     if (_.isFunction(format)) {
       return format(current)
     }
     if (format) {
       return parseFormat(format, current)
     }
-    return children
   }, [children, current, format])
 
   return (
