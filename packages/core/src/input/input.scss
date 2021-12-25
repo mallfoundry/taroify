@@ -1,0 +1,89 @@
+@import "./variables";
+
+.#{$component-prefix}input {
+  // For wechat
+  &,
+    // For h5
+  & > input {
+    height: $input-height;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    min-width: 0; // for flex-shrink in field__button
+    padding: 0;
+    margin: 0;
+    line-height: inherit;
+    color: $input-color;
+    text-align: left;
+    resize: none;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+
+    // for ios wechat
+    &[type='date'],
+    &[type='time'],
+    &[type='datetime-local'] {
+      min-height: var(--cell-line-height, $cell-line-height);
+    }
+
+    // for safari
+    &[type='search'] {
+      appearance: none;
+    }
+  }
+
+  // For wechat
+  &__placeholder,
+    // For h5
+  & > input::placeholder {
+    color: var(--input-placeholder-color, $input-placeholder-color);
+  }
+
+  // For wechat
+  &__placeholder--readonly {
+    color: inherit;
+  }
+
+  &--readonly {
+    cursor: default;
+
+    & > input::placeholder,
+    &::placeholder {
+      color: inherit;
+    }
+  }
+
+  &--disabled {
+    color: var(--input-disabled-color, $input-disabled-color);
+    cursor: not-allowed;
+    opacity: 1;
+    // fix disabled color in mobile safari
+    -webkit-text-fill-color: var(--input-disabled-color, $input-disabled-color);
+  }
+
+  &--center,
+    // For h5
+  &--center > input {
+    justify-content: center;
+    text-align: center;
+  }
+
+  &--right,
+    // For h5
+  &--right > input {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  &__clear {
+    flex-shrink: 0;
+    padding: 0 var(--padding-xs, $padding-xs);
+    margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
+    line-height: inherit;
+    font-size: var(--input-clear-icon-size, $input-clear-icon-size);
+    color: var(--input-clear-icon-color, $input-clear-icon-color);
+    cursor: pointer;
+  }
+}
+

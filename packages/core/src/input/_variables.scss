@@ -1,0 +1,11 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+@import "../cell/variables";
+
+$input-height: var(--input-height, 24px * $hd);
+$input-color: var(--input-color, var(--text-color, $text-color));
+$input-error-color: var(--danger-color, $danger-color);
+$input-disabled-color: var(--gray-5, $gray-5);
+$input-placeholder-color: var(--gray-5, $gray-5);
+$input-clear-icon-size: 16px * $hd;
+$input-clear-icon-color: var(--gray-5, $gray-5);
