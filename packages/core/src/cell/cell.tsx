@@ -1,7 +1,7 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
 import { ReactNode } from "react"
-import BaseCell from "./base-cell"
+import CellBase from "./cell-base"
 import { CellAlign, CellSize } from "./cell.shared"
 
 export interface CellProps extends ViewProps {
@@ -17,7 +17,7 @@ export interface CellProps extends ViewProps {
 }
 
 function Cell(props: CellProps) {
-  return <BaseCell {...props} />
+  return <CellBase {...props} />
 }
 
 export default Cell

@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
 import { CellAlign, CellSize } from "./cell.shared"
 
-export interface BaseCellProps extends ViewProps {
+export interface CellBaseProps extends ViewProps {
   titleClassName?: string
   briefClassName?: string
   valueClassName?: string
@@ -24,7 +24,7 @@ export interface BaseCellProps extends ViewProps {
   children?: ReactNode
 }
 
-function BaseCell(props: BaseCellProps) {
+function CellBase(props: CellBaseProps) {
   const {
     className,
     titleClassName,
@@ -91,4 +91,4 @@ function BaseCell(props: BaseCellProps) {
   )
 }
 
-export default BaseCell
+export default CellBase
