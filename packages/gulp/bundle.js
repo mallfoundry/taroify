@@ -61,4 +61,5 @@ function createBundle(name) {
   )
 }
 
+exports.cleanBundle = cleanBundle
 exports.createBundle = createBundle

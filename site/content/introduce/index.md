@@ -117,3 +117,11 @@ function Index() {
 ### 开源协议
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
+
+## 赞助者
+
+开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。Taroify 经常为此肝到深夜 ……
+
+如果您认为 Taroify 帮助到了您的开发工作，您可以捐赠 Taroify 的研发工作，捐赠无门槛，哪怕是一杯可乐也好（相信这比打赏主播更有意义）。
+
+<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechatpay.png" width="260" style="width: 260px;" />

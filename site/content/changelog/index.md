@@ -12,6 +12,28 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.21-alpha.0
+
+`2021-12-16`
+
+**New Component**
+
+- 新增 SafeArea 组件 [#195](https://github.com/mallfoundry/taroify/pull/195)
+
+**Feature**
+
+- Badge
+  - 新增 position 属性 [#196](https://github.com/mallfoundry/taroify/pull/196)
+- Button
+  - 新增 loading.size 属性 [#192](https://github.com/mallfoundry/taroify/pull/192) [@zjwshisb](https://github.com/zjwshisb)
+- ShareSheet.Option
+  - 新增 openType 属性 [#194](https://github.com/mallfoundry/taroify/pull/194) [@kunkuntang](https://github.com/kunkuntang)
+
+**Bug Fixes**
+
+- Badge
+  - 修复 content toString 的问题 [#196](https://github.com/mallfoundry/taroify/pull/196)
+
 ### v0.0.20-alpha.5
 
 `2021-12-15`

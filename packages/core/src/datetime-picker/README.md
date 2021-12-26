@@ -254,7 +254,7 @@ function DatePickerWithFields() {
 | max | 可选的最大时间，精确到秒 | _Date_ | 十年后 |
 | filter | 选项过滤函数 | _(type: string, values: string[]) => string[]_ | - |
 | formatter | 选项格式化函数 | _(type: string, value: string) => string_ | - |
-| fields | 自定义列排序数组, 子项可选值为<br> `year`、`month`、`day`、`hour`、`minute` | _string[]_ | - |
+| fields | 自定义列排序数组, 子项可选值为<br> `year` `month` `day` `hour` `minute` | _string[]_ | - |
 | loading | 是否显示加载状态 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
 | siblingCount | 可见的选项相邻个数 | _number_ | `3` |

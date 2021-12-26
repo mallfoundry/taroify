@@ -1,9 +1,10 @@
-import { Button as TaroButton, ButtonProps as TaroButtonProps, View } from "@tarojs/components"
+import { ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
-import Loading, { LoadingType } from "../loading"
+import { ReactNode, useContext, useMemo } from "react"
+import ButtonBase from "../button-base"
+import Loading, { LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
 import ButtonContext from "./button.context"
 import {
@@ -14,15 +15,21 @@ import {
   ButtonVariant,
 } from "./button.shared"
 
-interface ButtonLoadingProps {
-  type?: LoadingType
-}
-
-function useButtonLoading(loading?: boolean | ButtonLoadingProps): ButtonLoadingProps | undefined {
-  if (_.isBoolean(loading)) {
-    return loading ? {} : undefined
-  }
-  return loading
+function useButtonLoading(loading?: boolean | LoadingProps): ReactNode {
+  return useMemo(() => {
+    if (_.isBoolean(loading) && loading) {
+      return <Loading className={prefixClassname("button__loading")} />
+    } else if (_.isObjectLike(loading)) {
+      const { className, ...restProps } = loading as LoadingProps
+      return (
+        <Loading
+          className={classNames(prefixClassname("button__loading"), className)}
+          {...restProps}
+        />
+      )
+    }
+    return loading
+  }, [loading])
 }
 
 export interface ButtonProps
@@ -32,7 +39,7 @@ export interface ButtonProps
   size?: ButtonSize
   color?: ButtonColor
   formType?: ButtonFormType
-  loading?: boolean | ButtonLoadingProps
+  loading?: boolean | LoadingProps
   block?: boolean
   hairline?: boolean
   disabled?: boolean
@@ -58,7 +65,9 @@ export default function Button(props: ButtonProps) {
     onClick,
     ...restProps
   } = props
-  const loadingProps = useButtonLoading(loadingProp)
+
+  const loading = useButtonLoading(loadingProp)
+
   const { onClick: onCtxClick } = useContext(ButtonContext)
 
   return (
@@ -84,28 +93,24 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button--hairline")]: hairline,
           [prefixClassname("hairline--surround")]: hairline,
           [prefixClassname("button--disabled")]: disabled,
-          [prefixClassname("button--loading")]: loadingProps,
+          [prefixClassname("button--loading")]: loading,
           [prefixClassname("button--block")]: block,
         },
         className,
       )}
       style={style}
       onClick={(e) => {
-        if (!disabled && !loadingProps) {
+        if (!disabled && !loading) {
           onClick?.(e)
           onCtxClick?.(e, props)
         }
       }}
     >
       <View className={prefixClassname("button__content")}>
-        {loadingProps ? (
-          <Loading className={prefixClassname("button__loading")} {...loadingProps} />
-        ) : (
-          icon
-        )}
+        {loading ?? icon}
         {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
-      <TaroButton
+      <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
         disabled={disabled}

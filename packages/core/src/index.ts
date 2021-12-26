@@ -11,6 +11,7 @@ export { default as Space } from "./space"
 export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
+export { default as SafeArea } from "./safe-area"
 // Form Components
 export { default as Cascader } from "./cascader"
 export { default as Calendar } from "./calendar"

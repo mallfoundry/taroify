@@ -12,6 +12,8 @@
     box-sizing: border-box;
     display: flex;
     padding: var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
+    overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
 
     &::before {
@@ -30,16 +32,26 @@
   }
 
   &__option {
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     width: initial;
-    // Remove sheet__item style
-    padding: 0;
+    //// Remove sheet__item style
+    //padding: 0;
     cursor: pointer;
     user-select: none;
+    //// Remove TaroButton default style
+    //background-color: unset;
+    margin-top: 0;
 
-    &:active {
+    //// Remove TaroButton default style
+    //&::after {
+    //  border: unset;
+    //  border-radius: unset;
+    //}
+
+    &:not([disabled]):active {
       background-color: transparent;
       opacity: var(--active-opacity, $active-opacity);
     }

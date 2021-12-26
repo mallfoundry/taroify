@@ -1,6 +1,6 @@
 {
   "name": "@taroify/demo",
-  "version": "0.0.20-alpha.5",
+  "version": "0.0.21-alpha.0",
   "description": "",
   "author": "Taroify",
   "private": "true",
@@ -36,15 +36,16 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@taroify/core": "^0.0.20-alpha.5",
-    "@taroify/hooks": "^0.0.20-alpha.5",
-    "@taroify/icons": "^0.0.20-alpha.5",
+    "@taroify/core": "^0.0.21-alpha.0",
+    "@taroify/hooks": "^0.0.21-alpha.0",
+    "@taroify/icons": "^0.0.21-alpha.0",
     "@tarojs/components": "3.3.14",
     "@tarojs/react": "3.3.14",
     "@tarojs/runtime": "3.3.14",
     "@tarojs/taro": "3.3.14",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
+    "lorem-ipsum": "^2.0.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-native": "^0.65.1"

@@ -1,0 +1,17 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+.#{$component-prefix}safe-area {
+  display: block;
+  width: 100%;
+
+  &--top {
+    padding-top: constant(safe-area-inset-top); /* 兼容 iOS < 11.2 */
+    padding-top: env(safe-area-inset-top); /* 兼容 iOS >= 11.2 */
+  }
+
+  &--bottom {
+    padding-bottom: constant(safe-area-inset-bottom); /* 兼容 iOS < 11.2 */
+    padding-bottom: env(safe-area-inset-bottom); /* 兼容 iOS >= 11.2 */
+  }
+}

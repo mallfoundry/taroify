@@ -1,6 +1,5 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -13,8 +12,8 @@ import {
   useContext,
   useMemo,
 } from "react"
+import ButtonBase, { ButtonBaseProps } from "../button-base"
 import Image from "../image"
-import Sheet from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
@@ -55,10 +54,10 @@ function useShareSheetOptionIcon(node?: ReactNode) {
   return useMemo(() => renderShareSheetOptionIcon(node), [node])
 }
 
-interface ShareSheetOptionProps extends ViewProps {
+interface ShareSheetOptionProps
+  extends Omit<ButtonBaseProps, "size" | "type" | "plain" | "loading" | "formType"> {
   className?: string
   style?: CSSProperties
-  loading?: boolean
   disabled?: boolean
   icon?: ReactNode
   name?: ReactNode
@@ -66,20 +65,17 @@ interface ShareSheetOptionProps extends ViewProps {
 }
 
 export function ShareSheetOption(props: ShareSheetOptionProps) {
-  const { className, loading, disabled, icon, name, description, onClick, ...restProps } = props
+  const { className, style, disabled, icon, name, description, onClick, ...restProps } = props
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
   return (
-    <Sheet.Item
+    <View
       className={classNames(prefixClassname("share-sheet__option"), className)}
-      loading={loading}
-      disabled={loading}
-      {...restProps}
+      style={style}
       onClick={(event) => {
         onClick?.(event)
         onSelect?.({
-          loading,
           disabled,
           icon,
           name,
@@ -95,7 +91,8 @@ export function ShareSheetOption(props: ShareSheetOptionProps) {
           children={description}
         />
       )}
-    </Sheet.Item>
+      <ButtonBase className={prefixClassname("share-sheet__button")} {...restProps} />
+    </View>
   )
 }
 

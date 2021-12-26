@@ -1,6 +1,7 @@
-import * as _ from "lodash"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
+import { useUpdate } from "../hooks"
 import { cancelRaf, raf } from "../utils/raf"
+import { useToRef } from "../utils/state"
 import { CurrentTime } from "./countdown.shared"
 
 type CountdownStatus = "started" | "paused" | "stopped"
@@ -43,28 +44,30 @@ export interface UseCountdownOptions {
 
 export default function useCountdown(options: UseCountdownOptions) {
   const {
-    value,
+    value: valueProp,
     autostart: autostartProp,
     interval: intervalOption = 1000,
     onChange,
     onComplete,
   } = options
 
-  const interval = _.clamp(intervalOption, 1)
+  const update = useUpdate()
+
+  const intervalRef = useToRef(Math.max(intervalOption, 1))
+
+  const valueRef = useToRef(valueProp)
 
   const rafIdRef = useRef<number>()
 
   const statusRef = useRef<CountdownStatus>()
 
   const endTimeRef = useRef<number>(0)
-  const countingRef = useRef<boolean>()
 
-  const [remain, setRemain] = useState(value)
+  const remainRef = useRef(valueProp)
 
-  const current = useMemo(() => parseTime(remain), [remain])
+  const current = parseTime(remainRef.current)
 
   const pause = useCallback(() => {
-    countingRef.current = false
     statusRef.current = "paused"
     if (rafIdRef.current) {
       cancelRaf(rafIdRef.current)
@@ -73,45 +76,44 @@ export default function useCountdown(options: UseCountdownOptions) {
 
   const getCurrentRemain = () => Math.max(endTimeRef.current - Date.now(), 0)
 
-  const nextRemain = useCallback(
-    (value: number) => {
-      setRemain(value)
-      onChange?.(current)
-      if (value === 0) {
-        pause()
-        onComplete?.()
-      }
-    },
-    [current, onChange, onComplete, pause],
-  )
+  const nextRemain = (nextValue: number) => {
+    remainRef.current = nextValue
+    update()
+    onChange?.(current)
+    if (nextValue === 0) {
+      pause()
+      onComplete?.()
+    }
+  }
 
-  const macroTick = useCallback(() => {
+  function macroTick() {
     rafIdRef.current = raf(() => {
       // in case of call reset immediately after finish
-      if (countingRef.current) {
+      if (statusRef.current === "started") {
         const remainRemain = getCurrentRemain()
 
-        if (!isSameTime(remainRemain, remain, interval) || remainRemain === 0) {
+        if (
+          !isSameTime(remainRemain, remainRef.current, intervalRef.current) ||
+          remainRemain === 0
+        ) {
           nextRemain(remainRemain)
         }
-        if (remain > 0) {
+        if (remainRef.current > 0) {
           macroTick()
         }
       }
     })
-  }, [interval, nextRemain, remain])
-
-  const tick = useCallback(macroTick, [macroTick])
+  }
 
   const start = useCallback(
     () => {
-      if (!countingRef.current) {
-        if (_.includes(["stopped", undefined], statusRef.current)) {
-          endTimeRef.current = Date.now() + remain
-        }
+      if (statusRef.current !== "started") {
+        // If status is paused, set endTime to now() + remain.
+        // If status is stopped, set endTime to now() + initial value.
+        endTimeRef.current =
+          Date.now() + (statusRef.current === "paused" ? remainRef.current : valueRef.current)
         statusRef.current = "started"
-        countingRef.current = true
-        tick()
+        macroTick()
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -159,6 +161,13 @@ export default function useCountdown(options: UseCountdownOptions) {
     () => autostart(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
+  )
+
+  // Update remain to next value
+  useEffect(
+    () => restart(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [valueProp],
   )
 
   return useMemo(
