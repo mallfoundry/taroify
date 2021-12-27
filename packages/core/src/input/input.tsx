@@ -7,11 +7,10 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo, useState } from "react"
-import { FieldClearTrigger } from "../field"
 import { prefixClassname } from "../styles"
 import raf from "../utils/raf"
 import { useValue } from "../utils/state"
-import { InputAlign } from "./input.shared"
+import { InputAlign, InputClearTrigger } from "./input.shared"
 
 export function resolveOnChange<
   E extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
@@ -62,7 +61,7 @@ interface InputProps extends TaroInputProps {
   align?: InputAlign
   clearable?: boolean
   clearIcon?: ReactNode
-  clearTrigger?: FieldClearTrigger
+  clearTrigger?: InputClearTrigger
 
   onClear?(event: ITouchEvent): void
 
