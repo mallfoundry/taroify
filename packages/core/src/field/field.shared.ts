@@ -1,29 +1,14 @@
 import { ReactNode } from "react"
 
-export type FieldType = "number" | "text" | "idcard" | "digit" | "textarea" | "password"
-
-export type FieldClearTrigger = "always" | "focus"
-
 export type FieldLabelAlign = "left" | "center" | "right"
 
-export type FieldInputAlign = "left" | "center" | "right"
-
 export type FieldMessageAlign = "left" | "center" | "right"
-
-export interface FieldAutosize {
-  maxHeight: number
-  minHeight: number
-}
-
-export type FieldConfirmType = "send" | "search" | "next" | "go" | "done"
-
-export type FieldFormatTrigger = "onBlur" | "onChange"
 
 export type FieldValidateTrigger = "onBlur" | "onChange" | "onSubmit"
 
 export interface FieldValidError {
   name?: string
-  message: ReactNode
+  errors: ReactNode[]
 }
 
 export type FieldRuleMessage = string | ((value: any, rule: FieldRule) => string)
