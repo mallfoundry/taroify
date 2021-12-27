@@ -1,24 +1,25 @@
 import * as _ from "lodash"
-import { FieldInstance } from "../field"
-import { FieldValidError } from "../field/field.shared"
+import { FieldInstance, FieldValidError } from "../field"
 
 export function validateAll(fields: FieldInstance[]) {
   return new Promise<void>((resolve, reject) => {
     Promise.all(
       fields.map((field) =>
         field.validate().then(
-          () => [],
-          (reason) => [reason],
+          () => [] as FieldValidError[],
+          (reason) => [reason] as FieldValidError[],
         ),
       ),
-    ).then((errors) => {
-      errors = _.flatMap(errors, (error) => error)
-      if (errors.length) {
-        reject(errors)
-      } else {
-        resolve()
-      }
-    })
+    )
+      .then((errors) => _.flatMap<FieldValidError[], FieldValidError>(errors, (error) => error))
+      .then((errors) => _.filter<FieldValidError>(errors, (error) => !_.isEmpty(error.errors)))
+      .then((errors) => {
+        if (!_.isEmpty(errors)) {
+          reject(errors)
+        } else {
+          resolve()
+        }
+      })
   })
 }
 
