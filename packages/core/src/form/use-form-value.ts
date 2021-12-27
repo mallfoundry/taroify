@@ -12,21 +12,21 @@ export default function useFormValue(name?: string) {
   const onValueChange = useCallback(() => update(), [update])
 
   useEffect(() => {
-    form.addListener(`values.${name}.change`, onValueChange)
-    return () => form.removeListener(`values.${name}.change`, onValueChange)
+    form.addEventListener(`fields.${name}.value.change`, onValueChange)
+    return () => form.removeEventListener(`fields.${name}.value.change`, onValueChange)
   }, [form, name, onValueChange])
 
   return useMemo(
     () => ({
       get value() {
-        return _.get(form?.getValues(), name as string)
+        return _.get(form?.getFieldsValue(), name as string)
       },
       setValue: (value: any) => {
         if (name) {
-          form?.setValues({ [name]: value })
+          form?.setFieldsValue({ [name]: value })
         }
       },
-      getValue: () => _.get(form?.getValues(), name as string),
+      getValue: () => _.get(form?.getFieldsValue(), name as string),
     }),
     [form, name],
   )
