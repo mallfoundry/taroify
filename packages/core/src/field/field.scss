@@ -22,7 +22,7 @@
     &--required {
       &::before {
         margin-right: 2px * $hd;
-        color: var(--field-required-mark-color, $field-required-mark-color);
+        color: var(--field-required-color, $field-required-color);
         content: '*';
       }
     }
@@ -30,7 +30,7 @@
 
   &--disabled {
     .#{$component-prefix}field__label {
-      color: var(--field-disabled-text-color, $field-disabled-text-color);
+      color: var(--field-disabled-color, $field-disabled-color);
     }
   }
 
@@ -43,134 +43,15 @@
     align-items: center;
   }
 
-  &__body--textarea {
-    box-sizing: border-box;
-    min-height: 24px * $hd;
-    padding: 3.6px * $hd 0;
-    line-height: 1.2em;
-  }
-
-  input.#{$component-prefix}field__control,
-  &__control>input {
-    height: var(--field-input-height, $field-input-height);
-  }
-
-  textarea.#{$component-prefix}field__control,
-  &__control>textarea {
-    display: block;
-    height: 18px * $hd;
-    min-height: 18px * $hd;
-  }
-
-
-  &__control,
-  &__control>input,
-  &__control>textarea {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    min-width: 0; // for flex-shrink in field__button
-    padding: 0;
-    margin: 0;
-    line-height: inherit;
-    color: var(--field-input-text-color, $field-input-text-color);
-    text-align: left;
-    resize: none;
-    background-color: transparent;
-    border: 0;
-    outline: none;
-
-    &__placeholder,
-    &::placeholder {
-      color: var(--field-placeholder-text-color, $field-placeholder-text-color);
-    }
-
-    &__placeholder--readonly {
-      color: inherit;
-    }
-
-    &--disabled {
-      color: var(--field-input-disabled-text-color, $field-input-disabled-text-color);
-      cursor: not-allowed;
-      opacity: 1;
-      // fix disabled color in mobile safari
-      -webkit-text-fill-color: var(--field-input-disabled-text-color, $field-input-disabled-text-color);
-    }
-
-    &--readonly {
-      cursor: default;
-
-      & input::placeholder,
-      & textarea::placeholder,
-      &::placeholder {
-        color: inherit;
-      }
-    }
-
-    &--center,
-    &--center>input,
-    &--center>textarea {
-      justify-content: center;
-      text-align: center;
-    }
-
-    &--right,
-    &--right>input,
-    &--right>textarea {
-      justify-content: flex-end;
-      text-align: right;
-    }
-
-    &--custom {
-      display: flex;
-      align-items: center;
-      min-height: var(--cell-line-height, $cell-line-height);
-    }
-
-    &--error,
-    &__placeholder--error,
-    &--error>input::placeholder,
-    &--error>textarea::placeholder,
-    &--error::placeholder {
-      color: var(--field-input-error-text-color, $field-input-error-text-color);
-      -webkit-text-fill-color: currentColor;
-    }
-
-    &--min-height {
-      min-height: var(--field-text-area-min-height, $field-text-area-min-height);
-    }
-
-    // for ios wechat
-    &[type='date'],
-    &[type='time'],
-    &[type='datetime-local'] {
-      min-height: var(--cell-line-height, $cell-line-height);
-    }
-
-    // for safari
-    &[type='search'] {
-      appearance: none;
-    }
-  }
-
-  &__clear,
   &__icon,
-  &__button,
   &__right-icon {
     flex-shrink: 0;
   }
 
-  &__clear,
   &__right-icon {
     padding: 0 var(--padding-xs, $padding-xs);
     margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
     line-height: inherit;
-  }
-
-  &__clear {
-    font-size: var(--field-clear-icon-size, $field-clear-icon-size);
-    color: var(--field-clear-icon-color, $field-clear-icon-color);
-    cursor: pointer;
   }
 
   &__icon.#{$component-prefix}icon,
@@ -180,16 +61,16 @@
     line-height: inherit;
   }
 
-  &__button {
-    padding-left: var(--padding-xs, $padding-xs);
+  .#{$component-prefix}input + .#{$component-prefix}button {
+    margin-left: var(--padding-xs, $padding-xs);
+    flex-shrink: 0;
   }
 
-  &__message {
-    font-size: var(--field-error-message-font-size, $field-error-message-font-size);
-    text-align: left;
+  &__explain {
+    font-size: var(--field-explain-error-font-size, $field-explain-error-font-size);
 
-    &--error {
-      color: var(--field-error-message-color, $field-error-message-color);
+    &--left {
+      text-align: left;
     }
 
     &--center {
@@ -198,6 +79,10 @@
 
     &--right {
       text-align: right;
+    }
+
+    &__error {
+      color: var(--field-explain-error-color, $field-explain-error-color);
     }
   }
 }
