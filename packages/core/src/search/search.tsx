@@ -7,8 +7,8 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode } from "react"
-import Field, { FieldClearTrigger, FieldClearTriggerString } from "../field"
-import { FieldInputAlign, FieldInputAlignString } from "../field/field.shared"
+import Field from "../field"
+import Input, { InputAlign, InputClearTrigger } from "../input"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 
@@ -25,8 +25,8 @@ interface SearchProps extends ViewProps {
   placeholderClassName?: string
   clearable?: boolean
   clearIcon?: ReactNode
-  clearTrigger?: FieldClearTrigger | FieldClearTriggerString
-  inputAlign?: FieldInputAlign | FieldInputAlignString
+  clearTrigger?: InputClearTrigger
+  inputAlign?: InputAlign
   autoFocus?: boolean
   focus?: boolean
   disabled?: boolean
@@ -103,28 +103,31 @@ function Search(props: SearchProps) {
         {label && <View className={prefixClassname("search__label")} children={label} />}
         <Field
           className={prefixClassname("search__field")}
-          placeholderClassName={placeholderClassName}
-          value={value}
           icon={icon}
-          maxlength={maxlength}
-          placeholder={placeholder}
-          clearable={clearable}
-          clearIcon={clearIcon}
-          clearTrigger={clearTrigger}
-          inputAlign={inputAlign}
-          autoFocus={autoFocus}
-          focus={focus}
-          disabled={disabled}
-          readonly={readonly}
           error={error}
           message={message}
-          confirmType="search"
-          onConfirm={handleSearch}
-          onClear={onClear}
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
+        >
+          <Input
+            placeholderClassName={placeholderClassName}
+            value={value}
+            maxlength={maxlength}
+            placeholder={placeholder}
+            clearable={clearable}
+            clearIcon={clearIcon}
+            clearTrigger={clearTrigger}
+            align={inputAlign}
+            autoFocus={autoFocus}
+            focus={focus}
+            disabled={disabled}
+            readonly={readonly}
+            confirmType="search"
+            onConfirm={handleSearch}
+            onClear={onClear}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+        </Field>
       </View>
       {action && (
         <View
