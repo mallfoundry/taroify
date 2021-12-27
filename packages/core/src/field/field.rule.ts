@@ -3,12 +3,7 @@ import { ReactNode } from "react"
 import { isPromise } from "../utils/promisify"
 import { FieldRule } from "./field.shared"
 
-export interface FieldValidResult {
-  invalid: boolean
-  message?: ReactNode
-}
-
-function isEmptyValue(value: unknown) {
+function isEmptyValue(value: any) {
   if (Array.isArray(value)) {
     return !value.length
   }
@@ -18,77 +13,62 @@ function isEmptyValue(value: unknown) {
   return !value
 }
 
-function getRuleMessage(value: unknown, rule: FieldRule) {
+function getRuleMessage(value: any, rule: FieldRule) {
   const { message } = rule
 
   if (_.isFunction(message)) {
     return message(value, rule)
   }
-  return message || ""
+  return message
 }
 
-function getSyncRule(value: unknown, rule: FieldRule) {
+function getSyncRule(value: any, rule: FieldRule) {
   if (rule.required && isEmptyValue(value)) {
-    return Promise.resolve({
-      invalid: true,
-      message: getRuleMessage(value, rule),
-    })
+    return Promise.resolve(getRuleMessage(value, rule))
   }
 
   if (rule.pattern && !rule.pattern.test(String(value))) {
-    return Promise.resolve({
-      invalid: true,
-      message: getRuleMessage(value, rule),
-    })
+    return Promise.resolve(getRuleMessage(value, rule))
   }
 }
 
-function getValidatorRule(value: unknown, rule: FieldRule) {
-  return new Promise((resolve) => {
-    const result = rule.validator?.(value, rule)
-
-    if (isPromise(result)) {
-      return result.then(resolve)
+function getValidatorRule(value: any, rule: FieldRule) {
+  return new Promise<ReactNode>((resolve) => {
+    const promise = rule.validator?.(value, rule)
+    if (isPromise(promise)) {
+      promise
+        .then((error) => (_.isBoolean(error) && !error ? getRuleMessage(value, rule) : error))
+        .then(resolve)
+      return
     }
 
-    resolve(result)
-  }).then((result) => {
-    if (result && typeof result === "string") {
-      return {
-        invalid: true,
-        message: result,
-      }
-    } else if (result === false) {
-      return {
-        invalid: true,
-        message: getRuleMessage(value, rule),
-      }
+    if (_.isBoolean(promise) && !promise) {
+      resolve(getRuleMessage(value, rule))
+      return
     }
-
-    return {
-      invalid: false,
-    }
+    resolve(promise)
   })
 }
 
-function validateRule(value: unknown, rule: FieldRule): Promise<FieldValidResult> {
+function validateRule(value: any, rule: FieldRule): Promise<ReactNode> {
   return getSyncRule(value, rule) ?? getValidatorRule(value, rule)
 }
 
-export function validateRules(value: unknown, rules: FieldRule[]): Promise<FieldValidResult> {
+export function validateRules(value: any, rules: FieldRule[]): Promise<ReactNode[]> {
   return rules.reduce(
     (promise, rule) =>
-      promise.then((stepResult) => {
-        if (stepResult.invalid) {
-          return stepResult
-        }
-
+      promise.then((errors) => {
         if (rule.formatter) {
           value = rule.formatter(value, rule)
         }
 
-        return validateRule(value, rule)
+        return validateRule(value, rule).then((error) => {
+          if (error) {
+            errors.push(error)
+          }
+          return errors
+        })
       }),
-    Promise.resolve({ invalid: false }),
+    Promise.resolve<ReactNode[]>([]),
   )
 }
