@@ -23,12 +23,9 @@ function BasicField() {
   const [value, setValue] = useState("")
   return (
     <Cell.Group inset>
-      <Field
-        value={value}
-        label="文本"
-        placeholder="请输入文本"
-        onChange={(e) => setValue(e.detail.value)}
-      />
+      <Field label="文本">
+        <Input placeholder="请输入文本" value={value} onChange={(e) => setValue(e.detail.value)} />
+      </Field>
     </Cell.Group>
   )
 }
@@ -49,40 +46,41 @@ function CustomField() {
   const [password, setPassword] = useState("")
   return (
     <Cell.Group inset>
-      <Field
-        value={text}
-        label="文本"
-        placeholder="请输入文本"
-        onChange={(e) => setText(e.detail.value)}
-      />
-      <Field
-        value={idcard}
-        label="身份证号"
-        type="idcard"
-        placeholder="请输入手机号"
-        onChange={(e) => setIdcard(e.detail.value)}
-      />
-      <Field
-        value={number}
-        label="整数"
-        type="number"
-        placeholder="请输入整数"
-        onChange={(e) => setNumber(e.detail.value)}
-      />
-      <Field
-        value={digit}
-        label="数字"
-        type="digit"
-        placeholder="请输入数字（支持小数）"
-        onChange={(e) => setDigit(e.detail.value)}
-      />
-      <Field
-        value={password}
-        label="密码"
-        type="password"
-        placeholder="请输入密码"
-        onChange={(e) => setPassword(e.detail.value)}
-      />
+      <Field label="文本">
+        <Input placeholder="请输入文本" value={text} onChange={(e) => setText(e.detail.value)} />
+      </Field>
+      <Field label="身份证号">
+        <Input
+          type="idcard"
+          placeholder="请输入手机号"
+          value={idcard}
+          onChange={(e) => setIdcard(e.detail.value)}
+        />
+      </Field>
+      <Field label="整数">
+        <Input
+          type="number"
+          placeholder="请输入整数"
+          value={number}
+          onChange={(e) => setNumber(e.detail.value)}
+        />
+      </Field>
+      <Field label="数字">
+        <Input
+          type="digit"
+          placeholder="请输入数字（支持小数）"
+          value={digit}
+          onChange={(e) => setDigit(e.detail.value)}
+        />
+      </Field>
+      <Field label="密码">
+        <Input
+          password
+          placeholder="请输入密码"
+          value={password}
+          onChange={(e) => setPassword(e.detail.value)}
+        />
+      </Field>
     </Cell.Group>
   )
 }
@@ -98,8 +96,12 @@ import { Cell, Field } from "@taroify/core"
 function DisabledField() {
   return (
     <Cell.Group inset>
-      <Field label="文本" placeholder="输入框只读" readonly />
-      <Field label="文本" placeholder="输入框已禁用" disabled />
+      <Field label="文本">
+        <Input placeholder="输入框只读" readonly />
+      </Field>
+      <Field label="文本">
+        <Input placeholder="输入框已禁用" disabled />
+      </Field>
     </Cell.Group>
   )
 }
@@ -113,24 +115,14 @@ function DisabledField() {
 import { Cell, Field } from "@taroify/core"
 
 function IconField() {
-  const [value2, setValue2] = useState("")
-
   return (
     <Cell.Group inset>
-      <Field
-        label="文本"
-        icon={<SmileOutlined />}
-        rightIcon={<WarningOutlined />}
-        placeholder="显示图标"
-      />
-      <Field
-        value={value2}
-        label="文本"
-        icon={<MusicOutlined />}
-        clearable
-        placeholder="显示清除图标"
-        onChange={(e) => setValue2(e.detail.value)}
-      />
+      <Field label="文本" icon={<SmileOutlined />} rightIcon={<WarningOutlined />}>
+        <Input placeholder="显示图标" />
+      </Field>
+      <Field label="文本" icon={<MusicOutlined />}>
+        <Input placeholder="显示清除图标" clearable />
+      </Field>
     </Cell.Group>
   )
 }
@@ -164,12 +156,11 @@ import { Cell, Field } from "@taroify/core"
 function ButtonField() {
   return (
     <Cell.Group inset>
-      <Field align="center" label="短信验证码" placeholder="请输入短信验证码">
-        <Field.Button>
-          <Button size="small" color="primary">
-            发送验证码
-          </Button>
-        </Field.Button>
+      <Field align="center" label="短信验证码">
+        <Input placeholder="请输入短信验证码" />
+        <Button size="small" color="primary">
+          发送验证码
+        </Button>
       </Field>
     </Cell.Group>
   )
