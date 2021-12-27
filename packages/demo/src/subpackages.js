@@ -85,6 +85,11 @@ const subpackages = [
         path: "field/index",
       },
       {
+        title: "Form 表单",
+        name: "Form",
+        path: "form/index",
+      },
+      {
         title: "DatetimePicker 时间选择",
         name: "DatetimePicker ",
         path: "datetime-picker/index",
