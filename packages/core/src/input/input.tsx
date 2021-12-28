@@ -55,7 +55,7 @@ export function resolveOnChange<
   onChange((e as unknown) as BaseEventOrig<E2>)
 }
 
-interface InputProps extends TaroInputProps {
+export interface InputProps extends TaroInputProps {
   placeholderClassName?: string
   readonly?: boolean
   align?: InputAlign
