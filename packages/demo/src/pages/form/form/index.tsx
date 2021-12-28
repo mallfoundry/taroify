@@ -1,4 +1,4 @@
-import { Button, Cell, Field, Form, Input, Toast } from "@taroify/core"
+import { Button, Cell, Form, Input, Toast } from "@taroify/core"
 import { View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps } from "@tarojs/components/types/Form"
@@ -9,18 +9,25 @@ import "./index.scss"
 
 function BasicForm() {
   function onSubmit(event: BaseEventOrig<FormProps.onSubmitEventDetail>) {
-    console.log(event.detail.value)
+    Toast.open(JSON.stringify(event.detail.value))
   }
 
   return (
     <Form onSubmit={onSubmit}>
+      <Toast id="toast" />
       <Cell.Group inset>
-        <Field name="username" label="用户名" rules={[{ required: true, message: "请填写用户名" }]}>
-          <Input placeholder="用户名" />
-        </Field>
-        <Field name="password" label="密码" rules={[{ required: true, message: "请填写密码" }]}>
-          <Input password placeholder="密码" />
-        </Field>
+        <Form.Item name="username" rules={[{ required: true, message: "请填写用户名" }]}>
+          <Form.Label>用户名</Form.Label>
+          <Form.Control>
+            <Input placeholder="用户名" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="password" rules={[{ required: true, message: "请填写密码" }]}>
+          <Form.Label>用户名</Form.Label>
+          <Form.Control>
+            <Input password placeholder="密码" />
+          </Form.Control>
+        </Form.Item>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
@@ -46,34 +53,39 @@ function FormWithRules() {
     <Form defaultValues={{ validatorMessage: "abc" }}>
       <Toast id="toast" />
       <Cell.Group inset>
-        <Field
-          name="pattern"
-          label="文本"
-          rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}
-        >
-          <Input placeholder="正则校验" />
-        </Field>
-        <Field
+        <Form.Item name="pattern" rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}>
+          <Form.Label>文本</Form.Label>
+          <Form.Control>
+            <Input placeholder="正则校验" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item
           name="validator"
-          label="文本"
           rules={[{ validator: (val) => /1\d{10}/.test(val), message: "请输入正确内容" }]}
         >
-          <Input placeholder="函数校验" />
-        </Field>
-        <Field
+          <Form.Label>文本</Form.Label>
+          <Form.Control>
+            <Input placeholder="函数校验" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item
           name="validatorMessage"
-          label="文本"
           rules={[{ validator: (val) => `${val ?? ""} 不合法，请重新输入` }]}
         >
-          <Input placeholder="校验函数返回错误提示" />
-        </Field>
-        <Field
+          <Form.Label>文本</Form.Label>
+          <Form.Control>
+            <Input placeholder="校验函数返回错误提示" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item
           name="asyncValidator"
-          label="文本"
           rules={[{ validator: asyncValidator, message: "请输入正确内容" }]}
         >
-          <Input placeholder="异步函数校验" />
-        </Field>
+          <Form.Label>文本</Form.Label>
+          <Form.Control>
+            <Input placeholder="异步函数校验" />
+          </Form.Control>
+        </Form.Item>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
