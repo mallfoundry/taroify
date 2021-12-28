@@ -1,0 +1,31 @@
+@import "./variables";
+
+.#{$component-prefix}form {
+
+  &__label {
+    box-sizing: border-box;
+    flex: none;
+    width: var(--form-label-width, $form-label-width);
+    margin-right: var(--form-label-margin-right, $form-label-margin-right);
+    color: var(--form-label-color, $form-label-color);
+    text-align: left;
+    word-wrap: break-word;
+
+    &--center {
+      text-align: center;
+    }
+
+    &--right {
+      text-align: right;
+    }
+
+    &--required {
+      &::before {
+        margin-right: 2px * $hd;
+        color: var(--form-required-color, $form-required-color);
+        content: '*';
+      }
+    }
+  }
+}
+
