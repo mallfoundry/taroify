@@ -23,7 +23,7 @@ function BasicForm() {
           </Form.Control>
         </Form.Item>
         <Form.Item name="password" rules={[{ required: true, message: "请填写密码" }]}>
-          <Form.Label>用户名</Form.Label>
+          <Form.Label>密码</Form.Label>
           <Form.Control>
             <Input password placeholder="密码" />
           </Form.Control>
