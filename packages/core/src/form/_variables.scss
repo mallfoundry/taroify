@@ -1,0 +1,18 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+@import "../cell/variables";
+
+$form-label-width: 6.2em;
+$form-label-color: var(--gray-7, $gray-7);
+$form-label-margin-right: var(--padding-sm, $padding-sm);
+$form-required-color: var(--red, $red);
+
+$form-item-disabled-color: var(--gray-5, $gray-5);
+
+$form-item-icon-size: 16px * $hd;
+$form-item-right-icon-color: var(--gray-6, $gray-6);
+
+$form-feedback-font-size: var(--font-size-sm, $font-size-sm);
+$form-feedback-valid-color: var(--success-color, $success-color);
+$form-feedback-warning-color: var(--warning-color, $warning-color);
+$form-feedback-invalid-color: var(--danger-color, $danger-color);
