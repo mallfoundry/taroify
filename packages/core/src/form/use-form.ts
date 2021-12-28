@@ -1,7 +1,7 @@
 import * as Events from "events"
 import * as _ from "lodash"
 import { useEffect, useMemo } from "react"
-import { FieldInstance } from "../field"
+import { FormItemInstance } from "./form.shared"
 import { validateAll } from "./form.validate"
 
 function toMapValueArray<T>(map: Map<string, T>): T[] {
@@ -11,7 +11,6 @@ function toMapValueArray<T>(map: Map<string, T>): T[] {
 }
 
 const containerForms = new Map<string, FormAttributes>()
-
 const containerFormRefs = new Map<string, number>()
 
 function getAttributiveForm(formName: string) {
@@ -19,9 +18,8 @@ function getAttributiveForm(formName: string) {
 }
 
 class FormAttributes {
-  #fields = new Map<string, FieldInstance>()
-  #fieldsValue = {}
-  // #options: UseFormOptions<any> = {}
+  #fields = new Map<string, FormItemInstance>()
+  #fieldsValue: any = {}
   #events = new Events()
 
   get fields() {
@@ -32,12 +30,37 @@ class FormAttributes {
     return this.#fieldsValue
   }
 
-  findFields(predicate: (field: FieldInstance) => boolean) {
-    const fields = toMapValueArray(this.fields)
-    return _.filter<FieldInstance>(fields, predicate) as FieldInstance[]
+  set fieldsValue(value: any) {
+    this.#fieldsValue = value
   }
 
-  addField(name: string, field: FieldInstance) {
+  getFieldsValue<V>(nameNames?: string | string[]) {
+    const names = _.isUndefined(nameNames) ? [] : _.isArray(nameNames) ? nameNames : [nameNames]
+
+    const values: any = {}
+
+    if (_.isEmpty(names)) {
+      for (const field of this.fields.values()) {
+        if (field.name) {
+          values[field.name] = _.get(this.fieldsValue, field.name)
+        }
+      }
+      return values
+    }
+
+    for (let attr of names) {
+      _.set(values, attr, _.get(this.fieldsValue, attr))
+    }
+
+    return values as V
+  }
+
+  findFields(predicate: (field: FormItemInstance) => boolean) {
+    const fields = toMapValueArray(this.fields)
+    return _.filter<FormItemInstance>(fields, predicate) as FormItemInstance[]
+  }
+
+  addField(name: string, field: FormItemInstance) {
     this.#fields.set(name, field)
   }
 
@@ -47,6 +70,7 @@ class FormAttributes {
 
   removeField(name: string) {
     this.#fields.delete(name)
+    _.unset(this.#fieldsValue, name)
   }
 
   addEventListener(event: string | symbol, listener: (...args: any[]) => void) {
@@ -73,19 +97,21 @@ interface Form {
 
   removeEventListener(event: string | symbol, listener: (...args: any[]) => void): void
 
-  linkField(name?: string, field?: FieldInstance): void
+  linkField(name?: string, field?: FormItemInstance): void
 
   unlinkField(name?: string): void
 
-  getFields(): FieldInstance[]
+  getFields(): FormItemInstance[]
 
-  findFields(predicate: (field: FieldInstance) => boolean): FieldInstance[]
+  findFields(predicate: (field: FormItemInstance) => boolean): FormItemInstance[]
 
-  validateFields(name?: string | string[]): Promise<void>
+  validateFields<V>(name?: string | string[]): Promise<V>
+
+  setFieldsDefaultValue(values: any): void
 
   setFieldsValue(values: any): void
 
-  getFieldsValue<V>(): V
+  getFieldsValue<V>(name?: string | string[]): V
 }
 
 function defineForm(formName: string) {
@@ -102,23 +128,38 @@ function defineForm(formName: string) {
       getAttributiveForm(formName)?.removeEventListener(event, listener)
     }
 
+    setFieldsDefaultValue(newValues: any) {
+      const form = getAttributiveForm(formName)
+      if (form) {
+        const { fieldsValue } = form
+        _.forEach(newValues, (value, name) => _.set(fieldsValue, name, value))
+      }
+    }
+
     setFieldsValue(newValues: any) {
-      const values = getAttributiveForm(formName)?.fieldsValue
-      _.forEach(newValues, (value, name) => {
-        const oldValue = _.get(values, name)
-        _.set(values, name, value)
-        if (oldValue !== value) {
-          getAttributiveForm(formName)?.emitEvent(`fields.${name}.value.change`, value)
+      const form = getAttributiveForm(formName)
+      if (form) {
+        let changed = false
+        const { fieldsValue } = form
+        _.forEach(newValues, (value, name) => {
+          const oldValue = _.get(fieldsValue, name)
+          if (oldValue !== value) {
+            changed = true
+            _.set(fieldsValue, name, value)
+            form.emitEvent(`fields.${name}.value.change`, value)
+          }
+        })
+        if (changed) {
+          form.emitEvent("change", fieldsValue)
         }
-      })
-      getAttributiveForm(formName)?.emitEvent("change", values)
+      }
     }
 
-    getFieldsValue<V>() {
-      return getAttributiveForm(formName)?.fieldsValue as V
+    getFieldsValue<V>(name?: string | string[]) {
+      return getAttributiveForm(formName)?.getFieldsValue<V>(name)
     }
 
-    linkField(name?: string, field?: FieldInstance) {
+    linkField(name?: string, field?: FormItemInstance) {
       if (name && field) {
         getAttributiveForm(formName)?.addField(name, field)
       }
@@ -138,11 +179,11 @@ function defineForm(formName: string) {
       return toMapValueArray(getAttributiveForm(formName)?.fields)
     }
 
-    findFields(predicate: (field: FieldInstance) => boolean) {
+    findFields(predicate: (field: FormItemInstance) => boolean) {
       return getAttributiveForm(formName)?.findFields(predicate)
     }
 
-    validateFields(name?: string | string[]) {
+    validateFields<V>(name?: string | string[]) {
       return Promise.resolve<string[]>(_.isUndefined(name) ? [] : _.isArray(name) ? name : [name])
         .then((names: string[]) =>
           getAttributiveForm(formName)?.findFields(
@@ -150,6 +191,7 @@ function defineForm(formName: string) {
           ),
         )
         .then(validateAll)
+        .then<V>(() => getAttributiveForm(formName)?.getFieldsValue(name) as V)
     }
   }
 }
