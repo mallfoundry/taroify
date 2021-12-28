@@ -1,18 +1,18 @@
 import * as _ from "lodash"
-import { FieldInstance, FieldValidError } from "../field"
+import { FormItemInstance, FormValidError } from "./form.shared"
 
-export function validateAll(fields: FieldInstance[]) {
+export function validateAll(fields: FormItemInstance[]) {
   return new Promise<void>((resolve, reject) => {
     Promise.all(
       fields.map((field) =>
         field.validate().then(
-          () => [] as FieldValidError[],
-          (reason) => [reason] as FieldValidError[],
+          () => [] as FormValidError[],
+          (reason) => [reason] as FormValidError[],
         ),
       ),
     )
-      .then((errors) => _.flatMap<FieldValidError[], FieldValidError>(errors, (error) => error))
-      .then((errors) => _.filter<FieldValidError>(errors, (error) => !_.isEmpty(error.errors)))
+      .then((errors) => _.flatMap<FormValidError[], FormValidError>(errors, (error) => error))
+      .then((errors) => _.filter<FormValidError>(errors, (error) => !_.isEmpty(error.errors)))
       .then((errors) => {
         if (!_.isEmpty(errors)) {
           reject(errors)
@@ -23,7 +23,7 @@ export function validateAll(fields: FieldInstance[]) {
   })
 }
 
-export function validateSequence(fields: FieldInstance[]): Promise<void> {
+export function validateSequence(fields: FormItemInstance[]): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     fields
       .reduce(
@@ -37,7 +37,7 @@ export function validateSequence(fields: FieldInstance[]): Promise<void> {
             }
             return errors
           }),
-        Promise.resolve<FieldValidError[]>([]),
+        Promise.resolve<FormValidError[]>([]),
       )
       .then((errors) => {
         if (_.isEmpty(errors)) {
