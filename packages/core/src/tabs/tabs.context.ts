@@ -2,6 +2,7 @@ import { createContext } from "react"
 import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 interface TabsContextValue {
+  index?: number
   value: any
   duration?: number
   lazyRender: boolean
