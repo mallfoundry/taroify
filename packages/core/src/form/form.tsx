@@ -3,26 +3,24 @@ import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps as TaroFormProps } from "@tarojs/components/types/Form"
 import * as React from "react"
 import { ForwardedRef, forwardRef, ReactNode, useImperativeHandle } from "react"
-import { FieldLabelAlign, FieldMessageAlign, FieldValidateTrigger, FieldValidError } from "../field"
 import { useUniqueId } from "../hooks"
 import FormContext from "./form.context"
-import { FormInstance } from "./form.shared"
+import { FormInstance, FormLabelAlign, FormValidateTrigger, FormValidError } from "./form.shared"
 import useForm from "./use-form"
 
-interface FormProps extends TaroFormProps {
+export interface FormProps extends TaroFormProps {
   name?: string
   defaultValues?: any
   values?: any
-  labelAlign?: FieldLabelAlign
-  messageAlign?: FieldMessageAlign
-  validateTrigger?: FieldValidateTrigger
+  labelAlign?: FormLabelAlign
+  validateTrigger?: FormValidateTrigger
   colon?: boolean
   disabled?: boolean
   readonly?: boolean
 
   children?: ReactNode
 
-  onValidate?(errors: FieldValidError[]): void
+  onValidate?(errors: FormValidError[]): void
 }
 
 const Form = forwardRef<FormInstance, FormProps>(
@@ -47,7 +45,15 @@ const Form = forwardRef<FormInstance, FormProps>(
 
     function handleSubmit(e: BaseEventOrig<TaroFormProps.onSubmitEventDetail>) {
       validateFields()
-        .then(() => onSubmit?.(e))
+        .then((values) => {
+          const event = Object.assign({}, e, {
+            detail: {
+              ...e.detail,
+              value: values,
+            },
+          })
+          onSubmit?.(event)
+        })
         .catch((errors) => onValidate?.(errors))
     }
 
