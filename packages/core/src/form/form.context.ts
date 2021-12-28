@@ -1,9 +1,9 @@
 import { createContext } from "react"
-import { FieldValidateTrigger } from "../field"
+import { FormValidateTrigger } from "./form.shared"
 
 interface FormContextValue {
   name: string
-  validateTrigger?: FieldValidateTrigger
+  validateTrigger?: FormValidateTrigger
 }
 
 const FormContext = createContext<FormContextValue>({
