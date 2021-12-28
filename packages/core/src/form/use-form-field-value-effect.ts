@@ -1,6 +1,6 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from "react"
 
-function useFieldValueEffect(effect: EffectCallback, deps?: DependencyList) {
+function useFormFieldValueEffect(effect: EffectCallback, deps?: DependencyList) {
   const counterRef = useRef(0)
 
   useEffect(
@@ -17,4 +17,4 @@ function useFieldValueEffect(effect: EffectCallback, deps?: DependencyList) {
   )
 }
 
-export default useFieldValueEffect
+export default useFormFieldValueEffect
