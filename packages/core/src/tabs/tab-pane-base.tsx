@@ -36,22 +36,7 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
     return active
   }, [active, lazyRender])
 
-  if (animated || swipeable) {
-    return (
-      <Swiper.Item
-        className={classNames(prefixClassname("tabs__tab-pane-wrapper"), {
-          [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
-        })}
-      >
-        <View
-          className={classNames(prefixClassname("tabs__tab-pane"), className)}
-          children={children}
-        />
-      </Swiper.Item>
-    )
-  }
-
-  return (
+  const tabPane = (
     <View
       style={{
         ...style,
@@ -62,4 +47,17 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
       {...restProps}
     />
   )
+
+  if (animated || swipeable) {
+    return (
+      <Swiper.Item
+        className={classNames(prefixClassname("tabs__tab-pane-wrapper"), {
+          [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
+        })}
+        children={tabPane}
+      />
+    )
+  }
+
+  return tabPane
 }
