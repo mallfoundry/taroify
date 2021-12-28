@@ -9,31 +9,21 @@ import CellGroupContext from "./cell-group.context"
 import { CellAlign, CellSize } from "./cell.shared"
 
 export interface CellBaseProps extends ViewProps {
-  titleClassName?: string
-  briefClassName?: string
-  valueClassName?: string
-  size?: CellSize
-  align?: CellAlign
-  title?: ReactNode
-  brief?: ReactNode
-  icon?: ReactNode
-  rightIcon?: ReactNode
   bordered?: boolean
   required?: boolean
   clickable?: boolean
+  size?: CellSize
+  align?: CellAlign
+  icon?: ReactNode
+  rightIcon?: ReactNode
   children?: ReactNode
 }
 
 function CellBase(props: CellBaseProps) {
   const {
     className,
-    titleClassName,
-    briefClassName,
-    valueClassName,
     size = "medium",
     align,
-    title,
-    brief,
     clickable: clickableProp = false,
     required = false,
     bordered = true,
@@ -63,29 +53,7 @@ function CellBase(props: CellBaseProps) {
       {...restProps}
     >
       {icon && cloneIconElement(icon, { className: prefixClassname("cell__icon") })}
-      {title && (
-        <View className={classNames(prefixClassname("cell__title"), titleClassName)}>
-          {title}
-          {brief && (
-            <View
-              className={classNames(prefixClassname("cell__brief"), briefClassName)}
-              children={brief}
-            />
-          )}
-        </View>
-      )}
-      {children && (
-        <View
-          className={classNames(
-            prefixClassname("cell__value"),
-            {
-              [prefixClassname("cell__value--alone")]: !title,
-            },
-            valueClassName,
-          )}
-          children={children}
-        />
-      )}
+      {children}
       {rightIcon && cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })}
     </View>
   )
