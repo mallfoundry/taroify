@@ -117,6 +117,14 @@ function Tabs(props: TabsProps) {
 
   const tabObjects = useTabObjects(childrenProp)
 
+  const index = useMemo<number | undefined>(() => {
+    for (const tab of tabObjects) {
+      if (tab.value === value) {
+        return tab.index
+      }
+    }
+  }, [tabObjects, value])
+
   const handleTabClick = useCallback(
     (event: TabEvent) => {
       if (!event.disabled) {
@@ -145,6 +153,7 @@ function Tabs(props: TabsProps) {
   return (
     <TabsContext.Provider
       value={{
+        index,
         value,
         duration,
         lazyRender,
