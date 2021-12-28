@@ -1,8 +1,9 @@
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { Children, isValidElement, ReactElement, ReactNode, useContext, useMemo } from "react"
 import Input from "../input"
 import { doFormControlHandler } from "./control"
+import FormItemContext from "./form-item.context"
 import { FormController } from "./form.shared"
 
 interface FormControlProps extends FormController {
@@ -24,11 +25,14 @@ function FormControl(props: FormControlProps): JSX.Element {
     onBlur: onDelegatingBlur,
   } = props
 
+  const { validateStatus } = useContext(FormItemContext)
+
   return useMemo<ReactNode>(() => {
     if (_.isFunction(children)) {
       return children?.({
         name,
         value,
+        validateStatus,
         onChange: onDelegatingChange,
         onBlur: onDelegatingBlur,
       })
@@ -42,11 +46,12 @@ function FormControl(props: FormControlProps): JSX.Element {
       return doFormControlHandler(element, {
         name,
         value,
+        validateStatus,
         onChange: onDelegatingChange,
         onBlur: onDelegatingBlur,
       })
     })
-  }, [children, name, onDelegatingBlur, onDelegatingChange, value]) as JSX.Element
+  }, [children, name, onDelegatingBlur, onDelegatingChange, validateStatus, value]) as JSX.Element
 }
 
 export default FormControl

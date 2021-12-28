@@ -17,6 +17,7 @@ import {
   useContext,
   useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from "react"
 import { CellBase, CellProps, CellValue } from "../cell"
@@ -25,8 +26,9 @@ import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
 import { fulfillPromise } from "../utils/promisify"
 import { useToRef } from "../utils/state"
+import FormItemContext from "./form-item.context"
 import { validateRules } from "./form.rule"
-import { FormItemInstance, FormRule, FormValidateTrigger } from "./form.shared"
+import { FormItemInstance, FormRule, FormValidateStatus, FormValidateTrigger } from "./form.shared"
 
 import useFormFieldValueEffect from "./use-form-field-value-effect"
 
@@ -94,11 +96,13 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     const { validateTrigger } = useContext(FormContext)
 
+    const validateStatusRef = useRef<FormValidateStatus>()
     const [invalidMessages, setInvalidMessages] = useState<ReactNode[]>()
 
     const { value, getValue, setValue } = useFormValue(name, { defaultValue })
 
     const resetInvalidMessage = () => {
+      validateStatusRef.current = undefined
       setInvalidMessages(undefined)
     }
 
@@ -109,9 +113,11 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
             resetInvalidMessage()
             validateRules(getValue(), rules).then((errors) => {
               if (_.isEmpty(errors)) {
+                validateStatusRef.current = "valid"
                 setInvalidMessages(undefined)
                 resolve()
               } else {
+                validateStatusRef.current = "invalid"
                 setInvalidMessages(errors)
                 reject({
                   name,
@@ -141,6 +147,9 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
           if (rules.length) {
             fulfillPromise(validate(rulesProp))
+          } else {
+            validateStatusRef.current = undefined
+            setInvalidMessages(undefined)
           }
         }
       },
@@ -180,40 +189,46 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
     )
 
     return (
-      <CellBase
-        className={classNames(prefixClassname("form-item"), className)}
-        style={style}
-        bordered={bordered}
-        align={align}
-        clickable={clickable}
-        icon={cloneIconElement(icon, { className: prefixClassname("form-item__icon") })}
-        rightIcon={cloneIconElement(rightIcon, {
-          className: prefixClassname("form-item__right-icon"),
-        })}
-        required={required}
-        onClick={onClick}
+      <FormItemContext.Provider
+        value={{
+          validateStatus: validateStatusRef.current,
+        }}
       >
-        {label}
-        <CellValue alone={false}>
-          <View className={classNames(prefixClassname("form-item__body"))} children={Control} />
-          {explain && (
-            <View className={classNames(prefixClassname("form__feedbacks"))}>
-              {feedbacks}
-              {_.map(invalidMessages, (message, messageKey) => (
-                <View
-                  key={messageKey}
-                  className={classNames(
-                    prefixClassname("form__feedback"),
-                    prefixClassname("form__feedback--left"),
-                    prefixClassname("form__feedback--invalid"),
-                  )}
-                  children={message}
-                />
-              ))}
-            </View>
-          )}
-        </CellValue>
-      </CellBase>
+        <CellBase
+          className={classNames(prefixClassname("form-item"), className)}
+          style={style}
+          bordered={bordered}
+          align={align}
+          clickable={clickable}
+          icon={cloneIconElement(icon, { className: prefixClassname("form-item__icon") })}
+          rightIcon={cloneIconElement(rightIcon, {
+            className: prefixClassname("form-item__right-icon"),
+          })}
+          required={required}
+          onClick={onClick}
+        >
+          {label}
+          <CellValue alone={false}>
+            <View className={classNames(prefixClassname("form-item__body"))} children={Control} />
+            {explain && (
+              <View className={classNames(prefixClassname("form__feedbacks"))}>
+                {feedbacks}
+                {_.map(invalidMessages, (message, messageKey) => (
+                  <View
+                    key={messageKey}
+                    className={classNames(
+                      prefixClassname("form__feedback"),
+                      prefixClassname("form__feedback--left"),
+                      prefixClassname("form__feedback--invalid"),
+                    )}
+                    children={message}
+                  />
+                ))}
+              </View>
+            )}
+          </CellValue>
+        </CellBase>
+      </FormItemContext.Provider>
     )
   },
 )

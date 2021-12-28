@@ -16,6 +16,8 @@ export type FormFeedbackStatus = "valid" | "warning" | "invalid"
 
 export type FormValidateTrigger = "onBlur" | "onChange" | "onSubmit"
 
+export type FormValidateStatus = FormFeedbackStatus
+
 export interface FormValidError {
   name?: string
   errors: ReactNode[]
@@ -42,6 +44,7 @@ export interface FormRule {
 export interface FormController {
   name?: string
   value?: any
+  validateStatus?: FormValidateStatus
 
   onChange?(value: any): void
 

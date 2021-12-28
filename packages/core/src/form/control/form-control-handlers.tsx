@@ -3,10 +3,9 @@ import {
   Switch as TaroSwitch,
   Textarea as TaroTextarea,
 } from "@tarojs/components"
-import { InputProps } from "@tarojs/components/types/Input"
 import { SwitchProps as TaroSwitchProps } from "@tarojs/components/types/Switch"
 import { cloneElement, ReactElement, ReactNode } from "react"
-import Input from "../../input"
+import Input, { InputProps } from "../../input"
 import Switch, { SwitchProps } from "../../switch"
 import { FormController } from "../form.shared"
 import FormControlHandler, { registerFormControlHandler } from "./form-control-handler"
@@ -14,12 +13,19 @@ import FormControlHandler, { registerFormControlHandler } from "./form-control-h
 registerFormControlHandler(
   new (class implements FormControlHandler<InputProps> {
     doControlRender(element: ReactElement<InputProps>, controller: FormController): ReactNode {
-      const { name, value, onBlur: onDelegatingBlur, onChange: onDelegatingChange } = controller
+      const {
+        name,
+        value,
+        validateStatus,
+        onBlur: onDelegatingBlur,
+        onChange: onDelegatingChange,
+      } = controller
       const { props: elementProps } = element
       const { onBlur, onInput } = elementProps
       return cloneElement<InputProps>(element, {
         name,
         value,
+        color: validateStatus === "invalid" ? "danger" : undefined,
         onInput: (e) => {
           onInput?.(e)
           onDelegatingChange?.(e.detail.value)
