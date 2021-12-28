@@ -1,5 +1,1 @@
-import "../../styles/style"
-import "../../button/style"
-import "../../cell/style"
-import "../../input/style"
-import "../index.scss"
+import "../../form/style"
