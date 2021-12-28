@@ -1,7 +1,7 @@
 import * as _ from "lodash"
 import { ReactNode } from "react"
 import { isPromise } from "../utils/promisify"
-import { FieldRule } from "./field.shared"
+import { FormRule } from "./form.shared"
 
 function isEmptyValue(value: any) {
   if (Array.isArray(value)) {
@@ -13,7 +13,7 @@ function isEmptyValue(value: any) {
   return !value
 }
 
-function getRuleMessage(value: any, rule: FieldRule) {
+function getRuleMessage(value: any, rule: FormRule) {
   const { message } = rule
 
   if (_.isFunction(message)) {
@@ -22,7 +22,7 @@ function getRuleMessage(value: any, rule: FieldRule) {
   return message
 }
 
-function getSyncRule(value: any, rule: FieldRule) {
+function getSyncRule(value: any, rule: FormRule) {
   if (rule.required && isEmptyValue(value)) {
     return Promise.resolve(getRuleMessage(value, rule))
   }
@@ -32,7 +32,7 @@ function getSyncRule(value: any, rule: FieldRule) {
   }
 }
 
-function getValidatorRule(value: any, rule: FieldRule) {
+function getValidatorRule(value: any, rule: FormRule) {
   return new Promise<ReactNode>((resolve) => {
     const promise = rule.validator?.(value, rule)
     if (isPromise(promise)) {
@@ -50,11 +50,11 @@ function getValidatorRule(value: any, rule: FieldRule) {
   })
 }
 
-function validateRule(value: any, rule: FieldRule): Promise<ReactNode> {
+function validateRule(value: any, rule: FormRule): Promise<ReactNode> {
   return getSyncRule(value, rule) ?? getValidatorRule(value, rule)
 }
 
-export function validateRules(value: any, rules: FieldRule[]): Promise<ReactNode[]> {
+export function validateRules(value: any, rules: FormRule[]): Promise<ReactNode[]> {
   return rules.reduce(
     (promise, rule) =>
       promise.then((errors) => {
