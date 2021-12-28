@@ -93,10 +93,10 @@ function IconField() {
 function ErrorField() {
   return (
     <Cell.Group inset>
-      <Field label="用户名" required error>
-        <Input placeholder="请输入用户名" />
+      <Field label="用户名" required>
+        <Input placeholder="请输入用户名" color="danger" />
       </Field>
-      <Field required error label="手机号" message="手机号格式错误">
+      <Field required label="手机号" feedbackStatus="invalid" feedback="手机号格式错误">
         <Input placeholder="请输入手机号" />
       </Field>
     </Cell.Group>

@@ -1,55 +1,36 @@
 import * as React from "react"
 import { ReactNode } from "react"
-import { CellProps } from "../cell"
-import Form, { FormLabelAlign, FormRule } from "../form"
+import Form, { FormItemProps, FormLabelAlign } from "../form"
+import { FormFeedbackAlign, FormFeedbackStatus } from "../form/form.shared"
 
-export interface FieldProps extends CellProps {
-  name?: string
-  required?: boolean
+export interface FieldProps extends FormItemProps {
   label?: ReactNode
   labelAlign?: FormLabelAlign
-  error?: boolean
-  children?: ReactNode
-
-  rules?: FormRule[]
+  feedback?: ReactNode
+  feedbackAlign?: FormFeedbackAlign
+  feedbackStatus?: FormFeedbackStatus
 }
 
 function Field(props: FieldProps) {
   const {
-    className,
-    style,
-    name,
     label,
     labelAlign,
-    align,
-    bordered,
-    icon,
-    rightIcon,
-    clickable,
-    required,
+    //
+    feedback,
+    feedbackAlign,
+    feedbackStatus,
     //
     children,
     //
     rules,
-    onClick,
+    ...restProps
   } = props
 
   return (
-    <Form.Item
-      className={className}
-      style={style}
-      name={name}
-      bordered={bordered}
-      align={align}
-      clickable={clickable}
-      rules={rules}
-      icon={icon}
-      rightIcon={rightIcon}
-      required={required}
-      onClick={onClick}
-    >
+    <Form.Item {...restProps}>
       <Form.Label align={labelAlign} children={label} />
       <Form.Control children={children} />
+      <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />
     </Form.Item>
   )
 }
