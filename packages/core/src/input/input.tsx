@@ -10,7 +10,7 @@ import { ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
 import raf from "../utils/raf"
 import { useValue } from "../utils/state"
-import { InputAlign, InputClearTrigger } from "./input.shared"
+import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
 
 export function resolveOnChange<
   E extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
@@ -59,6 +59,7 @@ interface InputProps extends TaroInputProps {
   placeholderClassName?: string
   readonly?: boolean
   align?: InputAlign
+  color?: InputColor
   clearable?: boolean
   clearIcon?: ReactNode
   clearTrigger?: InputClearTrigger
@@ -77,6 +78,7 @@ function Input(props: InputProps) {
     readonly,
     disabled,
     align = "left",
+    color,
     clearable,
     clearTrigger = "focus",
     clearIcon = <Clear />,
@@ -138,6 +140,12 @@ function Input(props: InputProps) {
             [prefixClassname("input--right")]: align === "right",
             [prefixClassname("input--center")]: align === "center",
             [prefixClassname("input--left")]: align === "left",
+            // Color
+            [prefixClassname("input--primary")]: color === "primary",
+            [prefixClassname("input--info")]: color === "info",
+            [prefixClassname("input--success")]: color === "success",
+            [prefixClassname("input--warning")]: color === "warning",
+            [prefixClassname("input--danger")]: color === "danger",
           },
           className,
         )}
@@ -147,6 +155,12 @@ function Input(props: InputProps) {
           prefixClassname("input__placeholder"),
           {
             [prefixClassname("input__placeholder--readonly")]: readonly,
+            // // Color
+            [prefixClassname("input__placeholder--primary")]: color === "primary",
+            [prefixClassname("input__placeholder--info")]: color === "info",
+            [prefixClassname("input__placeholder--success")]: color === "success",
+            [prefixClassname("input__placeholder--warning")]: color === "warning",
+            [prefixClassname("input__placeholder--danger")]: color === "danger",
           },
         )}
         disabled={disabled || readonly}

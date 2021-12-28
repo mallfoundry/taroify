@@ -4,7 +4,14 @@
 
 $input-height: var(--input-height, 24px * $hd);
 $input-color: var(--input-color, var(--text-color, $text-color));
-$input-error-color: var(--danger-color, $danger-color);
+
+$input-default-color: var(--text-color, $text-color);
+$input-primary-color: var(--primary-color, $primary-color);
+$input-info-color: var(--info-color, $info-color);
+$input-success-color: var(--success-color, $success-color);
+$input-warning-color: var(--warning-color, $warning-color);
+$input-danger-color: var(--danger-color, $danger-color);
+
 $input-disabled-color: var(--gray-5, $gray-5);
 $input-placeholder-color: var(--gray-5, $gray-5);
 $input-clear-icon-size: 16px * $hd;

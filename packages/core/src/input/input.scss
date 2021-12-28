@@ -1,10 +1,10 @@
 @import "./variables";
 
 .#{$component-prefix}input {
-  // For wechat
-  &,
-    // For h5
-  & > input {
+
+  &, // For wechat
+  & > input // For h5
+  {
     height: $input-height;
     box-sizing: border-box;
     display: block;
@@ -33,10 +33,9 @@
     }
   }
 
-  // For wechat
-  &__placeholder,
-    // For h5
-  & > input::placeholder {
+  &__placeholder, // For wechat
+  & > input::placeholder // For h5
+  {
     color: var(--input-placeholder-color, $input-placeholder-color);
   }
 
@@ -62,16 +61,56 @@
     -webkit-text-fill-color: var(--input-disabled-color, $input-disabled-color);
   }
 
+  &--primary,
+  &--primary::placeholder,
+  &__placeholder--primary,
+  &--primary > input, // For h5
+  &--primary > input::placeholder {
+    color: var(--input-primary-color, $input-primary-color);
+  }
+
+  &--info,
+  &--info::placeholder,
+  &__placeholder--info,
+  &--info > input, // For h5
+  &--info > input::placeholder {
+    color: var(--input-info-color, $input-info-color);
+  }
+
+  &--success,
+  &--success::placeholder,
+  &__placeholder--success,
+  &--success > input, // For h5
+  &--success > input::placeholder {
+    color: var(--input-success-color, $input-success-color);
+  }
+
+  &--warning,
+  &--warning::placeholder,
+  &__placeholder--warning,
+  &--warning > input, // For h5
+  &--warning > input::placeholder {
+    color: var(--input-warning-color, $input-warning-color);
+  }
+
+  &--danger,
+  &--danger::placeholder,
+  &__placeholder--danger,
+  &--danger > input, // For h5
+  &--danger > input::placeholder {
+    color: var(--input-danger-color, $input-danger-color);
+  }
+
   &--center,
-    // For h5
-  &--center > input {
+  &--center > input // For h5
+  {
     justify-content: center;
     text-align: center;
   }
 
   &--right,
-    // For h5
-  &--right > input {
+  &--right > input // For h5
+  {
     justify-content: flex-end;
     text-align: right;
   }
