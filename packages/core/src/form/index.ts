@@ -6,6 +6,7 @@ import FormItem from "./form-item"
 import FormLabel from "./form-label"
 
 export type { FormRule, FormLabelAlign } from "./form.shared"
+export type { FormItemProps } from "./form-item"
 
 export { default as useFormField } from "./use-form-field"
 export { default as useFormValue } from "./use-form-value"
