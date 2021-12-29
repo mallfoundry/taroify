@@ -8,7 +8,7 @@ import { useValue } from "../utils/state"
 import RadioGroupContext from "./radio-group.context"
 import { RadioGroupDirection } from "./radio-group.shared"
 
-interface RadioGroupProps extends ViewProps {
+export interface RadioGroupProps extends ViewProps {
   defaultValue?: any
   value?: any
   disabled?: boolean
