@@ -44,7 +44,7 @@ export default function Checkbox(props: CheckboxProps) {
     onChange: onChangeProp,
   })
 
-  const { value: names = [], max: namesMax = 0, onChange: onNamesChange } = useContext(
+  const { value: names = [], max: namesMax = 0, direction, onChange: onNamesChange } = useContext(
     CheckboxGroupContext,
   )
 
@@ -68,7 +68,14 @@ export default function Checkbox(props: CheckboxProps) {
 
   return (
     <View
-      className={classNames(prefixClassname("checkbox"), className)}
+      className={classNames(
+        prefixClassname("checkbox"),
+        {
+          [prefixClassname("checkbox--horizontal")]: direction === "horizontal",
+          [prefixClassname("checkbox--vertical")]: direction === "vertical",
+        },
+        className,
+      )}
       onClick={onClick}
       {...restProps}
     >

@@ -12,6 +12,10 @@
     cursor: not-allowed;
   }
 
+  &--horizontal {
+    margin-right: var(--padding-sm, $padding-sm);
+  }
+
   &__icon {
     flex: none;
     height: 1em;
