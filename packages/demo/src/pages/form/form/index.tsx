@@ -1,7 +1,9 @@
 import {
   Button,
+  Calendar,
   Cell,
   Checkbox,
+  DatetimePicker,
   Form,
   Input,
   Picker,
@@ -19,6 +21,7 @@ import { CustomWrapper, View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps } from "@tarojs/components/types/Form"
 import { chooseImage } from "@tarojs/taro"
+import * as _ from "lodash"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import Block from "../../../components/block"
@@ -159,7 +162,7 @@ function PickerField(props: PickerFieldProps) {
   return (
     <>
       <Input value={valueProp} readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
-      <Popup open={open} rounded placement="bottom" onClose={setOpen}>
+      <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
         <Picker
           value={value}
           onChange={setValue}
@@ -181,6 +184,107 @@ function PickerField(props: PickerFieldProps) {
             <Picker.Option>湖州</Picker.Option>
           </Picker.Column>
         </Picker>
+      </Popup>
+    </>
+  )
+}
+
+interface DatetimePickerProps {
+  value?: Date
+
+  onChange?(value?: Date): void
+}
+
+function DatetimePickerField(props: DatetimePickerProps) {
+  const { value: valueProp, onChange } = props
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState<Date>()
+
+  useEffect(() => setValue(valueProp), [valueProp])
+
+  return (
+    <>
+      <Input
+        value={
+          valueProp
+            ? `${_.padStart(_.toString(valueProp?.getHours()), 2, "0")}:${
+                //
+                _.padStart(_.toString(valueProp?.getMinutes()), 2, "0")
+              }`
+            : undefined
+        }
+        readonly
+        placeholder="点击选择时间"
+        onClick={() => setOpen(true)}
+      />
+      <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
+        <DatetimePicker
+          type="hour-minute"
+          value={value}
+          onChange={setValue}
+          onCancel={() => setOpen(false)}
+          onConfirm={(newValue) => {
+            onChange?.(newValue)
+            setOpen(false)
+          }}
+        >
+          <Picker.Toolbar>
+            <Picker.Button>取消</Picker.Button>
+            <Picker.Button>确认</Picker.Button>
+          </Picker.Toolbar>
+        </DatetimePicker>
+      </Popup>
+    </>
+  )
+}
+
+interface CalendarProps {
+  value?: Date
+
+  onChange?(value?: Date): void
+}
+
+function CalendarField(props: CalendarProps) {
+  const { value: valueProp, onChange } = props
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState<Date>()
+
+  useEffect(() => setValue(valueProp), [valueProp])
+
+  return (
+    <>
+      <Input
+        value={
+          valueProp
+            ? `${_.padStart(_.toString(valueProp.getMonth() + 1), 2, "0")}/${valueProp.getDate()}`
+            : undefined
+        }
+        readonly
+        placeholder="点击选择日期"
+        onClick={() => setOpen(true)}
+      />
+      <Popup
+        mountOnEnter={false}
+        style={{ height: "80%" }}
+        open={open}
+        rounded
+        placement="bottom"
+        onClose={setOpen}
+      >
+        <Popup.Close />
+        <Calendar
+          type="single"
+          value={value}
+          onChange={setValue}
+          onConfirm={(newValue) => {
+            onChange?.(newValue)
+            setOpen(false)
+          }}
+        >
+          <Calendar.Footer>
+            <Calendar.Button type="confirm">确定</Calendar.Button>
+          </Calendar.Footer>
+        </Calendar>
       </Popup>
     </>
   )
@@ -254,7 +358,29 @@ function FormWithFields() {
           <Form.Label>选择器</Form.Label>
           <Form.Control>
             {(controller) => (
-              <PickerField value={controller.value} onChange={controller.onChange} />
+              <CustomWrapper>
+                <PickerField value={controller.value} onChange={controller.onChange} />
+              </CustomWrapper>
+            )}
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="datetimePicker" clickable rightIcon={<ArrowRight />}>
+          <Form.Label>时间选择</Form.Label>
+          <Form.Control>
+            {(controller) => (
+              <CustomWrapper>
+                <DatetimePickerField value={controller.value} onChange={controller.onChange} />
+              </CustomWrapper>
+            )}
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="calendar" clickable rightIcon={<ArrowRight />}>
+          <Form.Label>日历</Form.Label>
+          <Form.Control>
+            {(controller) => (
+              <CustomWrapper>
+                <CalendarField value={controller.value} onChange={controller.onChange} />
+              </CustomWrapper>
             )}
           </Form.Control>
         </Form.Item>
