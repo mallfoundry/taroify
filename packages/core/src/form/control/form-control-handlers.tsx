@@ -5,8 +5,14 @@ import {
 } from "@tarojs/components"
 import { SwitchProps as TaroSwitchProps } from "@tarojs/components/types/Switch"
 import { cloneElement, ReactElement, ReactNode } from "react"
+import Checkbox, { CheckboxGroupProps, CheckboxProps } from "../../checkbox"
 import Input, { InputProps } from "../../input"
+import Radio, { RadioGroupProps } from "../../radio"
+import Rate, { RateProps } from "../../rate"
+import Slider, { SliderProps } from "../../slider"
+import Stepper, { StepperProps } from "../../stepper"
 import Switch, { SwitchProps } from "../../switch"
+import Uploader, { UploaderProps } from "../../uploader"
 import { FormController } from "../form.shared"
 import FormControlHandler, { registerFormControlHandler } from "./form-control-handler"
 
@@ -66,12 +72,15 @@ registerFormControlHandler(
 )
 
 registerFormControlHandler(
-  new (class implements FormControlHandler<SwitchProps> {
-    doControlRender(element: ReactElement<SwitchProps>, controller: FormController): ReactNode {
+  new (class implements FormControlHandler<CheckboxProps | SwitchProps> {
+    doControlRender(
+      element: ReactElement<CheckboxProps | SwitchProps>,
+      controller: FormController,
+    ): ReactNode {
       const { value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
       const { onChange } = elementProps
-      return cloneElement<SwitchProps>(element, {
+      return cloneElement<CheckboxProps | SwitchProps>(element, {
         checked: value,
         onChange: (checked) => {
           onChange?.(checked)
@@ -81,7 +90,61 @@ registerFormControlHandler(
     }
 
     supportsControlType(elementType: any): boolean {
-      return elementType === Switch
+      return elementType === Checkbox || elementType === Switch
+    }
+  })(),
+)
+
+registerFormControlHandler(
+  new (class
+    implements
+      FormControlHandler<
+        | CheckboxGroupProps
+        | RadioGroupProps
+        | RateProps
+        | SliderProps
+        | StepperProps
+        | UploaderProps
+      > {
+    doControlRender(
+      element: ReactElement<
+        | CheckboxGroupProps
+        | RadioGroupProps
+        | RateProps
+        | SliderProps
+        | StepperProps
+        | UploaderProps
+      >,
+      controller: FormController,
+    ): ReactNode {
+      const { value, onChange: onDelegatingChange } = controller
+      const { props: elementProps } = element
+      const { onChange } = elementProps
+      return cloneElement<
+        | CheckboxGroupProps
+        | RadioGroupProps
+        | RateProps
+        | SliderProps
+        | StepperProps
+        | UploaderProps
+      >(element, {
+        value,
+        onChange: (nextValue: any) => {
+          onChange?.(nextValue)
+          onDelegatingChange?.(nextValue)
+        },
+      })
+    }
+
+    supportsControlType(elementType: any): boolean {
+      return (
+        elementType === Checkbox.Group ||
+        elementType === Radio.Group ||
+        elementType === Rate ||
+        elementType === Slider ||
+        elementType === Stepper ||
+        elementType === Uploader
+      )
     }
   })(),
 )
