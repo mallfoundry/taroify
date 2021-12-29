@@ -31,13 +31,9 @@ export function matchSelector(aSelector?: string, bSelector?: string) {
   return _.replace(aSelector as string, "#", "") === bSelector
 }
 
-export function createNodesRef(element: TaroElement) {
-  if (isRootElement(element)) {
-    return createSelectorQuery().selectViewport()
-  }
-
-  // Fix nested in CustomWrapper is undefined
-  // See: https://github.com/mallfoundry/taroify/pull/143
+// Fix nested in CustomWrapper is undefined
+// See: https://github.com/mallfoundry/taroify/pull/143
+function ancestorCustomWrapper(element: TaroElement) {
   if (inWechat) {
     let ancestor = element
     while (ancestor.parentNode && !isRootElement(ancestor.parentNode as TaroElement)) {
@@ -45,9 +41,33 @@ export function createNodesRef(element: TaroElement) {
     }
 
     if (ancestor && ancestor !== element) {
-      return createSelectorQuery().select(`#${ancestor.uid}>>>#${element.uid}`)
+      return ancestor
     }
+  }
+}
+
+export function queryNodesRef(element: TaroElement) {
+  if (isRootElement(element)) {
+    return createSelectorQuery().selectViewport()
+  }
+
+  const ancestor = ancestorCustomWrapper(element)
+  if (ancestor) {
+    return createSelectorQuery().select(`#${ancestor.uid}>>>#${element.uid}`)
   }
 
   return createSelectorQuery().select("#" + element.uid)
+}
+
+export function queryAllNodesRef(element: TaroElement, selector?: string) {
+  if (isRootElement(element)) {
+    return createSelectorQuery().selectViewport()
+  }
+
+  const ancestor = ancestorCustomWrapper(element)
+  if (ancestor) {
+    return createSelectorQuery().selectAll(`#${ancestor.uid}>>>#${element.uid}${selector}`)
+  }
+
+  return createSelectorQuery().selectAll("#" + element.uid + selector)
 }

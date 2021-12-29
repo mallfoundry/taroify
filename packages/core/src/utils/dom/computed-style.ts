@@ -1,5 +1,5 @@
 import { inBrowser } from "../base"
-import { createNodesRef, elementUnref } from "./element"
+import { elementUnref, queryNodesRef } from "./element"
 
 export function getComputedStyle(
   elementOrRef: any,
@@ -11,7 +11,7 @@ export function getComputedStyle(
       return Promise.resolve(window.getComputedStyle(element as any))
     } else {
       return new Promise<CSSStyleDeclaration>((resolve) => {
-        createNodesRef(element)
+        queryNodesRef(element)
           .fields(
             {
               computedStyle,
