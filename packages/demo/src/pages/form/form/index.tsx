@@ -1,8 +1,26 @@
-import { Button, Cell, Form, Input, Toast } from "@taroify/core"
-import { View } from "@tarojs/components"
+import {
+  Button,
+  Cell,
+  Checkbox,
+  Form,
+  Input,
+  Picker,
+  Popup,
+  Radio,
+  Rate,
+  Slider,
+  Stepper,
+  Switch,
+  Toast,
+  Uploader,
+} from "@taroify/core"
+import { ArrowRight } from "@taroify/icons"
+import { CustomWrapper, View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps } from "@tarojs/components/types/Form"
+import { chooseImage } from "@tarojs/taro"
 import * as React from "react"
+import { useEffect, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -96,6 +114,160 @@ function FormWithRules() {
   )
 }
 
+interface UploaderFieldProps {
+  value?: any
+
+  onChange?(value?: any): void
+}
+
+function UploaderField(props: UploaderFieldProps) {
+  const { value = [], onChange } = props
+
+  function onUpload() {
+    chooseImage({
+      count: 2,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+    }).then(({ tempFiles }) => {
+      onChange?.([
+        ...value,
+        {
+          url: tempFiles[0].path,
+          type: tempFiles[0].type,
+          name: tempFiles[0].originalFileObj?.name,
+        },
+      ])
+    })
+  }
+
+  return <Uploader multiple maxFiles={2} value={value} onUpload={onUpload} onChange={onChange} />
+}
+
+interface PickerFieldProps {
+  value?: any
+
+  onChange?(value?: any): void
+}
+
+function PickerField(props: PickerFieldProps) {
+  const { value: valueProp, onChange } = props
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState()
+
+  useEffect(() => setValue(valueProp), [valueProp])
+
+  return (
+    <>
+      <Input value={valueProp} readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
+      <Popup open={open} rounded placement="bottom" onClose={setOpen}>
+        <Picker
+          value={value}
+          onChange={setValue}
+          onCancel={() => setOpen(false)}
+          onConfirm={(newValue) => {
+            onChange?.(newValue)
+            setOpen(false)
+          }}
+        >
+          <Picker.Toolbar>
+            <Picker.Button>取消</Picker.Button>
+            <Picker.Button>确认</Picker.Button>
+          </Picker.Toolbar>
+          <Picker.Column>
+            <Picker.Option>杭州</Picker.Option>
+            <Picker.Option>宁波</Picker.Option>
+            <Picker.Option>温州</Picker.Option>
+            <Picker.Option>嘉兴</Picker.Option>
+            <Picker.Option>湖州</Picker.Option>
+          </Picker.Column>
+        </Picker>
+      </Popup>
+    </>
+  )
+}
+
+function FormWithFields() {
+  return (
+    <Form onSubmit={(e) => console.log(e.detail.value)}>
+      <Cell.Group inset>
+        <Form.Item name="switch">
+          <Form.Label>开关</Form.Label>
+          <Form.Control>
+            <Switch size={20} />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="checkbox">
+          <Form.Label>复选框</Form.Label>
+          <Form.Control>
+            <Checkbox shape="square" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="checkboxGroup">
+          <Form.Label>复选框</Form.Label>
+          <Form.Control>
+            <Checkbox.Group direction="horizontal">
+              <Checkbox name="1" shape="square">
+                复选框 1
+              </Checkbox>
+              <Checkbox name="2" shape="square">
+                复选框 2
+              </Checkbox>
+            </Checkbox.Group>
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="radio">
+          <Form.Label>单选框</Form.Label>
+          <Form.Control>
+            <Radio.Group direction="horizontal">
+              <Radio name="1">单选框 1</Radio>
+              <Radio name="2">单选框 2</Radio>
+            </Radio.Group>
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="stepper">
+          <Form.Label>步进器</Form.Label>
+          <Form.Control>
+            <Stepper />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="rate">
+          <Form.Label>评分</Form.Label>
+          <Form.Control>
+            <Rate />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="slider">
+          <Form.Label>滑块</Form.Label>
+          <Form.Control>
+            <Slider />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="uploader">
+          <Form.Label>文件上传</Form.Label>
+          <Form.Control>
+            {(controller) => (
+              <UploaderField value={controller.value} onChange={controller.onChange} />
+            )}
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="picker" clickable rightIcon={<ArrowRight />}>
+          <Form.Label>选择器</Form.Label>
+          <Form.Control>
+            {(controller) => (
+              <PickerField value={controller.value} onChange={controller.onChange} />
+            )}
+          </Form.Control>
+        </Form.Item>
+      </Cell.Group>
+      <View style={{ margin: "16px" }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+      </View>
+    </Form>
+  )
+}
+
 export default function FormDemo() {
   return (
     <Page title="Form 表单" className="form-demo">
@@ -104,6 +276,11 @@ export default function FormDemo() {
       </Block>
       <Block title="校验规则">
         <FormWithRules />
+      </Block>
+      <Block title="表单项类型">
+        <CustomWrapper>
+          <FormWithFields />
+        </CustomWrapper>
       </Block>
     </Page>
   )
