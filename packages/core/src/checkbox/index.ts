@@ -1,5 +1,8 @@
-import { CheckboxProps, default as CheckboxElement } from "./checkbox"
+import { CheckboxProps, default as CheckboxComponent } from "./checkbox"
 import CheckboxGroup from "./checkbox-group"
+
+export type { CheckboxProps } from "./checkbox"
+export type { CheckboxGroupProps } from "./checkbox-group"
 
 interface CheckboxInterface {
   (props: CheckboxProps): JSX.Element
@@ -7,7 +10,7 @@ interface CheckboxInterface {
   Group: typeof CheckboxGroup
 }
 
-const Checkbox = CheckboxElement as CheckboxInterface
+const Checkbox = CheckboxComponent as CheckboxInterface
 
 Checkbox.Group = CheckboxGroup
 
