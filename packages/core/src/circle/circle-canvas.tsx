@@ -6,7 +6,7 @@ import * as React from "react"
 import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useMounted, useUniqueId } from "../hooks"
 import { BLUE, WHITE } from "../styles/variables"
-import { createNodesRef } from "../utils/dom/element"
+import { queryNodesRef } from "../utils/dom/element"
 import { addUnitPx } from "../utils/format/unit"
 import { canIUseCanvas2d } from "../utils/version"
 import { canvasContextAdaptor } from "./canvas"
@@ -30,7 +30,7 @@ function useCanvasContext(canvasRef: MutableRefObject<TaroElement | undefined>, 
       }
     } else {
       if (canvasRef.current) {
-        createNodesRef(canvasRef.current)
+        queryNodesRef(canvasRef.current)
           .fields(
             {
               node: true,

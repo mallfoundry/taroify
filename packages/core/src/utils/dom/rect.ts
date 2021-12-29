@@ -1,6 +1,5 @@
-import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "../base"
-import { createNodesRef, elementUnref, isRootElement, isWindow } from "./element"
+import { queryNodesRef, elementUnref, isRootElement, isWindow, queryAllNodesRef } from "./element"
 
 export interface Rect {
   dataset: Record<string, any>
@@ -39,7 +38,7 @@ export function getRect(elementOrRef: any): Promise<Rect> {
       )
     } else {
       return new Promise<Rect>((resolve) => {
-        createNodesRef(element)
+        queryNodesRef(element)
           .boundingClientRect()
           .exec(([rect]) => {
             if (isRootElement(element)) {
@@ -68,8 +67,7 @@ export function getRects(elementOrRef: any, selector: string): Promise<Rect[]> {
       return Promise.resolve(rects)
     } else {
       return new Promise<Rect[]>((resolve) => {
-        createSelectorQuery()
-          .selectAll("#" + element.uid + selector)
+        queryAllNodesRef(element, selector)
           .boundingClientRect()
           .exec(([rects]) => resolve((rects as unknown) as Rect[]))
       })

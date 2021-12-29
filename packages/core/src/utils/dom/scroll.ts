@@ -2,7 +2,7 @@ import { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "../base"
 import { getComputedStyle } from "./computed-style"
-import { createNodesRef, elementUnref, isRootElement } from "./element"
+import { elementUnref, isRootElement, queryNodesRef } from "./element"
 
 const defaultRoot: HTMLElement | undefined = inBrowser
   ? ((window as unknown) as HTMLElement)
@@ -82,7 +82,7 @@ export function getScrollOffset(elementOrRef: any): Promise<ScrollOffset> {
       } as ScrollOffset)
     } else {
       return new Promise<ScrollOffset>((resolve) => {
-        createNodesRef(element).scrollOffset(resolve).exec()
+        queryNodesRef(element).scrollOffset(resolve).exec()
       })
     }
   }
