@@ -1,0 +1,7 @@
+@import "./variables";
+
+.#{$component-prefix}form-control {
+  display: flex;
+  align-items: center;
+  min-height: var(--form-control-min-height, $form-control-min-height);
+}

@@ -1,33 +1,33 @@
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { Children, isValidElement, ReactElement, ReactNode, useContext, useMemo } from "react"
 import Input from "../input"
+import { prefixClassname } from "../styles"
 import { doFormControlHandler } from "./control"
 import FormItemContext from "./form-item.context"
 import { FormController } from "./form.shared"
 
-interface FormControlProps extends FormController {
-  name?: string
-  value?: any
+interface FormControlProps extends ViewProps, FormController {
   children?: ReactNode | ((controller: FormController) => ReactNode)
-
-  onChange?(value: any): void
-
-  onBlur?(value: any): void
 }
 
 function FormControl(props: FormControlProps): JSX.Element {
   const {
+    className,
     name,
     value,
     children = <Input />,
     onChange: onDelegatingChange,
     onBlur: onDelegatingBlur,
+    ...restProps
   } = props
 
   const { validateStatus } = useContext(FormItemContext)
 
-  return useMemo<ReactNode>(() => {
+  const field = useMemo<ReactNode>(() => {
     if (_.isFunction(children)) {
       return children?.({
         name,
@@ -52,6 +52,14 @@ function FormControl(props: FormControlProps): JSX.Element {
       })
     })
   }, [children, name, onDelegatingBlur, onDelegatingChange, validateStatus, value]) as JSX.Element
+
+  return (
+    <View
+      className={classNames(prefixClassname("form-control"), className)}
+      children={field}
+      {...restProps}
+    />
+  )
 }
 
 export default FormControl

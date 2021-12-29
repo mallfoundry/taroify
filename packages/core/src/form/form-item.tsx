@@ -209,7 +209,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
         >
           {label}
           <CellValue alone={false}>
-            <View className={classNames(prefixClassname("form-item__body"))} children={Control} />
+            {Control}
             {explain && (
               <View className={classNames(prefixClassname("form__feedbacks"))}>
                 {feedbacks}
