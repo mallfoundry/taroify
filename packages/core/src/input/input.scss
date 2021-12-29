@@ -39,18 +39,8 @@
     color: var(--input-placeholder-color, $input-placeholder-color);
   }
 
-  // For wechat
-  &__placeholder--readonly {
-    color: inherit;
-  }
-
   &--readonly {
     cursor: default;
-
-    & > input::placeholder,
-    &::placeholder {
-      color: inherit;
-    }
   }
 
   &--disabled {
