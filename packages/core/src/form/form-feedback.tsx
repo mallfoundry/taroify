@@ -17,14 +17,14 @@ function FormFeedback(props: FormFeedbackProps) {
   return (
     <View
       className={classNames(
-        prefixClassname("form__feedback"),
+        prefixClassname("form-feedback"),
         {
-          [prefixClassname("form__feedback--left")]: align === "left",
-          [prefixClassname("form__feedback--center")]: align === "center",
-          [prefixClassname("form__feedback--right")]: align === "right",
-          [prefixClassname("form__feedback--valid")]: status === "valid",
-          [prefixClassname("form__feedback--warning")]: status === "warning",
-          [prefixClassname("form__feedback--invalid")]: status === "invalid",
+          [prefixClassname("form-feedback--left")]: align === "left",
+          [prefixClassname("form-feedback--center")]: align === "center",
+          [prefixClassname("form-feedback--right")]: align === "right",
+          [prefixClassname("form-feedback--valid")]: status === "valid",
+          [prefixClassname("form-feedback--warning")]: status === "warning",
+          [prefixClassname("form-feedback--invalid")]: status === "invalid",
         },
         className,
       )}
