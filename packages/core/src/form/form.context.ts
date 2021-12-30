@@ -1,8 +1,10 @@
 import { createContext } from "react"
-import { FormValidateTrigger } from "./form.shared"
+import { FormControlAlign, FormLabelAlign, FormValidateTrigger } from "./form.shared"
 
 interface FormContextValue {
   name: string
+  labelAlign?: FormLabelAlign
+  controlAlign?: FormControlAlign
   validateTrigger?: FormValidateTrigger
 }
 
