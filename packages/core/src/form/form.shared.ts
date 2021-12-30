@@ -1,7 +1,5 @@
 import { ReactNode } from "react"
 
-export type FormLabelAlign = "left" | "center" | "right"
-
 export interface FormInstance {
   validateFields(name?: string | string[]): Promise<void>
 
@@ -9,6 +7,10 @@ export interface FormInstance {
 
   getFieldsValue<V>(): V
 }
+
+export type FormLabelAlign = "left" | "center" | "right"
+
+export type FormControlAlign = "left" | "center" | "right"
 
 export type FormFeedbackAlign = "left" | "center" | "right"
 
@@ -41,18 +43,22 @@ export interface FormRule {
   formatter?: FiledRuleFormatter
 }
 
-export interface FormController {
+export interface FormController<V> {
   name?: string
-  value?: any
+  value?: V
   validateStatus?: FormValidateStatus
 
-  onChange?(value: any): void
+  onChange?(value: V): void
 
-  onBlur?(value: any): void
+  onBlur?(value: V): void
 }
 
 export interface FormItemInstance {
   readonly name?: string
+
+  getValue(): any
+
+  setValue(value: any): void
 
   validate(rules?: FormRule[]): Promise<void>
 }
