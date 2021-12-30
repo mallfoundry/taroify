@@ -18,7 +18,7 @@ import FormControlHandler, { registerFormControlHandler } from "./form-control-h
 
 registerFormControlHandler(
   new (class implements FormControlHandler<InputProps> {
-    doControlRender(element: ReactElement<InputProps>, controller: FormController): ReactNode {
+    doControlRender(element: ReactElement<InputProps>, controller: FormController<any>): ReactNode {
       const {
         name,
         value,
@@ -27,11 +27,11 @@ registerFormControlHandler(
         onChange: onDelegatingChange,
       } = controller
       const { props: elementProps } = element
-      const { onBlur, onInput } = elementProps
+      const { color, onBlur, onInput } = elementProps
       return cloneElement<InputProps>(element, {
         name,
         value,
-        color: validateStatus === "invalid" ? "danger" : undefined,
+        color: color ?? validateStatus === "invalid" ? "danger" : undefined,
         onInput: (e) => {
           onInput?.(e)
           onDelegatingChange?.(e.detail.value)
@@ -51,7 +51,10 @@ registerFormControlHandler(
 
 registerFormControlHandler(
   new (class implements FormControlHandler<TaroSwitchProps> {
-    doControlRender(element: ReactElement<TaroSwitchProps>, controller: FormController): ReactNode {
+    doControlRender(
+      element: ReactElement<TaroSwitchProps>,
+      controller: FormController<any>,
+    ): ReactNode {
       const { name, value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
       const { onChange } = elementProps
@@ -75,7 +78,7 @@ registerFormControlHandler(
   new (class implements FormControlHandler<CheckboxProps | SwitchProps> {
     doControlRender(
       element: ReactElement<CheckboxProps | SwitchProps>,
-      controller: FormController,
+      controller: FormController<any>,
     ): ReactNode {
       const { value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
@@ -115,7 +118,7 @@ registerFormControlHandler(
         | StepperProps
         | UploaderProps
       >,
-      controller: FormController,
+      controller: FormController<any>,
     ): ReactNode {
       const { value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
