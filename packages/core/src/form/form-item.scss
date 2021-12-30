@@ -1,6 +1,9 @@
 @import "./variables";
 
 .#{$component-prefix}form-item {
+  & > .#{$component-prefix}cell__value {
+    text-align: initial;
+  }
 
   &--disabled {
     .#{$component-prefix}form__label {

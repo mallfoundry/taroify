@@ -26,6 +26,7 @@ import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
 import { fulfillPromise } from "../utils/promisify"
 import { useToRef } from "../utils/state"
+import FormFeedback from "./form-feedback"
 import FormItemContext from "./form-item.context"
 import { validateRules } from "./form.rule"
 import { FormItemInstance, FormRule, FormValidateStatus, FormValidateTrigger } from "./form.shared"
@@ -162,8 +163,10 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       () => ({
         name,
         validate,
+        getValue,
+        setValue,
       }),
-      [name, validate],
+      [getValue, name, setValue, validate],
     )
 
     useImperativeHandle(ref, () => instance, [instance])
@@ -214,15 +217,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
               <View className={classNames(prefixClassname("form__feedbacks"))}>
                 {feedbacks}
                 {_.map(invalidMessages, (message, messageKey) => (
-                  <View
-                    key={messageKey}
-                    className={classNames(
-                      prefixClassname("form__feedback"),
-                      prefixClassname("form__feedback--left"),
-                      prefixClassname("form__feedback--invalid"),
-                    )}
-                    children={message}
-                  />
+                  <FormFeedback key={messageKey} status="invalid" children={message} />
                 ))}
               </View>
             )}
