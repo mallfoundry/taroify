@@ -1,30 +1,35 @@
 @import "./variables";
 
-.#{$component-prefix}form {
+.#{$component-prefix}form-label {
+  box-sizing: border-box;
+  flex: none;
+  width: var(--form-label-width, $form-label-width);
+  margin-right: var(--form-label-margin-right, $form-label-margin-right);
+  color: var(--form-label-color, $form-label-color);
+  text-align: left;
+  word-wrap: break-word;
+  display: flex;
 
-  &__label {
-    box-sizing: border-box;
-    flex: none;
-    width: var(--form-label-width, $form-label-width);
-    margin-right: var(--form-label-margin-right, $form-label-margin-right);
-    color: var(--form-label-color, $form-label-color);
+  &--left {
+    justify-content: flex-start;
     text-align: left;
-    word-wrap: break-word;
+  }
 
-    &--center {
-      text-align: center;
-    }
+  &--center {
+    justify-content: center;
+    text-align: center;
+  }
 
-    &--right {
-      text-align: right;
-    }
+  &--right {
+    justify-content: flex-end;
+    text-align: right;
+  }
 
-    &--required {
-      &::before {
-        margin-right: 2px * $hd;
-        color: var(--form-required-color, $form-required-color);
-        content: '*';
-      }
+  &--required {
+    &::before {
+      margin-right: 2px * $hd;
+      color: var(--form-required-color, $form-required-color);
+      content: '*';
     }
   }
 }
