@@ -5,7 +5,13 @@ import * as React from "react"
 import { ForwardedRef, forwardRef, ReactNode, useImperativeHandle } from "react"
 import { useUniqueId } from "../hooks"
 import FormContext from "./form.context"
-import { FormInstance, FormLabelAlign, FormValidateTrigger, FormValidError } from "./form.shared"
+import {
+  FormControlAlign,
+  FormInstance,
+  FormLabelAlign,
+  FormValidateTrigger,
+  FormValidError,
+} from "./form.shared"
 import useForm from "./use-form"
 
 export interface FormProps extends TaroFormProps {
@@ -13,6 +19,7 @@ export interface FormProps extends TaroFormProps {
   defaultValues?: any
   values?: any
   labelAlign?: FormLabelAlign
+  controlAlign?: FormControlAlign
   validateTrigger?: FormValidateTrigger
   colon?: boolean
   disabled?: boolean
@@ -29,6 +36,8 @@ const Form = forwardRef<FormInstance, FormProps>(
       defaultValues,
       values,
       name: nameProp,
+      labelAlign,
+      controlAlign,
       validateTrigger = "onBlur",
       children: childrenProp,
       onSubmit,
@@ -68,7 +77,14 @@ const Form = forwardRef<FormInstance, FormProps>(
     )
 
     return (
-      <FormContext.Provider value={{ name, validateTrigger }}>
+      <FormContext.Provider
+        value={{
+          name,
+          labelAlign,
+          controlAlign,
+          validateTrigger,
+        }}
+      >
         <TaroForm onSubmit={handleSubmit} children={childrenProp} />
       </FormContext.Provider>
     )
