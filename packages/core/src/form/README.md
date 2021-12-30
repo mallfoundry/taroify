@@ -455,7 +455,7 @@ function CalendarField() {
 | required | 是否显示表单必填星号 | _boolean_ | `false` |
 | rules | 表单校验规则 | _FormRule[]_ | - |
 
-> Form.Item 继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
+> 属性继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
 
 ### Rule 数据结构
 
