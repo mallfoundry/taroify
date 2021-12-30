@@ -9,13 +9,15 @@ import { FormLabelAlign } from "./form.shared"
 
 interface FormLabelProps extends ViewProps {
   align?: FormLabelAlign
+  colon?: boolean
   children?: ReactNode
 }
 
 function FormLabel(props: FormLabelProps) {
-  const { align: alignProp, ...restProps } = props
-  const { labelAlign } = useContext(FormContext)
+  const { align: alignProp, colon: colonProp, children, ...restProps } = props
+  const { colon: ctxColon, labelAlign } = useContext(FormContext)
   const align = alignProp ?? labelAlign
+  const colon = colonProp ?? ctxColon
 
   return (
     <CellTitle
@@ -25,7 +27,10 @@ function FormLabel(props: FormLabelProps) {
         [prefixClassname("form-label--right")]: align === "right",
       })}
       {...restProps}
-    />
+    >
+      {children}
+      {colon ? ":" : undefined}
+    </CellTitle>
   )
 }
 

@@ -22,8 +22,6 @@ export interface FormProps extends TaroFormProps {
   controlAlign?: FormControlAlign
   validateTrigger?: FormValidateTrigger
   colon?: boolean
-  disabled?: boolean
-  readonly?: boolean
 
   children?: ReactNode
 
@@ -33,15 +31,17 @@ export interface FormProps extends TaroFormProps {
 const Form = forwardRef<FormInstance, FormProps>(
   (props: FormProps, ref: ForwardedRef<FormInstance>) => {
     const {
+      name: nameProp,
       defaultValues,
       values,
-      name: nameProp,
       labelAlign,
       controlAlign,
       validateTrigger = "onBlur",
+      colon,
       children: childrenProp,
       onSubmit,
       onValidate,
+      ...restProps
     } = props
 
     const nameId = useUniqueId()
@@ -80,12 +80,13 @@ const Form = forwardRef<FormInstance, FormProps>(
       <FormContext.Provider
         value={{
           name,
+          colon,
           labelAlign,
           controlAlign,
           validateTrigger,
         }}
       >
-        <TaroForm onSubmit={handleSubmit} children={childrenProp} />
+        <TaroForm onSubmit={handleSubmit} children={childrenProp} {...restProps} />
       </FormContext.Provider>
     )
   },

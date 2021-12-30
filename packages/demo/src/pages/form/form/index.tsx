@@ -246,11 +246,12 @@ function CalendarField() {
 
   const formatDate = (date: any) => {
     if (date) {
-      const months = _.padStart(_.toString(date?.getMonth()), 2, "0")
+      const months = _.padStart(_.toString(date?.getMonth() + 1), 2, "0")
       const days = _.padStart(_.toString(date?.getDate()), 2, "0")
-      return `${months}:${days}`
+      return `${months}-${days}`
     }
   }
+
   return (
     <>
       <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
