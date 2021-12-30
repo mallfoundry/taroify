@@ -455,6 +455,8 @@ function CalendarField() {
 | required | 是否显示表单必填星号 | _boolean_ | `false` |
 | rules | 表单校验规则 | _FormRule[]_ | - |
 
+> Form.Item 继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
+
 ### Rule 数据结构
 
 使用 Form.Item 的 `rules` 属性可以定义校验规则，可选属性如下：
@@ -468,11 +470,24 @@ function CalendarField() {
 | trigger | 本项规则的触发时机，可选值为 `onChange`、`onBlur` | _string_ |
 | formatter | 格式化函数，将表单项的值转换后进行校验 | _(value, rule) => any_ |
 
-### Form.Item Props
+### Form.Label Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| name | 表单项名称，提交表单的标识符 | _string_ | - |
-| defaultValue | 表单项默认值 | _any_ | - |
-| required | 是否显示表单必填星号 | _boolean_ | `false` |
-| rules | 表单校验规则 | _FormRule[]_ | - |
+| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
+| colon | 是否在 label 后面添加冒号 | _boolean_ | `false` |
+
+
+### Form.Feedback Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
+| status | 反馈状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
+
+
+### Form.Control Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
