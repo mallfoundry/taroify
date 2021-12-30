@@ -14,7 +14,6 @@
     margin: 0;
     line-height: inherit;
     color: $input-color;
-    text-align: left;
     resize: none;
     background-color: transparent;
     border: 0;
@@ -89,6 +88,13 @@
   &--danger > input, // For h5
   &--danger > input::placeholder {
     color: var(--input-danger-color, $input-danger-color);
+  }
+
+  &--left,
+  &--left > input // For h5
+  {
+    justify-content: flex-start;
+    text-align: left;
   }
 
   &--center,

@@ -77,7 +77,7 @@ function Input(props: InputProps) {
     value: valueProp,
     readonly,
     disabled,
-    align = "left",
+    align,
     color,
     clearable,
     clearTrigger = "focus",
