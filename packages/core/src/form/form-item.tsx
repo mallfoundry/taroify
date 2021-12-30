@@ -68,9 +68,10 @@ export interface FormItemProps extends CellProps {
   name?: string
   defaultValue?: any
   required?: boolean
-  children?: ReactNode
 
   rules?: FormRule[]
+
+  children?: ReactNode
 }
 
 const FormItem = forwardRef<FormItemInstance, FormItemProps>(
