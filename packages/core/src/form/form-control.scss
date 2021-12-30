@@ -5,4 +5,19 @@
   align-items: center;
   color: var(--form-control-color, $form-control-color);
   min-height: var(--form-control-min-height, $form-control-min-height);
+
+  &--left {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  &--center {
+    justify-content: center;
+    text-align: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+    text-align: right;
+  }
 }

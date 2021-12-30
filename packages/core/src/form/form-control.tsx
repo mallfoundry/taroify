@@ -8,22 +8,28 @@ import Input from "../input"
 import { prefixClassname } from "../styles"
 import { doFormControlHandler } from "./control"
 import FormItemContext from "./form-item.context"
-import { FormController } from "./form.shared"
+import FormContext from "./form.context"
+import { FormControlAlign, FormController } from "./form.shared"
 
-interface FormControlProps extends ViewProps, FormController {
-  children?: ReactNode | ((controller: FormController) => ReactNode)
+interface FormControlProps<V> extends ViewProps, FormController<V> {
+  align?: FormControlAlign
+  children?: ReactNode | ((controller: FormController<V>) => ReactNode)
 }
 
-function FormControl(props: FormControlProps): JSX.Element {
+function FormControl<V = any>(props: FormControlProps<V>) {
   const {
     className,
     name,
     value,
+    align: alignProp,
     children = <Input />,
     onChange: onDelegatingChange,
     onBlur: onDelegatingBlur,
     ...restProps
   } = props
+
+  const { controlAlign } = useContext(FormContext)
+  const align = alignProp ?? controlAlign
 
   const { validateStatus } = useContext(FormItemContext)
 
@@ -55,7 +61,15 @@ function FormControl(props: FormControlProps): JSX.Element {
 
   return (
     <View
-      className={classNames(prefixClassname("form-control"), className)}
+      className={classNames(
+        prefixClassname("form-control"),
+        {
+          [prefixClassname("form-control--left")]: align === "left",
+          [prefixClassname("form-control--center")]: align === "center",
+          [prefixClassname("form-control--right")]: align === "right",
+        },
+        className,
+      )}
       children={field}
       {...restProps}
     />
