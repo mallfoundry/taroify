@@ -16,6 +16,7 @@ import {
   Toast,
   Uploader,
 } from "@taroify/core"
+import { FormItemInstance, FormValidError } from "@taroify/core/form"
 import { ArrowRight } from "@taroify/icons"
 import { CustomWrapper, View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
@@ -23,13 +24,13 @@ import { FormProps } from "@tarojs/components/types/Form"
 import { chooseImage } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useRef, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicForm() {
-  function onSubmit(event: BaseEventOrig<FormProps.onSubmitEventDetail>) {
+  const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     Toast.open(JSON.stringify(event.detail.value))
   }
 
@@ -70,8 +71,17 @@ function FormWithRules() {
       }, 1000)
     })
 
+  function onValidate(errors: FormValidError[]) {
+    Toast.open({
+      style: {
+        textAlign: "left",
+      },
+      message: JSON.stringify(errors, undefined, 2),
+    })
+  }
+
   return (
-    <Form defaultValues={{ validatorMessage: "abc" }}>
+    <Form defaultValues={{ validatorMessage: "abc" }} onValidate={onValidate}>
       <Toast id="toast" />
       <Cell.Group inset>
         <Form.Item name="pattern" rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}>
@@ -117,14 +127,8 @@ function FormWithRules() {
   )
 }
 
-interface UploaderFieldProps {
-  value?: any
-
-  onChange?(value?: any): void
-}
-
-function UploaderField(props: UploaderFieldProps) {
-  const { value = [], onChange } = props
+function UploaderField() {
+  const itemRef = useRef<FormItemInstance>()
 
   function onUpload() {
     chooseImage({
@@ -132,8 +136,8 @@ function UploaderField(props: UploaderFieldProps) {
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
     }).then(({ tempFiles }) => {
-      onChange?.([
-        ...value,
+      itemRef.current?.setValue([
+        ..._.toArray(itemRef.current?.getValue()),
         {
           url: tempFiles[0].path,
           type: tempFiles[0].type,
@@ -143,32 +147,33 @@ function UploaderField(props: UploaderFieldProps) {
     })
   }
 
-  return <Uploader multiple maxFiles={2} value={value} onUpload={onUpload} onChange={onChange} />
+  return (
+    <Form.Item ref={itemRef} name="uploader">
+      <Form.Label>文件上传</Form.Label>
+      <Form.Control>
+        <Uploader multiple maxFiles={2} onUpload={onUpload} />
+      </Form.Control>
+    </Form.Item>
+  )
 }
 
-interface PickerFieldProps {
-  value?: any
-
-  onChange?(value?: any): void
-}
-
-function PickerField(props: PickerFieldProps) {
-  const { value: valueProp, onChange } = props
+function PickerField() {
+  const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState()
-
-  useEffect(() => setValue(valueProp), [valueProp])
 
   return (
     <>
-      <Input value={valueProp} readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
+      <Form.Item ref={itemRef} name="picker" clickable rightIcon={<ArrowRight />}>
+        <Form.Label>选择器</Form.Label>
+        <Form.Control>
+          <Input readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
+        </Form.Control>
+      </Form.Item>
       <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
         <Picker
-          value={value}
-          onChange={setValue}
           onCancel={() => setOpen(false)}
           onConfirm={(newValue) => {
-            onChange?.(newValue)
+            itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
         >
@@ -189,42 +194,39 @@ function PickerField(props: PickerFieldProps) {
   )
 }
 
-interface DatetimePickerProps {
-  value?: Date
-
-  onChange?(value?: Date): void
-}
-
-function DatetimePickerField(props: DatetimePickerProps) {
-  const { value: valueProp, onChange } = props
+function DatetimePickerField() {
+  const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date>()
 
-  useEffect(() => setValue(valueProp), [valueProp])
+  const formatDate = (date: any) => {
+    if (date) {
+      const hours = _.padStart(_.toString(date?.getHours()), 2, "0")
+      const minutes = _.padStart(_.toString(date?.getMinutes()), 2, "0")
+      return `${hours}:${minutes}`
+    }
+  }
 
   return (
     <>
-      <Input
-        value={
-          valueProp
-            ? `${_.padStart(_.toString(valueProp?.getHours()), 2, "0")}:${
-                //
-                _.padStart(_.toString(valueProp?.getMinutes()), 2, "0")
-              }`
-            : undefined
-        }
-        readonly
-        placeholder="点击选择时间"
-        onClick={() => setOpen(true)}
-      />
+      <Form.Item ref={itemRef} name="datetimePicker" clickable rightIcon={<ArrowRight />}>
+        <Form.Label>时间选择</Form.Label>
+        <Form.Control>
+          {(controller) => (
+            <Input
+              value={formatDate(controller.value)}
+              readonly
+              placeholder="点击选择时间"
+              onClick={() => setOpen(true)}
+            />
+          )}
+        </Form.Control>
+      </Form.Item>
       <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
         <DatetimePicker
           type="hour-minute"
-          value={value}
-          onChange={setValue}
           onCancel={() => setOpen(false)}
           onConfirm={(newValue) => {
-            onChange?.(newValue)
+            itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
         >
@@ -238,31 +240,32 @@ function DatetimePickerField(props: DatetimePickerProps) {
   )
 }
 
-interface CalendarProps {
-  value?: Date
-
-  onChange?(value?: Date): void
-}
-
-function CalendarField(props: CalendarProps) {
-  const { value: valueProp, onChange } = props
+function CalendarField() {
+  const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date>()
 
-  useEffect(() => setValue(valueProp), [valueProp])
-
+  const formatDate = (date: any) => {
+    if (date) {
+      const months = _.padStart(_.toString(date?.getMonth()), 2, "0")
+      const days = _.padStart(_.toString(date?.getDate()), 2, "0")
+      return `${months}:${days}`
+    }
+  }
   return (
     <>
-      <Input
-        value={
-          valueProp
-            ? `${_.padStart(_.toString(valueProp.getMonth() + 1), 2, "0")}/${valueProp.getDate()}`
-            : undefined
-        }
-        readonly
-        placeholder="点击选择日期"
-        onClick={() => setOpen(true)}
-      />
+      <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
+        <Form.Label>日历</Form.Label>
+        <Form.Control>
+          {(controller) => (
+            <Input
+              value={formatDate(controller.value)}
+              readonly
+              placeholder="点击选择日期"
+              onClick={() => setOpen(true)}
+            />
+          )}
+        </Form.Control>
+      </Form.Item>
       <Popup
         mountOnEnter={false}
         style={{ height: "80%" }}
@@ -274,10 +277,8 @@ function CalendarField(props: CalendarProps) {
         <Popup.Close />
         <Calendar
           type="single"
-          value={value}
-          onChange={setValue}
           onConfirm={(newValue) => {
-            onChange?.(newValue)
+            itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
         >
@@ -346,44 +347,18 @@ function FormWithFields() {
             <Slider />
           </Form.Control>
         </Form.Item>
-        <Form.Item name="uploader">
-          <Form.Label>文件上传</Form.Label>
-          <Form.Control>
-            {(controller) => (
-              <UploaderField value={controller.value} onChange={controller.onChange} />
-            )}
-          </Form.Control>
-        </Form.Item>
-        <Form.Item name="picker" clickable rightIcon={<ArrowRight />}>
-          <Form.Label>选择器</Form.Label>
-          <Form.Control>
-            {(controller) => (
-              <CustomWrapper>
-                <PickerField value={controller.value} onChange={controller.onChange} />
-              </CustomWrapper>
-            )}
-          </Form.Control>
-        </Form.Item>
-        <Form.Item name="datetimePicker" clickable rightIcon={<ArrowRight />}>
-          <Form.Label>时间选择</Form.Label>
-          <Form.Control>
-            {(controller) => (
-              <CustomWrapper>
-                <DatetimePickerField value={controller.value} onChange={controller.onChange} />
-              </CustomWrapper>
-            )}
-          </Form.Control>
-        </Form.Item>
-        <Form.Item name="calendar" clickable rightIcon={<ArrowRight />}>
-          <Form.Label>日历</Form.Label>
-          <Form.Control>
-            {(controller) => (
-              <CustomWrapper>
-                <CalendarField value={controller.value} onChange={controller.onChange} />
-              </CustomWrapper>
-            )}
-          </Form.Control>
-        </Form.Item>
+        <CustomWrapper>
+          <UploaderField />
+        </CustomWrapper>
+        <CustomWrapper>
+          <PickerField />
+        </CustomWrapper>
+        <CustomWrapper>
+          <DatetimePickerField />
+        </CustomWrapper>
+        <CustomWrapper>
+          <CalendarField />
+        </CustomWrapper>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
