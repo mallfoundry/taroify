@@ -6,8 +6,6 @@
 
 ### 引入
 
-通过以下方式来全局注册组件，更多注册方式请参考[组件注册](#/zh-CN/advanced-usage#zu-jian-zhu-ce)。
-
 ```tsx
 import { Form } from "@taroify/core"
 ```
@@ -228,12 +226,12 @@ function UploaderField() {
 
   function onUpload() {
     chooseImage({
-      count: 2,
+      count: 1,
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
     }).then(({ tempFiles }) => {
       itemRef.current?.setValue([
-        ...(itemRef.current?.getValue()?[...itemRef.current?.getValue()]:[]),
+        ...(itemRef.current?.getValue() ? [...itemRef.current?.getValue()] : []),
         {
           url: tempFiles[0].path,
           type: tempFiles[0].type,

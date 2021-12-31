@@ -132,12 +132,12 @@ function UploaderField() {
 
   function onUpload() {
     chooseImage({
-      count: 2,
+      count: 1,
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
     }).then(({ tempFiles }) => {
       itemRef.current?.setValue([
-        ...(itemRef.current?.getValue()?[...itemRef.current?.getValue()]:[]),
+        ...(itemRef.current?.getValue() ? [...itemRef.current?.getValue()] : []),
         {
           url: tempFiles[0].path,
           type: tempFiles[0].type,
