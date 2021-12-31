@@ -233,7 +233,7 @@ function UploaderField() {
       sourceType: ["album", "camera"],
     }).then(({ tempFiles }) => {
       itemRef.current?.setValue([
-        ..._.toArray(itemRef.current?.getValue()),
+        ...(itemRef.current?.getValue()?[...itemRef.current?.getValue()]:[]),
         {
           url: tempFiles[0].path,
           type: tempFiles[0].type,
