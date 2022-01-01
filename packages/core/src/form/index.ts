@@ -5,7 +5,15 @@ import FormFeedback from "./form-feedback"
 import FormItem from "./form-item"
 import FormLabel from "./form-label"
 
-export type { FormRule, FormLabelAlign, FormValidError, FormItemInstance } from "./form.shared"
+export type {
+  FormRule,
+  FormLabelAlign,
+  FormValidError,
+  FormItemInstance,
+  FormFeedbackAlign,
+  FormFeedbackStatus,
+  FormController,
+} from "./form.shared"
 export type { FormItemProps } from "./form-item"
 
 export { default as useFormField } from "./use-form-field"
