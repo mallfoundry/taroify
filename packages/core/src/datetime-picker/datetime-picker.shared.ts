@@ -6,6 +6,7 @@ export type DatetimePickerType =
   | "time"
   | "datetime"
   | "date-hour"
+  | "date-minute"
   | "year-month"
   | "month-day"
   | "hour-minute"
@@ -161,6 +162,8 @@ function useSpecifiedDatetimeRanges(ranges: DatetimeRange[], type: DatetimePicke
         return _.slice(ranges, 1, 3)
       case "date-hour":
         return _.slice(ranges, 0, 4)
+      case "date-minute":
+        return _.slice(ranges, 0, 5)
       case "hour-minute":
         return _.slice(ranges, 3, 5)
     }

@@ -247,7 +247,7 @@ function DatePickerWithFields() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| type | 时间类型，可选值为 `date` `time` <br> `year-month` `month-day` `date-hour` `hour-minute` | _string_ | `datetime` |
+| type | 时间类型，可选值为 `date` `time` <br> `year-month` `month-day` `date-hour` `date-minute` `hour-minute` | _string_ | `datetime` |
 | defaultValue | 默认选中的时间 | _Date_ | - |
 | value | 选中的时间 | _Date_ | - |
 | min | 可选的最小时间，精确到秒 | _Date_ | 十年前 |
