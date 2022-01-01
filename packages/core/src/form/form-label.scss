@@ -2,13 +2,13 @@
 
 .#{$component-prefix}form-label {
   box-sizing: border-box;
+  display: flex;
   flex: none;
   width: var(--form-label-width, $form-label-width);
   margin-right: var(--form-label-margin-right, $form-label-margin-right);
   color: var(--form-label-color, $form-label-color);
   text-align: left;
   word-wrap: break-word;
-  display: flex;
 
   &--left {
     justify-content: flex-start;

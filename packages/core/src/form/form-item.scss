@@ -1,7 +1,7 @@
 @import "./variables";
 
 .#{$component-prefix}form-item {
-  & > .#{$component-prefix}cell__value {
+  > .#{$component-prefix}cell__value {
     text-align: initial;
   }
 
@@ -34,7 +34,7 @@
   }
 
   .#{$component-prefix}input + .#{$component-prefix}button {
-    margin-left: var(--padding-xs, $padding-xs);
     flex-shrink: 0;
+    margin-left: var(--padding-xs, $padding-xs);
   }
 }

@@ -3,13 +3,13 @@
 .#{$component-prefix}input {
 
   &, // For wechat
-  & > input // For h5
+  > input // For h5
   {
-    height: $input-height;
     box-sizing: border-box;
     display: block;
     width: 100%;
     min-width: 0; // for flex-shrink in field__button
+    height: $input-height;
     padding: 0;
     margin: 0;
     line-height: inherit;
@@ -33,7 +33,7 @@
   }
 
   &__placeholder, // For wechat
-  & > input::placeholder // For h5
+  > input::placeholder // For h5
   {
     color: $input-placeholder-color;
   }
@@ -123,8 +123,8 @@
     flex-shrink: 0;
     padding: 0 var(--padding-xs, $padding-xs);
     margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
-    line-height: inherit;
     font-size: $input-clear-icon-size;
+    line-height: inherit;
     color: $input-clear-icon-color;
     cursor: pointer;
   }
