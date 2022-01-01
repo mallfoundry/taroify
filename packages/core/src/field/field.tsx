@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ReactNode } from "react"
-import Form, { FormItemProps, FormLabelAlign } from "../form"
-import { FormFeedbackAlign, FormFeedbackStatus } from "../form/form.shared"
+import Form, { FormController, FormItemProps, FormLabelAlign } from "../form"
+import { FormFeedbackAlign, FormFeedbackStatus } from "../form"
 
 export interface FieldProps extends FormItemProps {
   label?: ReactNode
@@ -9,6 +9,7 @@ export interface FieldProps extends FormItemProps {
   feedback?: ReactNode
   feedbackAlign?: FormFeedbackAlign
   feedbackStatus?: FormFeedbackStatus
+  children?: ReactNode | ((controller: FormController<any>) => ReactNode)
 }
 
 function Field(props: FieldProps) {
@@ -28,9 +29,11 @@ function Field(props: FieldProps) {
 
   return (
     <Form.Item {...restProps}>
-      <Form.Label align={labelAlign} children={label} />
-      <Form.Control children={children} />
-      <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />
+      {label && <Form.Label align={labelAlign} children={label} />}
+      {children && <Form.Control children={children} />}
+      {feedback && (
+        <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />
+      )}
     </Form.Item>
   )
 }
