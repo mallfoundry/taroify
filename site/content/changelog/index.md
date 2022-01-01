@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.22-alpha.0
+
+`2022-01-01`
+
+**New Component**
+
+- 新增 Form 组件 [#118](https://github.com/mallfoundry/taroify/issues/118) [#224](https://github.com/mallfoundry/taroify/pull/224)
+
+**Feature**
+
+- Cell
+  - 设置 icon 和 rightIcon 属性时，仅为图标组件添加单元格图标样式 [#214](https://github.com/mallfoundry/taroify/issues/214) [#225](https://github.com/mallfoundry/taroify/pull/225)
+
+**Bug Fixes**
+
+- Tabs
+  - 修复 swipeable 不支持 lazyRender 的问题 [#218](https://github.com/mallfoundry/taroify/pull/218)
+
 ### v0.0.21-alpha.1
 
 `2021-12-22`
