@@ -221,6 +221,7 @@ function TabsWithCustomTitle() {
 | ellipsis | 是否省略过长的标题文字 | _boolean_ | `true` |
 | sticky | 是否使用粘性定位布局 | _boolean \| { offsetTop }_ | `false` |
 | swipeable | 是否开启手势左右滑动切换 | _boolean_ | `false` |
+| lazyRender | 是否延迟渲染未展示的选项卡 | _boolean_ | `false` |
 
 ### Tabs.Pane Props
 
