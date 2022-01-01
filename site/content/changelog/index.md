@@ -24,6 +24,21 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - Cell
   - 设置 icon 和 rightIcon 属性时，仅为图标组件添加单元格图标样式 [#214](https://github.com/mallfoundry/taroify/issues/214) [#225](https://github.com/mallfoundry/taroify/pull/225)
+- Field
+  - 新增 feedbackAlign 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackStatus 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+- Search
+  - 新增 inputColor 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackAlign 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackStatus 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  
+**Breaking Changes**
+
+- Field
+  - 删除 Input 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 将 message 属性重命名为 feedback [#224](https://github.com/mallfoundry/taroify/pull/224)
+- Search
+  - 将 message 属性重命名为 feedback [#224](https://github.com/mallfoundry/taroify/pull/224)
 
 **Bug Fixes**
 
