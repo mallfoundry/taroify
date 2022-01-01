@@ -35,7 +35,15 @@
   &__placeholder, // For wechat
   & > input::placeholder // For h5
   {
-    color: var(--input-placeholder-color, $input-placeholder-color);
+    color: $input-placeholder-color;
+  }
+
+  &--readonly,
+  &--readonly::placeholder,
+  &__placeholder--readonly,
+  &--readonly > input, // For h5
+  &--readonly > input::placeholder {
+    color: $input-color;
   }
 
   &--readonly {
@@ -43,11 +51,11 @@
   }
 
   &--disabled {
-    color: var(--input-disabled-color, $input-disabled-color);
+    color: $input-disabled-color;
     cursor: not-allowed;
     opacity: 1;
     // fix disabled color in mobile safari
-    -webkit-text-fill-color: var(--input-disabled-color, $input-disabled-color);
+    -webkit-text-fill-color: $input-disabled-color;
   }
 
   &--primary,
@@ -55,7 +63,7 @@
   &__placeholder--primary,
   &--primary > input, // For h5
   &--primary > input::placeholder {
-    color: var(--input-primary-color, $input-primary-color);
+    color: $input-primary-color;
   }
 
   &--info,
@@ -63,7 +71,7 @@
   &__placeholder--info,
   &--info > input, // For h5
   &--info > input::placeholder {
-    color: var(--input-info-color, $input-info-color);
+    color: $input-info-color;
   }
 
   &--success,
@@ -71,7 +79,7 @@
   &__placeholder--success,
   &--success > input, // For h5
   &--success > input::placeholder {
-    color: var(--input-success-color, $input-success-color);
+    color: $input-success-color;
   }
 
   &--warning,
@@ -79,7 +87,7 @@
   &__placeholder--warning,
   &--warning > input, // For h5
   &--warning > input::placeholder {
-    color: var(--input-warning-color, $input-warning-color);
+    color: $input-warning-color;
   }
 
   &--danger,
@@ -87,7 +95,7 @@
   &__placeholder--danger,
   &--danger > input, // For h5
   &--danger > input::placeholder {
-    color: var(--input-danger-color, $input-danger-color);
+    color: $input-danger-color;
   }
 
   &--left,
@@ -116,8 +124,8 @@
     padding: 0 var(--padding-xs, $padding-xs);
     margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
     line-height: inherit;
-    font-size: var(--input-clear-icon-size, $input-clear-icon-size);
-    color: var(--input-clear-icon-color, $input-clear-icon-color);
+    font-size: $input-clear-icon-size;
+    color: $input-clear-icon-color;
     cursor: pointer;
   }
 }
