@@ -91,6 +91,10 @@ const menus = [
         to: "/components/field/",
       },
       {
+        title: "Form 表单",
+        to: "/components/form/",
+      },
+      {
         title: "NumberKeyboard 数字键盘",
         to: "/components/number-keyboard/",
       },

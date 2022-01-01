@@ -19,7 +19,7 @@ import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
-import { useRefs } from "../utils/state"
+import { useRefs, useValue } from "../utils/state"
 import CalendarFooter from "./calendar-footer"
 import CalendarHeader from "./calendar-header"
 import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
@@ -116,7 +116,7 @@ function Calendar(props: CalendarProps) {
     subtitle: subtitleProp = true,
     type = "single",
     defaultValue,
-    value: currentValue,
+    value: valueProp,
     min: minValue = MIN_DATE,
     max: maxValue = MAX_DATE,
     firstDayOfWeek,
@@ -124,9 +124,11 @@ function Calendar(props: CalendarProps) {
     watermark = true,
     formatter = defaultFormatter,
     children: childrenProp,
-    onChange,
+    onChange: onChangeProp,
     onConfirm,
   } = props
+
+  const { value, setValue } = useValue({ defaultValue, value: valueProp, onChange: onChangeProp })
 
   const { footer } = useCalendarChildren(childrenProp)
 
@@ -222,7 +224,7 @@ function Calendar(props: CalendarProps) {
 
   function change(dateValue: CalendarValueType, complete?: boolean) {
     changeValueRef.current = dateValue
-    onChange?.(dateValue)
+    setValue?.(dateValue)
 
     if (complete && !hasConfirmRef.current) {
       onConfirm?.(dateValue)
@@ -238,12 +240,12 @@ function Calendar(props: CalendarProps) {
     if (type === "range") {
       const disabledDays = getDisabledDays()
 
-      if (!currentValue) {
+      if (!value) {
         change([date])
         return
       }
 
-      const [startDay, endDay] = currentValue as [Date, Date]
+      const [startDay, endDay] = value as [Date, Date]
 
       if (startDay && !endDay) {
         const compareToStart = compareDate(date, startDay)
@@ -265,11 +267,11 @@ function Calendar(props: CalendarProps) {
         change([date])
       }
     } else if (type === "multiple") {
-      if (!currentValue) {
+      if (!value) {
         change([date])
         return
       }
-      const dates = currentValue as Date[]
+      const dates = value as Date[]
 
       const newDates = _.filter(dates, (dateItem) => compareDate(dateItem, date) !== 0)
       if (_.size(newDates) !== _.size(dates)) {
@@ -370,17 +372,17 @@ function Calendar(props: CalendarProps) {
 
   const reset = (date?: CalendarValueType) => nextTick(() => scrollIntoView(date).then())
 
-  const init = () => reset(currentValue ?? defaultValue)
+  const init = () => reset(value)
 
   useEffect(() => {
-    if (currentValue !== changeValueRef.current) {
-      reset(getInitialDate(currentValue))
+    if (value !== changeValueRef.current) {
+      reset(getInitialDate(value))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentValue])
+  }, [value])
 
   useEffect(() => {
-    reset(getInitialDate(currentValue ?? defaultValue))
+    reset(getInitialDate(value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, subtitleRender, minValue, maxValue])
 
@@ -403,7 +405,7 @@ function Calendar(props: CalendarProps) {
   }
 
   function handleConfirm() {
-    onConfirm?.(currentValue as CalendarValueType)
+    onConfirm?.(value as CalendarValueType)
   }
 
   return (
@@ -414,7 +416,7 @@ function Calendar(props: CalendarProps) {
         firstDayOfWeek: dayOffset,
         min: minValue,
         max: maxValue,
-        value: currentValue,
+        value,
         formatter,
         onDayClick,
         notifyConfirm,

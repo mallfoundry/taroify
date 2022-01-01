@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { useValue } from "../utils/state"
 
-interface SwitchProps extends ViewProps {
+export interface SwitchProps extends ViewProps {
   style?: CSSProperties
   defaultChecked?: boolean
   checked?: boolean

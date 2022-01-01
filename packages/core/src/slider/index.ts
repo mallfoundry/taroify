@@ -1,6 +1,8 @@
 import SliderComponent, { SliderProps } from "./slider"
 import SliderThumb from "./slider-thumb"
 
+export type { SliderProps } from "./slider"
+
 interface SliderInterface {
   (props: SliderProps): JSX.Element
 

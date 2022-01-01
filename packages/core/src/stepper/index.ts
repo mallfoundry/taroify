@@ -1,6 +1,8 @@
-import { default as StepperElement, StepperProps } from "./stepper"
+import { default as StepperComponent, StepperProps } from "./stepper"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
+
+export type { StepperProps } from "./stepper"
 
 interface StepperInterface {
   (props: StepperProps): JSX.Element
@@ -9,7 +11,7 @@ interface StepperInterface {
   Button: typeof StepperButton
 }
 
-const Stepper = StepperElement as StepperInterface
+const Stepper = StepperComponent as StepperInterface
 
 Stepper.Input = StepperInput
 Stepper.Button = StepperButton

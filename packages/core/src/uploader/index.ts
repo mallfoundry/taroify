@@ -1,7 +1,9 @@
-import UploaderElement, { UploaderProps } from "./uploader"
+import UploaderComponent, { UploaderProps } from "./uploader"
 import UploaderImage from "./uploader-image"
 import UploaderUpload from "./uploader-upload"
 import { UploadFile } from "./uploader.shared"
+
+export type { UploaderProps } from "./uploader"
 
 interface UploaderInterface {
   (props: UploaderProps): JSX.Element
@@ -10,7 +12,7 @@ interface UploaderInterface {
   Image: typeof UploaderImage
 }
 
-const Uploader = UploaderElement as UploaderInterface
+const Uploader = UploaderComponent as UploaderInterface
 
 Uploader.Upload = UploaderUpload
 Uploader.Image = UploaderImage

@@ -1,14 +1,14 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import { useValue } from "../utils/state"
 import CheckboxGroupContext from "./checkbox-group.context"
+import { CheckboxGroupDirection } from "./checkbox-group.shared"
 
-export type CheckboxGroupDirection = "horizontal" | "vertical"
-
-interface CheckboxGroupProps {
+export interface CheckboxGroupProps extends ViewProps {
   defaultValue?: any[]
   value?: any[]
   max?: number
@@ -26,6 +26,7 @@ function CheckboxGroup(props: CheckboxGroupProps) {
     direction = "vertical",
     children,
     onChange: onChangeProp,
+    ...restProps
   } = props
 
   const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
@@ -35,15 +36,17 @@ function CheckboxGroup(props: CheckboxGroupProps) {
       value={{
         value,
         max,
+        direction,
         onChange: setValue,
       }}
     >
       <View
-        className={classNames(
-          prefixClassname("checkbox-group"),
-          prefixClassname(`checkbox-group--${direction}`),
-        )}
+        className={classNames(prefixClassname("checkbox-group"), {
+          [prefixClassname("checkbox-group--horizontal")]: direction === "horizontal",
+          [prefixClassname("checkbox-group--vertical")]: direction === "vertical",
+        })}
         children={children}
+        {...restProps}
       />
     </CheckboxGroupContext.Provider>
   )
