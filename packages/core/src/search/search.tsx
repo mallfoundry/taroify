@@ -8,31 +8,39 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode } from "react"
 import Field from "../field"
-import Input, { InputAlign, InputClearTrigger } from "../input"
+import { FormFeedbackAlign, FormFeedbackStatus } from "../form"
+import Input, { InputAlign, InputClearTrigger, InputColor } from "../input"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
-
-type SearchShape = "square" | "round"
+import { SearchShape } from "./search.shared"
 
 interface SearchProps extends ViewProps {
   className?: string
   value?: string
   icon?: ReactNode
+  rightIcon?: ReactNode
   label?: ReactNode
   shape?: SearchShape
   maxlength?: number
-  placeholder?: string
-  placeholderClassName?: string
-  clearable?: boolean
-  clearIcon?: ReactNode
-  clearTrigger?: InputClearTrigger
-  inputAlign?: InputAlign
   autoFocus?: boolean
   focus?: boolean
   disabled?: boolean
   readonly?: boolean
-  error?: boolean
-  message?: ReactNode
+
+  placeholder?: string
+  placeholderClassName?: string
+
+  inputAlign?: InputAlign
+  inputColor?: InputColor
+
+  clearable?: boolean
+  clearIcon?: ReactNode
+  clearTrigger?: InputClearTrigger
+
+  feedback?: ReactNode
+  feedbackAlign?: FormFeedbackAlign
+  feedbackStatus?: FormFeedbackStatus
+
   action?: boolean | ReactNode
 
   onClear?(event: ITouchEvent): void
@@ -53,22 +61,31 @@ function Search(props: SearchProps) {
     className,
     value,
     icon = <SearchIcon />,
+    rightIcon,
     label,
     shape = "square",
     maxlength,
-    placeholder,
-    placeholderClassName,
-    clearable = true,
-    clearIcon,
-    clearTrigger,
-    inputAlign,
     autoFocus,
     focus,
     disabled,
     readonly,
-    error,
-    message,
+
+    placeholder,
+    placeholderClassName,
+
+    clearable = true,
+    clearIcon,
+    clearTrigger,
+
+    inputAlign,
+    inputColor,
+
+    feedback,
+    feedbackAlign,
+    feedbackStatus,
+
     action,
+
     onClear,
     onCancel,
     onSearch,
@@ -104,10 +121,13 @@ function Search(props: SearchProps) {
         <Field
           className={prefixClassname("search__field")}
           icon={icon}
-          error={error}
-          message={message}
+          rightIcon={rightIcon}
+          feedback={feedback}
+          feedbackAlign={feedbackAlign}
+          feedbackStatus={feedbackStatus}
         >
           <Input
+            className={prefixClassname("search__input")}
             placeholderClassName={placeholderClassName}
             value={value}
             maxlength={maxlength}
@@ -116,6 +136,7 @@ function Search(props: SearchProps) {
             clearIcon={clearIcon}
             clearTrigger={clearTrigger}
             align={inputAlign}
+            color={inputColor}
             autoFocus={autoFocus}
             focus={focus}
             disabled={disabled}
