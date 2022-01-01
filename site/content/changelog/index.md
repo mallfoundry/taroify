@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.22-alpha.1
+
+`2022-01-01`
+
+**Feature**
+
+- DatetimePicker
+  - 新增 date-minute 类型（年月日时分） [#211](https://github.com/mallfoundry/taroify/issues/211) [#227](https://github.com/mallfoundry/taroify/pull/227)
+
+**Bug Fixes**
+
+- Input
+  - 修复 readonly 状态下 placeholder 颜色为 --text-color-3 的问题 [#218](https://github.com/mallfoundry/taroify/pull/218)
+  
 ### v0.0.22-alpha.0
 
 `2022-01-01`

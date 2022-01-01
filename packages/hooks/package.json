@@ -1,7 +1,7 @@
 {
   "name": "@taroify/~hooks",
   "description": "Taroify hooks",
-  "version": "0.0.22-alpha.0",
+  "version": "0.0.22-alpha.1",
   "license": "MIT",
   "private": "true",
   "keywords": [
