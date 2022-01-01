@@ -1,4 +1,4 @@
-import { cloneIconElement } from "@taroify/icons/utils"
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -52,9 +52,13 @@ function CellBase(props: CellBaseProps) {
       )}
       {...restProps}
     >
-      {icon && cloneIconElement(icon, { className: prefixClassname("cell__icon") })}
+      {icon && isIconElement(icon)
+        ? cloneIconElement(icon, { className: prefixClassname("cell__icon") })
+        : icon}
       {children}
-      {rightIcon && cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })}
+      {rightIcon && isIconElement(rightIcon)
+        ? cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })
+        : rightIcon}
     </View>
   )
 }
