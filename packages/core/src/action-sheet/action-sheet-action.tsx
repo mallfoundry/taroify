@@ -8,11 +8,12 @@ import ActionSheetContext from "./action-sheet.context"
 
 export interface ActionSheetActionProps extends SheetItemProps {
   name?: ReactNode
+  value?:any,
   onClick?: (event: ITouchEvent) => void
 }
 
 export default function ActionSheetAction(props: ActionSheetActionProps) {
-  const { className, disabled, loading, name, children, onClick, ...restProps } = props
+  const { className, disabled, loading, name,value, children, onClick, ...restProps } = props
   const { onSelect } = useContext(ActionSheetContext)
   return (
     <Sheet.Item
@@ -26,6 +27,7 @@ export default function ActionSheetAction(props: ActionSheetActionProps) {
             disabled,
             loading,
             name,
+            value,
             children,
           })
         }
