@@ -53,11 +53,7 @@ const subpackages = [
         name: "SafeArea",
         path: "safe-area/index",
       },
-      // {
-      //   title: "Space 间距",
-      //   name: "Space",
-      //   path: "space/index",
-      // },
+
     ],
   },
   {
@@ -270,6 +266,11 @@ const subpackages = [
         title: "Tag 标签",
         name: "Tag",
         path: "tag/index",
+      },
+      {
+        title: "Space 间距",
+        name: "Space",
+        path: "space/index",
       },
     ],
   },
