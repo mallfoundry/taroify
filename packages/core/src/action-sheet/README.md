@@ -23,9 +23,9 @@ function BasicActionSheet() {
   const [open, setOpen] = useState(true)
   return (
     <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
-      <ActionSheet.Action name="选项一" />
-      <ActionSheet.Action name="选项二" />
-      <ActionSheet.Action name="选项三" />
+      <ActionSheet.Action value="1" name="选项一" />
+      <ActionSheet.Action value="2" name="选项二" />
+      <ActionSheet.Action value="3" name="选项三" />
     </ActionSheet>
   )
 }
@@ -47,9 +47,9 @@ function ActionSheetWithCancel() {
       onCancel={() => setOpen(false)}
       onClose={setOpen}
     >
-      <ActionSheet.Action name="选项一" />
-      <ActionSheet.Action name="选项二" />
-      <ActionSheet.Action name="选项三" />
+      <ActionSheet.Action value="1" name="选项一" />
+      <ActionSheet.Action value="2" name="选项二" />
+      <ActionSheet.Action value="3" name="选项三" />
       <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
     </ActionSheet>
   )
@@ -73,9 +73,9 @@ function ActionSheetWithDescription() {
       onClose={setOpen}
     >
       <ActionSheet.Header>这是一段描述信息</ActionSheet.Header>
-      <ActionSheet.Action name="选项一" />
-      <ActionSheet.Action name="选项二" />
-      <ActionSheet.Action name="选项三" />
+      <ActionSheet.Action value="1" name="选项一" />
+      <ActionSheet.Action value="2" name="选项二" />
+      <ActionSheet.Action value="3" name="选项三" />
       <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
     </ActionSheet>
   )
@@ -93,9 +93,9 @@ function ActionSheetWithStatuses() {
   const [open, setOpen] = useState(true)
   return (
     <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
-      <ActionSheet.Action style={{ color: "#ee0a24" }} name="着色选项" />
-      <ActionSheet.Action disabled name="禁止选项" />
-      <ActionSheet.Action loading name="选项三" />
+      <ActionSheet.Action value="1" style={{ color: "#ee0a24" }} name="着色选项" />
+      <ActionSheet.Action value="2" disabled name="禁止选项" />
+      <ActionSheet.Action value="3" loading name="选项三" />
       <ActionSheet.Button onClick={() => setOpen(false)}>取消</ActionSheet.Button>
     </ActionSheet>
   )
@@ -139,6 +139,7 @@ function ActionSheetWithStatuses() {
 | className | 样式类名 | _string_        | - |
 | style     | 样式对象 | _CSSProperties_ | - |
 | name      | 标题    | _string_        | - |
+| value  | 值 | _string_        | - |
 | children  | 描述信息 | _string_        | - |
 
 ### ActionSheet.Button Props
