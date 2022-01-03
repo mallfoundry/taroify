@@ -6,12 +6,18 @@ import { prefixClassname } from "../styles"
 
 interface SpaceItemProps {
   children?: ReactNode
+  size?: SpaceSize | SpaceSizeString | number
 }
 
 function SpaceItem(props: SpaceItemProps) {
-  const { children } = props
-
-  return <View className={classNames(prefixClassname("space__item"))}>{children}</View>
+  const { size, children } = props
+  return (
+    <View
+      className={classNames(prefixClassname("space__item"), prefixClassname("space__item-" + size))}
+    >
+      {children}
+    </View>
+  )
 }
 
 export enum SpaceDirection {
@@ -28,24 +34,49 @@ export enum SpaceSize {
 }
 
 type SpaceSizeString = "small" | "medium" | "large"
+export enum SpaceJustify {
+  Start = "start",
+  Center = "center",
+  End = "end",
+  spaceBetween = "space-between",
+  spaceAround = "space-around",
+}
 
+type SpaceJustifyString = "start" | "center" | "end" | "space-around" | "space-between"
 interface SpaceProps {
   direction?: SpaceDirection | SpaceDirectionString
-  size?: SpaceSize | SpaceSizeString | number
+  size?: SpaceSize | SpaceSizeString
   children?: ReactNode
+  justify?: SpaceJustify | SpaceJustifyString
+  wrap?:boolean
 }
 
 export default function Space(props: SpaceProps) {
-  const { direction = SpaceDirection.Horizontal, children } = props
+  const {
+    size = SpaceSize.Small,
+    justify = SpaceJustify.Start,
+    direction = SpaceDirection.Horizontal,
+    wrap,
+    children,
+  } = props
   return (
     <View
-      className={classNames(prefixClassname("space"), {
-        [prefixClassname(`space--${direction}`)]:
-          direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
-      })}
+      style={{ justifyContent: justify }}
+      className={classNames(
+        prefixClassname("space"),
+        {
+          [prefixClassname(`space--${direction}`)]:
+            direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
+          [prefixClassname("space--vertical--"+justify)]:direction === SpaceDirection.Vertical
+
+        },
+        
+        prefixClassname("space--justify"),
+        wrap && prefixClassname("space--nowrap"),
+      )}
     >
       {React.Children.map(children, (item, index) => (
-        <SpaceItem key={index} children={item} />
+        <SpaceItem size={size} key={index} children={item} />
       ))}
     </View>
   )
