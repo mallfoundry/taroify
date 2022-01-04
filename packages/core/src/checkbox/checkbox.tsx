@@ -2,8 +2,9 @@ import { Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import { useValue } from "../utils/state"
@@ -38,17 +39,15 @@ export default function Checkbox(props: CheckboxProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue({
-    value: checkedProp,
-    defaultValue: defaultChecked,
-    onChange: onChangeProp,
-  })
-
-  const { value: names = [], max: namesMax = 0, direction, onChange: onNamesChange } = useContext(
+  const { value: names, max: namesMax = 0, direction, onChange: onNamesChange } = useContext(
     CheckboxGroupContext,
   )
 
-  const checked = useMemo(() => value || (name && names?.includes(name)), [value, name, names])
+  const { value: checked, setValue } = useValue({
+    value: checkedProp ?? names?.includes(name),
+    defaultValue: defaultChecked,
+    onChange: onChangeProp,
+  })
 
   function onClick() {
     if (disabled) {
@@ -60,8 +59,8 @@ export default function Checkbox(props: CheckboxProps) {
     if (name) {
       if (names?.includes(name)) {
         onNamesChange?.(names.filter((aName) => aName !== name))
-      } else if (namesMax === 0 || names.length < namesMax) {
-        onNamesChange?.([...names, name])
+      } else if (namesMax === 0 || _.size(names) < namesMax) {
+        onNamesChange?.([..._.toArray(names), name])
       }
     }
   }
