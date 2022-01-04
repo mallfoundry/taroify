@@ -23,7 +23,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - ActionSheet.Action
-- 新增 value 属性 [#229](https://github.com/mallfoundry/taroify/pull/229) [@coderYarn](https://github.com/coderYarn)
+  - 新增 value 属性 [#229](https://github.com/mallfoundry/taroify/pull/229) [@coderYarn](https://github.com/coderYarn)
 
 **Bug Fixes**
 
