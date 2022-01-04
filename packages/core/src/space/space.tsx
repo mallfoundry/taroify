@@ -1,83 +1,71 @@
-import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { Children, CSSProperties, ReactNode } from "react"
+import Flex from "../flex"
 import { prefixClassname } from "../styles"
+import { SpaceAlign, SpaceDirection, SpaceJustify, SpaceSize, SpaceWrap } from "./space.shared"
 
-interface SpaceItemProps {
+interface SpaceProps extends ViewProps {
+  style?: CSSProperties
+  direction?: SpaceDirection
+  size?: SpaceSize
+  align?: SpaceAlign
+  justify?: SpaceJustify
+  wrap?: SpaceWrap
   children?: ReactNode
-  size?: SpaceSize | SpaceSizeString | number
-}
-
-function SpaceItem(props: SpaceItemProps) {
-  const { size, children } = props
-  return (
-    <View
-      className={classNames(prefixClassname("space__item"), prefixClassname("space__item-" + size))}
-    >
-      {children}
-    </View>
-  )
-}
-
-export enum SpaceDirection {
-  Horizontal = "horizontal",
-  Vertical = "vertical",
-}
-
-type SpaceDirectionString = "horizontal" | "vertical"
-
-export enum SpaceSize {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
-
-type SpaceSizeString = "small" | "medium" | "large"
-export enum SpaceJustify {
-  Start = "start",
-  Center = "center",
-  End = "end",
-  spaceBetween = "space-between",
-  spaceAround = "space-around",
-}
-
-type SpaceJustifyString = "start" | "center" | "end" | "space-around" | "space-between"
-interface SpaceProps {
-  direction?: SpaceDirection | SpaceDirectionString
-  size?: SpaceSize | SpaceSizeString
-  children?: ReactNode
-  justify?: SpaceJustify | SpaceJustifyString
-  wrap?:boolean
 }
 
 export default function Space(props: SpaceProps) {
   const {
-    size = SpaceSize.Small,
-    justify = SpaceJustify.Start,
-    direction = SpaceDirection.Horizontal,
-    wrap,
+    className,
+    size = "small",
+    justify,
+    align,
+    direction = "horizontal",
+    wrap = "wrap",
     children,
+    ...restProps
   } = props
+
   return (
-    <View
-      style={{ justifyContent: justify }}
+    <Flex
       className={classNames(
         prefixClassname("space"),
         {
-          [prefixClassname(`space--${direction}`)]:
-            direction === SpaceDirection.Horizontal || direction === SpaceDirection.Vertical,
-          [prefixClassname("space--vertical--"+justify)]:direction === SpaceDirection.Vertical
+          [prefixClassname("space--horizontal")]: direction === "horizontal",
+          [prefixClassname("space--vertical")]: direction === "vertical",
 
+          [prefixClassname("space--mini")]: size === "mini",
+          [prefixClassname("space--small")]: size === "small",
+          [prefixClassname("space--medium")]: size === "medium",
+          [prefixClassname("space--large")]: size === "large",
         },
-        
-        prefixClassname("space--justify"),
-        wrap && prefixClassname("space--nowrap"),
+        className,
       )}
+      direction={
+        direction === "horizontal" ? "row" : direction === "vertical" ? "column" : undefined
+      }
+      justify={justify}
+      align={align}
+      wrap={wrap}
+      {...restProps}
     >
-      {React.Children.map(children, (item, index) => (
-        <SpaceItem size={size} key={index} children={item} />
-      ))}
-    </View>
+      {
+        //
+        Children.map(children, (item, index) => (
+          <Flex.Item
+            key={index}
+            className={classNames(prefixClassname("space__item"), {
+              [prefixClassname("space__item--mini")]: size === "mini",
+              [prefixClassname("space__item--small")]: size === "small",
+              [prefixClassname("space__item--medium")]: size === "medium",
+              [prefixClassname("space__item--large")]: size === "large",
+            })}
+            children={item}
+          />
+        ))
+      }
+    </Flex>
   )
 }
