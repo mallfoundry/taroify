@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import "@taroify/icons/index.scss"
 import "./emulator"
 import "./app.scss"
 
