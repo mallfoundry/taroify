@@ -139,7 +139,7 @@ function ActionSheetWithStatuses() {
 | className | 样式类名 | _string_        | - |
 | style     | 样式对象 | _CSSProperties_ | - |
 | name      | 标题    | _string_        | - |
-| value  | 值 | _string_        | - |
+| value     | 选项值  | _string_        | - |
 | children  | 描述信息 | _string_        | - |
 
 ### ActionSheet.Button Props

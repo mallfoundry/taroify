@@ -11,7 +11,7 @@ function BasicActionSheet() {
   return (
     <>
       <Cell clickable title="基础用法" rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
-      <ActionSheet open={open} onSelect={(e) => setOpen(false)} onClose={setOpen}>
+      <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
         <ActionSheet.Action value="1" name="选项一" />
         <ActionSheet.Action value="2" name="选项二" />
         <ActionSheet.Action value="3" name="选项三" />
@@ -84,7 +84,7 @@ function ActionSheetWithStatuses() {
       >
         <ActionSheet.Action value="1" style={{ color: "#ee0a24" }} name="着色选项" />
         <ActionSheet.Action value="2" disabled name="禁止选项" />
-        <ActionSheet.Action value="3" loading name="选项三" />{" "}
+        <ActionSheet.Action value="3" loading name="选项三" />
         <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
       </ActionSheet>
     </>
