@@ -49,11 +49,15 @@ const subpackages = [
         path: "toast/index",
       },
       {
+        title: "Space 间距",
+        name: "Space",
+        path: "space/index",
+      },
+      {
         title: "SafeArea 安全区域",
         name: "SafeArea",
         path: "safe-area/index",
       },
-
     ],
   },
   {
@@ -266,11 +270,6 @@ const subpackages = [
         title: "Tag 标签",
         name: "Tag",
         path: "tag/index",
-      },
-      {
-        title: "Space 间距",
-        name: "Space",
-        path: "space/index",
       },
     ],
   },
