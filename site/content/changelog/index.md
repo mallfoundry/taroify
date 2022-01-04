@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.23-alpha.0
+
+`2022-01-04`
+
+**New Component**
+
+- 新增 Space 组件 [#228](https://github.com/mallfoundry/taroify/pull/228) [@coderYarn](https://github.com/coderYarn)
+
+**Feature**
+
+- ActionSheet.Action
+- 新增 value 属性 [#229](https://github.com/mallfoundry/taroify/pull/229) [@coderYarn](https://github.com/coderYarn)
+
+**Bug Fixes**
+
+- Checkbox.Group
+  - 修复设置 value 为空数组时，Checkbox 组件的 checked 不为 false 的问题 [#231](https://github.com/mallfoundry/taroify/pull/231)
+
 ### v0.0.22-alpha.1
 
 `2022-01-01`
