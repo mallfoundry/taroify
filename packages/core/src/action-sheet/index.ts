@@ -4,6 +4,8 @@ import ActionSheetComponent, { ActionSheetProps } from "./action-sheet"
 import ActionSheetAction from "./action-sheet-action"
 import { ActionSheetActionObject } from "./action-sheet.shared"
 
+export type { ActionSheetActionObject } from "./action-sheet.shared"
+
 interface ActionSheetInterface {
   (props: ActionSheetProps): JSX.Element
 
