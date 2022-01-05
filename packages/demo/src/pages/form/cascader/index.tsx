@@ -1,4 +1,4 @@
-import { Cascader, Field, Popup } from "@taroify/core"
+import { Cascader, Field, Input, Popup } from "@taroify/core"
 import { useCascader } from "@taroify/hooks"
 import { ArrowRight } from "@taroify/icons"
 import * as _ from "lodash"
@@ -16,14 +16,9 @@ function BasicCascader() {
   const { columns } = useCascader({ value, depth: 3, options: area })
   return (
     <>
-      <Field
-        readonly
-        label="选项值"
-        placeholder="请选择地区"
-        value={fieldValue}
-        rightIcon={<ArrowRight />}
-        onClick={() => setOpen(true)}
-      />
+      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+        <Input readonly placeholder="请选择地区" value={fieldValue} />
+      </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>
         <Popup.Close />
         <Cascader
@@ -68,14 +63,9 @@ function CustomColorCascader() {
   const { columns } = useCascader({ value, depth: 3, options: area })
   return (
     <>
-      <Field
-        readonly
-        label="选项值"
-        placeholder="请选择地区"
-        value={fieldValue}
-        rightIcon={<ArrowRight />}
-        onClick={() => setOpen(true)}
-      />
+      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+        <Input readonly placeholder="请选择地区" value={fieldValue} />
+      </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>
         <Popup.Close />
         <Cascader
