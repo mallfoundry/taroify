@@ -10,7 +10,7 @@ function DatePicker() {
   const [minDate] = useState(new Date(2021, 9, 14))
   const [maxDate] = useState(new Date(2023, 11, 12))
   const [defaultValue] = useState(new Date(2021, 9, 14))
-  const [value, setValue] = useState(new Date(2021, 9, 14))
+  const [value, setValue] = useState(new Date(2022, 10, 14))
   return (
     <DatetimePicker
       type="date"
