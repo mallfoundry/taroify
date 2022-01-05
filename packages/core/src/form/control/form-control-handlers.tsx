@@ -27,10 +27,10 @@ registerFormControlHandler(
         onChange: onDelegatingChange,
       } = controller
       const { props: elementProps } = element
-      const { color, onBlur, onInput } = elementProps
+      const { name: nameProp, value: valueProp, color, onBlur, onInput } = elementProps
       return cloneElement<InputProps>(element, {
-        name,
-        value,
+        name: nameProp ?? name,
+        value: valueProp ?? value,
         color: color ?? validateStatus === "invalid" ? "danger" : undefined,
         onInput: (e) => {
           onInput?.(e)
@@ -57,10 +57,10 @@ registerFormControlHandler(
     ): ReactNode {
       const { name, value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
-      const { onChange } = elementProps
+      const { name: nameProp, checked: checkedProp, onChange } = elementProps
       return cloneElement<TaroSwitchProps>(element, {
-        name,
-        checked: value,
+        name: nameProp ?? name,
+        checked: checkedProp ?? value,
         onChange: (e) => {
           onChange?.(e)
           onDelegatingChange?.(e.detail.value)
@@ -82,9 +82,9 @@ registerFormControlHandler(
     ): ReactNode {
       const { value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
-      const { onChange } = elementProps
+      const { checked: checkedProp, onChange } = elementProps
       return cloneElement<CheckboxProps | SwitchProps>(element, {
-        checked: value,
+        checked: checkedProp ?? value,
         onChange: (checked) => {
           onChange?.(checked)
           onDelegatingChange?.(checked)
@@ -122,7 +122,7 @@ registerFormControlHandler(
     ): ReactNode {
       const { value, onChange: onDelegatingChange } = controller
       const { props: elementProps } = element
-      const { onChange } = elementProps
+      const { value: valueProp, onChange } = elementProps
       return cloneElement<
         | CheckboxGroupProps
         | RadioGroupProps
@@ -131,7 +131,7 @@ registerFormControlHandler(
         | StepperProps
         | UploaderProps
       >(element, {
-        value,
+        value: valueProp ?? value,
         onChange: (nextValue: any) => {
           onChange?.(nextValue)
           onDelegatingChange?.(nextValue)
