@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.23-alpha.1
+
+`2022-01-04`
+
+**Bug Fixes**
+
+- Field
+  - 修复嵌套 Input 组件不能赋值 value 的问题 [#235](https://github.com/mallfoundry/taroify/issues/235)
+
 ### v0.0.23-alpha.0
 
 `2022-01-04`
