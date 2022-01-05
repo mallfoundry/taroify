@@ -138,7 +138,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
   return {
     toDate,
     defaultValue: toValue(clampDefaultValue),
-    value: toValue(clampValue),
+    value: toValue(_.isUndefined(value) ? value : clampValue),
     columns,
   }
 }
