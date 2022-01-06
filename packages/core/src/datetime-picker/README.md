@@ -18,11 +18,19 @@ DatetimePicker 通过 type 属性来定义需要选择的时间类型，type 为
 
 ```tsx
 function DatePicker() {
-  const [minDate] = useState(new Date(2020, 0, 1))
-  const [maxDate] = useState(new Date(2025, 10, 1))
-  const [defaultValue] = useState(new Date(2021, 0, 17))
+  const [minDate] = useState(new Date(2021, 9, 14))
+  const [maxDate] = useState(new Date(2023, 11, 12))
+  const [defaultValue] = useState(new Date(2021, 9, 14))
+  const [value, setValue] = useState(new Date(2022, 10, 14))
   return (
-    <DatetimePicker type="date" min={minDate} max={maxDate} defaultValue={defaultValue}>
+    <DatetimePicker
+      type="date"
+      min={minDate}
+      max={maxDate}
+      defaultValue={defaultValue}
+      value={value}
+      onChange={setValue}
+    >
       <DatetimePicker.Toolbar>
         <DatetimePicker.Button>取消</DatetimePicker.Button>
         <DatetimePicker.Title>选择年月日</DatetimePicker.Title>
@@ -245,27 +253,27 @@ function DatePickerWithFields() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| type | 时间类型，可选值为 `date` `time` <br> `year-month` `month-day` `date-hour` `date-minute` `hour-minute` | _string_ | `datetime` |
-| defaultValue | 默认选中的时间 | _Date_ | - |
-| value | 选中的时间 | _Date_ | - |
-| min | 可选的最小时间，精确到秒 | _Date_ | 十年前 |
-| max | 可选的最大时间，精确到秒 | _Date_ | 十年后 |
-| filter | 选项过滤函数 | _(type: string, values: string[]) => string[]_ | - |
-| formatter | 选项格式化函数 | _(type: string, value: string) => string_ | - |
-| fields | 自定义列排序数组, 子项可选值为<br> `year` `month` `day` `hour` `minute` | _string[]_ | - |
-| loading | 是否显示加载状态 | _boolean_ | `false` |
-| readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
-| siblingCount | 可见的选项相邻个数 | _number_ | `3` |
+| 参数         | 说明                                                                                                   | 类型                                           | 默认值     |
+| ------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------- |
+| type         | 时间类型，可选值为 `date` `time` <br> `year-month` `month-day` `date-hour` `date-minute` `hour-minute` | _string_                                       | `datetime` |
+| defaultValue | 默认选中的时间                                                                                         | _Date_                                         | -          |
+| value        | 选中的时间                                                                                             | _Date_                                         | -          |
+| min          | 可选的最小时间，精确到秒                                                                               | _Date_                                         | 十年前     |
+| max          | 可选的最大时间，精确到秒                                                                               | _Date_                                         | 十年后     |
+| filter       | 选项过滤函数                                                                                           | _(type: string, values: string[]) => string[]_ | -          |
+| formatter    | 选项格式化函数                                                                                         | _(type: string, value: string) => string_      | -          |
+| fields       | 自定义列排序数组, 子项可选值为<br> `year` `month` `day` `hour` `minute`                                | _string[]_                                     | -          |
+| loading      | 是否显示加载状态                                                                                       | _boolean_                                      | `false`    |
+| readonly     | 是否为只读状态，只读状态下无法切换选项                                                                 | _boolean_                                      | `false`    |
+| siblingCount | 可见的选项相邻个数                                                                                     | _number_                                       | `3`        |
 
 ### Events
 
-| 事件名  | 说明                     | 回调参数              |
-| ------- | ------------------------ | --------------------- |
-| onChange  | 当值变化时触发的事件     | value: Date             |
-| onConfirm | 点击完成按钮时触发的事件 | value: Date              |
-| onCancel  | 点击取消按钮时触发的事件 | value: Date              |
+| 事件名    | 说明                     | 回调参数    |
+| --------- | ------------------------ | ----------- |
+| onChange  | 当值变化时触发的事件     | value: Date |
+| onConfirm | 点击完成按钮时触发的事件 | value: Date |
+| onCancel  | 点击取消按钮时触发的事件 | value: Date |
 
 ## 常见问题
 
