@@ -6,7 +6,7 @@ import "./index.scss"
 
 export default function SpaceDemo() {
   return (
-    <Page title="Space 间隔" className="space-demo">
+    <Page title="Space 间距" className="space-demo">
       <Block title="基础用法">
         <Space>
           <Button color="primary">主要按钮</Button>

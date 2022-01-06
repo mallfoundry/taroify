@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: "Space 间隔",
+  navigationBarTitleText: "Space 间距",
 }

@@ -61,7 +61,7 @@ const menus = [
         to: "/components/toast/",
       },
       {
-        title: "Space 轻提示",
+        title: "Space 间距",
         to: "/components/space/",
       },
       {
