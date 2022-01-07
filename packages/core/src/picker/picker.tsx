@@ -166,16 +166,18 @@ export default function Picker(props: PickerProps) {
   const onColumnChange = useCallback(
     (option: PickerOptionObject, column: PickerColumnObject, emitChange?: boolean) => {
       const { index: columnIndex = -1 } = column
-      const { index, value } = option
 
       valueOptionsRef.current[columnIndex] = option
 
       if (emitChange) {
-        const newValues = _.map(valueOptionsRef.current, ({ value }) => value)
-        _.set(newValues, columnIndex, value)
+        const newValues = _.map(
+          _.filter(valueOptionsRef.current, (newOption) => !_.isUndefined(newOption)),
+          ({ value }) => value,
+        )
+        _.set(newValues, columnIndex, option?.value)
         const aValues = getPickerValue(newValues, multiColumns)
         setValue(aValues)
-        onChange?.(aValues, { index, value })
+        onChange?.(aValues, { ...option })
       }
     },
     [multiColumns, onChange, setValue],
@@ -184,7 +186,7 @@ export default function Picker(props: PickerProps) {
   const handleAction = (action: any) => () =>
     action?.(
       _.map(valueOptionsRef.current, ({ value }) => value),
-      _.map(valueOptionsRef.current, ({ index, value }) => ({ index, value })),
+      _.map(valueOptionsRef.current, (valueOption) => ({ ...valueOption })),
     )
 
   return (
