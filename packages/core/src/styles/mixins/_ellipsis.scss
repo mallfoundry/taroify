@@ -1,9 +1,9 @@
 @mixin multi-ellipsis($lines) {
   /* stylelint-disable */
-
   /* autoprefixer: ignore next */
-  box-orient: vertical;
   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
   -webkit-line-clamp: $lines;
   /* stylelint-enable */
   overflow: hidden;
