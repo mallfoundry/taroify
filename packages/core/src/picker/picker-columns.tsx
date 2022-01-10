@@ -19,7 +19,7 @@ interface PickerColumnsProps extends ViewProps {
 }
 
 function PickerColumns(props: PickerColumnsProps) {
-  const { style, children, ...restProps } = props
+  const { className, style, children, ...restProps } = props
   const { readonly, values, siblingCount, onColumnChange } = useContext(PickerContext)
   const columns = usePickerOptions(children)
 
@@ -62,7 +62,7 @@ function PickerColumns(props: PickerColumnsProps) {
 
   return (
     <View
-      className={prefixClassname("picker__columns")}
+      className={classNames(prefixClassname("picker__columns"), className)}
       style={{
         ...style,
         height: addUnitPx(wrapHeight),
