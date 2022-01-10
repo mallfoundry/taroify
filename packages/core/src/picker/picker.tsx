@@ -18,7 +18,7 @@ function usePickerChildren(children?: ReactNode): ReactNode {
 
   const columns: ReactNode[] = []
 
-  Children.toArray(children).forEach((child: ReactNode, index) => {
+  Children.toArray(children).forEach((child: ReactNode) => {
     if (isElementOf(child, PickerColumn)) {
       const element = child as ReactElement
       if (_.isEmpty(columns)) {
@@ -83,7 +83,9 @@ export default function Picker(props: PickerProps) {
   const onColumnChange = useCallback(
     (option: PickerOptionObject, column: PickerOptionObject, emitChange?: boolean) => {
       const { index: columnIndex = -1 } = column
-
+      if (columnIndex < 0) {
+        return
+      }
       valueOptionsRef.current[columnIndex] = option
       if (emitChange) {
         const newValues = _.map(
