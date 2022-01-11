@@ -15,9 +15,8 @@ import { DEFAULT_SIBLING_COUNT, PickerOptionObject } from "./picker.shared"
 
 function usePickerChildren(children?: ReactNode): ReactNode {
   const __children__: ReactNode[] = []
-
   const columns: ReactNode[] = []
-
+  // Use toArray to generate element id
   Children.toArray(children).forEach((child: ReactNode) => {
     if (isElementOf(child, PickerColumn)) {
       const element = child as ReactElement
