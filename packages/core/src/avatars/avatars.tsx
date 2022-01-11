@@ -58,4 +58,5 @@ function Avatars({
     </View>
   )
 }
+
 export default Avatars
