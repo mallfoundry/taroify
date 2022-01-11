@@ -1,65 +1,20 @@
-import * as _ from "lodash"
-import { ReactNode, useCallback, useEffect, useState } from "react"
-
-interface CascaderColumn {
-  value?: any
-  label?: ReactNode
-  disabled?: boolean
-}
-
-interface CascaderOption extends CascaderColumn {
-  children?: CascaderOption[]
-}
+import useCascaderNew, { CascaderObjectNew, UseCascaderNewOptions } from "./use-cascader.new"
+import useCascaderOld, { CascaderObjectOld, UseCascaderOldOptions } from "./use-cascader.old"
+import { CascaderOption } from "./use-cascader.shared"
 
 interface UseCascaderOptions {
-  value?: any[]
-  depth?: number
-  options: CascaderOption[]
+  options?: CascaderOption[]
+  data?: CascaderOption[]
 }
 
-interface CascaderObject {
-  columns: CascaderOption[][]
+function useCascader(options: UseCascaderOldOptions): CascaderObjectOld
+function useCascader(options: UseCascaderNewOptions): CascaderObjectNew
+function useCascader({ data, ...restOptions }: UseCascaderOptions) {
+  const useCompatibleCascader = data ? useCascaderNew : useCascaderOld
+  return useCompatibleCascader({
+    data,
+    ...restOptions,
+  })
 }
 
-export default function useCascader({
-  value: values = [],
-  depth = 0,
-  options,
-}: UseCascaderOptions): CascaderObject {
-  depth = _.clamp(depth, 0, depth)
-  const [columns, setColumns] = useState<CascaderOption[][]>([])
-
-  const findOption = useCallback(
-    (options: CascaderOption[], value: any) =>
-      _.find(options, (option) => option.value === value) ?? {},
-    [],
-  )
-
-  useEffect(() => {
-    const newColumns: CascaderOption[][] = []
-    newColumns.push(options)
-
-    if (!_.isEmpty(values)) {
-      let cursorOptions: CascaderOption[] = options
-
-      for (const value of values) {
-        const { children: nextOptions } = findOption(cursorOptions, value)
-        if (!nextOptions || _.isEmpty(nextOptions)) {
-          break
-        }
-        cursorOptions = nextOptions
-        newColumns.push(nextOptions)
-      }
-    }
-    if (depth !== 0 && depth > _.size(newColumns)) {
-      _.range(depth - _.size(newColumns))
-        .map(() => [])
-        .forEach((e) => newColumns.push(e))
-    }
-    setColumns(newColumns)
-  }, [depth, findOption, options, values])
-
-  return {
-    columns,
-  }
-}
+export default useCascader
