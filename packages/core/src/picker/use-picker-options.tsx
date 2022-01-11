@@ -1,12 +1,9 @@
 import * as _ from "lodash"
 import { isValidElement, ReactElement, ReactNode, useMemo } from "react"
 import Children from "../utils/children"
+import { isTextElement } from "../utils/validate"
 import { PickerOptionProps } from "./picker-option"
 import { PickerOptionObject } from "./picker.shared"
-
-function isTextElement(node: ReactNode) {
-  return !isValidElement(node) && !_.isArray(node)
-}
 
 function elementToObject(
   element: any,
@@ -17,7 +14,7 @@ function elementToObject(
   if (isValidElement(element)) {
     const { props } = element as ReactElement<PickerOptionProps>
     const { value, label, children, ...restProps } = props
-    const textChildren = isTextElement(children) && children
+    const textChildren = isTextElement(children) ? children : undefined
     return {
       index,
       value: value ?? label ?? textChildren,
