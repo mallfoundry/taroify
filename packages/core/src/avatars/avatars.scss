@@ -1,22 +1,27 @@
 @import "./variables";
 
-.#{$component-prefix}avatars {
+.#{$component-prefix}avatars{
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--avatars-font-family, $avatars-font-family);
   font-size: var(--avatars-font-size, $avatars-font-size);
   font-weight: var(--avatars-font-weight, $avatars-font-weight);
   color: var(--avatars-color, $avatars-color);
-  text-align: center;
   background-color: gray;
   border: 1px solid $avatars-color;
+  overflow: hidden;
+
   &--circular {
     border-radius:50%;
   }
+
   &--square {
     border-radius:0%;
   }
+
   &--rounded {
-    border-radius:5px;
+    border-radius:10px;
   }
 }
