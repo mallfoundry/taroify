@@ -6,9 +6,5 @@
     "publish": {
       "registry": "https://registry.npmjs.org"
     }
-  },
-  "packages": [
-    "packages/*",
-    "bundles/*"
-  ]
+  }
 }

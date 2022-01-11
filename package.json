@@ -24,7 +24,8 @@
   },
   "workspaces": [
     "packages/*",
-    "bundles/*"
+    "bundles/*",
+    "problems/*"
   ],
   "browserslist": [
     "last 3 versions",
