@@ -11,6 +11,7 @@ import { addUnitPx } from "../utils/format/unit"
 import { useRendered } from "../utils/state"
 import { default as PickerColumnBase } from "./picker-column"
 import PickerContext from "./picker.context"
+import { getPickerOptionKey } from "./picker.shared"
 import usePickerOptions from "./use-picker-options"
 
 interface PickerColumnsProps extends ViewProps {
@@ -28,6 +29,14 @@ function PickerColumns(props: PickerColumnsProps) {
   const itemHeight = 44
 
   const wrapHeight = useMemo(() => itemHeight * visibleCount, [visibleCount])
+
+  const rootStyle = useMemo(
+    () => ({
+      ...style,
+      height: addUnitPx(wrapHeight),
+    }),
+    [style, wrapHeight],
+  )
 
   const maskStyle = useMemo<CSSProperties>(
     () => ({
@@ -48,13 +57,22 @@ function PickerColumns(props: PickerColumnsProps) {
       const { children: options, ...restColumnProps } = column
       return (
         <PickerColumnBase
-          key={columnIndex}
+          key={getPickerOptionKey(column) ?? columnIndex}
           // @ts-ignore
           children={options}
           readonly={readonly}
           {...restColumnProps}
           value={_.get(values, columnIndex)}
-          onChange={(option, emitChange) => onColumnChange?.(option, column, emitChange)}
+          onChange={(option, emitChange) =>
+            onColumnChange?.(
+              option,
+              {
+                ...column,
+                index: columnIndex,
+              },
+              emitChange,
+            )
+          }
         />
       )
     }),
@@ -63,10 +81,7 @@ function PickerColumns(props: PickerColumnsProps) {
   return (
     <View
       className={classNames(prefixClassname("picker__columns"), className)}
-      style={{
-        ...style,
-        height: addUnitPx(wrapHeight),
-      }}
+      style={rootStyle}
       catchMove
       onTouchMove={preventDefault}
       {...restProps}
