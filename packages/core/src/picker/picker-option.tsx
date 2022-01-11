@@ -1,34 +1,33 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
-export interface PickerOptionProps {
+export interface PickerOptionProps extends ViewProps {
   className?: string
+  style?: CSSProperties
   value?: any
+  label?: ReactNode
   disabled?: boolean
   children?: ReactNode
-
-  onClick?(event: ITouchEvent): void
 }
 
 export default function PickerOption(props: PickerOptionProps) {
-  const { className, disabled, children, onClick } = props
+  const { className, disabled, ...restProps } = props
 
   return (
     <View
       className={classNames(
         prefixClassname("ellipsis"),
-        prefixClassname("picker-column__item"),
+        prefixClassname("picker-option"),
         {
-          [prefixClassname("picker-column__item--disabled")]: disabled,
+          [prefixClassname("picker-option--disabled")]: disabled,
         },
         className,
       )}
-      style={{ height: "44px" }}
-      children={children}
-      onClick={onClick}
+      {...restProps}
     />
   )
 }

@@ -1,0 +1,16 @@
+@import "../styles/prefix";
+@import "./variables";
+
+.#{$component-prefix}picker-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--picker-option-padding, $picker-option-padding);
+  color: var(--picker-option-color, $picker-option-color);
+  height: var(--picker-option-height, $picker-option-height);
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: var(--picker-option-disabled-opacity, $picker-option-disabled-opacity);
+  }
+}

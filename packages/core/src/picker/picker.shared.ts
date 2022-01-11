@@ -1,5 +1,9 @@
 import { Key, ReactNode } from "react"
 
+export const DEFAULT_SIBLING_COUNT = 3
+
+export type PickerMode = "flat" | "cascade"
+
 export interface PickerOptionObject {
   index?: number
   value?: any
@@ -13,7 +17,7 @@ export interface PickerOptionObject {
 export interface PickerColumnObject {
   key: Key
   index?: number
-  options: PickerOptionObject[]
+  children?: PickerOptionObject[]
 
   // for custom filed names
   [key: string]: any
