@@ -16,4 +16,5 @@ export default {
   pages: ["pages/home/index"],
   subpackages: subPackages,
   subPackages,
+  animation: false,
 }
