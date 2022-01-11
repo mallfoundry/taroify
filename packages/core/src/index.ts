@@ -44,6 +44,7 @@ export { default as SwipeCell } from "./swipe-cell"
 // Display Components
 export { default as Badge } from "./badge"
 export { default as Circle } from "./circle"
+export { default as Avatars } from "./avatars"
 export { default as Collapse } from "./collapse"
 export { default as Countdown } from "./countdown"
 export { default as Divider } from "./divider"
