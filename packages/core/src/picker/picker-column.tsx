@@ -12,7 +12,7 @@ import { fulfillPromise } from "../utils/promisify"
 import { useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
-import { PickerOptionObject } from "./picker.shared"
+import { getPickerOptionKey, PickerOptionObject } from "./picker.shared"
 
 const DEFAULT_DURATION = 200
 
@@ -262,7 +262,7 @@ export default function PickerColumn(props: PickerColumnProps) {
         handleTouchEnd()
         onTouchCancel?.(event)
       }}
-      {...restProps}
+      {..._.omit(restProps, "label")}
     >
       <View
         ref={wrapperRef}
@@ -273,7 +273,11 @@ export default function PickerColumn(props: PickerColumnProps) {
         {
           //
           _.map(childrenProp, (option, index) => (
-            <PickerOption key={option.value} {...option} onClick={() => onItemClick(index)} />
+            <PickerOption
+              key={getPickerOptionKey(option) ?? index}
+              {...option}
+              onClick={() => onItemClick(index)}
+            />
           ))
         }
       </View>
