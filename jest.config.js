@@ -17,7 +17,6 @@ module.exports = {
   ],
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-    "^.+\\.esm.js?$": "<rootDir>/node_modules/ts-jest",
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!@taro)", "^.+\\.(css|sass|scss|less)$"],
 }
