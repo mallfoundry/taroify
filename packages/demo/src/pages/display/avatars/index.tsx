@@ -14,7 +14,7 @@ export default function AvatarsDemo() {
         <Avatars sx={{ background: "pink" }}>HP</Avatars>
       </Block>
       <Block title="图片">
-        <Avatars.Group max={3}>
+        <Avatars.Group  total={24} spacing={6}>
           <Avatars src="https://mui.com/static/images/avatar/1.jpg"></Avatars>
           <Avatars src="https://mui.com/static/images/avatar/2.jpg"></Avatars>
           <Avatars src="https://mui.com/static/images/avatar/3.jpg"></Avatars>
@@ -25,15 +25,15 @@ export default function AvatarsDemo() {
       <Block title="尺寸">
         <Avatars
           src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: "24px", height: "24px" }}
+          sx={{ width: 24, height: 24 }}
         ></Avatars>
         <Avatars
           src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: "36px", height: "36px" }}
+          sx={{ width: 36, height:36 }}
         ></Avatars>
         <Avatars
           src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: "48px", height: "48px" }}
+          sx={{ width: 48, height: 48 }}
         ></Avatars>
       </Block>
       <Block title="形状">
