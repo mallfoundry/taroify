@@ -2,8 +2,9 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, isValidElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
+import { isTextElement } from "../utils/validate"
 
 export interface PickerOptionProps extends ViewProps {
   className?: string
@@ -15,7 +16,16 @@ export interface PickerOptionProps extends ViewProps {
 }
 
 export default function PickerOption(props: PickerOptionProps) {
-  const { className, disabled, ...restProps } = props
+  const { className, disabled, label, children: childrenProp, ...restProps } = props
+
+  const children = useMemo(() => {
+    if (isValidElement(childrenProp) || isTextElement(childrenProp)) {
+      return childrenProp
+    }
+    if (isValidElement(label) || isTextElement(label)) {
+      return label
+    }
+  }, [childrenProp, label])
 
   return (
     <View
@@ -27,6 +37,7 @@ export default function PickerOption(props: PickerOptionProps) {
         },
         className,
       )}
+      children={children}
       {...restProps}
     />
   )
