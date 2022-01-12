@@ -119,10 +119,13 @@ export default function PickerColumn(props: PickerColumnProps) {
 
   useEffect(
     () => {
-      setIndex(getIndexByValue(value))
+      const valueIndex = getIndexByValue(value)
+      if (valueIndex !== activeIndexRef.current) {
+        setIndex(valueIndex)
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [value],
+    [value, activeIndexRef.current],
   )
 
   const getIndexByOffset = useCallback(
