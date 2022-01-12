@@ -139,7 +139,7 @@ export default function PickerColumn(props: PickerColumnProps) {
 
       distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
       const index = getIndexByOffset(distance)
-      setDuration(1000)
+      setDuration(800)
       setIndex(index, true)
     },
     [activeOffset, getIndexByOffset, setIndex],
