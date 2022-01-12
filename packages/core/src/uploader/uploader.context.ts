@@ -1,6 +1,7 @@
 import { createContext } from "react"
 
 interface UploaderContextValue {
+  removable?: boolean
   disabled?: boolean
 
   onUpload?(): void

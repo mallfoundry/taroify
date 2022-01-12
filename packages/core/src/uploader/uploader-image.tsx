@@ -3,10 +3,11 @@ import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { ReactNode, useContext } from "react"
 import Image, { ImageMode } from "../image"
 import { prefixClassname } from "../styles"
 import UploaderRemove from "./uploader-remove"
+import UploaderContext from "./uploader.context"
 import { isImageFile } from "./uploader.utils"
 
 interface UploaderImageProps extends ViewProps {
@@ -29,7 +30,7 @@ function UploaderImage(props: UploaderImageProps) {
     type,
     url,
     name,
-    removable = true,
+    removable: removableProp,
     mode,
     alt,
     round,
@@ -37,6 +38,8 @@ function UploaderImage(props: UploaderImageProps) {
     onRemove,
     ...restProps
   } = props
+  const { removable: ctxRemovable } = useContext(UploaderContext)
+  const removable = removableProp ?? ctxRemovable
 
   function renderFile() {
     if (isImageFile({ type, url })) {
