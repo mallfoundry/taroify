@@ -97,17 +97,19 @@ interface UseValueReturn<S> {
 }
 
 export function useValue<S>(options: UseValueOptions<S> = {}): UseValueReturn<S> {
-  const { defaultValue, value, initialValue, onChange } = options
+  const { defaultValue, value: valueProp, initialValue, onChange } = options
   const update = useUpdate()
-  const stateRef = useRef(defaultValue ?? value ?? initialValue)
+  //
+  const valueRef = useToRef(valueProp)
+  const stateRef = useRef(defaultValue ?? valueRef.current ?? initialValue)
 
-  if (value !== undefined) {
-    stateRef.current = value
+  if (valueRef.current !== undefined) {
+    stateRef.current = valueRef.current
   }
 
   const setValue = useCallback(
     (newValue: S, emitChange?: (aValue: S) => void) => {
-      if (_.isUndefined(value)) {
+      if (_.isUndefined(valueRef.current)) {
         stateRef.current = newValue
         update()
       }
@@ -120,7 +122,11 @@ export function useValue<S>(options: UseValueOptions<S> = {}): UseValueReturn<S>
   const getValue = useCallback(() => stateRef.current as S, [])
 
   return useMemo(
-    () => ({ value: stateRef.current, getValue, setValue }),
+    () => ({
+      value: stateRef.current,
+      getValue,
+      setValue,
+    }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [stateRef.current, getValue, setValue],
   )
