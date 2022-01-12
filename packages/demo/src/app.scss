@@ -1,15 +1,5 @@
 @import "./font";
 
-body {
-  height: 100vh;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
-}
-
 body,
 page {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
@@ -19,5 +9,10 @@ page {
 .taro_router {
   .taro_page {
     min-height: 100vh;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      background: transparent;
+    }
   }
 }
