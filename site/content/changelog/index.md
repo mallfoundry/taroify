@@ -12,6 +12,25 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.24-alpha.0
+
+`2022-01-12`
+
+**Feature**
+
+- Uploader
+  - 新增 removable 属性 [#243](https://github.com/mallfoundry/taroify/issues/243) [#256](https://github.com/mallfoundry/taroify/pull/256)
+- Picker
+  - 监听返回完整的选项（Option）对象 [#239](https://github.com/mallfoundry/taroify/issues/239) [#242](https://github.com/mallfoundry/taroify/pull/242)
+
+**Bug Fixes**
+
+- Style
+  - 修复 multi-ellipsis 无法省略的问题 [#245](https://github.com/mallfoundry/taroify/pull/245)
+- DatetimePicker
+  - 修复设置 defaultValue 无效的问题 [#238](https://github.com/mallfoundry/taroify/pull/238) [@Brain777777](https://github.com/Brain777777)
+  - 修复 2 月存在 31 天的问题 [#240](https://github.com/mallfoundry/taroify/issues/240) [#254](https://github.com/mallfoundry/taroify/pull/254)
+
 ### v0.0.23-alpha.1
 
 `2022-01-04`
@@ -52,7 +71,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - Input
   - 修复 readonly 状态下 placeholder 颜色为 --text-color-3 的问题 [#218](https://github.com/mallfoundry/taroify/pull/218)
-  
+
 ### v0.0.22-alpha.0
 
 `2022-01-01`
@@ -72,7 +91,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 新增 inputColor 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
   - 新增 feedbackAlign 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
   - 新增 feedbackStatus 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
-  
+
 **Breaking Changes**
 
 - Field
