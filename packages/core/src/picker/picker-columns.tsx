@@ -9,7 +9,7 @@ import { HAIRLINE_BORDER_UNSET_TOP_BOTTOM } from "../styles/hairline"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { useRendered } from "../utils/state"
-import { default as PickerColumnBase } from "./picker-column"
+import PickerColumn from "./picker-column"
 import PickerContext from "./picker.context"
 import { getPickerOptionKey } from "./picker.shared"
 import usePickerOptions from "./use-picker-options"
@@ -56,7 +56,7 @@ function PickerColumns(props: PickerColumnsProps) {
     _.map(columns, (column, columnIndex) => {
       const { children: options, ...restColumnProps } = column
       return (
-        <PickerColumnBase
+        <PickerColumn
           key={getPickerOptionKey(column) ?? columnIndex}
           // @ts-ignore
           children={options}
