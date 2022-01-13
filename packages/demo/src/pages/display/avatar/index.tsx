@@ -10,23 +10,15 @@ export default function AvatarDemo() {
     <Page title="Avatar 头像" className="avatar-demo">
       <Block title="基础用法" className="avatar-block">
         <Avatar>P</Avatar>
-        <Avatar sx={{ background: "green" }}>N</Avatar>
-        <Avatar sx={{ background: "pink" }}>HP</Avatar>
+        <Avatar style={{ background: "green" }}>N</Avatar>
+        <Avatar style={{ background: "pink" }}>HP</Avatar>
       </Block>
 
       <Block title="尺寸" className="avatar-block">
-        <Avatar
-          src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: 24, height: 24 }}
-        ></Avatar>
-        <Avatar
-          src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: 36, height: 36 }}
-        ></Avatar>
-        <Avatar
-          src="https://mui.com/static/images/avatar/1.jpg"
-          sx={{ width: 48, height: 48 }}
-        ></Avatar>
+        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="mini"></Avatar>
+        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="small"></Avatar>
+        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="medium"></Avatar>
+        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="large"></Avatar>
       </Block>
       <Block title="形状" className="avatar-block">
         <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
@@ -52,13 +44,13 @@ export default function AvatarDemo() {
         </Avatar.Group>
       </Block>
       <Block title="图标" className="avatar-block">
-        <Avatar sx={{ background: "red" }}>
+        <Avatar style={{ background: "red" }}>
           <Cross />
         </Avatar>
-        <Avatar sx={{ background: "pink" }}>
+        <Avatar style={{ background: "pink" }}>
           <LocationOutlined />
         </Avatar>
-        <Avatar sx={{ background: "green" }}>
+        <Avatar style={{ background: "green" }}>
           <SettingOutlined />
         </Avatar>
       </Block>
@@ -66,10 +58,7 @@ export default function AvatarDemo() {
         <Badge content={<Cross />} position="bottom-right">
           <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
         </Badge>
-        <Badge
-          content={<SettingOutlined></SettingOutlined>}
-          position="bottom-right"
-        >
+        <Badge content={<SettingOutlined></SettingOutlined>} position="bottom-right">
           <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
         </Badge>
       </Block>
