@@ -2,13 +2,15 @@
 
 .#{$component-prefix}avatar{
   box-sizing: border-box;
-  display: inline-block;
+  display: flex;
   text-align: center;
   font-family: var(--avatars-font-family, $avatars-font-family);
   font-size: var(--avatars-font-size, $avatars-font-size);
   font-weight: var(--avatars-font-weight, $avatars-font-weight);
   color: var(--avatars-color, $avatars-color);
   background-color: gray;
+  align-items: center;
+  justify-content: center;
   border: 1px solid $avatars-color;
   overflow: hidden;
 
