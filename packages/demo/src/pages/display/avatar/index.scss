@@ -6,3 +6,12 @@
   background: #fff;
   height: 100%;
 }
+.avatar-block {
+  .taroify-demo-block__content{
+    display: flex;
+    
+  }
+  .taroify-demo-block__content >*{
+    margin-right: 30px;
+  }
+}

@@ -202,9 +202,9 @@ const subpackages = [
     title: "展示组件",
     pages: [
       {
-        title: "Avatars 头像",
-        name: "Avatars",
-        path: "avatars/index",
+        title: "Avatar 头像",
+        name: "Avatar",
+        path: "avatar/index",
       },
       {
         title: "Badge 徽标",
