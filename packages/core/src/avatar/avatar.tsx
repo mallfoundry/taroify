@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { Image } from "@taroify/core"
 import { prefixClassname } from "../styles"
 
-interface AvatarsSx {
+interface AvatarStyle {
   height?: number
   width?: number
   background?: string
@@ -15,9 +15,9 @@ export enum variantEnum {
   CIRCULAR = "circular",
 }
 export type VarinatType = "square" | "rounded" | "circular"
-export interface AvatarsProps {
+export interface AvatarProps {
   children?: any
-  sx?: AvatarsSx
+  sx?: AvatarStyle
   src?: string
   alt?: string
   variant?: variantEnum | VarinatType
@@ -26,7 +26,7 @@ export interface AvatarsProps {
   ZIndex?:number
 }
 
-function Avatars({
+function Avatar({
   children,
   sx = {},
   src,
@@ -35,15 +35,15 @@ function Avatars({
   position,
   left,
   ZIndex
-}: AvatarsProps): JSX.Element {
+}: AvatarProps): JSX.Element {
   const { width = 36, height = 36, background = "gray" } = sx
   return (
     <View
-      className={classNames(prefixClassname("avatars"), {
-        [prefixClassname("avatars--circular")]: variant === "circular",
-        [prefixClassname("avatars--square")]: variant === "square",
-        [prefixClassname("avatars--rounded")]: variant === "rounded",
-        [prefixClassname("avatars--position")]: position === "position",
+      className={classNames(prefixClassname("avatar"), {
+        [prefixClassname("avatar--circular")]: variant === "circular",
+        [prefixClassname("avatar--square")]: variant === "square",
+        [prefixClassname("avatar--rounded")]: variant === "rounded",
+        [prefixClassname("avatar--position")]: position === "position",
       })}
       style={{
         background: background,
@@ -59,4 +59,4 @@ function Avatars({
   )
 }
 
-export default Avatars
+export default Avatar

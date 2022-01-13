@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 import * as React from "react"
-import Avatars, { variantEnum, VarinatType } from "./avatars"
+import Avatars, { variantEnum, VarinatType } from "./avatar"
 
 interface AvatarsGroupProps {
   children: React.ReactNode[]
