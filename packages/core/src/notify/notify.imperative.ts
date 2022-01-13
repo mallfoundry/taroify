@@ -1,4 +1,4 @@
-import * as Events from "events"
+import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
 import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { NotifyColor } from "./notify.shared"
@@ -68,7 +68,7 @@ function parseNotifyOptions(message: ReactNode | NotifyOptions): NotifyOptions {
 
 export function openNotify(args: ReactNode | NotifyOptions) {
   const { selector = "#notify", ...restOptions } = parseNotifyOptions(args)
-  notifyEvents.emit("open", {
+  notifyEvents.trigger("open", {
     selector,
     ...restOptions,
   })
@@ -83,5 +83,5 @@ export function createNotify(color: NotifyColor) {
 }
 
 export function closeNotify(selector?: string) {
-  notifyEvents.emit("close", selector ?? defaultNotifyOptions.selector)
+  notifyEvents.trigger("close", selector ?? defaultNotifyOptions.selector)
 }

@@ -1,5 +1,5 @@
 import { TaroElement } from "@tarojs/runtime"
-import { createSelectorQuery } from "@tarojs/taro"
+import { createSelectorQuery, getCurrentInstance } from "@tarojs/taro"
 import * as _ from "lodash"
 import { inWechat } from "../base"
 
@@ -28,7 +28,23 @@ export function isRootElement(node?: TaroElement) {
 }
 
 export function matchSelector(aSelector?: string, bSelector?: string) {
-  return _.replace(aSelector as string, "#", "") === bSelector
+  return aSelector === bSelector
+}
+
+export function getElementSelector(id?: string, className?: string) {
+  const selectors: string[] = []
+  if (!_.isEmpty(id)) {
+    selectors.push(`#${id}`)
+  }
+  if (!_.isEmpty(className)) {
+    selectors.push(_.split(className, " ").join("."))
+  }
+  return selectors.join(".")
+}
+
+export function prependPageSelector(selector?: string) {
+  const path = getCurrentInstance().router?.path
+  return path ? `${path}__${selector}` : selector
 }
 
 // Fix nested in CustomWrapper is undefined
