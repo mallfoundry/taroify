@@ -1,13 +1,13 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$avatars-size: 16px;
-$avatars-color: var(--white, $white);
-$avatars-padding: 0 3px * $hd;
-$avatars-font-size: var(--font-size-lg, $font-size-lg);
-$avatars-font-weight: var(--font-weight-bold, $font-weight-bold);
-$avatars-border-width: var(--border-width-base, $border-width-base);
-$avatars-background-color: var(--red, $red);
-$avatars-dot-color: var(--red, $red);
-$avatars-dot-size: 8PX;
-$avatars-font-family: -apple-system-font, helvetica neue, arial, sans-serif;
+$avatar-size: 16px;
+$avatar-color: var(--white, $white);
+$avatar-padding: 0 3px * $hd;
+$avatar-font-size: var(--font-size-lg, $font-size-lg);
+$avatar-font-weight: var(--font-weight-bold, $font-weight-bold);
+$avatar-border-width: var(--border-width-base, $border-width-base);
+$avatar-background-color: var(--red, $red);
+$avatar-dot-color: var(--red, $red);
+$avatar-dot-size: 8PX;
+$avatar-font-family: -apple-system-font, helvetica neue, arial, sans-serif;

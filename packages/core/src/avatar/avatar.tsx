@@ -3,40 +3,28 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import { Image } from "@taroify/core"
 import { prefixClassname } from "../styles"
+import { AvatarSize, AvatarVarinatType } from "./avatar.shared"
 
-interface AvatarStyle {
-  height?: number
-  width?: number
-  background?: string
-}
-export enum variantEnum {
-  SQUARE = "square",
-  ROUNDED = "rounded",
-  CIRCULAR = "circular",
-}
-export type VarinatType = "square" | "rounded" | "circular"
 export interface AvatarProps {
   children?: any
-  sx?: AvatarStyle
+  style?: React.CSSProperties
   src?: string
   alt?: string
-  variant?: variantEnum | VarinatType
+  variant?: AvatarVarinatType
   position?: string
-  left?:any
-  ZIndex?:number
+  size?:AvatarSize
 }
 
 function Avatar({
   children,
-  sx = {},
+  style = {},
   src,
   alt,
-  variant = variantEnum.CIRCULAR,
+  variant = "circular",
   position,
-  left,
-  ZIndex
+  size="medium"
 }: AvatarProps): JSX.Element {
-  const { width = 36, height = 36, background = "gray" } = sx
+  const { backgroundColor = "gray" } = style
   return (
     <View
       className={classNames(prefixClassname("avatar"), {
@@ -44,15 +32,13 @@ function Avatar({
         [prefixClassname("avatar--square")]: variant === "square",
         [prefixClassname("avatar--rounded")]: variant === "rounded",
         [prefixClassname("avatar--position")]: position === "position",
+      },{
+        [prefixClassname("avatar--mini")]: size === "mini",
+        [prefixClassname("avatar--small")]: size === "small",
+        [prefixClassname("avatar--medium")]: size === "medium",
+        [prefixClassname("avatar--large")]: size === "large",
       })}
-      style={{
-        background: background,
-        width: width + "px",
-        height: height + "px",
-        lineHeight: height + "px",
-        left: left+"px",
-        zIndex:ZIndex
-      }}
+      style={{ backgroundColor, ...style }}
     >
       {src ? <Image alt={alt} src={src}></Image> : children}
     </View>

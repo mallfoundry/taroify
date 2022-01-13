@@ -1,4 +1,4 @@
-import AvatarElement, { AvatarProps } from "./avatar"
+import AvatarComponent , { AvatarProps } from "./avatar"
 import AvatarGroup from "./avatar-group"
 
 interface AvatarsInterface {
@@ -7,7 +7,7 @@ interface AvatarsInterface {
   Group: typeof AvatarGroup
 }
 
-const Avatar = AvatarElement as AvatarsInterface
+const Avatar = AvatarComponent as AvatarsInterface
 Avatar.Group = AvatarGroup
 
 export default Avatar

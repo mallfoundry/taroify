@@ -1,21 +1,22 @@
 import { View } from "@tarojs/components"
 import * as React from "react"
-import Avatars, { variantEnum, VarinatType } from "./avatar"
+import  { AvatarVarinatType } from "./avatar.shared"
+import Avatars from "./avatar"
 
-interface AvatarsGroupProps {
+interface AvatarGroupProps {
   children: React.ReactNode[]
   max?: number
-  variant?: variantEnum | VarinatType
+  variant?: AvatarVarinatType
   spacing?: number
   total?: number
 }
 export default function AvatarsGroup({
-  variant = variantEnum.CIRCULAR,
+  variant = "circular",
   max = 0,
   children,
   spacing = 6,
   total,
-}: AvatarsGroupProps): JSX.Element {
+}: AvatarGroupProps): JSX.Element {
   const length = React.useMemo(() => {
     return children.length - max
   }, [children, max])
@@ -30,8 +31,10 @@ export default function AvatarsGroup({
             {
               key: index,
               position: "position",
-              left: child.props.width - spacing || index * (36 - spacing),
-              ZIndex: 999 - index,
+              style: {
+                left: child.props.width - spacing || index * (36 - spacing)+"px",
+                zIndex: 999 - index
+              },
               variant,
             },
             null,
@@ -45,11 +48,15 @@ export default function AvatarsGroup({
     <>
       <View style={{ position: "relative" }}>
         {NewReactNode}
-        <Avatars variant={variant} position={"position"} left={NewReactNode.length * (36 - spacing)}>
+        <Avatars
+          variant={variant}
+          position={"position"}
+          style={{left:NewReactNode.length * (36 - spacing)+"px"}}
+        >
           +{total ? total - children.length : length}
         </Avatars>
       </View>
-      <Avatars sx={{background:"transparent"}}></Avatars>
+      <Avatars style={{ background: "transparent" }}></Avatars>
     </>
   )
 }
