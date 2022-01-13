@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.24-alpha.1
+
+`2022-01-13`
+
+**Feature**
+
+- Form
+  - 新增 onValuesChange 属性 [#258](https://github.com/mallfoundry/taroify/issues/258) [#261](https://github.com/mallfoundry/taroify/pull/261)
+
+**Bug Fixes**
+
+- Toast
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+- Notify
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+- Dialog
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+
 ### v0.0.24-alpha.0
 
 `2022-01-12`
