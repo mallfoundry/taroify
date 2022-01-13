@@ -12,7 +12,7 @@ export interface AvatarProps {
   alt?: string
   variant?: AvatarVarinatType
   position?: string
-  size?:AvatarSize
+  size?: AvatarSize
 }
 
 function Avatar({
@@ -22,22 +22,26 @@ function Avatar({
   alt,
   variant = "circular",
   position,
-  size="medium"
+  size = "medium",
 }: AvatarProps): JSX.Element {
   const { backgroundColor = "gray" } = style
   return (
     <View
-      className={classNames(prefixClassname("avatar"), {
-        [prefixClassname("avatar--circular")]: variant === "circular",
-        [prefixClassname("avatar--square")]: variant === "square",
-        [prefixClassname("avatar--rounded")]: variant === "rounded",
-        [prefixClassname("avatar--position")]: position === "position",
-      },{
-        [prefixClassname("avatar--mini")]: size === "mini",
-        [prefixClassname("avatar--small")]: size === "small",
-        [prefixClassname("avatar--medium")]: size === "medium",
-        [prefixClassname("avatar--large")]: size === "large",
-      })}
+      className={classNames(
+        prefixClassname("avatar"),
+        {
+          [prefixClassname("avatar--circular")]: variant === "circular",
+          [prefixClassname("avatar--square")]: variant === "square",
+          [prefixClassname("avatar--rounded")]: variant === "rounded",
+          [prefixClassname("avatar--position")]: position === "position",
+        },
+        {
+          [prefixClassname("avatar--mini")]: size === "mini",
+          [prefixClassname("avatar--small")]: size === "small",
+          [prefixClassname("avatar--medium")]: size === "medium",
+          [prefixClassname("avatar--large")]: size === "large",
+        },
+      )}
       style={{ backgroundColor, ...style }}
     >
       {src ? <Image alt={alt} src={src}></Image> : children}

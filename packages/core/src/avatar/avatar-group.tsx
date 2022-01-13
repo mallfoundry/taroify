@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 import * as React from "react"
-import  { AvatarVarinatType } from "./avatar.shared"
+import { AvatarVarinatType } from "./avatar.shared"
 import Avatars from "./avatar"
 
 interface AvatarGroupProps {
@@ -32,8 +32,8 @@ export default function AvatarsGroup({
               key: index,
               position: "position",
               style: {
-                left: child.props.width - spacing || index * (36 - spacing)+"px",
-                zIndex: 999 - index
+                left: child.props.width - spacing || index * (36 - spacing) + "px",
+                zIndex: 999 - index,
               },
               variant,
             },
@@ -51,7 +51,7 @@ export default function AvatarsGroup({
         <Avatars
           variant={variant}
           position={"position"}
-          style={{left:NewReactNode.length * (36 - spacing)+"px"}}
+          style={{ left: NewReactNode.length * (36 - spacing) + "px" }}
         >
           +{total ? total - children.length : length}
         </Avatars>
