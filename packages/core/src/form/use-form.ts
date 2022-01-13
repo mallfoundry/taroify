@@ -1,4 +1,4 @@
-import * as Events from "events"
+import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
 import { useEffect, useMemo } from "react"
 import { FormItemInstance } from "./form.shared"
@@ -73,20 +73,20 @@ class FormAttributes {
     _.unset(this.#fieldsValue, name)
   }
 
-  addEventListener(event: string | symbol, listener: (...args: any[]) => void) {
-    this.#events?.addListener(event, listener)
+  addEventListener(event: string, listener: (...args: any[]) => void) {
+    this.#events?.on(event, listener)
   }
 
-  removeEventListener(event: string | symbol, listener: (...args: any[]) => void) {
-    this.#events?.removeListener(event, listener)
+  removeEventListener(event: string, listener: (...args: any[]) => void) {
+    this.#events?.off(event, listener)
   }
 
-  emitEvent(event: string | symbol, ...args: any[]) {
-    this.#events.emit(event, ...args)
+  emitEvent(event: string, ...args: any[]) {
+    this.#events.trigger(event, ...args)
   }
 
   release() {
-    this.#events?.removeAllListeners()
+    this.#events?.off()
   }
 }
 
@@ -120,11 +120,11 @@ function defineForm(formName: string) {
       return formName
     }
 
-    addEventListener(event: string | symbol, listener: (...args: any[]) => void) {
+    addEventListener(event: string, listener: (...args: any[]) => void) {
       getAttributiveForm(formName)?.addEventListener(event, listener)
     }
 
-    removeEventListener(event: string | symbol, listener: (...args: any[]) => void) {
+    removeEventListener(event: string, listener: (...args: any[]) => void) {
       getAttributiveForm(formName)?.removeEventListener(event, listener)
     }
 
@@ -150,7 +150,7 @@ function defineForm(formName: string) {
           }
         })
         if (changed) {
-          form.emitEvent("change", fieldsValue)
+          form.emitEvent("change", newValues, fieldsValue)
         }
       }
     }

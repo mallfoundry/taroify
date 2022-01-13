@@ -423,6 +423,7 @@ function CalendarField() {
 | --- | --- | --- |
 | onSubmit | 提交表单且验证通过后触发 | _values: object_ |
 | onValidate | 提交表单且验证不通过后触发 | _errors: { name: string, errors: string[] }[]_ |
+| onValuesChange | 字段值更新后触发 | _changedValues: object, allValues: object_ |
 
 ### Form Methods
 
