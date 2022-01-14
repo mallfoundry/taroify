@@ -6,7 +6,7 @@ import * as React from "react"
 import { Children, ReactElement, ReactNode, useCallback, useRef } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
+import { useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PickerColumns from "./picker-columns"
 import { PickerColumn } from "./picker.composition"
@@ -73,6 +73,8 @@ export default function Picker(props: PickerProps) {
 
   const { value, setValue } = useValue({ value: valueProp, defaultValue })
 
+  const multiValueRef = useToRef(_.isArray(value))
+
   const values = usePickerValues(value)
 
   const children = usePickerChildren(childrenProp)
@@ -92,12 +94,12 @@ export default function Picker(props: PickerProps) {
           ({ value }) => value,
         )
         _.set(newValues, columnIndex, option?.value)
-        const aValues = getPickerValue(newValues, _.size(newValues) > 1)
+        const aValues = getPickerValue(newValues, multiValueRef.current || _.size(newValues) > 1)
         setValue(aValues)
         onChange?.(aValues, { ...option })
       }
     },
-    [onChange, setValue],
+    [multiValueRef, onChange, setValue],
   )
 
   const handleAction = (action: any) => () =>
