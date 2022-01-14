@@ -113,7 +113,10 @@ export default function PickerColumn(props: PickerColumnProps) {
   )
 
   const getIndexByValue = useCallback(
-    (aValue?: any) => _.findIndex(childrenRef.current, ({ value: iValue }) => iValue === aValue),
+    (aValue?: any) => {
+      const index = _.findIndex(childrenRef.current, ({ value: iValue }) => iValue === aValue)
+      return index === -1 ? 0 : index
+    },
     [childrenRef],
   )
 
