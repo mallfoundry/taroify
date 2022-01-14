@@ -1,6 +1,9 @@
+import { default as useToRef } from "@taroify/hooks/use-to-ref"
 import * as _ from "lodash"
 import { createRef, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react"
 import { useUpdate } from "../hooks"
+
+export { default as useToRef } from "@taroify/hooks/use-to-ref"
 
 export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   const previousRef = useRef<T>(value)
@@ -25,12 +28,6 @@ export function useRenderedRef<T = any>(cb: UseRenderedCallback<T>): MutableRefO
   if (cb) {
     stateRef.current = cb()
   }
-  return stateRef as MutableRefObject<T>
-}
-
-export function useToRef<T = any>(value: T): MutableRefObject<T> {
-  const stateRef = useRef<T>()
-  stateRef.current = value
   return stateRef as MutableRefObject<T>
 }
 

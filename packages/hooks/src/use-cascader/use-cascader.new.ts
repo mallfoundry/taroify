@@ -1,6 +1,53 @@
 import * as _ from "lodash"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useMemo } from "react"
+import useToRef from "../use-to-ref"
 import { CascaderOption, findCascadeOption } from "./use-cascader.shared"
+
+interface UseCascadeSelectOptions {
+  data: CascaderOption[]
+  value: any[]
+  depth: number
+}
+
+function doCascadeSelect({ value: values, data: options }: UseCascadeSelectOptions) {
+  const newValues: any[] = []
+  const newColumns: CascaderOption[] = []
+  newColumns.push({ children: options })
+
+  let cursorOptions: CascaderOption[] = options
+  let depth = 0
+
+  for (;;) {
+    const value = _.get(values, depth)
+    const nextOption = findCascadeOption(cursorOptions, value, true)
+    if (_.isUndefined(nextOption)) {
+      break
+    }
+    const { value: newValue, children: nextOptions } = nextOption
+    newValues.push(newValue)
+    if (!nextOptions || _.isEmpty(nextOptions)) {
+      break
+    }
+    newColumns.push(nextOption)
+    cursorOptions = nextOptions
+    depth++
+  }
+
+  return [newColumns, newValues]
+}
+
+function useCascadeSelect(options: UseCascadeSelectOptions) {
+  const { value, data, depth } = options
+  return useMemo(
+    () =>
+      doCascadeSelect({
+        value,
+        data,
+        depth,
+      }),
+    [data, depth, value],
+  )
+}
 
 export interface UseCascaderNewOptions {
   value?: any[]
@@ -17,57 +64,24 @@ export interface CascaderObjectNew {
 export default function useCascaderNew({
   value: values = [],
   depth: maxDepth = 0,
-  data: options = [],
+  data = [],
   onChange,
 }: UseCascaderNewOptions): CascaderObjectNew {
   maxDepth = _.clamp(maxDepth, 0, maxDepth)
-  const [columns, setColumns] = useState<CascaderOption[]>([])
-
-  // eventRef
-  const onChangeRef = useRef(onChange)
-  onChangeRef.current = onChange
-
-  const doCascadeSelect = useCallback(() => {
-    const newValues: any[] = []
-    const newColumns: CascaderOption[] = []
-    newColumns.push({ children: options })
-
-    let cursorOptions: CascaderOption[] = options
-    let depth = 0
-
-    for (;;) {
-      const value = _.get(values, depth)
-      const nextOption = findCascadeOption(cursorOptions, value, true)
-      if (_.isUndefined(nextOption)) {
-        break
-      }
-      const { value: newValue, children: nextOptions } = nextOption
-      newValues.push(newValue)
-      if (!nextOptions || _.isEmpty(nextOptions)) {
-        break
-      }
-      newColumns.push(nextOption)
-      cursorOptions = nextOptions
-      depth++
-    }
-
-    return [newColumns, newValues]
-  }, [options, values])
+  const onChangeRef = useToRef(onChange)
+  const [columns, newValues] = useCascadeSelect({ value: values, depth: maxDepth, data })
 
   useEffect(() => {
-    const [newColumns, newValues] = doCascadeSelect()
-
-    if (maxDepth !== 0 && maxDepth > _.size(newColumns)) {
-      _.range(maxDepth - _.size(newColumns))
+    if (maxDepth !== 0 && maxDepth > _.size(columns)) {
+      _.range(maxDepth - _.size(columns))
         .map(() => [])
-        .forEach((e) => newColumns.push(e))
+        .forEach((e) => columns.push(e))
     }
 
     if (!_.isEqual(values, newValues)) {
       onChangeRef.current?.(newValues)
-      setColumns(newColumns)
     }
-  }, [doCascadeSelect, maxDepth, options, values])
+  }, [columns, maxDepth, newValues, onChangeRef, values])
 
   return {
     columns,
