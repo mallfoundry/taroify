@@ -26,19 +26,21 @@ export default function AvatarDemo() {
         <Avatar src="https://mui.com/static/images/avatar/1.jpg" variant="rounded"></Avatar>
       </Block>
       <Block title="群组" className="avatar-block">
-        <Avatar.Group total={24} spacing={6}>
+        <Avatar.Group total={24} spacing="medium">
           <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
         </Avatar.Group>
       </Block>
       <Block title="最大" className="avatar-block">
-        <Avatar.Group max={3} spacing={6}>
+        <Avatar.Group max={3} spacing="small" variant="square">
           <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
           <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
         </Avatar.Group>
