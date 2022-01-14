@@ -53,10 +53,11 @@ import Avatar from "@taroify/core/avatar"
 最多显示5个。
 
 ```tsx
-<Avatar.Group total={24} spacing={6}>
+<Avatar.Group total={24} spacing="medium">
   <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
 </Avatar.Group>
@@ -68,10 +69,11 @@ import Avatar from "@taroify/core/avatar"
 通过 `max` 属性最大可展示数量,最多显示5个。
 
 ```tsx
-<Avatar.Group max={3} spacing={6}>
+<Avatar.Group max={3} spacing="small" variant="square">
   <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
   <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
 </Avatar.Group>

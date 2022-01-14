@@ -57,7 +57,6 @@ export default function AvatarsGroup({
   return (
     <div
       className={classNames(prefixClassname("avatar-group"), {
-        [prefixClassname("avatar-group--spacing-mini")]: spacing === "mini",
         [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
         [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
         [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
