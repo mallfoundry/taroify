@@ -19,25 +19,20 @@ const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): R
     .filter((element) => isElementOf(element, Avatar))
     .map((child, index) => {
       const element = child as ReactElement<AvatarProps>
-      const { props } = element
+      const { key, props } = element
       const { children, ...restProps } = props
-
       return cloneElement(
         element,
         {
+          key: key ?? index,
+          variant,
           ...restProps,
-          key: index,
-          variant: variant,
         },
         children,
       )
     })
-
-  if (max) {
-    return avatars?.splice(0, max > 5 ? 5 : max)
-  } else {
-    return avatars?.splice(0, 5)
-  }
+  if (max) return avatars?.splice(0, max)
+  return avatars
 }
 export default function AvatarsGroup({
   variant = "circular",
@@ -47,7 +42,7 @@ export default function AvatarsGroup({
   total,
 }: AvatarGroupProps): JSX.Element {
   const length = useMemo(() => {
-    return children.length - max
+    return children.length - max > 0 ? children.length - max : 0
   }, [children, max])
   const avatars = useAvatars(children, variant, max)
   return (
