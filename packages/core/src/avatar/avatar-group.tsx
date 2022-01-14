@@ -14,25 +14,25 @@ interface AvatarGroupProps {
   total?: number
 }
 const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): ReactNode[] => {
-  const avatars = Children.toArray(children)
-    .filter((child) => isValidElement(child))
-    .filter((element) => isElementOf(element, Avatar))
-    .map((child, index) => {
-      const element = child as ReactElement<AvatarProps>
-      const { key, props } = element
-      const { children, ...restProps } = props
-      return cloneElement(
-        element,
-        {
-          key: key ?? index,
-          variant,
-          ...restProps,
-        },
-        children,
-      )
-    })
-  if (max) return avatars?.splice(0, max)
-  return avatars
+  const avatars = useMemo(()=>Children.toArray(children)
+  .filter((child) => isValidElement(child))
+  .filter((element) => isElementOf(element, Avatar))
+  .map((child, index) => {
+    const element = child as ReactElement<AvatarProps>
+    const { key, props } = element
+    const { children, ...restProps } = props
+    return cloneElement(
+      element,
+      {
+        key: key ?? index,
+        variant,
+        ...restProps,
+      },
+      children,
+    )
+  }),[children, variant])
+   return avatars?.splice(0, max||0)
+
 }
 export default function AvatarsGroup({
   variant = "circular",
