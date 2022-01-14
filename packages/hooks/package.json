@@ -21,6 +21,7 @@
     "@tarojs/taro": "^3.3.6"
   },
   "dependencies": {
+    "@vant/area-data": "^1.2.1",
     "lodash": "^4.17.21",
     "react": "^17.0.2"
   },
