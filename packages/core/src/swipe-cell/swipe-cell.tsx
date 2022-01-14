@@ -342,7 +342,7 @@ function SwipeCell(props: SwipeCellProps) {
         className={prefixClassname("swipe-cell__wrapper")}
         style={{
           transform: `translate3d(${addUnitPx(offset)}, 0, 0)`,
-          transitionDuration: draggingRef.current ? "0s" : ".6s",
+          ...(inBrowser ? { transitionDuration: draggingRef.current ? "0s" : ".3s" } : {}),
         }}
       >
         {left}
