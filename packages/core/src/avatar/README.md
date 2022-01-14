@@ -31,10 +31,10 @@ import Avatar from "@taroify/core/avatar"
 设置 `size` 属性后，可以选择四个大小。
 
 ```tsx
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" size="mini"></Avatar>
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" size="small"></Avatar>
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" size="medium"></Avatar>
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" size="large"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="mini"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="small"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="medium"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="large"></Avatar>
 ```
 
 ### 形状
@@ -42,9 +42,9 @@ import Avatar from "@taroify/core/avatar"
 通过 `variant` 属性来设置形状。
 
 ```tsx
-<Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" variant="square"></Avatar>
-<Avatar src="https://mui.com/static/images/avatar/1.jpg" variant="rounded"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="square"></Avatar>
+<Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="rounded"></Avatar>
 ```
 
 
@@ -54,12 +54,12 @@ import Avatar from "@taroify/core/avatar"
 
 ```tsx
 <Avatar.Group total={24} spacing="medium">
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
 </Avatar.Group>
 ```
 
@@ -70,12 +70,12 @@ import Avatar from "@taroify/core/avatar"
 
 ```tsx
 <Avatar.Group max={3} spacing="small" variant="square">
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-  <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
 </Avatar.Group>
 ```
 
@@ -99,10 +99,10 @@ import Avatar from "@taroify/core/avatar"
 
 ```tsx
 <Badge content={<Cross />} position="bottom-right">
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
 </Badge>
 <Badge content={<SettingOutlined></SettingOutlined>} position="bottom-right">
-  <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
+  <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
 </Badge>
 ```
 ## API

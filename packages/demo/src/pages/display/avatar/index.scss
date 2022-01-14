@@ -9,9 +9,9 @@
 .avatar-block {
   .taroify-demo-block__content{
     display: flex;
-    
+    &>*{
+      margin-right: 30px;
+    }
   }
-  .taroify-demo-block__content >*{
-    margin-right: 30px;
-  }
+
 }

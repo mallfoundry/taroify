@@ -4,14 +4,14 @@ import { CSSProperties } from "react"
 import classNames from "classnames"
 import { Image } from "@taroify/core"
 import { prefixClassname } from "../styles"
-import { AvatarSize, AvatarVarinatType } from "./avatar.shared"
+import { AvatarSize, AvatarVarinat } from "./avatar.shared"
 
 export interface AvatarProps {
   children?: any
   style?:CSSProperties
   src?: string
   alt?: string
-  variant?: AvatarVarinatType
+  variant?: AvatarVarinat
   size?: AvatarSize
 }
 

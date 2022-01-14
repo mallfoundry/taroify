@@ -4,20 +4,16 @@ import { cloneElement, useMemo, ReactElement, ReactNode, isValidElement, Childre
 import classNames from "classnames"
 import { isElementOf } from "../utils/validate"
 import { prefixClassname } from "../styles"
-import { AvatarVarinatType, spacingSize } from "./avatar.shared"
+import { AvatarVarinat, SpacingSize } from "./avatar.shared"
 import Avatar, { AvatarProps } from "./avatar"
 interface AvatarGroupProps {
   children: ReactNode[]
   max?: number
-  variant?: AvatarVarinatType
-  spacing?: spacingSize
+  variant?: AvatarVarinat
+  spacing?: SpacingSize
   total?: number
 }
-const avatarGroupNode = (
-  children: ReactNode,
-  variant: AvatarVarinatType,
-  max: number,
-): ReactNode[] => {
+const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): ReactNode[] => {
   const avatars = Children.toArray(children)
     .filter((child) => isValidElement(child))
     .filter((element) => isElementOf(element, Avatar))
@@ -45,7 +41,7 @@ const avatarGroupNode = (
 }
 export default function AvatarsGroup({
   variant = "circular",
-  max = 0,
+  max = 9999999,
   children,
   spacing = "medium",
   total,
@@ -53,7 +49,7 @@ export default function AvatarsGroup({
   const length = useMemo(() => {
     return children.length - max
   }, [children, max])
-  const avatars = avatarGroupNode(children, variant, max)
+  const avatars = useAvatars(children, variant, max)
   return (
     <div
       className={classNames(prefixClassname("avatar-group"), {
@@ -63,7 +59,7 @@ export default function AvatarsGroup({
       })}
     >
       {avatars}
-      <Avatar variant={variant} style={{ zIndex: 999 }}>
+      <Avatar variant={variant} style={{ zIndex: _.size(avatars) }}>
         +{total ? total - _.size(avatars) : length}
       </Avatar>
     </div>
