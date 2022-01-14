@@ -15,34 +15,34 @@ export default function AvatarDemo() {
       </Block>
 
       <Block title="尺寸" className="avatar-block">
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="mini"></Avatar>
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="small"></Avatar>
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="medium"></Avatar>
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" size="large"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="mini"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="small"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="medium"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="large"></Avatar>
       </Block>
       <Block title="形状" className="avatar-block">
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" variant="square"></Avatar>
-        <Avatar src="https://mui.com/static/images/avatar/1.jpg" variant="rounded"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="square"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="rounded"></Avatar>
       </Block>
       <Block title="群组" className="avatar-block">
         <Avatar.Group total={24} spacing="medium">
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
         </Avatar.Group>
       </Block>
       <Block title="最大" className="avatar-block">
         <Avatar.Group max={3} spacing="small" variant="square">
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/2.jpg"></Avatar>
-          <Avatar src="https://mui.com/static/images/avatar/3.jpg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
         </Avatar.Group>
       </Block>
       <Block title="图标" className="avatar-block">
@@ -58,10 +58,10 @@ export default function AvatarDemo() {
       </Block>
       <Block title="徽章用法" className="avatar-block">
         <Badge content={<Cross />} position="bottom-right">
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
         </Badge>
         <Badge content={<SettingOutlined></SettingOutlined>} position="bottom-right">
-          <Avatar src="https://mui.com/static/images/avatar/1.jpg"></Avatar>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
         </Badge>
       </Block>
     </Page>
