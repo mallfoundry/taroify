@@ -1,5 +1,6 @@
 import * as React from "react"
 import { View } from "@tarojs/components"
+import { CSSProperties } from "react"
 import classNames from "classnames"
 import { Image } from "@taroify/core"
 import { prefixClassname } from "../styles"
@@ -7,11 +8,10 @@ import { AvatarSize, AvatarVarinatType } from "./avatar.shared"
 
 export interface AvatarProps {
   children?: any
-  style?: React.CSSProperties
+  style?:CSSProperties
   src?: string
   alt?: string
   variant?: AvatarVarinatType
-  position?: string
   size?: AvatarSize
 }
 
@@ -21,10 +21,8 @@ function Avatar({
   src,
   alt,
   variant = "circular",
-  position,
   size = "medium",
 }: AvatarProps): JSX.Element {
-  const { backgroundColor = "gray" } = style
   return (
     <View
       className={classNames(
@@ -33,7 +31,6 @@ function Avatar({
           [prefixClassname("avatar--circular")]: variant === "circular",
           [prefixClassname("avatar--square")]: variant === "square",
           [prefixClassname("avatar--rounded")]: variant === "rounded",
-          [prefixClassname("avatar--position")]: position === "position",
         },
         {
           [prefixClassname("avatar--mini")]: size === "mini",
@@ -42,7 +39,7 @@ function Avatar({
           [prefixClassname("avatar--large")]: size === "large",
         },
       )}
-      style={{ backgroundColor, ...style }}
+      style={style}
     >
       {src ? <Image alt={alt} src={src}></Image> : children}
     </View>

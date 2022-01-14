@@ -1,0 +1,30 @@
+@import "./variables";
+.#{$component-prefix}avatar-group {
+  display: flex;
+  &--spacing-mini {
+    padding-left: 24px * $hd;
+    .#{$component-prefix}avatar {
+      margin-left: -(24px * $hd);
+    }
+  }
+  &--spacing-small {
+    padding-left: 18px * $hd;
+    .#{$component-prefix}avatar {
+      margin-left: -(18px * $hd);
+    }
+  }
+  &--spacing-medium {
+    padding-left: 14px * $hd;
+    .#{$component-prefix}avatar {
+      margin-left: -(14px * $hd);
+    }
+  }
+
+  &--spacing-large {
+    padding-left: 10px * $hd;
+    .#{$component-prefix}avatar {
+      margin-left: -(10px * $hd);
+    }
+  }
+
+}

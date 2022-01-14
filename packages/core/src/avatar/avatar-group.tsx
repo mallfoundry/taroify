@@ -1,62 +1,72 @@
-import { View } from "@tarojs/components"
 import * as React from "react"
-import { AvatarVarinatType } from "./avatar.shared"
-import Avatars from "./avatar"
-
+import * as _ from "lodash"
+import { cloneElement, useMemo, ReactElement, ReactNode, isValidElement, Children } from "react"
+import classNames from "classnames"
+import { isElementOf } from "../utils/validate"
+import { prefixClassname } from "../styles"
+import { AvatarVarinatType, spacingSize } from "./avatar.shared"
+import Avatar, { AvatarProps } from "./avatar"
 interface AvatarGroupProps {
-  children: React.ReactNode[]
+  children: ReactNode[]
   max?: number
   variant?: AvatarVarinatType
-  spacing?: number
+  spacing?: spacingSize
   total?: number
+}
+const avatarGroupNode = (
+  children: ReactNode,
+  variant: AvatarVarinatType,
+  max: number,
+): ReactNode[] => {
+  const avatars = Children.toArray(children)
+    .filter((child) => isValidElement(child))
+    .filter((element) => isElementOf(element, Avatar))
+    .map((child, index) => {
+      const element = child as ReactElement<AvatarProps>
+      const { props } = element
+      const { children, ...restProps } = props
+
+      return cloneElement(
+        element,
+        {
+          ...restProps,
+          key: index,
+          variant: variant,
+        },
+        children,
+      )
+    })
+
+  if (max) {
+    return avatars?.splice(0, max > 5 ? 5 : max)
+  } else {
+    return avatars?.splice(0, 5)
+  }
 }
 export default function AvatarsGroup({
   variant = "circular",
   max = 0,
   children,
-  spacing = 6,
+  spacing = "medium",
   total,
 }: AvatarGroupProps): JSX.Element {
-  const length = React.useMemo(() => {
+  const length = useMemo(() => {
     return children.length - max
   }, [children, max])
-  const NewReactNode: React.ReactNode[] = []
-
-  React.Children.forEach(children, (child, index) => {
-    if (React.isValidElement(child)) {
-      if (NewReactNode.length < max || total) {
-        NewReactNode.push(
-          React.cloneElement(
-            child,
-            {
-              key: index,
-              position: "position",
-              style: {
-                left: child.props.width - spacing || index * (36 - spacing) + "px",
-                zIndex: 999 - index,
-              },
-              variant,
-            },
-            null,
-          ),
-        )
-      }
-    }
-  })
-
+  const avatars = avatarGroupNode(children, variant, max)
   return (
-    <>
-      <View style={{ position: "relative" }}>
-        {NewReactNode}
-        <Avatars
-          variant={variant}
-          position={"position"}
-          style={{ left: NewReactNode.length * (36 - spacing) + "px" }}
-        >
-          +{total ? total - children.length : length}
-        </Avatars>
-      </View>
-      <Avatars style={{ background: "transparent" }}></Avatars>
-    </>
+    <div
+      className={classNames(prefixClassname("avatar-group"), {
+        [prefixClassname("avatar-group--spacing-mini")]: spacing === "mini",
+        [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
+        [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
+        [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
+      })}
+    >
+      {avatars}
+      <Avatar variant={variant} style={{ zIndex: 999 }}>
+        +{total ? total - _.size(avatars) : length}
+      </Avatar>
+    </div>
   )
 }
