@@ -123,5 +123,5 @@ import Avatar from "@taroify/core/avatar"
 | --- | --- | --- | --- |
 | max | 显示最大内容 | _number_ | - |
 | variant | 形状，可选值为 `square` `rounded` `circular` | _string_ | `circular` |
-| spacing | 间距，可选值为 `mini` `small` `medium` `large` | _string_ | `medium` |
+| spacing | 间距，可选值为 `small` `medium` `large` | _string_ | `medium` |
 | total | 头像总数。用于计算额外头像的数量。| _string_ | - |
