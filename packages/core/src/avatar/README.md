@@ -26,7 +26,7 @@ import Avatar from "@taroify/core/avatar"
 
 
 
-### 此村
+### 尺寸
 
 设置 `size` 属性后，可以选择四个大小。
 
