@@ -8,7 +8,7 @@ import { AvatarSize, AvatarVarinat } from "./avatar.shared"
 
 export interface AvatarProps {
   children?: any
-  style?:CSSProperties
+  style?: CSSProperties
   src?: string
   alt?: string
   variant?: AvatarVarinat
