@@ -37,13 +37,13 @@
     flex-direction: column;
     align-items: center;
     width: initial;
+    //// Remove TaroButton default style
+    //background-color: unset;
+    margin-top: 0;
     //// Remove sheet__item style
     //padding: 0;
     cursor: pointer;
     user-select: none;
-    //// Remove TaroButton default style
-    //background-color: unset;
-    margin-top: 0;
 
     //// Remove TaroButton default style
     //&::after {

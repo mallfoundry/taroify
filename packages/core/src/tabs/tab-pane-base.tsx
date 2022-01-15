@@ -10,13 +10,17 @@ import TabsContext from "./tabs.context"
 interface TabPaneBaseProps extends ViewProps {
   className?: string
   style?: CSSProperties
+  index: number
   value?: any
   children?: ReactNode
 }
 
 export default function TabPaneBase(props: TabPaneBaseProps) {
-  const { className, style, value, children, ...restProps } = props
-  const { value: activeValue, lazyRender, animated, swipeable } = useContext(TabsContext)
+  const { className, style, index, value, children, ...restProps } = props
+  const { index: activeIndex, value: activeValue, lazyRender, animated, swipeable } = useContext(
+    TabsContext,
+  )
+
   const active = activeValue === value
 
   const initializedRef = useRef(false)
@@ -30,11 +34,28 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
       return true
     }
 
+    if ((index - 1 === activeIndex || index + 1 === activeIndex) && !initializedRef.current) {
+      initializedRef.current = true
+      return true
+    }
+
     if (active && !initializedRef.current) {
       initializedRef.current = true
     }
     return active
-  }, [active, lazyRender])
+  }, [active, activeIndex, index, lazyRender])
+
+  const tabPane = (
+    <View
+      style={{
+        ...style,
+        display: !(animated || swipeable) && !active ? "none" : "",
+      }}
+      className={classNames(prefixClassname("tabs__tab-pane"), className)}
+      children={shouldRender ? children : undefined}
+      {...restProps}
+    />
+  )
 
   if (animated || swipeable) {
     return (
@@ -42,24 +63,10 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
         className={classNames(prefixClassname("tabs__tab-pane-wrapper"), {
           [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
         })}
-      >
-        <View
-          className={classNames(prefixClassname("tabs__tab-pane"), className)}
-          children={children}
-        />
-      </Swiper.Item>
+        children={tabPane}
+      />
     )
   }
 
-  return (
-    <View
-      style={{
-        ...style,
-        display: active ? "" : "none",
-      }}
-      className={classNames(prefixClassname("tabs__tab-pane"), className)}
-      children={shouldRender ? children : undefined}
-      {...restProps}
-    />
-  )
+  return tabPane
 }

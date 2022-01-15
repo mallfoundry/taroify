@@ -43,7 +43,7 @@ function getRateStatus(
   return { status: RateStatus.Void, value: 0 }
 }
 
-interface RateProps extends ViewProps {
+export interface RateProps extends ViewProps {
   className?: string
   style?: CSSProperties
   defaultValue?: number

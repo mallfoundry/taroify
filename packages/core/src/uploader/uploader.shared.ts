@@ -1,20 +1,14 @@
 import * as _ from "lodash"
 import { ReactNode } from "react"
 
-export enum UploadStatus {
-  Uploading = "uploading",
-  Completed = "completed ",
-  Failed = "failed",
-}
-
-export type UploadStatusString = "uploading" | "completed" | "failed"
+export type UploadStatus = "uploading" | "completed" | "failed"
 
 export interface UploadFile {
   url?: string
   type?: string
   name?: string
   removable?: boolean
-  status?: UploadStatus | UploadStatusString
+  status?: UploadStatus
   message?: ReactNode
 }
 

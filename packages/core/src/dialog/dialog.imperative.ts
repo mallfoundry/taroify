@@ -1,4 +1,4 @@
-import * as Events from "events"
+import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
 import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { ButtonProps } from "../button"
@@ -83,7 +83,7 @@ function parseDialogOptions(message: ReactNode | DialogOptions): DialogOptions {
 
 export function openDialog(args: ReactNode | DialogOptions) {
   const { selector = "#dialog", ...restOptions } = parseDialogOptions(args)
-  dialogEvents.emit("open", {
+  dialogEvents.trigger("open", {
     selector,
     ...restOptions,
   })
@@ -107,5 +107,5 @@ export function alertDialog(args: ReactNode | Omit<DialogOptions, "confirm">) {
 }
 
 export function cancelDialog(selector?: string) {
-  dialogEvents.emit("cancel", selector ?? defaultDialogOptions.selector)
+  dialogEvents.trigger("cancel", selector ?? defaultDialogOptions.selector)
 }

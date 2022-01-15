@@ -19,7 +19,7 @@ import { ButtonProps, createButton } from "../button"
 import ButtonContext from "../button/button.context"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
-import { matchSelector } from "../utils/dom/element"
+import { getElementSelector, matchSelector, prependPageSelector } from "../utils/dom/element"
 import { useObject, useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
@@ -129,6 +129,8 @@ function Dialog(props: DialogProps) {
     setObject,
   } = useObject<DialogProps & DialogOptions>(props)
 
+  const rootSelectorRef = useToRef(prependPageSelector(getElementSelector(id)))
+
   const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,
     value: openProp,
@@ -174,7 +176,7 @@ function Dialog(props: DialogProps) {
       cancel,
       ...restOptions
     }: DialogOptions) => {
-      if (matchSelector(selector, id)) {
+      if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
         const children: ReactNode[] = []
         const actions: ReactNode[] = []
 
@@ -203,7 +205,7 @@ function Dialog(props: DialogProps) {
   )
 
   useDialogCancel((selector) => {
-    if (matchSelector(selector, id)) {
+    if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
       onCancelRef.current?.()
       setOpen(false)
     }

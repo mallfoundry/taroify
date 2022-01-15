@@ -1,0 +1,36 @@
+@import "./variables";
+
+.#{$component-prefix}form-label {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  width: var(--form-label-width, $form-label-width);
+  margin-right: var(--form-label-margin-right, $form-label-margin-right);
+  color: var(--form-label-color, $form-label-color);
+  text-align: left;
+  word-wrap: break-word;
+
+  &--left {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  &--center {
+    justify-content: center;
+    text-align: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  &--required {
+    &::before {
+      margin-right: 2px * $hd;
+      color: var(--form-required-color, $form-required-color);
+      content: '*';
+    }
+  }
+}
+

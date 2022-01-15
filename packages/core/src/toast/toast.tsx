@@ -19,8 +19,8 @@ import { useTimeout } from "../hooks"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
-import { matchSelector } from "../utils/dom/element"
-import { useObject, useValue } from "../utils/state"
+import { getElementSelector, matchSelector, prependPageSelector } from "../utils/dom/element"
+import { useObject, useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
@@ -120,6 +120,8 @@ export default function Toast(props: ToastProps) {
     setObject,
   } = useObject<ToastProps & ToastOptions>(props)
 
+  const rootSelectorRef = useToRef(prependPageSelector(getElementSelector(id)))
+
   const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,
     value: openProp,
@@ -145,7 +147,7 @@ export default function Toast(props: ToastProps) {
   }, [duration, open, restartAutoClose, setObject, setOpen, stopAutoClose])
 
   useToastOpen(({ selector, message, ...restOptions }: ToastOptions) => {
-    if (matchSelector(selector, id)) {
+    if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
       restartAutoClose()
       setObject({
         children: message,
@@ -156,7 +158,7 @@ export default function Toast(props: ToastProps) {
   })
 
   useToastClose((selector) => {
-    if (matchSelector(selector, id)) {
+    if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
       setOpen(false)
     }
   })

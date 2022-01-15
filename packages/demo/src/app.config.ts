@@ -11,8 +11,10 @@ export default {
     navigationBarBackgroundColor: "#4fc08d",
     navigationBarTitleText: "Taroify",
     navigationBarTextStyle: "black",
+    allowsBounceVertical: "NO",
   },
   pages: ["pages/home/index"],
   subpackages: subPackages,
   subPackages,
+  animation: false,
 }

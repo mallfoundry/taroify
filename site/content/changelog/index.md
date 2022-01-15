@@ -12,6 +12,133 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.24-alpha.1
+
+`2022-01-13`
+
+**Feature**
+
+- Form
+  - 新增 onValuesChange 属性 [#258](https://github.com/mallfoundry/taroify/issues/258) [#261](https://github.com/mallfoundry/taroify/pull/261)
+
+**Bug Fixes**
+
+- Toast
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+- Notify
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+- Dialog
+  - 修复通过命令式调用重复打开的问题 [#259](https://github.com/mallfoundry/taroify/issues/259) [#260](https://github.com/mallfoundry/taroify/pull/260)
+
+### v0.0.24-alpha.0
+
+`2022-01-12`
+
+**Feature**
+
+- Uploader
+  - 新增 removable 属性 [#243](https://github.com/mallfoundry/taroify/issues/243) [#256](https://github.com/mallfoundry/taroify/pull/256)
+- Picker
+  - 监听返回完整的选项（Option）对象 [#239](https://github.com/mallfoundry/taroify/issues/239) [#242](https://github.com/mallfoundry/taroify/pull/242)
+
+**Bug Fixes**
+
+- Style
+  - 修复 multi-ellipsis 无法省略的问题 [#245](https://github.com/mallfoundry/taroify/pull/245)
+- DatetimePicker
+  - 修复设置 defaultValue 无效的问题 [#238](https://github.com/mallfoundry/taroify/pull/238) [@Brain777777](https://github.com/Brain777777)
+  - 修复 2 月存在 31 天的问题 [#240](https://github.com/mallfoundry/taroify/issues/240) [#254](https://github.com/mallfoundry/taroify/pull/254)
+
+### v0.0.23-alpha.1
+
+`2022-01-04`
+
+**Bug Fixes**
+
+- Field
+  - 修复嵌套 Input 组件不能赋值 value 的问题 [#235](https://github.com/mallfoundry/taroify/issues/235)
+
+### v0.0.23-alpha.0
+
+`2022-01-04`
+
+**New Component**
+
+- 新增 Space 组件 [#228](https://github.com/mallfoundry/taroify/pull/228) [@coderYarn](https://github.com/coderYarn)
+
+**Feature**
+
+- ActionSheet.Action
+  - 新增 value 属性 [#229](https://github.com/mallfoundry/taroify/pull/229) [@coderYarn](https://github.com/coderYarn)
+
+**Bug Fixes**
+
+- Checkbox.Group
+  - 修复设置 value 为空数组时，Checkbox 组件的 checked 不为 false 的问题 [#231](https://github.com/mallfoundry/taroify/pull/231)
+
+### v0.0.22-alpha.1
+
+`2022-01-01`
+
+**Feature**
+
+- DatetimePicker
+  - 新增 date-minute 类型（年月日时分） [#211](https://github.com/mallfoundry/taroify/issues/211) [#227](https://github.com/mallfoundry/taroify/pull/227)
+
+**Bug Fixes**
+
+- Input
+  - 修复 readonly 状态下 placeholder 颜色为 --text-color-3 的问题 [#218](https://github.com/mallfoundry/taroify/pull/218)
+
+### v0.0.22-alpha.0
+
+`2022-01-01`
+
+**New Component**
+
+- 新增 Form 组件 [#118](https://github.com/mallfoundry/taroify/issues/118) [#224](https://github.com/mallfoundry/taroify/pull/224)
+
+**Feature**
+
+- Cell
+  - 设置 icon 和 rightIcon 属性时，仅为图标组件添加单元格图标样式 [#214](https://github.com/mallfoundry/taroify/issues/214) [#225](https://github.com/mallfoundry/taroify/pull/225)
+- Field
+  - 新增 feedbackAlign 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackStatus 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+- Search
+  - 新增 inputColor 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackAlign 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 新增 feedbackStatus 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+
+**Breaking Changes**
+
+- Field
+  - 删除 Input 属性 [#224](https://github.com/mallfoundry/taroify/pull/224)
+  - 将 message 属性重命名为 feedback [#224](https://github.com/mallfoundry/taroify/pull/224)
+- Search
+  - 将 message 属性重命名为 feedback [#224](https://github.com/mallfoundry/taroify/pull/224)
+
+**Bug Fixes**
+
+- Tabs
+  - 修复 swipeable 不支持 lazyRender 的问题 [#218](https://github.com/mallfoundry/taroify/pull/218)
+
+### v0.0.21-alpha.1
+
+`2021-12-22`
+
+**Feature**
+
+- Countdown
+  - 新增单符号（D, H, m, s）格式 [#206](https://github.com/mallfoundry/taroify/issues/206) [#208](https://github.com/mallfoundry/taroify/pull/208)
+
+**Bug Fixes**
+
+- Countdown
+  - 修复 value 无法更新的问题 [#205](https://github.com/mallfoundry/taroify/issues/205) [#208](https://github.com/mallfoundry/taroify/pull/208)
+- SafeArea
+  - 修复 ios11 兼容性 constant(safe-area-inset-*) 的问题 [#199](https://github.com/mallfoundry/taroify/pull/199) [@Brain777777](https://github.com/Brain777777)
+
 ### v0.0.21-alpha.0
 
 `2021-12-16`

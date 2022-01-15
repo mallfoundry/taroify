@@ -1,9 +1,9 @@
 import { Calendar, Cell, Popup } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import { CustomWrapper } from "@tarojs/components"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
+import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 

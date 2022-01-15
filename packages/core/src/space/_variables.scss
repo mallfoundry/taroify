@@ -1,2 +1,17 @@
 @import "../styles/prefix";
 @import "../styles/variables";
+
+$space-item-gap-mini: var(--space-item-gap-mini, var(--padding-xs, $padding-xs));
+$space-item-gap-small: var(--space-item-gap-small, var(--padding-sm, $padding-sm));
+$space-item-gap-medium: var(--space-item-gap-medium, var(--padding-md, $padding-md));
+$space-item-gap-large: var(--space-item-gap-large, var(--padding-lg, $padding-lg));
+
+$space-item-vertical-gap-mini: var(--space-item-vertical-gap-mini, $space-item-gap-mini);
+$space-item-vertical-gap-small: var(--space-item-vertical-gap-small, $space-item-gap-small);
+$space-item-vertical-gap-medium: var(--space-item-vertical-gap-medium, $space-item-gap-medium);
+$space-item-vertical-gap-large: var(--space-item-vertical-gap-large, $space-item-gap-large);
+
+$space-item-horizontal-gap-mini: var(--space-item-horizontal-gap-mini, $space-item-gap-mini);
+$space-item-horizontal-gap-small: var(--space-item-horizontal-gap-small, $space-item-gap-small);
+$space-item-horizontal-gap-medium: var(--space-item-horizontal-gap-medium, $space-item-gap-medium);
+$space-item-horizontal-gap-large: var(--space-item-horizontal-gap-large, $space-item-gap-large);

@@ -9,17 +9,4 @@
   &__wrapper {
     transition-timing-function: cubic-bezier(0.23, 1, 0.68, 1);
   }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--picker-option-padding, $picker-option-padding);
-    color: var(--picker-option-text-color, $picker-option-text-color);
-
-    &--disabled {
-      cursor: not-allowed;
-      opacity: var(--picker-option-disabled-opacity, $picker-option-disabled-opacity);
-    }
-  }
 }

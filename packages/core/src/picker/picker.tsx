@@ -3,88 +3,33 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import {
-  Children,
-  CSSProperties,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react"
+import { Children, ReactElement, ReactNode, useCallback, useRef } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
-import { HAIRLINE_BORDER_UNSET_TOP_BOTTOM } from "../styles/hairline"
-import { preventDefault } from "../utils/dom/event"
-import { addUnitPx } from "../utils/format/unit"
-import { useValue } from "../utils/state"
-import PickerColumn, { PickerColumnProps } from "./picker-column"
-import PickerColumnBase from "./picker-column-base"
-import PickerOption, { PickerOptionProps } from "./picker-option"
-import PickerToolbar from "./picker-toolbar"
+import { useToRef, useValue } from "../utils/state"
+import { isElementOf } from "../utils/validate"
+import PickerColumns from "./picker-columns"
+import { PickerColumn } from "./picker.composition"
 import PickerContext from "./picker.context"
-import { PickerColumnObject, PickerOptionObject } from "./picker.shared"
+import { DEFAULT_SIBLING_COUNT, PickerOptionObject } from "./picker.shared"
 
-function getPickerOptions(children?: ReactNode): PickerOptionObject[] {
-  const options: PickerOptionObject[] = []
-  let index = 0
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
+function usePickerChildren(children?: ReactNode): ReactNode {
+  const __children__: ReactNode[] = []
+  const columns: ReactNode[] = []
+  // Use toArray to generate element id
+  Children.toArray(children).forEach((child: ReactNode) => {
+    if (isElementOf(child, PickerColumn)) {
       const element = child as ReactElement
-
-      const elementType = element.type
-      if (elementType === PickerOption) {
-        const { key, props } = element
-        const { value, children, ...restProps } = props as PickerOptionProps
-        options.push({
-          key: key ?? index,
-          index: index,
-          value: value ?? children,
-          children,
-          ...restProps,
-        })
-        // index = index + 1
-        index++
+      if (_.isEmpty(columns)) {
+        __children__.push(<PickerColumns key="-1" children={columns} />)
       }
+
+      columns.push(element)
+    } else {
+      __children__.push(child)
     }
   })
 
-  return options
-}
-
-interface PickerChildren {
-  toolbar: ReactNode
-  columns: PickerColumnObject[]
-}
-
-function usePickerChildren(children?: ReactNode): PickerChildren {
-  const __children__: PickerChildren = {
-    toolbar: undefined,
-    columns: [],
-  }
-
-  let index = 0
-
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      const { type: elementType } = element
-      if (elementType === PickerToolbar) {
-        __children__.toolbar = element
-      } else if (elementType === PickerColumn) {
-        const { key, props } = element
-        const { children, ...restProps } = props as PickerColumnProps
-        __children__.columns.push({
-          key: key ?? index,
-          index,
-          options: getPickerOptions(children),
-          ...restProps,
-        })
-        index++
-      }
-    }
-  })
   return __children__
 }
 
@@ -118,7 +63,7 @@ export default function Picker(props: PickerProps) {
     className,
     loading,
     readonly,
-    siblingCount = 3,
+    siblingCount = DEFAULT_SIBLING_COUNT,
     children: childrenProp,
     onChange,
     onCancel,
@@ -128,102 +73,56 @@ export default function Picker(props: PickerProps) {
 
   const { value, setValue } = useValue({ value: valueProp, defaultValue })
 
+  const multiValueRef = useToRef(_.isArray(value))
+
   const values = usePickerValues(value)
 
-  const { columns, toolbar } = usePickerChildren(childrenProp)
+  const children = usePickerChildren(childrenProp)
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
 
-  const multiColumns = _.size(columns) > 1
-
-  const visibleCount = siblingCount * 2
-
-  const itemHeight = 44
-
-  const wrapHeight = useMemo(() => itemHeight * visibleCount, [visibleCount])
-
-  const columnsStyle = useMemo<CSSProperties>(
-    () => ({
-      height: addUnitPx(wrapHeight),
-    }),
-    [wrapHeight],
-  )
-
-  const maskStyle = useMemo<CSSProperties>(
-    () => ({
-      backgroundSize: `100% ${addUnitPx((wrapHeight - itemHeight) / 2)}`,
-    }),
-    [wrapHeight],
-  )
-
-  const frameStyle = useMemo<CSSProperties>(
-    () => ({
-      height: addUnitPx(itemHeight),
-    }),
-    [],
-  )
-
   const onColumnChange = useCallback(
-    (option: PickerOptionObject, column: PickerColumnObject, emitChange?: boolean) => {
+    (option: PickerOptionObject, column: PickerOptionObject, emitChange?: boolean) => {
       const { index: columnIndex = -1 } = column
-      const { index, value } = option
-
+      if (columnIndex < 0) {
+        return
+      }
       valueOptionsRef.current[columnIndex] = option
-
       if (emitChange) {
-        const newValues = _.map(valueOptionsRef.current, ({ value }) => value)
-        _.set(newValues, columnIndex, value)
-        const aValues = getPickerValue(newValues, multiColumns)
+        const newValues = _.map(
+          _.filter(valueOptionsRef.current, (newOption) => !_.isUndefined(newOption)),
+          ({ value }) => value,
+        )
+        _.set(newValues, columnIndex, option?.value)
+        const aValues = getPickerValue(newValues, multiValueRef.current || _.size(newValues) > 1)
         setValue(aValues)
-        onChange?.(aValues, { index, value })
+        onChange?.(aValues, { ...option })
       }
     },
-    [multiColumns, onChange, setValue],
+    [multiValueRef, onChange, setValue],
   )
 
   const handleAction = (action: any) => () =>
     action?.(
       _.map(valueOptionsRef.current, ({ value }) => value),
-      _.map(valueOptionsRef.current, ({ index, value }) => ({ index, value })),
+      _.map(valueOptionsRef.current, (valueOption) => ({ ...valueOption })),
     )
 
   return (
-    <View className={classNames(prefixClassname("picker"), className)} {...restProps}>
-      <PickerContext.Provider
-        value={{
-          onConfirm: handleAction(onConfirm),
-          onCancel: handleAction(onCancel),
-        }}
-      >
-        {toolbar}
-      </PickerContext.Provider>
-      {loading && <Loading className={prefixClassname("picker__loading")} />}
-      <View
-        className={prefixClassname("picker__columns")}
-        style={columnsStyle}
-        catchMove
-        onTouchMove={preventDefault}
-      >
-        {
-          //
-          _.map(columns, (column, columnIndex) => (
-            <PickerColumnBase
-              {...column}
-              readonly={readonly}
-              value={_.get(values, columnIndex)}
-              onChange={(option, emitChange) => onColumnChange(option, column, emitChange)}
-            />
-          ))
-        }
-        <View className={prefixClassname("picker__mask")} style={maskStyle} />
-        <View
-          className={classNames([
-            HAIRLINE_BORDER_UNSET_TOP_BOTTOM,
-            prefixClassname("picker__frame"),
-          ])}
-          style={frameStyle}
-        />
+    <PickerContext.Provider
+      value={{
+        readonly,
+        siblingCount,
+        values,
+        onColumnChange,
+        onConfirm: handleAction(onConfirm),
+        onCancel: handleAction(onCancel),
+      }}
+    >
+      <View className={classNames(prefixClassname("picker"), className)} {...restProps}>
+        {loading && <Loading className={prefixClassname("picker__loading")} />}
+        {children}
       </View>
-    </View>
+    </PickerContext.Provider>
   )
 }

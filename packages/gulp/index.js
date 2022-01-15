@@ -1,4 +1,5 @@
 const { series, parallel } = require("gulp")
+const { task } = require("gulp-execa")
 const { buildTypescript, watchTypescript, watchTypescriptSymlink } = require("./typescript")
 const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
 const { buildScss, watchScss, watchScssSymlink } = require("./scss")
@@ -32,7 +33,11 @@ function watchSymlink() {
 exports.clean = series(
   createBundle("core"), //
   createBundle("hooks"), //
-  createBundle("icons"),
+  createBundle("icons"), //
+  task("gatsby clean", {
+    cwd: "site",
+    stdio: "inherit",
+  }),
 )
 
 exports.develop = parallel(

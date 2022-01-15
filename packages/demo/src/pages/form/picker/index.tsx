@@ -1,10 +1,10 @@
-import { Field, Picker, Popup, Toast } from "@taroify/core"
+import { Field, Input, Picker, Popup, Toast } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import { CustomWrapper } from "@tarojs/components"
 import * as _ from "lodash"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
+import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -129,14 +129,9 @@ function PickerPopup() {
 
   return (
     <>
-      <Field
-        value={value}
-        label="城市"
-        placeholder="选择城市"
-        readonly
-        rightIcon={<ArrowRight />}
-        onClick={() => setOpenPicker(true)}
-      />
+      <Field label="城市" rightIcon={<ArrowRight />} onClick={() => setOpenPicker(true)}>
+        <Input readonly placeholder="选择城市" value={value} />
+      </Field>
       <Popup open={openPicker} rounded placement="bottom" onClose={setOpenPicker}>
         <Popup.Backdrop />
         <Picker

@@ -1,16 +1,16 @@
 import { DatetimePicker } from "@taroify/core"
-import { CustomWrapper } from "@tarojs/components"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
+import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function DatePicker() {
-  const [minDate] = useState(new Date(2021, 9, 14))
+  const [minDate] = useState(new Date(2019, 0, 1))
   const [maxDate] = useState(new Date(2023, 11, 12))
-  const [defaultValue] = useState(new Date(2021, 9, 14))
-  const [value, setValue] = useState(new Date(2021, 9, 14))
+  const [defaultValue] = useState(new Date(2021, 12, 14))
+  const [value, setValue] = useState(new Date(2022, 10, 14))
   return (
     <DatetimePicker
       type="date"

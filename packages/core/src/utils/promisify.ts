@@ -6,6 +6,9 @@ export function isPromise<T = any>(val: any): val is Promise<T> {
 
 export function fulfillPromise(promise: PromiseLike<any>) {
   if (isPromise(promise)) {
-    promise?.then(() => {})
+    promise?.then(
+      () => {},
+      () => {},
+    )
   }
 }

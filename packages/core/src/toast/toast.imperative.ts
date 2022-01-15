@@ -1,4 +1,4 @@
-import * as Events from "events"
+import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
 import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
 import { PopupBackdropProps } from "../popup"
@@ -75,7 +75,7 @@ function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
 
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
-  toastEvents.emit("open", {
+  toastEvents.trigger("open", {
     selector,
     ...restOptions,
   })
@@ -90,5 +90,5 @@ export function createToast(type: ToastType) {
 }
 
 export function closeToast(selector?: string) {
-  toastEvents.emit("close", selector ?? defaultToastOptions.selector)
+  toastEvents.trigger("close", selector ?? defaultToastOptions.selector)
 }

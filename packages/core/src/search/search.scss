@@ -53,7 +53,7 @@
     padding: var(--search-action-padding, $search-action-padding);
     font-size: var(--search-action-font-size, $search-action-font-size);
     line-height: var(--search-input-height, $search-input-height);
-    color: var(--search-action-text-color, $search-action-text-color);
+    color: var(--search-action-color, $search-action-color);
     cursor: pointer;
     user-select: none;
 

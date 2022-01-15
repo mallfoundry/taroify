@@ -61,6 +61,10 @@ const menus = [
         to: "/components/toast/",
       },
       {
+        title: "Space 间距",
+        to: "/components/space/",
+      },
+      {
         title: "SafeArea 安全区域",
         to: "/components/safe-area/",
       },
@@ -89,6 +93,10 @@ const menus = [
       {
         title: "Field 输入框",
         to: "/components/field/",
+      },
+      {
+        title: "Form 表单",
+        to: "/components/form/",
       },
       {
         title: "NumberKeyboard 数字键盘",

@@ -1,0 +1,40 @@
+@import "./variables";
+
+.#{$component-prefix}form-item {
+  > .#{$component-prefix}cell__value {
+    text-align: initial;
+  }
+
+  &--disabled {
+    .#{$component-prefix}form__label {
+      color: var(--form-item-disabled-color, $form-item-disabled-color);
+    }
+  }
+
+  &__value {
+    overflow: visible;
+  }
+
+  &__icon,
+  &__right-icon {
+    flex-shrink: 0;
+  }
+
+  &__right-icon {
+    padding: 0 var(--padding-xs, $padding-xs);
+    margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
+    line-height: inherit;
+  }
+
+  &__icon.#{$component-prefix}icon,
+  &__right-icon.#{$component-prefix}icon {
+    display: block;
+    font-size: var(--form-item-icon-size, $form-item-icon-size);
+    line-height: inherit;
+  }
+
+  .#{$component-prefix}input + .#{$component-prefix}button {
+    flex-shrink: 0;
+    margin-left: var(--padding-xs, $padding-xs);
+  }
+}

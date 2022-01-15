@@ -4,7 +4,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useMemo } from "react"
+import { ReactNode, useCallback, useMemo } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { useValue } from "../utils/state"
@@ -12,16 +12,16 @@ import UploaderImage from "./uploader-image"
 import UploaderMask from "./uploader-mask"
 import UploaderUpload from "./uploader-upload"
 import UploaderContext from "./uploader.context"
-import { getOneUploadFile, getUploadFiles, UploadFile, UploadStatus } from "./uploader.shared"
+import { getOneUploadFile, getUploadFiles, UploadFile } from "./uploader.shared"
 
 function renderUploaderMask(file: UploadFile) {
   return (
-    (file?.status === UploadStatus.Uploading || file?.status === UploadStatus.Failed) && (
+    (file?.status === "uploading" || file?.status === "failed") && (
       <UploaderMask
         icon={
-          file?.status === UploadStatus.Uploading ? (
+          file?.status === "uploading" ? (
             <Loading />
-          ) : file?.status === UploadStatus.Failed ? (
+          ) : file?.status === "failed" ? (
             <Close />
           ) : undefined
         }
@@ -57,27 +57,40 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     onChange: onChangeProp,
   })
 
-  const files = useMemo(() => {
-    if (!multiple) {
-      return []
-    }
-    const __files__ = _.map(getUploadFiles(value) as UploadFile[], (file, index) => (
+  const renderImage = useCallback(
+    (file: UploadFile, index?: number) => (
       <UploaderImage
         key={index}
         type={file?.type}
         url={file?.url}
         name={file?.name}
-        removable={(file?.removable ?? true) && file?.status !== UploadStatus.Uploading}
+        removable={file?.removable && file?.status !== "uploading" ? true : undefined}
         children={renderUploaderMask(file)}
-        onRemove={() => !disabled && setValue(_.filter(value, (item) => item !== file))}
+        onRemove={() => {
+          if (!disabled) {
+            if (multiple) {
+              setValue(_.filter(value, (item) => item !== file))
+            } else {
+              // @ts-ignore
+              setValue(null)
+            }
+          }
+        }}
       />
-    ))
+    ),
+    [disabled, multiple, setValue, value],
+  )
 
+  const files = useMemo(() => {
+    if (!multiple) {
+      return []
+    }
+    const __files__ = _.map(getUploadFiles(value) as UploadFile[], renderImage)
     if (__files__.length < maxFiles) {
       __files__.push(<UploaderUpload key="upload" />)
     }
     return __files__ as ReactNode
-  }, [disabled, maxFiles, multiple, setValue, value])
+  }, [maxFiles, multiple, renderImage, value])
 
   if (_.isEmpty(value)) {
     return <UploaderUpload />
@@ -85,22 +98,8 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
 
   if (!multiple) {
     const file = getOneUploadFile(value)
-    return (
-      <UploaderImage
-        type={file.type}
-        url={file?.url}
-        name={file?.name}
-        removable={file?.status !== UploadStatus.Uploading}
-        children={renderUploaderMask(file)}
-        onRemove={() =>
-          !disabled &&
-          // @ts-ignore
-          setValue(null)
-        }
-      />
-    )
+    return renderImage(file)
   }
-
   return files as JSX.Element
 }
 
@@ -111,6 +110,7 @@ interface BaseUploaderProps extends ViewProps {
   disabled?: boolean
   multiple?: boolean
   maxFiles?: number
+  removable?: boolean
   children?: ReactNode
 
   onUpload?(): void
@@ -136,6 +136,7 @@ export default function Uploader(props: UploaderProps) {
     defaultValue,
     value,
     disabled = false,
+    removable = true,
     maxFiles,
     multiple,
     children,
@@ -147,6 +148,7 @@ export default function Uploader(props: UploaderProps) {
   return (
     <UploaderContext.Provider
       value={{
+        removable,
         disabled,
         onUpload,
       }}

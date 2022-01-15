@@ -49,15 +49,15 @@ const subpackages = [
         path: "toast/index",
       },
       {
+        title: "Space 间距",
+        name: "Space",
+        path: "space/index",
+      },
+      {
         title: "SafeArea 安全区域",
         name: "SafeArea",
         path: "safe-area/index",
       },
-      // {
-      //   title: "Space 间距",
-      //   name: "Space",
-      //   path: "space/index",
-      // },
     ],
   },
   {
@@ -83,6 +83,11 @@ const subpackages = [
         title: "Field 输入框",
         name: "Field",
         path: "field/index",
+      },
+      {
+        title: "Form 表单",
+        name: "Form",
+        path: "form/index",
       },
       {
         title: "DatetimePicker 时间选择",
