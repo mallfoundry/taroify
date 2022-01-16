@@ -7,6 +7,7 @@ interface PopupContextProps {
   placement?: PopupPlacement
 
   onClose?(opened: boolean): void
+  onOpen?(opened: boolean): void
 }
 
 const PopupContext = createContext<PopupContextProps>({})

@@ -90,6 +90,7 @@ export interface PopupProps extends ViewProps {
   transitionAppear?: boolean
 
   onClose?(opened: boolean): void
+  onOpen?(opened: boolean): void
 
   onTransitionEnter?: EnterHandler<HTMLElement>
   onTransitionEntered?: EnterHandler<HTMLElement>
@@ -111,6 +112,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     transitionAppear = true,
     mountOnEnter = true,
     onClose,
+    onOpen,
     onTransitionEnter,
     onTransitionEntered,
     onTransitionExited,
@@ -127,6 +129,12 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
     [duration],
   )
+
+  React.useCallback(() => {
+    if (openProp) {
+      onOpen?.(openProp)
+    }
+  }, [openProp])
 
   return (
     <PopupContext.Provider
