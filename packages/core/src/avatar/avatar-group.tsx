@@ -4,13 +4,13 @@ import { cloneElement, useMemo, ReactElement, ReactNode, isValidElement, Childre
 import classNames from "classnames"
 import { isElementOf } from "../utils/validate"
 import { prefixClassname } from "../styles"
-import { AvatarVarinat, SpacingSize } from "./avatar.shared"
+import { AvatarVarinat, AvatarSpacing } from "./avatar.shared"
 import Avatar, { AvatarProps } from "./avatar"
 interface AvatarGroupProps {
   children: ReactNode[]
   max?: number
   variant?: AvatarVarinat
-  spacing?: SpacingSize
+  spacing?: AvatarSpacing
   total?: number
 }
 const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): ReactNode[] => {
