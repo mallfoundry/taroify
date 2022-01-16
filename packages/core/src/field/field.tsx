@@ -28,7 +28,7 @@ function Field(props: FieldProps) {
   } = props
 
   return (
-    <Form.Item {...restProps}>
+    <Form.Item {...restProps} rules={rules}>
       {label && <Form.Label align={labelAlign} children={label} />}
       {children && <Form.Control children={children} />}
       {feedback && (
