@@ -7,9 +7,9 @@
   height: 100%;
 }
 .avatar-block {
-  .taroify-demo-block__content{
+  .taroify-demo-block__content {
     display: flex;
-    &>*{
+    & > * {
       margin-right: 30px;
     }
   }
