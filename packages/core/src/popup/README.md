@@ -88,6 +88,5 @@ import Popup from "@taroify/core/popup"
 
 | 事件名           | 说明                       | 回调参数            |
 | ---------------- | -------------------------- | ------------------- |
-| onClick            | 点击弹出层时触发           | _event: MouseEvent_ |
-| onOpen             | 打开弹出层时触发           | -                   |
+| onClick            | 点击弹出层时触发           | _event: ITouchEvent_ |
 | onClose            | 关闭弹出层时触发           | -                   |
