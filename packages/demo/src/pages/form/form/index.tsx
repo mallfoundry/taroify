@@ -15,6 +15,7 @@ import {
   Switch,
   Toast,
   Uploader,
+  Field,
 } from "@taroify/core"
 import { FormItemInstance, FormValidError } from "@taroify/core/form"
 import { ArrowRight } from "@taroify/icons"
@@ -51,6 +52,9 @@ function BasicForm() {
             <Input password placeholder="密码" />
           </Form.Control>
         </Form.Item>
+        <Field name="text" label="文本" rules={[{ required: true, message: "请填写文本" }]}>
+          <Input placeholder="请输入文本" />
+        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
