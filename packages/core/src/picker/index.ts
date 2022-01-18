@@ -1,4 +1,5 @@
-import PickerElement, { PickerProps } from "./picker"
+import { FunctionComponent } from "react"
+import PickerComponent, { PickerProps } from "./picker"
 import PickerButton from "./picker-button"
 import PickerColumns from "./picker-columns"
 import PickerOption from "./picker-option"
@@ -6,9 +7,11 @@ import PickerTitle from "./picker-title"
 import PickerToolbar from "./picker-toolbar"
 import { PickerColumn } from "./picker.composition"
 
-interface PickerInterface {
-  (props: PickerProps): JSX.Element
+export type { PickerProps } from "./picker"
+export type { PickerColumnsProps } from "./picker-columns"
+export { default as PickerContext } from "./picker.context"
 
+interface PickerInterface extends FunctionComponent<PickerProps> {
   Toolbar: typeof PickerToolbar
   Title: typeof PickerTitle
   Button: typeof PickerButton
@@ -17,7 +20,7 @@ interface PickerInterface {
   Option: typeof PickerOption
 }
 
-const Picker = PickerElement as PickerInterface
+const Picker = PickerComponent as PickerInterface
 
 Picker.Toolbar = PickerToolbar
 Picker.Title = PickerTitle
