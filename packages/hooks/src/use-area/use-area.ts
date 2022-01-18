@@ -1,9 +1,10 @@
 import * as _ from "lodash"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
+import useForceUpdate from "../use-force-update"
 import useToRef from "../use-to-ref"
 import { AreaData, AreaDivision, getAreaData } from "./area.shared"
 
-type AreaFormatter = (record?: Record<string, string>, prefix?: any) => AreaDivision[]
+export type AreaFormatter = (record?: Record<string, string>, prefix?: any) => AreaDivision[]
 
 const DEFAULT_AREA_DATA: AreaData = {
   province_list: {},
@@ -12,7 +13,8 @@ const DEFAULT_AREA_DATA: AreaData = {
 }
 
 function defaultFormatter(list?: Record<string, string>): AreaDivision[] {
-  return _.map(list, (label, value) => ({ value, label, children: label }))
+  let index = 0
+  return _.map(list, (label, value) => ({ index: index++, value, label, children: label }))
 }
 
 function padAreaPrefixToValue(prefix: any) {
@@ -37,12 +39,12 @@ function getFirstDivisionPrefix(divisions: AreaDivision[], depth: number) {
   return getAreaPrefix(_.first(divisions)?.value, depth)
 }
 
-function getAreaPrefixValue(
+function getAreaPrefixDivision(
   prefixes: string[],
   divisions: AreaDivision[],
   values: any[],
   index: number,
-) {
+): AreaDivision {
   const value = _.get(values, index)
   const depth = index + 1
   const valuePrefix = getAreaPrefix(value, depth)
@@ -52,8 +54,6 @@ function getAreaPrefixValue(
   } else {
     const valueSuperiorPrefix = value?.substring(0, index * 2)
     const superiorPrefix = prefixes[index - 1]
-    // prefixes[index] =
-    //   superiorPrefix !== valueSuperiorPrefix ? getFirstDivisionPrefix(divisions, depth) : valuePrefix
     // Easy to debug code
     if (superiorPrefix !== valueSuperiorPrefix) {
       prefixes[index] = getFirstDivisionPrefix(divisions, depth)
@@ -61,23 +61,25 @@ function getAreaPrefixValue(
       prefixes[index] = valuePrefix
     }
   }
-  return padAreaPrefixToValue(prefixes[index])
+  const valuePad = padAreaPrefixToValue(prefixes[index])
+  return _.find(divisions, (division) => division.value === valuePad) as AreaDivision
 }
 
 interface UseAreaSelectOptions {
   data: AreaData
-  values: any[]
+  unverifiedValues: any[]
   depth: number
 
   formatter: AreaFormatter
 }
 
 function doAreaSelect(options: UseAreaSelectOptions) {
-  const { values, data: dataPrimitive, depth, formatter } = options
+  const { unverifiedValues, data: dataPrimitive, depth, formatter } = options
   const data = getAreaData(dataPrimitive, depth)
   //
   const prefixes: string[] = []
   const columns: AreaDivision[] = []
+  const nextValueOptions: AreaDivision[] = []
   const nextValues: string[] = []
 
   _.forEach(data, (record, index) => {
@@ -89,24 +91,32 @@ function doAreaSelect(options: UseAreaSelectOptions) {
     } else {
       divisions = formatter?.(filterAreaList(record, prefixes[index - 1]))
     }
-    nextValues[index] = getAreaPrefixValue(prefixes, divisions, values, index)
-    columns[index] = { children: divisions }
+    const division = getAreaPrefixDivision(prefixes, divisions, unverifiedValues, index)
+    nextValueOptions[index] = division
+    nextValues[index] = division.value
+    columns[index] = {
+      index,
+      children: divisions,
+    }
   })
-
-  return [columns, nextValues]
+  return {
+    columns,
+    values: nextValues,
+    valueOptions: nextValueOptions,
+  }
 }
 
 function useAreaSelect(options: UseAreaSelectOptions) {
-  const { values, data, depth, formatter } = options
+  const { unverifiedValues, data, depth, formatter } = options
   return useMemo(
     () =>
       doAreaSelect({
-        values,
+        unverifiedValues,
         data,
         depth,
         formatter,
       }),
-    [data, depth, formatter, values],
+    [data, depth, formatter, unverifiedValues],
   )
 }
 
@@ -121,23 +131,47 @@ interface UseAreaOptions {
   formatter?: AreaFormatter
 }
 
-export default function useArea(initialValue: any[] = [], options: UseAreaOptions = {}) {
+export default function useArea(unverifiedValue: any[] = [], options: UseAreaOptions = {}) {
   const { data = DEFAULT_AREA_DATA, depth = 3, formatter = defaultFormatter } = options
-  const [state = [], setValue] = useState<any>(initialValue)
-  const values = useAreaValues(state)
+  const unverifiedValueRef = useRef(unverifiedValue)
+  const forceUpdate = useForceUpdate()
+  const unverifiedValues = useAreaValues(unverifiedValueRef.current)
   //
-  const [columns, value] = useAreaSelect({ values, data, depth, formatter })
+  const { columns, values, valueOptions } = useAreaSelect({
+    unverifiedValues,
+    data,
+    depth,
+    formatter,
+  })
   //
-  const valueRef = useToRef(value)
-  const getValue = useCallback(() => valueRef.current, [valueRef])
+  const valuesRef = useToRef(values)
+  const valueOptionsRef = useToRef(valueOptions)
+  const getValues = useCallback(() => valuesRef.current, [valuesRef])
+  const getValueOptions = useCallback(() => valueOptionsRef.current, [valueOptionsRef])
+
+  const setValues = useCallback(
+    (newValues: any[]) => {
+      unverifiedValueRef.current = newValues
+      forceUpdate()
+    },
+    [forceUpdate],
+  )
+  //
+  useEffect(() => {
+    if (!_.isEqual(valuesRef.current, unverifiedValue)) {
+      setValues(unverifiedValue)
+    }
+  }, [setValues, unverifiedValue, valuesRef])
   //
   return useMemo(
     () => ({
       columns,
-      value,
-      getValue,
-      setValue,
+      values,
+      valueOptions,
+      getValues,
+      getValueOptions,
+      setValues,
     }),
-    [columns, getValue, value],
+    [columns, getValueOptions, getValues, setValues, values],
   )
 }

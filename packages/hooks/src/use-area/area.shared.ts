@@ -8,6 +8,7 @@ export interface AreaData {
 }
 
 export interface AreaDivision extends Record<any, any> {
+  index: number
   value?: any
   label?: ReactNode
   children?: AreaDivision[] | ReactNode
