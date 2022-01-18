@@ -18,13 +18,13 @@ function PickerColumns(props: PickerColumnsProps) {
     siblingCount,
     getValueOptions,
     isMultiValue,
-    onColumnChange,
+    setValueOptions,
     onChange,
   } = useContext(PickerContext)
 
-  const handleColumnChange = useCallback(
+  const onColumnChange = useCallback(
     (option: PickerOptionObject, unverifiedColumn: PickerOptionObject, emitChange?: boolean) => {
-      onColumnChange?.(option, unverifiedColumn, emitChange)
+      setValueOptions?.(option, unverifiedColumn)
       const column = validPickerColumn(unverifiedColumn)
       if (column && emitChange) {
         const { index: columnIndex } = column
@@ -37,7 +37,7 @@ function PickerColumns(props: PickerColumnsProps) {
         onChange?.(aValues, { ...option }, { ...column })
       }
     },
-    [getValueOptions, isMultiValue, onChange, onColumnChange],
+    [getValueOptions, isMultiValue, onChange, setValueOptions],
   )
 
   return (
@@ -46,7 +46,7 @@ function PickerColumns(props: PickerColumnsProps) {
       readonly={readonly}
       values={values}
       siblingCount={siblingCount}
-      onChange={handleColumnChange}
+      onChange={onColumnChange}
     />
   )
 }

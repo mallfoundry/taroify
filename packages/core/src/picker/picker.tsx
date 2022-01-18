@@ -44,6 +44,17 @@ interface PickerBaseProps extends ViewProps {
   children?: ReactNode
 }
 
+export interface MultiValuePickerProps extends PickerBaseProps {
+  defaultValue?: any[]
+  value?: any[]
+
+  onChange?(values: any[], option: PickerOptionObject, column: PickerOptionObject): void
+
+  onConfirm?(values: any[], option: PickerOptionObject[]): void
+
+  onCancel?(values: any[], option: PickerOptionObject[]): void
+}
+
 export interface PickerProps extends PickerBaseProps {
   defaultValue?: any | any[]
   value?: any | any[]
@@ -80,7 +91,7 @@ function Picker(props: PickerProps) {
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
 
-  const onColumnChange = useCallback(
+  const setValueOptions = useCallback(
     (option: PickerOptionObject, unverifiedColumn: PickerOptionObject) => {
       const column = validPickerColumn(unverifiedColumn)
       if (column) {
@@ -117,7 +128,7 @@ function Picker(props: PickerProps) {
         values,
         getValueOptions,
         isMultiValue,
-        onColumnChange,
+        setValueOptions,
         onChange: handleChange,
         onConfirm: handleAction(onConfirm),
         onCancel: handleAction(onCancel),

@@ -1,6 +1,7 @@
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import * as _ from "lodash"
 import * as React from "react"
 import { CSSProperties, isValidElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
@@ -16,7 +17,16 @@ export interface PickerOptionProps extends ViewProps {
 }
 
 export default function PickerOption(props: PickerOptionProps) {
-  const { className, disabled, value, label, children: childrenProp, ...restProps } = props
+  const {
+    className,
+    disabled,
+    // @ts-ignore
+    index,
+    value,
+    label,
+    children: childrenProp,
+    ...restProps
+  } = props
 
   const children = useMemo(() => {
     if (isValidElement(childrenProp) || isTextElement(childrenProp)) {
