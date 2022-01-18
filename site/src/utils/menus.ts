@@ -191,6 +191,10 @@ const menus = [
     subpackage: "display",
     children: [
       {
+        title: "Avatar 头像",
+        to: "/components/avatar/",
+      },
+      {
         title: "Badge 徽标",
         to: "/components/badge/",
       },
