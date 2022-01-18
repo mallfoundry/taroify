@@ -172,6 +172,6 @@ export default function useArea(unverifiedValue: any[] = [], options: UseAreaOpt
       getValueOptions,
       setValues,
     }),
-    [columns, getValueOptions, getValues, setValues, values],
+    [columns, getValueOptions, getValues, setValues, valueOptions, values],
   )
 }
