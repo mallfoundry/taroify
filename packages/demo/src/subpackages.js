@@ -110,6 +110,11 @@ const subpackages = [
         path: "picker/index",
       },
       {
+        title: "AreaPicker 省市区选择器",
+        name: "AreaPicker",
+        path: "area-picker/index",
+      },
+      {
         title: "Radio 单选框",
         name: "Radio",
         path: "radio/index",

@@ -75,6 +75,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "AreaPicker 省市区选择",
+        to: "/components/area-picker/",
+      },
+      {
         title: "Cascader 级联选择",
         to: "/components/cascader/",
       },

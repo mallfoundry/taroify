@@ -1,0 +1,12 @@
+@import "~@taroify/core/styles/prefix";
+@import "../../../styles/prefix";
+
+.area-picker-demo {
+  .#{$component-prefix}toast {
+    text-align: left;
+  }
+
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}
