@@ -13,6 +13,7 @@ export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 export { default as SafeArea } from "./safe-area"
 // Form Components
+export { default as AreaPicker } from "./area-picker"
 export { default as Cascader } from "./cascader"
 export { default as Calendar } from "./calendar"
 export { default as Checkbox } from "./checkbox"
