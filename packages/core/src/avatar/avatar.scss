@@ -1,0 +1,48 @@
+@import "./variables";
+
+.#{$component-prefix}avatar {
+  box-sizing: border-box;
+  display: flex;
+  text-align: center;
+  font-family: var(--avatar-font-family, $avatar-font-family);
+  font-size: var(--avatar-font-size, $avatar-font-size);
+  font-weight: var(--avatar-font-weight, $avatar-font-weight);
+  color: var(--avatar-color, $avatar-color);
+  background-color: gray;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $avatar-color;
+  overflow: hidden;
+
+  &--circular {
+    border-radius: 50%;
+  }
+
+  &--square {
+    border-radius: 0%;
+  }
+
+  &--rounded {
+    border-radius: 10px;
+  }
+
+  &--position {
+    position: absolute;
+  }
+  &--mini {
+    width: 18px * $hd;
+    height: 18px * $hd;
+  }
+  &--small {
+    width: 24px * $hd;
+    height: 24px * $hd;
+  }
+  &--medium {
+    width: 36px * $hd;
+    height: 36px * $hd;
+  }
+  &--large {
+    width: 48px * $hd;
+    height: 48px * $hd;
+  }
+}

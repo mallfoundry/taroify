@@ -1,0 +1,66 @@
+import * as React from "react"
+import * as _ from "lodash"
+import { cloneElement, useMemo, ReactElement, ReactNode, isValidElement, Children } from "react"
+import classNames from "classnames"
+import { isElementOf } from "../utils/validate"
+import { prefixClassname } from "../styles"
+import { AvatarVarinat, AvatarSpacing } from "./avatar.shared"
+import Avatar, { AvatarProps } from "./avatar"
+interface AvatarGroupProps {
+  children: ReactNode[]
+  max?: number
+  variant?: AvatarVarinat
+  spacing?: AvatarSpacing
+  total?: number
+}
+const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): ReactNode[] => {
+  const avatars = useMemo(
+    () =>
+      Children.toArray(children)
+        .filter((child) => isValidElement(child))
+        .filter((element) => isElementOf(element, Avatar))
+        .map((child, index) => {
+          const element = child as ReactElement<AvatarProps>
+          const { key, props } = element
+          const { children, ...restProps } = props
+          return cloneElement(
+            element,
+            {
+              key: key ?? index,
+              variant,
+              ...restProps,
+            },
+            children,
+          )
+        }),
+    [children, variant],
+  )
+
+  return avatars?.splice(0, max)
+}
+export default function AvatarsGroup({
+  variant = "circular",
+  max = 999999999,
+  children,
+  spacing = "medium",
+  total,
+}: AvatarGroupProps): JSX.Element {
+  const length = useMemo(() => {
+    return children.length - max > 0 ? children.length - max : 0
+  }, [children, max])
+  const avatars = useAvatars(children, variant, max)
+  return (
+    <div
+      className={classNames(prefixClassname("avatar-group"), {
+        [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
+        [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
+        [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
+      })}
+    >
+      {avatars}
+      <Avatar variant={variant} style={{ zIndex: _.size(avatars) }}>
+        +{total ? total - _.size(avatars) : length}
+      </Avatar>
+    </div>
+  )
+}

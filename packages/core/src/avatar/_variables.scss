@@ -1,0 +1,12 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+
+$avatar-color: var(--white, $white);
+$avatar-font-size: var(--font-size-lg, $font-size-lg);
+$avatar-font-weight: var(--font-weight-bold, $font-weight-bold);
+$avatar-font-family: -apple-system-font, helvetica neue, arial, sans-serif;
+$avatar-spacing-mini: var(--padding-xs, $padding-xs);
+$avatar-spacing-small: var(--padding-sm, $padding-sm);
+$avatar-spacing-medium: var(--padding-md, $padding-md);
+$avatar-spacing-large: var(--padding-lg, $padding-lg);

@@ -1,0 +1,33 @@
+@import "./variables";
+
+.#{$component-prefix}avatar-group {
+  display: flex;
+
+  &--spacing-mini {
+    padding-left: var(--avatar-spacing-mini, $avatar-spacing-mini);
+    .#{$component-prefix}avatar {
+      margin-left: calc(var(--avatar-spacing-mini, #{$avatar-spacing-mini}) * -1);
+    }
+  }
+
+  &--spacing-small {
+    padding-left: var(--avatar-spacing-small, $avatar-spacing-small);
+    .#{$component-prefix}avatar {
+      margin-left: calc(var(--avatar-spacing-small, #{$avatar-spacing-small}) * -1);
+    }
+  }
+
+  &--spacing-medium {
+    padding-left: var(--avatar-spacing-medium, $avatar-spacing-medium);
+    .#{$component-prefix}avatar {
+      margin-left: calc(var(--avatar-spacing-medium, #{$avatar-spacing-medium}) * -1);
+    }
+  }
+
+  &--spacing-large {
+    padding-left: var(--avatar-spacing-large, $avatar-spacing-large);
+    .#{$component-prefix}avatar {
+      margin-left: calc(var(--avatar-spacing-large, #{$avatar-spacing-large}) * -1);
+    }
+  }
+}
