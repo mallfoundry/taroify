@@ -50,9 +50,9 @@ export interface MultiValuePickerProps extends PickerBaseProps {
 
   onChange?(values: any[], option: PickerOptionObject, column: PickerOptionObject): void
 
-  onConfirm?(values: any[], option: PickerOptionObject[]): void
+  onConfirm?(values: any[], options: PickerOptionObject[]): void
 
-  onCancel?(values: any[], option: PickerOptionObject[]): void
+  onCancel?(values: any[], options: PickerOptionObject[]): void
 }
 
 export interface PickerProps extends PickerBaseProps {
