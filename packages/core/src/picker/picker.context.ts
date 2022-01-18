@@ -6,11 +6,17 @@ interface PickerContextValue {
   readonly?: boolean
   siblingCount: number
 
+  isMultiValue?(): boolean
+
+  getValueOptions?(): PickerOptionObject[]
+
   onColumnChange?(
     option: PickerOptionObject,
     column: PickerOptionObject,
     emitChange?: boolean,
   ): void
+
+  onChange?(values: any, option: PickerOptionObject, column: PickerOptionObject): void
 
   onConfirm?(): void
 
