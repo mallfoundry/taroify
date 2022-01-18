@@ -1,9 +1,8 @@
-import { default as useToRef } from "@taroify/hooks/use-to-ref"
+import { useForceUpdate } from "@taroify/hooks"
 import * as _ from "lodash"
 import { createRef, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react"
-import { useUpdate } from "../hooks"
 
-export { default as useToRef } from "@taroify/hooks/use-to-ref"
+export { useToRef, useUncontrolled as useValue } from "@taroify/hooks"
 
 export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   const previousRef = useRef<T>(value)
@@ -48,7 +47,7 @@ export function useRefs<T = Element>() {
 }
 
 export function useObject<S>(state: S) {
-  const update = useUpdate()
+  const forceUpdate = useForceUpdate()
 
   const stateRef = useRef(state)
 
@@ -64,7 +63,7 @@ export function useObject<S>(state: S) {
   const setObject = useCallback(
     (newState: S) => {
       stateRef.current = { ...stateRef.current, ...newState }
-      update()
+      forceUpdate()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -76,55 +75,5 @@ export function useObject<S>(state: S) {
     () => ({ object: stateRef.current, getObject, setObject }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [stateRef.current, getObject, setObject],
-  )
-}
-
-interface UseValueOptions<S> {
-  defaultValue?: S
-  initialValue?: S
-  value?: S
-
-  onChange?: (...args: any[]) => void
-}
-
-interface UseValueReturn<S> {
-  value: S | undefined
-  getValue: () => S
-  setValue: (newValue: S, emitChange?: (aValue: S) => void) => void
-}
-
-export function useValue<S>(options: UseValueOptions<S> = {}): UseValueReturn<S> {
-  const { defaultValue, value: valueProp, initialValue, onChange } = options
-  const update = useUpdate()
-  //
-  const valueRef = useToRef(valueProp)
-  const stateRef = useRef(defaultValue ?? valueRef.current ?? initialValue)
-
-  if (valueRef.current !== undefined) {
-    stateRef.current = valueRef.current
-  }
-
-  const setValue = useCallback(
-    (newValue: S, emitChange?: (aValue: S) => void) => {
-      if (_.isUndefined(valueRef.current)) {
-        stateRef.current = newValue
-        update()
-      }
-      ;(emitChange ?? onChange)?.(newValue)
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [onChange],
-  )
-
-  const getValue = useCallback(() => stateRef.current as S, [])
-
-  return useMemo(
-    () => ({
-      value: stateRef.current,
-      getValue,
-      setValue,
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [stateRef.current, getValue, setValue],
   )
 }
