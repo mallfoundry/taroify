@@ -20,17 +20,17 @@ import {
   useRef,
   useState,
 } from "react"
-import {CellBase, CellProps, CellValue} from "../cell"
-import Form, {useFormField, useFormValue} from "../form"
+import { CellBase, CellProps, CellValue } from "../cell"
+import Form, { useFormField, useFormValue } from "../form"
 import FormContext from "../form/form.context"
-import {prefixClassname} from "../styles"
-import {fulfillPromise} from "../utils/promisify"
-import {useToRef} from "../utils/state"
-import {isElementOf} from "../utils/validate";
+import { prefixClassname } from "../styles"
+import { fulfillPromise } from "../utils/promisify"
+import { useToRef } from "../utils/state"
+import { isElementOf } from "../utils/validate"
 import FormFeedback from "./form-feedback"
 import FormItemContext from "./form-item.context"
-import {validateRules} from "./form.rule"
-import {FormItemInstance, FormRule, FormValidateStatus, FormValidateTrigger} from "./form.shared"
+import { validateRules } from "./form.rule"
+import { FormItemInstance, FormRule, FormValidateStatus, FormValidateTrigger } from "./form.shared"
 
 import useFormFieldValueEffect from "./use-form-field-value-effect"
 
@@ -52,7 +52,7 @@ function useFormItemChildren(children?: ReactNode): FormItemChildren {
       }
 
       const element = child as ReactElement
-      const {type: elementType} = element as ReactElement<InputProps>
+      const { type: elementType } = element as ReactElement<InputProps>
       if (isElementOf(element, Form.Label)) {
         __children__.label = element
       } else if (elementType === Form.Control) {
@@ -93,16 +93,16 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       onClick,
     } = props
 
-    const {label, control, feedbacks} = useFormItemChildren(childrenProp)
+    const { label, control, feedbacks } = useFormItemChildren(childrenProp)
 
     const rulesRef = useToRef(rulesProp)
 
-    const {validateTrigger} = useContext(FormContext)
+    const { validateTrigger } = useContext(FormContext)
 
     const validateStatusRef = useRef<FormValidateStatus>()
     const [invalidMessages, setInvalidMessages] = useState<ReactNode[]>()
 
-    const {value, getValue, setValue} = useFormValue(name, {defaultValue})
+    const { value, getValue, setValue } = useFormValue(name, { defaultValue })
 
     const resetInvalidMessage = () => {
       validateStatusRef.current = undefined
@@ -205,7 +205,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
           bordered={bordered}
           align={align}
           clickable={clickable}
-          icon={cloneIconElement(icon, {className: prefixClassname("form-item__icon")})}
+          icon={cloneIconElement(icon, { className: prefixClassname("form-item__icon") })}
           rightIcon={cloneIconElement(rightIcon, {
             className: prefixClassname("form-item__right-icon"),
           })}
@@ -219,7 +219,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
               <View className={classNames(prefixClassname("form__feedbacks"))}>
                 {feedbacks}
                 {_.map(invalidMessages, (message, messageKey) => (
-                  <FormFeedback key={messageKey} status="invalid" children={message}/>
+                  <FormFeedback key={messageKey} status="invalid" children={message} />
                 ))}
               </View>
             )}
