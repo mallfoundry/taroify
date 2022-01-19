@@ -27,10 +27,10 @@ import { Avatar } from "@taroify/core"
 设置 `size` 属性后，可以选择四个大小。
 
 ```tsx
-<Avatar src="https://joeschmoe.io/api/v1/1" size="mini" />
-<Avatar src="https://joeschmoe.io/api/v1/2" size="small" />
-<Avatar src="https://joeschmoe.io/api/v1/3" size="medium" />
-<Avatar src="https://joeschmoe.io/api/v1/4" size="large" />
+<Avatar src="https://joeschmoe.io/api/v1/random" size="mini" />
+<Avatar src="https://joeschmoe.io/api/v1/random" size="small" />
+<Avatar src="https://joeschmoe.io/api/v1/random" size="medium" />
+<Avatar src="https://joeschmoe.io/api/v1/random" size="large" />
 ```
 
 ### 形状
@@ -38,9 +38,9 @@ import { Avatar } from "@taroify/core"
 通过 `variant` 属性来设置形状。
 
 ```tsx
-<Avatar src="https://joeschmoe.io/api/v1/1" />
-<Avatar src="https://joeschmoe.io/api/v1/2" shape="square" />
-<Avatar src="https://joeschmoe.io/api/v1/3" shape="rounded" />
+<Avatar src="https://joeschmoe.io/api/v1/random" />
+<Avatar src="https://joeschmoe.io/api/v1/random" shape="square" />
+<Avatar src="https://joeschmoe.io/api/v1/random" shape="rounded" />
 ```
 
 ### 群组
@@ -49,12 +49,12 @@ import { Avatar } from "@taroify/core"
 
 ```tsx
 <Avatar.Group total={24}>
-  <Avatar src="https://joeschmoe.io/api/v1/1" />
-  <Avatar src="https://joeschmoe.io/api/v1/2" />
-  <Avatar src="https://joeschmoe.io/api/v1/3" />
-  <Avatar src="https://joeschmoe.io/api/v1/4" />
-  <Avatar src="https://joeschmoe.io/api/v1/5" />
-  <Avatar src="https://joeschmoe.io/api/v1/6" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
 </Avatar.Group>
 ```
 
@@ -64,12 +64,12 @@ import { Avatar } from "@taroify/core"
 
 ```tsx
 <Avatar.Group max={3}>
-  <Avatar src="https://joeschmoe.io/api/v1/1" />
-  <Avatar src="https://joeschmoe.io/api/v1/2" />
-  <Avatar src="https://joeschmoe.io/api/v1/3" />
-  <Avatar src="https://joeschmoe.io/api/v1/4" />
-  <Avatar src="https://joeschmoe.io/api/v1/5" />
-  <Avatar src="https://joeschmoe.io/api/v1/6" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
 </Avatar.Group>
 ```
 
@@ -91,14 +91,14 @@ import { Avatar } from "@taroify/core"
 
 ```tsx
 <Badge className="avatar-dot" dot position="bottom-right">
-  <Avatar src="https://joeschmoe.io/api/v1/1" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
 </Badge>
 <Badge
   className="avatar-avatar"
-  content={<Avatar src="https://joeschmoe.io/api/v1/2" />}
+  content={<Avatar src="https://joeschmoe.io/api/v1/random" />}
   position="bottom-right"
 >
-  <Avatar src="https://joeschmoe.io/api/v1/female/3" />
+  <Avatar src="https://joeschmoe.io/api/v1/random" />
 </Badge>
 ```
 

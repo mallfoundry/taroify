@@ -1,9 +1,14 @@
 import { Avatar, Badge } from "@taroify/core"
 import { Cross, LocationOutlined, SettingOutlined } from "@taroify/icons"
+import * as _ from "lodash"
 import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
+
+function randomAvatar() {
+  return `https://joeschmoe.io/api/v1/random?t=${_.random(Number.MAX_VALUE)}`
+}
 
 export default function AvatarDemo() {
   return (
@@ -14,34 +19,34 @@ export default function AvatarDemo() {
         <Avatar style={{ background: "pink" }}>HP</Avatar>
       </Block>
       <Block title="尺寸" className="avatar-block">
-        <Avatar src="https://joeschmoe.io/api/v1/1" size="mini" />
-        <Avatar src="https://joeschmoe.io/api/v1/2" size="small" />
-        <Avatar src="https://joeschmoe.io/api/v1/3" size="medium" />
-        <Avatar src="https://joeschmoe.io/api/v1/4" size="large" />
+        <Avatar src={randomAvatar()} size="mini" />
+        <Avatar src={randomAvatar()} size="small" />
+        <Avatar src={randomAvatar()} size="medium" />
+        <Avatar src={randomAvatar()} size="large" />
       </Block>
       <Block title="形状" className="avatar-block">
-        <Avatar src="https://joeschmoe.io/api/v1/1" />
-        <Avatar src="https://joeschmoe.io/api/v1/2" shape="square" />
-        <Avatar src="https://joeschmoe.io/api/v1/3" shape="rounded" />
+        <Avatar src={randomAvatar()} />
+        <Avatar src={randomAvatar()} shape="square" />
+        <Avatar src={randomAvatar()} shape="rounded" />
       </Block>
       <Block title="群组" className="avatar-block">
         <Avatar.Group limit={5}>
-          <Avatar src="https://joeschmoe.io/api/v1/1" />
-          <Avatar src="https://joeschmoe.io/api/v1/2" />
-          <Avatar src="https://joeschmoe.io/api/v1/3" />
-          <Avatar src="https://joeschmoe.io/api/v1/4" />
-          <Avatar src="https://joeschmoe.io/api/v1/5" />
-          <Avatar src="https://joeschmoe.io/api/v1/6" />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
         </Avatar.Group>
       </Block>
       <Block title="最大" className="avatar-block">
         <Avatar.Group limit={3}>
-          <Avatar src="https://joeschmoe.io/api/v1/1" />
-          <Avatar src="https://joeschmoe.io/api/v1/2" />
-          <Avatar src="https://joeschmoe.io/api/v1/3" />
-          <Avatar src="https://joeschmoe.io/api/v1/4" />
-          <Avatar src="https://joeschmoe.io/api/v1/5" />
-          <Avatar src="https://joeschmoe.io/api/v1/6" />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
+          <Avatar src={randomAvatar()} />
         </Avatar.Group>
       </Block>
       <Block title="图标" className="avatar-block">
@@ -57,14 +62,14 @@ export default function AvatarDemo() {
       </Block>
       <Block title="徽章用法" className="avatar-block">
         <Badge className="avatar-dot" dot position="bottom-right">
-          <Avatar src="https://joeschmoe.io/api/v1/1" />
+          <Avatar src={randomAvatar()} />
         </Badge>
         <Badge
           className="avatar-avatar"
-          content={<Avatar src="https://joeschmoe.io/api/v1/2" />}
+          content={<Avatar src={randomAvatar()} />}
           position="bottom-right"
         >
-          <Avatar src="https://joeschmoe.io/api/v1/female/3" />
+          <Avatar src={randomAvatar()} />
         </Badge>
       </Block>
     </Page>
