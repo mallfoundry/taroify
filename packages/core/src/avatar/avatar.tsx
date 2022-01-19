@@ -17,13 +17,13 @@ export interface AvatarProps extends ViewProps {
 }
 
 function Avatar(props: AvatarProps) {
-  const { src, alt, shape = "circular", size = "medium", children, ...restProps } = props
+  const { src, alt, shape = "circle", size = "medium", children, ...restProps } = props
   return (
     <View
       className={classNames(
         prefixClassname("avatar"),
         {
-          [prefixClassname("avatar--circular")]: shape === "circular",
+          [prefixClassname("avatar--circle")]: shape === "circle",
           [prefixClassname("avatar--square")]: shape === "square",
           [prefixClassname("avatar--rounded")]: shape === "rounded",
         },
@@ -36,7 +36,7 @@ function Avatar(props: AvatarProps) {
       )}
       {...restProps}
     >
-      {src ? <Image alt={alt} round={shape === "circular"} src={src} /> : children}
+      {src ? <Image alt={alt} shape={shape} src={src} /> : children}
     </View>
   )
 }
