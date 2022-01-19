@@ -63,7 +63,7 @@ interface AvatarGroupProps {
 
 export default function AvatarGroup(props: AvatarGroupProps) {
   const {
-    shape = "circular",
+    shape = "circle",
     limit = Number.MAX_VALUE,
     spacing = "small",
     total,

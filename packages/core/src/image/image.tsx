@@ -3,72 +3,49 @@ import { StandardProps } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactElement, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
+import { getLogger } from "../utils/logger"
+import ImagePlaceholder from "./image-placeholder"
+import { ImageMode, ImageShape } from "./image.shared"
 
-export type ImageMode =
-  | "scaleToFill"
-  | "aspectFit"
-  | "aspectFill"
-  | "widthFix"
-  | "heightFix"
-  | "top"
-  | "bottom"
-  | "center"
-  | "left"
-  | "right"
-  | "topLeft"
-  | "topRight"
-  | "bottomLeft"
-  | "bottomRight"
+const { warn } = getLogger("Image")
 
-function toTaroMode(mode: ImageMode): string {
-  if (mode === "topLeft") {
-    return "top left"
-  }
-  if (mode === "topRight") {
-    return "top right"
-  }
-  if (mode === "bottomLeft") {
-    return "bottom left"
-  }
-  if (mode === "bottomRight") {
-    return "bottom right"
-  }
-  return mode
+function useImageMode(mode: ImageMode) {
+  return useMemo(() => {
+    if (mode === "topLeft") {
+      return "top left"
+    }
+    if (mode === "topRight") {
+      return "top right"
+    }
+    if (mode === "bottomLeft") {
+      return "bottom left"
+    }
+    if (mode === "bottomRight") {
+      return "bottom right"
+    }
+    return mode
+  }, [mode])
 }
 
-interface ImagePlaceholderProps {
-  prefix: string
-  children?: ReactNode
+function useImageShape(shape?: ImageShape, round?: boolean) {
+  if (_.isBoolean(round) && round) {
+    shape = "circle"
+    warn(`Use the shape="${shape}" prop instead of the round prop`)
+    if (round) {
+      return shape
+    }
+  }
+  return shape
 }
 
-function ImagePlaceholder({ prefix = "placeholder", children }: ImagePlaceholderProps) {
-  // Icon Element
-  if (React.isValidElement(children)) {
-    return (
-      <>
-        {React.cloneElement(children as ReactElement, {
-          className: classNames(
-            prefixClassname(`image__${prefix}`),
-            prefixClassname(`image__${prefix}-icon`),
-          ),
-        })}
-      </>
-    )
-  }
-  // Text String
-  if (_.isString(children) || _.isNumber(children)) {
-    return <View className={prefixClassname(`image__${prefix}`)} children={children} />
-  }
-  return <></>
-}
-
-interface ImageProps extends StandardProps {
+export interface ImageProps extends StandardProps {
   src?: string
   alt?: string
   mode?: ImageMode
   round?: boolean
+  shape?: ImageShape
   lazyLoad?: boolean
   placeholder?: boolean | ReactNode
   fallback?: boolean | ReactNode
@@ -80,24 +57,19 @@ export default function Image(props: ImageProps) {
     src,
     alt,
     mode = "scaleToFill",
-    round = false,
+    round,
+    shape: shapeProp,
     lazyLoad = false,
     placeholder = true,
     fallback = true,
     ...restProps
   } = props
-  const taroMode = toTaroMode(mode)
-
+  const taroMode = useImageMode(mode)
+  const shape = useImageShape(shapeProp, round)
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
 
-  useEffect(() => {
-    setLoading(true)
-  }, [src])
-
-  function handleLoad() {
-    setLoading(false)
-  }
+  useEffect(() => setLoading(true), [src])
 
   function handleError() {
     setLoading(false)
@@ -114,24 +86,48 @@ export default function Image(props: ImageProps) {
           className={classNames(
             prefixClassname("image"),
             {
-              [prefixClassname("image--round")]: round,
+              [prefixClassname("image--square")]: shape === "square",
+              [prefixClassname("image--rounded")]: shape === "rounded",
+              [prefixClassname("image--circle")]: shape === "circle",
               [prefixClassname("image--loading")]: loading,
             },
             className,
           )}
           imgProps={{ alt }}
+          onLoad={() => setLoading(false)}
           onError={handleError}
-          onLoad={handleLoad}
           {...restProps}
         />
       )}
       {loading && placeholder && (
-        <View className={classNames(prefixClassname("image"), className)} {...restProps}>
+        <View
+          className={classNames(
+            prefixClassname("image"),
+            {
+              [prefixClassname("image--square")]: shape === "square",
+              [prefixClassname("image--rounded")]: shape === "rounded",
+              [prefixClassname("image--circle")]: shape === "circle",
+            },
+            className,
+          )}
+          {...restProps}
+        >
           <ImagePlaceholder prefix="placeholder" children={placeholder} />
         </View>
       )}
       {failed && fallback && (
-        <View className={classNames(prefixClassname("image"), className)} {...restProps}>
+        <View
+          className={classNames(
+            prefixClassname("image"),
+            {
+              [prefixClassname("image--square")]: shape === "square",
+              [prefixClassname("image--rounded")]: shape === "rounded",
+              [prefixClassname("image--circle")]: shape === "circle",
+            },
+            className,
+          )}
+          {...restProps}
+        >
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
       )}
