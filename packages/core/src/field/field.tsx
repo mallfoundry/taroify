@@ -1,7 +1,24 @@
 import * as React from "react"
-import { ReactNode } from "react"
-import Form, { FormController, FormItemProps, FormLabelAlign } from "../form"
-import { FormFeedbackAlign, FormFeedbackStatus } from "../form"
+import { createElement as createReactElement, isValidElement, ReactNode} from "react"
+import Form, {FormController, FormFeedbackAlign, FormFeedbackStatus, FormItemProps, FormLabelAlign} from "../form"
+
+function createElement(type: any, node: any): any {
+  if (isValidElement(node)) {
+    return node
+  } else if (typeof node === "string") {
+    return createReactElement(type, {children: node})
+  } else {
+    return createReactElement(type, node)
+  }
+}
+
+
+function createComponent(type: any, node: any) {
+  const Component = () => createElement(type, node)
+  Component.displayName = "FormLabel"
+  return Component
+}
+
 
 export interface FieldProps extends FormItemProps {
   label?: ReactNode
@@ -27,12 +44,14 @@ function Field(props: FieldProps) {
     ...restProps
   } = props
 
+  const FormLabel = createComponent(Form.Label, label)
+
   return (
     <Form.Item {...restProps} rules={rules}>
-      {label && <Form.Label align={labelAlign} children={label} />}
-      {children && <Form.Control children={children} />}
+      <FormLabel></FormLabel>
+      {children && <Form.Control children={children}/>}
       {feedback && (
-        <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />
+        <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback}/>
       )}
     </Form.Item>
   )

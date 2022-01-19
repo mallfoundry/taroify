@@ -55,6 +55,12 @@ function BasicForm() {
         <Field name="text" label="文本" rules={[{ required: true, message: "请填写文本" }]}>
           <Input placeholder="请输入文本" />
         </Field>
+        <Field name="text1" label={{children:"文本1"}} rules={[{ required: true, message: "请填写文本" }]}>
+          <Input placeholder="请输入文本1" />
+        </Field>
+        <Field name="text2" label={<Form.Label>文本2</Form.Label>} rules={[{ required: true, message: "请填写文本" }]}>
+          <Input placeholder="请输入文本2" />
+        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">

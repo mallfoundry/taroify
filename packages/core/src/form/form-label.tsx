@@ -34,4 +34,6 @@ function FormLabel(props: FormLabelProps) {
   )
 }
 
+FormLabel.displayName = "FormLabel"
+
 export default FormLabel
