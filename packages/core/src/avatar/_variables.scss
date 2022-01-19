@@ -23,7 +23,7 @@ $avatar-size-small: var(--avatar-size-small, var(--avatar-size, 26px * $hd));
 $avatar-size-medium: var(--avatar-size-medium, var(--avatar-size, 38px * $hd));
 $avatar-size-large: var(--avatar-size-large, var(--avatar-size, 56px * $hd));
 //
-$avatar-spacing-mini: var(--avatar-spacing-mini, var(--avatar-spacing, var(--padding-xs, $padding-xs)));
-$avatar-spacing-small: var(--avatar-spacing-small, var(--avatar-spacing, var(--padding-xs, $padding-sm)));
-$avatar-spacing-medium: var(--avatar-spacing-medium, var(--avatar-spacing, var(--padding-xs, $padding-md)));
-$avatar-spacing-large: var(--avatar-spacing-large, var(--avatar-spacing, var(--padding-xs, $padding-lg)));
+$avatar-spacing-mini: var(--avatar-spacing-mini, var(--padding-xs, $padding-xs));
+$avatar-spacing-small: var(--avatar-spacing-small, var(--padding-xs, $padding-sm));
+$avatar-spacing-medium: var(--avatar-spacing-medium, var(--padding-xs, $padding-md));
+$avatar-spacing-large: var(--avatar-spacing-large, var(--padding-xs, $padding-lg));
