@@ -1,6 +1,7 @@
 import { Avatar, Badge } from "@taroify/core"
+import { Cross, LocationOutlined, SettingOutlined } from "@taroify/icons"
+import { View } from "@tarojs/components"
 import * as React from "react"
-import { Cross, SettingOutlined, LocationOutlined } from "@taroify/icons"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -13,36 +14,36 @@ export default function AvatarDemo() {
         <Avatar style={{ background: "green" }}>N</Avatar>
         <Avatar style={{ background: "pink" }}>HP</Avatar>
       </Block>
-
       <Block title="尺寸" className="avatar-block">
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="mini"></Avatar>
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="small"></Avatar>
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="medium"></Avatar>
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="large"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="mini" />
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="small" />
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="medium" />
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" size="large" />
       </Block>
       <Block title="形状" className="avatar-block">
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="square"></Avatar>
-        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" variant="rounded"></Avatar>
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" shape="square" />
+        <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" shape="rounded" />
       </Block>
       <Block title="群组" className="avatar-block">
-        <Avatar.Group total={24} spacing="medium">
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+        <Avatar.Group limit={5}>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Avatar.Group>
       </Block>
       <Block title="最大" className="avatar-block">
-        <Avatar.Group max={3} spacing="small" variant="square">
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+        <Avatar.Group limit={3}>
+          <View>sdafjal</View>
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Avatar.Group>
       </Block>
       <Block title="图标" className="avatar-block">
@@ -57,11 +58,15 @@ export default function AvatarDemo() {
         </Avatar>
       </Block>
       <Block title="徽章用法" className="avatar-block">
-        <Badge content={<Cross />} position="bottom-right">
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+        <Badge className="avatar-dot" dot position="bottom-right">
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Badge>
-        <Badge content={<SettingOutlined></SettingOutlined>} position="bottom-right">
-          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg"></Avatar>
+        <Badge
+          className="avatar-avatar"
+          content={<Avatar size="mini" src="https://img01.yzcdn.cn/vant/cat.jpeg" />}
+          position="bottom-right"
+        >
+          <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Badge>
       </Block>
     </Page>

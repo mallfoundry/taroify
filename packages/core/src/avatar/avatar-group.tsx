@@ -1,66 +1,91 @@
-import * as React from "react"
-import * as _ from "lodash"
-import { cloneElement, useMemo, ReactElement, ReactNode, isValidElement, Children } from "react"
+import { View } from "@tarojs/components"
 import classNames from "classnames"
-import { isElementOf } from "../utils/validate"
+import * as _ from "lodash"
+import * as React from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactChild,
+  ReactElement,
+  ReactNode,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
-import { AvatarVarinat, AvatarSpacing } from "./avatar.shared"
+import { isElementOf } from "../utils/validate"
 import Avatar, { AvatarProps } from "./avatar"
+import { AvatarShape, AvatarSpacing } from "./avatar.shared"
+
+const useAvatars = (
+  children: ReactNode,
+  shape: AvatarShape,
+  limit: number,
+): [ReactNode[], number] => {
+  return useMemo(() => {
+    const avatars = Children.toArray(children) //
+      .filter((child) => isValidElement(child) && isElementOf(child, Avatar))
+
+    const avatarsSize = _.size(avatars)
+    const luckyAvatars: ReactNode[] = []
+    const length = Math.min(avatarsSize, limit)
+    for (let index = 0; index < length; index++) {
+      const child = _.get(avatars, index) as ReactChild
+      const element = child as ReactElement<AvatarProps>
+      const { key, props } = element
+      const { style, children, ...restProps } = props
+      luckyAvatars.push(
+        cloneElement(
+          element,
+          {
+            key: key ?? index,
+            shape,
+            style: {
+              ...style,
+              zIndex: index,
+            },
+            ...restProps,
+          },
+          children,
+        ),
+      )
+    }
+    return [luckyAvatars, avatarsSize]
+  }, [children, limit, shape])
+}
+
 interface AvatarGroupProps {
   children: ReactNode[]
-  max?: number
-  variant?: AvatarVarinat
+  shape?: AvatarShape
   spacing?: AvatarSpacing
+  limit?: number
   total?: number
 }
-const useAvatars = (children: ReactNode, variant: AvatarVarinat, max: number): ReactNode[] => {
-  const avatars = useMemo(
-    () =>
-      Children.toArray(children)
-        .filter((child) => isValidElement(child))
-        .filter((element) => isElementOf(element, Avatar))
-        .map((child, index) => {
-          const element = child as ReactElement<AvatarProps>
-          const { key, props } = element
-          const { children, ...restProps } = props
-          return cloneElement(
-            element,
-            {
-              key: key ?? index,
-              variant,
-              ...restProps,
-            },
-            children,
-          )
-        }),
-    [children, variant],
-  )
 
-  return avatars?.splice(0, max)
-}
-export default function AvatarsGroup({
-  variant = "circular",
-  max = 999999999,
-  children,
-  spacing = "medium",
-  total,
-}: AvatarGroupProps): JSX.Element {
-  const length = useMemo(() => {
-    return children.length - max > 0 ? children.length - max : 0
-  }, [children, max])
-  const avatars = useAvatars(children, variant, max)
+export default function AvatarGroup(props: AvatarGroupProps) {
+  const {
+    shape = "circular",
+    limit = Number.MAX_VALUE,
+    spacing = "small",
+    total,
+    children, //
+  } = props
+  const [avatars, avatarsSize] = useAvatars(children, shape, limit)
+
   return (
-    <div
+    <View
       className={classNames(prefixClassname("avatar-group"), {
+        [prefixClassname("avatar-group--spacing-mini")]: spacing === "mini",
         [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
         [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
         [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
       })}
     >
       {avatars}
-      <Avatar variant={variant} style={{ zIndex: _.size(avatars) }}>
-        +{total ? total - _.size(avatars) : length}
-      </Avatar>
-    </div>
+      {avatarsSize >= limit && (
+        <Avatar shape={shape} style={{ zIndex: avatarsSize }}>
+          +{total ? total - limit : avatarsSize - limit}
+        </Avatar>
+      )}
+    </View>
   )
 }

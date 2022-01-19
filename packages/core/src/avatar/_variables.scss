@@ -1,11 +1,28 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-
 $avatar-color: var(--white, $white);
-$avatar-font-size: var(--font-size-lg, $font-size-lg);
+$avatar-background-color: var(--gray-5, $gray-5);
+$avatar-border-color: var(--white, $white);
+$avatar-border-width: 2PX;
 $avatar-font-weight: var(--font-weight-bold, $font-weight-bold);
-$avatar-font-family: -apple-system-font, helvetica neue, arial, sans-serif;
+$avatar-font-family: Roboto, Helvetica, Arial, sans-serif;
+//
+$avatar-font-size-mini: var(--avatar-font-size-mini, $font-size-xs);
+$avatar-font-size-small: var(--avatar-font-size-small, $font-size-sm);
+$avatar-font-size-medium: var(--avatar-font-size-medium, $font-size-md);
+$avatar-font-size-large: var(--avatar-font-size-large, $font-size-lg);
+//
+$avatar-border-radius-mini: var(--avatar-border-radius-mini, 2px * $hd);
+$avatar-border-radius-small: var(--avatar-border-radius-small, 4px * $hd);
+$avatar-border-radius-medium: var(--avatar-border-radius-medium, 5px * $hd);
+$avatar-border-radius-large: var(--avatar-border-radius-large, 6px * $hd);
+//
+$avatar-size-mini: var(--avatar-size, var(--avatar-size-mini, 16px * $hd));
+$avatar-size-small: var(--avatar-size, var(--avatar-size-small, 26px * $hd));
+$avatar-size-medium: var(--avatar-size, var(--avatar-size-medium, 38px * $hd));
+$avatar-size-large: var(--avatar-size, var(--avatar-size-large, 56px * $hd));
+//
 $avatar-spacing-mini: var(--padding-xs, $padding-xs);
 $avatar-spacing-small: var(--padding-sm, $padding-sm);
 $avatar-spacing-medium: var(--padding-md, $padding-md);

@@ -1,48 +1,62 @@
 @import "./variables";
 
 .#{$component-prefix}avatar {
-  box-sizing: border-box;
+  box-sizing: content-box;
   display: flex;
   text-align: center;
   font-family: var(--avatar-font-family, $avatar-font-family);
-  font-size: var(--avatar-font-size, $avatar-font-size);
   font-weight: var(--avatar-font-weight, $avatar-font-weight);
   color: var(--avatar-color, $avatar-color);
-  background-color: gray;
+  background: var(--avatar-background-color, $avatar-background-color);
   align-items: center;
   justify-content: center;
-  border: 1px solid $avatar-color;
   overflow: hidden;
 
   &--circular {
-    border-radius: 50%;
+    border-radius: var(--border-radius-max, $border-radius-max);
   }
 
   &--square {
-    border-radius: 0%;
+    border-radius: 0;
   }
 
-  &--rounded {
-    border-radius: 10px;
-  }
-
-  &--position {
-    position: absolute;
-  }
   &--mini {
-    width: 18px * $hd;
-    height: 18px * $hd;
+    font-size: var(--avatar-font-size, $avatar-font-size-mini);
+    width: $avatar-size-mini;
+    height: $avatar-size-mini;
+
+    &.#{$component-prefix}avatar--rounded {
+      border-radius: var(--avatar-border-radius, $avatar-border-radius-mini);
+    }
   }
+
   &--small {
-    width: 24px * $hd;
-    height: 24px * $hd;
+    font-size: var(--avatar-font-size, $avatar-font-size-small);
+    width: $avatar-size-small;
+    height: $avatar-size-small;
+
+    &.#{$component-prefix}avatar--rounded {
+      border-radius: var(--avatar-border-radius, $avatar-border-radius-small);
+    }
   }
+
   &--medium {
-    width: 36px * $hd;
-    height: 36px * $hd;
+    font-size: var(--avatar-font-size, $avatar-font-size-medium);
+    width: $avatar-size-medium;
+    height: $avatar-size-medium;
+
+    &.#{$component-prefix}avatar--rounded {
+      border-radius: var(--avatar-border-radius, $avatar-border-radius-medium);
+    }
   }
+
   &--large {
-    width: 48px * $hd;
-    height: 48px * $hd;
+    font-size: var(--avatar-font-size, $avatar-font-size-large);
+    width: $avatar-size-large;
+    height: $avatar-size-large;
+
+    &.#{$component-prefix}avatar--rounded {
+      border-radius: var(--avatar-border-radius, $avatar-border-radius-large);
+    }
   }
 }

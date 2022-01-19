@@ -1,36 +1,31 @@
-import * as React from "react"
-import { View } from "@tarojs/components"
-import { CSSProperties } from "react"
-import classNames from "classnames"
 import { Image } from "@taroify/core"
+import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
+import * as React from "react"
+import { CSSProperties, ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { AvatarSize, AvatarVarinat } from "./avatar.shared"
+import { AvatarShape, AvatarSize } from "./avatar.shared"
 
-export interface AvatarProps {
-  children?: any
+export interface AvatarProps extends ViewProps {
   style?: CSSProperties
   src?: string
   alt?: string
-  variant?: AvatarVarinat
+  shape?: AvatarShape
   size?: AvatarSize
+  children?: ReactNode
 }
 
-function Avatar({
-  children,
-  style = {},
-  src,
-  alt,
-  variant = "circular",
-  size = "medium",
-}: AvatarProps): JSX.Element {
+function Avatar(props: AvatarProps) {
+  const { src, alt, shape = "circular", size = "medium", children, ...restProps } = props
   return (
     <View
       className={classNames(
         prefixClassname("avatar"),
         {
-          [prefixClassname("avatar--circular")]: variant === "circular",
-          [prefixClassname("avatar--square")]: variant === "square",
-          [prefixClassname("avatar--rounded")]: variant === "rounded",
+          [prefixClassname("avatar--circular")]: shape === "circular",
+          [prefixClassname("avatar--square")]: shape === "square",
+          [prefixClassname("avatar--rounded")]: shape === "rounded",
         },
         {
           [prefixClassname("avatar--mini")]: size === "mini",
@@ -39,9 +34,9 @@ function Avatar({
           [prefixClassname("avatar--large")]: size === "large",
         },
       )}
-      style={style}
+      {...restProps}
     >
-      {src ? <Image alt={alt} src={src}></Image> : children}
+      {src ? <Image alt={alt} round={shape === "circular"} src={src} /> : children}
     </View>
   )
 }
