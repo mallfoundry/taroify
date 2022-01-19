@@ -1,9 +1,9 @@
-import { Image } from "@taroify/core"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
+import Image from "../image"
 import { prefixClassname } from "../styles"
 import { AvatarShape, AvatarSize } from "./avatar.shared"
 
