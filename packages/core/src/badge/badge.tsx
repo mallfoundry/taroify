@@ -1,15 +1,17 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactElement, ReactNode, useMemo } from "react"
+import { CSSProperties, ReactElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 
 export type BadgePosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 
-export interface BadgeProps {
+export interface BadgeProps extends ViewProps {
   className?: string
+  style?: CSSProperties
   content?: ReactNode
   dot?: boolean
   max?: number
@@ -18,7 +20,15 @@ export interface BadgeProps {
 }
 
 function Badge(props: BadgeProps): JSX.Element {
-  const { className, content: contentProp, max, dot, position = "top-right", children } = props
+  const {
+    className,
+    content: contentProp,
+    max,
+    dot,
+    position = "top-right",
+    children,
+    ...restProps
+  } = props
   const isIcon = useMemo(() => isIconElement(children), [children])
   const hasChildren = children !== undefined
   const noneChildren = children === undefined
@@ -32,18 +42,16 @@ function Badge(props: BadgeProps): JSX.Element {
   )
 
   return cloneIconElement(isIcon ? children : <View />, {
-    className: classNames(
-      {
-        [prefixClassname("badge__wrapper")]: hasChildren,
-        [prefixClassname("badge")]: noneChildren,
-        [prefixClassname("badge--dot")]: noneChildren && dot,
-        [prefixClassname("badge--top-left")]: noneChildren && position === "top-left",
-        [prefixClassname("badge--top-right")]: noneChildren && position === "top-right",
-        [prefixClassname("badge--bottom-left")]: noneChildren && position === "bottom-left",
-        [prefixClassname("badge--bottom-right")]: noneChildren && position === "bottom-right",
-      },
-      className,
-    ),
+    className: classNames({
+      [prefixClassname("badge__wrapper")]: hasChildren,
+      [prefixClassname("badge")]: noneChildren,
+      [prefixClassname("badge--dot")]: noneChildren && dot,
+      [prefixClassname("badge--top-left")]: noneChildren && position === "top-left",
+      [prefixClassname("badge--top-right")]: noneChildren && position === "top-right",
+      [prefixClassname("badge--bottom-left")]: noneChildren && position === "bottom-left",
+      [prefixClassname("badge--bottom-right")]: noneChildren && position === "bottom-right",
+      className: noneChildren,
+    }),
     children: (
       <>
         {!isIcon && children}
@@ -61,12 +69,15 @@ function Badge(props: BadgeProps): JSX.Element {
                 [prefixClassname("badge--bottom-right")]: position === "bottom-right",
               },
               prefixClassname("badge--fixed"),
+              className,
             )}
             children={!dot && content}
+            {...restProps}
           />
         )}
       </>
     ),
+    ...(noneChildren ? restProps : {}),
   }) as ReactElement
 }
 
