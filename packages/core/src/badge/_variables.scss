@@ -1,13 +1,15 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$badge-size: 16px;
-$badge-color: var(--white, $white);
-$badge-padding: 0 3px * $hd;
-$badge-font-size: var(--font-size-sm, $font-size-sm);
-$badge-font-weight: var(--font-weight-bold, $font-weight-bold);
-$badge-border-width: var(--border-width-base, $border-width-base);
-$badge-background-color: var(--red, $red);
-$badge-dot-color: var(--red, $red);
-$badge-dot-size: 8PX;
-$badge-font-family: -apple-system-font, helvetica neue, arial, sans-serif;
+$badge-size: var(--badge-size, 16px * $hd);
+$badge-color: var(--badge-color, var(--white, $white));
+$badge-padding: var(--badge-padding, 0 3px * $hd);
+$badge-font-family: var(--badge-font-family, #{-apple-system-font, helvetica neue, arial, sans-serif});
+$badge-font-size: var(--badge-font-size, var(--font-size-sm, $font-size-sm));
+$badge-font-weight: var(--badge-font-weight, var(--font-weight-bold, $font-weight-bold));
+$badge-border-width: var(--badge-border-width, var(--border-width-base, $border-width-base));
+$badge-border-color: var(--badge-border-color, var(--white, $white));
+$badge-border-radius: var(--badge-border-radius, var(--border-radius-max, $border-radius-max));
+$badge-background-color: var(--badge-background-color, var(--red, $red));
+$badge-dot-color: var(--badge-dot-color, var(--red, $red));
+$badge-dot-size: var(--badge-dot-size, 8PX);
