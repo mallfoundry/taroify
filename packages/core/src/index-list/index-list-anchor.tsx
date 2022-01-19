@@ -35,8 +35,13 @@ interface InternalIndexListAnchorProps extends IndexListAnchorProps {
 
 const IndexListAnchor = forwardRef(
   (props: IndexListAnchorProps, ref: ForwardedRef<IndexListAnchorInstance>) => {
-    const { arrayedIndex, index, children, className, ...restProps } =
-      props as InternalIndexListAnchorProps
+    const {
+      arrayedIndex,
+      index,
+      children,
+      className,
+      ...restProps
+    } = props as InternalIndexListAnchorProps
 
     const {
       activeArrayedIndex,
