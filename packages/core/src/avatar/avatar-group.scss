@@ -4,7 +4,7 @@
   display: flex;
 
   .#{$component-prefix}avatar {
-    border: 2px * $hd solid var(--avatar-border-color, $avatar-border-color);
+    border: var(--avatar-border-width, $avatar-border-width) solid var(--avatar-border-color, $avatar-border-color);
   }
 
   &--spacing-mini {

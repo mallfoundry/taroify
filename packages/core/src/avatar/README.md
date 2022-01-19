@@ -90,12 +90,32 @@ import { Avatar } from "@taroify/core"
 ### 徽章
 
 ```tsx
-<Badge content={<Cross />} position="bottom-right">
+<Badge className="avatar-dot" dot position="bottom-right">
   <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
 </Badge>
-<Badge content={<SettingOutlined />} position="bottom-right">
+<Badge
+  className="avatar-avatar"
+  content={<Avatar size="mini" src="https://img01.yzcdn.cn/vant/cat.jpeg" />}
+  position="bottom-right"
+>
   <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
 </Badge>
+```
+
+```scss
+.avatar-dot {
+  bottom: 2px * 2;
+  right: 6px * 2,
+}
+
+.avatar-avatar {
+  --badge-background-color: transparent;
+  --badge-padding: 0;
+  --badge-size: 12px * 2;
+  --avatar-size: var(--badge-size);
+  bottom: 2px * 2;
+  right: 6px * 2,
+}
 ```
 
 ## API
@@ -113,7 +133,7 @@ import { Avatar } from "@taroify/core"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| variant | 形状，可选值为 `square` `rounded` `circular` | _string_ | `circular` |
+| shape | 形状，可选值为 `square` `rounded` `circular` | _string_ | `circular` |
 | spacing | 间距，可选值为 `small` `medium` `large` | _string_ | `medium` |
 | limit | 显示的最大头像个数 | _number_ | - |
 | total | 头像总数。用于计算额外头像的数量。| _string_ | - |

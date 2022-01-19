@@ -58,10 +58,14 @@ export default function AvatarDemo() {
         </Avatar>
       </Block>
       <Block title="徽章用法" className="avatar-block">
-        <Badge content={<Cross />} position="bottom-right">
+        <Badge className="avatar-dot" dot position="bottom-right">
           <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Badge>
-        <Badge content={<SettingOutlined />} position="bottom-right">
+        <Badge
+          className="avatar-avatar"
+          content={<Avatar size="mini" src="https://img01.yzcdn.cn/vant/cat.jpeg" />}
+          position="bottom-right"
+        >
           <Avatar src="https://img01.yzcdn.cn/vant/cat.jpeg" />
         </Badge>
       </Block>
