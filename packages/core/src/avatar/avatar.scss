@@ -4,10 +4,10 @@
   box-sizing: content-box;
   display: flex;
   text-align: center;
-  font-family: var(--avatar-font-family, $avatar-font-family);
-  font-weight: var(--avatar-font-weight, $avatar-font-weight);
-  color: var(--avatar-color, $avatar-color);
-  background: var(--avatar-background-color, $avatar-background-color);
+  font-family: $avatar-font-family;
+  font-weight: $avatar-font-weight;
+  color: $avatar-color;
+  background: $avatar-background-color;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -21,42 +21,42 @@
   }
 
   &--mini {
-    font-size: var(--avatar-font-size, $avatar-font-size-mini);
+    font-size: $avatar-font-size-mini;
     width: $avatar-size-mini;
     height: $avatar-size-mini;
 
     &.#{$component-prefix}avatar--rounded {
-      border-radius: var(--avatar-border-radius, $avatar-border-radius-mini);
+      border-radius: $avatar-border-radius-mini;
     }
   }
 
   &--small {
-    font-size: var(--avatar-font-size, $avatar-font-size-small);
+    font-size: $avatar-font-size-small;
     width: $avatar-size-small;
     height: $avatar-size-small;
 
     &.#{$component-prefix}avatar--rounded {
-      border-radius: var(--avatar-border-radius, $avatar-border-radius-small);
+      border-radius: $avatar-border-radius-small;
     }
   }
 
   &--medium {
-    font-size: var(--avatar-font-size, $avatar-font-size-medium);
+    font-size: $avatar-font-size-medium;
     width: $avatar-size-medium;
     height: $avatar-size-medium;
 
     &.#{$component-prefix}avatar--rounded {
-      border-radius: var(--avatar-border-radius, $avatar-border-radius-medium);
+      border-radius: $avatar-border-radius-medium;
     }
   }
 
   &--large {
-    font-size: var(--avatar-font-size, $avatar-font-size-large);
+    font-size: $avatar-font-size-large;
     width: $avatar-size-large;
     height: $avatar-size-large;
 
     &.#{$component-prefix}avatar--rounded {
-      border-radius: var(--avatar-border-radius, $avatar-border-radius-large);
+      border-radius: $avatar-border-radius-large;
     }
   }
 }

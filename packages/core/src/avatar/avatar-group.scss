@@ -4,38 +4,38 @@
   display: flex;
 
   .#{$component-prefix}avatar {
-    border: var(--avatar-border-width, $avatar-border-width) solid var(--avatar-border-color, $avatar-border-color);
+    border: $avatar-border-width solid $avatar-border-color;
   }
 
   &--spacing-mini {
-    padding-left: var(--avatar-spacing-mini, $avatar-spacing-mini);
+    padding-left: $avatar-spacing-mini;
 
     .#{$component-prefix}avatar {
-      margin-left: calc(var(--avatar-spacing-mini, #{$avatar-spacing-mini}) * -1);
+      margin-left: calc(#{$avatar-spacing-mini} * -1);
     }
   }
 
   &--spacing-small {
-    padding-left: var(--avatar-spacing-small, $avatar-spacing-small);
+    padding-left: $avatar-spacing-small;
 
     .#{$component-prefix}avatar {
-      margin-left: calc(var(--avatar-spacing-small, #{$avatar-spacing-small}) * -1);
+      margin-left: calc(#{$avatar-spacing-small} * -1);
     }
   }
 
   &--spacing-medium {
-    padding-left: var(--avatar-spacing-medium, $avatar-spacing-medium);
+    padding-left: $avatar-spacing-medium;
 
     .#{$component-prefix}avatar {
-      margin-left: calc(var(--avatar-spacing-medium, #{$avatar-spacing-medium}) * -1);
+      margin-left: calc(#{$avatar-spacing-medium} * -1);
     }
   }
 
   &--spacing-large {
-    padding-left: var(--avatar-spacing-large, $avatar-spacing-large);
+    padding-left: $avatar-spacing-large;
 
     .#{$component-prefix}avatar {
-      margin-left: calc(var(--avatar-spacing-large, #{$avatar-spacing-large}) * -1);
+      margin-left: calc(#{$avatar-spacing-large} * -1);
     }
   }
 }
