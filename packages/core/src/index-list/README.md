@@ -69,21 +69,21 @@ function CustomIndexList() {
 
 ### IndexList Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| sticky | 是否开启锚点自动吸顶 | _boolean_ | `true` |
-| stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | _number_ | `0` |
+| 参数            | 说明                       | 类型               | 默认值 |
+| --------------- | -------------------------- | ------------------ | ------ |
+| sticky          | 是否开启锚点自动吸顶       | _boolean_          | `true` |
+| stickyOffsetTop | 锚点自动吸顶时与顶部的距离 | _number \| string_ | `0`    |
 
 ### IndexList.Anchor Props
 
-| 参数  | 说明     | 类型               | 默认值 |
-| ----- | -------- | ------------------ | ------ |
-| index | 索引字符 | _number \| string_ | -      |
-| children | 索引内容 | _ReactNode_ | -      |
+| 参数     | 说明     | 类型               | 默认值 |
+| -------- | -------- | ------------------ | ------ |
+| index    | 索引字符 | _number \| string_ | -      |
+| children | 索引内容 | _ReactNode_        | -      |
 
 ### IndexList Events
 
-| 事件名 | 说明                         | 回调参数                  |
-| ------ | ---------------------------- | ------------------------- |
+| 事件名   | 说明                         | 回调参数                  |
+| -------- | ---------------------------- | ------------------------- |
 | onSelect | 点击索引栏的字符时触发       | _index: number \| string_ |
 | onChange | 当前高亮的索引字符变化时触发 | _index: number \| string_ |
