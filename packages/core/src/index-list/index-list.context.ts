@@ -3,7 +3,7 @@ import { Rect, makeRect } from "../utils/dom/rect"
 
 interface IndexListContextValue {
   sticky?: boolean
-  stickyOffsetTop?: number
+  stickyOffsetTop?: number | string
   activeIndex: number | string
   activeArrayedIndex: number
 
