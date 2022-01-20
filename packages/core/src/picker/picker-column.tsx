@@ -9,7 +9,7 @@ import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { fulfillPromise } from "../utils/promisify"
-import { useRenderedRef, useToRef } from "../utils/state"
+import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
 import { getPickerOptionKey, PickerOptionObject } from "./picker.shared"
@@ -120,6 +120,10 @@ export default function PickerColumn(props: PickerColumnProps) {
     [childrenRef],
   )
 
+  const childrenChanged = useRendered(() =>
+    JSON.stringify(_.map(childrenProp, ({ value }) => value)),
+  )
+
   useEffect(
     () => {
       const valueIndex = getIndexByValue(value)
@@ -128,7 +132,7 @@ export default function PickerColumn(props: PickerColumnProps) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [value, activeIndexRef.current],
+    [value, childrenChanged],
   )
 
   const getIndexByOffset = useCallback(
