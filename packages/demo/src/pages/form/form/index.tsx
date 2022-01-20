@@ -4,6 +4,7 @@ import {
   Cell,
   Checkbox,
   DatetimePicker,
+  Field,
   Form,
   Input,
   Picker,
@@ -15,7 +16,6 @@ import {
   Switch,
   Toast,
   Uploader,
-  Field,
 } from "@taroify/core"
 import { FormItemInstance, FormValidError } from "@taroify/core/form"
 import { ArrowRight } from "@taroify/icons"
@@ -52,14 +52,20 @@ function BasicForm() {
             <Input password placeholder="密码" />
           </Form.Control>
         </Form.Item>
-        <Field name="text" label="文本" rules={[{ required: true, message: "请填写文本" }]}>
+        <Field
+          name="text"
+          label={{ align: "left", children: "文本" }}
+          feedback={
+            <>
+              <Form.Feedback>aaa</Form.Feedback>
+              <Form.Feedback>aaa</Form.Feedback>
+              <Form.Feedback>aaa</Form.Feedback>
+              <Form.Feedback>aaa</Form.Feedback>
+            </>
+          }
+          rules={[{ required: true, message: "请填写文本" }]}
+        >
           <Input placeholder="请输入文本" />
-        </Field>
-        <Field name="text1" label={{children:"文本1"}} rules={[{ required: true, message: "请填写文本" }]}>
-          <Input placeholder="请输入文本1" />
-        </Field>
-        <Field name="text2" label={<Form.Label>文本2</Form.Label>} rules={[{ required: true, message: "请填写文本" }]}>
-          <Input placeholder="请输入文本2" />
         </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
@@ -305,7 +311,7 @@ function CalendarField() {
 
 function FormWithFields() {
   return (
-    <Form onSubmit={(e) => console.log(e.detail.value)}>
+    <Form>
       <Cell.Group inset>
         <Form.Item name="switch">
           <Form.Label>开关</Form.Label>
