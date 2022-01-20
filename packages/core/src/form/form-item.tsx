@@ -57,7 +57,7 @@ function useFormItemChildren(children?: ReactNode): FormItemChildren {
         __children__.label = element
       } else if (elementType === Form.Control) {
         __children__.control = element
-      } else if (elementType === Form.Feedback) {
+      } else if (isElementOf(element, Form.Feedback)) {
         __children__.feedbacks?.push(element)
       }
     })

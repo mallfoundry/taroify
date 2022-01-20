@@ -7,7 +7,7 @@ import { prefixClassname } from "../styles"
 import FormContext from "./form.context"
 import { FormLabelAlign } from "./form.shared"
 
-interface FormLabelProps extends ViewProps {
+export interface FormLabelProps extends ViewProps {
   align?: FormLabelAlign
   colon?: boolean
   children?: ReactNode

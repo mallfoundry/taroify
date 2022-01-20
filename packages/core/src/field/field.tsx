@@ -1,27 +1,38 @@
 import * as React from "react"
-import { createElement as createReactElement, isValidElement, ReactNode} from "react"
-import Form, {FormController, FormFeedbackAlign, FormFeedbackStatus, FormItemProps, FormLabelAlign} from "../form"
+import {
+  ComponentClass,
+  createElement,
+  FunctionComponent,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  ReactText,
+} from "react"
+import { isFragment } from "react-is"
+import Form, {
+  FormController,
+  FormFeedbackAlign,
+  FormFeedbackStatus,
+  FormItemProps,
+  FormLabelAlign,
+  FormLabelProps,
+} from "../form"
+import { isObjectElement, isTextElement } from "../utils/validate"
 
-function createElement(type: any, node: any): any {
-  if (isValidElement(node)) {
-    return node
-  } else if (typeof node === "string") {
-    return createReactElement(type, {children: node})
-  } else {
-    return createReactElement(type, node)
+function createUnknownElement(
+  type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
+  node?: ReactNode,
+): JSX.Element {
+  if (isTextElement(node)) {
+    return createElement(type, { children: node })
+  } else if (isObjectElement(node)) {
+    return createElement(type, node)
   }
+  return node as JSX.Element
 }
-
-
-function createComponent(type: any, node: any) {
-  const Component = () => createElement(type, node)
-  Component.displayName = "FormLabel"
-  return Component
-}
-
 
 export interface FieldProps extends FormItemProps {
-  label?: ReactNode
+  label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
   labelAlign?: FormLabelAlign
   feedback?: ReactNode
   feedbackAlign?: FormFeedbackAlign
@@ -31,28 +42,28 @@ export interface FieldProps extends FormItemProps {
 
 function Field(props: FieldProps) {
   const {
-    label,
-    labelAlign,
+    label: labelProp,
+    // labelAlign,
     //
     feedback,
-    feedbackAlign,
-    feedbackStatus,
+    // feedbackAlign,
+    // feedbackStatus,
     //
     children,
     //
-    rules,
     ...restProps
   } = props
+  const label = createUnknownElement(Form.Label, labelProp)
 
-  const FormLabel = createComponent(Form.Label, label)
-
+  console.log(isFragment(feedback))
   return (
-    <Form.Item {...restProps} rules={rules}>
-      <FormLabel></FormLabel>
-      {children && <Form.Control children={children}/>}
-      {feedback && (
-        <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback}/>
-      )}
+    <Form.Item {...restProps}>
+      {label}
+      {children && <Form.Control children={children} />}
+      {feedback}
+      {/*{feedback && (*/}
+      {/*  <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />*/}
+      {/*)}*/}
     </Form.Item>
   )
 }
