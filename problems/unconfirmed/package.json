@@ -44,6 +44,7 @@
     "@tarojs/runtime": "3.4.0",
     "@tarojs/taro": "3.4.0",
     "classnames": "^2.2.6",
+    "dayjs": "^1.10.7",
     "lodash": "^4.17.21",
     "lorem-ipsum": "^2.0.4",
     "react": "^17.0.0",
