@@ -6,4 +6,8 @@
   .#{$demo-prefix}block__content {
     padding: 0;
   }
+
+  .#{$component-prefix}toast {
+    text-align: left;
+  }
 }
