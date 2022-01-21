@@ -14,6 +14,7 @@ import {
 } from "react"
 import ButtonBase, { ButtonBaseProps } from "../button-base"
 import Image from "../image"
+import { useSheetProps } from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
@@ -64,8 +65,20 @@ interface ShareSheetOptionProps
   description?: ReactNode
 }
 
-export function ShareSheetOption(props: ShareSheetOptionProps) {
-  const { className, style, disabled, icon, name, description, onClick, ...restProps } = props
+export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
+  const [
+    buttonProps,
+    {
+      className,
+      style,
+      disabled,
+      icon,
+      name,
+      description,
+      onClick, //
+      ...restProps
+    },
+  ] = useSheetProps<ShareSheetOptionProps>(mixedProps)
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
@@ -82,6 +95,7 @@ export function ShareSheetOption(props: ShareSheetOptionProps) {
           description,
         })
       }}
+      {...restProps}
     >
       {icon && image}
       {name && <View className={prefixClassname("share-sheet__option-name")} children={name} />}
@@ -91,7 +105,7 @@ export function ShareSheetOption(props: ShareSheetOptionProps) {
           children={description}
         />
       )}
-      <ButtonBase className={prefixClassname("share-sheet__button")} {...restProps} />
+      <ButtonBase className={prefixClassname("share-sheet__button")} {...buttonProps} />
     </View>
   )
 }

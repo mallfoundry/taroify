@@ -9,6 +9,7 @@ export type { SheetProps } from "./sheet"
 export type { SheetHeaderProps } from "./sheet-header"
 export type { SheetItemProps } from "./sheet-item"
 export type { SheetButtonProps } from "./sheet-button"
+export { default as useSheetProps } from "./use-sheet-props"
 
 interface SheetInterface {
   (props: SheetProps): JSX.Element
