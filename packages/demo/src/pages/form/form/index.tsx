@@ -55,14 +55,7 @@ function BasicForm() {
         <Field
           name="text"
           label={{ align: "left", children: "文本" }}
-          feedback={
-            <>
-              <Form.Feedback>aaa</Form.Feedback>
-              <Form.Feedback>aaa</Form.Feedback>
-              <Form.Feedback>aaa</Form.Feedback>
-              <Form.Feedback>aaa</Form.Feedback>
-            </>
-          }
+          feedback={<Form.Feedback>aaa</Form.Feedback>}
           rules={[{ required: true, message: "请填写文本" }]}
         >
           <Input placeholder="请输入文本" />
