@@ -19,6 +19,8 @@ export type { FormItemProps } from "./form-item"
 
 export type { FormLabelProps } from "./form-label"
 
+export type { FormFeedbackProps } from "./form-feedback"
+
 export { default as useFormField } from "./use-form-field"
 export { default as useFormValue } from "./use-form-value"
 

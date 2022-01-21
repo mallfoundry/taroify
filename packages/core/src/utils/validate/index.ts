@@ -6,7 +6,7 @@ export function isTextElement(node: ReactNode) {
 }
 
 export function isObjectElement(node?: ReactNode) {
-  return !isValidElement(node) && _.isObjectLike(node)
+  return !isValidElement(node) && _.isObjectLike(node) && !(node instanceof Array)
 }
 
 export function isElementOf(node?: ReactNode, type?: JSXElementConstructor<any>) {

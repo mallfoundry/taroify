@@ -8,7 +8,6 @@ import {
   ReactNode,
   ReactText,
 } from "react"
-import { isFragment } from "react-is"
 import Form, {
   FormController,
   FormFeedbackAlign,
@@ -17,12 +16,13 @@ import Form, {
   FormLabelAlign,
   FormLabelProps,
 } from "../form"
+
 import { isObjectElement, isTextElement } from "../utils/validate"
 
 function createUnknownElement(
   type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
-  node?: ReactNode,
-): JSX.Element {
+  node?: ReactNode | ReactNode[],
+): JSX.Element | JSX.Element[] {
   if (isTextElement(node)) {
     return createElement(type, { children: node })
   } else if (isObjectElement(node)) {
@@ -34,7 +34,7 @@ function createUnknownElement(
 export interface FieldProps extends FormItemProps {
   label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
   labelAlign?: FormLabelAlign
-  feedback?: ReactNode
+  feedback?: any //ReactNode | ReactElement<FormFeedbackProps> | FormFeedbackProps
   feedbackAlign?: FormFeedbackAlign
   feedbackStatus?: FormFeedbackStatus
   children?: ReactNode | ((controller: FormController<any>) => ReactNode)
@@ -45,25 +45,24 @@ function Field(props: FieldProps) {
     label: labelProp,
     // labelAlign,
     //
-    feedback,
+    feedback: feedbackProp,
     // feedbackAlign,
-    // feedbackStatus,
+    //feedbackStatus,
     //
     children,
     //
     ...restProps
   } = props
   const label = createUnknownElement(Form.Label, labelProp)
-
-  console.log(isFragment(feedback))
+  const {
+    props: { children: feedbackPropChildren },
+  } = feedbackProp
+  const feedback = createUnknownElement(Form.Feedback, feedbackPropChildren)
   return (
     <Form.Item {...restProps}>
       {label}
       {children && <Form.Control children={children} />}
       {feedback}
-      {/*{feedback && (*/}
-      {/*  <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />*/}
-      {/*)}*/}
     </Form.Item>
   )
 }
