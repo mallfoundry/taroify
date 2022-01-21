@@ -52,7 +52,7 @@ function BasicForm() {
           </Form.Control>
         </Form.Item>
       </Cell.Group>
-      <View style={{ marginTop: "16px" }}>
+      <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
           提交
         </Button>
