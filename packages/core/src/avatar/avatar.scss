@@ -3,14 +3,14 @@
 .#{$component-prefix}avatar {
   box-sizing: content-box;
   display: flex;
-  text-align: center;
-  font-family: $avatar-font-family;
-  font-weight: $avatar-font-weight;
-  color: $avatar-color;
-  background: $avatar-background-color;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  font-family: $avatar-font-family;
+  font-weight: $avatar-font-weight;
+  color: $avatar-color;
+  text-align: center;
+  background: $avatar-background-color;
 
   &--circle {
     border-radius: var(--border-radius-max, $border-radius-max);
@@ -21,9 +21,9 @@
   }
 
   &--mini {
-    font-size: $avatar-font-size-mini;
     width: $avatar-size-mini;
     height: $avatar-size-mini;
+    font-size: $avatar-font-size-mini;
 
     &.#{$component-prefix}avatar--rounded {
       border-radius: $avatar-border-radius-mini;
@@ -31,9 +31,9 @@
   }
 
   &--small {
-    font-size: $avatar-font-size-small;
     width: $avatar-size-small;
     height: $avatar-size-small;
+    font-size: $avatar-font-size-small;
 
     &.#{$component-prefix}avatar--rounded {
       border-radius: $avatar-border-radius-small;
@@ -41,9 +41,9 @@
   }
 
   &--medium {
-    font-size: $avatar-font-size-medium;
     width: $avatar-size-medium;
     height: $avatar-size-medium;
+    font-size: $avatar-font-size-medium;
 
     &.#{$component-prefix}avatar--rounded {
       border-radius: $avatar-border-radius-medium;
@@ -51,9 +51,9 @@
   }
 
   &--large {
-    font-size: $avatar-font-size-large;
     width: $avatar-size-large;
     height: $avatar-size-large;
+    font-size: $avatar-font-size-large;
 
     &.#{$component-prefix}avatar--rounded {
       border-radius: $avatar-border-radius-large;
