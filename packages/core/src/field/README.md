@@ -7,7 +7,7 @@
 ### 引入
 
 ```tsx
-import { Cell, Field, Input } from "@taroify/core";
+import { Button, Cell, Field, Input, Textarea } from "@taroify/core"
 ```
 
 ## 代码演示
@@ -151,7 +151,7 @@ function ErrorField() {
 
 ### 插入按钮
 
-通过 `Field.Button` 可以在输入框尾部插入按钮。
+通过 `Button` 可以在输入框尾部插入按钮。
 
 ```tsx
 import { Cell, Field, Input } from "@taroify/core"
@@ -164,6 +164,66 @@ function ButtonField() {
         <Button size="small" color="primary">
           发送验证码
         </Button>
+      </Field>
+    </Cell.Group>
+  )
+}
+```
+
+### 高度自适应
+
+对于 Textarea 组件，可以通过 `autoHeight` 属性设置高度自适应。
+
+```tsx
+import { Cell, Field, Textarea } from "@taroify/core"
+
+function FieldWithTextarea() {
+  return (
+    <Cell.Group inset>
+      <Field align="start" label="留言">
+        <Textarea autoHeight placeholder="请输入留言" />
+      </Field>
+    </Cell.Group>
+  )
+}
+```
+
+### 显示字数统计
+
+设置 `limit` 属性后会在底部显示字数统计。
+
+```tsx
+import { Cell, Field, Textarea } from "@taroify/core"
+
+function FieldWithTextareaLimit() {
+  return (
+    <Cell.Group inset>
+      <Field align="start" label="留言">
+        <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
+      </Field>
+    </Cell.Group>
+  )
+}
+```
+
+### 输入框内容对齐
+
+通过 Input 组件的 `align` 属性可以设置输入框内容的对齐方式，可选值为 `center`、`right`。
+
+```tsx
+import { Cell, Field, Input } from "@taroify/core"
+
+function FieldWithInputAlign() {
+  return (
+    <Cell.Group inset>
+      <Field label="文本">
+        <Input align="left" placeholder="输入框内容左对齐" />
+      </Field>
+      <Field label="文本">
+        <Input align="center" placeholder="输入框内容居中对齐" />
+      </Field>
+      <Field label="文本">
+        <Input align="right" placeholder="输入框内容右对齐" />
       </Field>
     </Cell.Group>
   )
