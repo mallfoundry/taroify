@@ -75,6 +75,10 @@ const menus = [
     subpackage: "form",
     children: [
       {
+        title: "AreaPicker 省市区选择",
+        to: "/components/area-picker/",
+      },
+      {
         title: "Cascader 级联选择",
         to: "/components/cascader/",
       },
@@ -186,6 +190,10 @@ const menus = [
     title: "展示组件",
     subpackage: "display",
     children: [
+      {
+        title: "Avatar 头像",
+        to: "/components/avatar/",
+      },
       {
         title: "Badge 徽标",
         to: "/components/badge/",

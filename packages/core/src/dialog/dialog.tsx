@@ -19,7 +19,12 @@ import { ButtonProps, createButton } from "../button"
 import ButtonContext from "../button/button.context"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
-import { getElementSelector, matchSelector, prependPageSelector } from "../utils/dom/element"
+import {
+  getElementSelector,
+  matchSelector,
+  prependPageSelector,
+  usePrependPageSelector,
+} from "../utils/dom/element"
 import { useObject, useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
@@ -129,7 +134,7 @@ function Dialog(props: DialogProps) {
     setObject,
   } = useObject<DialogProps & DialogOptions>(props)
 
-  const rootSelectorRef = useToRef(prependPageSelector(getElementSelector(id)))
+  const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
   const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,

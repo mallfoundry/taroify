@@ -1,0 +1,36 @@
+@import "./variables";
+
+.#{$component-prefix}textarea {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  text-align: left;
+  background: transparent;
+  color: $textarea-color;
+  border: 0;
+  resize: none;
+
+  &__wrapper {
+    width: 100%;
+  }
+
+  &__limit {
+    margin-top: var(--padding-base, $padding-base);
+    text-align: right;
+    color: $textarea-limit-color;
+    font-size: $textarea-limit-font-size;
+    line-height: $textarea-limit-line-height;
+  }
+
+
+  &__placeholder {
+    color: $textarea-placeholder-color;
+  }
+
+  &--readonly,
+  &__placeholder--readonly {
+    color: $textarea-readonly-color;
+  }
+}

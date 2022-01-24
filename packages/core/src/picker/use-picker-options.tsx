@@ -26,7 +26,7 @@ function elementToObject(
       ...restProps,
     }
   }
-  if (_.isObjectLike(element)) {
+  if (_.isPlainObject(element)) {
     return element as PickerOptionObject
   }
 }

@@ -88,7 +88,7 @@ function useIndexBarChildren(children?: ReactNode): IndexBarChildren {
 
 export interface IndexListProps extends ViewProps {
   sticky?: boolean
-  stickyOffsetTop?: number
+  stickyOffsetTop?: number | string
   children?: ReactNode
 }
 

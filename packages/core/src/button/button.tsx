@@ -19,7 +19,7 @@ function useButtonLoading(loading?: boolean | LoadingProps): ReactNode {
   return useMemo(() => {
     if (_.isBoolean(loading) && loading) {
       return <Loading className={prefixClassname("button__loading")} />
-    } else if (_.isObjectLike(loading)) {
+    } else if (_.isPlainObject(loading)) {
       const { className, ...restProps } = loading as LoadingProps
       return (
         <Loading

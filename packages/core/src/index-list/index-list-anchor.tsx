@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import { TaroElement } from "@tarojs/runtime"
 import { pageScrollTo } from "@tarojs/taro"
 import classNames from "classnames"
@@ -23,7 +24,7 @@ export interface IndexListAnchorInstance {
   scrollIntoView(scrollTop: number): void
 }
 
-export interface IndexListAnchorProps {
+export interface IndexListAnchorProps extends ViewProps {
   index: number | string
   children?: ReactNode
 }
@@ -34,7 +35,13 @@ interface InternalIndexListAnchorProps extends IndexListAnchorProps {
 
 const IndexListAnchor = forwardRef(
   (props: IndexListAnchorProps, ref: ForwardedRef<IndexListAnchorInstance>) => {
-    const { arrayedIndex, index, children } = props as InternalIndexListAnchorProps
+    const {
+      arrayedIndex,
+      index,
+      children,
+      className,
+      ...restProps
+    } = props as InternalIndexListAnchorProps
 
     const {
       activeArrayedIndex,
@@ -109,8 +116,9 @@ const IndexListAnchor = forwardRef(
     return (
       <View
         ref={rootRef}
-        className={prefixClassname("index-list__anchor-wrapper")}
+        className={classNames(prefixClassname("index-list__anchor-wrapper"), className)}
         style={wrapperStyle}
+        {...restProps}
       >
         <View
           className={classNames(prefixClassname("index-list__anchor"), {

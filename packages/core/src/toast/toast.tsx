@@ -19,7 +19,12 @@ import { useTimeout } from "../hooks"
 import Loading from "../loading"
 import Popup, { usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
-import { getElementSelector, matchSelector, prependPageSelector } from "../utils/dom/element"
+import {
+  getElementSelector,
+  matchSelector,
+  prependPageSelector,
+  usePrependPageSelector,
+} from "../utils/dom/element"
 import { useObject, useToRef, useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
@@ -120,7 +125,7 @@ export default function Toast(props: ToastProps) {
     setObject,
   } = useObject<ToastProps & ToastOptions>(props)
 
-  const rootSelectorRef = useToRef(prependPageSelector(getElementSelector(id)))
+  const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
   const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,

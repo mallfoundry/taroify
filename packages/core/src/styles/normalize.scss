@@ -4,3 +4,31 @@
 [class*="#{$component-prefix}"] {
   -webkit-tap-highlight-color: transparent;
 }
+
+a {
+  text-decoration: none;
+}
+
+input,
+button,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+a,
+input,
+button,
+textarea,
+[class*="#{$component-prefix}"] {
+  &:focus {
+    outline: none;
+  }
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

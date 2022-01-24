@@ -11,7 +11,7 @@ import { isElementOf } from "../utils/validate"
 import PickerColumns from "./picker-columns"
 import { PickerColumn } from "./picker.composition"
 import PickerContext from "./picker.context"
-import { DEFAULT_SIBLING_COUNT, PickerOptionObject } from "./picker.shared"
+import { DEFAULT_SIBLING_COUNT, PickerOptionObject, validPickerColumn } from "./picker.shared"
 
 function usePickerChildren(children?: ReactNode): ReactNode {
   const __children__: ReactNode[] = []
@@ -33,30 +33,40 @@ function usePickerChildren(children?: ReactNode): ReactNode {
   return __children__
 }
 
-function getPickerValue(values: any, multiColumns: boolean): any {
-  return multiColumns ? values : _.first(values)
-}
-
 function usePickerValues(value?: any): any[] {
   return _.isArray(value) ? value : [value]
 }
 
-export interface PickerProps extends ViewProps {
-  defaultValue?: any | any[]
-  value?: any | any[]
+interface PickerBaseProps extends ViewProps {
   readonly?: boolean
   loading?: boolean
   siblingCount?: number
   children?: ReactNode
-
-  onChange?(values: any | any[], option: PickerOptionObject): void
-
-  onConfirm?(values: any | any[], options: PickerOptionObject | PickerOptionObject[]): void
-
-  onCancel?(values: any | any[], options: PickerOptionObject | PickerOptionObject[]): void
 }
 
-export default function Picker(props: PickerProps) {
+export interface MultiValuePickerProps extends PickerBaseProps {
+  defaultValue?: any[]
+  value?: any[]
+
+  onChange?(values: any[], option: PickerOptionObject, column: PickerOptionObject): void
+
+  onConfirm?(values: any[], options: PickerOptionObject[]): void
+
+  onCancel?(values: any[], options: PickerOptionObject[]): void
+}
+
+export interface PickerProps extends PickerBaseProps {
+  defaultValue?: any | any[]
+  value?: any | any[]
+
+  onChange?(values: any | any[], option: PickerOptionObject, column: PickerOptionObject): void
+
+  onConfirm?(values: any | any[], option: PickerOptionObject | PickerOptionObject[]): void
+
+  onCancel?(values: any | any[], option: PickerOptionObject | PickerOptionObject[]): void
+}
+
+function Picker(props: PickerProps) {
   const {
     defaultValue,
     value: valueProp,
@@ -81,25 +91,23 @@ export default function Picker(props: PickerProps) {
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
 
-  const onColumnChange = useCallback(
-    (option: PickerOptionObject, column: PickerOptionObject, emitChange?: boolean) => {
-      const { index: columnIndex = -1 } = column
-      if (columnIndex < 0) {
-        return
-      }
-      valueOptionsRef.current[columnIndex] = option
-      if (emitChange) {
-        const newValues = _.map(
-          _.filter(valueOptionsRef.current, (newOption) => !_.isUndefined(newOption)),
-          ({ value }) => value,
-        )
-        _.set(newValues, columnIndex, option?.value)
-        const aValues = getPickerValue(newValues, multiValueRef.current || _.size(newValues) > 1)
-        setValue(aValues)
-        onChange?.(aValues, { ...option })
+  const setValueOptions = useCallback(
+    (option: PickerOptionObject, unverifiedColumn: PickerOptionObject) => {
+      const column = validPickerColumn(unverifiedColumn)
+      if (column) {
+        const { index: columnIndex } = column
+        valueOptionsRef.current[columnIndex] = option
       }
     },
-    [multiValueRef, onChange, setValue],
+    [],
+  )
+
+  const handleChange = useCallback(
+    (values: any, option: PickerOptionObject, column: PickerOptionObject) => {
+      setValue(values)
+      onChange?.(values, option, column)
+    },
+    [onChange, setValue],
   )
 
   const handleAction = (action: any) => () =>
@@ -108,13 +116,20 @@ export default function Picker(props: PickerProps) {
       _.map(valueOptionsRef.current, (valueOption) => ({ ...valueOption })),
     )
 
+  const getValueOptions = useCallback(() => valueOptionsRef.current, [])
+
+  const isMultiValue = useCallback(() => multiValueRef.current, [multiValueRef])
+
   return (
     <PickerContext.Provider
       value={{
         readonly,
         siblingCount,
         values,
-        onColumnChange,
+        getValueOptions,
+        isMultiValue,
+        setValueOptions,
+        onChange: handleChange,
         onConfirm: handleAction(onConfirm),
         onCancel: handleAction(onCancel),
       }}
@@ -126,3 +141,5 @@ export default function Picker(props: PickerProps) {
     </PickerContext.Provider>
   )
 }
+
+export default Picker

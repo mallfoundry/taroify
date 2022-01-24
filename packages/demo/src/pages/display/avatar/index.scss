@@ -1,0 +1,32 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.avatars-demo {
+  background: #fff;
+  height: 100%;
+}
+
+.avatar-block {
+  .#{$demo-prefix}block__content {
+    display: flex;
+
+    & > .#{$component-prefix}avatar {
+      margin-right: 14px * $hd;
+    }
+  }
+
+  .avatar-dot {
+    bottom: 2px * $hd;
+    right: 6px * $hd,
+  }
+
+  .avatar-avatar {
+    --badge-background-color: transparent;
+    --badge-padding: 0;
+    --badge-size: #{12px * $hd};
+    --avatar-size: var(--badge-size);
+    bottom: 2px * $hd;
+    right: 6px * $hd,
+  }
+}

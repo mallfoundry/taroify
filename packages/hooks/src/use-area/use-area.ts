@@ -1,6 +1,10 @@
 import * as _ from "lodash"
-import { ReactNode, useEffect, useMemo } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
+import useForceUpdate from "../use-force-update"
 import useToRef from "../use-to-ref"
+import { AreaData, AreaDivision, getAreaData } from "./area.shared"
+
+export type AreaFormatter = (record?: Record<string, string>, prefix?: any) => AreaDivision[]
 
 const DEFAULT_AREA_DATA: AreaData = {
   province_list: {},
@@ -8,57 +12,13 @@ const DEFAULT_AREA_DATA: AreaData = {
   county_list: {},
 }
 
-const FIRST_PROVINCE_PREFIX = "11"
-
-interface AreaData {
-  province_list: Record<string, string>
-  city_list: Record<string, string>
-  county_list: Record<string, string>
-}
-
-interface AreaDivision extends Record<any, any> {
-  value?: any
-  label?: ReactNode
-  children?: AreaDivision[] | ReactNode
-}
-
-function defaultFormatter(list: Record<string, string>): AreaDivision[] {
-  return _.map(list, (label, value) => ({ value, label, children: label }))
-}
-
-function nextFirstValuePrefix(prefix: string) {
-  return prefix + "01"
+function defaultFormatter(list?: Record<string, string>): AreaDivision[] {
+  let index = 0
+  return _.map(list, (label, value) => ({ index: index++, value, label, children: label }))
 }
 
 function padAreaPrefixToValue(prefix: any) {
   return _.padEnd(prefix, 6, "0")
-}
-
-function getAreaPrefixesAndValues(values: any[], size: number) {
-  const prefixes: string[] = []
-  const newValues: string[] = []
-
-  for (let index = 0; index < size; index++) {
-    const depth = index + 1
-    const indexValue = _.get(values, index)
-    const valuePrefix = indexValue?.substring(0, depth * 2)
-    if (index === 0) {
-      prefixes[index] = valuePrefix ?? FIRST_PROVINCE_PREFIX
-    } else {
-      const valueSuperiorPrefix = indexValue?.substring(0, index * 2)
-      const superiorPrefix = prefixes[index - 1]
-      // prefixes[index] =
-      //   superiorPrefix !== valueSuperiorPrefix ? nextFirstValuePrefix(superiorPrefix) : valuePrefix
-      // Easy to debug code
-      if (superiorPrefix !== valueSuperiorPrefix) {
-        prefixes[index] = nextFirstValuePrefix(superiorPrefix)
-      } else {
-        prefixes[index] = valuePrefix
-      }
-    }
-    newValues[index] = padAreaPrefixToValue(prefixes[index])
-  }
-  return [prefixes, newValues]
 }
 
 function filterAreaList(list?: Record<string, string>, prefix?: string) {
@@ -71,54 +31,92 @@ function filterAreaList(list?: Record<string, string>, prefix?: string) {
   return newRecord
 }
 
-function getAreaData(data: AreaData, maxDepth: number) {
-  const { province_list, city_list, county_list } = data
-  const dataArray: Record<any, any>[] = []
-  if (maxDepth >= 1 && !_.isEmpty(province_list)) {
-    dataArray.push(province_list)
-    if (maxDepth >= 2 && !_.isEmpty(city_list)) {
-      dataArray.push(city_list)
-      if (maxDepth >= 3 && !_.isEmpty(county_list)) {
-        dataArray.push(county_list)
-      }
+function getAreaPrefix(value: any, depth: number) {
+  return value?.substring(0, depth * 2)
+}
+
+function getFirstDivisionPrefix(divisions: AreaDivision[], depth: number) {
+  return getAreaPrefix(_.first(divisions)?.value, depth)
+}
+
+function getAreaPrefixDivision(
+  prefixes: string[],
+  divisions: AreaDivision[],
+  values: any[],
+  index: number,
+): AreaDivision {
+  const value = _.get(values, index)
+  const depth = index + 1
+  const valuePrefix = getAreaPrefix(value, depth)
+
+  if (index === 0) {
+    prefixes[index] = valuePrefix ?? getFirstDivisionPrefix(divisions, depth)
+  } else {
+    const valueSuperiorPrefix = value?.substring(0, index * 2)
+    const superiorPrefix = prefixes[index - 1]
+    // Easy to debug code
+    if (superiorPrefix !== valueSuperiorPrefix) {
+      prefixes[index] = getFirstDivisionPrefix(divisions, depth)
+    } else {
+      prefixes[index] = valuePrefix
     }
   }
-  return dataArray
+  const valuePad = padAreaPrefixToValue(prefixes[index])
+  return _.find(divisions, (division) => division.value === valuePad) as AreaDivision
 }
 
 interface UseAreaSelectOptions {
   data: AreaData
-  value: any[]
+  unverifiedValues: any[]
   depth: number
 
-  formatter(record?: Record<string, string>): AreaDivision[]
+  formatter: AreaFormatter
 }
 
 function doAreaSelect(options: UseAreaSelectOptions) {
-  const { value: values, data: dataPrimitive, depth, formatter } = options
+  const { unverifiedValues, data: dataPrimitive, depth, formatter } = options
   const data = getAreaData(dataPrimitive, depth)
-  const [prefixes, newValues] = getAreaPrefixesAndValues(values, depth)
-  const columns = _.map(data, (record, index) => ({
-    children:
-      index === 0
-        ? formatter?.(record) //
-        : formatter?.(filterAreaList(record, prefixes[index - 1])),
-  }))
+  //
+  const prefixes: string[] = []
+  const columns: AreaDivision[] = []
+  const nextValueOptions: AreaDivision[] = []
+  const nextValues: string[] = []
 
-  return [columns, newValues]
+  _.forEach(data, (record, index) => {
+    // const divisions = formatter?.(index === 0 ? record : filterAreaList(record, prefixes[index - 1]))
+    // Easy to debug code
+    let divisions: AreaDivision[]
+    if (index === 0) {
+      divisions = formatter?.(record)
+    } else {
+      divisions = formatter?.(filterAreaList(record, prefixes[index - 1]))
+    }
+    const division = getAreaPrefixDivision(prefixes, divisions, unverifiedValues, index)
+    nextValueOptions[index] = division
+    nextValues[index] = division.value
+    columns[index] = {
+      index,
+      children: divisions,
+    }
+  })
+  return {
+    columns,
+    values: nextValues,
+    valueOptions: nextValueOptions,
+  }
 }
 
 function useAreaSelect(options: UseAreaSelectOptions) {
-  const { value, data, depth, formatter } = options
+  const { unverifiedValues, data, depth, formatter } = options
   return useMemo(
     () =>
       doAreaSelect({
-        value,
+        unverifiedValues,
         data,
         depth,
         formatter,
       }),
-    [data, depth, formatter, value],
+    [data, depth, formatter, unverifiedValues],
   )
 }
 
@@ -126,36 +124,54 @@ function useAreaValues(value: any | any[]) {
   return useMemo(() => (_.isArray(value) ? value : [value]), [value])
 }
 
-interface UseVanAreaOptions {
-  value?: any[]
+interface UseAreaOptions {
   depth?: number
   data?: AreaData
 
-  formatter?(record?: Record<string, string>): AreaDivision[]
-
-  onChange?(value: any[]): void
+  formatter?: AreaFormatter
 }
 
-export default function useArea(options: UseVanAreaOptions) {
-  const {
-    value = [],
-    data = DEFAULT_AREA_DATA,
-    depth = 3,
-    formatter = defaultFormatter,
-    onChange,
-  } = options
-  const onChangeRef = useToRef(onChange)
-  const values = useAreaValues(value)
+export default function useArea(unverifiedValue: any[] = [], options: UseAreaOptions = {}) {
+  const { data = DEFAULT_AREA_DATA, depth = 3, formatter = defaultFormatter } = options
+  const unverifiedValueRef = useRef(unverifiedValue)
+  const forceUpdate = useForceUpdate()
+  const unverifiedValues = useAreaValues(unverifiedValueRef.current)
+  //
+  const { columns, values, valueOptions } = useAreaSelect({
+    unverifiedValues,
+    data,
+    depth,
+    formatter,
+  })
+  //
+  const valuesRef = useToRef(values)
+  const valueOptionsRef = useToRef(valueOptions)
+  const getValues = useCallback(() => valuesRef.current, [valuesRef])
+  const getValueOptions = useCallback(() => valueOptionsRef.current, [valueOptionsRef])
 
-  const [columns, newValues] = useAreaSelect({ value: values, data, depth, formatter })
-
+  const setValues = useCallback(
+    (newValues: any[]) => {
+      unverifiedValueRef.current = newValues
+      forceUpdate()
+    },
+    [forceUpdate],
+  )
+  //
   useEffect(() => {
-    if (!_.isEqual(value, newValues)) {
-      onChangeRef.current?.(newValues)
+    if (!_.isEqual(valuesRef.current, unverifiedValue)) {
+      setValues(unverifiedValue)
     }
-  }, [newValues, onChangeRef, value])
-
-  return {
-    columns,
-  }
+  }, [setValues, unverifiedValue, valuesRef])
+  //
+  return useMemo(
+    () => ({
+      columns,
+      values,
+      valueOptions,
+      getValues,
+      getValueOptions,
+      setValues,
+    }),
+    [columns, getValueOptions, getValues, setValues, valueOptions, values],
+  )
 }

@@ -5,7 +5,12 @@ import { CSSProperties, ReactNode, useEffect } from "react"
 import { useTimeout } from "../hooks"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
-import { getElementSelector, matchSelector, prependPageSelector } from "../utils/dom/element"
+import {
+  getElementSelector,
+  matchSelector,
+  prependPageSelector,
+  usePrependPageSelector,
+} from "../utils/dom/element"
 import { useObject, useToRef, useValue } from "../utils/state"
 import { NotifyOptions, useNotifyClose, useNotifyOpen } from "./notify.imperative"
 import { NotifyColor } from "./notify.shared"
@@ -39,7 +44,7 @@ function Notify(props: NotifyProps) {
     setObject,
   } = useObject<NotifyProps & NotifyOptions>(props)
 
-  const rootSelectorRef = useToRef(prependPageSelector(getElementSelector(id)))
+  const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
   const { value: open = false, setValue: setOpen } = useValue({
     defaultValue: defaultOpen,

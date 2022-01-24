@@ -16,7 +16,16 @@ export interface PickerOptionProps extends ViewProps {
 }
 
 export default function PickerOption(props: PickerOptionProps) {
-  const { className, disabled, value, label, children: childrenProp, ...restProps } = props
+  const {
+    className,
+    disabled,
+    // @ts-ignore
+    index,
+    value,
+    label,
+    children: childrenProp,
+    ...restProps
+  } = props
 
   const children = useMemo(() => {
     if (isValidElement(childrenProp) || isTextElement(childrenProp)) {

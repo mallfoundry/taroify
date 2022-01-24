@@ -118,7 +118,7 @@ function Index() {
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
 
-## 赞助者
+### 赞助者
 
 开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。Taroify 经常为此肝到深夜 ……
 

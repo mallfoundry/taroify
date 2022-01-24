@@ -12,6 +12,51 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.25-alpha.1
+
+`2022-01-24`
+
+**Feature**
+
+- IndexList
+  - 新增 stickyOffsetTop 字符串（string）类型 [#287](https://github.com/mallfoundry/taroify/pull/287) [@bluescurry](https://github.com/bluescurry)
+- ActionSheet
+  - 新增按钮（Button）相关属性 [#292](https://github.com/mallfoundry/taroify/pull/292)
+
+**Bug Fixes**
+
+- Picker
+  - 修复当子元素（children）改变时，索引（index）未更新的问题 [#289](https://github.com/mallfoundry/taroify/pull/289)
+
+### v0.0.25-alpha.0
+
+`2022-01-20`
+
+**New Component**
+
+- 新增 Avatar 组件 [#233](https://github.com/mallfoundry/taroify/issues/233) [#248](https://github.com/mallfoundry/taroify/pull/248) [@coderYarn](https://github.com/coderYarn)
+- 新增 AreaPicker 组件 [#77](https://github.com/mallfoundry/taroify/issues/77) [#264](https://github.com/mallfoundry/taroify/pull/272) [#264](https://github.com/mallfoundry/taroify/pull/272)
+
+**Feature**
+
+- IndexList.Anchor
+  - 新增全部属性 [#282](https://github.com/mallfoundry/taroify/pull/282) [@bluescurry](https://github.com/bluescurry)
+- Picker
+  - 新增 onChange 事件返回 column 对象 [#269](https://github.com/mallfoundry/taroify/blob/1b80d78ed8bd0150b83c1485a3a5b692975ce7d9/packages/core/src/picker/picker-columns.tsx#L37)
+- SwipeCell
+  - 优化微信小程序端的滑动动画效果 [#265](https://github.com/mallfoundry/taroify/pull/265)
+
+**Bug Fixes**
+
+- Toast
+  - 修复页面切换返回后不能打开的问题 [#283](https://github.com/mallfoundry/taroify/issues/283) [#284](https://github.com/mallfoundry/taroify/pull/284)
+- Notify
+  - 修复页面切换返回后不能打开的问题 [#283](https://github.com/mallfoundry/taroify/issues/283) [#284](https://github.com/mallfoundry/taroify/pull/284)
+- Dialog
+  - 修复页面切换返回后不能打开的问题 [#283](https://github.com/mallfoundry/taroify/issues/283) [#284](https://github.com/mallfoundry/taroify/pull/284)
+- Empty
+  - 修复内部图片样式被覆盖的问题 [#268](https://github.com/mallfoundry/taroify/issues/268) [#271](https://github.com/mallfoundry/taroify/pull/271)
+
 ### v0.0.24-alpha.1
 
 `2022-01-13`

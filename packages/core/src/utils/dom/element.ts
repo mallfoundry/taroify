@@ -1,5 +1,5 @@
 import { TaroElement } from "@tarojs/runtime"
-import { createSelectorQuery, getCurrentInstance } from "@tarojs/taro"
+import { createSelectorQuery, getCurrentInstance, useRouter } from "@tarojs/taro"
 import * as _ from "lodash"
 import { inWechat } from "../base"
 
@@ -44,6 +44,11 @@ export function getElementSelector(id?: string, className?: string) {
 
 export function prependPageSelector(selector?: string) {
   const path = getCurrentInstance().router?.path
+  return path ? `${path}__${selector}` : selector
+}
+
+export function usePrependPageSelector(selector?: string) {
+  const { path } = useRouter()
   return path ? `${path}__${selector}` : selector
 }
 

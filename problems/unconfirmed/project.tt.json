@@ -1,0 +1,9 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "@taroify/unconfirmed",
+  "appid": "testAppId",
+  "setting": {
+    "es6": false,
+    "minified": false
+  }
+}

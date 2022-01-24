@@ -110,6 +110,11 @@ const subpackages = [
         path: "picker/index",
       },
       {
+        title: "AreaPicker 省市区选择器",
+        name: "AreaPicker",
+        path: "area-picker/index",
+      },
+      {
         title: "Radio 单选框",
         name: "Radio",
         path: "radio/index",
@@ -201,6 +206,11 @@ const subpackages = [
     root: "pages/display",
     title: "展示组件",
     pages: [
+      {
+        title: "Avatar 头像",
+        name: "Avatar",
+        path: "avatar/index",
+      },
       {
         title: "Badge 徽标",
         name: "Badge",

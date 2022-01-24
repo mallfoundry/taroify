@@ -429,7 +429,8 @@ function CalendarField() {
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| onSubmit | 提交表单且验证通过后触发 | _values: object_ |
+| onSubmit | 提交表单且验证通过后触发 | _event: BaseEventOrig<FormProps.onSubmitEventDetail>_ |
+| onReset  | 重置表单后触发         | _event: BaseEventOrig_ |
 | onValidate | 提交表单且验证不通过后触发 | _errors: { name: string, errors: string[] }[]_ |
 | onValuesChange | 字段值更新后触发 | _changedValues: object, allValues: object_ |
 
@@ -439,9 +440,10 @@ function CalendarField() {
 
 | 方法名 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| setFieldsValue | 设置表单值 | _object_ | - |
-| getFieldsValue | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
-| validateFields | 验证表单，支持传入 `name` 来验证单个或部分表单项 | _name?: string \| string[]_ | _Promise_ |
+| setValues | 设置表单值                                   | _object_                    | - |
+| getValues | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
+| validate  | 验证表单，支持传入 `name` 来验证单个或部分表单项   | _name?: string \| string[]_ | _Promise_ |
+| reset     | 重置表单                                     | -                           | _Promise_ |
 
 ### validateTrigger 可选值
 
