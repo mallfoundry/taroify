@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.25-alpha.1
+
+`2022-01-24`
+
+**Feature**
+
+- IndexList
+  - 新增 stickyOffsetTop 字符串（string）类型 [#287](https://github.com/mallfoundry/taroify/pull/287) [@bluescurry](https://github.com/bluescurry)
+- ActionSheet
+  - 新增按钮（Button）相关属性 [#292](https://github.com/mallfoundry/taroify/pull/292)
+
+**Bug Fixes**
+
+- Picker
+  - 修复当子元素（children）改变时，索引（index）未更新的问题 [#289](https://github.com/mallfoundry/taroify/pull/289)
+
 ### v0.0.25-alpha.0
 
 `2022-01-20`
