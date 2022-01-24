@@ -8,6 +8,7 @@ import {
   ReactElement,
   ReactNode,
   ReactText,
+  useMemo,
 } from "react"
 import Form, {
   FormController,
@@ -44,6 +45,13 @@ function createUnknownElement(
   return node as JSX.Element
 }
 
+function useUnknownElement(
+  type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
+  node?: ReactNode | ReactNode[],
+) {
+  return useMemo(() => createUnknownElement(type, node), [node, type])
+}
+
 export interface FieldProps extends FormItemProps {
   label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
   labelAlign?: FormLabelAlign
@@ -66,8 +74,8 @@ function Field(props: FieldProps) {
     //
     ...restProps
   } = props
-  const label = createUnknownElement(Form.Label, labelProp)
-  const feedback = createUnknownElement(Form.Feedback, feedbackProp)
+  const label = useUnknownElement(Form.Label, labelProp)
+  const feedback = useUnknownElement(Form.Feedback, feedbackProp)
 
   return (
     <Form.Item {...restProps}>
