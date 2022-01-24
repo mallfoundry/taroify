@@ -36,6 +36,8 @@ export default function useCascader({
   )
 
   useEffect(() => {
+    if (_.isEmpty(options)) return
+
     const newColumns: CascaderOption[][] = []
     newColumns.push(options)
 
@@ -57,8 +59,9 @@ export default function useCascader({
         .forEach((e) => newColumns.push(e))
     }
     setColumns(newColumns)
-  }, [depth, findOption, options, values])
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [depth, findOption, JSON.stringify(options), values])
+  
   return {
     columns,
   }
