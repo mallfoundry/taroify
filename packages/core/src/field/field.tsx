@@ -3,6 +3,7 @@ import {
   ComponentClass,
   createElement,
   FunctionComponent,
+  isValidElement,
   PropsWithChildren,
   ReactElement,
   ReactNode,
@@ -11,6 +12,7 @@ import {
 import Form, {
   FormController,
   FormFeedbackAlign,
+  FormFeedbackProps,
   FormFeedbackStatus,
   FormItemProps,
   FormLabelAlign,
@@ -19,14 +21,25 @@ import Form, {
 
 import { isObjectElement, isTextElement } from "../utils/validate"
 
+function createUnknownComponentWrapper(children: ReactNode, displayName?: string) {
+  const Component = () => children as JSX.Element
+  Component.displayName = displayName
+  return Component
+}
+
 function createUnknownElement(
   type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
   node?: ReactNode | ReactNode[],
 ): JSX.Element | JSX.Element[] {
   if (isTextElement(node)) {
     return createElement(type, { children: node })
-  } else if (isObjectElement(node)) {
+  }
+  if (isObjectElement(node)) {
     return createElement(type, node)
+  }
+  if (isValidElement(node)) {
+    const ComponentWrapper = createUnknownComponentWrapper(node, type.displayName)
+    return createElement(ComponentWrapper)
   }
   return node as JSX.Element
 }
@@ -34,7 +47,7 @@ function createUnknownElement(
 export interface FieldProps extends FormItemProps {
   label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
   labelAlign?: FormLabelAlign
-  feedback?: any //ReactNode | ReactElement<FormFeedbackProps> | FormFeedbackProps
+  feedback?: ReactText | FormFeedbackProps | ReactElement<FormFeedbackProps> | ReactElement
   feedbackAlign?: FormFeedbackAlign
   feedbackStatus?: FormFeedbackStatus
   children?: ReactNode | ((controller: FormController<any>) => ReactNode)
@@ -54,10 +67,8 @@ function Field(props: FieldProps) {
     ...restProps
   } = props
   const label = createUnknownElement(Form.Label, labelProp)
-  const {
-    props: { children: feedbackPropChildren },
-  } = feedbackProp
-  const feedback = createUnknownElement(Form.Feedback, feedbackPropChildren)
+  const feedback = createUnknownElement(Form.Feedback, feedbackProp)
+
   return (
     <Form.Item {...restProps}>
       {label}

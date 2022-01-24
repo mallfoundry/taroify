@@ -33,4 +33,6 @@ function FormFeedback(props: FormFeedbackProps) {
   )
 }
 
+FormFeedback.displayName = "FormFeedback"
+
 export default FormFeedback
