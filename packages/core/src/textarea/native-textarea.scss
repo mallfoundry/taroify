@@ -1,0 +1,32 @@
+@import "./variables";
+
+.#{$component-prefix}native-textarea {
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  line-height: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  resize: none;
+  user-select: auto;
+
+  &:focus {
+    outline: none
+  }
+
+  &::placeholder
+  {
+    color: $textarea-placeholder-color;
+  }
+
+  &--readonly::placeholder {
+    color: $textarea-readonly-color;
+  }
+}
