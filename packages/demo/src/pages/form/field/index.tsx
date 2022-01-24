@@ -1,8 +1,9 @@
-import { Button, Cell, Field, Input } from "@taroify/core"
+import { Button, Cell, Field, Input, Textarea } from "@taroify/core"
 import { MusicOutlined, SmileOutlined, WarningOutlined } from "@taroify/icons"
 import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
+import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -116,6 +117,22 @@ function ButtonField() {
   )
 }
 
+function FieldWithInputAlign() {
+  return (
+    <Cell.Group inset>
+      <Field label="文本">
+        <Input align="left" placeholder="输入框内容左对齐" />
+      </Field>
+      <Field label="文本">
+        <Input align="center" placeholder="输入框内容居中对齐" />
+      </Field>
+      <Field label="文本">
+        <Input align="right" placeholder="输入框内容右对齐" />
+      </Field>
+    </Cell.Group>
+  )
+}
+
 export default function FieldDemo() {
   return (
     <Page title="Field 输入框" className="field-demo">
@@ -136,6 +153,29 @@ export default function FieldDemo() {
       </Block>
       <Block title="插入按钮">
         <ButtonField />
+      </Block>
+      <Block title="高度自适应">
+        <CustomWrapper>
+          <Cell.Group inset>
+            <Field align="start" label="留言">
+              <Textarea autoHeight placeholder="请输入留言" />
+            </Field>
+          </Cell.Group>
+        </CustomWrapper>
+      </Block>
+      <Block title="显示字数统计">
+        <CustomWrapper>
+          <Cell.Group inset>
+            <Field align="start" label="留言">
+              <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
+            </Field>
+          </Cell.Group>
+        </CustomWrapper>
+      </Block>
+      <Block title="输入框内容对齐">
+        <CustomWrapper>
+          <FieldWithInputAlign />
+        </CustomWrapper>
       </Block>
     </Page>
   )
