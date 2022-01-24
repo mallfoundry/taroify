@@ -8,10 +8,10 @@
 }
 
 .avatar-block {
-  .taroify-demo-block__content {
+  .#{$demo-prefix}block__content {
     display: flex;
 
-    & > * {
+    & > .#{$component-prefix}avatar {
       margin-right: 14px * $hd;
     }
   }
