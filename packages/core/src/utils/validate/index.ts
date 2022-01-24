@@ -6,7 +6,7 @@ export function isTextElement(node: ReactNode) {
 }
 
 export function isObjectElement(node?: ReactNode) {
-  return !isValidElement(node) && _.isObjectLike(node) && !(node instanceof Array)
+  return !isValidElement(node) && _.isObject(node) && !_.isArray(node)
 }
 
 export function isElementOf(node?: ReactNode, type?: JSXElementConstructor<any>) {
@@ -15,6 +15,7 @@ export function isElementOf(node?: ReactNode, type?: JSXElementConstructor<any>)
     if (element.type === type) {
       return true
     }
+
     const displayName = _.get(element.type, "displayName")
     if (
       _.isFunction(element.type) &&
