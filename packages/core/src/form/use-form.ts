@@ -369,6 +369,9 @@ class FormContainer {
   }
 
   getForm(name: string) {
+    if (!containerForms.has(name)) {
+      return undefined
+    }
     FormContainer.increaseFormRef(name)
     const DelegatingForm = defineForm(name)
     return new DelegatingForm()
@@ -404,10 +407,11 @@ interface UseFormOptions<V> {
   values?: V
 }
 
-export default function useForm<V = any>(name: string, options: UseFormOptions<V> = {}): Form {
+export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form {
   const { defaultValues, values } = options
   const hasForm = formContainer.hasForm(name)
-  if (!hasForm) {
+
+  if (!hasForm && !_.isEmpty(name)) {
     formContainer.newForm(name)
   }
 
