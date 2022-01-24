@@ -7,17 +7,17 @@ import { validateAll } from "./form.validate"
 
 const { warn } = getLogger("useForm")
 
-function toMapValueArray<T>(map: Map<string, T>): T[] {
+const containerForms = new Map<string, FormAttributes>()
+const containerFormRefs = new Map<string, number>()
+
+function toMapValueArray<T>(map?: Map<string, T>): T[] {
   const array: T[] = []
   map?.forEach((value) => array.push(value))
   return array
 }
 
-const containerForms = new Map<string, FormAttributes>()
-const containerFormRefs = new Map<string, number>()
-
 function getAttributiveForm(formName: string) {
-  return containerForms.get(formName) as FormAttributes
+  return containerForms.get(formName)
 }
 
 class FormAttributes {
@@ -181,12 +181,12 @@ function validateForm<V>(formName: string, name?: string | string[]) {
       .then((names: string[]) =>
         form?.findFields((field) => _.isEmpty(names) || _.includes(names, field.name)),
       )
-      .then(validateAll)
+      .then((items) => items && validateAll(items))
       .then<V>(() => form?.getValues(name) as V)
       .then(resolve)
       .catch((errors: FormValidError[]) => {
-        form.resetErrors()
-        form.setErrors(errors)
+        form?.resetErrors()
+        form?.setErrors(errors)
         reject(errors)
       })
   })
@@ -205,7 +205,7 @@ interface Form {
 
   getFields(): FormItemInstance[]
 
-  findFields(predicate: (field: FormItemInstance) => boolean): FormItemInstance[]
+  findFields(predicate: (field: FormItemInstance) => boolean): FormItemInstance[] | undefined
 
   setErrors(errors: FormValidError[]): void
 
@@ -288,8 +288,9 @@ function defineForm(formName: string) {
     }
 
     getErrors(name?: string | string[]): FormValidError[] {
+      const form = getAttributiveForm(formName)
       return _.reduce<FormValidError, FormValidError[]>(
-        getAttributiveForm(formName).getErrors(name) as any,
+        form?.getErrors(name) as any,
         (errors, error) => {
           errors.push(error)
           return errors
@@ -322,12 +323,12 @@ function defineForm(formName: string) {
 
     reset() {
       const form = getAttributiveForm(formName)
-      const oldValues = _.cloneDeep(form.values)
-      const newValues = _.cloneDeep(form.defaultValues)
+      const oldValues = _.cloneDeep(form?.values)
+      const newValues = _.cloneDeep(form?.defaultValues)
       form?.resetValues(newValues)
       form?.resetErrors()
-      form.emitEvent("change", newValues, oldValues)
-      form.emitEvent("reset")
+      form?.emitEvent("change", newValues, oldValues)
+      form?.emitEvent("reset")
     }
 
     setFieldsValue(newValues: any, emitChange?: boolean) {
