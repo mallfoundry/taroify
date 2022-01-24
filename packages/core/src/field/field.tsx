@@ -1,12 +1,40 @@
 import * as React from "react"
-import { ReactNode } from "react"
-import Form, { FormController, FormItemProps, FormLabelAlign } from "../form"
-import { FormFeedbackAlign, FormFeedbackStatus } from "../form"
+import {
+  ComponentClass,
+  createElement,
+  FunctionComponent,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  ReactText,
+} from "react"
+import Form, {
+  FormController,
+  FormFeedbackAlign,
+  FormFeedbackStatus,
+  FormItemProps,
+  FormLabelAlign,
+  FormLabelProps,
+} from "../form"
+
+import { isObjectElement, isTextElement } from "../utils/validate"
+
+function createUnknownElement(
+  type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
+  node?: ReactNode | ReactNode[],
+): JSX.Element | JSX.Element[] {
+  if (isTextElement(node)) {
+    return createElement(type, { children: node })
+  } else if (isObjectElement(node)) {
+    return createElement(type, node)
+  }
+  return node as JSX.Element
+}
 
 export interface FieldProps extends FormItemProps {
-  label?: ReactNode
+  label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
   labelAlign?: FormLabelAlign
-  feedback?: ReactNode
+  feedback?: any //ReactNode | ReactElement<FormFeedbackProps> | FormFeedbackProps
   feedbackAlign?: FormFeedbackAlign
   feedbackStatus?: FormFeedbackStatus
   children?: ReactNode | ((controller: FormController<any>) => ReactNode)
@@ -14,26 +42,27 @@ export interface FieldProps extends FormItemProps {
 
 function Field(props: FieldProps) {
   const {
-    label,
-    labelAlign,
+    label: labelProp,
+    // labelAlign,
     //
-    feedback,
-    feedbackAlign,
-    feedbackStatus,
+    feedback: feedbackProp,
+    // feedbackAlign,
+    //feedbackStatus,
     //
     children,
     //
-    rules,
     ...restProps
   } = props
-
+  const label = createUnknownElement(Form.Label, labelProp)
+  const {
+    props: { children: feedbackPropChildren },
+  } = feedbackProp
+  const feedback = createUnknownElement(Form.Feedback, feedbackPropChildren)
   return (
     <Form.Item {...restProps}>
-      {label && <Form.Label align={labelAlign} children={label} />}
+      {label}
       {children && <Form.Control children={children} />}
-      {feedback && (
-        <Form.Feedback align={feedbackAlign} status={feedbackStatus} children={feedback} />
-      )}
+      {feedback}
     </Form.Item>
   )
 }

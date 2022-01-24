@@ -2,7 +2,11 @@ import * as _ from "lodash"
 import { isValidElement, JSXElementConstructor, ReactElement, ReactNode } from "react"
 
 export function isTextElement(node: ReactNode) {
-  return !isValidElement(node) && !_.isArray(node) && !_.isUndefined(node) && !_.isNull(node)
+  return _.isNumber(node) || _.isString(node)
+}
+
+export function isObjectElement(node?: ReactNode) {
+  return !isValidElement(node) && _.isObjectLike(node) && !(node instanceof Array)
 }
 
 export function isElementOf(node?: ReactNode, type?: JSXElementConstructor<any>) {
