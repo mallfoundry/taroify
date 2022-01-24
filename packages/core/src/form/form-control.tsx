@@ -27,8 +27,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
     onBlur: onDelegatingBlur,
     ...restProps
   } = props
-
-  const { controlAlign } = useContext(FormContext)
+  const { name: formName, controlAlign } = useContext(FormContext)
   const align = alignProp ?? controlAlign
 
   const { validateStatus } = useContext(FormItemContext)
@@ -37,7 +36,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
     if (_.isFunction(children)) {
       return children?.({
         name,
-        value,
+        value: formName ? value : undefined,
         validateStatus,
         onChange: onDelegatingChange,
         onBlur: onDelegatingBlur,
@@ -57,7 +56,15 @@ function FormControl<V = any>(props: FormControlProps<V>) {
         onBlur: onDelegatingBlur,
       })
     })
-  }, [children, name, onDelegatingBlur, onDelegatingChange, validateStatus, value]) as JSX.Element
+  }, [
+    children,
+    formName,
+    name,
+    onDelegatingBlur,
+    onDelegatingChange,
+    validateStatus,
+    value,
+  ]) as JSX.Element
 
   return (
     <View
