@@ -8,30 +8,21 @@ import {
   ReactElement,
   ReactNode,
   ReactText,
-  useMemo,
 } from "react"
-import Form, {
-  FormController,
-  FormFeedbackAlign,
-  FormFeedbackProps,
-  FormFeedbackStatus,
-  FormItemProps,
-  FormLabelAlign,
-  FormLabelProps,
-} from "../form"
+import Form, { FormController, FormFeedbackProps, FormItemProps, FormLabelProps } from "../form"
 
 import { isObjectElement, isTextElement } from "../utils/validate"
 
-function createUnknownComponentWrapper(children: ReactNode, displayName?: string) {
+function createVariantComponentWrapper(children: ReactNode, displayName?: string) {
   const Component = () => children as JSX.Element
   Component.displayName = displayName
   return Component
 }
 
-function createUnknownElement(
+function createVariantElement(
   type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
   node?: ReactNode | ReactNode[],
-): JSX.Element | JSX.Element[] {
+): JSX.Element {
   if (isTextElement(node)) {
     return createElement(type, { children: node })
   }
@@ -39,43 +30,22 @@ function createUnknownElement(
     return createElement(type, node)
   }
   if (isValidElement(node)) {
-    const ComponentWrapper = createUnknownComponentWrapper(node, type.displayName)
+    const ComponentWrapper = createVariantComponentWrapper(node, type.displayName)
     return createElement(ComponentWrapper)
   }
   return node as JSX.Element
 }
 
-function useUnknownElement(
-  type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
-  node?: ReactNode | ReactNode[],
-) {
-  return useMemo(() => createUnknownElement(type, node), [node, type])
-}
-
 export interface FieldProps extends FormItemProps {
-  label?: ReactText | FormLabelProps | ReactElement<FormLabelProps>
-  labelAlign?: FormLabelAlign
-  feedback?: ReactText | FormFeedbackProps | ReactElement<FormFeedbackProps> | ReactElement
-  feedbackAlign?: FormFeedbackAlign
-  feedbackStatus?: FormFeedbackStatus
+  label?: ReactText | FormLabelProps | ReactElement
+  feedback?: ReactText | FormFeedbackProps | ReactElement
   children?: ReactNode | ((controller: FormController<any>) => ReactNode)
 }
 
 function Field(props: FieldProps) {
-  const {
-    label: labelProp,
-    // labelAlign,
-    //
-    feedback: feedbackProp,
-    // feedbackAlign,
-    //feedbackStatus,
-    //
-    children,
-    //
-    ...restProps
-  } = props
-  const label = useUnknownElement(Form.Label, labelProp)
-  const feedback = useUnknownElement(Form.Feedback, feedbackProp)
+  const { label: labelProp, feedback: feedbackProp, children, ...restProps } = props
+  const label = createVariantElement(Form.Label, labelProp)
+  const feedback = createVariantElement(Form.Feedback, feedbackProp)
 
   return (
     <Form.Item {...restProps}>

@@ -130,7 +130,7 @@ function IconField() {
 
 ### 错误提示
 
-设置 `required` 属性表示这是一个必填项，可以配合 `error` 或 `message` 属性显示对应的错误提示。
+设置 `required` 属性表示这是一个必填项，可以配合 `Input` 或 `Field.Feedback` 组件显示对应的错误提示。
 
 ```tsx
 import { Cell, Field, Input } from "@taroify/core"
@@ -141,7 +141,11 @@ function ErrorField() {
       <Field label="用户名" required>
         <Input placeholder="请输入用户名" color="danger" />
       </Field>
-      <Field required label="手机号" feedbackStatus="invalid" feedback="手机号格式错误">
+      <Field
+        required
+        label="手机号"
+        feedback={<Field.Feedback status="invalid">手机号格式错误</Field.Feedback>}
+      >
         <Input placeholder="请输入手机号" />
       </Field>
     </Cell.Group>
@@ -230,16 +234,38 @@ function FieldWithInputAlign() {
 }
 ```
 
+
+### 标签（Field.Label）和反馈（Field.Feedback）
+
+使用 `label` 和 `feedback` 属性的对象或元素表示法，提供全部属性。
+
+```tsx
+import { Cell, Field, Input } from "@taroify/core"
+
+function FieldWithVaraintLabel() {
+  return (
+    <Cell.Group inset>
+      <Field label="文本">
+        <Input placeholder="请输入文本" />
+      </Field>
+      <Field label={{ children: "文本" }}>
+        <Input placeholder="请输入文本" />
+      </Field>
+      <Field label={<Field.Label>文本</Field.Label>}>
+        <Input placeholder="请输入文本" />
+      </Field>
+    </Cell.Group>
+  )
+}
+```
+
 ## API
 
 ### Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| label | 左侧文本 | _string_ | - |
-| labelAlign | 左侧文本对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| feedback | 提示文案，为空时不展示 | _string_ | - |
-| feedbackAlign | 提示文案对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| feedbackStatus | 提示文案状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
+| label | 左侧文本 | _string \| [FormLabelProps](/components/form/#formlabel-props) \| ReactElement_ | - |
+| feedback | 提示文案，为空时不展示 | _string \| [FormFeedbackProps](/components/form/#formfeedback-props) \| ReactElement_ | - |
 
 > 属性继承自 Form.Item 组件，更多属性参见：[Form.Item 组件](/components/form/#formitem-props)

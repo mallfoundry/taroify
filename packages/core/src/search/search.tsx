@@ -6,9 +6,9 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode } from "react"
+import { ReactElement, ReactNode, ReactText } from "react"
 import Field from "../field"
-import { FormFeedbackAlign, FormFeedbackStatus } from "../form"
+import { FormFeedbackProps } from "../form"
 import Input, { InputAlign, InputClearTrigger, InputColor } from "../input"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
@@ -37,10 +37,7 @@ interface SearchProps extends ViewProps {
   clearIcon?: ReactNode
   clearTrigger?: InputClearTrigger
 
-  feedback?: ReactNode
-  feedbackAlign?: FormFeedbackAlign
-  feedbackStatus?: FormFeedbackStatus
-
+  feedback?: ReactText | FormFeedbackProps | ReactElement
   action?: boolean | ReactNode
 
   onClear?(event: ITouchEvent): void
@@ -69,23 +66,17 @@ function Search(props: SearchProps) {
     focus,
     disabled,
     readonly,
-
+    //
     placeholder,
     placeholderClassName,
-
     clearable = true,
     clearIcon,
     clearTrigger,
-
     inputAlign,
     inputColor,
-
     feedback,
-    feedbackAlign,
-    feedbackStatus,
-
     action,
-
+    //
     onClear,
     onCancel,
     onSearch,
@@ -123,8 +114,6 @@ function Search(props: SearchProps) {
           icon={icon}
           rightIcon={rightIcon}
           feedback={feedback}
-          feedbackAlign={feedbackAlign}
-          feedbackStatus={feedbackStatus}
         >
           <Input
             className={prefixClassname("search__input")}
