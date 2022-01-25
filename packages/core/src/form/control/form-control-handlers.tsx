@@ -12,6 +12,7 @@ import Rate, { RateProps } from "../../rate"
 import Slider, { SliderProps } from "../../slider"
 import Stepper, { StepperProps } from "../../stepper"
 import Switch, { SwitchProps } from "../../switch"
+import Textarea from "../../textarea"
 import Uploader, { UploaderProps } from "../../uploader"
 import { FormController } from "../form.shared"
 import FormControlHandler, { registerFormControlHandler } from "./form-control-handler"
@@ -44,7 +45,12 @@ registerFormControlHandler(
     }
 
     supportsControlType(elementType: any): boolean {
-      return elementType === TaroInput || elementType === TaroTextarea || elementType === Input
+      return (
+        elementType === TaroInput ||
+        elementType === TaroTextarea ||
+        elementType === Input ||
+        elementType === Textarea
+      )
     }
   })(),
 )
