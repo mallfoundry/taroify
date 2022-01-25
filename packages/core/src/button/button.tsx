@@ -113,7 +113,7 @@ export default function Button(props: ButtonProps) {
       <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
-        disabled={disabled}
+        disabled={disabled || !!loading}
         loading={false}
         {...restProps}
       />
