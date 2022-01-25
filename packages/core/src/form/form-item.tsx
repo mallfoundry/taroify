@@ -24,6 +24,7 @@ import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
 import { fulfillPromise } from "../utils/promisify"
 import { useToRef } from "../utils/state"
+import { isElementOf } from "../utils/validate"
 import FormFeedback from "./form-feedback"
 import FormItemContext from "./form-item.context"
 import { validateRules } from "./form.rule"
@@ -50,11 +51,11 @@ function useFormItemChildren(children?: ReactNode): FormItemChildren {
 
       const element = child as ReactElement
       const { type: elementType } = element as ReactElement<InputProps>
-      if (elementType === Form.Label) {
+      if (isElementOf(element, Form.Label)) {
         __children__.label = element
       } else if (elementType === Form.Control) {
         __children__.control = element
-      } else if (elementType === Form.Feedback) {
+      } else if (isElementOf(element, Form.Feedback)) {
         __children__.feedbacks?.push(element)
       }
     })

@@ -21,7 +21,7 @@ function BasicForm() {
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     Toast.open(JSON.stringify(event.detail.value))
   }
-  
+
   return (
     <Form onSubmit={onSubmit}>
       <Toast id="toast" />
@@ -38,6 +38,14 @@ function BasicForm() {
             <Input password placeholder="密码" />
           </Form.Control>
         </Form.Item>
+        <Field
+          name="text"
+          label={{ align: "left", children: "文本" }}
+          feedback={<Form.Feedback>aaa</Form.Feedback>}
+          rules={[{ required: true, message: "请填写文本" }]}
+        >
+          <Input placeholder="请输入文本" />
+        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
@@ -363,7 +371,7 @@ function CalendarField() {
       return `${months}-${days}`
     }
   }
-  
+
   return (
     <>
       <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
@@ -478,14 +486,12 @@ function CalendarField() {
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | colon | 是否在 label 后面添加冒号 | _boolean_ | `false` |
 
-
 ### Form.Feedback Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | status | 反馈状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
-
 
 ### Form.Control Props
 

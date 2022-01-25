@@ -143,9 +143,7 @@ function CustomSearch() {
 | clearable | 是否启用清除图标，点击清除图标后会清空输入框 | _boolean_ | `true` |
 | clearIcon| 清除图标 | _string_ | `<Clear />` |
 | clearTrigger | 显示清除图标的时机，`always` 表示输入框不为空时展示，<br>`focus` 表示输入框聚焦且不为空时展示 | _string_ | `focus` |
-| feedback | 提示文案，为空时不展示 | _string_ | - |
-| feedbackAlign | 提示文案对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| feedbackStatus | 提示文案状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
+| feedback | 提示文案，为空时不展示 | _string \| [FormFeedbackProps](/components/form/#formfeedback-props) \| ReactElement_ | - |
 
 ### Events
 

@@ -97,7 +97,11 @@ function ErrorField() {
       <Field label="用户名" required>
         <Input placeholder="请输入用户名" color="danger" />
       </Field>
-      <Field required label="手机号" feedbackStatus="invalid" feedback="手机号格式错误">
+      <Field
+        required
+        label="手机号"
+        feedback={<Field.Feedback status="invalid">手机号格式错误</Field.Feedback>}
+      >
         <Input placeholder="请输入手机号" />
       </Field>
     </Cell.Group>

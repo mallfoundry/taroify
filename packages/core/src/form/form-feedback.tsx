@@ -6,7 +6,7 @@ import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import { FormFeedbackAlign, FormFeedbackStatus } from "./form.shared"
 
-interface FormFeedbackProps extends ViewProps {
+export interface FormFeedbackProps extends ViewProps {
   align?: FormFeedbackAlign
   status?: FormFeedbackStatus
   children?: ReactNode
@@ -32,5 +32,7 @@ function FormFeedback(props: FormFeedbackProps) {
     />
   )
 }
+
+FormFeedback.displayName = "FormFeedback"
 
 export default FormFeedback
