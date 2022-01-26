@@ -9,7 +9,6 @@
   }
 
   &__icon {
-    display: inline-flex;
     font-size: var(--grid-item-icon-size, $grid-item-icon-size);
 
     .#{$component-prefix}icon {

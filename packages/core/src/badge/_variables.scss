@@ -11,5 +11,6 @@ $badge-border-width: var(--badge-border-width, var(--border-width-base, $border-
 $badge-border-color: var(--badge-border-color, var(--white, $white));
 $badge-border-radius: var(--badge-border-radius, var(--border-radius-max, $border-radius-max));
 $badge-background-color: var(--badge-background-color, var(--red, $red));
-$badge-dot-color: var(--badge-dot-color, var(--red, $red));
-$badge-dot-size: var(--badge-dot-size, 8PX);
+$badge-dot-color: var(--badge-dot-color, $badge-background-color);
+//$badge-dot-size: var(--badge-dot-size, 8PX);
+$badge-dot-size: var(--badge-dot-size, 8px * $hd);

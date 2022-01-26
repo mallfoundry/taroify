@@ -72,7 +72,7 @@ export default function GridDemo() {
       </Block>
       <Block title="徽标提示">
         <Grid columns={2}>
-          <Grid.Item icon={<HomeOutlined />} dot text="文字" />
+          <Grid.Item icon={<HomeOutlined />} badge text="文字" />
           <Grid.Item icon={<Search />} badge="99+" text="文字" />
         </Grid>
       </Block>
