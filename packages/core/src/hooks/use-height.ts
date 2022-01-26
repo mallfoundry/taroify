@@ -6,7 +6,7 @@ export default function useHeight(elementOrRef: any) {
   const [height, setHeight] = useState<number>(0)
   useMounted(() =>
     getRect(elementOrRef)
-      .then(({ height }) => height)
+      .then((rect) => rect?.height)
       .then(setHeight),
   )
   return height
