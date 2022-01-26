@@ -11,9 +11,7 @@
   }
 
   .custom-color {
-    .#{$component-prefix}badge {
-      background: #1989fa;
-    }
+    --badge-background-color: #1989fa;
   }
 
   .badge-icon {
