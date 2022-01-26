@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.1
+
+`2022-01-26`
+
+**Feature**
+
+- Form
+  - 补全 FormInstance 类型 [#311](https://github.com/mallfoundry/taroify/pull/311)
+
+**Bug Fixes**
+
+- useHeight
+  - 修复 rect 为 undefined 的问题 [#312](https://github.com/mallfoundry/taroify/pull/312)
+
 ### v0.0.26-alpha.0
 
 `2022-01-26`
