@@ -1,31 +1,24 @@
 import * as _ from "lodash"
 import * as React from "react"
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
+import { cloneElement, ReactElement, ReactNode } from "react"
+import { isElementOf } from "../utils/validate"
 import Badge, { BadgeProps } from "./badge"
-
-interface BadgeChildren {
-  children?: ReactNode
-}
-
-function elementTypeOf(node: ReactNode, type: any) {
-  return isValidElement(node) && (node as ReactElement).type === type
-}
 
 export default function useBadge(badge: ReactNode, props: BadgeProps = {}) {
   if (_.isBoolean(badge) && badge) {
-    return ({ children }: BadgeChildren) => <Badge {...props} dot children={children} />
+    return (badgeProps: BadgeProps) => <Badge {...props} dot {...badgeProps} />
   }
 
   if (_.isNumber(badge) || _.isString(badge)) {
-    return ({ children }: BadgeChildren) => <Badge {...props} content={badge} children={children} />
+    return (badgeProps: BadgeProps) => <Badge {...props} content={badge} {...badgeProps} />
   }
 
-  if (elementTypeOf(badge, Badge)) {
-    return ({ children }: BadgeChildren) =>
+  if (isElementOf(badge, Badge)) {
+    return (badgeProps: BadgeProps) =>
       cloneElement(badge as ReactElement, {
         ...props,
-        children,
+        ...badgeProps,
       })
   }
-  return ({ children }: BadgeChildren) => <Badge {...props} children={children} />
+  return (badgeProps: BadgeProps) => <Badge {...props} {...badgeProps} />
 }
