@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import { AvatarShape, AvatarSize } from "./avatar.shared"
 
 export interface AvatarProps extends ViewProps {
-  className?:string
+  className?: string
   style?: CSSProperties
   src?: string
   alt?: string
@@ -18,7 +18,7 @@ export interface AvatarProps extends ViewProps {
 }
 
 function Avatar(props: AvatarProps) {
-  const {className, src, alt, shape = "circle", size = "medium", children, ...restProps } = props
+  const { className, src, alt, shape = "circle", size = "medium", children, ...restProps } = props
   return (
     <View
       className={classNames(
@@ -34,7 +34,7 @@ function Avatar(props: AvatarProps) {
           [prefixClassname("avatar--medium")]: size === "medium",
           [prefixClassname("avatar--large")]: size === "large",
         },
-        className
+        className,
       )}
       {...restProps}
     >

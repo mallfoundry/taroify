@@ -64,12 +64,12 @@ interface AvatarGroupProps {
 
 export default function AvatarGroup(props: AvatarGroupProps) {
   const {
+    className,
     shape = "circle",
     limit = Number.MAX_VALUE,
     spacing = "small",
     total,
     children, //
-    className,
   } = props
   const [avatars, avatarsSize] = useAvatars(children, shape, limit)
 
