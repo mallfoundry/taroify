@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useContext } from "react"
-import { useBadge } from "../badge"
+import { useBadge, useBadgeWrapper } from "../badge"
 import { prefixClassname } from "../styles"
 import TabbarContext from "./tabbar.context"
 
@@ -19,9 +19,9 @@ export default function TabbarItem(props: TabbarItemProps) {
   const { className, icon, value: valueProp, badge, children, onClick, ...restProps } = props
   const { value, onItemClick } = useContext(TabbarContext)
   const active = value === valueProp
-  const Badge = useBadge(badge, {
-    className: prefixClassname("tabbar-item__icon"),
-  })
+
+  const IconBadgeWrapper = useBadgeWrapper(icon)
+  const Badge = useBadge(badge)
 
   return (
     <View
@@ -38,7 +38,11 @@ export default function TabbarItem(props: TabbarItemProps) {
       }}
       {...restProps}
     >
-      {icon && <Badge children={icon} />}
+      {icon && (
+        <IconBadgeWrapper className={classNames(prefixClassname("tabbar-item__icon"))}>
+          <Badge />
+        </IconBadgeWrapper>
+      )}
       <View className={prefixClassname("tabbar-item__label")} children={children} />
     </View>
   )
