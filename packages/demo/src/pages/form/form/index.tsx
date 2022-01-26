@@ -4,7 +4,6 @@ import {
   Cell,
   Checkbox,
   DatetimePicker,
-  Field,
   Form,
   Input,
   Picker,
@@ -52,14 +51,6 @@ function BasicForm() {
             <Input password placeholder="密码" />
           </Form.Control>
         </Form.Item>
-        <Field
-          name="text"
-          label={{ align: "left", children: "文本" }}
-          feedback={<Form.Feedback>aaa</Form.Feedback>}
-          rules={[{ required: true, message: "请填写文本" }]}
-        >
-          <Input placeholder="请输入文本" />
-        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
