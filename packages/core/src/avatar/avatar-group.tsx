@@ -59,6 +59,7 @@ interface AvatarGroupProps {
   spacing?: AvatarSpacing
   limit?: number
   total?: number
+  className?: string
 }
 
 export default function AvatarGroup(props: AvatarGroupProps) {
@@ -68,17 +69,22 @@ export default function AvatarGroup(props: AvatarGroupProps) {
     spacing = "small",
     total,
     children, //
+    className,
   } = props
   const [avatars, avatarsSize] = useAvatars(children, shape, limit)
 
   return (
     <View
-      className={classNames(prefixClassname("avatar-group"), {
-        [prefixClassname("avatar-group--spacing-mini")]: spacing === "mini",
-        [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
-        [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
-        [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
-      })}
+      className={classNames(
+        prefixClassname("avatar-group"),
+        {
+          [prefixClassname("avatar-group--spacing-mini")]: spacing === "mini",
+          [prefixClassname("avatar-group--spacing-small")]: spacing === "small",
+          [prefixClassname("avatar-group--spacing-medium")]: spacing === "medium",
+          [prefixClassname("avatar-group--spacing-large")]: spacing === "large",
+        },
+        className,
+      )}
     >
       {avatars}
       {avatarsSize >= limit && (
