@@ -137,6 +137,26 @@ function FieldWithInputAlign() {
   )
 }
 
+function TextareaWithAutoHeight() {
+  return (
+    <Cell.Group inset>
+      <Field align="start" label="留言">
+        <Textarea autoHeight placeholder="请输入留言" />
+      </Field>
+    </Cell.Group>
+  )
+}
+
+function TextareaWithLimit() {
+  return (
+    <Cell.Group inset>
+      <Field align="start" label="留言">
+        <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
+      </Field>
+    </Cell.Group>
+  )
+}
+
 export default function FieldDemo() {
   return (
     <Page title="Field 输入框" className="field-demo">
@@ -160,20 +180,12 @@ export default function FieldDemo() {
       </Block>
       <Block title="高度自适应">
         <CustomWrapper>
-          <Cell.Group inset>
-            <Field align="start" label="留言">
-              <Textarea autoHeight placeholder="请输入留言" />
-            </Field>
-          </Cell.Group>
+          <TextareaWithAutoHeight />
         </CustomWrapper>
       </Block>
       <Block title="显示字数统计">
         <CustomWrapper>
-          <Cell.Group inset>
-            <Field align="start" label="留言">
-              <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
-            </Field>
-          </Cell.Group>
+          <TextareaWithLimit />
         </CustomWrapper>
       </Block>
       <Block title="输入框内容对齐">
