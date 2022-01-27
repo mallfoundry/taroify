@@ -8,7 +8,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
-import raf from "../utils/raf"
+import { preventDefault } from "../utils/dom/event"
 import { useValue } from "../utils/state"
 import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
 
@@ -104,6 +104,7 @@ function Input(props: InputProps) {
   }, [clearTrigger, clearable, disabled, focused, value])
 
   const handleClear = (event: ITouchEvent) => {
+    preventDefault(event, true)
     resolveOnChange(event, onChange, "")
     resolveOnChange(event, onInput, "")
     onClear?.(event)
@@ -122,11 +123,9 @@ function Input(props: InputProps) {
   }
 
   const handleBlur = (event: BaseEventOrig<TaroInputProps.inputValueEventDetail>) => {
-    resolveOnChange(event, onChange, value)
     onBlur?.(event)
-
-    // Update focused by raf
-    raf(() => setFocused(false))
+    // Update focused by setTimeout
+    setTimeout(() => setFocused(false), 80)
   }
 
   return (
