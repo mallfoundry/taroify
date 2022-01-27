@@ -52,6 +52,7 @@ function Textarea(props: TextareaProps) {
         disabled={readonly || disabled}
         readonly={readonly}
         maxlength={maxlength}
+        value={value}
         onInput={(e) => {
           setValue(e.detail.value)
           onInput?.(e)
