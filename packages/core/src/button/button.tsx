@@ -19,7 +19,7 @@ function useButtonLoading(loading?: boolean | LoadingProps): ReactNode {
   return useMemo(() => {
     if (_.isBoolean(loading) && loading) {
       return <Loading className={prefixClassname("button__loading")} />
-    } else if (_.isObjectLike(loading)) {
+    } else if (_.isPlainObject(loading)) {
       const { className, ...restProps } = loading as LoadingProps
       return (
         <Loading
@@ -113,7 +113,7 @@ export default function Button(props: ButtonProps) {
       <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
-        disabled={disabled}
+        disabled={disabled || !!loading}
         loading={false}
         {...restProps}
       />

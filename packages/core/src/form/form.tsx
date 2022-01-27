@@ -1,10 +1,13 @@
+import { useForceUpdate } from "@taroify/hooks"
 import { Form as TaroForm } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps as TaroFormProps } from "@tarojs/components/types/Form"
 import * as React from "react"
 import { ForwardedRef, forwardRef, ReactNode, useEffect, useImperativeHandle } from "react"
 import { useUniqueId } from "../hooks"
+import { preventDefault } from "../utils/dom/event"
 import FormContext from "./form.context"
+
 import {
   FormControlAlign,
   FormInstance,
@@ -41,16 +44,25 @@ const Form = forwardRef<FormInstance, FormProps>(
       validateTrigger = "onBlur",
       colon,
       children: childrenProp,
-      onSubmit,
       onValidate,
       onValuesChange,
+      onSubmit,
+      onReset,
       ...restProps
     } = props
+
+    const forceUpdate = useForceUpdate()
 
     const nameId = useUniqueId()
     const name = nameProp ?? nameId
 
     const {
+      getErrors,
+      setErrors,
+      setValues,
+      getValues,
+      validate,
+      reset,
       setFieldsValue,
       getFieldsValue,
       validateFields,
@@ -62,7 +74,7 @@ const Form = forwardRef<FormInstance, FormProps>(
     })
 
     function handleSubmit(e: BaseEventOrig<TaroFormProps.onSubmitEventDetail>) {
-      validateFields()
+      validate()
         .then((values) => {
           const event = Object.assign({}, e, {
             detail: {
@@ -75,14 +87,46 @@ const Form = forwardRef<FormInstance, FormProps>(
         .catch((errors) => onValidate?.(errors))
     }
 
+    function handleReset(e: BaseEventOrig) {
+      preventDefault(e)
+      reset()
+      forceUpdate()
+      onReset?.(e)
+    }
+
     useImperativeHandle(
       ref,
       () => ({
+        getErrors,
+        setErrors,
+        getValues,
+        setValues,
+        validate,
+        reset,
+        /**
+         * @deprecated
+         */
         setFieldsValue,
+        /**
+         * @deprecated
+         */
         getFieldsValue,
+        /**
+         * @deprecated
+         */
         validateFields,
       }),
-      [getFieldsValue, setFieldsValue, validateFields],
+      [
+        getErrors,
+        getFieldsValue,
+        getValues,
+        reset,
+        setErrors,
+        setFieldsValue,
+        setValues,
+        validate,
+        validateFields,
+      ],
     )
 
     useEffect(() => {
@@ -106,7 +150,12 @@ const Form = forwardRef<FormInstance, FormProps>(
           validateTrigger,
         }}
       >
-        <TaroForm onSubmit={handleSubmit} children={childrenProp} {...restProps} />
+        <TaroForm
+          onSubmit={handleSubmit}
+          onReset={handleReset}
+          children={childrenProp}
+          {...restProps}
+        />
       </FormContext.Provider>
     )
   },

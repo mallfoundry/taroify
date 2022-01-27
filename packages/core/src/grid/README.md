@@ -115,11 +115,11 @@ import Grid from "@taroify/core/grid"
 
 ### 徽标提示
 
-设置 `dot` 属性后，会在图标右上角展示一个小红点。设置 `badge` 属性后，会在图标右上角展示相应的徽标。
+设置 `badge=true` 属性后，会在图标右上角展示一个小红点。设置 `badge` 属性后，会在图标右上角展示相应的徽标。
 
 ```tsx
 <Grid columns={2}>
-  <Grid.Item icon={<HomeOutlined />} dot text="文字" />
+  <Grid.Item icon={<HomeOutlined />} badge text="文字" />
   <Grid.Item icon={<Search />} badge="99+" text="文字" />
 </Grid>
 ```
@@ -145,8 +145,7 @@ import Grid from "@taroify/core/grid"
 | --- | --- | --- | --- |
 | text | 文字 | _string_ | - |
 | icon | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
-| dot | 是否显示图标右上角小红点 | _boolean_ | `false` |
-| badge | 图标右上角徽标的内容 | _number \| string_ | - |
+| badge | 图标右上角徽标的内容 | _boolean \| number \| string \| Badge_ | - |
 
 ### Grid.Item Events
 

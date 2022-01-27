@@ -29,7 +29,17 @@ function symlinkScssFiles(bundle, dist) {
 }
 
 function compileScss(bundle, dist) {
-  const plugins = [autoprefixer(), cssnano()]
+  const plugins = [
+    autoprefixer(),
+    cssnano({
+      preset: [
+        "default",
+        {
+          calc: false,
+        },
+      ],
+    }),
+  ]
 
   const compileScssTask = () =>
     gulp

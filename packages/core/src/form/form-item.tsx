@@ -17,8 +17,6 @@ import {
   useContext,
   useImperativeHandle,
   useMemo,
-  useRef,
-  useState,
 } from "react"
 import { CellBase, CellProps, CellValue } from "../cell"
 import Form, { useFormField, useFormValue } from "../form"
@@ -26,11 +24,12 @@ import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
 import { fulfillPromise } from "../utils/promisify"
 import { useToRef } from "../utils/state"
+import { isElementOf } from "../utils/validate"
 import FormFeedback from "./form-feedback"
 import FormItemContext from "./form-item.context"
 import { validateRules } from "./form.rule"
-import { FormItemInstance, FormRule, FormValidateStatus, FormValidateTrigger } from "./form.shared"
-
+import { FormItemInstance, FormRule, FormValidateTrigger } from "./form.shared"
+import useFormError from "./use-form-error"
 import useFormFieldValueEffect from "./use-form-field-value-effect"
 
 interface FormItemChildren {
@@ -52,11 +51,11 @@ function useFormItemChildren(children?: ReactNode): FormItemChildren {
 
       const element = child as ReactElement
       const { type: elementType } = element as ReactElement<InputProps>
-      if (elementType === Form.Label) {
+      if (isElementOf(element, Form.Label)) {
         __children__.label = element
       } else if (elementType === Form.Control) {
         __children__.control = element
-      } else if (elementType === Form.Feedback) {
+      } else if (isElementOf(element, Form.Feedback)) {
         __children__.feedbacks?.push(element)
       }
     })
@@ -98,41 +97,34 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     const { validateTrigger } = useContext(FormContext)
 
-    const validateStatusRef = useRef<FormValidateStatus>()
-    const [invalidMessages, setInvalidMessages] = useState<ReactNode[]>()
+    const { validateStatus, error, setError, resetError } = useFormError(name)
 
     const { value, getValue, setValue } = useFormValue(name, { defaultValue })
-
-    const resetInvalidMessage = () => {
-      validateStatusRef.current = undefined
-      setInvalidMessages(undefined)
-    }
 
     const validate = useCallback(
       (rules = rulesRef.current) => {
         return new Promise<void>((resolve, reject) => {
           if (rules) {
-            resetInvalidMessage()
-            validateRules(getValue(), rules).then((errors) => {
-              if (_.isEmpty(errors)) {
-                validateStatusRef.current = "valid"
-                setInvalidMessages(undefined)
-                resolve()
-              } else {
-                validateStatusRef.current = "invalid"
-                setInvalidMessages(errors)
-                reject({
-                  name,
-                  errors,
-                })
-              }
-            })
+            resetError()
+            validateRules(getValue(), rules) //
+              .then((errors) => {
+                if (_.isEmpty(errors)) {
+                  resetError()
+                  resolve()
+                } else {
+                  setError({ errors })
+                  reject({
+                    name,
+                    errors,
+                  })
+                }
+              })
           } else {
             resolve()
           }
         })
       },
-      [getValue, name, rulesRef],
+      [getValue, name, resetError, rulesRef, setError],
     )
 
     const validateWithTrigger = useCallback(
@@ -149,16 +141,13 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
           if (rules.length) {
             fulfillPromise(validate(rulesProp))
-          } else {
-            validateStatusRef.current = undefined
-            setInvalidMessages(undefined)
+          } else if (defaultTrigger) {
+            resetError()
           }
         }
       },
-      [rulesProp, validate, validateTrigger],
+      [resetError, rulesProp, validate, validateTrigger],
     )
-
-    useFormFieldValueEffect(() => validateWithTrigger("onChange"), [value])
 
     const instance = useMemo<FormItemInstance>(
       () => ({
@@ -174,10 +163,12 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     useFormField(name, instance)
 
+    useFormFieldValueEffect(() => validateWithTrigger("onChange"), [value])
+
     const explain = useMemo(
-      () => !_.isEmpty(feedbacks) || !_.isEmpty(invalidMessages),
+      () => !_.isEmpty(feedbacks) || !_.isEmpty(error?.errors),
       //
-      [feedbacks, invalidMessages],
+      [error?.errors, feedbacks],
     )
 
     const Control = useMemo(
@@ -195,7 +186,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
     return (
       <FormItemContext.Provider
         value={{
-          validateStatus: validateStatusRef.current,
+          validateStatus,
         }}
       >
         <CellBase
@@ -217,7 +208,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
             {explain && (
               <View className={classNames(prefixClassname("form__feedbacks"))}>
                 {feedbacks}
-                {_.map(invalidMessages, (message, messageKey) => (
+                {_.map(error?.errors, (message, messageKey) => (
                   <FormFeedback key={messageKey} status="invalid" children={message} />
                 ))}
               </View>

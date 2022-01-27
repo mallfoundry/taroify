@@ -1,2 +1,16 @@
-export { default } from "./badge"
+import { FunctionComponent } from "react"
+import BadgeComponent, { BadgeProps } from "./badge"
+import BadgeWrapper from "./badge-wrapper"
+
 export { default as useBadge } from "./use-badge"
+export { default as useBadgeWrapper } from "./use-badge-wrapper"
+
+interface BadgeInterface extends FunctionComponent<BadgeProps> {
+  Wrapper: typeof BadgeWrapper
+}
+
+const Badge = BadgeComponent as BadgeInterface
+
+Badge.Wrapper = BadgeWrapper
+
+export default Badge

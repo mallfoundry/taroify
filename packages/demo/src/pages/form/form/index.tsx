@@ -295,7 +295,7 @@ function CalendarField() {
 
 function FormWithFields() {
   return (
-    <Form onSubmit={(e) => console.log(e.detail.value)}>
+    <Form onSubmit={(e) => Toast.open(JSON.stringify(e.detail.value, undefined, 2))}>
       <Cell.Group inset>
         <Form.Item name="switch">
           <Form.Label>开关</Form.Label>
@@ -365,6 +365,9 @@ function FormWithFields() {
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
           提交
+        </Button>
+        <Button style={{ marginTop: "16px" }} shape="round" block color="warning" formType="reset">
+          重置
         </Button>
       </View>
     </Form>

@@ -12,6 +12,48 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.0
+
+`2022-01-26`
+
+**New Component**
+
+- 新增 Textarea 组件 [#297](https://github.com/mallfoundry/taroify/pull/297)
+
+**Feature**
+
+- Field
+  - 优化 label, feedback 属性 [#310](https://github.com/mallfoundry/taroify/issues/310) [#299](https://github.com/mallfoundry/taroify/pull/299) [@coderYarn](https://github.com/coderYarn)
+
+**Bug Fixes**
+
+- Avatar
+  - 修复 className 无法传入的问题 [#308](https://github.com/mallfoundry/taroify/pull/308) [@coderYarn](https://github.com/coderYarn)
+- Input
+  - 修复独立于 Form 组件，无法赋值的问题 [#298](https://github.com/mallfoundry/taroify/pull/298)
+- Button
+  - 修复加载（loading）状态下还可以提交表单的问题 [#306](https://github.com/mallfoundry/taroify/pull/306)
+- Grid.Item
+  - 修复 badge 字号样式问题 [#309](https://github.com/mallfoundry/taroify/pull/309)
+- Tabbar.Item
+  - 修复 badge 字号样式问题 [#309](https://github.com/mallfoundry/taroify/pull/309)
+
+### v0.0.25-alpha.1
+
+`2022-01-24`
+
+**Feature**
+
+- IndexList
+  - 新增 stickyOffsetTop 字符串（string）类型 [#287](https://github.com/mallfoundry/taroify/pull/287) [@bluescurry](https://github.com/bluescurry)
+- ActionSheet
+  - 新增按钮（Button）相关属性 [#292](https://github.com/mallfoundry/taroify/pull/292)
+
+**Bug Fixes**
+
+- Picker
+  - 修复当子元素（children）改变时，索引（index）未更新的问题 [#289](https://github.com/mallfoundry/taroify/pull/289)
+
 ### v0.0.25-alpha.0
 
 `2022-01-20`

@@ -79,9 +79,7 @@ import Badge from "@taroify/core/badge"
 
 ```scss
 .custom-color {
-  .taroify-badge {
-    background: #1989fa;
-  }
+  --badge-background-color: #1989fa;
 }
 ```
 

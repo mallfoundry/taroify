@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode, useContext, useMemo } from "react"
-import Badge from "../badge"
+import { useBadge, useBadgeWrapper } from "../badge"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import { addUnitPx } from "../utils/format/unit"
@@ -17,7 +17,7 @@ interface GridItemProps extends ViewProps {
   __dataIndex__?: number
   style?: CSSProperties
   dot?: boolean
-  badge?: ReactNode
+  badge?: boolean | string | number | ReactNode
   icon?: ReactNode
   text?: ReactNode
   children?: ReactNode
@@ -35,9 +35,21 @@ export function GridItem(props: GridItemProps) {
     children,
     ...restProps
   } = props
-  const { columns, gutter, bordered, centered, clickable, direction, square } = useContext(
-    GridContext,
-  )
+
+  const {
+    columns,
+    gutter,
+    bordered,
+    centered,
+    clickable,
+    direction,
+    square, //
+  } = useContext(GridContext)
+
+  const IconBadgeWrapper = useBadgeWrapper(icon)
+
+  const Badge = useBadge(badge, { dot })
+
   const percent = useGridItemPercent(columns)
 
   const rootStyle = useMemo(() => {
@@ -94,14 +106,9 @@ export function GridItem(props: GridItemProps) {
       >
         {!children && (
           <>
-            {icon && (
-              <Badge
-                className={prefixClassname("grid-item__icon")}
-                dot={dot}
-                content={badge}
-                children={icon}
-              />
-            )}
+            <IconBadgeWrapper className={classNames(prefixClassname("grid-item__icon"))}>
+              <Badge />
+            </IconBadgeWrapper>
             <View className={prefixClassname("grid-item__text")}>{text}</View>
           </>
         )}

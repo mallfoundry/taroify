@@ -1,9 +1,6 @@
 import * as _ from "lodash"
-import { Children as ReactChildren, isValidElement, ReactNode } from "react"
-
-function isObjectElement(node?: ReactNode) {
-  return !isValidElement(node) && _.isObjectLike(node)
-}
+import { Children as ReactChildren, ReactNode } from "react"
+import { isObjectElement } from "./validate"
 
 function isObjectChildren(children?: ReactNode) {
   if (!_.isArray(children)) {

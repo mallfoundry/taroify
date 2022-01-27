@@ -1,6 +1,6 @@
+import { useForceUpdate } from "@taroify/hooks"
 import * as _ from "lodash"
 import { useCallback, useContext, useEffect, useMemo } from "react"
-import { useUpdate } from "../hooks"
 import FormContext from "./form.context"
 import useForm from "./use-form"
 
@@ -10,12 +10,14 @@ interface UseFormValueOptions {
 
 export default function useFormValue(name?: string, options?: UseFormValueOptions) {
   const { defaultValue } = options ?? {}
+
   const { name: formName } = useContext(FormContext)
 
   const form = useForm(formName)
-  const update = useUpdate()
 
-  const onValueChange = useCallback(() => update(), [update])
+  const forceUpdate = useForceUpdate()
+
+  const onValueChange = useCallback(() => forceUpdate(), [forceUpdate])
 
   useEffect(() => {
     form?.addEventListener(`fields.${name}.value.change`, onValueChange)
@@ -25,28 +27,35 @@ export default function useFormValue(name?: string, options?: UseFormValueOption
   useEffect(
     () => {
       if (name) {
-        form?.setFieldsDefaultValue({
+        form?.setDefaultValues({
           [name]: defaultValue,
         })
-        update()
+        onValueChange()
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
 
+  const getValue = useCallback(
+    () =>
+      // The mini app does not supports undefined value
+      _.get(form?.getValues(name), name as string) ?? "",
+    [form, name],
+  )
+
   return useMemo(
     () => ({
       get value() {
-        return _.get(form?.getFieldsValue(), name as string)
+        return getValue()
       },
       setValue: (value: any) => {
         if (name) {
-          form?.setFieldsValue({ [name]: value })
+          form?.setValues({ [name]: value })
         }
       },
-      getValue: () => _.get(form?.getFieldsValue(), name as string),
+      getValue,
     }),
-    [form, name],
+    [form, getValue, name],
   )
 }

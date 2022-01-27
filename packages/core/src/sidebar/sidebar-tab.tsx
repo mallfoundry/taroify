@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode, useCallback, useContext } from "react"
-import { useBadge } from "../badge"
+import { useBadge, useBadgeWrapper } from "../badge"
 import SidebarContext from "../sidebar/sidebar.context"
 import { prefixClassname } from "../styles"
 
@@ -14,11 +14,15 @@ interface SidebarTabContentProps {
 
 function SidebarTabContent(props: SidebarTabContentProps) {
   const { badge, children } = props
-  const Badge = useBadge(badge, {
-    className: prefixClassname("sidebar-tab__content"),
-  })
+  const ContentBadgeWrapper = useBadgeWrapper(<View />)
+  const Badge = useBadge(badge)
 
-  return <Badge children={children} />
+  return (
+    <ContentBadgeWrapper className={prefixClassname("sidebar-tab__content")}>
+      {children}
+      <Badge />
+    </ContentBadgeWrapper>
+  )
 }
 
 interface SidebarTabProps extends ViewProps {

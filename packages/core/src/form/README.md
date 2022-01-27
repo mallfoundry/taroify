@@ -21,7 +21,7 @@ function BasicForm() {
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     Toast.open(JSON.stringify(event.detail.value))
   }
-  
+
   return (
     <Form onSubmit={onSubmit}>
       <Toast id="toast" />
@@ -38,6 +38,14 @@ function BasicForm() {
             <Input password placeholder="密码" />
           </Form.Control>
         </Form.Item>
+        <Field
+          name="text"
+          label={{ align: "left", children: "文本" }}
+          feedback={<Form.Feedback>aaa</Form.Feedback>}
+          rules={[{ required: true, message: "请填写文本" }]}
+        >
+          <Input placeholder="请输入文本" />
+        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
@@ -363,7 +371,7 @@ function CalendarField() {
       return `${months}-${days}`
     }
   }
-  
+
   return (
     <>
       <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
@@ -421,7 +429,8 @@ function CalendarField() {
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| onSubmit | 提交表单且验证通过后触发 | _values: object_ |
+| onSubmit | 提交表单且验证通过后触发 | _event: BaseEventOrig<FormProps.onSubmitEventDetail>_ |
+| onReset  | 重置表单后触发         | _event: BaseEventOrig_ |
 | onValidate | 提交表单且验证不通过后触发 | _errors: { name: string, errors: string[] }[]_ |
 | onValuesChange | 字段值更新后触发 | _changedValues: object, allValues: object_ |
 
@@ -431,9 +440,10 @@ function CalendarField() {
 
 | 方法名 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| setFieldsValue | 设置表单值 | _object_ | - |
-| getFieldsValue | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
-| validateFields | 验证表单，支持传入 `name` 来验证单个或部分表单项 | _name?: string \| string[]_ | _Promise_ |
+| setValues | 设置表单值                                   | _object_                    | - |
+| getValues | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
+| validate  | 验证表单，支持传入 `name` 来验证单个或部分表单项   | _name?: string \| string[]_ | _Promise_ |
+| reset     | 重置表单                                     | -                           | _Promise_ |
 
 ### validateTrigger 可选值
 
@@ -476,14 +486,12 @@ function CalendarField() {
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | colon | 是否在 label 后面添加冒号 | _boolean_ | `false` |
 
-
 ### Form.Feedback Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
 | status | 反馈状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
-
 
 ### Form.Control Props
 
