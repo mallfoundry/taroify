@@ -1,9 +1,9 @@
+import Button from "@taroify/~core/src/button"
+import { prefixClassname } from "@taroify/~core/src/styles"
 import { View } from "@tarojs/components"
 import classnames from "classnames"
 import * as React from "react"
 import { ReactElement, ReactText } from "react"
-import Button from "../button"
-import { prefixClassname } from "../styles"
 import "./action-bar-icon.scss"
 
 interface ActionBarIconBadge {

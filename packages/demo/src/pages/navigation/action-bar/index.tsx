@@ -1,4 +1,4 @@
-import { ActionBar } from "@taroify/core"
+import { ActionBar } from "@taroify/commerce"
 import { ChatOutlined } from "@taroify/icons"
 import * as React from "react"
 import Block from "../../../components/block"

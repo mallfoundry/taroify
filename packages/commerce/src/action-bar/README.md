@@ -7,9 +7,9 @@
 ### 引入
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
+import { ActionSheet } from "@taroify/~core/src"
 // or
-import ActionSheet from "@taroify/core/action-sheet"
+import ActionSheet from "@taroify/~core/src/action-sheet"
 ```
 
 ## 代码演示

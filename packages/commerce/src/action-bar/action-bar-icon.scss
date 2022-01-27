@@ -1,0 +1,7 @@
+@import "variables";
+
+.#{$component-prefix}action-bar-icon {
+  width: 48px * $hd;
+  color: var(--action-bar-color, $action-bar-color);
+  text-align: center;
+}

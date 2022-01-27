@@ -1,5 +1,5 @@
+import Button from "@taroify/~core/src/button"
 import * as React from "react"
-import Button from "../button"
 
 export type ActionBarButtonType = "primary" | "info" | "warning" | "danger"
 

@@ -1,9 +1,9 @@
-@import "./variables";
+@import "variables";
 
 .#{$component-prefix}action-bar {
-  font-size: var(--action-bar-font-size, $action-bar-font-size);
   display: inline-flex;
-  height: 50px * $hd;
-  background: $background-color-light;
   align-items: center;
+  height: 50px * $hd;
+  font-size: var(--action-bar-font-size, $action-bar-font-size);
+  background: $background-color-light;
 }

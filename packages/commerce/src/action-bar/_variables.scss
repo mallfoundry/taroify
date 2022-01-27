@@ -1,6 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/mixins/hairline";
-@import "../styles/variables";
+@import "../../../core/src/styles/prefix";
+@import "../../../core/src/styles/mixins/hairline";
+@import "../../../core/src/styles/variables";
 
 $action-bar-color: var(--gray-6, $gray-6);
 $action-bar-font-size: var(--font-size-sm, $font-size-sm);

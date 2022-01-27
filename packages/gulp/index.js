@@ -14,6 +14,9 @@ function watch() {
   watchTypescript("icons")
   watchTypescript("hooks")
   watchTypescript("core")
+  watchTypescript("commerce")
+  watchReadmeFiles("commerce/src", "components")
+  watchReadmeFiles("commerce/docs", "components")
   watchReadmeFiles("core/src", "components")
   watchReadmeFiles("core/docs", "components")
   watchReadmeFiles("hooks/src", "hooks")
@@ -25,8 +28,11 @@ function watchSymlink() {
   watchTypescriptSymlink("icons")
   watchTypescriptSymlink("hooks")
   watchTypescriptSymlink("core")
+  watchTypescriptSymlink("commerce")
   watchReadmeFiles("core/src", "components")
   watchReadmeFiles("core/docs", "components")
+  watchReadmeFiles("commerce/src", "components")
+  watchReadmeFiles("commerce/docs", "components")
   watchReadmeFiles("hooks/src", "hooks")
 }
 
@@ -34,6 +40,7 @@ exports.clean = series(
   createBundle("core"), //
   createBundle("hooks"), //
   createBundle("icons"), //
+  createBundle("commerce"), //
   task("gatsby clean", {
     cwd: "site",
     stdio: "inherit",
@@ -44,6 +51,7 @@ exports.develop = parallel(
   createBundle("icons"), //
   createBundle("hooks"), //
   createBundle("core"), //
+  createBundle("commerce"), //
   watchSymlink,
   serveDemo,
   serveSite,
@@ -55,18 +63,24 @@ exports.build = series(
   createBundle("icons"),
   createBundle("hooks"), //
   createBundle("core"), //
+  createBundle("commerce"), //
   copyFontFiles("core"), //
+  copyFontFiles("commerce"), //
   buildScss("icons"), //
   buildScss("core"), //
+  buildScss("commerce"),
   buildTypescript("icons"),
   buildTypescript("hooks"), //
   buildTypescript("core"), //
+  buildTypescript("commerce"),
 )
 
 const readme = series(
   copyReadmeFiles("core/src", "components"), //
   copyReadmeFiles("core/docs", "components"), //
   copyReadmeFiles("hooks/src", "hooks"),
+  copyReadmeFiles("commerce/docs", "components"),
+  copyReadmeFiles("commerce/src", "components"),
 )
 
 exports.buildWww = series(
