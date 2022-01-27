@@ -1,6 +1,6 @@
 import { Clear } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { Input as TaroInput, ITouchEvent } from "@tarojs/components"
+import { ITouchEvent } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
 import classNames from "classnames"
@@ -11,6 +11,7 @@ import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { useValue } from "../utils/state"
 import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
+import NativeInput from "./native-input"
 
 export function resolveOnChange<
   E extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
@@ -89,9 +90,7 @@ function Input(props: InputProps) {
     onClear,
     ...restProps
   } = props
-
   const { value, setValue } = useValue({ value: valueProp })
-
   const [focused, setFocused] = useState(false)
 
   const allowClear = useMemo(() => {
@@ -130,7 +129,7 @@ function Input(props: InputProps) {
 
   return (
     <>
-      <TaroInput
+      <NativeInput
         className={classNames(
           prefixClassname("input"),
           {
@@ -163,6 +162,8 @@ function Input(props: InputProps) {
           },
         )}
         disabled={disabled || readonly}
+        readonly={readonly}
+        color={color}
         value={value}
         onFocus={handleFocus}
         onInput={handleInput}
