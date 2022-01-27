@@ -5,7 +5,8 @@
   min-width: 0;
   padding: 0;
   margin: 0;
-  line-height: inherit;
+  font-size: $textarea-font-size;
+  line-height: $textarea-line-height;
   color: $textarea-color;
   text-align: left;
   resize: none;
