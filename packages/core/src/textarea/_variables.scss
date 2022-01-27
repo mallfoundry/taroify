@@ -1,9 +1,13 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
+
+$textarea-line-height: var(--textarea-line-height, 24px * $hd);
+$textarea-font-size: var(--textarea-font-size, var(--font-size-md, $font-size-md));
+
 $textarea-color: var(--textarea-color, var(--text-color, var(--gray-8, $gray-8)));
 $textarea-placeholder-color: var(--textarea-placeholder-color, var(--text-color-3, $text-color-3));
-$textarea-readonly-color: var(--textarea-readonly-color,$textarea-color);
+$textarea-readonly-color: var(--textarea-readonly-color, $textarea-color);
 $textarea-limit-color: var(--textarea-limit-color, var(--gray-7, $gray-7));
 $textarea-limit-font-size: var(--textarea-limit-font-size, var(--font-size-sm, $font-size-sm));
 $textarea-limit-line-height: var(--textarea-limit-line-height, 16px * $hd);
