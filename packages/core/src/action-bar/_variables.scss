@@ -1,0 +1,7 @@
+@import "../styles/prefix";
+@import "../styles/mixins/hairline";
+@import "../styles/variables";
+
+$action-bar-color: var(--gray-6, $gray-6);
+$action-bar-font-size: var(--font-size-sm, $font-size-sm);
+$action-bar-line-height: var(--line-height-sm, $line-height-sm);
