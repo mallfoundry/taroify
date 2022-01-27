@@ -8,13 +8,13 @@
   height: $input-height;
   padding: 0;
   margin: 0;
-  line-height: inherit;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
   color: $input-color;
   resize: none;
   background-color: transparent;
   border: 0;
   outline: none;
-  font-size: $input-font-size;
 
   // for ios wechat
   &[type='date'],
