@@ -37,12 +37,12 @@ export default function useFormValue(name?: string, options?: UseFormValueOption
     [],
   )
 
-  const getValue = useCallback(
-    () =>
+  const getValue = useCallback(() => {
+    if (form) {
       // The mini app does not supports undefined value
-      _.get(form?.getValues(name), name as string) ?? "",
-    [form, name],
-  )
+      return _.get(form.getValues(name), name as string) ?? ""
+    }
+  }, [form, name])
 
   return useMemo(
     () => ({
