@@ -12,6 +12,18 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+
+### v0.0.26-alpha.2
+
+`2022-01-27`
+
+**Bug Fixes**
+
+- ShareSheet
+  - 修复 image 样式被覆盖的问题 [#316](https://github.com/mallfoundry/taroify/pull/316)
+- Textarea
+  - 修复设置 value 无效的问题 [#315](https://github.com/mallfoundry/taroify/pull/315)
+
 ### v0.0.26-alpha.1
 
 `2022-01-26`
