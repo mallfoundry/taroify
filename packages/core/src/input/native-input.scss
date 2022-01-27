@@ -1,0 +1,40 @@
+@import "./variables";
+
+.#{$component-prefix}native-input {
+  box-sizing: inherit;
+  display: inherit;
+  width: inherit;
+  min-width: inherit;
+  height: inherit;
+  line-height: inherit;
+  color: inherit;
+  resize: inherit;
+  background: inherit;
+  border: inherit;
+
+  // for ios wechat
+  &[type='date'],
+  &[type='time'],
+  &[type='datetime-local'] {
+    min-height: var(--cell-line-height, $cell-line-height);
+  }
+
+  // for safari
+  &[type='search'] {
+    appearance: none;
+  }
+
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+
+  &--readonly {
+    cursor: default;
+  }
+
+  &--colorful {
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+}
