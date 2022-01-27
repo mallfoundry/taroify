@@ -1,11 +1,11 @@
 {
   "name": "taroify",
-  "version": "0.0.26-alpha.1",
+  "version": "0.0.26-alpha.0",
   "license": "MIT",
   "private": true,
   "scripts": {
     "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",
-    "install:node_modules": "yarn install && cd ./site && yarn install",
+    "install:node_modules": "lerna bootstrap && cd ./site && yarn install",
     "clean": "gulp clean",
     "develop": "gulp develop",
     "watch": "gulp watch",
@@ -39,7 +39,7 @@
     "*.{css,scss}": "stylelint --fix"
   },
   "devDependencies": {
-    "@taroify/cli": "0.0.26-alpha.1",
+    "@taroify/cli": "0.0.26-alpha.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "cross-env": "^7.0.3",
