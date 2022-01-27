@@ -32,7 +32,7 @@ registerFormControlHandler(
       return cloneElement<InputProps>(element, {
         name: nameProp ?? name,
         value: valueProp ?? value,
-        color: color ?? validateStatus === "invalid" ? "danger" : undefined,
+        color: color ?? (validateStatus === "invalid" ? "danger" : undefined),
         onInput: (e) => {
           onInput?.(e)
           onDelegatingChange?.(e.detail.value)
