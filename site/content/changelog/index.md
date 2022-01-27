@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.3
+
+`2022-01-28`
+
+**Bug Fixes**
+
+- Input
+  - 修复字号（font-size）、行高（line-height）继承父元素样式的问题 [#325](https://github.com/mallfoundry/taroify/pull/325)
+  - 修复清除按钮点击无效果的问题 [#320](https://github.com/mallfoundry/taroify/pull/320)
+- Textarea
+  - 修复字号（font-size）、行高（line-height）继承父元素样式的问题 [#324](https://github.com/mallfoundry/taroify/pull/324)
+- Form
+  - 修复非表单环境下设置空字符串的问题 [#323](https://github.com/mallfoundry/taroify/pull/323)
+  - 修复嵌套 Input 组件不能自定义颜色的问题 [#323](https://github.com/mallfoundry/taroify/pull/323)
 
 ### v0.0.26-alpha.2
 
