@@ -137,7 +137,6 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         onClose,
       }}
     >
-      {backdrop}
       <Transition
         in={open}
         name={transactionName}
@@ -172,6 +171,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
           {content}
         </View>
       </Transition>
+      {backdrop}
     </PopupContext.Provider>
   )
 })
