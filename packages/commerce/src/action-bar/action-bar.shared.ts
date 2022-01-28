@@ -23,15 +23,10 @@ export interface ActionBarButtonProps {
   icon?: ReactText | ReactElement
 }
 
-interface ActionBarIconBadge {
-  content?: number
-  dot?: boolean
-}
-
-export interface ActionBarIconProps {
+export interface ActionBarIconButtonProps {
   icon?: ReactText | ReactElement
   text?: string
-  badge?: ActionBarIconBadge
+  badge?: string | number
   onClick?: (e: ITouchEvent) => void
   style?: CSSProperties | any
   className?: string

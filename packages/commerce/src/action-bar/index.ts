@@ -1,17 +1,17 @@
 import ActionBarElement from "./action-bar"
 import ActionBarButton from "./action-bar-button"
-import ActionBarIcon from "./action-bar-icon"
+import ActionBarIconButton from "./action-bar-icon-button"
 
 interface ActionBarInterface {
   (props: any): JSX.Element
 
-  Icon: typeof ActionBarIcon
+  IconButton: typeof ActionBarIconButton
   Button: typeof ActionBarButton
 }
 
 const ActionBar = ActionBarElement as unknown as ActionBarInterface
 
-ActionBar.Icon = ActionBarIcon
+ActionBar.IconButton = ActionBarIconButton
 ActionBar.Button = ActionBarButton
 
 export default ActionBar

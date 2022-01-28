@@ -16,7 +16,6 @@ function watch() {
   watchTypescript("core")
   watchTypescript("commerce")
   watchReadmeFiles("commerce/src", "components")
-  watchReadmeFiles("commerce/docs", "components")
   watchReadmeFiles("core/src", "components")
   watchReadmeFiles("core/docs", "components")
   watchReadmeFiles("hooks/src", "hooks")
@@ -32,7 +31,6 @@ function watchSymlink() {
   watchReadmeFiles("core/src", "components")
   watchReadmeFiles("core/docs", "components")
   watchReadmeFiles("commerce/src", "components")
-  watchReadmeFiles("commerce/docs", "components")
   watchReadmeFiles("hooks/src", "hooks")
 }
 
