@@ -3,9 +3,10 @@
 .#{$component-prefix}action-bar-button {
   flex: 1;
   color: var(--action-bar-button-color, $action-bar-button-color);
+  font-size: var(--action-bar-button-font-size, $action-bar-button-font-size);
 
   &--danger {
-    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red) !important;
+    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red);
   }
 
   &--last {
@@ -21,6 +22,6 @@
   }
 
   &--warning {
-    background: var(--action-bar-button-gradient-orange, $action-bar-button-gradient-orange) !important;
+    background: var(--action-bar-button-gradient-orange, $action-bar-button-gradient-orange);
   }
 }

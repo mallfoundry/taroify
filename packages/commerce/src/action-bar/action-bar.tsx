@@ -17,6 +17,7 @@ function ActionBar(props: ActionBarProps) {
   return (
     <ActionBarContext.Provider value={{ parent: childrenDisplayNames }}>
       <Flex
+        justify={"space-between"}
         style={style}
         className={classnames(
           prefixClassname("action-bar"),

@@ -21,6 +21,7 @@ export interface ActionBarButtonProps {
   disabled?: boolean
   loading?: boolean | LoadingProps
   icon?: ReactText | ReactElement
+  children?: ReactText | ReactElement
 }
 
 export interface ActionBarIconButtonProps {
@@ -30,4 +31,10 @@ export interface ActionBarIconButtonProps {
   onClick?: (e: ITouchEvent) => void
   style?: CSSProperties | any
   className?: string
+  children: ReactElement | ReactElement[]
+}
+
+export interface ActionBarButtonGroupProps {
+  flex?: number
+  children?: ReactElement | ReactElement[]
 }

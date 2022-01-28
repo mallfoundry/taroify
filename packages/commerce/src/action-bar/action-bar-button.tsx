@@ -14,9 +14,9 @@ function ActionBarButton(props: ActionBarButtonProps) {
     onClick,
     style,
     disabled,
-    text,
     type = "danger",
     className,
+    children,
   } = props
   const { parent } = useContext(ActionBarContext)
   const isFirst = useMemo(() => {
@@ -26,6 +26,7 @@ function ActionBarButton(props: ActionBarButtonProps) {
   const isLast = useMemo(() => {
     return parent[index + 1] !== "ActionBarButton"
   }, [index, parent])
+  console.log(parent)
   return (
     <Button
       block
@@ -48,7 +49,7 @@ function ActionBarButton(props: ActionBarButtonProps) {
         className,
       )}
     >
-      {text}
+      {children}
     </Button>
   )
 }
