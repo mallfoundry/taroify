@@ -10,10 +10,11 @@ export default function ActionSheetDemo() {
     <Page title="ActionBar 动作栏" className="action-sheet-demo">
       <Block variant="card" title="基础用法">
         <ActionBar>
-          <ActionBar.Icon icon={<ChatOutlined />} badge={{ dot: true }} text="客服" />
-          <ActionBar.Icon icon={<ChatOutlined />} badge={{ content: 12 }} text="购物车" />
-          <ActionBar.Icon icon={<ChatOutlined />} badge={{ content: 13 }} text="店铺" />
+          <ActionBar.Button type="warning" text="立即购买" />
+          <ActionBar.IconButton icon={<ChatOutlined />} badge="dot" text="客服" />
+          <ActionBar.IconButton icon={<ChatOutlined />} badge="hot" text="购物车" />
           <ActionBar.Button type="danger" text="立即购买" />
+          <ActionBar.IconButton icon={<ChatOutlined />} badge={13} text="店铺" />
         </ActionBar>
       </Block>
     </Page>
