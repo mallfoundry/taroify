@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.4
+
+`2022-01-28`
+
+**Bug Fixes**
+
+- Stepper
+  - 修复获取手动输入值不正确的问题 [#326](https://github.com/mallfoundry/taroify/pull/326)
+- Popup
+  - 修复固定定位（fixed position）和动画（translate3d）联用的问题 [#327](https://github.com/mallfoundry/taroify/pull/327)
+
 ### v0.0.26-alpha.3
 
 `2022-01-28`
