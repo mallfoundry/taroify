@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.5
+
+`2022-01-28`
+
+**Feature**
+
+- ShareSheet.Option
+  - 新增 value 属性 [#328](https://github.com/mallfoundry/taroify/pull/328)
+
 ### v0.0.26-alpha.4
 
 `2022-01-28`
