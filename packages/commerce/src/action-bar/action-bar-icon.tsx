@@ -1,5 +1,5 @@
-import Button from "@taroify/~core/src/button"
-import { prefixClassname } from "@taroify/~core/src/styles"
+import { Button } from "@taroify/core"
+import { prefixClassname } from "@taroify/core/styles"
 import { View } from "@tarojs/components"
 import classnames from "classnames"
 import * as React from "react"
@@ -11,7 +11,7 @@ interface ActionBarIconBadge {
   dot?: boolean
 }
 
-interface ActionBarIconProps {
+export interface ActionBarIconProps {
   icon?: ReactText | ReactElement
   text?: string
   badge?: ActionBarIconBadge
@@ -19,16 +19,16 @@ interface ActionBarIconProps {
 
 function ActionBarIcon(props: ActionBarIconProps) {
   const { icon, text } = props
+
   return (
-    <Button
-      className={classnames(prefixClassname("action-bar-icon"))}
-      variant="text"
-      onClick={() => console.log(1)}
-    >
-      <View>{icon}</View>
-      <View>{text}</View>
+    <Button variant="text" style={{ padding: "0px" }} onClick={() => console.log(1)}>
+      <View className={classnames(prefixClassname("action-bar-icon"))}>
+        <View>{icon}</View>
+        <View>{text}</View>
+      </View>
     </Button>
   )
 }
 
+ActionBarIcon.displayName = "ActionBarIcon"
 export default ActionBarIcon

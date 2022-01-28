@@ -1,5 +1,24 @@
-@import "variables";
+@import "./variables";
 
 .#{$component-prefix}action-bar-button {
+  flex: 1;
+  color: var(--action-bar-button-color, $action-bar-button-color);
 
+  &--danger {
+    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red) !important;
+  }
+
+  &--last:last-child {
+    border-top-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
+    border-bottom-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
+  }
+
+  &--first:first-child {
+    border-top-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
+    border-bottom-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
+  }
+
+  &--warning {
+    background: var(--action-bar-button-gradient-orange, $action-bar-button-gradient-orange) !important;
+  }
 }
