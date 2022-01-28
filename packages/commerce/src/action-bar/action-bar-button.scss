@@ -8,12 +8,14 @@
     background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red) !important;
   }
 
-  &--last:last-child {
+  &--last {
+    margin-right: 5px;
     border-top-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
     border-bottom-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
   }
 
-  &--first:first-child {
+  &--first {
+    margin-left: 5px;
     border-top-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
     border-bottom-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
   }
