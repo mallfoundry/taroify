@@ -156,13 +156,14 @@ function ShareSheetWithDescription() {
 
 ### ShareSheet.Option Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 分享选项类名 | _string_ | - |
-| name | 分享渠道名称 | _string_ | - |
+|     参数     | 说明 | 类型 | 默认值 |
+| ----------- | --- | --- | --- |
+| className   | 分享选项类名 | _string_ | - |
+| name        | 分享渠道名称 | _string_ | - |
+| value       | 选项值  | _string_        | - |
 | description | 分享选项描述 | _string_ | - |
-| icon | 图标，可选值为 `wechat` `weibo` `qq` `link` `qrcode` `poster`<br/>`weapp-qrcode` `wechat-moments`，支持传入 Image 组件 | _string_ | - |
-| openType | 微信开放能力，可选值为 `contact` `contactShare` `share`<br/>`getRealnameAuthInfo` `getAuthorize` `getPhoneNumber`<br/>`getUserInfo` `lifestyle` `launchApp` `openSetting` `feedback` | _string_ | - |
+| icon        | 图标，可选值为 `wechat` `weibo` `qq` `link` `qrcode` `poster`<br/>`weapp-qrcode` `wechat-moments`，支持传入 Image 组件 | _string_ | - |
+| openType    | 微信开放能力，可选值为 `contact` `contactShare` `share`<br/>`getRealnameAuthInfo` `getAuthorize` `getPhoneNumber`<br/>`getUserInfo` `lifestyle` `launchApp` `openSetting` `feedback` | _string_ | - |
 
 ### Events
 

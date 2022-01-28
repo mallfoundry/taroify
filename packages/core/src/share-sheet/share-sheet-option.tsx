@@ -59,6 +59,7 @@ interface ShareSheetOptionProps
   extends Omit<ButtonBaseProps, "size" | "type" | "plain" | "loading" | "formType"> {
   className?: string
   style?: CSSProperties
+  value?: any
   disabled?: boolean
   icon?: ReactNode
   name?: ReactNode
@@ -71,6 +72,7 @@ export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
     {
       className,
       style,
+      value,
       disabled,
       icon,
       name,
@@ -89,6 +91,7 @@ export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
       onClick={(event) => {
         onClick?.(event)
         onSelect?.({
+          value,
           disabled,
           icon,
           name,
