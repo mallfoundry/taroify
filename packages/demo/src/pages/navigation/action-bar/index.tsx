@@ -11,7 +11,7 @@ export default function ActionSheetDemo() {
     <Page title="ActionBar 动作栏" className="action-sheet-demo">
       <Block variant="card" title="基础用法">
         <ActionBar>
-          <ActionBar.ButtonGroup flex={14}>
+          <ActionBar.ButtonGroup shape="square" flex={14}>
             <ActionBar.Button type="danger">加入购物车</ActionBar.Button>
             <ActionBar.Button type="warning">立即购买</ActionBar.Button>
           </ActionBar.ButtonGroup>

@@ -17,16 +17,26 @@ function ActionBarButton(props: ActionBarButtonProps) {
     type = "danger",
     className,
     children,
+    shape,
   } = props
   const { parent } = useContext(ActionBarContext)
   const isFirst = useMemo(() => {
-    return parent[index - 1] !== "ActionBarButton"
+    if (shape === "border-round" || shape === undefined) {
+      return parent[index - 1] !== "ActionBarButton"
+    }
+    return false
   }, [index, parent])
 
   const isLast = useMemo(() => {
-    return parent[index + 1] !== "ActionBarButton"
+    if (shape === "border-round" || shape === undefined) {
+      return parent[index + 1] !== "ActionBarButton"
+    }
+    return false
   }, [index, parent])
-  console.log(parent)
+  const isShape = useMemo(() => {
+    return shape == "border-round" ? "square" : shape
+  }, [shape])
+
   return (
     <Button
       block
@@ -34,6 +44,7 @@ function ActionBarButton(props: ActionBarButtonProps) {
       style={{ border: "none", ...style }}
       loading={loading}
       disabled={disabled}
+      shape={isShape}
       icon={icon}
       className={classnames(
         prefixClassname("action-bar-button"),

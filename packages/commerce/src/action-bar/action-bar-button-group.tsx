@@ -2,13 +2,18 @@ import { Flex } from "@taroify/core"
 import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"
+import { Children, cloneElement, ReactElement } from "react"
 import { ActionBarButtonGroupProps } from "./action-bar.shared"
 
 function ActionBarButtonGroup(props: ActionBarButtonGroupProps) {
-  const { flex, children } = props
+  const { shape, flex, children } = props
   return (
     <Flex.Item span={flex} className={classnames(prefixClassname("action-bar-button-group"))}>
-      <Flex>{children}</Flex>
+      <Flex>
+        {Children.toArray(children).map((Child: any, index: number) => {
+          return cloneElement(Child as ReactElement, { shape, index }, Child?.props?.children)
+        })}
+      </Flex>
     </Flex.Item>
   )
 }

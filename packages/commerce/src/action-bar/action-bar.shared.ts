@@ -10,6 +10,7 @@ export interface ActionBarProps {
 }
 
 export type ActionBarButtonType = "primary" | "info" | "warning" | "danger"
+type ActionBarSquare = "square" | "round" | "circle" | "border-round"
 
 export interface ActionBarButtonProps {
   type?: ActionBarButtonType
@@ -22,6 +23,7 @@ export interface ActionBarButtonProps {
   loading?: boolean | LoadingProps
   icon?: ReactText | ReactElement
   children?: ReactText | ReactElement
+  shape?: ActionBarSquare
 }
 
 export interface ActionBarIconButtonProps {
@@ -37,4 +39,5 @@ export interface ActionBarIconButtonProps {
 export interface ActionBarButtonGroupProps {
   flex?: number
   children?: ReactElement | ReactElement[]
+  shape?: ActionBarSquare
 }
