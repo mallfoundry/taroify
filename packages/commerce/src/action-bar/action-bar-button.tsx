@@ -1,10 +1,26 @@
 import { Button } from "@taroify/core"
 import { prefixClassname } from "@taroify/core/styles"
+import { LoadingProps } from "@taroify/~core/src/loading"
+import { ITouchEvent } from "@tarojs/components/types/common"
 import classnames from "classnames"
 import * as React from "react"
-import { useContext, useMemo } from "react"
+import { CSSProperties, ReactElement, ReactText, useContext, useMemo } from "react"
 import { ActionBarContext } from "./action-bar.context"
-import { ActionBarButtonProps } from "./action-bar.shared"
+import { ActionBarButtonType, ActionBarSquare } from "./action-bar.shared"
+
+export interface ActionBarButtonProps {
+  type?: ActionBarButtonType
+  text?: string
+  style?: CSSProperties | any
+  className?: string
+  index?: number
+  onClick?: (event: ITouchEvent) => void
+  disabled?: boolean
+  loading?: boolean | LoadingProps
+  icon?: ReactText | ReactElement
+  children?: ReactText | ReactElement
+  shape?: ActionBarSquare
+}
 
 function ActionBarButton(props: ActionBarButtonProps) {
   const {

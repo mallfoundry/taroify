@@ -10,13 +10,13 @@
   }
 
   &--last {
-    margin-right: 5px;
+    margin-right: 5px* $hd;
     border-top-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
     border-bottom-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
   }
 
   &--first {
-    margin-left: 5px;
+    margin-left: 5px* $hd;
     border-top-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
     border-bottom-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
   }

@@ -3,7 +3,13 @@ import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"
 import { Children, cloneElement, ReactElement } from "react"
-import { ActionBarButtonGroupProps } from "./action-bar.shared"
+import { ActionBarSquare } from "./action-bar.shared"
+
+export interface ActionBarButtonGroupProps {
+  flex?: number
+  children?: ReactElement | ReactElement[]
+  shape?: ActionBarSquare
+}
 
 function ActionBarButtonGroup(props: ActionBarButtonGroupProps) {
   const { shape, flex, children } = props

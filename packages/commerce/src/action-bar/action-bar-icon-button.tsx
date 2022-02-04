@@ -1,9 +1,20 @@
 import { Badge, Button, Flex } from "@taroify/core"
 import { prefixClassname } from "@taroify/core/styles"
+import { ITouchEvent } from "@tarojs/components/types/common"
 import classnames from "classnames"
 import * as React from "react"
+import { CSSProperties, ReactElement, ReactText } from "react"
 import "./action-bar-icon-button.scss"
-import { ActionBarIconButtonProps } from "./action-bar.shared"
+
+export interface ActionBarIconButtonProps {
+  icon?: ReactText | ReactElement
+  text?: string
+  badge?: string | number
+  onClick?: (e: ITouchEvent) => void
+  style?: CSSProperties | any
+  className?: string
+  children: ReactElement | ReactElement[]
+}
 
 function ActionBarIconButton(props: ActionBarIconButtonProps) {
   const { badge, onClick, style, className, children } = props
