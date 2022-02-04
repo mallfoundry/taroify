@@ -68,10 +68,14 @@ export default function CheckboxDemo() {
         </Checkbox.Group>
       </Block>
       <Block title="水平排列" className="basic-checkbox-group">
-        <Checkbox.Group defaultValue={["a"]} max={2}>
+        <Checkbox.Group max={4}>
           <Checkbox name="a">复选框 a</Checkbox>
           <Checkbox name="b">复选框 b</Checkbox>
           <Checkbox name="c">复选框 c</Checkbox>
+          <Checkbox name="d">复选框 d</Checkbox>
+          <Checkbox name="e">复选框 e</Checkbox>
+          <Checkbox name="f">复选框 f</Checkbox>
+          <Checkbox name="g">复选框 g</Checkbox>
         </Checkbox.Group>
       </Block>
       <Block title="搭配单元格组件使用" className="checkbox-cell-group">

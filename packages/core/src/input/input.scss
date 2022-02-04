@@ -1,53 +1,35 @@
 @import "./variables";
 
 .#{$component-prefix}input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0; // for flex-shrink in field__button
+  height: $input-height;
+  padding: 0;
+  margin: 0;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+  color: $input-color;
+  resize: none;
+  background-color: transparent;
+  border: 0;
+  outline: none;
 
-  &, // For wechat
-  > input // For h5
-  {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    min-width: 0; // for flex-shrink in field__button
-    height: $input-height;
-    padding: 0;
-    margin: 0;
-    line-height: inherit;
-    color: $input-color;
-    resize: none;
-    background-color: transparent;
-    border: 0;
-    outline: none;
-
-    // for ios wechat
-    &[type='date'],
-    &[type='time'],
-    &[type='datetime-local'] {
-      min-height: var(--cell-line-height, $cell-line-height);
-    }
-
-    // for safari
-    &[type='search'] {
-      appearance: none;
-    }
+  // for ios wechat
+  &[type='date'],
+  &[type='time'],
+  &[type='datetime-local'] {
+    min-height: var(--cell-line-height, $cell-line-height);
   }
 
-  &__placeholder, // For wechat
-  > input::placeholder // For h5
-  {
+  // for safari
+  &[type='search'] {
+    appearance: none;
+  }
+
+  &__placeholder {
     color: $input-placeholder-color;
-  }
-
-  &--readonly,
-  &--readonly::placeholder,
-  &__placeholder--readonly,
-  &--readonly > input, // For h5
-  &--readonly > input::placeholder {
-    color: $input-color;
-  }
-
-  &--readonly {
-    cursor: default;
   }
 
   &--disabled {
@@ -58,63 +40,51 @@
     -webkit-text-fill-color: $input-disabled-color;
   }
 
+  &--readonly,
+  &__placeholder--readonly {
+    color: $input-color;
+  }
+
+  &--readonly {
+    cursor: default;
+  }
+
   &--primary,
-  &--primary::placeholder,
-  &__placeholder--primary,
-  &--primary > input, // For h5
-  &--primary > input::placeholder {
+  &__placeholder--primary {
     color: $input-primary-color;
   }
 
   &--info,
-  &--info::placeholder,
-  &__placeholder--info,
-  &--info > input, // For h5
-  &--info > input::placeholder {
+  &__placeholder--info {
     color: $input-info-color;
   }
 
   &--success,
-  &--success::placeholder,
-  &__placeholder--success,
-  &--success > input, // For h5
-  &--success > input::placeholder {
+  &__placeholder--success {
     color: $input-success-color;
   }
 
   &--warning,
-  &--warning::placeholder,
-  &__placeholder--warning,
-  &--warning > input, // For h5
-  &--warning > input::placeholder {
+  &__placeholder--warning {
     color: $input-warning-color;
   }
 
   &--danger,
-  &--danger::placeholder,
-  &__placeholder--danger,
-  &--danger > input, // For h5
-  &--danger > input::placeholder {
+  &__placeholder--danger {
     color: $input-danger-color;
   }
 
-  &--left,
-  &--left > input // For h5
-  {
+  &--left {
     justify-content: flex-start;
     text-align: left;
   }
 
-  &--center,
-  &--center > input // For h5
-  {
+  &--center {
     justify-content: center;
     text-align: center;
   }
 
-  &--right,
-  &--right > input // For h5
-  {
+  &--right {
     justify-content: flex-end;
     text-align: right;
   }

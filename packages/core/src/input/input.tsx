@@ -1,6 +1,6 @@
 import { Clear } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { Input as TaroInput, ITouchEvent } from "@tarojs/components"
+import { ITouchEvent } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
 import classNames from "classnames"
@@ -8,9 +8,10 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
-import raf from "../utils/raf"
+import { preventDefault } from "../utils/dom/event"
 import { useValue } from "../utils/state"
 import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
+import NativeInput from "./native-input"
 
 export function resolveOnChange<
   E extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
@@ -89,9 +90,7 @@ function Input(props: InputProps) {
     onClear,
     ...restProps
   } = props
-
   const { value, setValue } = useValue({ value: valueProp })
-
   const [focused, setFocused] = useState(false)
 
   const allowClear = useMemo(() => {
@@ -104,6 +103,7 @@ function Input(props: InputProps) {
   }, [clearTrigger, clearable, disabled, focused, value])
 
   const handleClear = (event: ITouchEvent) => {
+    preventDefault(event, true)
     resolveOnChange(event, onChange, "")
     resolveOnChange(event, onInput, "")
     onClear?.(event)
@@ -122,16 +122,14 @@ function Input(props: InputProps) {
   }
 
   const handleBlur = (event: BaseEventOrig<TaroInputProps.inputValueEventDetail>) => {
-    resolveOnChange(event, onChange, value)
     onBlur?.(event)
-
-    // Update focused by raf
-    raf(() => setFocused(false))
+    // Update focused by setTimeout
+    setTimeout(() => setFocused(false), 80)
   }
 
   return (
     <>
-      <TaroInput
+      <NativeInput
         className={classNames(
           prefixClassname("input"),
           {
@@ -164,6 +162,8 @@ function Input(props: InputProps) {
           },
         )}
         disabled={disabled || readonly}
+        readonly={readonly}
+        color={color}
         value={value}
         onFocus={handleFocus}
         onInput={handleInput}

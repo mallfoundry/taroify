@@ -99,8 +99,8 @@ const Form = forwardRef<FormInstance, FormProps>(
       () => ({
         getErrors,
         setErrors,
-        setValues,
         getValues,
+        setValues,
         validate,
         reset,
         /**

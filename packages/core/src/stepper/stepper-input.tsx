@@ -52,9 +52,8 @@ function StepperInput(props: StepperInputProps) {
   )
 
   const onInput = useCallback(
-    (event: BaseEventOrig<InputProps.inputEventDetail>) => {
-      const input = event.target as HTMLInputElement
-      const { value: inputValue } = input
+    ({ detail }: BaseEventOrig<InputProps.inputEventDetail>) => {
+      const { value: inputValue } = detail
 
       let formatted = formatNumber(String(inputValue), digit)
 
@@ -72,9 +71,9 @@ function StepperInput(props: StepperInputProps) {
   )
 
   const onBlur = useCallback(
-    (event: BaseEventOrig<InputProps.inputValueEventDetail>) => {
-      const input = event.target as HTMLInputElement
-      const value = formatValue?.(input.value)
+    ({ detail }: BaseEventOrig<InputProps.inputValueEventDetail>) => {
+      const { value: inputValue } = detail
+      const value = formatValue?.(inputValue)
       setValue(value)
       onChange?.(value)
     },

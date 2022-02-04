@@ -1,50 +1,35 @@
 @import "./variables";
 
 .#{$component-prefix}badge {
-  box-sizing: border-box;
-  display: inline-block;
-  min-width: $badge-size;
-  height: $badge-size;
-  padding: $badge-padding;
-  font-family: $badge-font-family;
-  font-size: $badge-font-size;
-  font-weight: $badge-font-weight;
-  line-height: 1.2;
-  color: $badge-color;
-  text-align: center;
-  background-color: $badge-background-color;
-  border: $badge-border-width solid $badge-border-color;
-  border-radius: $badge-border-radius;
 
-  &__wrapper {
-    position: relative;
+  &--content {
+    box-sizing: border-box;
     display: inline-block;
-  }
-
-  // If is Icon children
-  > .#{$component-prefix}icon {
-    width: unset;
-    height: unset;
+    min-width: $badge-size;
+    padding: $badge-padding;
+    font-family: $badge-font-family;
+    font-size: $badge-font-size;
+    font-weight: $badge-font-weight;
+    line-height: 1.2;
     color: $badge-color;
+    text-align: center;
+    background: $badge-background-color;
+    border: $badge-border-width solid $badge-border-color;
+    border-radius: $badge-border-radius;
   }
-
-  &--fixed {
-    position: absolute;
-    transform-origin: 100%;
-  }
-
-  //&--content {
-  //  padding: $badge-padding;
-  //  line-height: 1.2;
-  //}
 
   &--dot {
     width: $badge-dot-size;
     min-width: 0;
     height: $badge-dot-size;
     padding: 0;
-    background-color: $badge-dot-color;
+    background: $badge-dot-color;
     border-radius: 100%;
+  }
+
+  &--fixed {
+    position: absolute;
+    transform-origin: 100%;
   }
 
   &--top-left {

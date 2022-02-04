@@ -1,11 +1,12 @@
-import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactElement, ReactNode, useMemo } from "react"
+import { CSSProperties, ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
+import BadgeWrapper from "./badge-wrapper"
+import BadgeWrapperContext from "./badge-wrapper.context"
 
 export type BadgePosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 
@@ -13,6 +14,7 @@ export interface BadgeProps extends ViewProps {
   className?: string
   style?: CSSProperties
   content?: ReactNode
+  fixed?: boolean
   dot?: boolean
   max?: number
   position?: BadgePosition
@@ -25,13 +27,15 @@ function Badge(props: BadgeProps): JSX.Element {
     content: contentProp,
     max,
     dot,
+    fixed: fixedProp,
     position = "top-right",
     children,
     ...restProps
   } = props
-  const isIcon = useMemo(() => isIconElement(children), [children])
+  const wrapperContext = useContext(BadgeWrapperContext)
   const hasChildren = children !== undefined
-  const noneChildren = children === undefined
+  const noChildren = children === undefined
+  const fixed = fixedProp ?? !!wrapperContext
 
   const content = useMemo(
     () =>
@@ -41,44 +45,36 @@ function Badge(props: BadgeProps): JSX.Element {
     [contentProp, max],
   )
 
-  return cloneIconElement(isIcon ? children : <View />, {
-    className: classNames({
-      [prefixClassname("badge__wrapper")]: hasChildren,
-      [prefixClassname("badge")]: noneChildren,
-      [prefixClassname("badge--dot")]: noneChildren && dot,
-      [prefixClassname("badge--top-left")]: noneChildren && position === "top-left",
-      [prefixClassname("badge--top-right")]: noneChildren && position === "top-right",
-      [prefixClassname("badge--bottom-left")]: noneChildren && position === "bottom-left",
-      [prefixClassname("badge--bottom-right")]: noneChildren && position === "bottom-right",
-      className: noneChildren,
-    }),
-    children: (
-      <>
-        {!isIcon && children}
-        {noneChildren && !dot && content}
-        {hasChildren && (dot || content) && (
-          <View
-            className={classNames(
-              prefixClassname("badge"),
-              {
-                [prefixClassname("badge--dot")]: dot,
-                [prefixClassname("badge--content")]: content,
-                [prefixClassname("badge--top-left")]: position === "top-left",
-                [prefixClassname("badge--top-right")]: position === "top-right",
-                [prefixClassname("badge--bottom-left")]: position === "bottom-left",
-                [prefixClassname("badge--bottom-right")]: position === "bottom-right",
-              },
-              prefixClassname("badge--fixed"),
-              className,
-            )}
-            children={!dot && content}
-            {...restProps}
-          />
-        )}
-      </>
-    ),
-    ...(noneChildren ? restProps : {}),
-  }) as ReactElement
+  const badge = (
+    <View
+      className={classNames(
+        prefixClassname("badge__badge"),
+        {
+          [prefixClassname("badge--dot")]: dot,
+          [prefixClassname("badge--content")]: content,
+          [prefixClassname("badge--fixed")]: fixed || hasChildren,
+          [prefixClassname("badge--top-left")]: position === "top-left",
+          [prefixClassname("badge--top-right")]: position === "top-right",
+          [prefixClassname("badge--bottom-left")]: position === "bottom-left",
+          [prefixClassname("badge--bottom-right")]: position === "bottom-right",
+        },
+        className,
+      )}
+      children={!dot && content}
+      {...restProps}
+    />
+  )
+
+  if (noChildren) {
+    return badge
+  }
+
+  return (
+    <BadgeWrapper>
+      {children}
+      {(dot || content) && badge}
+    </BadgeWrapper>
+  )
 }
 
 export default Badge

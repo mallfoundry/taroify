@@ -1,11 +1,32 @@
 import { ReactNode } from "react"
 
 export interface FormInstance {
+  /**
+   * @deprecated
+   */
   validateFields(name?: string | string[]): Promise<void>
 
+  /**
+   * @deprecated
+   */
   setFieldsValue(values: any): void
 
+  /**
+   * @deprecated
+   */
   getFieldsValue<V>(): V
+
+  getErrors(name?: string | string[]): FormValidError[]
+
+  setErrors(errors: FormValidError[]): void
+
+  getValues<V>(name?: string | string[]): V
+
+  setValues(values: any): void
+
+  validate<V>(name?: string | string[]): Promise<V>
+
+  reset(): void
 }
 
 export type FormLabelAlign = "left" | "center" | "right"

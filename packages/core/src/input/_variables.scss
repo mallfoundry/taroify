@@ -3,9 +3,10 @@
 @import "../cell/variables";
 
 $input-height: var(--input-height, 24px * $hd);
-$input-color: var(--input-color, var(--text-color, $text-color));
+$input-line-height: var(--input-line-height, 24px * $hd);
+$input-font-size: var(--input-font-size, var(--font-size-md, $font-size-md));
 
-$input-default-color: var(--input-default-color, $input-color);
+$input-color: var(--input-color, var(--text-color, $text-color));
 $input-primary-color: var(--input-primary-color, var(--primary-color, $primary-color));
 $input-info-color: var(--input-info-color, var(--info-color, $info-color));
 $input-success-color: var(--input-success-color, var(--success-color, $success-color));
