@@ -7,9 +7,9 @@
 ### 引入
 
 ```tsx
-import { ActionSheet } from "@taroify/~core/src"
+import { ActionBar } from "@taroify/commerce"
 // or
-import ActionSheet from "@taroify/~core/src/action-sheet"
+import ActionBar from "@taroify/commerce/src/action-bar"
 ```
 
 ## 代码演示
@@ -17,145 +17,166 @@ import ActionSheet from "@taroify/~core/src/action-sheet"
 ### 基础用法
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
+import { ActionBar } from "@taroify/commerce"
 
-function BasicActionSheet() {
-  const [open, setOpen] = useState(true)
+function ActionBarBase() {
+  <ActionBar>
+    <ActionBar.ButtonGroup shape="round" flex={14}>
+      <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
+      <ActionBar.Button color="warning">立即购买</ActionBar.Button>
+    </ActionBar.ButtonGroup>
+    <ActionBar.IconButton badge={1}>
+      <ChatOutlined />
+      <Text>客服</Text>
+    </ActionBar.IconButton>
+    <ActionBar.IconButton badge="dot">
+      <ChatOutlined />
+      <Text>店铺</Text>
+    </ActionBar.IconButton>
+    <ActionBar.IconButton badge="hot">
+      <ChatOutlined />
+      <Text>店铺</Text>
+    </ActionBar.IconButton>
+  </ActionBar>
+}
+```
+
+### 形状
+
+通过`shape`设置按钮形状
+
+```tsx
+import { ActionBar } from "@taroify/commerce"
+
+function ActionBarShape() {
   return (
-    <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-    </ActionSheet>
+    <ActionBar>
+      <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
+      <ActionBar.IconButton badge={1}>
+        <ChatOutlined />
+        <Text>客服</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="dot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="hot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+    </ActionBar>
   )
 }
 ```
 
-### 展示取消按钮
+### 组合
 
-使用 `ActionSheet.Button` 组件后，会在底部展示取消按钮，点击后关闭当前面板并触发 `onCancel` 事件。
+可以通过 `ActionBar.ButtonGroup`调整`ActionBar.Button` 样式,以及所需宽度
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
+import { ActionBar } from "@taroify/commerce"
 
-function ActionSheetWithCancel() {
-  const [open, setOpen] = useState(true)
+function ActionGroup() {
   return (
-    <ActionSheet
-      open={open}
-      onSelect={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      onClose={setOpen}
-    >
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-      <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
-    </ActionSheet>
+    <ActionBar>
+      <ActionBar.ButtonGroup shape="square" flex={14}>
+        <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
+        <ActionBar.Button color="warning">立即购买</ActionBar.Button>
+      </ActionBar.ButtonGroup>
+      <ActionBar.IconButton badge={1}>
+        <ChatOutlined />
+        <Text>客服</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="dot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="hot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+    </ActionBar>
+
   )
 }
 ```
 
-### 展示描述信息
+### 置底
 
-通过 `ActionSheet.Header` 组件可以在菜单顶部显示描述信息，通过选项的 `ActionSheet.Action.children` 属性可以在 `Action` 文字的下侧展示描述信息。
-
-```tsx
-import { ActionSheet } from "@taroify/core"
-
-function ActionSheetWithDescription() {
-  const [open, setOpen] = useState(true)
-  return (
-    <ActionSheet
-      open={open}
-      onSelect={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      onClose={setOpen}
-    >
-      <ActionSheet.Header>这是一段描述信息</ActionSheet.Header>
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-      <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
-    </ActionSheet>
-  )
-}
-```
-
-### 选项状态
-
-可以通过 `loading` 和 `disabled` 将选项设置为加载状态或禁用状态，或者通过`style.color`设置选项的颜色
+可以通过 `placeholder` 和 `fixed` 可以将组件置于底部
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
+import { ActionBar } from "@taroify/commerce"
 
-function ActionSheetWithStatuses() {
-  const [open, setOpen] = useState(true)
+function ActionBarBottom() {
   return (
-    <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
-      <ActionSheet.Action value="1" style={{ color: "#ee0a24" }} name="着色选项" />
-      <ActionSheet.Action value="2" disabled name="禁止选项" />
-      <ActionSheet.Action value="3" loading name="选项三" />
-      <ActionSheet.Button onClick={() => setOpen(false)}>取消</ActionSheet.Button>
-    </ActionSheet>
+    <ActionBar fixed placeholder>
+      <ActionBar.ButtonGroup shape="round" flex={14}>
+        <ActionBar.Button color="danger">我是浮空得</ActionBar.Button>
+        <ActionBar.Button color="warning">立即购买</ActionBar.Button>
+      </ActionBar.ButtonGroup>
+      <ActionBar.IconButton badge={1}>
+        <ChatOutlined />
+        <Text>客服</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="dot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+      <ActionBar.IconButton badge="hot">
+        <ChatOutlined />
+        <Text>店铺</Text>
+      </ActionBar.IconButton>
+    </ActionBar>
   )
 }
+
 ```
 
 ## API
 
-### ActionSheet Props
+### ActionBar Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| defaultOpen | 默认是否显示动作面板 | _boolean_ | `false` |
-| open      | 是否显示动作面板 | _boolean_ | `false` |
+| fixed | 是否固定在底部 | _boolean_ | `false` |
+| placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
 | className | 样式类名 | _string_ | - |
 | style     | 样式对象 | _CSSProperties_ | - |
-| rounded   | 是否为圆角 | _string_ | - |
 
-### ActionSheet.Backdrop Props
+### ActionBar.ButtonGroup Props
+
+| 参数        | 说明                         | 类型 | 默认值 |
+|-----------|----------------------------| --- | --- |
+| className | 样式类名                       | _string_       | - |
+| style     | 样式对象                       | _CSSProperties_ | - |
+| flex      | 列元素宽度                      | _number_ | - |
+| shape | 按钮形状,可选值为 `circle` `round` | _string_ | `square` |
+
+### ActionBar.Button Props
+
+| 参数        | 说明                         | 类型 | 默认值 |
+|-----------|----------------------------| --- | --- |
+| className | 样式类名                       | _string_        | - |
+| style     | 样式对象                       | _CSSProperties_ | - |
+| children  | 描述信息                       | _string_        | - |
+| shape     | 按钮形状,可选值为 `circle` `round` | _string_ | `square` |
+| color     | 按钮颜色,可选值为 `danger` `warning` | _string_ | `danger` |
+| icon | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
+| size | 尺寸，可选值为 `large` `small` `mini` | _string_ | `medium` |
+| formType | 原生 button 标签的 type 属性 | _string_ | `button` |
+| block | 是否为块级元素 | _boolean_ | `false` |
+| disabled | 是否禁用按钮 | _boolean_ | `false` |
+| hairline | 是否使用 0.5px 边框 | _boolean_ | `false` |
+| loading | 是否显示为加载状态 | _boolean \ LoadingProps_ | `false` |
+| variant | 按钮变种，可选值为 `contained` `text` `outlined` | _string_ | `contained` |
+
+### ActionBar.IconButton Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | className | 样式类名 | _string_        | - |
 | style     | 样式对象 | _CSSProperties_ | - |
-| duration  | 动画时长，单位毫秒 | _number \| string_ | `300` |
-| closeable | 点击是否可以关闭  | _boolean_ | `true` |
+| badge      | 徽标内容    | _ReactNode_        | - |
 
-### ActionSheet.Header Props
-
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 样式类名 | _string_        | - |
-| style     | 样式对象 | _CSSProperties_ | - |
-| title     | 标题    | _string_        | - |
-| children  | 描述信息 | _string_        | - |
-
-### ActionSheet.Action Props
-
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 样式类名 | _string_        | - |
-| style     | 样式对象 | _CSSProperties_ | - |
-| name      | 标题    | _string_        | - |
-| value     | 选项值  | _string_        | - |
-| children  | 描述信息 | _string_        | - |
-
-### ActionSheet.Button Props
-
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 按钮类名 | _string_        | - |
-| style     | 按钮样式 | _CSSProperties_ | - |
-| type      | 按钮类型，可选值为 `cancel`  | _string_ | `button` |
-| children  | 按钮内容 | _string_        | - |
-
-### ActionSheet Events
-
-| 事件名 | 说明 | 回调参数 |
-| --- | --- | --- |
-| onSelect | 点击选项时触发，禁用或加载状态下不会触发 | _event: ActionSheet.ActionEvent_ |
-| onCancel | 点击取消按钮时触发 | - |
-| onClose | 关闭面板时触发 | - |
 

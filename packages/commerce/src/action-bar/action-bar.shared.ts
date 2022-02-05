@@ -1,11 +1,3 @@
-import { CSSProperties, ReactElement } from "react"
+export type ActionBarButtonColor = "primary" | "info" | "warning" | "danger"
 
-export interface ActionBarProps {
-  safeAreaInsetBottom: boolean
-  children: ReactElement
-  className?: string
-  style?: CSSProperties | any
-}
-
-export type ActionBarButtonType = "primary" | "info" | "warning" | "danger"
-export type ActionBarSquare = "square" | "round" | "circle" | "border-round"
+export type ActionBarButtonShape = "square" | "round"

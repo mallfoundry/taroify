@@ -1,49 +1,53 @@
 import { Flex } from "@taroify/core"
+import { FlexProps } from "@taroify/core/flex"
 import { prefixClassname } from "@taroify/core/styles"
+import { usePlaceholder } from "@taroify/~core/src/hooks"
+import { View } from "@tarojs/components"
 import classnames from "classnames"
 import * as React from "react"
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
-import { ActionBarContext } from "./action-bar.context"
+import { useRef } from "react"
 import "./action-bar.scss"
-import { ActionBarProps } from "./action-bar.shared"
 
-function useDisplayNames(children: ReactNode[]) {
-  const childrenDisplayNames = (children: ReactElement[]): string[] => {
-    return children
-      .map((item: ReactElement<any, any>) => {
-        if (item.type.displayName === "ActionBarButtonGroup") {
-          return childrenDisplayNames(item.props.children)
-        }
-        return item?.type.displayName
-      })
-      .flat()
-  }
-  return childrenDisplayNames(children as ReactElement[])
+export interface ActionBarProps extends FlexProps {
+  fixed: boolean
+  placeholder: boolean
 }
 
 function ActionBar(props: ActionBarProps) {
-  const { style, safeAreaInsetBottom, children, className } = props
+  const { className, fixed, placeholder, justify = "space-between", ...restProps } = props
+  const rootRef = useRef()
+  const PlaceHolder = usePlaceholder(rootRef, {
+    className: prefixClassname("action-bar--placeholder"),
+  })
 
-  const childrenDisplayNames = useDisplayNames(React.Children.toArray(children))
-  return (
-    <ActionBarContext.Provider value={{ parent: childrenDisplayNames }}>
-      <Flex
-        justify={"space-between"}
-        style={style}
-        className={classnames(
-          prefixClassname("action-bar"),
-          { [prefixClassname("action--bar--safeAreaInsetBottom")]: safeAreaInsetBottom === true },
-          className,
-        )}
+  function ActionBarRender() {
+    return (
+      <View
+        className={classnames({
+          [prefixClassname("action-bar--fixed")]: fixed,
+        })}
       >
-        {React.Children.toArray(children)
-          .filter((child) => isValidElement(child))
-          .map((child: ReactNode, index: number) => {
-            return cloneElement(child as ReactElement, { index })
-          })}
-      </Flex>
-    </ActionBarContext.Provider>
-  )
+        <Flex
+          justify={justify}
+          className={classnames(
+            prefixClassname("action-bar"),
+
+            className,
+          )}
+          {...restProps}
+        />
+      </View>
+    )
+  }
+
+  if (fixed && placeholder) {
+    return (
+      <PlaceHolder>
+        <ActionBarRender />
+      </PlaceHolder>
+    )
+  }
+  return <ActionBarRender />
 }
 
 export default ActionBar

@@ -5,13 +5,13 @@
 #### NPM
 
 ```shell
-npm i @taroify/Commerce -S
+npm i @taroify/commerce -S
 ```
 
 #### YARN
 
 ```shell
-yarn add @taroify/Commerce
+yarn add @taroify/commerce
 ```
 
 ## Document

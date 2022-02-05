@@ -4,24 +4,13 @@
   flex: 1;
   color: var(--action-bar-button-color, $action-bar-button-color);
   font-size: var(--action-bar-button-font-size, $action-bar-button-font-size);
-
-  &--danger {
-    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red);
-  }
-
-  &--last {
-    margin-right: 5px* $hd;
-    border-top-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
-    border-bottom-right-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
-  }
-
-  &--first {
-    margin-left: 5px* $hd;
-    border-top-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
-    border-bottom-left-radius: var(--action-bar-button-border-radius, $action-bar-button-border-radius);
-  }
+  border: 0 none;
 
   &--warning {
     background: var(--action-bar-button-gradient-orange, $action-bar-button-gradient-orange);
+  }
+
+  &--danger {
+    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red);
   }
 }
