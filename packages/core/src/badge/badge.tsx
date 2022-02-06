@@ -32,10 +32,10 @@ function Badge(props: BadgeProps): JSX.Element {
     children,
     ...restProps
   } = props
-  const wrapperContext = useContext(BadgeWrapperContext)
+  const inWrapper = useContext(BadgeWrapperContext)
   const hasChildren = children !== undefined
   const noChildren = children === undefined
-  const fixed = fixedProp ?? !!wrapperContext
+  const fixed = fixedProp ?? !!inWrapper
 
   const content = useMemo(
     () =>
