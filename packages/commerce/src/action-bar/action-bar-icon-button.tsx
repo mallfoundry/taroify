@@ -1,36 +1,54 @@
-import { Badge, Button, Flex } from "@taroify/core"
-import { ButtonProps } from "@taroify/core/button"
+import Button, { ButtonProps } from "@taroify/core/button"
+import Flex from "@taroify/core/flex"
 import { prefixClassname } from "@taroify/core/styles"
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
+import { createBadge, createBadgeWrapper } from "@taroify/~core/src/badge"
 import classnames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
-import "./action-bar-icon-button.scss"
+import { Children, CSSProperties, ReactNode } from "react"
+
+function useActionBarIconButtonChildren(
+  children?: ReactNode,
+  badge?: boolean | string | number | ReactNode,
+) {
+  return Children.toArray(children).map((child, index) => {
+    if (isIconElement(child)) {
+      const IconBadgeWrapper = createBadgeWrapper(
+        cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") }),
+      )
+      const Badge = createBadge(badge)
+      return (
+        <IconBadgeWrapper key={index}>
+          <Badge />
+        </IconBadgeWrapper>
+      )
+    }
+    return child
+  })
+}
 
 export interface ActionBarIconButtonProps extends ButtonProps {
-  badge?: string | number
+  badge?: boolean | string | number | ReactNode
   style?: CSSProperties
-  className?: string
   children: ReactNode
 }
 
 function ActionBarIconButton(props: ActionBarIconButtonProps) {
-  const { badge, style, className, children } = props
+  const { badge, style, className, children: childrenProp } = props
+  const children = useActionBarIconButtonChildren(childrenProp, badge)
   return (
     <Flex.Item>
       <Button
         className={classnames(prefixClassname("action-bar-icon-button"), className)}
         variant="text"
-        style={{ padding: "0px", ...style }}
+        style={style}
       >
-        <Badge content={badge} dot={badge === "dot"}>
-          <Flex align="center" direction="column">
-            {children}
-          </Flex>
-        </Badge>
+        <Flex align="center" direction="column">
+          {children}
+        </Flex>
       </Button>
     </Flex.Item>
   )
 }
 
-ActionBarIconButton.displayName = "ActionBarIcon"
 export default ActionBarIconButton

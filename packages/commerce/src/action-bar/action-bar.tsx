@@ -1,12 +1,9 @@
-import { Flex } from "@taroify/core"
-import { FlexProps } from "@taroify/core/flex"
+import Flex, { FlexProps } from "@taroify/core/flex"
+import { usePlaceholder } from "@taroify/core/hooks"
 import { prefixClassname } from "@taroify/core/styles"
-import { usePlaceholder } from "@taroify/~core/src/hooks"
-import { View } from "@tarojs/components"
 import classnames from "classnames"
 import * as React from "react"
 import { useRef } from "react"
-import "./action-bar.scss"
 
 export interface ActionBarProps extends FlexProps {
   fixed: boolean
@@ -22,21 +19,17 @@ function ActionBar(props: ActionBarProps) {
 
   function ActionBarRender() {
     return (
-      <View
-        className={classnames({
-          [prefixClassname("action-bar--fixed")]: fixed,
-        })}
-      >
-        <Flex
-          justify={justify}
-          className={classnames(
-            prefixClassname("action-bar"),
-
-            className,
-          )}
-          {...restProps}
-        />
-      </View>
+      <Flex
+        justify={justify}
+        className={classnames(
+          prefixClassname("action-bar"),
+          {
+            [prefixClassname("action-bar--fixed")]: fixed,
+          },
+          className,
+        )}
+        {...restProps}
+      />
     )
   }
 

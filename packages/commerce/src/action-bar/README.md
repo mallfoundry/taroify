@@ -1,15 +1,15 @@
-# ActionSheet 动作面板
+# ActionBar 动作栏
 
 ### 介绍
 
-底部弹起的模态面板，包含与当前情境相关的多个选项。
+用于为页面相关操作提供便捷交互。
 
 ### 引入
 
 ```tsx
 import { ActionBar } from "@taroify/commerce"
 // or
-import ActionBar from "@taroify/commerce/src/action-bar"
+import ActionBar from "@taroify/commerce/action-bar"
 ```
 
 ## 代码演示
@@ -19,7 +19,7 @@ import ActionBar from "@taroify/commerce/src/action-bar"
 ```tsx
 import { ActionBar } from "@taroify/commerce"
 
-function ActionBarBase() {
+function BasicActionBar() {
   <ActionBar>
     <ActionBar.ButtonGroup shape="round" flex={14}>
       <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
@@ -137,19 +137,16 @@ function ActionBarBottom() {
 
 ### ActionBar Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| fixed | 是否固定在底部 | _boolean_ | `false` |
-| placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
-| className | 样式类名 | _string_ | - |
-| style     | 样式对象 | _CSSProperties_ | - |
+|     参数     | 说明                                                                      | 类型        |       默认值     |
+|-------------|--------------------------------------------------------------------------|-------------| -------------- |
+| justify     | 主轴对齐方式，可选值为 `start` `end` `center` `space-around` `space-between`  | _string_   | `space-between` |
+| fixed       | 是否固定在底部                                                              | _boolean_   |     `false`    |
+| placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素                                 | _boolean_   |     `false`     |
 
 ### ActionBar.ButtonGroup Props
 
 | 参数        | 说明                         | 类型 | 默认值 |
 |-----------|----------------------------| --- | --- |
-| className | 样式类名                       | _string_       | - |
-| style     | 样式对象                       | _CSSProperties_ | - |
 | flex      | 列元素宽度                      | _number_ | - |
 | shape | 按钮形状,可选值为 `circle` `round` | _string_ | `square` |
 
@@ -157,9 +154,6 @@ function ActionBarBottom() {
 
 | 参数        | 说明                         | 类型 | 默认值 |
 |-----------|----------------------------| --- | --- |
-| className | 样式类名                       | _string_        | - |
-| style     | 样式对象                       | _CSSProperties_ | - |
-| children  | 描述信息                       | _string_        | - |
 | shape     | 按钮形状,可选值为 `circle` `round` | _string_ | `square` |
 | color     | 按钮颜色,可选值为 `danger` `warning` | _string_ | `danger` |
 | icon | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
@@ -175,8 +169,6 @@ function ActionBarBottom() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| className | 样式类名 | _string_        | - |
-| style     | 样式对象 | _CSSProperties_ | - |
-| badge      | 徽标内容    | _ReactNode_        | - |
+| badge  | 徽标内容    | _ReactNode_        | - |
 
 

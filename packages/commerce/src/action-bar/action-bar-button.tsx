@@ -1,5 +1,4 @@
-import { Button } from "@taroify/core"
-import { ButtonProps } from "@taroify/core/button"
+import Button, { ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"
@@ -33,5 +32,4 @@ function ActionBarButton(props: ActionBarButtonProps) {
   )
 }
 
-ActionBarButton.displayName = "ActionBarButton"
 export default ActionBarButton

@@ -13,7 +13,7 @@ function ActionBarBase() {
         <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
         <ActionBar.Button color="warning">立即购买</ActionBar.Button>
       </ActionBar.ButtonGroup>
-      <ActionBar.IconButton badge={1}>
+      <ActionBar.IconButton badge>
         <ChatOutlined />
         <Text>客服</Text>
       </ActionBar.IconButton>
@@ -36,7 +36,7 @@ function ActionBarGroup() {
         <ActionBar.Button color="danger">加入购物车</ActionBar.Button>
         <ActionBar.Button color="warning">立即购买</ActionBar.Button>
       </ActionBar.ButtonGroup>
-      <ActionBar.IconButton badge={1}>
+      <ActionBar.IconButton badge={5}>
         <ChatOutlined />
         <Text>客服</Text>
       </ActionBar.IconButton>
