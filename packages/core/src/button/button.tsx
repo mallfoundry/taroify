@@ -107,7 +107,7 @@ export default function Button(props: ButtonProps) {
       }}
     >
       <View className={prefixClassname("button__content")}>
-        {loading ?? icon}
+        {loading || icon}
         {children && <View className={prefixClassname("button__text")} children={children} />}
       </View>
       <ButtonBase
