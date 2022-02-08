@@ -1,0 +1,172 @@
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+/*! ./../../../../webpack/buildin/module.js */
+
+/*! ./../../../process/browser.js */
+
+/*! ./../../../webpack/buildin/global.js */
+
+/*! ./defineProperty.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/classCallCheck.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/createClass.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/createSuper.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/defineProperty.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/get.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/inherits.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/set.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/slicedToArray.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/toArray.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/typeof.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/wrapNativeSuper.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/typeof.js */
+
+/*! ./runtime */
+
+/*! @babel/runtime/helpers/classCallCheck */
+
+/*! @babel/runtime/helpers/createClass */
+
+/*! @babel/runtime/helpers/defineProperty */
+
+/*! @babel/runtime/helpers/objectSpread2 */
+
+/*! @babel/runtime/helpers/typeof */
+
+/*! @tarojs/api */
+
+/*! @tarojs/runtime */
+
+/*! @tarojs/shared */
+
+/*! all exports used */
+
+/*! exports provided: Ad, AdCustom, Audio, Block, Button, Camera, Canvas, Checkbox, CheckboxGroup, CoverImage, CoverView, CustomWrapper, Editor, Form, FunctionalPageNavigator, Icon, Image, Input, KeyboardAccessory, Label, LivePlayer, LivePusher, Map, MatchMedia, MovableArea, MovableView, NavigationBar, Navigator, OfficialAccount, OpenData, PageContainer, PageMeta, Picker, PickerView, PickerViewColumn, Progress, Radio, RadioGroup, RichText, ScrollView, Slider, Slot, Swiper, SwiperItem, Switch, Text, Textarea, Video, View, VoipRoom, WebView */
+
+/*! exports provided: Current, ElementNames, Events, FormElement, MutationObserver, SERVICE_IDENTIFIER, SVGElement, Style, TaroElement, TaroEvent, TaroNode, TaroRootElement, TaroText, addLeadingSlash, cancelAnimationFrame, container, createComponentConfig, createDocument, createEvent, createPageConfig, createRecursiveComponentConfig, document, eventCenter, eventHandler, eventSource, getComputedStyle, getCurrentInstance, getPageInstance, hydrate, incrementId, injectPageInstance, navigator, nextTick, now, options, processPluginHooks, requestAnimationFrame, safeExecute, stringify, window */
+
+/*! exports provided: EMPTY_ARR, EMPTY_OBJ, animation, box, cacheDataGet, cacheDataHas, cacheDataSet, capitalize, controlledComponent, defaultReconciler, ensure, focusComponents, getUniqueKey, hasOwn, indent, internalComponents, isArray, isBoolean, isBooleanStringLiteral, isFunction, isNull, isNumber, isObject, isString, isUndefined, mergeInternalComponents, mergeReconciler, nestElements, noop, processApis, queryToJson, setUniqueKeyToRoute, singleQuote, toCamelCase, toDashed, toKebabCase, touchEvents, unbox, unsupport, voidElements, warn */
+
+/*! exports provided: PageContext, R, connectReactPage, createNativeComponentConfig, createReactApp, setReconciler, useAddToFavorites, useDidHide, useDidShow, useOptionMenuClick, usePageScroll, usePullDownRefresh, usePullIntercept, useReachBottom, useReady, useResize, useRouter, useScope, useShareAppMessage, useShareTimeline, useTabItemTap, useTitleClick */
+
+/*! exports provided: createPortal, default, findDOMNode, render, unmountComponentAtNode, unstable_batchedUpdates */
+
+/*! exports provided: default */
+
+/*! exports used: Button, View */
+
+/*! exports used: EMPTY_ARR, EMPTY_OBJ, capitalize, controlledComponent, defaultReconciler, ensure, internalComponents, isArray, isBoolean, isFunction, isNumber, isObject, isString, isUndefined, mergeInternalComponents, mergeReconciler, noop, processApis, toCamelCase, toDashed, warn */
+
+/*! exports used: createReactApp */
+
+/*! exports used: createSelectorQuery, getCurrentInstance, initPxTransform, nextTick, offWindowResize, onWindowResize, useRouter */
+
+/*! exports used: default */
+
+/*! inversify */
+
+/*! no exports provided */
+
+/*! no static exports found */
+
+/*! react-reconciler */
+
+/*! scheduler */
+
+/*!*********************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/taro/index.js ***!
+  \*********************************************************************************/
+
+/*!*****************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/dist/index.esm.js ***!
+  \*****************************************************************************************/
+
+/*!*******************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/react/dist/react.esm.js ***!
+  \*******************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/shared/dist/shared.esm.js ***!
+  \*********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/runtime/dist/runtime.esm.js ***!
+  \***********************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/mini-runner/dist/template/comp.js ***!
+  \*****************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/plugin-platform-weapp/dist/runtime.js ***!
+  \*********************************************************************************************************/
+
+/*!**********************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/plugin-framework-react/dist/runtime.js ***!
+  \**********************************************************************************************************/
+
+/*!***************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/mini-runner/dist/template/custom-wrapper.js ***!
+  \***************************************************************************************************************/
+
+/*!******************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js ***!
+  \******************************************************************************************************************/
+
+/*!*********************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*********************************************************************************************************************/
+
+/*!**************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/node_modules/@babel/runtime/helpers/createClass.js ***!
+  \**************************************************************************************************************************/
+
+/*!***************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/mini-runner/node_modules/regenerator-runtime/runtime.js ***!
+  \***************************************************************************************************************************/
+
+/*!****************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/node_modules/@babel/runtime/helpers/objectSpread2.js ***!
+  \****************************************************************************************************************************/
+
+/*!*****************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \*****************************************************************************************************************************/
+
+/*!*****************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/api/node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \*****************************************************************************************************************************/
+
+/*!**********************************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/@tarojs/mini-runner/node_modules/regenerator-runtime/runtime-module.js ***!
+  \**********************************************************************************************************************************/
