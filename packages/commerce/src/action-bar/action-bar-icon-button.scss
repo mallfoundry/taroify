@@ -1,0 +1,15 @@
+@import "./variables";
+
+.#{$component-prefix}action-bar-icon-button {
+  width: 48px * $hd;
+  color: var(--action-bar-color, $action-bar-color) !important;
+  font-size: var(--action-bar-font-size, $action-bar-font-size);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  &__icon {
+    margin: 0 auto var(--padding-base);
+    font-size: var(--action-bar-icon-font-size, $action-bar-icon-font-size);
+  }
+}

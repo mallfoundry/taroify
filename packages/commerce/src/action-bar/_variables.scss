@@ -1,0 +1,14 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/mixins/hairline";
+@import "~@taroify/core/styles/variables";
+
+$action-bar-color: var(--gray-6, $gray-6);
+$action-bar-font-size: var(--font-size-xs, $font-size-xs);
+$action-bar-button-font-size: var(--font-size-sm, $font-size-sm);
+$action-bar-button-color: var(--white, $white);
+$action-bar-button-gradient-red: var(--gradient-red, $gradient-red);
+$action-bar-button-gradient-orange: var(--gradient-orange, $gradient-orange);
+$action-bar-button-border-radius-md: var(--action-bar-button-border-radius-md, var(--border-radius-md, $border-radius-md));
+$action-bar-button-border-radius-max: var(--action-bar-button-border-radius-max, var(--border-radius-max, $border-radius-max));
+
+$action-bar-icon-font-size: 18px * $hd;

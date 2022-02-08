@@ -244,6 +244,12 @@
     border-radius: 0;
   }
 
+  &__icon {
+    font-size: 1.2em;
+    line-height: inherit;
+    color: inherit;
+  }
+
   &__content {
     display: flex;
     align-items: center;

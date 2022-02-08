@@ -288,6 +288,11 @@ const subpackages = [
     title: "导航组件",
     pages: [
       {
+        title: "actionBar 动作栏",
+        name: "actionBar",
+        path: "action-bar/index",
+      },
+      {
         title: "Grid 宫格",
         name: "Grid",
         path: "grid/index",
