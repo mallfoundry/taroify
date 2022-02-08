@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.26-alpha.6
+
+`2022-02-08`
+
+**Bug Fixes**
+
+- Badge
+  - 修复独立模式 fixed 的问题 [#331](https://github.com/mallfoundry/taroify/pull/331)
+- Button
+  - 修复 loading 为 false 时，不能显示图标的问题 [#332](https://github.com/mallfoundry/taroify/pull/332)
+
 ### v0.0.26-alpha.5
 
 `2022-01-28`
