@@ -261,13 +261,6 @@
       line-height: inherit;
       color: inherit;
     }
-
-    .#{$component-prefix}icon + .#{$component-prefix}button__text,
-    .#{$component-prefix}button__text + .#{$component-prefix}icon,
-    .#{$component-prefix}button__loading + .#{$component-prefix}button__text,
-    .#{$component-prefix}button__text + .#{$component-prefix}button__loading {
-      margin-left: var(--padding-base, $padding-base);
-    }
   }
 
   &__loading {
@@ -280,5 +273,15 @@
       height: var(--button-loading-icon-size, $button-loading-icon-size);
       color: currentColor;
     }
+  }
+
+  &__loading--right,
+  &__icon--right {
+    margin-right: var(--padding-base, $padding-base);
+  }
+
+  &__loading--left,
+  &__icon--left {
+    margin-left: var(--padding-base, $padding-base);
   }
 }
