@@ -1,5 +1,4 @@
 import Button, { ButtonProps } from "@taroify/core/button"
-import Flex from "@taroify/core/flex"
 import { prefixClassname } from "@taroify/core/styles"
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { createBadge, createBadgeWrapper } from "@taroify/~core/src/badge"
@@ -27,27 +26,25 @@ function useActionBarIconButtonChildren(
   })
 }
 
-export interface ActionBarIconButtonProps extends ButtonProps {
-  badge?: boolean | string | number | ReactNode
+export interface ActionBarIconButtonProps extends Omit<ButtonProps, "variant"> {
   style?: CSSProperties
+  badge?: boolean | string | number | ReactNode
   children: ReactNode
 }
 
 function ActionBarIconButton(props: ActionBarIconButtonProps) {
-  const { badge, style, className, children: childrenProp } = props
+  const { className, style, badge, children: childrenProp, ...restProps } = props
   const children = useActionBarIconButtonChildren(childrenProp, badge)
   return (
-    <Flex.Item>
-      <Button
-        className={classnames(prefixClassname("action-bar-icon-button"), className)}
-        variant="text"
-        style={style}
-      >
-        <Flex align="center" direction="column">
-          {children}
-        </Flex>
-      </Button>
-    </Flex.Item>
+    <Button
+      className={classnames(prefixClassname("action-bar-icon-button"), "color", className)}
+      variant="text"
+      {...restProps}
+    >
+      <Button.Content className={prefixClassname("action-bar-icon-button__content")}>
+        {children}
+      </Button.Content>
+    </Button>
   )
 }
 

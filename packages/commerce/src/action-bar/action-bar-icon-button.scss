@@ -8,6 +8,12 @@
   flex-direction: column;
   padding: 0;
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   &__icon {
     margin: 0 auto var(--padding-base);
     font-size: var(--action-bar-icon-font-size, $action-bar-icon-font-size);
