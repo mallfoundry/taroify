@@ -1,0 +1,16 @@
+@import "./variables";
+
+.#{$component-prefix}action-bar-button {
+  flex: 1;
+  color: var(--action-bar-button-color, $action-bar-button-color);
+  font-size: var(--action-bar-button-font-size, $action-bar-button-font-size);
+  border: 0 none;
+
+  &--warning {
+    background: var(--action-bar-button-gradient-orange, $action-bar-button-gradient-orange);
+  }
+
+  &--danger {
+    background: var(--action-bar-button-gradient-red, $action-bar-button-gradient-red);
+  }
+}

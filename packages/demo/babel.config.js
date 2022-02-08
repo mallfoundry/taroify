@@ -21,6 +21,15 @@ module.exports = {
       },
       "@taroify/core",
     ],
+    [
+      "import",
+      {
+        libraryName: "@taroify/commerce",
+        libraryDirectory: "",
+        style: true,
+      },
+      "@taroify/commerce",
+    ],
     // [
     //   "import",
     //   {

@@ -1,11 +1,13 @@
+import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { Children, cloneElement, isValidElement, ReactNode, useContext, useMemo } from "react"
 import ButtonBase from "../button-base"
 import Loading, { LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
+import { isTextElement } from "../utils/validate"
 import ButtonContext from "./button.context"
 import {
   ButtonColor,
@@ -30,6 +32,21 @@ function useButtonLoading(loading?: boolean | LoadingProps): ReactNode {
     }
     return loading
   }, [loading])
+}
+
+function useButtonChildren(children?: ReactNode) {
+  return Children.map(children, (child, index) => {
+    if (isTextElement(child)) {
+      return <View key={index} className={prefixClassname("button__text")} children={children} />
+    }
+    if (isIconElement(child)) {
+      return cloneIconElement(child, { key: index, className: prefixClassname("button__icon") })
+    }
+    if (isValidElement(child)) {
+      return cloneElement(child, { key: index })
+    }
+    return child
+  })
 }
 
 export interface ButtonProps
@@ -61,12 +78,12 @@ export default function Button(props: ButtonProps) {
     disabled,
     loading: loadingProp,
     icon,
-    children,
+    children: childrenProp,
     onClick,
     ...restProps
   } = props
-
   const loading = useButtonLoading(loadingProp)
+  const children = useButtonChildren(childrenProp)
 
   const { onClick: onCtxClick } = useContext(ButtonContext)
 
@@ -108,7 +125,7 @@ export default function Button(props: ButtonProps) {
     >
       <View className={prefixClassname("button__content")}>
         {loading ?? icon}
-        {children && <View className={prefixClassname("button__text")} children={children} />}
+        {children}
       </View>
       <ButtonBase
         className={prefixClassname("button__button")}

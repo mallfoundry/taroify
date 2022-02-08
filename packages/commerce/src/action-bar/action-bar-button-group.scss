@@ -1,0 +1,38 @@
+@import "./variables";
+
+.#{$component-prefix}action-bar-button-group {
+  flex: 1;
+  display: flex;
+
+  > .#{$component-prefix}action-bar-button {
+    border-radius: 0;
+  }
+
+  &--square {
+    > .#{$component-prefix}action-bar-button {
+      &:first-child {
+        border-top-left-radius: $action-bar-button-border-radius-md;
+        border-bottom-left-radius: $action-bar-button-border-radius-md;
+      }
+
+      &:last-child {
+        border-top-right-radius: $action-bar-button-border-radius-md;
+        border-bottom-right-radius: $action-bar-button-border-radius-md;
+      }
+    }
+  }
+
+  &--round {
+    > .#{$component-prefix}action-bar-button {
+      &:first-child {
+        border-top-left-radius: $action-bar-button-border-radius-max;
+        border-bottom-left-radius: $action-bar-button-border-radius-max;
+      }
+
+      &:last-child {
+        border-top-right-radius: $action-bar-button-border-radius-max;
+        border-bottom-right-radius: $action-bar-button-border-radius-max;
+      }
+    }
+  }
+}
