@@ -3,11 +3,13 @@ import { ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactNode, useContext, useMemo } from "react"
+import { cloneElement, ReactElement, ReactNode, useContext, useMemo } from "react"
 import ButtonBase from "../button-base"
 import Loading, { LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
-import { isTextElement } from "../utils/validate"
+import Children from "../utils/children"
+import { isElementOf, isObjectElement } from "../utils/validate"
+import ButtonContent from "./button-content"
 import ButtonContext from "./button.context"
 import {
   ButtonColor,
@@ -17,36 +19,82 @@ import {
   ButtonVariant,
 } from "./button.shared"
 
-function useButtonLoading(loading?: boolean | LoadingProps): ReactNode {
+function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): ReactNode {
   return useMemo(() => {
     if (_.isBoolean(loading) && loading) {
-      return <Loading className={prefixClassname("button__loading")} />
-    } else if (_.isPlainObject(loading)) {
+      return (
+        <Loading
+          className={classNames(
+            prefixClassname("button__loading"),
+            prefixClassname("button__loading--right"),
+          )}
+        />
+      )
+    }
+
+    if (isObjectElement(loading)) {
       const { className, ...restProps } = loading as LoadingProps
       return (
         <Loading
-          className={classNames(prefixClassname("button__loading"), className)}
+          className={classNames(
+            prefixClassname("button__loading"),
+            prefixClassname("button__loading--right"),
+            className,
+          )}
           {...restProps}
         />
       )
     }
+
+    if (isElementOf(loading, Loading)) {
+      return cloneElement(loading as ReactElement, {
+        className: classNames(
+          prefixClassname("button__loading"),
+          prefixClassname("button__loading--right"),
+        ),
+      })
+    }
+
     return loading
   }, [loading])
 }
 
-function useButtonChildren(children?: ReactNode) {
-  return Children.map(children, (child, index) => {
-    if (isTextElement(child)) {
-      return <View key={index} className={prefixClassname("button__text")} children={children} />
-    }
-    if (isIconElement(child)) {
-      return cloneIconElement(child, { key: index, className: prefixClassname("button__icon") })
-    }
-    if (isValidElement(child)) {
-      return cloneElement(child, { key: index })
-    }
-    return child
-  })
+function appendButtonIconClassname(icon?: ReactNode, className?: string) {
+  return isIconElement(icon) ? cloneIconElement(icon, { className }) : icon
+}
+
+interface UseButtonChildrenOptions {
+  children?: ReactNode
+  loading?: ReactNode
+  icon?: ReactNode
+}
+
+function useButtonChildren(options: UseButtonChildrenOptions = {}) {
+  const { loading, icon: iconProp, children } = options
+  if (isElementOf(children, ButtonContent)) {
+    return children
+  }
+  const childrenArray = Children.toArray(children)
+  const lastIndex = _.size(childrenArray) - 1
+
+  const icon = appendButtonIconClassname(iconProp, prefixClassname("button__icon--right"))
+  return (
+    <ButtonContent>
+      {loading || icon}
+      {
+        //
+        _.map(childrenArray, (child, index) => {
+          if (isIconElement(child) && index === 0) {
+            return appendButtonIconClassname(child, prefixClassname("button__icon--right"))
+          }
+          if (isIconElement(child) && index === lastIndex) {
+            return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
+          }
+          return child
+        })
+      }
+    </ButtonContent>
+  )
 }
 
 export interface ButtonProps
@@ -56,7 +104,7 @@ export interface ButtonProps
   size?: ButtonSize
   color?: ButtonColor
   formType?: ButtonFormType
-  loading?: boolean | LoadingProps
+  loading?: boolean | LoadingProps | ReactElement
   block?: boolean
   hairline?: boolean
   disabled?: boolean
@@ -82,8 +130,9 @@ export default function Button(props: ButtonProps) {
     onClick,
     ...restProps
   } = props
+
   const loading = useButtonLoading(loadingProp)
-  const children = useButtonChildren(childrenProp)
+  const children = useButtonChildren({ children: childrenProp, loading, icon })
 
   const { onClick: onCtxClick } = useContext(ButtonContext)
 
@@ -123,10 +172,7 @@ export default function Button(props: ButtonProps) {
         }
       }}
     >
-      <View className={prefixClassname("button__content")}>
-        {loading ?? icon}
-        {children}
-      </View>
+      {children}
       <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}

@@ -10,11 +10,11 @@ type SkeletonAnimation = "pulse" | "wave"
 
 interface SkeletonProps extends Omit<ViewProps, "animation"> {
   variant?: SkeletonVariant
-  animation?: boolean | SkeletonAnimation
+  animation?: SkeletonAnimation | false
 }
 
 function Skeleton(props: SkeletonProps) {
-  const { className, variant = "rect", animation = "rect", ...restProps } = props
+  const { className, variant = "rect", animation = "pulse", ...restProps } = props
 
   return (
     <View
@@ -23,8 +23,8 @@ function Skeleton(props: SkeletonProps) {
         {
           [prefixClassname("skeleton--rect")]: variant === "rect",
           [prefixClassname("skeleton--circle")]: variant === "circle",
-          [prefixClassname("skeleton--pulse")]: animation === "pulse" || animation === true,
-          [prefixClassname("skeleton--wave")]: animation === "pulse",
+          [prefixClassname("skeleton--pulse")]: animation === "pulse",
+          [prefixClassname("skeleton--wave")]: animation === "wave",
         },
         className,
       )}

@@ -1,0 +1,624 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*! ../annotation/inject */
+
+/*! ../bindings/binding */
+
+/*! ../bindings/binding_count */
+
+/*! ../constants/error_msgs */
+
+/*! ../constants/literal_types */
+
+/*! ../constants/metadata_keys */
+
+/*! ../planning/metadata */
+
+/*! ../planning/metadata_reader */
+
+/*! ../planning/planner */
+
+/*! ../resolution/resolver */
+
+/*! ../syntax/binding_to_syntax */
+
+/*! ../utils/exceptions */
+
+/*! ../utils/id */
+
+/*! ../utils/serialization */
+
+/*! ./annotation/decorator_utils */
+
+/*! ./annotation/inject */
+
+/*! ./annotation/injectable */
+
+/*! ./annotation/multi_inject */
+
+/*! ./annotation/named */
+
+/*! ./annotation/optional */
+
+/*! ./annotation/post_construct */
+
+/*! ./annotation/tagged */
+
+/*! ./annotation/target_name */
+
+/*! ./annotation/unmanaged */
+
+/*! ./arrayLikeToArray.js */
+
+/*! ./arrayWithHoles.js */
+
+/*! ./arrayWithoutHoles.js */
+
+/*! ./assertThisInitialized.js */
+
+/*! ./binding_in_syntax */
+
+/*! ./binding_in_when_on_syntax */
+
+/*! ./binding_on_syntax */
+
+/*! ./binding_when_on_syntax */
+
+/*! ./binding_when_syntax */
+
+/*! ./constants/literal_types */
+
+/*! ./constants/metadata_keys */
+
+/*! ./constraint_helpers */
+
+/*! ./construct.js */
+
+/*! ./container/container */
+
+/*! ./container/container_module */
+
+/*! ./container_snapshot */
+
+/*! ./context */
+
+/*! ./decorator_utils */
+
+/*! ./defineProperty.js */
+
+/*! ./getPrototypeOf.js */
+
+/*! ./instantiation */
+
+/*! ./isNativeFunction.js */
+
+/*! ./isNativeReflectConstruct.js */
+
+/*! ./iterableToArray.js */
+
+/*! ./iterableToArrayLimit.js */
+
+/*! ./lookup */
+
+/*! ./metadata */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/typeof.js */
+
+/*! ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/typeof.js */
+
+/*! ./nonIterableRest.js */
+
+/*! ./nonIterableSpread.js */
+
+/*! ./plan */
+
+/*! ./planning/metadata_reader */
+
+/*! ./possibleConstructorReturn.js */
+
+/*! ./queryable_string */
+
+/*! ./reflection_utils */
+
+/*! ./request */
+
+/*! ./setPrototypeOf.js */
+
+/*! ./superPropBase.js */
+
+/*! ./syntax/constraint_helpers */
+
+/*! ./target */
+
+/*! ./typeof.js */
+
+/*! ./unsupportedIterableToArray.js */
+
+/*! ./utils/binding_utils */
+
+/*! ./utils/id */
+
+/*! ./utils/serialization */
+
+/*! @tarojs/runtime */
+
+/*! all exports used */
+
+/*! exports provided: Binding */
+
+/*! exports provided: BindingCount */
+
+/*! exports provided: BindingInSyntax */
+
+/*! exports provided: BindingInWhenOnSyntax */
+
+/*! exports provided: BindingOnSyntax */
+
+/*! exports provided: BindingScopeEnum, BindingTypeEnum, TargetTypeEnum */
+
+/*! exports provided: BindingToSyntax */
+
+/*! exports provided: BindingWhenOnSyntax */
+
+/*! exports provided: BindingWhenSyntax */
+
+/*! exports provided: Container */
+
+/*! exports provided: ContainerModule, AsyncContainerModule */
+
+/*! exports provided: ContainerSnapshot */
+
+/*! exports provided: Context */
+
+/*! exports provided: DUPLICATED_INJECTABLE_DECORATOR, DUPLICATED_METADATA, NULL_ARGUMENT, KEY_NOT_FOUND, AMBIGUOUS_MATCH, CANNOT_UNBIND, NOT_REGISTERED, MISSING_INJECTABLE_ANNOTATION, MISSING_INJECT_ANNOTATION, UNDEFINED_INJECT_ANNOTATION, CIRCULAR_DEPENDENCY, NOT_IMPLEMENTED, INVALID_BINDING_TYPE, NO_MORE_SNAPSHOTS_AVAILABLE, INVALID_MIDDLEWARE_RETURN, INVALID_FUNCTION_BINDING, INVALID_TO_SELF_VALUE, INVALID_DECORATOR_OPERATION, ARGUMENTS_LENGTH_MISMATCH, CONTAINER_OPTIONS_MUST_BE_AN_OBJECT, CONTAINER_OPTIONS_INVALID_DEFAULT_SCOPE, CONTAINER_OPTIONS_INVALID_AUTO_BIND_INJECTABLE, CONTAINER_OPTIONS_INVALID_SKIP_BASE_CHECK, MULTIPLE_POST_CONSTRUCT_METHODS, POST_CONSTRUCT_ERROR, CIRCULAR_DEPENDENCY_IN_FACTORY, STACK_OVERFLOW */
+
+/*! exports provided: LazyServiceIdentifer, inject */
+
+/*! exports provided: Lookup */
+
+/*! exports provided: METADATA_KEY, Container, BindingScopeEnum, BindingTypeEnum, TargetTypeEnum, AsyncContainerModule, ContainerModule, injectable, tagged, named, inject, LazyServiceIdentifer, optional, unmanaged, multiInject, targetName, postConstruct, MetadataReader, id, decorate, traverseAncerstors, taggedConstraint, namedConstraint, typeConstraint, getServiceIdentifierAsString, multiBindToService */
+
+/*! exports provided: Metadata */
+
+/*! exports provided: MetadataReader */
+
+/*! exports provided: NAMED_TAG, NAME_TAG, UNMANAGED_TAG, OPTIONAL_TAG, INJECT_TAG, MULTI_INJECT_TAG, TAGGED, TAGGED_PROP, PARAM_TYPES, DESIGN_PARAM_TYPES, POST_CONSTRUCT, NON_CUSTOM_TAG_KEYS */
+
+/*! exports provided: Plan */
+
+/*! exports provided: QueryableString */
+
+/*! exports provided: Request */
+
+/*! exports provided: Target */
+
+/*! exports provided: decorate, tagParameter, tagProperty */
+
+/*! exports provided: default */
+
+/*! exports provided: getDependencies, getBaseClassDependencyCount, getFunctionName */
+
+/*! exports provided: getFunctionName, getServiceIdentifierAsString, listRegisteredBindingsForServiceIdentifier, listMetadataForTarget, circularDependencyToException */
+
+/*! exports provided: id */
+
+/*! exports provided: injectable */
+
+/*! exports provided: isStackOverflowExeption */
+
+/*! exports provided: multiBindToService */
+
+/*! exports provided: multiInject */
+
+/*! exports provided: named */
+
+/*! exports provided: optional */
+
+/*! exports provided: plan, createMockRequest, getBindingDictionary */
+
+/*! exports provided: postConstruct */
+
+/*! exports provided: resolve */
+
+/*! exports provided: resolveInstance */
+
+/*! exports provided: tagged */
+
+/*! exports provided: targetName */
+
+/*! exports provided: traverseAncerstors, taggedConstraint, namedConstraint, typeConstraint */
+
+/*! exports provided: unmanaged */
+
+/*! exports used: AMBIGUOUS_MATCH, ARGUMENTS_LENGTH_MISMATCH, CANNOT_UNBIND, CIRCULAR_DEPENDENCY, CIRCULAR_DEPENDENCY_IN_FACTORY, CONTAINER_OPTIONS_INVALID_AUTO_BIND_INJECTABLE, CONTAINER_OPTIONS_INVALID_DEFAULT_SCOPE, CONTAINER_OPTIONS_INVALID_SKIP_BASE_CHECK, CONTAINER_OPTIONS_MUST_BE_AN_OBJECT, DUPLICATED_INJECTABLE_DECORATOR, DUPLICATED_METADATA, INVALID_BINDING_TYPE, INVALID_DECORATOR_OPERATION, INVALID_FUNCTION_BINDING, INVALID_MIDDLEWARE_RETURN, INVALID_TO_SELF_VALUE, KEY_NOT_FOUND, MISSING_INJECTABLE_ANNOTATION, MISSING_INJECT_ANNOTATION, MULTIPLE_POST_CONSTRUCT_METHODS, NOT_REGISTERED, NO_MORE_SNAPSHOTS_AVAILABLE, NULL_ARGUMENT, POST_CONSTRUCT_ERROR, STACK_OVERFLOW, UNDEFINED_INJECT_ANNOTATION */
+
+/*! exports used: Binding */
+
+/*! exports used: BindingCount */
+
+/*! exports used: BindingInSyntax */
+
+/*! exports used: BindingInWhenOnSyntax */
+
+/*! exports used: BindingOnSyntax */
+
+/*! exports used: BindingScopeEnum, BindingTypeEnum, TargetTypeEnum */
+
+/*! exports used: BindingToSyntax */
+
+/*! exports used: BindingWhenOnSyntax */
+
+/*! exports used: BindingWhenSyntax */
+
+/*! exports used: Container */
+
+/*! exports used: Container, ContainerModule, inject, injectable, multiInject, optional */
+
+/*! exports used: ContainerModule */
+
+/*! exports used: ContainerSnapshot */
+
+/*! exports used: Context */
+
+/*! exports used: LazyServiceIdentifer, inject */
+
+/*! exports used: Lookup */
+
+/*! exports used: Metadata */
+
+/*! exports used: MetadataReader */
+
+/*! exports used: Plan */
+
+/*! exports used: QueryableString */
+
+/*! exports used: Request */
+
+/*! exports used: Target */
+
+/*! exports used: circularDependencyToException, getFunctionName, getServiceIdentifierAsString, listMetadataForTarget, listRegisteredBindingsForServiceIdentifier */
+
+/*! exports used: createMockRequest, getBindingDictionary, plan */
+
+/*! exports used: default */
+
+/*! exports used: getBaseClassDependencyCount, getDependencies, getFunctionName */
+
+/*! exports used: id */
+
+/*! exports used: injectable */
+
+/*! exports used: isStackOverflowExeption */
+
+/*! exports used: multiInject */
+
+/*! exports used: namedConstraint, taggedConstraint, traverseAncerstors, typeConstraint */
+
+/*! exports used: optional */
+
+/*! exports used: resolve */
+
+/*! exports used: resolveInstance */
+
+/*! exports used: tagParameter, tagProperty */
+
+/*! no static exports found */
+
+/*! object-assign */
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+
+/*!******************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/process/browser.js ***!
+  \******************************************************************************/
+
+/*!**********************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/object-assign/index.js ***!
+  \**********************************************************************************/
+
+/*!************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/utils/id.js ***!
+  \************************************************************************************/
+
+/*!*************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/inversify.js ***!
+  \*************************************************************************************/
+
+/*!**************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/typeof.js ***!
+  \**************************************************************************************/
+
+/*!***************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/get.js ***!
+  \***************************************************************************************/
+
+/*!***************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/set.js ***!
+  \***************************************************************************************/
+
+/*!*****************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/plan.js ***!
+  \*****************************************************************************************/
+
+/*!******************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/typeof.js ***!
+  \******************************************************************************************/
+
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/toArray.js ***!
+  \*******************************************************************************************/
+
+/*!*******************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/target.js ***!
+  \*******************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/inherits.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/named.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/bindings/binding.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/container/lookup.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/context.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/planner.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/request.js ***!
+  \********************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/utils/exceptions.js ***!
+  \********************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/construct.js ***!
+  \*********************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/inject.js ***!
+  \*********************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/tagged.js ***!
+  \*********************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/metadata.js ***!
+  \*********************************************************************************************/
+
+/*!*********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/react/cjs/react.production.min.js ***!
+  \*********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/createClass.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/createSuper.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/optional.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/container/container.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/resolution/resolver.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/utils/binding_utils.js ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/utils/serialization.js ***!
+  \***********************************************************************************************/
+
+/*!************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/unmanaged.js ***!
+  \************************************************************************************************/
+
+/*!************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/constants/error_msgs.js ***!
+  \************************************************************************************************/
+
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \*************************************************************************************************/
+
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/superPropBase.js ***!
+  \*************************************************************************************************/
+
+/*!*************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/injectable.js ***!
+  \*************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/target_name.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/bindings/binding_count.js ***!
+  \**************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/iterableToArray.js ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/wrapNativeSuper.js ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/multi_inject.js ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/constants/literal_types.js ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/constants/metadata_keys.js ***!
+  \***************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/isNativeFunction.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/metadata_reader.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/resolution/instantiation.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_in_syntax.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_on_syntax.js ***!
+  \****************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_to_syntax.js ***!
+  \****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/post_construct.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/queryable_string.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/planning/reflection_utils.js ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/constraint_helpers.js ***!
+  \*****************************************************************************************************/
+
+/*!******************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/annotation/decorator_utils.js ***!
+  \******************************************************************************************************/
+
+/*!******************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/container/container_module.js ***!
+  \******************************************************************************************************/
+
+/*!******************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_when_syntax.js ***!
+  \******************************************************************************************************/
+
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \********************************************************************************************************/
+
+/*!********************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/container/container_snapshot.js ***!
+  \********************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
+  \*********************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_when_on_syntax.js ***!
+  \*********************************************************************************************************/
+
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/isNativeReflectConstruct.js ***!
+  \************************************************************************************************************/
+
+/*!************************************************************************************************************!*\
+  !*** D:/Projects/WebstormProjects/vant-taro/node_modules/inversify/es/syntax/binding_in_when_on_syntax.js ***!
+  \************************************************************************************************************/
+
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js ***!
+  \*************************************************************************************************************/
+
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-taro/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
+  \**************************************************************************************************************/
+
+/** @license React v17.0.2
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
