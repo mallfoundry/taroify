@@ -261,12 +261,6 @@
     &::before {
       content: ' ';
     }
-
-    .#{$component-prefix}icon {
-      font-size: 1.2em;
-      line-height: inherit;
-      color: inherit;
-    }
   }
 
   &__loading {
