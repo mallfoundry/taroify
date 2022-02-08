@@ -36,6 +36,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "@taroify/commerce": "^0.0.26-alpha.6",
     "@taroify/core": "^0.0.26-alpha.6",
     "@taroify/hooks": "^0.0.26-alpha.6",
     "@taroify/icons": "^0.0.26-alpha.6",
