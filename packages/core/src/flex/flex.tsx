@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useMemo } from "react"
+import { CSSProperties, forwardRef, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
@@ -43,7 +43,7 @@ export interface FlexProps extends ViewProps {
   children?: ReactNode
 }
 
-export default function Flex(props: FlexProps) {
+const Flex = forwardRef((props: FlexProps, ref) => {
   const {
     className,
     style,
@@ -70,6 +70,7 @@ export default function Flex(props: FlexProps) {
 
   return (
     <View
+      ref={ref}
       className={classNames(
         prefixClassname("flex"),
         {
@@ -111,4 +112,6 @@ export default function Flex(props: FlexProps) {
       />
     </View>
   )
-}
+})
+
+export default Flex
