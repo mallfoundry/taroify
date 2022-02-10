@@ -106,7 +106,7 @@ function Tabs(props: TabsProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, getValue, setValue } = useValue({
     defaultValue,
     value: valueProp,
   })
@@ -125,15 +125,24 @@ function Tabs(props: TabsProps) {
     }
   }, [tabObjects, value])
 
-  const handleTabClick = useCallback(
+  const onTabChange = useCallback(
     (event: TabEvent) => {
       if (!event.disabled) {
-        setValue(event.value)
-        onChange?.(event.value, event)
+        if (getValue() !== event.value) {
+          onChange?.(event.value, event)
+          setValue(event.value)
+        }
       }
-      onTabClick?.(event)
     },
-    [onChange, onTabClick, setValue],
+    [getValue, onChange, setValue],
+  )
+
+  const handleTabClick = useCallback(
+    (event: TabEvent) => {
+      onTabClick?.(event)
+      onTabChange(event)
+    },
+    [onTabChange, onTabClick],
   )
 
   const headerRender = useMemo(
@@ -163,7 +172,6 @@ function Tabs(props: TabsProps) {
         ellipsis,
         bordered,
         tabObjects,
-        onTabClick: handleTabClick,
       }}
     >
       <View
@@ -195,7 +203,7 @@ function Tabs(props: TabsProps) {
           animated={animated}
           swipeable={swipeable}
           tabObjects={tabObjects}
-          onTabClick={handleTabClick}
+          onTabChange={onTabChange}
         />
       </View>
     </TabsContext.Provider>
