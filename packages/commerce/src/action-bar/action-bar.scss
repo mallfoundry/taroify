@@ -1,26 +1,16 @@
-@import "variables";
+@import "./variables";
 
 .#{$component-prefix}action-bar {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  height: 50px * $hd;
-  font-size: var(--action-bar-font-size, $action-bar-font-size);
-  background: $background-color-light;
   width: 100%;
-  box-sizing: border-box;
-  padding: 0 5px * $hd;
+  height: $action-bar-height;
+  background: $action-bar-background;
 
   &--fixed {
-    width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 100;
-  }
-
-  &--placeholder {
-    padding-top: 50px * $hd;
   }
 }
-
-

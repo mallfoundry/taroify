@@ -1,12 +1,13 @@
 @import "./variables";
 
 .#{$component-prefix}action-bar-icon-button {
-  width: 48px * $hd;
-  color: var(--action-bar-color, $action-bar-color) !important;
-  font-size: var(--action-bar-font-size, $action-bar-font-size);
   display: flex;
   flex-direction: column;
+  width: $action-bar-icon-button-width;
+  height: $action-bar-icon-button-height;
   padding: 0;
+  font-size: $action-bar-icon-button-font-size;
+  color: $action-bar-icon-button-color !important;
 
   &__content {
     display: flex;
@@ -15,7 +16,7 @@
   }
 
   &__icon {
-    margin: 0 auto var(--padding-base);
-    font-size: var(--action-bar-icon-font-size, $action-bar-icon-font-size);
+    margin: 0 auto var(--padding-base, $padding-base);
+    font-size: $action-bar-icon-button-icon-font-size;
   }
 }

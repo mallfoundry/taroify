@@ -4,32 +4,35 @@ import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { createBadge, createBadgeWrapper } from "@taroify/~core/src/badge"
 import classnames from "classnames"
 import * as React from "react"
-import { Children, CSSProperties, ReactNode } from "react"
+import { Children, CSSProperties, PropsWithChildren, ReactNode, useMemo } from "react"
 
 function useActionBarIconButtonChildren(
   children?: ReactNode,
   badge?: boolean | string | number | ReactNode,
 ) {
-  return Children.toArray(children).map((child, index) => {
-    if (isIconElement(child)) {
-      const IconBadgeWrapper = createBadgeWrapper(
-        cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") }),
-      )
-      const Badge = createBadge(badge)
-      return (
-        <IconBadgeWrapper key={index}>
-          <Badge />
-        </IconBadgeWrapper>
-      )
-    }
-    return child
-  })
+  return useMemo(
+    () =>
+      Children.toArray(children).map((child, index) => {
+        if (isIconElement(child)) {
+          const IconBadgeWrapper = createBadgeWrapper(
+            cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") }),
+          )
+          const Badge = createBadge(badge)
+          return (
+            <IconBadgeWrapper key={index}>
+              <Badge />
+            </IconBadgeWrapper>
+          )
+        }
+        return child
+      }),
+    [badge, children],
+  )
 }
 
-export interface ActionBarIconButtonProps extends Omit<ButtonProps, "variant"> {
+export interface ActionBarIconButtonProps extends PropsWithChildren<Omit<ButtonProps, "variant">> {
   style?: CSSProperties
   badge?: boolean | string | number | ReactNode
-  children: ReactNode
 }
 
 function ActionBarIconButton(props: ActionBarIconButtonProps) {
@@ -41,9 +44,10 @@ function ActionBarIconButton(props: ActionBarIconButtonProps) {
       variant="text"
       {...restProps}
     >
-      <Button.Content className={prefixClassname("action-bar-icon-button__content")}>
-        {children}
-      </Button.Content>
+      <Button.Content
+        className={prefixClassname("action-bar-icon-button__content")}
+        children={children}
+      />
     </Button>
   )
 }

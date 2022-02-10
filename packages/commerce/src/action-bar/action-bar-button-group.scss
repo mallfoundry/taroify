@@ -1,11 +1,20 @@
 @import "./variables";
 
 .#{$component-prefix}action-bar-button-group {
-  flex: 1;
   display: flex;
+  flex: 1;
 
   > .#{$component-prefix}action-bar-button {
+    margin: 0;
     border-radius: 0;
+
+    &:first-child {
+      margin-left: 5px * $hd;
+    }
+
+    &:last-child {
+      margin-right: 5px * $hd;
+    }
   }
 
   &--square {

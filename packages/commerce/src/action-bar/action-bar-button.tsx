@@ -2,23 +2,22 @@ import Button, { ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, PropsWithChildren } from "react"
 import { ActionBarButtonColor, ActionBarButtonShape } from "./action-bar.shared"
 
-export interface ActionBarButtonProps extends Omit<ButtonProps, "shape" | "color" | "block"> {
+export interface ActionBarButtonProps
+  extends PropsWithChildren<Omit<ButtonProps, "shape" | "color" | "block">> {
   className?: string
   style?: CSSProperties
   color?: ActionBarButtonColor
   shape?: ActionBarButtonShape
-  children?: ReactNode
 }
 
 function ActionBarButton(props: ActionBarButtonProps) {
-  const { className, color = "danger", ...restProps } = props
+  const { className, shape = "round", color = "danger", ...restProps } = props
 
   return (
     <Button
-      block
       className={classnames(
         prefixClassname("action-bar-button"),
         {
@@ -27,6 +26,9 @@ function ActionBarButton(props: ActionBarButtonProps) {
         },
         className,
       )}
+      block
+      color={color}
+      shape={shape}
       {...restProps}
     />
   )

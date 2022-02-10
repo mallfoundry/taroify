@@ -3,18 +3,17 @@ import { prefixClassname } from "@taroify/core/styles"
 import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, PropsWithChildren } from "react"
 import { ActionBarButtonShape } from "./action-bar.shared"
 
-export interface ActionBarButtonGroupProps extends ViewProps {
+export interface ActionBarButtonGroupProps extends PropsWithChildren<ViewProps> {
   style?: CSSProperties
   shape?: ActionBarButtonShape
   flex?: number
-  children?: ReactNode
 }
 
 function ActionBarButtonGroup(props: ActionBarButtonGroupProps) {
-  const { className, shape, flex, ...restProps } = props
+  const { className, shape = "round", flex, ...restProps } = props
   return (
     <Flex.Item
       span={flex}

@@ -6,20 +6,22 @@ import * as React from "react"
 import { useRef } from "react"
 
 export interface ActionBarProps extends FlexProps {
-  fixed: boolean
-  placeholder: boolean
+  fixed?: boolean
+  placeholder?: boolean
 }
 
 function ActionBar(props: ActionBarProps) {
   const { className, fixed, placeholder, justify = "space-between", ...restProps } = props
   const rootRef = useRef()
-  const PlaceHolder = usePlaceholder(rootRef, {
-    className: prefixClassname("action-bar--placeholder"),
+
+  const Placeholder = usePlaceholder(rootRef, {
+    className: prefixClassname("action-bar__placeholder"),
   })
 
   function ActionBarRender() {
     return (
       <Flex
+        ref={rootRef}
         justify={justify}
         className={classnames(
           prefixClassname("action-bar"),
@@ -35,9 +37,9 @@ function ActionBar(props: ActionBarProps) {
 
   if (fixed && placeholder) {
     return (
-      <PlaceHolder>
+      <Placeholder>
         <ActionBarRender />
-      </PlaceHolder>
+      </Placeholder>
     )
   }
   return <ActionBarRender />

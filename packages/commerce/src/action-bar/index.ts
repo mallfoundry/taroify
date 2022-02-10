@@ -1,20 +1,19 @@
-import ActionBarElement from "./action-bar"
+import { FunctionComponent } from "react"
+import ActionBarComponent, { ActionBarProps } from "./action-bar"
 import ActionBarButton from "./action-bar-button"
 import ActionBarButtonGroup from "./action-bar-button-group"
 import ActionBarIconButton from "./action-bar-icon-button"
 
-interface ActionBarInterface {
-  (props: any): JSX.Element
-
-  IconButton: typeof ActionBarIconButton
+interface ActionBarInterface extends FunctionComponent<ActionBarProps> {
   Button: typeof ActionBarButton
   ButtonGroup: typeof ActionBarButtonGroup
+  IconButton: typeof ActionBarIconButton
 }
 
-const ActionBar = ActionBarElement as unknown as ActionBarInterface
+const ActionBar = ActionBarComponent as ActionBarInterface
 
-ActionBar.IconButton = ActionBarIconButton
 ActionBar.Button = ActionBarButton
 ActionBar.ButtonGroup = ActionBarButtonGroup
+ActionBar.IconButton = ActionBarIconButton
 
 export default ActionBar
