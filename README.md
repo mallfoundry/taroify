@@ -71,7 +71,7 @@ function Index() {
   <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
 </a>
 
-- 部分图形设计来自[BiscuitCoder](https://biscuitcoder.github.io)
+- 部分图形设计来自 [@BiscuitCoder](https://uyyu.xyz/)
 
 ## Vant 官方生态
 
