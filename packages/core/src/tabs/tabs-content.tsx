@@ -5,6 +5,7 @@ import * as React from "react"
 import { ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
+import { useRendered } from "../utils/state"
 import TabPaneBase from "./tab-pane-base"
 import { TabEvent, TabObject } from "./tabs.shared"
 
@@ -20,11 +21,11 @@ interface TabsContentProps {
   swipeable: boolean
   tabObjects: TabObject[]
 
-  onTabClick?(event: TabEvent): void
+  onTabChange?(event: TabEvent): void
 }
 
 export function TabsContent(props: TabsContentProps) {
-  const { value: activeValue, duration, animated, swipeable, tabObjects, onTabClick } = props
+  const { value: activeValue, duration, animated, swipeable, tabObjects, onTabChange } = props
 
   const panes = useTabPanes(tabObjects)
 
@@ -33,12 +34,12 @@ export function TabsContent(props: TabsContentProps) {
     if (tabObject) {
       const { value, title, disabled } = tabObject
       if (!disabled) {
-        onTabClick?.({ value, title, disabled })
+        onTabChange?.({ value, title, disabled })
       }
     }
   }
 
-  const renderChildren = () => {
+  const childrenRender = useRendered(() => {
     if (animated || swipeable) {
       return (
         <Swiper
@@ -52,16 +53,15 @@ export function TabsContent(props: TabsContentProps) {
         />
       )
     }
-
     return panes
-  }
+  })
 
   return (
     <View
       className={classNames(prefixClassname("tabs__content"), {
         [prefixClassname("tabs__content--animated")]: animated,
       })}
-      children={renderChildren()}
+      children={childrenRender}
     />
   )
 }

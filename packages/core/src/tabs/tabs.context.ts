@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
+import { TabObject, TabsTheme } from "./tabs.shared"
 
 interface TabsContextValue {
   index?: number
@@ -12,8 +12,6 @@ interface TabsContextValue {
   bordered?: boolean
   ellipsis?: boolean
   tabObjects: TabObject[]
-
-  onTabClick?(event: TabEvent): void
 }
 
 const TabsContext = createContext<TabsContextValue>({
