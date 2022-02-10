@@ -292,6 +292,16 @@ const menus = [
     ],
   },
   {
+    title: "电商组件",
+    subpackage: "commerce",
+    children: [
+      {
+        title: "ActionBar 动作栏",
+        to: "/components/action-bar/",
+      },
+    ],
+  },
+  {
     title: "Hooks",
     subpackage: "hooks",
     children: [

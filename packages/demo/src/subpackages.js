@@ -288,11 +288,6 @@ const subpackages = [
     title: "导航组件",
     pages: [
       {
-        title: "actionBar 动作栏",
-        name: "actionBar",
-        path: "action-bar/index",
-      },
-      {
         title: "Grid 宫格",
         name: "Grid",
         path: "grid/index",
@@ -331,6 +326,17 @@ const subpackages = [
         title: "TreeSelect 分类选择",
         name: "TreeSelect",
         path: "tree-select/index",
+      },
+    ],
+  },
+  {
+    root: "pages/commerce",
+    title: "电商组件",
+    pages: [
+      {
+        title: "ActionBar 动作栏",
+        name: "ActionBar",
+        path: "action-bar/index",
       },
     ],
   },
