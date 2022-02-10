@@ -1,12 +1,11 @@
+import { ForwardRefExoticComponent } from "react"
 import FlexComponent, { FlexProps } from "./flex"
 import FlexItem from "./flex-item"
 
 export type { FlexProps } from "./flex"
 export type { FlexItemProps } from "./flex-item"
 
-interface FlexInterface {
-  (props: FlexProps): JSX.Element
-
+interface FlexInterface extends ForwardRefExoticComponent<FlexProps> {
   Item: typeof FlexItem
 }
 
