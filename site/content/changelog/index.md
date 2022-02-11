@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.0
+
+`2022-02-11`
+
+**New Component**
+
+- 新增 @taroify/commerce 包 [#84](https://github.com/mallfoundry/taroify/issues/84)
+- 新增 ActionBar 组件 [#341](https://github.com/mallfoundry/taroify/pull/341)
+
+**Bug Fixes**
+
+- Tabs
+  - 修复切换标签页会触发两次 onChange 事件的问题 [#336](https://github.com/mallfoundry/taroify/issues/336) [#339](https://github.com/mallfoundry/taroify/pull/339)
+- Skeleton
+  - 修复设置动画无效果的问题 [#334](https://github.com/mallfoundry/taroify/pull/334)
+
 ### v0.0.26-alpha.6
 
 `2022-02-08`
@@ -21,7 +37,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Badge
   - 修复独立模式 fixed 的问题 [#331](https://github.com/mallfoundry/taroify/pull/331)
 - Button
-  - 修复 loading 为 false 时，不能显示图标的问题 [#332](https://github.com/mallfoundry/taroify/pull/332)
+  - 修复 loading 为 false 时，不能显示图标的问题 [#332](https://github.com/mallfoundry/taroify/pull/332) [@yifeishu-com](https://github.com/yifeishu-com)
 
 ### v0.0.26-alpha.5
 
