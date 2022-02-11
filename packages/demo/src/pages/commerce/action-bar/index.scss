@@ -1,0 +1,9 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.action-bar-demo {
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+}

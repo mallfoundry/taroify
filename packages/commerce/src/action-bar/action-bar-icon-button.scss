@@ -1,0 +1,25 @@
+@import "./variables";
+
+.#{$component-prefix}action-bar-icon-button {
+  display: flex;
+  flex-direction: column;
+  width: $action-bar-icon-button-width;
+  height: $action-bar-icon-button-height;
+  padding: 0;
+  font-size: $action-bar-icon-button-font-size;
+
+  &.#{$component-prefix}button {
+    color: $action-bar-icon-button-color;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__icon {
+    margin: 0 auto var(--padding-base, $padding-base);
+    font-size: $action-bar-icon-button-icon-font-size;
+  }
+}

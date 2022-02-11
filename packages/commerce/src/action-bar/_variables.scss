@@ -1,0 +1,24 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/mixins/hairline";
+@import "~@taroify/core/styles/variables";
+
+$action-bar-color: var(--gray-6, $gray-6);
+$action-bar-height: var(--action-bar-height, 50px * $hd);
+$action-bar-background: var(--action-bar-background, $background-color-light);
+//
+$action-bar-button-height: var(--action-bar-button-height, 40px * $hd);
+$action-bar-button-color: var(--action-bar-button-color, var(--white, $white));
+$action-bar-button-font-size: var(--action-bar-button-font-size, var(--font-size-md, $font-size-md));
+//
+$action-bar-button-gradient-red: var(--action-bar-button-gradient-red, var(--gradient-red, $gradient-red));
+$action-bar-button-gradient-orange: var(--action-bar-button-gradient-orange, var(--gradient-orange, $gradient-orange));
+//
+$action-bar-button-border-radius-md: var(--action-bar-button-border-radius-md, var(--border-radius-md, $border-radius-md));
+$action-bar-button-border-radius-max: var(--action-bar-button-border-radius-max, var(--border-radius-max, $border-radius-max));
+//
+$action-bar-icon-button-color: var(--action-bar-icon-button-color, var(--gray-7, $gray-7));
+$action-bar-icon-button-font-size: var(--action-bar-icon-button-font-size, var(--font-size-xs, $font-size-xs));
+$action-bar-icon-button-width: var(--action-bar-icon-button-width, 48px * $hd);
+$action-bar-icon-button-height: var(--action-bar-icon-button-height, 100%);
+//
+$action-bar-icon-button-icon-font-size: var(--action-bar-icon-button-icon-font-size, 18px * $hd);

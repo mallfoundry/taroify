@@ -329,6 +329,17 @@ const subpackages = [
       },
     ],
   },
+  {
+    root: "pages/commerce",
+    title: "电商组件",
+    pages: [
+      {
+        title: "ActionBar 动作栏",
+        name: "ActionBar",
+        path: "action-bar/index",
+      },
+    ],
+  },
 ]
 
 module.exports = subpackages

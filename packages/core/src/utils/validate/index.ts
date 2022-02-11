@@ -1,6 +1,10 @@
 import * as _ from "lodash"
 import { isValidElement, JSXElementConstructor, ReactElement, ReactNode } from "react"
 
+export function isNoneElement(node: ReactNode) {
+  return _.isUndefined(node) || _.isNull(node)
+}
+
 export function isTextElement(node: ReactNode) {
   return _.isNumber(node) || _.isString(node)
 }
