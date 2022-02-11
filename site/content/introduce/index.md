@@ -66,6 +66,8 @@ function Index() {
 <br />
 备注 "taroify" 加好友后邀请进群
 
+QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
+
 ### 贡献者
 
 <a href="https://github.com/mallfoundry/taroify/graphs/contributors">
