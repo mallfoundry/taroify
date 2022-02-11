@@ -62,7 +62,7 @@ function Index() {
 
 ### 微信交流群
 
-<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<img src="https://gitee.com/mallfoundry/taroify/raw/main/wechat-qrcode.png" width="200" style="margin: 0; width: 200px; height: 200px;"  />
 
 <p>备注 "taroify" 加好友后邀请进群</p>
 
