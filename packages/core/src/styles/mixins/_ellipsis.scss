@@ -1,17 +1,17 @@
-@mixin multi-ellipsis($lines) {
-  /* stylelint-disable */
-  /* autoprefixer: ignore next */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  -webkit-line-clamp: $lines;
-  /* stylelint-enable */
+@mixin ellipsis($lines: 1) {
   overflow: hidden;
   text-overflow: ellipsis;
-}
 
-@mixin ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @if ($lines == 1) {
+    white-space: nowrap;
+  } @else {
+    white-space: pre-wrap;
+    /* stylelint-disable */
+    /* autoprefixer: ignore next */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    /* stylelint-enable */
+  }
 }
