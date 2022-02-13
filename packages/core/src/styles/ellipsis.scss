@@ -6,9 +6,9 @@
 }
 
 .#{$component-prefix}ellipsis--l2 {
-  @include multi-ellipsis(2);
+  @include ellipsis(2);
 }
 
 .#{$component-prefix}ellipsis--l3 {
-  @include multi-ellipsis(3);
+  @include ellipsis(3);
 }
