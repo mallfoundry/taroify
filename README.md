@@ -95,9 +95,9 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 | 项目 | 描述 |
 | --- | --- |
 | [3lang3/react-vant](https://github.com/3lang3/react-vant) | 参照 Vant 打造的 React 移动端组件库 |
-| [mxdi9i7/vant-react](https://github.com/mxdi9i7/vant-react) | 基于 React 和 TS 构建的移动端组件库 |
+| [rc-ui-lib](https://github.com/rancui/rc-ui-lib) | 参照 Vant 打造的 React 框架移动端组件库 |
 | [vant-aliapp](https://github.com/ant-move/Vant-Aliapp) | Vant 支付宝小程序版 |
-| [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro 版 |
+| [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro React 版 |
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
