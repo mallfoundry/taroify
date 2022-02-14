@@ -2,10 +2,10 @@ import __subpackages__ from "./subpackages"
 
 const subPackages = __subpackages__.map(({ root, pages }) => ({
   root,
-  pages: pages.map(({ path }) => path),
+  pages: pages.map(({ path }) => path) as string[],
 }))
 
-export default {
+export default defineAppConfig({
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#4fc08d",
@@ -17,4 +17,4 @@ export default {
   subpackages: subPackages,
   subPackages,
   animation: false,
-}
+})
