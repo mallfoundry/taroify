@@ -19,14 +19,6 @@
     }
   }
 
-  &-card {
-    margin-bottom: 24px;
-    padding: 24px;
-    background-color: #fff;
-    border-radius: $vant-border-radius;
-    box-shadow: 0 8px 12px #ebedf0;
-  }
-
   &-content {
     padding: 30px;
     overflow: hidden;
@@ -221,6 +213,18 @@
       width: 100%;
       margin: 16px 0;
       border-radius: $vant-border-radius;
+    }
+  }
+
+  &-card {
+    margin-bottom: 24px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: $vant-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
+
+    h3 {
+      margin-top: 0;
     }
   }
 }
