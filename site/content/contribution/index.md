@@ -29,6 +29,9 @@ cd taroify && yarn run install:node_modules
 npm run develop
 ```
 
+> Tips: 确保已全局安装 rimraf、lerna、@tarojs/cli@3.x
+
+
 ### 目录结构
 
 - 仓库的组件代码位于 packages/core 下，每个组件一个文件夹
