@@ -6,6 +6,13 @@ module.exports = {
     "stylelint-config-prettier",
   ],
   rules: {
+    "selector-no-qualifying-type": [
+      true,
+      {
+        ignore: ["attribute", "class", "id"],
+      },
+    ],
+    "selector-max-compound-selectors": 5,
     "selector-type-no-unknown": [
       true,
       {
@@ -16,6 +23,12 @@ module.exports = {
       true,
       {
         ignorePseudoClasses: ["host", "global"],
+      },
+    ],
+    "selector-class-pattern": [
+      "^[a-z]([a-z0-9-]+)?((__|_)([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+      {
+        resolveNestedSelectors: true,
       },
     ],
     "max-nesting-depth": [
