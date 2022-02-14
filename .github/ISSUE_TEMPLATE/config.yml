@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question, give feedback, share your project
+    url: https://github.com/mallfoundry/taroify/discussions
+    about: 通过 Discussions 讨论区联系其他社区成员
+  - name: Get help on Wechat
+    url: https://github.com/mallfoundry/taroify#%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4
+    about: 打开链接扫描二维码，通过微信讨论组获得帮助
