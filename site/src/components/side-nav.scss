@@ -8,7 +8,7 @@
   z-index: 1;
   min-width: 220px;
   max-width: 220px;
-  padding: 24px 0;
+  padding: 0 0 24px;
   overflow-y: scroll;
   background-color: #fff;
   box-shadow: 0 8px 12px #ebedf0;
@@ -80,4 +80,15 @@
     left: 50%;
     margin-left: -840px;
   }
+}
+
+.#{$component-prefix}diamond-sponsor {
+  width: 100%;
+  height: 60px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 2px;
+  color: rgba(60, 60, 60, .33);
 }

@@ -47,6 +47,10 @@ function MenuItem({ title, to, active, onClick, onRouted }: MenuItemProps) {
   )
 }
 
+function DiamondSponsor() {
+  return <div className={prefixClassname("diamond-sponsor")}>广告招租</div>
+}
+
 interface SideNavProps {
   slug?: string
 }
@@ -67,6 +71,9 @@ export default function SideNav(props: SideNavProps) {
 
   return (
     <nav ref={rootRef} className={prefixClassname("side-nav")} style={{ top: `${top}px` }}>
+      <MenuItemGroup title="砖石赞助商">
+        <DiamondSponsor />
+      </MenuItemGroup>
       {
         //
         _.map(menus, (group) => (
