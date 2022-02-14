@@ -19,7 +19,7 @@ body:
   - type: dropdown
     id: participate
     attributes:
-      label: 你想贡献这个功能并创建一个 PR 吗
+      label: 你想为这个功能创建一个 PR 吗
       options:
         - 'Yes'
         - 'No'

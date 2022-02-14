@@ -49,19 +49,9 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: 描述一下您遇到的问题
+      label: 描述一下您遇到的问题以及重现步骤
+      description: 请提供一个最简单的操作步骤，方便我们快速重现问题
       placeholder: 比如：弹窗无法展示、日历组件报错
-    validations:
-      required: true
-  - type: textarea
-    id: reproduce_steps
-    attributes:
-      label: 描述一下您所遇到问题的重现步骤
-      description: 请提供一个最简单的操作步骤，方便我们快速重现问题。
-      placeholder: |
-        比如：
-        1. 点击按钮
-        2. 弹窗无法展示
     validations:
       required: true
   - type: input
