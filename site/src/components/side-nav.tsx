@@ -71,7 +71,7 @@ export default function SideNav(props: SideNavProps) {
 
   return (
     <nav ref={rootRef} className={prefixClassname("side-nav")} style={{ top: `${top}px` }}>
-      <MenuItemGroup title="砖石赞助商">
+      <MenuItemGroup title="钻石赞助商">
         <DiamondSponsor />
       </MenuItemGroup>
       {
