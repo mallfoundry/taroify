@@ -1,0 +1,25 @@
+name: Request a feature
+description: 为这个项目提出一个想法
+title: '[Feature Request] '
+labels: 'feature'
+body:
+  - type: markdown
+    attributes:
+      value: '## 感谢您伸出援手！'
+  - type: textarea
+    id: example
+    attributes:
+      label: 使用示例，包括组件或 Hooks
+      description: 请尽可能详细地说明这个功能的使用场景
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 解决方案
+      description: 描述一下这个新功能的方案，并提供一些代码示例
+  - type: dropdown
+    id: participate
+    attributes:
+      label: 你想贡献这个功能并创建一个 PR 吗
+      options:
+        - 'Yes'
+        - 'No'
