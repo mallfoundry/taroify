@@ -18,6 +18,9 @@
 按照下面的步骤操作，即可在本地开发 Taroify 组件。
 
 ```bash
+# 全局安装 rimraf、lerna
+npm install -g rimraf lerna
+
 # 克隆仓库
 # 默认为 main 分支，包含 Taroify 的代码
 git clone https://github.com/mallfoundry/taroify.git
@@ -26,11 +29,8 @@ git clone https://github.com/mallfoundry/taroify.git
 cd taroify && yarn run install:node_modules
 
 # 进入开发模式，浏览器访问 http://localhost:8000
-npm run develop
+yarn run develop
 ```
-
-> Tips: 确保已全局安装 rimraf、lerna、@tarojs/cli@3.x
-
 
 ### 目录结构
 
@@ -42,7 +42,6 @@ npm run develop
 ```
 taroify
 ├─ bundles         # 构建
-├─ site            # 文档
 ├─ packages/core   # 组件
 ├─ packages        # 子包
 ├─ site            # 文档
