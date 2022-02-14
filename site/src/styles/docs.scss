@@ -90,7 +90,7 @@
     }
 
     p {
-      margin: 0;
+      margin: 16px 0;
       color: $vant-text-color;
       font-size: 15px;
       line-height: 26px;
@@ -211,6 +211,10 @@
       padding: 16px;
       background-color: #ecf9ff;
       border-radius: $vant-border-radius;
+
+      p {
+        margin: 0;
+      }
     }
 
     img {
