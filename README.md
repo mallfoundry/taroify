@@ -21,7 +21,7 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 
 ## 浏览器支持
 
-现代浏览器以及 Android 4.0+, iOS 8.0+。
+支持现代浏览器以及 Chrome >= 51、iOS >= 10.0。
 
 ## 安装
 
