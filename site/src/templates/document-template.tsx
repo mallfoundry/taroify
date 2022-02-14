@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import { graphql } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
@@ -6,6 +7,7 @@ import { Helmet } from "react-helmet"
 import Handler from "../components/header"
 import SideNav from "../components/side-nav"
 import Simulator from "../components/simulator"
+import { prefixClassname } from "../styles/prefix"
 import { docsCardWrapper } from "./docs"
 
 interface ComponentTemplateProps {
@@ -21,16 +23,21 @@ export default function ComponentTemplate(props: ComponentTemplateProps) {
   return (
     <>
       <Helmet>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
       </Helmet>
-      <div className="vant-docs">
+      <div className={prefixClassname("docs")}>
         <Handler />
         <SideNav slug={slug} />
-        <div className="vant-docs-container vant-docs-container-with-simulator">
+        <div
+          className={classNames(
+            prefixClassname("docs-container"),
+            prefixClassname("docs-container-with-simulator"),
+          )}
+        >
           <div
-            className="vant-docs-content"
+            className={prefixClassname("docs-content")}
             dangerouslySetInnerHTML={{ __html: docsCardWrapper(post.html) }}
           />
         </div>

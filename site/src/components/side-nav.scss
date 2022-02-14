@@ -1,4 +1,6 @@
-.vant-side-nav {
+@import "../styles/prefix";
+
+.#{$component-prefix}side-nav {
   position: fixed;
   top: 60px;
   bottom: 0;
@@ -74,7 +76,7 @@
 }
 
 @media (min-width: 1680px) {
-  .vant-side-nav {
+  .#{$component-prefix}side-nav {
     left: 50%;
     margin-left: -840px;
   }

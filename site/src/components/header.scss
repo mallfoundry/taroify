@@ -1,4 +1,6 @@
-.van-header {
+@import "../styles/prefix";
+
+.#{$component-prefix}header {
   width: 100%;
   background-color: #001938;
   -webkit-user-select: none;
