@@ -1,6 +1,7 @@
+@import "./prefix";
 @import "./variables";
 
-.vant-docs {
+.#{$component-prefix}docs {
   &-container {
     box-sizing: border-box;
     padding-left: 220px;

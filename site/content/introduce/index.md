@@ -1,6 +1,6 @@
-<div class="vant-docs-card">
+<div class="taroify-docs-card">
   <div style="padding-top: 20px; text-align: center" >
-    <img class="van-doc-introduce-logo" style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
+    <img style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
     <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Taroify</h2>
     <p>轻量、可靠的小程序端 Taro React UI 组件库</p>
   </div>

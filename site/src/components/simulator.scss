@@ -1,6 +1,7 @@
+@import "../styles/prefix";
 @import "../styles/variables";
 
-.vant-simulator {
+.#{$component-prefix}simulator {
   position: absolute;
   top: 90px;
   right: 24px;
@@ -19,21 +20,21 @@
     height: 640px;
   }
 
-  &-fixed {
+  &--fixed {
     position: fixed;
     top: 24px;
   }
 }
 
 @media (min-width: 1680px) {
-  .vant-simulator {
+  .#{$component-prefix}simulator {
     right: 50%;
     margin-right: -816px;
   }
 }
 
 @media (max-width: 1100px) {
-  .vant-simulator {
+  .#{$component-prefix}simulator {
     right: auto;
     left: 750px;
   }

@@ -4,14 +4,15 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useCallback, useEffect, useRef } from "react"
 import useScroll from "../hooks/useScroll"
+import { prefixClassname } from "../styles/prefix"
 import menus from "../utils/menus"
 
 import "./side-nav.scss"
 
 function MenuItemGroup({ title = "", children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="vant-side-nav-item-group">
-      <div className="vant-side-nav-item-group-title" children={title} />
+    <div className={prefixClassname("side-nav-item-group")}>
+      <div className={prefixClassname("side-nav-item-group-title")} children={title} />
       {children}
     </div>
   )
@@ -35,8 +36,8 @@ function MenuItem({ title, to, active, onClick, onRouted }: MenuItemProps) {
   }, [active, onRouted])
   return (
     <Link
-      className={classNames("vant-side-nav-item", {
-        "vant-side-nav-item-active": active,
+      className={classNames(prefixClassname("side-nav-item"), {
+        [prefixClassname("side-nav-item-active")]: active,
       })}
       to={to}
       onClick={onClick}
@@ -65,7 +66,7 @@ export default function SideNav(props: SideNavProps) {
   )
 
   return (
-    <nav ref={rootRef} className="vant-side-nav" style={{ top: `${top}px` }}>
+    <nav ref={rootRef} className={prefixClassname("side-nav")} style={{ top: `${top}px` }}>
       {
         //
         _.map(menus, (group) => (
