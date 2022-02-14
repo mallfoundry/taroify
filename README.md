@@ -25,21 +25,21 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 
 ## 安装
 
-### 通过 npm 安装使用（推荐）
-
-* 通过 npm 安装
+在现有项目中使用 Taroify 时，可以通过 `npm` 进行安装
 
 ```bash
-npm i @taroify/core -S --production
+npm i @taroify/core
 ```
 
-* 通过 yarn 安装
+当然，你也可以通过 `yarn` 或 `pnpm` 进行安装
 
 ```bash
-yarn add @taroify/core --production
+yarn add @taroify/core
+
+pnpm add @taroify/core
 ```
 
-## 使用组件
+## 快速上手
 
 ```tsx
 import { Button } from "@taroify/core"
