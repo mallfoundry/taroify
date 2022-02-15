@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { Close } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
@@ -7,7 +8,6 @@ import * as React from "react"
 import { ReactNode, useCallback, useMemo } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import UploaderImage from "./uploader-image"
 import UploaderMask from "./uploader-mask"
 import UploaderUpload from "./uploader-upload"
@@ -51,7 +51,7 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     onChange: onChangeProp,
   } = props
 
-  const { value = [], setValue } = useValue({
+  const { value = [], setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,

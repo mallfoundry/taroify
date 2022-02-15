@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -23,7 +24,6 @@ import { preventDefault } from "../utils/dom/event"
 import { getRect } from "../utils/dom/rect"
 import { addUnitPx } from "../utils/format/unit"
 import { fulfillPromise } from "../utils/promisify"
-import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwipeCellActions from "./swipe-cell-actions"
 
@@ -117,7 +117,7 @@ function SwipeCell(props: SwipeCellProps) {
     ...restProps
   } = props
 
-  const { value } = useValue<SwipeCellPosition>({
+  const { value } = useUncontrolled<SwipeCellPosition>({
     defaultValue: defaultOpen,
     value: openProp,
   })
