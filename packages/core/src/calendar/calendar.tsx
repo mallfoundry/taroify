@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
@@ -19,7 +20,7 @@ import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
-import { useRefs, useValue } from "../utils/state"
+import { useRefs } from "../utils/state"
 import CalendarFooter from "./calendar-footer"
 import CalendarHeader from "./calendar-header"
 import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
@@ -128,7 +129,11 @@ function Calendar(props: CalendarProps) {
     onConfirm,
   } = props
 
-  const { value, setValue } = useValue({ defaultValue, value: valueProp, onChange: onChangeProp })
+  const { value, setValue } = useUncontrolled({
+    defaultValue,
+    value: valueProp,
+    onChange: onChangeProp,
+  })
 
   const { footer } = useCalendarChildren(childrenProp)
 
