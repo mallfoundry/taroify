@@ -126,3 +126,7 @@ WebStorm - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify �
 如果您认为 Taroify 帮助到了您的开发工作，您可以捐赠 Taroify 的研发工作，捐赠无门槛，哪怕是一杯可乐也好（相信这比打赏主播更有意义）。
 
 <img src="https://gitee.com/mallfoundry/taroify/raw/main/wechatpay.png" width="260" style="width: 260px;" />
+
+### 支持者
+
+<a href="https://github.com/Yorksh1re">@Yorksh1re</a>
