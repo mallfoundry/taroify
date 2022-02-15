@@ -15,7 +15,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import Tabs from "../tabs"
-import { useValue } from "../utils/state"
+import { useUncontrolled } from "@taroify/hooks"
 import CascaderHeader from "./cascader-header"
 import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
@@ -104,7 +104,7 @@ function Cascader(props: CascaderProps) {
   } = props
   const { header, tabs } = useCascaderChildren(childrenProp)
 
-  const { value: values = [], setValue: setValues } = useValue({ defaultValue, value: valueProp })
+  const { value: values = [], setValue: setValues } = useUncontrolled({ defaultValue, value: valueProp })
 
   const [activeTab, setActiveTab] = useState(0)
 
