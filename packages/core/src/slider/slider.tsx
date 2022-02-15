@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -19,7 +20,6 @@ import { getClientCoordinates, preventDefault, stopPropagation } from "../utils/
 import { getRect } from "../utils/dom/rect"
 import { addNumber } from "../utils/format/number"
 import { addUnitPx } from "../utils/format/unit"
-import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SliderThumb from "./slider-thumb"
 import SliderContext from "./slider.context"
@@ -117,7 +117,7 @@ function Slider(props: SliderProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
