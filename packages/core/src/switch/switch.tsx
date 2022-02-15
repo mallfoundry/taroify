@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -6,7 +7,6 @@ import { CSSProperties } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
-import { useValue } from "../utils/state"
 
 export interface SwitchProps extends ViewProps {
   style?: CSSProperties
@@ -33,7 +33,7 @@ function Switch(props: SwitchProps) {
     ...restProps
   } = props
 
-  const { value: checked = false, setValue } = useValue({
+  const { value: checked = false, setValue } = useUncontrolled({
     value: checkedProp,
     defaultValue: defaultChecked,
     onChange: onChangeProp,

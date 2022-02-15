@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -6,7 +7,7 @@ import * as React from "react"
 import { Children, ReactElement, ReactNode, useCallback, useRef } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
-import { useToRef, useValue } from "../utils/state"
+import { useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PickerColumns from "./picker-columns"
 import { PickerColumn } from "./picker.composition"
@@ -81,7 +82,7 @@ function Picker(props: PickerProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue({ value: valueProp, defaultValue })
+  const { value, setValue } = useUncontrolled({ value: valueProp, defaultValue })
 
   const multiValueRef = useToRef(_.isArray(value))
 

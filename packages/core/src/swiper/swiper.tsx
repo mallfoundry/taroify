@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
@@ -24,7 +25,7 @@ import { preventDefault } from "../utils/dom/event"
 import { getRect, makeRect, Rect } from "../utils/dom/rect"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
-import { useRendered, useRenderedRef, useToRef, useValue } from "../utils/state"
+import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
 import SwiperItem from "./swiper-item"
@@ -113,7 +114,7 @@ function Swiper(props: SwiperProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

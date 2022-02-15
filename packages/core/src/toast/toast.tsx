@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { Fail, Success } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
@@ -25,7 +26,7 @@ import {
   prependPageSelector,
   usePrependPageSelector,
 } from "../utils/dom/element"
-import { useObject, useToRef, useValue } from "../utils/state"
+import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
 import { ToastPosition, ToastType } from "./toast.shared"
@@ -127,7 +128,7 @@ export default function Toast(props: ToastProps) {
 
   const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
-  const { value: open = false, setValue: setOpen } = useValue({
+  const { value: open = false, setValue: setOpen } = useUncontrolled({
     defaultValue: defaultOpen,
     value: openProp,
     onChange: (aOpened) => !aOpened && onClose?.(aOpened),

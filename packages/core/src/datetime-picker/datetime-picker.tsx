@@ -1,8 +1,8 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
 import { ReactNode } from "react"
 import Picker from "../picker"
-import { useValue } from "../utils/state"
 import { DatetimePickerColumnType, DatetimePickerType } from "./datetime-picker.shared"
 import useDatetimePicker from "./use-datetime-picker"
 
@@ -50,7 +50,7 @@ function DatetimePicker(props: DatetimePickerProps) {
     ...restProps
   } = props
 
-  const { value: dateValue, setValue: setDateValue } = useValue({
+  const { value: dateValue, setValue: setDateValue } = useUncontrolled({
     value: valueProp,
     onChange: onChangeProp,
   })

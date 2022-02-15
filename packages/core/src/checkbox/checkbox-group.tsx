@@ -1,10 +1,10 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import CheckboxGroupContext from "./checkbox-group.context"
 import { CheckboxGroupDirection } from "./checkbox-group.shared"
 
@@ -29,7 +29,11 @@ function CheckboxGroup(props: CheckboxGroupProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
+  const { value, setValue } = useUncontrolled({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
 
   return (
     <CheckboxGroupContext.Provider

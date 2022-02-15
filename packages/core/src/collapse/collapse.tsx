@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -6,7 +7,6 @@ import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
-import { useValue } from "../utils/state"
 import CollapseItem from "./collapse-item"
 import CollapseContext from "./collapse.context"
 
@@ -80,7 +80,11 @@ function Collapse(props: CollapseProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
+  const { value, setValue } = useUncontrolled({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
 
   const { items } = useCollapseChildren(childrenProp)
 

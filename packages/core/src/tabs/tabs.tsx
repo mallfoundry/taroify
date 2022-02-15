@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { PageScrollObject } from "@tarojs/taro"
@@ -15,7 +16,6 @@ import {
 } from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import TabPane from "./tab-pane"
 import { TabsContent } from "./tabs-content"
 import TabsHeader from "./tabs-header"
@@ -106,7 +106,7 @@ function Tabs(props: TabsProps) {
     ...restProps
   } = props
 
-  const { value = 0, getValue, setValue } = useValue({
+  const { value = 0, getValue, setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
   })

@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
@@ -11,7 +12,7 @@ import {
   prependPageSelector,
   usePrependPageSelector,
 } from "../utils/dom/element"
-import { useObject, useToRef, useValue } from "../utils/state"
+import { useObject, useToRef } from "../utils/state"
 import { NotifyOptions, useNotifyClose, useNotifyOpen } from "./notify.imperative"
 import { NotifyColor } from "./notify.shared"
 
@@ -46,7 +47,7 @@ function Notify(props: NotifyProps) {
 
   const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
-  const { value: open = false, setValue: setOpen } = useValue({
+  const { value: open = false, setValue: setOpen } = useUncontrolled({
     defaultValue: defaultOpen,
     value: openProp,
     onChange: (aOpened) => !aOpened && onClose?.(aOpened),

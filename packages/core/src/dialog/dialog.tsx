@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -25,7 +26,7 @@ import {
   prependPageSelector,
   usePrependPageSelector,
 } from "../utils/dom/element"
-import { useObject, useToRef, useValue } from "../utils/state"
+import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
@@ -136,7 +137,7 @@ function Dialog(props: DialogProps) {
 
   const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
 
-  const { value: open = false, setValue: setOpen } = useValue({
+  const { value: open = false, setValue: setOpen } = useUncontrolled({
     defaultValue: defaultOpen,
     value: openProp,
   })

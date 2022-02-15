@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { Clear } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { ITouchEvent } from "@tarojs/components"
@@ -9,7 +10,6 @@ import * as React from "react"
 import { ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
-import { useValue } from "../utils/state"
 import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
 import NativeInput from "./native-input"
 
@@ -90,7 +90,7 @@ function Input(props: InputProps) {
     onClear,
     ...restProps
   } = props
-  const { value, setValue } = useValue({ value: valueProp })
+  const { value, setValue } = useUncontrolled({ value: valueProp })
   const [focused, setFocused] = useState(false)
 
   const allowClear = useMemo(() => {

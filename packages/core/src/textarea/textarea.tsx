@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
@@ -5,7 +6,6 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import NativeTextarea, { NativeTextareaProps } from "./native-textarea"
 import { getStringLength } from "./textarea.shared"
 
@@ -30,7 +30,7 @@ function Textarea(props: TextareaProps) {
     ...restProps
   } = props
   const maxlength = _.isNumber(limit) ? limit : maxlengthProp
-  const { value, setValue } = useValue({ value: valueProp })
+  const { value, setValue } = useUncontrolled({ value: valueProp })
 
   return (
     <View className={prefixClassname("textarea__wrapper")}>

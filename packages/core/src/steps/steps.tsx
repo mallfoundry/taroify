@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -11,7 +12,6 @@ import {
   ReactNode,
 } from "react"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import Step from "./step"
 import StepsContext from "./steps.context"
 import { StepsDirection } from "./steps.shared"
@@ -68,7 +68,7 @@ function Steps(props: StepsProps) {
     ...restProps
   } = props
 
-  const { value } = useValue({ value: valueProp, defaultValue })
+  const { value } = useUncontrolled({ value: valueProp, defaultValue })
 
   const { steps } = useStepsChildren(childrenProp)
 
