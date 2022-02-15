@@ -121,6 +121,7 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 #### 支持者
 
 <a href="https://github.com/Yorksh1re">@Yorksh1re</a>
+<a href="https://github.com/akazwz">@akazwz</a>
 
 ### 鸣谢
 
