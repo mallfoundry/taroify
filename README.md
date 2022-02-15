@@ -101,24 +101,6 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
-## 友情推荐
-
-| 项目 | 描述 |
-| --- | --- |
-| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
-| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
-| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
-
-## 鸣谢
-
-Vant - 感谢 Vant 团队多年来的不断维护，让 Taroify 能够站在巨人的肩膀上。
-
-WebStorm - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify 可以快速开发。
-
-## 开源协议
-
-本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
-
 ## 赞助者
 
 开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。Taroify 经常为此肝到深夜 ……
@@ -130,3 +112,21 @@ WebStorm - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify �
 ### 支持者
 
 <a href="https://github.com/Yorksh1re">@Yorksh1re</a>
+
+## 鸣谢
+
+[Vant](https://github.com/youzan/vant) - 感谢 Vant 团队多年来的不断维护，让 Taroify 能够站在巨人的肩膀上。
+
+[WebStorm](https://www.jetbrains.com) - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify 可以快速开发。
+
+## 开源协议
+
+本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
+
+## 友情推荐
+
+| 项目 | 描述 |
+| --- | --- |
+| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
+| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
+| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
