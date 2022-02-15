@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -13,7 +14,6 @@ import {
   useMemo,
 } from "react"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import SidebarTab from "./sidebar-tab"
 import { SidebarTabObject } from "./sidebar-tab.shared"
 import SidebarContext from "./sidebar.context"
@@ -62,7 +62,7 @@ function Sidebar(props: SidebarProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({ value: valueProp, defaultValue })
+  const { value = 0, setValue } = useUncontrolled({ value: valueProp, defaultValue })
 
   const children = useSidebarChildren(childrenProp)
 
