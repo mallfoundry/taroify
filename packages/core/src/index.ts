@@ -59,7 +59,7 @@ export { default as Steps } from "./steps"
 export { default as Sticky } from "./sticky"
 export { default as Swiper } from "./swiper"
 export { default as Tag } from "./tag"
-export { default as TimeLine } from "./time-line"
+export { default as Timeline } from "./timeline"
 // Navigation Components
 export { default as Grid } from "./grid"
 export { default as IndexList } from "./index-list"

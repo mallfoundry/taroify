@@ -4,16 +4,10 @@ import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"
 
-
-export interface TimeLineItemProps extends ViewProps {
-
-}
+export interface TimeLineItemProps extends ViewProps {}
 
 function TimeLineItem(props: TimeLineItemProps) {
-  
-  return <>
-    TimeLineItem
-  </>
+  return <>TimeLineItem</>
 }
 
 export default TimeLineItem
