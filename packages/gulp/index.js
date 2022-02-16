@@ -92,3 +92,10 @@ exports.buildWww = series(
 )
 
 exports.serve = parallel(serveDemo, serveSite)
+
+exports.preinstall = parallel(
+  createBundle("icons"),
+  createBundle("hooks"),
+  createBundle("core"),
+  createBundle("commerce"),
+)
