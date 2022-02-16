@@ -2,6 +2,7 @@ import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
 import { useEffect, useMemo } from "react"
 import { getLogger } from "../utils/logger"
+import { useToRef } from "../utils/state"
 import { FormItemInstance, FormValidError } from "./form.shared"
 import { validateAll } from "./form.validate"
 
@@ -409,7 +410,9 @@ interface UseFormOptions<V> {
 
 export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form {
   const { defaultValues, values } = options
+  const nameRef = useToRef(name)
   const hasForm = formContainer.hasForm(name)
+  const hasFormRef = useToRef(hasForm)
 
   if (!hasForm && !_.isEmpty(name)) {
     formContainer.newForm(name)
@@ -417,23 +420,19 @@ export default function useForm<V = any>(name: string = "", options: UseFormOpti
 
   useEffect(
     () => {
-      if (!hasForm && _.isPlainObject(defaultValues)) {
-        formContainer.getForm(name)?.setDefaultValues(defaultValues)
+      if (hasFormRef.current) {
+        formContainer.getForm(nameRef.current)?.setDefaultValues(defaultValues)
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
 
-  useEffect(
-    () => {
-      if (!hasForm && _.isPlainObject(values)) {
-        formContainer.getForm(name)?.setValues(values)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [values],
-  )
+  useEffect(() => {
+    if (hasFormRef.current) {
+      formContainer.getForm(nameRef.current)?.setValues(values)
+    }
+  }, [hasFormRef, nameRef, values])
 
   useEffect(() => () => formContainer.releaseForm(name), [name])
 
