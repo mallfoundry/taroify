@@ -14,6 +14,14 @@
       color: $text-color;
       font-size: 32px  * $hd;
     }
+
+    .#{$component-prefix}badge-wrapper {
+      margin: 16px * $hd 0;
+
+      .#{$component-prefix}icon {
+        margin: 0;
+      }
+    }
   }
 
   .#{$component-prefix}tabs__tab-pane {
