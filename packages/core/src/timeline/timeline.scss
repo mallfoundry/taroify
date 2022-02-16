@@ -1,14 +1,11 @@
 @import "./variables";
 
 .#{$component-prefix}timeline {
+  margin: 0 auto;
   &-item{
-    &:first-child{
-      margin-top: 0;
-    }
+   
     &:last-child{
-      &::before{
-        display: none;
-      }
+      flex-direction: row-reverse;
     }
   }
 }

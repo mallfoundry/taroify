@@ -15,7 +15,11 @@ function TimeLineItem(props: TimeLineItemProps) {
   const { children, bullet, title } = props
   return (
     <View className={classNames(prefixClassname("timeline-item"))}>
-      <View className={classNames(prefixClassname("timeline-item-bullet"))}>{bullet}</View>
+      <View className={classNames(prefixClassname("timeline-item-line"))}>
+        <View className={classNames(prefixClassname("timeline-item-line-bullet"))}>
+        {bullet}
+        </View>
+      </View>
       <View className={classNames(prefixClassname("timeline-item-content"))}>
         <View className={classNames(prefixClassname("timeline-item-content-title"))}>
           <Text>{title}</Text>
