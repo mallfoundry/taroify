@@ -1,6 +1,6 @@
+import { getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
 import { CSSProperties } from "react"
-import { getSystemInfoSync } from "@tarojs/taro"
 
 export function addUnitPx(value?: string | number): string {
   return value === undefined ? "" : `${unitToPx(value)}px`
@@ -41,7 +41,8 @@ function getRootFontSize() {
 
 function convertRpx(value: string) {
   value = value.replace(/rpx/g, "")
-  const pixelRatio = 750 / getSystemInfoSync().windowWidth
+  const { windowWidth } = getSystemInfoSync()
+  const pixelRatio = 750 / windowWidth
   return +value / pixelRatio
 }
 
