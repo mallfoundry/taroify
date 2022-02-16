@@ -1,10 +1,10 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import RadioGroupContext from "./radio-group.context"
 import { RadioGroupDirection } from "./radio-group.shared"
 
@@ -32,7 +32,11 @@ function RadioGroup(props: RadioGroupProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue({ value: valueProp, defaultValue, onChange: onChangeProp })
+  const { value, setValue } = useUncontrolled({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
 
   return (
     <RadioGroupContext.Provider

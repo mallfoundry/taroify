@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -16,7 +17,6 @@ import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
-import { useValue } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
@@ -117,7 +117,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     ...restProps
   } = props
 
-  const { value: open } = useValue({ defaultValue: defaultOpen, value: openProp })
+  const { value: open } = useUncontrolled({ defaultValue: defaultOpen, value: openProp })
 
   const transactionName = transaction ?? toTransactionName(placement)
 

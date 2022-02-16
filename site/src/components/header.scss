@@ -1,8 +1,9 @@
-.van-header {
+@import "../styles/prefix";
+
+.#{$component-prefix}header {
   width: 100%;
-  background-color: #001938;
-  -webkit-user-select: none;
   user-select: none;
+  background-color: #001938;
 
   @media (min-width: 1680px) {
     &__top {
@@ -12,9 +13,9 @@
   }
 
   &__top {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
-    box-sizing: border-box;
     height: 60px;
     padding: 0 30px;
     line-height: 60px;
@@ -33,8 +34,8 @@
     }
 
     span {
-      color: #fff;
       font-size: 22px;
+      color: #fff;
     }
   }
 
@@ -47,8 +48,8 @@
   &__top-nav-item {
     position: relative;
     display: inline-block;
-    vertical-align: middle;
     margin-left: 16px;
+    vertical-align: middle;
 
     img {
       display: block;

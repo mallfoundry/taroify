@@ -2,7 +2,7 @@ import { useForceUpdate } from "@taroify/hooks"
 import * as _ from "lodash"
 import { createRef, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react"
 
-export { useToRef, useUncontrolled as useValue } from "@taroify/hooks"
+export { useToRef } from "@taroify/hooks"
 
 export function usePreviousRef<T = any>(value: T): MutableRefObject<T> {
   const previousRef = useRef<T>(value)

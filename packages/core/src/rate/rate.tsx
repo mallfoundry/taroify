@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { Star, StarOutlined } from "@taroify/icons"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
@@ -7,7 +8,6 @@ import { CSSProperties, ReactNode, useCallback, useMemo, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
 import { getRects } from "../utils/dom/rect"
-import { useValue } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import RateItem from "./rate-item"
 import RateContext from "./rate.context"
@@ -82,7 +82,7 @@ function Rate(props: RateProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

@@ -1,4 +1,6 @@
-.vant-side-nav {
+@import "../styles/prefix";
+
+.#{$component-prefix}side-nav {
   position: fixed;
   top: 60px;
   bottom: 0;
@@ -6,7 +8,7 @@
   z-index: 1;
   min-width: 220px;
   max-width: 220px;
-  padding: 24px 0;
+  padding: 0 0 24px;
   overflow-y: scroll;
   background-color: #fff;
   box-shadow: 0 8px 12px #ebedf0;
@@ -34,10 +36,10 @@
 
     &-title {
       padding: 8px 0 8px 24px;
-      color: #455a64;
-      font-weight: 600;
       font-size: 15px;
+      font-weight: 600;
       line-height: 28px;
+      color: #455a64;
     }
   }
 
@@ -48,14 +50,14 @@
 
     span {
       display: block;
-      margin: 0;
       padding: 8px 0 8px 24px;
-      color: #455a64;
+      margin: 0;
       font-size: 14px;
       line-height: 20px;
-      transition: color 0.2s;
+      color: #455a64;
       text-decoration: none;
       cursor: pointer;
+      transition: color 0.2s;
 
       &:hover {
         color: #4fc08d;
@@ -64,8 +66,8 @@
 
     &-active {
       span {
-        color: #4fc08d;
         font-weight: 600;
+        color: #4fc08d;
         background-color: #ebfff0;
         border-radius: 999px;
       }
@@ -74,8 +76,19 @@
 }
 
 @media (min-width: 1680px) {
-  .vant-side-nav {
+  .#{$component-prefix}side-nav {
     left: 50%;
     margin-left: -840px;
   }
+}
+
+.#{$component-prefix}diamond-sponsor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  color: #4fc08d;
+  border: 1px solid #4fc08d;
+  border-radius: 2px;
 }

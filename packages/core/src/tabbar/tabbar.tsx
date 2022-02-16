@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -14,7 +15,6 @@ import {
 import { usePlaceholder } from "../hooks"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
-import { useValue } from "../utils/state"
 import TabbarItem from "./tabbar-item"
 import TabbarContext from "./tabbar.context"
 
@@ -63,7 +63,7 @@ function Tabbar(props: TabbarProps) {
     ...restProps
   } = props
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

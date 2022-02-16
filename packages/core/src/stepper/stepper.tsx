@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -13,7 +14,7 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addNumber, formatNumber } from "../utils/format/number"
-import { useToRef, useValue } from "../utils/state"
+import { useToRef } from "../utils/state"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
 import StepperContext from "./stepper.context"
@@ -109,7 +110,7 @@ function Stepper(props: StepperProps) {
 
   const { decrease, input, increase } = useStepperChildren(childrenProp)
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

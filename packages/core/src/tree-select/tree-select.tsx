@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
@@ -7,7 +8,6 @@ import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
 import Sidebar from "../sidebar"
 import { prefixClassname } from "../styles"
-import { useValue } from "../utils/state"
 import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
 import TreeSelectContext from "./tree-select.context"
@@ -109,13 +109,13 @@ function TreeSelect(props: TreeSelectProps) {
     ...restProps
   } = props
 
-  const { value: tabValue = 0, setValue: setTabValue } = useValue({
+  const { value: tabValue = 0, setValue: setTabValue } = useUncontrolled({
     value: tabValueProp,
     defaultValue: defaultTabValue,
     onChange: onTabChangeProp,
   })
 
-  const { value = 0, setValue } = useValue({
+  const { value = 0, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

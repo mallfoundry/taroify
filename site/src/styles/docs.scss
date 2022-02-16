@@ -1,6 +1,7 @@
+@import "./prefix";
 @import "./variables";
 
-.vant-docs {
+.#{$component-prefix}docs {
   &-container {
     box-sizing: border-box;
     padding-left: 220px;
@@ -16,14 +17,6 @@
       width: 1680px;
       margin: 0 auto;
     }
-  }
-
-  &-card {
-    margin-bottom: 24px;
-    padding: 24px;
-    background-color: #fff;
-    border-radius: $vant-border-radius;
-    box-shadow: 0 8px 12px #ebedf0;
   }
 
   &-content {
@@ -50,9 +43,9 @@
     h4,
     h5,
     h6 {
-      color: $vant-black;
       font-weight: normal;
       line-height: 1.5;
+      color: $vant-black;
 
       &[id] {
         cursor: pointer;
@@ -72,35 +65,35 @@
 
     h3 {
       margin-bottom: 16px;
-      font-weight: 600;
       font-size: 18px;
+      font-weight: 600;
     }
 
     h4 {
       margin: 24px 0 12px;
-      font-weight: 600;
       font-size: 16px;
+      font-weight: 600;
     }
 
     h5 {
       margin: 24px 0 12px;
-      font-weight: 600;
       font-size: 15px;
+      font-weight: 600;
     }
 
     p {
-      margin: 0;
-      color: $vant-text-color;
+      margin: 16px 0;
       font-size: 15px;
       line-height: 26px;
+      color: $vant-text-color;
     }
 
     table {
       width: 100%;
       margin-top: 12px;
-      color: $vant-text-color;
       font-size: 14px;
       line-height: 1.5;
+      color: $vant-text-color;
       border-collapse: collapse;
 
       th {
@@ -125,11 +118,11 @@
           padding-left: 0;
           // version tag
           code {
-            margin: 0;
             padding: 2px 6px;
-            color: $vant-blue;
-            font-weight: 600;
+            margin: 0;
             font-size: 11px;
+            font-weight: 600;
+            color: $vant-blue;
             background-color: fade($vant-blue, 10%);
             border-radius: 20px;
           }
@@ -141,26 +134,26 @@
       }
 
       em {
-        color: $vant-green;
-        font-size: 14px;
         font-family: $vant-code-font-family;
+        font-size: 14px;
         font-style: normal;
+        color: $vant-green;
       }
     }
 
     ul, ol {
-      list-style: none;
       padding: 0;
+      list-style: none;
     }
 
     ul li,
     ol li {
       position: relative;
-      margin: 5px 0 5px 10px;
       padding-left: 15px;
-      color: $vant-text-color;
+      margin: 5px 0 5px 10px;
       font-size: 15px;
       line-height: 26px;
+      color: $vant-text-color;
 
       &::before {
         position: absolute;
@@ -170,9 +163,9 @@
         width: 6px;
         height: 6px;
         margin-top: 10px;
+        content: '';
         border: 1px solid $vant-dark-grey;
         border-radius: 50%;
-        content: '';
       }
     }
 
@@ -186,10 +179,10 @@
     li > code,
     table code {
       display: inline;
-      margin: 0 2px;
       padding: 2px 5px;
-      font-size: 14px;
+      margin: 0 2px;
       font-family: inherit;
+      font-size: 14px;
       word-break: keep-all;
       background-color: $vant-background-color;
       border-radius: 4px;
@@ -206,16 +199,32 @@
     }
 
     blockquote {
-      margin: 16px 0 0;
       padding: 16px;
+      margin: 16px 0 0;
       background-color: #ecf9ff;
       border-radius: $vant-border-radius;
+
+      p {
+        margin: 0;
+      }
     }
 
     img {
       width: 100%;
       margin: 16px 0;
       border-radius: $vant-border-radius;
+    }
+  }
+
+  &-card {
+    padding: 24px;
+    margin-bottom: 24px;
+    background-color: #fff;
+    border-radius: $vant-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
+
+    h3 {
+      margin-top: 0;
     }
   }
 }

@@ -1,6 +1,6 @@
-<div class="vant-docs-card">
+<div class="taroify-docs-card">
   <div style="padding-top: 20px; text-align: center" >
-    <img class="van-doc-introduce-logo" style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
+    <img style="width: 120px; height: 120px; margin: 16px 0;" src="https://img.yzcdn.cn/vant/logo.png">
     <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Taroify</h2>
     <p>轻量、可靠的小程序端 Taro React UI 组件库</p>
   </div>
@@ -24,23 +24,25 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 
 ### 浏览器支持
 
-现代浏览器以及 Android 4.0+, iOS 8.0+。
+支持现代浏览器以及 Chrome >= 51、iOS >= 10.0。
 
-### 通过 npm 安装使用（推荐）
+### 安装
 
-* 通过 npm 安装
-
-```bash
-npm i @taroify/core -S --production
-```
-
-* 通过 yarn 安装
+在现有项目中使用 Taroify 时，可以通过 `npm` 进行安装
 
 ```bash
-yarn add @taroify/core --production
+npm i @taroify/core
 ```
 
-### 使用组件
+当然，你也可以通过 `yarn` 或 `pnpm` 进行安装
+
+```bash
+yarn add @taroify/core
+
+pnpm add @taroify/core
+```
+
+### 快速上手
 
 ```tsx
 import { Button } from "@taroify/core"
@@ -96,9 +98,9 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 | 项目 | 描述 |
 | --- | --- |
 | [3lang3/react-vant](https://github.com/3lang3/react-vant) | 参照 Vant 打造的 React 移动端组件库 |
-| [mxdi9i7/vant-react](https://github.com/mxdi9i7/vant-react) | 基于 React 和 TS 构建的移动端组件库 |
+| [rc-ui-lib](https://github.com/rancui/rc-ui-lib) | 参照 Vant 打造的 React 框架移动端组件库 |
 | [vant-aliapp](https://github.com/ant-move/Vant-Aliapp) | Vant 支付宝小程序版 |
-| [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro 版 |
+| [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro React 版 |
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
@@ -108,18 +110,6 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
 - [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
 
-###  友情推荐
-
-| 项目 | 描述 |
-| --- | --- |
-| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
-| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
-| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
-
-### 开源协议
-
-本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源
-
 ### 赞助者
 
 开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。Taroify 经常为此肝到深夜 ……
@@ -127,3 +117,26 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 如果您认为 Taroify 帮助到了您的开发工作，您可以捐赠 Taroify 的研发工作，捐赠无门槛，哪怕是一杯可乐也好（相信这比打赏主播更有意义）。
 
 <img src="https://gitee.com/mallfoundry/taroify/raw/main/wechatpay.png" width="260" style="width: 260px;" />
+
+#### 支持者
+
+<a href="https://github.com/Yorksh1re">@Yorksh1re</a>
+<a href="https://github.com/akazwz">@akazwz</a>
+
+### 鸣谢
+
+[Vant](https://github.com/youzan/vant) - 感谢 Vant 团队多年来的不断维护，让 Taroify 能够站在巨人的肩膀上。
+
+[WebStorm](https://www.jetbrains.com) - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify 可以快速开发。
+
+### 开源协议
+
+本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
+
+###  友情推荐
+
+| 项目 | 描述 |
+| --- | --- |
+| [mockm](https://github.com/wll8/mockm) | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具 |
+| [taro-hooks](https://github.com/innocces/taro-hooks) | 为 Taro 而设计的 Hooks Library |
+| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |

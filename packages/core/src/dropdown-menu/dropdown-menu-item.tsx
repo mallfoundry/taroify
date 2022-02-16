@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
@@ -8,7 +9,6 @@ import { ExitHandler } from "react-transition-group/Transition"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
-import { useValue } from "../utils/state"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
 import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
@@ -40,7 +40,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     ...restProps
   } = props
 
-  const { getValue, setValue } = useValue({
+  const { getValue, setValue } = useUncontrolled({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,

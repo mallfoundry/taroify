@@ -3,6 +3,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import useFixed from "../hooks/useFixed"
+import { prefixClassname } from "../styles/prefix"
 
 import menus from "../utils/menus"
 import { listeningSimulatorEvents } from "../utils/simulator-router"
@@ -68,11 +69,11 @@ export default function Simulator(props: SimulatorProps) {
 
   return (
     <div
-      className={classNames("vant-simulator", {
-        "vant-simulator-fixed": fixed,
+      className={classNames(prefixClassname("simulator"), {
+        [prefixClassname("simulator--fixed")]: fixed,
       })}
     >
-      <iframe src={iframeUrl} frameBorder="0" />
+      <iframe title="simulator" src={iframeUrl} frameBorder="0" />
     </div>
   )
 }

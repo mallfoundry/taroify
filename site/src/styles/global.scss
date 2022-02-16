@@ -1,9 +1,9 @@
 @import "./variables";
 
 body {
-  background-color: $vant-background-color;
   min-width: 1100px;
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
   Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui',
   'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  background-color: $vant-background-color;
 }

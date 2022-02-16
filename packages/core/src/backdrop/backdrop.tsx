@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ITouchEvent } from "@tarojs/components/types/common"
 import { ViewProps } from "@tarojs/components/types/View"
@@ -8,7 +9,6 @@ import { CSSProperties, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Transition from "../transition"
 import { preventDefault } from "../utils/dom/event"
-import { useValue } from "../utils/state"
 
 interface BackdropProps extends ViewProps {
   style?: CSSProperties
@@ -35,7 +35,10 @@ export default function Backdrop(props: BackdropProps) {
     ...restProps
   } = props
 
-  const { value: open = false, setValue } = useValue({ defaultValue: defaultOpen, value: openProp })
+  const { value: open = false, setValue } = useUncontrolled({
+    defaultValue: defaultOpen,
+    value: openProp,
+  })
 
   const durationStyle = useMemo(
     () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),

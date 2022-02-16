@@ -1,3 +1,4 @@
+import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
@@ -21,7 +22,6 @@ import {
 import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
-import { useValue } from "../utils/state"
 import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
@@ -130,7 +130,7 @@ function DropdownMenu(props: DropdownMenuProps) {
     ...restProps
   } = props
 
-  const { value, setValue } = useValue<any>({
+  const { value, setValue } = useUncontrolled<any>({
     value: valueProp,
     onChange: onChangeProp,
   })

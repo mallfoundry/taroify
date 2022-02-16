@@ -23,9 +23,6 @@
       "global.d.ts"
     ]
   },
-  "include": [
-    "./global.d.ts"
-  ],
   "exclude": [
     "node_modules",
     "dist"
