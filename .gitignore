@@ -25,6 +25,7 @@ node_modules/
 /site/public/
 /packages/*/dist
 /packages/*/build
+/problems/*/dist
 
 #gatsby
 .content/
