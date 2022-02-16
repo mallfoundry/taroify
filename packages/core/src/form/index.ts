@@ -7,6 +7,7 @@ import FormLabel from "./form-label"
 
 export type {
   FormRule,
+  FormInstance,
   FormLabelAlign,
   FormValidError,
   FormItemInstance,
