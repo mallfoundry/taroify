@@ -1,10 +1,10 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$time-linecolor: var(--avatar-color, var(--white, $white));
-$time-line-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
-$time-line-border-color: var(--avatar-border-color, var(--white, $white));
-$time-line-border-width: var(--avatar-border-width, 2PX);
-$time-line-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
-$time-line-font-family: var(--avatar-font-family, #{Roboto, Helvetica, Arial, sans-serif});
-
+$timeline-color: var(--avatar-color, var(--white, $white));
+$timeline-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
+$timeline-border-color: var(--avatar-border-color, var(--white, $white));
+$timeline-border-width: var(--avatar-border-width, 2PX);
+$timeline-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
+$timeline-font-family: var(--avatar-font-family, #{Roboto, Helvetica, Arial, sans-serif});
+$timeline-font-size: var(--font-size-md, $font-size-md);

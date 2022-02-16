@@ -1,5 +1,14 @@
 @import "./variables";
 
 .#{$component-prefix}timeline {
-
+  &-item{
+    &:first-child{
+      margin-top: 0;
+    }
+    &:last-child{
+      &::before{
+        display: none;
+      }
+    }
+  }
 }

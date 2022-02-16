@@ -1,0 +1,44 @@
+@import "./variables";
+
+.#{$component-prefix}timeline-item {
+  margin-top: 24px * $hd;
+  font-size: var(--timeline-font-size, $timeline-font-size);
+  max-width: 320px * $hd;
+
+  position: relative;
+  padding-left: 24px * $hd;
+  &::before {
+    content: "";
+    left: 0;
+    top: 24px * $hd;
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    border-left: 4px solid #dee2e6;
+    display: block;
+  }
+  &-content{
+    &-title{
+      font-size: 16px * $hd;
+      font-weight: 500;
+      color: inherit;
+      line-height: 1;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    }
+  }
+  &-bullet {
+    position: absolute;
+    left: -11px * $hd;
+    width: 24px * $hd;
+    height: 24px * $hd;
+    border-radius: 32px * $hd;
+    border-color: #1c7ed6;
+    border: 2px solid #dee2e6;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1c7ed6;
+    color: #fff;
+  }
+}
