@@ -1,0 +1,10 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$time-linecolor: var(--avatar-color, var(--white, $white));
+$time-line-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
+$time-line-border-color: var(--avatar-border-color, var(--white, $white));
+$time-line-border-width: var(--avatar-border-width, 2PX);
+$time-line-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
+$time-line-font-family: var(--avatar-font-family, #{Roboto, Helvetica, Arial, sans-serif});
+
