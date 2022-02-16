@@ -3,7 +3,14 @@ import { Form as TaroForm } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps as TaroFormProps } from "@tarojs/components/types/Form"
 import * as React from "react"
-import { ForwardedRef, forwardRef, ReactNode, useEffect, useImperativeHandle } from "react"
+import {
+  ForwardedRef,
+  forwardRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+} from "react"
 import { useUniqueId } from "../hooks"
 import { preventDefault } from "../utils/dom/event"
 import FormContext from "./form.context"
@@ -73,26 +80,38 @@ const Form = forwardRef<FormInstance, FormProps>(
       values,
     })
 
-    function handleSubmit(e: BaseEventOrig<TaroFormProps.onSubmitEventDetail>) {
-      validate()
-        .then((values) => {
-          const event = Object.assign({}, e, {
-            detail: {
-              ...e.detail,
-              value: values,
-            },
-          })
-          onSubmit?.(event)
-        })
-        .catch((errors) => onValidate?.(errors))
-    }
+    const delegatingReset = useCallback(
+      (e?: BaseEventOrig) => {
+        reset()
+        onReset?.(e as BaseEventOrig)
+      },
+      [onReset, reset],
+    )
 
-    function handleReset(e: BaseEventOrig) {
-      preventDefault(e)
-      reset()
-      forceUpdate()
-      onReset?.(e)
-    }
+    const handleSubmit = useCallback(
+      (e: BaseEventOrig<TaroFormProps.onSubmitEventDetail>) => {
+        validate()
+          .then((values) => {
+            const event = Object.assign({}, e, {
+              detail: {
+                ...e.detail,
+                value: values,
+              },
+            })
+            onSubmit?.(event)
+          })
+          .catch((errors) => onValidate?.(errors))
+      },
+      [onSubmit, onValidate, validate],
+    )
+
+    const handleReset = useCallback(
+      (e: BaseEventOrig) => {
+        preventDefault(e)
+        delegatingReset(e)
+      },
+      [delegatingReset],
+    )
 
     useImperativeHandle(
       ref,
@@ -102,7 +121,7 @@ const Form = forwardRef<FormInstance, FormProps>(
         getValues,
         setValues,
         validate,
-        reset,
+        reset: () => delegatingReset(),
         /**
          * @deprecated
          */
@@ -117,10 +136,10 @@ const Form = forwardRef<FormInstance, FormProps>(
         validateFields,
       }),
       [
+        delegatingReset,
         getErrors,
         getFieldsValue,
         getValues,
-        reset,
         setErrors,
         setFieldsValue,
         setValues,
@@ -139,6 +158,11 @@ const Form = forwardRef<FormInstance, FormProps>(
         }
       }
     }, [addEventListener, onValuesChange, removeEventListener])
+
+    useEffect(() => {
+      addEventListener("reset", forceUpdate)
+      return () => removeEventListener("reset", forceUpdate)
+    }, [addEventListener, forceUpdate, onValuesChange, removeEventListener])
 
     return (
       <FormContext.Provider
