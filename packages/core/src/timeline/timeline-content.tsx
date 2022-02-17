@@ -13,9 +13,10 @@ export interface TimeLineContentProps {
   className?: string
 }
 
-function TimeLineItem(props: TimeLineContentProps) {
+function TimeLineContent(props: TimeLineContentProps) {
   const { children } = props
+  
   return <View className={classNames(prefixClassname("timeline-content"))}>{children}</View>
 }
 
-export default TimeLineItem
+export default TimeLineContent

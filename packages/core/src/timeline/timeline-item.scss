@@ -3,65 +3,8 @@
 .#{$component-prefix}timeline-item {
   font-size: var(--timeline-font-size, $timeline-font-size);
   display: flex;
-  &-right{
+  &-right {
     flex-direction: row-reverse;
     text-align: right;
-  }
- 
-  &-content {
-    &:last-child {
-      text-align: left;
-    }
-    &:first-child {
-      text-align: right;
-    }
-    flex: 1;
-    box-sizing: border-box;
-    padding-bottom: 24px * $hd;
-    &-title {
-      font-size: 16px * $hd;
-      font-weight: 500;
-      color: inherit;
-      line-height: 1;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
-        Apple Color Emoji, Segoe UI Emoji;
-    }
-  }
-  &-line {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-    padding: 0 12px * $hd;
-    &-active {
-      border-color: #1c7ed6;
-    }
-    &::before {
-      content: "";
-      flex: 1;
-      box-sizing: border-box;
-      height: 100%;
-      border-left: 4px solid #dee2e6;
-      display: block;
-    }
-    &-active {
-      &::before {
-        border-color: #1c7ed6;
-      }
-    }
-    &-bullet {
-      left: -11px * $hd;
-      width: 24px * $hd;
-      height: 24px * $hd;
-      border-radius: 32px * $hd;
-      border: 2px solid #dee2e6;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &-active {
-        background-color: #1c7ed6;
-      }
-    }
   }
 }

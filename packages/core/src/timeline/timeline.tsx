@@ -15,12 +15,13 @@ function useTimeLineItemComponents(children: ReactNode, algin: algin | undefined
   return Children.toArray(children).map((child: any, index: number) => {
     return cloneElement(child, {
       algin: algin,
-      active: active > index,
+      active:active>index
     })
   })
 }
 function TimeLine(props: TimeLineProps) {
   const { children, algin, active = 0 } = props
+  
   const TimelineItem = useTimeLineItemComponents(children, algin, active)
   return <View className={classNames(prefixClassname("timeline"))}>{TimelineItem}</View>
 }
