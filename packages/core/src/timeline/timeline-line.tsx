@@ -13,6 +13,7 @@ export interface TimeLineLineProps {
   children?: ReactNode
   className?: string
   active?: boolean
+
 }
 
 function TimeLineLine(props: TimeLineLineProps) {

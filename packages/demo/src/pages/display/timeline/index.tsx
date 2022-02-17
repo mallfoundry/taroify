@@ -10,7 +10,7 @@ export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="timeline-demo">
       <Block title="基础用法" className="timeline-block">
-        <Timeline active={2}>
+        <Timeline active={3}>
           <Timeline.Item>
             <Timeline.Line>
               <SettingOutlined size={12} />
@@ -114,7 +114,7 @@ export default function TimelineDemo() {
       <Block title="两边都有" className="timeline-block">
         <Timeline active={2}>
           <Timeline.Item>
-          <Timeline.Content algin="left">
+            <Timeline.Content algin="left">
               <View>
                 You&apos;ve created new branch
                 <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
@@ -127,7 +127,7 @@ export default function TimelineDemo() {
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
-          <Timeline.Content algin="left">am 9:00</Timeline.Content>
+            <Timeline.Content algin="left">am 9:00</Timeline.Content>
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
@@ -140,7 +140,7 @@ export default function TimelineDemo() {
             </Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
-          <Timeline.Content algin="left">am 9:00</Timeline.Content>
+            <Timeline.Content algin="left">am 9:00</Timeline.Content>
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
