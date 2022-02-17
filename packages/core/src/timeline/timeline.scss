@@ -2,10 +2,14 @@
 
 .#{$component-prefix}timeline {
   margin: 0 auto;
-  &-item{
-   
-    &:last-child{
-      flex-direction: row-reverse;
+  &-item {
+    &:last-child {
+      .taroify-timeline-item-line {
+        justify-content: start;
+        &::before {
+          display: none;
+        }
+      }
     }
   }
 }
