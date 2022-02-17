@@ -12,6 +12,31 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.1
+
+`2022-02-17`
+
+**Feature**
+
+- ellipsis
+  - 合并 multi-ellipsis 为 ellipsis [#343](https://github.com/mallfoundry/taroify/pull/343) [@yifeishu-com](https://github.com/yifeishu-com)
+- Docs
+  - 完善开发指南 [#347](https://github.com/mallfoundry/taroify/pull/347) [@Yang](https://github.com/programmer-yang)
+- addUnitPx
+  - 新增 rpx 转换 px 的支持 [#361](https://github.com/mallfoundry/taroify/pull/361) [@BluesCurry](https://github.com/bluescurry)
+- SwipeCell
+  - 新增 beforeClose 方法 [#363](https://github.com/mallfoundry/taroify/pull/363)
+
+**Bug Fixes**
+
+- useForm
+  - 修复设置 values 无反应的问题 [#356](https://github.com/mallfoundry/taroify/pull/356)
+- Form
+  - 修复通过 ref 调用 reset() 不能更新视图的问题 [#358](https://github.com/mallfoundry/taroify/pull/358)
+  - 修复通过 ref 调用 reset() 不能触发 onReset 事件的问题 [#358](https://github.com/mallfoundry/taroify/pull/358)
+- SwipeCell
+  - 修复点击滑动按钮不能自动关闭的问题 [#363](https://github.com/mallfoundry/taroify/pull/363)
+
 ### v0.0.27-alpha.0
 
 `2022-02-11`
