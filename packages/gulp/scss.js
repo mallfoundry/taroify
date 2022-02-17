@@ -1,3 +1,4 @@
+const path = require("path")
 const autoprefixer = require("autoprefixer")
 const cssnano = require("cssnano")
 const gulp = require("gulp")
@@ -28,6 +29,41 @@ function symlinkScssFiles(bundle, dist) {
   return symlinkScssFilesTask
 }
 
+function addScssFileExtname(id) {
+  return path.extname(id) === "scss" ? id : `${id}.scss`
+}
+
+function getScssPartialBasename(basename) {
+  return `_${basename}`
+}
+
+function resolveNpmPath(id) {
+  try {
+    return require.resolve(addScssFileExtname(id))
+  } catch (e) {
+    const dirname = path.dirname(id)
+    const basename = path.basename(id)
+    const partialBasename = getScssPartialBasename(basename)
+    const partialFilename = addScssFileExtname(partialBasename)
+    const partialFilepath = path.join(dirname, partialFilename)
+    return require.resolve(partialFilepath)
+  }
+}
+
+function npmModule(url, file, done) {
+  if (!url.startsWith("~")) {
+    return done({ file: url })
+  }
+  // Remove ~ character
+  url = url.substring(1)
+  try {
+    const toPath = resolveNpmPath(url)
+    return done({ file: toPath })
+  } catch (e) {
+    return done({ file: url })
+  }
+}
+
 function compileScss(bundle, dist) {
   const plugins = [
     autoprefixer(),
@@ -45,7 +81,12 @@ function compileScss(bundle, dist) {
     gulp
       .src(`./packages/${bundle}/src/**/index.scss`)
       .pipe(sourcemaps.init())
-      .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+      .pipe(
+        sass({
+          importer: npmModule,
+          outputStyle: "compressed",
+        }).on("error", sass.logError),
+      )
       .pipe(postcss(plugins))
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
