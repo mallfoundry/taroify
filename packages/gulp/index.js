@@ -60,7 +60,7 @@ exports.develop = parallel(
 
 exports.watch = watch
 
-exports.build = series(
+exports.buildPackages = series(
   createBundles, //
   copyFontFiles("core"),
   copyFontFiles("commerce"),
