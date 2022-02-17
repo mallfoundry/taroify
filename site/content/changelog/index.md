@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.2
+
+`2022-02-17`
+
+**Bug Fixes**
+
+- useForm
+  - 修复调用重置（reset）时，获取 onValuesChange 事件的 allValues 形参不正确的问题 [#367](https://github.com/mallfoundry/taroify/pull/367)
+
 ### v0.0.27-alpha.1
 
 `2022-02-17`
