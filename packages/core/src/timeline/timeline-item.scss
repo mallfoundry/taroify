@@ -2,24 +2,22 @@
 
 .#{$component-prefix}timeline-item {
   font-size: var(--timeline-font-size, $timeline-font-size);
-  // max-width: 320px * $hd;
   display: flex;
-  &-algin {
+  &-right{
     flex-direction: row-reverse;
     text-align: right;
   }
-  &::before {
-    content: " ";
-    flex: 1;
-  }
-  &-flex {
-    &::before {
-      content: " ";
-      flex: 0;
-    }
-  }
+ 
   &-content {
-    flex: 1;
+    &-flex{
+      flex: 1;
+    }
+    &:last-child {
+      text-align: left;
+    }
+    &:first-child {
+      text-align: right;
+    }
     box-sizing: border-box;
     padding-bottom: 24px * $hd;
     &-title {
