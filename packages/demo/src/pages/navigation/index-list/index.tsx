@@ -1,6 +1,5 @@
 import { Cell, IndexList, Tabs } from "@taroify/core"
 import * as _ from "lodash"
-import * as React from "react"
 import { Fragment, useState } from "react"
 import Page from "../../../components/page"
 import "./index.scss"

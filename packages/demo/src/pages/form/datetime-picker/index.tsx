@@ -1,5 +1,4 @@
 import { DatetimePicker } from "@taroify/core"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"

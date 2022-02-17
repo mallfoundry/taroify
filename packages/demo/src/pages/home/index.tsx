@@ -1,10 +1,9 @@
 import { Image, Text, View } from "@tarojs/components"
 import * as _ from "lodash"
-import * as React from "react"
 import { demoPrefixClassname } from "../../styles/prefix"
 import subpackages, { Page } from "../../subpackages"
-
 import "./index.scss"
+
 import Nav, { NavBlock } from "./nav"
 
 function renderNavBlocks(root: string, pages: Page[]) {

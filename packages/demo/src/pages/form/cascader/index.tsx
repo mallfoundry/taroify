@@ -2,7 +2,6 @@ import { Cascader, Field, Input, Popup } from "@taroify/core"
 import { useCascader } from "@taroify/hooks"
 import { ArrowRight } from "@taroify/icons"
 import * as _ from "lodash"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
@@ -24,7 +23,7 @@ function BasicCascader() {
         <Cascader
           value={value}
           onSelect={setValue}
-          onChange={(values, options) => {
+          onChange={(_values_, options) => {
             setOpen(false)
             setFieldValue(
               _.join(
@@ -73,7 +72,7 @@ function CustomColorCascader() {
           swipeable
           value={value}
           onSelect={setValue}
-          onChange={(values, options) => {
+          onChange={(_values_, options) => {
             setOpen(false)
             setFieldValue(
               _.join(

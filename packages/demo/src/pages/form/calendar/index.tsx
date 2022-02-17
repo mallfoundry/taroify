@@ -1,6 +1,5 @@
 import { Calendar, Cell, Popup } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"

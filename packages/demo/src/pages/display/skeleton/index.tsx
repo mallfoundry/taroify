@@ -1,5 +1,4 @@
 import { Skeleton, WhiteSpace } from "@taroify/core"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"

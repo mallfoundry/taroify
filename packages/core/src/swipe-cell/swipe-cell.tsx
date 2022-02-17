@@ -302,7 +302,6 @@ function SwipeCell(props: SwipeCellProps) {
         open(side, false)
       })
     } else {
-      console.log("ooo")
       close("outside", false)
     }
   }

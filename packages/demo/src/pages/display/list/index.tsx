@@ -1,6 +1,5 @@
 import { Cell, List, Loading, PullRefresh, Tabs } from "@taroify/core"
 import { usePageScroll } from "@tarojs/taro"
-import * as React from "react"
 import { useRef, useState } from "react"
 import Page from "../../../components/page"
 import "./index.scss"

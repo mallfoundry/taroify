@@ -1,6 +1,5 @@
 import { SafeArea } from "@taroify/core"
 import { View } from "@tarojs/components"
-import * as React from "react"
 import Page from "../../../components/page"
 import lorem from "../../../utils/lorem"
 

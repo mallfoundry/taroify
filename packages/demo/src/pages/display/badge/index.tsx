@@ -1,7 +1,6 @@
 import { Badge } from "@taroify/core"
 import { Cross, Down, Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"

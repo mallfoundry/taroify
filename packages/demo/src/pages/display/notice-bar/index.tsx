@@ -1,6 +1,5 @@
 import { NoticeBar, Swiper, WhiteSpace } from "@taroify/core"
 import { ArrowRight, Cross, InfoOutlined, VolumeOutlined } from "@taroify/icons"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"

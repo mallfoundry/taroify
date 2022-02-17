@@ -1,6 +1,5 @@
 import { Button, Cell, Field, Input, Textarea } from "@taroify/core"
 import { MusicOutlined, SmileOutlined, WarningOutlined } from "@taroify/icons"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"
