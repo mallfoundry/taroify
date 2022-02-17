@@ -1,5 +1,4 @@
 import { Grid, Sidebar, Toast } from "@taroify/core"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -8,7 +7,7 @@ function EventSidebar() {
   return (
     <>
       <Toast id="toast" />
-      <Sidebar onChange={(newValue, { children }: Sidebar.TabObject) => Toast.open(children)}>
+      <Sidebar onChange={(_, { children }: Sidebar.TabObject) => Toast.open(children)}>
         <Sidebar.Tab>标签名 1</Sidebar.Tab>
         <Sidebar.Tab>标签名 2</Sidebar.Tab>
         <Sidebar.Tab>标签名 3</Sidebar.Tab>

@@ -1,7 +1,6 @@
 import { Field, Input, Picker, Popup, Toast } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
 import * as _ from "lodash"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"

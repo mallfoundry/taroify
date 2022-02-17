@@ -1,6 +1,5 @@
 import { Badge, Tabbar, Toast } from "@taroify/core"
 import { FriendsOutlined, HomeOutlined, Search, SettingOutlined } from "@taroify/icons"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"

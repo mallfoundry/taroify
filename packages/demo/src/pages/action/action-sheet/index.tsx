@@ -1,6 +1,5 @@
 import { ActionSheet, Cell } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"

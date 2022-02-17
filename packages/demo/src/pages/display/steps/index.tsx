@@ -1,7 +1,6 @@
 import { Button, Steps } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"

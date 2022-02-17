@@ -1,7 +1,6 @@
 import { Image, PullRefresh, Tabs } from "@taroify/core"
 import { View } from "@tarojs/components"
 import { usePageScroll } from "@tarojs/taro"
-import * as React from "react"
 import { useState } from "react"
 import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
