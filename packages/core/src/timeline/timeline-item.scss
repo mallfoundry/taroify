@@ -9,15 +9,13 @@
   }
  
   &-content {
-    &-flex{
-      flex: 1;
-    }
     &:last-child {
       text-align: left;
     }
     &:first-child {
       text-align: right;
     }
+    flex: 1;
     box-sizing: border-box;
     padding-bottom: 24px * $hd;
     &-title {

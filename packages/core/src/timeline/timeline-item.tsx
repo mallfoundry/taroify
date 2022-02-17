@@ -38,9 +38,7 @@ function TimeLineItem(props: TimeLineItemProps) {
       {
         <>
           {!algin && (
-            <View className={classNames(prefixClassname("timeline-item-content"),{
-              [prefixClassname("timeline-item-content-flex")]:!algin
-            })}>
+            <View className={classNames(prefixClassname("timeline-item-content"))}>
               {leftChild}
             </View>
           )}
@@ -57,9 +55,7 @@ function TimeLineItem(props: TimeLineItemProps) {
               {bullet}
             </View>
           </View>
-          <View className={classNames(prefixClassname("timeline-item-content"),{
-              [prefixClassname("timeline-item-content-flex")]:!algin
-            })}>
+          <View className={classNames(prefixClassname("timeline-item-content"))}>
             {!algin ? rightChild : children}
           </View>
         </>

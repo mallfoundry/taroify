@@ -10,7 +10,7 @@ export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="avatar-demo">
       <Block title="基础用法" className="avatar-block">
-        <Timeline active={2}>
+        <Timeline active={2} algin="left">
           <Timeline.Item bullet={<SettingOutlined size={12} />}>
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
           </Timeline.Item>
