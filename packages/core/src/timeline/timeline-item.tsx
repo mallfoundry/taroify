@@ -12,10 +12,11 @@ export interface TimeLineItemProps extends ViewProps {
   title?: string
   children?: ReactNode
   className?: string
+  active?:boolean
 }
 
 function TimeLineItem(props: TimeLineItemProps) {
-  const { children, bullet, title, algin = "left", className } = props
+  const { children, bullet, title, algin = "left", className ,active} = props
   return (
     <View
       className={classNames(
@@ -26,8 +27,12 @@ function TimeLineItem(props: TimeLineItemProps) {
         className,
       )}
     >
-      <View className={classNames(prefixClassname("timeline-item-line"))}>
-        <View className={classNames(prefixClassname("timeline-item-line-bullet"))}>{bullet}</View>
+      <View className={classNames(prefixClassname("timeline-item-line"),{
+        [prefixClassname("timeline-item-line-active")]:active
+      })}>
+        <View className={classNames(prefixClassname("timeline-item-line-bullet"),{
+        [prefixClassname("timeline-item-line-bullet-active")]:active
+      })}>{bullet}</View>
       </View>
       <View className={classNames(prefixClassname("timeline-item-content"))}>
         <View className={classNames(prefixClassname("timeline-item-content-title"))}>
