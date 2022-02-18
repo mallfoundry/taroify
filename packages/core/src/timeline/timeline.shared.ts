@@ -1,3 +1,2 @@
-export type borderStyle = "dashed" | "solid"
-
-
+export type shape = "dashed" | "solid"
+export type direction = "top"|"bottom"| "all"

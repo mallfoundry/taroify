@@ -6,65 +6,31 @@ import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
-
 function AlternateTimeline() {
   return (
-    <Timeline>
-      <Timeline.Item>
-        <Timeline.Content />
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-        </Timeline.Content>
+    <Timeline size="3px">
+      <Timeline.Item
+        algin
+        icon={<SettingOutlined size={24} />}
+        direction="all"
+        color="#1c7ed6"
+      >
+        <View>
+          You&apos;ve created new branch
+          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
+        </View>
       </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content />
+      <Timeline.Item icon={<SettingOutlined size={24} />}>
+        <View>
+          You&apos;ve created new branch
+          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
+        </View>
       </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content />
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={12} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
-        </Timeline.Content>
+      <Timeline.Item icon={<SettingOutlined size={24} />} shape="dashed">
+        <View>
+          You&apos;ve created new branch
+          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
+        </View>
       </Timeline.Item>
     </Timeline>
   )
@@ -73,15 +39,15 @@ function AlternateTimeline() {
 function LeftTimeline() {
   return (
     <Timeline>
-      <Timeline.Item>
+      <Timeline.ItemBase>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
         <Timeline.Content>am 9:00</Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item>
+      </Timeline.ItemBase>
+      <Timeline.ItemBase>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
@@ -94,8 +60,8 @@ function LeftTimeline() {
           </View>
           <View>2 hours ago</View>
         </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item>
+      </Timeline.ItemBase>
+      <Timeline.ItemBase>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
@@ -108,23 +74,35 @@ function LeftTimeline() {
           </View>
           <View>2 hours ago</View>
         </Timeline.Content>
-      </Timeline.Item>
+      </Timeline.ItemBase>
     </Timeline>
   )
 }
 
 function RightTimeline() {
   return (
-    <Timeline>
-      <Timeline.Item>
+    <Timeline size="3px">
+      <Timeline.ItemBase>
         <Timeline.Content>am 9:00</Timeline.Content>
         <Timeline.Separator>
-          <Timeline.Connector />
+          <SettingOutlined size={24} />
+        </Timeline.Separator>
+      </Timeline.ItemBase>
+      <Timeline.ItemBase>
+        <Timeline.Content >
+          <View>
+            You&apos;ve created new branch
+            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
+          </View>
+          <View>2 hours ago</View>
+        </Timeline.Content>
+        <Timeline.Separator >
+          <Timeline.Connector size="3px" />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-      </Timeline.Item>
-      <Timeline.Item>
+      </Timeline.ItemBase>
+      <Timeline.ItemBase>
         <Timeline.Content>
           <View>
             You&apos;ve created new branch
@@ -137,21 +115,7 @@ function RightTimeline() {
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.Item>
+      </Timeline.ItemBase>
     </Timeline>
   )
 }

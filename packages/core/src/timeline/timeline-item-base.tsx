@@ -5,13 +5,13 @@ import * as React from "react"
 import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
-export interface TimeLineContentProps extends PropsWithChildren<ViewProps> {}
-
-function TimeLineContent(props: TimeLineContentProps) {
+export interface TimeLineItemBaseProps extends PropsWithChildren<ViewProps> {
+  size?: string
+}
+function TimeLineItemBase(props: TimeLineItemBaseProps) {
   const { className, ...restProps } = props
-  return (
-    <View className={classNames(prefixClassname("timeline-content"), className)} {...restProps} />
-  )
+
+  return <View className={classNames(prefixClassname("timeline-item"), className)} {...restProps} />
 }
 
-export default TimeLineContent
+export default TimeLineItemBase

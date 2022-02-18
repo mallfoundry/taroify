@@ -2,6 +2,8 @@
 
 .#{$component-prefix}timeline-connector {
   flex: 1;
-  width: 2PX;
-  background: #bdbdbd;
+  border-left: 0 none;
+  border-top: 0 none;
+  border-bottom: 0 none;
+  border-right: 2px solid;
 }
