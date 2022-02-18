@@ -23,12 +23,10 @@ interface MenuItemProps {
   to: string
   active?: boolean
 
-  onClick(): void
-
   onRouted(): void
 }
 
-function MenuItem({ title, to, active, onClick, onRouted }: MenuItemProps) {
+function MenuItem({ title, to, active, onRouted }: MenuItemProps) {
   useEffect(() => {
     if (active) {
       onRouted()
@@ -40,7 +38,6 @@ function MenuItem({ title, to, active, onClick, onRouted }: MenuItemProps) {
         [prefixClassname("side-nav-item-active")]: active,
       })}
       to={to}
-      onClick={onClick}
     >
       <span>{title}</span>
     </Link>
@@ -75,7 +72,17 @@ export default function SideNav(props: SideNavProps) {
   )
 
   return (
-    <nav ref={rootRef} className={prefixClassname("side-nav")} style={{ top: `${top}px` }}>
+    <nav
+      ref={rootRef}
+      className={prefixClassname("side-nav")}
+      style={{ top: `${top}px` }}
+      onScroll={() =>
+        localStorage.setItem(
+          "sideNav.scrollTop", //
+          (rootRef.current?.scrollTop ?? 0)?.toString(),
+        )
+      }
+    >
       <MenuItemGroup title="钻石赞助商">
         <DiamondSponsor />
       </MenuItemGroup>
@@ -91,12 +98,6 @@ export default function SideNav(props: SideNavProps) {
                   title={item.title}
                   to={item.to}
                   active={item.to === slug}
-                  onClick={() =>
-                    localStorage.setItem(
-                      "sideNav.scrollTop",
-                      (rootRef.current?.scrollTop ?? 0)?.toString(),
-                    )
-                  }
                   onRouted={onRouted}
                 />
               ))
