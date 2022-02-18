@@ -1,6 +1,6 @@
 {
   "name": "@taroify/~commerce",
-  "version": "0.0.27-alpha.2",
+  "version": "0.0.27-alpha.3",
   "license": "MIT",
   "private": "true",
   "keywords": [
@@ -22,7 +22,7 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@taroify/core": "^0.0.27-alpha.2",
+    "@taroify/core": "^0.0.27-alpha.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "raf": "^3.4.1",

@@ -1,13 +1,13 @@
 {
   "name": "@taroify/cli",
-  "version": "0.0.27-alpha.2",
+  "version": "0.0.27-alpha.3",
   "license": "MIT",
   "private": "true",
   "dependencies": {
-    "@taroify/babel-preset": "^0.0.27-alpha.2",
-    "@taroify/eslint-config": "^0.0.27-alpha.2",
-    "@taroify/gulp": "^0.0.27-alpha.2",
-    "@taroify/stylelint-config": "^0.0.27-alpha.2",
+    "@taroify/babel-preset": "^0.0.27-alpha.3",
+    "@taroify/eslint-config": "^0.0.27-alpha.3",
+    "@taroify/gulp": "^0.0.27-alpha.3",
+    "@taroify/stylelint-config": "^0.0.27-alpha.3",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.2",
