@@ -8,30 +8,48 @@ import "./timeline-line.scss"
 
 export interface TimeLineLineProps {
   algin?: algin
-  bullet?: JSX.Element
-  title?: string
   children?: ReactNode
   className?: string
-  active?: boolean
+  borderStyle?: string
+  borderWidth?: number
+  borderColor?: string
+  lineWidth?: number
+  BulletSize?: number
+  lineColor?: string
+  bulletBorder?: number
 }
 
 function TimeLineLine(props: TimeLineLineProps) {
-  const { children, active,className } = props
-  console.log(className);
-  
+  const {
+    children,
+    className,
+    lineWidth = 1,
+    borderStyle = "solid",
+    BulletSize,
+    lineColor,
+    bulletBorder = 1,
+  } = props
+
   return (
-    <View
-      className={classNames(prefixClassname("timeline-line"), {
-        [prefixClassname("timeline-line-active")]: active,
-      },className)}
-    >
+    <View className={classNames(prefixClassname("timeline-line"), className)}>
       <View
-        className={classNames(prefixClassname("timeline-line-bullet"), {
-          [prefixClassname("timeline-line-bullet-active")]: active,
-        })}
+        className={classNames(prefixClassname("timeline-line-bullet"))}
+        style={{
+          borderWidth: bulletBorder + "px",
+          borderColor: lineColor,
+          height: BulletSize + "px",
+          width: BulletSize + "px",
+        }}
       >
         {children}
       </View>
+      <View
+        className={classNames(prefixClassname("timeline-line-border"), {
+          [prefixClassname("timeline-line-border-dashed")]: borderStyle === "dashed",
+          [prefixClassname("timeline-line-border-solid")]: borderStyle === "solid",
+        })}
+        style={{ borderWidth: lineWidth + "px", borderLeftColor: lineColor }}
+      ></View>
     </View>
   )
 }

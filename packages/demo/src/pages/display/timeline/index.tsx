@@ -10,10 +10,10 @@ export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="timeline-demo">
       <Block title="基础用法" className="timeline-block">
-        <Timeline active={3}>
+        <Timeline active={2}>
           <Timeline.Item>
             <Timeline.Content />
-            <Timeline.Line>
+            <Timeline.Line borderStyle="dashed" lineWidth={2} bulletBorder={1} lineColor="#1c7ed6">
               <SettingOutlined size={12} />
             </Timeline.Line>
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
@@ -26,7 +26,7 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Line borderStyle="dashed">
               <SettingOutlined size={12} />
             </Timeline.Line>
             <Timeline.Content />
@@ -39,7 +39,7 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Line borderStyle="dashed">
               <SettingOutlined size={12} />
             </Timeline.Line>
             <Timeline.Content />
