@@ -12,7 +12,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
-### v0.0.27-alpha.3
+### v0.0.27-alpha.4
 
 `2022-02-18`
 
@@ -20,6 +20,10 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - useForm
   - 修复 defaultValues 被覆盖的问题 [#368](https://github.com/mallfoundry/taroify/pull/368)
+  
+### v0.0.27-alpha.3
+
+`2022-02-18`
 
 ### v0.0.27-alpha.2
 
