@@ -1,12 +1,12 @@
 @import "./variables";
 
-.#{$component-prefix}timeline-line {
+.#{$component-prefix}timeline-separator {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0 12px * $hd;
-
+  padding: 0 18px * $hd;
+  position: relative;
   &-border {
     &-dashed {
       border-left-style: dashed;
@@ -31,5 +31,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background-color: #fff;
   }
 }

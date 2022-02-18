@@ -4,18 +4,23 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { algin } from "./timeline.shared"
 import "./timeline.scss"
 export interface TimeLineProps extends ViewProps {
-  active: number
   children: ReactNode
-  algin?: algin
-
+  tail?: boolean
 }
 function TimeLine(props: TimeLineProps) {
-  const { children} = props
-  
-  return <View className={classNames(prefixClassname("timeline"))}>{children}</View>
+  const { children, tail = false } = props
+
+  return (
+    <View
+      className={classNames(prefixClassname("timeline"), {
+        [prefixClassname("timeline-tail")]: tail,
+      })}
+    >
+      {children}
+    </View>
+  )
 }
 
 export default TimeLine

@@ -10,7 +10,7 @@ export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="timeline-demo">
       <Block title="基础用法" className="timeline-block">
-        <Timeline active={2}>
+        <Timeline tail>
           <Timeline.Item>
             <Timeline.Content />
             <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
@@ -39,7 +39,7 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} >
+            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1}>
               <SettingOutlined size={12} />
             </Timeline.Separator>
             <Timeline.Content />
@@ -47,7 +47,7 @@ export default function TimelineDemo() {
         </Timeline>
       </Block>
       <Block title="靠左用法" className="timeline-block">
-        <Timeline active={2} algin="left">
+        <Timeline>
           <Timeline.Item>
             <Timeline.Separator>
               <SettingOutlined size={12} />
@@ -81,7 +81,7 @@ export default function TimelineDemo() {
         </Timeline>
       </Block>
       <Block title="右边用法" className="timeline-block">
-        <Timeline active={2} algin="right">
+        <Timeline>
           <Timeline.Item>
             <Timeline.Content>am 9:00</Timeline.Content>
             <Timeline.Separator>
@@ -115,7 +115,7 @@ export default function TimelineDemo() {
         </Timeline>
       </Block>
       <Block title="两边都有" className="timeline-block">
-        <Timeline active={2}>
+        <Timeline>
           <Timeline.Item>
             <Timeline.Content algin="left">
               <View>

@@ -14,6 +14,7 @@ export interface TimeLineSeparatorProps {
   BulletSize?: number
   color?: string
   bulletBorder?: number
+  top?:number
 }
 
 function TimeLineSeparator(props: TimeLineSeparatorProps) {
@@ -25,25 +26,27 @@ function TimeLineSeparator(props: TimeLineSeparatorProps) {
     BulletSize,
     color,
     bulletBorder,
+    top,
   } = props
 
   return (
-    <View className={classNames(prefixClassname("timeline-line"), className)}>
+    <View className={classNames(prefixClassname("timeline-separator"), className)}>
       <View
-        className={classNames(prefixClassname("timeline-line-bullet"))}
+        className={classNames(prefixClassname("timeline-separator-bullet"))}
         style={{
           borderWidth: bulletBorder + "px",
           borderColor: color,
           height: BulletSize + "px",
           width: BulletSize + "px",
+          top:top+"px"
         }}
       >
         {children}
       </View>
       <View
-        className={classNames(prefixClassname("timeline-line-border"), {
-          [prefixClassname("timeline-line-border-dashed")]: borderStyle === "dashed",
-          [prefixClassname("timeline-line-border-solid")]: borderStyle === "solid",
+        className={classNames(prefixClassname("timeline-separator-border"), {
+          [prefixClassname("timeline-separator-border-dashed")]: borderStyle === "dashed",
+          [prefixClassname("timeline-separator-border-solid")]: borderStyle === "solid",
         })}
         style={{ borderLeftWidth: lineSize + "px", borderLeftColor: color }}
       ></View>

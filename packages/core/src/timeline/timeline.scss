@@ -7,10 +7,26 @@
   justify-content: space-between;
   &-item {
     &:last-child {
-      .taroify-timeline-line {
+     
+      .taroify-timeline-separator {
         justify-content: start;
-        .taroify-timeline-line-border {
+        .taroify-timeline-separator-border {
           display: none;
+        }
+      }
+    }
+  }
+  &-tail {
+    .taroify-timeline-item {
+     
+      &:last-child {
+        
+        .taroify-timeline-separator {
+          justify-content: start;
+
+          .taroify-timeline-separator-border {
+            display: block;
+          }
         }
       }
     }
