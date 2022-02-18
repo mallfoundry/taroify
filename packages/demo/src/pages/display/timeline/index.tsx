@@ -12,6 +12,7 @@ export default function TimelineDemo() {
       <Block title="基础用法" className="timeline-block">
         <Timeline active={3}>
           <Timeline.Item>
+            <Timeline.Content />
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
@@ -28,6 +29,7 @@ export default function TimelineDemo() {
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
+            <Timeline.Content />
           </Timeline.Item>
           <Timeline.Item>
             <Timeline.Content algin="right">
@@ -40,6 +42,7 @@ export default function TimelineDemo() {
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
+            <Timeline.Content />
           </Timeline.Item>
         </Timeline>
       </Block>
@@ -80,15 +83,12 @@ export default function TimelineDemo() {
       <Block title="右边用法" className="timeline-block">
         <Timeline active={2} algin="right">
           <Timeline.Item>
-            <Timeline.Line>
-              <SettingOutlined size={12} />
-            </Timeline.Line>
             <Timeline.Content>am 9:00</Timeline.Content>
-          </Timeline.Item>
-          <Timeline.Item>
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
+          </Timeline.Item>
+          <Timeline.Item>
             <Timeline.Content>
               <View>
                 You&apos;ve created new branch
@@ -96,11 +96,11 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-          </Timeline.Item>
-          <Timeline.Item>
             <Timeline.Line>
               <SettingOutlined size={12} />
             </Timeline.Line>
+          </Timeline.Item>
+          <Timeline.Item>
             <Timeline.Content>
               <View>
                 You&apos;ve created new branch
@@ -108,6 +108,9 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
+            <Timeline.Line>
+              <SettingOutlined size={12} />
+            </Timeline.Line>
           </Timeline.Item>
         </Timeline>
       </Block>

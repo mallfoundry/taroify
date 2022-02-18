@@ -1,40 +1,40 @@
 @import "./variables";
 
 .#{$component-prefix}timeline-line {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-    padding: 0 12px * $hd;
-    &-active {
+
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px * $hd;
+  &-active {
+    border-color: #1c7ed6;
+  }
+  &::before {
+    content: "";
+    flex: 1;
+    box-sizing: border-box;
+    height: 100%;
+    border-left: 4px solid #dee2e6;
+    display: block;
+  }
+  &-active {
+    &::before {
       border-color: #1c7ed6;
     }
-    &::before {
-      content: "";
-      flex: 1;
-      box-sizing: border-box;
-      height: 100%;
-      border-left: 4px solid #dee2e6;
-      display: block;
-    }
+  }
+  &-bullet {
+    left: -11px * $hd;
+    width: 24px * $hd;
+    height: 24px * $hd;
+    border-radius: 32px * $hd;
+    border: 2px solid #dee2e6;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &-active {
-      &::before {
-        border-color: #1c7ed6;
-      }
+      background-color: #1c7ed6;
     }
-    &-bullet {
-      left: -11px * $hd;
-      width: 24px * $hd;
-      height: 24px * $hd;
-      border-radius: 32px * $hd;
-      border: 2px solid #dee2e6;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &-active {
-        background-color: #1c7ed6;
-      }
-    }
-  
+  }
 }

@@ -3,8 +3,5 @@
 .#{$component-prefix}timeline-item {
   font-size: var(--timeline-font-size, $timeline-font-size);
   display: flex;
-  &-right {
-    flex-direction: row-reverse;
-    text-align: right;
-  }
+
 }

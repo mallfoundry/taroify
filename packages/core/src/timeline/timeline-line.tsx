@@ -13,17 +13,17 @@ export interface TimeLineLineProps {
   children?: ReactNode
   className?: string
   active?: boolean
-
 }
 
 function TimeLineLine(props: TimeLineLineProps) {
-  const { children, active } = props
-
+  const { children, active,className } = props
+  console.log(className);
+  
   return (
     <View
       className={classNames(prefixClassname("timeline-line"), {
         [prefixClassname("timeline-line-active")]: active,
-      })}
+      },className)}
     >
       <View
         className={classNames(prefixClassname("timeline-line-bullet"), {
