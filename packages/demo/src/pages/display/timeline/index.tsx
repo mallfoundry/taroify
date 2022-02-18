@@ -13,9 +13,9 @@ export default function TimelineDemo() {
         <Timeline active={2}>
           <Timeline.Item>
             <Timeline.Content />
-            <Timeline.Line borderStyle="dashed" lineWidth={2} bulletBorder={1} lineColor="#1c7ed6">
+            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
@@ -26,9 +26,9 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line borderStyle="dashed">
+            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content />
           </Timeline.Item>
           <Timeline.Item>
@@ -39,9 +39,9 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line borderStyle="dashed">
+            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} >
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content />
           </Timeline.Item>
         </Timeline>
@@ -49,15 +49,15 @@ export default function TimelineDemo() {
       <Block title="靠左用法" className="timeline-block">
         <Timeline active={2} algin="left">
           <Timeline.Item>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content>am 9:00</Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content>
               <View>
                 You&apos;ve created new branch
@@ -67,9 +67,9 @@ export default function TimelineDemo() {
             </Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content>
               <View>
                 You&apos;ve created new branch
@@ -84,9 +84,9 @@ export default function TimelineDemo() {
         <Timeline active={2} algin="right">
           <Timeline.Item>
             <Timeline.Content>am 9:00</Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
           </Timeline.Item>
           <Timeline.Item>
             <Timeline.Content>
@@ -96,9 +96,9 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
           </Timeline.Item>
           <Timeline.Item>
             <Timeline.Content>
@@ -108,9 +108,9 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
           </Timeline.Item>
         </Timeline>
       </Block>
@@ -124,16 +124,16 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
           </Timeline.Item>
           <Timeline.Item>
             <Timeline.Content algin="left">am 9:00</Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content algin="right">
               <View>
                 You&apos;ve created new branch
@@ -144,9 +144,9 @@ export default function TimelineDemo() {
           </Timeline.Item>
           <Timeline.Item>
             <Timeline.Content algin="left">am 9:00</Timeline.Content>
-            <Timeline.Line>
+            <Timeline.Separator>
               <SettingOutlined size={12} />
-            </Timeline.Line>
+            </Timeline.Separator>
             <Timeline.Content algin="right">
               <View>
                 You&apos;ve created new branch

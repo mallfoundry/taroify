@@ -3,31 +3,28 @@ import classNames from "classnames"
 import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
-import { algin } from "./timeline.shared"
-import "./timeline-line.scss"
+import "./timeline-separator.scss"
+import { borderStyle } from "./timeline.shared"
 
-export interface TimeLineLineProps {
-  algin?: algin
+export interface TimeLineSeparatorProps {
   children?: ReactNode
   className?: string
-  borderStyle?: string
-  borderWidth?: number
-  borderColor?: string
-  lineWidth?: number
+  borderStyle?: borderStyle
+  lineSize?: number
   BulletSize?: number
-  lineColor?: string
+  color?: string
   bulletBorder?: number
 }
 
-function TimeLineLine(props: TimeLineLineProps) {
+function TimeLineSeparator(props: TimeLineSeparatorProps) {
   const {
     children,
     className,
-    lineWidth = 1,
+    lineSize = 1,
     borderStyle = "solid",
     BulletSize,
-    lineColor,
-    bulletBorder = 1,
+    color,
+    bulletBorder,
   } = props
 
   return (
@@ -36,7 +33,7 @@ function TimeLineLine(props: TimeLineLineProps) {
         className={classNames(prefixClassname("timeline-line-bullet"))}
         style={{
           borderWidth: bulletBorder + "px",
-          borderColor: lineColor,
+          borderColor: color,
           height: BulletSize + "px",
           width: BulletSize + "px",
         }}
@@ -48,10 +45,9 @@ function TimeLineLine(props: TimeLineLineProps) {
           [prefixClassname("timeline-line-border-dashed")]: borderStyle === "dashed",
           [prefixClassname("timeline-line-border-solid")]: borderStyle === "solid",
         })}
-        style={{ borderWidth: lineWidth + "px", borderLeftColor: lineColor }}
+        style={{ borderLeftWidth: lineSize + "px", borderLeftColor: color }}
       ></View>
     </View>
   )
 }
-TimeLineLine.displayName = "TimeLineLine"
-export default TimeLineLine
+export default TimeLineSeparator

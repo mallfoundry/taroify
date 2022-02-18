@@ -6,10 +6,10 @@
   flex-direction: column;
   justify-content: space-between;
   &-item {
-    &:last-child{
-      .taroify-timeline-line{
+    &:last-child {
+      .taroify-timeline-line {
         justify-content: start;
-        &::before{
+        .taroify-timeline-line-border {
           display: none;
         }
       }

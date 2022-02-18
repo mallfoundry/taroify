@@ -1,3 +1,3 @@
-export type algin="left"|"right"
+export type borderStyle="dashed"|"solid"
 
   
