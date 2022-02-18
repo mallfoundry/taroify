@@ -5,18 +5,13 @@ import * as React from "react"
 import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
-export interface TimeLineProps extends PropsWithChildren<ViewProps> {
+interface TimelineConnectorProps extends PropsWithChildren<ViewProps> {
 
 }
 
-function TimeLine(props: TimeLineProps) {
+function TimelineConnector(props: TimelineConnectorProps) {
   const { className, ...restProps } = props
-  return (
-    <View
-      className={classNames(prefixClassname("timeline"), className)}
-      {...restProps}
-    />
-  )
+  return <View className={classNames(prefixClassname("timeline-connector"), className)} {...restProps} />
 }
 
-export default TimeLine
+export default TimelineConnector

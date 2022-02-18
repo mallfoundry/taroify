@@ -1,22 +1,21 @@
 import { View } from "@tarojs/components"
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
-import { algin } from "./timeline.shared"
-import "./timeline-content.scss"
-export interface TimeLineContentProps {
-  algin?: algin
-  bullet?: JSX.Element
-  title?: string
-  children?: ReactNode
-  className?: string
+
+export interface TimeLineContentProps extends PropsWithChildren<ViewProps> {
 }
 
 function TimeLineContent(props: TimeLineContentProps) {
-  const { children } = props
-
-  return <View className={classNames(prefixClassname("timeline-content"))}>{children}</View>
+  const { className, ...restProps } = props
+  return (
+    <View
+      className={classNames(prefixClassname("timeline-content"), className)}
+      {...restProps}
+    />
+  )
 }
 
 export default TimeLineContent

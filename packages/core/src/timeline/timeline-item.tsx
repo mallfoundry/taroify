@@ -1,25 +1,18 @@
 import { View } from "@tarojs/components"
-
+import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, CSSProperties } from "react"
+import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
-import "./timeline-item.scss"
-
-export interface TimeLineItemProps {
-  children?: ReactNode
-  className?: string
-  style?: string | CSSProperties
+export interface TimeLineItemProps extends PropsWithChildren<ViewProps> {
 }
 
 function TimeLineItem(props: TimeLineItemProps) {
-  const { children, className, style } = props
+  const { className, ...restProps } = props
 
   return (
-    <View className={classNames(prefixClassname("timeline-item"), className)} style={style}>
-      {children}
-    </View>
+    <View className={classNames(prefixClassname("timeline-item"), className)} {...restProps} />
   )
 }
 

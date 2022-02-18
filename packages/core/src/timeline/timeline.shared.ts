@@ -1,3 +1,3 @@
-export type borderStyle="dashed"|"solid"
+export type borderStyle = "dashed" | "solid"
 
-  
+

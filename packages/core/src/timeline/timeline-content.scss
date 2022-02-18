@@ -3,18 +3,11 @@
 .#{$component-prefix}timeline-content {
   flex: 1;
   box-sizing: border-box;
-  padding-bottom: 24px * $hd;
-  &-title {
-    font-size: 16px * $hd;
-    font-weight: 500;
-    color: inherit;
-    line-height: 1;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
-      Apple Color Emoji, Segoe UI Emoji;
-  }
+
   &:last-child {
     text-align: left;
   }
+
   &:first-child {
     text-align: right;
   }
