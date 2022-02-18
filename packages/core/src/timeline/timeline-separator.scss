@@ -1,10 +1,7 @@
 @import "./variables";
 
 .#{$component-prefix}timeline-separator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
   padding: 0 18px * $hd;
   position: relative;
   &-border {
@@ -26,15 +23,15 @@
     width: 24px * $hd;
     height: 24px * $hd;
     border-radius: 32px * $hd;
-    border:solid #dee2e6;
+    border: solid #dee2e6;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+    
+    transform: translate(-50%,0%);
     background-color: #fff;
   }
 }

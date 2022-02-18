@@ -13,7 +13,7 @@ export default function TimelineDemo() {
         <Timeline tail>
           <Timeline.Item>
             <Timeline.Content />
-            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
+            <Timeline.Separator  borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
               <SettingOutlined size={12} />
             </Timeline.Separator>
             <Timeline.Content algin="right">am 9:00</Timeline.Content>
@@ -26,13 +26,13 @@ export default function TimelineDemo() {
               </View>
               <View>2 hours ago</View>
             </Timeline.Content>
-            <Timeline.Separator borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
+            <Timeline.Separator  borderStyle="dashed" lineSize={2} bulletBorder={1} color="#1c7ed6">
               <SettingOutlined size={12} />
             </Timeline.Separator>
             <Timeline.Content />
           </Timeline.Item>
           <Timeline.Item>
-            <Timeline.Content algin="right">
+            <Timeline.Content >
               <View>
                 You&apos;ve created new branch
                 <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master

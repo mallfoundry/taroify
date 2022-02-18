@@ -14,7 +14,8 @@ export interface TimeLineSeparatorProps {
   BulletSize?: number
   color?: string
   bulletBorder?: number
-  top?:number
+  top?:string
+  style?: string | React.CSSProperties
 }
 
 function TimeLineSeparator(props: TimeLineSeparatorProps) {
@@ -27,10 +28,11 @@ function TimeLineSeparator(props: TimeLineSeparatorProps) {
     color,
     bulletBorder,
     top,
+    style
   } = props
 
   return (
-    <View className={classNames(prefixClassname("timeline-separator"), className)}>
+    <View className={classNames(prefixClassname("timeline-separator"), className)} style={style}>
       <View
         className={classNames(prefixClassname("timeline-separator-bullet"))}
         style={{
@@ -38,7 +40,7 @@ function TimeLineSeparator(props: TimeLineSeparatorProps) {
           borderColor: color,
           height: BulletSize + "px",
           width: BulletSize + "px",
-          top:top+"px"
+          top:top,
         }}
       >
         {children}
