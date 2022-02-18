@@ -303,8 +303,10 @@ function defineForm(formName: string) {
     setDefaultValues(defaultValues: any): void {
       const form = getAttributiveForm(formName)
       if (form) {
-        form.defaultValues = defaultValues
-        form?.setValues(defaultValues)
+        _.forEach(defaultValues, (value, name) => {
+          _.set(form.defaultValues, name, value)
+        })
+        form?.setValues(_.cloneDeep(defaultValues))
       }
     }
 
