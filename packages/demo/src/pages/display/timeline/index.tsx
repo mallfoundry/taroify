@@ -67,7 +67,11 @@ function LeftTimeline() {
           <View>2 hours ago</View>
         </Timeline.Content>
       </Timeline.ItemBase>
-      <Timeline.ItemBase>
+      <Timeline.ItemBase
+        style={{
+          "--timeline-connector-style": "dashed",
+        }}
+      >
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
