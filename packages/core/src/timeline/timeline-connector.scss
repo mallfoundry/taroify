@@ -2,8 +2,13 @@
 
 .#{$component-prefix}timeline-connector {
   flex: 1;
-  border-left: 0 none;
-  border-top: 0 none;
-  border-bottom: 0 none;
-  border-right: 2px solid;
+  border-right: $timeline-connector-width $timeline-connector-style $timeline-connector-color;
+
+  &--top {
+    border-right: $timeline-top-connector-width $timeline-top-connector-style $timeline-top-connector-color;
+  }
+
+  &--bottom {
+    border-right: $timeline-bottom-connector-width $timeline-bottom-connector-style $timeline-bottom-connector-color;
+  }
 }

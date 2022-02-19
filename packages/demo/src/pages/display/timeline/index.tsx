@@ -10,10 +10,20 @@ function AlternateTimeline() {
   return (
     <Timeline size="3px">
       <Timeline.Item
-        algin
+        align
         icon={<SettingOutlined size={24} />}
-        direction="all"
-        color="#1c7ed6"
+        style={{
+          "--timeline-top-connector-color": "red",
+        }}
+      >
+        <View>
+          You&apos;ve created new branch
+          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
+        </View>
+      </Timeline.Item>
+      <Timeline.Item style={{
+        "--timeline-connector-style": "dashed",
+      }} icon={<SettingOutlined size={24} />}
       >
         <View>
           You&apos;ve created new branch
@@ -21,12 +31,6 @@ function AlternateTimeline() {
         </View>
       </Timeline.Item>
       <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <View>
-          You&apos;ve created new branch
-          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-        </View>
-      </Timeline.Item>
-      <Timeline.Item icon={<SettingOutlined size={24} />} shape="dashed">
         <View>
           You&apos;ve created new branch
           <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
@@ -89,15 +93,15 @@ function RightTimeline() {
         </Timeline.Separator>
       </Timeline.ItemBase>
       <Timeline.ItemBase>
-        <Timeline.Content >
+        <Timeline.Content>
           <View>
             You&apos;ve created new branch
             <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
           </View>
           <View>2 hours ago</View>
         </Timeline.Content>
-        <Timeline.Separator >
-          <Timeline.Connector size="3px" />
+        <Timeline.Separator>
+          <Timeline.Connector style={{ "--timeline-connector-width": "3px" }} />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
