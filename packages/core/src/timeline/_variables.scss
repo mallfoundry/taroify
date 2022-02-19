@@ -4,13 +4,13 @@
 $timeline-color: var(--avatar-color, var(--white, $white));
 $timeline-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
 $timeline-border-color: var(--avatar-border-color, var(--white, $white));
-$timeline-border-width: var(--avatar-border-width, 2PX);
+$timeline-border-width: var(--avatar-border-width, 2px);
 $timeline-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
 $timeline-font-family: var(--avatar-font-family, #{Roboto, Helvetica, Arial, sans-serif});
 $timeline-font-size: var(--font-size-md, $font-size-md);
-//
+
 $timeline-connector-color: var(--timeline-connector-color, var(--text-color-2, $text-color-2));
-$timeline-connector-width: var(--timeline-connector-width, 2PX);
+$timeline-connector-width: var(--timeline-connector-width, 2px);
 $timeline-connector-style: var(--timeline-connector-style, solid);
 
 $timeline-top-connector-color: var(--timeline-top-connector-color, $timeline-connector-color);

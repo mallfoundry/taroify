@@ -5,9 +5,7 @@ import * as React from "react"
 import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
-export interface TimeLineItemBaseProps extends PropsWithChildren<ViewProps> {
-  size?: string
-}
+export interface TimeLineItemBaseProps extends PropsWithChildren<ViewProps> {}
 function TimeLineItemBase(props: TimeLineItemBaseProps) {
   const { className, ...restProps } = props
 

@@ -8,7 +8,7 @@ import "./index.scss"
 
 function AlternateTimeline() {
   return (
-    <Timeline size="3px">
+    <Timeline>
       <Timeline.Item
         align
         icon={<SettingOutlined size={24} />}
@@ -21,9 +21,11 @@ function AlternateTimeline() {
           <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
         </View>
       </Timeline.Item>
-      <Timeline.Item style={{
-        "--timeline-connector-style": "dashed",
-      }} icon={<SettingOutlined size={24} />}
+      <Timeline.Item
+        style={{
+          "--timeline-connector-style": "dashed",
+        }}
+        icon={<SettingOutlined size={24} />}
       >
         <View>
           You&apos;ve created new branch
@@ -85,7 +87,7 @@ function LeftTimeline() {
 
 function RightTimeline() {
   return (
-    <Timeline size="3px">
+    <Timeline style={{ "--timeline-connector-width": "3px" }}>
       <Timeline.ItemBase>
         <Timeline.Content>am 9:00</Timeline.Content>
         <Timeline.Separator>
@@ -101,7 +103,7 @@ function RightTimeline() {
           <View>2 hours ago</View>
         </Timeline.Content>
         <Timeline.Separator>
-          <Timeline.Connector style={{ "--timeline-connector-width": "3px" }} />
+          <Timeline.Connector />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>

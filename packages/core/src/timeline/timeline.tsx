@@ -2,21 +2,14 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { createContext, PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
-export interface TimeLineProps extends PropsWithChildren<ViewProps> {
-  size?: string
-}
-export const TimeLineContext = createContext<any>({})
+export interface TimeLineProps extends PropsWithChildren<ViewProps> {}
 function TimeLine(props: TimeLineProps) {
-  const { className, size, ...restProps } = props
+  const { className, ...restProps } = props
 
-  return (
-    <TimeLineContext.Provider value={size}>
-      <View className={classNames(prefixClassname("timeline"), className)} {...restProps} />
-    </TimeLineContext.Provider>
-  )
+  return <View className={classNames(prefixClassname("timeline"), className)} {...restProps} />
 }
 
 export default TimeLine
