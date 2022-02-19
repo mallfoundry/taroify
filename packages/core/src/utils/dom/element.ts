@@ -27,6 +27,10 @@ export function isRootElement(node?: TaroElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
+export function isBlockElement(node?: TaroElement) {
+  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "BLOCK"
+}
+
 export function matchSelector(aSelector?: string, bSelector?: string) {
   return aSelector === bSelector
 }
@@ -57,7 +61,15 @@ export function usePrependPageSelector(selector?: string) {
 function ancestorCustomWrapper(element: TaroElement) {
   if (inWechat) {
     let ancestor = element
-    while (ancestor.parentNode && !isRootElement(ancestor.parentNode as TaroElement)) {
+
+    while (ancestor.parentNode) {
+
+      if (isRootElement(ancestor.parentNode)) break
+
+      if (isBlockElement(ancestor.parentNode)) {
+        if (isRootElement(ancestor.parentNode.parentNode)) break
+      }
+
       ancestor = ancestor.parentNode as TaroElement
     }
 
