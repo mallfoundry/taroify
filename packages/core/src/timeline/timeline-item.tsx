@@ -1,8 +1,7 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
-import { ReactNode } from "react"
-import { PropsWithChildren } from "react"
-import { shape,direction } from "./timeline.shared"
+import { PropsWithChildren, ReactNode } from "react"
+import { direction, shape } from "./timeline.shared"
 import TimelineItemBase from "./timeline-item-base"
 import TimelineContent from "./timeline-content"
 import TimelineSeparator from "./timeline-separator"
@@ -10,25 +9,25 @@ import TimelineConnector from "./timeline-connector"
 
 export interface TimeLineItemProps extends PropsWithChildren<ViewProps> {
   icon?: ReactNode
-  algin?: boolean
+  align?: boolean
   color?: string
-  size?:string
-  shape?:shape
-  direction?:direction
+  size?: string
+  shape?: shape
+  direction?: direction
 }
 
 function TimeLineItem(props: TimeLineItemProps) {
-  const { direction,shape,size,algin, color, icon, children, ...restProps } = props;
-  
+  const { direction, shape, size, align, color, icon, children, ...restProps } = props
+
   return (
     <TimelineItemBase {...restProps}>
-      <TimelineContent children={algin ? children : undefined} />
+      <TimelineContent children={align ? children : undefined} />
       <TimelineSeparator>
-        <TimelineConnector color={direction !=="bottom"?color:undefined} size={size} shape={shape}/>
+        <TimelineConnector color={direction !== "bottom" ? color : undefined} size={size} shape={shape} />
         {icon}
-        <TimelineConnector color={direction !=="top"?color:undefined} size={size} shape={shape} />
+        <TimelineConnector color={direction !== "top" ? color : undefined} size={size} shape={shape} />
       </TimelineSeparator>
-      <TimelineContent children={!algin ? children : undefined} />
+      <TimelineContent children={!align ? children : undefined} />
     </TimelineItemBase>
   )
 }
