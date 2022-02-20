@@ -28,7 +28,7 @@ export function isRootElement(node?: TaroElement) {
 }
 
 export function isValidElement(node?: TaroElement) {
-  return ["BLOCK"].includes(node?.tagName)
+  return !["BLOCK"].includes(node?.tagName)
 }
 
 export function matchSelector(aSelector?: string, bSelector?: string) {
