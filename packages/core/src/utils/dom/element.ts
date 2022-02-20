@@ -27,7 +27,7 @@ export function isRootElement(node?: TaroElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
-export function isBlockElement(node?: TaroElement) {
+export function isValidElement(node?: TaroElement) {
   return node && !["BLOCK"].includes(node?.tagName)
 }
 
@@ -67,7 +67,7 @@ function ancestorCustomWrapper(element: TaroElement) {
 
       if (isRootElement(pointer.parentNode)) break
 
-      if (!isBlockElement(pointer.parentNode)) {
+      if (isValidElement(pointer.parentNode)) {
         ancestor = pointer.parentNode
       }
 
