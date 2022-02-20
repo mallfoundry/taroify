@@ -67,7 +67,7 @@ function ancestorCustomWrapper(element: TaroElement) {
 
       if (isRootElement(pointer.parentNode)) break
 
-      if (isValidElement(pointer.parentNode)) {
+      if (!isBlockElement(pointer.parentNode)) {
         ancestor = pointer.parentNode
       }
 
