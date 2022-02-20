@@ -27,8 +27,8 @@ export function isRootElement(node?: TaroElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
-export function isValidElement(node?: TaroElement) {
-  return !["BLOCK"].includes(node?.tagName)
+export function isBlockElement(node?: TaroElement) {
+  return node && !["BLOCK"].includes(node?.tagName)
 }
 
 export function matchSelector(aSelector?: string, bSelector?: string) {
