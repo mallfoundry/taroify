@@ -27,8 +27,8 @@ export function isRootElement(node?: TaroElement) {
   return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
-export function isBlockElement(node?: TaroElement) {
-  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "BLOCK"
+export function isValidElement(node?: TaroElement) {
+  return ["BLOCK"].includes(node?.tagName)
 }
 
 export function matchSelector(aSelector?: string, bSelector?: string) {
@@ -60,17 +60,18 @@ export function usePrependPageSelector(selector?: string) {
 // See: https://github.com/mallfoundry/taroify/pull/143
 function ancestorCustomWrapper(element: TaroElement) {
   if (inWechat) {
+    let pointer = element
     let ancestor = element
 
-    while (ancestor.parentNode) {
+    while (pointer.parentNode) {
 
-      if (isRootElement(ancestor.parentNode)) break
+      if (isRootElement(pointer.parentNode)) break
 
-      if (isBlockElement(ancestor.parentNode)) {
-        if (isRootElement(ancestor.parentNode.parentNode)) break
+      if (isValidElement(pointer.parentNode)) {
+        ancestor = pointer.parentNode
       }
 
-      ancestor = ancestor.parentNode as TaroElement
+      pointer = pointer.parentNode as TaroElement
     }
 
     if (ancestor && ancestor !== element) {
