@@ -14,5 +14,5 @@ function TimeLineSeparator(props: TimeLineSeparatorProps) {
     <View className={classNames(prefixClassname("timeline-separator"), className)} {...restProps} />
   )
 }
-
+TimeLineSeparator.displayName = "TimeLineSeparator"
 export default TimeLineSeparator

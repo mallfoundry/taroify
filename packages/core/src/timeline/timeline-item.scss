@@ -3,4 +3,34 @@
 .#{$component-prefix}timeline-item {
   font-size: var(--timeline-font-size, $timeline-font-size);
   display: flex;
+
+  &--alternate {
+    &:nth-of-type(even) {
+      flex-direction: row-reverse;
+
+      .#{$component-prefix}timeline-content {
+        &:first-child {
+          text-align: left;
+        }
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+  }
+  
+  &--alternate-reverse {
+    &:nth-of-type(odd) {
+      flex-direction: row-reverse;
+
+      .#{$component-prefix}timeline-content {
+        &:first-child {
+          text-align: left;
+        }
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+  }
 }

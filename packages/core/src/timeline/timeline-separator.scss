@@ -7,37 +7,4 @@
   flex-direction: column;
   padding: 0 12px * $hd;
   position: relative;
-
-  &-border {
-    &-dashed {
-      border-left-style: dashed;
-    }
-
-    &-solid {
-      border-left-style: solid;
-    }
-
-    flex: 1;
-    box-sizing: border-box;
-    height: 100%;
-    border-left: 3px * $hd;
-    display: block;
-  }
-
-  &-bullet {
-    left: -11px * $hd;
-    width: 24px * $hd;
-    height: 24px * $hd;
-    border-radius: 32px * $hd;
-    border: solid #dee2e6;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    background-color: #fff;
-  }
 }

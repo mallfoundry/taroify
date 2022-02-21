@@ -4,12 +4,24 @@ import classNames from "classnames"
 import * as React from "react"
 import { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
+import TimelineContext from "./timeline.context"
+import { TimelinePosition } from "./timeline.shared"
 
-export interface TimeLineProps extends PropsWithChildren<ViewProps> {}
-function TimeLine(props: TimeLineProps) {
-  const { className, ...restProps } = props
+export interface TimelineProps extends PropsWithChildren<ViewProps> {
+  position?: TimelinePosition
+}
+function Timeline(props: TimelineProps) {
+  const { className, position, ...restProps } = props
 
-  return <View className={classNames(prefixClassname("timeline"), className)} {...restProps} />
+  return (
+    <TimelineContext.Provider
+      value={{
+        position,
+      }}
+    >
+      <View className={classNames(prefixClassname("timeline"), className)} {...restProps} />
+    </TimelineContext.Provider>
+  )
 }
 
-export default TimeLine
+export default Timeline

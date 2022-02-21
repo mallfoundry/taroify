@@ -1,34 +1,7 @@
 @import "./variables";
 
 .#{$component-prefix}timeline {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  &-item {
-    &:last-child {
-      .taroify-timeline-separator {
-        justify-content: start;
-
-        .taroify-timeline-separator-border {
-          display: none;
-        }
-      }
-    }
-  }
-
-  &-tail {
-    .taroify-timeline-item {
-      &:last-child {
-        .taroify-timeline-separator {
-          justify-content: start;
-
-          .taroify-timeline-separator-border {
-            display: block;
-          }
-        }
-      }
-    }
-  }
 }
