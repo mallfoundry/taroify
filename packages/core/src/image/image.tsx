@@ -49,6 +49,8 @@ export interface ImageProps extends StandardProps {
   lazyLoad?: boolean
   placeholder?: boolean | ReactNode
   fallback?: boolean | ReactNode
+  onLoad: () => void
+  onError: () => void
 }
 
 export default function Image(props: ImageProps) {
@@ -62,6 +64,8 @@ export default function Image(props: ImageProps) {
     lazyLoad = false,
     placeholder = true,
     fallback = true,
+    onLoad,
+    onError,
     ...restProps
   } = props
   const taroMode = useImageMode(mode)
@@ -72,8 +76,14 @@ export default function Image(props: ImageProps) {
   useEffect(() => setLoading(true), [src])
 
   function handleError() {
+    onError?.()
     setLoading(false)
     setFailed(true)
+  }
+
+  function handleLoaded() {
+    onLoad?.()
+    setLoading(false)
   }
 
   return (
@@ -81,7 +91,7 @@ export default function Image(props: ImageProps) {
       {!failed && src && (
         <TaroImage
           src={src as string}
-          mode={(taroMode as unknown) as undefined}
+          mode={taroMode as unknown as undefined}
           lazyLoad={lazyLoad}
           className={classNames(
             prefixClassname("image"),
@@ -94,7 +104,7 @@ export default function Image(props: ImageProps) {
             className,
           )}
           imgProps={{ alt }}
-          onLoad={() => setLoading(false)}
+          onLoad={handleLoaded}
           onError={handleError}
           {...restProps}
         />
