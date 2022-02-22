@@ -37,10 +37,11 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
     filter,
     formatter = defaultFormatter,
   } = options
-
   const clampDefaultValue = clampDate(defaultValue, minDate, maxDate)
-  const clampValue = clampDate(value, minDate, maxDate)
-
+  // When the defaultValue has value and the value is undefined,
+  // set the value to defaultValue
+  // The clampValue is value or defaultValue
+  const clampValue = clampDate(value ?? defaultValue, minDate, maxDate)
   const ranges = useDatetimeRanges(clampValue, minDate, maxDate, type, fields)
 
   const columns = useMemo(
@@ -49,7 +50,6 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
         let values = _.times(range[1] - range[0] + 1, (index) =>
           _.padStart(`${range[0] + index}`, 2, "0"),
         )
-
         if (filter) {
           values = filter(type, values)
         }
