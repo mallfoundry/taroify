@@ -15,6 +15,8 @@ interface PickerContextValue {
 
   setColumnRefs?: SetRefCallback<PickerColumnInstance>
 
+  clearColumnRefs?(): void
+
   onChange?(values: any, option: PickerOptionObject, column: PickerOptionObject): void
 
   onConfirm?(): void

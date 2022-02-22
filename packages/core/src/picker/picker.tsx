@@ -87,7 +87,11 @@ function Picker(props: PickerProps) {
     ...restProps
   } = props
 
-  const { getRefs: getColumnRefs, setRefs: setColumnRefs } = useRefs<PickerColumnInstance>()
+  const {
+    getRefs: getColumnRefs,
+    setRefs: setColumnRefs,
+    clearRefs: clearColumnRefs,
+  } = useRefs<PickerColumnInstance>()
 
   const { value, setValue } = useUncontrolled({ value: valueProp, defaultValue })
 
@@ -148,6 +152,7 @@ function Picker(props: PickerProps) {
         getValueOptions,
         isMultiValue,
         setValueOptions,
+        clearColumnRefs,
         setColumnRefs,
         onChange: handleChange,
         onConfirm: handleAction(onConfirm),
