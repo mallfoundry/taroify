@@ -87,7 +87,7 @@ function Picker(props: PickerProps) {
     ...restProps
   } = props
 
-  const [columnRefs, setColumnRefs] = useRefs<PickerColumnInstance>()
+  const { getRefs: getColumnRefs, setRefs: setColumnRefs } = useRefs<PickerColumnInstance>()
 
   const { value, setValue } = useUncontrolled({ value: valueProp, defaultValue })
 
@@ -119,11 +119,13 @@ function Picker(props: PickerProps) {
     [onChange, setValue],
   )
 
-  const stopMomentum = useCallback(() => {
-    columnRefs
-      .filter((columnRef) => columnRef.current)
-      .forEach((columnRef) => columnRef.current.stopMomentum())
-  }, [columnRefs])
+  const stopMomentum = useCallback(
+    () =>
+      getColumnRefs()
+        .filter((columnRef) => columnRef.current)
+        .forEach((columnRef) => columnRef.current.stopMomentum()),
+    [getColumnRefs],
+  )
 
   const handleAction = (action: any) => () => {
     stopMomentum()
