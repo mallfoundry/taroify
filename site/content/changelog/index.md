@@ -12,6 +12,23 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.5
+
+`2022-02-22`
+
+**Bug Fixes**
+
+- ancestorCustomWrapper
+  - 修复嵌套在 Block 组件内不能查询元素的问题 [#370](https://github.com/mallfoundry/taroify/pull/370) [@ThomasTrainset](https://github.com/xdoer)
+- Image
+  - 修复 onLoad, onError 未实现的问题 [#372](https://github.com/mallfoundry/taroify/pull/372) [@yifeishu-com](https://github.com/yifeishu-com)
+- DatetimePicker
+  - 修复快速滑动时，快速点击 onConfirm 获取值不正确问题 [#373](https://github.com/mallfoundry/taroify/issues/373) [#380](https://github.com/mallfoundry/taroify/pull/380)
+- Picker
+  - 修复 options 为空时，导致 valueOptions 为 undefined 的问题 [#375](https://github.com/mallfoundry/taroify/issues/375) [#378](https://github.com/mallfoundry/taroify/pull/378)
+- ActionBar.IconButton
+  - 修复 badge 导入路径的问题 [#376](https://github.com/mallfoundry/taroify/issues/376) [#377](https://github.com/mallfoundry/taroify/pull/377)
+
 ### v0.0.27-alpha.4
 
 `2022-02-18`
