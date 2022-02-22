@@ -95,7 +95,8 @@ function Picker(props: PickerProps) {
   const setValueOptions = useCallback(
     (option: PickerOptionObject, unverifiedColumn: PickerOptionObject) => {
       const column = validPickerColumn(unverifiedColumn)
-      if (column) {
+      // If options is empty, option is undefined
+      if (option && column) {
         const { index: columnIndex } = column
         valueOptionsRef.current[columnIndex] = option
       }
