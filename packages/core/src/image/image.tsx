@@ -49,8 +49,10 @@ export interface ImageProps extends StandardProps {
   lazyLoad?: boolean
   placeholder?: boolean | ReactNode
   fallback?: boolean | ReactNode
-  onLoad: () => void
-  onError: () => void
+
+  onLoad?(): void
+
+  onError?(): void
 }
 
 export default function Image(props: ImageProps) {
