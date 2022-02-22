@@ -40,10 +40,9 @@ function CustomTimeline() {
         </Timeline.Content>
         <Timeline.Separator>
           <GiftOutlined size={24} />
-          <Timeline.Connector />
         </Timeline.Separator>
         <Timeline.Content>
-          <View >AM 9:00</View>
+        <View style={{ height: "100px" }}>AM 9:00</View>
         </Timeline.Content>
       </Timeline.Item>
     </Timeline>

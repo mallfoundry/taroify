@@ -2,7 +2,7 @@
 
 .#{$component-prefix}timeline-separator {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding: 0 12px * $hd;

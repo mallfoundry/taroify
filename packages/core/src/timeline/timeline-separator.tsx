@@ -5,7 +5,9 @@ import { PropsWithChildren } from "react"
 import { ViewProps } from "@tarojs/components/types/View"
 import { prefixClassname } from "../styles"
 
-export interface TimeLineSeparatorProps extends PropsWithChildren<ViewProps> {}
+export interface TimeLineSeparatorProps extends PropsWithChildren<ViewProps> {
+  justify?: any // .....
+}
 
 function TimeLineSeparator(props: TimeLineSeparatorProps) {
   const { className, ...restProps } = props
