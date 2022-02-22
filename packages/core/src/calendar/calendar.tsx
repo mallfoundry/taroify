@@ -155,6 +155,7 @@ function Calendar(props: CalendarProps) {
     getRef: getMonthRef,
     getRefs: getMonthRefs,
     setRefs: setMonthRefs,
+    clearRefs: clearMonthRefs,
   } = useRefs<CalendarMonthInstance>()
 
   const dayOffset = useMemo(() => (firstDayOfWeek ? +firstDayOfWeek % 7 : 0), [firstDayOfWeek])
@@ -398,6 +399,10 @@ function Calendar(props: CalendarProps) {
   useMounted(init)
 
   const monthsRender = useMemo(() => {
+    // When rerender, clear columns refs
+    // Prevent leakage and contamination
+    clearMonthRefs?.()
+    //
     return _.map(months, (month, index) => (
       <CalendarMonth
         ref={setMonthRefs(index)}
@@ -407,7 +412,7 @@ function Calendar(props: CalendarProps) {
         watermark={watermark}
       />
     ))
-  }, [months, setMonthRefs, watermark])
+  }, [clearMonthRefs, months, setMonthRefs, watermark])
 
   function notifyConfirm(hasConfirm: boolean) {
     hasConfirmRef.current = hasConfirm

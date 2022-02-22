@@ -38,7 +38,7 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
     ...restProps
   } = props
 
-  const { setColumnRefs } = useContext(PickerContext)
+  const { setColumnRefs, clearColumnRefs } = useContext(PickerContext)
 
   const columns = usePickerOptions(children)
 
@@ -73,6 +73,10 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
   const columnsRender = useRendered(() =>
     _.map(columns, (column, columnIndex) => {
       const { children: options, ...restColumnProps } = column
+      // When rerender, clear columns refs
+      // Prevent leakage and contamination
+      clearColumnRefs?.()
+      //
       return (
         <PickerColumn
           ref={setColumnRefs?.(columnIndex)}
