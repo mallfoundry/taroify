@@ -1,5 +1,6 @@
 import { createContext } from "react"
-import { DEFAULT_SIBLING_COUNT, PickerOptionObject } from "./picker.shared"
+import { SetRefCallback } from "../utils/state"
+import { DEFAULT_SIBLING_COUNT, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
 
 interface PickerContextValue {
   values?: any[]
@@ -11,6 +12,8 @@ interface PickerContextValue {
   getValueOptions?(): PickerOptionObject[]
 
   setValueOptions?(option: PickerOptionObject, column: PickerOptionObject): void
+
+  setColumnRefs?: SetRefCallback<PickerColumnInstance>
 
   onChange?(values: any, option: PickerOptionObject, column: PickerOptionObject): void
 

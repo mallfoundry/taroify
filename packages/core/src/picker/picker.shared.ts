@@ -15,6 +15,10 @@ export interface PickerOptionObject extends Record<string, any> {
   children?: ReactNode
 }
 
+export interface PickerColumnInstance {
+  stopMomentum(): void
+}
+
 export function validPickerColumn(column: PickerOptionObject) {
   const { index } = column
   return _.isNumber(index) && _.gte(index, DEFAULT_COLUMN_INDEX) ? column : undefined

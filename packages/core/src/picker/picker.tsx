@@ -7,12 +7,17 @@ import * as React from "react"
 import { Children, ReactElement, ReactNode, useCallback, useRef } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
-import { useToRef } from "../utils/state"
+import { useRefs, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import PickerColumns from "./picker-columns"
 import { PickerColumn } from "./picker.composition"
 import PickerContext from "./picker.context"
-import { DEFAULT_SIBLING_COUNT, PickerOptionObject, validPickerColumn } from "./picker.shared"
+import {
+  DEFAULT_SIBLING_COUNT,
+  PickerColumnInstance,
+  PickerOptionObject,
+  validPickerColumn,
+} from "./picker.shared"
 
 function usePickerChildren(children?: ReactNode): ReactNode {
   const __children__: ReactNode[] = []
@@ -82,6 +87,8 @@ function Picker(props: PickerProps) {
     ...restProps
   } = props
 
+  const [columnRefs, setColumnRefs] = useRefs<PickerColumnInstance>()
+
   const { value, setValue } = useUncontrolled({ value: valueProp, defaultValue })
 
   const multiValueRef = useToRef(_.isArray(value))
@@ -112,11 +119,19 @@ function Picker(props: PickerProps) {
     [onChange, setValue],
   )
 
-  const handleAction = (action: any) => () =>
+  const stopMomentum = useCallback(() => {
+    columnRefs
+      .filter((columnRef) => columnRef.current)
+      .forEach((columnRef) => columnRef.current.stopMomentum())
+  }, [columnRefs])
+
+  const handleAction = (action: any) => () => {
+    stopMomentum()
     action?.(
       _.map(valueOptionsRef.current, ({ value }) => value),
       _.map(valueOptionsRef.current, (valueOption) => ({ ...valueOption })),
     )
+  }
 
   const getValueOptions = useCallback(() => valueOptionsRef.current, [])
 
@@ -131,6 +146,7 @@ function Picker(props: PickerProps) {
         getValueOptions,
         isMultiValue,
         setValueOptions,
+        setColumnRefs,
         onChange: handleChange,
         onConfirm: handleAction(onConfirm),
         onCancel: handleAction(onCancel),
