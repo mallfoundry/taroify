@@ -1,7 +1,7 @@
 import Button, { ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { createBadge, createBadgeWrapper } from "@taroify/~core/src/badge"
+import { createBadge, createBadgeWrapper } from "@taroify/core/badge"
 import classnames from "classnames"
 import * as React from "react"
 import { Children, CSSProperties, PropsWithChildren, ReactNode, useMemo } from "react"
