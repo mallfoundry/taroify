@@ -1,6 +1,6 @@
 import { Timeline } from "@taroify/core"
 import { FireOutlined, SettingOutlined, GiftOutlined } from "@taroify/icons"
-import { Text, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
@@ -10,26 +10,41 @@ import "./index.scss"
 function CustomTimeline() {
   return (
     <Timeline>
-      <Timeline.Item icon={<FireOutlined size={24} />}>
+      <Timeline.Item>
         <Timeline.Content>
-          效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边
-          效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边 效果1 左边
-          效果1 左边 效果1 左边 效果1 左边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
-        <Timeline.Content>效果1 右边</Timeline.Content>
+        <Timeline.Separator>
+          <FireOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>AM 9:00</View>
+        </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item>
         <Timeline.Content>
-          效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边
-          效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边
-          效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
         <Timeline.Separator>
-          <Timeline.Connector />
           <GiftOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-        <Timeline.Content>效果2 右边</Timeline.Content>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>AM 9:00</View>
+        </Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <GiftOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content>
+          <View >AM 9:00</View>
+        </Timeline.Content>
       </Timeline.Item>
     </Timeline>
   )
@@ -39,10 +54,9 @@ function CustomTimeline() {
 function AlternateTimeline() {
   return (
     <Timeline position="alternate">
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
+      <Timeline.Item>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
         <Timeline.Separator>
           <Timeline.Connector />
@@ -52,26 +66,23 @@ function AlternateTimeline() {
       </Timeline.Item>
       <Timeline.Item>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-        <Timeline.Content>
-          效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边
-          效果2 左边 效果2 左边 效果2 左边
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item icon={<FireOutlined size={24} />}>
-        效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-        效果1 右边 效果1 右边 效果1 右边
       </Timeline.Item>
       <Timeline.Item>
-        效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边
-        效果2 右边 效果2 右边 效果2 右边 效果2 右边
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <SettingOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
       </Timeline.Item>
     </Timeline>
   )
@@ -83,24 +94,16 @@ function AlternateReverseTimeline() {
     <Timeline position="alternate-reverse">
       <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
+      <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边 效果2 左边
-          效果2 左边 效果2 左边 效果2 左边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
-      <Timeline.Item>
-        效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边 效果2 右边
-        效果2 右边 效果2 右边 效果2 右边 效果2 右边
+      <Timeline.Item icon={<FireOutlined size={24} />}>
+        <View style={{ height: "100px" }}>Taroify</View>
       </Timeline.Item>
     </Timeline>
   )
@@ -112,18 +115,12 @@ function LeftTimeline() {
     <Timeline position="left">
       <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
         <Timeline.Separator>
           <Timeline.Connector />
@@ -140,18 +137,12 @@ function RightTimeline() {
     <Timeline position="right">
       <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item>
@@ -161,10 +152,7 @@ function RightTimeline() {
           <Timeline.Connector />
         </Timeline.Separator>
         <Timeline.Content>
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边 效果1 右边
-          效果1 右边
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
       </Timeline.Item>
     </Timeline>
@@ -174,10 +162,10 @@ function RightTimeline() {
 export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="timeline-demo">
-      {/* <Block title="基础用法" className="timeline-block">
-        <CustomTimeline />
-      </Block> */}
       <Block title="基础用法" className="timeline-block">
+        <CustomTimeline />
+      </Block>
+      <Block title="交替用法" className="timeline-block">
         <AlternateTimeline />
       </Block>
       <Block title="基础用法" className="timeline-block">

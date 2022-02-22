@@ -14,93 +14,112 @@ import { TimeLine } from "@taroify/core"
 
 ### 基础用法
 
-设置 `--timeline-top-connector-color` 可以修改线段颜色
-
 ```tsx
-function AlternateTimeline() {
+function CustomTimeline() {
   return (
     <Timeline>
-      <Timeline.Item
-        align
-        icon={<SettingOutlined size={24} />}
-        style={{
-          "--timeline-top-connector-color": "red",
-        }}
-      >
-        <View>
-          You&apos;ve created new branch
-          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-        </View>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <FireOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>AM 9:00</View>
+        </Timeline.Content>
       </Timeline.Item>
-      <Timeline.Item
-        style={{
-          "--timeline-connector-style": "dashed",
-        }}
-        icon={<SettingOutlined size={24} />}
-      >
-        <View>
-          You&apos;ve created new branch
-          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-        </View>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <GiftOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>AM 9:00</View>
+        </Timeline.Content>
       </Timeline.Item>
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <View>
-          You&apos;ve created new branch
-          <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-        </View>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <GiftOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content>
+          <View >AM 9:00</View>
+        </Timeline.Content>
       </Timeline.Item>
     </Timeline>
   )
 }
 ```
 
+### 交替
+```tsx
+function AlternateTimeline() {
+  return (
+    <Timeline position="alternate">
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <GiftOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <SettingOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <SettingOutlined size={24} />
+          <Timeline.Connector />
+        </Timeline.Separator>
+      </Timeline.Item>
+    </Timeline>
+  )
+}
+```
 ### 靠左
 
 
 ```tsx
 function LeftTimeline() {
   return (
-    <Timeline>
-      <Timeline.ItemBase>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content>am 9:00</Timeline.Content>
-      </Timeline.ItemBase>
-      <Timeline.ItemBase>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
+    <Timeline position="left">
+      <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
-      </Timeline.ItemBase>
-      <Timeline.ItemBase
-        style={{
-          "--timeline-connector-style": "dashed",
-        }}
-      >
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-        <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
-        </Timeline.Content>
-      </Timeline.ItemBase>
+      </Timeline.Item>
     </Timeline>
   )
 }
@@ -108,46 +127,31 @@ function LeftTimeline() {
 
 ### 靠右
 
-通过 `--timeline-connector-width` 可以设置线段宽度
 
 ```tsx
 function RightTimeline() {
   return (
-    <Timeline style={{ "--timeline-connector-width": "3px" }}>
-      <Timeline.ItemBase>
-        <Timeline.Content>am 9:00</Timeline.Content>
-        <Timeline.Separator>
-          <SettingOutlined size={24} />
-        </Timeline.Separator>
-      </Timeline.ItemBase>
-      <Timeline.ItemBase>
+    <Timeline position="right">
+      <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.ItemBase>
-      <Timeline.ItemBase>
+      </Timeline.Item>
+      <Timeline.Item icon={<SettingOutlined size={24} />}>
         <Timeline.Content>
-          <View>
-            You&apos;ve created new branch
-            <Text style={{ color: "#1c7ed6" }}>fix-notifications</Text> from master
-          </View>
-          <View>2 hours ago</View>
+          <View style={{ height: "100px" }}>Taroify</View>
         </Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
         <Timeline.Separator>
           <Timeline.Connector />
           <SettingOutlined size={24} />
           <Timeline.Connector />
         </Timeline.Separator>
-      </Timeline.ItemBase>
+        <Timeline.Content>
+          <View style={{ height: "100px" }}>Taroify</View>
+        </Timeline.Content>
+      </Timeline.Item>
     </Timeline>
   )
 }
@@ -155,20 +159,22 @@ function RightTimeline() {
 
 ## API
 
-### Avatar Props
+### Timeline Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| src | 传入图片的链接,传入之后嵌套内容不展示 | _string_ | - |
-| alt | 图片不显示时的文本内容 | _string_ | - |
-| shape | 形状，可选值为 `square` `rounded` `circle` | _string_ | `circle` |
-| size | 大小，可选值为 `mini` `small` `medium` `large` | _string_ | `medium` |
+| position | 位置布局`left` `right` `alternate` `alternate-reverse` | _string_ | - |
 
-### Avatar.Group Props
+### Timeline Style Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| shape | 形状，可选值为 `square` `rounded` `circle` | _string_ | `circle` |
-| spacing | 间距，可选值为 `small` `medium` `large` | _string_ | `medium` |
-| limit | 显示的最大头像个数 | _number_ | - |
-| total | 头像总数。用于计算额外头像的数量。| _string_ | - |
+| --timeline-connector-color | 线段颜色 | _string_ | - |
+| --timeline-connector-width | 线段宽度 | _string_ | - |
+| --timeline-connector-style | 线段样式 | _string_ | - |
+| --timeline-top-connector-color | 上端线段颜色 | _string_ | - |
+| --timeline-top-connector-width | 上端线段宽度 | _string_ | - |
+| --timeline-top-connector-style | 上端线段样式 | _string_ | - |
+| --timeline-bottom-connector-color | 下端线段颜色 | _string_ | - |
+| --timeline-bottom-connector-width | 下端线段宽度 | _string_ | - |
+| --timeline-bottom-connector-style | 下端线段样式 | _string_ | - |
