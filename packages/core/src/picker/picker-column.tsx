@@ -155,7 +155,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
         distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
         const index = getIndexByOffset(distance)
-        setDuration(2000)
+        setDuration(800)
         setIndex(index, true)
       },
       [activeOffset, getIndexByOffset, setIndex],
