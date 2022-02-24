@@ -1,3 +1,4 @@
+import { useGetter } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
@@ -12,8 +13,8 @@ import { useToRef } from "../utils/state"
 import { ListDirection } from "./list.shared"
 
 export interface ListProps extends ViewProps {
-  loading?: boolean
-  hasMore?: boolean
+  loading?: boolean | (() => boolean)
+  hasMore?: boolean | (() => boolean)
   direction?: ListDirection
   offset?: number
   children?: ReactNode
@@ -38,8 +39,10 @@ function List(props: ListProps) {
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
-  const loadingRef = useToRef(loadingProp)
-  const hasMoreRef = useToRef(hasMoreProp)
+  const getLoading = useGetter(loadingProp)
+  const loadingRef = useToRef(getLoading())
+  const getHasMore = useGetter(hasMoreProp)
+  const hasMoreRef = useToRef(getHasMore())
 
   const loadCheck = useCallback(() => {
     nextTick(async () => {
