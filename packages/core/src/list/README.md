@@ -181,8 +181,8 @@ function PullRefreshList() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | scrollTop | 距离顶部的滚动距离 | _number_ | `0` |
-| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
-| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
+| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean \| ()=> boolean_ | `false` |
+| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean \| ()=> boolean_ | `false` |
 | offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_ | `300` |
 | direction | 滚动触发加载的方向，可选值为 `up` | _string_ | `down` |
 
