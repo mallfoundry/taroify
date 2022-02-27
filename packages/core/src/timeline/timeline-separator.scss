@@ -1,0 +1,10 @@
+@import "./variables";
+
+.#{$component-prefix}timeline-separator {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 12px * $hd;
+  position: relative;
+}

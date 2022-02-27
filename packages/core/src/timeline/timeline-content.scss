@@ -1,0 +1,14 @@
+@import "./variables";
+
+.#{$component-prefix}timeline-content {
+  flex: 1;
+  box-sizing: border-box;
+  
+  &:last-child {
+    text-align: left;
+  }
+
+  &:first-child {
+    text-align: right;
+  }
+}
