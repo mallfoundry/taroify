@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.6
+
+`2022-02-28`
+
+**Feature**
+
+- List
+  - 新增 loading, hasMore 函数返回值类型 [#385](https://github.com/mallfoundry/taroify/pull/385)
+
+**Bug Fixes**
+
+- @taroify/core/index.scss
+  - 修复没有导入 ButtonBase 组件样式的问题 [#389](https://github.com/mallfoundry/taroify/pull/389)
+- List
+  - 修复 loading 赋值的问题 [#390](https://github.com/mallfoundry/taroify/pull/390)
+- DropdownMenu
+  - 修复当初始化页面滑动时，获得 rect 为 undefined 的问题 [#391](https://github.com/mallfoundry/taroify/pull/391)
+
 ### v0.0.27-alpha.5
 
 `2022-02-22`
