@@ -149,6 +149,8 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   const updateItemOffset = useCallback(() => {
     getRect(barRef).then((rect) => {
+      // In the mini app, when the page scrolls,
+      // the rect may be undefined
       if (rect) {
         if (direction === "down") {
           setItemOffset(rect.bottom)
