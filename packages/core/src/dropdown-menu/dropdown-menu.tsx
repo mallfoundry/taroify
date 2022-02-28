@@ -149,10 +149,12 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   const updateItemOffset = useCallback(() => {
     getRect(barRef).then((rect) => {
-      if (direction === "down") {
-        setItemOffset(rect.bottom)
-      } else {
-        setItemOffset(windowHeight - rect.top)
+      if (rect) {
+        if (direction === "down") {
+          setItemOffset(rect.bottom)
+        } else {
+          setItemOffset(windowHeight - rect.top)
+        }
       }
     })
   }, [direction, windowHeight])
