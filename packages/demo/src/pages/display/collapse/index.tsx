@@ -1,6 +1,5 @@
 import { Collapse } from "@taroify/core"
 import { QuestionOutlined, ShopOutlined } from "@taroify/icons"
-import * as React from "react"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"

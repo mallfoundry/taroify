@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
-import "./emulator"
 import "./app.scss"
+import "./emulator"
 
 interface AppProps {
   children?: ReactNode

@@ -1,4 +1,5 @@
 export { default as useDidEffect } from "./use-did-effect"
+export { default as useFunctionInterceptor } from "./use-function-interceptor"
 export { default as useHeight } from "./use-height"
 export { default as useMounted } from "./use-mounted"
 export { default as usePlaceholder } from "./use-placeholder"

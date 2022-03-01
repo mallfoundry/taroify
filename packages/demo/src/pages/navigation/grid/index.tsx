@@ -1,6 +1,5 @@
 import { Grid, Image } from "@taroify/core"
 import { HomeOutlined, PhotoOutlined, Search } from "@taroify/icons"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"

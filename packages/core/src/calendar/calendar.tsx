@@ -151,7 +151,12 @@ function Calendar(props: CalendarProps) {
 
   const bodyScrollTopRef = useRef(0)
 
-  const [monthRefs, setMonthRefs] = useRefs<CalendarMonthInstance>()
+  const {
+    getRef: getMonthRef,
+    getRefs: getMonthRefs,
+    setRefs: setMonthRefs,
+    clearRefs: clearMonthRefs,
+  } = useRefs<CalendarMonthInstance>()
 
   const dayOffset = useMemo(() => (firstDayOfWeek ? +firstDayOfWeek % 7 : 0), [firstDayOfWeek])
 
@@ -221,7 +226,7 @@ function Calendar(props: CalendarProps) {
 
   // disabled calendarDay
   function getDisabledDays() {
-    return monthRefs.reduce((arr, ref) => {
+    return getMonthRefs().reduce((arr, ref) => {
       arr.push(...(ref.current?.disabledDays ?? []))
       return arr
     }, [] as CalendarDayObject[])
@@ -293,7 +298,7 @@ function Calendar(props: CalendarProps) {
     const top = await getScrollTop(bodyRef)
     const bodyHeight = (await getRect(bodyRef)).height
     const bottom = top + bodyHeight
-    const heights = months.map((item, index) => monthRefs[index].current.getHeight())
+    const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
     const heightSum = heights.reduce((a, b) => a + b, 0)
 
     // iOS scroll bounce may exceed the range
@@ -305,7 +310,7 @@ function Calendar(props: CalendarProps) {
     let currentMonth
 
     for (let i = 0; i < months.length; i++) {
-      const month = monthRefs[i]
+      const month = getMonthRef(i)
       const visible = height <= bottom && height + heights[i] >= top
 
       if (visible && !currentMonth) {
@@ -332,7 +337,7 @@ function Calendar(props: CalendarProps) {
   async function scrollToDate(targetDate?: Date) {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate as Date) === 0) {
-        const currentMonth = monthRefs[index].current
+        const currentMonth = getMonthRef(index).current
         const subtitle = subtitleRender(currentMonth.getValue())
         setMonthSubtitle(currentMonth, subtitle)
         nextTick(() => {
@@ -394,6 +399,10 @@ function Calendar(props: CalendarProps) {
   useMounted(init)
 
   const monthsRender = useMemo(() => {
+    // When rerender, clear columns refs
+    // Prevent leakage and contamination
+    clearMonthRefs?.()
+    //
     return _.map(months, (month, index) => (
       <CalendarMonth
         ref={setMonthRefs(index)}
@@ -403,7 +412,7 @@ function Calendar(props: CalendarProps) {
         watermark={watermark}
       />
     ))
-  }, [months, setMonthRefs, watermark])
+  }, [clearMonthRefs, months, setMonthRefs, watermark])
 
   function notifyConfirm(hasConfirm: boolean) {
     hasConfirmRef.current = hasConfirm

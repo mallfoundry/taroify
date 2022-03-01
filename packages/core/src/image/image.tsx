@@ -3,7 +3,7 @@ import { StandardProps } from "@tarojs/components/types/common"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useEffect, useMemo, useState } from "react"
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
 import { getLogger } from "../utils/logger"
 import ImagePlaceholder from "./image-placeholder"
@@ -49,6 +49,10 @@ export interface ImageProps extends StandardProps {
   lazyLoad?: boolean
   placeholder?: boolean | ReactNode
   fallback?: boolean | ReactNode
+
+  onLoad?(): void
+
+  onError?(): void
 }
 
 export default function Image(props: ImageProps) {
@@ -62,6 +66,8 @@ export default function Image(props: ImageProps) {
     lazyLoad = false,
     placeholder = true,
     fallback = true,
+    onLoad,
+    onError,
     ...restProps
   } = props
   const taroMode = useImageMode(mode)
@@ -71,10 +77,16 @@ export default function Image(props: ImageProps) {
 
   useEffect(() => setLoading(true), [src])
 
-  function handleError() {
+  const handleLoad = useCallback(() => {
+    onLoad?.()
+    setLoading(false)
+  }, [onLoad])
+
+  const handleError = useCallback(() => {
+    onError?.()
     setLoading(false)
     setFailed(true)
-  }
+  }, [onError])
 
   return (
     <>
@@ -94,7 +106,7 @@ export default function Image(props: ImageProps) {
             className,
           )}
           imgProps={{ alt }}
-          onLoad={() => setLoading(false)}
+          onLoad={handleLoad}
           onError={handleError}
           {...restProps}
         />

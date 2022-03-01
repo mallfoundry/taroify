@@ -2,7 +2,6 @@ import { AreaPicker, Toast } from "@taroify/core"
 import { PickerOptionObject } from "@taroify/core/picker"
 import { areaList } from "@vant/area-data"
 import * as _ from "lodash"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -14,7 +13,7 @@ function toastOptions(options?: PickerOptionObject[]) {
 
 function BasicAreaPicker() {
   return (
-    <AreaPicker onConfirm={(values, options) => toastOptions(options)}>
+    <AreaPicker onConfirm={(_values_, options) => toastOptions(options)}>
       <AreaPicker.Toolbar>
         <AreaPicker.Button>取消</AreaPicker.Button>
         <AreaPicker.Title>标题</AreaPicker.Title>
@@ -29,7 +28,7 @@ function AreaPickerWithValue() {
   return (
     <AreaPicker
       value={["330000", "330300"]} //
-      onConfirm={(values, options) => toastOptions(options)}
+      onConfirm={(_values_, options) => toastOptions(options)}
     >
       <AreaPicker.Toolbar>
         <AreaPicker.Button>取消</AreaPicker.Button>
@@ -43,7 +42,7 @@ function AreaPickerWithValue() {
 
 function AreaPickerWithColumns2() {
   return (
-    <AreaPicker depth={2} onConfirm={(values, options) => toastOptions(options)}>
+    <AreaPicker depth={2} onConfirm={(_values_, options) => toastOptions(options)}>
       <AreaPicker.Toolbar>
         <AreaPicker.Button>取消</AreaPicker.Button>
         <AreaPicker.Title>标题</AreaPicker.Title>

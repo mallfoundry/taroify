@@ -94,6 +94,7 @@ import SwipeCell from "@taroify/core/swipe-cell"
 | --- | --- | --- | --- |
 | defaultOpen | 默认是否打开滑动单元格，可选值：`left` `right` `outside`  | _string_ | - |
 | open | 是否打开滑动单元格，可选值：`left` `right` `outside`  | _string_ | - |
+| beforeClose | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise | _(args) => boolean \| Promise\<boolean\>_ | - |
 | disabled | 是否禁用滑动 | _boolean_ | `false` |
 | stopPropagation | 是否阻止滑动事件冒泡 | _boolean_ | `false` |
 

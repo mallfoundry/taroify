@@ -1,3 +1,4 @@
+import { getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
 import { CSSProperties } from "react"
 
@@ -38,6 +39,13 @@ function getRootFontSize() {
   return rootFontSize
 }
 
+function convertRpx(value: string) {
+  value = value.replace(/rpx/g, "")
+  const { windowWidth } = getSystemInfoSync()
+  const pixelRatio = 750 / windowWidth
+  return +value / pixelRatio
+}
+
 function convertPx(value: string) {
   value = value.replace(/px/g, "")
   return +value
@@ -63,6 +71,9 @@ export function unitToPx(value: string | number): number {
     return value
   }
 
+  if (value.includes("rpx")) {
+    return convertRpx(value)
+  }
   if (value.includes("px")) {
     return convertPx(value)
   }

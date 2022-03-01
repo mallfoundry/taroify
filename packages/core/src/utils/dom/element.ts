@@ -13,6 +13,14 @@ export function isBodyElement(val: unknown): boolean {
   return val === document.body
 }
 
+export function isRootElement(node?: TaroElement) {
+  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
+}
+
+export function isBlockElement(node?: TaroElement) {
+  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "BLOCK"
+}
+
 export function elementUnref(elementOrRef: any): TaroElement {
   if (elementOrRef === undefined || elementOrRef === null) {
     return elementOrRef
@@ -21,10 +29,6 @@ export function elementUnref(elementOrRef: any): TaroElement {
     return elementOrRef.current
   }
   return elementOrRef
-}
-
-export function isRootElement(node?: TaroElement) {
-  return node?.nodeType === ELEMENT_NODE_TYPE && node?.tagName === "ROOT"
 }
 
 export function matchSelector(aSelector?: string, bSelector?: string) {
@@ -54,11 +58,22 @@ export function usePrependPageSelector(selector?: string) {
 
 // Fix nested in CustomWrapper is undefined
 // See: https://github.com/mallfoundry/taroify/pull/143
-function ancestorCustomWrapper(element: TaroElement) {
+// Fix nested in a Block element does not query elements
+// See: https://github.com/mallfoundry/taroify/pull/370
+function getAncestorWrapper(element: TaroElement) {
   if (inWechat) {
     let ancestor = element
-    while (ancestor.parentNode && !isRootElement(ancestor.parentNode as TaroElement)) {
-      ancestor = ancestor.parentNode as TaroElement
+
+    for (let cursor = element; !_.isEmpty(cursor.parentNode); ) {
+      if (isRootElement(cursor.parentNode as TaroElement)) {
+        break
+      }
+
+      if (!isBlockElement(cursor.parentNode as TaroElement)) {
+        ancestor = cursor.parentNode as TaroElement
+      }
+
+      cursor = cursor.parentNode as TaroElement
     }
 
     if (ancestor && ancestor !== element) {
@@ -72,7 +87,7 @@ export function queryNodesRef(element: TaroElement) {
     return createSelectorQuery().selectViewport()
   }
 
-  const ancestor = ancestorCustomWrapper(element)
+  const ancestor = getAncestorWrapper(element)
   if (ancestor) {
     return createSelectorQuery().select(`#${ancestor.uid}>>>#${element.uid}`)
   }
@@ -85,7 +100,7 @@ export function queryAllNodesRef(element: TaroElement, selector?: string) {
     return createSelectorQuery().selectViewport()
   }
 
-  const ancestor = ancestorCustomWrapper(element)
+  const ancestor = getAncestorWrapper(element)
   if (ancestor) {
     return createSelectorQuery().selectAll(`#${ancestor.uid}>>>#${element.uid}${selector}`)
   }

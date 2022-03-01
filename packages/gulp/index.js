@@ -34,11 +34,17 @@ function watchSymlink() {
   watchReadmeFiles("hooks/src", "hooks")
 }
 
+const createBundles = parallel(
+  createBundle("icons"),
+  createBundle("hooks"),
+  createBundle("core"),
+  createBundle("commerce"),
+)
+
+exports.createBundles = createBundles
+
 exports.clean = series(
-  createBundle("core"), //
-  createBundle("hooks"), //
-  createBundle("icons"), //
-  createBundle("commerce"), //
+  createBundles,
   task("gatsby clean", {
     cwd: "site",
     stdio: "inherit",
@@ -46,10 +52,7 @@ exports.clean = series(
 )
 
 exports.develop = parallel(
-  createBundle("icons"), //
-  createBundle("hooks"), //
-  createBundle("core"), //
-  createBundle("commerce"), //
+  createBundles, //
   watchSymlink,
   serveDemo,
   serveSite,
@@ -57,25 +60,22 @@ exports.develop = parallel(
 
 exports.watch = watch
 
-exports.build = series(
-  createBundle("icons"),
-  createBundle("hooks"), //
-  createBundle("core"), //
-  createBundle("commerce"), //
-  copyFontFiles("core"), //
-  copyFontFiles("commerce"), //
-  buildScss("icons"), //
-  buildScss("core"), //
+exports.buildPackages = series(
+  createBundles, //
+  copyFontFiles("core"),
+  copyFontFiles("commerce"),
+  buildScss("icons"),
+  buildScss("core"),
   buildScss("commerce"),
   buildTypescript("icons"),
-  buildTypescript("hooks"), //
-  buildTypescript("core"), //
+  buildTypescript("hooks"),
+  buildTypescript("core"),
   buildTypescript("commerce"),
 )
 
 const readme = series(
   copyReadmeFiles("core/src", "components"), //
-  copyReadmeFiles("core/docs", "components"), //
+  copyReadmeFiles("core/docs", "components"),
   copyReadmeFiles("hooks/src", "hooks"),
   copyReadmeFiles("commerce/docs", "components"),
   copyReadmeFiles("commerce/src", "components"),

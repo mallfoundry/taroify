@@ -1,6 +1,5 @@
 import { Cell, NumberKeyboard, Toast } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import * as React from "react"
 import { useState } from "react"
 import BlockCard from "../../../components/block-card"
 import Page from "../../../components/page"

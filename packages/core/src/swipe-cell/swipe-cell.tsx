@@ -17,7 +17,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { useRenderedEffect } from "../hooks"
+import { useFunctionInterceptor, useRenderedEffect } from "../hooks"
 import { prefixClassname } from "../styles"
 import { inBrowser } from "../utils/base"
 import { preventDefault } from "../utils/dom/event"
@@ -39,7 +39,10 @@ function useSwipeCellChildren(
   children?: ReactNode,
   leftRef?: LegacyRef<typeof View | undefined>,
   rightRef?: LegacyRef<typeof View | undefined>,
-  handleClick?: (position: SwipeCellPosition, stop?: boolean) => void,
+  createClickHandler?: (
+    position: SwipeCellPosition,
+    stop?: boolean,
+  ) => (event: ITouchEvent) => void,
 ): SwipeCellChildren {
   return useMemo(() => {
     const __children__: SwipeCellChildren = {
@@ -60,7 +63,7 @@ function useSwipeCellChildren(
               ref: leftRef,
               onClick: (event: ITouchEvent) => {
                 onClick?.(event)
-                handleClick?.("left", true)
+                createClickHandler?.("left", true)(event)
               },
             })
           } else if (side === "right") {
@@ -69,7 +72,7 @@ function useSwipeCellChildren(
               ref: rightRef,
               onClick: (event: ITouchEvent) => {
                 onClick?.(event)
-                handleClick?.("right", true)
+                createClickHandler?.("right", true)(event)
               },
             })
           }
@@ -82,7 +85,7 @@ function useSwipeCellChildren(
     })
 
     return __children__
-  }, [children, handleClick, leftRef, rightRef])
+  }, [children, createClickHandler, leftRef, rightRef])
 }
 
 export interface SwipeCellProps extends ViewProps {
@@ -93,6 +96,8 @@ export interface SwipeCellProps extends ViewProps {
   disabled?: boolean
   stopPropagation?: boolean
   children?: ReactNode
+
+  beforeClose?(position: SwipeCellPosition): boolean | Promise<boolean>
 
   onOpen?(position: SwipeCellPosition): void
 
@@ -106,6 +111,7 @@ function SwipeCell(props: SwipeCellProps) {
     open: openProp,
     disabled,
     stopPropagation,
+    beforeClose: beforeCloseProp,
     onOpen,
     onClose,
     onClick: onClickProp,
@@ -116,6 +122,8 @@ function SwipeCell(props: SwipeCellProps) {
     children: childrenProp,
     ...restProps
   } = props
+
+  const beforeClose = useFunctionInterceptor(beforeCloseProp)
 
   const { value } = useUncontrolled<SwipeCellPosition>({
     defaultValue: defaultOpen,
@@ -252,13 +260,13 @@ function SwipeCell(props: SwipeCellProps) {
   const onClick = useCallback(
     (position: SwipeCellPosition = "outside") => {
       if (openedRef.current && !lockClickRef.current) {
-        close(position)
+        beforeClose(position).then(() => close(position))
       }
     },
-    [close],
+    [beforeClose, close],
   )
 
-  const handleClick = useCallback(
+  const createClickHandler = useCallback(
     (position: SwipeCellPosition, stop?: boolean) => (event: ITouchEvent) => {
       if (stop) {
         event.stopPropagation()
@@ -272,7 +280,7 @@ function SwipeCell(props: SwipeCellProps) {
     childrenProp,
     leftRef,
     rightRef,
-    handleClick,
+    createClickHandler,
   )
 
   const valueChange = (side?: SwipeCellPosition) => {
@@ -334,7 +342,7 @@ function SwipeCell(props: SwipeCellProps) {
       }}
       onClick={(event) => {
         onClickProp?.(event)
-        handleClick("cell")
+        createClickHandler("cell")(event)
       }}
       {...restProps}
     >

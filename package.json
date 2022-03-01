@@ -1,16 +1,17 @@
 {
   "name": "taroify",
-  "version": "0.0.27-alpha.0",
+  "version": "0.0.27-alpha.6",
   "license": "MIT",
   "private": true,
   "scripts": {
     "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",
-    "install:node_modules": "lerna bootstrap && cd ./site && yarn install",
+    "install:node_modules": "yarn install && gulp createBundles && lerna bootstrap && cd ./site && yarn install",
     "clean": "gulp clean",
     "develop": "gulp develop",
     "watch": "gulp watch",
     "build:www": "gulp buildWww",
-    "build": "yarn run clean && gulp build && yarn run build:www",
+    "build:packages": "gulp buildPackages",
+    "build": "yarn run clean && yarn run build:packages  && yarn run build:www",
     "publish": "yarn run clean  && yarn run build && lerna publish from-package",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
     "lerna:prepatch": "lerna version prepatch --yes --no-git-tag-version --conventional-graduate",
@@ -39,7 +40,7 @@
     "*.{css,scss}": "stylelint --fix"
   },
   "devDependencies": {
-    "@taroify/cli": "0.0.27-alpha.0",
+    "@taroify/cli": "0.0.27-alpha.6",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "cross-env": "^7.0.3",

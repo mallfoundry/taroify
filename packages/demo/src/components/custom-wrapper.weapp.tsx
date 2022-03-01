@@ -1,5 +1,4 @@
 import { CustomWrapper as TaroCustomWrapper } from "@tarojs/components"
-import * as React from "react"
 import { ReactNode } from "react"
 
 interface CustomWrapperProps {

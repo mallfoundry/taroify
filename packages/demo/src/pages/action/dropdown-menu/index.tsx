@@ -1,6 +1,5 @@
 import { Button, Cell, DropdownMenu, Switch } from "@taroify/core"
 import { View } from "@tarojs/components"
-import * as React from "react"
 import { Key, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"

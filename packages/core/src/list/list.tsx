@@ -1,3 +1,4 @@
+import { useGetter, useToRef } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
@@ -8,12 +9,35 @@ import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollParent } from "../utils/dom/scroll"
-import { useToRef } from "../utils/state"
 import { ListDirection } from "./list.shared"
 
+function useAssignLoading<T = any>(state?: T | (() => T)) {
+  const getState = useGetter(state)
+  const value = getState()
+  const valueRef = useRef<T>()
+  const previousRef = useRef<T>()
+
+  if (value !== previousRef.current) {
+    valueRef.current = value
+    previousRef.current = value
+  }
+
+  const getLoading = useCallback(() => valueRef.current, [])
+
+  const setLoading = useCallback((newValue: T) => (valueRef.current = newValue), [])
+
+  return useMemo(
+    () => ({
+      getLoading,
+      setLoading,
+    }),
+    [getLoading, setLoading],
+  )
+}
+
 export interface ListProps extends ViewProps {
-  loading?: boolean
-  hasMore?: boolean
+  loading?: boolean | (() => boolean)
+  hasMore?: boolean | (() => boolean)
   direction?: ListDirection
   offset?: number
   children?: ReactNode
@@ -38,34 +62,39 @@ function List(props: ListProps) {
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
-  const loadingRef = useToRef(loadingProp)
+
+  const { getLoading, setLoading } = useAssignLoading(loadingProp)
   const hasMoreRef = useToRef(hasMoreProp)
 
-  const loadCheck = useCallback(() => {
-    nextTick(async () => {
-      if (loadingRef.current || !hasMoreRef.current) {
-        return
-      }
+  const loadCheck = useCallback(
+    () =>
+      nextTick(async () => {
+        const loading = getLoading()
+        const hasMore = hasMoreRef.current
+        if (loading || !hasMore) {
+          return
+        }
 
-      const scrollParent = await getScrollParent(rootRef)
-      const scrollParentRect = await getRect(scrollParent)
-      if (!scrollParentRect.height) {
-        return
-      }
+        const scrollParent = await getScrollParent(rootRef)
+        const scrollParentRect = await getRect(scrollParent)
+        if (!scrollParentRect.height) {
+          return
+        }
 
-      let isReachEdge: boolean
-      const edgeRect = await getRect(edgeRef)
-      if (direction === "up") {
-        isReachEdge = scrollParentRect.top - edgeRect.top <= offset
-      } else {
-        isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
-      }
-      if (isReachEdge && !loadingRef.current) {
-        loadingRef.current = true
-        onLoad?.()
-      }
-    })
-  }, [direction, hasMoreRef, loadingRef, offset, onLoad])
+        let isReachEdge: boolean
+        const edgeRect = await getRect(edgeRef)
+        if (direction === "up") {
+          isReachEdge = scrollParentRect.top - edgeRect.top <= offset
+        } else {
+          isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
+        }
+        if (isReachEdge && !loading) {
+          setLoading(true)
+          onLoad?.()
+        }
+      }),
+    [direction, getLoading, hasMoreRef, offset, onLoad, setLoading],
+  )
 
   useMounted(loadCheck)
 

@@ -12,6 +12,88 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.27-alpha.6
+
+`2022-02-28`
+
+**Feature**
+
+- List
+  - 新增 loading, hasMore 函数返回值类型 [#385](https://github.com/mallfoundry/taroify/pull/385)
+
+**Bug Fixes**
+
+- @taroify/core/index.scss
+  - 修复没有导入 ButtonBase 组件样式的问题 [#389](https://github.com/mallfoundry/taroify/pull/389)
+- List
+  - 修复 loading 赋值的问题 [#390](https://github.com/mallfoundry/taroify/pull/390)
+- DropdownMenu
+  - 修复当初始化页面滑动时，获得 rect 为 undefined 的问题 [#391](https://github.com/mallfoundry/taroify/pull/391)
+
+### v0.0.27-alpha.5
+
+`2022-02-22`
+
+**Bug Fixes**
+
+- ancestorCustomWrapper
+  - 修复嵌套在 Block 组件内不能查询元素的问题 [#370](https://github.com/mallfoundry/taroify/pull/370) [@ThomasTrainset](https://github.com/xdoer)
+- Image
+  - 修复 onLoad, onError 未实现的问题 [#372](https://github.com/mallfoundry/taroify/pull/372) [@yifeishu-com](https://github.com/yifeishu-com)
+- DatetimePicker
+  - 修复快速滑动时，快速点击 onConfirm 获取值不正确问题 [#373](https://github.com/mallfoundry/taroify/issues/373) [#380](https://github.com/mallfoundry/taroify/pull/380)
+- Picker
+  - 修复 options 为空时，导致 valueOptions 为 undefined 的问题 [#375](https://github.com/mallfoundry/taroify/issues/375) [#378](https://github.com/mallfoundry/taroify/pull/378)
+- ActionBar.IconButton
+  - 修复 badge 导入路径的问题 [#376](https://github.com/mallfoundry/taroify/issues/376) [#377](https://github.com/mallfoundry/taroify/pull/377)
+
+### v0.0.27-alpha.4
+
+`2022-02-18`
+
+**Bug Fixes**
+
+- useForm
+  - 修复 defaultValues 被覆盖的问题 [#368](https://github.com/mallfoundry/taroify/pull/368)
+  
+### v0.0.27-alpha.3
+
+`2022-02-18`
+
+### v0.0.27-alpha.2
+
+`2022-02-17`
+
+**Bug Fixes**
+
+- useForm
+  - 修复调用重置（reset）时，获取 onValuesChange 事件的 allValues 形参不正确的问题 [#367](https://github.com/mallfoundry/taroify/pull/367)
+
+### v0.0.27-alpha.1
+
+`2022-02-17`
+
+**Feature**
+
+- ellipsis
+  - 合并 multi-ellipsis 为 ellipsis [#343](https://github.com/mallfoundry/taroify/pull/343) [@yifeishu-com](https://github.com/yifeishu-com)
+- Docs
+  - 完善开发指南 [#347](https://github.com/mallfoundry/taroify/pull/347) [@Yang](https://github.com/programmer-yang)
+- addUnitPx
+  - 新增 rpx 转换 px 的支持 [#361](https://github.com/mallfoundry/taroify/pull/361) [@BluesCurry](https://github.com/bluescurry)
+- SwipeCell
+  - 新增 beforeClose 方法 [#363](https://github.com/mallfoundry/taroify/pull/363)
+
+**Bug Fixes**
+
+- useForm
+  - 修复设置 values 无反应的问题 [#356](https://github.com/mallfoundry/taroify/pull/356)
+- Form
+  - 修复通过 ref 调用 reset() 不能更新视图的问题 [#358](https://github.com/mallfoundry/taroify/pull/358)
+  - 修复通过 ref 调用 reset() 不能触发 onReset 事件的问题 [#358](https://github.com/mallfoundry/taroify/pull/358)
+- SwipeCell
+  - 修复点击滑动按钮不能自动关闭的问题 [#363](https://github.com/mallfoundry/taroify/pull/363)
+
 ### v0.0.27-alpha.0
 
 `2022-02-11`

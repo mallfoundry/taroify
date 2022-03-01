@@ -1,6 +1,5 @@
 import ArrowRight from "@taroify/icons/ArrowRight"
 import { Navigator, View } from "@tarojs/components"
-import * as React from "react"
 import { ReactNode } from "react"
 import { demoPrefixClassname } from "../../styles/prefix"
 import { framedWrapper, navigateTo } from "../../utils/framed-router"

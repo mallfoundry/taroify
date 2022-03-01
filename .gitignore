@@ -54,3 +54,7 @@ yarn.lock
 *.iws
 *.iml
 *.ipr
+
+# vscode
+.history
+.vscode

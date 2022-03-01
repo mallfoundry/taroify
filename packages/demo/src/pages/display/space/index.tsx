@@ -1,5 +1,4 @@
 import { Button, Space } from "@taroify/core"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -64,7 +63,7 @@ export default function SpaceDemo() {
         </Space>
       </Block>
       <Block title="不换行">
-        <Space wrap>
+        <Space wrap="nowrap">
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>

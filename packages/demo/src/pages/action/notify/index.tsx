@@ -1,6 +1,5 @@
 import { Cell, Notify } from "@taroify/core"
-import { ArrowRight } from "@taroify/~icons/src"
-import * as React from "react"
+import { ArrowRight } from "@taroify/icons"
 import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"

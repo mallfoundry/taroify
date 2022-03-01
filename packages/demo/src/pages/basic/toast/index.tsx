@@ -1,6 +1,5 @@
 import { Cell, Image, Loading, Toast } from "@taroify/core"
 import { ArrowRight, LikeOutlined } from "@taroify/icons"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 

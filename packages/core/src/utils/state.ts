@@ -1,6 +1,14 @@
 import { useForceUpdate } from "@taroify/hooks"
 import * as _ from "lodash"
-import { createRef, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react"
+import {
+  createRef,
+  MutableRefObject,
+  RefCallback,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react"
 
 export { useToRef } from "@taroify/hooks"
 
@@ -30,10 +38,12 @@ export function useRenderedRef<T = any>(cb: UseRenderedCallback<T>): MutableRefO
   return stateRef as MutableRefObject<T>
 }
 
+export type SetRefCallback<T> = (index: number) => RefCallback<T>
+
 export function useRefs<T = Element>() {
   const refs = useRef<MutableRefObject<T>[]>([])
 
-  const setIndexRefs = useCallback(
+  const setRefs = useCallback(
     (index: number) => (el: unknown) => {
       if (!refs.current[index]) {
         refs.current[index] = createRef() as MutableRefObject<T>
@@ -43,7 +53,22 @@ export function useRefs<T = Element>() {
     [],
   )
 
-  return [refs.current, setIndexRefs] as const
+  const getRef = useCallback((index: number) => refs.current[index], [])
+
+  const getRefs = useCallback(() => refs.current, [])
+
+  const clearRefs = useCallback(() => (refs.current = []), [])
+
+  return useMemo(
+    () => ({
+      refs,
+      getRef,
+      getRefs,
+      setRefs,
+      clearRefs,
+    }),
+    [clearRefs, getRef, getRefs, setRefs],
+  )
 }
 
 export function useObject<S>(state: S) {

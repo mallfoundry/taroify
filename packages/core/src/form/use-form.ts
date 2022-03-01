@@ -1,6 +1,6 @@
 import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { getLogger } from "../utils/logger"
 import { useToRef } from "../utils/state"
 import { FormItemInstance, FormValidError } from "./form.shared"
@@ -166,8 +166,8 @@ class FormAttributes {
     }
   }
 
-  resetValues(values: any = {}) {
-    this.values = values
+  resetValues(newValues: any = {}) {
+    this.values = newValues
   }
 
   release() {
@@ -303,8 +303,10 @@ function defineForm(formName: string) {
     setDefaultValues(defaultValues: any): void {
       const form = getAttributiveForm(formName)
       if (form) {
-        form.defaultValues = defaultValues
-        form?.setValues(defaultValues)
+        _.forEach(defaultValues, (value, name) => {
+          _.set(form.defaultValues, name, value)
+        })
+        form?.setValues(_.cloneDeep(defaultValues))
       }
     }
 
@@ -324,11 +326,10 @@ function defineForm(formName: string) {
 
     reset() {
       const form = getAttributiveForm(formName)
-      const oldValues = _.cloneDeep(form?.values)
       const newValues = _.cloneDeep(form?.defaultValues)
       form?.resetValues(newValues)
       form?.resetErrors()
-      form?.emitEvent("change", newValues, oldValues)
+      form?.emitEvent("change", newValues, newValues)
       form?.emitEvent("reset")
     }
 
@@ -378,8 +379,8 @@ class FormContainer {
     return new DelegatingForm()
   }
 
-  hasForm(name: string) {
-    return containerForms.has(name)
+  hasForm(name?: string) {
+    return name && containerForms.has(name)
   }
 
   newForm(name: string) {
@@ -403,6 +404,11 @@ class FormContainer {
 
 const formContainer = new FormContainer()
 
+function useConstant<V = any>(value?: V) {
+  const [constant] = useState<V | undefined>(value)
+  return constant
+}
+
 interface UseFormOptions<V> {
   defaultValues?: V
   values?: V
@@ -410,9 +416,9 @@ interface UseFormOptions<V> {
 
 export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form {
   const { defaultValues, values } = options
-  const nameRef = useToRef(name)
   const hasForm = formContainer.hasForm(name)
-  const hasFormRef = useToRef(hasForm)
+  const immutableHasForm = useConstant(hasForm)
+  const nameRef = useToRef(name)
 
   if (!hasForm && !_.isEmpty(name)) {
     formContainer.newForm(name)
@@ -420,7 +426,9 @@ export default function useForm<V = any>(name: string = "", options: UseFormOpti
 
   useEffect(
     () => {
-      if (hasFormRef.current) {
+      //  First time if hasForm is false,
+      //  Set the form to defaultValues when defaultValues is value object
+      if (!immutableHasForm && _.isPlainObject(defaultValues)) {
         formContainer.getForm(nameRef.current)?.setDefaultValues(defaultValues)
       }
     },
@@ -428,11 +436,17 @@ export default function useForm<V = any>(name: string = "", options: UseFormOpti
     [],
   )
 
-  useEffect(() => {
-    if (hasFormRef.current) {
-      formContainer.getForm(nameRef.current)?.setValues(values)
-    }
-  }, [hasFormRef, nameRef, values])
+  useEffect(
+    () => {
+      //  First time if hasForm is false,
+      //  Set the form to values when values is value object
+      if (!immutableHasForm && _.isPlainObject(values)) {
+        formContainer.getForm(nameRef.current)?.setValues(values)
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [nameRef, values],
+  )
 
   useEffect(() => () => formContainer.releaseForm(name), [name])
 

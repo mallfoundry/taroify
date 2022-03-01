@@ -3,23 +3,25 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useMemo } from "react"
+import { CSSProperties, ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_UNSET_TOP_BOTTOM } from "../styles/hairline"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { useRendered } from "../utils/state"
 import PickerColumn from "./picker-column"
+import PickerContext from "./picker.context"
 import { getPickerOptionKey, PickerOptionObject } from "./picker.shared"
 import usePickerOptions from "./use-picker-options"
 
 export interface PickerColumnsRenderProps extends ViewProps {
   style?: CSSProperties
-  children?: ReactNode
 
   values?: any[]
   readonly?: boolean
   siblingCount: number
+
+  children?: ReactNode
 
   onChange?(option: PickerOptionObject, column: PickerOptionObject, emitChange?: boolean): void
 }
@@ -35,6 +37,9 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
     onChange,
     ...restProps
   } = props
+
+  const { setColumnRefs, clearColumnRefs } = useContext(PickerContext)
+
   const columns = usePickerOptions(children)
 
   const visibleCount = siblingCount * 2
@@ -68,8 +73,13 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
   const columnsRender = useRendered(() =>
     _.map(columns, (column, columnIndex) => {
       const { children: options, ...restColumnProps } = column
+      // When rerender, clear columns refs
+      // Prevent leakage and contamination
+      clearColumnRefs?.()
+      //
       return (
         <PickerColumn
+          ref={setColumnRefs?.(columnIndex)}
           key={getPickerOptionKey(column) ?? columnIndex}
           // @ts-ignore
           children={options}
