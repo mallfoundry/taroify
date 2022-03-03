@@ -1,0 +1,14 @@
+@import "./variables";
+
+.#{$component-prefix}timeline-connector {
+  flex: 1;
+  border-right: $timeline-connector-border-width $timeline-connector-border-style $timeline-connector-border-color;
+
+  &--top {
+    border-right: $timeline-top-connector-border-width $timeline-top-connector-border-style $timeline-top-connector-border-color;
+  }
+
+  &--bottom {
+    border-right: $timeline-bottom-connector-border-width $timeline-bottom-connector-border-style $timeline-bottom-connector-border-color;
+  }
+}

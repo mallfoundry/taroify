@@ -250,6 +250,10 @@ const menus = [
         title: "Tag 标签",
         to: "/components/tag/",
       },
+      {
+        title: "Timeline 时间轴",
+        to: "/components/timeline/",
+      },
     ],
   },
   {

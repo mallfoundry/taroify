@@ -1,0 +1,47 @@
+@import "./variables";
+
+$timeline-content-justifies: (
+  "start":flex-start,
+  "center": center,
+  "end": flex-end,
+  "between": space-between,
+  "around": space-around
+);
+
+$timeline-content-aligns: (
+  "start":flex-start,
+  "center": center,
+  "end": flex-end,
+  "baseline": baseline,
+  "stretch": stretch
+);
+
+.#{$component-prefix}timeline-content {
+  box-sizing: border-box;
+  flex: 1;
+  padding: $timeline-content-padding;
+
+  &:first-child {
+    justify-content: flex-end;
+  }
+
+  &:last-child {
+    justify-content: flex-start;
+  }
+
+  &.#{$component-prefix}timeline-content--justify {
+    @each $justify-name, $justify-value in $timeline-content-justifies {
+      &-#{$justify-name} {
+        justify-content: $justify-value;
+      }
+    }
+  }
+
+  &.#{$component-prefix}timeline-content--align {
+    @each $align-name, $align-value in $timeline-content-aligns {
+      &-#{$align-name} {
+        align-items: $align-value;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import "~@taroify/core/styles/prefix";
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.timeline-demo {
+
+  .#{$demo-prefix}block__content {
+    display: flex;
+    padding: 0;
+  }
+
+  .#{$demo-prefix}timeline-block {
+    flex: 1;
+  }
+
+  .timeline-title {
+    font-size: 24px * $hd;
+  }
+}
+

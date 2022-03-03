@@ -1,0 +1,35 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$timeline-color: var(--avatar-color, var(--white, $white));
+$timeline-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
+$timeline-border-color: var(--avatar-border-color, var(--white, $white));
+$timeline-border-width: var(--avatar-border-width, 2px * $hd);
+$timeline-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
+$timeline-font-size: var(--timeline-font-size, var(--font-size-md, $font-size-md));
+$timeline-min-height: var(--timeline-min-height, 70px * $hd);
+
+$timeline-content-padding: var(--timeline-content-padding, 0 16px * $hd);
+
+$timeline-connector-border-color: var(--timeline-connector-border-color, var(--gray-5, $gray-5));
+$timeline-connector-border-width: var(--timeline-connector-border-width, 2PX);
+$timeline-connector-border-style: var(--timeline-connector-border-style, solid);
+
+$timeline-top-connector-border-color: var(--timeline-top-connector-border-color, $timeline-connector-border-color);
+$timeline-top-connector-border-width: var(--timeline-top-connector-border-width, $timeline-connector-border-width);
+$timeline-top-connector-border-style: var(--timeline-top-connector-border-style, $timeline-connector-border-style);
+$timeline-bottom-connector-border-color: var(--timeline-bottom-connector-border-color, $timeline-connector-border-color);
+$timeline-bottom-connector-border-width: var(--timeline-bottom-connector-border-width, $timeline-connector-border-width);
+$timeline-bottom-connector-border-style: var(--timeline-bottom-connector-border-style, $timeline-connector-border-style);
+
+$timeline-dot-size: var(--timeline-dot-size, 12px * $hd);
+$timeline-dot-margin: var(--timeline-dot-margin, 6px * $hd 0);
+$timeline-dot-padding: var(--timeline-dot-padding, 4PX);
+$timeline-dot-border-width: var(--timeline-dot-border, 2PX);
+
+$timeline-dot-default-color: var(--timeline-dot-default-color, var(--gray-5, $gray-5));
+$timeline-dot-primary-color: var(--timeline-dot-primary-color, var(--primary-color, $primary-color));
+$timeline-dot-info-color: var(--timeline-dot-info-color, var(--info-color, $info-color));
+$timeline-dot-success-color: var(--timeline-dot-success-color, var(--success-color, $success-color));
+$timeline-dot-warning-color: var(--timeline-dot-warning-color, var(--warning-color, $warning-color));
+$timeline-dot-danger-color: var(--timeline-dot-danger-color, var(--danger-color, $danger-color));
