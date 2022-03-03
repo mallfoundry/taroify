@@ -1,0 +1,29 @@
+@import "./variables";
+
+$timeline-dot-colors: (
+  "default" : $timeline-dot-default-color,
+  "primary" :$timeline-dot-primary-color,
+  "info" :$timeline-dot-info-color,
+  "success": $timeline-dot-success-color,
+  "warning": $timeline-dot-warning-color,
+  "danger": $timeline-dot-danger-color
+);
+
+.#{$component-prefix}timeline-dot {
+  display: flex;
+  padding: $timeline-dot-padding;
+  margin: $timeline-dot-margin;
+  border: $timeline-dot-border-width solid transparent;
+  border-radius: 50%;
+
+  @each $color-name, $color-value in $timeline-dot-colors {
+    &--filled-#{$color-name} {
+      color: $white;
+      background: $color-value;
+    }
+
+    &--outlined-#{$color-name} {
+      border-color: $color-value;
+    }
+  }
+}

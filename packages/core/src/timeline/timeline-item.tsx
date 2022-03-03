@@ -1,29 +1,35 @@
 import { ViewProps } from "@tarojs/components/types/View"
-import * as React from "react"
-import { PropsWithChildren, ReactNode, Children, useContext } from "react"
-import * as _ from "lodash"
-import { SettingOutlined } from "@taroify/icons"
 import classNames from "classnames"
+import * as _ from "lodash"
+import * as React from "react"
+import {
+  Children,
+  isValidElement,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useContext,
+} from "react"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
-import TimelineItemBase from "./timeline-item-base"
-import TimelineContent from "./timeline-content"
-import TimelineSeparator from "./timeline-separator"
 import TimelineConnector from "./timeline-connector"
-import { TimelinePosition } from "./timeline.shared"
+import TimelineContent from "./timeline-content"
+import TimelineDot, { TimelineDotProps } from "./timeline-dot"
+import TimelineItemBase from "./timeline-item-base"
+import TimelineSeparator from "./timeline-separator"
 import TimelineContext from "./timeline.context"
-import TimeLineContent from "./timeline-content"
+import { TimelinePosition } from "./timeline.shared"
 
 interface UseTimelineItemChildrenOptions {
   position?: TimelinePosition
-  icon?: ReactNode
+  dot?: ReactNode
 }
 
 function useTimelineItemChildren(
   children: ReactNode,
   options: UseTimelineItemChildrenOptions,
 ): ReactNode {
-  const { position, icon } = options
+  const { position, dot } = options
   const separator: [boolean, ReactNode] = [false, undefined]
   const leftContent: [boolean, ReactNode] = [false, undefined]
   const rightContent: [boolean, ReactNode] = [false, undefined]
@@ -45,8 +51,6 @@ function useTimelineItemChildren(
     }
   })
 
-  console.log("11")
-
   if (!leftContent[0] && !rightContent[0]) {
     leftContent[0] = true
     leftContent[1] = <TimelineContent children={children} />
@@ -56,8 +60,7 @@ function useTimelineItemChildren(
     separator[0] = true
     separator[1] = (
       <TimelineSeparator>
-        <TimelineConnector />
-        {icon}
+        {dot}
         <TimelineConnector />
       </TimelineSeparator>
     )
@@ -88,30 +91,38 @@ function useTimelineItemChildren(
 
   return (
     <>
-      {rightContent[1]}
-      {separator[1]}
       {leftContent[1]}
+      {separator[1]}
+      {rightContent[1]}
     </>
   )
 }
 
-export interface TimeLineItemProps extends PropsWithChildren<ViewProps> {
-  position?: TimelinePosition
-  icon?: ReactNode
+function useTimelineDot(dot?: ReactNode | TimelineDotProps): ReactNode {
+  if (isValidElement(dot)) {
+    return dot as ReactElement
+  }
+
+  if (_.isObject(dot)) {
+    const dotProps = dot as TimelineDotProps
+    return <TimelineDot {...dotProps} />
+  }
 }
 
-function TimelineItem(props: TimeLineItemProps) {
-  const {
-    className,
-    icon = <SettingOutlined size={24} />,
-    children: childrenProp,
-    ...restProps
-  } = props
+export interface TimelineItemProps extends PropsWithChildren<ViewProps> {
+  dot?: ReactNode | TimelineDotProps
+}
+
+function TimelineItem(props: TimelineItemProps) {
+  const { className, dot: dotProp = <TimelineDot />, children: childrenProp, ...restProps } = props
   const { position } = useContext(TimelineContext)
-  const children = useTimelineItemChildren(childrenProp, { position, icon })
+  const dot = useTimelineDot(dotProp)
+  const children = useTimelineItemChildren(childrenProp, { position, dot })
   return (
     <TimelineItemBase
       className={classNames(className, {
+        [prefixClassname("timeline-item--right")]: position === "right",
+        [prefixClassname("timeline-item--left")]: position === "left",
         [prefixClassname("timeline-item--alternate")]: position === "alternate",
         [prefixClassname("timeline-item--alternate-reverse")]: position === "alternate-reverse",
       })}

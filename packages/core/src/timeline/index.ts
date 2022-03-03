@@ -1,24 +1,24 @@
 import { FunctionComponent } from "react"
-import TimelineComponent, { TimeLineProps } from "./timeline"
-import TimelineItemBase from "./timeline-item-base"
-import TimelineItem from "./timeline-item"
-import TimelineContent from "./timeline-content"
-import TimelineSeparator from "./timeline-separator"
+import TimelineComponent, { TimelineProps } from "./timeline"
 import TimelineConnector from "./timeline-connector"
+import TimelineContent from "./timeline-content"
+import TimelineDot from "./timeline-dot"
+import TimelineItem from "./timeline-item"
+import TimelineSeparator from "./timeline-separator"
 
-interface TimelineInterface extends FunctionComponent<TimeLineProps> {
-  ItemBase: typeof TimelineItemBase
-  Item: typeof TimelineItem
-  Content: typeof TimelineContent
-  Separator: typeof TimelineSeparator
+interface TimelineInterface extends FunctionComponent<TimelineProps> {
   Connector: typeof TimelineConnector
+  Content: typeof TimelineContent
+  Dot: typeof TimelineDot
+  Item: typeof TimelineItem
+  Separator: typeof TimelineSeparator
 }
 
 const Timeline = TimelineComponent as TimelineInterface
-Timeline.ItemBase = TimelineItemBase
-Timeline.Item = TimelineItem
-Timeline.Content = TimelineContent
-Timeline.Separator = TimelineSeparator
 Timeline.Connector = TimelineConnector
+Timeline.Content = TimelineContent
+Timeline.Dot = TimelineDot
+Timeline.Item = TimelineItem
+Timeline.Separator = TimelineSeparator
 
 export default Timeline

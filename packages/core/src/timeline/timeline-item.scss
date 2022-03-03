@@ -1,34 +1,50 @@
 @import "./variables";
 
 .#{$component-prefix}timeline-item {
-  font-size: var(--timeline-font-size, $timeline-font-size);
   display: flex;
+  min-height: $timeline-min-height;
+  font-size: $timeline-font-size;
 
-  &--alternate {
-    &:nth-of-type(even) {
-      flex-direction: row-reverse;
-
-      .#{$component-prefix}timeline-content {
-        &:first-child {
-          text-align: left;
-        }
+  &--right,
+  &--left,
+  &--alternate,
+  &--alternate-reverse {
+    &:last-child {
+      .#{$component-prefix}timeline-connector {
         &:last-child {
-          text-align: right;
+          display: none;
         }
       }
     }
   }
-  
-  &--alternate-reverse {
+
+  &--alternate {
     &:nth-of-type(odd) {
       flex-direction: row-reverse;
 
       .#{$component-prefix}timeline-content {
         &:first-child {
-          text-align: left;
+          justify-content: flex-start;
         }
+
         &:last-child {
-          text-align: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  &--alternate-reverse {
+    &:nth-of-type(even) {
+      flex-direction: row-reverse;
+
+      .#{$component-prefix}timeline-content {
+        &:first-child {
+          justify-content: flex-start;
+        }
+
+        &:last-child {
+          justify-content: flex-end;
         }
       }
     }
