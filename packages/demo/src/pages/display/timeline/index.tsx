@@ -1,158 +1,110 @@
 import { Timeline } from "@taroify/core"
-import { FireOutlined, SettingOutlined, GiftOutlined } from "@taroify/icons"
+import { FireOutlined, GemOutlined, SmileOutlined, StarOutlined } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import * as React from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
+import { demoPrefixClassname } from "../../../styles/prefix"
 import "./index.scss"
-
-// 双边有内容的
-function CustomTimeline() {
-  return (
-    <Timeline>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <FireOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>AM 9:00</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <GiftOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>AM 9:00</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <GiftOutlined size={24} />
-        </Timeline.Separator>
-        <Timeline.Content>
-        <View style={{ height: "100px" }}>AM 9:00</View>
-        </Timeline.Content>
-      </Timeline.Item>
-    </Timeline>
-  )
-}
-
-// 交替有内容的
-function AlternateTimeline() {
-  return (
-    <Timeline position="alternate">
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <GiftOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.Item>
-    </Timeline>
-  )
-}
-
-// 交替有内容的
-function AlternateReverseTimeline() {
-  return (
-    <Timeline position="alternate-reverse">
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item icon={<FireOutlined size={24} />}>
-        <View style={{ height: "100px" }}>Taroify</View>
-      </Timeline.Item>
-    </Timeline>
-  )
-}
-
-// 单边有内容的
-function LeftTimeline() {
-  return (
-    <Timeline position="left">
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-        <Timeline.Separator>
-          <Timeline.Connector />
-          <SettingOutlined size={24} />
-          <Timeline.Connector />
-        </Timeline.Separator>
-      </Timeline.Item>
-    </Timeline>
-  )
-}
 
 function RightTimeline() {
   return (
     <Timeline position="right">
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
-        </Timeline.Content>
-      </Timeline.Item>
-      <Timeline.Item icon={<SettingOutlined size={24} />}>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
+      <Timeline.Item>Eat</Timeline.Item>
+      <Timeline.Item>Code</Timeline.Item>
+      <Timeline.Item>Sleep</Timeline.Item>
+    </Timeline>
+  )
+}
+
+function LeftTimeline() {
+  return (
+    <Timeline position="left">
+      <Timeline.Item>Eat</Timeline.Item>
+      <Timeline.Item>Code</Timeline.Item>
+      <Timeline.Item>Sleep</Timeline.Item>
+    </Timeline>
+  )
+}
+
+function AlternateTimeline() {
+  return (
+    <Timeline position="alternate">
+      <Timeline.Item>Eat</Timeline.Item>
+      <Timeline.Item>Code</Timeline.Item>
+      <Timeline.Item>Sleep</Timeline.Item>
+      <Timeline.Item>Repeat</Timeline.Item>
+    </Timeline>
+  )
+}
+
+function OutlinedTimeline() {
+  return (
+    <Timeline position="alternate">
+      <Timeline.Item dot={{ variant: "outlined" }}>Eat</Timeline.Item>
+      <Timeline.Item dot={{ variant: "outlined", color: "primary" }}>Code</Timeline.Item>
+      <Timeline.Item dot={{ variant: "outlined", color: "danger" }}>Sleep</Timeline.Item>
+      <Timeline.Item dot={{ variant: "outlined" }}>Repeat</Timeline.Item>
+    </Timeline>
+  )
+}
+
+function CustomTimeline() {
+  return (
+    <Timeline>
+      <Timeline.Item>
+        <Timeline.Content align="center">9:30 am</Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <Timeline.Dot>
+            <FireOutlined size="24" />
+          </Timeline.Dot>
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content direction="column" align="start">
+          <View className="timeline-title">Eat</View>
+          <View>Because you need strength</View>
         </Timeline.Content>
       </Timeline.Item>
       <Timeline.Item>
+        <Timeline.Content direction="column" align="end">
+          <View className="timeline-title">Code</View>
+          <View>awesome</View>
+        </Timeline.Content>
         <Timeline.Separator>
           <Timeline.Connector />
-          <SettingOutlined size={24} />
+          <Timeline.Dot color="primary">
+            <StarOutlined size="24" />
+          </Timeline.Dot>
           <Timeline.Connector />
         </Timeline.Separator>
-        <Timeline.Content>
-          <View style={{ height: "100px" }}>Taroify</View>
+        <Timeline.Content align="center">10:00 am</Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content />
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <Timeline.Dot variant="outlined" color="primary">
+            <GemOutlined size="24" />
+          </Timeline.Dot>
+          <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content direction="column" align="start">
+          <View className="timeline-title">Sleep</View>
+          <View>Because you need rest</View>
         </Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Content direction="column" align="end">
+          <View className="timeline-title">Repeat</View>
+          <View>you love!</View>
+        </Timeline.Content>
+        <Timeline.Separator>
+          <Timeline.Connector />
+          <Timeline.Dot color="danger">
+            <SmileOutlined size="24" />
+          </Timeline.Dot>
+          <Timeline.Connector />
+        </Timeline.Separator>
       </Timeline.Item>
     </Timeline>
   )
@@ -161,20 +113,32 @@ function RightTimeline() {
 export default function TimelineDemo() {
   return (
     <Page title="Timeline 时间轴" className="timeline-demo">
-      <Block title="基础用法" className="timeline-block">
-        <CustomTimeline />
+      <Block title="基础用法">
+        <View style={{ width: "calc(50% - 12px)" }} />
+        <View className={demoPrefixClassname("timeline-block")}>
+          <RightTimeline />
+        </View>
       </Block>
-      <Block title="交替用法" className="timeline-block">
-        <AlternateTimeline />
+      <Block title="左边用法">
+        <View className={demoPrefixClassname("timeline-block")}>
+          <LeftTimeline />
+        </View>
+        <View className={demoPrefixClassname("timeline-block")} />
       </Block>
-      <Block title="基础用法" className="timeline-block">
-        <AlternateReverseTimeline />
+      <Block title="交替用法">
+        <View style={{ width: "calc(100% - 12px)" }}>
+          <AlternateTimeline />
+        </View>
       </Block>
-      <Block title="左边用法" className="timeline-block">
-        <LeftTimeline />
+      <Block title="描边用法">
+        <View style={{ width: "calc(100% - 12px)" }}>
+          <OutlinedTimeline />
+        </View>
       </Block>
-      <Block title="右边用法" className="timeline-block">
-        <RightTimeline />
+      <Block title="自定义用法">
+        <View style={{ width: "calc(100% - 12px)" }}>
+          <CustomTimeline />
+        </View>
       </Block>
     </Page>
   )
