@@ -172,15 +172,11 @@ function PickerPopup() {
 
   return (
     <>
-      <Field
-        value={value}
-        label="城市"
-        placeholder="选择城市"
-        readonly
-        rightIcon={<ArrowRight />}
-        onClick={() => setOpenPicker(true)}
-      />
+      <Field label="城市" rightIcon={<ArrowRight />} onClick={() => setOpenPicker(true)}>
+        <Input readonly placeholder="选择城市" value={value} />
+      </Field>
       <Popup open={openPicker} rounded placement="bottom" onClose={setOpenPicker}>
+        <Popup.Backdrop />
         <Picker
           onCancel={() => setOpenPicker(false)}
           onConfirm={(values) => {
