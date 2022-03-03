@@ -1,9 +1,11 @@
 import * as _ from "lodash"
-import { useCallback } from "react"
+import { useMemo } from "react"
 
 export default function useGetter<T>(state?: T | (() => T)) {
-  if (_.isFunction(state)) {
-    return useCallback(state, [state])
-  }
-  return useCallback(() => state, [state])
+  return useMemo(() => {
+    if (_.isFunction(state)) {
+      return state
+    }
+    return () => state
+  }, [state])
 }
