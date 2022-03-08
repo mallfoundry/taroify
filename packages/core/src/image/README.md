@@ -81,8 +81,7 @@ import { Image } from "@taroify/core"
 | src | 图片链接 | _string_ | - |
 | mode | 图片填充模式 | _string_ | `fill` |
 | alt | 替代文本 | _string_ | - |
-| radius | 圆角大小，默认单位为 `px` | _number \| string_ | `0` |
-| round | 是否显示为圆形 | _boolean_ | `false` |
+| shape | 图片形状 `square` `rounded` `circle` | _boolean_ | - |
 | lazyLoad | 是否开启图片懒加载 | _boolean_ | `false` |
 | placeholder | 加载时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<Photo />` |
 | fallback | 失败时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<PhotoFail />` |
