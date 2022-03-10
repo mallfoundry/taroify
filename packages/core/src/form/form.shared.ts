@@ -51,7 +51,7 @@ export type FormRuleMessage = string | ((value: any, rule: FormRule) => string)
 export type FormRuleValidator = (
   value: any,
   rule: FormRule,
-) => boolean | string | Promise<boolean | string>
+) => boolean | string | Error | Promise<boolean | string | Error>
 
 export type FiledRuleFormatter = (value: any, rule: FormRule) => string
 
