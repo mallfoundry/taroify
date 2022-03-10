@@ -33,20 +33,24 @@ function getSyncRule(value: any, rule: FormRule) {
 }
 
 function getValidatorRule(value: any, rule: FormRule) {
+  function obtainInvalidMessage(error?: boolean | string | Error) {
+    if (_.isBoolean(error) && !error) {
+      return getRuleMessage(value, rule)
+    }
+    if (_.isError(error)) {
+      return error.message
+    }
+    return error
+  }
+
   return new Promise<ReactNode>((resolve) => {
     const promise = rule.validator?.(value, rule)
     if (isPromise(promise)) {
-      promise
-        .then((error) => (_.isBoolean(error) && !error ? getRuleMessage(value, rule) : error))
-        .then(resolve)
-      return
+      // Process then, catch to then
+      promise.then(obtainInvalidMessage).catch(obtainInvalidMessage).then(resolve)
+    } else {
+      resolve(obtainInvalidMessage(promise))
     }
-
-    if (_.isBoolean(promise) && !promise) {
-      resolve(getRuleMessage(value, rule))
-      return
-    }
-    resolve(promise)
   })
 }
 
@@ -63,7 +67,9 @@ export function validateRules(value: any, rules: FormRule[]): Promise<ReactNode[
         }
 
         return validateRule(value, rule).then((error) => {
-          if (error) {
+          // Push string only,
+          // Because error could be true or undefined
+          if (_.isString(error)) {
             errors.push(error)
           }
           return errors
