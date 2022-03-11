@@ -12,6 +12,21 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.28-alpha.0
+
+`2022-03-11`
+
+**New Component**
+
+- 新增 Timeline 组件 [#395](https://github.com/mallfoundry/taroify/pull/395) [@coderYarn](https://github.com/coderYarn)
+
+**Bug Fixes**
+
+- Form
+  - 修复使用校验函数返回值处理错误的问题 [#400](https://github.com/mallfoundry/taroify/pull/400)
+- Picker
+  - 修复滑动结束后不更新列值的问题 [#401](https://github.com/mallfoundry/taroify/pull/401)
+
 ### v0.0.27-alpha.6
 
 `2022-02-28`
