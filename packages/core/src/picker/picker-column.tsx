@@ -22,8 +22,6 @@ import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
 import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
 
-const DEFAULT_DURATION = 200
-
 // 惯性滑动思路:
 // 在手指离开屏幕时，如果和上一次 move 时的间隔小于 `MOMENTUM_LIMIT_TIME` 且 move
 // 距离大于 `MOMENTUM_LIMIT_DISTANCE` 时，执行惯性滑动
@@ -37,6 +35,8 @@ async function getElementTranslateY(element: Element) {
 
   return Number(translateY)
 }
+
+type PickerColumnDuration = "zero" | "switch" | "momentum"
 
 export interface PickerColumnProps extends ViewProps {
   value: any
@@ -76,7 +76,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const [activeOffset, setActiveOffset] = useState<number>(0)
     const activeOffsetRef = useToRef(activeOffset)
 
-    const [duration, setDuration] = useState<number>(0)
+    const [duration, setDuration] = useState<PickerColumnDuration>("zero")
 
     const baseOffset = useMemo(() => (itemHeight * (6 - 1)) / 2, [])
 
@@ -155,7 +155,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
         distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
         const index = getIndexByOffset(distance)
-        setDuration(800)
+        setDuration("momentum")
         setIndex(index, true)
       },
       [activeOffset, getIndexByOffset, setIndex],
@@ -163,7 +163,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
     const stopMomentum = useCallback(() => {
       movingRef.current = false
-      setDuration(0)
+      setDuration("zero")
 
       if (transitionEndTriggerRef.current) {
         transitionEndTriggerRef.current?.()
@@ -178,7 +178,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         }
 
         transitionEndTriggerRef.current = undefined
-        setDuration(DEFAULT_DURATION)
+        setDuration("switch")
         setIndex(index, true)
       },
       [readonly, setIndex],
@@ -202,7 +202,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
       touchStartTimeRef.current = Date.now()
       momentumOffsetRef.current = startOffsetRef.current
-      setDuration(0)
+      setDuration("zero")
     }
 
     const handleTouchMove = (event: ITouchEvent) => {
@@ -247,6 +247,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       }
 
       const index = getIndexByOffset(activeOffset)
+      setDuration("switch")
       setIndex(index, true)
 
       // compatible with desktop scenario
@@ -259,9 +260,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const wrapperStyle = useMemo(
       () => ({
         transform: `translate3d(0, ${addUnitPx(activeOffset + baseOffset)}, 0)`,
-        transition: `transform ${duration}ms`,
       }),
-      [activeOffset, baseOffset, duration],
+      [activeOffset, baseOffset],
     )
 
     useImperativeHandle(
@@ -297,7 +297,11 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         <View
           ref={wrapperRef}
           style={wrapperStyle}
-          className={prefixClassname("picker-column__wrapper")}
+          className={classNames(prefixClassname("picker-column__wrapper"), {
+            [prefixClassname("picker-column__wrapper--zero")]: duration === "zero",
+            [prefixClassname("picker-column__wrapper--momentum")]: duration === "momentum",
+            [prefixClassname("picker-column__wrapper--switch")]: duration === "switch",
+          })}
           onTransitionEnd={stopMomentum}
         >
           {
