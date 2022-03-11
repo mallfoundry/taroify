@@ -9,6 +9,11 @@ $picker-action-padding: 0 var(--padding-md, $padding-md);
 $picker-action-font-size: var(--font-size-md, $font-size-md);
 $picker-confirm-action-color: var(--text-link-color, $text-link-color);
 $picker-cancel-action-color: var(--gray-6, $gray-6);
+//
+$picker-column-transition-zero-duration: var(--picker-column-transition-zero-duration, 0);
+$picker-column-transition-switch-duration: var(--picker-column-transition-switch-duration, 200ms);
+$picker-column-transition-duration: var(--picker-column-transition-duration, var(--picker-swipe-duration, 800ms));
+//
 $picker-option-color: var(--black, $black);
 $picker-option-padding: 0 var(--padding-base, $padding-base);
 $picker-option-font-size: var(--font-size-lg, $font-size-lg);

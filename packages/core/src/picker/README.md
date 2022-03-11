@@ -226,3 +226,31 @@ function PickerPopup() {
 | onConfirm | 点击完成按钮时触发 | 单列：选中值，选中值对应的选项对象<br>多列：所有列选中值，所有列选中值对应的选项对象 |
 | onCancel | 点击取消按钮时触发 | 单列：选中值，选中值对应的选项对象<br>多列：所有列选中值，所有列选中值对应的选项对象 |
 | onChange | 选项改变时触发 | 单列：选中值，选中值对应的选项对象<br>多列：所有列选中值，当前列对应的选项对象 |
+
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称 | 默认值 | 描述 |
+| --- | --- | --- |
+| --picker-background-color | _var(--white, $white)_ | - |
+| --picker-toolbar-height | _44px * $hd_ | - |
+| --picker-title-font-size | _var(--font-size-lg, $font-size-lg)_ | - |
+| --picker-title-line-height | _var(--line-height-md, $line-height-md)_ | - |
+| --picker-action-padding | _0 var(--padding-md, $padding-md)_ | - |
+| --picker-action-font-size | _var(--font-size-md, $font-size-md)_ | - |
+| --picker-confirm-action-color | _var(--text-link-color, $text-link-color)_ | - |
+| --picker-cancel-action-color | _var(--gray-6, $gray-6)_ | - |
+| --picker-column-transition-zero-duration | _var(--picker-column-transition-zero-duration, 0)_ | - |
+| --picker-column-transition-switch-duration | _var(--picker-column-transition-switch-duration, 200ms)_ | - |
+| --picker-column-transition-duration | _var(--picker-column-transition-duration, var(--picker-swipe-duration, 800ms))_ | - |
+| --picker-option-color | _var(--black, $black)_ | - |
+| --picker-option-padding | _0 var(--padding-base, $padding-base)_ | - |
+| --picker-option-font-size | _var(--font-size-lg, $font-size-lg)_ | - |
+| --picker-option-disabled-opacity | _0.3_ | - |
+| --picker-option-height | _44PX_ | - |
+| --picker-loading-icon-color | _var(--primary-color, $primary-color)_ | - |
+| --picker-loading-mask-color | _rgba(255, 255, 255, 0.9)_ | - |

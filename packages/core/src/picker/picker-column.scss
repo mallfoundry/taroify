@@ -8,5 +8,17 @@
 
   &__wrapper {
     transition-timing-function: cubic-bezier(0.23, 1, 0.68, 1);
+
+    &--zero {
+      transition-duration: $picker-column-transition-zero-duration;
+    }
+
+    &--momentum {
+      transition-duration: $picker-column-transition-duration;
+    }
+
+    &--switch {
+      transition-duration: $picker-column-transition-switch-duration;
+    }
   }
 }
