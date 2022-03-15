@@ -66,6 +66,8 @@ export default function useCountdown(options: UseCountdownOptions) {
   const remainRef = useRef(valueProp)
 
   const current = parseTime(remainRef.current)
+  // Set the current toRef when rerendering
+  const currentRef = useToRef(current)
 
   const pause = useCallback(() => {
     statusRef.current = "paused"
@@ -79,7 +81,9 @@ export default function useCountdown(options: UseCountdownOptions) {
   const nextRemain = (nextValue: number) => {
     remainRef.current = nextValue
     update()
-    onChange?.(current)
+    // current is immutable,
+    // Use the currentRef value instead of the current
+    onChange?.(currentRef.current)
     if (nextValue === 0) {
       pause()
       onComplete?.()
