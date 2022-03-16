@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.28-alpha.1
+
+`2022-03-16`
+
+**Bug Fixes**
+
+- Countdown
+  - 修复监听 onChange 事件时，获得 value 不正确的问题 [#403](https://github.com/mallfoundry/taroify/pull/403)
+- List
+  - 修复重复加载（onLoad）的问题 [#406](https://github.com/mallfoundry/taroify/pull/406)
+
 ### v0.0.28-alpha.0
 
 `2022-03-11`
