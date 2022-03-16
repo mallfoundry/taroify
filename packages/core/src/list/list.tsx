@@ -15,23 +15,21 @@ function useAssignLoading<T = any>(state?: T | (() => T)) {
   const getState = useGetter(state)
   const value = getState()
   const valueRef = useRef<T>()
-  const previousRef = useRef<T>()
 
-  if (value !== previousRef.current) {
+  if (valueRef.current !== value) {
     valueRef.current = value
-    previousRef.current = value
   }
 
-  const getLoading = useCallback(() => valueRef.current, [])
+  const isLoading = useCallback(() => valueRef.current, [])
 
   const setLoading = useCallback((newValue: T) => (valueRef.current = newValue), [])
 
   return useMemo(
     () => ({
-      getLoading,
+      isLoading,
       setLoading,
     }),
-    [getLoading, setLoading],
+    [isLoading, setLoading],
   )
 }
 
@@ -45,6 +43,8 @@ export interface ListProps extends ViewProps {
   scrollTop?: number
 
   onLoad?(): void
+
+  onLoading?(loading: true): void
 }
 
 function List(props: ListProps) {
@@ -57,24 +57,25 @@ function List(props: ListProps) {
     children,
     scrollTop,
     onLoad,
+    onLoading,
     ...restProps
   } = props
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
 
-  const { getLoading, setLoading } = useAssignLoading(loadingProp)
-  const hasMoreRef = useToRef(hasMoreProp)
+  const onLoadingRef = useToRef(onLoading)
+  const onLoadRef = useToRef(onLoad)
+
+  const { isLoading, setLoading } = useAssignLoading(loadingProp)
+  const isHasMore = useGetter(hasMoreProp)
 
   const loadCheck = useCallback(
     () =>
       nextTick(async () => {
-        const loading = getLoading()
-        const hasMore = hasMoreRef.current
-        if (loading || !hasMore) {
+        if (isLoading() || !isHasMore()) {
           return
         }
-
         const scrollParent = await getScrollParent(rootRef)
         const scrollParentRect = await getRect(scrollParent)
         if (!scrollParentRect.height) {
@@ -88,17 +89,18 @@ function List(props: ListProps) {
         } else {
           isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
         }
-        if (isReachEdge && !loading) {
+        if (isReachEdge && !isLoading()) {
           setLoading(true)
-          onLoad?.()
+          onLoadingRef.current?.(true)
+          onLoadRef.current?.()
         }
       }),
-    [direction, getLoading, hasMoreRef, offset, onLoad, setLoading],
+    [direction, isHasMore, isLoading, offset, onLoadRef, onLoadingRef, setLoading],
   )
 
   useMounted(loadCheck)
 
-  useEffect(loadCheck, [loadingProp, hasMoreProp, loadCheck, scrollTop, children])
+  useEffect(loadCheck, [isLoading(), isHasMore(), loadCheck, scrollTop, children])
 
   const listEdge = useMemo(
     () => <View ref={edgeRef} className={prefixClassname("list__edge")} />,
