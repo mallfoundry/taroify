@@ -43,6 +43,8 @@ export interface ListProps extends ViewProps {
   scrollTop?: number
 
   onLoad?(): void
+
+  onLoading?(loading: true): void
 }
 
 function List(props: ListProps) {
@@ -55,12 +57,14 @@ function List(props: ListProps) {
     children,
     scrollTop,
     onLoad,
+    onLoading,
     ...restProps
   } = props
 
   const rootRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
 
+  const onLoadingRef = useToRef(onLoading)
   const onLoadRef = useToRef(onLoad)
 
   const { isLoading, setLoading } = useAssignLoading(loadingProp)
@@ -87,10 +91,11 @@ function List(props: ListProps) {
         }
         if (isReachEdge && !isLoading()) {
           setLoading(true)
+          onLoadingRef.current?.(true)
           onLoadRef.current?.()
         }
       }),
-    [direction, isHasMore, isLoading, offset, onLoadRef, setLoading],
+    [direction, isHasMore, isLoading, offset, onLoadRef, onLoadingRef, setLoading],
   )
 
   useMounted(loadCheck)
