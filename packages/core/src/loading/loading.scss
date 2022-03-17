@@ -4,20 +4,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--loading-color, $loading-color);
+  color: $loading-color;
 
   &__spinner,
   &__circular {
     position: relative;
     box-sizing: border-box;
-    width: var(--loading-size, $loading-size);
+    width: $loading-size;
     max-width: 100%;
-    height: var(--loading-size, $loading-size);
+    height: $loading-size;
     max-height: 100%;
   }
 
   &__spinner {
-    animation: #{$component-prefix}-rotate var(--loading-animation-duration, $loading-animation-duration) steps(12) infinite;
+    animation: #{$component-prefix}-rotate $loading-animation-duration steps(12) infinite;
 
     &__item {
       position: absolute;
@@ -47,23 +47,22 @@
   }
 
   &__circular {
-    border: 1px * $hd solid transparent;
+    border: $loading-circular-border-width solid transparent;
     border-top-color: currentColor;
     border-radius: 100%;
-    animation: #{$component-prefix}-rotate var(--loading-animation-duration, $loading-animation-duration) linear infinite;
+    animation: #{$component-prefix}-rotate $loading-animation-duration linear infinite;
   }
 
   &__text {
     margin-left: var(--padding-xs, $padding-xs);
-    font-size: var(--loading-text-font-size, $loading-text-font-size);
-    line-height: var(--loading-text-line-height, $loading-text-line-height);
-    color: var(--loading-text-color, $loading-text-color);
+    font-size: $loading-text-font-size;
+    line-height: $loading-text-line-height;
+    color: $loading-text-color;
 
     &:empty {
       display: none;
     }
   }
-
 
   &--vertical {
     flex-direction: column;

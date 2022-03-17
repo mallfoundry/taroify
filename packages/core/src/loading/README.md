@@ -95,3 +95,19 @@ import { Loading } from "@taroify/core"
 | size       | 加载图标大小，默认单位为 `px` | _number \| string_ | `30px`     |
 | direction | 排列方向，可选值为 `horizontal` | _string_ | `vertical` |
 | children   | 加载文案    | _ReactNode_          | -    |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                              | 默认值                                                                 | 描述  |
+|---------------------------------|---------------------------------------------------------------------|-----|
+| --loading-color                 | _var(--loading-color, var(--gray-5, $gray-5))_                      | -   |
+| --loading-size                  | _var(--loading-size, 30px * $hd)_                                   | -   |
+| --loading-animation-duration    | _var(--loading-animation-duration, 0.8s)_                           | -   |
+| --loading-circular-border-width | _var(--loading-circular-border-width, 1px * $hd)_                   | -   |
+| --loading-text-color            | _var(--loading-text-color, var(--gray-6, $gray-6))_                 | -   |
+| --loading-text-font-size        | _var(--loading-text-font-size, var(--font-size-md, $font-size-md))_ | -   |
+| --loading-text-line-height      | _var(--loading-text-line-height, 20px * $hd)_                       | -   |

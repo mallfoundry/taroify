@@ -1,10 +1,10 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$loading-color: var(--gray-5, $gray-5);
-$loading-size: 30px * $hd;
-$loading-animation-duration: 0.8s;
-
-$loading-text-color: var(--gray-6, $gray-6);
-$loading-text-font-size: var(--font-size-md, $font-size-md);
-$loading-text-line-height: 20px * $hd;
+$loading-color: var(--loading-color, var(--gray-5, $gray-5));
+$loading-size: var(--loading-size, 30px * $hd);
+$loading-animation-duration: var(--loading-animation-duration, 0.8s);
+$loading-circular-border-width: var(--loading-circular-border-width, 1px * $hd);
+$loading-text-color: var(--loading-text-color, var(--gray-6, $gray-6));
+$loading-text-font-size: var(--loading-text-font-size, var(--font-size-md, $font-size-md));
+$loading-text-line-height: var(--loading-text-line-height, 20px * $hd);
