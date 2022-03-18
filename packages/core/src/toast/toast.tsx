@@ -1,6 +1,5 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Fail, Success } from "@taroify/icons"
-import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -43,7 +42,7 @@ function defaultToastIcon(icon?: ReactNode, type?: ToastType): ReactNode {
     return <Success />
   }
   if (type === "loading") {
-    return <Loading />
+    return <Loading className={prefixClassname("toast__loading")} />
   }
   if (type === "fail") {
     return <Fail />
@@ -184,13 +183,7 @@ export default function Toast(props: ToastProps) {
       {...restProps}
     >
       {backdrop}
-      {
-        //
-        icon &&
-          cloneIconElement(icon, {
-            className: prefixClassname("toast__icon"),
-          })
-      }
+      {icon}
       {icon ? <View className={prefixClassname("toast__message")} children={content} /> : content}
     </Popup>
   )

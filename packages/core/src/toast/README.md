@@ -141,3 +141,32 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 | Toast.loading | _options \| message_ | - | 展示加载提示 |
 | Toast.success | _options \| message_ | - | 展示成功提示 |
 | Toast.fail | _options \| message_ | - | 展示失败提示 |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                               | 默认值                                   | 描述  |
+|----------------------------------|---------------------------------------|-----|
+| --toast-width                    | _88px * $hd_                          | -   |
+| --toast-width                    | _88px * $hd_                          | -   |
+| --toast-min-height               | _88px * $hd_                          | -   |
+| --toast-max-width                | _70%_                                 | -   |
+| --toast-padding                  | _var(--padding-md)_                   | -   |
+| --toast-font-size                | _var(--font-size-md)_                 | -   |
+| --toast-line-height              | _var(--line-height-md)_               | -   |
+| --toast-color                    | _var(--white)_                        | -   |
+| --toast-background-color         | _rgba(var(--black-rgb), $alpha: 0.7)_ | -   |
+| --toast-border-radius            | _var(--border-radius-lg)_             | -   |
+| --toast-transition-duration      | _var(--animation-duration-fast)_      | -   |
+| --toast-icon-font-size           | _36px * $hd_                          | -   |
+| --toast-icon-color               | _var(--white)_                        | -   |
+| --toast-loading-padding          | _3px * $hd_                           | -   |
+| --toast-loading-color            | _var(--white)_                        | -   |
+| --toast-text-min-width           | _96px * $hd_                          | -   |
+| --toast-text-padding             | _var(--padding-xs) var(--padding-sm)_ | -   |
+| --toast-position-distance        | _20%_                                 | -   |
+| --toast-position-top-distance    | _var(--toast-position-distance)_      | -   |
+| --toast-position-bottom-distance | _var(--toast-position-distance)_      | -   |
