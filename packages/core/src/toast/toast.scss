@@ -6,30 +6,29 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--toast-width, $toast-width);
-  max-width: var(--toast-max-width, $toast-max-width);
-  min-height: var(--toast-min-height, $toast-min-height);
-  padding: var(--toast-padding, $toast-padding);
-  font-size: var(--toast-font-size, $toast-font-size);
-  line-height: var(--toast-line-height, $toast-line-height);
-  color: var(--toast-text-color, $toast-text-color);
+  width: $toast-width;
+  max-width: $toast-max-width;
+  min-height: $toast-min-height;
+  padding: $toast-padding;
+  font-size: $toast-font-size;
+  line-height: $toast-line-height;
+  color: $toast-color;
   text-align: center;
   // https://github.com/youzan/vant/issues/8959
   word-break: break-all;
 
   // allow newline character
   white-space: pre-wrap;
-  background: var(--toast-background-color, $toast-background-color);
-  background-color: var(--toast-background-color, $toast-background-color);
-  border-radius: var(--toast-border-radius, $toast-border-radius);
-  transition: all var(--animation-duration-fast, $animation-duration-fast);
+  background: $toast-background-color;
+  border-radius: $toast-border-radius;
+  transition: all $toast-transition-duration;
 
   &--text,
   &--html {
     width: fit-content;
-    min-width: var(--toast-text-min-width, $toast-text-min-width);
+    min-width: $toast-text-min-width;
     min-height: 0;
-    padding: var(--toast-text-padding, $toast-text-padding);
+    padding: $toast-text-padding;
 
     .#{$component-prefix}toast__message {
       margin-top: 0;
@@ -37,22 +36,22 @@
   }
 
   &--top {
-    top: var(--toast-position-top-distance, $toast-position-top-distance);
+    top: $toast-position-top-distance;
   }
 
   &--bottom {
     top: auto;
-    bottom: var(--toast-position-bottom-distance, $toast-position-bottom-distance);
+    bottom: $toast-position-bottom-distance;
   }
 
   &__icon {
-    font-size: 36px * $hd !important;
-    color: var(--toast-icon-color, $toast-icon-color);
+    font-size: $toast-icon-font-size;
+    color: $toast-icon-color;
   }
 
   &__loading {
-    padding: var(padding-base, $padding-base);
-    color: var(--toast-loading-icon-color, $toast-loading-icon-color);
+    padding: $toast-loading-padding;
+    color: $toast-loading-color;
   }
 
   &__message {

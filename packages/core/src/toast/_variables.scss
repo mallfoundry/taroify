@@ -1,23 +1,26 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$toast-max-width: 70%;
-$toast-font-size: var(--font-size-md, $font-size-md);
-$toast-text-color: var(--white, $white);
-$toast-icon-color: var(--white, $white);
-$toast-loading-icon-color: var(--white, $white);
-$toast-line-height: var(--line-height-md, $line-height-md);
+$toast-width: var(--toast-width, 88px * $hd);
+$toast-min-height: var(--toast-min-height, 88px * $hd);
+$toast-max-width: var(--toast-max-width, 70%);
+$toast-padding: var(--toast-padding, var(--padding-md, $padding-md));
+$toast-font-size: var(--toast-font-size, var(--font-size-md, $font-size-md));
+$toast-line-height: var(--toast-line-height, var(--line-height-md, $line-height-md));
+$toast-color: var(--toast-color, var(--white, $white));
+$toast-background-color: var(--toast-background-color, rgba(var(--black-rgb, $black-rgb), $alpha: 0.7));
+$toast-border-radius: var(--toast-border-radius, var(--border-radius-lg, $border-radius-lg));
+$toast-transition-duration: var(--toast-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
 
-$toast-text-color: var(--white, $white);
-$toast-border-radius: var(--border-radius-lg, $border-radius-lg);
-$toast-background-color: rgba($black, $alpha: 0.7);
+$toast-icon-font-size: var(--toast-icon-font-size, 36px * $hd);
+$toast-icon-color: var(--toast-icon-color, var(--white, $white));
 
-$toast-padding: var(--padding-md, $padding-md);
-$toast-width: 88px * 2;
-$toast-min-height: 88px * 2;
+$toast-loading-padding: var(--toast-loading-padding, 3px * $hd);
+$toast-loading-color: var(--toast-loading-color, var(--white, $white));
 
-$toast-text-min-width: 96px * 2;
-$toast-text-padding: var(--padding-xs, $padding-xs) var(--padding-sm, $padding-sm);
+$toast-text-min-width: var(--toast-text-min-width, 96px * $hd);
+$toast-text-padding: var(--toast-text-padding, var(--padding-xs, $padding-xs) var(--padding-sm, $padding-sm));
 
-$toast-position-top-distance: 20%;
-$toast-position-bottom-distance: 20%;
+$toast-position-distance: var(--toast-position-distance, 20%);
+$toast-position-top-distance: var(--toast-position-top-distance, $toast-position-distance);
+$toast-position-bottom-distance: var(--toast-position-bottom-distance, $toast-position-distance);
