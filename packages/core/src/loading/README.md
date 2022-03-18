@@ -102,12 +102,12 @@ import { Loading } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                              | 默认值                                                                 | 描述  |
-|---------------------------------|---------------------------------------------------------------------|-----|
-| --loading-color                 | _var(--loading-color, var(--gray-5, $gray-5))_                      | -   |
-| --loading-size                  | _var(--loading-size, 30px * $hd)_                                   | -   |
-| --loading-animation-duration    | _var(--loading-animation-duration, 0.8s)_                           | -   |
-| --loading-circular-border-width | _var(--loading-circular-border-width, 1px * $hd)_                   | -   |
-| --loading-text-color            | _var(--loading-text-color, var(--gray-6, $gray-6))_                 | -   |
-| --loading-text-font-size        | _var(--loading-text-font-size, var(--font-size-md, $font-size-md))_ | -   |
-| --loading-text-line-height      | _var(--loading-text-line-height, 20px * $hd)_                       | -   |
+| 名称                              | 默认值                   | 描述  |
+|---------------------------------|-----------------------|-----|
+| --loading-color                 | _var(--gray-5)_       | -   |
+| --loading-size                  | _30px * $hd_          | -   |
+| --loading-animation-duration    | _0.8s_                | -   |
+| --loading-circular-border-width | _1px * $hd_           | -   |
+| --loading-text-color            | _var(--gray-6)_       | -   |
+| --loading-text-font-size        | _var(--font-size-md)_ | -   |
+| --loading-text-line-height      | _20px * $hd_          | -   |
