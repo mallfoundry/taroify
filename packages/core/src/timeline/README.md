@@ -179,32 +179,32 @@ function CustomTimeline() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称 | 默认值 | 描述 |
-| --- | --- | --- |
-| --timeline-color | _var(--avatar-color, var(--white, $white))_ | - |
-| --timeline-background-color | _var(--avatar-background-color, var(--gray-5, $gray-5))_ | - |
-| --timeline-border-color | _var(--avatar-border-color, var(--white, $white))_ | - |
-| --timeline-border-width | _var(--avatar-border-width, 2px * $hd)_ | - |
-| --timeline-font-weight | _var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold))_ | - |
-| --timeline-font-size | _var(--timeline-font-size, var(--font-size-md, $font-size-md))_ | - |
-| --timeline-min-height | _var(--timeline-min-height, 70px * $hd)_ | - |
-| --timeline-content-padding | _var(--timeline-content-padding, 0 16px * $hd)_ | - |
-| --timeline-connector-border-color | _var(--timeline-connector-border-color, var(--gray-5, $gray-5))_ | - |
-| --timeline-connector-border-width | _var(--timeline-connector-border-width, 2PX)_ | - |
-| --timeline-connector-border-style | _var(--timeline-connector-border-style, solid)_ | - |
-| --timeline-top-connector-border-color | _var(--timeline-top-connector-border-color, var(--timeline-connector-border-color))_ | - |
-| --timeline-top-connector-border-width | _var(--timeline-top-connector-border-width, var(--timeline-connector-border-width))_ | - |
-| --timeline-top-connector-border-style | _var(--timeline-top-connector-border-style, var(--timeline-connector-border-style))_ | - |
-| --timeline-bottom-connector-border-color | _var(--timeline-bottom-connector-border-color, var(--timeline-connector-border-color))_ | - |
-| --timeline-bottom-connector-border-width | _var(--timeline-bottom-connector-border-width, var(--timeline-connector-border-width))_ | - |
-| --timeline-bottom-connector-border-style | _var(--timeline-bottom-connector-border-style, var(--timeline-connector-border-style))_ | - |
-| --timeline-dot-size | _var(--timeline-dot-size, 12px * $hd)_ | - |
-| --timeline-dot-margin | _var(--timeline-dot-margin, 6px * $hd 0)_ | - |
-| --timeline-dot-padding | _var(--timeline-dot-padding, 4PX)_ | - |
-| --timeline-dot-border-width | _var(--timeline-dot-border, 2PX)_ | - |
-| --timeline-dot-default-color | _var(--timeline-dot-default-color, var(--gray-5, $gray-5))_ | - |
-| --timeline-dot-primary-color | _var(--timeline-dot-primary-color, var(--primary-color, $primary-color))_ | - |
-| --timeline-dot-info-color | _var(--timeline-dot-info-color, var(--info-color, $info-color))_ | - |
-| --timeline-dot-success-color | _var(--timeline-dot-success-color, var(--success-color, $success-color))_ | - |
-| --timeline-dot-warning-color | _var(--timeline-dot-warning-color, var(--warning-color, $warning-color))_ | - |
-| --timeline-dot-danger-color | _var(--timeline-dot-danger-color, var(--danger-color, $danger-color))_ | - |
+| 名称                                       | 默认值                                      | 描述  |
+|------------------------------------------|------------------------------------------|-----|
+| --timeline-color                         | _var(--white)_                           | -   |
+| --timeline-background-color              | _var(--gray-5)_                          | -   |
+| --timeline-border-color                  | _var(--white)_                           | -   |
+| --timeline-border-width                  | _2px * $hd_                              | -   |
+| --timeline-font-weight                   | _var(--font-weight-bold)_                | -   |
+| --timeline-font-size                     | _var(--font-size-md)_                    | -   |
+| --timeline-min-height                    | _70px * $hd_                             | -   |
+| --timeline-content-padding               | _0 16px * $hd_                           | -   |
+| --timeline-connector-border-color        | _var(--gray-5)_                          | -   |
+| --timeline-connector-border-width        | _2PX_                                    | -   |
+| --timeline-connector-border-style        | _solid_                                  | -   |
+| --timeline-top-connector-border-color    | _var(--timeline-connector-border-color)_ | -   |
+| --timeline-top-connector-border-width    | _var(--timeline-connector-border-width)_ | -   |
+| --timeline-top-connector-border-style    | _var(--timeline-connector-border-style)_ | -   |
+| --timeline-bottom-connector-border-color | _var(--timeline-connector-border-color)_ | -   |
+| --timeline-bottom-connector-border-width | _var(--timeline-connector-border-width)_ | -   |
+| --timeline-bottom-connector-border-style | _var(--timeline-connector-border-style)_ | -   |
+| --timeline-dot-size                      | _12px * $hd_                             | -   |
+| --timeline-dot-margin                    | _6px * $hd 0_                            | -   |
+| --timeline-dot-padding                   | _4PX_                                    | -   |
+| --timeline-dot-border-width              | _2PX_                                    | -   |
+| --timeline-dot-default-color             | _var(--gray-5)_                          | -   |
+| --timeline-dot-primary-color             | _var(--primary-color)_                   | -   |
+| --timeline-dot-info-color                | _var(--info-color)_                      | -   |
+| --timeline-dot-success-color             | _var(--success-color)_                   | -   |
+| --timeline-dot-warning-color             | _var(--warning-color)_                   | -   |
+| --timeline-dot-danger-color              | _var(--danger-color)_                    | -   |
