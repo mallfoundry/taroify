@@ -135,6 +135,28 @@ import { Button } from "@taroify/core"
 <Button style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>渐变色按钮</Button>
 ```
 
+### 按钮组
+
+```tsx
+<Button.Group variant="contained" color="primary" shape="round">
+  <Button> <ArrowLeft /> 上一步</Button>
+  <Button> <Replay /> 刷新</Button>
+  <Button>下一步 <Arrow /></Button>
+</Button.Group>
+
+<Button.Group variant="outlined" shape="round" size="small">
+  <Button> <ArrowLeft /> 上一步</Button>
+  <Button><Replay /> 刷新</Button>
+  <Button>下一步 <Arrow /></Button>
+</Button.Group>
+
+<Button.Group variant="text" color="primary" shape="round">
+  <Button> <ArrowLeft /> 上一步</Button>
+  <Button> <Replay /> 刷新</Button>
+  <Button>下一步 <Arrow /></Button>
+</Button.Group>
+```
+
 ## API
 
 ### Props
