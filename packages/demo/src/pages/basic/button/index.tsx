@@ -1,5 +1,5 @@
 import { Button, Space, WhiteSpace } from "@taroify/core"
-import { ShopOutlined } from "@taroify/icons"
+import { Arrow, ArrowLeft, Replay, ShopOutlined } from "@taroify/icons"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -169,7 +169,7 @@ export default function ButtonDemo() {
           块级按钮
         </Button>
       </Block>
-      <Block title="按钮尺寸">
+      <Block title="自定义颜色">
         <Space>
           <Button style={{ backgroundColor: "#7232dd", color: "#fff" }}>单色按钮</Button>
           <Button style={{ borderColor: "#7232dd", color: "#7232dd" }}>单色按钮</Button>
@@ -181,6 +181,50 @@ export default function ButtonDemo() {
           >
             渐变色按钮
           </Button>
+        </Space>
+      </Block>
+      <Block title="按钮组">
+        <Space direction="vertical">
+          <Button.Group variant="contained" shape="round" color="primary">
+            <Button>
+              <ArrowLeft />
+              上一步
+            </Button>
+            <Button>
+              <Replay />
+              刷新
+            </Button>
+            <Button>
+              下一步
+              <Arrow />
+            </Button>
+          </Button.Group>
+          <Button.Group variant="outlined" shape="round">
+            <Button>
+              <ArrowLeft /> 上一步
+            </Button>
+            <Button>
+              <Replay />
+              刷新
+            </Button>
+            <Button>
+              下一步
+              <Arrow />
+            </Button>
+          </Button.Group>
+          <Button.Group variant="text" shape="round">
+            <Button>
+              <ArrowLeft /> 上一步
+            </Button>
+            <Button>
+              <Replay />
+              刷新
+            </Button>
+            <Button>
+              下一步
+              <Arrow />
+            </Button>
+          </Button.Group>
         </Space>
       </Block>
     </Page>

@@ -1,52 +1,51 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$button-line-height: 1.2;
-$button-border-width: var(--border-width-base, $border-width-base);
-$button-border-radius: var(--border-radius-sm, $border-radius-sm);
+$button-line-height: var(--button-line-height, 1.2);
+$button-border-width: var(--button-border-width, var(--border-width-base, $border-width-base));
+$button-border-radius: var(--button-border-radius, var(--border-radius-sm, $border-radius-sm));
+$button-border-radius-max: var(--button-border-radius-max, var(--border-radius-max, $border-radius-max));
+$button-transition-duration: var(--button-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
 
-$button-disabled-opacity: var(--disabled-opacity, $disabled-opacity);
+$button-disabled-opacity: var(--button-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
 
-$button-round-border-radius: var(--border-radius-max, $border-radius-max);
+$button-loading-icon-size: var(--button-loading-icon-size, 20px * $hd);
 
-$button-mini-height: 24px * $hd;
-$button-mini-padding: 0 var(--padding-base, $padding-base);
-$button-mini-font-size: var(--font-size-xs, $font-size-xs);
+$button-height-mini: var(--button-height-mini, 24px * $hd);
+$button-padding-mini: var(--button-padding-mini, 0 var(--padding-base, $padding-base));
+$button-font-size-mini: var(--button-font-size-mini, var(--font-size-xs, $font-size-xs));
 
-$button-small-height: 32px * $hd;
-$button-small-padding: 0 var(--padding-xs, $padding-xs);
-$button-small-font-size: var(--font-size-sm, $font-size-sm);
+$button-height-small: var(--button-height-small, 32px * $hd);
+$button-padding-small: var(--button-padding-small, 0 var(--padding-xs, $padding-xs));
+$button-font-size-small: var(--button-font-size-small, var(--font-size-sm, $font-size-sm));
 
-$button-medium-height: 44px * $hd;
-$button-medium-padding: 0 var(--padding-md, $padding-md);
-$button-medium-font-size: var(--font-size-md, $font-size-md);
+$button-height-medium: var(--button-height-medium, 44px * $hd);
+$button-padding-medium: var(--button-height-medium, 0 var(--padding-md, $padding-md));
+$button-font-size-medium: var(--button-font-size-medium, var(--font-size-md, $font-size-md));
 
-$button-large-height: 50px * $hd;
-$button-large-font-size: var(--font-size-lg, $font-size-lg);
+$button-height-large: var(--button-height-large, 50px * $hd);
+$button-font-size-large: var(--button-font-size-large, var(--font-size-lg, $font-size-lg));
 
-$button-default-color: var(--text-color, $text-color);
-$button-default-background-color: var(--white, $white);
-$button-default-border-color: var(--border-color, $border-color);
+$button-color-default: var(--button-color-default, var(--text-color, $text-color));
+$button-background-color-default: var(--button-background-color-default, var(--white, $white));
+$button-border-color-default: var(--button-border-color-default, var(--border-color, $border-color));
 
-$button-primary-color: var(--white, $white);
-$button-primary-background-color: var(--primary-color, $primary-color);
-$button-primary-border-color: var(--primary-color, $primary-color);
+$button-color-primary: var(--button-color-primary, var(--white, $white));
+$button-background-color-primary: var(--button-background-color-primary, var(--primary-color, $primary-color));
+$button-border-color-primary: var(--button-border-color-primary, $button-background-color-primary);
 
-$button-info-color: var(--white, $white);
-$button-info-background-color: var(--info-color, $info-color);
-$button-info-border-color: var(--info-color, $info-color);
+$button-color-info: var(--button-color-info, var(--white, $white));
+$button-background-color-info: var(--button-background-color-info, var(--info-color, $info-color));
+$button-border-color-info: var(--button-background-color-info, $button-background-color-info);
 
-$button-success-color: var(--white, $white);
-$button-success-background-color: var(--success-color, $success-color);
-$button-success-border-color: var(--success-color, $success-color);
+$button-color-success: var(--button-color-success, var(--white, $white));
+$button-background-color-success: var(--button-background-color-success, var(--success-color, $success-color));
+$button-border-color-success: var(--button-border-color-success,$button-background-color-success);
 
-$button-warning-color: var(--white, $white);
-$button-warning-background-color: var(--warning-color, $warning-color);
-$button-warning-border-color: var(--warning-color, $warning-color);
+$button-color-warning: var(--button-color-warning, var(--white, $white));
+$button-background-color-warning: var(--button-background-color-warning, var(--warning-color, $warning-color));
+$button-border-color-warning: var(--button-border-color-warning, $button-background-color-warning);
 
-$button-danger-color: var(--white, $white);
-$button-danger-background-color: var(--danger-color, $danger-color);
-$button-danger-border-color: var(--danger-color, $danger-color);
-
-$button-icon-size: 1.2em;
-$button-loading-icon-size: 20px * $hd;
+$button-color-danger: var(--button-color-danger, var(--white, $white));
+$button-background-color-danger: var(--button-background-color-danger, var(--danger-color, $danger-color));
+$button-border-color-danger: var(--button-border-color-danger, $button-background-color-danger);
