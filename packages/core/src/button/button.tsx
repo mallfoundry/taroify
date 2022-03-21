@@ -10,6 +10,7 @@ import { prefixClassname } from "../styles"
 import Children from "../utils/children"
 import { isElementOf, isObjectElement } from "../utils/validate"
 import ButtonContent from "./button-content"
+import ButtonGroupContext from "./button-group.context"
 import ButtonContext from "./button.context"
 import {
   ButtonColor,
@@ -97,6 +98,18 @@ function useButtonChildren(options: UseButtonChildrenOptions = {}) {
   )
 }
 
+function useButtonPropertyValue<T>(value1?: T, value2?: T, defaultValue?: T) {
+  return useMemo(() => {
+    if (value1) {
+      return value1
+    }
+    if (value2) {
+      return value2
+    }
+    return defaultValue
+  }, [defaultValue, value1, value2])
+}
+
 export interface ButtonProps
   extends Omit<TaroButtonProps, "size" | "formType" | "type" | "loading" | "plain"> {
   variant?: ButtonVariant
@@ -116,25 +129,38 @@ export default function Button(props: ButtonProps) {
   const {
     className,
     style,
-    variant = "contained",
-    shape,
-    size = "medium",
-    color = "default",
+    variant: variantProp,
+    shape: shapeProp,
+    size: sizeProp,
+    color: colorProp,
     formType = "button",
     block,
-    hairline,
-    disabled,
+    hairline: hairlineProp,
+    disabled: disabledProp,
     loading: loadingProp,
     icon,
     children: childrenProp,
     onClick,
     ...restProps
   } = props
+  const {
+    variant: variantCtx,
+    shape: shapeCtx,
+    size: sizeCtx,
+    color: colorCtx,
+    hairline: hairlineCtx,
+    disabled: disabledCtx,
+  } = useContext(ButtonGroupContext)
+  const { onClick: onCtxClick } = useContext(ButtonContext)
+  const variant = useButtonPropertyValue(variantProp, variantCtx, "contained")
+  const shape = useButtonPropertyValue(shapeProp, shapeCtx)
+  const size = useButtonPropertyValue(sizeProp, sizeCtx, "medium")
+  const color = useButtonPropertyValue(colorProp, colorCtx, "default")
+  const hairline = useButtonPropertyValue(hairlineProp, hairlineCtx)
+  const disabled = useButtonPropertyValue(disabledProp, disabledCtx)
 
   const loading = useButtonLoading(loadingProp)
   const children = useButtonChildren({ children: childrenProp, loading, icon })
-
-  const { onClick: onCtxClick } = useContext(ButtonContext)
 
   return (
     <View
