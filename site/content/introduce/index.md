@@ -8,7 +8,7 @@
 
 ### 介绍
 
-Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro React 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用。
+Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro React 版本，两者基于相同的视觉规范，提供近似一致的 API 接口，助力开发者快速搭建小程序应用。
 
 ### 特性
 
