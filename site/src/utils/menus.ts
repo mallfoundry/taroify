@@ -68,6 +68,10 @@ const menus = [
         title: "SafeArea 安全区域",
         to: "/components/safe-area/",
       },
+      {
+        title: "FixedView 固定视图",
+        to: "/components/fixed-view/",
+      },
     ],
   },
   {

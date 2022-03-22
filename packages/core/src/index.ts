@@ -12,6 +12,7 @@ export { default as Toast } from "./toast"
 export { default as Transition } from "./transition"
 export { default as WhiteSpace } from "./white-space"
 export { default as SafeArea } from "./safe-area"
+export { default as FixedView } from "./fixed-view"
 // Form Components
 export { default as AreaPicker } from "./area-picker"
 export { default as Cascader } from "./cascader"
