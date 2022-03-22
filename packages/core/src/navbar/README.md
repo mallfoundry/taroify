@@ -37,11 +37,12 @@ import Navbar from "@taroify/core/navbar"
 
 ### Navbar Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| title | 标题 | _string_ | `''` |
-| bordered | 是否显示下边框 | _boolean_ | `true` |
-| fixed | 是否固定在顶部 | _boolean_ | `false` |
+| 参数          | 说明                        | 类型        | 默认值     |
+|-------------|---------------------------|-----------|---------|
+| title       | 标题                        | _string_  | `''`    |
+| bordered    | 是否显示下边框                   | _boolean_ | `true`  |
+| fixed       | 是否固定在顶部                   | _boolean_ | `false` |
+| safeArea    | 安全区域，可选值 `top` `bottom`   | _string_  | -       |
 | placeholder | 固定在顶部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
 
 ### Navbar.NavLeft Props
