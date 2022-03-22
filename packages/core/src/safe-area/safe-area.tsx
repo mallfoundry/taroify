@@ -4,10 +4,10 @@ import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"
 
-type SafeAreaPosition = "top" | "bottom"
+export type SafeAreaPosition = "top" | "bottom"
 
 export interface SafeAreaProps extends ViewProps {
-  position: SafeAreaPosition
+  position?: SafeAreaPosition
 }
 
 function SafeArea(props: SafeAreaProps) {
