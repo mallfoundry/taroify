@@ -51,7 +51,7 @@ function Tabbar(props: TabbarProps) {
     value: valueProp,
     bordered,
     fixed,
-    placeholder,
+    placeholder = true,
     safeArea,
     children: childrenProp,
     onChange: onChangeProp,
@@ -82,7 +82,7 @@ function Tabbar(props: TabbarProps) {
       <FixedView
         position={fixed}
         safeArea={safeArea}
-        placeholder={fixed && prefixClassname("tabbar__placeholder")}
+        placeholder={fixed && placeholder && prefixClassname("tabbar__placeholder")}
       >
         <View
           className={classNames(
