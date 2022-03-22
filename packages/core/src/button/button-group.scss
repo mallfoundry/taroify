@@ -6,8 +6,8 @@
   .#{$component-prefix}button {
 
     &:not(&:first-child):not(&:last-child) {
-      border-radius: 0;
       border-right: 0;
+      border-radius: 0;
 
       &::after {
         border-radius: 0;
@@ -15,9 +15,9 @@
     }
 
     &:first-child, &:first-child::after {
+      border-right-width: 0;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-right-width: 0;
     }
 
     &:last-child, &:last-child::after {
