@@ -7,10 +7,4 @@
   width: 100%;
   height: var(--tabbar-height, $tabbar-height);
   background-color: var(--tabbar-background-color, $tabbar-background-color);
-
-  &--fixed {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
 }

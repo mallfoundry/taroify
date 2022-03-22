@@ -14,21 +14,17 @@ export interface ActionBarProps extends FlexProps {
 function ActionBar(props: ActionBarProps) {
   const { className, fixed, safeArea, placeholder, justify = "space-between", ...restProps } = props
   return (
-    <FixedView<FlexProps>
-      component={Flex}
-      justify={justify}
-      className={classnames(
-        prefixClassname("action-bar"),
-        {
-          [prefixClassname("action-bar--fixed")]: fixed,
-        },
-        className,
-      )}
+    <FixedView
       position={fixed}
       safeArea={safeArea}
       placeholder={fixed && prefixClassname("action-bar__placeholder")}
-      {...restProps}
-    />
+    >
+      <Flex
+        justify={justify}
+        className={classnames(prefixClassname("action-bar"), className)}
+        {...restProps}
+      />
+    </FixedView>
   )
 }
 

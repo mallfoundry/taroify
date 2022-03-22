@@ -67,25 +67,27 @@ function Navbar(props: NavbarProps) {
 
   return (
     <FixedView
-      className={classNames(
-        prefixClassname("navbar"),
-        {
-          [HAIRLINE_BORDER_BOTTOM]: bordered,
-          [prefixClassname("navbar--fixed")]: fixed,
-        },
-        className,
-      )}
-      position={fixed}
+      position={fixed && "top"}
       safeArea={safeArea}
       placeholder={fixed && prefixClassname("navbar__placeholder")}
-      {...restProps}
     >
-      <View className={classNames(prefixClassname("navbar__content"))}>
-        {left}
-        {title ?? (
-          <View className={classNames(prefixClassname("navbar__title"))} children={titleProp} />
+      <View
+        className={classNames(
+          prefixClassname("navbar"),
+          {
+            [HAIRLINE_BORDER_BOTTOM]: bordered,
+          },
+          className,
         )}
-        {right}
+        {...restProps}
+      >
+        <View className={classNames(prefixClassname("navbar__content"))}>
+          {left}
+          {title ?? (
+            <View className={classNames(prefixClassname("navbar__title"))} children={titleProp} />
+          )}
+          {right}
+        </View>
       </View>
     </FixedView>
   )

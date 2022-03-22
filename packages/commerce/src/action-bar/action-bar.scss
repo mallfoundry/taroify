@@ -7,10 +7,4 @@
   width: 100%;
   height: $action-bar-height;
   background: $action-bar-background;
-
-  &--fixed {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
 }
