@@ -12,12 +12,20 @@ export interface ActionBarProps extends FlexProps {
 }
 
 function ActionBar(props: ActionBarProps) {
-  const { className, fixed, safeArea, placeholder, justify = "space-between", ...restProps } = props
+  const {
+    className,
+    fixed,
+    safeArea,
+    placeholder = true,
+    justify = "space-between",
+    ...restProps
+  } = props
+
   return (
     <FixedView
       position={fixed}
       safeArea={safeArea}
-      placeholder={fixed && prefixClassname("action-bar__placeholder")}
+      placeholder={fixed && placeholder && prefixClassname("action-bar__placeholder")}
     >
       <Flex
         justify={justify}

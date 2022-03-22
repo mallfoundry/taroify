@@ -57,7 +57,7 @@ function Navbar(props: NavbarProps) {
     className,
     bordered,
     fixed,
-    placeholder,
+    placeholder = true,
     safeArea,
     title: titleProp,
     children: childrenProp,
@@ -69,7 +69,7 @@ function Navbar(props: NavbarProps) {
     <FixedView
       position={fixed && "top"}
       safeArea={safeArea}
-      placeholder={fixed && prefixClassname("navbar__placeholder")}
+      placeholder={fixed && placeholder && prefixClassname("navbar__placeholder")}
     >
       <View
         className={classNames(
