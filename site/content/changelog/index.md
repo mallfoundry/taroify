@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.0
+
+`2022-03-22`
+
+**New Component**
+
+- 新增 Button.Group 组件 [#414](https://github.com/mallfoundry/taroify/issues/414) [#416](https://github.com/mallfoundry/taroify/pull/416)
+- 新增 FixedView 组件 [#413](https://github.com/mallfoundry/taroify/issues/413) [#417](https://github.com/mallfoundry/taroify/pull/417)
+
+**Feature**
+
+- Tabbar
+  - 新增 safeArea 属性 [#417](https://github.com/mallfoundry/taroify/pull/417) [#418](https://github.com/mallfoundry/taroify/pull/418)
+- Navbar
+  - 新增 safeArea 属性 [#417](https://github.com/mallfoundry/taroify/pull/417) [#418](https://github.com/mallfoundry/taroify/pull/418)
+- ActionBar
+  - 新增 safeArea 属性 [#417](https://github.com/mallfoundry/taroify/pull/417) [#418](https://github.com/mallfoundry/taroify/pull/418)
+
 ### v0.0.28-alpha.1
 
 `2022-03-16`
