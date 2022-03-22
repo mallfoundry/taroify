@@ -1,4 +1,5 @@
 import { useUncontrolled } from "@taroify/hooks"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
@@ -79,20 +80,22 @@ function Tabbar(props: TabbarProps) {
       }}
     >
       <FixedView
-        className={classNames(
-          prefixClassname("tabbar"),
-          {
-            [HAIRLINE_BORDER_TOP_BOTTOM]: bordered,
-            [prefixClassname("tabbar--fixed")]: fixed,
-          },
-          className,
-        )}
         position={fixed}
         safeArea={safeArea}
         placeholder={fixed && prefixClassname("tabbar__placeholder")}
-        children={children}
-        {...restProps}
-      />
+      >
+        <View
+          className={classNames(
+            prefixClassname("tabbar"),
+            {
+              [HAIRLINE_BORDER_TOP_BOTTOM]: bordered,
+            },
+            className,
+          )}
+          children={children}
+          {...restProps}
+        />
+      </FixedView>
     </TabbarContext.Provider>
   )
 }
