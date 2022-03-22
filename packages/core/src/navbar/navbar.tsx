@@ -2,8 +2,9 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useMemo, useRef } from "react"
-import { usePlaceholder } from "../hooks"
+import { Children, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import FixedView from "../fixed-view"
+import { SafeAreaPosition } from "../safe-area"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_BOTTOM } from "../styles/hairline"
 import NavBarLeft from "./navbar-left"
@@ -44,8 +45,9 @@ function useNavbarChildren(children?: ReactNode): NavbarChildren {
 
 export interface NavbarProps extends ViewProps {
   bordered?: boolean
-  placeholder?: boolean
   fixed?: boolean
+  placeholder?: boolean
+  safeArea?: SafeAreaPosition
   title?: ReactNode
   children?: ReactNode
 }
@@ -56,46 +58,37 @@ function Navbar(props: NavbarProps) {
     bordered,
     fixed,
     placeholder,
+    safeArea,
     title: titleProp,
     children: childrenProp,
     ...restProps
   } = props
   const { left, title, right } = useNavbarChildren(childrenProp)
-  const rootRef = useRef()
 
-  const Placeholder = usePlaceholder(rootRef, { className: "navbar__placeholder" })
-
-  const Content = useMemo(
-    () => (
-      <View
-        ref={rootRef}
-        className={classNames(
-          prefixClassname("navbar"),
-          {
-            [HAIRLINE_BORDER_BOTTOM]: bordered,
-            [prefixClassname("navbar--fixed")]: fixed,
-          },
-          className,
+  return (
+    <FixedView
+      className={classNames(
+        prefixClassname("navbar"),
+        {
+          [HAIRLINE_BORDER_BOTTOM]: bordered,
+          [prefixClassname("navbar--fixed")]: fixed,
+        },
+        className,
+      )}
+      position={fixed}
+      safeArea={safeArea}
+      placeholder={fixed && prefixClassname("navbar__placeholder")}
+      {...restProps}
+    >
+      <View className={classNames(prefixClassname("navbar__content"))}>
+        {left}
+        {title ?? (
+          <View className={classNames(prefixClassname("navbar__title"))} children={titleProp} />
         )}
-        {...restProps}
-      >
-        <View className={classNames(prefixClassname("navbar__content"))}>
-          {left}
-          {title ?? (
-            <View className={classNames(prefixClassname("navbar__title"))} children={titleProp} />
-          )}
-          {right}
-        </View>
+        {right}
       </View>
-    ),
-    [bordered, className, fixed, left, restProps, right, title, titleProp],
+    </FixedView>
   )
-
-  if (fixed && placeholder) {
-    return <Placeholder children={Content} />
-  }
-
-  return Content
 }
 
 export default Navbar

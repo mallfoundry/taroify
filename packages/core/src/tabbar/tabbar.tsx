@@ -1,18 +1,10 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useMemo,
-  useRef,
-} from "react"
-import { usePlaceholder } from "../hooks"
+import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import FixedView from "../fixed-view"
+import { SafeAreaPosition } from "../safe-area"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import TabbarItem from "./tabbar-item"
@@ -42,9 +34,10 @@ function useTabbarChildren(children?: ReactNode) {
 export interface TabbarProps extends ViewProps {
   defaultValue?: any
   value?: any
-  fixed?: boolean
   bordered?: boolean
+  fixed?: boolean
   placeholder?: boolean
+  safeArea?: SafeAreaPosition
   children?: ReactNode
 
   onChange?(value: any): void
@@ -58,6 +51,7 @@ function Tabbar(props: TabbarProps) {
     bordered,
     fixed,
     placeholder,
+    safeArea,
     children: childrenProp,
     onChange: onChangeProp,
     ...restProps
@@ -71,51 +65,36 @@ function Tabbar(props: TabbarProps) {
 
   const children = useTabbarChildren(childrenProp)
 
-  const rootRef = useRef()
-
-  const PlaceHolder = usePlaceholder(rootRef, {
-    className: prefixClassname("tabbar__placeholder"),
-  })
-
   function onItemClick(dataKey?: any) {
     if (dataKey !== value) {
       setValue(dataKey)
     }
   }
 
-  function TabbarRender() {
-    return (
-      <TabbarContext.Provider
-        value={{
-          value,
-          onItemClick,
-        }}
-      >
-        <View
-          ref={rootRef}
-          className={classNames(
-            prefixClassname("tabbar"),
-            {
-              [HAIRLINE_BORDER_TOP_BOTTOM]: bordered,
-              [prefixClassname("tabbar--fixed")]: fixed,
-            },
-            className,
-          )}
-          children={children}
-          {...restProps}
-        />
-      </TabbarContext.Provider>
-    )
-  }
-
-  if (fixed && placeholder) {
-    return (
-      <PlaceHolder>
-        <TabbarRender />
-      </PlaceHolder>
-    )
-  }
-  return <TabbarRender />
+  return (
+    <TabbarContext.Provider
+      value={{
+        value,
+        onItemClick,
+      }}
+    >
+      <FixedView
+        className={classNames(
+          prefixClassname("tabbar"),
+          {
+            [HAIRLINE_BORDER_TOP_BOTTOM]: bordered,
+            [prefixClassname("tabbar--fixed")]: fixed,
+          },
+          className,
+        )}
+        position={fixed}
+        safeArea={safeArea}
+        placeholder={fixed && prefixClassname("tabbar__placeholder")}
+        children={children}
+        {...restProps}
+      />
+    </TabbarContext.Provider>
+  )
 }
 
 export default Tabbar
