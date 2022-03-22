@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { DependencyList, useState } from "react"
 import { getRect } from "../utils/dom/rect"
-import useMounted from "./use-mounted"
+import { useRenderedEffect } from "./index"
 
-export default function useHeight(elementOrRef: any) {
+export default function useHeight(elementOrRef: any, deps?: DependencyList) {
   const [height, setHeight] = useState<number>(0)
-  useMounted(() =>
+  useRenderedEffect(() => {
     getRect(elementOrRef)
       .then((rect) => rect?.height)
-      .then(setHeight),
-  )
+      .then(setHeight)
+  }, deps)
   return height
 }

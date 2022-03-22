@@ -141,10 +141,11 @@ function ActionBarWithCustomButton() {
 
 ### ActionBar Props
 
-|     参数     | 说明                                      |  类型     |   默认值   |
-|-------------|-------------------------------------------|-----------|----------|
-| fixed       | 是否固定在底部                              | _boolean_ |  `false`  |
-| placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ |  `false`  |
+| 参数          | 说明                        | 类型        | 默认值     |
+|-------------|---------------------------|-----------|---------|
+| fixed       | 是否固定在底部                   | _boolean_ | `false` |
+| safeArea    | 安全区域，可选值 `top` `bottom`   | _string_  | -       |
+| placeholder | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
 
 ### ActionBar.ButtonGroup Props
 

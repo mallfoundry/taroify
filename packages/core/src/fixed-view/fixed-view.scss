@@ -1,0 +1,21 @@
+@import "./variables";
+
+.#{$component-prefix}fixed-view {
+  position: fixed;
+  right: 0;
+  left: 0;
+
+  &, &__placeholder {
+    width: 100%;
+  }
+
+  &--top {
+    top: 0;
+    bottom: auto;
+  }
+
+  &--bottom {
+    top: auto;
+    bottom: 0;
+  }
+}

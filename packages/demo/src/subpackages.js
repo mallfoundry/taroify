@@ -58,6 +58,11 @@ const subpackages = [
         name: "SafeArea",
         path: "safe-area/index",
       },
+      {
+        title: "FixedView 固定视图",
+        name: "FixedView",
+        path: "fixed-view/index",
+      },
     ],
   },
   {
