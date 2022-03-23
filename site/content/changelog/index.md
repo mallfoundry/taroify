@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.2
+
+`2022-03-23`
+
+**Bug Fixes**
+
+- Button
+  - 修复微信端不能编译 SCSS 样式的问题 [#422](https://github.com/mallfoundry/taroify/issues/422) [#423](https://github.com/mallfoundry/taroify/pull/423)
+
 ### v0.0.29-alpha.1
 
 `2022-03-22`
