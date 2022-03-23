@@ -5,7 +5,7 @@
 
   .#{$component-prefix}button {
 
-    &:not(&:first-child):not(&:last-child) {
+    &:not(:first-child):not(:last-child) {
       border-right: 0;
       border-radius: 0;
 
