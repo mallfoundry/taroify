@@ -9,7 +9,7 @@ import { prefixClassname } from "../styles"
 import NativeTextarea, { NativeTextareaProps } from "./native-textarea"
 import { getStringLength } from "./textarea.shared"
 
-interface TextareaProps extends NativeTextareaProps {
+export interface TextareaProps extends NativeTextareaProps {
   limit?: number | boolean
   readonly?: boolean
 
