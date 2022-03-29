@@ -3,7 +3,8 @@
 
 $popup-z-index: 1010;
 $popup-background-color: var(--background-color-light, $background-color-light);
-$popup-transition: transform var(--animation-duration-base, $animation-duration-base);
+//$popup-transition: transform var(--animation-duration-base, $animation-duration-base);
+$popup-animation-duration: var(--popup-animation-duration, var(--animation-duration-base, $animation-duration-base));
 $popup-round-border-radius: 16px * $hd;
 // close icon
 $popup-close-icon-size: 22px * $hd;
