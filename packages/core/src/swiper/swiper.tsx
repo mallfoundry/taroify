@@ -413,15 +413,21 @@ function Swiper(props: SwiperProps) {
 
   const getTrackRect = useCallback(
     () =>
-      Promise.all([
-        getRect(rootRef),
-        getComputedStyle(rootRef, ["width", "height"]),
-      ]).then(([rect, style]) =>
-        makeRect(
-          style.width === "auto" ? rect.width : unitToPx(style.width),
-          style.height === "auto" ? rect.height : unitToPx(style.height),
-        ),
-      ),
+      new Promise<Rect>((resolve) => {
+        nextTick(() =>
+          resolve(
+            Promise.all([
+              getRect(rootRef),
+              getComputedStyle(rootRef, ["width", "height"]),
+            ]).then(([rect, style]) =>
+              makeRect(
+                style.width === "auto" ? rect.width : unitToPx(style.width),
+                style.height === "auto" ? rect.height : unitToPx(style.height),
+              ),
+            ),
+          ),
+        )
+      }),
     [],
   )
 
