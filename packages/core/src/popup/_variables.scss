@@ -1,13 +1,13 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$popup-z-index: 1010;
-$popup-background-color: var(--background-color-light, $background-color-light);
+$popup-z-index: var(--popup-z-index, 1010);
+$popup-background-color: var(--popup-background-color, var(--background-color-light, $background-color-light));
 $popup-animation-duration: var(--popup-animation-duration, var(--animation-duration-base, $animation-duration-base));
-$popup-round-border-radius: 16px * $hd;
+$popup-border-radius-rounded: var(--popup-border-radius-rounded, 16px * $hd);
 // close icon
-$popup-close-icon-size: 22px * $hd;
-$popup-close-icon-color: var(--gray-5, $gray-5);
-$popup-close-icon-active-color: var(--gray-6, $gray-6);
-$popup-close-icon-margin: 16px * $hd;
-$popup-close-icon-z-index: 1;
+$popup-close-icon-z-index: var(--popup-close-icon-z-index, 1);
+$popup-close-icon-size: var(--popup-close-icon-size, 22px * $hd);
+$popup-close-icon-color: var(--popup-close-icon-color, var(--gray-5, $gray-5));
+$popup-close-icon-color-active: var(--popup-close-icon-color-active, var(--gray-6, $gray-6));
+$popup-close-icon-margin: var(--popup-close-icon-margin, 16px * $hd);
