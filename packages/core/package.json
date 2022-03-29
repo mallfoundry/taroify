@@ -1,6 +1,6 @@
 {
   "name": "@taroify/~core",
-  "version": "0.0.29-alpha.2",
+  "version": "0.0.29-alpha.3",
   "license": "MIT",
   "private": "true",
   "keywords": [
@@ -22,8 +22,8 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@taroify/hooks": "^0.0.29-alpha.2",
-    "@taroify/icons": "^0.0.29-alpha.2",
+    "@taroify/hooks": "^0.0.29-alpha.3",
+    "@taroify/icons": "^0.0.29-alpha.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "promise": "^8.1.0",

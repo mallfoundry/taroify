@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.3
+
+`2022-03-29`
+
+**Feature**
+
+- Textarea
+  - 导出 TextareaProps 类型 [#425](https://github.com/mallfoundry/taroify/pull/425) [@bingtsingw](https://github.com/bingtsingw)
+
+**Bug Fixes**
+
+- Popup
+  - 修复弹出抖动两次的问题 [#404](https://github.com/mallfoundry/taroify/issues/404) [#431](https://github.com/mallfoundry/taroify/pull/431)
+- styles
+  - 删除重复 $text-link-color 变量 [#427](https://github.com/mallfoundry/taroify/pull/427) [@Yorksh1re](https://github.com/Yorksh1re)
+
 ### v0.0.29-alpha.2
 
 `2022-03-23`
