@@ -76,39 +76,55 @@ import { Image } from "@taroify/core"
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| src | 图片链接 | _string_ | - |
-| mode | 图片填充模式 | _string_ | `fill` |
-| alt | 替代文本 | _string_ | - |
-| shape | 图片形状 `square` `rounded` `circle` | _boolean_ | - |
-| lazyLoad | 是否开启图片懒加载 | _boolean_ | `false` |
-| placeholder | 加载时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<Photo />` |
-| fallback | 失败时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<PhotoFail />` |
+| 参数          | 说明                                  | 类型          | 默认值             |
+|-------------|-------------------------------------|-------------|-----------------|
+| src         | 图片链接                                | _string_    | -               |
+| mode        | 图片填充模式                              | _string_    | `fill`          |
+| alt         | 替代文本                                | _string_    | -               |
+| shape       | 图片形状 `square` `rounded` `circle`    | _boolean_   | -               |
+| lazyLoad    | 是否开启图片懒加载                           | _boolean_   | `false`         |
+| placeholder | 加载时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<Photo />`     |
+| fallback    | 失败时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<PhotoFail />` |
 
 ### Modes
 
-| 名称         | 含义                                                   |
-| ----------- | ----------------------------------------------------- |
-| scaleToFill | 缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素           |
-| aspectFit   | 缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。 |
-| aspectFill  | 缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取。    |
-| widthFix    | 缩放模式，宽度不变，高度自动变化，保持原图宽高比不变            |
-| heightFix   | 缩放模式，高度不变，宽度自动变化，保持原图宽高比不变            |
-| top         | 裁剪模式，不缩放图片，只显示图片的顶部区域                    |
-| bottom      | 裁剪模式，不缩放图片，只显示图片的底部区域                    |
-| center      | 裁剪模式，不缩放图片，只显示图片的中间区域                    |
-| left        | 裁剪模式，不缩放图片，只显示图片的左边区域                    |
-| right       | 裁剪模式，不缩放图片，只显示图片的右边区域                    |
-| topLeft     | 裁剪模式，不缩放图片，只显示图片的左上边区域                  |
-| topRight    | 裁剪模式，不缩放图片，只显示图片的右上边区域                  |
-| bottomLeft  | 裁剪模式，不缩放图片，只显示图片的左下边区域                  |
-| bottomRight | 裁剪模式，不缩放图片，只显示图片的右下边区域                  |
+| 名称          | 含义                                                                 |
+|-------------|--------------------------------------------------------------------|
+| scaleToFill | 缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素                             |
+| aspectFit   | 缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。                    |
+| aspectFill  | 缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取。 |
+| widthFix    | 缩放模式，宽度不变，高度自动变化，保持原图宽高比不变                                         |
+| heightFix   | 缩放模式，高度不变，宽度自动变化，保持原图宽高比不变                                         |
+| top         | 裁剪模式，不缩放图片，只显示图片的顶部区域                                              |
+| bottom      | 裁剪模式，不缩放图片，只显示图片的底部区域                                              |
+| center      | 裁剪模式，不缩放图片，只显示图片的中间区域                                              |
+| left        | 裁剪模式，不缩放图片，只显示图片的左边区域                                              |
+| right       | 裁剪模式，不缩放图片，只显示图片的右边区域                                              |
+| topLeft     | 裁剪模式，不缩放图片，只显示图片的左上边区域                                             |
+| topRight    | 裁剪模式，不缩放图片，只显示图片的右上边区域                                             |
+| bottomLeft  | 裁剪模式，不缩放图片，只显示图片的左下边区域                                             |
+| bottomRight | 裁剪模式，不缩放图片，只显示图片的右下边区域                                             |
 
 ### Events
 
-| 事件名 | 说明                 | 回调参数             |
-| ------ | ------------------ | ------------------ |
-| onClick  | 点击图片时触发     | _event: MouseEvent_ |
-| onLoad   | 图片加载完毕时触发  | -                   |
-| onError | 图片加载失败时触发   | -                   |
+| 事件名     | 说明        | 回调参数                |
+|---------|-----------|---------------------|
+| onClick | 点击图片时触发   | _event: MouseEvent_ |
+| onLoad  | 图片加载完毕时触发 | -                   |
+| onError | 图片加载失败时触发 | -                   |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                   | 默认值                       | 描述  |
+|--------------------------------------|---------------------------|-----|
+| --image-placeholder-color            | _var(var(--gray-6)_       | -   |
+| --image-placeholder-font-size        | _var(--font-size-md)_     | -   |
+| --image-placeholder-icon-size        | _32px * $hd_              | -   |
+| --image-placeholder-icon-color       | _var(--gray-4)_           | -   |
+| --image-placeholder-background-color | _var(--background-color)_ | -   |
+
+

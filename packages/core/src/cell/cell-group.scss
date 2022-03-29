@@ -1,22 +1,22 @@
 @import "./variables";
 
 .#{$component-prefix}cell-group {
-  background-color: var(--cell-group-background-color, $cell-group-background-color);
+  background: $cell-group-background-color;
 
   &--inset {
-    margin: var(--cell-group-inset-padding, $cell-group-inset-padding);
+    margin: $cell-group-inset-padding;
     overflow: hidden;
-    border-radius: var(--cell-group-inset-border-radius, $cell-group-inset-border-radius);
+    border-radius: $cell-group-inset-border-radius;
   }
 
   &__title {
-    padding: var(--cell-group-title-padding, $cell-group-title-padding);
-    font-size: var(--cell-group-title-font-size, $cell-group-title-font-size);
-    line-height: var(--cell-group-title-line-height, $cell-group-title-line-height);
-    color: var(--cell-group-title-color, $cell-group-title-color);
+    padding: $cell-group-title-padding;
+    font-size: $cell-group-title-font-size;
+    line-height: $cell-group-title-line-height;
+    color: $cell-group-title-color;
 
     &--inset {
-      padding: var(--cell-group-inset-title-padding, $cell-group-inset-title-padding);
+      padding: $cell-group-inset-title-padding;
     }
   }
 }

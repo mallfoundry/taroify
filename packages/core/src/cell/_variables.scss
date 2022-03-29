@@ -2,41 +2,37 @@
 @import "../styles/variables";
 @import "../styles/mixins/hairline";
 
-$cell-font-size: var(--font-size-md, $font-size-md);
-$cell-line-height: 24px * $hd;
+$cell-font-size: var(--cell-font-size, var(--font-size-md, $font-size-md));
+$cell-line-height: var(--cell-line-height, 24px * $hd);
 
-$cell-text-color: var(--text-color, $text-color);
-$cell-background-color: var(--white, $white);
-$cell-border-color: var(--border-color, $border-color);
-$cell-value-color: var(--gray-6, $gray-6);
-$cell-active-color: var(--active-color, $active-color);
-$cell-required-color: var(--danger-color, $danger-color);
+$cell-color: var(--cell-color, var(--text-color, $text-color));
+$cell-background-color: var(--cell-background-color, var(--white, $white));
+$cell-border-color: var(--cell-border-color, var(--border-color, $border-color));
+$cell-value-color: var(--cell-value-color, var(--gray-6, $gray-6));
+$cell-active-color: var(--cell-active-color, var(--active-color, $active-color));
+$cell-required-color: var(--cell-required-color, var(--danger-color, $danger-color));
 
-$cell-icon-size: 16px * $hd;
-$cell-icon-margin-left: 4px * $hd;
-$cell-right-icon-margin-right: 4px * $hd;
+$cell-icon-size: var(--cell-icon-size, 16px * $hd);
+$cell-icon-margin-left: var(--cell-icon-margin-left, 4px * $hd);
+$cell-right-icon-margin-right: var(--cell-right-icon-margin-right, 4px * $hd);
 
-$cell-brief-color: var(--gray-6, $gray-6);
-$cell-brief-font-size: var(--font-size-sm, $font-size-sm);
-$cell-brief-line-height: var(--line-height-sm, $line-height-sm);
-$cell-brief-margin-top: var(--padding-base, $padding-base);
+$cell-brief-margin-top: var(--cell-brief-margin-top, var(--padding-base, $padding-base));
+$cell-brief-font-size: var(--cell-brief-font-size, var(--font-size-sm, $font-size-sm));
+$cell-brief-line-height: var(--cell-brief-line-height, var(--line-height-sm, $line-height-sm));
+$cell-brief-color: var(--cell-brief-color, var(--gray-6, $gray-6));
 
-$cell-vertical-padding: 10px * $hd;
-$cell-horizontal-padding: var(--padding-md, $padding-md);
+$cell-vertical-padding: var(--cell-vertical-padding, 10px * $hd);
+$cell-horizontal-padding: var(--cell-horizontal-padding, var(--padding-md, $padding-md));
 
-$cell-medium-vertical-padding: var(--padding-sm, $padding-sm);
-$cell-medium-title-font-size: var(--font-size-lg, $font-size-lg);
-$cell-medium-title-font-size: var(--font-size-md, $font-size-md);
+$cell-vertical-padding-large: var(--cell-vertical-padding-large, var(--padding-sm, $padding-sm));
+$cell-title-font-size-large: var(--cell-title-font-size-large, var(--font-size-lg, $font-size-lg));
+$cell-subtitle-font-size-large: var(--cell-subtitle-font-size-large, var(--font-size-md, $font-size-md));
 
-$cell-large-vertical-padding: var(--padding-sm, $padding-sm);
-$cell-large-title-font-size: var(--font-size-lg, $font-size-lg);
-$cell-large-subtitle-font-size: var(--font-size-md, $font-size-md);
-
-$cell-group-background-color: var(--white, $white);
-$cell-group-title-color: var(--gray-, $gray-6);
-$cell-group-title-padding: var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
-$cell-group-title-font-size: var(--font-size-md, $font-size-md);
-$cell-group-title-line-height: 16px * $hd;
-$cell-group-inset-padding: 0 var(--padding-md, $padding-md);
-$cell-group-inset-border-radius: var(--border-radius-lg, $border-radius-lg);
-$cell-group-inset-title-padding: var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs) var(--padding-xl, $padding-xl);
+$cell-group-background-color: var(--cell-group-background-color, var(--white, $white));
+$cell-group-title-color: var(--cell-group-title-color, var(--gray-6, $gray-6));
+$cell-group-title-padding: var(--cell-group-title-padding, var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs));
+$cell-group-title-font-size: var(--cell-group-title-font-size, var(--font-size-md, $font-size-md));
+$cell-group-title-line-height: var(--cell-group-title-line-height, 16px * $hd);
+$cell-group-inset-padding: var(--cell-group-inset-padding, 0 var(--padding-md, $padding-md));
+$cell-group-inset-border-radius: var(--cell-group-inset-border-radius, var(--border-radius-lg, $border-radius-lg));
+$cell-group-inset-title-padding: var(--cell-group-inset-title-padding, var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs) var(--padding-xl, $padding-xl));
