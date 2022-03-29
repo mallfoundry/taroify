@@ -20,7 +20,7 @@ $button-padding-small: var(--button-padding-small, 0 var(--padding-xs, $padding-
 $button-font-size-small: var(--button-font-size-small, var(--font-size-sm, $font-size-sm));
 
 $button-height-medium: var(--button-height-medium, 44px * $hd);
-$button-padding-medium: var(--button-height-medium, 0 var(--padding-md, $padding-md));
+$button-padding-medium: var(--button-padding-medium, 0 var(--padding-md, $padding-md));
 $button-font-size-medium: var(--button-font-size-medium, var(--font-size-md, $font-size-md));
 
 $button-height-large: var(--button-height-large, 50px * $hd);
