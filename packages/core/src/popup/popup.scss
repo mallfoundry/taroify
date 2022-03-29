@@ -2,11 +2,11 @@
 
 .#{$component-prefix}popup {
   position: fixed;
-  z-index: var(--popup-z-index, $popup-z-index);
+  z-index: $popup-z-index;
   max-height: 100%;
   overflow-y: auto;
-  background: var(--popup-background-color, $popup-background-color);
-  transition: var(--popup-transition, $popup-transition);
+  background: $popup-background-color;
+  animation-duration: $popup-animation-duration;
   -webkit-overflow-scrolling: touch;
 
   &--center {
@@ -21,7 +21,7 @@
     width: 100%;
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: 0 0 var(--popup-round-border-radius, $popup-round-border-radius) var(--popup-round-border-radius, $popup-round-border-radius);
+      border-radius: 0 0 $popup-border-radius-rounded $popup-border-radius-rounded;
     }
   }
 
@@ -31,7 +31,7 @@
     width: 100%;
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: var(--popup-round-border-radius, $popup-round-border-radius) var(--popup-round-border-radius, $popup-round-border-radius) 0 0;
+      border-radius: $popup-border-radius-rounded $popup-border-radius-rounded 0 0;
     }
   }
 
@@ -41,7 +41,7 @@
     transform: translate3d(0, -50%, 0);
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: var(--popup-round-border-radius, $popup-round-border-radius) 0 0 var(--popup-round-border-radius, $popup-round-border-radius);
+      border-radius: $popup-border-radius-rounded 0 0 $popup-border-radius-rounded;
     }
 
     &.#{$component-prefix}transition-slide-right {
@@ -66,7 +66,7 @@
     transform: translate3d(0, -50%, 0);
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: 0 var(--popup-round-border-radius, $popup-round-border-radius) var(--popup-round-border-radius, $popup-round-border-radius) 0;
+      border-radius: 0 $popup-border-radius-rounded $popup-border-radius-rounded 0;
     }
 
     &.#{$component-prefix}transition-slide-left {
@@ -87,33 +87,33 @@
 
   &__close-icon {
     position: absolute;
-    z-index: var(--popup-close-icon-z-index, $popup-close-icon-z-index);
-    color: var(--popup-close-icon-color, $popup-close-icon-color);
+    z-index: $popup-close-icon-z-index;
+    color: $popup-close-icon-color;
     cursor: pointer;
-    size: var(--popup-close-icon-size, $popup-close-icon-size);
+    size: $popup-close-icon-size;
 
     &:active {
-      color: var(--popup-close-icon-active-color, $popup-close-icon-active-color);
+      color: $popup-close-icon-color-active;
     }
 
     &--top-left {
-      top: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      left: var(--popup-close-icon-margin, $popup-close-icon-margin);
+      top: $popup-close-icon-margin;
+      left: $popup-close-icon-margin;
     }
 
     &--top-right {
-      top: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      right: var(--popup-close-icon-margin, $popup-close-icon-margin);
+      top: $popup-close-icon-margin;
+      right: $popup-close-icon-margin;
     }
 
     &--bottom-left {
-      bottom: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      left: var(--popup-close-icon-margin, $popup-close-icon-margin);
+      bottom: $popup-close-icon-margin;
+      left: $popup-close-icon-margin;
     }
 
     &--bottom-right {
-      right: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      bottom: var(--popup-close-icon-margin, $popup-close-icon-margin);
+      right: $popup-close-icon-margin;
+      bottom: $popup-close-icon-margin;
     }
   }
 }
