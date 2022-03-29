@@ -93,8 +93,8 @@ import { Cell } from "@taroify/core"
 
 | 参数        | 说明                                               | 类型          | 默认值     |
 |-----------|--------------------------------------------------|-------------|---------|
-| title     | 左侧标题                                             | _number \   | string_ | - |
-| children  | 右侧内容                                             | _number \   | string_ | - |
+| title     | 左侧标题                                             | _number \| string_ | - |
+| children  | 右侧内容                                             | _number \| string_ | - |
 | brief     | 标题下方的描述信息                                        | _string_    | -       |
 | size      | 单元格大小，可选值为 `large`                               | _string_    | -       |
 | icon      | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | -       |

@@ -64,7 +64,7 @@ import Popup from "@taroify/core/popup"
 | defaultOpen | 默认是否显示弹出层                               | _boolean_ | `false`  |
 | open        | 是否显示弹出层                                 | _boolean_ | `false`  |
 | placement   | 弹出位置，可选值为 `top` `bottom` `right` `left` | _string_  | `center` |
-| duration    | 动画时长，单位毫秒                               | _number \ | string_  | `300` |
+| duration    | 动画时长，单位毫秒                               | _number \| string_  | `300` |
 | rounded     | 是否显示圆角                                  | _boolean_ | `false`  |
 
 ### Popup.Backdrop Props
@@ -75,7 +75,7 @@ import Popup from "@taroify/core/popup"
 | style     | 背景板样式       | _CSSProperties_ | `false` |
 | open      | 是否显示背景板     | _boolean_       | `false` |
 | closeable | 是否在点击遮罩层后关闭 | _boolean_       | `true`  |
-| duration  | 动画时长，单位毫秒   | _number \       | string_ | `300` |
+| duration  | 动画时长，单位毫秒   | _number \| string_ | `300` |
 
 ### Popup.Close Props
 
