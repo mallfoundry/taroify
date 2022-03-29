@@ -11,7 +11,7 @@
     "watch": "gulp watch",
     "build:www": "gulp buildWww",
     "build:packages": "gulp buildPackages",
-    "build": "yarn run clean && yarn run build:packages  && yarn run build:www",
+    "build": "yarn run clean && yarn run build:packages && yarn run build:www",
     "publish": "yarn run clean  && yarn run build && lerna publish from-package",
     "lerna:prerelease": "lerna version prerelease --yes --no-git-tag-version --conventional-graduate",
     "lerna:prepatch": "lerna version prepatch --yes --no-git-tag-version --conventional-graduate",
