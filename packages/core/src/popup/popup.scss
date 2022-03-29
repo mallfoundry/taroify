@@ -6,8 +6,8 @@
   max-height: 100%;
   overflow-y: auto;
   background: var(--popup-background-color, $popup-background-color);
-  //transition: var(--popup-transition, $popup-transition);
-  animation-duration: $popup-animation-duration;
+  transition: var(--popup-transition, $popup-transition);
+  //animation-duration: $popup-animation-duration;
   -webkit-overflow-scrolling: touch;
 
   &--center {
