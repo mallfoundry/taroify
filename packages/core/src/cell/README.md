@@ -118,7 +118,6 @@ import { Cell } from "@taroify/core"
 
 | 名称                               | 默认值                                                                       | 描述  |
 |----------------------------------|---------------------------------------------------------------------------|-----|
-| --button-line-height             | _1.2_                                                                     | -   |
 | --cell-font-size                 | _var(--font-size-md)_                                                     | -   |
 | --cell-line-height               | _24px * $hd_                                                              | -   |
 | --cell-color                     | _var(--text-color)_                                                       | -   |

@@ -1,8 +1,8 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$image-placeholder-text-color: var(--gray-6, $gray-6);
-$image-placeholder-font-size: var(--font-size-md, $font-size-md);
-$image-placeholder-icon-size: 32px * $hd;
-$image-placeholder-icon-color: var(--gray-4, $gray-4);
-$image-placeholder-background-color: var(--background-color, $background-color);
+$image-placeholder-color: var(--image-placeholder-color, var(--gray-6, $gray-6));
+$image-placeholder-font-size: var(--image-placeholder-font-size, var(--font-size-md, $font-size-md));
+$image-placeholder-icon-size: var(--image-placeholder-icon-size, 32px * $hd);
+$image-placeholder-icon-color: var(--image-placeholder-icon-color, var(--gray-4, $gray-4));
+$image-placeholder-background-color: var(--image-placeholder-background-color, var(--background-color, $background-color));
