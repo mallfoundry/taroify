@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.4
+
+`2022-04-01`
+
+**Bug Fixes**
+
+- DropdownMenu
+  - 修复弹出抖动两次的问题 [#426](https://github.com/mallfoundry/taroify/issues/426) [#436](https://github.com/mallfoundry/taroify/pull/436)
+
 ### v0.0.29-alpha.3
 
 `2022-03-29`
