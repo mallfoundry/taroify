@@ -125,17 +125,20 @@ function NoticeBar(props: NoticeBarProps) {
         return
       }
 
-      const { width: wrapRefWidth } = await getRect(wrapRef)
-      const { width: contentRefWidth } = await getRect(contentRef)
-
-      if (scrollable || contentRefWidth > wrapRefWidth) {
-        doubleRaf(() => {
-          wrapWidthRef.current = wrapRefWidth
-          contentWidthRef.current = contentRefWidth
-          setOffset(-contentRefWidth)
-          setDuration(contentRefWidth / +speed)
-        })
-      }
+      nextTick(() =>
+        Promise.all([getRect(wrapRef), getRect(contentRef)]).then(
+          ([{ width: wrapRefWidth }, { width: contentRefWidth }]) => {
+            if (scrollable || contentRefWidth > wrapRefWidth) {
+              doubleRaf(() => {
+                wrapWidthRef.current = wrapRefWidth
+                contentWidthRef.current = contentRefWidth
+                setOffset(-contentRefWidth)
+                setDuration(contentRefWidth / +speed)
+              })
+            }
+          },
+        ),
+      )
     }, +delay)
   }
 
