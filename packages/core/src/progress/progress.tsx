@@ -7,7 +7,7 @@ import { prefixClassname } from "../styles"
 
 type ProgressColor = "primary" | "info" | "success" | "warning" | "danger"
 
-interface ProgressProps extends ViewProps {
+export interface ProgressProps extends ViewProps {
   animated?: boolean
   striped?: boolean
   inactive?: boolean
