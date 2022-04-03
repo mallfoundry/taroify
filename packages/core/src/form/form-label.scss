@@ -4,9 +4,9 @@
   box-sizing: border-box;
   display: flex;
   flex: none;
-  width: var(--form-label-width, $form-label-width);
-  margin-right: var(--form-label-margin-right, $form-label-margin-right);
-  color: var(--form-label-color, $form-label-color);
+  width: $form-label-width;
+  margin-right: $form-label-margin-right;
+  color: $form-label-color;
   text-align: left;
   word-wrap: break-word;
 
@@ -28,7 +28,7 @@
   &--required {
     &::before {
       margin-right: 2px * $hd;
-      color: var(--form-required-color, $form-required-color);
+      color: $form-label-required-color;
       content: '*';
     }
   }

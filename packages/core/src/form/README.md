@@ -497,3 +497,28 @@ function CalendarField() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                 | 默认值                       | 描述  |
+|------------------------------------|---------------------------|-----|
+| form-label-width                   | _6.2em_                   | -   |
+| form-label-color                   | _var(--gray-7)_           | -   |
+| form-label-margin-right            | _var(--padding-sm)_       | -   |
+| form-label-required-color          | _var(--red)_              | -   |
+| form-label-disabled-color          | _var(--gray-5)_           | -   |
+| form-item-icon-size                | _16px * $hd_              | -   |
+| form-item-right-icon-color         | _var(--gray-6)_           | -   |
+| form-item-right-icon-padding       | _0 var(--padding-xs)_     | -   |
+| form-item-right-icon-margin-right  | _-8px * $hd_              | -   |
+| form-item-right-button-margin-left | _var(--padding-xs)_       | -   |
+| form-control-color                 | _var(--text-color)_       | -   |
+| form-control-min-height            | _var(--cell-line-height)_ | -   |
+| form-feedback-font-size            | _var(--font-size-sm)_     | -   |
+| form-feedback-valid-color          | _var(--success-color)_    | -   |
+| form-feedback-warning-color        | _var(--warning-color)_    | -   |
+| form-feedback-invalid-color        | _var(--danger-color)_     | -   |
