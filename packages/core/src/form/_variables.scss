@@ -2,20 +2,22 @@
 @import "../styles/variables";
 @import "../cell/variables";
 
-$form-required-color: var(--red, $red);
+$form-label-width: var(--form-label-width, 6.2em);
+$form-label-color: var(--form-label-color, var(--gray-7, $gray-7));
+$form-label-margin-right: var(--form-label-margin-right, var(--padding-sm, $padding-sm));
+$form-label-required-color: var(--form-label-required-color, var(--red, $red));
+$form-label-disabled-color: var(--form-label-disabled-color, var(--gray-5, $gray-5));
 
-$form-label-width: 6.2em;
-$form-label-color: var(--gray-7, $gray-7);
-$form-label-margin-right: var(--padding-sm, $padding-sm);
-
-$form-item-disabled-color: var(--gray-5, $gray-5);
-$form-item-icon-size: 16px * $hd;
+$form-item-icon-size: var(--form-item-icon-size, 16px * $hd);
 $form-item-right-icon-color: var(--gray-6, $gray-6);
+$form-item-right-icon-padding: var(--form-item-right-icon-padding, 0 var(--padding-xs, $padding-xs));
+$form-item-right-icon-margin-right: var(--form-item-right-icon-margin-right, -8px * $hd);
+$form-item-right-button-margin-left: var(--form-item-right-button-margin-left, var(--padding-xs, $padding-xs));
 
-$form-control-color: var(--text-color, $text-color);
-$form-control-min-height: var(--cell-line-height, $cell-line-height);
+$form-control-color: var(--form-control-color, var(--text-color, $text-color));
+$form-control-min-height: var(--form-control-min-height, $cell-line-height);
 
-$form-feedback-font-size: var(--font-size-sm, $font-size-sm);
-$form-feedback-valid-color: var(--success-color, $success-color);
-$form-feedback-warning-color: var(--warning-color, $warning-color);
-$form-feedback-invalid-color: var(--danger-color, $danger-color);
+$form-feedback-font-size: var(--form-feedback-font-size, var(--font-size-sm, $font-size-sm));
+$form-feedback-valid-color: var(--form-feedback-valid-color, var(--success-color, $success-color));
+$form-feedback-warning-color: var(--form-feedback-warning-color, var(--warning-color, $warning-color));
+$form-feedback-invalid-color: var(--form-feedback-invalid-color, var(--danger-color, $danger-color));

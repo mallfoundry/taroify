@@ -1,14 +1,28 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$cascader-header-height: 48px * $hd;
-$cascader-header-padding: 0 var(--padding-md, $padding-md);
-$cascader-header-font-size: var(--font-size-lg, $font-size-lg);
-$cascader-header-line-height: 20px * $hd;
-$cascader-active-icon-size: 18px * $hd;
-$cascader-tabs-height: 48px * $hd;
-$cascader-active-color: var(--danger-color, $danger-color);
-$cascader-options-height: 384px * $hd;
-$cascader-option-disabled-color: $gray-5;
-$cascader-tab-color: $text-color;
-$cascader-unselected-tab-color: $gray-6;
+$cascader-active-color: var(--cascader-active-color, var(--danger-color, $danger-color));
+//
+$cascader-header-height: var(--cascader-header-height, 48px * $hd);
+$cascader-header-padding: var(--cascader-header-padding, 0 var(--padding-md, $padding-md));
+$cascader-header-font-size: var(--cascader-header-font-size, var(--font-size-lg, $font-size-lg));
+$cascader-header-font-weight: var(--cascader-header-font-weight, var(--font-weight-bold, $font-weight-bold));
+$cascader-header-line-height: var(--cascader-header-line-height, 20px * $hd);
+//
+$cascader-tabs-height: var(--cascader-tabs-height, 48px * $hd);
+//
+$cascader-tab-font-weight: var(--cascader-tab-font-weight, var(--font-weight-bold, $font-weight-bold));
+$cascader-tab-color: var(--cascader-tab-color, var(--text-color, $text-color));
+$cascader-inactive-tab-color: var(--cascader-inactive-tab-color, var(--gray-6, $gray-6));
+//
+$cascader-options-height: var(--cascader-options-height, 384px * $hd);
+//
+$cascader-option-padding: var(--cascader-option-padding, 10px * $hd var(--padding-md, $padding-md));
+$cascader-option-font-size: var(--cascader-option-font-size, var(--font-size-md, $font-size-md));
+$cascader-option-line-height: var(--cascader-option-line-height, var(--line-height-md, $line-height-md));
+$cascader-option-active-background-color: var(--cascader-option-active-background-color, var(--active-color, $active-color));
+$cascader-disabled-option-color: var(--cascader-disabled-option-color, var(--gray-5, $gray-5));
+$cascader-active-option-color: var(--cascader-active-option-color, $cascader-active-color);
+$cascader-active-option-font-weight: var(--cascader-active-option-font-weight, var(--font-weight-bold, $font-weight-bold));
+//
+$cascader-active-icon-font-size: var(--cascader-active-icon-font-size, 18px * $hd);

@@ -5,25 +5,8 @@
 .checkbox-demo {
 
   .custom-color {
-    .#{$component-prefix}checkbox__icon--checked {
-
-      .#{$component-prefix}icon {
-        border-color: #ee0a24;
-        background: #ee0a24;
-      }
-    }
-  }
-
-  .basic-checkbox-group {
-    .#{$component-prefix}checkbox {
-      margin-bottom: 8px * 2;
-    }
-  }
-
-  .horizontal-checkbox-group {
-    .#{$component-prefix}checkbox {
-      margin-right: 8px * 2;
-    }
+    --checkbox-checked-icon-border-color: #ee0a24;
+    --checkbox-checked-icon-background-color: #ee0a24;
   }
 
   .checkbox-cell-group {

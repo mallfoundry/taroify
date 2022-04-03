@@ -1,29 +1,39 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$calendar-background-color: var(--calendar-background-color, var(--white, $white));
 $calendar-active-color: var(--calendar-active-color, var(--danger-color, $danger-color));
+$calendar-background-color: var(--calendar-background-color, var(--white, $white));
+//
 $calendar-header-box-shadow: var(--calendar-header-box-shadow, (0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)));
 $calendar-header-title-height: var(--calendar-header-title-height, 44px * $hd);
 $calendar-header-title-font-size: var(--calendar-header-title-font-size, var(--font-size-lg, $font-size-lg));
 $calendar-header-subtitle-font-size: var(--calendar-header-subtitle-font-size, var(--font-size-md, $font-size-md));
+//
 $calendar-weekdays-height: var(--calendar-weekdays-height, 30px * $hd);
 $calendar-weekdays-font-size: var(--calendar-weekdays-font-size, var(--font-size-sm, $font-size-sm));
+//
 $calendar-month-title-font-size: var(--calendar-month-title-font-size, var(--font-size-md, $font-size-md));
 $calendar-month-watermark-color: var(--calendar-month-watermark-color, rgba(242, 243, 245, 0.8));
 $calendar-month-watermark-font-size: var(--calendar-month-watermark-font-size, 160px * $hd);
-$calendar-day-height: var(--calendar-day-height, 64px * $hd);
-$calendar-day-font-size: var(--calendar-day-font-size, var(--font-size-lg, $font-size-lg));
+//
 $calendar-range-edge-color: var(--calendar-range-edge-color, var(--white, $white));
 $calendar-range-edge-background-color: var(--calendar-range-edge-background-color, $calendar-active-color);
 $calendar-range-middle-color: var(--calendar-range-middle-color, $calendar-active-color);
 $calendar-range-middle-background-opacity: var(--calendar-range-middle-background-opacity, 0.1);
+//
+$calendar-day-height: var(--calendar-day-height, 64px * $hd);
+$calendar-day-font-size: var(--calendar-day-font-size, var(--font-size-lg, $font-size-lg));
+$calendar-day-disabled-color: var(--calendar-day-disabled-color, var(--gray-5, $gray-5));
 $calendar-active-day-size: var(--calendar-active-day-size, 54px * $hd);
 $calendar-active-day-color: var(--calendar-active-day-color, var(--white, $white));
-$calendar-info-font-size: var(--calendar-info-font-size, var(--font-size-xs, $font-size-xs));
-$calendar-info-line-height: var(--calendar-info-line-height, var(--line-height-xs, $line-height-xs));
 $calendar-active-day-background-color: var(--calendar-active-day-background-color, $calendar-active-color);
-$calendar-day-disabled-color: var(--calendar-day-disabled-color, var(--gray-5, $gray-5));
+$calendar-active-day-border-radius: var(--calendar-active-day-border-radius, var(--border-radius-md, $border-radius-md));
+//
+$calendar-day-info-font-size: var(--calendar-day-info-font-size, var(--font-size-xs, $font-size-xs));
+$calendar-day-info-line-height: var(--calendar-day-info-line-height, var(--line-height-xs, $line-height-xs));
+//
 $calendar-confirm-button-height: var(--calendar-confirm-button-height, 36px * $hd);
 $calendar-confirm-button-margin: var(--calendar-confirm-button-margin, 7px * $hd 0);
 $calendar-confirm-button-color: var(--calendar-confirm-button-color, $calendar-active-color);
+//
+$calendar-footer-padding: var(--calendar-footer-padding, 0 var(--padding-md, $padding-md));

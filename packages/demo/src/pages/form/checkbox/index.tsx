@@ -54,19 +54,19 @@ export default function CheckboxDemo() {
       <Block title="自定义图标">
         <CheckboxWithCustomIcon />
       </Block>
-      <Block title="复选框组" className="basic-checkbox-group">
+      <Block title="复选框组">
         <Checkbox.Group>
           <Checkbox name="a">复选框 a</Checkbox>
           <Checkbox name="b">复选框 b</Checkbox>
         </Checkbox.Group>
       </Block>
-      <Block title="水平排列" className="horizontal-checkbox-group">
+      <Block title="水平排列">
         <Checkbox.Group direction="horizontal">
           <Checkbox name="a">复选框 a</Checkbox>
           <Checkbox name="b">复选框 b</Checkbox>
         </Checkbox.Group>
       </Block>
-      <Block title="水平排列" className="basic-checkbox-group">
+      <Block title="限制最大可选数">
         <Checkbox.Group max={4}>
           <Checkbox name="a">复选框 a</Checkbox>
           <Checkbox name="b">复选框 b</Checkbox>

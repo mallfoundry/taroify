@@ -7,7 +7,7 @@
 
   &--disabled {
     .#{$component-prefix}form__label {
-      color: var(--form-item-disabled-color, $form-item-disabled-color);
+      color: $form-label-disabled-color;
     }
   }
 
@@ -21,20 +21,20 @@
   }
 
   &__right-icon {
-    padding: 0 var(--padding-xs, $padding-xs);
-    margin-right: calc(var(--padding-xs, #{$padding-xs}) * -1);
+    padding: $form-item-right-icon-padding;
+    margin-right: $form-item-right-icon-margin-right;
     line-height: inherit;
   }
 
   &__icon.#{$component-prefix}icon,
   &__right-icon.#{$component-prefix}icon {
     display: block;
-    font-size: var(--form-item-icon-size, $form-item-icon-size);
+    font-size: $form-item-icon-size;
     line-height: inherit;
   }
 
   .#{$component-prefix}input + .#{$component-prefix}button {
     flex-shrink: 0;
-    margin-left: var(--padding-xs, $padding-xs);
+    margin-left: $form-item-right-button-margin-left;
   }
 }

@@ -3,8 +3,8 @@
 .#{$component-prefix}form-control {
   display: flex;
   align-items: center;
-  min-height: var(--form-control-min-height, $form-control-min-height);
-  color: var(--form-control-color, $form-control-color);
+  min-height: $form-control-min-height;
+  color: $form-control-color;
 
   &--left {
     justify-content: flex-start;

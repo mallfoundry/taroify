@@ -214,3 +214,35 @@ function RandomNumberKeyboard(props: KeyboardProps) {
 | onChange  | 点击按键时触发                 | key: 按键内容 |
 | onBackspace | 点击删除键时触发               | -             |
 | onHide  | 点击关闭按钮时触发             | -             |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                          | 默认值                                         | 描述  |
+|---------------------------------------------|---------------------------------------------|-----|
+| number-keyboard-z-index                     | _100_                                       | -   |
+| number-keyboard-background-color            | _var(--gray-2)_                             | -   |
+| number-keyboard-with-title-border-radius    | _20px * $hd 20px * $hd 0 0_                 | -   |
+| number-keyboard-header-color                | _var(--gray-7)_                             | -   |
+| number-keyboard-header-padding-top          | _6px * $hd_                                 | -   |
+| number-keyboard-header-height               | _34px * $hd_                                | -   |
+| number-keyboard-header-font-size            | _var(--font-size-lg)_                       | -   |
+| number-keyboard-key-height                  | _48px * $hd_                                | -   |
+| number-keyboard-key-font-size               | _28px * $hd_                                | -   |
+| number-keyboard-key-background-color        | _var(--white, $white)_                      | -   |
+| number-keyboard-key-border-radius           | _var(--border-radius-lg)_                   | -   |
+| number-keyboard-key-line-height             | _1.5_                                       | -   |
+| number-keyboard-key-active-background-color | _var(--gray-3)_                             | -   |
+| number-keyboard-key-active-opacity          | _var(--active-opacity)_                     | -   |
+| number-keyboard-large-key-font-size         | _var(--font-size-lg)_                       | -   |
+| number-keyboard-hide-padding                | _0 var(--padding-md)_                       | -   |
+| number-keyboard-hide-font-size              | _24px * $hd_                                | -   |
+| number-keyboard-hide-color                  | _var(--text-link-color)_                    | -   |
+| number-keyboard-hide-font-size              | _var(--font-size-md)_                       | -   |
+| number-keyboard-hide-active-opacity         | _var(--number-keyboard-key-active-opacity)_ | -   |
+| number-keyboard-backspace-font-size         | _22px * $hd_                                | -   |
+| number-keyboard-button-color                | _var(--white)_                              | -   |
+| number-keyboard-button-background-color     | _var(--primary-color)_                      | -   |

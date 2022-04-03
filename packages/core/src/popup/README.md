@@ -102,9 +102,9 @@ import Popup from "@taroify/core/popup"
 | --popup-z-index                 | _1010_                           | -   |
 | --popup-background-color        | _var(--background-color-light)_  | -   |
 | --popup-animation-duration      | _var(--animation-duration-base)_ | -   |
-| --popup-border-radius-rounded   | _16px * $hd_                     | -   |
+| --popup-rounded-border-radius   | _16px * $hd_                     | -   |
 | --popup-close-icon-z-index      | _1_                              | -   |
 | --popup-close-icon-size         | _22px * $hd_                     | -   |
 | --popup-close-icon-color        | _var(--gray-5)_                  | -   |
-| --popup-close-icon-color-active | _var(--gray-6)_                  | -   |
+| --popup-close-icon-active-color | _var(--gray-6)_                  | -   |
 | --popup-close-icon-margin       | _16px * $hd_                     | -   |

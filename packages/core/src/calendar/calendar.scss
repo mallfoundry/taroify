@@ -143,6 +143,27 @@
       color: $calendar-day-disabled-color;
       cursor: default;
     }
+
+    &__top,
+    &__bottom {
+      position: absolute;
+      right: 0;
+      left: 0;
+      font-size: $calendar-day-info-font-size;
+      line-height: $calendar-day-info-line-height;
+
+      @media (max-width: 350px) {
+        font-size: 9px;
+      }
+    }
+
+    &__top {
+      top: 6px;
+    }
+
+    &__bottom {
+      bottom: 6px;
+    }
   }
 
   &__active-day {
@@ -150,34 +171,12 @@
     height: $calendar-active-day-size;
     color: $calendar-active-day-color;
     background: $calendar-active-day-background-color;
-    border-radius: $border-radius-md;
-  }
-
-  &__top,
-  &__bottom {
-    position: absolute;
-    right: 0;
-    left: 0;
-    font-size: $calendar-info-font-size;
-    line-height: $calendar-info-line-height;
-
-    @media (max-width: 350px) {
-      font-size: 9px;
-    }
-  }
-
-  &__top {
-    top: 6px;
-  }
-
-  &__bottom {
-    bottom: 6px;
+    border-radius: $calendar-active-day-border-radius;
   }
 
   &__footer {
     flex-shrink: 0;
-    padding-right: $padding-md;
-    padding-left: $padding-md;
+    padding: $calendar-footer-padding;
   }
 
   &__confirm {
