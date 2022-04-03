@@ -21,7 +21,7 @@
     width: 100%;
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: 0 0 $popup-border-radius-rounded $popup-border-radius-rounded;
+      border-radius: 0 0 $popup-rounded-border-radius $popup-rounded-border-radius;
     }
   }
 
@@ -31,7 +31,7 @@
     width: 100%;
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: $popup-border-radius-rounded $popup-border-radius-rounded 0 0;
+      border-radius: $popup-rounded-border-radius $popup-rounded-border-radius 0 0;
     }
   }
 
@@ -41,7 +41,7 @@
     transform: translate3d(0, -50%, 0);
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: $popup-border-radius-rounded 0 0 $popup-border-radius-rounded;
+      border-radius: $popup-rounded-border-radius 0 0 $popup-rounded-border-radius;
     }
 
     &.#{$component-prefix}transition-slide-right {
@@ -66,7 +66,7 @@
     transform: translate3d(0, -50%, 0);
 
     &.#{$component-prefix}popup--rounded {
-      border-radius: 0 $popup-border-radius-rounded $popup-border-radius-rounded 0;
+      border-radius: 0 $popup-rounded-border-radius $popup-rounded-border-radius 0;
     }
 
     &.#{$component-prefix}transition-slide-left {
@@ -93,7 +93,7 @@
     size: $popup-close-icon-size;
 
     &:active {
-      color: $popup-close-icon-color-active;
+      color: $popup-close-icon-active-color;
     }
 
     &--top-left {
