@@ -4,12 +4,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--number-keyboard-key-height, $number-keyboard-key-height);
-  font-size: var(--number-keyboard-key-font-size, $number-keyboard-key-font-size);
-  line-height: 1.5;
+  height: $number-keyboard-key-height;
+  font-size: $number-keyboard-key-font-size;
+  line-height: $number-keyboard-key-line-height;
   cursor: pointer;
-  background-color: var(--white, $white);
-  border-radius: var(--border-radius-lg, $border-radius-lg);
+  background-color: $number-keyboard-key-background-color;
+  border-radius: $number-keyboard-key-border-radius;
 
   &--large {
     // height: 100% can't fill flex parent on legacy safari
@@ -20,19 +20,19 @@
     bottom: 6px * $hd;
     left: 0;
     height: auto;
-    font-size: var(--number-keyboard-delete-font-size, $number-keyboard-delete-font-size);
+    font-size: $number-keyboard-large-key-font-size;
   }
 
   &--active {
-    background-color: var(--number-keyboard-key-active-color, $number-keyboard-key-active-color);
+    background-color: $number-keyboard-key-active-background-color;
   }
 
   &--blue {
-    color: var(--number-keyboard-button-text-color, $number-keyboard-button-text-color);
-    background-color: var(--number-keyboard-button-background-color, $number-keyboard-button-background-color);
+    color: $number-keyboard-button-color;
+    background-color: $number-keyboard-button-background-color;
 
     &.#{$component-prefix}key--active {
-      opacity: var(--active-opacity, $active-opacity);
+      opacity: $number-keyboard-key-active-opacity;
     }
   }
 
@@ -49,14 +49,14 @@
   }
 
   .#{$component-prefix}keyboard-hide {
-    font-size: var(--number-keyboard-key-keyboard-hide-font-size, $number-keyboard-key-keyboard-hide-font-size);
+    font-size: $number-keyboard-hide-font-size;
   }
 
   .#{$component-prefix}backspace {
-    font-size: var(--number-keyboard-key-backspace-font-size, $number-keyboard-key-backspace-font-size);
+    font-size: $number-keyboard-backspace-font-size;
   }
 
   &__loading-icon {
-    color: var(--number-keyboard-button-text-color, $number-keyboard-button-text-color);
+    color: $number-keyboard-button-color;
   }
 }
