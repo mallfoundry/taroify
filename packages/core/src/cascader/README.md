@@ -130,3 +130,32 @@ function BasicCascader() {
 | onSelect    | 选中项变化时触发       | _values: any[], options: Cascader.OptionObject[]_ |
 | onChange    | 全部选项选择完成后触发 | _values: any[], options: Cascader.OptionObject[]_ |
 | onTabClick | 点击标签时触发         | _event: Tabs.TabEvent_      |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                        | 默认值                            | 描述  |
+|-------------------------------------------|--------------------------------|-----|
+| --cascader-active-color                   | _var(--danger-color)_          | -   |
+| --cascader-header-height                  | _48px * $hd_                   | -   |
+| --cascader-header-padding                 | _0 var(--padding-md)_          | -   |
+| --cascader-header-font-size               | _var(--font-size-lg)_          | -   |
+| --cascader-header-font-weight             | _var(--font-weight-bold)_      | -   |
+| --cascader-header-line-height             | _20px * $hd_                   | -   |
+| --cascader-tabs-height                    | _48px * $hd_                   | -   |
+| --cascader-tab-font-weight                | _var(--font-weight-bold)_      | -   |
+| --cascader-tab-color                      | _var(--text-color)_            | -   |
+| --cascader-inactive-tab-color             | _var(--gray-6)_                | -   |
+| --cascader-options-height                 | _384px * $hd_                  | -   |
+| --cascader-option-padding                 | _10px * $hd var(--padding-md)_ | -   |
+| --cascader-option-font-size               | _var(--font-size-md)_          | -   |
+| --cascader-option-line-height             | _var(--line-height-md)_        | -   |
+| --cascader-option-active-background-color | _var(--active-color)_          | -   |
+| --cascader-disabled-option-color          | _var(--gray-5)_                | -   |
+| --cascader-active-option-color            | _var(--cascader-active-color)_ | -   |
+| --cascader-active-option-font-weight      | _var(--font-weight-bold)_      | -   |
+| --cascader-active-icon-font-size          | _18px * $hd_                   | -   |
+

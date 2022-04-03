@@ -6,11 +6,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--cascader-header-height, $cascader-header-height);
-    padding: var(--cascader-header-padding, $cascader-header-padding);
-    font-size: var(--cascader-header-font-size, $cascader-header-font-size);
-    font-weight: var(--font-weight-bold, $font-weight-bold);
-    line-height: var(--cascader-header-line-height, $cascader-header-line-height);
+    height: $cascader-header-height;
+    padding: $cascader-header-padding;
+    font-size: $cascader-header-font-size;
+    font-weight: $cascader-header-font-weight;
+    line-height: $cascader-header-line-height;
   }
 
   &__tabs {
@@ -21,7 +21,7 @@
     }
 
     &.#{$component-prefix}tabs--line .#{$component-prefix}tabs__wrap {
-      height: var(--cascader-tabs-height, $cascader-tabs-height);
+      height: $cascader-tabs-height;
     }
 
     .#{$component-prefix}tabs__nav--complete {
@@ -31,35 +31,43 @@
   }
 
   &__tab {
-    font-weight: var(--font-weight-bold, $font-weight-bold);
-    color: var(--cascader-tab-color, $cascader-tab-color);
+    font-weight: $cascader-tab-font-weight;
+    color: $cascader-tab-color;
 
     &--inactive {
       font-weight: normal;
-      color: var(--cascader-unselected-tab-color, $cascader-unselected-tab-color);
+      color: $cascader-inactive-tab-color;
     }
+  }
+
+  &__options {
+    box-sizing: border-box;
+    height: $cascader-options-height;
+    padding-top: 6px * $hd;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &__option {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px * $hd var(--padding-md, $padding-md);
-    font-size: var(--font-size-md, $font-size-md);
-    line-height: var(--line-height-md, $line-height-md);
+    padding: $cascader-option-padding;
+    font-size: $cascader-option-font-size;
+    line-height: $cascader-option-line-height;
     cursor: pointer;
 
     &:active, &--hover {
-      background-color: var(--active-color, $active-color);
+      background: $cascader-option-active-background-color;
     }
 
     &--active {
-      font-weight: var(--font-weight-bold, $font-weight-bold);
-      color: var(--cascader-active-color, $cascader-active-color);
+      font-weight: $cascader-active-option-font-weight;
+      color: $cascader-active-option-color;
     }
 
     &--disabled {
-      color: var(--van-cascader-option-disabled-color);
+      color: $cascader-disabled-option-color;
       cursor: not-allowed;
 
       &:active {
@@ -69,14 +77,6 @@
   }
 
   &__active-icon {
-    font-size: var(--cascader-active-icon-size, $cascader-active-icon-size);
-  }
-
-  &__options {
-    box-sizing: border-box;
-    height: var(--cascader-options-height, $cascader-options-height);
-    padding-top: 6px * $hd;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    font-size: $cascader-active-icon-font-size;
   }
 }
