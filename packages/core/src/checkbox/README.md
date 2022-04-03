@@ -49,12 +49,8 @@ import { Checkbox } from "@taroify/core"
 
 ```scss
 .custom-color {
-  .taroify-checkbox__icon--checked {
-    .taroify-icon {
-      border-color: #ee0a24;
-      background: #ee0a24;
-    }
-  }
+  --checkbox-checked-icon-border-color: #ee0a24;
+  --checkbox-checked-icon-background-color: #ee0a24;
 }
 ```
 
@@ -180,3 +176,27 @@ function CheckboxWithCustomIcon() {
 | 事件名 | 说明                     | 回调参数       |
 | ------ | ------------------------ | -------------- |
 | onChange | 当绑定值变化时触发的事件 | _names: any[]_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                        | 默认值                              | 描述  |
+|-------------------------------------------|----------------------------------|-----|
+| --checkbox-size                           | _20px * $hd_                     | -   |
+| --checkbox-font-size                      | _var(--font-size-lg)_            | -   |
+| --checkbox-border-color                   | _var(--gray-5)_                  | -   |
+| --checkbox-transition-duration            | _var(--animation-duration-fast)_ | -   |
+| --checkbox-label-margin                   | _var(--padding-xs)_              | -   |
+| --checkbox-label-color                    | _var(--text-color)_              | -   |
+| --checkbox-label-line-height              | _var(--checkbox-size)_           | -   |
+| --checkbox-disabled-label-color           | _var(--gray-5)_                  | -   |
+| --checkbox-icon-font-size                 | _var(--checkbox-size)_           | -   |
+| --checkbox-checked-icon-color             | _var(--white)_                   | -   |
+| --checkbox-checked-icon-border-color      | _var(--primary-color)_           | -   |
+| --checkbox-checked-icon-background-color  | _var(--primary-color)_           | -   |
+| --checkbox-disabled-icon-color            | _var(--gray-5)_                  | -   |
+| --checkbox-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
+| --checkbox-disabled-icon-background-color | _var(--border-color)_            | -   |

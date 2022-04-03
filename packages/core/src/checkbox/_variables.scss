@@ -1,12 +1,22 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$checkbox-size: 20px * $hd;
-$checkbox-border-color: var(--gray-5, $gray-5);
-$checkbox-transition-duration: var(--animation-duration-fast, $animation-duration-fast);
-$checkbox-label-margin: var(--padding-xs, $padding-xs);
-$checkbox-label-color: var(--text-color, $text-color);
-$checkbox-checked-icon-color: var(--primary-color, $primary-color);
-$checkbox-disabled-icon-color: var(--gray-5, $gray-5);
-$checkbox-disabled-label-color: var(--gray-5, $gray-5);
-$checkbox-disabled-background-color: var(--border-color, $border-color);
+$checkbox-size: var(--checkbox-size, 20px * $hd);
+$checkbox-font-size: var(--checkbox-font-size, var(--font-size-lg, $font-size-lg));
+$checkbox-border-color: var(--checkbox-border-color, var(--gray-5, $gray-5));
+$checkbox-transition-duration: var(--checkbox-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
+//
+$checkbox-label-margin: var(--checkbox-label-margin, var(--padding-xs, $padding-xs));
+$checkbox-label-color: var(--checkbox-label-color, var(--text-color, $text-color));
+$checkbox-label-line-height: var(--checkbox-label-line-height, $checkbox-size);
+$checkbox-disabled-label-color: var(--checkbox-disabled-label-color, var(--gray-5, $gray-5));
+//
+$checkbox-icon-font-size: var(--checkbox-icon-font-size, $checkbox-size);
+//
+$checkbox-checked-icon-color: var(--checkbox-checked-icon-color, var(--white, $white));
+$checkbox-checked-icon-border-color: var(--checkbox-checked-icon-border-color, var(--primary-color, $primary-color));
+$checkbox-checked-icon-background-color: var(--checkbox-checked-icon-background-color, var(--primary-color, $primary-color));
+//
+$checkbox-disabled-icon-color: var(--checkbox-disabled-icon-color, var(--gray-5, $gray-5));
+$checkbox-disabled-icon-border-color: var(--checkbox-disabled-icon-border-color, var(--gray-5, $gray-5));
+$checkbox-disabled-icon-background-color: var(--checkbox-disabled-icon-background-color, var(--border-color, $border-color));
