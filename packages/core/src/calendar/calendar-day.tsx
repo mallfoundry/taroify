@@ -35,17 +35,19 @@ function CalendarDay(props: CalendarDayProps) {
     if (single && type === "active") {
       return (
         <>
-          {top && <View className={prefixClassname("calendar__top")} children={top} />}
+          {top && <View className={prefixClassname("calendar__day__top")} children={top} />}
           <View className={prefixClassname("calendar__active-day")} children={children} />
-          {bottom && <View className={prefixClassname("calendar__bottom")} children={bottom} />}
+          {bottom && (
+            <View className={prefixClassname("calendar__day__bottom")} children={bottom} />
+          )}
         </>
       )
     }
     return (
       <>
-        {top && <View className={prefixClassname("calendar__top")} children={top} />}
+        {top && <View className={prefixClassname("calendar__day__top")} children={top} />}
         {children}
-        {bottom && <View className={prefixClassname("calendar__bottom")} children={bottom} />}
+        {bottom && <View className={prefixClassname("calendar__day__bottom")} children={bottom} />}
       </>
     )
   }
