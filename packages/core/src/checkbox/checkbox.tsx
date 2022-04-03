@@ -49,8 +49,6 @@ export default function Checkbox(props: CheckboxProps) {
     onChange: onChangeProp,
   })
 
-  console.log(checked)
-
   function onClick() {
     if (disabled) {
       return
