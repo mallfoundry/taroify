@@ -241,7 +241,6 @@ function RandomNumberKeyboard(props: KeyboardProps) {
 | number-keyboard-hide-padding                | _0 var(--padding-md)_                       | -   |
 | number-keyboard-hide-font-size              | _24px * $hd_                                | -   |
 | number-keyboard-hide-color                  | _var(--text-link-color)_                    | -   |
-| number-keyboard-hide-font-size              | _var(--font-size-md)_                       | -   |
 | number-keyboard-hide-active-opacity         | _var(--number-keyboard-key-active-opacity)_ | -   |
 | number-keyboard-backspace-font-size         | _22px * $hd_                                | -   |
 | number-keyboard-button-color                | _var(--white)_                              | -   |
