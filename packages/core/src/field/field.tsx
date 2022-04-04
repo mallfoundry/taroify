@@ -1,40 +1,7 @@
 import * as React from "react"
-import {
-  ComponentClass,
-  createElement,
-  FunctionComponent,
-  isValidElement,
-  PropsWithChildren,
-  ReactElement,
-  ReactNode,
-  ReactText,
-} from "react"
+import { ReactElement, ReactNode, ReactText } from "react"
 import Form, { FormController, FormFeedbackProps, FormItemProps, FormLabelProps } from "../form"
-
-import { isObjectElement, isTextElement } from "../utils/validate"
-
-function createVariantComponentWrapper(children: ReactNode, displayName?: string) {
-  const Component = () => children as JSX.Element
-  Component.displayName = displayName
-  return Component
-}
-
-function createVariantElement(
-  type: FunctionComponent<PropsWithChildren<any>> | ComponentClass<PropsWithChildren<any>>,
-  node?: ReactNode | ReactNode[],
-): JSX.Element {
-  if (isTextElement(node)) {
-    return createElement(type, { children: node })
-  }
-  if (isObjectElement(node)) {
-    return createElement(type, node)
-  }
-  if (isValidElement(node)) {
-    const ComponentWrapper = createVariantComponentWrapper(node, type.displayName)
-    return createElement(ComponentWrapper)
-  }
-  return node as JSX.Element
-}
+import { createVariantElement } from "../utils/element"
 
 export interface FieldProps extends FormItemProps {
   label?: ReactText | FormLabelProps | ReactElement
