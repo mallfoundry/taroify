@@ -78,15 +78,20 @@ function NoMaskPasswordInput(props: OpenKeyboardProps) {
   )
 }
 
-function PasswordInputWithInfo(props: OpenKeyboardProps) {
+function PasswordInputWithFeedback(props: OpenKeyboardProps) {
   const { open, onOpen } = props
   const [value, setValue] = useState("123")
 
   return (
     <>
-      <PasswordInput focus info="密码为 6 位数字" value={value} onFocus={() => onOpen?.("info")} />
+      <PasswordInput
+        focus
+        feedback="密码为 6 位数字"
+        value={value}
+        onFocus={() => onOpen?.("feedback")}
+      />
       <NumberKeyboard
-        open={open === "info"}
+        open={open === "feedback"}
         onKeyPress={(key) => setValue(value + key)}
         onBackspace={() => setValue(value.substring(0, value.length - 1))}
         onHide={() => onOpen?.("")}
@@ -111,8 +116,8 @@ export default function PasswordInputDemo() {
       <Block title="明文展示">
         <NoMaskPasswordInput open={open} onOpen={setOpen} />
       </Block>
-      <Block title="明文展示">
-        <PasswordInputWithInfo open={open} onOpen={setOpen} />
+      <Block title="提示信息">
+        <PasswordInputWithFeedback open={open} onOpen={setOpen} />
       </Block>
     </Page>
   )

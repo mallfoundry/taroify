@@ -1,17 +1,27 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$password-input-height: 50px * $hd;
-$password-input-margin: 0 var(--padding-md, $padding-md);
-$password-input-font-size: 20px * $hd;
-$password-input-border-radius: 6px * $hd;
-$password-input-background-color: var(--white, $white);
-$password-input-info-color: var(--gray-6, $gray-6);
-$password-input-info-font-size: var(--font-size-md, $font-size-md);
-$password-input-error-info-color: var(--danger-color, $danger-color);
-$password-input-dot-size: 10px * $hd;
-$password-input-dot-color: var(--black, $black);
-$password-input-cursor-color: var(--text-color, $text-color);
-$password-input-cursor-width: 1px * $hd;
-$password-input-cursor-height: 40%;
-$password-input-cursor-animation-duration: 1s;
+$password-input-height: var(--password-input-height, 50px * $hd);
+$password-input-margin: var(--password-input-margin, 0 var(--padding-md, $padding-md));
+$password-input-border-radius: var(--password-input-border-radius, 6px * $hd);
+$password-input-item-font-size: var(--password-input-item-font-size, 20px * $hd);
+$password-input-item-background-color: var(--password-input-item-background-color, var(--white, $white));
+//
+$password-input-mask-size: var(--password-input-mask-size, 10px * $hd);
+$password-input-mask-width: var(--password-input-mask-width, $password-input-mask-size);
+$password-input-mask-height: var(--password-input-mask-height, $password-input-mask-size);
+$password-input-mask-color: var(--password-input-mask-color, var(--black, $black));
+//
+$password-input-cursor-color: var(--password-input-cursor-color, var(--text-color, $text-color));
+$password-input-cursor-width: var(--password-input-cursor-width, 1px * $hd);
+$password-input-cursor-height: var(--password-input-cursor-height, 40%);
+$password-input-cursor-animation-duration: var(--password-input-cursor-animation-duration, 1s);
+//
+$password-input-feedback-margin-top: var(--password-input-feedback-margin-top, var(--padding-md, $padding-md));
+$password-input-feedback-font-size: var(--password-input-feedback-font-size, var(--font-size-md, $font-size-md));
+$password-input-feedback-color: var(--password-input-feedback-color, var(--gray-6, $gray-6));
+$password-input-feedback-primary-color: var(--password-input-feedback-primary-color, var(--primary-color, $primary-color));
+$password-input-feedback-info-color: var(--password-input-feedback-info-color, var(--info-color, $info-color));
+$password-input-feedback-success-color: var(--password-input-feedback-success-color, var(--success-color, $success-color));
+$password-input-feedback-warning-color: var(--password-input-feedback-warning-color, var(--warning-color, $warning-color));
+$password-input-feedback-danger-color: var(--password-input-feedback-danger-color, var(--danger-color, $danger-color));

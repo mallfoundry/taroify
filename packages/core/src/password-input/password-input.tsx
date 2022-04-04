@@ -3,21 +3,22 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { useCallback, useMemo } from "react"
+import { ReactElement, ReactText, useCallback, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_SURROUND } from "../styles/hairline"
 import { stopPropagation } from "../utils/dom/event"
+import { createVariantElement } from "../utils/element"
 import { addUnitPx } from "../utils/format/unit"
+import PasswordInputFeedback, { PasswordInputFeedbackProps } from "./password-input-feedback"
 
-interface PasswordInputProps extends ViewProps {
+export interface PasswordInputProps extends ViewProps {
   value?: string
   length?: number
   gutter?: number
   mask?: boolean
   focused?: boolean
   focus?: boolean
-  error?: boolean
-  info?: string
+  feedback?: ReactText | PasswordInputFeedbackProps | ReactElement
 
   onFocus?(event: ITouchEvent): void
 }
@@ -31,11 +32,12 @@ function PasswordInput(props: PasswordInputProps) {
     mask = true,
     focused: focusedProp,
     focus: focusProp = false,
-    error,
-    info,
+    feedback: feedbackProp,
     onFocus,
     ...restProps
   } = props
+
+  const feedback = createVariantElement(PasswordInputFeedback, feedbackProp)
 
   const focus = useMemo(() => (_.isBoolean(focusedProp) ? focusedProp : focusProp), [
     focusProp,
@@ -55,7 +57,7 @@ function PasswordInput(props: PasswordInputProps) {
     [onFocus],
   )
 
-  const renderPoints = () => {
+  const points = useMemo(() => {
     const Points: JSX.Element[] = []
 
     for (let i = 0; i < length; i++) {
@@ -91,7 +93,8 @@ function PasswordInput(props: PasswordInputProps) {
     }
 
     return Points
-  }
+  }, [focus, gutter, length, mask, value])
+
   return (
     <View className={classNames(prefixClassname("password-input"), className)} {...restProps}>
       <View
@@ -99,17 +102,9 @@ function PasswordInput(props: PasswordInputProps) {
           [HAIRLINE_BORDER_SURROUND]: !gutter,
         })}
         onTouchStart={onTouchStart}
-      >
-        {renderPoints()}
-      </View>
-      {info && (
-        <View
-          className={classNames(prefixClassname("password-input__info"), {
-            [prefixClassname("password-input__info--error")]: error,
-          })}
-          children={info}
-        />
-      )}
+        children={points}
+      />
+      {feedback}
     </View>
   )
 }
