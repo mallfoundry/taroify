@@ -5,6 +5,7 @@ $checkbox-size: var(--checkbox-size, 20px * $hd);
 $checkbox-font-size: var(--checkbox-font-size, var(--font-size-lg, $font-size-lg));
 $checkbox-border-color: var(--checkbox-border-color, var(--gray-5, $gray-5));
 $checkbox-transition-duration: var(--checkbox-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
+$checkbox-gap: var(--checkbox-gap, var(--padding-sm, $padding-sm));
 //
 $checkbox-label-margin: var(--checkbox-label-margin, var(--padding-xs, $padding-xs));
 $checkbox-label-color: var(--checkbox-label-color, var(--text-color, $text-color));

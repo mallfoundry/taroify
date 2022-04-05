@@ -189,6 +189,7 @@ function CheckboxWithCustomIcon() {
 | --checkbox-font-size                      | _var(--font-size-lg)_            | -   |
 | --checkbox-border-color                   | _var(--gray-5)_                  | -   |
 | --checkbox-transition-duration            | _var(--animation-duration-fast)_ | -   |
+| --checkbox-gap                            | _var(--padding-sm)_              | -   |
 | --checkbox-label-margin                   | _var(--padding-xs)_              | -   |
 | --checkbox-label-color                    | _var(--text-color)_              | -   |
 | --checkbox-label-line-height              | _var(--checkbox-size)_           | -   |

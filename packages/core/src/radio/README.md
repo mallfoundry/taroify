@@ -73,7 +73,8 @@ import { Radio } from "@taroify/core";
 
 ```scss
 .custom-color {
-  --radio-checked-icon-color: #ee0a24;
+  --radio-checked-icon-background-color: #ee0a24;
+  --radio-checked-icon-border-color: #ee0a24;
 }
 ```
 
@@ -173,3 +174,28 @@ function CustomIconRadio() {
 | 事件名 | 说明                     | 回调参数       |
 | ------ | ------------------------ | -------------- |
 | onChange | 当绑定值变化时触发的事件 | _name: string_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                     | 默认值                              | 描述  |
+|----------------------------------------|----------------------------------|-----|
+| --radio-size                           | _20px * $hd_                     | -   |
+| --radio-font-size                      | _var(--font-size-lg)_            | -   |
+| --radio-border-color                   | _var(--gray-5)_                  | -   |
+| --radio-transition-duration            | _var(--animation-duration-fast)_ | -   |
+| --radio-gap                            | _var(--padding-sm)_              | -   |
+| --radio-label-margin                   | _var(--padding-xs)_              | -   |
+| --radio-label-color                    | _var(--text-color)_              | -   |
+| --radio-label-line-height              | _var(--radio-size)_              | -   |
+| --radio-disabled-label-color           | _var(--gray-5)_                  | -   |
+| --radio-icon-font-size                 | _var(--radio-size)_              | -   |
+| --radio-checked-icon-color             | _var(--white)_                   | -   |
+| --radio-checked-icon-border-color      | _var(--primary-color)_           | -   |
+| --radio-checked-icon-background-color  | _var(--primary-color)_           | -   |
+| --radio-disabled-icon-color            | _var(--gray-5)_                  | -   |
+| --radio-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
+| --radio-disabled-icon-background-color | _var(--border-color)_            | -   |
