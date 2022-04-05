@@ -1,8 +1,8 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$rate-icon-size: 20px * $hd;
-$rate-icon-gutter: var(--padding-base, $padding-base);
-$rate-icon-empty-color: var(--gray-5, $gray-5);
-$rate-icon-full-color: var(--danger-color, $danger-color);
-$rate-icon-disabled-color: var(--gray-5, $gray-5);
+$rate-icon-size: var(--rate-icon-size, 20px * $hd);
+$rate-icon-gutter: var(--rate-icon-gutter, var(--padding-base, $padding-base));
+$rate-icon-empty-color: var(--rate-icon-empty-color, var(--gray-5, $gray-5));
+$rate-icon-full-color: var(--rate-icon-full-color, var(--danger-color, $danger-color));
+$rate-icon-disabled-color: var(--rate-icon-disabled-color, var(--gray-5, $gray-5));
