@@ -1,28 +1,54 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$uploader-size: 80px * $hd;
-$uploader-icon-size: 24px * $hd;
-$uploader-icon-color: var(--gray-4, $gray-4);
-$uploader-text-color: var(--gray-6, $gray-6);
-$uploader-text-font-size: var(--font-size-sm, $font-size-sm);
-$uploader-upload-background-color: var(--gray-1, $gray-1);
-$uploader-upload-active-color: var(--active-color, $active-color);
-$uploader-remove-color: var(--white, $white);
-$uploader-remove-icon-size: 14px * $hd;
-$uploader-remove-background-color: rgba(0, 0, 0, 0.7);
-$uploader-file-background-color: var(--background-color, $background-color);
-$uploader-file-icon-size: 20px * $hd;
-$uploader-file-icon-color: var(--gray-7, $gray-7);
-$uploader-file-name-padding: 0 var(--padding-base, $padding-base);
-$uploader-file-name-margin-top: var(--padding-xs, $padding-xs);
-$uploader-file-name-font-size: var(--font-size-sm, $font-size-sm);
-$uploader-file-name-text-color: var(--gray-7, $gray-7);
-$uploader-mask-text-color: var(--white, $white);
-$uploader-mask-background-color: rgba(50, 50, 51, 0.88);
-$uploader-mask-icon-size: 22px * $hd;
-$uploader-mask-message-font-size: var(--font-size-sm, $font-size-sm);
-$uploader-mask-message-line-height: var(--line-height-xs, $line-height-xs);
-$uploader-loading-icon-size: 22px * $hd;
-$uploader-loading-icon-color: var(--white, $white);
-$uploader-disabled-opacity: var(--disabled-opacity, $disabled-opacity);
+$uploader-size: var(--uploader-size, 80px * $hd);
+$uploader-disabled-opacity: var(--uploader-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
+//
+$uploader-upload-size: var(--uploader-upload-size, $uploader-size);
+$uploader-upload-width: var(--uploader-upload-width, $uploader-upload-size);
+$uploader-upload-height: var(--uploader-upload-height, $uploader-upload-size);
+$uploader-upload-margin: var(--uploader-upload-margin, 0 var(--padding-xs, $padding-xs) var(--padding-xs, $padding-xs) 0);
+$uploader-upload-background-color: var(--uploader-upload-background-color, var(--gray-1, $gray-1));
+$uploader-upload-active-background-color: var(--uploader-upload-active-background-color, var(--active-color, $active-color));
+$uploader-upload-icon-color: var(--uploader-upload-icon-color, var(--gray-4, $gray-4));
+$uploader-upload-icon-font-size: var(--uploader-upload-icon-font-size, 24px * $hd);
+$uploader-upload-text-margin-top: var(--uploader-upload-text-margin-top, var(--padding-xs, $padding-xs));
+$uploader-upload-text-color: var(--uploader-upload-text-color, var(--gray-6, $gray-6));
+$uploader-upload-text-font-size: var(--uploader-upload-text-font-size, var(--font-size-sm, $font-size-sm));
+//
+$uploader-preview-margin: var(--uploader-preview-margin, 0 var(--padding-xs, $padding-xs) var(--padding-xs, $padding-xs) 0);
+$uploader-preview-image-size: var(--uploader-preview-image-size, $uploader-size);
+$uploader-preview-image-width: var(--uploader-preview-image-width, $uploader-preview-image-size);
+$uploader-preview-image-height: var(--uploader-preview-image-height, $uploader-preview-image-size);
+//
+$uploader-remove-size: var(--uploader-remove-size, 14px * $hd);
+$uploader-remove-width: var(--uploader-remove-width, $uploader-remove-size);
+$uploader-remove-height: var(--uploader-remove-height, $uploader-remove-size);
+$uploader-remove-background-color: var(--uploader-remove-background-color, rgba(0, 0, 0, 0.7));
+$uploader-remove-border-radius: var(--uploader-remove-border-radius, 0 0 0 12px * $hd);
+$uploader-remove-icon-font-size: var(--uploader-remove-icon-font-size, 16px * $hd);
+$uploader-remove-icon-color: var(--uploader-remove-icon-color, var(--white, $white));
+//
+$uploader-file-size: var(--uploader-file-size, $uploader-size);
+$uploader-file-width: var(--uploader-file-width, $uploader-file-size);
+$uploader-file-height: var(--uploader-file-height, $uploader-file-size);
+$uploader-file-background-color: var(--uploader-file-background-color, var(--background-color, $background-color));
+$uploader-file-icon-font-size: var(--uploader-file-icon-font-size, 20px * $hd);
+$uploader-file-icon-color: var(--uploader-file-icon-color, var(--gray-7, $gray-7));
+$uploader-file-name-padding: var(--uploader-file-name-padding, 0 var(--padding-base, $padding-base));
+$uploader-file-name-margin-top: var(--uploader-file-name-margin-top, var(--padding-xs, $padding-xs));
+$uploader-file-name-font-size: var(--uploader-file-name-font-size, var(--font-size-sm, $font-size-sm));
+$uploader-file-name-color: var(--uploader-file-name-color, var(--gray-7, $gray-7));
+//
+$uploader-mask-color: var(--uploader-mask-color, var(--white, $white));
+$uploader-mask-background-color: var(--uploader-mask-background-color, rgba(50, 50, 51, 0.88));
+$uploader-mask-icon-size: var(--uploader-mask-icon-size, 22px * $hd);
+$uploader-mask-message-margin-top: var(--uploader-mask-message-margin-top, 6px * $hd);
+$uploader-mask-message-padding: var(--uploader-mask-message-padding, 0 var(--padding-base, $padding-base));
+$uploader-mask-message-font-size: var(--uploader-mask-message-font-size, var(--font-size-sm, $font-size-sm));
+$uploader-mask-message-line-height: var(--uploader-mask-message-line-height, var(--line-height-xs, $line-height-xs));
+//
+$uploader-loading-icon-size: var(--uploader-loading-icon-size, 22px * $hd);
+$uploader-loading-icon-width: var(--uploader-loading-icon-width, $uploader-loading-icon-size);
+$uploader-loading-icon-height: var(--uploader-loading-icon-height, $uploader-loading-icon-size);
+$uploader-loading-icon-color: var(--uploader-loading-icon-color, var(--white, $white));
