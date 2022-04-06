@@ -4,27 +4,27 @@
   position: relative;
   box-sizing: content-box;
   display: inline-block;
-  width: var(--switch-width, $switch-width);
-  height: var(--switch-height, $switch-height);
-  font-size: var(--switch-size, $switch-size);
+  width: $switch-width;
+  height: $switch-height;
+  font-size: $switch-font-size;
   cursor: pointer;
-  background-color: var(--switch-background-color, $switch-background-color);
-  border: var(--switch-border, $switch-border);
-  border-radius: var(--switch-node-size, $switch-node-size);
-  transition: background-color var(--switch-transition-duration, $switch-transition-duration);
+  background: $switch-background-color;
+  border: $switch-border;
+  border-radius: $switch-node-size;
+  transition: background-color $switch-transition-duration;
 
   &__node {
     position: absolute;
     top: 0;
     left: 0;
-    width: var(--switch-node-size, $switch-node-size);
-    height: var(--switch-node-size, $switch-node-size);
+    width: $switch-node-width;
+    height: $switch-node-height;
     // https://github.com/youzan/vant/issues/9839
     font-size: inherit;
-    background-color: var(--switch-node-background-color, $switch-node-background-color);
+    background: $switch-node-background-color;
     border-radius: 100%;
-    box-shadow: var(--switch-node-box-shadow, $switch-node-box-shadow);
-    transition: transform var(--switch-transition-duration, $switch-transition-duration) cubic-bezier(0.3, 1.05, 0.4, 1.05);
+    box-shadow:$switch-node-box-shadow;
+    transition: transform $switch-transition-duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
   }
 
   &__loading {
@@ -37,20 +37,20 @@
   }
 
   &--checked {
-    background-color: var(--switch-checked-background-color, $switch-checked-background-color);
+    background: $switch-checked-background-color;
 
     .#{$component-prefix}switch__node {
-      transform: translateX(var(--switch-node-translate-x, $switch-node-translate-x));
+      transform: $switch-node-translate-x;
     }
 
     .#{$component-prefix}switch__loading {
-      color: var(--switch-loading-color, $switch-loading-color);
+      color: $switch-loading-color;
     }
   }
 
   &--disabled {
     cursor: not-allowed;
-    opacity: var(--switch-disabled-opacity, $switch-disabled-opacity);
+    opacity: $switch-disabled-opacity;
   }
 
   &--loading {

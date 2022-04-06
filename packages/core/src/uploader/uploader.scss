@@ -9,11 +9,11 @@
     flex-wrap: wrap;
 
     &--disabled {
-      opacity: var(--uploader-disabled-opacity, $uploader-disabled-opacity);
+      opacity: $uploader-disabled-opacity;
 
       .#{$component-prefix}uploader__upload {
         &:active {
-          background-color: var(--uploader-upload-background-color, $uploader-upload-background-color);
+          background: $uploader-upload-background-color;
         }
       }
     }
@@ -26,40 +26,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: var(--uploader-size, $uploader-size);
-    height: var(--uploader-size, $uploader-size);
-    margin: 0 var(--padding-xs, $padding-xs) var(--padding-xs, $padding-xs) 0;
-    background-color: var(--uploader-upload-background-color, $uploader-upload-background-color);
+    width: $uploader-upload-width;
+    height: $uploader-upload-height;
+    margin: $uploader-upload-margin;
+    background: $uploader-upload-background-color;
 
     &:active {
-      background-color: var(--uploader-upload-active-color, $uploader-upload-active-color);
+      background: $uploader-upload-active-background-color;
     }
 
     &--readonly:active {
-      background-color: var(--uploader-upload-background-color, $uploader-upload-background-color);
+      background: $uploader-upload-background-color;
     }
 
     &-icon {
-      font-size: var(--uploader-icon-size, $uploader-icon-size);
-      color: var(--uploader-icon-color, $uploader-icon-color);
+      font-size: $uploader-upload-icon-font-size;
+      color: $uploader-upload-icon-color;
     }
 
     &-text {
-      margin-top: var(--padding-xs, $padding-xs);
-      font-size: var(--uploader-text-font-size, $uploader-text-font-size);
-      color: var(--uploader-text-color, $uploader-text-color);
+      margin-top: $uploader-upload-text-margin-top;
+      font-size: $uploader-upload-text-font-size;
+      color: $uploader-upload-text-color;
     }
   }
 
   &__preview {
     position: relative;
-    margin: 0 var(--padding-xs, $padding-xs) var(--padding-xs, $padding-xs) 0;
+    margin: $uploader-preview-margin;
     cursor: pointer;
 
     &-image {
       display: block;
-      width: var(--uploader-size, $uploader-size);
-      height: var(--uploader-size, $uploader-size);
+      width: $uploader-preview-image-width;
+      height: $uploader-preview-image-height;
       overflow: hidden;
     }
 
@@ -67,17 +67,17 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: var(--uploader-remove-icon-size, $uploader-remove-icon-size);
-      height: var(--uploader-remove-icon-size, $uploader-remove-icon-size);
-      background-color: var(--uploader-remove-background-color, $uploader-remove-background-color);
-      border-radius: 0 0 0 12px * $hd;
+      width: $uploader-remove-width;
+      height: $uploader-remove-height;
+      background: $uploader-remove-background-color;
+      border-radius: $uploader-remove-border-radius;
 
       &-icon {
         position: absolute;
         top: -2px * $hd;
         right: -2px * $hd;
-        font-size: 16px * $hd;
-        color: var(--uploader-remove-color, $uploader-remove-color);
+        font-size: $uploader-remove-icon-font-size;
+        color: $uploader-remove-icon-color;
         transform: scale(0.5);
       }
     }
@@ -101,25 +101,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--uploader-mask-text-color, $uploader-mask-text-color);
-    background-color: var(--uploader-mask-background-color, $uploader-mask-background-color);
+    color: $uploader-mask-color;
+    background: $uploader-mask-background-color;
 
     &-icon {
-      font-size: var(--uploader-mask-icon-size, $uploader-mask-icon-size);
+      font-size: $uploader-mask-icon-size;
     }
 
     &-message {
-      padding: 0 var(--padding-base, $padding-base);
-      margin-top: 6px * $hd;
-      font-size: var(--uploader-mask-message-font-size, $uploader-mask-message-font-size);
-      line-height: var(--uploader-mask-message-line-height, $uploader-mask-message-line-height);
+      padding: $uploader-mask-message-padding;
+      margin-top: $uploader-mask-message-margin-top;
+      font-size: $uploader-mask-message-font-size;
+      line-height: $uploader-mask-message-line-height;
     }
   }
 
   &__loading {
-    width: var(--uploader-loading-icon-size, $uploader-loading-icon-size);
-    height: var(--uploader-loading-icon-size, $uploader-loading-icon-size);
-    color: var(--uploader-loading-icon-color, $uploader-loading-icon-color);
+    width: $uploader-loading-icon-width;
+    height: $uploader-loading-icon-height;
+    color: $uploader-loading-icon-color;
   }
 
   &__file {
@@ -127,22 +127,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: var(--uploader-size, $uploader-size);
-    height: var(--uploader-size, $uploader-size);
-    background-color: var(--uploader-file-background-color, $uploader-file-background-color);
+    width: $uploader-file-width;
+    height: $uploader-file-height;
+    background: $uploader-file-background-color;
 
     &-icon {
-      font-size: var(--uploader-file-icon-size, $uploader-file-icon-size);
-      color: var(--uploader-file-icon-color, $uploader-file-icon-color);
+      font-size: $uploader-file-icon-font-size;
+      color: $uploader-file-icon-color;
     }
 
     &-name {
       box-sizing: border-box;
       width: 100%;
-      padding: var(--uploader-file-name-padding, $uploader-file-name-padding);
-      margin-top: var(--uploader-file-name-margin-top, $uploader-file-name-margin-top);
-      font-size: var(--uploader-file-name-font-size, $uploader-file-name-font-size);
-      color: var(--uploader-file-name-text-color, $uploader-file-name-text-color);
+      padding: $uploader-file-name-padding;
+      margin-top: $uploader-file-name-margin-top;
+      font-size: $uploader-file-name-font-size;
+      color: $uploader-file-name-color;
       text-align: center;
     }
   }

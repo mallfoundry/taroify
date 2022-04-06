@@ -1,19 +1,20 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$switch-size: 30px * $hd;
-$switch-width: 2em;
-$switch-height: 1em;
-$switch-node-size: 1em;
-$switch-node-translate-x: $switch-width - $switch-node-size;
-$switch-node-background-color: var(--white, $white);
-$switch-node-box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05),
-0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
-$switch-background-color: var(--white, $white);
-$switch-checked-color: var(--primary-color, $primary-color);
-$switch-checked-background-color: var(--switch-checked-color, $switch-checked-color);
-$switch-loading-color: var(--switch-checked-color, $switch-checked-color);
-$switch-transition-duration: var(--animation-duration-base, $animation-duration-base);
-$switch-disabled-opacity: var(--disabled-opacity, $disabled-opacity);
-$switch-border: $border-width-base solid rgba(0, 0, 0, 0.1);
-
+$switch-size: var(--switch-size, 30px * $hd);
+$switch-font-size: var(--switch-font-size, $switch-size);
+$switch-width: var(--switch-width, 2em);
+$switch-height: var(--switch-height, 1em);
+$switch-border: var(--switch-border, var(--border-width-base, $border-width-base) solid rgba(0, 0, 0, 0.1));
+$switch-background-color: var(--switch-background-color, var(--white, $white));
+$switch-transition-duration: var(--switch-transition-duration, var(--animation-duration-base, $animation-duration-base));
+$switch-node-size: var(--switch-node-size, 1em);
+$switch-node-width: var(--switch-node-width, $switch-node-size);
+$switch-node-height: var(--switch-node-height, $switch-node-size);
+$switch-node-translate-x: translateX(var(--switch-node-translate-x, calc(#{$switch-width} - #{$switch-node-size})));
+$switch-node-background-color: var(--switch-node-background-color, var(--white, $white));
+$switch-node-box-shadow: var(--switch-node-box-shadow, #{0 3px * $hd 1px * $hd 0 rgba(0, 0, 0, 0.05), 0 2px * $hd 2px * $hd 0 rgba(0, 0, 0, 0.1), 0 3px * $hd 3px * $hd 0 rgba(0, 0, 0, 0.05)});
+$switch-checked-color: var(--switch-checked-color, var(--primary-color, $primary-color));
+$switch-checked-background-color: var(--switch-checked-background-color, $switch-checked-color);
+$switch-loading-color: var(--switch-loading-color, var(--switch-checked-color, $switch-checked-color));
+$switch-disabled-opacity: var(--switch-disabled-opacity, var(--disabled-opacity, $disabled-opacity));

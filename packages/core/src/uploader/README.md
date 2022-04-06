@@ -249,3 +249,57 @@ function CustomPreviewUploader() {
 | --------------------- | ---------------------- | ------------------- |
 | onUpload              | 点击上传区域时触发     | _event: ITouchEvent_ |
 | onChange              | 已上传图片列表改变后触发 | _file: UploadFile \| UploadFile[]_  |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                        | 默认值                                       | 描述  |
+|-------------------------------------------|-------------------------------------------|-----|
+| --uploader-size                           | _80px * $hd_                              | -   |
+| --uploader-disabled-opacity               | _var(--disabled-opacity)_                 | -   |
+| --uploader-upload-size                    | _var(--uploader-size)_                    | -   |
+| --uploader-upload-width                   | _var(--uploader-upload-size)_             | -   |
+| --uploader-upload-height                  | _var(--uploader-upload-size)_             | -   |
+| --uploader-upload-margin                  | _0 var(--padding-xs) var(--padding-xs) 0_ | -   |
+| --uploader-upload-background-color        | _var(--gray-1)_                           | -   |
+| --uploader-upload-active-background-color | _var(--active-color)_                     | -   |
+| --uploader-upload-icon-color              | _var(--gray-4)_                           | -   |
+| --uploader-upload-icon-font-size          | _24px * $hd_                              | -   |
+| --uploader-upload-text-margin-top         | _var(--padding-xs)_                       | -   |
+| --uploader-upload-text-color              | _var(--gray-6)_                           | -   |
+| --uploader-upload-text-font-size          | _var(--font-size-sm)_                     | -   |
+| --uploader-preview-margin                 | _0 var(--padding-xs) var(--padding-xs) 0_ | -   |
+| --uploader-preview-image-size             | _var(--uploader-size)_                    | -   |
+| --uploader-preview-image-width            | _var(--uploader-preview-image-size)_      | -   |
+| --uploader-preview-image-height           | _var(--uploader-preview-image-size)_      | -   |
+| --uploader-remove-size                    | _14px * $hd_                              | -   |
+| --uploader-remove-width                   | _var(--uploader-remove-size)_             | -   |
+| --uploader-remove-height                  | _var(--uploader-remove-size)_             | -   |
+| --uploader-remove-background-color        | _rgba(0, 0, 0, 0.7)_                      | -   |
+| --uploader-remove-border-radius           | _0 0 0 12px * $hd_                        | -   |
+| --uploader-remove-icon-font-size          | _16px * $hd_                              | -   |
+| --uploader-remove-icon-color              | _var(--white)_                            | -   |
+| --uploader-file-size                      | _var(--uploader-size)_                    | -   |
+| --uploader-file-width                     | _var(--uploader-file-size)_               | -   |
+| --uploader-file-height                    | _var(--uploader-file-size)_               | -   |
+| --uploader-file-background-color          | _var(--background-color)_                 | -   |
+| --uploader-file-icon-font-size            | _20px * $hd_                              | -   |
+| --uploader-file-icon-color                | _var(--gray-7)_                           | -   |
+| --uploader-file-name-padding              | _0 var(--padding-base)_                   | -   |
+| --uploader-file-name-margin-top           | _var(--padding-xs)_                       | -   |
+| --uploader-file-name-font-size            | _var(--font-size-sm)_                     | -   |
+| --uploader-file-name-color                | _var(--gray-7)_                           | -   |
+| --uploader-mask-color                     | _var(--white)_                            | -   |
+| --uploader-mask-background-color          | _rgba(50, 50, 51, 0.88)_                  | -   |
+| --uploader-mask-icon-size                 | _22px * $hd_                              | -   |
+| --uploader-mask-message-margin-top        | _6px * $hd_                               | -   |
+| --uploader-mask-message-padding           | _0 var(--padding-base)_                   | -   |
+| --uploader-mask-message-font-size         | _var(--font-size-sm)_                     | -   |
+| --uploader-mask-message-line-height       | _var(--line-height-xs)_                   | -   |
+| --uploader-loading-icon-size              | _22px * $hd_                              | -   |
+| --uploader-loading-icon-width             | _var(--uploader-loading-icon-size)_       | -   |
+| --uploader-loading-icon-height            | _var(--uploader-loading-icon-size)_       | -   |
+| --uploader-loading-icon-color             | _var(--white)_                            | -   |
