@@ -58,39 +58,39 @@
   }
 
   &--default {
-    color: $button-color-default;
-    background: $button-background-color-default;
-    border: $button-border-width solid $button-border-color-default;
+    color: $button-default-color;
+    background: $button-default-background-color;
+    border: $button-border-width solid $button-default-border-color;
   }
 
   &--primary {
-    color: $button-color-primary;
-    background: $button-background-color-primary;
-    border: $button-border-width solid $button-border-color-primary;
+    color: $button-primary-color;
+    background: $button-primary-background-color;
+    border: $button-border-width solid $button-primary-border-color;
   }
 
   &--info {
-    color: $button-color-info;
-    background: $button-background-color-info;
-    border: $button-border-width solid $button-border-color-info;
+    color: $button-info-color;
+    background: $button-info-background-color;
+    border: $button-border-width solid $button-info-border-color;
   }
 
   &--success {
-    color: $button-color-success;
-    background: $button-background-color-success;
-    border: $button-border-width solid $button-background-color-success;
+    color: $button-success-color;
+    background: $button-success-background-color;
+    border: $button-border-width solid $button-success-background-color;
   }
 
   &--warning {
-    color: $button-color-warning;
-    background: $button-background-color-warning;
-    border: $button-border-width solid $button-border-color-warning;
+    color: $button-warning-color;
+    background: $button-warning-background-color;
+    border: $button-border-width solid $button-warning-border-color;
   }
 
   &--danger {
-    color: $button-color-danger;
-    background: $button-background-color-danger;
-    border: $button-border-width solid $button-border-color-danger;
+    color: $button-danger-color;
+    background: $button-danger-background-color;
+    border: $button-border-width solid $button-danger-border-color;
   }
 
   &--disabled {
@@ -123,46 +123,46 @@
     }
 
     &.#{$component-prefix}button--default {
-      color: $button-color-default;
+      color: $button-default-color;
     }
 
     &.#{$component-prefix}button--primary {
-      color: $button-background-color-primary;
+      color: $button-primary-background-color;
 
       &:active::before {
-        background: $button-background-color-primary;
+        background: $button-primary-background-color;
       }
     }
 
     &.#{$component-prefix}button--info {
-      color: $button-background-color-info;
+      color: $button-info-background-color;
 
       &:active::before {
-        background: $button-background-color-info;
+        background: $button-info-background-color;
       }
     }
 
     &.#{$component-prefix}button--success {
-      color: $button-background-color-success;
+      color: $button-success-background-color;
 
       &:active::before {
-        background: $button-background-color-success;
+        background: $button-success-background-color;
       }
     }
 
     &.#{$component-prefix}button--warning {
-      color: $button-background-color-warning;
+      color: $button-warning-background-color;
 
       &:active::before {
-        background: $button-background-color-warning;
+        background: $button-warning-background-color;
       }
     }
 
     &.#{$component-prefix}button--danger {
-      color: $button-background-color-danger;
+      color: $button-danger-background-color;
 
       &:active::before {
-        background: $button-background-color-danger;
+        background: $button-danger-background-color;
       }
     }
   }
@@ -175,47 +175,47 @@
     background: transparent;
 
     &.#{$component-prefix}button--primary {
-      color: $button-background-color-primary;
-      background: $button-color-primary;
+      color: $button-primary-background-color;
+      background: $button-primary-color;
 
       &:active::before {
-        background: $button-background-color-primary;
+        background: $button-primary-background-color;
       }
     }
 
     &.#{$component-prefix}button--info {
-      color: $button-background-color-info;
-      background: $button-color-info;
+      color: $button-info-background-color;
+      background: $button-info-color;
 
       &:active::before {
-        background: $button-background-color-info;
+        background: $button-info-background-color;
       }
     }
 
     &.#{$component-prefix}button--success {
-      color: $button-background-color-success;
-      background: $button-color-success;
+      color: $button-success-background-color;
+      background: $button-success-color;
 
       &:active::before {
-        background: $button-background-color-success;
+        background: $button-success-background-color;
       }
     }
 
     &.#{$component-prefix}button--warning {
-      color: $button-background-color-warning;
-      background: $button-color-warning;
+      color: $button-warning-background-color;
+      background: $button-warning-color;
 
       &:active::before {
-        background: $button-background-color-warning;
+        background: $button-warning-background-color;
       }
     }
 
     &.#{$component-prefix}button--danger {
-      color: $button-background-color-danger;
-      background: $button-color-danger;
+      color: $button-danger-background-color;
+      background: $button-danger-color;
 
       &:active::before {
-        background: $button-background-color-danger;
+        background: $button-danger-background-color;
       }
     }
   }
