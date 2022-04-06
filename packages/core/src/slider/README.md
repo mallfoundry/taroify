@@ -126,6 +126,26 @@ function StyledThumbSlider() {
 
 ### Slider Events
 
-| 事件名             | 说明                     | 回调参数            |
-| ------------------ | ------------------------ | ------------------- |
-| onChange             | 进度变化且结束拖动后触发 | _value: number_     |
+| 事件名      | 说明           | 回调参数            |
+|----------|--------------|-----------------|
+| onChange | 进度变化且结束拖动后触发 | _value: number_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                 | 默认值                                        | 描述  |
+|------------------------------------|--------------------------------------------|-----|
+| --slider-border-radius             | _var(--border-radius-max)_                 | -   |
+| --slider-active-background-color   | _var(--blue)_                              | -   |
+| --slider-inactive-background-color | _var(--gray-3)_                            | -   |
+| --slider-disabled-opacity          | _var(--disabled-opacity)_                  | -   |
+| --slider-track-height              | _2px * $hd_                                | -   |
+| --slider-track-transition-duration | _var(--animation-duration-fast)_           | -   |
+| --slider-thumb-width               | _24px * $hd_                               | -   |
+| --slider-thumb-height              | _24px * $hd_                               | -   |
+| --slider-thumb-border-radius       | _50%_                                      | -   |
+| --slider-thumb-background-color    | _var(--white)_                             | -   |
+| --slider-thumb-box-shadow          | _0 1px * $hd 2px * $hd rgba(0, 0, 0, 0.5)_ | -   |
