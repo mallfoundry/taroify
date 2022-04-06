@@ -92,7 +92,7 @@ function InputCenterSearch() {
 
 ```scss
 .background {
-  background: #4fc08d;
+  --search-background-color: #4fc08d;
 }
 ```
 
