@@ -22,5 +22,12 @@ export function getLogger(name: string) {
         console.warn(`Taroify - ${name} : ${message}`, ...optionalParams)
       }
     },
+
+    deprecated(message?: any, ...optionalParams: any[]) {
+      if (logConfig.level <= warnLevel) {
+        // eslint-disable-next-line no-console
+        console.warn(`[Deprecated] Taroify - ${name} : ${message}`, ...optionalParams)
+      }
+    },
   }
 }
