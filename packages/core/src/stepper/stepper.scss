@@ -9,14 +9,14 @@
     position: relative;
     box-sizing: border-box;
     display: inline-block;
-    width: var(--stepper-input-height, $stepper-input-height);
-    height: var(--stepper-input-height, $stepper-input-height);
+    width: $stepper-input-height;
+    height: $stepper-input-height;
     padding: 0;
     margin: 0;
-    color: var(--stepper-button-icon-color, $stepper-button-icon-color);
+    color: $stepper-button-icon-color;
     vertical-align: middle;
     cursor: pointer;
-    background-color: var(--stepper-background-color, $stepper-background-color);
+    background: $stepper-background-color;
     border: 0;
 
     &::before {
@@ -40,56 +40,47 @@
     }
 
     &:active {
-      background-color: var(--stepper-active-color, $stepper-active-color);
+      background-color: $stepper-active-background-color;
     }
 
     &--disabled {
-      color: var(--stepper-button-disabled-icon-color, $stepper-button-disabled-icon-color);
+      color: $stepper-button-disabled-color;
       cursor: not-allowed;
-      background-color: var(--stepper-button-disabled-color, $stepper-button-disabled-color);
+      background: $stepper-button-disabled-background-color;
 
       &:active {
-        background-color: var(--stepper-button-disabled-color, $stepper-button-disabled-color);
+        background: $stepper-button-disabled-background-color;
       }
     }
   }
 
-  &__decrease {
-    border-radius: var(--stepper-border-radius, $stepper-border-radius) 0 0 var(--stepper-border-radius, $stepper-border-radius);
-
-    &::after {
-      display: none;
-    }
+  &__decrease::after {
+    display: none;
   }
-
-  &__increase {
-    border-radius: 0 var(--stepper-border-radius, $stepper-border-radius) var(--stepper-border-radius, $stepper-border-radius) 0;
-  }
-
 
   &__input {
     box-sizing: border-box;
     display: inline-block;
-    width: var(--stepper-input-width, $stepper-input-width);
-    height: var(--stepper-input-height, $stepper-input-height);
+    width: $stepper-input-width;
+    height: $stepper-input-height;
     padding: 0;
-    margin: 0 2px * $hd;
-    font-size: var(--stepper-input-font-size, $stepper-input-font-size);
-    line-height: var(--stepper-input-line-height, $stepper-input-line-height);
-    color: var(--stepper-input-text-color, $stepper-input-text-color);
+    margin: $stepper-input-margin;
+    font-size: $stepper-input-font-size;
+    line-height: $stepper-input-line-height;
+    color: $stepper-input-color;
     text-align: center;
     vertical-align: middle;
-    background-color: var(--stepper-background-color, $stepper-background-color);
+    background: $stepper-input-background-color;
     border: 0 none;
     border-radius: 0;
     appearance: none;
 
     &:disabled {
-      color: var(--stepper-input-disabled-text-color, $stepper-input-disabled-text-color);
-      background-color: var(--stepper-input-disabled-background-color, $stepper-input-disabled-background-color);
+      color: $stepper-input-disabled-color;
+      background: $stepper-input-disabled-background-color;
       opacity: 1;
       // fix disabled color in iOS
-      -webkit-text-fill-color: var(--stepper-input-disabled-text-color, $stepper-input-disabled-text-color);
+      -webkit-text-fill-color: $stepper-input-disabled-color;
     }
 
     &:read-only {
@@ -101,10 +92,30 @@
     }
   }
 
+  &--rounded {
+    .#{$component-prefix}stepper__decrease {
+      border-radius: $stepper-rounded-decrease-button-border-radius 0 0 $stepper-rounded-decrease-button-border-radius;
+    }
 
-  &--round {
+    .#{$component-prefix}stepper__increase {
+      border-radius: 0 $stepper-rounded-increase-button-border-radius $stepper-rounded-increase-button-border-radius 0;
+    }
+  }
+
+  &--circular {
     .#{$component-prefix}stepper__input {
-      background-color: transparent;
+      background: transparent;
+    }
+
+    .#{$component-prefix}stepper__decrease {
+      color: $stepper-circular-decrease-button-color;
+      background: $stepper-circular-decrease-button-background-color;
+      border: 1px * $hd solid $stepper-circular-decrease-button-border-color;
+    }
+
+    .#{$component-prefix}stepper__increase {
+      color: $stepper-circular-increase-button-color;
+      background: $stepper-circular-increase-button-background-color;
     }
 
     .#{$component-prefix}stepper__decrease,
@@ -122,17 +133,5 @@
         }
       }
     }
-
-    .#{$component-prefix}stepper__increase {
-      color: $white;
-      background-color: var(--stepper-button-round-color, $stepper-button-round-color);
-    }
-
-    .#{$component-prefix}stepper__decrease {
-      color: var(--stepper-button-round-color, $stepper-button-round-color);
-      background-color: $white;
-      border: 1px solid var(--stepper-button-round-color, $stepper-button-round-color);
-    }
   }
-
 }
