@@ -53,7 +53,7 @@ function DisabledSearch() {
 }
 
 function BackgroundSearch() {
-  return <Search className="background" shape="round" placeholder="请输入搜索关键词" />
+  return <Search className="background" shape="circular" placeholder="请输入搜索关键词" />
 }
 
 function CustomSearch() {
