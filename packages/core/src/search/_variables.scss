@@ -1,14 +1,23 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$search-padding: 10px * $hd var(--padding-sm, $padding-sm);
-$search-background-color: var(--white, $white);
-$search-content-background-color: var(--gray-1, $gray-1);
-$search-input-height: 34px * $hd;
-$search-label-padding: 0 5px * $hd;
-$search-label-color: var(--text-color, $text-color);
-$search-label-font-size: var(--font-size-md, $font-size-md);
-$search-left-icon-color: var(--gray-6, $gray-6);
-$search-action-padding: 0 var(--padding-xs, $padding-xs);
-$search-action-color: var(--text-color, $text-color);
-$search-action-font-size: var(--font-size-md, $font-size-md);
+$search-padding: var(--search-padding, 10px * $hd var(--padding-sm, $padding-sm));
+$search-background-color: var(--search-background-color, var(--white, $white));
+$search-content-padding-left: var(--search-content-padding-left, var(--padding-sm, $padding-sm));
+$search-content-background-color: var(--search-content-background-color, var(--gray-1, $gray-1));
+$search-content-rounded-border-radius: var(--search-content-rounded-border-radius, var(--border-radius-sm, $border-radius-sm));
+$search-content-circular-border-radius: var(--search-content-circular-border-radius, var(--border-radius-max, $border-radius-max));
+$search-input-height: var(--search-input-height, 34px * $hd);
+$search-label-padding: var(--search-label-padding, 0 5px * $hd);
+$search-label-color: var(--search-label-color, var(--text-color, $text-color));
+$search-label-font-size: var(--search-label-font-size, var(--font-size-md, $font-size-md));
+$search-label-line-height: var(--search-label-line-height, $search-input-height);
+//
+$search-field-padding: var(--search-field-padding, 5px * $hd var(--padding-xs, $padding-xs) 5px * $hd 0);
+$search-left-icon-color: var(--search-left-icon-color, var(--gray-6, $gray-6));
+//
+$search-action-padding: var(--search-action-padding, 0 var(--padding-xs, $padding-xs));
+$search-action-color: var(--search-action-color, var(--text-color, $text-color));
+$search-action-line-height: var(--search-action-line-height, $search-input-height);
+$search-action-font-size: var(--search-action-font-size, var(--font-size-md, $font-size-md));
+$search-action-active-background-color: var(--search-action-active-background-color, var(--active-color, $active-color));
