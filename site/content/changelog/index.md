@@ -12,6 +12,30 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.5
+
+`2022-04-06`
+
+**Feature**
+
+- Progress
+  - 导出 ProgressProps 类型 [#437](https://github.com/mallfoundry/taroify/pull/437) [@bingtsingw](https://github.com/bingtsingw)
+
+**Bug Fixes**
+
+- NoticeBar
+  - 修复 rect 为 undefined [#438](https://github.com/mallfoundry/taroify/pull/438)
+
+**Breaking Changes**
+
+- PasswordInput
+  - 删除 error 属性 [#440](https://github.com/mallfoundry/taroify/issues/440)
+  - 将 info 属性重命名为 feedback [#440](https://github.com/mallfoundry/taroify/issues/440)
+- Search
+  - 将 shape="round" 属性重命名为 shape="circular" [#444](https://github.com/mallfoundry/taroify/issues/444)
+- Stepper
+  - 将 shape="round" 属性重命名为 shape="circular" [#449](https://github.com/mallfoundry/taroify/issues/449)
+
 ### v0.0.29-alpha.4
 
 `2022-04-01`
