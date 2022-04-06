@@ -82,3 +82,29 @@ import { Switch } from "@taroify/core"
 | 事件名 | 说明               | 回调参数            |
 | ------ | ------------------ | ------------------- |
 | onChange | 开关状态切换时触发 | _value: boolean_        |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                              | 默认值                                                                                                                                              | 描述  |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|-----|
+| switch-size                     | _30px * $hd_                                                                                                                                     | -   |
+| switch-font-size                | _var(--switch-size)_                                                                                                                             | -   |
+| switch-width                    | _2em_                                                                                                                                            | -   |
+| switch-height                   | _1em_                                                                                                                                            | -   |
+| switch-border                   | _var(--border-width-base) solid rgba(0, 0, 0, 0.1)_                                                                                              | -   |
+| switch-background-color         | _var(--white)_                                                                                                                                   | -   |
+| switch-transition-duration      | _var(--animation-duration-base)_                                                                                                                 | -   |
+| switch-node-size                | _1em_                                                                                                                                            | -   |
+| switch-node-width               | _var(--switch-node-size)_                                                                                                                        | -   |
+| switch-node-height              | _var(--switch-node-size)_                                                                                                                        | -   |
+| switch-node-translate-x         | _translateX(calc(var(--switch-width) - var(--switch-node-size)))_                                                                                | -   |
+| switch-node-background-color    | _var(--white)_                                                                                                                                   | -   |
+| switch-node-box-shadow          | _0 3px * $hd 1px * $hd 0 rgba(0, 0, 0, 0.05), <br/>0 2px * $hd 2px * $hd 0 rgba(0, 0, 0, 0.1),<br/> 0 3px * $hd 3px * $hd 0 rgba(0, 0, 0, 0.05)_ | -   |
+| switch-checked-color            | _var(var(--primary-color)_                                                                                                                       | -   |
+| switch-checked-background-color | _var(--switch-checked-color)_                                                                                                                    | -   |
+| switch-loading-color            | _var(--switch-checked-color)_                                                                                                                    | -   |
+| switch-disabled-opacity         | _var(--disabled-opacity)_                                                                                                                        | -   |
