@@ -1,18 +1,29 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$stepper-active-color: #e8e8e8;
-$stepper-background-color: var(--active-color, $active-color);
-$stepper-button-icon-color: var(--text-color, $text-color);
-$stepper-button-disabled-color: var(--background-color, $background-color);
-$stepper-button-disabled-icon-color: var(--gray-5, $gray-5);
-$stepper-button-round-color: var(--danger-color, $danger-color);
-$stepper-input-width: 32px * $hd;
-$stepper-input-height: 28px * $hd;
-$stepper-input-font-size: var(--font-size-md, $font-size-md);
-$stepper-input-line-height: normal;
-$stepper-input-text-color: var(--text-color, $text-color);
-$stepper-input-disabled-text-color: var(--gray-5, $gray-5);
-$stepper-input-disabled-background-color: var(--active-color, $active-color);
-$stepper-border-radius: var(--border-radius-md, $border-radius-md);
-
+$stepper-active-background-color: var(--stepper-active-background-color, #e8e8e8);
+$stepper-background-color: var(--stepper-background-color, var(--active-color, $active-color));
+//
+$stepper-input-width: var(--stepper-input-width, 32px * $hd);
+$stepper-input-height: var(--stepper-input-height, 28px * $hd);
+$stepper-input-margin: var(--stepper-input-margin, 0 2px * $hd);
+$stepper-input-font-size: var(--stepper-input-font-size, var(--font-size-md, $font-size-md));
+$stepper-input-line-height: var(--stepper-input-line-height, normal);
+$stepper-input-color: var(--stepper-input-color, var(--text-color, $text-color));
+$stepper-input-background-color: var(--stepper-input-background-color, $stepper-background-color);
+$stepper-input-disabled-color: var(--stepper-input-disabled-color, var(--gray-5, $gray-5));
+$stepper-input-disabled-background-color: var(--stepper-input-disabled-background-color, var(--active-color, $active-color));
+//
+$stepper-button-icon-color: var(--stepper-button-icon-color, var(--text-color, $text-color));
+$stepper-button-disabled-color: var(--stepper-button-disabled-color, var(--gray-5, $gray-5));
+$stepper-button-disabled-background-color: var(--stepper-button-disabled-background-color, var(--background-color, $background-color));
+//
+$stepper-rounded-button-border-radius: var(--stepper-rounded-button-border-radius, var(--border-radius-md, $border-radius-md));
+$stepper-rounded-decrease-button-border-radius: var(--stepper-rounded-decrease-button-border-radius, $stepper-rounded-button-border-radius);
+$stepper-rounded-increase-button-border-radius: var(--stepper-rounded-increase-button-border-radius, $stepper-rounded-button-border-radius);
+//
+$stepper-circular-decrease-button-color: var(--stepper-circular-increase-button-color, var(--danger-color, $danger-color));
+$stepper-circular-decrease-button-background-color: var(--stepper-circular-increase-button-background-color, var(--white, $white));
+$stepper-circular-decrease-button-border-color: var(--stepper-circular-increase-button-border-color, var(--danger-color, $danger-color));
+$stepper-circular-increase-button-color: var(--stepper-circular-increase-button-color, var(--white, $white));
+$stepper-circular-increase-button-background-color: var(--stepper-circular-increase-button-background-color, var(--danger-color, $danger-color));

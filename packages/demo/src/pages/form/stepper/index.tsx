@@ -37,7 +37,7 @@ export default function StepperDemo() {
           </Stepper>
         </Cell>
         <Cell title="圆角风格">
-          <Stepper shape="round" size="22" />
+          <Stepper shape="circular" size="22" />
         </Cell>
       </Block>
     </Page>

@@ -14,11 +14,14 @@ import {
 } from "react"
 import { prefixClassname } from "../styles"
 import { addNumber, formatNumber } from "../utils/format/number"
+import { getLogger } from "../utils/logger"
 import { useToRef } from "../utils/state"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
 import StepperContext from "./stepper.context"
-import { StepperActionType } from "./stepper.shared"
+import { StepperActionType, StepperShape } from "./stepper.shared"
+
+const { deprecated } = getLogger("Stepper")
 
 interface StepperChildren {
   decrease?: ReactNode
@@ -72,8 +75,6 @@ function useStepperChildren(children?: ReactNode): StepperChildren {
   }, [children])
 }
 
-type StepperShape = "square" | "round"
-
 export interface StepperProps extends ViewProps {
   defaultValue?: number | string
   value?: number | string
@@ -102,11 +103,16 @@ function Stepper(props: StepperProps) {
     disabled,
     precision = 0,
     longPress = true,
-    shape = "square",
+    shape = "rounded",
     children: childrenProp,
     onChange: onChangeProp,
     ...restProps
   } = props
+
+  if (shape === "round") {
+    // eslint-disable-next-line quotes
+    deprecated('Use the shape="circular" prop instead of the shape="round" prop')
+  }
 
   const { decrease, input, increase } = useStepperChildren(childrenProp)
 
@@ -166,7 +172,9 @@ function Stepper(props: StepperProps) {
         className={classNames(
           prefixClassname("stepper"),
           {
-            [prefixClassname("stepper--round")]: shape === "round",
+            [prefixClassname("stepper--square")]: shape === "square",
+            [prefixClassname("stepper--rounded")]: shape === "rounded",
+            [prefixClassname("stepper--circular")]: shape === "circular" || shape === "round",
           },
           className,
         )}
