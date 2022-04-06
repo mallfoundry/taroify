@@ -56,6 +56,7 @@ export default function Radio(props: RadioProps) {
         prefixClassname("radio"),
         {
           [prefixClassname("radio--horizontal")]: direction === "horizontal",
+          [prefixClassname("radio--vertical")]: direction === "vertical",
         },
         className,
       )}

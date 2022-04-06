@@ -106,3 +106,17 @@ import { Rate } from "@taroify/core"
 | 事件名 | 说明                     | 回调参数 |
 | ------ | ------------------------ | -------- |
 | onChange | 当前分值变化时触发的事件 | _value :number_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                       | 默认值                   | 描述  |
+|--------------------------|-----------------------|-----|
+| rate-icon-size           | _20px * $hd_          | -   |
+| rate-icon-gutter         | _var(--padding-base)_ | -   |
+| rate-icon-empty-color    | _var(--gray-5)_       | -   |
+| rate-icon-full-color     | _var(--danger-color)_ | -   |
+| rate-icon-disabled-color | _var(--gray-5)_       | -   |

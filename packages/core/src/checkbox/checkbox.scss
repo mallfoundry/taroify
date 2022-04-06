@@ -13,7 +13,7 @@
   }
 
   &--horizontal {
-    margin-right: var(--padding-sm, $padding-sm);
+    margin-right: $checkbox-gap;
 
     &:last-child {
       margin-right: 0;
@@ -21,7 +21,7 @@
   }
 
   &--vertical {
-    margin-bottom: var(--padding-sm, $padding-sm);
+    margin-bottom: $checkbox-gap;
 
     &:last-child {
       margin-bottom: 0;
@@ -58,7 +58,7 @@
     &--checked {
       .#{$component-prefix}icon {
         color: $checkbox-checked-icon-color;
-        background-color: $checkbox-checked-icon-border-color;
+        background: $checkbox-checked-icon-border-color;
         border-color: $checkbox-checked-icon-border-color;
       }
 

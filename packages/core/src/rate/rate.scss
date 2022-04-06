@@ -10,15 +10,15 @@
     pointer-events: none;
 
     &:not(:last-child) {
-      padding-right: var(--rate-icon-gutter, $rate-icon-gutter);
+      padding-right: $rate-icon-gutter;
     }
   }
 
   &__icon {
     display: block;
     width: 1em;
-    font-size: var(--rate-icon-size, $rate-icon-size);
-    color: var(--rate-icon-empty-color, $rate-icon-empty-color);
+    font-size: $rate-icon-size;
+    color: $rate-icon-empty-color;
 
     &--half {
       position: absolute;
@@ -28,11 +28,11 @@
     }
 
     &--full {
-      color: var(--rate-icon-full-color, $rate-icon-full-color);
+      color: $rate-icon-full-color;
     }
 
     &--disabled {
-      color: var(--rate-icon-disabled-color, $rate-icon-disabled-color);
+      color: $rate-icon-disabled-color;
     }
   }
 

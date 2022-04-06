@@ -4,7 +4,7 @@
   display: inline-flex;
   align-items: center;
   overflow: hidden;
-  font-size: var(--font-size-lg, $font-size-lg);
+  font-size: $radio-font-size;
   cursor: pointer;
   user-select: none;
 
@@ -13,13 +13,25 @@
   }
 
   &--horizontal {
-    margin-right: var(--padding-sm, $padding-sm);
+    margin-right: $radio-gap;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &--vertical {
+    margin-bottom: $radio-gap;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__icon {
     flex: none;
     height: 1em;
-    font-size: var(--radio-size, $radio-size);
+    font-size: $radio-icon-font-size;
     line-height: 1em;
     cursor: pointer;
 
@@ -32,8 +44,8 @@
       line-height: 1.25;
       color: transparent;
       text-align: center;
-      border: 1px solid var(--radio-border-color, $radio-border-color);
-      transition-duration: var(--radio-transition-duration, $radio-transition-duration);
+      border: 1px solid $radio-border-color;
+      transition-duration: $radio-transition-duration;
       transition-property: color, border-color, background-color;
     }
 
@@ -45,9 +57,15 @@
 
     &--checked {
       .#{$component-prefix}icon {
-        color: var(--white, $white);
-        background-color: var(--radio-checked-icon-color, $radio-checked-icon-color);
-        border-color: var(--radio-checked-icon-color, $radio-checked-icon-color);
+        color: $radio-checked-icon-color;
+        background: $radio-checked-icon-background-color;
+        border-color: $radio-checked-icon-border-color;
+      }
+
+      &.#{$component-prefix}radio__icon--disabled {
+        .#{$component-prefix}icon {
+          color: $radio-disabled-icon-color;
+        }
       }
     }
 
@@ -55,23 +73,23 @@
       cursor: not-allowed;
 
       .#{$component-prefix}icon {
-        background-color: var(--radio-disabled-background-color, $radio-disabled-background-color);
-        border-color: var(--radio-disabled-icon-color, $radio-disabled-icon-color);
+        background: $radio-disabled-icon-background-color;
+        border-color: $radio-disabled-icon-border-color;
       }
     }
   }
 
   &__label {
-    margin-left: var(--radio-label-margin, $radio-label-margin);
-    line-height: var(--radio-size, $radio-size);
-    color: var(--radio-label-color, $radio-label-color);
+    margin-left: $radio-label-margin;
+    line-height: $radio-label-line-height;
+    color: $radio-label-color;
 
     &--left {
-      margin: 0 var(--radio-label-margin, $radio-label-margin) 0 0;
+      margin: 0 $radio-label-margin 0 0;
     }
 
     &--disabled {
-      color: var(--radio-disabled-label-color, $radio-disabled-label-color);
+      color: $radio-disabled-label-color;
     }
   }
 }

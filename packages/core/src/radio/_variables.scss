@@ -1,12 +1,23 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$radio-size: 20px * $hd;
-$radio-border-color: var(--gray-5, $gray-5);
-$radio-transition-duration: var(--animation-duration-fast, $animation-duration-fast);
-$radio-label-margin: var(--padding-xs, $padding-xs);
-$radio-label-color: var(--text-color, $text-color);
-$radio-checked-icon-color: var(--primary-color, $primary-color);
-$radio-disabled-icon-color: var(--gray-5, $gray-5);
-$radio-disabled-label-color: var(--gray-5, $gray-5);
-$radio-disabled-background-color: var(--border-color, $border-color);
+$radio-size: var(--radio-size, 20px * $hd);
+$radio-font-size: var(--radio-font-size, var(--font-size-lg, $font-size-lg));
+$radio-border-color: var(--radio-border-color, var(--gray-5, $gray-5));
+$radio-transition-duration: var(--radio-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
+$radio-gap: var(--radio-gap, var(--padding-sm, $padding-sm));
+//
+$radio-label-margin: var(--radio-label-margin, var(--padding-xs, $padding-xs));
+$radio-label-color: var(--radio-label-color, var(--text-color, $text-color));
+$radio-label-line-height: var(--radio-label-line-height, $radio-size);
+$radio-disabled-label-color: var(--radio-disabled-label-color, var(--gray-5, $gray-5));
+//
+$radio-icon-font-size: var(--radio-icon-font-size, $radio-size);
+//
+$radio-checked-icon-color: var(--radio-checked-icon-color, var(--white, $white));
+$radio-checked-icon-border-color: var(--radio-checked-icon-border-color, var(--primary-color, $primary-color));
+$radio-checked-icon-background-color: var(--radio-checked-icon-background-color, var(--primary-color, $primary-color));
+//
+$radio-disabled-icon-color: var(--radio-disabled-icon-color, var(--gray-5, $gray-5));
+$radio-disabled-icon-border-color: var(--radio-disabled-icon-border-color, var(--gray-5, $gray-5));
+$radio-disabled-icon-background-color: var(--radio-disabled-icon-background-color, var(--border-color, $border-color));
