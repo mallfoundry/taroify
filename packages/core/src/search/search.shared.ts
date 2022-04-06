@@ -1,1 +1,1 @@
-export type SearchShape = "square" | "round"
+export type SearchShape = "square" | "rounded" | "circular" | "round"

@@ -4,35 +4,38 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: var(--search-padding, $search-padding);
-  background-color: var(--search-background-color, $search-background-color);
+  padding: $search-padding;
+  background-color: $search-background-color;
 
   &__content {
     display: flex;
     flex: 1;
-    padding-left: var(--padding-sm, $padding-sm);
-    background-color: var(--search-content-background-color, $search-content-background-color);
-    border-radius: var(--border-radius-sm, $border-radius-sm);
+    padding-left: $search-content-padding-left;
+    background-color: $search-content-background-color;
 
-    &--round {
-      border-radius: var(--border-radius-max, $border-radius-max);
+    &--rounded {
+      border-radius: $search-content-rounded-border-radius;
+    }
+
+    &--circular {
+      border-radius: $search-content-circular-border-radius;
     }
   }
 
   &__label {
-    padding: var(--search-label-padding, $search-label-padding);
-    font-size: var(--search-label-font-size, $search-label-font-size);
-    line-height: var(--search-input-height, $search-input-height);
-    color: var(--search-label-color, $search-label-color);
+    padding: $search-label-padding;
+    font-size: $search-label-font-size;
+    line-height: $search-label-line-height;
+    color: $search-label-color;
   }
 
   &__field {
     flex: 1;
-    padding: 5px * $hd var(--padding-xs, $padding-xs) 5px * $hd 0;
+    padding: $search-field-padding;
     background-color: transparent;
 
     .#{$component-prefix}field__icon {
-      color: var(--search-left-icon-color, $search-left-icon-color);
+      color: $search-left-icon-color;
     }
   }
 
@@ -50,15 +53,15 @@
   }
 
   &__action {
-    padding: var(--search-action-padding, $search-action-padding);
-    font-size: var(--search-action-font-size, $search-action-font-size);
-    line-height: var(--search-input-height, $search-input-height);
-    color: var(--search-action-color, $search-action-color);
+    padding: $search-action-padding;
+    font-size: $search-action-font-size;
+    line-height: $search-action-line-height;
+    color: $search-action-color;
     cursor: pointer;
     user-select: none;
 
     &:active, &--hover {
-      background-color: var(--active-color, $active-color);
+      background-color: $search-action-active-background-color;
     }
   }
 }

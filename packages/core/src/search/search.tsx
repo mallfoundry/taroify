@@ -12,7 +12,10 @@ import { FormFeedbackProps } from "../form"
 import Input, { InputAlign, InputClearTrigger, InputColor } from "../input"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
+import { getLogger } from "../utils/logger"
 import { SearchShape } from "./search.shared"
+
+const { deprecated } = getLogger("Search")
 
 interface SearchProps extends ViewProps {
   className?: string
@@ -60,7 +63,7 @@ function Search(props: SearchProps) {
     icon = <SearchIcon />,
     rightIcon,
     label,
-    shape = "square",
+    shape = "rounded",
     maxlength,
     autoFocus,
     focus,
@@ -86,6 +89,11 @@ function Search(props: SearchProps) {
     ...restProps
   } = props
 
+  if (shape === "round") {
+    // eslint-disable-next-line quotes
+    deprecated('Use the shape="circular" prop instead of the shape="round" prop')
+  }
+
   function handleSearch(event: BaseEventOrig<InputProps.inputValueEventDetail>) {
     preventDefault(event)
     onSearch?.(event)
@@ -103,10 +111,11 @@ function Search(props: SearchProps) {
       {...restProps}
     >
       <View
-        className={classNames(
-          prefixClassname("search__content"),
-          shape && prefixClassname(`search__content--${shape}`),
-        )}
+        className={classNames(prefixClassname("search__content"), {
+          [prefixClassname("search__content--square")]: shape === "square",
+          [prefixClassname("search__content--rounded")]: shape === "rounded",
+          [prefixClassname("search__content--circular")]: shape === "circular" || shape === "round",
+        })}
       >
         {label && <View className={prefixClassname("search__label")} children={label} />}
         <Field
