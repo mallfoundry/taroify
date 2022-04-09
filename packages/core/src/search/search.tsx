@@ -63,7 +63,7 @@ function Search(props: SearchProps) {
     icon = <SearchIcon />,
     rightIcon,
     label,
-    shape = "rounded",
+    shape,
     maxlength,
     autoFocus,
     focus,
@@ -91,7 +91,7 @@ function Search(props: SearchProps) {
 
   if (shape === "round") {
     // eslint-disable-next-line quotes
-    deprecated('Use the shape="circular" prop instead of the shape="round" prop')
+    deprecated('Use the shape="rounded" prop instead of the shape="round" prop')
   }
 
   function handleSearch(event: BaseEventOrig<InputProps.inputValueEventDetail>) {
@@ -113,8 +113,7 @@ function Search(props: SearchProps) {
       <View
         className={classNames(prefixClassname("search__content"), {
           [prefixClassname("search__content--square")]: shape === "square",
-          [prefixClassname("search__content--rounded")]: shape === "rounded",
-          [prefixClassname("search__content--circular")]: shape === "circular" || shape === "round",
+          [prefixClassname("search__content--rounded")]: shape === "rounded" || shape === "round",
         })}
       >
         {label && <View className={prefixClassname("search__label")} children={label} />}

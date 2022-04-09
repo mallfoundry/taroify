@@ -5,8 +5,9 @@ $search-padding: var(--search-padding, 10px * $hd var(--padding-sm, $padding-sm)
 $search-background-color: var(--search-background-color, var(--white, $white));
 $search-content-padding-left: var(--search-content-padding-left, var(--padding-sm, $padding-sm));
 $search-content-background-color: var(--search-content-background-color, var(--gray-1, $gray-1));
-$search-content-rounded-border-radius: var(--search-content-rounded-border-radius, var(--border-radius-sm, $border-radius-sm));
-$search-content-circular-border-radius: var(--search-content-circular-border-radius, var(--border-radius-max, $border-radius-max));
+$search-content-border-radius: var(--search-content-border-radius, var(--border-radius-sm, $border-radius-sm));
+$search-content-square-border-radius: var(--search-content-square-border-radius, 0);
+$search-content-rounded-border-radius: var(--search-content-rounded-border-radius, var(--border-radius-max, $border-radius-max));
 $search-input-height: var(--search-input-height, 34px * $hd);
 $search-label-padding: var(--search-label-padding, 0 5px * $hd);
 $search-label-color: var(--search-label-color, var(--text-color, $text-color));

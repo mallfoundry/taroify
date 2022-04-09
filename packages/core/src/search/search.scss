@@ -11,14 +11,15 @@
     display: flex;
     flex: 1;
     padding-left: $search-content-padding-left;
-    background-color: $search-content-background-color;
+    background: $search-content-background-color;
+    border-radius: $search-content-border-radius;
+
+    &--square {
+      border-radius: $search-content-square-border-radius;
+    }
 
     &--rounded {
       border-radius: $search-content-rounded-border-radius;
-    }
-
-    &--circular {
-      border-radius: $search-content-circular-border-radius;
     }
   }
 
@@ -60,8 +61,9 @@
     cursor: pointer;
     user-select: none;
 
-    &:active, &--hover {
-      background-color: $search-action-active-background-color;
+    &:active,
+    &--hover {
+      background: $search-action-active-background-color;
     }
   }
 }
