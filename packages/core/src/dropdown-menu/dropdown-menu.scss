@@ -6,12 +6,12 @@
   &__bar {
     position: relative;
     display: flex;
-    height: var(--dropdown-menu-height, $dropdown-menu-height);
-    background-color: var(--dropdown-menu-background-color, $dropdown-menu-background-color);
-    box-shadow: var(--dropdown-menu-box-shadow, $dropdown-menu-box-shadow);
+    height: $dropdown-menu-height;
+    background: $dropdown-menu-background-color;
+    box-shadow: $dropdown-menu-box-shadow;
 
     &--opened {
-      z-index: var(--dropdown-menu-z-index, $dropdown-menu-z-index);
+      z-index: $dropdown-menu-z-index;
     }
   }
 }

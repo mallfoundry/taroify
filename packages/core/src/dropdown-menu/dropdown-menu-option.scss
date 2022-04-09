@@ -4,10 +4,10 @@
   text-align: left;
 
   &--active {
-    color: var(--dropdown-menu-option-active-color, $dropdown-menu-option-active-color);
+    color: $dropdown-menu-option-active-color;
 
     .#{$component-prefix}dropdown-menu-option__icon {
-      color: var(--dropdown-menu-option-active-color, $dropdown-menu-option-active-color);
+      color: $dropdown-menu-option-active-color;
     }
   }
 

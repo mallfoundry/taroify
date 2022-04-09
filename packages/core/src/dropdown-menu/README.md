@@ -185,3 +185,27 @@ function DisabledDropdownMenu() {
 | value | 标识符                                 | _any_  |
 | icon  | 左侧[图标](/components/icon)或[图片](/components/image) |   _ReactNode_       |
 | title | 展示 DropdownMenu 选中的 title 内容      | _ReactNode_         |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                              | 默认值                                                | 描述  |
+|-------------------------------------------------|----------------------------------------------------|-----|
+| --dropdown-menu-height                          | _48px * $hd_                                       | -   |
+| --dropdown-menu-background-color                | _var(--white)_                                     | -   |
+| --dropdown-menu-z-index                         | _11_                                               | -   |
+| --dropdown-menu-box-shadow                      | _0 2px * $hd 12px * $hd rgba(100, 101, 102, 0.12)_ | -   |
+| --dropdown-menu-title-font-size                 | _15px * $hd_                                       | -   |
+| --dropdown-menu-title-color                     | _var(--text-color)_                                | -   |
+| --dropdown-menu-title-padding                   | _0 var(--padding-xs)_                              | -   |
+| --dropdown-menu-title-line-height               | _var(--line-height-lg)_                            | -   |
+| --dropdown-menu-title-active-opacity            | _var(--active-opacity)_                            | -   |
+| --dropdown-menu-title-active-color              | _var(--danger-color)_                              | -   |
+| --dropdown-menu-title-disabled-color            | _var(--gray-6)_                                    | -   |
+| --dropdown-menu-item-z-index                    | _calc(var(--dropdown-menu-z-index) - 1)_           | -   |
+| --dropdown-menu-item-content-max-height         | _80%_                                              | -   |
+| --dropdown-menu-item-content-animation-duration | _var(--animation-duration-fast)_                   | -   |
+| --dropdown-menu-option-active-color             | _var(--danger-color)_                              | -   |
