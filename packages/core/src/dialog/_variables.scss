@@ -1,27 +1,31 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$dialog-width: 320px * $hd;
-$dialog-small-screen-width: 90%;
-$dialog-font-size: var(--font-size-lg, $font-size-lg);
-$dialog-transition: var(--animation-duration-base, $animation-duration-base);
-$dialog-border-radius: 16px * $hd;
-$dialog-background-color: var(--white, $white);
-$dialog-header-font-weight: var(--font-weight-bold, $font-weight-bold);
-$dialog-header-line-height: 24px * $hd;
-$dialog-header-padding-top: 26px * $hd;
-$dialog-header-isolated-padding: var(--padding-lg, $padding-lg) 0;
-$dialog-message-padding: var(--padding-lg, $padding-lg);
-$dialog-message-font-size: var(--font-size-md, $font-size-md);
-$dialog-message-line-height: var(--line-height-md, $line-height-md);
-$dialog-message-max-height: 60vh;
-$dialog-has-title-message-text-color: var(--gray-7, $gray-7);
-$dialog-has-title-message-padding-top: var(--padding-xs, $padding-xs);
+$dialog-width: var(--dialog-width, 320px * $hd);
+$dialog-small-screen-width: var(--dialog-small-screen-width, 90%);
+$dialog-font-size: var(--dialog-font-size, var(--font-size-lg, $font-size-lg));
+$dialog-transition: var(--dialog-transition, var(--animation-duration-base, $animation-duration-base));
+$dialog-border-radius: var(--dialog-border-radius, 16px * $hd);
+$dialog-background-color: var(--dialog-background-color, var(--white, $white));
+$dialog-header-font-weight: var(--dialog-header-font-weight, var(--font-weight-bold, $font-weight-bold));
+$dialog-header-line-height: var(--dialog-header-line-height, 24px * $hd);
+$dialog-header-padding-top: var(--dialog-header-padding-top, 26px * $hd);
+$dialog-header-isolated-padding: var(--dialog-header-isolated-padding, var(--padding-lg, $padding-lg) 0);
+$dialog-message-padding: var(--dialog-message-padding, 26px * $hd var(--padding-lg, $padding-lg));
+$dialog-message-font-size: var(--dialog-message-font-size, var(--font-size-md, $font-size-md));
+$dialog-message-line-height: var(--dialog-message-line-height, var(--line-height-md, $line-height-md));
+$dialog-message-max-height: var(--dialog-message-max-height, 60vh);
+$dialog-has-title-message-color: var(--dialog-has-title-message-color, var(--gray-7, $gray-7));
+$dialog-has-title-message-padding-top: var(--dialog-has-title-message-padding-top, var(--padding-xs, $padding-xs));
 
-$dialog-button-height: 48px * $hd;
-$dialog-confirm-button-text-color: var(--red, $red);
+$dialog-button-height: var(--dialog-button-height, 48px * $hd);
+$dialog-confirm-button-color: var(--dialog-confirm-button-color, var(--red, $red));
 
-$dialog-round-button-font-size: var(--font-size-md, $font-size-md);
-$dialog-round-button-height: 36px * $hd;
-$dialog-round-confirm-button-background-color: var(--gradient-red, $gradient-red);
-$dialog-round-cancel-button-background-color: var(--gradient-orange, $gradient-orange);
+$dialog-footer-rounded-padding: var(--dialog-footer-rounded-padding, var(--padding-xs, $padding-xs) var(--padding-lg, $padding-lg) var(--padding-md, $padding-md));
+
+$dialog-rounded-button-active-color: var(--dialog-rounded-button-active-color, var(--white, $white));
+$dialog-rounded-button-font-size: var(--dialog-rounded-button-font-size, var(--font-size-md, $font-size-md));
+$dialog-rounded-button-height: var(--dialog-rounded-button-height, 36px * $hd);
+$dialog-rounded-button-border-radius: var(--dialog-rounded-button-border-radius, var(--border-radius-max, $border-radius-max));
+$dialog-rounded-confirm-button-background-color: var(--dialog-rounded-confirm-button-background-color, var(--gradient-red, $gradient-red));
+$dialog-rounded-cancel-button-background-color: var(--dialog-rounded-cancel-button-background-color, var(--gradient-orange, $gradient-orange));

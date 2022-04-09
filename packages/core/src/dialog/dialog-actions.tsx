@@ -4,22 +4,25 @@ import * as React from "react"
 import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_TOP } from "../styles/hairline"
+import { getLogger } from "../utils/logger"
+import { DialogActionsTheme, DialogActionsVariant } from "./dialog.shared"
 
-type DialogActionsTheme = "round"
+const { deprecated } = getLogger("Dialog.Actions")
 
 interface DialogActionsProps {
   theme?: DialogActionsTheme
+  variant?: DialogActionsVariant
   children?: ReactNode
 }
 
 function useActionButtons(props: DialogActionsProps) {
   return useMemo(() => {
-    const { children, theme } = props
+    const { children, variant } = props
     if (children === undefined) {
       return children
     }
 
-    const __round__ = theme === "round"
+    const __rounded__ = variant === "rounded"
     const count = Children.count(children)
     const zeroIndex = 0
     const lastIndex = count - 1
@@ -35,7 +38,7 @@ function useActionButtons(props: DialogActionsProps) {
 
       const actionClassNames = [element.props.className]
 
-      if (index !== zeroIndex && !__round__) {
+      if (index !== zeroIndex && !__rounded__) {
         actionClassNames.push(HAIRLINE_BORDER_LEFT)
       }
 
@@ -53,7 +56,7 @@ function useActionButtons(props: DialogActionsProps) {
           className: classNames(action.props.className, actionClassNames),
           size: "large",
           shape: "square",
-          variant: __round__ ? "contained" : "text",
+          variant: __rounded__ ? "contained" : "text",
         }),
       )
     })
@@ -62,13 +65,20 @@ function useActionButtons(props: DialogActionsProps) {
 }
 
 export default function DialogActions(props: DialogActionsProps) {
-  const { theme } = props
-  const children = useActionButtons(props)
+  const { theme, variant: variantProp, children: childrenProp } = props
+
+  if (theme === "round") {
+    // eslint-disable-next-line quotes
+    deprecated('Use the variant="rounded" prop instead of the theme="round" prop')
+  }
+
+  const variant = variantProp ?? (theme === "round" ? "rounded" : undefined)
+  const children = useActionButtons({ children: childrenProp, variant })
   return (
     <View
       className={classNames(prefixClassname("dialog__footer"), {
-        [HAIRLINE_BORDER_TOP]: theme !== "round",
-        [prefixClassname("dialog__footer--round")]: theme === "round",
+        [HAIRLINE_BORDER_TOP]: variant !== "rounded",
+        [prefixClassname("dialog__footer--rounded")]: variant === "rounded",
       })}
       children={children}
     />
