@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.6
+
+`2022-04-09`
+
+**Breaking Changes**
+
+- Search
+  - 将 shape="round" 属性重命名为 shape="rounded" [#444](https://github.com/mallfoundry/taroify/issues/444) [#458](https://github.com/mallfoundry/taroify/pull/458)
+- Dialog
+  - 将 shape="round" 属性重命名为 shape="rounded" [#456](https://github.com/mallfoundry/taroify/issues/456) [#457](https://github.com/mallfoundry/taroify/pull/457)
+
 ### v0.0.29-alpha.5
 
 `2022-04-06`
