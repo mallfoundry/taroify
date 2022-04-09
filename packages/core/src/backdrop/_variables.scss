@@ -1,5 +1,5 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$backdrop-z-index: 1000;
-$backdrop-background-color: rgba(0, 0, 0, 0.7);
+$backdrop-z-index: var(--backdrop-z-index, 1000);
+$backdrop-background-color: var(--backdrop-background-color, rgba(0, 0, 0, 0.7));

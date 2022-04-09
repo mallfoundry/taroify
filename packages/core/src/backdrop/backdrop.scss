@@ -4,8 +4,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: var(--backdrop-z-index, $backdrop-z-index);
+  z-index: $backdrop-z-index;
   width: 100%;
   height: 100%;
-  background: var(--backdrop-background-color, $backdrop-background-color);
+  background: $backdrop-background-color;
 }

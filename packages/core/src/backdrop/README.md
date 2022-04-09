@@ -69,10 +69,21 @@ function BackdropExample() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 自定义类名 | _string_ | - |
-| children | 用于在遮罩层上方嵌入内容| _ReactNode_ | - |
-| defaultOpen | 是否默认展示遮罩层 | _boolean_ | `false` |
-| open | 是否展示遮罩层 | _boolean_ | `false` |
-| duration | 动画时长，单位毫秒 | _number_ | `300` |
+| 参数          | 说明           | 类型          | 默认值     |
+|-------------|--------------|-------------|---------|
+| className   | 自定义类名        | _string_    | -       |
+| children    | 用于在遮罩层上方嵌入内容 | _ReactNode_ | -       |
+| defaultOpen | 是否默认展示遮罩层    | _boolean_   | `false` |
+| open        | 是否展示遮罩层      | _boolean_   | `false` |
+| duration    | 动画时长，单位毫秒    | _number_    | `300`   |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                          | 默认值                  | 描述  |
+|-----------------------------|----------------------|-----|
+| --backdrop-z-index          | _1000_               | -   |
+| --backdrop-background-color | _rgba(0, 0, 0, 0.7)_ | -   |
