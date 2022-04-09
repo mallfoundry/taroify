@@ -64,7 +64,7 @@ function ConfirmDialog() {
   )
 }
 
-function RoundDialog() {
+function RoundedDialog() {
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -78,7 +78,7 @@ function RoundDialog() {
       <Dialog open={open} onClose={setOpen}>
         <Dialog.Header>标题</Dialog.Header>
         <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions theme="round">
+        <Dialog.Actions variant="rounded">
           <Button onClick={() => setOpen(false)}>取消</Button>
           <Button onClick={() => setOpen(false)}>确认</Button>
         </Dialog.Actions>
@@ -87,7 +87,7 @@ function RoundDialog() {
   )
 }
 
-function RoundNoTitleDialog() {
+function RoundedNoTitleDialog() {
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -100,7 +100,7 @@ function RoundNoTitleDialog() {
       />
       <Dialog open={open} onClose={setOpen}>
         <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions theme="round">
+        <Dialog.Actions variant="rounded">
           <Button onClick={() => setOpen(false)}>确认</Button>
         </Dialog.Actions>
       </Dialog>
@@ -117,8 +117,8 @@ export default function DialogDemo() {
         <ConfirmDialog />
       </Block>
       <Block variant="card" title="圆角按钮样式">
-        <RoundDialog />
-        <RoundNoTitleDialog />
+        <RoundedDialog />
+        <RoundedNoTitleDialog />
       </Block>
     </Page>
   )
