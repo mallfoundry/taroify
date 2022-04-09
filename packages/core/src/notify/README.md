@@ -75,25 +75,42 @@ function BasicNotify() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 自定义类名 | _string_ | - |
-| style | 组件样式 | _CSSProperties_ | - |
-| defaultOpen | 默认是否显示消息提示 | _boolean_ | - |
-| open | 是否显示消息提示 | _boolean_ | - |
-| color | 类型，可选值为 `primary` `success` `warning` | _string_ | `danger` |
-| duration | 展示时长(ms)，值为 0 时，notify 不会消失 | _number_ | `3000` |
-| children | 展示文案，支持通过`\n`换行 | _ReactNode_ | - |
-| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+| 参数          | 说明                                    | 类型                         | 默认值      |
+|-------------|---------------------------------------|----------------------------|----------|
+| className   | 自定义类名                                 | _string_                   | -        |
+| style       | 组件样式                                  | _CSSProperties_            | -        |
+| defaultOpen | 默认是否显示消息提示                            | _boolean_                  | -        |
+| open        | 是否显示消息提示                              | _boolean_                  | -        |
+| color       | 类型，可选值为 `primary` `success` `warning` | _string_                   | `danger` |
+| duration    | 展示时长(ms)，值为 0 时，notify 不会消失           | _number_                   | `3000`   |
+| children    | 展示文案，支持通过`\n`换行                       | _ReactNode_                | -        |
+| onClose     | 关闭时的回调函数                              | _(open : boolean) => void_ | -        |
 
 ### Options
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| selector | 自定义节点选择器 | _string_ | `notify` |
-| className | 自定义类名 | _string_ | - |
-| style | 组件样式 | _CSSProperties_ | - |
-| color | 类型，可选值为 `primary` `success` `warning` | _string_ | `danger` |
-| duration | 展示时长(ms)，值为 0 时，notify 不会消失 | _number_ | `3000` |
-| message | 展示文案，支持通过`\n`换行 | _ReactNode_ | - |
-| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+| 参数        | 说明                                    | 类型                         | 默认值      |
+|-----------|---------------------------------------|----------------------------|----------|
+| selector  | 自定义节点选择器                              | _string_                   | `notify` |
+| className | 自定义类名                                 | _string_                   | -        |
+| style     | 组件样式                                  | _CSSProperties_            | -        |
+| color     | 类型，可选值为 `primary` `success` `warning` | _string_                   | `danger` |
+| duration  | 展示时长(ms)，值为 0 时，notify 不会消失           | _number_                   | `3000`   |
+| message   | 展示文案，支持通过`\n`换行                       | _ReactNode_                | -        |
+| onClose   | 关闭时的回调函数                              | _(open : boolean) => void_ | -        |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                | 默认值                                   | 描述  |
+|-----------------------------------|---------------------------------------|-----|
+| --notify-color                    | _var(--white)_                        | -   |
+| --notify-padding                  | _var(--padding-xs) var(--padding-md)_ | -   |
+| --notify-font-size                | _var(--font-size-md)_                 | -   |
+| --notify-line-height              | _var(--line-height-md)_               | -   |
+| --notify-primary-background-color | _var(--primary-color)_                | -   |
+| --notify-success-background-color | _var(--success-color)_                | -   |
+| --notify-warning-background-color | _var(--warning-color)_                | -   |
+| --notify-danger-background-color  | _var(--danger-color)_                 | -   |

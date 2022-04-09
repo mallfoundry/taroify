@@ -2,9 +2,21 @@
 @import "../styles/mixins/hairline";
 @import "../styles/variables";
 
-$share-sheet-icon-size: 48px * $hd;
-$share-sheet-option-name-color: var(--gray-7, $gray-7);
-$share-sheet-option-name-font-size: var(--font-size-sm, $font-size-sm);
-$share-sheet-option-name-line-height: 1.4;
-$share-sheet-option-description-color: var(--gray-5, $gray-5);
-$share-sheet-option-description-font-size: var(--font-size-sm, $font-size-sm);
+$share-sheet-description-font-size: var(--share-sheet-description-font-size, var(--font-size-sm, $font-size-sm));
+$share-sheet-options-padding: var(--share-sheet-options-padding, var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs));
+//
+$share-sheet-option-icon-margin: var(--share-sheet-option-icon-margin, 0 var(--padding-md, $padding-md));
+$share-sheet-option-icon-size: var(--share-sheet-option-icon-size, 48px * $hd);
+$share-sheet-option-icon-width: var(--share-sheet-option-icon-width, $share-sheet-option-icon-size);
+$share-sheet-option-icon-height: var(--share-sheet-option-icon-height, $share-sheet-option-icon-size);
+$share-sheet-option-icon-font-size: var(--share-sheet-option-icon-font-size, $share-sheet-option-icon-size);
+//
+$share-sheet-option-name-padding: var(--share-sheet-option-name-padding, 0 var(--padding-base, $padding-base));
+$share-sheet-option-name-margin-top: var(--share-sheet-option-name-margin-top, var(--padding-xs, $padding-xs));
+$share-sheet-option-name-color: var(--share-sheet-option-name-color, var(--gray-7, $gray-7));
+$share-sheet-option-name-font-size: var(--share-sheet-option-name-font-size, var(--font-size-sm, $font-size-sm));
+$share-sheet-option-name-line-height: var(--share-sheet-option-name-line-height, 1.4);
+//
+$share-sheet-option-description-padding: var(--share-sheet-option-description-padding, 0 var(--padding-base, $padding-base));
+$share-sheet-option-description-color: var(--share-sheet-option-description-color, var(--gray-5, $gray-5));
+$share-sheet-option-description-font-size: var(--share-sheet-option-description-font-size, var(--font-size-sm, $font-size-sm));

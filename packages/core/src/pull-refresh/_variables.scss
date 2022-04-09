@@ -1,7 +1,10 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$pull-refresh-head-height: 50px * $hd;
-$pull-refresh-head-font-size: var(--font-size-md, $font-size-md);
-$pull-refresh-head-text-color: var(--gray-6, $gray-6);
-$pull-refresh-loading-icon-size: 16px * $hd;
+$pull-refresh-head-height: var(--pull-refresh-head-height, 50px * $hd);
+$pull-refresh-head-line-height: var(--pull-refresh-head-line-height, $pull-refresh-head-height);
+$pull-refresh-head-font-size: var(--pull-refresh-head-font-size, var(--font-size-md, $font-size-md));
+$pull-refresh-head-color: var(--pull-refresh-head-color, var(--gray-6, $gray-6));
+$pull-refresh-loading-icon-size: var(--pull-refresh-loading-icon-size, 16px * $hd);
+$pull-refresh-loading-icon-width: var(--pull-refresh-loading-icon-width, $pull-refresh-loading-icon-size);
+$pull-refresh-loading-icon-height: var(--pull-refresh-loading-icon-height, $pull-refresh-loading-icon-size);

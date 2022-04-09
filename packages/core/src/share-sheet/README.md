@@ -128,13 +128,13 @@ function ShareSheetWithDescription() {
 
 ### ShareSheet Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| defaultOpen | 默认是否显示动作面板 | _boolean_ | `false` |
-| open      | 是否显示动作面板 | _boolean_ | `false` |
-| className | 样式类名 | _string_ | - |
-| style     | 样式对象 | _CSSProperties_ | - |
-| rounded   | 是否为圆角 | _string_ | - |
+| 参数          | 说明         | 类型              | 默认值     |
+|-------------|------------|-----------------|---------|
+| defaultOpen | 默认是否显示动作面板 | _boolean_       | `false` |
+| open        | 是否显示动作面板   | _boolean_       | `false` |
+| className   | 样式类名       | _string_        | -       |
+| style       | 样式对象       | _CSSProperties_ | -       |
+| rounded     | 是否为圆角      | _string_        | -       |
 
 ### ShareSheet.Backdrop Props
 
@@ -147,12 +147,12 @@ function ShareSheetWithDescription() {
 
 ### ShareSheet.Header Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 样式类名 | _string_        | - |
-| style     | 样式对象 | _CSSProperties_ | - |
-| title     | 标题    | _string_        | - |
-| children  | 描述信息 | _string_        | - |
+| 参数        | 说明   | 类型              | 默认值 |
+|-----------|------|-----------------|-----|
+| className | 样式类名 | _string_        | -   |
+| style     | 样式对象 | _CSSProperties_ | -   |
+| title     | 标题   | _string_        | -   |
+| children  | 描述信息 | _string_        | -   |
 
 ### ShareSheet.Option Props
 
@@ -167,11 +167,36 @@ function ShareSheetWithDescription() {
 
 ### Events
 
-| 事件名        | 说明                     | 回调参数                        |
-| ------------- | ------------------------ | ------------------------------- |
-| onSelect        | 点击分享选项时触发       | _event: ShareSheet.OptionEvent_ |
-| onCancel | 点击取消按钮时触发 | - |
-| onClose | 关闭面板时触发 | - |
+| 事件名      | 说明        | 回调参数                            |
+|----------|-----------|---------------------------------|
+| onSelect | 点击分享选项时触发 | _event: ShareSheet.OptionEvent_ |
+| onCancel | 点击取消按钮时触发 | -                               |
+| onClose  | 关闭面板时触发   | -                               |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                         | 默认值                                                       | 描述  |
+|--------------------------------------------|-----------------------------------------------------------|-----|
+| --share-sheet-description-font-size        | _var(--font-size-sm)_                                     | -   |
+| --share-sheet-options-padding              | _var(--padding-md) 0 var(--padding-md) var(--padding-xs)_ | -   |
+| --share-sheet-option-icon-margin           | _0 var(--padding-md)_                                     | -   |
+| --share-sheet-option-icon-size             | _48px * $hd_                                              | -   |
+| --share-sheet-option-icon-width            | _var(--share-sheet-option-icon-size)_                     | -   |
+| --share-sheet-option-icon-height           | _var(--share-sheet-option-icon-size)_                     | -   |
+| --share-sheet-option-icon-font-size        | _var(--share-sheet-option-icon-size)_                     | -   |
+| --share-sheet-option-name-padding          | _0 var(--padding-base)_                                   | -   |
+| --share-sheet-option-name-margin-top       | _var(--padding-xs)_                                       | -   |
+| --share-sheet-option-name-color            | _var(--gray-7)_                                           | -   |
+| --share-sheet-option-name-font-size        | _var(--font-size-sm)_                                     | -   |
+| --share-sheet-option-name-line-height      | _1.4_                                                     | -   |
+| --share-sheet-option-description-padding   | _0 var(--padding-base)_                                   | -   |
+| --share-sheet-option-description-color     | _var(--gray-5)_                                           | -   |
+| --share-sheet-option-description-font-size | _var(--font-size-sm)_                                     | -   |
+
 
 ## 常见问题
 

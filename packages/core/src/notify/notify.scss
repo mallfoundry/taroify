@@ -5,10 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--notify-padding, $notify-padding);
-  font-size: var(--notify-font-size, $notify-font-size);
-  line-height: var(--notify-line-height, $notify-line-height);
-  color: var(--notify-text-color, $notify-text-color);
+  padding: $notify-padding;
+  font-size: $notify-font-size;
+  line-height: $notify-line-height;
+  color: $notify-color;
   text-align: center;
   word-wrap: break-word;
 
@@ -17,18 +17,18 @@
 
 
   &--primary {
-    background-color: var(--notify-primary-background-color, $notify-primary-background-color);
+    background: $notify-primary-background-color;
   }
 
   &--success {
-    background-color: var(--notify-success-background-color, $notify-success-background-color);
+    background: $notify-success-background-color;
   }
 
   &--danger {
-    background-color: var(--notify-danger-background-color, $notify-danger-background-color);
+    background: $notify-danger-background-color;
   }
 
   &--warning {
-    background-color: var(--notify-warning-background-color, $notify-warning-background-color);
+    background: $notify-warning-background-color;
   }
 }

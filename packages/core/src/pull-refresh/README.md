@@ -148,3 +148,19 @@ function CustomPullRefresh() {
 | 事件名  | 说明           | 回调参数 |
 | ------- | -------------- | -------- |
 | onRefresh | 下拉刷新时触发 | -        |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                 | 默认值                                     | 描述  |
+|------------------------------------|-----------------------------------------|-----|
+| --pull-refresh-head-height         | _50px * $hd_                            | -   |
+| --pull-refresh-head-line-height    | _var(--pull-refresh-head-height)_       | -   |
+| --pull-refresh-head-font-size      | _var(--font-size-md)_                   | -   |
+| --pull-refresh-head-color          | _var(--gray-6)_                         | -   |
+| --pull-refresh-loading-icon-size   | _16px * $hd_                            | -   |
+| --pull-refresh-loading-icon-width  | _var(--pull-refresh-loading-icon-size)_ | -   |
+| --pull-refresh-loading-icon-height | _var(--pull-refresh-loading-icon-size)_ | -   |

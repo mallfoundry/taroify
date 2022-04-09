@@ -4,7 +4,7 @@
   position: fixed;
   right: 0;
   left: 0;
-  z-index: var(--dropdown-menu-item-z-index, $dropdown-menu-item-z-index);
+  z-index: $dropdown-menu-item-z-index;
   overflow: hidden;
 
   &__icon {
@@ -22,7 +22,7 @@
 
   &__content {
     position: absolute;
-    max-height: var(--dropdown-menu-item-content-max-height, $dropdown-menu-item-content-max-height);
-    animation-duration: var(--dropdown-menu-item-content-animation-duration, $dropdown-menu-item-content-animation-duration);
+    max-height: $dropdown-menu-item-content-max-height;
+    animation-duration: $dropdown-menu-item-content-animation-duration;
   }
 }

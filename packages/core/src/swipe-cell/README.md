@@ -103,4 +103,4 @@ import SwipeCell from "@taroify/core/swipe-cell"
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
 | onOpen | 打开时触发 | _position: 'left' \| 'right'_ |
-| onClose | 关闭时触发 | _position: 'left' \| 'right' \| 'cell' \| 'outside' _ |
+| onClose | 关闭时触发 | _position: 'left' \| 'right' \| 'cell' \| 'outside'_ |

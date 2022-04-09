@@ -3,7 +3,7 @@
 .#{$component-prefix}share-sheet {
 
   .#{$component-prefix}sheet__description {
-    font-size: var(--font-size-sm, $font-size-sm);
+    font-size: $share-sheet-description-font-size;
 
   }
 
@@ -11,12 +11,13 @@
     position: relative;
     box-sizing: border-box;
     display: flex;
-    padding: var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs);
+    padding: $share-sheet-options-padding;
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
 
     &::before {
+      // TODO Use scss vars
       @include hairline-top(var(--border-color, $border-color), var(--padding-md, $padding-md), var(--padding-md, $padding-md));
     }
 
@@ -57,25 +58,25 @@
     }
 
     &-icon {
-      width: var(--share-sheet-icon-size, $share-sheet-icon-size);
-      height: var(--share-sheet-icon-size, $share-sheet-icon-size);
-      margin: 0 var(--padding-md, $padding-md);
-      font-size: var(--share-sheet-icon-size, $share-sheet-icon-size);
+      width: $share-sheet-option-icon-width;
+      height: $share-sheet-option-icon-height;
+      margin: $share-sheet-option-icon-margin;
+      font-size: $share-sheet-option-icon-font-size;
       line-height: 1;
     }
 
     &-name {
-      padding: 0 var(--padding-base, $padding-base);
-      margin-top: var(--padding-xs, $padding-xs);
-      font-size: var(--share-sheet-option-name-font-size, $share-sheet-option-name-font-size);
-      line-height: var(--share-sheet-option-name-line-height, $share-sheet-option-name-line-height);
-      color: var(--share-sheet-option-name-color, $share-sheet-option-name-color);
+      padding: $share-sheet-option-name-padding;
+      margin-top: $share-sheet-option-name-margin-top;
+      font-size: $share-sheet-option-name-font-size;
+      line-height: $share-sheet-option-name-line-height;
+      color: $share-sheet-option-name-color;
     }
 
     &-description {
-      padding: 0 var(--padding-base, $padding-base);
-      font-size: var(--share-sheet-option-description-font-size, $share-sheet-option-description-font-size);
-      color: var(--share-sheet-option-description-color, $share-sheet-option-description-color);
+      padding: $share-sheet-option-description-padding;
+      font-size: $share-sheet-option-description-font-size;
+      color: $share-sheet-option-description-color;
     }
   }
 }
