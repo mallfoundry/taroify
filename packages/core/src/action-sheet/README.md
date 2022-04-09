@@ -159,3 +159,16 @@ function ActionSheetWithStatuses() {
 | onCancel | 点击取消按钮时触发 | - |
 | onClose | 关闭面板时触发 | - |
 
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                        | 默认值                     | 描述  |
+|-------------------------------------------|-------------------------|-----|
+| --action-sheet-description-padding-bottom | _var(--padding-md)_     | -   |
+| --action-sheet-subname-margin-top         | _var(--padding-xs)_     | -   |
+| --action-sheet-subname-color              | _var(--gray-6)_         | -   |
+| --action-sheet-subname-font-size          | _var(--font-size-sm)_   | -   |
+| --action-sheet-subname-line-height        | _var(--line-height-sm)_ | -   |
