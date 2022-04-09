@@ -2,6 +2,8 @@
 @import "../styles/mixins/hairline";
 @import "../styles/variables";
 
-$action-sheet-subname-color: var(--gray-6, $gray-6);
-$action-sheet-subname-font-size: var(--font-size-sm, $font-size-sm);
-$action-sheet-subname-line-height: var(--line-height-sm, $line-height-sm);
+$action-sheet-description-padding-bottom: var(--action-sheet-description-padding-bottom, var(--padding-md, $padding-md));
+$action-sheet-subname-margin-top: var(--action-sheet-subname-margin-top, var(--padding-xs, $padding-xs));
+$action-sheet-subname-color: var(--action-sheet-subname-color, var(--gray-6, $gray-6));
+$action-sheet-subname-font-size: var(--action-sheet-subname-font-size, var(--font-size-sm, $font-size-sm));
+$action-sheet-subname-line-height: var(--action-sheet-subname-line-height, var(--line-height-sm, $line-height-sm));

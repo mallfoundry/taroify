@@ -3,17 +3,18 @@
 .#{$component-prefix}action-sheet {
 
   .#{$component-prefix}sheet__description {
-    padding-bottom: var(--padding-md, $padding-md);
+    padding-bottom: $action-sheet-description-padding-bottom;
 
     &::after {
+      // TODO use scss vars
       @include hairline-bottom(var(--border-color, $border-color), var(--padding-md, $padding-md), var(--padding-md, $padding-md));
     }
   }
 
   &__subname {
-    margin-top: var(--padding-xs, $padding-xs);
-    font-size: var(--action-sheet-subname-font-size, $action-sheet-subname-font-size);
-    line-height: var(--action-sheet-subname-line-height, $action-sheet-subname-line-height);
-    color: var(--action-sheet-subname-color, $action-sheet-subname-color);
+    margin-top: $action-sheet-subname-margin-top;
+    font-size: $action-sheet-subname-font-size;
+    line-height: $action-sheet-subname-line-height;
+    color: $action-sheet-subname-color;
   }
 }
