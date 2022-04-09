@@ -1,4 +1,6 @@
 import "../../styles/style"
+import "../../button-base/style"
+import "../../button/style"
 import "../../loading/style"
 import "../../popup/style"
 import "../index.scss"
