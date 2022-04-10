@@ -1,4 +1,4 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$sticky-z-index: 99;
+$sticky-z-index: var(--sticky-z-index, 99);

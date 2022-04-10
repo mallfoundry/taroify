@@ -5,13 +5,14 @@
 
   &--bordered {
     &::after {
+      // TODO Use scss Vars
       @include hairline-top(var(--border-color, $border-color), var(--padding-md, $padding-md), var(--padding-md, $padding-md));
     }
   }
 
   &__title {
     .#{$component-prefix}cell__right-icon::before {
-      transition: transform var(--collapse-item-transition-duration, $collapse-item-transition-duration);
+      transition: transform $collapse-item-transition-duration;
       // using translateZ to fix safari rendering issues
       // see: https://github.com/youzan/vant/issues/8608
       transform: rotate(90deg) translateZ(0);
@@ -43,22 +44,22 @@
 
       &,
       .#{$component-prefix}cell__right-icon {
-        color: var(--collapse-item-title-disabled-color, $collapse-item-title-disabled-color);
+        color: $collapse-item-title-disabled-color;
       }
     }
   }
 
   &__wrapper {
     overflow: hidden;
-    transition: height var(--collapse-item-transition-duration, $collapse-item-transition-duration) ease-in-out;
+    transition: height $collapse-item-transition-duration ease-in-out;
     will-change: height;
   }
 
   &__content {
-    padding: var(--collapse-item-content-padding, $collapse-item-content-padding);
-    font-size: var(--collapse-item-content-font-size, $collapse-item-content-font-size);
-    line-height: var(--collapse-item-content-line-height, $collapse-item-content-line-height);
-    color: var(--collapse-item-content-text-color, $collapse-item-content-text-color);
-    background-color: var(--collapse-item-content-background-color, $collapse-item-content-background-color);
+    padding: $collapse-item-content-padding;
+    font-size: $collapse-item-content-font-size;
+    line-height: $collapse-item-content-line-height;
+    color: $collapse-item-content-color;
+    background: $collapse-item-content-background-color;
   }
 }

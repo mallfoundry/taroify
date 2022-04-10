@@ -100,3 +100,23 @@ function BasicCircle({ percent }: PercentProps) {
 | strokeLinecap | 进度条端点的形状，可选值为 `sqaure` `butt` | _string_ | `round` |
 | clockwise | 是否顺时针增加 | _boolean_ | `true` |
 | children | 文字 | _ReactNode_ | - |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                        | 默认值                       | 描述  |
+|---------------------------|---------------------------|-----|
+| --circle-size             | _100px * $hd_             | -   |
+| --circle-width            | _var(--circle-size)_      | -   |
+| --circle-height           | _var(--circle-size)_      | -   |
+| --circle-color            | _var(--primary-color)_    | -   |
+| --circle-hover-stroke     | _var(--circle-color)_     | -   |
+| --circle-layer-stroke     | _var(--white)_            | -   |
+| --circle-text-padding     | _0 var(--padding-base)_   | -   |
+| --circle-text-color       | _var(--text-color)_       | -   |
+| --circle-text-font-weight | _var(--font-weight-bold)_ | -   |
+| --circle-text-font-size   | _var(--font-size-md)_     | -   |
+| --circle-text-line-height | _var(--line-height-md)_   | -   |

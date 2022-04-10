@@ -1,8 +1,15 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$progress-height: 14px * $hd;
-$progress-background-color: var(--gray-3, $gray-3);
-$progress-inactive-background-color: #cacaca;
-$progress-text-text-color: var(--white, $white);
-$progress-text-font-size: var(--font-size-xs, $font-size-xs);
+$progress-height: var(--progress-height, 14px * $hd);
+$progress-border-radius: var(--progress-border-radius, $progress-height);
+$progress-background-color: var(--progress-background-color, var(--gray-3, $gray-3));
+$progress-portion-color: var(--progress-portion-text-color, var(--white, $white));
+$progress-portion-font-size: var(--progress-portion-font-size, var(--font-size-xs, $font-size-xs));
+$progress-inactive-background-color: var(--progress-inactive-background-color, #cacaca);
+
+$progress-portion-primary-background-color: var(--progress-portion-primary-background-color, var(--primary-color, $primary-color));
+$progress-portion-info-background-color: var(--progress-portion-info-background-color, var(--info-color, $info-color));
+$progress-portion-success-background-color: var(--progress-portion-success-background-color, var(--success-color, $success-color));
+$progress-portion-warning-background-color: var(--progress-portion-warning-background-color, var(--warning-color, $warning-color));
+$progress-portion-danger-background-color: var(--progress-portion-danger-background-color, var(--danger-color, $danger-color));

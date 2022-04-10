@@ -146,3 +146,24 @@ import Badge from "@taroify/core/badge"
 | dot | 是否展示为小红点 | _boolean_ | `false` |
 | max | 最大值，超过最大值会显示 `{max}+`，仅当 content 为数字时有效 | _number \| string_ | - |
 | position | 徽标位置，可选值为 `top-left` `bottom-left` `bottom-right` | _string_ | `top-right` |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                       | 默认值                                                     | 描述  |
+|--------------------------|---------------------------------------------------------|-----|
+| --badge-size             | _16px * $hd_                                            | -   |
+| --badge-color            | _var(--white)_                                          | -   |
+| --badge-padding          | _0 3px * $hd_                                           | -   |
+| --badge-font-family      | _-apple-system-font, helvetica neue, arial, sans-serif_ | -   |
+| --badge-font-size        | _var(--font-size-sm)_                                   | -   |
+| --badge-font-weight      | _var(--font-weight-bold)_                               | -   |
+| --badge-border-width     | _var(--border-width-base)_                              | -   |
+| --badge-border-color     | _var(--white)_                                          | -   |
+| --badge-border-radius    | _var(--border-radius-max)_                              | -   |
+| --badge-background-color | _var(--red)_                                            | -   |
+| --badge-dot-color        | _var(--badge-background-color)_                         | -   |
+| --badge-dot-size         | _8PX_                                                   | -   |

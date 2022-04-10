@@ -124,3 +124,19 @@ function CustomCollapse() {
 | bordered | 是否显示内边框 | _boolean_ | `true` |
 | clickable| 是否开启点击反馈 | _boolean_ | `true` |
 | disabled | 是否禁用面板 | _boolean_ | `false` |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                       | 默认值                                   | 描述  |
+|------------------------------------------|---------------------------------------|-----|
+| --collapse-item-title-disabled-color     | _var(--gray-5)_                       | -   |
+| --collapse-item-transition-duration      | _var(--animation-duration-base)_      | -   |
+| --collapse-item-content-padding          | _var(--padding-sm) var(--padding-md)_ | -   |
+| --collapse-item-content-font-size        | _var(--font-size-md)_                 | -   |
+| --collapse-item-content-line-height      | _1.5_                                 | -   |
+| --collapse-item-content-color            | _var(--gray-6)_                       | -   |
+| --collapse-item-content-background-color | _var(--white)_                        | -   |

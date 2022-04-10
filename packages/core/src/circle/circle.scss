@@ -3,8 +3,8 @@
 .#{$component-prefix}circle {
   position: relative;
   display: inline-block;
-  width: var(--circle-size, $circle-size);
-  height: var(--circle-size, $circle-size);
+  width: $circle-width;
+  height: $circle-height;
   text-align: center;
 
   svg {
@@ -17,12 +17,12 @@
 
   &__hover {
     fill: none;
-    stroke: var(--circle-color, $circle-color);
+    stroke: $circle-hover-stroke;
     stroke-linecap: round;
   }
 
   &__layer {
-    stroke: var(--circle-layer-color, $circle-layer-color);
+    stroke: $circle-layer-stroke;
   }
 
   &__text {
@@ -31,10 +31,10 @@
     left: 0;
     box-sizing: border-box;
     width: 100%;
-    padding: 0 var(--padding-base, $padding-base);
-    font-size: var(--circle-text-font-size, $circle-text-font-size);
-    font-weight: var(--circle-text-font-weight, $circle-text-font-weight);
-    line-height: var(--circle-text-line-height, $circle-text-line-height);
+    padding: $circle-text-padding;
+    font-size: $circle-text-font-size;
+    font-weight: $circle-text-font-weight;
+    line-height: $circle-text-line-height;
     color: var(--circle-text-color, $circle-text-color);
     transform: translateY(-50%);
   }
