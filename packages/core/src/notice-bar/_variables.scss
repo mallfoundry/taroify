@@ -1,12 +1,12 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$notice-bar-height: 40px * $hd;
-$notice-bar-padding: 0 var(--padding-md, $padding-md);
-$notice-bar-wordwrap-padding: var(--padding-xs, $padding-xs) var(--padding-md, $padding-md);
-$notice-bar-text-color: var(--orange-dark, $orange-dark);
-$notice-bar-font-size: var(--font-size-md, $font-size-md);
-$notice-bar-line-height: 24px * $hd;
-$notice-bar-background-color: var(--orange-light, $orange-light);
-$notice-bar-icon-size: 16px * $hd;
-$notice-bar-icon-min-width: 24px * $hd;
+$notice-bar-height: var(--notice-bar-height, 40px * $hd);
+$notice-bar-padding: var(--notice-bar-padding, 0 var(--padding-md, $padding-md));
+$notice-bar-wordwrap-padding: var(--notice-bar-wordwrap-padding, var(--padding-xs, $padding-xs) var(--padding-md, $padding-md));
+$notice-bar-color: var(--notice-bar-color, var(--orange-dark, $orange-dark));
+$notice-bar-font-size: var(--notice-bar-font-size, var(--font-size-md, $font-size-md));
+$notice-bar-line-height: var(--notice-bar-line-height, 24px * $hd);
+$notice-bar-background-color: var(--notice-bar-background-color, var(--orange-light, $orange-light));
+$notice-bar-icon-size: var(--notice-bar-icon-size, 16px * $hd);
+$notice-bar-icon-min-width: var(--notice-bar-icon-min-width, 24px * $hd);

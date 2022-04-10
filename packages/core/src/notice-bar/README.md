@@ -128,3 +128,21 @@ import NoticeBar from "@taroify/core/notice-bar"
 | ------ | ---------------------------- | ------------------- |
 | onClick  | 点击通知栏时触发             | _event: MouseEvent_ |
 | onReplay | 每当滚动栏重新开始滚动时触发 | -                   |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                            | 默认值                                   | 描述  |
+|-------------------------------|---------------------------------------|-----|
+| --notice-bar-height           | _40px * $hd_                          | -   |
+| --notice-bar-padding          | _0 var(--padding-md)_                 | -   |
+| --notice-bar-wordwrap-padding | _var(--padding-xs) var(--padding-md)_ | -   |
+| --notice-bar-color            | _var(--orange-dark)_                  | -   |
+| --notice-bar-font-size        | _var(--font-size-md)_                 | -   |
+| --notice-bar-line-height      | _24px * $hd_                          | -   |
+| --notice-bar-background-color | _var(--orange-light)_                 | -   |
+| --notice-bar-icon-size        | _16px * $hd_                          | -   |
+| --notice-bar-icon-min-width   | _24px * $hd_                          | -   |
