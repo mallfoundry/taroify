@@ -3,6 +3,6 @@
 .#{$component-prefix}sticky {
   &--fixed {
     position: fixed;
-    z-index: var(--sticky-z-index, $sticky-z-index);
+    z-index: $sticky-z-index;
   }
 }
