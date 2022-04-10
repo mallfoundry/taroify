@@ -2,10 +2,10 @@
 
 .#{$component-prefix}progress {
   position: relative;
-  height: var(--progress-height, $progress-height);
+  height: $progress-height;
   overflow: hidden;
-  background: var(--progress-background-color, $progress-background-color);
-  border-radius: var(--progress-height, $progress-height);
+  background: $progress-background-color;
+  border-radius: $progress-border-radius;
 
   &__portion {
     position: absolute;
@@ -15,8 +15,8 @@
     justify-content: center;
     height: 100%;
     overflow: hidden;
-    font-size: var(--progress-text-font-size, $progress-text-font-size);
-    color: var(--progress-text-text-color, $progress-text-text-color);
+    font-size: $progress-portion-font-size;
+    color: $progress-portion-color;
     text-align: center;
     word-break: keep-all;
   }
@@ -24,7 +24,7 @@
   &--primary {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--primary-color, $primary-color);
+        background: $progress-portion-primary-background-color;
       }
     }
   }
@@ -32,7 +32,7 @@
   &--info {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--info-color, $info-color);
+        background: $progress-portion-info-background-color;
       }
     }
   }
@@ -40,7 +40,7 @@
   &--success {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--success-color, $success-color);
+        background: $progress-portion-success-background-color;
       }
     }
   }
@@ -48,7 +48,7 @@
   &--warning {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--warning-color, $warning-color);
+        background: $progress-portion-warning-background-color;
       }
     }
   }
@@ -56,7 +56,7 @@
   &--danger {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--danger-color, $danger-color);
+        background: $progress-portion-danger-background-color;
       }
     }
   }
@@ -64,7 +64,7 @@
   &--inactive {
     .#{$component-prefix}progress {
       &__portion {
-        background: var(--progress-inactive-background-color, $progress-inactive-background-color);
+        background: $progress-inactive-background-color;
       }
     }
   }
@@ -73,13 +73,13 @@
     .#{$component-prefix}progress {
       &__portion {
         background-image: linear-gradient(
-                        45deg,
-                        hsla(0, 0%, 100%, .15) 25%,
-                        transparent 0,
-                        transparent 50%,
-                        hsla(0, 0%, 100%, .15) 0,
-                        hsla(0, 0%, 100%, .15) 75%,
-                        transparent 0, transparent);
+            45deg,
+            hsla(0, 0%, 100%, .15) 25%,
+            transparent 0,
+            transparent 50%,
+            hsla(0, 0%, 100%, .15) 0,
+            hsla(0, 0%, 100%, .15) 75%,
+            transparent 0, transparent);
         background-size: 1rem 1rem;
       }
     }
