@@ -2,9 +2,9 @@
 @import "~@taroify/core/styles/mixins/hairline";
 @import "~@taroify/core/styles/variables";
 
-$action-bar-color: var(--gray-6, $gray-6);
+$action-bar-color: var(--action-bar-color, var(--gray-6, $gray-6));
 $action-bar-height: var(--action-bar-height, 50px * $hd);
-$action-bar-background: var(--action-bar-background, $background-color-light);
+$action-bar-background: var(--action-bar-background, var(--background-color-light, $background-color-light));
 //
 $action-bar-button-height: var(--action-bar-button-height, 40px * $hd);
 $action-bar-button-color: var(--action-bar-button-color, var(--white, $white));

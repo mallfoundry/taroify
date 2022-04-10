@@ -170,4 +170,26 @@ function ActionBarWithCustomButton() {
 | --- | --- | --- | --- |
 | badge  | 徽标内容    | _boolean \| number \| string \| [Badge](/components/badge)_  | - |
 
+## 主题定制
 
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                      | 默认值                            | 描述  |
+|-----------------------------------------|--------------------------------|-----|
+| --action-bar-color                      | _var(--gray-6)_                | -   |
+| --action-bar-height                     | _50px * $hd_                   | -   |
+| --action-bar-background                 | _var(--action-bar-background)_ | -   |
+| --action-bar-button-height              | _40px * $hd_                   | -   |
+| --action-bar-button-color               | _var(--white)_                 | -   |
+| --action-bar-button-font-size           | _var(--font-size-md)_          | -   |
+| --action-bar-button-gradient-red        | _var(--gradient-red)_          | -   |
+| --action-bar-button-gradient-orange     | _var(--gradient-orange)_       | -   |
+| --action-bar-button-border-radius-md    | _var(--border-radius-md)_      | -   |
+| --action-bar-button-border-radius-max   | _var(--border-radius-max)_     | -   |
+| --action-bar-icon-button-color          | _var(--gray-7)_                | -   |
+| --action-bar-icon-button-font-size      | _var(--font-size-xs)_          | -   |
+| --action-bar-icon-button-width          | _48px * $hd_                   | -   |
+| --action-bar-icon-button-height         | _100%_                         | -   |
+| --action-bar-icon-button-icon-font-size | _18px * $hd_                   | -   |
