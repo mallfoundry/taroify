@@ -137,3 +137,34 @@ import { Avatar } from "@taroify/core"
 | spacing | 间距，可选值为 `small` `medium` `large` | _string_ | `medium` |
 | limit | 显示的最大头像个数 | _number_ | - |
 | total | 头像总数。用于计算额外头像的数量。| _string_ | - |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                            | 默认值                                            | 描述  |
+|-------------------------------|------------------------------------------------|-----|
+| --avatar-color                | _var(--white)_                                 | -   |
+| --avatar-background-color     | _var(--gray-5)_                                | -   |
+| --avatar-border-color         | _var(--white)_                                 | -   |
+| --avatar-border-width         | _2PX_                                          | -   |
+| --avatar-font-weight          | _var(--font-weight-bold)_                      | -   |
+| --avatar-font-family          | _Roboto, Helvetica, Arial, sans-serif_         | -   |
+| --avatar-font-size-mini       | _var(--avatar-font-size, var(--font-size-xs))_ | -   |
+| --avatar-font-size-small      | _var(--avatar-font-size, var(--font-size-sm))_ | -   |
+| --avatar-font-size-medium     | _var(--avatar-font-size, var(--font-size-md))_ | -   |
+| --avatar-font-size-large      | _var(--avatar-font-size, var(--font-size-lg))_ | -   |
+| --avatar-border-radius-mini   | _var(--avatar-border-radius, 2px * $hd)_       | -   |
+| --avatar-border-radius-small  | _var(--avatar-border-radius, 4px * $hd)_       | -   |
+| --avatar-border-radius-medium | _var(--avatar-border-radius, 5px * $hd)_       | -   |
+| --avatar-border-radius-large  | _var(--avatar-border-radius, 6px * $hd)_       | -   |
+| --avatar-size-mini            | _var(--avatar-size, 16px * $hd)_               | -   |
+| --avatar-size-small           | _var(--avatar-size, 26px * $hd)_               | -   |
+| --avatar-size-medium          | _var(--avatar-size, 38px * $hd)_               | -   |
+| --avatar-size-large           | _var(--avatar-size, 56px * $hd)_               | -   |
+| --avatar-spacing-mini         | _var(--avatar-spacing, var(--padding-xs))_     | -   |
+| --avatar-spacing-small        | _var(--avatar-spacing, var(--padding-sm))_     | -   |
+| --avatar-spacing-medium       | _var(--avatar-spacing, var(--padding-md))_     | -   |
+| --avatar-spacing-large        | _var(--avatar-spacing, var(--padding-lg))_     | -   |
