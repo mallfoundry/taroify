@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.7
+
+`2022-04-12`
+
+**Bug Fixes**
+
+- Swiper
+  - 修复 targetOffset 为 0 的问题 [#461](https://github.com/mallfoundry/taroify/pull/461)
+- Tabs
+  - 修复开启滑动，无法滚动页面的问题 [#463](https://github.com/mallfoundry/taroify/pull/463)
+
 ### v0.0.29-alpha.6
 
 `2022-04-09`
