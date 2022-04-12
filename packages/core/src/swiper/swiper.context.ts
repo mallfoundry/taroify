@@ -9,7 +9,7 @@ interface SwiperContextValue {
   direction?: SwiperDirection
   lazyRender?: boolean
   loop?: boolean
-  size?: number
+  getSize?: () => number
   indicator?: number
   count?: number
   itemInstances: SwiperItemInstance[]

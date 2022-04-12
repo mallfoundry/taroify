@@ -1,4 +1,4 @@
-import { useUncontrolled } from "@taroify/hooks"
+import { useForceUpdate, useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
@@ -18,7 +18,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { useMounted, useUpdate, useWindowResize } from "../hooks"
+import { useMounted, useWindowResize } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
@@ -128,7 +128,7 @@ function Swiper(props: SwiperProps) {
 
   const touch = useTouch()
 
-  const update = useUpdate()
+  const forceUpdate = useForceUpdate()
 
   const vertical = direction === "vertical"
 
@@ -162,33 +162,38 @@ function Swiper(props: SwiperProps) {
     [],
   )
 
-  const customRectRef = useRenderedRef(() => ({
-    width: width ?? rectRef.current?.width,
-    height: height ?? rectRef.current?.height,
-  }))
+  const getCustomRect = useCallback(
+    () => ({
+      width: width ?? rectRef.current?.width,
+      height: height ?? rectRef.current?.height,
+    }),
+    [height, width],
+  )
 
   const propRectRef = useRenderedRef(() => ({
     width,
     height,
   }))
 
-  const sizeRef = useRenderedRef(
-    () => (vertical ? customRectRef.current?.height : customRectRef.current?.width) ?? 0,
-  )
+  const getSize = useCallback(() => {
+    const { height, width } = getCustomRect()
+    return (vertical ? height : width) ?? 0
+  }, [getCustomRect, vertical])
 
-  const trackSizeRef = useRenderedRef(() => count * sizeRef.current)
+  const getTrackSize = useCallback(() => count * getSize(), [count, getSize])
 
-  const minOffsetRef = useRenderedRef(() => {
+  const getMinOffset = useCallback(() => {
     if (rectRef.current) {
       const base = (vertical ? rectRef.current?.height : rectRef.current?.width) ?? 0
-      return base - sizeRef.current * count
+      return base - getSize() * count
     }
     return 0
-  })
+  }, [count, getSize, vertical])
 
-  const maxCountRef = useRenderedRef(() =>
-    Math.ceil(Math.abs(minOffsetRef.current) / sizeRef.current),
-  )
+  const getMaxCount = useCallback(() => Math.ceil(Math.abs(getMinOffset()) / getSize()), [
+    getMinOffset,
+    getSize,
+  ])
 
   const getTargetActive = useCallback(
     (pace: number) => {
@@ -196,27 +201,29 @@ function Swiper(props: SwiperProps) {
         if (loop) {
           return _.clamp(activeIndexRef.current + pace, -1, count)
         }
-        return _.clamp(activeIndexRef.current + pace, 0, maxCountRef.current)
+        return _.clamp(activeIndexRef.current + pace, 0, getMaxCount())
       }
       return activeIndexRef.current
     },
-    [loop, maxCountRef, count],
+    [loop, getMaxCount, count],
   )
 
   const getTargetOffset = useCallback(
     (targetActive: number, offset = 0) => {
-      let currentPosition = targetActive * sizeRef.current
+      const size = getSize()
+      const minOffset = getMinOffset()
+      let currentPosition = targetActive * size
       if (!loop) {
-        currentPosition = Math.min(currentPosition, -minOffsetRef.current)
+        currentPosition = Math.min(currentPosition, -minOffset)
       }
 
       let targetOffset = offset - currentPosition
       if (!loop) {
-        targetOffset = _.clamp(targetOffset, minOffsetRef.current, 0)
+        targetOffset = _.clamp(targetOffset, getMinOffset(), 0)
       }
       return targetOffset
     },
-    [sizeRef, loop, minOffsetRef],
+    [getMinOffset, getSize, loop],
   )
 
   const moveTo = useCallback(
@@ -225,17 +232,19 @@ function Swiper(props: SwiperProps) {
         return
       }
 
+      const minOffset = getMinOffset()
+
       const targetActive = getTargetActive(pace)
       const targetOffset = getTargetOffset(targetActive, offset)
       if (loop) {
-        if (itemInstances[0] && targetOffset !== minOffsetRef.current) {
-          const outRightBound = targetOffset < minOffsetRef.current
-          itemInstances[0].setOffset(outRightBound ? trackSizeRef.current : 0)
+        if (itemInstances[0] && targetOffset !== minOffset) {
+          const outRightBound = targetOffset < minOffset
+          itemInstances[0].setOffset(outRightBound ? getSize() : 0)
         }
 
         if (itemInstances[count - 1] && targetOffset !== 0) {
           const outLeftBound = targetOffset > 0
-          itemInstances[count - 1].setOffset(outLeftBound ? -trackSizeRef.current : 0)
+          itemInstances[count - 1].setOffset(outLeftBound ? -getTrackSize() : 0)
         }
       }
 
@@ -249,12 +258,13 @@ function Swiper(props: SwiperProps) {
     },
     [
       count,
+      getMinOffset,
       getTargetActive,
       getTargetOffset,
       loop,
       itemInstances,
-      minOffsetRef,
-      trackSizeRef,
+      getSize,
+      getTrackSize,
       setValue,
     ],
   )
@@ -375,7 +385,8 @@ function Swiper(props: SwiperProps) {
 
     const delta = getDelta()
     const speed = delta / duration
-    const shouldSwipe = Math.abs(speed) > 0.25 || Math.abs(delta) > sizeRef.current / 2
+    const size = getSize()
+    const shouldSwipe = Math.abs(speed) > 0.25 || Math.abs(delta) > size / 2
 
     swipingRef.current = false
     const correctDirection = getCorrectDirection()
@@ -387,7 +398,7 @@ function Swiper(props: SwiperProps) {
       if (loop) {
         pace = offset > 0 ? (delta > 0 ? -1 : 1) : 0
       } else {
-        pace = -Math[delta > 0 ? "ceil" : "floor"](delta / sizeRef.current)
+        pace = -Math[delta > 0 ? "ceil" : "floor"](delta / size)
       }
 
       moveTo({
@@ -401,7 +412,7 @@ function Swiper(props: SwiperProps) {
   }, [
     touchable,
     getDelta,
-    sizeRef,
+    getSize,
     getCorrectDirection,
     startAutoplay,
     vertical,
@@ -446,11 +457,11 @@ function Swiper(props: SwiperProps) {
       setOffset(targetOffset)
       // Force update render
       if (targetOffset === offset) {
-        update()
+        forceUpdate()
       }
       itemInstances.forEach((item) => item.setOffset(0))
     },
-    [valueRef, getTrackRect, count, getTargetOffset, offset, itemInstances, update],
+    [valueRef, getTrackRect, count, getTargetOffset, offset, itemInstances, forceUpdate],
   )
 
   const resize = useCallback(() => nextTick(() => initialize(activeIndexRef.current)), [initialize])
@@ -487,9 +498,10 @@ function Swiper(props: SwiperProps) {
       transform: `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`,
     }
 
-    if (sizeRef.current) {
+    const size = getSize?.()
+    if (size) {
       const mainAxis = vertical ? "height" : "width"
-      style[mainAxis] = `${addUnitPx(trackSizeRef.current)}`
+      style[mainAxis] = `${addUnitPx(size)}`
       const crossAxis = vertical ? "width" : "height"
       const crossAxisValue = propRectRef.current[crossAxis]
       style[crossAxis] = crossAxisValue ? addUnitPx(crossAxisValue) : ""
@@ -505,7 +517,7 @@ function Swiper(props: SwiperProps) {
           loop,
           direction,
           indicator: activeIndicatorRef.current,
-          size: sizeRef.current,
+          getSize,
           count,
           itemInstances,
         }}
