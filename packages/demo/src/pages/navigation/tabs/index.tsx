@@ -1,6 +1,7 @@
 import { Tabs, Toast } from "@taroify/core"
 import { MoreOutlined } from "@taroify/icons"
 import Block from "../../../components/block"
+import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -179,10 +180,14 @@ export default function TabsDemo() {
         <TabsWithCustomTitle />
       </Block>
       <Block title="切换动画">
-        <AnimatedTabs />
+        <CustomWrapper>
+          <AnimatedTabs />
+        </CustomWrapper>
       </Block>
       <Block title="滑动切换">
-        <SwipeableTabs />
+        <CustomWrapper>
+          <SwipeableTabs />
+        </CustomWrapper>
       </Block>
     </Page>
   )
