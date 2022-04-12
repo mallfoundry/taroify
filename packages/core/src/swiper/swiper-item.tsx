@@ -25,7 +25,7 @@ export default function SwiperItem(props: SwiperItemProps) {
     ...restProps
   } = props
 
-  const { lazyRender, size, direction, loop, indicator = 0, count = 0, itemInstances } = useContext(
+  const { lazyRender, getSize, direction, loop, indicator = 0, count = 0, itemInstances } = useContext(
     SwiperContext,
   )
   const vertical = direction === "vertical"
@@ -66,6 +66,7 @@ export default function SwiperItem(props: SwiperItemProps) {
 
   const rootStyle = useRendered(() => {
     const style: CSSProperties = {}
+    const size= getSize?.()
     if (size) {
       const mainAxis = vertical ? "height" : "width"
       style[mainAxis] = addUnitPx(size)
