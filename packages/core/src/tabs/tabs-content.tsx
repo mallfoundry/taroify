@@ -54,6 +54,7 @@ export function TabsContent(props: TabsContentProps) {
           duration={duration}
           touchable={swipeable}
           children={panes}
+          stopPropagation={false}
           onChange={onSwiperChange}
         />
       )
