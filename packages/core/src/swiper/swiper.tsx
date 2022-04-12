@@ -526,7 +526,7 @@ function Swiper(props: SwiperProps) {
           className={classNames(prefixClassname("swiper__track"), {
             [prefixClassname("swiper__track--vertical")]: vertical,
           })}
-          catchMove
+          catchMove={stopPropagation}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
