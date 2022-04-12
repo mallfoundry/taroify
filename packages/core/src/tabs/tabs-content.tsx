@@ -27,6 +27,11 @@ interface TabsContentProps {
 export function TabsContent(props: TabsContentProps) {
   const { value: activeValue, duration, animated, swipeable, tabObjects, onTabChange } = props
 
+  const activeIndex = useMemo(() => _.find(tabObjects, (tab) => tab.value === activeValue)?.index, [
+    activeValue,
+    tabObjects,
+  ])
+
   const panes = useTabPanes(tabObjects)
 
   function onSwiperChange(index: number) {
@@ -43,7 +48,7 @@ export function TabsContent(props: TabsContentProps) {
     if (animated || swipeable) {
       return (
         <Swiper
-          value={activeValue as number}
+          value={activeIndex as number}
           loop={false}
           className={prefixClassname("tabs__track")}
           duration={duration}
