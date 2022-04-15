@@ -1,9 +1,12 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$swiper-indicator-size: 6px * $hd;
-$swiper-indicator-margin: var(--padding-sm, $padding-sm);
-$swiper-indicator-active-opacity: 1;
-$swiper-indicator-inactive-opacity: 0.3;
-$swiper-indicator-active-background-color: var(--blue, $blue);
-$swiper-indicator-inactive-background-color: var(--border-color, $border-color);
+$swiper-indicators-margin: var(--swiper-indicators-margin, var(--padding-sm, $padding-sm));
+$swiper-indicator-size: var(--swiper-indicator-size, 6px * $hd);
+$swiper-indicator-width: var(--swiper-indicator-width, $swiper-indicator-size);
+$swiper-indicator-height: var(--swiper-indicator-height, $swiper-indicator-size);
+$swiper-indicator-opacity: var(--swiper-indicator-opacity, 0.3);
+$swiper-indicator-background-color: var(--swiper-indicator-background-color, var(--border-color, $border-color));
+$swiper-indicator-transition-duration: var(--swiper-indicator-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
+$swiper-indicator-active-opacity: var(--swiper-indicator-active-opacity, 1);
+$swiper-indicator-active-background-color: var(--swiper-indicator-active-background-color, var(--blue, $blue));
