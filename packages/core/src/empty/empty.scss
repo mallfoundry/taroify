@@ -23,6 +23,6 @@
     margin-top: $empty-description-margin-top;
     font-size: $empty-description-font-size;
     line-height: $empty-description-line-height;
-    color: var(--empty-description-color, $empty-description-color);
+    color: $empty-description-color;
   }
 }
