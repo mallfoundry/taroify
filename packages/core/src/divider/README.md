@@ -65,13 +65,31 @@ import Divider from "@taroify/core/divider"
 
 ### Divider Props
 
-| 参数             | 说明                              | 类型      | 默认值   |
-| ---------------- | --------------------------------- | --------- | -------- |
-| dashed           | 是否使用虚线                      | _boolean_ | `false`  |
-| hairline         | 是否使用 0.5px 线                 | _boolean_ | `true`   |
+| 参数       | 说明           | 类型        | 默认值     |
+|----------|--------------|-----------|---------|
+| dashed   | 是否使用虚线       | _boolean_ | `false` |
+| hairline | 是否使用 0.5px 线 | _boolean_ | `true`  |
 
 ### Divider.Text Props
 
-| 参数             | 说明                              | 类型      | 默认值   |
-| ---------------- | --------------------------------- | --------- | -------- |
-| orientation | 内容位置，可选值为 `left` `right` | _string_  | `center` |
+| 参数          | 说明                       | 类型       | 默认值      |
+|-------------|--------------------------|----------|----------|
+| orientation | 内容位置，可选值为 `left` `right` | _string_ | `center` |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                            | 默认值                            | 描述  |
+|-------------------------------|--------------------------------|-----|
+| --divider-margin              | _var(--padding-md) 0_          | -   |
+| --divider-color               | _var(--gray-6)_                | -   |
+| --divider-font-size           | _var(--font-size-md)_          | -   |
+| --divider-line-height         | _24px * $hd_                   | -   |
+| --divider-border-color        | _var(--border-color)_          | -   |
+| --divider-border-width        | _var(--border-width-base) 0 0_ | -   |
+| --divider-content-padding     | _var(--padding-md)_            | -   |
+| --divider-content-left-width  | _10%_                          | -   |
+| --divider-content-right-width | _10%_                          | -   |
