@@ -1,11 +1,12 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$empty-padding: var(--padding-xl, $padding-xl) 0;
-$empty-image-size: 160px * $hd;
-$empty-description-margin-top: var(--padding-md, $padding-md);
-$empty-description-padding: 0 60px * $hd;
-$empty-description-color: var(--gray-6, $gray-6);
-$empty-description-font-size: var(--font-size-md, $font-size-md);
-$empty-description-line-height: var(--line-height-md, $line-height-md);
-$empty-bottom-margin-top: 24px * $hd;
+$empty-padding: var(--empty-padding, var(--padding-xl, $padding-xl) 0);
+$empty-image-size: var(--empty-image-size, 160px * $hd);
+$empty-image-width: var(--empty-image-width, $empty-image-size);
+$empty-image-height: var(--empty-image-height, $empty-image-size);
+$empty-description-margin-top: var(--empty-description-padding, var(--padding-md, $padding-md));
+$empty-description-padding: var(--empty-description-padding, 0 60px * $hd);
+$empty-description-color: var(--empty-description-color, var(--gray-6, $gray-6));
+$empty-description-font-size: var(--empty-description-font-size, var(--font-size-md, $font-size-md));
+$empty-description-line-height: var(--empty-description-line-height, var(--line-height-md, $line-height-md));
