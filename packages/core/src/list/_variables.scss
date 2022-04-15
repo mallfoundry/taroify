@@ -1,7 +1,9 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$list-text-color: var(--gray-6, $gray-6);
-$list-text-font-size: var(--font-size-md, $font-size-md);
-$list-text-line-height: 50px * $hd;
-$list-loading-icon-size: 16px * $hd;
+$list-text-color: var(--list-text-color, var(--gray-6, $gray-6));
+$list-text-font-size: var(--list-text-font-size, var(--font-size-md, $font-size-md));
+$list-text-line-height: var(--list-text-line-height, 50px * $hd);
+$list-loading-icon-size: var(--list-loading-icon-size, 16px * $hd);
+$list-loading-icon-width: var(--list-loading-icon-width, $list-loading-icon-size);
+$list-loading-icon-height: var(--list-loading-icon-height, $list-loading-icon-size);

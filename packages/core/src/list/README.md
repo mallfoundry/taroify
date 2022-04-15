@@ -188,10 +188,25 @@ function PullRefreshList() {
 
 ### Events
 
-| 事件名      | 说明                           | 回调参数 |
-|------------|-------------------------------| -------- |
-| onLoad     | 滚动条与底部距离小于 offset 时触发 | -        |
-| onLoading  | 内部 loading 改变时触发          | -        |
+| 事件名       | 说明                    | 回调参数 |
+|-----------|-----------------------|------|
+| onLoad    | 滚动条与底部距离小于 offset 时触发 | -    |
+| onLoading | 内部 loading 改变时触发      | -    |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                         | 默认值                             | 描述  |
+|----------------------------|---------------------------------|-----|
+| --list-text-color          | _var(--gray-6)_                 | -   |
+| --list-text-font-size      | _var(--font-size-md)_           | -   |
+| --list-text-line-height    | _50px * $hd_                    | -   |
+| --list-loading-icon-size   | _16px * $hd_                    | -   |
+| --list-loading-icon-width  | _var(--list-loading-icon-size)_ | -   |
+| --list-loading-icon-height | _var(--list-loading-icon-size)_ | -   |
 
 ## 常见问题
 
