@@ -19,7 +19,7 @@
 
   &__indicators {
     position: absolute;
-    bottom: var(--swiper-indicator-margin, $swiper-indicator-margin);
+    bottom: $swiper-indicators-margin;
     left: 50%;
     display: flex;
     transform: translateX(-50%);
@@ -27,32 +27,32 @@
     &--vertical {
       top: 50%;
       bottom: auto;
-      left: var(--swiper-indicator-margin, $swiper-indicator-margin);
+      left: $swiper-indicators-margin;
       flex-direction: column;
       transform: translateY(-50%);
 
       .#{$component-prefix}swiper__indicator:not(:last-child) {
-        margin-bottom: var(--swiper-indicator-size, $swiper-indicator-size);
+        margin-bottom: $swiper-indicator-size;
       }
     }
   }
 
   &__indicator {
-    width: var(--swiper-indicator-size, $swiper-indicator-size);
-    height: var(--swiper-indicator-size, $swiper-indicator-size);
-    background-color: var(--swiper-indicator-inactive-background-color, $swiper-indicator-inactive-background-color);
+    width: $swiper-indicator-width;
+    height: $swiper-indicator-height;
+    background: $swiper-indicator-background-color;
     border-radius: 100%;
-    opacity: var(--swiper-indicator-inactive-opacity, $swiper-indicator-inactive-opacity);
-    transition: opacity var(--animation-duration-fast, $animation-duration-fast),
-    background-color var(--animation-duration-fast, $animation-duration-fast);
+    opacity: $swiper-indicator-opacity;
+    transition: opacity $swiper-indicator-transition-duration,
+    background-color $swiper-indicator-transition-duration;
 
     &:not(:last-child) {
-      margin-right: var(--swiper-indicator-size, $swiper-indicator-size);
+      margin-right: $swiper-indicator-size;
     }
 
     &--active {
-      background-color: var(--swiper-indicator-active-background-color, $swiper-indicator-active-background-color);
-      opacity: var(--swiper-indicator-active-opacity, $swiper-indicator-active-opacity);
+      background: $swiper-indicator-active-background-color;
+      opacity: $swiper-indicator-active-opacity;
     }
   }
 }

@@ -1,20 +1,20 @@
 @import './variables';
 
 .#{$component-prefix}skeleton {
-  height: var(--skeleton-height, $skeleton-height);
-  background: var(--skeleton-background-color, $skeleton-background-color);
+  height: $skeleton-height;
+  background: $skeleton-background-color;
 
   &--circle {
-    width: var(--skeleton-circle-size, $skeleton-circle-size);
-    height: var(--skeleton-circle-size, $skeleton-circle-size);
-    border-radius: var(--border-radius-max, $border-radius-max);
+    width: $skeleton-circle-width;
+    height: $skeleton-circle-height;
+    border-radius: $skeleton-circle-border-radius;
   }
 
   &--pulse {
     animation: #{$component-prefix}skeleton-pulse //
-    var(--skeleton-pulse-animation-duration, $skeleton-pulse-animation-duration) //
-    var(--skeleton-pulse-animation-timing-function, $skeleton-pulse-animation-timing-function) //
-    var(--skeleton-pulse-animation-delay, $skeleton-pulse-animation-delay) infinite;
+    $skeleton-pulse-animation-duration //
+    $skeleton-pulse-animation-timing-function //
+    $skeleton-pulse-animation-delay infinite;
   }
 
   &--wave {
@@ -32,9 +32,9 @@
       background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
       transform: translateX(-100%);
       animation: #{$component-prefix}skeleton-wave //
-      var(--skeleton-wave-animation-duration, $skeleton-wave-animation-duration) //
-      var(--skeleton-wave-animation-timing-function, $skeleton-wave-animation-timing-function) //
-      var(--skeleton-wave-animation-delay, $skeleton-wave-animation-delay) infinite;
+      $skeleton-wave-animation-duration //
+      $skeleton-wave-animation-timing-function //
+      $skeleton-wave-animation-delay infinite;
     }
   }
 }

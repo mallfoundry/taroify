@@ -182,7 +182,7 @@ function SwiperWithCustomIndicator() {
   padding: 2px * 2 5px * 2;
   font-size: 12px * 2;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1)_ | - |
 }
 ```
 
@@ -208,3 +208,21 @@ function SwiperWithCustomIndicator() {
 | 事件名 | 说明                 | 回调参数            |
 | ------ | -------------------- | ------------------- |
 | onChange | 每一页轮播结束后触发 | _(index: number)_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                         | 默认值                              | 描述  |
+|--------------------------------------------|----------------------------------|-----|
+| --swiper-indicators-margin                 | _var(--padding-sm)_              | -   |
+| --swiper-indicator-size                    | _6px * $hd_                      | -   |
+| --swiper-indicator-width                   | _var(--swiper-indicator-size)_   | -   |
+| --swiper-indicator-height                  | _var(--swiper-indicator-size)_   | -   |
+| --swiper-indicator-opacity                 | _0.3_                            | -   |
+| --swiper-indicator-background-color        | _var(--border-color)_            | -   |
+| --swiper-indicator-transition-duration     | _var(--animation-duration-fast)_ | -   |
+| --swiper-indicator-active-opacity          | _1_                              | -   |
+| --swiper-indicator-active-background-color | _var(--blue)_                    | -   |

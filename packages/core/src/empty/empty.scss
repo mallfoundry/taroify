@@ -9,8 +9,8 @@
   padding: var(--empty-padding, $empty-padding);
 
   &__image {
-    width: var(--empty-image-size, $empty-image-size);
-    height: var(--empty-image-size, $empty-image-size);
+    width: $empty-image-width;
+    height: $empty-image-height;
 
     img {
       width: 100%;
@@ -19,10 +19,10 @@
   }
 
   &__description {
-    padding: var(--empty-description-padding, $empty-description-padding);
-    margin-top: var(--empty-description-margin-top, $empty-description-margin-top);
-    font-size: var(--empty-description-font-size, $empty-description-font-size);
-    line-height: var(--empty-description-line-height, $empty-description-line-height);
-    color: var(--empty-description-color, $empty-description-color);
+    padding: $empty-description-padding;
+    margin-top: $empty-description-margin-top;
+    font-size: $empty-description-font-size;
+    line-height: $empty-description-line-height;
+    color: $empty-description-color;
   }
 }
