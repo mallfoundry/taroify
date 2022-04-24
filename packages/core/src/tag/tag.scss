@@ -4,62 +4,62 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: var(--tag-padding, $tag-padding);
-  font-size: var(--tag-font-size, $tag-font-size);
-  line-height: var(--tag-line-height, $tag-line-height);
-  color: var(--tag-text-color, $tag-text-color);
-  border-radius: var(--tag-border-radius, $tag-border-radius);
+  padding: $tag-padding;
+  font-size: $tag-font-size;
+  line-height: $tag-line-height;
+  color: $tag-color;
+  border-radius: $tag-border-radius;
 
   &--default {
-    background-color: var(--tag-default-color, $tag-default-color);
+    background: $tag-default-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-default-color, $tag-default-color);
+      color: $tag-default-color;
     }
   }
 
   &--primary {
-    background-color: var(--tag-primary-color, $tag-primary-color);
+    background: $tag-primary-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-primary-color, $tag-primary-color);
+      color: $tag-primary-color;
     }
   }
 
   &--info {
-    background-color: var(--tag-info-color, $tag-info-color);
+    background: $tag-info-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-info-color, $tag-info-color);
+      color: $tag-info-color;
     }
   }
 
   &--success {
-    background-color: var(--tag-success-color, $tag-success-color);
+    background: $tag-success-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-success-color, $tag-success-color);
+      color: $tag-success-color;
     }
   }
 
   &--warning {
-    background-color: var(--tag-warning-color, $tag-warning-color);
+    background: $tag-warning-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-warning-color, $tag-warning-color);
+      color: $tag-warning-color;
     }
   }
 
   &--danger {
-    background-color: var(--tag-danger-color, $tag-danger-color);
+    background: $tag-danger-background-color;
 
     &.#{$component-prefix}tag--outlined {
-      color: var(--tag-danger-color, $tag-danger-color);
+      color: $tag-danger-color;
     }
   }
 
   &--outlined {
-    background-color: var(--tag-outlined-background-color, $tag-outlined-background-color);
+    background: $tag-outlined-background-color;
 
     &::before {
       position: absolute;
@@ -75,44 +75,44 @@
   }
 
   &--medium {
-    padding: var(--tag-medium-padding, $tag-medium-padding);
+    padding: $tag-medium-padding;
 
     &.#{$component-prefix}tag--round-right {
-      padding: var(--tag-round-right-medium-padding, $tag-round-right-medium-padding);
+      padding: $tag-rounded-right-medium-padding;
     }
 
     &.#{$component-prefix}tag--round-left {
-      padding: var(--tag-round-left-medium-padding, $tag-round-left-medium-padding);
+      padding: $tag-rounded-left-medium-padding;
     }
   }
 
   &--large {
-    padding: var(--tag-large-padding, $tag-large-padding);
-    font-size: var(--tag-large-font-size, $tag-large-font-size);
-    border-radius: var(--tag-large-border-radius, $tag-large-border-radius);
+    padding: $tag-large-padding;
+    font-size: $tag-large-font-size;
+    border-radius: $tag-large-border-radius;
 
     &.#{$component-prefix}tag--round-right {
-      padding: var(--tag-round-right-large-padding, $tag-round-right-large-padding);
+      padding: $tag-rounded-right-large-padding;
     }
 
     &.#{$component-prefix}tag--round-left {
-      padding: var(--tag-round-left-large-padding, $tag-round-left-large-padding);
+      padding: $tag-rounded-left-large-padding;
     }
 
   }
 
   &--round {
-    border-radius: var(--tag-round-border-radius, $tag-round-border-radius);
+    border-radius: $tag-rounded-border-radius;
   }
 
   &--round-left {
-    padding: $tag-round-left-padding;
-    border-radius: var(--tag-round-border-radius, $tag-round-border-radius) 0 0 var(--tag-round-border-radius, $tag-round-border-radius);
+    padding: $tag-rounded-left-padding;
+    border-radius: $tag-rounded-border-radius 0 0 $tag-rounded-border-radius;
   }
 
   &--round-right {
-    padding: var(--tag-round-right-padding, $tag-round-right-padding);
-    border-radius: 0 var(--tag-round-border-radius, $tag-round-border-radius) var(--tag-round-border-radius, $tag-round-border-radius) 0;
+    padding: $tag-rounded-right-padding;
+    border-radius: 0 $tag-rounded-border-radius $tag-rounded-border-radius 0;
   }
 
   &__close {
