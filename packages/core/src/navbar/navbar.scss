@@ -2,34 +2,34 @@
 
 .#{$component-prefix}navbar {
   position: relative;
-  z-index: var(--navbar-z-index, $navbar-z-index);
-  line-height: var(--line-height-lg, $line-height-lg);
+  z-index: $navbar-z-index;
+  line-height: $navbar-line-height;
   text-align: center;
   user-select: none;
-  background-color: var(--navbar-background-color, $navbar-background-color);
+  background: $navbar-background-color;
 
   .#{$component-prefix}icon {
-    color: var(--navbar-icon-color, $navbar-icon-color);
+    color: $navbar-icon-color;
   }
 
   &__content {
     position: relative;
     display: flex;
     align-items: center;
-    height: var(--navbar-height, $navbar-height);
+    height: $navbar-height;
   }
 
   &__icon {
-    margin-right: var(--padding-base, $padding-base);
-    font-size: var(--navbar-icon-size, $navbar-icon-size);
+    margin-right: $navbar-icon-margin-right;
+    font-size: $navbar-icon-font-size;
   }
 
   &__title {
     max-width: 60%;
     margin: 0 auto;
-    font-size: var(--navbar-title-font-size, $navbar-title-font-size);
-    font-weight: var(--font-weight-bold, $font-weight-bold);
-    color: var(--navbar-title-text-color, $navbar-title-text-color);
+    font-size: $navbar-title-font-size;
+    font-weight: $navbar-title-font-weight;
+    color: $navbar-title-color;
   }
 
   &__left,
@@ -57,6 +57,6 @@
   }
 
   &__text {
-    color: var(--navbar-text-color, $navbar-text-color);
+    color: $navbar-text-color;
   }
 }

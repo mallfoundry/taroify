@@ -3,22 +3,22 @@
 .#{$component-prefix}step {
   position: relative;
   flex: 1;
-  font-size: var(--step-font-size, $step-font-size);
-  color: var(--step-text-color, $step-text-color);
+  font-size: $step-font-size;
+  color: $step-color;
 
   &__circle {
     display: block;
-    width: var(--step-circle-size, $step-circle-size);
-    height: var(--step-circle-size, $step-circle-size);
-    margin: 3px * $hd;
-    background-color: var(--step-circle-color, $step-circle-color);
-    border-radius: 50%;
+    width: $step-circle-width;
+    height: $step-circle-height;
+    margin: $step-circle-margin;
+    background: $step-circle-background-color;
+    border-radius: $step-circle-border-radius;
   }
 
   &__line {
     position: absolute;
-    background-color: var(--step-line-color, $step-line-color);
-    transition: background-color var(--animation-duration-base, $animation-duration-base);
+    background: $step-line-background-color;
+    transition: background-color $step-line-transition-duration;
   }
 
   &--horizontal {
@@ -46,7 +46,7 @@
 
     .#{$component-prefix}step__label {
       display: inline-block;
-      font-size: var(--step-horizontal-title-font-size, $step-horizontal-title-font-size);
+      font-size: $step-horizontal-title-font-size;
 
       @media (max-width: 321px) {
         font-size: var(--step-horizontal-title-font-size, $step-horizontal-title-font-size) - 1px * $hd;
@@ -62,11 +62,11 @@
 
     .#{$component-prefix}step__icon {
       display: block;
-      font-size: var(--step-icon-size, $step-icon-size);
+      font-size: $step-icon-font-size;
     }
 
     .#{$component-prefix}step--process {
-      color: var(--step-process-text-color, $step-process-text-color);
+      color: $step-process-color;
     }
   }
 
@@ -94,8 +94,8 @@
   &--vertical {
     display: block;
     float: none;
-    padding: 10px * $hd 10px * $hd 10px * $hd 0;
-    line-height: var(--line-height-sm, $line-height-sm);
+    padding: $step-vertical-padding;
+    line-height: $step-vertical-line-height;
 
     &:not(:last-child)::after {
       border-bottom-width: 1px * $hd;
@@ -110,7 +110,7 @@
         width: 1px * $hd;
         height: 20px * $hd;
         content: '';
-        background-color: var(--white, $white);
+        background: var(--white, $white);
       }
     }
 
@@ -119,7 +119,7 @@
       top: 19px * $hd;
       left: -16px * $hd;
       z-index: 2;
-      font-size: var(--step-icon-size, $step-icon-size);
+      font-size: $step-icon-font-size;
       line-height: 1;
       transform: translate(-50%, -50%);
     }
@@ -139,28 +139,28 @@
   }
 
   &--completed {
-    color: var(--step-completed-text-color, $step-completed-text-color);
+    color: $step-completed-color;
 
     .#{$component-prefix}step__circle,
     .#{$component-prefix}step__line {
-      background-color: var(--step-completed-line-color, $step-completed-line-color);
+      background: $step-completed-line-background-color;
     }
 
     .#{$component-prefix}step__icon {
-      color: var(--step-active-color, $step-active-color);
+      color: $step-active-color;
     }
   }
 
   &--active {
-    color: var(--step-completed-text-color, $step-completed-text-color);
+    color: $step-completed-color;
 
     .#{$component-prefix}step__circle {
-      background-color: var(--step-active-color, $step-active-color);
+      background: $step-active-color;
     }
 
     .#{$component-prefix}step__icon,
     .#{$component-prefix}step__label {
-      color: var(--step-active-color, $step-active-color);
+      color: $step-active-color;
     }
   }
 

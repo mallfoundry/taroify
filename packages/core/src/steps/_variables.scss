@@ -1,17 +1,27 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$step-text-color: var(--gray-6, $gray-6);
-$step-active-color: var(--green, $green);
-$step-process-text-color: var(--text-color, $text-color);
-$step-font-size: var(--font-size-md, $font-size-md);
-$step-line-color: var(--border-color, $border-color);
-$step-completed-line-color: var(--green, $green);
-$step-completed-text-color: var(--text-color, $text-color);
-$step-icon-size: 12px * $hd;
-$step-circle-size: 5PX;
-$step-circle-color: var(--gray-6, $gray-6);
-$step-horizontal-title-font-size: var(--font-size-sm, $font-size-sm);
-
-$steps-background-color: var(--white, $white);
-
+$steps-background-color: var(--steps-background-color, var(--white, $white));
+$steps-horizontal-padding: var(--steps-horizontal-padding, 10px * $hd 0);
+$steps-vertical-padding: var(--steps-vertical-padding, 0 0 0 var(--padding-xl, $padding-xl));
+//
+$step-color: var(--step-color, var(--gray-6, $gray-6));
+$step-active-color: var(--step-active-color, var(--green, $green));
+$step-process-color: var(--step-process-color, var(--text-color, $text-color));
+$step-font-size: var(--step-font-size, var(--font-size-md, $font-size-md));
+$step-icon-font-size: var(--step-icon-font-size, 12px * $hd);
+$step-line-background-color: var(--step-line-background-color, var(--border-color, $border-color));
+$step-line-transition-duration: var(--step-line-transition-duration, var(--animation-duration-base, $animation-duration-base));
+$step-completed-color: var(--step-completed-color, var(--text-color, $text-color));
+$step-completed-line-background-color: var(--step-completed-line-background-color, var(--green, $green));
+//
+$step-circle-size: var(--step-circle-size, 5PX);
+$step-circle-width: var(--step-circle-width, $step-circle-size);
+$step-circle-height: var(--step-circle-height, $step-circle-size);
+$step-circle-margin: var(--step-circle-margin, 3px * $hd);
+$step-circle-background-color: var(--step-circle-background-color, var(--gray-6, $gray-6));
+$step-circle-border-radius: var(--step-circle-border-radius, 50%);
+//
+$step-horizontal-title-font-size: var(--step-horizontal-title-font-size, var(--font-size-sm, $font-size-sm));
+$step-vertical-line-height: var(--step-vertical-line-height, var(--line-height-sm, $line-height-sm));
+$step-vertical-padding: var(--step-vertical-padding, 10px * $hd 10px * $hd 10px * $hd 0);

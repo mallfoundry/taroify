@@ -13,7 +13,7 @@ type TagColor = "default" | "primary" | "info" | "success" | "warning" | "danger
 
 type TagSize = "small" | "medium" | "large"
 
-type TagShape = "square" | "round" | "roundRight" | "roundLeft"
+type TagShape = "square" | "rounded" | "roundedRight" | "roundedLeft"
 
 interface TagProps extends ViewProps {
   variant?: TagVariant
@@ -58,9 +58,9 @@ function Tag(props: TagProps) {
           [prefixClassname("tag--warning")]: color === "warning",
           [prefixClassname("tag--danger")]: color === "danger",
           // Set shape styles
-          [prefixClassname("tag--round")]: shape === "round",
-          [prefixClassname("tag--round-right")]: shape === "roundRight",
-          [prefixClassname("tag--round-left")]: shape === "roundLeft",
+          [prefixClassname("tag--rounded")]: shape === "rounded",
+          [prefixClassname("tag--rounded-right")]: shape === "roundedRight",
+          [prefixClassname("tag--rounded-left")]: shape === "roundedLeft",
         },
         className,
       )}

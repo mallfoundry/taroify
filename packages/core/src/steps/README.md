@@ -54,7 +54,7 @@ import { Steps } from "@taroify/core"
 ```scss
 .custom-color {
   .taroify-step--completed {
-    .taroify-step__icon, {
+    .taroify-step__icon {
       color: #38f;
     }
 
@@ -111,3 +111,33 @@ import { Steps } from "@taroify/core"
 | defaultValue | 默认步骤对应的索引值 | _number \| string_ | `0` |
 | value | 当前步骤对应的索引值 | _number \| string_ | `0` |
 | direction | 步骤条方向，可选值为 `vertical` | _string_ | `horizontal` |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                     | 默认值                                  | 描述  |
+|----------------------------------------|--------------------------------------|-----|
+| --steps-background-color               | _var(var(--whit)_                    | -   |
+| --steps-horizontal-padding             | _10px * $hd 0_                       | -   |
+| --steps-vertical-padding               | _0 0 0 var(--padding-xl)_            | -   |
+| --step-color                           | _var(--gray-6)_                      | -   |
+| --step-active-color                    | _var(--green)_                       | -   |
+| --step-process-color                   | _var(--text-color)_                  | -   |
+| --step-font-size                       | _var(--font-size-md)_                | -   |
+| --step-icon-font-size                  | _12px * $hd_                         | -   |
+| --step-line-background-color           | _var(--border-color)_                | -   |
+| --step-line-transition-duration        | _var(--animation-duration-base)_     | -   |
+| --step-completed-color                 | _var(--text-color)_                  | -   |
+| --step-completed-line-background-color | _var(--green)_                       | -   |
+| --step-circle-size                     | _5PX_                                | -   |
+| --step-circle-width                    | _var(--step-circle-size)_            | -   |
+| --step-circle-height                   | _var(--step-circle-size)_            | -   |
+| --step-circle-margin                   | _3px * $hd_                          | -   |
+| --step-circle-background-color         | _var(--gray-6)_                      | -   |
+| --step-circle-border-radius            | _50%_                                | -   |
+| --step-horizontal-title-font-size      | _var(--font-size-sm)_                | -   |
+| --step-vertical-line-height            | _var(--line-height-sm)_              | -   |
+| --step-vertical-padding                | _10px * $hd 10px * $hd 10px * $hd 0_ | -   |

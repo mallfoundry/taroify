@@ -1,11 +1,14 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$navbar-height: 46px * $hd;
-$navbar-background-color: var(--white, $white);
-$navbar-icon-size: 16px * $hd;
-$navbar-icon-color: var(--blue, $blue);
-$navbar-text-color: var(--blue, $blue);
-$navbar-title-font-size: var(--font-size-lg, $font-size-lg);
-$navbar-title-text-color: var(--text-color, $text-color);
-$navbar-z-index: 1;
+$navbar-z-index: var(--navbar-z-index, 1);
+$navbar-height: var(--navbar-height, 46px * $hd);
+$navbar-line-height: var(--navbar-line-height, var(--line-height-lg, $line-height-lg));
+$navbar-background-color: var(--navbar-background-color, var(--white, $white));
+$navbar-icon-margin-right: var(--navbar-icon-margin-right, var(--padding-base, $padding-base));
+$navbar-icon-font-size: var(--navbar-icon-font-size, 16px * $hd);
+$navbar-icon-color: var(--navbar-icon-color, var(--blue, $blue));
+$navbar-text-color: var(--navbar-text-color, var(--blue, $blue));
+$navbar-title-font-size: var(--navbar-title-font-size, var(--font-size-lg, $font-size-lg));
+$navbar-title-font-weight: var(--navbar-title-font-weight, var(--font-weight-bold, $font-weight-bold));
+$navbar-title-color: var(--navbar-title-color, var(--text-color, $text-color));
