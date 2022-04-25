@@ -5,7 +5,7 @@
     position: fixed;
     top: 50%;
     right: 0;
-    z-index: var(--index-list-sidebar-z-index, $index-list-sidebar-z-index);
+    z-index: $index-list-sidebar-z-index;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -17,13 +17,13 @@
 
   &__index {
     position: relative;
-    padding: 0 var(--padding-xs, $padding-xs) 0 var(--padding-md, $padding-md);
-    font-size: var(--index-list-index-font-size, $index-list-index-font-size);
-    font-weight: var(--font-weight-bold, $font-weight-bold);
-    line-height: var(--index-list-index-line-height, $index-list-index-line-height);
+    padding: $index-list-index-padding;
+    font-size: $index-list-index-font-size;
+    font-weight: $index-list-index-font-weight;
+    line-height: $index-list-index-line-height;
 
     &--active {
-      color: var(--index-list-index-active-color, $index-list-index-active-color);
+      color: $index-list-index-active-color;
     }
   }
 }
