@@ -162,3 +162,24 @@ function BadgeTreeSelect() {
 | ---------- | -------------------- | ------------------------- |
 | onTabChange | 点击左侧导航时触发   | _value: any, tabObject: TreeSelect.TabObject_ |
 | onChange | 点击右侧选择项时触发 | _any \| any[]_     |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                           | 默认值                                | 描述  |
+|----------------------------------------------|------------------------------------|-----|
+| --tree-select-font-size                      | _var(--font-size-md)_              | -   |
+| --tree-select-sidebar-background-color       | _var(--background-color)_          | -   |
+| --tree-select-content-background-color       | _var(--white)_                     | -   |
+| --tree-select-tab-padding                    | _14px * $hd var(--padding-sm)_     | -   |
+| --tree-select-option-padding                 | _0 32px * $hd 0 var(--padding-md)_ | -   |
+| --tree-select-option-font-weight             | _var(--font-weight-bold)_          | -   |
+| --tree-select-option-line-height             | _48px * $hd_                       | -   |
+| --tree-select-option-active-color            | _var(--danger-color)_              | -   |
+| --tree-select-option-active-background-color | _var(--active-color)_              | -   |
+| --tree-select-option-disabled-color          | _var(--gray-5)_                    | -   |
+| --tree-select-option-icon-active-right       | _var(--padding-md, $padding-md)_   | -   |
+| --tree-select-option-icon-active-font-size   | _16px * $hd_                       | -   |

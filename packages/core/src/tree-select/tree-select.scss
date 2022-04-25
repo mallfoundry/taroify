@@ -3,20 +3,20 @@
 .#{$component-prefix}tree-select {
   position: relative;
   display: flex;
-  font-size: var(--tree-select-font-size, $tree-select-font-size);
+  font-size: $tree-select-font-size;
   user-select: none;
 
   &__sidebar {
     flex: 1;
     overflow-y: auto;
-    background-color: var(--tree-select-sidebar-background-color, $tree-select-sidebar-background-color);
+    background: $tree-select-sidebar-background-color;
     -webkit-overflow-scrolling: touch;
   }
 
   &__content {
     flex: 2;
     overflow-y: auto;
-    background-color: var(--tree-select-content-background-color, $tree-select-content-background-color);
+    background: $tree-select-content-background-color;
     -webkit-overflow-scrolling: touch;
   }
 }
