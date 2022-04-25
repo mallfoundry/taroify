@@ -139,3 +139,22 @@ function TabbarWithCustomColor() {
 | icon     | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | -        |
 | badge    | 图标右上角徽标的内容                                     | _boolean \  | number \ | string \| Badge_ | - |
 | children | 标签名                                            | _ReactNode_ | -        |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                    | 默认值                   | 描述  |
+|---------------------------------------|-----------------------|-----|
+| --tabbar-height                       | _50px * $hd_          | -   |
+| --tabbar-z-index                      | _1_                   | -   |
+| --tabbar-background-color             | _var(--white)_        | -   |
+| --tabbar-item-font-size               | _var(--font-size-sm)_ | -   |
+| --tabbar-item-color                   | _var(--gray-7)_       | -   |
+| --tabbar-item-line-height             | _1_                   | -   |
+| --tabbar-item-icon-size               | _22px * $hd_          | -   |
+| --tabbar-item-margin-bottom           | _4px * $hd_           | -   |
+| --tabbar-item-active-color            | _var(--blue)_         | -   |
+| --tabbar-item-active-background-color | _var(--white)_        | -   |

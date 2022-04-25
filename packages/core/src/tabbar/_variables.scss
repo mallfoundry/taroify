@@ -2,15 +2,15 @@
 @import "../styles/variables";
 
 // tabbar styles
-$tabbar-height: 50px * $hd;
-$tabbar-z-index: 1;
-$tabbar-background-color: var(--white, $white);
+$tabbar-height: var(--tabbar-height, 50px * $hd);
+$tabbar-z-index: var(--tabbar-z-index, 1);
+$tabbar-background-color: var(--tabbar-background-color, var(--white, $white));
 
 // tabbar-item styles
-$tabbar-item-font-size: var(--font-size-sm, $font-size-sm);
-$tabbar-item-color: var(--gray-7, $gray-7);
-$tabbar-item-active-color: var(--blue, $blue);
-$tabbar-item-active-background-color: var(--white, $white);
-$tabbar-item-line-height: 1;
-$tabbar-item-icon-size: 22px * $hd;
-$tabbar-item-margin-bottom: 4px * $hd;
+$tabbar-item-font-size: var(--tabbar-item-font-size, var(--font-size-sm, $font-size-sm));
+$tabbar-item-color: var(--tabbar-item-color, var(--gray-7, $gray-7));
+$tabbar-item-line-height: var(--tabbar-item-line-height, 1);
+$tabbar-item-icon-size: var(--tabbar-item-icon-size, 22px * $hd);
+$tabbar-item-margin-bottom: var(--tabbar-item-margin-bottom, 4px * $hd);
+$tabbar-item-active-color: var(--tabbar-item-active-color, var(--blue, $blue));
+$tabbar-item-active-background-color: var(--tabbar-item-active-background-color, var(--white, $white));

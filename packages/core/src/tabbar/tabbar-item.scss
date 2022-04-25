@@ -6,14 +6,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: var(--tabbar-item-font-size, $tabbar-item-font-size);
-  line-height: var(--tabbar-item-line-height, $tabbar-item-line-height);
-  color: var(--tabbar-item-color, $tabbar-item-color);
+  font-size: $tabbar-item-font-size;
+  line-height: $tabbar-item-line-height;
+  color: $tabbar-item-color;
   cursor: pointer;
 
   &__icon {
-    margin-bottom: var(--tabbar-item-margin-bottom, $tabbar-item-margin-bottom);
-    font-size: var(--tabbar-item-icon-size, $tabbar-item-icon-size);
+    margin-bottom: $tabbar-item-margin-bottom;
+    font-size: $tabbar-item-icon-size;
 
     .#{$component-prefix}icon {
       display: block;
@@ -25,8 +25,8 @@
   }
 
   &--active {
-    color: var(--tabbar-item-active-color, $tabbar-item-active-color);
-    background-color: var(--tabbar-item-active-background-color, $tabbar-item-active-background-color);
+    color: $tabbar-item-active-color;
+    background: $tabbar-item-active-background-color;
   }
 
 }
