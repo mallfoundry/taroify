@@ -1,12 +1,14 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$pagination-height: 40px * $hd;
-$pagination-font-size: var(--font-size-md, $font-size-md);
-$pagination-item-width: 36px * $hd;
-$pagination-item-default-color: var(--blue, $blue);
-$pagination-item-disabled-color: var(--gray-7, $gray-7);
-$pagination-item-disabled-background-color: var(--background-color, $background-color);
-$pagination-background-color: var(--white, $white);
-$pagination-desc-color: var(--gray-7, $gray-7);
-$pagination-disabled-opacity: var(--disabled-opacity, $disabled-opacity);
+$pagination-height: var(--pagination-height, 40px * $hd);
+$pagination-font-size: var(--pagination-font-size, var(--font-size-md, $font-size-md));
+$pagination-background-color: var(--pagination-background-color, var(--white, $white));
+$pagination-item-min-width: var(--pagination-item-min-width, 36px * $hd);
+$pagination-item-color: var(--pagination-item-color, var(--blue, $blue));
+$pagination-item-active-color: var(--pagination-item-active-color, var(--white, $white));
+$pagination-item-active-background-color: var(--pagination-item-active-background-color, $pagination-item-color);
+$pagination-item-disabled-color: var(--pagination-item-disabled-color, var(--gray-7, $gray-7));
+$pagination-item-disabled-background-color: var(--pagination-item-disabled-background-color, var(--background-color, $background-color));
+$pagination-item-disabled-opacity: var(--pagination-item-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
+$pagination-button-padding: var(--pagination-button-padding, 0 var(--padding-base, $padding-base));

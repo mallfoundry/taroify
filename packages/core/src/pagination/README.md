@@ -70,15 +70,34 @@ function PaginationWithCustomButton() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| current | 当前页码 | _number_ | - |
+| 参数           | 说明            | 类型       | 默认值 |
+|--------------|---------------|----------|-----|
+| current      | 当前页码          | _number_ | -   |
 | siblingCount | 当前页码两侧显示的数字个数 | _number_ | `2` |
-| count | 总页数 | _number_ | - |
+| count        | 总页数           | _number_ | -   |
 
 ### Events
 
-| 事件名 | 说明           | 回调参数 |
-| ------ | -------------- | -------- |
-| onChange | 页码改变时触发 | -        |
+| 事件名      | 说明      | 回调参数 |
+|----------|---------|------|
+| onChange | 页码改变时触发 | -    |
 
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                          | 默认值                            | 描述  |
+|---------------------------------------------|--------------------------------|-----|
+| --pagination-height                         | _40px * $hd_                   | -   |
+| --pagination-font-size                      | _var(--font-size-md)_          | -   |
+| --pagination-background-color               | _var(--white)_                 | -   |
+| --pagination-item-min-width                 | _36px * $hd_                   | -   |
+| --pagination-item-color                     | _var(--blue)_                  | -   |
+| --pagination-item-active-color              | _var(--white)_                 | -   |
+| --pagination-item-active-background-color   | _var(--pagination-item-color)_ | -   |
+| --pagination-item-disabled-color            | _var(--gray-7)_                | -   |
+| --pagination-item-disabled-background-color | _var(--background-color)_      | -   |
+| --pagination-item-disabled-opacity          | _var(--disabled-opacity)_      | -   |
+| --pagination-button-padding                 | _0 var(--padding-base)_        | -   |
