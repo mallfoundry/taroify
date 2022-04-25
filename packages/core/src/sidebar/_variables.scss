@@ -1,19 +1,22 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$sidebar-width: 80px * $hd;
+$sidebar-width: var(--sidebar-width, 80px * $hd);
+$sidebar-disabled-color: var(--sidebar-disabled-color, var(--gray-5, $gray-5));
 
-$sidebar-font-size: var(--font-size-md, $font-size-md);
-$sidebar-line-height: var(--line-height-md, $line-height-md);
-$sidebar-text-color: var(--text-color, $text-color);
+$sidebar-tab-font-size: var(--sidebar-tab-font-size, var(--font-size-md, $font-size-md));
+$sidebar-tab-line-height: var(--sidebar-tab-line-height, var(--line-height-md, $line-height-md));
+$sidebar-tab-color: var(--sidebar-tab-color, var(--text-color, $text-color));
+$sidebar-tab-padding: var(--sidebar-tab-padding, 20px * $hd var(--padding-sm, $padding-sm));
+$sidebar-tab-background-color: var(--sidebar-tab-background-color, var(--background-color, $background-color));
+$sidebar-tab-active-background-color: var(--sidebar-tab-active-background-color, var(--active-color, $active-color));
+$sidebar-tab-active-font-weight: var(--sidebar-tab-active-font-weight, var(--font-weight-bold, $font-weight-bold));
+$sidebar-tab-active-color: var(--sidebar-active-color, var(--text-color, $text-color));
+$sidebar-tab-active-border-width: var(--sidebar-active-border-width, 4px * $hd);
+$sidebar-tab-active-border-height: var(--sidebar-active-border-height, 16px * $hd);
+$sidebar-tab-active-border-color: var(--sidebar-active-border-color, var(--red, $red));
 
-$sidebar-disabled-text-color: var(--gray-5, $gray-5);
-$sidebar-padding: 20px * $hd var(--padding-sm, $padding-sm);
-$sidebar-active-color: var(--active-color, $active-color);
-$sidebar-background-color: var(--background-color, $background-color);
-$sidebar-active-font-weight: var(--font-weight-bold, $font-weight-bold);
-$sidebar-active-text-color: var(--text-color, $text-color);
-$sidebar-active-border-width: 4px * $hd;
-$sidebar-active-border-height: 16px * $hd;
-$sidebar-active-border-color: var(--red, $red);
-$sidebar-active-background-color: var(--white, $white);
+$sidebar-tab-active-active-background-color: var(--sidebar-active-active-background-color, var(--white, $white));
+
+$sidebar-tab-disabled-color: var(--sidebar-tab-disabled-color, $sidebar-disabled-color);
+$sidebar-tab-disabled-background-color: var(--sidebar-tab-disabled-background-color, $sidebar-tab-background-color);

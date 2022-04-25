@@ -10,11 +10,11 @@
   }
 
   &--disabled {
-    color: var(--sidebar-disabled-text-color, $sidebar-disabled-text-color);
+    color: $sidebar-disabled-color;
     cursor: not-allowed;
 
     &:active {
-      background-color: var(--sidebar-background-color, $sidebar-background-color);
+      background: $sidebar-disabled-color;
     }
   }
 }
