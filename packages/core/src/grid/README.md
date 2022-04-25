@@ -149,6 +149,21 @@ import Grid from "@taroify/core/grid"
 
 ### Grid.Item Events
 
-| 事件名 | 说明           | 回调参数            |
-| ------ | -------------- | ------------------- |
-| onClick  | 点击格子时触发 | _event: MouseEvent_ |
+| 事件名     | 说明      | 回调参数                |
+|---------|---------|---------------------|
+| onClick | 点击格子时触发 | _event: MouseEvent_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                   | 默认值                                   | 描述  |
+|--------------------------------------|---------------------------------------|-----|
+| --grid-item-content-padding          | _var(--padding-md) var(--padding-xs)_ | -   |
+| --grid-item-content-background-color | _var(--white)_                        | -   |
+| --grid-item-content-active-color     | _var(--active-color)_                 | -   |
+| --grid-item-icon-font-size           | _28px * $hd_                          | -   |
+| --grid-item-text-color               | _var(--gray-7)_                       | -   |
+| --grid-item-text-font-size           | _var(--font-size-sm)_                 | -   |
