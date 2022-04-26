@@ -239,7 +239,7 @@ function Swiper(props: SwiperProps) {
       if (loop) {
         if (itemInstances[0] && targetOffset !== minOffset) {
           const outRightBound = targetOffset < minOffset
-          itemInstances[0].setOffset(outRightBound ? getSize() : 0)
+          itemInstances[0].setOffset(outRightBound ? getTrackSize() : 0)
         }
 
         if (itemInstances[count - 1] && targetOffset !== 0) {
