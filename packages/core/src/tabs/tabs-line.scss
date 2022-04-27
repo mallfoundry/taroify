@@ -1,19 +1,16 @@
 @import "./variables";
 
-.#{$component-prefix}tabs {
+.#{$component-prefix}tabs__line {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: $tabs-line-width;
+  height: $tabs-line-height;
+  background: $tabs-line-background-color;
+  border-radius: $tabs-line-border-radius;
+  transform: scale(0);
 
-  &__line {
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    width: var(--tabs-bottom-bar-width, $tabs-bottom-bar-width);
-    height: var(--tabs-bottom-bar-height, $tabs-bottom-bar-height);
-    background-color: var(--tabs-bottom-bar-color, $tabs-bottom-bar-color);
-    border-radius: var(--tabs-bottom-bar-height, $tabs-bottom-bar-height);
-    transform: scale(0);
-
-    &--active {
-      transform: scale(1);
-    }
+  &--active {
+    transform: scale(1);
   }
 }

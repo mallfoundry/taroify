@@ -95,3 +95,28 @@ function EventSidebar() {
 | 事件名 | 说明       | 回调参数        |
 | ------ | ---------- | --------------- |
 | onClick  | 点击时触发 | _event: ITouchEvent_|
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                           | 默认值                                   | 描述  |
+|----------------------------------------------|---------------------------------------|-----|
+| --sidebar-width                              | _80px * $hd_                          | -   |
+| --sidebar-disabled-color                     | _var(--gray-5)_                       | -   |
+| --sidebar-tab-font-size                      | _var(--font-size-md)_                 | -   |
+| --sidebar-tab-line-height                    | _var(--line-height-md)_               | -   |
+| --sidebar-tab-color                          | _var(--text-color)_                   | -   |
+| --sidebar-tab-padding                        | _20px * $hd var(--padding-sm)_        | -   |
+| --sidebar-tab-background-color               | _var(--background-color)_             | -   |
+| --sidebar-tab-active-background-color        | _var(--active-color)_                 | -   |
+| --sidebar-tab-active-font-weight             | _var(--font-weight-bold)_             | -   |
+| --sidebar-tab-active-color                   | _var(--text-color)_                   | -   |
+| --sidebar-tab-active-border-width            | _4px * $hd_                           | -   |
+| --sidebar-tab-active-border-height           | _16px * $hd_                          | -   |
+| --sidebar-tab-active-border-color            | _var(--red)_                          | -   |
+| --sidebar-tab-active-active-background-color | _var(--white)_                        | -   |
+| --sidebar-tab-disabled-color                 | _var(--sidebar-disabled-color)_       | -   |
+| --sidebar-tab-disabled-background-color      | _var(--sidebar-tab-background-color)_ | -   |

@@ -4,17 +4,17 @@
   position: relative;
   box-sizing: border-box;
   display: block;
-  padding: var(--sidebar-padding, $sidebar-padding);
+  padding: $sidebar-tab-padding;
   overflow: hidden;
-  font-size: var(--sidebar-font-size, $sidebar-font-size);
-  line-height: var(--sidebar-line-height, $sidebar-line-height);
-  color: var(--sidebar-text-color, $sidebar-text-color);
+  font-size: $sidebar-tab-font-size;
+  line-height: $sidebar-tab-line-height;
+  color: $sidebar-tab-color;
   cursor: pointer;
   user-select: none;
-  background-color: var(--sidebar-background-color, $sidebar-background-color);
+  background: $sidebar-tab-background-color;
 
   &:active {
-    background-color: var(--sidebar-active-color, $sidebar-active-color);
+    background: $sidebar-tab-active-background-color;
   }
 
   &__children {
@@ -23,32 +23,32 @@
   }
 
   &--active {
-    font-weight: var(--sidebar-active-font-weight, $sidebar-active-font-weight);
-    color: var(--sidebar-active-text-color, $sidebar-active-text-color);
+    font-weight: $sidebar-tab-active-font-weight;
+    color: $sidebar-tab-active-color;
 
     &,
     &:active {
-      background-color: var(--sidebar-active-background-color, $sidebar-active-background-color);
+      background: $sidebar-tab-active-active-background-color;
     }
 
     &::before {
       position: absolute;
       top: 50%;
       left: 0;
-      width: var(--sidebar-active-border-width, $sidebar-active-border-width);
-      height: var(--sidebar-active-border-height, $sidebar-active-border-height);
+      width: $sidebar-tab-active-border-width;
+      height: $sidebar-tab-active-border-height;
       content: '';
-      background-color: var(--sidebar-active-border-color, $sidebar-active-border-color);
+      background: $sidebar-tab-active-border-color;
       transform: translateY(-50%);
     }
   }
 
   &--disabled {
-    color: var(--sidebar-disabled-text-color, $sidebar-disabled-text-color);
+    color: $sidebar-tab-disabled-color;
     cursor: not-allowed;
 
     &:active {
-      background-color: var(--sidebar-background-color, $sidebar-background-color);
+      background: $sidebar-tab-disabled-background-color;
     }
   }
 }

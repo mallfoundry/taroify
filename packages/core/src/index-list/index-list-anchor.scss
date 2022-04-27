@@ -1,19 +1,19 @@
 @import "./variables";
 
 .#{$component-prefix}index-list__anchor {
-  z-index: var(--index-anchor-z-index, $index-anchor-z-index);
+  z-index: $index-anchor-z-index;
   box-sizing: border-box;
-  padding: var(--index-anchor-padding, $index-anchor-padding);
-  font-size: var(--index-anchor-font-size, $index-anchor-font-size);
-  font-weight: var(--index-anchor-font-weight, $index-anchor-font-weight);
-  line-height: var(--index-anchor-line-height, $index-anchor-line-height);
-  color: var(--index-anchor-text-color, $index-anchor-text-color);
-  background-color: var(--index-anchor-background-color, $index-anchor-background-color);
+  padding: $index-anchor-padding;
+  font-size: $index-anchor-font-size;
+  font-weight: $index-anchor-font-weight;
+  line-height: $index-anchor-line-height;
+  color: $index-anchor-color;
+  background: $index-anchor-background-color;
 
   &--sticky {
     right: 0;
     left: 0;
-    color: var(--index-anchor-sticky-text-color, $index-anchor-sticky-text-color);
-    background-color: var(--index-anchor-sticky-background-color, $index-anchor-sticky-background-color);
+    color: $index-anchor-sticky-color;
+    background: $index-anchor-sticky-background-color;
   }
 }

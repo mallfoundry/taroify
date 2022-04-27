@@ -87,3 +87,27 @@ function CustomIndexList() {
 | -------- | ---------------------------- | ------------------------- |
 | onSelect | 点击索引栏的字符时触发       | _index: number \| string_ |
 | onChange | 当前高亮的索引字符变化时触发 | _index: number \| string_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                                     | 默认值                                      | 描述  |
+|----------------------------------------|------------------------------------------|-----|
+| --index-list-sidebar-z-index           | _2_                                      | -   |
+| --index-list-index-font-size           | _var(--font-size-xs)_                    | -   |
+| --index-list-index-line-height         | _var(--line-height-xs)_                  | -   |
+| --index-list-index-font-weight         | _var(--font-weight-bold)_                | -   |
+| --index-list-index-padding             | _0 var(--padding-xs 0 var(--padding-md)_ | -   |
+| --index-list-index-active-color        | _var(--danger-color)_                    | -   |
+| --index-anchor-z-index                 | _1_                                      | -   |
+| --index-anchor-padding                 | _0 var(--padding-md)_                    | -   |
+| --index-anchor-color                   | _var(--text-color)_                      | -   |
+| --index-anchor-font-weight             | _var(--font-weight-bold)_                | -   |
+| --index-anchor-font-size               | _var(--font-size-md)_                    | -   |
+| --index-anchor-line-height             | _32px * $hd_                             | -   |
+| --index-anchor-background-color        | _transparent_                            | -   |
+| --index-anchor-sticky-color            | _var(--danger-color)_                    | -   |
+| --index-anchor-sticky-background-color | _var(--white)_                           | -   |

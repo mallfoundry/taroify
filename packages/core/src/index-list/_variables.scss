@@ -1,17 +1,19 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$index-anchor-z-index: 1;
-$index-anchor-padding: 0 var(--padding-md, $padding-md);
-$index-anchor-text-color: var(--text-color, $text-color);
-$index-anchor-font-weight: var(--font-weight-bold, $font-weight-bold);
-$index-anchor-font-size: var(--font-size-md, $font-size-md);
-$index-anchor-line-height: 32px * $hd;
-$index-anchor-background-color: transparent;
-$index-anchor-sticky-text-color: var(--danger-color, $danger-color);
-$index-anchor-sticky-background-color: var(--white, $white);
+$index-list-sidebar-z-index: var(--index-list-sidebar-z-index, 2);
+$index-list-index-font-size: var(--index-list-index-font-size, var(--font-size-xs, $font-size-xs));
+$index-list-index-line-height: var(--index-list-index-line-height, var(--line-height-xs, $line-height-xs));
+$index-list-index-font-weight: var(--index-list-index-weight-bold, var(--font-weight-bold, $font-weight-bold));
+$index-list-index-padding: var(--index-list-index-padding, 0 var(--padding-xs, $padding-xs) 0 var(--padding-md, $padding-md));
+$index-list-index-active-color: var(--index-list-index-active-color, var(--danger-color, $danger-color));
 
-$index-list-sidebar-z-index: 2;
-$index-list-index-font-size: var(--font-size-xs, $font-size-xs);
-$index-list-index-line-height: var(--line-height-xs, $line-height-xs);
-$index-list-index-active-color: var(--danger-color, $danger-color);
+$index-anchor-z-index: var(--index-anchor-z-index, 1);
+$index-anchor-padding: var(--index-anchor-padding, 0 var(--padding-md, $padding-md));
+$index-anchor-color: var(--index-anchor-color, var(--text-color, $text-color));
+$index-anchor-font-weight: var(--index-anchor-font-weight, var(--font-weight-bold, $font-weight-bold));
+$index-anchor-font-size: var(--index-anchor-font-size, var(--font-size-md, $font-size-md));
+$index-anchor-line-height: var(--index-anchor-line-height, 32px * $hd);
+$index-anchor-background-color: var(--index-anchor-background-color, transparent);
+$index-anchor-sticky-color: var(--index-anchor-sticky-color, var(--danger-color, $danger-color));
+$index-anchor-sticky-background-color: var(--index-anchor-sticky-background-color, var(--white, $white));

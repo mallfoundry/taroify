@@ -8,19 +8,19 @@
   align-items: center;
   justify-content: center;
   min-width: 0;
-  padding: 0 var(--padding-base, $padding-base);
-  font-size: var(--tab-font-size, $tab-font-size);
-  line-height: var(--tab-line-height, $tab-line-height);
-  color: var(--tab-text-color, $tab-text-color);
+  padding: $tab-padding;
+  font-size: $tab-font-size;
+  line-height: $tab-line-height;
+  color: $tab-color;
   cursor: pointer;
 
   &--active {
-    font-weight: var(--font-weight-bold, $font-weight-bold);
-    color: var(--tab-active-text-color, $tab-active-text-color);
+    font-weight: $tab-active-font-weight;
+    color: $tab-active-color;
   }
 
   &--disabled {
-    color: var(--tab-disabled-text-color, $tab-disabled-text-color);
+    color: $tab-disabled-color;
     cursor: not-allowed;
   }
 

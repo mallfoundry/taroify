@@ -9,7 +9,7 @@
   }
 
   &__icon {
-    font-size: var(--grid-item-icon-size, $grid-item-icon-size);
+    font-size: $grid-item-icon-font-size;
 
     .#{$component-prefix}icon {
       font-size: inherit;
@@ -17,9 +17,9 @@
   }
 
   &__text {
-    font-size: var(--grid-item-text-font-size, $grid-item-text-font-size);
+    font-size: $grid-item-text-font-size;
     line-height: 1.5;
-    color: var(--grid-item-text-color, $grid-item-text-color);
+    color: $grid-item-text-color;
     // https://github.com/youzan/vant/issues/3894
     word-break: break-all;
   }
@@ -33,8 +33,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: var(--grid-item-content-padding, $grid-item-content-padding);
-    background-color: var(--grid-item-content-background-color, $grid-item-content-background-color);
+    padding: $grid-item-content-padding;
+    background-color: $grid-item-content-background-color;
 
     &::after {
       z-index: 1;
@@ -72,7 +72,7 @@
       cursor: pointer;
 
       &:active {
-        background-color: var(--grid-item-content-active-color, $grid-item-content-active-color);
+        background-color: $grid-item-content-active-color;
       }
     }
   }

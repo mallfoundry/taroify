@@ -1,14 +1,17 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$tree-select-font-size: var(--font-size-md, $font-size-md);
-$tree-select-sidebar-background-color: var(--background-color, $background-color);
+$tree-select-font-size: var(--tree-select-font-size, var(--font-size-md, $font-size-md));
+$tree-select-sidebar-background-color: var(--tree-select-sidebar-background-color, var(--background-color, $background-color));
+$tree-select-content-background-color: var(--tree-select-content-background-color, var(--white, $white));
 
-$tree-select-tab-padding: 14px * $hd var(--padding-sm, $padding-sm);
+$tree-select-tab-padding: var(--tree-select-tab-padding, 14px * $hd var(--padding-sm, $padding-sm));
 
-$tree-select-content-background-color: var(--white, $white);
-
-$tree-select-option-height: 48px * $hd;
-$tree-select-option-active-color: var(--danger-color, $danger-color);
-$tree-select-option-disabled-color: var(--gray-5, $gray-5);
-$tree-select-option-selected-size: 16px * $hd;
+$tree-select-option-padding: var(--tree-select-option-padding, 0 32px * $hd 0 var(--padding-md, $padding-md));
+$tree-select-option-font-weight: var(--tree-select-option-font-weight, var(--font-weight-bold, $font-weight-bold));
+$tree-select-option-line-height: var(--tree-select-option-line-height, 48px * $hd);
+$tree-select-option-active-color: var(--tree-select-option-active-color, var(--danger-color, $danger-color));
+$tree-select-option-active-background-color: var(--tree-select-option-active-background-color, var(--active-color, $active-color));
+$tree-select-option-disabled-color: var(--tree-select-option-disabled-color, var(--gray-5, $gray-5));
+$tree-select-option-icon-active-right: var(--tree-select-option-icon-active-right, var(--padding-md, $padding-md));
+$tree-select-option-icon-active-font-size: var(--tree-select-option-icon-active-font-size, 16px * $hd);
