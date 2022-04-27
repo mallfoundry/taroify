@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.8
+
+`2022-04-27`
+
+**Feature**
+
+- CSS Vars
+  - 优化全部组件的 CSS Vars 文档 [#392](https://github.com/mallfoundry/taroify/issues/392)
+
+**Bug Fixes**
+
+- Swiper
+  - 修复切换存在白屏的问题 [#472](https://github.com/mallfoundry/taroify/issues/472) [#474](https://github.com/mallfoundry/taroify/pull/474) [@Laotree](https://github.com/Laotree)
+
 ### v0.0.29-alpha.7
 
 `2022-04-12`
