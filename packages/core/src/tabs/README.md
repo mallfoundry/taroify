@@ -238,3 +238,31 @@ function TabsWithCustomTitle() {
 | --- | --- | --- |
 | onTabClick | 点击标签时触发 | _event : Tabs.TabEvent_ |
 | onChange | 当前激活的标签改变时触发 | _value: any, event : Tabs.TabEvent_ |
+
+## 主题定制
+
+### 样式变量
+
+组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
+
+| 名称                           | 默认值                                             | 描述  |
+|------------------------------|-------------------------------------------------|-----|
+| --tabs-active-color          | _var(--danger-color)_                           | -   |
+| --tabs-wrap-height           | _44px * $hd_                                    | -   |
+| --tabs-card-height           | _30px * $hd_                                    | -   |
+| --tabs-card-margin           | _0 var(--padding-md)_                           | -   |
+| --tabs-card-border-width     | _var(--border-width-base, $border-width-base))_ | -   |
+| --tabs-card-border-color     | _var(--tabs-active-color)_                      | -   |
+| --tabs-card-border-radius    | _var(--border-radius-sm)_                       | -   |
+| --tabs-nav-background-color  | _var(--white)_                                  | -   |
+| --tabs-line-width            | _40px * $hd_                                    | -   |
+| --tabs-line-height           | _3px * $hd_                                     | -   |
+| --tabs-line-border-radius    | _var(--tabs-line-height)_                       | -   |
+| --tabs-line-background-color | _var(--tabs-active-color)_                      | -   |
+| --tab-color                  | _var(--gray-7)_                                 | -   |
+| --tab-padding                | _0 var(--padding-base)_                         | -   |
+| --tab-font-size              | _var(--font-size-md)_                           | -   |
+| --tab-line-height            | _var(--line-height-md)_                         | -   |
+| --tab-active-color           | _var(--text-color)_                             | -   |
+| --tab-active-font-weight     | _var(--font-weight-bold)_                       | -   |
+| --tab-disabled-color         | _var(--gray-5)_                                 | -   |

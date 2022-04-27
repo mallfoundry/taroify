@@ -4,7 +4,7 @@
 
   &--line {
     .#{$component-prefix}tabs__wrap {
-      height: var(--tabs-line-height, $tabs-line-height);
+      height: $tabs-wrap-height;
     }
   }
 }
@@ -34,10 +34,10 @@
     &--card {
       box-sizing: border-box;
       width: 100%;
-      height: var(--tabs-card-height, $tabs-card-height);
-      margin: 0 var(--padding-md, $padding-md);
-      border: var(--border-width-base, $border-width-base) solid var(--tabs-active-color, $tabs-active-color);
-      border-radius: var(--border-radius-sm, $border-radius-sm);
+      height: $tabs-card-height;
+      margin: $tabs-card-margin;
+      border: $tabs-card-border-width solid $tabs-card-border-color;
+      border-radius: $tabs-card-border-radius;
     }
 
     &::-webkit-scrollbar {
@@ -57,7 +57,7 @@
   position: relative;
   display: flex;
   user-select: none;
-  background-color: var(--tabs-nav-background-color, $tabs-nav-background-color);
+  background: $tabs-nav-background-color;
 
   &--line {
     box-sizing: content-box;
@@ -70,8 +70,8 @@
     height: 100%;
 
     .#{$component-prefix}tabs__tab {
-      color: var(--tabs-active-color, $tabs-active-color);
-      border-right: var(--border-width-base, $border-width-base) solid var(--tabs-active-color, $tabs-active-color);
+      color: $tabs-active-color;
+      border-right: var(--border-width-base, $border-width-base) solid $tabs-active-color;
 
       &:last-child {
         border-right: 0 none;
@@ -79,11 +79,11 @@
 
       &--active {
         color: var(--white, $white);
-        background-color: var(--tabs-active-color, $tabs-active-color);
+        background: $tabs-active-color;
       }
 
       &--disabled {
-        color: var(--tab-disabled-text-color, $tab-disabled-text-color);
+        color: $tab-disabled-color;
       }
     }
   }

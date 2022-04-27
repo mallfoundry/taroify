@@ -1,17 +1,25 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-// Tab styles
-$tab-text-color: var(--gray-7, $gray-7);
-$tab-active-text-color: var(--text-color, $text-color);
-$tab-disabled-text-color: var(--gray-5, $gray-5);
-$tab-font-size: var(--font-size-md, $font-size-md);
-$tab-line-height: var(--line-height-md, $line-height-md);
 // Tabs styles
-$tabs-active-color: var(--danger-color, $danger-color);
-$tabs-line-height: 44px * $hd;
-$tabs-card-height: 30px * $hd;
-$tabs-nav-background-color: $white;
-$tabs-bottom-bar-width: 40px * $hd;
-$tabs-bottom-bar-height: 3px * $hd;
-$tabs-bottom-bar-color: var(--tabs-active-color, $tabs-active-color);
+$tabs-active-color: var(--tabs-active-color, var(--danger-color, $danger-color));
+$tabs-wrap-height: var(--tabs-wrap-height, 44px * $hd);
+$tabs-card-height: var(--tabs-card-height, 30px * $hd);
+$tabs-card-margin: var(--tabs-card-margin, 0 var(--padding-md, $padding-md));
+$tabs-card-border-width: var(--tabs-card-border-width, var(--border-width-base, $border-width-base));
+$tabs-card-border-color: var(--tabs-card-border-color, $tabs-active-color);
+$tabs-card-border-radius: var(--tabs-card-border-radius, var(--border-radius-sm, $border-radius-sm));
+$tabs-nav-background-color: var(--tabs-nav-background-color, var(--white, $white));
+$tabs-line-width: var(--tabs-line-width, 40px * $hd);
+$tabs-line-height: var(--tabs-line-height, 3px * $hd);
+$tabs-line-border-radius: var(--tabs-line-border-radius, $tabs-line-height);
+$tabs-line-background-color: var(--tabs-line-background-color, $tabs-active-color);
+
+// Tab styles
+$tab-color: var(--tab-color, var(--gray-7, $gray-7));
+$tab-padding: var(--tab-padding, 0 var(--padding-base, $padding-base));
+$tab-font-size: var(--tab-font-size, var(--font-size-md, $font-size-md));
+$tab-line-height: var(--tab-line-height, var(--line-height-md, $line-height-md));
+$tab-active-color: var(--tab-active-color, var(--text-color, $text-color));
+$tab-active-font-weight: var(--tab-active-font-weight, var(--font-weight-bold, $font-weight-bold));
+$tab-disabled-color: var(--tab-disabled-color, var(--gray-5, $gray-5));
