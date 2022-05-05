@@ -133,11 +133,9 @@ function Cascader(props: CascaderProps) {
   const emitChange = useCallback(
     (newValues: any[]) => {
       const newActiveOptions = findOptions(newValues)
-      if (!_.isEqual(newValues, valueProp)) {
-        onSelect?.(newValues, newActiveOptions)
-        if (_.size(tabs) === _.size(newValues)) {
-          onChange?.(newValues, newActiveOptions)
-        }
+      onSelect?.(newValues, newActiveOptions)
+      if (!_.isEqual(newValues, valueProp) && _.size(tabs) === _.size(newValues)) {
+        onChange?.(newValues, newActiveOptions)
       }
     },
     [findOptions, onChange, onSelect, tabs, valueProp],
@@ -149,9 +147,7 @@ function Cascader(props: CascaderProps) {
       if (disabled) {
         return
       }
-
       const newValues = _.slice(values, 0, tabIndex + 1)
-
       newValues[tabIndex] = value
       setValues(newValues)
       emitChange(newValues)
@@ -159,11 +155,14 @@ function Cascader(props: CascaderProps) {
     [emitChange, setValues, values],
   )
 
-  useEffect(() => {
-    nextTick(() => {
-      setActiveTab(_.clamp(_.size(values), lastTab))
-    })
-  }, [lastTab, values])
+  useEffect(
+    () =>
+      nextTick(() =>
+        //
+        setActiveTab(_.clamp(_.size(values), lastTab)),
+      ),
+    [lastTab, values],
+  )
 
   const panes = useMemo(
     () =>
