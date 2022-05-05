@@ -12,6 +12,7 @@ import {
   useCallback,
   useMemo,
 } from "react"
+import {isNumber} from "lodash"
 import { prefixClassname } from "../styles"
 import { addNumber, formatNumber } from "../utils/format/number"
 import { getLogger } from "../utils/logger"
@@ -147,10 +148,14 @@ function Stepper(props: StepperProps) {
 
   const onStep = useCallback(
     (actionType: StepperActionType) => {
-      const diff = actionType === "decrease" ? -step : +step
-      setValue(formatValue(addNumber(valueRef.current as number, diff)))
+      if (isNumber(min) && !isNumber(valueRef.current)) {
+        setValue(min)
+      } else {
+        const diff = actionType === "decrease" ? -step : +step
+        setValue(formatValue(addNumber(valueRef.current as number, diff)))
+      }
     },
-    [formatValue, setValue, step, valueRef],
+    [formatValue, min, setValue, step, valueRef],
   )
 
   return (
