@@ -12,6 +12,17 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.0.29-alpha.9
+
+`2022-05-30`
+
+**Bug Fixes**
+
+- Cascader
+  - 修复没用触发 onSelect 事件的问题 [#484](https://github.com/mallfoundry/taroify/pull/484)
+- Avatar
+  - 修复没用按需加载 Image 样式的问题 [#480](https://github.com/mallfoundry/taroify/pull/480) [@ShibaPipi](https://github.com/ShibaPipi)
+
 ### v0.0.29-alpha.8
 
 `2022-04-27`
