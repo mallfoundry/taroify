@@ -322,6 +322,7 @@ function SwipeCell(props: SwipeCellProps) {
 
   return (
     <View
+      catchMove
       ref={rootRef}
       className={classNames(prefixClassname("swipe-cell"), className)}
       onTouchStart={(event) => {
