@@ -7,6 +7,14 @@ module.exports = {
     NODE_ENV: '"development"',
   },
   defineConstants: {},
+  plugins: [
+    [
+      "@tarojs/plugin-platform-lark",
+      {
+        pc: false,
+      },
+    ],
+  ],
   mini: {
     webpackChain(chain) {
       // lodash bundle reduction

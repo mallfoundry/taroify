@@ -18,6 +18,7 @@
     "build:rn": "taro build --type rn",
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
+    "build:lark": "taro build --type lark",
     "build:quickapp": "taro build --type quickapp",
     "unconfirmed:dev:weapp": "npm run build:weapp -- --watch",
     "dev:swan": "npm run build:swan -- --watch",
@@ -27,7 +28,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:quickapp": "npm run build:quickapp -- --watch"
+    "dev:quickapp": "npm run build:quickapp -- --watch",
+    "dev:lark": "npm run build:lark -- --watch"
   },
   "browserslist": [
     "last 3 versions",
