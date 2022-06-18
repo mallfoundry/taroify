@@ -6,4 +6,4 @@ export type ButtonSize = "mini" | "small" | "medium" | "large"
 
 export type ButtonColor = "default" | "primary" | "info" | "success" | "warning" | "danger"
 
-export type ButtonShape = "square" | "circle" | "round"
+export type ButtonShape = "square" | "round"
