@@ -1,11 +1,10 @@
 import { Textarea, TextareaProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { HTMLProps } from "react"
 import { prefixClassname } from "../styles"
 
 export interface NativeTextareaProps extends TextareaProps {
-  nativeProps?: HTMLProps<HTMLTextAreaElement>
+  nativeProps?: Record<string, string>
   readonly?: boolean
 }
 

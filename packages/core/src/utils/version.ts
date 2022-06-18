@@ -1,4 +1,4 @@
-import { canIUse, getSystemInfoSync } from "@tarojs/taro"
+import { getSystemInfoSync } from "@tarojs/taro"
 import { inQQ, inWechat } from "./base"
 
 function compareVersion(o1: string, o2: string) {
@@ -29,20 +29,8 @@ function compareVersion(o1: string, o2: string) {
 }
 
 function gte(version: string) {
-  const system = getSystemInfoSync()
-  return compareVersion(system.SDKVersion, version) >= 0
-}
-
-export function canIUseModel() {
-  return gte("2.9.3")
-}
-
-export function canIUseAnimate() {
-  return gte("2.9.0")
-}
-
-export function canIUseNextTick() {
-  return canIUse("nextTick")
+  const { SDKVersion } = getSystemInfoSync()
+  return SDKVersion && compareVersion(SDKVersion, version) >= 0
 }
 
 export function canIUseCanvas2d() {

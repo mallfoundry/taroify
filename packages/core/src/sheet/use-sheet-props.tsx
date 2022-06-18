@@ -30,10 +30,8 @@ export default function useSheetProps<P>(props: ButtonProps & ViewProps & P): [B
       onGetAuthorize,
       onContact,
       onGetPhoneNumber,
-      onGetRealnameAuthInfo,
       onError,
       onOpenSetting,
-      onLaunchapp,
       ...restProps
     } = props
     const buttonProps = {
@@ -62,10 +60,8 @@ export default function useSheetProps<P>(props: ButtonProps & ViewProps & P): [B
       onGetAuthorize,
       onContact,
       onGetPhoneNumber,
-      onGetRealnameAuthInfo,
       onError,
       onOpenSetting,
-      onLaunchapp,
     }
     return [buttonProps, restProps as P]
   }, [props])

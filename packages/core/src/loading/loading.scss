@@ -39,7 +39,7 @@
       // Generate 12 item
       @for $i from 1 through 12 {
         &:nth-of-type(#{$i}) {
-          opacity: calc(1 - (0.75 / 12) * ($i - 1));
+          opacity: 1 - calc(0.75 / 12) * ($i - 1);
           transform: rotate($i * 30deg);
         }
       }

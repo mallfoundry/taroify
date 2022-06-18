@@ -10,11 +10,11 @@
 
 @for $i from 1 through 24 {
   .#{$component-prefix}flex-item-#{$i} {
-    flex: 0 0 $i * (100% / 24);
-    max-width: $i * (100% / 24);
+    flex: 0 0 $i * calc(100% / 24);
+    max-width: $i * calc(100% / 24);
   }
 
   .#{$component-prefix}flex-item-offset-#{$i} {
-    margin-left: $i * (100% / 24) * $hd;
+    margin-left: $i * calc(100% / 24) * $hd;
   }
 }
