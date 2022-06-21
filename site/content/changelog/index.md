@@ -20,7 +20,6 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - 更新 @tarojs/* 版本至 3.4.10 [#a2864f3](https://github.com/mallfoundry/taroify/commit/a2864f319b0eddde8006444a6a41be3a0e78b07a) [#9a2d5eb](https://github.com/mallfoundry/taroify/commit/9a2d5ebc19d466902952d98ab749eaa7613ce1ff) [#b722781](https://github.com/mallfoundry/taroify/commit/b722781d3a58a294d43065aea8e6bf12691d1fc4)
 
-
 **Bug Fixes**
 
 - 修复 safe-area.scss 样式未导入的问题 [#493](https://github.com/mallfoundry/taroify/pull/493) [@peng](https://github.com/pengcu)
