@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.0
+
+`2022-06-21`
+
+**Bug Fixes**
+
+- 修复 safe-area.scss 样式未导入的问题 [#493](https://github.com/mallfoundry/taroify/pull/493) [@peng](https://github.com/pengcu)
+- SwipeCell
+  - 修复 catch move 的问题 [#495](https://github.com/mallfoundry/taroify/pull/495) [@Kyle](https://github.com/jhxxs)
+- Loading
+  - 修复 SCSS 样式编译警告的问题 [#497](https://github.com/mallfoundry/taroify/pull/497) [@Fen QIN](https://github.com/umcai)
+- Button
+  - 更新 shape 属性文档不一致的问题 [#512](https://github.com/mallfoundry/taroify/pull/512) [@Kuntang Huang](https://github.com/kunkuntang)
+
 ### v0.0.29-alpha.9
 
 `2022-05-30`
