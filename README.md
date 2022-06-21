@@ -115,6 +115,7 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 <a href="https://github.com/akazwz">@akazwz</a>
 <a href="https://github.com/programmer-yang">@Yang</a>
 <a href="https://github.com/coderYarn">@coderYarn</a>
+<a href="https://github.com/shaolongcai">@蔡包</a>
 
 ## 鸣谢
 
