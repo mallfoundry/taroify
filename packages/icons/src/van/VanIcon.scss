@@ -13,8 +13,16 @@
 .van-icon {
   position: relative;
   display: inline-block;
-  font: normal normal normal 14px/1 'vant-icon';
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-variant-east-asian: normal;
+  font-weight: normal;
+  font-stretch: normal;
   font-size: inherit;
+  line-height: 1;
+  font-family: 'vant-icon', serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: auto;
 
