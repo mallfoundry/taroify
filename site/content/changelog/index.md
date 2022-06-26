@@ -12,6 +12,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+
+### v0.1.0-alpha.1
+
+`2022-06-26`
+
+**Bug Fixes**
+
+- Icons
+  - 修复在飞书小程序图标不显示的问题 [#511](https://github.com/mallfoundry/taroify/issues/511) [#519](https://github.com/mallfoundry/taroify/issues/519) [#520](https://github.com/mallfoundry/taroify/pull/520)
+
 ### v0.1.0-alpha.0
 
 `2022-06-21`
