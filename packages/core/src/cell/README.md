@@ -137,7 +137,7 @@ import { Cell } from "@taroify/core"
 | --cell-horizontal-padding        | _var(--padding-md)_                                                       | -   |
 | --cell-vertical-padding-large    | _var(--padding-sm)_                                                       | -   |
 | --cell-title-font-size-large     | _var(--font-size-lg)_                                                     | -   |
-| --cell-subtitle-font-size-large  | _var(--font-size-md)_                                                     | -   |
+| --cell-brief-font-size-large  | _var(--font-size-md)_                                                     | -   |
 | --cell-group-background-color    | _var(--white)_                                                            | -   |
 | --cell-group-title-color         | _var(--gray-6)_                                                           | -   |
 | --cell-group-title-padding       | _var(--padding-md) var(--padding-md) var(--padding-xs)_                   | -   |

@@ -17,19 +17,24 @@ export interface CellProps extends ViewProps {
   bordered?: boolean
   clickable?: boolean
   children?: ReactNode
+  titleClass?: ViewProps["className"]
+  titleStyle?: ViewProps["style"]
+  valueClass?: ViewProps["className"]
+  briefClass?: ViewProps["className"]
 }
 
 function Cell(props: CellProps) {
-  const { title, brief, children, ...restProps } = props
+  const { title, brief, children, titleClass, titleStyle, valueClass, briefClass, ...restProps } =
+    props
   return (
     <CellBase {...restProps}>
       {title && (
-        <CellTitle>
+        <CellTitle className={titleClass} style={titleStyle}>
           {title}
-          {brief && <CellBrief children={brief} />}
+          {brief && <CellBrief children={brief} className={briefClass} />}
         </CellTitle>
       )}
-      <CellValue alone={!title} children={children} />
+      {children ? <CellValue alone={!title} children={children} className={valueClass} /> : null}
     </CellBase>
   )
 }
