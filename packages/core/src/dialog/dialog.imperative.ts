@@ -98,7 +98,7 @@ export function confirmDialog(args: ReactNode | DialogOptions) {
   })
 }
 
-export function alertDialog(args: ReactNode | Omit<DialogOptions, "confirm">) {
+export function alertDialog(args: ReactNode | Omit<DialogOptions, "cancel">) {
   const { confirm = "确定", ...restOptions } = parseDialogOptions(args)
   return openDialog({
     confirm,
