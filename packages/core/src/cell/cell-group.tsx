@@ -15,7 +15,7 @@ interface CellGroupProps extends ViewProps {
 }
 
 export function CellGroup(props: CellGroupProps) {
-  const { title, clickable = false, inset = false, bordered = true, children, ...restProps } = props
+  const { title, clickable = false, inset = false, bordered = true, children, className, ...restProps } = props
   return (
     <CellGroupContext.Provider
       value={{
@@ -23,9 +23,13 @@ export function CellGroup(props: CellGroupProps) {
       }}
     >
       <View
-        className={classNames(prefixClassname("cell-group"), {
-          [prefixClassname("cell-group--inset")]: inset,
-        })}
+        className={classNames(
+          prefixClassname("cell-group"),
+          {
+            [prefixClassname("cell-group--inset")]: inset,
+          },
+          className,
+        )}
         {...restProps}
       >
         {title && (
