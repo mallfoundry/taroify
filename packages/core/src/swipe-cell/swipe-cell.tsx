@@ -95,6 +95,7 @@ export interface SwipeCellProps extends ViewProps {
   open?: SwipeCellPosition
   disabled?: boolean
   stopPropagation?: boolean
+  catchMove?: boolean
   children?: ReactNode
 
   beforeClose?(position: SwipeCellPosition): boolean | Promise<boolean>
@@ -120,6 +121,7 @@ function SwipeCell(props: SwipeCellProps) {
     onTouchEnd,
     onTouchCancel,
     children: childrenProp,
+    catchMove,
     ...restProps
   } = props
 
@@ -322,7 +324,7 @@ function SwipeCell(props: SwipeCellProps) {
 
   return (
     <View
-      catchMove
+      catchMove={catchMove}
       ref={rootRef}
       className={classNames(prefixClassname("swipe-cell"), className)}
       onTouchStart={(event) => {

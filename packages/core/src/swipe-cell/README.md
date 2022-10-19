@@ -97,6 +97,7 @@ import SwipeCell from "@taroify/core/swipe-cell"
 | beforeClose | 关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise | _(args) => boolean \| Promise\<boolean\>_ | - |
 | disabled | 是否禁用滑动 | _boolean_ | `false` |
 | stopPropagation | 是否阻止滑动事件冒泡 | _boolean_ | `false` |
+| catchMove | 是否捕获触摸移动事件 | _boolean_ | `false` |
 
 ### Events
 
