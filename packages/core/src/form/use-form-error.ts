@@ -20,7 +20,9 @@ export default function useFormError(name?: string) {
     return () => form?.removeEventListener(`fields.${name}.error.change`, onErrorChange)
   }, [form, name, onErrorChange])
 
-  const getError = useCallback(() => _.first(form?.getErrors(name)), [form, name])
+  const getError = useCallback(() => {
+    if (name) return _.first(form?.getErrors(name))
+  }, [form, name])
 
   const setError = useCallback(
     (error: Omit<FormValidError, "name">) => {
