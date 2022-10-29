@@ -34,7 +34,9 @@ function Cell(props: CellProps) {
           {brief && <CellBrief children={brief} className={briefClass} />}
         </CellTitle>
       )}
-      {children ? <CellValue alone={!title} children={children} className={valueClass} /> : null}
+      {children === undefined || children === null ? null : (
+        <CellValue alone={!title} children={children} className={valueClass} />
+      )}
     </CellBase>
   )
 }
