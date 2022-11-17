@@ -16,8 +16,5 @@
     "jest": "^26.6.0",
     "jest-transform-css": "^2.1.0",
     "ts-jest": "^26.5.4"
-  },
-  "devDependencies": {
-    "@types/vue": "^2.0.0"
   }
 }

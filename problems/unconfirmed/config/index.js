@@ -1,4 +1,5 @@
 const config = {
+  compiler: "webpack5",
   projectName: "@taroify/demo",
   date: "2021-3-9",
   designWidth: 750,
