@@ -19,7 +19,7 @@
   "peerDependencies": {
     "@tarojs/components": "^3.3.9",
     "@tarojs/taro": "^3.3.9",
-    "react": "^17.0.2"
+    "react": ">=17.0.2"
   },
   "dependencies": {
     "@taroify/hooks": "^0.1.0-alpha.1",
