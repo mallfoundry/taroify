@@ -35,5 +35,15 @@ export function getClientCoordinates(event: ITouchEvent | MouseEvent): ClientCoo
       clientY,
     }
   }
-  return touches[0]
+    /** 支付宝点击 */
+  const { clientX: touchMoveClientX, clientY:  touchMoveClientY, touches: moveTouches } = event.detail || {}
+
+  if (touchMoveClientX && touchMoveClientY) {
+    return {
+      clientX: touchMoveClientX,
+      clientY: touchMoveClientY,
+    }
+  }
+
+  return touches?.[0] || moveTouches?.[0]
 }
