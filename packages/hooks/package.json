@@ -18,9 +18,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@tarojs/taro": "^3.3.6",
+    "@tarojs/taro": "3.6.7",
     "lodash": "^4.17.21",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
     "@vant/area-data": "^1.2.1"

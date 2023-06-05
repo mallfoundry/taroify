@@ -58,3 +58,5 @@ yarn.lock
 # vscode
 .history
 .vscode
+
+.swc/
