@@ -19,14 +19,14 @@
   "peerDependencies": {
     "@tarojs/components": "^3.3.9",
     "@tarojs/taro": "^3.3.9",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
     "@taroify/core": "^0.1.0-alpha.1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "raf": "^3.4.1",
-    "react-is": "^17.0.2",
+    "react-is": "^18.2.0",
     "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "@types/lodash": "^4.14.178",
     "@types/node": "^14.14.25",
     "@types/raf": "^3.4.0",
-    "@types/react-is": "^17.0.2",
+    "@types/react-is": "^18.2.0",
     "@types/react-transition-group": "^4.4.1"
   }
 }
