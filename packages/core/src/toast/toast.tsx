@@ -13,6 +13,7 @@ import {
   ReactNode,
   useEffect,
   useMemo,
+  Attributes,
 } from "react"
 import Backdrop from "../backdrop"
 import { useTimeout } from "../hooks"
@@ -59,7 +60,7 @@ function useToastIcon(node?: ReactNode, type?: ToastType) {
     const element = icon as ReactElement
     return cloneElement(icon, {
       className: classNames(prefixClassname("toast__icon"), element.props.className),
-    })
+    } as Partial<unknown> & Attributes)
   }, [node, type])
 }
 

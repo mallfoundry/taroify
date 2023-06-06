@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
@@ -163,7 +163,7 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const checkPosition = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (reachTopRef.current) {
         resetDuration()
         touch.start(event)
@@ -173,7 +173,7 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const onTouchStart = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (isTouchable()) {
         checkPosition(event)
       }
@@ -200,7 +200,7 @@ function PullRefresh(props: PullRefreshProps) {
 
   const onTouchMove = useMemo(
     () =>
-      _.throttle((event: ITouchEvent) => {
+      _.throttle((event) => {
         if (isTouchable()) {
           if (!reachTopPreviousRef.current) {
             checkPosition(event)
@@ -280,7 +280,6 @@ function PullRefresh(props: PullRefreshProps) {
   }, [])
 
   const renderStatus = useCallback(() => {
-    // @ts-ignore
     const statusSlot = children[statusRef.current as string]
     if (statusSlot) {
       return statusSlot
@@ -334,6 +333,7 @@ function PullRefresh(props: PullRefreshProps) {
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
+          // 
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}

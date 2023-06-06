@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactElement, ReactText, useCallback, useMemo } from "react"
+import { ReactNode, useCallback, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_SURROUND } from "../styles/hairline"
 import { stopPropagation } from "../utils/dom/event"
@@ -18,7 +18,7 @@ export interface PasswordInputProps extends ViewProps {
   mask?: boolean
   focused?: boolean
   focus?: boolean
-  feedback?: ReactText | PasswordInputFeedbackProps | ReactElement
+  feedback?: ReactNode | PasswordInputFeedbackProps 
 
   onFocus?(event: ITouchEvent): void
 }
@@ -37,7 +37,7 @@ function PasswordInput(props: PasswordInputProps) {
     ...restProps
   } = props
 
-  const feedback = createVariantElement(PasswordInputFeedback, feedbackProp)
+  const feedback = createVariantElement(PasswordInputFeedback, feedbackProp as ReactNode)
 
   const focus = useMemo(() => (_.isBoolean(focusedProp) ? focusedProp : focusProp), [
     focusProp,
@@ -50,7 +50,7 @@ function PasswordInput(props: PasswordInputProps) {
   }
 
   const onTouchStart = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       stopPropagation(event)
       onFocus?.(event)
     },

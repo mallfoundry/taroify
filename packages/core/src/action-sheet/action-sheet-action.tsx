@@ -9,7 +9,19 @@ import ActionSheetContext from "./action-sheet.context"
 
 export interface ActionSheetActionProps
   extends SheetItemProps,
-    Omit<ButtonBaseProps, "size" | "type" | "plain" | "loading" | "formType"> {
+    Omit<
+      ButtonBaseProps,
+      | "size"
+      | "type"
+      | "plain"
+      | "loading"
+      | "formType"
+      | "animation"
+      | "onTouchEnd"
+      | "onTouchCancel"
+      | "onTouchMove"
+      | "onTouchStart"
+    > {
   name?: ReactNode
   value?: any
   onClick?: (event: ITouchEvent) => void

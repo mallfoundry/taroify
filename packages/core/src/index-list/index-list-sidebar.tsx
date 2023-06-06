@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { ITouchEvent, View, ViewProps } from "@tarojs/components"
 import * as React from "react"
 import { ForwardedRef, forwardRef, ReactNode } from "react"
 import { prefixClassname } from "../styles"
@@ -6,9 +6,9 @@ import { prefixClassname } from "../styles"
 interface IndexListSidebarProps {
   children?: ReactNode
   onClick?: (event: ITouchEvent) => void
-  onTouchMove?: (event: ITouchEvent) => void
-  onTouchCancel?: (event: ITouchEvent) => void
-  onTouchEnd?: (event: ITouchEvent) => void
+  onTouchMove?: ViewProps["onTouchStart"]
+  onTouchCancel?: ViewProps["onTouchCancel"]
+  onTouchEnd?: ViewProps["onTouchEnd"]
 }
 
 const IndexListSidebar = forwardRef(

@@ -1,5 +1,4 @@
-import { Image as TaroImage, View } from "@tarojs/components"
-import { StandardProps } from "@tarojs/components/types/common"
+import { Image as TaroImage, View, ViewProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -40,7 +39,7 @@ function useImageShape(shape?: ImageShape, round?: boolean) {
   return shape
 }
 
-export interface ImageProps extends StandardProps {
+export interface ImageProps extends ViewProps {
   src?: string
   alt?: string
   mode?: ImageMode

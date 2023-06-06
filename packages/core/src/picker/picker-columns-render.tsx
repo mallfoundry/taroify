@@ -14,14 +14,14 @@ import PickerContext from "./picker.context"
 import { getPickerOptionKey, PickerOptionObject } from "./picker.shared"
 import usePickerOptions from "./use-picker-options"
 
-export interface PickerColumnsRenderProps extends ViewProps {
+export interface PickerColumnsRenderProps extends Omit<ViewProps, "children"> {
   style?: CSSProperties
 
   values?: any[]
   readonly?: boolean
   siblingCount: number
 
-  children?: ReactNode
+  children?: ReactNode;
 
   onChange?(option: PickerOptionObject, column: PickerOptionObject, emitChange?: boolean): void
 }

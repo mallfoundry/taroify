@@ -11,8 +11,9 @@ function renderIcon(icon?: ReactNode) {
     return cloneIconElement(icon, { className: prefixClassname("uploader__mask-icon") })
   }
   if (isValidElement(icon) && (icon as ReactElement).type === Loading) {
-    const { className } = (icon as ReactElement).props
+    const { className, ...restProps } = (icon as ReactElement).props
     return cloneElement(icon, {
+      ...restProps,
       className: classNames(prefixClassname("uploader__loading"), className),
     })
   }

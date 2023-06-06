@@ -51,7 +51,7 @@ function useActionButtons(props: DialogActionsProps) {
       }
 
       __children__.push(
-        cloneElement(action, {
+        cloneElement(action as ReactElement, {
           key: action.key ?? index,
           className: classNames(action.props.className, actionClassNames),
           size: "large",

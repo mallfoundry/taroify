@@ -49,8 +49,8 @@ function StepperButton(props: StepperButtonProps) {
   const disabled =
     disabledProp ||
     disabledCtx ||
-    (type === "decrease" && value <= min) ||
-    (type === "increase" && value >= max)
+    (type === "decrease" && Number(value) <= min) ||
+    (type === "increase" && Number(value) >= max)
 
   const longPressRef = useRef(false)
 
@@ -78,7 +78,7 @@ function StepperButton(props: StepperButtonProps) {
   }, [longPress, longPressStep, onStep, type])
 
   const handleTouchEnd = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (longPress) {
         if (longPressTimerRef.current) {
           clearTimeout(longPressTimerRef.current)

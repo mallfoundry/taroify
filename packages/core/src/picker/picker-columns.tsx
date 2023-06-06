@@ -6,7 +6,7 @@ import PickerColumnsRender from "./picker-columns-render"
 import PickerContext from "./picker.context"
 import { getPickerValue, PickerOptionObject, validPickerColumn } from "./picker.shared"
 
-export interface PickerColumnsProps extends ViewProps {
+export interface PickerColumnsProps extends Omit<ViewProps, "children"> {
   style?: CSSProperties
   children?: ReactNode
 }

@@ -22,7 +22,7 @@ function elementToObject(
       children:
         isTextElement(children) || depth === maxDepth
           ? children
-          : mapToChildrenOptions(children, depth + 1, maxDepth),
+          : mapToChildrenOptions(children, depth + 1, maxDepth) as ReactNode,
       ...restProps,
     }
   }
@@ -42,7 +42,9 @@ function mapToOption(
 
 export function mapToChildrenOptions(children: ReactNode, depth: number, maxDepth: number) {
   return Children.map<PickerOptionObject | undefined, ReactNode>(children, (child, index) =>
-    mapToOption(child, index, depth, maxDepth),
+    {
+      return mapToOption(child, index, depth, maxDepth)
+    },
   )
 }
 

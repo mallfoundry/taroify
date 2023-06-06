@@ -199,7 +199,7 @@ function SwipeCell(props: SwipeCellProps) {
     [close, offset, open],
   )
 
-  const handleTouchStart = (event: ITouchEvent) => {
+  const handleTouchStart = (event) => {
     if (disabled) {
       return
     }
@@ -211,7 +211,7 @@ function SwipeCell(props: SwipeCellProps) {
   }
 
   const handleTouchMove = useCallback(
-    async (event: ITouchEvent) => {
+    async (event) => {
       if (disabled) {
         return
       }

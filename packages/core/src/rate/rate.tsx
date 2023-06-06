@@ -123,7 +123,7 @@ function Rate(props: RateProps) {
   )
 
   const onItemClick = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       onClick?.(event)
       if (untouchable) {
         return
@@ -137,7 +137,7 @@ function Rate(props: RateProps) {
   )
 
   const handleTouchStart = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (untouchable) {
         return
       }
@@ -206,6 +206,7 @@ function Rate(props: RateProps) {
         onTouchStart?.(event)
       }}
       onTouchMove={(event) => {
+        // 
         handleTouchMove(event)
         onTouchMove?.(event)
       }}
