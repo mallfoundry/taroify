@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import { useMemo } from "react"
 
 export default function useSheetProps<P>(
-  props: ButtonProps & ViewProps & P & { businessId: number },
+  props: ButtonProps & ViewProps & P & { businessId?: number },
 ): [ButtonProps, P] {
   return useMemo(() => {
     const {
