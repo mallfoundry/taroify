@@ -2,7 +2,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import { ReactNode } from "react"
 
-export interface CascaderOption extends ViewProps {
+export interface CascaderOption extends Omit<ViewProps, "children"> {
   value?: any
   label?: ReactNode
   disabled?: boolean

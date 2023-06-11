@@ -1,5 +1,5 @@
 import { useForceUpdate, useUncontrolled } from "@taroify/hooks"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
@@ -341,7 +341,7 @@ function Swiper(props: SwiperProps) {
   }, [autoplay, count, next, stopAutoplay])
 
   const onTouchStart = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (!touchable) {
         return
       }
@@ -356,7 +356,7 @@ function Swiper(props: SwiperProps) {
   )
 
   const onTouchMove = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (!touchable || !swipingRef.current) {
         return
       }

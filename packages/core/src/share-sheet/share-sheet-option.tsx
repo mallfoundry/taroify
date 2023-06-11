@@ -56,7 +56,18 @@ function useShareSheetOptionIcon(node?: ReactNode) {
 }
 
 interface ShareSheetOptionProps
-  extends Omit<ButtonBaseProps, "size" | "type" | "plain" | "loading" | "formType"> {
+  extends Omit<
+    ButtonBaseProps,
+    | "size"
+    | "type"
+    | "plain"
+    | "loading"
+    | "formType"
+    | "onTouchStart"
+    | "onTouchMove"
+    | "onTouchEnd"
+    | "onTouchCancel"
+  > {
   className?: string
   style?: CSSProperties
   value?: any

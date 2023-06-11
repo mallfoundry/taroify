@@ -28,5 +28,5 @@ export function createVariantElement(
     const ComponentWrapper = createVariantComponentWrapper(node, type.displayName)
     return createElement(ComponentWrapper)
   }
-  return node as JSX.Element
+  return node as unknown as JSX.Element
 }

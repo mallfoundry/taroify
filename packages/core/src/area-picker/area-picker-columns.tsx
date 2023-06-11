@@ -1,12 +1,12 @@
 import useArea, { AreaData } from "@taroify/hooks/use-area"
 import * as _ from "lodash"
 import * as React from "react"
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useRef, ReactNode } from "react"
 import Picker, { PickerColumnsProps, PickerContext, PickerOptionObject } from "../picker"
 import { useToRef } from "../utils/state"
 import AreaPickerContext from "./area-picker.context"
 
-interface AreaPickerColumnsProps extends PickerColumnsProps {
+interface AreaPickerColumnsProps extends Omit<PickerColumnsProps, "children"> {
   children?: AreaData
 }
 
@@ -37,7 +37,7 @@ function AreaPickerColumns(props: AreaPickerColumnsProps) {
   const valuesRef = useRef<any[]>()
   const columnRef = useRef<PickerOptionObject>()
 
-  _.forEach(valueOptions, (value, index) => setValueOptions?.(value, { index }))
+  _.forEach(valueOptions, (value, index) => setValueOptions?.(value as PickerOptionObject, { index }))
 
   useEffect(() => {
     if (columnRef.current && !_.isEqual(valuesRef.current, values)) {
@@ -59,7 +59,7 @@ function AreaPickerColumns(props: AreaPickerColumnsProps) {
         ...restCtx,
       }}
     >
-      <Picker.Columns children={columns} />
+      <Picker.Columns children={columns as ReactNode} />
     </PickerContext.Provider>
   )
 }

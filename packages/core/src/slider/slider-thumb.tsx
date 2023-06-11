@@ -32,9 +32,13 @@ function SliderThumb(props: SliderThumbProps) {
         ...getSizeStyle(size),
       }}
       catchMove
+      // @ts-ignore
       onTouchStart={(event) => onTouchStart?.(event, index)}
+      // @ts-ignore
       onTouchMove={(event) => onTouchMove?.(event, index)}
+      // @ts-ignore
       onTouchEnd={(event) => onTouchEnd?.(event, index)}
+      // @ts-ignore
       onTouchCancel={(event) => onTouchEnd?.(event, index)}
       onClick={stopPropagation}
     >

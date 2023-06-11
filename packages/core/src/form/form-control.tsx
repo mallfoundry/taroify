@@ -11,7 +11,7 @@ import FormItemContext from "./form-item.context"
 import FormContext from "./form.context"
 import { FormControlAlign, FormController } from "./form.shared"
 
-interface FormControlProps<V> extends ViewProps, FormController<V> {
+interface FormControlProps<V> extends Omit<ViewProps, "children">, FormController<V> {
   align?: FormControlAlign
   children?: ReactNode | ((controller: FormController<V>) => ReactNode)
 }

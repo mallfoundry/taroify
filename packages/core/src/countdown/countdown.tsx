@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import { CountdownInstance, CurrentTime, parseFormat } from "./countdown.shared"
 import useCountdown, { UseCountdownOptions } from "./use-countdown"
 
-interface CountdownProps extends ViewProps, UseCountdownOptions {
+interface CountdownProps extends Omit<ViewProps, "children">, UseCountdownOptions {
   format?: string | ((current: CurrentTime) => ReactNode)
   children?: ReactNode | ((current: CurrentTime) => ReactNode)
 }

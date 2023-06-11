@@ -80,7 +80,7 @@ function DatetimePicker(props: DatetimePickerProps) {
       {...restProps}
     >
       {children}
-      <Picker.Columns children={columns} />
+      <Picker.Columns children={columns as ReactNode} />
     </Picker>
   )
 }

@@ -14,7 +14,6 @@ function NativeInput(props: NativeInputProps) {
   const { className: nativeClassname, ...restNativeProps } = nativeProps as Record<string, string>
   return (
     <Input
-      // @ts-ignore
       nativeProps={{
         className: classNames(
           prefixClassname("native-input"),

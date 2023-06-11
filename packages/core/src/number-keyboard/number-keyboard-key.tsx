@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { useContext, useState } from "react"
@@ -29,12 +29,12 @@ function NumberKeyboardKey(props: NumberKeyboardKeyProps) {
   const [active, setActive] = useState(false)
   const touch = useTouch()
 
-  const onTouchStart = (event: ITouchEvent) => {
+  const onTouchStart = (event) => {
     touch.start(event)
     setActive(true)
   }
 
-  const onTouchMove = (event: ITouchEvent) => {
+  const onTouchMove = (event) => {
     touch.move(event)
 
     if (touch.direction) {
@@ -42,7 +42,7 @@ function NumberKeyboardKey(props: NumberKeyboardKeyProps) {
     }
   }
 
-  const onTouchEnd = (event: ITouchEvent) => {
+  const onTouchEnd = (event) => {
     if (active) {
       // eliminate tap delay on safari
       // see: https://github.com/youzan/vant/issues/6836

@@ -2,7 +2,9 @@ import { ButtonProps } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { useMemo } from "react"
 
-export default function useSheetProps<P>(props: ButtonProps & ViewProps & P): [ButtonProps, P] {
+export default function useSheetProps<P>(
+  props: ButtonProps & ViewProps & P & { businessId?: number },
+): [ButtonProps, P] {
   return useMemo(() => {
     const {
       size,

@@ -10,13 +10,13 @@ function isObjectChildren(children?: ReactNode) {
   return isObjectElement(node)
 }
 
-function forEachChildren<C>(children: C | C[], fn: (child: C, index: number) => void) {
+function forEachChildren(children: ReactNode | ReactNode[], fn: (child: ReactNode, index: number) => void) {
   const objectified = isObjectChildren(children)
   const forEach = objectified ? _.forEach : ReactChildren.forEach
   return forEach(children, fn)
 }
 
-function mapChildren<T, C>(
+function mapChildren<T, C extends ReactNode>(
   children: C | C[],
   fn: (child: C, index: number) => T,
 ): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>> {

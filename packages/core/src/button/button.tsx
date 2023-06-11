@@ -33,7 +33,7 @@ function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): Reac
       )
     }
 
-    if (isObjectElement(loading)) {
+    if (isObjectElement(loading as ReactNode)) {
       const { className, ...restProps } = loading as LoadingProps
       return (
         <Loading
@@ -47,7 +47,7 @@ function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): Reac
       )
     }
 
-    if (isElementOf(loading, Loading)) {
+    if (isElementOf(loading as ReactNode, Loading)) {
       return cloneElement(loading as ReactElement, {
         className: classNames(
           prefixClassname("button__loading"),
@@ -56,7 +56,7 @@ function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): Reac
       })
     }
 
-    return loading
+    return loading as ReactNode
   }, [loading])
 }
 
@@ -214,5 +214,5 @@ export function createButton(children: ReactNode | ButtonProps, props?: ButtonPr
   if (_.isPlainObject(children)) {
     return <Button {...(children as ButtonProps)} {...props} />
   }
-  return <Button children={children} {...props} />
+  return <Button children={children as ReactNode} {...props} />
 }
