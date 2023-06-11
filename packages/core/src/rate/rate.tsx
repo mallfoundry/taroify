@@ -1,6 +1,6 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Star, StarOutlined } from "@taroify/icons"
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
@@ -147,7 +147,7 @@ function Rate(props: RateProps) {
   )
 
   const handleTouchMove = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       if (untouchable) {
         return
       }

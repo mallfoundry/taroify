@@ -1,4 +1,4 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -38,7 +38,7 @@ async function getElementTranslateY(element: Element) {
 
 type PickerColumnDuration = "zero" | "switch" | "momentum"
 
-export interface PickerColumnProps extends ViewProps {
+export interface PickerColumnProps extends Omit<ViewProps, "children"> {
   value: any
   className?: string
   readonly?: boolean
@@ -184,7 +184,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       [readonly, setIndex],
     )
 
-    const handleTouchStart = async (event: ITouchEvent) => {
+    const handleTouchStart = async (event) => {
       if (readonly) {
         return
       }
@@ -205,7 +205,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       setDuration("zero")
     }
 
-    const handleTouchMove = (event: ITouchEvent) => {
+    const handleTouchMove = (event) => {
       if (readonly) {
         return
       }
