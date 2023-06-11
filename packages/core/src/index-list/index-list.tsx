@@ -203,7 +203,7 @@ function IndexList(props: IndexListProps) {
   const onSidebarClick = useCallback((event: ITouchEvent) => scrollToEvent(event), [scrollToEvent])
 
   const onTouchMove = useCallback(
-    (event: ITouchEvent) => {
+    (event) => {
       preventDefault(event)
       scrollToEvent(event)
     },
