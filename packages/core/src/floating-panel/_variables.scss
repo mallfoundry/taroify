@@ -1,0 +1,10 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$floating-panel-z-index: var(--floating-panel-z-index, 1010);
+$floating-panel-rounded-border-radius: var(--floating-panel-rounded-border-radius, 16px * $hd);
+$floating-panel-header-height: var(--floating-panel-header-height, 60px);
+$floating-panel-bar-height: var(--floating-panel-bar-height, 6px);
+$floating-panel-bar-width: var(--floating-panel-bar-width, 40px);
+$floating-panel-bar-color: var(--floating-panel-bar-color, var(--gray-5, $gray-5));
+$floating-panel-background: var(--floating-panel-background, var(--background-color-light, $background-color-light));

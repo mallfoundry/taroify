@@ -44,6 +44,7 @@ export { default as Backdrop } from "./backdrop"
 export { default as PullRefresh } from "./pull-refresh"
 export { default as ShareSheet } from "./share-sheet"
 export { default as SwipeCell } from "./swipe-cell"
+export { default as FloatingPanel } from "./floating-panel"
 // Display Components
 export { default as Avatar } from "./avatar"
 export { default as Badge } from "./badge"

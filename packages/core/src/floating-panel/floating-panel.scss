@@ -1,0 +1,47 @@
+@import "./variables";
+
+.#{$component-prefix}floating-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  z-index: $floating-panel-z-index;
+  display: flex;
+  flex-direction: column;
+  touch-action: none;
+  border-top-left-radius: $floating-panel-rounded-border-radius;
+  border-top-right-radius: $floating-panel-rounded-border-radius;
+  background: $floating-panel-background;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: inherit;
+  }
+
+  &__header {
+    height: $floating-panel-header-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    user-select: none;
+
+    &-bar {
+      height: $floating-panel-bar-height;
+      width: $floating-panel-bar-width;
+      border-radius: $border-radius-sm;
+      background: $floating-panel-bar-color;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    background-color: $floating-panel-background;
+  }
+}

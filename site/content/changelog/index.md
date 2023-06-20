@@ -12,6 +12,13 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.3
+
+`2023-06-20`
+
+**New Component**
+
+- 新增 FloatingPanel 组件 [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.1
 
