@@ -165,6 +165,10 @@ const menus = [
         to: "/components/dropdown-menu/",
       },
       {
+        title: "FloatingPanel 浮动面板",
+        to: "/components/floating-panel/",
+      },
+      {
         title: "Loading 加载",
         to: "/components/loading/",
       },

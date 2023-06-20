@@ -176,6 +176,11 @@ const subpackages = [
         path: "dropdown-menu/index",
       },
       {
+        title: "FloatingPanel 浮动面板",
+        name: "FloatingPanel",
+        path: "floating-panel/index",
+      },
+      {
         title: "Loading 加载",
         name: "Loading",
         path: "loading/index",
