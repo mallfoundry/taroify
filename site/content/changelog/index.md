@@ -18,7 +18,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **New Component**
 
-- 新增 FloatingPanel 组件 [@Pilotager](https://github.com/Pilotager)
+- 新增 FloatingPanel 组件 [#564](https://github.com/mallfoundry/taroify/pull/564) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.1
 

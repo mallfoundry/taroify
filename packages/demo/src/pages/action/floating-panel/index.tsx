@@ -1,7 +1,6 @@
 import { FloatingPanel, Cell, Tabs } from "@taroify/core"
 import { useState, useMemo } from "react"
 import { getSystemInfoSync } from "@tarojs/taro"
-import { View } from "@tarojs/components"
 import Page from "../../../components/page"
 
 import "./index.scss"
