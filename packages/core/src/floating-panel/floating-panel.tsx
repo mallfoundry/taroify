@@ -19,6 +19,7 @@ export interface FloatingPanelProps extends ViewProps {
   duration?: number // 动画时长，单位秒，设置为 0 可以禁用动画
   contentDraggable?: boolean // 允许拖拽内容容器
   safeAreaInsetBottom?: boolean // 是否开启底部安全区适配
+  handleChange?: (height: number) => void
 }
 
 const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
@@ -31,6 +32,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
     contentDraggable = true,
     safeAreaInsetBottom = true,
     children,
+    handleChange,
   } = props
 
   const contentRef = useRef<Element>()
@@ -112,6 +114,9 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
   const onTouchEnd = (): void => {
     setDragging(false)
     setHeight(closest(anchors, height))
+    if (height !== -startY.current) {
+      handleChange?.(height)
+    }
   }
 
   return (
@@ -130,10 +135,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
       <View className={classNames(prefixClassname("floating-panel__header"))} ref={headerRef}>
         <View className={classNames(prefixClassname("floating-panel__header-bar"))} />
       </View>
-      <View
-        className={classNames(prefixClassname("floating-panel__content"))}
-        ref={contentRef}
-      >
+      <View className={classNames(prefixClassname("floating-panel__content"))} ref={contentRef}>
         {children}
         {safeAreaInsetBottom && <SafeArea position="bottom" />}
       </View>
