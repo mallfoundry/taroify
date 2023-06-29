@@ -1,0 +1,10 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$back-top-size: var(--back-top-size, 80px);
+$back-top-icon-size: var(--back-top-icon-size, 40px);
+$back-top-right: var(--back-top-right, 60px);
+$back-top-bottom: var(--back-top-bottom, 80px);
+$back-top-z-index: var(--back-top-z-index, 	100);
+$back-top-text-color: var(--back-top-text-color, #fff);
+$back-top-background: var(--back-top-background, var(--blue, $blue));
