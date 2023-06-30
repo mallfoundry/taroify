@@ -342,6 +342,11 @@ const subpackages = [
         name: "TreeSelect",
         path: "tree-select/index",
       },
+      {
+        title: "BackTop 回到顶部",
+        name: "BackTop",
+        path: "back-top/index",
+      },
     ],
   },
   {

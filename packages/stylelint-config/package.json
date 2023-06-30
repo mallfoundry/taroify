@@ -1,6 +1,6 @@
 {
   "name": "@taroify/stylelint-config",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "license": "MIT",
   "private": "true",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "stylelint": "^13.12.0"
   },
   "dependencies": {
-    "@taroify/cli": "^0.1.0-alpha.3",
+    "@taroify/cli": "^0.1.0-alpha.4",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.3.0",
     "stylelint-config-sass-guidelines": "^8.0.0",
