@@ -2,5 +2,11 @@
 @import "../../../styles/prefix";
 
 .back-top-demo {
-  height: 300vh;
+  --tab-font-size: 22px;
+
+  .custom-back-top {
+    width: 160px;
+    font-size: 28px;
+    text-align: center;
+  }
 }

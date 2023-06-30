@@ -1,116 +1,133 @@
-# FloatingPanel 浮动面板
+# BackTop 回到顶部
 
 ### 介绍
 
-浮动在页面底部的面板，可以上下拖动来浏览内容，常用于提供额外的功能或信息。
+返回页面顶部的操作按钮。
 
 ### 引入
 
 ```tsx
-import { FloatingPanel } from "@taroify/core"
+import { BackTop } from "@taroify/core"
 ```
 
 ## 代码演示
 
 ### 基础用法
 
-FloatingPanel 的默认高度为 `100px`，用户可以拖动来展开面板，使高度达到 `60%` 的屏幕高度。
+请滚动右侧的示例页面，当页面滚动 200px 时，右下角会出现返回顶部按钮。
 
 ```tsx
-<FloatingPanel>
+const list = [...Array(50).keys()];
+<View>
   <Cell.Group>
-    <Cell>1</Cell>
-    <Cell>2</Cell>
-    <Cell>3</Cell>
-    <Cell>4</Cell>
-    <Cell>5</Cell>
-    <Cell>6</Cell>
-    <Cell>7</Cell>
-    <Cell>8</Cell>
-    <Cell>9</Cell>
-    <Cell>10</Cell>
-    <Cell>11</Cell>
-    <Cell>12</Cell>
-    <Cell>13</Cell>
+    {arr.map((v) => {
+      return (
+        <Cell key={v}>{v}</Cell>
+      )
+    })}
   </Cell.Group>
-</FloatingPanel>
+  <BackTop />
+</View>
 ```
 
-### 自定义锚点
+### 自定义位置
 
-你可以通过 `anchors` 属性来设置 FloatingPanel 的锚点位置，并通过 `height` 来控制当前面板的显示高度。
-比如，使面板的高度在 `100px`、40% 屏幕高度和 70% 屏幕高度三个位置停靠：
+通过 right 和 bottom 属性来设置组件距离右侧和底部的位置。
 
 ```tsx
-function CustomAnchors() {
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
-
-  const anchors = useMemo(
-    () => [200, Math.round(0.4 * windowHeight), Math.round(0.7 * windowHeight)],
-    [windowHeight],
-  )
+function CustomContent) {
+  const list = [...Array(50).keys()];
 
   return (
-    <FloatingPanel anchors={anchors} height={anchors[0]}>
+    <View>
       <Cell.Group>
-        <Cell>1</Cell>
-        <Cell>2</Cell>
-        <Cell>3</Cell>
-        <Cell>4</Cell>
-        <Cell>5</Cell>
-        <Cell>6</Cell>
-        <Cell>7</Cell>
-        <Cell>8</Cell>
-        <Cell>9</Cell>
-        <Cell>10</Cell>
-        <Cell>11</Cell>
-        <Cell>12</Cell>
-        <Cell>13</Cell>
+        {list.map((v) => {
+          return (
+            <Cell key={v}>{v}</Cell>
+          )
+        })}
       </Cell.Group>
-    </FloatingPanel>
+      <BackTop />
+    </View>
   )
 }
 ```
 
-### 仅头部拖拽
+### 自定义内容
 
-默认情况下，FloatingPanel 的头部区域和内容区域都可以被拖拽，你可以通过 `contentDraggable` 属性来禁用内容区域的拖拽。
+使用 `children` 来自定义组件展示的内容。
 
 ```tsx
-function HeadDragOnly() {
+function CustomContent() {
+  const list = [...Array(50).keys()];
+
   return (
-    <FloatingPanel contentDraggable={false}>
+    <View>
       <Cell.Group>
-        <Cell>1</Cell>
-        <Cell>2</Cell>
-        <Cell>3</Cell>
-        <Cell>4</Cell>
-        <Cell>5</Cell>
-        <Cell>6</Cell>
-        <Cell>7</Cell>
-        <Cell>8</Cell>
-        <Cell>9</Cell>
-        <Cell>10</Cell>
-        <Cell>11</Cell>
-        <Cell>12</Cell>
-        <Cell>13</Cell>
+        {list.map((v) => {
+          return (
+            <Cell key={v}>{v}</Cell>
+          )
+        })}
       </Cell.Group>
-    </FloatingPanel>
+      <BackTop>返回顶部</BackTop>
+    </View>
+  )
+}
+```
+
+```css
+.custom-back-top {
+  width: 160px;
+  font-size: 28px;
+  text-align: center;
+}
+```
+
+### 瞬间滚动
+
+当设置 `immediate` 属性后，页面滚动的过程不再有过渡效果，而是瞬间滚动到顶部。
+
+```tsx
+function SetImmediate() {
+  const list = [...Array(50).keys()];
+
+  return (
+    <View>
+      <Cell.Group>
+        {list.map((v) => {
+          return (
+            <Cell key={v}>{v}</Cell>
+          )
+        })}
+      </Cell.Group>
+      <BackTop immediate />
+    </View>
   )
 }
 ```
 
 ## API
 
-### Flex Props
+### Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| height | 当前面板的显示高度 | _number_ | `0` |
-| anchors | 设置自定义锚点, 单位 `px` | _number[]_ | `[100, window.innerWidth * 0.6]` |
-| duration | 动画时长，单位秒，设置为 0 可以禁用动画 | _number_ | `0.3` |
-| contentDraggable | 允许拖拽内容容器 | _boolean_ | `true` |
-| safeAreaInsetBottom | 是否开启底部安全区适配 | _boolean_ | `true` |
+| right | 距离页面右侧的距离，默认单位为 `px` | _number_ | `30` |
+| bottom | 	距离页面底部的距离，默认单位为 `px` | _number_ | `40` |
+| offset | 	滚动高度达到此参数值时才显示组件 | _number_ | `200` |
+| immediate | 是否瞬间滚动到顶部 | _boolean_ | `false` |
+| zIndex | 设置组件的 z-index 层级 | _number_ | `100` |
+
+### Event
+
+| 事件 | 说明 | 回调参数 |
+| --- | --- | --- |
+| onClick | 点击组件时触发 | _event:ITouchEvent_ |
+
+### 注意
+
+非 `H5` 项目需要显式调用 `onClick`
 
 ## 主题定制
 
@@ -120,10 +137,10 @@ function HeadDragOnly() {
 
 | 名称                                      | 默认值                            | 描述  |
 |-----------------------------------------|--------------------------------|-----|
-| --floating-panel-z-index                | _1010_                         | -   |
-| --floating-panel-rounded-border-radius  | _16px * $hd_                   | -   |
-| --floating-panel-header-height          | _60px_                         | -   |
-| --floating-panel-bar-height             | _6px_                          | -   |
-| --floating-panel-bar-width              | _40px_                         | -   |
-| --floating-panel-bar-color              | _var(--gray-5, $gray-5)_       | -   |
-| --floating-panel-background             | _var(--background-color-light)_| -   |
+| --back-top-size                         | _80px_                         | -   |
+| --back-top-icon-size                    | _40px_                         | -   |
+| --back-top-right                        | _60px_                         | -   |
+| --back-top-bottom                       | _80px_                         | -   |
+| --back-top-z-index                      | _100_                          | -   |
+| --back-top-text-color                   | _#fff_                         | -   |
+| --back-top-background                   | _var(--blue, $blue)_           | -   |

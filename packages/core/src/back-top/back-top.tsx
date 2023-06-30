@@ -1,7 +1,7 @@
 import * as React from "react"
 import { CSSProperties, FC, useMemo, useState, useRef, useEffect } from "react"
 import { usePageScroll, nextTick } from "@tarojs/taro"
-import { View } from "@tarojs/components"
+import { ITouchEvent, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import { BackTop as BackTopIcon } from "@taroify/icons"
@@ -12,12 +12,12 @@ import { getScrollParent, getScrollTop } from "../utils/dom/scroll"
 
 export interface BackTopProps extends ViewProps {
   style?: CSSProperties
-  right?: number
-  bottom?: number
+  right?: number | string
+  bottom?: number | string
   zIndex?: number
   offset?: number
   immediate?: boolean
-  onClick?: () => void
+  onClick?: (event: ITouchEvent) => void
 }
 
 const BackTop: FC<BackTopProps> = (props) => {
@@ -57,8 +57,8 @@ const BackTop: FC<BackTopProps> = (props) => {
     [right, bottom, offset, zIndex],
   )
 
-  const onClick = () => {
-    onClickProp?.();
+  const onClick = (event: ITouchEvent) => {
+    onClickProp?.(event);
     if (inBrowser) {
       scrollParent.current?.scrollTo({
         top: 0,
