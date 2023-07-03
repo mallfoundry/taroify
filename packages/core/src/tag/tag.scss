@@ -101,16 +101,16 @@
 
   }
 
-  &--round {
+  &--rounded {
     border-radius: $tag-rounded-border-radius;
   }
 
-  &--round-left {
+  &--rounded-left {
     padding: $tag-rounded-left-padding;
     border-radius: $tag-rounded-border-radius 0 0 $tag-rounded-border-radius;
   }
 
-  &--round-right {
+  &--rounded-right {
     padding: $tag-rounded-right-padding;
     border-radius: 0 $tag-rounded-border-radius $tag-rounded-border-radius 0;
   }

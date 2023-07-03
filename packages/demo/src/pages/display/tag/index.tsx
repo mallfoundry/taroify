@@ -45,13 +45,13 @@ export default function TagDemo() {
           <Tag color="primary" variant="outlined" children="标签" />
         </Cell>
         <Cell title="圆角样式">
-          <Tag color="primary" shape="round" children="标签" />
+          <Tag color="primary" shape="rounded" children="标签" />
         </Cell>
         <Cell title="右侧圆角样式">
-          <Tag color="primary" shape="roundRight" children="标签" />
+          <Tag color="primary" shape="roundedRight" children="标签" />
         </Cell>
         <Cell title="左侧圆角样式">
-          <Tag color="primary" shape="roundLeft" children="标签" />
+          <Tag color="primary" shape="roundedLeft" children="标签" />
         </Cell>
         <Cell title="可关闭标签">
           <CloseTag />
