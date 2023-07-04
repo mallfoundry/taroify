@@ -4,6 +4,7 @@
   position: fixed;
   right: 0;
   left: 0;
+  z-index: $fixed-view-z-index;
 
   &, &__placeholder {
     width: 100%;

@@ -1,2 +1,4 @@
 @import "../styles/prefix";
 @import "../styles/variables";
+
+$fixed-view-z-index: var(--fixed-view-z-index, 1);
