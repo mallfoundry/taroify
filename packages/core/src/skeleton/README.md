@@ -9,7 +9,7 @@
 ```tsx
 import { Skeleton } from "@taroify/core"
 // or
-import Skeleton from "@taroify/core/swiper"
+import Skeleton from "@taroify/core/skeleton"
 ```
 
 ## 代码演示
