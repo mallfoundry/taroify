@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.5
+`2023-07-06`
+
+**Bug Fixes**
+
+- Tag
+  - 修复 Tag 组件圆角属性不生效问题 [#570](https://github.com/mallfoundry/taroify/pull/570) [@Pilotager](https://github.com/Pilotager)
+- NavBar
+  - 修复 NavBar 层级导致的被覆盖问题 [#571](https://github.com/mallfoundry/taroify/pull/571) [@Pilotager](https://github.com/Pilotager)
+- Skeleton
+  - 修改 Skeleton 文档问题 [#557](https://github.com/mallfoundry/taroify/pull/557) [@Youmeng](https://github.com/youmengme)
+- IndexList
+  - 修复 IndexList 组件首次点击右侧快捷跳转问题 [#572](https://github.com/mallfoundry/taroify/pull/572) [@Pilotager](https://github.com/Pilotager)
+- Form
+  - Input 校验未通过时，placeholder 颜色优化 [#503](https://github.com/mallfoundry/taroify/issues/503)
+
 ### v0.1.0-alpha.4
 `2023-06-30`
 
