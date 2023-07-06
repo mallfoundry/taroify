@@ -1,7 +1,7 @@
 {
   "name": "@taroify/~icons",
   "description": "Taroify icon components built on Taro",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.5",
   "license": "MIT",
   "private": "true",
   "keywords": [
@@ -21,7 +21,7 @@
     "icons:generate": "node ./scripts/generate.js"
   },
   "peerDependencies": {
-    "@tarojs/components": "3.6.8"
+    "@tarojs/components": "3.6.7"
   },
   "dependencies": {
     "classnames": "^2.2.6"

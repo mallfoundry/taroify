@@ -15,9 +15,11 @@ export default function useUncontrolled<S>(options: UseUncontrolledOptions<S> = 
   const forceUpdate = useForceUpdate()
   //
   const valueRef = useToRef(valueProp)
-  const stateRef = useRef(defaultValue ?? valueRef.current)
+  const stateRef = useRef(defaultValue ? defaultValue : valueRef.current)
+  
+  if (Array.isArray(valueRef.current) && valueRef.current.length === 0) {
 
-  if (valueRef.current !== undefined) {
+  } else if (valueRef.current !== undefined) {
     stateRef.current = valueRef.current
   }
 

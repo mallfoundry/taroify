@@ -301,6 +301,10 @@ const menus = [
         title: "TreeSelect 分类选择",
         to: "/components/tree-select/",
       },
+      {
+        title: "BackTop 回到顶部",
+        to: "/components/back-top/",
+      },
     ],
   },
   {

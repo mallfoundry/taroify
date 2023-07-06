@@ -34,7 +34,7 @@
 
   &--colorful {
     &::placeholder {
-      color: currentColor;
+      color: $input-placeholder-color;
     }
   }
 }

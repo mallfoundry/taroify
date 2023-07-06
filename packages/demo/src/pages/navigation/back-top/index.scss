@@ -1,0 +1,12 @@
+@import "~@taroify/core/styles/variables";
+@import "../../../styles/prefix";
+
+.back-top-demo {
+  --tab-font-size: 22px;
+
+  .custom-back-top {
+    width: 160px;
+    font-size: 28px;
+    text-align: center;
+  }
+}

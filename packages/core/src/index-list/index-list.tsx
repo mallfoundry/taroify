@@ -16,6 +16,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useEffect,
 } from "react"
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
@@ -212,8 +213,7 @@ function IndexList(props: IndexListProps) {
 
   const onTouchStop = useCallback(() => (scrollToAnchorIndexRef.current = undefined), [])
 
-  usePageScroll(({ scrollTop }) => {
-    scrollTopRef.current = scrollTop
+  const getRectAll = () => {
     setTimeout(() => {
       Promise.all([getListRect(), getSidebarRect(), getAnchorRects()])
         .then((rects) => {
@@ -224,6 +224,15 @@ function IndexList(props: IndexListProps) {
         })
         .then(onScroll)
     }, 0)
+  }
+
+  useEffect(() => {
+    getRectAll();
+  }, [])
+
+  usePageScroll(({ scrollTop }) => {
+    scrollTopRef.current = scrollTop
+    getRectAll();
   })
 
   const sidebarIndexes = useMemo(

@@ -142,8 +142,8 @@ function Input(props: InputProps) {
             [prefixClassname("input--primary")]: color === "primary",
             [prefixClassname("input--info")]: color === "info",
             [prefixClassname("input--success")]: color === "success",
-            [prefixClassname("input--warning")]: color === "warning",
-            [prefixClassname("input--danger")]: color === "danger",
+            // [prefixClassname("input--warning")]: color === "warning",
+            // [prefixClassname("input--danger")]: color === "danger",
           },
           className,
         )}
@@ -153,12 +153,12 @@ function Input(props: InputProps) {
           prefixClassname("input__placeholder"),
           {
             [prefixClassname("input__placeholder--readonly")]: readonly,
-            // // Color
+            // Color
             [prefixClassname("input__placeholder--primary")]: color === "primary",
             [prefixClassname("input__placeholder--info")]: color === "info",
             [prefixClassname("input__placeholder--success")]: color === "success",
-            [prefixClassname("input__placeholder--warning")]: color === "warning",
-            [prefixClassname("input__placeholder--danger")]: color === "danger",
+            // [prefixClassname("input__placeholder--warning")]: color === "warning",
+            // [prefixClassname("input__placeholder--danger")]: color === "danger",
           },
         )}
         disabled={disabled || readonly}
