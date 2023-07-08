@@ -43,11 +43,10 @@ export default function Tab(props: TabProps) {
       {...restProps}
     >
       <View
-        className={classNames(prefixClassname("tabs__tab__content"), {
-          [prefixClassname("ellipsis")]: ellipsis,
-        })}
-        children={children}
-      />
+        className={classNames(prefixClassname("tabs__tab__content"))}
+      >
+        <View className={classNames({[prefixClassname("tabs__tab__content-ellipsis")]: ellipsis})}>{children}</View>
+      </View>
       {underline && <TabsLine active={active} />}
     </View>
   )
