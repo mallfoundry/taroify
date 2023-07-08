@@ -37,3 +37,7 @@ export function addNumber(num1: number, num2: number) {
   const cardinal = 10 ** 10
   return Math.round((_.toNumber(num1) + _.toNumber(num2)) * cardinal) / cardinal
 }
+
+export function padZero(num: number | string, targetLength = 2): string {
+  return _.padStart(_.toString(num), targetLength, "0")
+}

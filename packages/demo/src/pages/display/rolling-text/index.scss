@@ -1,0 +1,18 @@
+.rolling-text {
+  &-btn {
+    margin-top: 20px;
+  }
+
+  &-right {
+    margin-left: 40px;
+  }
+
+  .my-rolling-text {
+    --rolling-text-background: #1989fa;
+    --rolling-text-color: white;
+    --rolling-text-font-size: 48px;
+    --rolling-text-gap: 12px;
+    --rolling-text-item-border-radius: 10px;
+    --rolling-text-item-width: 80px;
+  }
+}

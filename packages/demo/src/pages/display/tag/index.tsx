@@ -1,5 +1,5 @@
-import { Cell, Tag } from "@taroify/core"
-import { useState } from "react"
+import {Cell, Tag} from "@taroify/core"
+import {useState} from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -42,41 +42,41 @@ export default function TagDemo() {
       </Block>
       <Block variant="card" title="样式风格">
         <Cell title="空心样式">
-          <Tag color="primary" variant="outlined" children="标签" />
+          <Tag color="primary" variant="outlined" children="标签"/>
         </Cell>
         <Cell title="圆角样式">
-          <Tag color="primary" shape="rounded" children="标签" />
+          <Tag color="primary" shape="rounded" children="标签"/>
         </Cell>
         <Cell title="右侧圆角样式">
-          <Tag color="primary" shape="roundedRight" children="标签" />
+          <Tag color="primary" shape="roundedRight" children="标签"/>
         </Cell>
         <Cell title="左侧圆角样式">
-          <Tag color="primary" shape="roundedLeft" children="标签" />
+          <Tag color="primary" shape="roundedLeft" children="标签"/>
         </Cell>
         <Cell title="可关闭标签">
-          <CloseTag />
+          <CloseTag/>
         </Cell>
       </Block>
       <Block variant="card" title="标签大小">
         <Cell title="小号标签">
-          <Tag color="primary" children="标签" />
+          <Tag color="primary" children="标签"/>
         </Cell>
         <Cell title="中号标签">
-          <Tag color="primary" size="medium" children="标签" />
+          <Tag color="primary" size="medium" children="标签"/>
         </Cell>
         <Cell title="大号标签">
-          <Tag color="primary" size="large" children="标签" />
+          <Tag color="primary" size="large" children="标签"/>
         </Cell>
       </Block>
       <Block variant="card" title="自定义颜色">
         <Cell title="背景颜色">
-          <Tag style={{ backgroundColor: "#7232dd" }} children="标签" />
+          <Tag style={{backgroundColor: "#7232dd"}} children="标签"/>
         </Cell>
         <Cell title="文字颜色">
-          <Tag style={{ backgroundColor: "#ffe1e1", color: "#ad0000" }} children="标签" />
+          <Tag style={{backgroundColor: "#ffe1e1", color: "#ad0000"}} children="标签"/>
         </Cell>
         <Cell title="空心颜色">
-          <Tag style={{ color: "#7232dd" }} variant="outlined" children="标签" />
+          <Tag style={{color: "#7232dd"}} variant="outlined" children="标签"/>
         </Cell>
       </Block>
     </Page>

@@ -62,6 +62,7 @@ export { default as Sticky } from "./sticky"
 export { default as Swiper } from "./swiper"
 export { default as Tag } from "./tag"
 export { default as Timeline } from "./timeline"
+export { default as RollingText } from "./rolling-text"
 // Navigation Components
 export { default as Grid } from "./grid"
 export { default as IndexList } from "./index-list"
