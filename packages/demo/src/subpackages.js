@@ -267,6 +267,11 @@ const subpackages = [
         path: "progress/index",
       },
       {
+        title: "RollingText 翻滚文本动效",
+        name: "RollingText",
+        path: "rolling-text/index",
+      },
+      {
         title: "Skeleton 骨架屏",
         name: "Skeleton",
         path: "skeleton/index",

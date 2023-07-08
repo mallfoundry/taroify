@@ -1,0 +1,66 @@
+@import "./variables";
+
+.#{$component-prefix}rolling-text {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $rolling-text-font-size;
+  color: $rolling-text-color;
+
+  &-item {
+    margin-right: $rolling-text-gap;
+    width: $rolling-text-item-width;
+    border-radius: $rolling-text-item-border-radius;
+    background: $rolling-text-background;
+    overflow: hidden;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &__box {
+      overflow: hidden;
+
+      &.animate {
+        animation: #{$component-prefix}-up $rolling-text-duration ease-in-out $rolling-text-delay;
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+      }
+    }
+
+    &__item {
+      text-align: center;
+    }
+
+    &--down {
+      .#{$component-prefix}rolling-text-item__box {
+        transform: translateY($rolling-text-translate);
+
+        &.animate {
+          animation-name: #{$component-prefix}-down;
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes #{$component-prefix}-down {
+  0% {
+    transform: translateY($rolling-text-translate);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes #{$component-prefix}-up {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY($rolling-text-translate);
+  }
+}

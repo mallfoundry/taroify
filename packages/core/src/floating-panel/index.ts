@@ -1,10 +1,10 @@
 import { ForwardRefExoticComponent } from "react"
 import FloatingPanelComponent, { FloatingPanelProps } from "./floating-panel"
 
-interface PopupInterface extends ForwardRefExoticComponent<FloatingPanelProps> {
+interface FloatingPanelInterface extends ForwardRefExoticComponent<FloatingPanelProps> {
   (props: FloatingPanelProps): JSX.Element
 }
 
-const FloatingPanel = FloatingPanelComponent as PopupInterface
+const FloatingPanel = FloatingPanelComponent as FloatingPanelInterface
 
 export default FloatingPanel

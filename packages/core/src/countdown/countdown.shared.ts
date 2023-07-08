@@ -1,4 +1,5 @@
 import * as _ from "lodash"
+import {padZero} from '../utils/format/number';
 
 const REGEX_FORMAT = /\[([^\]]+)]|D{1,2}|H{1,2}|h{1,2}|m{1,2}|s{1,2}|S{1,3}/g
 
@@ -21,10 +22,6 @@ export interface CurrentTime {
   minutes: number
   seconds: number
   milliseconds: number
-}
-
-function padZero(num: number | string, targetLength = 2): string {
-  return _.padStart(_.toString(num), targetLength, "0")
 }
 
 function rightCurrentTime(format: string, currentTime: CurrentTime): CurrentTime {

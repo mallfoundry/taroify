@@ -239,6 +239,10 @@ const menus = [
         to: "/components/progress/",
       },
       {
+        title: "RollingText 翻滚文本动效",
+        to: "/components/rolling-text/",
+      },
+      {
         title: "Skeleton 骨架屏",
         to: "/components/skeleton/",
       },
