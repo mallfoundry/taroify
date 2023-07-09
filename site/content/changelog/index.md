@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.6
+`2023-07-09`
+
+**New Component**
+
+- 新增  RollingText 组件 [#574](https://github.com/mallfoundry/taroify/pull/574) [@Pilotager](https://github.com/Pilotager)
+
+**Bug Fixes**
+
+- Tab
+  - 修复 Tab 中 `ellipsis` 属性样式问题 [#576](https://github.com/mallfoundry/taroify/pull/576)
+- Collapse
+  - 修复 Collapse 折叠面板无法全部关闭问题 [#576](https://github.com/mallfoundry/taroify/pull/576)
+
 ### v0.1.0-alpha.5
 `2023-07-06`
 
