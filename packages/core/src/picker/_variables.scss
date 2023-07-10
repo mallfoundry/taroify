@@ -7,7 +7,7 @@ $picker-title-font-size: var(--font-size-lg, $font-size-lg);
 $picker-title-line-height: var(--line-height-md, $line-height-md);
 $picker-action-padding: 0 var(--padding-md, $padding-md);
 $picker-action-font-size: var(--font-size-md, $font-size-md);
-$picker-confirm-action-color: var(--text-link-color, $text-link-color);
+$picker-confirm-action-color: var(--text-link-color, $primary-color);
 $picker-cancel-action-color: var(--gray-6, $gray-6);
 //
 $picker-swipe-transition-duration: var(--picker-swipe-transition-duration, 800ms);

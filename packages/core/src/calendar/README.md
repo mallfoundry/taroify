@@ -423,33 +423,33 @@ function CustomPositionCalendar() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                         | 默认值                                                | 描述  |
-|--------------------------------------------|----------------------------------------------------|-----|
-| --calendar-active-color                    | _var(--danger-color)_                              | -   |
-| --calendar-background-color                | _var(--white)_                                     | -   |
-| --calendar-header-box-shadow               | _0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)_ | -   |
-| --calendar-header-title-height             | _44px * $hd_                                       | -   |
-| --calendar-header-title-font-size          | _var(--font-size-lg)_                              | -   |
-| --calendar-header-subtitle-font-size       | _var(--font-size-md)_                              | -   |
-| --calendar-weekdays-height                 | _30px * $hd_                                       | -   |
-| --calendar-weekdays-font-size              | _var(--font-size-sm)_                              | -   |
-| --calendar-month-title-font-size           | _var(--font-size-md)_                              | -   |
-| --calendar-month-watermark-color           | _rgba(242, 243, 245, 0.8)_                         | -   |
-| --calendar-month-watermark-font-size       | _160px * $hd_                                      | -   |
-| --calendar-range-edge-color                | _var(--white)_                                     | -   |
-| --calendar-range-edge-background-color     | _var(--calendar-active-color)_                     | -   |
-| --calendar-range-middle-color              | _var(--calendar-active-color)_                     | -   |
-| --calendar-range-middle-background-opacity | _0.1_                                              | -   |
-| --calendar-day-height                      | _64px * $hd_                                       | -   |
-| --calendar-day-font-size                   | _var(--font-size-lg)_                              | -   |
-| --calendar-day-disabled-color              | _var(--gray-5)_                                    | -   |
-| --calendar-active-day-size                 | _54px * $hd_                                       | -   |
-| --calendar-active-day-color                | _var(--white)_                                     | -   |
-| --calendar-active-day-background-color     | _var(--calendar-active-color)_                     | -   |
-| --calendar-active-day-border-radius        | _var(--border-radius-md)_                          | -   |
-| --calendar-day-info-font-size              | _var(--font-size-xs)_                              | -   |
-| --calendar-day-info-line-height            | _var(--line-height-xs)_                            | -   |
-| --calendar-confirm-button-height           | _36px * $hd_                                       | -   |
-| --calendar-confirm-button-margin           | _7px * $hd 0_                                      | -   |
-| --calendar-confirm-button-color            | _var(--calendar-active-color)_                     | -   |
-| --calendar-footer-padding                  | _0 var(--padding-md)_                              | -   |
+| 名称                                         | 默认值                                                 | 描述  |
+|--------------------------------------------|-----------------------------------------------------|-----|
+| --calendar-active-color                    | _var(--blue, $blue)_                                | -   |
+| --calendar-background-color                | _var(--white)_                                      | -   |
+| --calendar-header-box-shadow               | _0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)_  | -   |
+| --calendar-header-title-height             | _44px * $hd_                                        | -   |
+| --calendar-header-title-font-size          | _var(--font-size-lg)_                               | -   |
+| --calendar-header-subtitle-font-size       | _var(--font-size-md)_                               | -   |
+| --calendar-weekdays-height                 | _30px * $hd_                                        | -   |
+| --calendar-weekdays-font-size              | _var(--font-size-sm)_                               | -   |
+| --calendar-month-title-font-size           | _var(--font-size-md)_                               | -   |
+| --calendar-month-watermark-color           | _rgba(242, 243, 245, 0.8)_                          | -   |
+| --calendar-month-watermark-font-size       | _160px * $hd_                                       | -   |
+| --calendar-range-edge-color                | _var(--white)_                                      | -   |
+| --calendar-range-edge-background-color     | _var(--calendar-active-color)_                      | -   |
+| --calendar-range-middle-color              | _var(--calendar-active-color)_                      | -   |
+| --calendar-range-middle-background-opacity | _0.1_                                               | -   |
+| --calendar-day-height                      | _64px * $hd_                                        | -   |
+| --calendar-day-font-size                   | _var(--font-size-lg)_                               | -   |
+| --calendar-day-disabled-color              | _var(--gray-5)_                                     | -   |
+| --calendar-active-day-size                 | _54px * $hd_                                        | -   |
+| --calendar-active-day-color                | _var(--white)_                                      | -   |
+| --calendar-active-day-background-color     | _var(--calendar-active-color)_                      | -   |
+| --calendar-active-day-border-radius        | _var(--border-radius-md)_                           | -   |
+| --calendar-day-info-font-size              | _var(--font-size-xs)_                               | -   |
+| --calendar-day-info-line-height            | _var(--line-height-xs)_                             | -   |
+| --calendar-confirm-button-height           | _36px * $hd_                                        | -   |
+| --calendar-confirm-button-margin           | _7px * $hd 0_                                       | -   |
+| --calendar-confirm-button-color            | _var(--calendar-active-color)_                      | -   |
+| --calendar-footer-padding                  | _0 var(--padding-md)_                               | -   |

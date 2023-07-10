@@ -1,7 +1,7 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$cascader-active-color: var(--cascader-active-color, var(--danger-color, $danger-color));
+$cascader-active-color: var(--cascader-active-color, $primary-color);
 //
 $cascader-header-height: var(--cascader-header-height, 48px * $hd);
 $cascader-header-padding: var(--cascader-header-padding, 0 var(--padding-md, $padding-md));

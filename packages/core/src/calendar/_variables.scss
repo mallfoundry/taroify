@@ -1,7 +1,7 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$calendar-active-color: var(--calendar-active-color, var(--danger-color, $danger-color));
+$calendar-active-color: var(--calendar-active-color, $primary-color);
 $calendar-background-color: var(--calendar-background-color, var(--white, $white));
 //
 $calendar-header-box-shadow: var(--calendar-header-box-shadow, (0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)));

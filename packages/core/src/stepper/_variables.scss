@@ -26,4 +26,4 @@ $stepper-circular-decrease-button-color: var(--stepper-circular-increase-button-
 $stepper-circular-decrease-button-background-color: var(--stepper-circular-increase-button-background-color, var(--white, $white));
 $stepper-circular-decrease-button-border-color: var(--stepper-circular-increase-button-border-color, var(--danger-color, $danger-color));
 $stepper-circular-increase-button-color: var(--stepper-circular-increase-button-color, var(--white, $white));
-$stepper-circular-increase-button-background-color: var(--stepper-circular-increase-button-background-color, var(--danger-color, $danger-color));
+$stepper-circular-increase-button-background-color: var(--stepper-circular-increase-button-background-color, $primary-color);
