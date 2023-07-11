@@ -19,7 +19,7 @@ $dialog-has-title-message-color: var(--dialog-has-title-message-color, var(--gra
 $dialog-has-title-message-padding-top: var(--dialog-has-title-message-padding-top, var(--padding-xs, $padding-xs));
 
 $dialog-button-height: var(--dialog-button-height, 48px * $hd);
-$dialog-confirm-button-color: var(--dialog-confirm-button-color, var(--red, $red));
+$dialog-confirm-button-color: var(--dialog-confirm-button-color, $primary-color);
 
 $dialog-footer-rounded-padding: var(--dialog-footer-rounded-padding, var(--padding-xs, $padding-xs) var(--padding-lg, $padding-lg) var(--padding-md, $padding-md));
 

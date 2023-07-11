@@ -278,9 +278,11 @@
     }
   }
 
-  &__loading--right,
-  &__icon--right {
-    margin-right: var(--padding-base, $padding-base);
+  &__icon--right+,
+  &__loading--right+ {
+    .#{$component-prefix}button__text {
+      margin-left: var(--padding-base, $padding-base);
+    }
   }
 
   &__loading--left,

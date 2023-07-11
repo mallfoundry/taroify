@@ -8,6 +8,8 @@ export { createButton } from "./button"
 export type { ButtonProps } from "./button"
 export { default as ButtonContext } from "./button.context"
 
+export type { ButtonThemeVars } from './button.shared'
+
 interface ButtonInterface extends FunctionComponent<ButtonProps> {
   Content: typeof ButtonContent
   Group: typeof ButtonGroup

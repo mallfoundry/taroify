@@ -4,6 +4,8 @@ import CascaderOption from "./cascader-option"
 import CascaderTab from "./cascader-tab"
 import { CascaderOptionObject } from "./cascader.shared"
 
+export type { CascaderThemeVars } from './cascader.shared';
+
 interface CascaderInterface {
   (props: CascaderProps): JSX.Element
 

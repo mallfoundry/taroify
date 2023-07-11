@@ -125,27 +125,27 @@ import { Stepper } from "@taroify/core";
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                                  | 默认值                                           | 描述  |
-|-----------------------------------------------------|-----------------------------------------------|-----|
-| --stepper-active-background-color                   | _#e8e8e8_                                     | -   |
-| --stepper-background-color                          | _var($active-color)_                          | -   |
-| --stepper-input-width                               | _32px * $hd_                                  | -   |
-| --stepper-input-height                              | _28px * $hd_                                  | -   |
-| --stepper-input-margin                              | _0 2px * $hd_                                 | -   |
-| --stepper-input-font-size                           | _var(--font-size-md)_                         | -   |
-| --stepper-input-line-height                         | _normal_                                      | -   |
-| --stepper-input-color                               | _var(--text-color)_                           | -   |
-| --stepper-input-background-color                    | _var(--stepper-background-color)_             | -   |
-| --stepper-input-disabled-color                      | _var(--gray-5)_                               | -   |
-| --stepper-input-disabled-background-color           | _var(--active-color)_                         | -   |
-| --stepper-button-icon-color                         | _var(--text-color)_                           | -   |
-| --stepper-button-disabled-color                     | _var(--gray-5)_                               | -   |
-| --stepper-button-disabled-background-color          | _var(--background-color)_                     | -   |
-| --stepper-rounded-button-border-radius              | _var(--border-radius-md)_                     | -   |
-| --stepper-rounded-decrease-button-border-radius     | _var(--stepper-rounded-button-border-radius)_ | -   |
-| --stepper-rounded-increase-button-border-radius     | _var(--stepper-rounded-button-border-radius)_ | -   |
-| --stepper-circular-decrease-button-color            | _var(--danger-color)_                         | -   |
-| --stepper-circular-decrease-button-background-color | _var(--white)_                                | -   |
-| --stepper-circular-decrease-button-border-color     | _var(--danger-color)_                         | -   |
-| --stepper-circular-increase-button-color            | _var(--white)_                                | -   |
-| --stepper-circular-increase-button-background-color | _var(--danger-color)_                         | -   |
+| 名称                                                  | 默认值                                            | 描述  |
+|-----------------------------------------------------|------------------------------------------------|-----|
+| --stepper-active-background-color                   | _#e8e8e8_                                      | -   |
+| --stepper-background-color                          | _var(--active-color)_                          | -   |
+| --stepper-input-width                               | _32px * $hd_                                   | -   |
+| --stepper-input-height                              | _28px * $hd_                                   | -   |
+| --stepper-input-margin                              | _0 2px * $hd_                                  | -   |
+| --stepper-input-font-size                           | _var(--font-size-md)_                          | -   |
+| --stepper-input-line-height                         | _normal_                                       | -   |
+| --stepper-input-color                               | _var(--text-color)_                            | -   |
+| --stepper-input-background-color                    | _var(--stepper-background-color)_              | -   |
+| --stepper-input-disabled-color                      | _var(--gray-5)_                                | -   |
+| --stepper-input-disabled-background-color           | _var(--active-color)_                          | -   |
+| --stepper-button-icon-color                         | _var(--text-color)_                            | -   |
+| --stepper-button-disabled-color                     | _var(--gray-5)_                                | -   |
+| --stepper-button-disabled-background-color          | _var(--background-color)_                      | -   |
+| --stepper-rounded-button-border-radius              | _var(--border-radius-md)_                      | -   |
+| --stepper-rounded-decrease-button-border-radius     | _var(--stepper-rounded-button-border-radius)_  | -   |
+| --stepper-rounded-increase-button-border-radius     | _var(--stepper-rounded-button-border-radius)_  | -   |
+| --stepper-circular-decrease-button-color            | _var(--danger-color)_                          | -   |
+| --stepper-circular-decrease-button-background-color | _var(--white)_                                 | -   |
+| --stepper-circular-decrease-button-border-color     | _var(--danger-color)_                          | -   |
+| --stepper-circular-increase-button-color            | _var(--white)_                                 | -   |
+| --stepper-circular-increase-button-background-color | _var(--blue, $blue)_                           | -   |

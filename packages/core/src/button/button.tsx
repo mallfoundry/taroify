@@ -91,7 +91,9 @@ function useButtonChildren(options: UseButtonChildrenOptions = {}) {
           if (isIconElement(child) && index === lastIndex) {
             return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
           }
-          return child
+          return (
+            <View className={prefixClassname("button__text")}>{child}</View>
+          )
         })
       }
     </ButtonContent>
