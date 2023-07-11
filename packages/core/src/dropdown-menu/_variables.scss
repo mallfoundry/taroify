@@ -12,11 +12,11 @@ $dropdown-menu-title-color: var(--dropdown-menu-title-color, var(--text-color, $
 $dropdown-menu-title-padding: var(--dropdown-menu-title-padding, 0 var(--padding-xs, $padding-xs));
 $dropdown-menu-title-line-height: var(--dropdown-menu-title-line-height, var(--line-height-lg, $line-height-lg));
 $dropdown-menu-title-active-opacity: var(--dropdown-menu-title-active-opacity, var(--active-opacity, $active-opacity));
-$dropdown-menu-title-active-color: var(--dropdown-menu-title-active-color, var(--danger-color, $danger-color));
+$dropdown-menu-title-active-color: var(--dropdown-menu-title-active-color, $primary-color);
 $dropdown-menu-title-disabled-color: var(--dropdown-menu-title-disabled-color, var(--gray-6, $gray-6));
 //
 $dropdown-menu-item-z-index: var(--dropdown-menu-item-z-index, calc(#{$dropdown-menu-z-index} - 1));
 $dropdown-menu-item-content-max-height: var(--dropdown-menu-item-content-max-height, 80%);
 $dropdown-menu-item-content-animation-duration: var(--dropdown-menu-item-content-animation-duration, var(--animation-duration-fast, $animation-duration-fast));
 //
-$dropdown-menu-option-active-color: var(--dropdown-menu-option-active-color, var(--danger-color, $danger-color));
+$dropdown-menu-option-active-color: var(--dropdown-menu-option-active-color, $primary-color);

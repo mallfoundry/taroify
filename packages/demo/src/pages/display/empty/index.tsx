@@ -55,7 +55,7 @@ export default function EmptyDemo() {
         <Empty>
           <Empty.Image />
           <Empty.Description>描述文字</Empty.Description>
-          <Button shape="round" color="danger" className="bottom-button">
+          <Button shape="round" color="primary" className="bottom-button">
             按钮
           </Button>
         </Empty>
