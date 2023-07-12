@@ -12,7 +12,7 @@ import {
 
 export type { ToastOptions } from "./toast.imperative"
 
-export type { ToastType, ToastPosition } from "./toast.shared"
+export type { ToastType, ToastPosition, ToastThemeVars } from "./toast.shared"
 
 interface ToastInterface {
   (props: ToastProps): JSX.Element

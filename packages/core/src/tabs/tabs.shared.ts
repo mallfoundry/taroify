@@ -20,3 +20,25 @@ export interface TabObject {
   badge?: ReactNode
   children?: ReactNode
 }
+
+export type TabThemeVars = {
+  tabsActiveColor?: string
+  tabsWrapHeight?: string
+  tabsCardHeight?: string
+  tabsCardMargin?: string
+  tabsCardBorderWidth?: string
+  tabsCardBorderColor?: string
+  tabsCardBorderRadius?: string
+  tabsNavBackgroundColor?: string
+  tabsLineWidth?: string
+  tabsLineHeight?: string
+  tabsLineBorderRadius?: string
+  tabsLineBackgroundColor?: string
+  tabColor?: string
+  tabPadding?: string
+  tabFontSize?: string
+  tabLineHeight?: string
+  tabActiveColor?: string
+  tabActiveFontWeight?: string
+  tabDisabledColor?: string
+}

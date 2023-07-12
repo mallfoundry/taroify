@@ -4,6 +4,8 @@ import NumberKeyboardHeader from "./number-keyboard-header"
 import NumberKeyboardKey from "./number-keyboard-key"
 import NumberKeyboardSidebar from "./number-keyboard-sidebar"
 
+export type { NumberKeyboardThemeVars } from './number-keyboard.shared'
+
 interface NumberKeyboardInterface {
   (props: NumberKeyboardProps): JSX.Element
 

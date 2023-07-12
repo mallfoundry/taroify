@@ -6,6 +6,8 @@ import TimelineDot from "./timeline-dot"
 import TimelineItem from "./timeline-item"
 import TimelineSeparator from "./timeline-separator"
 
+export type { TimelineThemeVars } from './timeline.shared'
+
 interface TimelineInterface extends FunctionComponent<TimelineProps> {
   Connector: typeof TimelineConnector
   Content: typeof TimelineContent

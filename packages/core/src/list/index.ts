@@ -1,7 +1,7 @@
 import ListComponent, { ListProps } from "./list"
 import ListPlaceholder from "./list-placeholder"
 
-export type { ListDirection } from "./list.shared"
+export type { ListDirection, ListThemeVars } from "./list.shared"
 
 interface ListInterface {
   (props: ListProps): JSX.Element

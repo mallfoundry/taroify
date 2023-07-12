@@ -83,3 +83,22 @@ export interface FormItemInstance {
 
   validate(rules?: FormRule[]): Promise<void>
 }
+
+export type FormThemeVars = {
+  formLabelWidth?: string
+  formLabelColor?: string
+  formLabelMarginRight?: string
+  formLabelRequiredColor?: string
+  formLabelDisabledColor?: string
+  formItemIconSize?: string
+  formItemRightIconColor?: string
+  formItemRightIconPadding?: string
+  formItemRightIconMarginRight?: string
+  formItemRightButtonMarginLeft?: string
+  formControlColor?: string
+  formControlMinHeight?: string
+  formFeedbackFontSize?: string
+  formFeedbackValidColor?: string
+  formFeedbackWarningColor?: string
+  formFeedbackInvalidColor?: string
+}

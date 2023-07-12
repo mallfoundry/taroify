@@ -12,3 +12,17 @@ export interface Page {
   page: number
   type?: ItemType
 }
+
+export type PaginationThemeVars = {
+  paginationHeight?: string
+  paginationFontSize?: string
+  paginationBackgroundColor?: string
+  paginationItemMinWidth?: string
+  paginationItemColor?: string
+  paginationItemActiveColor?: string
+  paginationItemActiveBackgroundColor?: string
+  paginationItemDisabledColor?: string
+  paginationItemDisabledBackgroundColor?: string
+  paginationItemDisabledOpacity?: string
+  paginationButtonPadding?: string
+}

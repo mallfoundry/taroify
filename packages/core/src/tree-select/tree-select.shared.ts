@@ -9,3 +9,18 @@ export interface TreeSelectOptionObject {
   value: any
   children?: ReactNode
 }
+
+export type TreeSelectThemeVars = {
+  treeSelectFontSize?: string
+  treeSelectSidebarBackgroundColor?: string
+  treeSelectContentBackgroundColor?: string
+  treeSelectTabPadding?: string
+  treeSelectOptionPadding?: string
+  treeSelectOptionFontWeight?: string
+  treeSelectOptionLineHeight?: string
+  treeSelectOptionActiveColor?: string
+  treeSelectOptionActiveBackgroundColor?: string
+  treeSelectOptionDisabledColor?: string
+  treeSelectOptionIconActiveRight?: string
+  treeSelectOptionIconActiveFontSize?: string
+}

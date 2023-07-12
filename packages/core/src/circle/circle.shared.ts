@@ -20,3 +20,17 @@ export interface CircleProps {
 
   onChange?(value: number): void
 }
+
+export type CircleThemeVars = {
+  circleSize?: string
+  circleWidth?: string
+  circleHeight?: string
+  circleColor?: string
+  circleHoverStroke?: string
+  circleLayerStroke?: string
+  circleTextPadding?: string
+  circleTextColor?: string
+  circleTextFontWeight?: string
+  circleTextFontSize?: string
+  circleTextLineHeight?: string
+}

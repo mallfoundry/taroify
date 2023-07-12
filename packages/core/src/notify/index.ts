@@ -6,7 +6,7 @@ import {
   setDefaultNotifyOptions,
 } from "./notify.imperative"
 
-export type { NotifyColor } from "./notify.shared"
+export type { NotifyColor, NotifyThemeVars } from "./notify.shared"
 
 interface NotifyInterface {
   (props: NotifyProps): JSX.Element

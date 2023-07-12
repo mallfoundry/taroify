@@ -3,6 +3,8 @@ import SwiperIndicator, { SwiperIndicatorProps } from "./swiper-indicator"
 import SwiperItem, { SwiperItemProps } from "./swiper-item"
 import { SwiperItemEvent } from "./swiper.shared"
 
+export type { SwiperThemeVars } from './swiper.shared'
+
 interface SwiperInterface {
   (props: SwiperProps): JSX.Element
 

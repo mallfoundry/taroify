@@ -19,6 +19,28 @@ export interface PickerColumnInstance {
   stopMomentum(): void
 }
 
+export type PickerThemeVars = {
+  pickerBackgroundColor?: string
+  pickerToolbarHeight?: string
+  pickerTitleFontSize?: string
+  pickerTitleLineHeight?: string
+  pickerActionPadding?: string
+  pickerActionFontSize?: string
+  pickerConfirmActionColor?: string
+  pickerCancelActionColor?: string
+  pickerSwipeTransitionDuration?: string
+  pickerColumnTransitionZeroDuration?: string
+  pickerColumnTransitionSwitchDuration?: string
+  pickerColumnTransitionDuration?: string
+  pickerOptionColor?: string
+  pickerOptionPadding?: string
+  pickerOptionFontSize?: string
+  pickerOptionDisabledOpacity?: number
+  pickerOptionHeight?: string
+  pickerLoadingIconColor?: string
+  pickerLoadingMaskColor?: string
+}
+
 export function validPickerColumn(column: PickerOptionObject) {
   const { index } = column
   return _.isNumber(index) && _.gte(index, DEFAULT_COLUMN_INDEX) ? column : undefined
