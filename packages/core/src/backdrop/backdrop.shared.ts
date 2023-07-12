@@ -1,4 +1,4 @@
 export type BackdropThemeVars = {
-  backdropZIndex?: string
+  backdropZIndex?: string | number
   backdropBackgroundColor?: string
 }

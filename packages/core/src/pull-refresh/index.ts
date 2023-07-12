@@ -6,6 +6,8 @@ import {
   PullRefreshPulling,
 } from "./pull-refresh-children"
 
+export type { PullRefreshThemeVars } from './pull-refresh.shared'
+
 interface PullRefreshInterface {
   (props: PullRefreshProps): JSX.Element
 

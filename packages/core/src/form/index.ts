@@ -14,6 +14,7 @@ export type {
   FormFeedbackAlign,
   FormFeedbackStatus,
   FormController,
+  FormThemeVars
 } from "./form.shared"
 
 export type { FormItemProps } from "./form-item"

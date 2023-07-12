@@ -1,9 +1,17 @@
-import { Button, ConfigProvider, Field, Rate, Slider } from "@taroify/core"
+import { Button, ConfigProvider, Field, Rate, Slider, ConfigProviderThemeVars } from "@taroify/core"
 import { View } from "@tarojs/components"
 import { useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
+
+const themeVars: ConfigProviderThemeVars ={
+  rateIconFullColor: "#07c160",
+  sliderTrackHeight: "4px",
+  sliderActiveBackgroundColor: "#07c160",
+  buttonPrimaryBorderColor: "#07c160",
+  buttonPrimaryBackgroundColor: "#07c160",
+}
 
 export default function ConfigProviderDemo() {
   const [rate, setRate] = useState(4)
@@ -26,15 +34,7 @@ export default function ConfigProviderDemo() {
       </Block>
       <Block title="定制主题">
         <ConfigProvider
-          theme={{
-            rateIconFullColor: "#07c160",
-            sliderTrackHeight: "4px",
-            sliderButtonWidth: "20px",
-            sliderButtonHeight: "20px",
-            sliderActiveBackgroundColor: "#07c160",
-            buttonPrimaryBorderColor: "#07c160",
-            buttonPrimaryBackgroundColor: "#07c160",
-          }}
+          theme={themeVars}
         >
           <Field label="评分">
             <Rate allowHalf value={rate} onChange={setRate} />

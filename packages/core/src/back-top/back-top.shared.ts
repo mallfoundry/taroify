@@ -3,7 +3,7 @@ export type BackTopThemeVars = {
   backTopIconSize?: string
   backTopRight?: string
   backTopBottom?: string
-  backTopZIndex?: string
+  backTopZIndex?: string | number
   backTopTextColor?: string
   backTopBackground?: string
 }

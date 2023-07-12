@@ -24,6 +24,12 @@ export interface CurrentTime {
   milliseconds: number
 }
 
+export type CountdownThemeVars = {
+  countdownColor?: string
+  countdownFontSize?: string
+  countdownLineHeight?: string
+}
+
 function rightCurrentTime(format: string, currentTime: CurrentTime): CurrentTime {
   const { total, days } = currentTime
   let { hours, minutes, seconds, milliseconds } = currentTime

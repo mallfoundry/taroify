@@ -3,6 +3,8 @@ import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
 import { TreeSelectTabObject } from "./tree-select.shared"
 
+export type { TreeSelectThemeVars } from './tree-select.shared'
+
 interface TreeSelectInterface {
   (props: TreeSelectProps): JSX.Element
 

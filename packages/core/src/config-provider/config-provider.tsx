@@ -12,13 +12,19 @@ function convertThemeVarsToCSSVars(themeVars: Record<string, string | number>) {
 }
 
 interface ConfigProviderProps {
-  theme?: Record<string, string>
+  theme?: Record<string, string | number>
   children?: ReactNode
 }
 
 function ConfigProvider(props: ConfigProviderProps) {
-  const { theme = {}, children } = props
-  const style = useMemo<CSSProperties | undefined>(() => convertThemeVarsToCSSVars(theme), [theme])
+  const {
+    theme = {},
+    children
+  } = props
+  const style = useMemo<CSSProperties | undefined>(() =>
+    convertThemeVarsToCSSVars(theme),
+    [theme]
+  )
   return <View style={style} children={children} />
 }
 

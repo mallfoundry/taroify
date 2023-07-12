@@ -15,3 +15,11 @@ export type ImageMode =
   | "bottomRight"
 
 export type ImageShape = "square" | "rounded" | "circle"
+
+export type ImageThemeVars = {
+  imagePlaceholderColor?: string
+  imagePlaceholderFontSize?: string
+  imagePlaceholderIconSize?: string
+  imagePlaceholderIconColor?: string
+  imagePlaceholderBackgroundColor?: string
+}

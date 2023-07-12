@@ -5,6 +5,8 @@ import { UploadFile } from "./uploader.shared"
 
 export type { UploaderProps } from "./uploader"
 
+export type { UploadThemeVars } from './uploader.shared'
+
 interface UploaderInterface {
   (props: UploaderProps): JSX.Element
 

@@ -2,6 +2,8 @@ import SidebarElement, { SidebarProps } from "./sidebar"
 import SidebarTab from "./sidebar-tab"
 import { SidebarTabObject } from "./sidebar-tab.shared"
 
+export type { SidebarThemeVars } from './sidebar.shared'
+
 interface SidebarInterface {
   (props: SidebarProps): JSX.Element
 
