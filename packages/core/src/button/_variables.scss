@@ -3,7 +3,7 @@
 
 $button-line-height: var(--button-line-height, 1.2);
 $button-border-width: var(--button-border-width, var(--border-width-base, $border-width-base));
-$button-border-radius: var(--button-border-radius, var(--border-radius-sm, $border-radius-sm));
+$button-border-radius: var(--button-border-radius, var(--border-radius-sm, $border-radius-md));
 $button-border-radius-max: var(--button-border-radius-max, var(--border-radius-max, $border-radius-max));
 $button-transition-duration: var(--button-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
 
@@ -27,8 +27,8 @@ $button-height-large: var(--button-height-large, 50px * $hd);
 $button-font-size-large: var(--button-font-size-large, var(--font-size-lg, $font-size-lg));
 
 $button-default-color: var(--button-default-color, var(--text-color, $text-color));
-$button-default-background-color: var(--button-default-background-color, var(--white, $white));
-$button-default-border-color: var(--button-default-border-color, var(--border-color, $border-color));
+$button-default-background-color: var(--button-default-background-color, var(--white, $background-color-2));
+$button-default-border-color: var(--button-default-border-color, var(--border-color, $gray-4));
 
 $button-primary-color: var(--button-primary-color, var(--white, $white));
 $button-primary-background-color: var(--button-primary-background-color, var(--primary-color, $primary-color));

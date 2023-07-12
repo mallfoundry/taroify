@@ -1,0 +1,31 @@
+export type TagThemeVars = {
+  tagPadding?: string
+  tagColor?: string
+  tagFontSize?: string
+  tagBorderRadius?: string
+  tagLineHeight?: string
+  tagMediumPadding?: string
+  tagLargePadding?: string
+  tagLargeBorderRadius?: string
+  tagLargeFontSize?: string
+  tagRoundedBorderRadius?: string
+  tagRoundedRightPadding?: string
+  tagRoundedLeftPadding?: string
+  tagRoundedRightMediumPadding?: string
+  tagRoundedLeftMediumPadding?: string
+  tagRoundedRightLargePadding?: string
+  tagRoundedLeftLargePadding?: string
+  tagDefaultColor?: string
+  tagDefaultBackgroundColor?: string
+  tagPrimaryColor?: string
+  tagPrimaryBackgroundColor?: string
+  tagInfoColor?: string
+  tagInfoBackgroundColor?: string
+  tagSuccessColor?: string
+  tagSuccessBackgroundColor?: string
+  tagWarningColor?: string
+  tagWarningBackgroundColor?: string
+  tagDangerColor?: string
+  tagDangerBackgroundColor?: string
+  tagOutlinedBackgroundColor?: string
+}

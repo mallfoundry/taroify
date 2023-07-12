@@ -10,7 +10,7 @@ $tree-select-tab-padding: var(--tree-select-tab-padding, 14px * $hd var(--paddin
 $tree-select-option-padding: var(--tree-select-option-padding, 0 32px * $hd 0 var(--padding-md, $padding-md));
 $tree-select-option-font-weight: var(--tree-select-option-font-weight, var(--font-weight-bold, $font-weight-bold));
 $tree-select-option-line-height: var(--tree-select-option-line-height, 48px * $hd);
-$tree-select-option-active-color: var(--tree-select-option-active-color, var(--danger-color, $danger-color));
+$tree-select-option-active-color: var(--tree-select-option-active-color, $primary-color);
 $tree-select-option-active-background-color: var(--tree-select-option-active-background-color, var(--active-color, $active-color));
 $tree-select-option-disabled-color: var(--tree-select-option-disabled-color, var(--gray-5, $gray-5));
 $tree-select-option-icon-active-right: var(--tree-select-option-icon-active-right, var(--padding-md, $padding-md));

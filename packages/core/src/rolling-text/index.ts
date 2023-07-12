@@ -4,6 +4,8 @@ import RollingTextComponent, {RollingTextProps} from "./rolling-text"
 
 export type {RollingTextRef} from './rolling-text';
 
+export type { RollingTextThemeVars } from './rolling-text.shared'
+
 interface RollingTextInterface extends ForwardRefExoticComponent<RollingTextProps> {
   (props: RollingTextProps): React.ReactElement
 }

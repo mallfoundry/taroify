@@ -43,7 +43,7 @@ function DropdownMenuWithCustomContent() {
           <Switch size="24" checked={switch2} onChange={setSwitch2} />
         </Cell>
         <View style="padding: 5px 16px;">
-          <Button color="danger" block shape="round" onClick={() => setValue(false)}>
+          <Button color="primary" block shape="round" onClick={() => setValue(false)}>
             确认
           </Button>
         </View>

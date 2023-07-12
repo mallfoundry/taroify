@@ -26,6 +26,37 @@ export interface CalendarDayObject {
   bottom?: ReactNode
 }
 
+export type CalendarThemeVars = {
+  calendarActiveColor?: string
+  calendarBackgroundColor?: string
+  calendarHeaderBoxShadow?: string
+  calendarHeaderTitleHeight?: string
+  calendarHeaderTitleFontSize?: string
+  calendarHeaderSubtitleFontSize?: string
+  calendarWeekdaysHeight?: string
+  calendarWeekdaysFontSize?: string
+  calendarMonthTitleFontSize?: string
+  calendarMonthWatermarkColor?: string
+  calendarMonthWatermarkFontSize?: string
+  calendarRangeEdgeColor?: string
+  calendarRangeEdgeBackgroundColor?: string
+  calendarRangeMiddleColor?: string
+  calendarRangeMiddleBackgroundOpacity?: string
+  calendarDayHeight?: string
+  calendarDayFontSize?: string
+  calendarDayDisabledColor?: string
+  calendarActiveDaySize?: string
+  calendarActiveDayColor?: string
+  calendarActiveDayBackgroundColor?: string
+  calendarActiveDayBorderRadius?: string
+  calendarDayInfoFontSize?: string
+  calendarDayInfoLineHeight?: string
+  calendarConfirmButtonHeight?: string
+  calendarConfirmButtonMargin?: string
+  calendarConfirmButtonColor?: string
+  calendarFooterPadding?: string
+}
+
 export function compareYearMonth(date1: Date, date2: Date) {
   const year1 = date1?.getFullYear()
   const year2 = date2?.getFullYear()

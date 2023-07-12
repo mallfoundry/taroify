@@ -3,6 +3,8 @@ import SliderThumb from "./slider-thumb"
 
 export type { SliderProps } from "./slider"
 
+export type { SliderThemeVars } from './slider.shared'
+
 interface SliderInterface {
   (props: SliderProps): JSX.Element
 

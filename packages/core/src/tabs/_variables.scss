@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 // Tabs styles
-$tabs-active-color: var(--tabs-active-color, var(--danger-color, $danger-color));
+$tabs-active-color: var(--tabs-active-color, $primary-color);
 $tabs-wrap-height: var(--tabs-wrap-height, 44px * $hd);
 $tabs-card-height: var(--tabs-card-height, 30px * $hd);
 $tabs-card-margin: var(--tabs-card-margin, 0 var(--padding-md, $padding-md));

@@ -2,6 +2,8 @@ import NoticeBarElement, { NoticeBarProps } from "./notice-bar"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
 
+export type { NoticeBarThemeVars } from './notice-bar.shared'
+
 interface NoticeBarInterface {
   (props: NoticeBarProps): JSX.Element
 

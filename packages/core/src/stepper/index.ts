@@ -4,6 +4,8 @@ import StepperInput from "./stepper-input"
 
 export type { StepperProps } from "./stepper"
 
+export type { StepperThemeVars } from './stepper.shared'
+
 interface StepperInterface {
   (props: StepperProps): JSX.Element
 

@@ -5,6 +5,8 @@ import ShareSheetOption from "./share-sheet-option"
 import ShareSheetOptions from "./share-sheet-options"
 import { ShareSheetOptionObject } from "./share-sheet.shared"
 
+export type { ShareSheetThemeVars } from './share-sheet.shared'
+
 interface ShareSheetInterface {
   (props: ShareSheetProps): JSX.Element
 
