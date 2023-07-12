@@ -83,6 +83,22 @@ function CustomThemeVars() {
 
 > 注意：ConfigProvider 仅影响它的子组件的样式，不影响全局 root 节点。在小程序中 ConfigProvider 不能放置在 `app.ts` 文件里，因为 `app.ts` 文件不能渲染任何内容。
 
+#### 在 TypeScript 中使用
+
+在 TypeScript 中定义 themeVars 时，建议使用 Taroify 提供的 ConfigProviderThemeVars 类型，可以提供完善的类型提示：
+
+```ts
+import type { ConfigProviderThemeVars } from '@taroify/core';
+
+const themeVars: ConfigProviderThemeVars = {
+  rateIconFullColor: "#07c160",
+  sliderTrackHeight: "4px",
+  sliderActiveBackgroundColor: "#07c160",
+  buttonPrimaryBorderColor: "#07c160",
+  buttonPrimaryBackgroundColor: "#07c160",
+};
+```
+
 ### 基础变量
 
 Taroify 中的 CSS 变量分为 **基础变量** 和 **组件变量**。组件变量会继承基础变量，因此在修改基础变量后，会影响所有相关的组件。

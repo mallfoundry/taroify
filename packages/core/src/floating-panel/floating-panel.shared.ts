@@ -1,5 +1,5 @@
 export type FloatingPanelThemeVars = {
-  floatingPanelZIndex?: string
+  floatingPanelZIndex?: string | number
   floatingPanelRoundedBorderRadius?: string
   floatingPanelHeaderHeight?: string
   floatingPanelBarHeight?: string

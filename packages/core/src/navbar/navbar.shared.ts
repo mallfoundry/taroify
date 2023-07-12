@@ -1,5 +1,5 @@
 export type NavbarThemeVars = {
-  navbarZIndex?: string
+  navbarZIndex?: string | number
   navbarHeight?: string
   navbarLineHeight?: string
   navbarBackgroundColor?: string

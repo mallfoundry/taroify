@@ -1,5 +1,5 @@
 export type NumberKeyboardThemeVars = {
-  numberKeyboardZIndex?: string
+  numberKeyboardZIndex?: string | number
   numberKeyboardBackgroundColor?: string
   numberKeyboardWithTitleBorderRadius?: string
   numberKeyboardHeaderColor?: string

@@ -5,7 +5,7 @@ export type PopupThemeVars = {
   popupBackgroundColor?: string
   popupAnimationDuration?: string
   popupRoundedBorderRadius?: string
-  popupCloseIconZIndex?: string
+  popupCloseIconZIndex?: string | number
   popupCloseIconSize?: string
   popupCloseIconColor?: string
   popupCloseIconActiveColor?: string
