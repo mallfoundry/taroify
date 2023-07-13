@@ -12,6 +12,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.7
+`2023-07-13`
+
+**Feature**
+
+- 统一了所有组件的主色调，所有组件均采用蓝色作为主色调 [#578](https://github.com/mallfoundry/taroify/pull/578) [@Pilotager](https://github.com/Pilotager)
+- 完善了主题变量的类型定义，`ConfigProviderThemeVars` 类型 [#579](https://github.com/mallfoundry/taroify/pull/579) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.0-alpha.6
 `2023-07-09`
 
