@@ -416,13 +416,12 @@ function CalendarField() {
 
 ### Form Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| labelAlign | 表单项 label 对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| controlAlign | 表单项 control 对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| validateTrigger | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_ | `onBlur` |
-| validateFirst | 是否在某一项校验不通过时停止校验 | _boolean_ | `false` |
-| colon | 是否在 label 后面添加冒号 | _boolean_ | `false` |
+| 参数              | 说明                                       | 类型         | 默认值      |
+|-----------------|------------------------------------------|------------|----------|
+| labelAlign      | 表单项 label 对齐方式，可选值为 `center` `right`     | _string_   | `left`   |
+| controlAlign    | 表单项 control 对齐方式，可选值为 `center` `right`   | _string_   | `left`   |
+| validateTrigger | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_   | `onBlur` |
+| colon           | 是否在 label 后面添加冒号                         | _boolean_  | `false`  |
 
 ### Form Events
 
