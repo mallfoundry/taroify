@@ -1,11 +1,5 @@
 const config = {
-  compiler: {
-    type: 'webpack5',
-    // https://github.com/NervJS/taro/issues/13271
-    prebundle: {
-      enable: false,
-    },
-  },
+  compiler: "webpack5",
   projectName: "@taroify/demo",
   date: "2021-3-9",
   designWidth: 750,
