@@ -26,12 +26,13 @@ interface TabsHeaderProps {
   bordered?: boolean
   ellipsis?: boolean
   tabObjects: TabObject[]
+  swipeThreshold: number
 
   onTabClick?(event: TabEvent): void
 }
 
 export default function TabsHeader(props: TabsHeaderProps) {
-  const { value: activeValue, theme, ellipsis, bordered, tabObjects, onTabClick } = props
+  const { value: activeValue, theme, ellipsis, bordered, tabObjects, swipeThreshold, onTabClick } = props
   const themeLine = theme === "line"
   const themeCard = theme === "card"
 
@@ -77,6 +78,10 @@ export default function TabsHeader(props: TabsHeaderProps) {
     )
   }, [])
 
+  const flexBasis = useMemo(() => {
+    return ellipsis && themeLine ? `${88 / swipeThreshold}%` : ""
+  }, [ellipsis, themeLine, swipeThreshold])
+
   useEffect(() => nextTick(resize), [resize, tabObjects])
 
   // resize
@@ -96,7 +101,7 @@ export default function TabsHeader(props: TabsHeaderProps) {
       )}
     >
       <ScrollView
-        scrollX
+        scrollX={tabObjects.length > swipeThreshold || !ellipsis}
         scrollWithAnimation
         scrollLeft={scrollLeft}
         className={classNames(prefixClassname("tabs__wrap__scroll"), {
@@ -116,8 +121,9 @@ export default function TabsHeader(props: TabsHeaderProps) {
             _.map(tabObjects, (tabObject) => (
               <Tab
                 key={tabObject.key}
+                flexBasis={flexBasis}
                 // TODO swipeThreshold does not support
-                flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
+                // flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
                 className={tabObject?.classNames?.title}
                 dot={tabObject.dot}
                 badge={tabObject.badge}

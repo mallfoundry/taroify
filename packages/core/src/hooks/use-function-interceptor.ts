@@ -1,4 +1,4 @@
-import * as FakePromise from "promise"
+import FakePromise from "promise"
 import { isPromise } from "../utils/promisify"
 
 export type FunctionInterceptor = (...args: any[]) => Promise<boolean> | boolean | undefined | void

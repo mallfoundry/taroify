@@ -77,6 +77,7 @@ export interface TabsProps extends ViewProps {
   sticky?: boolean | TabsSticky
   bordered?: boolean
   ellipsis?: boolean
+  swipeThreshold?: number
   children?: ReactNode
 
   onChange?(value: any, event: TabEvent): void
@@ -99,6 +100,7 @@ function Tabs(props: TabsProps) {
     theme = "line",
     ellipsis = true,
     bordered,
+    swipeThreshold = 5,
     children: childrenProp,
     onTabClick,
     onChange,
@@ -153,6 +155,7 @@ function Tabs(props: TabsProps) {
         bordered={bordered}
         ellipsis={ellipsis}
         tabObjects={tabObjects}
+        swipeThreshold={swipeThreshold}
         onTabClick={handleTabClick}
       />
     ),
@@ -172,6 +175,7 @@ function Tabs(props: TabsProps) {
         ellipsis,
         bordered,
         tabObjects,
+        swipeThreshold,
       }}
     >
       <View

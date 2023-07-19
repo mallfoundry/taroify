@@ -11,6 +11,7 @@ interface TabsContextValue {
   theme?: TabsTheme
   bordered?: boolean
   ellipsis?: boolean
+  swipeThreshold?: number
   tabObjects: TabObject[]
 }
 
@@ -19,6 +20,7 @@ const TabsContext = createContext<TabsContextValue>({
   lazyRender: true,
   animated: false,
   swipeable: false,
+  swipeThreshold: 5,
   tabObjects: [],
 })
 
