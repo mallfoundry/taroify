@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.8
+`2023-07-19`
+
+**Feature**
+
+- Taro 版本升级为 v3.6.8 [#583](https://github.com/mallfoundry/taroify/pull/583) [@Pilotager](https://github.com/Pilotager)
+- Tab
+  - 新增 swipeThreshold 属性 [#585](https://github.com/mallfoundry/taroify/pull/585) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.0-alpha.7
 `2023-07-13`
 
@@ -25,7 +34,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **New Component**
 
-- 新增  RollingText 组件 [#574](https://github.com/mallfoundry/taroify/pull/574) [@Pilotager](https://github.com/Pilotager)
+- 新增 RollingText 组件 [#574](https://github.com/mallfoundry/taroify/pull/574) [@Pilotager](https://github.com/Pilotager)
 
 **Bug Fixes**
 
