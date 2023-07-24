@@ -25,6 +25,19 @@ export default function BasicPagination() {
 }
 ```
 
+### 简单模式
+
+将 `mode` 设置为 `simple` 来切换到简单模式，此时分页器不会展示具体的页码按钮。
+
+```tsx
+export default function BasicPagination() {
+  const [current, setCurrent] = useState<number>(1)
+  return (
+    <Pagination current={current} count={10} mode="simple" onChange={(page) => setCurrent(page)} />
+  )
+}
+```
+
 ### 显示省略号
 
 设置 `Pagination.Item.type` 为 `start-ellipsis` 或者 `end-ellipsis` 展示省略号按钮，点击后可以快速跳转。
@@ -33,12 +46,7 @@ export default function BasicPagination() {
 function PaginationWithEllipses() {
   const [current, setCurrent] = useState<number>(1)
   return (
-    <Pagination
-      current={current}
-      siblingCount={1}
-      count={13}
-      onChange={(page) => setCurrent(page)}
-    >
+    <Pagination current={current} siblingCount={1} count={13} onChange={(page) => setCurrent(page)}>
       <Pagination.Item type="start-ellipsis" />
       <Pagination.Item type="end-ellipsis" />
     </Pagination>
@@ -70,17 +78,20 @@ function PaginationWithCustomButton() {
 
 ### Props
 
-| 参数           | 说明            | 类型       | 默认值 |
-|--------------|---------------|----------|-----|
-| current      | 当前页码          | _number_ | -   |
-| siblingCount | 当前页码两侧显示的数字个数 | _number_ | `2` |
-| count        | 总页数           | _number_ | -   |
+| 参数         | 说明                       | 类型     | 默认值 |
+| ------------ | -------------------------- | -------- | ------ |
+| current      | 当前页码                   | _number_ | -      |
+| mode         | 显示模式，可选值为 simple  | _string_ | multi  |
+| prevText     | 上一页按钮文字             | _string_ | 上一页 |
+| nextText     | 下一页按钮文字             | _string_ | 下一页 |
+| siblingCount | 当前页码两侧显示的数字个数 | _number_ | `2`    |
+| count        | 总页数                     | _number_ | -      |
 
 ### Events
 
-| 事件名      | 说明      | 回调参数 |
-|----------|---------|------|
-| onChange | 页码改变时触发 | -    |
+| 事件名   | 说明           | 回调参数 |
+| -------- | -------------- | -------- |
+| onChange | 页码改变时触发 | -        |
 
 ## 主题定制
 
@@ -88,16 +99,17 @@ function PaginationWithCustomButton() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                          | 默认值                            | 描述  |
-|---------------------------------------------|--------------------------------|-----|
-| --pagination-height                         | _40px * $hd_                   | -   |
-| --pagination-font-size                      | _var(--font-size-md)_          | -   |
-| --pagination-background-color               | _var(--white)_                 | -   |
-| --pagination-item-min-width                 | _36px * $hd_                   | -   |
-| --pagination-item-color                     | _var(--blue)_                  | -   |
-| --pagination-item-active-color              | _var(--white)_                 | -   |
-| --pagination-item-active-background-color   | _var(--pagination-item-color)_ | -   |
-| --pagination-item-disabled-color            | _var(--gray-7)_                | -   |
-| --pagination-item-disabled-background-color | _var(--background-color)_      | -   |
-| --pagination-item-disabled-opacity          | _var(--disabled-opacity)_      | -   |
-| --pagination-button-padding                 | _0 var(--padding-base)_        | -   |
+| 名称                                        | 默认值                         | 描述 |
+| ------------------------------------------- | ------------------------------ | ---- |
+| --pagination-height                         | _40px \* $hd_                  | -    |
+| --pagination-font-size                      | _var(--font-size-md)_          | -    |
+| --pagination-background-color               | _var(--white)_                 | -    |
+| --pagination-item-min-width                 | _36px \* $hd_                  | -    |
+| --pagination-item-color                     | _var(--blue)_                  | -    |
+| --pagination-item-active-color              | _var(--white)_                 | -    |
+| --pagination-item-active-background-color   | _var(--pagination-item-color)_ | -    |
+| --pagination-item-disabled-color            | _var(--gray-7)_                | -    |
+| --pagination-item-disabled-background-color | _var(--background-color)_      | -    |
+| --pagination-item-disabled-opacity          | _var(--disabled-opacity)_      | -    |
+| --pagination-button-padding                 | _0 var(--padding-base)_        | -    |
+| --pagination-desc-color                     | _var(--gray-7)_                | -    |

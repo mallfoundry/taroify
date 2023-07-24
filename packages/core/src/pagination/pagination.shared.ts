@@ -25,4 +25,7 @@ export type PaginationThemeVars = {
   paginationItemDisabledBackgroundColor?: string
   paginationItemDisabledOpacity?: string
   paginationButtonPadding?: string
+  paginationDescColor?: string
 }
+
+export type PaginationMode = "simple" | "multi"
