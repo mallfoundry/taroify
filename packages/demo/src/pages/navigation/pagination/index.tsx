@@ -14,6 +14,20 @@ function BasicPagination() {
   )
 }
 
+function SimplePagination() {
+  const [current, setCurrent] = useState<number>(1)
+  return (
+    <Block title="简单模式">
+      <Pagination
+        current={current}
+        count={10}
+        mode="simple"
+        onChange={(page) => setCurrent(page)}
+      />
+    </Block>
+  )
+}
+
 function PaginationWithEllipses() {
   const [current, setCurrent] = useState<number>(1)
   return (
@@ -51,6 +65,7 @@ export default function PaginationDemo() {
   return (
     <Page title="Pagination 分页" className="pagination-demo">
       <BasicPagination />
+      <SimplePagination />
       <PaginationWithEllipses />
       <PaginationWithCustomButton />
     </Page>

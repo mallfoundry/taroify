@@ -11,11 +11,12 @@ import {
   ReactNode,
   useContext,
   useMemo,
+  Fragment,
 } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import PaginationContext from "./pagination.context"
-import { ItemType, Page as SharedPage } from "./pagination.shared"
+import { ItemType, Page as SharedPage, PaginationMode } from "./pagination.shared"
 
 function rangePages(start: number, end: number) {
   const length = end - start + 1
@@ -31,6 +32,7 @@ interface PaginationChildren {
   startEllipsis?: ReactNode
   items?: ReactNode
   endEllipsis?: ReactNode
+  desc?: ReactNode
   next?: ReactNode
 }
 
@@ -38,11 +40,12 @@ interface UsePaginationOptions {
   current: number
   count: number
   siblingCount: number
+  mode: PaginationMode
   children?: ReactNode
 }
 
 function usePagination(options: UsePaginationOptions): PaginationChildren {
-  const { current, count, siblingCount, children } = options
+  const { current, count, siblingCount, children, mode } = options
   const siblingRange = siblingCount * 2 + 1
   let start = Math.max(current - siblingCount, 1)
   let end = start + siblingRange - 1
@@ -55,14 +58,19 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
   const hasEndEllipsis = end < count
   const hasNext = current < count
 
-  const items = useMemo(() => makePageItems(start, end), [start, end])
+  const items = useMemo(
+    () => (mode === "simple" ? undefined : makePageItems(start, end)),
+    [start, end],
+  )
 
   const __children__: PaginationChildren = {
     previous: undefined,
     startEllipsis: undefined,
     items,
+    desc: mode === "simple" ? <Pagination.Desc /> : undefined,
     next: undefined,
   }
+
   Children.forEach(children, (child: ReactNode) => {
     // Skip is not Item of Pagination
     if (!isValidElement(child)) {
@@ -106,9 +114,12 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
 
 interface PaginationProps extends ViewProps {
   className?: string
+  prevText?: string
+  nextText?: string
   current?: number
   count?: number
   siblingCount?: number
+  mode?: PaginationMode
   children?: ReactNode
   onChange?: (page: number) => void
 }
@@ -116,18 +127,22 @@ interface PaginationProps extends ViewProps {
 function Pagination(props: PaginationProps) {
   const {
     className,
+    mode = "multi",
     current = 1,
+    prevText = "上一页",
+    nextText = "下一页",
     siblingCount = 2,
     count = 1,
     children,
     onChange,
     ...restProps
   } = props
-  const { previous, startEllipsis, items, endEllipsis, next } = usePagination({
+  const { previous, startEllipsis, items, endEllipsis, next, desc } = usePagination({
     current,
     siblingCount,
     count,
     children,
+    mode,
   })
 
   function emitClick(page: Pagination.Page) {
@@ -151,15 +166,23 @@ function Pagination(props: PaginationProps) {
       <PaginationContext.Provider
         value={{
           current,
+          prevText,
+          nextText,
           count,
           siblingCount,
           emitClick,
         }}
       >
         {previous}
-        {startEllipsis}
-        {items}
-        {endEllipsis}
+        {mode === "simple" ? (
+          desc
+        ) : (
+          <Fragment>
+            {startEllipsis}
+            {items}
+            {endEllipsis}
+          </Fragment>
+        )}
         {next}
       </PaginationContext.Provider>
     </View>
@@ -222,18 +245,18 @@ namespace Pagination {
       onClick,
       ...restProps
     } = props
-    const { current, emitClick } = useContext(PaginationContext)
+    const { current, prevText, nextText, emitClick } = useContext(PaginationContext)
     const active = page === current
 
     function renderChildren() {
       let __children__ = children
       if (__children__ === undefined) {
         if (type === ItemType.Previous) {
-          __children__ = "上一页"
+          __children__ = prevText
         } else if (type === ItemType.StartEllipsis || type === ItemType.EndEllipsis) {
           __children__ = "..."
         } else if (type === ItemType.Next) {
-          __children__ = "下一页"
+          __children__ = nextText
         } else if (type === ItemType.Page) {
           __children__ = page
         }
@@ -258,6 +281,16 @@ namespace Pagination {
         onClick={() => emitClick?.({ page, type: type as ItemType })}
         {...restProps}
       />
+    )
+  }
+
+  export function Desc() {
+    const { current, count } = useContext(PaginationContext)
+
+    return (
+      <View className={classNames(prefixClassname("pagination__desc"))}>
+        {current}/{count}
+      </View>
     )
   }
 }

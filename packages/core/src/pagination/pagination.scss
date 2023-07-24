@@ -64,4 +64,13 @@
     padding: $pagination-button-padding;
     cursor: pointer;
   }
+
+  &__desc {
+    flex: 1;
+    height: $pagination-height;
+    color: $pagination-desc-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

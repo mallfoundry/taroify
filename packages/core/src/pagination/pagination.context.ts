@@ -3,6 +3,8 @@ import { Page } from "./pagination.shared"
 
 interface PaginationContextValue {
   current: number
+  prevText: string
+  nextText: string
   count: number
   siblingCount: number
   emitClick?: (page: Page) => void
@@ -10,6 +12,8 @@ interface PaginationContextValue {
 
 const PaginationContext = createContext<PaginationContextValue>({
   current: 0,
+  prevText: "",
+  nextText: "",
   count: 0,
   siblingCount: 0,
 })
