@@ -17,8 +17,14 @@ import Navbar from "@taroify/core/navbar"
 ### 基础用法
 
 ```tsx
+<Navbar title="标题" />
+```
+
+### 返回上级
+
+```tsx
 <Navbar title="标题">
-  <Navbar.NavLeft>返回</Navbar.NavLeft>
+  <Navbar.NavLeft onClick={onClick}>返回</Navbar.NavLeft>
   <Navbar.NavRight>按钮</Navbar.NavRight>
 </Navbar>
 ```

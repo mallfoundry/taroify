@@ -8,6 +8,9 @@ export default function NavbarDemo() {
   return (
     <Page title="Navbar 导航栏" className="navbar-demo">
       <Block title="基础用法">
+        <Navbar title="标题" />
+      </Block>
+      <Block title="返回上级">
         <Navbar title="标题">
           <Navbar.NavLeft>返回</Navbar.NavLeft>
           <Navbar.NavRight>按钮</Navbar.NavRight>
