@@ -12,6 +12,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.9
+`2023-07-27`
+
+**Feature**
+
+- Pagination
+  - 新增 `prevText`、`nextText`、`mode` 属性 [#588](https://github.com/mallfoundry/taroify/pull/588)[@Pilotager](https://github.com/Pilotager)
+- Navbar
+  - 完善文档 [#587](https://github.com/mallfoundry/taroify/pull/587)[@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.0-alpha.8
 `2023-07-19`
 
