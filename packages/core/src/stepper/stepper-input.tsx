@@ -12,14 +12,20 @@ import StepperContext from "./stepper.context"
 interface StepperInputProps {
   width?: number | string
   disabled?: boolean
+  cursor?: number
   onFocus?: CommonEventFunction<InputProps.inputForceEventDetail>
 }
 
 function StepperInput(props: StepperInputProps) {
-  const { width, disabled: disabledProp, onFocus } = props
-  const { value: valueProp, size, disabled, precision = 0, formatValue, onChange } = useContext(
-    StepperContext,
-  )
+  const { width, disabled: disabledProp, cursor, onFocus } = props
+  const {
+    value: valueProp,
+    size,
+    disabled,
+    precision = 0,
+    formatValue,
+    onChange,
+  } = useContext(StepperContext)
   const digit = precision > 0
 
   const rootRef = useRef<HTMLElement>()
@@ -90,7 +96,8 @@ function StepperInput(props: StepperInputProps) {
       }}
       disabled={disabledProp || disabled}
       type={digit ? "digit" : "number"}
-      value={(value as unknown) as string}
+      cursor={cursor}
+      value={value as unknown as string}
       onTouchEnd={onTouchEnd}
       onFocus={handleFocus}
       onInput={onInput}
