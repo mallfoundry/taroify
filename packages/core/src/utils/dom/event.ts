@@ -27,7 +27,7 @@ interface ClientCoordinates {
 
 export function getClientCoordinates(event: ITouchEvent | MouseEvent): ClientCoordinates {
   // @ts-ignore
-  const { clientX, clientY, detail } = event
+  const { clientX, clientY, detail = {}, touchs = [] } = event
 
   if (clientX && clientY) {
     return {
@@ -35,5 +35,5 @@ export function getClientCoordinates(event: ITouchEvent | MouseEvent): ClientCoo
       clientY,
     }
   }
-  return detail;
+  return touchs[0] || { clientX: detail.x || detail.clientX, clientY: detail.y || detail.clientY };
 }
