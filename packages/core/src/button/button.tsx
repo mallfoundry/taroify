@@ -92,7 +92,7 @@ function useButtonChildren(options: UseButtonChildrenOptions = {}) {
             return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
           }
           return (
-            <View className={prefixClassname("button__text")}>{child}</View>
+            <View key={index} className={prefixClassname("button__text")}>{child}</View>
           )
         })
       }
