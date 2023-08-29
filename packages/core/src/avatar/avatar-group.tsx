@@ -14,13 +14,13 @@ import {
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
 import Avatar, { AvatarProps } from "./avatar"
-import { AvatarShape, AvatarSpacing } from "./avatar.shared"
+import { AvatarShape, AvatarSize, AvatarSpacing } from "./avatar.shared"
 
 const useAvatars = (
   children: ReactNode,
   shape: AvatarShape,
   limit: number,
-): [ReactNode[], number] => {
+): [ReactNode[], number, AvatarSize] => {
   return useMemo(() => {
     const avatars = Children.toArray(children) //
       .filter((child) => isValidElement(child) && isElementOf(child, Avatar))
@@ -28,6 +28,11 @@ const useAvatars = (
     const avatarsSize = _.size(avatars)
     const luckyAvatars: ReactNode[] = []
     const length = Math.min(avatarsSize, limit)
+
+    const size = avatars[length]
+      ? (avatars[length] as ReactElement<AvatarProps>).props.size || "medium"
+      : "medium"
+
     for (let index = 0; index < length; index++) {
       const child = _.get(avatars, index) as ReactChild
       const element = child as ReactElement<AvatarProps>
@@ -49,7 +54,7 @@ const useAvatars = (
         ),
       )
     }
-    return [luckyAvatars, avatarsSize]
+    return [luckyAvatars, avatarsSize, size]
   }, [children, limit, shape])
 }
 
@@ -71,7 +76,7 @@ export default function AvatarGroup(props: AvatarGroupProps) {
     total,
     children, //
   } = props
-  const [avatars, avatarsSize] = useAvatars(children, shape, limit)
+  const [avatars, avatarsSize, size] = useAvatars(children, shape, limit)
 
   return (
     <View
@@ -88,7 +93,7 @@ export default function AvatarGroup(props: AvatarGroupProps) {
     >
       {avatars}
       {avatarsSize >= limit && (
-        <Avatar shape={shape} style={{ zIndex: avatarsSize }}>
+        <Avatar shape={shape} size={size} style={{ zIndex: avatarsSize }}>
           +{total ? total - limit : avatarsSize - limit}
         </Avatar>
       )}
