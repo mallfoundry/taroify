@@ -27,6 +27,7 @@ import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject } from "./
 // 距离大于 `MOMENTUM_LIMIT_DISTANCE` 时，执行惯性滑动
 const MOMENTUM_LIMIT_TIME = 300
 const MOMENTUM_LIMIT_DISTANCE = 15
+const DEFAULT_DURATION = 200
 
 async function getElementTranslateY(element: Element) {
   const style = await getComputedStyle(element, ["transform", "webkitTransform"])
@@ -36,7 +37,7 @@ async function getElementTranslateY(element: Element) {
   return Number(translateY)
 }
 
-type PickerColumnDuration = "zero" | "switch" | "momentum"
+// type PickerColumnDuration = "zero" | "switch" | "momentum"
 
 export interface PickerColumnProps extends Omit<ViewProps, "children"> {
   value: any
@@ -67,6 +68,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const startOffsetRef = useRef<number>(0)
     const momentumOffsetRef = useRef<number>(0)
     const touchStartTimeRef = useRef<number>(0)
+    const currentDurationRef = useRef<number>(0)
 
     const transitionEndTriggerRef = useRef<() => void>()
 
@@ -76,7 +78,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const [activeOffset, setActiveOffset] = useState<number>(0)
     const activeOffsetRef = useToRef(activeOffset)
 
-    const [duration, setDuration] = useState<PickerColumnDuration>("zero")
+    // const [duration, setDuration] = useState<PickerColumnDuration>("zero")
 
     const baseOffset = useMemo(() => (itemHeight * (6 - 1)) / 2, [])
 
@@ -155,7 +157,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
         distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
         const index = getIndexByOffset(distance)
-        setDuration("momentum")
+        // setDuration("momentum")
+        currentDurationRef.current = 1000
         setIndex(index, true)
       },
       [activeOffset, getIndexByOffset, setIndex],
@@ -163,7 +166,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
     const stopMomentum = useCallback(() => {
       movingRef.current = false
-      setDuration("zero")
+      // setDuration("zero")
+      currentDurationRef.current = 0
 
       if (transitionEndTriggerRef.current) {
         transitionEndTriggerRef.current?.()
@@ -178,7 +182,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         }
 
         transitionEndTriggerRef.current = undefined
-        setDuration("switch")
+        currentDurationRef.current = DEFAULT_DURATION
+        // setDuration("switch")
         setIndex(index, true)
       },
       [readonly, setIndex],
@@ -200,9 +205,10 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         startOffsetRef.current = activeOffset
       }
 
+      currentDurationRef.current = 0
       touchStartTimeRef.current = Date.now()
       momentumOffsetRef.current = startOffsetRef.current
-      setDuration("zero")
+      // setDuration("zero")
     }
 
     const handleTouchMove = (event) => {
@@ -247,7 +253,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       }
 
       const index = getIndexByOffset(activeOffset)
-      setDuration("switch")
+      currentDurationRef.current = DEFAULT_DURATION
+      // setDuration("switch")
       setIndex(index, true)
 
       // compatible with desktop scenario
@@ -260,6 +267,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const wrapperStyle = useMemo(
       () => ({
         transform: `translate3d(0, ${addUnitPx(activeOffset + baseOffset)}, 0)`,
+        transitionDuration: `${currentDurationRef.current}ms`,
+        transitionProperty: currentDurationRef.current ? "all" : "none",
       }),
       [activeOffset, baseOffset],
     )
@@ -298,9 +307,9 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
           ref={wrapperRef}
           style={wrapperStyle}
           className={classNames(prefixClassname("picker-column__wrapper"), {
-            [prefixClassname("picker-column__wrapper--zero")]: duration === "zero",
-            [prefixClassname("picker-column__wrapper--momentum")]: duration === "momentum",
-            [prefixClassname("picker-column__wrapper--switch")]: duration === "switch",
+            // [prefixClassname("picker-column__wrapper--zero")]: duration === "zero",
+            // [prefixClassname("picker-column__wrapper--momentum")]: duration === "momentum",
+            // [prefixClassname("picker-column__wrapper--switch")]: duration === "switch",
           })}
           onTransitionEnd={stopMomentum}
         >

@@ -11,9 +11,9 @@ $picker-confirm-action-color: var(--text-link-color, $primary-color);
 $picker-cancel-action-color: var(--gray-6, $gray-6);
 //
 $picker-swipe-transition-duration: var(--picker-swipe-transition-duration, 800ms);
-$picker-column-transition-zero-duration: var(--picker-column-transition-zero-duration, 0);
-$picker-column-transition-switch-duration: var(--picker-column-transition-switch-duration, 200ms);
-$picker-column-transition-duration: var(--picker-column-transition-duration, $picker-swipe-transition-duration);
+//$picker-column-transition-zero-duration: var(--picker-column-transition-zero-duration, 0);
+//$picker-column-transition-switch-duration: var(--picker-column-transition-switch-duration, 200ms);
+//$picker-column-transition-duration: var(--picker-column-transition-duration, $picker-swipe-transition-duration);
 //
 $picker-option-color: var(--black, $black);
 $picker-option-padding: 0 var(--padding-base, $padding-base);
