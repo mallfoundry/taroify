@@ -12,13 +12,42 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.0-alpha.12
+`2023-09-04`
+
+**Bug Fixes**
+
+- Button
+  - 消除 `key` 警告 [#596](https://github.com/mallfoundry/taroify/pull/596) [@rtmax0](https://github.com/rtmax0)
+- Avatar
+  - 修复群组使用 `size` 属性时最后一个元素尺寸问题 [#600](https://github.com/mallfoundry/taroify/pull/600) [@Pilotager](https://github.com/Pilotager)
+- Picker
+  - 修复滚动时卡顿问题 [#601](https://github.com/mallfoundry/taroify/pull/601) [@Pilotager](https://github.com/Pilotager)
+
+### v0.1.0-alpha.11
+`2023-08-21`
+
+**Bug Fixes**
+
+- IndexList
+  - 修复微信小程序端点击事件报错 [#592](https://github.com/mallfoundry/taroify/pull/592) [@450669540](https://github.com/450669540)
+
+
+### v0.1.0-alpha.10
+`2023-08-11`
+
+**Feature**
+
+- Stepper
+  - 新增 `cursor` 属性 [#590](https://github.com/mallfoundry/taroify/pull/590) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.0-alpha.9
 `2023-07-27`
 
 **Feature**
 
 - Pagination
-  - 新增 `prevText`、`nextText`、`mode` 属性 [#588](https://github.com/mallfoundry/taroify/pull/588)[@Pilotager](https://github.com/Pilotager)
+  - 新增 `prevText`、`nextText`、`mode` 属性 [#588](https://github.com/mallfoundry/taroify/pull/588) [@Pilotager](https://github.com/Pilotager)
 - Navbar
   - 完善文档 [#587](https://github.com/mallfoundry/taroify/pull/587)[@Pilotager](https://github.com/Pilotager)
 
