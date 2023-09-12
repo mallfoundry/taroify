@@ -18,6 +18,7 @@ import {
   ButtonShape,
   ButtonSize,
   ButtonVariant,
+  IconPosition,
 } from "./button.shared"
 
 function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): ReactNode {
@@ -68,20 +69,25 @@ interface UseButtonChildrenOptions {
   children?: ReactNode
   loading?: ReactNode
   icon?: ReactNode
+  iconPosition?: IconPosition
 }
 
 function useButtonChildren(options: UseButtonChildrenOptions = {}) {
-  const { loading, icon: iconProp, children } = options
+  const { loading, icon: iconProp, children, iconPosition } = options
   if (isElementOf(children, ButtonContent)) {
     return children
   }
   const childrenArray = Children.toArray(children)
   const lastIndex = _.size(childrenArray) - 1
 
-  const icon = appendButtonIconClassname(iconProp, prefixClassname("button__icon--right"))
+  const icon = appendButtonIconClassname(
+    iconProp,
+    prefixClassname(iconPosition === "left" ? "button__icon--right" : "button__icon--left"),
+  )
   return (
     <ButtonContent>
-      {loading || icon}
+      {loading}
+      {iconPosition === "left" && icon}
       {
         //
         _.map(childrenArray, (child, index) => {
@@ -92,10 +98,13 @@ function useButtonChildren(options: UseButtonChildrenOptions = {}) {
             return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
           }
           return (
-            <View key={index} className={prefixClassname("button__text")}>{child}</View>
+            <View key={index} className={prefixClassname("button__text")}>
+              {child}
+            </View>
           )
         })
       }
+      {iconPosition === "right" && icon}
     </ButtonContent>
   )
 }
@@ -124,6 +133,7 @@ export interface ButtonProps
   hairline?: boolean
   disabled?: boolean
   icon?: ReactNode
+  iconPosition?: IconPosition
   children?: ReactNode
 }
 
@@ -141,6 +151,7 @@ export default function Button(props: ButtonProps) {
     disabled: disabledProp,
     loading: loadingProp,
     icon,
+    iconPosition = "left",
     children: childrenProp,
     onClick,
     ...restProps
@@ -162,7 +173,7 @@ export default function Button(props: ButtonProps) {
   const disabled = useButtonPropertyValue(disabledProp, disabledCtx)
 
   const loading = useButtonLoading(loadingProp)
-  const children = useButtonChildren({ children: childrenProp, loading, icon })
+  const children = useButtonChildren({ children: childrenProp, loading, icon, iconPosition })
 
   return (
     <View

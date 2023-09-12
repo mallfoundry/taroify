@@ -278,15 +278,23 @@
     }
   }
 
-  &__icon--right+,
-  &__loading--right+ {
-    .#{$component-prefix}button__text {
+  &__text+ {
+    .#{$component-prefix}button__icon--left {
       margin-left: var(--padding-base, $padding-base);
     }
   }
 
-  &__loading--left,
-  &__icon--left {
-    margin-left: var(--padding-base, $padding-base);
+  &__loading--left+,
+  &__icon--left+ {
+    .#{$component-prefix}button__text {
+      margin-right: var(--padding-base, $padding-base);
+    }
+  }
+
+  &__loading--right+,
+  &__icon--right+ {
+    .#{$component-prefix}button__text {
+      margin-left: var(--padding-base, $padding-base);
+    }
   }
 }

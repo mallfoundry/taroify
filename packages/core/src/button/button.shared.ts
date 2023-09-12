@@ -8,6 +8,8 @@ export type ButtonColor = "default" | "primary" | "info" | "success" | "warning"
 
 export type ButtonShape = "square" | "round"
 
+export type IconPosition = "left" | "right"
+
 export type ButtonThemeVars = {
   buttonLineHeight?: string
   buttonBorderWidth?: string
