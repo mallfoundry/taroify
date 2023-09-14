@@ -142,7 +142,7 @@ export default function ButtonDemo() {
           <Button variant="contained" color="primary" icon={<ShopOutlined />}>
             主要按钮
           </Button>
-          <Button variant="outlined" color="primary" icon={<ShopOutlined />}>
+          <Button variant="outlined" color="primary" icon={<ShopOutlined />} iconPosition="right">
             轮廓按钮
           </Button>
         </Space>
@@ -171,13 +171,15 @@ export default function ButtonDemo() {
       </Block>
       <Block title="自定义颜色">
         <Space>
-          <Button style={{ backgroundColor: "#7232dd", color: "#fff", borderColor: "#7232dd" }}>单色按钮</Button>
+          <Button style={{ backgroundColor: "#7232dd", color: "#fff", borderColor: "#7232dd" }}>
+            单色按钮
+          </Button>
           <Button style={{ borderColor: "#7232dd", color: "#7232dd" }}>单色按钮</Button>
           <Button
             style={{
               background: "linear-gradient(to right, #ff6034, #ee0a24)",
               color: "#fff",
-              border: 0
+              border: 0,
             }}
           >
             渐变色按钮
