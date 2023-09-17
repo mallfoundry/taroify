@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.0
+`2023-09-17`
+
+**Feature**
+
+- Button
+  - 添加 `iconPosition` 属性 [#606](https://github.com/mallfoundry/taroify/pull/606) [@Pilotager](https://github.com/Pilotager)
+- Taro 版本升级为 v3.6.16 [#607](https://github.com/mallfoundry/taroify/pull/607) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.0-alpha.12
 `2023-09-04`
 
