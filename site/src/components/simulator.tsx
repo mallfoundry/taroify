@@ -44,7 +44,7 @@ function resolveComponentPath(componentName: string) {
 
 function h5Root() {
   if (process.env.NODE_ENV === "development") {
-    return "//localhost:10086/index.html"
+    return `//localhost:${process.env.GATSBY_DEMO_PORT}/index.html`
   }
   return "/taroify.com/h5/index.html"
 }
