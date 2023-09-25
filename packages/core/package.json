@@ -22,8 +22,8 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@taroify/hooks": "^0.1.0-alpha.12",
-    "@taroify/icons": "^0.1.0-alpha.12",
+    "@taroify/hooks": "^0.1.1-alpha.0",
+    "@taroify/icons": "^0.1.1-alpha.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "promise": "^8.1.0",

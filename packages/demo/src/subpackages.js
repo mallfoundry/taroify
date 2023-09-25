@@ -181,6 +181,11 @@ const subpackages = [
         path: "floating-panel/index",
       },
       {
+        title: "FloatingBubble 浮动气泡",
+        name: "FloatingBubble",
+        path: "floating-bubble/index",
+      },
+      {
         title: "Loading 加载",
         name: "Loading",
         path: "loading/index",

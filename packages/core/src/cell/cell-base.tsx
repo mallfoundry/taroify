@@ -34,7 +34,6 @@ function CellBase(props: CellBaseProps) {
   } = props
 
   const { clickable } = useContext(CellGroupContext)
-
   return (
     <View
       className={classNames(

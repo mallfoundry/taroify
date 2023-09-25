@@ -26,6 +26,7 @@ export interface TouchRef {
   deltaY: number
   offsetX: number
   offsetY: number
+  isTap: boolean
   direction?: TouchDirection
 
   isVertical(): boolean
@@ -39,6 +40,8 @@ export interface TouchRef {
   reset(): void
 }
 
+const TAP_OFFSET = 5
+
 export function useTouch() {
   const touchRef = useRef<TouchRef>({
     startX: 0,
@@ -47,6 +50,7 @@ export function useTouch() {
     deltaY: 0,
     offsetX: 0,
     offsetY: 0,
+    isTap: true,
     isVertical: () => false,
     isHorizontal: () => false,
     start: emptyFunction,
@@ -67,6 +71,7 @@ export function useTouch() {
     touchRef.current.offsetX = 0
     touchRef.current.offsetY = 0
     touchRef.current.direction = undefined
+    touchRef.current.isTap = true
   }, [])
 
   const start = useCallback(
@@ -88,6 +93,13 @@ export function useTouch() {
 
     if (!touchRef.current.direction) {
       touchRef.current.direction = getDirection(touchRef.current.offsetX, touchRef.current.offsetY)
+    }
+
+    if (
+      touchRef.current.isTap &&
+      (touchRef.current.offsetX > TAP_OFFSET || touchRef.current.offsetY > TAP_OFFSET)
+    ) {
+      touchRef.current.isTap = false
     }
   }, [])
 
