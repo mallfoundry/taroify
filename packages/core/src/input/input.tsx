@@ -161,7 +161,7 @@ function Input(props: InputProps) {
             // [prefixClassname("input__placeholder--danger")]: color === "danger",
           },
         )}
-        disabled={disabled || readonly}
+        disabled={disabled}
         readonly={readonly}
         color={color}
         value={value}

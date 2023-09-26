@@ -23,6 +23,7 @@ function NativeInput(props: NativeInputProps) {
           },
           nativeClassname,
         ),
+        readonly,
         ...restNativeProps,
       }}
       {...restProps}
