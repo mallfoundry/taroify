@@ -93,6 +93,7 @@ export interface PopupProps extends ViewProps {
 
   onTransitionEnter?: EnterHandler<HTMLElement>
   onTransitionEntered?: EnterHandler<HTMLElement>
+  onTransitionExit?: ExitHandler<HTMLElement>
   onTransitionExited?: ExitHandler<HTMLElement>
 }
 
@@ -113,6 +114,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     onClose,
     onTransitionEnter,
     onTransitionEntered,
+    onTransitionExit,
     onTransitionExited,
     ...restProps
   } = props
@@ -145,6 +147,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         mountOnEnter={mountOnEnter}
         onEnter={onTransitionEnter}
         onEntered={onTransitionEntered}
+        onExit={onTransitionExit}
         onExited={onTransitionExited}
       >
         <View

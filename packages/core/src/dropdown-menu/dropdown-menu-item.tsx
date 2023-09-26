@@ -4,7 +4,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState } from "react"
+import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState, useEffect, useRef } from "react"
 import { ExitHandler } from "react-transition-group/Transition"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
@@ -24,6 +24,11 @@ export interface DropdownMenuItemProps extends ViewProps {
 
   onChange?(value: any | any[]): void
 
+  onOpen?(): void
+  onClose?(): void
+  onOpened?(): void
+  onClosed?(): void
+  /** @deprecated */
   onTransitionExited?: ExitHandler<HTMLElement>
 }
 
@@ -35,6 +40,10 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     value: valueProp,
     disabled,
     children,
+    onOpen,
+    onClose,
+    onOpened,
+    onClosed,
     onChange: onChangeProp,
     onTransitionExited,
     ...restProps
@@ -123,10 +132,20 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
           open={_.isBoolean(active) && active}
           className={prefixClassname("dropdown-menu-item__content")}
           placement={down ? "top" : "bottom"}
-          onTransitionEnter={() => setOpened(true)}
+          onTransitionEnter={() => {
+            setOpened(true)
+            onOpen?.()
+          }}
+          onTransitionEntered={() => {
+            onOpened?.()
+          }}
+          onTransitionExit={() => {
+            onClose?.()
+          }}
           onTransitionExited={(...args) => {
             setOpened(false)
             onTransitionExited?.(...args)
+            onClosed?.()
           }}
         >
           <Popup.Backdrop style={{ position: "absolute" }} onClick={toggleItem} />

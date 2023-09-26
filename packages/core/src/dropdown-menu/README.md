@@ -177,6 +177,10 @@ function DisabledDropdownMenu() {
 | 事件名 | 说明                          | 回调参数 |
 | ------ | ----------------------------- | -------- |
 | onChange | 点击选项导致 value 变化时触发 | _value: any_    |
+| onOpen | 打开菜单栏时触发 | - |
+| onClose | 关闭菜单栏时触发 | - |
+| onOpened | 打开菜单栏且动画结束后触发 | - |
+| onClosed | 关闭菜单栏且动画结束后触发 | - |
 
 ### DropdownMenu.Option Props
 
