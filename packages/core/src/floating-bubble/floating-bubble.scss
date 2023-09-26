@@ -1,0 +1,32 @@
+@import "./variables";
+
+.#{$component-prefix}floating-bubble {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: $floating-bubble-initial-gap;
+  bottom: $floating-bubble-initial-gap;
+  width: $floating-bubble-size;
+  height: $floating-bubble-size;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  background: $floating-bubble-background;
+  color: $floating-bubble-color;
+  border-radius: $floating-bubble-border-radius;
+  z-index: $floating-bubble-z-index;
+  transition: $floating-bubble-duration;
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &__icon {
+    font-size: $floating-bubble-icon-size;
+  }
+}

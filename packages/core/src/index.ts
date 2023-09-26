@@ -2,7 +2,7 @@
 export { default as Button } from "./button"
 export { default as Cell } from "./cell"
 export { default as ConfigProvider } from "./config-provider"
-export type { ConfigProviderThemeVars } from './config-provider'
+export type { ConfigProviderThemeVars } from "./config-provider"
 export { default as Col } from "./col"
 export { default as Row } from "./row"
 export { default as Flex } from "./flex"
@@ -46,6 +46,7 @@ export { default as PullRefresh } from "./pull-refresh"
 export { default as ShareSheet } from "./share-sheet"
 export { default as SwipeCell } from "./swipe-cell"
 export { default as FloatingPanel } from "./floating-panel"
+export { default as FloatingBubble } from "./floating-bubble"
 // Display Components
 export { default as Avatar } from "./avatar"
 export { default as Badge } from "./badge"

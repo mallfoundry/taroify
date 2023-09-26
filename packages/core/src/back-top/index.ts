@@ -1,3 +1,3 @@
 export { default } from "./back-top"
 
-export type { BackTopThemeVars } from './back-top.shared'
+export type { BackTopThemeVars } from "./back-top.shared"

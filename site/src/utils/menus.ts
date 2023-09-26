@@ -169,6 +169,10 @@ const menus = [
         to: "/components/floating-panel/",
       },
       {
+        title: "FloatingBubble 浮动气泡",
+        to: "/components/floating-bubble/",
+      },
+      {
         title: "Loading 加载",
         to: "/components/loading/",
       },

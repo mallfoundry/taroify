@@ -9,6 +9,7 @@ import { prefixClassname } from "../styles"
 import { useTouch } from "../utils/touch"
 import { addUnitPx } from "../utils/format/unit"
 import { preventDefault } from "../utils/dom/event"
+import { closest } from "../utils/closest"
 
 const DAMP = 0.2
 
@@ -43,9 +44,6 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
   const touch = useTouch()
 
   const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
-
-  const closest = (arr: number[], target: number) =>
-    arr.reduce((pre, cur) => (Math.abs(pre - target) < Math.abs(cur - target) ? pre : cur))
 
   const ease = (moveY: number): number => {
     const absDistance = Math.abs(moveY)
