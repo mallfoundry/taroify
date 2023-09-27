@@ -4,7 +4,7 @@ const { buildTypescript, watchTypescript, watchTypescriptSymlink } = require("./
 const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
 const { buildScss, watchScss, watchScssSymlink } = require("./scss")
 const { createBundle, cleanBundle } = require("./bundle")
-const { serveDemo, serveSite } = require("./serve")
+const { detectPort, serveDemo, serveSite } = require("./serve")
 const { copyFontFiles } = require("./font")
 const { buildH5, buildSite, copyH5, copySite, copyGitIgnore } = require("./www")
 
@@ -51,11 +51,14 @@ exports.clean = series(
   }),
 )
 
-exports.develop = parallel(
-  createBundles, //
-  watchSymlink,
-  serveDemo,
-  serveSite,
+exports.develop = series(
+  detectPort,
+  parallel(
+    createBundles, //
+    watchSymlink,
+    serveDemo,
+    serveSite,
+  )
 )
 
 exports.watch = watch

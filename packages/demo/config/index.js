@@ -55,6 +55,9 @@ const config = {
         },
       },
     },
+    devServer: {
+      open: false
+    },
     output: {
       filename: "js/[name].[hash:8].js",
       chunkFilename: "chunk/[name].[chunkhash:8].js",
