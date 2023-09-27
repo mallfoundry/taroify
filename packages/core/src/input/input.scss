@@ -42,7 +42,10 @@
 
   &--readonly,
   &__placeholder--readonly {
-    color: $input-color;
+    color: $input-readonly-color;
+    opacity: 1;
+    // fix disabled color in mobile safari
+    -webkit-text-fill-color: $input-readonly-color;
   }
 
   &--readonly {
