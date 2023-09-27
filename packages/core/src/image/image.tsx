@@ -2,9 +2,10 @@ import { Image as TaroImage, View, ViewProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useCallback, useEffect, useMemo, useState } from "react"
+import { ReactNode, useEffect, useMemo, useState, useRef } from "react"
 import { prefixClassname } from "../styles"
 import { getLogger } from "../utils/logger"
+import { useMemoizedFn } from "../hooks"
 import ImagePlaceholder from "./image-placeholder"
 import { ImageMode, ImageShape } from "./image.shared"
 
@@ -69,28 +70,42 @@ export default function Image(props: ImageProps) {
     onError,
     ...restProps
   } = props
+  const taroImageRef = useRef<any>()
   const taroMode = useImageMode(mode)
   const shape = useImageShape(shapeProp, round)
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
-
-  useEffect(() => setLoading(true), [src])
-
-  const handleLoad = useCallback(() => {
-    onLoad?.()
-    setLoading(false)
-  }, [onLoad])
-
-  const handleError = useCallback(() => {
+  const isLoadedRef = useRef(false)
+  const handleLoad = useMemoizedFn(() => {
+    if (!isLoadedRef.current) {
+      isLoadedRef.current = true
+      onLoad?.()
+      setLoading(false)
+    }
+  })
+  const handleError = useMemoizedFn(() => {
     onError?.()
     setLoading(false)
     setFailed(true)
-  }, [onError])
+  })
 
+  useEffect(() => {
+    isLoadedRef.current = false
+    setLoading(true)
+  }, [src])
+
+  useEffect(() => {
+    const nativeImg = taroImageRef.current?.children?.[0] as HTMLImageElement
+    if (nativeImg && nativeImg.complete) {
+      handleLoad()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       {!failed && src && (
         <TaroImage
+          ref={taroImageRef}
           src={src as string}
           mode={(taroMode as unknown) as undefined}
           lazyLoad={lazyLoad}
