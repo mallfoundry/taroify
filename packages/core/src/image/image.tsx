@@ -75,9 +75,13 @@ export default function Image(props: ImageProps) {
   const shape = useImageShape(shapeProp, round)
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
+  const isLoadedRef = useRef(false)
   const handleLoad = useMemoizedFn(() => {
-    onLoad?.()
-    setLoading(false)
+    if (!isLoadedRef.current) {
+      isLoadedRef.current = true
+      onLoad?.()
+      setLoading(false)
+    }
   })
   const handleError = useMemoizedFn(() => {
     onError?.()
@@ -86,14 +90,17 @@ export default function Image(props: ImageProps) {
   })
 
   useEffect(() => {
+    isLoadedRef.current = false
+    setLoading(true)
+  }, [src])
+
+  useEffect(() => {
     const nativeImg = taroImageRef.current?.children?.[0] as HTMLImageElement
     if (nativeImg && nativeImg.complete) {
       handleLoad()
-    } else {
-      setLoading(true)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       {!failed && src && (
