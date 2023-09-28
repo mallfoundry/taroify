@@ -4,7 +4,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState, useEffect, useRef } from "react"
+import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState } from "react"
 import { ExitHandler } from "react-transition-group/Transition"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
@@ -55,9 +55,12 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     onChange: onChangeProp,
   })
 
-  const { direction = "down", itemOffset, isItemToggle, toggleItem: triggerItem } = useContext(
-    DropdownMenuContext,
-  )
+  const {
+    direction = "down",
+    itemOffset,
+    isItemToggle,
+    toggleItem: triggerItem,
+  } = useContext(DropdownMenuContext)
 
   const active = useMemo(() => isItemToggle?.(dataKey), [dataKey, isItemToggle])
 
