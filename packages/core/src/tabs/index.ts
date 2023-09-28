@@ -2,7 +2,7 @@ import TabPane from "./tab-pane"
 import TabsElement, { TabsProps } from "./tabs"
 import { TabEvent as SharedTabEvent } from "./tabs.shared"
 
-export type { TabThemeVars } from './tabs.shared'
+export type { TabThemeVars } from "./tabs.shared"
 
 interface TabsInterface {
   (props: TabsProps): JSX.Element

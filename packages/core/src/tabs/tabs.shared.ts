@@ -1,4 +1,4 @@
-import { Key, ReactNode } from "react"
+import { ReactNode } from "react"
 
 export type TabsTheme = "line" | "card"
 
@@ -9,7 +9,7 @@ export interface TabEvent {
 }
 
 export interface TabObject {
-  key: Key
+  key: string | number
   index: number
   value: any
   className?: string

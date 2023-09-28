@@ -159,7 +159,7 @@ function Tabs(props: TabsProps) {
         onTabClick={handleTabClick}
       />
     ),
-    [bordered, ellipsis, handleTabClick, tabObjects, theme, value],
+    [bordered, ellipsis, handleTabClick, tabObjects, theme, value, swipeThreshold],
   )
 
   return (
