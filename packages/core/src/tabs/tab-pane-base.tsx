@@ -17,7 +17,7 @@ interface TabPaneBaseProps extends ViewProps {
 
 export default function TabPaneBase(props: TabPaneBaseProps) {
   const { className, style, index, value, children, ...restProps } = props
-  const { index: activeIndex, value: activeValue, lazyRender, animated, swipeable } = useContext(
+  const { value: activeValue, lazyRender, animated, swipeable } = useContext(
     TabsContext,
   )
 
@@ -34,16 +34,11 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
       return true
     }
 
-    if ((index - 1 === activeIndex || index + 1 === activeIndex) && !initializedRef.current) {
-      initializedRef.current = true
-      return true
-    }
-
     if (active && !initializedRef.current) {
       initializedRef.current = true
     }
     return active
-  }, [active, activeIndex, index, lazyRender])
+  }, [active, lazyRender])
 
   const tabPane = (
     <View
