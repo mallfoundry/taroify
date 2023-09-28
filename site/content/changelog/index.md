@@ -12,6 +12,29 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.1
+`2023-09-29`
+
+**New Component**
+
+- 新增 FloatingBubble 组件 [#610](https://github.com/mallfoundry/taroify/pull/610) [@Pilotager](https://github.com/Pilotager)
+
+**Feature**
+
+- DropdownMenu
+  - 新增 `onOpen` `onClose` `onOpened` `onClosed` 事件 [#612](https://github.com/mallfoundry/taroify/pull/612) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Input
+  - 修复设置readonly属性的，原生input dom上是disabled，会导致无法聚焦触发onClick，电脑上h5调试打不开Picker [#613](https://github.com/mallfoundry/taroify/pull/613) [@hbztd](https://github.com/hbztd)
+
+- Image
+  - 修复 img onload 不一定触发问题 [#614](https://github.com/mallfoundry/taroify/pull/614) [@hbztd](https://github.com/hbztd)
+
+- Tabs
+  - Tabs设置lazyRender属性后，会加载当前，前后选项卡，和预期不符(延迟渲染未展示的选项卡) [#615](https://github.com/mallfoundry/taroify/pull/615) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.0
 `2023-09-17`
 
