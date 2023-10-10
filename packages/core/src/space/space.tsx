@@ -16,6 +16,7 @@ interface SpaceProps extends ViewProps {
   justify?: SpaceJustify
   wrap?: SpaceWrap
   children?: ReactNode
+  fill?: boolean
 }
 
 function normalizeSize(size: SpaceSize) {
@@ -38,6 +39,7 @@ export default function Space(props: SpaceProps) {
     align,
     direction = "horizontal",
     wrap = "wrap",
+    fill,
     children,
     ...restProps
   } = props
@@ -81,6 +83,8 @@ export default function Space(props: SpaceProps) {
               [prefixClassname("space__item--small")]: size === "small",
               [prefixClassname("space__item--medium")]: size === "medium",
               [prefixClassname("space__item--large")]: size === "large",
+
+              [prefixClassname("space__item--fill")]: fill,
             })}
             children={item}
           />

@@ -20,6 +20,10 @@
     &--large {
       margin-bottom: $space-item-vertical-gap-large;
     }
+
+    &--fill {
+      width: 100%;
+    }
   }
 
   &--horizontal {

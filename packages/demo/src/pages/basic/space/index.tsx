@@ -14,10 +14,10 @@ export default function SpaceDemo() {
         </Space>
       </Block>
       <Block title="垂直">
-        <Space direction="vertical">
-          <Button color="primary">主要按钮</Button>
-          <Button color="primary">主要按钮</Button>
-          <Button color="primary">主要按钮</Button>
+        <Space direction="vertical" fill>
+          <Button color="primary" block>主要按钮</Button>
+          <Button color="primary" block>主要按钮</Button>
+          <Button color="primary" block>主要按钮</Button>
         </Space>
       </Block>
       <Block title="间距">
