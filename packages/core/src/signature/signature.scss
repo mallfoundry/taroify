@@ -1,0 +1,21 @@
+@import "./variables";
+
+.#{$component-prefix}signature {
+  padding: $signature-padding;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $signature-content-height;
+    background-color: $signature-content-background;
+    border: $signature-content-border;
+    border-radius: $signature-border-radius;
+    overflow: hidden;
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

@@ -135,6 +135,10 @@ const menus = [
         to: "/components/slider/",
       },
       {
+        title: "Signature 签名",
+        to: "/components/signature/",
+      },
+      {
         title: "Stepper 步进器",
         to: "/components/stepper/",
       },

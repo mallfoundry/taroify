@@ -1,0 +1,8 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$signature-padding: var(--signature-padding, $padding-xs);
+$signature-content-height: var(--signature-content-height, 200px * $hd);
+$signature-content-background: var(--signature-content-background, $background-color-2);
+$signature-content-border: var(--signature-content-border, 1px dotted #dadada);
+$signature-border-radius: var(--signature-border-radius, $border-radius-lg);

@@ -140,6 +140,11 @@ const subpackages = [
         path: "slider/index",
       },
       {
+        title: "Signature 签名",
+        name: "Signature",
+        path: "signature/index",
+      },
+      {
         title: "Stepper 步进器",
         name: "Stepper",
         path: "stepper/index",
