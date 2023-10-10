@@ -20,7 +20,7 @@ export default function SpaceDemo() {
           <Button color="primary">主要按钮</Button>
         </Space>
       </Block>
-      <Block title="间隙">
+      <Block title="间距">
         <Space size="small">
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>
