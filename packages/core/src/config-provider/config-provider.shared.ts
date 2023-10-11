@@ -42,6 +42,7 @@ export type ConfigProviderThemeVars = import("../action-sheet").ActionSheetTheme
   import("../share-sheet").ShareSheetThemeVars &
   import("../sheet").SheetThemeVars &
   import("../sidebar").SidebarThemeVars &
+  import("../signature").SignatureThemeVars &
   import("../skeleton").SkeletonThemeVars &
   import("../slider").SliderThemeVars &
   import("../space").SpaceThemeVars &
