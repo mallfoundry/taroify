@@ -1,6 +1,6 @@
 export type SpaceDirection = "horizontal" | "vertical"
 
-export type SpaceSize = "mini" | "small" | "medium" | "large"
+export type SpaceSize = "mini" | "small" | "medium" | "large" | number | [number, number?]
 
 export type SpaceJustify = "start" | "center" | "end" | "space-around" | "space-between"
 

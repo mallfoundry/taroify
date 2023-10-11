@@ -1,6 +1,8 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
+import { useMemo } from "react"
 import * as React from "react"
+import { pxTransform } from "@tarojs/taro"
 import { Children, CSSProperties, ReactNode } from "react"
 import Flex from "../flex"
 import { prefixClassname } from "../styles"
@@ -14,19 +16,35 @@ interface SpaceProps extends ViewProps {
   justify?: SpaceJustify
   wrap?: SpaceWrap
   children?: ReactNode
+  fill?: boolean
+}
+
+function normalizeSize(size: SpaceSize) {
+  if (Array.isArray(size)) {
+    return ["", pxTransform(size[0]), pxTransform(size[1]!)]
+  } else if (typeof size === "number") {
+    return ["", pxTransform(size), pxTransform(size)]
+  }  else if (["mini", "small", "medium", "large"].includes(size)) {
+    return [size]
+  } else {
+    return ["small"]
+  }
 }
 
 export default function Space(props: SpaceProps) {
   const {
     className,
-    size = "small",
+    size: _size = "small",
     justify,
     align,
     direction = "horizontal",
     wrap = "wrap",
+    fill,
     children,
     ...restProps
   } = props
+
+  const [size, gapX, gapY] = useMemo(() => normalizeSize(_size), [_size])
 
   return (
     <Flex
@@ -56,11 +74,17 @@ export default function Space(props: SpaceProps) {
         Children.map(children, (item, index) => (
           <Flex.Item
             key={index}
+            style={{
+              marginRight: gapX,
+              marginBottom: gapY
+            }}
             className={classNames(prefixClassname("space__item"), {
               [prefixClassname("space__item--mini")]: size === "mini",
               [prefixClassname("space__item--small")]: size === "small",
               [prefixClassname("space__item--medium")]: size === "medium",
               [prefixClassname("space__item--large")]: size === "large",
+
+              [prefixClassname("space__item--fill")]: fill,
             })}
             children={item}
           />

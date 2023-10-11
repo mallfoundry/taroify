@@ -14,13 +14,13 @@ export default function SpaceDemo() {
         </Space>
       </Block>
       <Block title="垂直">
-        <Space direction="vertical">
-          <Button color="primary">主要按钮</Button>
-          <Button color="primary">主要按钮</Button>
-          <Button color="primary">主要按钮</Button>
+        <Space direction="vertical" fill>
+          <Button color="primary" block>主要按钮</Button>
+          <Button color="primary" block>主要按钮</Button>
+          <Button color="primary" block>主要按钮</Button>
         </Space>
       </Block>
-      <Block title="间隙">
+      <Block title="间距">
         <Space size="mini">
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>
@@ -37,6 +37,23 @@ export default function SpaceDemo() {
           <Button color="primary">主要按钮</Button>
         </Space>
         <Space size="large">
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+        </Space>
+      </Block>
+      <Block title="自定义间隔">
+        <Space size={16}>
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+        </Space>
+        <Space size={[16, 32]}>
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+          <Button color="primary">主要按钮</Button>
+        </Space>
+        <Space size={[16]}>
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>
           <Button color="primary">主要按钮</Button>
