@@ -1,6 +1,6 @@
 {
   "name": "@taroify/babel-preset",
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.1-alpha.2",
   "private": true,
   "dependencies": {
     "@babel/cli": "^7.15.0",
