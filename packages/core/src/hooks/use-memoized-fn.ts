@@ -9,7 +9,7 @@ type PickFunction<T extends noop> = (
 
 export default function useMemoizedFn<T extends noop>(fn: T) {
   const fnRef = useRef(fn)
-  fnRef.current = fn
+  // fnRef.current = fn
   fnRef.current = useMemo(() => fn, [fn]);
 
   const memoizedFn = useRef<PickFunction<T>>();

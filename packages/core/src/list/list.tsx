@@ -1,15 +1,18 @@
 import { useGetter, useToRef } from "@taroify/hooks"
-import { View } from "@tarojs/components"
+import { View, ScrollView } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
+import { forwardRef, ForwardedRef, useImperativeHandle } from "react"
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from "react"
-import { useMounted } from "../hooks"
+import { nextTick, usePageScroll } from "@tarojs/taro"
+import { useMemoizedFn, useDidEffect } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollParent } from "../utils/dom/scroll"
-import { ListDirection } from "./list.shared"
+import { raf } from "../utils/raf"
+import { debounce } from "../utils/lodash-polyfill"
+import { ListDirection, ListInstance } from "./list.shared"
 
 function useAssignLoading<T = any>(state?: T | (() => T)) {
   const getState = useGetter(state)
@@ -34,73 +37,102 @@ function useAssignLoading<T = any>(state?: T | (() => T)) {
 }
 
 export interface ListProps extends ViewProps {
-  loading?: boolean | (() => boolean)
-  hasMore?: boolean | (() => boolean)
+  loading?: boolean
+  hasMore?: boolean
   direction?: ListDirection
   offset?: number
+  immediateCheck?: boolean
+  disabled?: boolean
+  fixedHeight?: boolean
   children?: ReactNode
-
-  scrollTop?: number
-
   onLoad?(): void
-
-  onLoading?(loading: true): void
 }
 
-function List(props: ListProps) {
+function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
   const {
     className,
     loading: loadingProp = false,
-    hasMore: hasMoreProp = true,
+    hasMore = true,
     direction = "down",
-    offset = 300,
+    offset = 100,
+    immediateCheck: _immediateCheck = true,
+    fixedHeight = false,
+    disabled = false,
     children,
-    scrollTop,
     onLoad,
-    onLoading,
     ...restProps
   } = props
-
   const rootRef = useRef<HTMLElement>()
+  const scrollRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
-
-  const onLoadingRef = useToRef(onLoading)
   const onLoadRef = useToRef(onLoad)
-
+  const immediateCheck = useToRef(_immediateCheck)
   const { isLoading, setLoading } = useAssignLoading(loadingProp)
-  const isHasMore = useGetter(hasMoreProp)
 
-  const loadCheck = useCallback(
-    () =>
-      nextTick(async () => {
-        if (isLoading() || !isHasMore()) {
-          return
-        }
-        const scrollParent = await getScrollParent(rootRef)
-        const scrollParentRect = await getRect(scrollParent)
-        if (!scrollParentRect.height) {
-          return
-        }
+  const check = useMemoizedFn(debounce(() => {
+    raf(async () => {
+      if (isLoading() || !hasMore || disabled) {
+        return
+      }
+      const scrollParentRect = await getRect(scrollRef)
+      if (!scrollParentRect.height) {
+        return
+      }
 
-        let isReachEdge: boolean
-        const edgeRect = await getRect(edgeRef)
-        if (direction === "up") {
-          isReachEdge = scrollParentRect.top - edgeRect.top <= offset
-        } else {
-          isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
-        }
-        if (isReachEdge && !isLoading()) {
-          setLoading(true)
-          onLoadingRef.current?.(true)
-          onLoadRef.current?.()
-        }
-      }),
-    [direction, isHasMore, isLoading, offset, onLoadRef, onLoadingRef, setLoading],
-  )
+      let isReachEdge: boolean
+      const edgeRect = await getRect(edgeRef)
+      if (direction === "up") {
+        isReachEdge = scrollParentRect.top - edgeRect.top <= offset
+      } else {
+        isReachEdge = edgeRect.bottom - scrollParentRect.bottom <= offset
+      }
 
-  useMounted(loadCheck)
+      if (isLoading() || !hasMore || disabled) {
+        return
+      }
+      if (isReachEdge) {
+        setLoading(true)
+        onLoadRef.current?.()
+      }
+    })
+  }, 50))
 
-  useEffect(loadCheck, [isLoading(), isHasMore(), loadCheck, scrollTop, children])
+  useImperativeHandle(ref, () => ({
+    check
+  }))
+
+  usePageScroll(() => {
+    if (!fixedHeight) {
+      check()
+    }
+  })
+
+  const onScroll = () => {
+    if (fixedHeight) {
+      check()
+    }
+  }
+
+  useDidEffect(() => {
+    check()
+  }, [loadingProp, hasMore, check])
+
+  useEffect(() => {
+    nextTick(async () => {
+      if (fixedHeight) {
+        scrollRef.current = rootRef.current
+      } else {
+        //
+        scrollRef.current = await getScrollParent(rootRef)
+      }
+      if (immediateCheck.current) {
+        check()
+      }
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fixedHeight])
+
+  const Wrapper = useMemo(() => fixedHeight ? ScrollView : View, [fixedHeight])
 
   const listEdge = useMemo(
     () => <View ref={edgeRef} className={prefixClassname("list__edge")} />,
@@ -108,11 +140,11 @@ function List(props: ListProps) {
   )
 
   return (
-    <View ref={rootRef} className={classNames(prefixClassname("list"), className)} {...restProps}>
+    <Wrapper ref={rootRef} scrollY={fixedHeight} className={classNames(prefixClassname("list"), className)} {...restProps} onScroll={onScroll}>
       {direction === "down" ? children : listEdge}
       {direction === "up" ? children : listEdge}
-    </View>
+    </Wrapper>
   )
 }
 
-export default List
+export default forwardRef<ListInstance, ListProps>(List)

@@ -22,15 +22,10 @@ function BasicList() {
   const [hasMore, setHasMore] = useState(true)
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
-  const [scrollTop, setScrollTop] = useState(0)
-
-  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
-
   return (
     <List
       loading={loading}
       hasMore={hasMore}
-      scrollTop={scrollTop}
       onLoad={() => {
         setLoading(true)
         setTimeout(() => {
@@ -45,6 +40,7 @@ function BasicList() {
       }}
     >
       {
+        //
         list.map((item) => (
           <Cell key={item}>{item}</Cell>
         ))
@@ -54,6 +50,55 @@ function BasicList() {
         {!hasMore && "没有更多了"}
       </List.Placeholder>
     </List>
+  )
+}
+```
+
+> Tips: 在Tabs里使用，通过设置disabled={tabKey !== activeTabKey}，避免其他tab里的List也触发了滑动
+
+### 固定高度
+设置fixedHeight，通过class或者style指定容器高度
+
+```tsx
+function FixedHeightList() {
+  const [hasMore, setHasMore] = useState(true)
+  const [list, setList] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
+  const ref = useRef<ListInstance>(null)
+
+  return (
+    <>
+      <List
+        ref={ref}
+        loading={loading}
+        hasMore={hasMore}
+        fixedHeight
+        style={{ height: "300px" }}
+        onLoad={() => {
+          setLoading(true)
+          setTimeout(() => {
+            for (let i = 0; i < 10; i++) {
+              const text = list.length + 1
+              list.push(text < 10 ? "0" + text : String(text))
+            }
+            setList([...list])
+            setHasMore(list.length < 40)
+            setLoading(false)
+          }, 1000)
+        }}
+      >
+        {
+          //
+          list.map((item) => (
+            <Cell key={item}>{item}</Cell>
+          ))
+        }
+        <List.Placeholder>
+          {loading && <Loading>加载中...</Loading>}
+          {!hasMore && "没有更多了"}
+        </List.Placeholder>
+      </List>
+    </>
   )
 }
 ```
@@ -68,15 +113,11 @@ function ErrorList() {
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [scrollTop, setScrollTop] = useState(0)
-
-  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
 
   return (
     <List
       loading={loading}
       hasMore={hasMore}
-      scrollTop={scrollTop}
       onLoad={() => {
         setLoading(true)
         setTimeout(() => {
@@ -108,7 +149,7 @@ function ErrorList() {
       >
         {loading && <Loading>加载中...</Loading>}
         {error && "请求失败，点击重新加载"}
-        {!hasMore && "没有更多了"}
+        {!error && !hasMore && "没有更多了"}
       </List.Placeholder>
     </List>
   )
@@ -125,11 +166,9 @@ function PullRefreshList() {
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const refreshingRef = useRef(false)
-  const [scrollTop, setScrollTop] = useState(0)
   const [reachTop, setReachTop] = useState(true)
 
   usePageScroll(({ scrollTop: aScrollTop }) => {
-    setScrollTop(aScrollTop)
     setReachTop(aScrollTop === 0)
   })
 
@@ -156,7 +195,7 @@ function PullRefreshList() {
 
   return (
     <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} scrollTop={scrollTop} onLoad={onLoad}>
+      <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
         {
           list.map((item) => (
             <Cell key={item}>{item}</Cell>
@@ -180,10 +219,12 @@ function PullRefreshList() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| scrollTop | 距离顶部的滚动距离 | _number_ | `0` |
-| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean \| ()=> boolean_ | `false` |
-| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean \| ()=> boolean_ | `false` |
-| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_ | `300` |
+| fixedHeight | 是否固定高度 | _boolean_ | `false` |
+| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
+| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
+| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_ | `100` |
+| immediateCheck | 是否在初始化时立即执行滚动位置检查 | _boolean_ | `true` |
+| disabled | 是否禁用滚动加载 | _boolean_ | `false` |
 | direction | 滚动触发加载的方向，可选值为 `up` | _string_ | `down` |
 
 ### Events
@@ -191,7 +232,15 @@ function PullRefreshList() {
 | 事件名       | 说明                    | 回调参数 |
 |-----------|-----------------------|------|
 | onLoad    | 滚动条与底部距离小于 offset 时触发 | -    |
-| onLoading | 内部 loading 改变时触发      | -    |
+
+
+### 方法
+
+通过 ref 可以获取到 List 实例并调用实例方法
+
+| 方法名 | 说明 | 参数 | 返回值 |
+| --- | --- | --- | --- |
+| check | 检查当前的滚动位置，若已滚动至底部，则会触发 load 事件 | - | - |
 
 ## 主题定制
 
@@ -211,8 +260,9 @@ function PullRefreshList() {
 ## 常见问题
 
 ### List 的运行机制是什么？
-
-List 会监听浏览器的滚动事件并计算列表的位置，当列表底部与可视区域的距离小于 `offset` 时，List 会触发一次 load 事件。
+- 当设置fixedHeight为false时会监听页面滚动事件(usePageScroll)
+- 当设置fixedHeight为true时会监听滚动容器的滚动事件(onScroll)
+当列表底部与可视区域的距离小于 `offset` 时，List 会触发一次 load 事件。
 
 ### 为什么 List 初始化后会立即触发 load 事件？
 

@@ -8,3 +8,7 @@ export type ListThemeVars = {
   listLoadingIconWidth?: string
   listLoadingIconHeight?: string
 }
+
+export interface ListInstance {
+  check(): void
+}
