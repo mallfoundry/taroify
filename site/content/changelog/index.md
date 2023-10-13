@@ -12,7 +12,23 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.2
+
+`2023-10-13`
+
+**New Component**
+
+- 新增 Signature 组件 [#618](https://github.com/mallfoundry/taroify/pull/618) [@hbztd](https://github.com/hbztd)
+
+**Feature**
+
+- Space
+  - 支持自定间距，添加 `fill` 属性 [#619](https://github.com/mallfoundry/taroify/pull/619) [@hbztd](https://github.com/hbztd)
+- List
+  - 重构 List 实现。删除 `scrollTop`、`onLoading`，添加 `fixedHeight`、`immediateCheck`、`disabled`、`check` [#620](https://github.com/mallfoundry/taroify/pull/620) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.1
+
 `2023-09-29`
 
 **New Component**
@@ -27,15 +43,18 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Input
-  - 修复设置readonly属性的，原生input dom上是disabled，会导致无法聚焦触发onClick，电脑上h5调试打不开Picker [#613](https://github.com/mallfoundry/taroify/pull/613) [@hbztd](https://github.com/hbztd)
+
+  - 修复设置 readonly 属性的，原生 input dom 上是 disabled，会导致无法聚焦触发 onClick，电脑上 h5 调试打不开 Picker [#613](https://github.com/mallfoundry/taroify/pull/613) [@hbztd](https://github.com/hbztd)
 
 - Image
+
   - 修复 img onload 不一定触发问题 [#614](https://github.com/mallfoundry/taroify/pull/614) [@hbztd](https://github.com/hbztd)
 
 - Tabs
-  - Tabs设置lazyRender属性后，会加载当前，前后选项卡，和预期不符(延迟渲染未展示的选项卡) [#615](https://github.com/mallfoundry/taroify/pull/615) [@hbztd](https://github.com/hbztd)
+  - Tabs 设置 lazyRender 属性后，会加载当前，前后选项卡，和预期不符(延迟渲染未展示的选项卡) [#615](https://github.com/mallfoundry/taroify/pull/615) [@hbztd](https://github.com/hbztd)
 
 ### v0.1.1-alpha.0
+
 `2023-09-17`
 
 **Feature**
@@ -45,6 +64,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Taro 版本升级为 v3.6.16 [#607](https://github.com/mallfoundry/taroify/pull/607) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.12
+
 `2023-09-04`
 
 **Bug Fixes**
@@ -57,6 +77,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 修复滚动时卡顿问题 [#601](https://github.com/mallfoundry/taroify/pull/601) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.11
+
 `2023-08-21`
 
 **Bug Fixes**
@@ -64,8 +85,8 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - IndexList
   - 修复微信小程序端点击事件报错 [#592](https://github.com/mallfoundry/taroify/pull/592) [@450669540](https://github.com/450669540)
 
-
 ### v0.1.0-alpha.10
+
 `2023-08-11`
 
 **Feature**
@@ -74,6 +95,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 新增 `cursor` 属性 [#590](https://github.com/mallfoundry/taroify/pull/590) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.9
+
 `2023-07-27`
 
 **Feature**
@@ -84,6 +106,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 完善文档 [#587](https://github.com/mallfoundry/taroify/pull/587)[@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.8
+
 `2023-07-19`
 
 **Feature**
@@ -93,6 +116,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 新增 swipeThreshold 属性 [#585](https://github.com/mallfoundry/taroify/pull/585) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.7
+
 `2023-07-13`
 
 **Feature**
@@ -101,6 +125,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - 完善了主题变量的类型定义，`ConfigProviderThemeVars` 类型 [#579](https://github.com/mallfoundry/taroify/pull/579) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.1.0-alpha.6
+
 `2023-07-09`
 
 **New Component**
@@ -115,6 +140,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - 修复 Collapse 折叠面板无法全部关闭问题 [#576](https://github.com/mallfoundry/taroify/pull/576)
 
 ### v0.1.0-alpha.5
+
 `2023-07-06`
 
 **Bug Fixes**
@@ -131,6 +157,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
   - Input 校验未通过时，placeholder 颜色优化 [#503](https://github.com/mallfoundry/taroify/issues/503)
 
 ### v0.1.0-alpha.4
+
 `2023-06-30`
 
 **New Component**
@@ -160,7 +187,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **Feature**
 
-- 更新 @tarojs/* 版本至 3.4.10 [#a2864f3](https://github.com/mallfoundry/taroify/commit/a2864f319b0eddde8006444a6a41be3a0e78b07a) [#9a2d5eb](https://github.com/mallfoundry/taroify/commit/9a2d5ebc19d466902952d98ab749eaa7613ce1ff) [#b722781](https://github.com/mallfoundry/taroify/commit/b722781d3a58a294d43065aea8e6bf12691d1fc4)
+- 更新 @tarojs/\* 版本至 3.4.10 [#a2864f3](https://github.com/mallfoundry/taroify/commit/a2864f319b0eddde8006444a6a41be3a0e78b07a) [#9a2d5eb](https://github.com/mallfoundry/taroify/commit/9a2d5ebc19d466902952d98ab749eaa7613ce1ff) [#b722781](https://github.com/mallfoundry/taroify/commit/b722781d3a58a294d43065aea8e6bf12691d1fc4)
 
 **Bug Fixes**
 
@@ -379,7 +406,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - useForm
   - 修复 defaultValues 被覆盖的问题 [#368](https://github.com/mallfoundry/taroify/pull/368)
-  
+
 ### v0.0.27-alpha.3
 
 `2022-02-18`
@@ -701,7 +728,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Countdown
   - 修复 value 无法更新的问题 [#205](https://github.com/mallfoundry/taroify/issues/205) [#208](https://github.com/mallfoundry/taroify/pull/208)
 - SafeArea
-  - 修复 ios11 兼容性 constant(safe-area-inset-*) 的问题 [#199](https://github.com/mallfoundry/taroify/pull/199) [@Brain777777](https://github.com/Brain777777)
+  - 修复 ios11 兼容性 constant(safe-area-inset-\*) 的问题 [#199](https://github.com/mallfoundry/taroify/pull/199) [@Brain777777](https://github.com/Brain777777)
 
 ### v0.0.21-alpha.0
 
@@ -965,11 +992,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Field
-  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#121](https://github.com/mallfoundry/taroify/issues/121) [#126](https://github.com/mallfoundry/taroify/issues/126)
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) \* -1) 的问题 [#121](https://github.com/mallfoundry/taroify/issues/121) [#126](https://github.com/mallfoundry/taroify/issues/126)
 - TreeSelect
-  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#122](https://github.com/mallfoundry/taroify/issues/122) [#124](https://github.com/mallfoundry/taroify/issues/124)
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) \* -1) 的问题 [#122](https://github.com/mallfoundry/taroify/issues/122) [#124](https://github.com/mallfoundry/taroify/issues/124)
 - Slider
-  - 修复 calc(var(--padding-xs, #{$padding-xs}) * -1) 的问题 [#123](https://github.com/mallfoundry/taroify/issues/123) [#125](https://github.com/mallfoundry/taroify/issues/125)
+  - 修复 calc(var(--padding-xs, #{$padding-xs}) \* -1) 的问题 [#123](https://github.com/mallfoundry/taroify/issues/123) [#125](https://github.com/mallfoundry/taroify/issues/125)
 
 ### v0.0.18-alpha.3
 
