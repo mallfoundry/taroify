@@ -6,6 +6,7 @@
   &__error,
   &__placeholder {
     font-size: $list-text-font-size;
+    min-height: $list-text-line-height; // wx
     line-height: $list-text-line-height;
     color: $list-text-color;
     text-align: center;

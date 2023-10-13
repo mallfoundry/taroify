@@ -1,22 +1,18 @@
-import { Cell, List, Loading, PullRefresh, Tabs } from "@taroify/core"
+import { Cell, List, ListInstance, Loading, PullRefresh, Tabs, Button, Flex } from "@taroify/core"
 import { usePageScroll } from "@tarojs/taro"
 import { useRef, useState } from "react"
 import Page from "../../../components/page"
 import "./index.scss"
 
-function BasicList() {
+function BasicList({ disabled }) {
   const [hasMore, setHasMore] = useState(true)
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
-  const [scrollTop, setScrollTop] = useState(0)
-
-  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
-
   return (
     <List
       loading={loading}
       hasMore={hasMore}
-      scrollTop={scrollTop}
+      disabled={disabled}
       onLoad={() => {
         setLoading(true)
         setTimeout(() => {
@@ -44,20 +40,73 @@ function BasicList() {
   )
 }
 
-function ErrorList() {
+function FixedHeightList({ disabled }) {
+  const [hasMore, setHasMore] = useState(true)
+  const [list, setList] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
+  const ref = useRef<ListInstance>(null)
+
+  return (
+    <>
+      <List
+        ref={ref}
+        loading={loading}
+        hasMore={hasMore}
+        fixedHeight
+        style={{ height: "300px" }}
+        disabled={disabled}
+        immediateCheck={false}
+        onLoad={() => {
+          setLoading(true)
+          setTimeout(() => {
+            for (let i = 0; i < 10; i++) {
+              const text = list.length + 1
+              list.push(text < 10 ? "0" + text : String(text))
+            }
+            setList([...list])
+            setHasMore(list.length < 40)
+            setLoading(false)
+          }, 1000)
+        }}
+      >
+        {
+          //
+          list.map((item) => (
+            <Cell key={item}>{item}</Cell>
+          ))
+        }
+        <List.Placeholder>
+          {loading && <Loading>加载中...</Loading>}
+          {!hasMore && "没有更多了"}
+        </List.Placeholder>
+      </List>
+      <Flex align="center" direction="column">
+        <Flex.Item>immediateCheck设为false,调用check，触发onLoad</Flex.Item>
+        <Flex.Item>
+          <Button
+            onClick={() => {
+              ref.current?.check()
+            }}
+          >
+          check
+        </Button>
+        </Flex.Item>
+      </Flex>
+    </>
+  )
+}
+
+function ErrorList({ disabled }) {
   const [hasMore, setHasMore] = useState(true)
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [scrollTop, setScrollTop] = useState(0)
-
-  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
 
   return (
     <List
       loading={loading}
       hasMore={hasMore}
-      scrollTop={scrollTop}
+      disabled={disabled}
       onLoad={() => {
         setLoading(true)
         setTimeout(() => {
@@ -87,22 +136,20 @@ function ErrorList() {
       >
         {loading && <Loading>加载中...</Loading>}
         {error && "请求失败，点击重新加载"}
-        {!hasMore && "没有更多了"}
+        {!error && !hasMore && "没有更多了"}
       </List.Placeholder>
     </List>
   )
 }
 
-function PullRefreshList() {
+function PullRefreshList({ disabled }) {
   const [hasMore, setHasMore] = useState(true)
   const [list, setList] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const refreshingRef = useRef(false)
-  const [scrollTop, setScrollTop] = useState(0)
   const [reachTop, setReachTop] = useState(true)
 
   usePageScroll(({ scrollTop: aScrollTop }) => {
-    setScrollTop(aScrollTop)
     setReachTop(aScrollTop === 0)
   })
 
@@ -129,7 +176,7 @@ function PullRefreshList() {
 
   return (
     <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} scrollTop={scrollTop} onLoad={onLoad}>
+      <List loading={loading} hasMore={hasMore} onLoad={onLoad} disabled={disabled}>
         {
           //
           list.map((item) => (
@@ -154,13 +201,16 @@ export default function ListDemo() {
     <Page title="List 列表" className="list-demo">
       <Tabs value={tab} onChange={setTab}>
         <Tabs.TabPane title="基础用法">
-          <BasicList />
+          <BasicList disabled={tab !== 0} />
+        </Tabs.TabPane>
+        <Tabs.TabPane title="固定高度">
+          <FixedHeightList disabled={tab !== 1} />
         </Tabs.TabPane>
         <Tabs.TabPane title="错误提示">
-          <ErrorList />
+          <ErrorList disabled={tab !== 2} />
         </Tabs.TabPane>
         <Tabs.TabPane title="下拉刷新">
-          <PullRefreshList />
+          <PullRefreshList disabled={tab !== 3} />
         </Tabs.TabPane>
       </Tabs>
     </Page>

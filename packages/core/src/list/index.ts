@@ -1,16 +1,15 @@
-import ListComponent, { ListProps } from "./list"
+import ListComponent from "./list"
 import ListPlaceholder from "./list-placeholder"
 
 export type { ListDirection, ListThemeVars } from "./list.shared"
 
-interface ListInterface {
-  (props: ListProps): JSX.Element
-
+type ListType = (typeof ListComponent) & {
   Placeholder: typeof ListPlaceholder
 }
 
-const List = ListComponent as ListInterface
+const List = ListComponent as ListType
 
 List.Placeholder = ListPlaceholder
 
 export default List
+export type { ListInstance } from "./list.shared"
