@@ -16,14 +16,14 @@ import {
   Toast,
   Uploader,
 } from "@taroify/core"
-import { FormItemInstance, FormValidError } from "@taroify/core/form"
+import { FormItemInstance, FormValidError, FormInstance } from "@taroify/core/form"
 import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps } from "@tarojs/components/types/Form"
 import { chooseImage } from "@tarojs/taro"
 import * as _ from "lodash"
-import { useRef, useState } from "react"
+import { useRef, useState, Fragment } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
@@ -373,6 +373,62 @@ function FormWithFields() {
   )
 }
 
+function DynamicForm() {
+  const ref = useRef<FormInstance>(null)
+  const onManual = () => {
+    ref.current?.setValues({
+      contacts: [
+        { name: "小红", phone: "10000" },
+        { name: "小绿", phone: "10086" }
+      ]
+    })
+  }
+  return <Form ref={ref}  onSubmit={(e) => {
+    Toast.open(JSON.stringify(e.detail.value, undefined, 2))
+  }}
+  >
+    <Form.List name="contacts" defaultValue={[{name: "小明", phone: "10086"}]}>
+      {
+        (fields, { add, remove }) => <Cell.Group inset>
+          {
+            fields.map((field, idx) => <Fragment key={field.key}>
+              <Form.Item name={`${field.name}.name`} key={`${field.key}.name`}>
+                <Form.Label>姓名</Form.Label>
+                <Form.Control>
+                  {
+                    ({ value, onChange }) => <>
+                      <Input placeholder="请输入姓名" value={value} onChange={(e) => { onChange?.(e.detail.value) }} />
+                      <View style={{ flexShrink: 0 }} onClick={() => { remove(idx) }}>删除</View>
+                    </>
+                  }
+                </Form.Control>
+              </Form.Item>
+              <Form.Item name={`${field.name}.phone`} key={`${field.key}.phone`} rules={[{ required: true, message: "必填" }]}>
+                <Form.Label>电话</Form.Label>
+                <Form.Control>
+                  <Input placeholder="请输入电话" />
+                </Form.Control>
+              </Form.Item>
+            </Fragment>)
+          }
+          <Button variant="text" color="primary" onClick={() => add({})} >添加联系人</Button>
+        </Cell.Group>
+      }
+    </Form.List>
+    <View style={{ margin: "16px" }}>
+      <Button shape="round" block color="primary" formType="submit">
+        提交
+      </Button>
+      <Button style={{ marginTop: "16px" }} shape="round" block color="info" onClick={onManual}>
+        手动
+      </Button>
+      <Button style={{ marginTop: "16px" }} shape="round" block color="warning" formType="reset">
+        重置
+      </Button>
+    </View>
+  </Form>
+}
+
 export default function FormDemo() {
   return (
     <Page title="Form 表单" className="form-demo">
@@ -386,6 +442,9 @@ export default function FormDemo() {
         <CustomWrapper>
           <FormWithFields />
         </CustomWrapper>
+      </Block>
+      <Block title="动态增减表单项">
+        <DynamicForm />
       </Block>
     </Page>
   )

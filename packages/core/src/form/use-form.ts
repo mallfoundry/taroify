@@ -23,6 +23,7 @@ function getAttributiveForm(formName: string) {
 
 class FormAttributes {
   #fields = new Map<string, FormItemInstance>()
+  #inFormListFields = new Map<string, FormItemInstance>()
   #defaultValues: any = {}
   #values: any = {}
   #errors: Record<string, FormValidError> = {}
@@ -30,6 +31,10 @@ class FormAttributes {
 
   get fields() {
     return this.#fields
+  }
+
+  get inFormListFields() {
+    return this.#inFormListFields
   }
 
   get defaultValues() {
@@ -70,16 +75,29 @@ class FormAttributes {
 
   findFields(predicate: (field: FormItemInstance) => boolean) {
     const fields = toMapValueArray(this.fields)
-    return _.filter<FormItemInstance>(fields, predicate) as FormItemInstance[]
+    const inFormListFields = toMapValueArray(this.#inFormListFields)
+    return _.filter<FormItemInstance>(fields.concat(inFormListFields), predicate) as FormItemInstance[]
   }
 
-  addField(name: string, field: FormItemInstance) {
-    this.#fields.set(name, field)
+  addField(name: string, field: FormItemInstance, inFormList?: boolean) {
+    if (inFormList) {
+      this.#inFormListFields.set(name, field)
+    } else {
+      this.#fields.set(name, field)
+    }
   }
 
-  removeField(name: string) {
-    this.#fields.delete(name)
-    _.unset(this.#values, name)
+  removeField(name: string, inFormList?: boolean) {
+    if (inFormList) {
+      this.#inFormListFields.delete(name)
+    } else {
+      this.#fields.delete(name)
+    }
+
+    // This is no need to delete value, because it'll be filtered by fields when you call getValues
+    // Also use key refresh FormItem, which will unmount and then remount, the value will unset when unmounted, it causes an exception
+
+    // _.unset(this.#values, name)
   }
 
   hasField(name: string) {
@@ -154,9 +172,10 @@ class FormAttributes {
     _.forEach(newValues, (value, name) => {
       const oldValue = _.get(values, name)
       if (oldValue !== value) {
-        _.set(values, name, value)
+        const copyValue = _.cloneDeep(value)
+        _.set(values, name, copyValue)
         if (emitChange) {
-          this.emitEvent(`fields.${name}.value.change`, value)
+          this.emitEvent(`fields.${name}.value.change`, copyValue)
           changed = true
         }
       }
@@ -200,9 +219,9 @@ interface Form {
 
   removeEventListener(event: string | symbol, listener: (...args: any[]) => void): void
 
-  linkField(name?: string, field?: FormItemInstance): void
+  linkField(name?: string, field?: FormItemInstance, inFormList?: boolean): void
 
-  unlinkField(name?: string): void
+  unlinkField(name?: string, inFormList?: boolean): void
 
   getFields(): FormItemInstance[]
 
@@ -214,9 +233,9 @@ interface Form {
 
   getErrors(name?: string | string[]): FormValidError[]
 
-  setDefaultValues(values: any): void
+  setDefaultValues(values: any, inFormList?: boolean): void
 
-  setValues(values: any): void
+  setValues(values: any, emitChange?: boolean): void
 
   resetValues(values: any): void
 
@@ -240,6 +259,8 @@ interface Form {
    * @deprecated
    */
   validateFields<V>(name?: string | string[]): Promise<V>
+
+  getAttributiveForm(): FormAttributes | undefined
 }
 
 function defineForm(formName: string) {
@@ -256,9 +277,9 @@ function defineForm(formName: string) {
       getAttributiveForm(formName)?.removeEventListener(event, listener)
     }
 
-    linkField(name?: string, field?: FormItemInstance) {
+    linkField(name?: string, field?: FormItemInstance, inFormList?: boolean) {
       if (name && field) {
-        getAttributiveForm(formName)?.addField(name, field)
+        getAttributiveForm(formName)?.addField(name, field, inFormList)
       }
     }
 
@@ -266,9 +287,9 @@ function defineForm(formName: string) {
       return name && getAttributiveForm(formName)?.hasField(name)
     }
 
-    unlinkField(name?: string) {
+    unlinkField(name?: string, inFormList?: boolean) {
       if (name) {
-        getAttributiveForm(formName)?.removeField(name)
+        getAttributiveForm(formName)?.removeField(name, inFormList)
       }
     }
 
@@ -300,18 +321,22 @@ function defineForm(formName: string) {
       )
     }
 
-    setDefaultValues(defaultValues: any): void {
+    setDefaultValues(defaultValues: any, inFormList?: boolean): void {
       const form = getAttributiveForm(formName)
       if (form) {
+        const newValues = {}
         _.forEach(defaultValues, (value, name) => {
-          _.set(form.defaultValues, name, value)
+          if (!inFormList) {
+            _.set(form.defaultValues, name, value)
+          }
+          newValues[name] = _.get(form.values, name) || value
         })
-        form?.setValues(_.cloneDeep(defaultValues))
+        form?.setValues(newValues)
       }
     }
 
-    setValues(newValues: any) {
-      getAttributiveForm(formName)?.setValues(newValues)
+    setValues(newValues: any, emitChange?: boolean) {
+      getAttributiveForm(formName)?.setValues(newValues, emitChange)
     }
 
     resetValues(values: any) {}
@@ -346,6 +371,10 @@ function defineForm(formName: string) {
     validateFields<V>(name?: string | string[]) {
       warn("Please use validate instead of validateFields")
       return validateForm<V>(formName, name)
+    }
+
+    getAttributiveForm() {
+      return getAttributiveForm(this.name)
     }
   }
 }

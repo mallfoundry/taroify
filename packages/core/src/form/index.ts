@@ -4,6 +4,7 @@ import FormControl from "./form-control"
 import FormFeedback from "./form-feedback"
 import FormItem from "./form-item"
 import FormLabel from "./form-label"
+import FormList from "./form-list"
 
 export type {
   FormRule,
@@ -11,6 +12,8 @@ export type {
   FormLabelAlign,
   FormValidError,
   FormItemInstance,
+  FormListItemField,
+  FormListInstance,
   FormFeedbackAlign,
   FormFeedbackStatus,
   FormController,
@@ -33,6 +36,7 @@ interface FormInterface extends ForwardRefExoticComponent<FormProps> {
   Label: typeof FormLabel
   Control: typeof FormControl
   Feedback: typeof FormFeedback
+  List: typeof FormList
 }
 
 const Form = FormComponent as FormInterface
@@ -41,5 +45,6 @@ Form.Item = FormItem
 Form.Label = FormLabel
 Form.Control = FormControl
 Form.Feedback = FormFeedback
+Form.List = FormList
 
 export default Form
