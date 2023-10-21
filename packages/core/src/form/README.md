@@ -55,6 +55,7 @@ function BasicForm() {
   )
 }
 ```
+> Tips: 推荐可以使用`Field`组件，可以减少代码量，提高可读性
 
 ### 校验规则
 
@@ -412,6 +413,69 @@ function CalendarField() {
 }
 ```
 
+
+### 动态增减表单项
+
+通过Form.List动态增减表单项
+```tsx
+function DynamicForm() {
+  const ref = useRef<FormInstance>(null)
+  const onManual = () => {
+    ref.current?.setValues({
+      contacts: [
+        { name: "小红", phone: "10000" },
+        { name: "小绿", phone: "10086" }
+      ]
+    })
+  }
+  return <Form ref={ref}  onSubmit={(e) => {
+    Toast.open(JSON.stringify(e.detail.value, undefined, 2))
+  }}
+  >
+    <Toast id="toast" />
+    <Form.List name="contacts" defaultValue={[{name: "小明", phone: "10086"}]}>
+      {
+        (fields, { add, remove }) => <Cell.Group inset>
+          {
+            fields.map((field, idx) => <Fragment key={field.key}>
+              <Form.Item name={`${field.name}.name`} key={`${field.key}.name`}>
+                <Form.Label>姓名</Form.Label>
+                <Form.Control>
+                  {
+                    ({ value, onChange }) => <>
+                      <Input placeholder="请输入姓名" value={value} onChange={(e) => { onChange?.(e.detail.value) }} />
+                      <View style={{ flexShrink: 0 }} onClick={() => { remove(idx) }}>删除</View>
+                    </>
+                  }
+                </Form.Control>
+              </Form.Item>
+              <Form.Item name={`${field.name}.phone`} key={`${field.key}.phone`} rules={[{ required: true, message: "必填" }]}>
+                <Form.Label>电话</Form.Label>
+                <Form.Control>
+                  <Input placeholder="请输入电话" />
+                </Form.Control>
+              </Form.Item>
+            </Fragment>)
+          }
+          <Button variant="text" color="primary" onClick={() => add({})} >添加联系人</Button>
+        </Cell.Group>
+      }
+    </Form.List>
+    <View style={{ margin: "16px" }}>
+      <Button shape="round" block color="primary" formType="submit">
+        提交
+      </Button>
+      <Button style={{ marginTop: "16px" }} shape="round" block color="info" onClick={onManual}>
+        手动
+      </Button>
+      <Button style={{ marginTop: "16px" }} shape="round" block color="warning" formType="reset">
+        重置
+      </Button>
+    </View>
+  </Form>
+}
+```
+
 ## API
 
 ### Form Props
@@ -438,10 +502,12 @@ function CalendarField() {
 
 | 方法名 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| setValues | 设置表单值                                   | _object_                    | - |
+| setValues | 设置表单值(浅合并)                                   | _object_                    | - |
 | getValues | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
+| setErrors | 设置表单验证错误信息(浅合并) | _FormValidError[]_ | _void_ |
+| getErrors | 获得表单验证错误信息，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _FormValidError[]_ |
 | validate  | 验证表单，支持传入 `name` 来验证单个或部分表单项   | _name?: string \| string[]_ | _Promise_ |
-| reset     | 重置表单                                     | -                           | _Promise_ |
+| reset     | 重置表单                                     | -                           | _void_ |
 
 ### validateTrigger 可选值
 
@@ -496,6 +562,35 @@ function CalendarField() {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
+| children | 内容 | _ReactNode\|((controller: FormController<V>) => ReactNode)_ | --
+
+```tsx
+interface FormController<V> {
+  value?: V // 当前表单项值
+  validateStatus?: FormValidateStatus // 当前表单项验证状态
+
+  onChange?(value: V): void // 改变当前表单项值
+
+  onBlur?(value: V): void // 触发onBlur当前表单项校验
+}
+```
+> Tips: 使用onBlur触发表单验证，自定义表单项时，要手动调用onBlur，才能触发校验
+
+### Form.List
+
+| 参数 | 说明 | 类型 |
+| --- | --- | --- |
+| children | 渲染函数 | _(fields: { key: string, name: string }[], operation: { add, remove }) => ReactNode_ | _
+| name | 表单项名称，提交表单的标识符 | _string_ |
+| defaultValue | 表单项默认值 | _any_ | 
+
+### 类型定义
+通过`@taroify/core/form`导入组件类型：
+```tsx
+import { 
+  FormRule, FormItemInstance, FormListInstance, FormInstance 
+} from "@taroify/core/form"
+```
 
 ## 主题定制
 

@@ -22,7 +22,7 @@ export interface FormInstance {
 
   getValues<V>(name?: string | string[]): V
 
-  setValues(values: any): void
+  setValues(values: any, emitChange?: boolean): void
 
   validate<V>(name?: string | string[]): Promise<V>
 
@@ -82,6 +82,16 @@ export interface FormItemInstance {
   setValue(value: any): void
 
   validate(rules?: FormRule[]): Promise<void>
+}
+
+export interface FormListInstance {
+  add(defaultValue?: any): void
+  remove(index: number): void
+}
+
+export interface FormListItemField {
+  name: string
+  key: number
 }
 
 export type FormThemeVars = {
