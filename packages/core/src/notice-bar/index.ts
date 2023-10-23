@@ -1,17 +1,15 @@
-import NoticeBarElement, { NoticeBarProps } from "./notice-bar"
+import NoticeBarElement from "./notice-bar"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
 
-export type { NoticeBarThemeVars } from './notice-bar.shared'
+export type { NoticeBarThemeVars, NoticeBarInterface } from "./notice-bar.shared"
 
-interface NoticeBarInterface {
-  (props: NoticeBarProps): JSX.Element
-
+type NoticeBarComponent = typeof NoticeBarElement & {
   Icon: typeof NoticeBarIcon
   Action: typeof NoticeBarAction
 }
 
-const NoticeBar = NoticeBarElement as NoticeBarInterface
+const NoticeBar = NoticeBarElement as NoticeBarComponent
 
 NoticeBar.Icon = NoticeBarIcon
 NoticeBar.Action = NoticeBarAction

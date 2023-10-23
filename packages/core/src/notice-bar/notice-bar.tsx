@@ -3,6 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
+import { useImperativeHandle, forwardRef, ForwardedRef } from "react"
 import {
   Children,
   CSSProperties,
@@ -20,6 +21,7 @@ import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
+import { NoticeBarInterface } from "./notice-bar.shared"
 
 interface NoticeBarChildren {
   icon: ReactNode
@@ -61,7 +63,7 @@ export interface NoticeBarProps extends ViewProps {
   children?: ReactNode
 }
 
-function NoticeBar(props: NoticeBarProps) {
+function NoticeBar(props: NoticeBarProps, ref: ForwardedRef<NoticeBarInterface>) {
   const {
     className,
     delay = 1000,
@@ -93,13 +95,6 @@ function NoticeBar(props: NoticeBarProps) {
     [offset, duration],
   )
 
-  function reset() {
-    wrapWidthRef.current = 0
-    contentWidthRef.current = 0
-    setOffset(0)
-    setDuration(0)
-  }
-
   function onTransitionEnd() {
     setOffset(wrapWidthRef.current)
     setDuration(0)
@@ -113,8 +108,11 @@ function NoticeBar(props: NoticeBarProps) {
     })
   }
 
-  function start() {
-    reset()
+  function reset() {
+    wrapWidthRef.current = 0
+    contentWidthRef.current = 0
+    setOffset(0)
+    setDuration(0)
 
     if (startTimerRef.current) {
       clearTimeout(startTimerRef.current)
@@ -142,8 +140,12 @@ function NoticeBar(props: NoticeBarProps) {
     }, +delay)
   }
 
+  useImperativeHandle(ref, () => ({
+    reset
+  }))
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(start, [])
+  useEffect(reset, [])
 
   return (
     <View
@@ -173,4 +175,4 @@ function NoticeBar(props: NoticeBarProps) {
   )
 }
 
-export default NoticeBar
+export default forwardRef(NoticeBar)

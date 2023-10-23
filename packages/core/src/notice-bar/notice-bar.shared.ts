@@ -9,3 +9,7 @@ export type NoticeBarThemeVars = {
   noticeBarIconSize?: string
   noticeBarIconMinWidth?: string
 }
+
+export interface NoticeBarInterface {
+  reset(): void
+}
