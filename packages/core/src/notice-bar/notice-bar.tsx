@@ -61,6 +61,7 @@ export interface NoticeBarProps extends ViewProps {
   scrollable?: boolean
   wordwrap?: boolean
   children?: ReactNode
+  onReplay?(): void
 }
 
 function NoticeBar(props: NoticeBarProps, ref: ForwardedRef<NoticeBarInterface>) {
@@ -71,6 +72,7 @@ function NoticeBar(props: NoticeBarProps, ref: ForwardedRef<NoticeBarInterface>)
     wordwrap,
     scrollable = false,
     children: childrenProp,
+    onReplay,
     ...restProps
   } = props
 
@@ -104,6 +106,7 @@ function NoticeBar(props: NoticeBarProps, ref: ForwardedRef<NoticeBarInterface>)
       doubleRaf(() => {
         setOffset(-contentWidthRef.current)
         setDuration((contentWidthRef.current + wrapWidthRef.current) / +speed)
+        onReplay?.()
       })
     })
   }
