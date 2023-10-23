@@ -129,6 +129,14 @@ import NoticeBar from "@taroify/core/notice-bar"
 | onClick  | 点击通知栏时触发             | _event: MouseEvent_ |
 | onReplay | 每当滚动栏重新开始滚动时触发 | -                   |
 
+### 方法
+
+通过 ref 可以获取到 NoticeBar 实例并调用实例方法
+
+| 方法名 | 说明 | 参数 | 返回值 |
+| --- | --- | --- | --- |
+| reset | 重置通知栏到初始状态 | - | - |
+
 ## 主题定制
 
 ### 样式变量

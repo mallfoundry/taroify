@@ -99,7 +99,7 @@ export default function NoticeBarDemo() {
       <Block title="自定义样式">
         <NoticeBarWithCustomStyle />
       </Block>
-      <Block title="自定义样式">
+      <Block title="垂直滚动">
         <NoticeBarWithVerticalScrolling />
       </Block>
     </Page>

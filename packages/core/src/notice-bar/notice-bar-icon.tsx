@@ -9,11 +9,15 @@ interface NoticeBarIconProps extends ViewProps {
 }
 
 export function NoticeBarIcon(props: NoticeBarIconProps): JSX.Element {
-  const { className, children, ...restProps } = props
+  const { className, children, onClick, ...restProps } = props
 
   // @ts-ignore
   return cloneIconElement(children, {
     className: classNames(prefixClassname("notice-bar__icon"), className),
+    onClick(e) {
+      e.stopPropagation()
+      onClick?.(e)
+    },
     ...restProps,
   }) as JSX.Element
 }
