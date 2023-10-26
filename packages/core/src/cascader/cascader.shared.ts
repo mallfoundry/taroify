@@ -1,9 +1,9 @@
 import { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
-import { Key, ReactNode } from "react"
+import { ReactNode } from "react"
 
 export interface CascaderOptionObject extends ViewProps {
-  key?: Key
+  key?: string | number
   tabIndex: number
   className?: string
   value?: any
