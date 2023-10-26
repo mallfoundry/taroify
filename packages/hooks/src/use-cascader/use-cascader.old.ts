@@ -1,6 +1,6 @@
 import * as _ from "lodash"
-import { useEffect, useState } from "react"
-import { CascaderOption, findCascadeOption } from "./use-cascader.shared"
+import { useEffect, useState, useRef } from "react"
+import { CascaderOption } from "./use-cascader.shared"
 
 export interface UseCascaderOldOptions {
   value?: any[]
@@ -18,7 +18,17 @@ export default function useCascaderOld({
   options = [],
 }: UseCascaderOldOptions): CascaderObjectOld {
   depth = _.clamp(depth, 0, depth)
+  const cacheMapRef = useRef(new Map())
+  const cachedKeyRef = useRef<string[]>([])
   const [columns, setColumns] = useState<CascaderOption[][]>([])
+
+  useEffect(() => {
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      cacheMapRef.current.clear();
+      cachedKeyRef.current = [];
+    }
+  }, [options])
 
   useEffect(() => {
     const newColumns: CascaderOption[][] = []
@@ -28,7 +38,12 @@ export default function useCascaderOld({
       let cursorOptions: CascaderOption[] = options
 
       for (const value of values) {
-        const nextOption = findCascadeOption(cursorOptions, value)
+        if (!cacheMapRef.current.has(value)) {
+          cursorOptions.forEach(item => {
+            cacheMapRef.current.set(item.value, item)
+          })
+        }
+        const nextOption = cacheMapRef.current.get(value)
         if (_.isUndefined(nextOption)) {
           break
         }
@@ -42,8 +57,7 @@ export default function useCascaderOld({
     }
     if (depth !== 0 && depth > _.size(newColumns)) {
       _.range(depth - _.size(newColumns))
-        .map(() => [])
-        .forEach((e) => newColumns.push(e))
+        .forEach((e) => newColumns.push([]))
     }
     setColumns(newColumns)
   }, [depth, options, values])
