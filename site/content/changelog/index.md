@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.3
+
+`2023-10-26`
+
+**Feature**
+
+- Form
+  - Form表单支持动态增减表单项 [622](https://github.com/mallfoundry/taroify/pull/622) [@hbztd](https://github.com/hbztd)
+
+- NoticeBar
+  - 添加 `reset` 实例方法 [#623](https://github.com/mallfoundry/taroify/pull/623) [@hbztd](https://github.com/hbztd)
+  - `NoticeBarIcon` 和 `NoticeBarAction` onClick 阻止冒泡触发 NoticeBar Click 事件 [#623](https://github.com/mallfoundry/taroify/pull/623) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- NoticeBar
+  - 修复 `onReplay` 未触发 [#623](https://github.com/mallfoundry/taroify/pull/623) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.2
 
 `2023-10-13`
