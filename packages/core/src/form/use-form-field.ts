@@ -12,7 +12,7 @@ export default function useFormField(name?: string, field?: FormItemInstance) {
   useEffect(() => {
     form?.linkField?.(name, field, inFormList)
     return () => {
-      form.unlinkField(name, inFormList)
+      form?.unlinkField(name, inFormList)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, field, inFormList])
