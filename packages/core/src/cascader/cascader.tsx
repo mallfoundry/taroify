@@ -1,4 +1,4 @@
-import { useUncontrolled } from "@taroify/hooks"
+import { useUncontrolled, useCascader } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
@@ -9,18 +9,18 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
-  useCallback,
-  useEffect,
+  useReducer,
   useMemo,
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
 import Tabs from "../tabs"
+import { useMemoizedFn } from "../hooks"
 import CascaderHeader from "./cascader-header"
 import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
 import CascaderTab from "./cascader-tab"
-import { CascaderOptionObject, CascaderTabObject, isActiveOption } from "./cascader.shared"
+import { CascaderOptionObject, CascaderEventOption, CascaderTabObject, isActiveOption, CascaderDataOption, CascaderFieldNames } from "./cascader.shared"
 
 function getCascaderOptions(children: ReactNode, tabIndex: number): CascaderOptionObject[] {
   const options: CascaderOptionObject[] = []
@@ -77,17 +77,28 @@ function useCascaderChildren(children?: ReactNode): CascaderChildren {
 
 export interface CascaderProps {
   className?: string
-  defaultValue?: any[]
-  value?: any[]
+  defaultValue?: string[]
+  value?: string[]
+  title?: ReactNode
   swipeable?: boolean
+  animated?: boolean
   placeholder?: ReactNode
+  loadData?(values: string[], options: CascaderEventOption[]): Promise<any[]>
+  fieldNames?: CascaderFieldNames
   children?: ReactNode
+  options?: CascaderDataOption[]
 
-  onChange?(values: any[], options: CascaderOptionObject[]): void
+  onChange?(values: string[], options: CascaderEventOption[]): void
 
-  onSelect?(values: any[], options: CascaderOptionObject[]): void
+  onSelect?(values: string[], options: CascaderEventOption[]): void
 
   onTabClick?(event: Tabs.TabEvent): void
+}
+
+const defaultFieldNames: CascaderFieldNames = {
+  label: "label",
+  value: "value",
+  children: "children"
 }
 
 function Cascader(props: CascaderProps) {
@@ -96,52 +107,98 @@ function Cascader(props: CascaderProps) {
     defaultValue,
     value: valueProp,
     placeholder = "请选择",
+    title,
+    loadData,
+    fieldNames: _fieldNames,
+    animated = true,
     swipeable = false,
     children: childrenProp,
+    options,
     onChange,
     onSelect,
     onTabClick,
   } = props
-  const { header, tabs } = useCascaderChildren(childrenProp)
-
+  const [colRefreshKey, refreshKey] = useReducer(state => state + 1, 0)
   const { value: values = [], setValue: setValues } = useUncontrolled({
     defaultValue,
     value: valueProp,
   })
-
+  const fieldNames: CascaderFieldNames = useMemo(() => {
+    if (!_.isEmpty(_fieldNames) && _.isObject(_fieldNames)) {
+      return Object.assign({...defaultFieldNames}, _fieldNames)
+    }
+    return defaultFieldNames
+  }, [_fieldNames])
+  // @ts-ignore
+  const { columns } = useCascader({ options: options, value: values, fieldNames, refreshKey: colRefreshKey })
+  const { header: _header, tabs: _tab } = useCascaderChildren(childrenProp)
+  const header = useMemo(() => title ? <CascaderHeader>{title}</CascaderHeader> : _header, [title, _header])
+  const [tabs, tabsMap] = useMemo(() => {
+    let ret: CascaderTabObject[]
+    const cache = new Map<string, CascaderOptionObject>();
+    if (columns.length > 0) {
+      ret = columns.map((column, idx) => ({
+        options: column.map(item => ({
+          children: item[fieldNames.label!],
+          key: item[fieldNames.value!],
+          value: item[fieldNames.value!],
+          disabled: item.disabled,
+          tabIndex: idx,
+        } as CascaderOptionObject))
+      }))
+    } else {
+      ret = _tab
+    }
+    ret.forEach(r => r.options?.forEach(rr => cache.set(rr.value, rr)))
+    return [ret, cache] as const
+  },[columns, _tab, fieldNames])
   const [activeTab, setActiveTab] = useState(0)
 
-  const lastTab = useMemo(() => _.size(tabs) - 1, [tabs])
+  const renderedTabs = useMemo(() => _.slice(tabs, 0, _.size(values) + 1), [tabs, values])
 
-  const activeTabs = useMemo(() => _.slice(tabs, 0, _.size(values) + 1), [tabs, values])
+  const renderedOptions = useMemo(() => values.map(item => tabsMap.get(item)), [tabsMap, values])
 
-  const findOptions = useCallback(
-    (aValues: any[]) =>
-      _.map(
-        tabs,
-        ({ options }) =>
-          _.find(
-            options,
-            (option) => option.value === aValues[option.tabIndex],
-          ) as CascaderOptionObject,
-      ),
-    [tabs],
-  )
-
-  const activeOptions = useMemo(() => findOptions(values), [findOptions, values])
-
-  const emitChange = useCallback(
-    (newValues: any[]) => {
-      const newActiveOptions = findOptions(newValues)
+  const emitChange = useMemoizedFn(
+   async (newValues: any[]) => {
+      const newActiveOptions = newValues.map(item => tabsMap.get(item)!)
       onSelect?.(newValues, newActiveOptions)
-      if (!_.isEqual(newValues, valueProp) && _.size(tabs) === _.size(newValues)) {
-        onChange?.(newValues, newActiveOptions)
+      if (!_.isEqual(newValues, valueProp)) {
+        if (columns.length > 0) {
+          let children
+          if (loadData) {
+            // @ts-ignore
+            children = await loadData(newValues.slice(), newActiveOptions.slice())
+            const level = newValues.length - 1
+            const selected = columns[level].find(item => item[fieldNames.value!] === newValues[level])
+            if (selected) {
+              selected[fieldNames.children!] = children
+            }
+          } else {
+            const last = columns[newValues.length - 1].find(item => item[fieldNames.value!] === newValues[newValues.length - 1])
+            children = last?.[fieldNames.children!]
+          }
+          if (!children || children.length === 0) {
+            onChange?.(newValues, newActiveOptions)
+          } else {
+            nextTick(() => {
+              refreshKey()
+              setActiveTab(prev => prev + 1)
+            })
+          }
+        } else {
+          if (_.size(tabs) === _.size(newValues)) {
+            onChange?.(newValues, newActiveOptions)
+          } else {
+            nextTick(() => {
+              setActiveTab(prev => prev + 1)
+            })
+          }
+        }
       }
-    },
-    [findOptions, onChange, onSelect, tabs, valueProp],
+    }
   )
 
-  const handleSelect = useCallback(
+  const handleSelect = useMemoizedFn(
     (option: CascaderOptionObject) => {
       const { disabled, tabIndex, value } = option
       if (disabled) {
@@ -150,31 +207,21 @@ function Cascader(props: CascaderProps) {
       const newValues = _.slice(values, 0, tabIndex + 1)
       newValues[tabIndex] = value
       setValues(newValues)
-      emitChange(newValues)
+      emitChange(newValues.slice())
     },
-    [emitChange, setValues, values],
-  )
-
-  useEffect(
-    () =>
-      nextTick(() =>
-        //
-        setActiveTab(_.clamp(_.size(values), lastTab)),
-      ),
-    [lastTab, values],
   )
 
   const panes = useMemo(
     () =>
-      _.map(activeTabs, (tab, index) => (
+      _.map(renderedTabs, (tab, index) => (
         <Tabs.TabPane
           key={index}
           value={index}
-          title={_.get(activeOptions, index)?.children ?? placeholder}
+          title={_.get(renderedOptions, index)?.children ?? placeholder}
           classNames={{
             title: classNames(prefixClassname("cascader__tab"), {
               [prefixClassname("cascader__tab--inactive")]: _.isEmpty(
-                _.get(activeOptions, index)?.children,
+                _.get(renderedOptions, index)?.children,
               ),
             }),
           }}
@@ -200,7 +247,7 @@ function Cascader(props: CascaderProps) {
           </View>
         </Tabs.TabPane>
       )),
-    [activeOptions, activeTabs, handleSelect, placeholder, values],
+    [renderedOptions, renderedTabs, handleSelect, placeholder, values],
   )
 
   return (
@@ -209,7 +256,7 @@ function Cascader(props: CascaderProps) {
       <Tabs
         className={prefixClassname("cascader__tabs")}
         value={activeTab}
-        animated
+        animated={animated}
         swipeable={swipeable}
         onChange={(value) => setActiveTab(value)}
         onTabClick={onTabClick}

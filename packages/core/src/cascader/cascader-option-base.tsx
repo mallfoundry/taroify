@@ -7,6 +7,7 @@ import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface CascaderOptionBaseProps extends ViewProps {
+  key?: string | number
   className?: string
   active?: boolean
   disabled?: boolean

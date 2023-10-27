@@ -18,7 +18,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { useMounted, useWindowResize } from "../hooks"
+import { useMounted, useWindowResize, useMemoizedFn } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
@@ -190,10 +190,10 @@ function Swiper(props: SwiperProps) {
     return 0
   }, [count, getSize, vertical])
 
-  const getMaxCount = useCallback(() => Math.ceil(Math.abs(getMinOffset()) / getSize()), [
-    getMinOffset,
-    getSize,
-  ])
+  const getMaxCount = useCallback(
+    () => Math.ceil(Math.abs(getMinOffset()) / getSize()),
+    [getMinOffset, getSize],
+  )
 
   const getTargetActive = useCallback(
     (pace: number) => {
@@ -427,14 +427,12 @@ function Swiper(props: SwiperProps) {
       new Promise<Rect>((resolve) => {
         nextTick(() =>
           resolve(
-            Promise.all([
-              getRect(rootRef),
-              getComputedStyle(rootRef, ["width", "height"]),
-            ]).then(([rect, style]) =>
-              makeRect(
-                style.width === "auto" ? rect.width : unitToPx(style.width),
-                style.height === "auto" ? rect.height : unitToPx(style.height),
-              ),
+            Promise.all([getRect(rootRef), getComputedStyle(rootRef, ["width", "height"])]).then(
+              ([rect, style]) =>
+                makeRect(
+                  style.width === "auto" ? rect.width : unitToPx(style.width),
+                  style.height === "auto" ? rect.height : unitToPx(style.height),
+                ),
             ),
           ),
         )
@@ -442,7 +440,7 @@ function Swiper(props: SwiperProps) {
     [],
   )
 
-  const initialize = useCallback(
+  const initialize = useMemoizedFn(
     async (activeIndex = valueRef.current) => {
       if (!rootRef.current) {
         return
@@ -460,15 +458,25 @@ function Swiper(props: SwiperProps) {
         forceUpdate()
       }
       itemInstances.forEach((item) => item.setOffset(0))
-    },
-    [valueRef, getTrackRect, count, getTargetOffset, offset, itemInstances, forceUpdate],
+    }
   )
 
   const resize = useCallback(() => nextTick(() => initialize(activeIndexRef.current)), [initialize])
 
-  useMounted(initialize)
-
   useWindowResize(resize)
+
+  useEffect(() => {
+    if (count !== 0) {
+      nextTick(initialize)
+    }
+  }, [count, initialize])
+
+  useEffect(() => {
+    // todo: delete activeIndexRef and only use value, setValue
+    if (valueProp !== activeIndexRef.current) {
+      nextTick(initialize)
+    }
+  }, [valueProp, initialize])
 
   useMounted(() => {
     startAutoplay()

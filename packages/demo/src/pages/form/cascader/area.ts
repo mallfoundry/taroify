@@ -1,4 +1,4 @@
-export default [
+export const area = [
   {
     label: "浙江省",
     value: "330000",
@@ -119,4 +119,187 @@ export default [
       },
     ],
   },
+]
+
+export const dept = [
+  {
+    label: "研发中心",
+    value: "1",
+    children: [
+      {
+        label: "产线1",
+        value: "1-1",
+        children: [
+          {
+            label: "研发",
+            value: "1-1-1",
+          },
+          {
+            label: "测试",
+            value: "1-1-2",
+          },
+          {
+            label: "产品",
+            value: "1-1-3",
+          }
+        ]
+      },
+      {
+        label: "产线2",
+        value: "1-2",
+      }
+    ]
+  },
+  {
+    label: "客户中心",
+    value: "2",
+    children: [
+      {
+        label: "客服",
+        value: "2-1",
+      },
+      {
+        label: "销售",
+        value: "2-2",
+      }
+    ]
+  }
+]
+
+export const customArea = [
+  {
+    name: "浙江省",
+    code: "330000",
+    data: [
+      {
+        name: "杭州市",
+        code: "330100",
+        data: [
+          {
+            name: "上城区",
+            code: "330102",
+          },
+          {
+            name: "下城区",
+            code: "330103",
+          },
+          {
+            name: "江干区",
+            code: "330104",
+          },
+        ],
+      },
+      {
+        name: "宁波市",
+        code: "330200",
+        data: [
+          {
+            name: "海曙区",
+            code: "330203",
+          },
+          {
+            name: "江北区",
+            code: "330205",
+          },
+          {
+            name: "北仑区",
+            code: "330206",
+          },
+        ],
+      },
+      {
+        name: "温州市",
+        code: "330300",
+        data: [
+          {
+            name: "鹿城区",
+            code: "330302",
+          },
+          {
+            name: "龙湾区",
+            code: "330303",
+          },
+          {
+            name: "瓯海区",
+            code: "330304",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "江苏省",
+    code: "320000",
+    data: [
+      {
+        name: "南京市",
+        code: "320100",
+        data: [
+          {
+            name: "玄武区",
+            code: "320102",
+          },
+          {
+            name: "秦淮区",
+            code: "320104",
+          },
+          {
+            name: "建邺区",
+            code: "320105",
+          },
+        ],
+      },
+      {
+        name: "无锡市",
+        code: "320200",
+        data: [
+          {
+            name: "锡山区",
+            code: "320205",
+          },
+          {
+            name: "惠山区",
+            code: "320206",
+          },
+          {
+            name: "滨湖区",
+            code: "320211",
+          },
+        ],
+      },
+      {
+        name: "徐州市",
+        code: "320300",
+        data: [
+          {
+            name: "鼓楼区",
+            code: "320302",
+          },
+          {
+            name: "云龙区",
+            code: "320303",
+          },
+          {
+            name: "贾汪区",
+            code: "320305",
+          },
+        ],
+      },
+    ],
+  },
+]
+
+export const dynamic = [
+  {
+    label: "产品",
+    value: "1"
+  },
+  {
+    label: "测试",
+    value: "2"
+  },
+  {
+    label: "研发",
+    value: "3"
+  }
 ]
