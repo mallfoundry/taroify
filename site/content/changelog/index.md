@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.4
+
+`2023-10-27`
+
+**Feature**
+
+- Cascader
+  - 添加 `options` `fieldNames` `loadData`，支持指定数据源，自定义 options 结构中的字段，动态加载选项 [626](https://github.com/mallfoundry/taroify/pull/626) [@hbztd](https://github.com/hbztd)
+  - `useCascader` 添加缓存，提高性能 [626](https://github.com/mallfoundry/taroify/pull/626) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Swiper
+  - 修复动态设置 SwiperItem 时可能出现页面异常 [626](https://github.com/mallfoundry/taroify/pull/626) [@hbztd](https://github.com/hbztd)
+
+- Filed
+  - 修复单独使用 Filed 时，form为空报错 [627](https://github.com/mallfoundry/taroify/pull/627) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.3
 
 `2023-10-26`
