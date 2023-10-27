@@ -2,7 +2,7 @@ import { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import { ReactNode } from "react"
 
-export interface CascaderOptionObject extends ViewProps {
+export interface CascaderEventOption {
   key?: string | number
   tabIndex: number
   className?: string
@@ -11,9 +11,24 @@ export interface CascaderOptionObject extends ViewProps {
   children?: ReactNode
 }
 
+export type CascaderOptionObject = CascaderEventOption & ViewProps
 export interface CascaderTabObject {
   className?: string
   options?: CascaderOptionObject[]
+}
+
+export interface CascaderDataOption {
+  [idx: string]: any
+  value?: any
+  label?: ReactNode
+  disabled?: boolean
+  children?: CascaderDataOption[]
+}
+
+export interface CascaderFieldNames {
+  label?: string
+  value?: string
+  children?: string
 }
 
 export type CascaderThemeVars = {

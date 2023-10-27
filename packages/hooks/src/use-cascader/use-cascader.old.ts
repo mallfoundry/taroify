@@ -1,21 +1,39 @@
 import * as _ from "lodash"
 import { useEffect, useState, useRef } from "react"
 import { CascaderOption } from "./use-cascader.shared"
+interface CascaderFieldNames {
+  label?: string
+  value?: string
+  children?: string
+}
 
 export interface UseCascaderOldOptions {
   value?: any[]
   depth?: number
   options?: CascaderOption[]
+  /** @deprecated 请不要设置这个属性 */
+  fieldNames?: CascaderFieldNames
+  /** @deprecated 请不要设置这个属性 */
+  refreshKey?: number
 }
 
 export interface CascaderObjectOld {
   columns: CascaderOption[][]
 }
 
+const emptyArr = []
+const defaultFieldNames: CascaderFieldNames = {
+  label: "label",
+  value: "value",
+  children: "children"
+}
+
 export default function useCascaderOld({
-  value: values = [],
+  value: values = emptyArr,
   depth = 0,
-  options = [],
+  options = emptyArr,
+  fieldNames = defaultFieldNames,
+  refreshKey = 0
 }: UseCascaderOldOptions): CascaderObjectOld {
   depth = _.clamp(depth, 0, depth)
   const cacheMapRef = useRef(new Map())
@@ -31,6 +49,10 @@ export default function useCascaderOld({
   }, [options])
 
   useEffect(() => {
+    if (_.isEmpty(options)) {
+      return
+    }
+
     const newColumns: CascaderOption[][] = []
     newColumns.push(options)
 
@@ -40,14 +62,14 @@ export default function useCascaderOld({
       for (const value of values) {
         if (!cacheMapRef.current.has(value)) {
           cursorOptions.forEach(item => {
-            cacheMapRef.current.set(item.value, item)
+            cacheMapRef.current.set(item[fieldNames.value!], item)
           })
         }
         const nextOption = cacheMapRef.current.get(value)
         if (_.isUndefined(nextOption)) {
           break
         }
-        const { children: nextOptions } = nextOption
+        const nextOptions = nextOption[fieldNames.children!]
         if (!nextOptions || _.isEmpty(nextOptions)) {
           break
         }
@@ -57,10 +79,10 @@ export default function useCascaderOld({
     }
     if (depth !== 0 && depth > _.size(newColumns)) {
       _.range(depth - _.size(newColumns))
-        .forEach((e) => newColumns.push([]))
+        .forEach(() => newColumns.push([]))
     }
     setColumns(newColumns)
-  }, [depth, options, values])
+  }, [depth, options, values, fieldNames, refreshKey])
 
   return {
     columns,
