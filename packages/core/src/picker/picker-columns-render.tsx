@@ -85,6 +85,7 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
           children={options}
           readonly={readonly}
           {...restColumnProps}
+          visibleCount={visibleCount}
           value={_.get(values, columnIndex)}
           onChange={(option, emitChange) =>
             onChange?.(

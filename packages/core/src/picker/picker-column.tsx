@@ -20,7 +20,7 @@ import { fulfillPromise } from "../utils/promisify"
 import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
-import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
+import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject, DEFAULT_SIBLING_COUNT } from "./picker.shared"
 
 // 惯性滑动思路:
 // 在手指离开屏幕时，如果和上一次 move 时的间隔小于 `MOMENTUM_LIMIT_TIME` 且 move
@@ -43,6 +43,7 @@ export interface PickerColumnProps extends Omit<ViewProps, "children"> {
   value: any
   className?: string
   readonly?: boolean
+  visibleCount?: number
   children?: PickerOptionObject[]
 
   onChange?(option: PickerOptionObject, emitChange?: boolean): void
@@ -54,6 +55,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       value,
       className,
       readonly,
+      visibleCount = DEFAULT_SIBLING_COUNT * 2,
       children: childrenProp = [],
       onChange,
       onTouchStart,
@@ -80,7 +82,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
     // const [duration, setDuration] = useState<PickerColumnDuration>("zero")
 
-    const baseOffset = useMemo(() => (itemHeight * (6 - 1)) / 2, [])
+    const baseOffset = useMemo(() => (itemHeight * (+visibleCount - 1)) / 2, [visibleCount])
 
     const countRef = useRenderedRef(() => _.size(childrenProp))
 
