@@ -4,15 +4,17 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, ReactElement, ReactNode, useCallback, useRef } from "react"
+import { Children, ReactElement, ReactNode, useCallback, useRef, useMemo } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { useRefs, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
+import { unitToPx } from "../utils/format/unit"
 import PickerColumns from "./picker-columns"
 import { PickerColumn } from "./picker.composition"
 import PickerContext from "./picker.context"
 import {
+  DEFAULT_OPTION_HEIGHT,
   DEFAULT_SIBLING_COUNT,
   PickerColumnInstance,
   PickerOptionObject,
@@ -47,6 +49,7 @@ interface PickerBaseProps extends ViewProps {
   readonly?: boolean
   loading?: boolean
   siblingCount?: number
+  optionHeight?: string | number
   children?: ReactNode
 }
 
@@ -80,6 +83,7 @@ function Picker(props: PickerProps) {
     loading,
     readonly,
     siblingCount = DEFAULT_SIBLING_COUNT,
+    optionHeight: optionHeightProp,
     children: childrenProp,
     onChange,
     onCancel,
@@ -102,6 +106,8 @@ function Picker(props: PickerProps) {
   const children = usePickerChildren(childrenProp)
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
+
+  const optionHeight = useMemo(() => optionHeightProp ? unitToPx(optionHeightProp) : DEFAULT_OPTION_HEIGHT, [optionHeightProp])
 
   const setValueOptions = useCallback(
     (option: PickerOptionObject, unverifiedColumn: PickerOptionObject) => {
@@ -148,6 +154,7 @@ function Picker(props: PickerProps) {
       value={{
         readonly,
         siblingCount,
+        optionHeight,
         values,
         getValueOptions,
         isMultiValue,

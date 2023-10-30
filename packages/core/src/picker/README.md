@@ -216,6 +216,7 @@ function PickerPopup() {
 | loading | 是否显示加载状态 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
 | siblingCount | 可见的选项相邻个数 | _number_ | `3` |
+| optionHeight | 选项高度，支持 `px` `vw` `vh` `rem` `rpx` 单位，默认 `px` | _number\|string_ | `44` |
 
 ### Picker Events
 
