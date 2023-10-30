@@ -271,7 +271,7 @@ function PickerField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="picker" clickable rightIcon={<ArrowRight />}>
+      <Form.Item ref={itemRef} name="picker" isLink>
         <Form.Label>选择器</Form.Label>
         <Form.Control>
           <Input readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
@@ -322,7 +322,7 @@ function DatetimePickerField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="datetimePicker" clickable rightIcon={<ArrowRight />}>
+      <Form.Item ref={itemRef} name="datetimePicker" isLink>
         <Form.Label>时间选择</Form.Label>
         <Form.Control>
           {(controller) => (
@@ -374,7 +374,7 @@ function CalendarField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
+      <Form.Item ref={itemRef} name="calendar" isLink>
         <Form.Label>日历</Form.Label>
         <Form.Control>
           {(controller) => (

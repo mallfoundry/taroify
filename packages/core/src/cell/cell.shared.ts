@@ -1,6 +1,23 @@
+import { ReactNode } from "react";
+import { ViewProps } from "@tarojs/components/types/View"
 export type CellSize = "medium" | "large"
 
 export type CellAlign = "start" | "center" | "end"
+
+export type ArrowDirection = "right" | "left" | "up" | "down"
+
+export type CellBaseProps = {
+  size?: CellSize
+  align?: CellAlign
+  icon?: ReactNode
+  rightIcon?: ReactNode
+  required?: boolean
+  bordered?: boolean
+  clickable?: boolean
+  isLink?: boolean
+  arrowDirection?: ArrowDirection
+  children?: ReactNode
+} & ViewProps
 
 export type CellThemeVars = {
   cellFontSize?: string
