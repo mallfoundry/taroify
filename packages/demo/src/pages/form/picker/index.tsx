@@ -1,65 +1,172 @@
 import { Field, Input, Picker, Popup, Toast } from "@taroify/core"
 import { ArrowRight } from "@taroify/icons"
-import * as _ from "lodash"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicPicker() {
+  const columns = useMemo(() => [
+    { label2: "杭州", value: "Hangzhou" },
+    { label2: "宁波", value: "Ningbo" },
+    { label2: "温州", value: "Wenzhou" },
+    { label2: "绍兴", value: "Shaoxing" },
+    { label2: "湖州", value: "Huzhou" }
+  ], [])
+
   return (
     <>
       <Toast id="toast" />
-      <Picker onChange={(value) => Toast.open(`当前值：${value}`)}>
-        <Picker.Toolbar>
-          <Picker.Button>取消</Picker.Button>
-          <Picker.Title>标题</Picker.Title>
-          <Picker.Button>确认</Picker.Button>
-        </Picker.Toolbar>
-        <Picker.Column>
-          <Picker.Option>杭州</Picker.Option>
-          <Picker.Option>宁波</Picker.Option>
-          <Picker.Option>温州</Picker.Option>
-          <Picker.Option>绍兴</Picker.Option>
-          <Picker.Option>湖州</Picker.Option>
-          <Picker.Option>嘉兴</Picker.Option>
-          <Picker.Option>金华</Picker.Option>
-        </Picker.Column>
+      <Picker
+        title="标题"
+        columns={columns}
+        columnsFieldNames={{ label: "label2" }}
+        onChange={(value) => Toast.open(`当前值：${value}`)}
+        onConfirm={(value) => Toast.open(`当前值：${value}`)}
+      >
       </Picker>
     </>
   )
 }
 
 function DefaultPicker() {
+  const columns = useMemo(() => [
+    { label: "杭州", value: "Hangzhou" },
+    { label: "宁波", value: "Ningbo" },
+    { label: "温州", value: "Wenzhou" },
+    { label: "绍兴", value: "Shaoxing" },
+    { label: "湖州", value: "Huzhou" }
+  ], [])
   return (
     <>
       <Toast id="toast" />
-      <Picker defaultValue="温州" onChange={(value) => Toast.open(`当前值：${value}`)}>
-        <Picker.Toolbar>
-          <Picker.Button>取消</Picker.Button>
-          <Picker.Title>标题</Picker.Title>
-          <Picker.Button>确认</Picker.Button>
-        </Picker.Toolbar>
-        <Picker.Column>
-          <Picker.Option>杭州</Picker.Option>
-          <Picker.Option>宁波</Picker.Option>
-          <Picker.Option>温州</Picker.Option>
-          <Picker.Option>绍兴</Picker.Option>
-          <Picker.Option>湖州</Picker.Option>
-          <Picker.Option>嘉兴</Picker.Option>
-          <Picker.Option>金华</Picker.Option>
-        </Picker.Column>
+      <Picker
+        defaultValue="Wenzhou"
+        title="标题"
+        columns={columns}
+        onChange={(value) => Toast.open(`当前值：${value}`)}
+        onConfirm={(value) => Toast.open(`当前值：${value}`)}
+      >
       </Picker>
     </>
   )
 }
 
 function PickerWithMultiColumns() {
+  const columns = useMemo(() => [
+    [
+      { label: "周一", value: "Monday" },
+      { label: "周二", value: "Tuesday" },
+      { label: "周三", value: "Wednesday" },
+      { label: "周四", value: "Thursday" },
+      { label: "周五", value: "Friday" }
+    ],
+    [
+      { label: "上午", value: "morning" },
+      { label: "下午", value: "afternoon"},
+      { label: "晚上", value: "evening"}
+    ]
+  ], [])
   return (
     <>
       <Toast id="toast" />
-      <Picker onConfirm={(values) => Toast.open(`当前值：${_.join(values, ",")}`)}>
+      <Picker
+        defaultValue={["Monday", "evening"]}
+        title="标题"
+        columns={columns}
+        onChange={(value) => Toast.open(`当前值：${value}`)}
+        onConfirm={(value) => Toast.open(`当前值：${value}`)}
+      >
+      </Picker>
+    </>
+  )
+}
+
+function DisabledPicker() {
+  const columns = useMemo(() => [
+    { label: "杭州", value: "Hangzhou" },
+    { label: "宁波", value: "Ningbo" },
+    { label: "温州", value: "Wenzhou", disabled: true },
+    { label: "绍兴", value: "Shaoxing" },
+    { label: "湖州", value: "Huzhou" }
+  ], [])
+  return (
+    <Picker
+      columns={columns}
+      onChange={(value) => Toast.open(`当前值：${value}`)}
+      onConfirm={(value) => Toast.open(`当前值：${value}`)}
+    >
+    </Picker>
+  )
+}
+
+function LoadingPicker() {
+  const columns = useMemo(() => [
+    { label: "杭州", value: "Hangzhou" },
+    { label: "宁波", value: "Ningbo" },
+    { label: "温州", value: "Wenzhou" },
+    { label: "绍兴", value: "Shaoxing" },
+    { label: "湖州", value: "Huzhou" }
+  ], [])
+
+  return (
+    <>
+      <Toast id="toast" />
+      <Picker
+        loading
+        title="标题"
+        columns={columns}
+        onChange={(value) => Toast.open(`当前值：${value}`)}
+        onConfirm={(value) => Toast.open(`当前值：${value}`)}
+      >
+      </Picker>
+    </>
+  )
+}
+
+function PickerPopup() {
+  const [value, setValue] = useState("")
+  const [openPicker, setOpenPicker] = useState(false)
+  const columns = useMemo(() => [
+    { label: "杭州", value: "Hangzhou" },
+    { label: "宁波", value: "Ningbo" },
+    { label: "温州", value: "Wenzhou" },
+    { label: "绍兴", value: "Shaoxing" },
+    { label: "湖州", value: "Huzhou" }
+  ], [])
+  return (
+    <>
+      <Field label="城市" rightIcon={<ArrowRight />} onClick={() => setOpenPicker(true)}>
+        <Input readonly placeholder="选择城市" value={value} />
+      </Field>
+      <Popup open={openPicker} rounded placement="bottom" onClose={setOpenPicker}>
+        <Popup.Backdrop />
+        <Picker
+          title="搭配弹出层使用"
+          cancelText="取消"
+          confirmText="确认"
+          columns={columns}
+          onCancel={() => setOpenPicker(false)}
+          onConfirm={(values) => {
+            setValue(values as string)
+            setOpenPicker(false)
+          }}
+        >
+        </Picker>
+      </Popup>
+    </>
+  )
+}
+
+function ManualPicker() {
+  return (
+    <>
+      <Toast id="toast" />
+      <Picker
+        onChange={(value) => Toast.open(`当前值：${value}`)}
+        onConfirm={(value) => Toast.open(`当前值：${value}`)}
+      >
         <Picker.Toolbar>
           <Picker.Button>取消</Picker.Button>
           <Picker.Title>标题</Picker.Title>
@@ -78,84 +185,6 @@ function PickerWithMultiColumns() {
           <Picker.Option>晚上</Picker.Option>
         </Picker.Column>
       </Picker>
-    </>
-  )
-}
-
-function DisabledPicker() {
-  return (
-    <Picker>
-      <Picker.Toolbar>
-        <Picker.Button>取消</Picker.Button>
-        <Picker.Title>标题</Picker.Title>
-        <Picker.Button>确认</Picker.Button>
-      </Picker.Toolbar>
-      <Picker.Column>
-        <Picker.Option disabled>杭州</Picker.Option>
-        <Picker.Option>宁波</Picker.Option>
-        <Picker.Option>温州</Picker.Option>
-      </Picker.Column>
-    </Picker>
-  )
-}
-
-function LoadingPicker() {
-  return (
-    <Picker loading>
-      <Picker.Toolbar>
-        <Picker.Button>取消</Picker.Button>
-        <Picker.Title>标题</Picker.Title>
-        <Picker.Button>确认</Picker.Button>
-      </Picker.Toolbar>
-      <Picker.Column>
-        <Picker.Option>浙江</Picker.Option>
-        <Picker.Option>福建</Picker.Option>
-      </Picker.Column>
-      <Picker.Column>
-        <Picker.Option>杭州</Picker.Option>
-        <Picker.Option>宁波</Picker.Option>
-        <Picker.Option>温州</Picker.Option>
-        <Picker.Option>嘉兴</Picker.Option>
-        <Picker.Option>湖州</Picker.Option>
-      </Picker.Column>
-    </Picker>
-  )
-}
-
-function PickerPopup() {
-  const [value, setValue] = useState("")
-  const [openPicker, setOpenPicker] = useState(false)
-
-  return (
-    <>
-      <Field label="城市" rightIcon={<ArrowRight />} onClick={() => setOpenPicker(true)}>
-        <Input readonly placeholder="选择城市" value={value} />
-      </Field>
-      <Popup open={openPicker} rounded placement="bottom" onClose={setOpenPicker}>
-        <Popup.Backdrop />
-        <Picker
-          onCancel={() => setOpenPicker(false)}
-          onConfirm={(values) => {
-            setValue(values)
-            setOpenPicker(false)
-          }}
-        >
-          <Picker.Toolbar>
-            <Picker.Button>取消</Picker.Button>
-            <Picker.Title>标题</Picker.Title>
-            <Picker.Button>确认</Picker.Button>
-          </Picker.Toolbar>
-          <Picker.Column>
-            <Picker.Option>杭州</Picker.Option>
-            <Picker.Option>宁波</Picker.Option>
-            <Picker.Option>温州</Picker.Option>
-            <Picker.Option>绍兴</Picker.Option>
-            <Picker.Option>湖州</Picker.Option>
-            <Picker.Option>嘉兴</Picker.Option>
-            <Picker.Option>金华</Picker.Option>
-          </Picker.Column>
-        </Picker>
-      </Popup>
     </>
   )
 }
@@ -191,6 +220,11 @@ export default function PickerDemo() {
       <Block variant="card" title="搭配弹出层使用">
         <CustomWrapper>
           <PickerPopup />
+        </CustomWrapper>
+      </Block>
+      <Block variant="card" title="手动控制DOM">
+        <CustomWrapper>
+          <ManualPicker />
         </CustomWrapper>
       </Block>
     </Page>

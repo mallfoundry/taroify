@@ -20,7 +20,7 @@ import { fulfillPromise } from "../utils/promisify"
 import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
-import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
+import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject, DEFAULT_SIBLING_COUNT, DEFAULT_OPTION_HEIGHT } from "./picker.shared"
 
 // 惯性滑动思路:
 // 在手指离开屏幕时，如果和上一次 move 时的间隔小于 `MOMENTUM_LIMIT_TIME` 且 move
@@ -43,6 +43,8 @@ export interface PickerColumnProps extends Omit<ViewProps, "children"> {
   value: any
   className?: string
   readonly?: boolean
+  visibleCount?: number
+  optionHeight?: number
   children?: PickerOptionObject[]
 
   onChange?(option: PickerOptionObject, emitChange?: boolean): void
@@ -54,6 +56,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       value,
       className,
       readonly,
+      visibleCount = DEFAULT_SIBLING_COUNT * 2,
+      optionHeight = DEFAULT_OPTION_HEIGHT,
       children: childrenProp = [],
       onChange,
       onTouchStart,
@@ -73,14 +77,13 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const transitionEndTriggerRef = useRef<() => void>()
 
     const touch = useTouch()
-    const itemHeight = 44
     const activeIndexRef = useRef(-1)
     const [activeOffset, setActiveOffset] = useState<number>(0)
     const activeOffsetRef = useToRef(activeOffset)
 
     // const [duration, setDuration] = useState<PickerColumnDuration>("zero")
 
-    const baseOffset = useMemo(() => (itemHeight * (6 - 1)) / 2, [])
+    const baseOffset = useMemo(() => (optionHeight * (+visibleCount - 1)) / 2, [visibleCount, optionHeight])
 
     const countRef = useRenderedRef(() => _.size(childrenProp))
 
@@ -102,7 +105,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       (index: number, emitChange?: boolean) => {
         index = adjustIndex(index) || 0
 
-        const offset = -index * itemHeight
+        const offset = -index * optionHeight
         const trigger = () => {
           if (index !== activeIndexRef.current) {
             activeIndexRef.current = index
@@ -120,7 +123,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
         setActiveOffset(offset)
       },
-      [adjustIndex, activeOffsetRef, childrenRef, onChange],
+      [adjustIndex, activeOffsetRef, childrenRef, onChange, optionHeight],
     )
 
     const getIndexByValue = useCallback(
@@ -147,8 +150,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     )
 
     const getIndexByOffset = useCallback(
-      (offset: number) => _.clamp(Math.round(-offset / itemHeight), 0, countRef.current - 1),
-      [countRef],
+      (offset: number) => _.clamp(Math.round(-offset / optionHeight), 0, countRef.current - 1),
+      [countRef, optionHeight],
     )
 
     const momentum = useCallback(
@@ -232,8 +235,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       setActiveOffset(
         _.clamp(
           startOffsetRef.current + touch.deltaY,
-          -(countRef.current * itemHeight),
-          itemHeight,
+          -(countRef.current * optionHeight),
+          optionHeight,
         ),
       )
     }

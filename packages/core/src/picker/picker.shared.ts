@@ -3,8 +3,16 @@ import { Key, ReactNode } from "react"
 import { isTextElement } from "../utils/validate"
 
 export const DEFAULT_SIBLING_COUNT = 3
+export const DEFAULT_OPTION_HEIGHT = 44
 
 const DEFAULT_COLUMN_INDEX = 0
+
+export interface PickerOptionData {
+  [x: string]: any
+  value?: string
+  label?: ReactNode
+  disabled?: boolean
+}
 
 export interface PickerOptionObject extends Record<string, any> {
   key?: Key

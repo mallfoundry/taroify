@@ -1,11 +1,12 @@
 import { createContext } from "react"
 import { SetRefCallback } from "../utils/state"
-import { DEFAULT_SIBLING_COUNT, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
+import { DEFAULT_SIBLING_COUNT, DEFAULT_OPTION_HEIGHT, PickerColumnInstance, PickerOptionObject } from "./picker.shared"
 
 interface PickerContextValue {
   values?: any[]
   readonly?: boolean
   siblingCount: number
+  optionHeight: number
 
   isMultiValue?(): boolean
 
@@ -26,6 +27,7 @@ interface PickerContextValue {
 
 const PickerContext = createContext<PickerContextValue>({
   siblingCount: DEFAULT_SIBLING_COUNT,
+  optionHeight: DEFAULT_OPTION_HEIGHT
 })
 
 export default PickerContext

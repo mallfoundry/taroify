@@ -38,15 +38,13 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
     ...restProps
   } = props
 
-  const { setColumnRefs, clearColumnRefs } = useContext(PickerContext)
+  const { setColumnRefs, clearColumnRefs, optionHeight } = useContext(PickerContext)
 
   const columns = usePickerOptions(children)
 
   const visibleCount = siblingCount * 2
 
-  const itemHeight = 44
-
-  const wrapHeight = useMemo(() => itemHeight * visibleCount, [visibleCount])
+  const wrapHeight = useMemo(() => optionHeight * visibleCount, [visibleCount, optionHeight])
 
   const rootStyle = useMemo(
     () => ({
@@ -58,16 +56,16 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
 
   const maskStyle = useMemo<CSSProperties>(
     () => ({
-      backgroundSize: `100% ${addUnitPx((wrapHeight - itemHeight) / 2)}`,
+      backgroundSize: `100% ${addUnitPx((wrapHeight - optionHeight) / 2)}`,
     }),
-    [wrapHeight],
+    [wrapHeight, optionHeight],
   )
 
   const frameStyle = useMemo<CSSProperties>(
     () => ({
-      height: addUnitPx(itemHeight),
+      height: addUnitPx(optionHeight),
     }),
-    [],
+    [optionHeight],
   )
 
   const columnsRender = useRendered(() =>
@@ -85,6 +83,8 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
           children={options}
           readonly={readonly}
           {...restColumnProps}
+          visibleCount={visibleCount}
+          optionHeight={optionHeight}
           value={_.get(values, columnIndex)}
           onChange={(option, emitChange) =>
             onChange?.(
