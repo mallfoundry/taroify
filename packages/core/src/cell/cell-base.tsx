@@ -1,22 +1,18 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { useContext, useMemo } from "react"
+import { ArrowLeft, ArrowRight, ArrowDown, ArrowUp } from "@taroify/icons"
 import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
-import { CellAlign, CellSize } from "./cell.shared"
+import { CellBaseProps, ArrowDirection } from "./cell.shared"
 
-export interface CellBaseProps extends ViewProps {
-  bordered?: boolean
-  required?: boolean
-  clickable?: boolean
-  size?: CellSize
-  align?: CellAlign
-  icon?: ReactNode
-  rightIcon?: ReactNode
-  children?: ReactNode
+const iconMap: Record<ArrowDirection, any> = {
+  right: ArrowRight,
+  left: ArrowLeft,
+  up: ArrowUp,
+  down: ArrowDown
 }
 
 function CellBase(props: CellBaseProps) {
@@ -27,13 +23,37 @@ function CellBase(props: CellBaseProps) {
     clickable: clickableProp = false,
     required = false,
     bordered = true,
+    isLink = false,
     icon,
-    rightIcon,
+    arrowDirection = "right",
+    rightIcon: rightIconProps,
     children,
     ...restProps
   } = props
 
   const { clickable } = useContext(CellGroupContext)
+  const cellClickable = isLink || clickable || clickableProp
+
+  const leftIcon = useMemo(() => {
+    if (icon) {
+      return isIconElement(icon)
+        ? cloneIconElement(icon, { className: prefixClassname("cell__icon") })
+        : icon
+    }
+    return null
+  }, [icon])
+
+  const rightIcon = useMemo(() => {
+    if (rightIconProps) {
+      return isIconElement(rightIconProps)
+        ? cloneIconElement(rightIconProps, { className: prefixClassname("cell__right-icon") })
+        : rightIconProps
+    } else if (isLink && iconMap[arrowDirection] ) {
+      const Icon = iconMap[arrowDirection]
+      return <Icon className={ prefixClassname("cell__right-icon") } />
+    }
+    return null
+  }, [rightIconProps, isLink, arrowDirection])
   return (
     <View
       className={classNames(
@@ -43,7 +63,7 @@ function CellBase(props: CellBaseProps) {
           [prefixClassname("cell--center")]: align === "center",
           [prefixClassname("cell--end")]: align === "end",
           [prefixClassname("cell--large")]: size === "large",
-          [prefixClassname("cell--clickable")]: clickableProp || clickable,
+          [prefixClassname("cell--clickable")]: cellClickable,
           [prefixClassname("cell--required")]: required,
           [prefixClassname("cell--borderless")]: !bordered,
         },
@@ -51,13 +71,9 @@ function CellBase(props: CellBaseProps) {
       )}
       {...restProps}
     >
-      {icon && isIconElement(icon)
-        ? cloneIconElement(icon, { className: prefixClassname("cell__icon") })
-        : icon}
+      {leftIcon}
       {children}
-      {rightIcon && isIconElement(rightIcon)
-        ? cloneIconElement(rightIcon, { className: prefixClassname("cell__right-icon") })
-        : rightIcon}
+      {rightIcon}
     </View>
   )
 }

@@ -22,9 +22,9 @@ export default function CellDemo() {
         <Cell>内容</Cell>
       </Block>
       <Block title="展示箭头">
-        <Cell title="单元格" rightIcon={<ArrowRight />} clickable />
-        <Cell title="单元格" rightIcon={<ArrowRight />} clickable children="内容" />
-        <Cell title="单元格" rightIcon={<ArrowDown />} clickable children="内容" />
+        <Cell title="单元格" isLink  />
+        <Cell title="单元格" isLink children="内容" />
+        <Cell title="单元格" isLink arrowDirection="down" children="内容" />
       </Block>
       <Block title="分组标题">
         <Cell.Group title="分组 1">

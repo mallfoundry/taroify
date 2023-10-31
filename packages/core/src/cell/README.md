@@ -51,9 +51,9 @@ import { Cell } from "@taroify/core"
 通过 `rightIcon` 属性在标题右侧展示箭头，并且可以通过不同图标控制箭头方向。
 
 ```tsx
-<Cell title="单元格" rightIcon={<Arrow />} clickable />
-<Cell title="单元格" rightIcon={<Arrow />} clickable>内容</Cell>
-<Cell title="单元格" rightIcon={<ArrowDown />} clickable>内容</Cell>
+<Cell title="单元格" isLink  />
+<Cell title="单元格" isLink children="内容" />
+<Cell title="单元格" isLink arrowDirection="down" children="内容" />
 ```
 
 ### 分组标题
@@ -88,6 +88,7 @@ import { Cell } from "@taroify/core"
 | title    | 分组标题        | _string_  | `-`     |
 | inset    | 是否展示为圆角卡片风格 | _boolean_ | `false` |
 | bordered | 是否显示外边框     | _boolean_ | `true`  |
+| clickable | 是否开启点击反馈  | _boolean_   | `false` |
 
 ### Cell Props
 
@@ -101,6 +102,8 @@ import { Cell } from "@taroify/core"
 | rightIcon | 右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | -       |
 | bordered  | 是否显示内边框                                          | _boolean_   | `true`  |
 | clickable | 是否开启点击反馈                                         | _boolean_   | `false` |
+| isLink  | 是否展示右侧箭头并开启点击反馈                              | _boolean_   | `false` |
+| arrowDirection  | 箭头方向，可选值为 `left` `right` `up` `down`      | _string_   | `right` |
 | required  | 是否显示表单必填星号                                       | _boolean_   | `false` |
 | align     | 对齐方式，可选值为 `start` `center` `end`                 | _string_    | -       |
 

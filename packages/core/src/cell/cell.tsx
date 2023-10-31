@@ -1,22 +1,14 @@
-import { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
 import { ReactNode } from "react"
 import CellBase from "./cell-base"
 import CellBrief from "./cell-brief"
 import CellTitle from "./cell-title"
 import CellValue from "./cell-value"
-import { CellAlign, CellSize } from "./cell.shared"
+import { CellBaseProps } from "./cell.shared"
 
-export interface CellProps extends ViewProps {
-  size?: CellSize
-  align?: CellAlign
+export interface CellProps extends CellBaseProps {
   title?: ReactNode
   brief?: ReactNode
-  icon?: ReactNode
-  rightIcon?: ReactNode
-  bordered?: boolean
-  clickable?: boolean
-  children?: ReactNode
 }
 
 function Cell(props: CellProps) {
