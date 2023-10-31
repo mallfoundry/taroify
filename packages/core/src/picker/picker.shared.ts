@@ -7,6 +7,13 @@ export const DEFAULT_OPTION_HEIGHT = 44
 
 const DEFAULT_COLUMN_INDEX = 0
 
+export interface PickerOptionData {
+  [x: string]: any
+  value?: string
+  label?: ReactNode
+  disabled?: boolean
+}
+
 export interface PickerOptionObject extends Record<string, any> {
   key?: Key
   index: number
