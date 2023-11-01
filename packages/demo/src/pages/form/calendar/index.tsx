@@ -1,5 +1,4 @@
-import { Calendar, Cell, Popup } from "@taroify/core"
-import { ArrowRight } from "@taroify/icons"
+import { Calendar, Cell } from "@taroify/core"
 import { useState } from "react"
 import Block from "../../../components/block"
 import CustomWrapper from "../../../components/custom-wrapper"
@@ -69,33 +68,25 @@ function SingleCalendar() {
     <>
       <Cell
         title="选择单个日期"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup
-        style={{ height: "80%" }}
-        open={open}
-        mountOnEnter={false}
-        rounded
-        placement="bottom"
+      <Calendar
+        type="single"
+        value={value}
+        poppable
+        show={open}
         onClose={setOpen}
+        onChange={setValue}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+        }}
       >
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatFullDate(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -109,33 +100,26 @@ function MultipleCalendar() {
     <>
       <Cell
         title="选择多个日期"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup
-        style={{ height: "80%" }}
-        open={open}
-        mountOnEnter={false}
-        rounded
-        placement="bottom"
+      <Calendar
+        type="multiple"
+        value={value}
+        poppable
+        show={open}
         onClose={setOpen}
+        onChange={setValue}
+        onConfirm={(newValue) => {
+          setFormatValue(formatMultiple(newValue))
+          setOpen(false)
+        }}
       >
-        <Calendar
-          type="multiple"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatMultiple(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -149,33 +133,26 @@ function RangeCalendar() {
     <>
       <Cell
         title="选择日期区间"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup
-        style={{ height: "80%" }}
-        open={open}
-        mountOnEnter={false}
-        rounded
-        placement="bottom"
+      <Calendar
+        type="range"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
         onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
       >
-        <Calendar
-          type="range"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -189,22 +166,22 @@ function SingleQuicklyCalendar() {
     <>
       <Cell
         title="选择单个日期"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} open={open} rounded placement="bottom" onClose={setOpen}>
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatFullDate(newValue))
-            setOpen(false)
-          }}
-        />
-      </Popup>
+      <Calendar
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+          setOpen(false)
+        }}
+      />
     </>
   )
 }
@@ -218,22 +195,22 @@ function RangeQuicklyCalendar() {
     <>
       <Cell
         title="选择日期区间"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} open={open} rounded placement="bottom" onClose={setOpen}>
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        />
-      </Popup>
+      <Calendar
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      />
     </>
   )
 }
@@ -247,26 +224,26 @@ function CustomColorCalendar() {
     <>
       <Cell
         title="自定义颜色"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} open={open} rounded placement="bottom" onClose={setOpen}>
-        <Calendar
-          style={{
-            // @ts-ignore
-            "--calendar-active-color": "#1989fa",
-          }}
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        />
-      </Popup>
+      <Calendar
+        style={{
+          // @ts-ignore
+          "--calendar-active-color": "red",
+        }}
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      />
     </>
   )
 }
@@ -282,28 +259,28 @@ function CustomRangeCalendar() {
     <>
       <Cell
         title="自定义日期范围"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} open={open} rounded placement="bottom" onClose={setOpen}>
-        <Calendar
-          type="range"
-          min={minDate}
-          max={maxDate}
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        type="range"
+        min={minDate}
+        max={maxDate}
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -318,30 +295,29 @@ function CustomConfirmCalendar() {
     <>
       <Cell
         title="自定义按钮"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} rounded placement="bottom" open={open} onClose={setOpen}>
-        <Popup.Close />
-        <Calendar
-          type="range"
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue)
-            setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
-          }}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">{confirm}</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        type="range"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue)
+          setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
+        }}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">{confirm}</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -357,30 +333,29 @@ function CustomDayCalendar() {
     <>
       <Cell
         title="自定义日期文案"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} rounded placement="bottom" open={open} onClose={setOpen}>
-        <Popup.Close />
-        <Calendar
-          type="range"
-          min={minDate}
-          max={maxDate}
-          formatter={dayFormatter}
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatRange(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        type="range"
+        min={minDate}
+        max={maxDate}
+        formatter={dayFormatter}
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -394,27 +369,27 @@ function CustomPositionCalendar() {
     <>
       <Cell
         title="自定义弹出位置"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "100%" }} placement="right" open={open} onClose={setOpen}>
-        <Popup.Close />
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatFullDate(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        popupPlacement="right"
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }
@@ -428,26 +403,29 @@ function CustomFirstDayOfWeekCalendar() {
     <>
       <Cell
         title="自定义周起始日"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "80%" }} open={open} rounded placement="bottom" onClose={setOpen}>
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatFullDate(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        popupCloseIcon={false}
+        popupRounded={false}
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        firstDayOfWeek={1}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">确定</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
     </>
   )
 }

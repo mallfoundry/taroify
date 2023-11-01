@@ -16,6 +16,9 @@ import {
   useRef,
   useState,
 } from "react"
+import Popup from "../popup"
+import type { PopupPlacement } from "../popup"
+import type { PopupProps } from "../popup/popup"
 import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
@@ -97,6 +100,11 @@ export interface CalendarProps extends ViewProps {
   value?: CalendarValueType
   min?: Date
   max?: Date
+  poppable?: boolean
+  show?: boolean
+  popupPlacement?: PopupPlacement
+  popupRounded?: boolean
+  popupCloseIcon?: boolean
   firstDayOfWeek?: number
   watermark?: boolean
   readonly?: boolean
@@ -107,6 +115,8 @@ export interface CalendarProps extends ViewProps {
   onChange?(value: any): void
 
   onConfirm?(value: any): void
+
+  onClose?(val: boolean): void
 }
 
 function Calendar(props: CalendarProps) {
@@ -116,6 +126,12 @@ function Calendar(props: CalendarProps) {
     title = true,
     subtitle: subtitleProp = true,
     type = "single",
+    // set false to be compatible with lower versions
+    poppable = false,
+    show = false,
+    popupPlacement = "bottom",
+    popupRounded = true,
+    popupCloseIcon = true,
     defaultValue,
     value: valueProp,
     min: minValue = MIN_DATE,
@@ -127,7 +143,10 @@ function Calendar(props: CalendarProps) {
     children: childrenProp,
     onChange: onChangeProp,
     onConfirm,
+    onClose,
   } = props
+
+  const Wrapper = useMemo<React.FC<PopupProps>>(() => poppable ? Popup : ({children}) => <>{children}</>, [poppable])
 
   const { value, setValue } = useUncontrolled({
     defaultValue,
@@ -366,6 +385,9 @@ function Calendar(props: CalendarProps) {
 
   // scroll to current month
   async function scrollIntoView(newValue?: CalendarValueType) {
+    if (poppable && !show) {
+      return
+    }
     if (newValue) {
       const targetDate = (() => {
         if (type === "single" && _.isDate(newValue)) {
@@ -437,29 +459,32 @@ function Calendar(props: CalendarProps) {
         onConfirm: handleConfirm,
       }}
     >
-      <View
-        className={classNames(
-          prefixClassname("calendar"),
-          prefixClassname(`calendar--${type}`),
-          className,
-        )}
-        style={style}
-      >
-        {(title || subtitle) && <CalendarHeader title={title} subtitle={subtitle} />}
-        <ScrollView
-          ref={bodyRef}
-          className={prefixClassname("calendar__body")}
-          scrollY
-          scrollTop={bodyScrollTop}
-          onScroll={async ({ detail }) => {
-            bodyScrollTopRef.current = detail.scrollTop
-            await onScroll()
-          }}
+      <Wrapper rounded={popupRounded} placement={popupPlacement} open={show} onClose={onClose} className={classNames(prefixClassname("calendar--popup"))}>
+        {(poppable && show && popupCloseIcon) && <Popup.Close /> }
+        <View
+          className={classNames(
+            prefixClassname("calendar"),
+            prefixClassname(`calendar--${type}`),
+            className,
+          )}
+          style={style}
         >
-          {monthsRender}
-        </ScrollView>
-        {footer}
-      </View>
+          {(title || subtitle) && <CalendarHeader title={title} subtitle={subtitle} />}
+          <ScrollView
+            ref={bodyRef}
+            className={prefixClassname("calendar__body")}
+            scrollY
+            scrollTop={bodyScrollTop}
+            onScroll={async ({ detail }) => {
+              bodyScrollTopRef.current = detail.scrollTop
+              await onScroll()
+            }}
+          >
+            {monthsRender}
+          </ScrollView>
+          {footer}
+        </View>
+      </Wrapper>
     </CalendarContext.Provider>
   )
 }

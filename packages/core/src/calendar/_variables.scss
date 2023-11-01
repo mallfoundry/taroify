@@ -1,6 +1,8 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
+$calendar-popup-height: var(--calendar-popup-height, 80%);
+
 $calendar-active-color: var(--calendar-active-color, $primary-color);
 $calendar-background-color: var(--calendar-background-color, var(--white, $white));
 //
