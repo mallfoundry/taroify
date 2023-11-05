@@ -74,9 +74,9 @@ function DatetimePicker(props: DatetimePickerProps) {
       siblingCount={siblingCount}
       defaultValue={defaultValue}
       value={value}
-      onChange={(aValue) => setDateValue(toDate(aValue))}
-      onConfirm={(aValue) => onConfirm?.(toDate(aValue))}
-      onCancel={(aValue) => onCancel?.(toDate(aValue))}
+      onChange={(aValue) => setDateValue(toDate(aValue as string[]))}
+      onConfirm={(aValue) => onConfirm?.(toDate(aValue as string[]))}
+      onCancel={(aValue) => onCancel?.(toDate(aValue as string[]))}
       {...restProps}
     >
       {children}
