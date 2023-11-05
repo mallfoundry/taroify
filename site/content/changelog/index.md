@@ -12,6 +12,44 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.5
+
+`2023-11-05`
+
+**Feature**
+
+- Picker
+  - 添加 `optionHeight` 属性，支持配置选项高度 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
+  - 添加 `title` `confirmText` `cancelText` `columns` `columnsFIle`，支持通过数据配置选项 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
+
+- Cell
+  - Cell(Form.Item, Field) 添加 `isLink` `arrowDirection` 属性 [630](https://github.com/mallfoundry/taroify/pull/630) [@hbztd](https://github.com/hbztd)
+
+- Icon [631](https://github.com/mallfoundry/taroify/pull/631) [@Pilotager](https://github.com/Pilotager)
+  - 图标：添加一个实底的 records 图标
+  - 图标：添加一个实底的 contact 图标
+  - 图标：添加一个实底的 discount 图标
+  - 图标：添加一个实底的 completed 图标
+  - 图标：添加一个实底的 description 图标
+  - 图标：添加一个实底的 cash-back-record 图标
+  - 图标：添加新的 user 图标
+  - 图标：添加新的 notes 图标
+  - 图标：添加新的 newspaper 图标
+  - 图标：添加新的 list-switch 图标
+  - 图标：添加新的 list-switching 图标
+  - 图标：将 records 图标重命名为 records-o
+  - 图标：将 contact 图标重命名为 contact-o
+  - 图标：将 discount 图标重命名为 discount-o
+  - 图标：将 completed 图标重命名为 completed-o
+  - 图标：将 description 图标重命名为 description-o
+  - 图标：将 cash-back-record 图标重命名为 cash-back-record-o
+
+**Bug Fixes**
+
+- Picker
+  - 修复 siblingCount 属性未生效 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
+
+
 ### v0.1.1-alpha.4
 
 `2023-10-27`
