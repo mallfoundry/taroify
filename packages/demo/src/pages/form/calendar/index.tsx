@@ -76,7 +76,7 @@ function SingleCalendar() {
         type="single"
         value={value}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
@@ -106,7 +106,7 @@ function MultipleCalendar() {
         type="multiple"
         value={value}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
@@ -137,7 +137,7 @@ function RangeCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -167,7 +167,7 @@ function SingleQuicklyCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         showConfirm={false}
         onClose={setOpen}
         onConfirm={(newValue) => {
@@ -197,7 +197,7 @@ function RangeQuicklyCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         showConfirm={false}
         onConfirm={(newValue) => {
@@ -231,7 +231,7 @@ function CustomColorCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatFullDate(newValue))
@@ -264,7 +264,7 @@ function CustomRangeCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -296,7 +296,7 @@ function CustomConfirmCalendar() {
           setValue(newValue)
         }}
         poppable
-        show={open}
+        showPopup={open}
         confirmDisabledText="请选择结束时间"
         onClose={setOpen}
         onConfirm={(newValue) => {
@@ -332,7 +332,7 @@ function CustomDayCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -363,7 +363,7 @@ function CustomPositionCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatFullDate(newValue))
@@ -395,7 +395,7 @@ function CustomFirstDayOfWeekCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         firstDayOfWeek={1}
         onConfirm={(newValue) => {

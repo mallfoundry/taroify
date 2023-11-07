@@ -40,7 +40,7 @@ function SingleCalendar() {
         type="single"
         value={value}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
@@ -82,7 +82,7 @@ function MultipleCalendar() {
         type="multiple"
         value={value}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
@@ -126,7 +126,7 @@ function RangeCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -160,7 +160,7 @@ function SingleQuicklyCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         showConfirm={false}
         onClose={setOpen}
         onConfirm={(newValue) => {
@@ -208,7 +208,7 @@ function CustomRangeCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -246,7 +246,7 @@ function CustomConfirmCalendar() {
           setValue(newValue)
         }}
         poppable
-        show={open}
+        showPopup={open}
         confirmDisabledText="请选择结束时间"
         onClose={setOpen}
         onConfirm={(newValue) => {
@@ -288,7 +288,7 @@ function CustomDayCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -325,7 +325,7 @@ function CustomPositionCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatFullDate(newValue))
@@ -363,7 +363,7 @@ function CustomFirstDayOfWeekCalendar() {
         value={value}
         onChange={setValue}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         firstDayOfWeek={1}
         onConfirm={(newValue) => {
@@ -425,7 +425,7 @@ function CustomConfirmCalendar() {
           setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
         }}
         poppable
-        show={open}
+        showPopup={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
@@ -456,7 +456,7 @@ function CustomConfirmCalendar() {
 | min | 可选择的最小日期 | _Date_ | 当前日期 |
 | max | 可选择的最大日期 | _Date_ | 当前日期的六个月后 |
 | poppable | 是否以弹层的形式展示日历 | _boolean_ | `false` |
-| show | 是否显示日历弹窗, poppable: true时生效 | _boolean_ | `false` |
+| showPopup | 是否显示日历弹窗, poppable: true时生效 | _boolean_ | `false` |
 | popupPlacement | 弹出位置，可选值为 `left` `right` `top` , poppable: true时生效 | _string_ | `bottom`
 | popupRound | 是否显示圆角弹窗, poppable: true时生效 | _boolean_ | `true` |
 | popupCloseIcon | 弹框是否显示关闭图标, poppable: true时生效 | _boolean_ | `true` |

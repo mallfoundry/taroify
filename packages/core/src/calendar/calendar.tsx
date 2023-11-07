@@ -82,7 +82,7 @@ export interface CalendarProps extends ViewProps {
   min?: Date
   max?: Date
   poppable?: boolean
-  show?: boolean
+  showPopup?: boolean
   popupPlacement?: PopupPlacement
   popupRounded?: boolean
   popupCloseIcon?: boolean
@@ -112,7 +112,7 @@ function Calendar(props: CalendarProps) {
     type = "single",
     // set false to be compatible with lower versions
     poppable = false,
-    show = false,
+    showPopup = false,
     popupPlacement = "bottom",
     popupRounded = true,
     popupCloseIcon = true,
@@ -389,7 +389,7 @@ function Calendar(props: CalendarProps) {
 
   // scroll to current month
   async function scrollIntoView(newValue?: CalendarValueType) {
-    if (poppable && !show) {
+    if (poppable && !showPopup) {
       return
     }
     if (newValue) {
@@ -463,8 +463,8 @@ function Calendar(props: CalendarProps) {
         onConfirm: handleConfirm,
       }}
     >
-      <Wrapper rounded={popupRounded} placement={popupPlacement} open={show} onClose={onClose} className={classNames(prefixClassname("calendar--popup"))}>
-        {(poppable && show && popupCloseIcon) && <Popup.Close /> }
+      <Wrapper rounded={popupRounded} placement={popupPlacement} open={showPopup} onClose={onClose} className={classNames(prefixClassname("calendar--popup"))}>
+        {(poppable && showPopup && popupCloseIcon) && <Popup.Close /> }
         <View
           className={classNames(
             prefixClassname("calendar"),
