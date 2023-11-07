@@ -44,12 +44,10 @@ function SingleCalendar() {
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
+          setOpen(false)
           setFormatValue(formatFullDate(newValue))
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -92,9 +90,6 @@ function MultipleCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -138,9 +133,6 @@ function RangeCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -148,9 +140,7 @@ function RangeCalendar() {
 ```
 
 ### 快捷选择
-
-不设置 `Calendar.Button` 组件可以隐藏确认按钮，这种情况下选择完成后会立即触发 `onConfirm` 事件。
-
+将 `showConfirm` 设置为 `false` 可以隐藏确认按钮，这种情况下选择完成后会立即触发 confirm 事件。
 ```tsx
 function SingleQuicklyCalendar() {
   const [open, setOpen] = useState(false)
@@ -171,6 +161,7 @@ function SingleQuicklyCalendar() {
         onChange={setValue}
         poppable
         show={open}
+        showConfirm={false}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatFullDate(newValue))
@@ -198,22 +189,46 @@ function SingleQuicklyCalendar() {
 function CustomRangeCalendar() {
   const [minDate] = useState(new Date(2010, 0, 1))
   const [maxDate] = useState(new Date(2010, 0, 31))
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState<Date[]>([])
+  const [formatValue, setFormatValue] = useState<string>()
 
   return (
-    <Calendar min={minDate} max={maxDate} />
+    <>
+      <Cell
+        title="自定义日期范围"
+        isLink
+        children={formatValue}
+        onClick={() => setOpen(true)}
+      />
+      <Calendar
+        type="range"
+        min={minDate}
+        max={maxDate}
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      >
+      </Calendar>
+    </>
   )
 }
 ```
 
 ### 自定义按钮文字
 
-通过 `Calendar.Button` 组件设置按钮文字。
+通过 `confirmText` 设置按钮文字，通过 `confirmDisabledText` 设置按钮禁用时的文字。
 
 ```tsx
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<Date[]>([])
-  const [confirm, setConfirm] = useState("请选择结束时间")
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -229,24 +244,20 @@ function CustomConfirmCalendar() {
         value={value}
         onChange={(newValue) => {
           setValue(newValue)
-          setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
         }}
         poppable
         show={open}
+        confirmDisabledText="请选择结束时间"
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">{confirm}</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
 }
-
 ```
 
 ### 自定义日期文案
@@ -284,9 +295,6 @@ function CustomDayCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -307,27 +315,24 @@ function CustomPositionCalendar() {
     <>
       <Cell
         title="自定义弹出位置"
-        clickable
-        rightIcon={<ArrowRight />}
+        isLink
         children={formatValue}
         onClick={() => setOpen(true)}
       />
-      <Popup style={{ height: "100%" }} placement="right" open={open} onClose={setOpen}>
-        <Popup.Close />
-        <Calendar
-          type="single"
-          value={value}
-          onChange={setValue}
-          onConfirm={(newValue) => {
-            setFormatValue(formatFullDate(newValue))
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      <Calendar
+        popupPlacement="right"
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+          setOpen(false)
+        }}
+      >
+      </Calendar>
     </>
   )
 }
@@ -338,15 +343,102 @@ function CustomPositionCalendar() {
 通过 `firstDayOfWeek` 属性设置一周从哪天开始。
 
 ```tsx
-<Calendar firstDayOfWeek={1} />
+function CustomFirstDayOfWeekCalendar() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState<Date>()
+  const [formatValue, setFormatValue] = useState<string>()
+
+  return (
+    <>
+      <Cell
+        title="自定义周起始日"
+        isLink
+        children={formatValue}
+        onClick={() => setOpen(true)}
+      />
+      <Calendar
+        popupCloseIcon={false}
+        popupRounded={false}
+        type="single"
+        value={value}
+        onChange={setValue}
+        poppable
+        show={open}
+        onClose={setOpen}
+        firstDayOfWeek={1}
+        onConfirm={(newValue) => {
+          setFormatValue(formatFullDate(newValue))
+          setOpen(false)
+        }}
+      >
+      </Calendar>
+    </>
+  )
+}
 ```
 
 ### 平铺展示
 
-将 `css` 设置为 高度，日历会直接展示在页面内，而不是以弹层的形式出现。
+将 `poppable` 设置为 `false`，日历会直接展示在页面内，而不是以弹层的形式出现。
 
 ```tsx
-<Calendar style={{ height: "500px" }} title="日历" />
+function TiledCalendar() {
+  const [minDate] = useState(new Date(2012, 1, 10))
+  const [maxDate] = useState(new Date(2012, 10, 20))
+  const [value, setValue] = useState<Date>(minDate)
+  return (
+    <Calendar
+      style={{ height: "500px" }}
+      title="日历"
+      min={minDate}
+      max={maxDate}
+      value={value}
+      onChange={setValue}
+    />
+  )
+}
+
+```
+
+### 手动控制Footer DOM
+通过 `Calendar.Footer` `Calendar.Button` 手动控制Footer DOM。
+```tsx
+function CustomConfirmCalendar() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState<Date[]>([])
+  const [confirm, setConfirm] = useState("请选择结束时间")
+  const [formatValue, setFormatValue] = useState<string>()
+
+  return (
+    <>
+      <Cell
+        title="自定义按钮"
+        isLink
+        children={formatValue}
+        onClick={() => setOpen(true)}
+      />
+      <Calendar
+        type="range"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue)
+          setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
+        }}
+        poppable
+        show={open}
+        onClose={setOpen}
+        onConfirm={(newValue) => {
+          setFormatValue(formatRange(newValue))
+          setOpen(false)
+        }}
+      >
+        <Calendar.Footer>
+          <Calendar.Button type="confirm">{confirm}</Calendar.Button>
+        </Calendar.Footer>
+      </Calendar>
+    </>
+  )
+}
 ```
 
 ## API
@@ -369,6 +461,9 @@ function CustomPositionCalendar() {
 | popupRound | 是否显示圆角弹窗, poppable: true时生效 | _boolean_ | `true` |
 | popupCloseIcon | 弹框是否显示关闭图标, poppable: true时生效 | _boolean_ | `true` |
 | readonly | 是否为只读状态，只读状态下不能选择日期 | _boolean_ | `false` |
+| showConfirm | 是否展示确认按钮 |  _boolean_ | `true` |
+| confirmText | 确认按钮的文字 |  _ReactNode_ | `确认` |
+| confirmDisabledText | 确认按钮处于禁用状态时的文字 |  _ReactNode_ | `确认` |
 | firstDayOfWeek | 设置周起始日 | _0-6_ | `0` |
 
 ### Calendar.DayObject 数据结构
@@ -391,6 +486,21 @@ function CustomPositionCalendar() {
 | onChange | 点击并选中任意日期时触发 | _value: Date \| Date[]_ |
 | onConfirm | 日期选择完成后触发，若使用 `Calendar.Button` 组件，则点击确认按钮后触发 | _value: Date \| Date[]_ |
 | onClose | 关闭弹层时出发 | _visible: boolean_ |
+
+### Calendar.Footer Props
+
+| 参数       | 说明         | 类型        | 默认值 |
+| --------- | ------------ | ----------- | --- |
+| children  | 底部内容      | _ReactNoe_  | - |
+
+### Calendar.Button Props
+
+| 参数               | 说明                     | 类型               | 默认值 |
+| ------------------ | ------------------------ | ---------------- | --- |
+| children           | 按钮内容         | _ReactNoe_          | 确认 |
+| type               | 按钮类型     | _confirm_   | `confirm` |
+| confirmText           | 确认按钮的文字  | _ReactNode_          | - |
+| confirmDisabledText | 确认按钮处于禁用状态时的文字 |  _ReactNode_ | - |
 
 ## 主题定制
 

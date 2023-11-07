@@ -8,10 +8,12 @@ import CalendarContext from "./calendar.context"
 
 export interface CalendarButtonProps extends ButtonProps {
   type?: "confirm"
+  confirmText?: React.ReactNode
+  confirmDisabledText?: React.ReactNode
 }
 
 function CalendarButton(props: CalendarButtonProps) {
-  const { className, type = "confirm", children = "确定", onClick, ...restProps } = props
+  const { className, confirmText, confirmDisabledText, type = "confirm", children = "确定", onClick, ...restProps } = props
   const confirm = type === "confirm"
   const { value: currentValue, type: ctxType, onConfirm } = useContext(CalendarContext)
 
@@ -24,7 +26,7 @@ function CalendarButton(props: CalendarButtonProps) {
         return !(currentValue as Date[]).length
       }
     }
-    return !currentValue
+    return Array.isArray(currentValue) ? currentValue.length === 0 : !currentValue
   }, [ctxType, currentValue])
 
   return (
@@ -39,7 +41,6 @@ function CalendarButton(props: CalendarButtonProps) {
       block
       disabled={confirm && disabled}
       color="danger"
-      children={children}
       onClick={(event: ITouchEvent) => {
         onClick?.(event)
         if (confirm && !disabled) {
@@ -47,7 +48,12 @@ function CalendarButton(props: CalendarButtonProps) {
         }
       }}
       {...restProps}
-    />
+    >
+      {
+        props.children ? children :
+          disabled ? confirmDisabledText : confirmText
+      }
+    </Button>
   )
 }
 

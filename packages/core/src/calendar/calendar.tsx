@@ -25,6 +25,7 @@ import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
 import { useRefs } from "../utils/state"
 import CalendarFooter from "./calendar-footer"
+import CalendarButton from "./calendar-button"
 import CalendarHeader from "./calendar-header"
 import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
 import CalendarContext from "./calendar.context"
@@ -72,26 +73,6 @@ function defaultFormatter(day: CalendarDayObject) {
   return day
 }
 
-interface CalendarChildren {
-  footer?: ReactNode
-}
-
-function useCalendarChildren(children?: ReactNode): CalendarChildren {
-  const __children__: CalendarChildren = {}
-
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      const { type: elementType } = element
-      if (elementType === CalendarFooter) {
-        __children__.footer = element
-      }
-    }
-  })
-
-  return __children__
-}
-
 export interface CalendarProps extends ViewProps {
   type?: CalendarType
   title?: ReactNode
@@ -105,6 +86,9 @@ export interface CalendarProps extends ViewProps {
   popupPlacement?: PopupPlacement
   popupRounded?: boolean
   popupCloseIcon?: boolean
+  showConfirm?: boolean
+  confirmText?: ReactNode
+  confirmDisabledText?: ReactNode
   firstDayOfWeek?: number
   watermark?: boolean
   readonly?: boolean
@@ -132,6 +116,9 @@ function Calendar(props: CalendarProps) {
     popupPlacement = "bottom",
     popupRounded = true,
     popupCloseIcon = true,
+    showConfirm = true,
+    confirmText = "确认",
+    confirmDisabledText = "确认",
     defaultValue,
     value: valueProp,
     min: minValue = MIN_DATE,
@@ -154,7 +141,24 @@ function Calendar(props: CalendarProps) {
     onChange: onChangeProp,
   })
 
-  const { footer } = useCalendarChildren(childrenProp)
+  const renderFooter = () => {
+    let _footer: ReactNode = null
+    Children.forEach(childrenProp, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        const { type: elementType } = element
+        if (elementType === CalendarFooter) {
+          _footer = element
+        }
+      }
+    })
+    if (!_footer && showConfirm) {
+      _footer = <CalendarFooter>
+        <CalendarButton type="confirm" confirmText={confirmText} confirmDisabledText={confirmDisabledText}  />
+      </CalendarFooter>
+    }
+    return _footer
+  }
 
   const bodyRef = useRef()
 
@@ -482,7 +486,7 @@ function Calendar(props: CalendarProps) {
           >
             {monthsRender}
           </ScrollView>
-          {footer}
+          {renderFooter()}
         </View>
       </Wrapper>
     </CalendarContext.Provider>

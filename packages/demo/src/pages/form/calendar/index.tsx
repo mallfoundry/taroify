@@ -80,12 +80,10 @@ function SingleCalendar() {
         onClose={setOpen}
         onChange={setValue}
         onConfirm={(newValue) => {
+          setOpen(false)
           setFormatValue(formatFullDate(newValue))
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -116,9 +114,6 @@ function MultipleCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -149,9 +144,6 @@ function RangeCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -176,6 +168,7 @@ function SingleQuicklyCalendar() {
         onChange={setValue}
         poppable
         show={open}
+        showConfirm={false}
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatFullDate(newValue))
@@ -200,12 +193,13 @@ function RangeQuicklyCalendar() {
         onClick={() => setOpen(true)}
       />
       <Calendar
-        type="single"
+        type="range"
         value={value}
         onChange={setValue}
         poppable
         show={open}
         onClose={setOpen}
+        showConfirm={false}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
           setOpen(false)
@@ -240,7 +234,7 @@ function CustomColorCalendar() {
         show={open}
         onClose={setOpen}
         onConfirm={(newValue) => {
-          setFormatValue(formatRange(newValue))
+          setFormatValue(formatFullDate(newValue))
           setOpen(false)
         }}
       />
@@ -277,9 +271,6 @@ function CustomRangeCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -288,7 +279,6 @@ function CustomRangeCalendar() {
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<Date[]>([])
-  const [confirm, setConfirm] = useState("请选择结束时间")
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -304,19 +294,16 @@ function CustomConfirmCalendar() {
         value={value}
         onChange={(newValue) => {
           setValue(newValue)
-          setConfirm(newValue.length === 2 ? "完成" : "请选择结束时间")
         }}
         poppable
         show={open}
+        confirmDisabledText="请选择结束时间"
         onClose={setOpen}
         onConfirm={(newValue) => {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">{confirm}</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -352,9 +339,6 @@ function CustomDayCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -386,9 +370,6 @@ function CustomPositionCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
@@ -422,9 +403,6 @@ function CustomFirstDayOfWeekCalendar() {
           setOpen(false)
         }}
       >
-        <Calendar.Footer>
-          <Calendar.Button type="confirm">确定</Calendar.Button>
-        </Calendar.Footer>
       </Calendar>
     </>
   )
