@@ -453,6 +453,7 @@ function CustomConfirmCalendar() {
 | formatter | 日期格式化函数 | _(day: Calendar.DayObject) => Calendar.DayObject_ | - |
 | title | 日历标题 | _string_ | `日期选择` |
 | subtitle | 是否展示日历副标题（年月） | _boolean_ | `true` |
+| watermark | 是否显示月份背景水印 | _boolean_ | `true` |
 | min | 可选择的最小日期 | _Date_ | 当前日期 |
 | max | 可选择的最大日期 | _Date_ | 当前日期的六个月后 |
 | poppable | 是否以弹层的形式展示日历 | _boolean_ | `false` |
