@@ -91,7 +91,7 @@ function SingleCalendar() {
 
 function MultipleCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -121,7 +121,7 @@ function MultipleCalendar() {
 
 function RangeCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -181,7 +181,7 @@ function SingleQuicklyCalendar() {
 
 function RangeQuicklyCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<[]>([])
+  const [value, setValue] = useState<[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -211,7 +211,7 @@ function RangeQuicklyCalendar() {
 
 function CustomColorCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<[]>([])
+  const [value, setValue] = useState<[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -246,7 +246,7 @@ function CustomRangeCalendar() {
   const [minDate] = useState(new Date(2010, 0, 1))
   const [maxDate] = useState(new Date(2010, 0, 31))
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -278,7 +278,7 @@ function CustomRangeCalendar() {
 
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -313,7 +313,7 @@ function CustomDayCalendar() {
   const [open, setOpen] = useState(false)
   const [minDate] = useState(new Date(2010, 4, 1))
   const [maxDate] = useState(new Date(2010, 4, 31))
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -411,7 +411,7 @@ function CustomFirstDayOfWeekCalendar() {
 function TiledCalendar() {
   const [minDate] = useState(new Date(2012, 1, 10))
   const [maxDate] = useState(new Date(2012, 10, 20))
-  const [value, setValue] = useState<Date>(minDate)
+  const [value, setValue] = useState<Date>()
   return (
     <Calendar
       style={{ height: "500px" }}

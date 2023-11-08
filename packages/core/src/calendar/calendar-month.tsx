@@ -41,7 +41,7 @@ export interface CalendarMonthInstance {
 
   getHeight(): number
 
-  getScrollTop(subtitle: any): Promise<number>
+  getRectTop(): Promise<number>
 }
 
 function getBottom(type: CalendarType, dayType: CalendarDayType) {
@@ -74,7 +74,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     )
 
     const monthRef = useRef()
-    const daysRef = useRef()
+    // const daysRef = useRef()
 
     const height = useHeight(monthRef)
 
@@ -206,19 +206,19 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       [days],
     )
 
-    const getScrollTop = useCallback((subtitle: any) => {
-      return getRect(subtitle ? daysRef : monthRef).then(({ top }) => top)
+    const getRectTop = useCallback(() => {
+      return getRect(monthRef).then(({ top }) => top)
     }, [])
 
     useImperativeHandle(
       ref,
       () => ({
-        getScrollTop,
+        getRectTop,
         disabledDays,
         getHeight: () => height,
         getValue: () => monthValue,
       }),
-      [disabledDays, getScrollTop, monthValue, height],
+      [disabledDays, getRectTop, monthValue, height],
     )
 
     const content = useMemo(
@@ -241,7 +241,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     return (
       <View ref={monthRef} className={prefixClassname("calendar__month")}>
         {showMonthTitle && <View className={prefixClassname("calendar__month-title")} children={title} />}
-        <View ref={daysRef} className={prefixClassname("calendar__days")}>
+        <View className={prefixClassname("calendar__days")}>
           {watermark && <CalendarMonthWatermark children={month} />}
           {content}
         </View>

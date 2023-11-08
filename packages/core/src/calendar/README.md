@@ -67,7 +67,7 @@ function formatMultiple(dates: Date[]) {
 
 function MultipleCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -110,7 +110,7 @@ function formatRange(dateRange: Date[]) {
 
 function RangeCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -190,7 +190,7 @@ function CustomRangeCalendar() {
   const [minDate] = useState(new Date(2010, 0, 1))
   const [maxDate] = useState(new Date(2010, 0, 31))
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -228,7 +228,7 @@ function CustomRangeCalendar() {
 ```tsx
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -269,7 +269,7 @@ function CustomDayCalendar() {
   const [open, setOpen] = useState(false)
   const [minDate] = useState(new Date(2010, 4, 1))
   const [maxDate] = useState(new Date(2010, 4, 31))
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [formatValue, setFormatValue] = useState<string>()
 
   return (
@@ -385,7 +385,7 @@ function CustomFirstDayOfWeekCalendar() {
 function TiledCalendar() {
   const [minDate] = useState(new Date(2012, 1, 10))
   const [maxDate] = useState(new Date(2012, 10, 20))
-  const [value, setValue] = useState<Date>(minDate)
+  const [value, setValue] = useState<Date>()
   return (
     <Calendar
       style={{ height: "500px" }}
@@ -405,7 +405,7 @@ function TiledCalendar() {
 ```tsx
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<Date[]>([])
+  const [value, setValue] = useState<Date[]>()
   const [confirm, setConfirm] = useState("请选择结束时间")
   const [formatValue, setFormatValue] = useState<string>()
 

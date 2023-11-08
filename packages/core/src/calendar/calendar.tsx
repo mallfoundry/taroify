@@ -18,11 +18,12 @@ import {
 import Popup from "../popup"
 import type { PopupPlacement } from "../popup"
 import type { PopupProps } from "../popup/popup"
-import useMounted from "../hooks/use-mounted"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
 import { useRefs } from "../utils/state"
+import raf from "../utils/raf"
+import { useMemoizedFn } from "../hooks"
 import CalendarFooter from "./calendar-footer"
 import CalendarButton from "./calendar-button"
 import CalendarHeader from "./calendar-header"
@@ -99,7 +100,7 @@ function Calendar(props: CalendarProps) {
     showConfirm = true,
     confirmText = "确认",
     confirmDisabledText = "确认",
-    defaultValue,
+    defaultValue: defaultValueProp,
     value: valueProp,
     min: minValue = MIN_DATE,
     max: maxValue = MAX_DATE,
@@ -114,7 +115,8 @@ function Calendar(props: CalendarProps) {
   } = props
 
   const Wrapper = useMemo<React.FC<PopupProps>>(() => poppable ? Popup : ({children}) => <>{children}</>, [poppable])
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const defaultValue = useMemo(() => getInitialDate(defaultValueProp), [])
   const { value, setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
@@ -140,7 +142,8 @@ function Calendar(props: CalendarProps) {
     return _footer
   }
 
-  const bodyRef = useRef()
+  const scrollViewRef = useRef()
+  const scrollViewHeightRef = useRef(0)
 
   const hasConfirmRef = useRef(false)
 
@@ -148,9 +151,7 @@ function Calendar(props: CalendarProps) {
 
   const changeValueRef = useRef<CalendarValueType>()
 
-  const [bodyScrollTop, setBodyScrollTop] = useState(0)
-
-  const bodyScrollTopRef = useRef(0)
+  const [scrollViewScrollTop, setScrollViewScrollTop] = useState(0)
 
   const {
     getRef: getMonthRef,
@@ -296,9 +297,11 @@ function Calendar(props: CalendarProps) {
   }
 
   async function onScroll() {
-    const top = await getScrollTop(bodyRef)
-    const bodyHeight = (await getRect(bodyRef)).height
-    const bottom = top + bodyHeight
+    const top = await getScrollTop(scrollViewRef)
+    raf(() => {
+      setScrollViewScrollTop(top)
+    })
+    const bottom = top + scrollViewHeightRef.current
     const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
     const heightSum = heights.reduce((a, b) => a + b, 0)
 
@@ -333,19 +336,14 @@ function Calendar(props: CalendarProps) {
         const currentMonthRef = getMonthRef(index)
         setCurrentMonth(currentMonthRef.current.getValue())
         nextTick(() => {
-          if (bodyRef.current) {
+          if (scrollViewRef.current) {
             Promise.all([
-              getRect(bodyRef), //
-              getScrollTop(bodyRef),
-              currentMonthRef.current?.getScrollTop(showSubtitle),
-            ]).then(([{ top: bodyTop }, bodyScrollTop, monthScrollTop]) => {
-              const newBodyScrollTop = monthScrollTop - bodyTop + bodyScrollTop
-              if (bodyScrollTopRef.current !== newBodyScrollTop) {
-                setBodyScrollTop(bodyScrollTopRef.current)
-                setBodyScrollTop(newBodyScrollTop)
-              } else {
-                setBodyScrollTop(newBodyScrollTop)
-              }
+              getRect(scrollViewRef),
+              getScrollTop(scrollViewRef),
+              currentMonthRef.current?.getRectTop(),
+            ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
+              const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
+              setScrollViewScrollTop(newBodyScrollTop)
             })
           }
         })
@@ -357,27 +355,35 @@ function Calendar(props: CalendarProps) {
   }
 
   // scroll to current month
-  async function scrollIntoView(newValue?: CalendarValueType) {
+  async function scrollToCurrentDate(newValue?: CalendarValueType) {
     if (poppable && !showPopup) {
       return
     }
     if (newValue) {
-      const targetDate = (() => {
-        if (type === "single" && _.isDate(newValue)) {
-          return newValue as Date
-        } else if (_.isArray(newValue)) {
-          return newValue[0] as Date
-        }
-      })()
-      await scrollToDate(targetDate)
+      const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0];
+      if (_.isDate(targetDate)) {
+        scrollToDate(targetDate);
+      }
     } else {
-      await onScroll()
+      onScroll()
     }
   }
 
-  const reset = (date?: CalendarValueType) => nextTick(() => scrollIntoView(date).then())
+  const reset = (date?: CalendarValueType) => nextTick(() => scrollToCurrentDate(date).then())
 
-  const init = () => reset(value)
+  const init = useMemoizedFn(() => {
+    if (poppable && !showPopup) {
+      return;
+    }
+
+    raf(async () => {
+      // add Math.floor to avoid decimal height issues
+      // https://github.com/vant-ui/vant/issues/5640
+      const bodyHeight = (await getRect(scrollViewRef)).height
+      scrollViewHeightRef.current = Math.floor(bodyHeight);
+      reset(getInitialDate(value))
+    });
+  })
 
   useEffect(() => {
     if (value !== changeValueRef.current) {
@@ -391,7 +397,10 @@ function Calendar(props: CalendarProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, minValue, maxValue])
 
-  useMounted(init)
+  useEffect(() => {
+    init()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showPopup])
 
   const monthsRender = useMemo(() => {
     // When rerender, clear columns refs
@@ -443,14 +452,11 @@ function Calendar(props: CalendarProps) {
         >
           <CalendarHeader title={title} subtitle={subtitle} date={currentMonth} showSubtitle={showSubtitle}  />
           <ScrollView
-            ref={bodyRef}
+            ref={scrollViewRef}
             className={prefixClassname("calendar__body")}
             scrollY
-            scrollTop={bodyScrollTop}
-            onScroll={async ({ detail }) => {
-              bodyScrollTopRef.current = detail.scrollTop
-              await onScroll()
-            }}
+            scrollTop={scrollViewScrollTop}
+            onScroll={onScroll}
           >
             {monthsRender}
           </ScrollView>
