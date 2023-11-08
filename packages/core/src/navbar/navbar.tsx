@@ -57,7 +57,7 @@ function Navbar(props: NavbarProps) {
     className,
     bordered,
     fixed,
-    placeholder = true,
+    placeholder,
     safeArea,
     title: titleProp,
     children: childrenProp,
