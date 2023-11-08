@@ -1,5 +1,5 @@
 const { exec } = require("gulp-execa")
-const detectPort = require('detect-port')
+const detectPort = require("detect-port")
 
 const portTool = (function() {
   const port = 8900
