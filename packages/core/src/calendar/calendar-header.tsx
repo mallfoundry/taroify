@@ -1,30 +1,32 @@
 import { View } from "@tarojs/components"
 import * as React from "react"
 import { ReactNode } from "react"
+import { isFunction } from "lodash"
 import { prefixClassname } from "../styles"
 import CalendarWeekdays from "./calendar-weekdays"
+import { CalendarSubtitle } from "./calendar.shared"
 
 interface CalendarHeaderProps {
   title?: ReactNode
-  subtitle?: ReactNode
+  subtitle?: CalendarSubtitle
+  showSubtitle?: boolean
+  date?: Date
 }
 
 function CalendarHeader(props: CalendarHeaderProps) {
-  const { title, subtitle } = props
+  const { title, subtitle, showSubtitle, date } = props
   return (
     <View className={prefixClassname("calendar__header")}>
+      <View className={prefixClassname("calendar__header-title")}>
+        {title}
+      </View>
       {
-        //
-        title !== false && (
-          <View className={prefixClassname("calendar__header-title")}>
-            {title === true ? "日期选择" : title}
+        showSubtitle && (
+          <View className={prefixClassname("calendar__header-subtitle")}>
+            {
+              isFunction(subtitle) ? (date ? subtitle(date) : "") : subtitle
+            }
           </View>
-        )
-      }
-      {
-        //
-        subtitle && (
-          <View className={prefixClassname("calendar__header-subtitle")} children={subtitle} />
         )
       }
       <CalendarWeekdays />

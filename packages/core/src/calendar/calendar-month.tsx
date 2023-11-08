@@ -1,5 +1,4 @@
 import { View } from "@tarojs/components"
-import { nextTick } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
 import {
@@ -7,14 +6,13 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
 } from "react"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
-import { usePrevious } from "../utils/state"
+import { useHeight } from "../hooks"
 import CalendarDay from "./calendar-day"
 import CalendarContext from "./calendar.context"
 import {
@@ -62,7 +60,7 @@ function getBottom(type: CalendarType, dayType: CalendarDayType) {
 
 interface CalendarMonthProps {
   value?: Date
-  top?: boolean
+  showMonthTitle?: boolean
   readonly?: boolean
   watermark?: boolean
   children?: ReactNode
@@ -70,18 +68,15 @@ interface CalendarMonthProps {
 
 const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
   (props: CalendarMonthProps, ref) => {
-    const { value: monthValue = new Date(), watermark, top } = props
-    const { type, firstDayOfWeek, min, max, value: currentValue, subtitle, formatter } = useContext(
+    const { value: monthValue = new Date(), watermark, showMonthTitle } = props
+    const { type, firstDayOfWeek, min, max, value: currentValue, formatter } = useContext(
       CalendarContext,
     )
-
-    const previousTop = usePrevious(top)
-    const previousSubtitle = usePrevious(subtitle)
 
     const monthRef = useRef()
     const daysRef = useRef()
 
-    const heightRef = useRef(0)
+    const height = useHeight(monthRef)
 
     const month = useMemo(() => monthValue.getMonth() + 1, [monthValue])
 
@@ -220,21 +215,11 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       () => ({
         getScrollTop,
         disabledDays,
-        getHeight: () => heightRef.current,
+        getHeight: () => height,
         getValue: () => monthValue,
       }),
-      [disabledDays, getScrollTop, monthValue],
+      [disabledDays, getScrollTop, monthValue, height],
     )
-
-    // Get height of month when top || subtitle
-    useEffect(() => {
-      if (!top || subtitle !== !previousTop || previousSubtitle) {
-        nextTick(() =>
-          getRect(monthRef) //
-            .then(({ height }) => (heightRef.current = height)),
-        )
-      }
-    }, [top, subtitle, previousTop, previousSubtitle])
 
     const content = useMemo(
       () =>
@@ -255,12 +240,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
 
     return (
       <View ref={monthRef} className={prefixClassname("calendar__month")}>
-        {
-          //
-          (!top || !subtitle) && (
-            <View className={prefixClassname("calendar__month-title")} children={title} />
-          )
-        }
+        {showMonthTitle && <View className={prefixClassname("calendar__month-title")} children={title} />}
         <View ref={daysRef} className={prefixClassname("calendar__days")}>
           {watermark && <CalendarMonthWatermark children={month} />}
           {content}

@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react"
+import { createContext } from "react"
 import {
   CalendarDayObject,
   CalendarType,
@@ -9,7 +9,6 @@ import {
 
 interface CalendarContextValue {
   type: CalendarType
-  subtitle?: ReactNode
   firstDayOfWeek: number
   value?: CalendarValueType
   min: Date

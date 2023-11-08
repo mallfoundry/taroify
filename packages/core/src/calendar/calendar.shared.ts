@@ -6,6 +6,8 @@ export type CalendarType = "single" | "multiple" | "range"
 
 export type CalendarValueType = Date | Date[]
 
+export type CalendarSubtitle = ReactNode | ((date: Date) => ReactNode)
+
 export type CalendarDayType =
   | ""
   | "start"

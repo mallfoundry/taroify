@@ -451,8 +451,9 @@ function CustomConfirmCalendar() {
 | defaultValue | 默认选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
 | value | 选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
 | formatter | 日期格式化函数 | _(day: Calendar.DayObject) => Calendar.DayObject_ | - |
-| title | 日历标题 | _string_ | `日期选择` |
-| subtitle | 是否展示日历副标题（年月） | _boolean_ | `true` |
+| title | 日历标题 | _ReactNode_ | `日期选择` |
+| showSubtitle | 是否展示日历副标题（年月） | _boolean_ | `true` |
+| subtitle | 自定义日历副标题 | _ReactNode\|((date: Date) => ReactNode)_ | (date) => \`${date.getFullYear()}年${date.getMonth() + 1}月\` |
 | watermark | 是否显示月份背景水印 | _boolean_ | `true` |
 | min | 可选择的最小日期 | _Date_ | 当前日期 |
 | max | 可选择的最大日期 | _Date_ | 当前日期的六个月后 |
