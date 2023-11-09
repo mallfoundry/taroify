@@ -13,10 +13,11 @@ interface TabPaneBaseProps extends ViewProps {
   index: number
   value?: any
   children?: ReactNode
+  title?: ReactNode
 }
 
 export default function TabPaneBase(props: TabPaneBaseProps) {
-  const { className, style, index, value, children, ...restProps } = props
+  const { className, style, index, value, children, title, ...restProps } = props
   const { value: activeValue, lazyRender, animated, swipeable } = useContext(
     TabsContext,
   )
