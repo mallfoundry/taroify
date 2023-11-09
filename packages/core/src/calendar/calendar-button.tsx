@@ -40,7 +40,7 @@ function CalendarButton(props: CalendarButtonProps) {
       shape="round"
       block
       disabled={confirm && disabled}
-      color="danger"
+      color="primary"
       onClick={(event: ITouchEvent) => {
         onClick?.(event)
         if (confirm && !disabled) {

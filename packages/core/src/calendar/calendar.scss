@@ -192,12 +192,11 @@ $popup-close-icon-size: var(--popup-close-icon-size, 22px * $hd);
   &__footer {
     flex-shrink: 0;
     padding: $calendar-footer-padding;
-  }
-
-  &__confirm {
-    height: $calendar-confirm-button-height;
-    margin: $calendar-confirm-button-margin;
-    background: $calendar-confirm-button-color;
-    border-color: $calendar-confirm-button-color;
+    .#{$component-prefix}calendar__confirm {
+      height: $calendar-confirm-button-height;
+      margin: $calendar-confirm-button-margin;
+      background: $calendar-confirm-button-color;
+      border-color: $calendar-confirm-button-color;
+    }
   }
 }
