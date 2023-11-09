@@ -1,7 +1,7 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick } from "@tarojs/taro"
+import { nextTick, getEnv } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -41,6 +41,7 @@ import {
   createToday,
   MAX_DATE,
   MIN_DATE,
+  genMonthId,
 } from "./calendar.shared"
 
 
@@ -142,7 +143,7 @@ function Calendar(props: CalendarProps) {
     return _footer
   }
 
-  const scrollViewRef = useRef()
+  const scrollViewRef = useRef<HTMLDivElement>()
   const scrollViewHeightRef = useRef(0)
 
   const hasConfirmRef = useRef(false)
@@ -151,7 +152,7 @@ function Calendar(props: CalendarProps) {
 
   const changeValueRef = useRef<CalendarValueType>()
 
-  const [scrollViewScrollTop, setScrollViewScrollTop] = useState(0)
+  const [scrollIntoView, setScrollIntoView] = useState("")
 
   const {
     getRef: getMonthRef,
@@ -298,9 +299,6 @@ function Calendar(props: CalendarProps) {
 
   async function onScroll() {
     const top = await getScrollTop(scrollViewRef)
-    raf(() => {
-      setScrollViewScrollTop(top)
-    })
     const bottom = top + scrollViewHeightRef.current
     const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
     const heightSum = heights.reduce((a, b) => a + b, 0)
@@ -334,19 +332,25 @@ function Calendar(props: CalendarProps) {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate as Date) === 0) {
         const currentMonthRef = getMonthRef(index)
-        setCurrentMonth(currentMonthRef.current.getValue())
-        nextTick(() => {
-          if (scrollViewRef.current) {
-            Promise.all([
-              getRect(scrollViewRef),
-              getScrollTop(scrollViewRef),
-              currentMonthRef.current?.getRectTop(),
-            ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
-              const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
-              setScrollViewScrollTop(newBodyScrollTop)
-            })
-          }
-        })
+        const month = currentMonthRef.current.getValue()
+        setCurrentMonth(month)
+        if (getEnv() === "WEB") {
+          nextTick(() => {
+            if (scrollViewRef.current) {
+              Promise.all([
+                getRect(scrollViewRef),
+                getScrollTop(scrollViewRef),
+                currentMonthRef.current?.getRectTop(),
+              ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
+                const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
+                scrollViewRef.current!.scrollTop = newBodyScrollTop
+              })
+            }
+          })
+        } else {
+          setScrollIntoView(genMonthId(month))
+        }
+
 
         return true
       }
@@ -373,6 +377,7 @@ function Calendar(props: CalendarProps) {
 
   const init = useMemoizedFn(() => {
     if (poppable && !showPopup) {
+      setScrollIntoView("")
       return;
     }
 
@@ -455,7 +460,7 @@ function Calendar(props: CalendarProps) {
             ref={scrollViewRef}
             className={prefixClassname("calendar__body")}
             scrollY
-            scrollTop={scrollViewScrollTop}
+            scrollIntoView={scrollIntoView}
             onScroll={onScroll}
           >
             {monthsRender}

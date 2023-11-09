@@ -105,3 +105,5 @@ export function createToday() {
 export const MIN_DATE = createToday()
 
 export const MAX_DATE = new Date(MIN_DATE.getFullYear(), MIN_DATE.getMonth() + 6, 14)
+
+export const genMonthId = (date: Date) => `taroify-calendar-${date.getFullYear()}-${date.getMonth()}`

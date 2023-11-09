@@ -22,6 +22,7 @@ import {
   compareDate,
   createNextDay,
   createPreviousDay,
+  genMonthId,
   getEndDayOfMonth,
 } from "./calendar.shared"
 
@@ -79,6 +80,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     const height = useHeight(monthRef)
 
     const month = useMemo(() => monthValue.getMonth() + 1, [monthValue])
+    const id = useMemo(() => genMonthId(monthValue), [monthValue])
 
     const title = useMemo(() => `${monthValue.getFullYear()}年${monthValue.getMonth() + 1}月`, [
       monthValue,
@@ -239,7 +241,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     )
 
     return (
-      <View ref={monthRef} className={prefixClassname("calendar__month")}>
+      <View id={id} ref={monthRef} className={prefixClassname("calendar__month")}>
         {showMonthTitle && <View className={prefixClassname("calendar__month-title")} children={title} />}
         <View className={prefixClassname("calendar__days")}>
           {watermark && <CalendarMonthWatermark children={month} />}
