@@ -1,7 +1,7 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { nextTick } from "@tarojs/taro"
+import { nextTick, getEnv } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -10,18 +10,22 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
-  useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react"
-import useMounted from "../hooks/use-mounted"
+import Popup from "../popup"
+import type { PopupPlacement } from "../popup"
+import type { PopupProps } from "../popup/popup"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
 import { getScrollTop } from "../utils/dom/scroll"
 import { useRefs } from "../utils/state"
+import raf from "../utils/raf"
+import { useMemoizedFn } from "../hooks"
 import CalendarFooter from "./calendar-footer"
+import CalendarButton from "./calendar-button"
 import CalendarHeader from "./calendar-header"
 import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
 import CalendarContext from "./calendar.context"
@@ -29,6 +33,7 @@ import {
   CalendarDayObject,
   CalendarType,
   CalendarValueType,
+  CalendarSubtitle,
   compareDate,
   compareYearMonth,
   createNextDay,
@@ -36,67 +41,35 @@ import {
   createToday,
   MAX_DATE,
   MIN_DATE,
+  genMonthId,
 } from "./calendar.shared"
 
-type CalendarSubtitleRender = (date: Date) => ReactNode
 
 function defaultSubtitleRender(date: Date) {
   return `${date.getFullYear()}年${date.getMonth() + 1}月`
-}
-
-function useSubtitleRender(subtitle?: ReactNode | CalendarSubtitleRender): CalendarSubtitleRender {
-  const renderRef = useRef<CalendarSubtitleRender>()
-
-  const getRender = useCallback(() => {
-    if (_.isBoolean(subtitle) && subtitle) {
-      return defaultSubtitleRender
-    } else if (_.isBoolean(subtitle) && !subtitle) {
-      return () => undefined
-    } else if (_.isFunction(subtitle)) {
-      return subtitle
-    }
-    return () => subtitle
-  }, [subtitle])
-
-  useEffect(() => {
-    renderRef.current = getRender()
-  }, [getRender, subtitle])
-
-  return useCallback((date: Date) => renderRef.current?.(date), [])
 }
 
 function defaultFormatter(day: CalendarDayObject) {
   return day
 }
 
-interface CalendarChildren {
-  footer?: ReactNode
-}
-
-function useCalendarChildren(children?: ReactNode): CalendarChildren {
-  const __children__: CalendarChildren = {}
-
-  Children.forEach(children, (child: ReactNode) => {
-    if (isValidElement(child)) {
-      const element = child as ReactElement
-      const { type: elementType } = element
-      if (elementType === CalendarFooter) {
-        __children__.footer = element
-      }
-    }
-  })
-
-  return __children__
-}
-
 export interface CalendarProps extends ViewProps {
   type?: CalendarType
   title?: ReactNode
-  subtitle?: ReactNode | CalendarSubtitleRender
+  subtitle?: CalendarSubtitle
+  showSubtitle?: boolean
   defaultValue?: CalendarValueType
   value?: CalendarValueType
   min?: Date
   max?: Date
+  poppable?: boolean
+  showPopup?: boolean
+  popupPlacement?: PopupPlacement
+  popupRounded?: boolean
+  popupCloseIcon?: boolean
+  showConfirm?: boolean
+  confirmText?: ReactNode
+  confirmDisabledText?: ReactNode
   firstDayOfWeek?: number
   watermark?: boolean
   readonly?: boolean
@@ -107,16 +80,28 @@ export interface CalendarProps extends ViewProps {
   onChange?(value: any): void
 
   onConfirm?(value: any): void
+
+  onClose?(val: boolean): void
 }
 
 function Calendar(props: CalendarProps) {
   const {
     className,
     style,
-    title = true,
-    subtitle: subtitleProp = true,
+    title = "日期选择",
+    subtitle = defaultSubtitleRender,
+    showSubtitle = true,
     type = "single",
-    defaultValue,
+    // set false to be compatible with lower versions
+    poppable = false,
+    showPopup = false,
+    popupPlacement = "bottom",
+    popupRounded = true,
+    popupCloseIcon = true,
+    showConfirm = true,
+    confirmText = "确认",
+    confirmDisabledText = "确认",
+    defaultValue: defaultValueProp,
     value: valueProp,
     min: minValue = MIN_DATE,
     max: maxValue = MAX_DATE,
@@ -127,29 +112,47 @@ function Calendar(props: CalendarProps) {
     children: childrenProp,
     onChange: onChangeProp,
     onConfirm,
+    onClose,
   } = props
 
+  const Wrapper = useMemo<React.FC<PopupProps>>(() => poppable ? Popup : ({children}) => <>{children}</>, [poppable])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const defaultValue = useMemo(() => getInitialDate(defaultValueProp), [])
   const { value, setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
 
-  const { footer } = useCalendarChildren(childrenProp)
+  const renderFooter = () => {
+    let _footer: ReactNode = null
+    Children.forEach(childrenProp, (child: ReactNode) => {
+      if (isValidElement(child)) {
+        const element = child as ReactElement
+        const { type: elementType } = element
+        if (elementType === CalendarFooter) {
+          _footer = element
+        }
+      }
+    })
+    if (!_footer && showConfirm) {
+      _footer = <CalendarFooter>
+        <CalendarButton type="confirm" confirmText={confirmText} confirmDisabledText={confirmDisabledText}  />
+      </CalendarFooter>
+    }
+    return _footer
+  }
 
-  const bodyRef = useRef()
+  const scrollViewRef = useRef<HTMLDivElement>()
+  const scrollViewHeightRef = useRef(0)
 
   const hasConfirmRef = useRef(false)
 
-  const subtitleRender = useSubtitleRender(subtitleProp)
-
-  const [subtitle, setSubtitle] = useState<ReactNode>()
+  const [currentMonth, setCurrentMonth] = useState<Date>();
 
   const changeValueRef = useRef<CalendarValueType>()
 
-  const [bodyScrollTop, setBodyScrollTop] = useState(0)
-
-  const bodyScrollTopRef = useRef(0)
+  const [scrollIntoView, setScrollIntoView] = useState("")
 
   const {
     getRef: getMonthRef,
@@ -295,9 +298,8 @@ function Calendar(props: CalendarProps) {
   }
 
   async function onScroll() {
-    const top = await getScrollTop(bodyRef)
-    const bodyHeight = (await getRect(bodyRef)).height
-    const bottom = top + bodyHeight
+    const top = await getScrollTop(scrollViewRef)
+    const bottom = top + scrollViewHeightRef.current
     const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
     const heightSum = heights.reduce((a, b) => a + b, 0)
 
@@ -307,56 +309,48 @@ function Calendar(props: CalendarProps) {
     }
 
     let height = 0
-    let currentMonth
+    let currentMonthRef
 
     for (let i = 0; i < months.length; i++) {
       const month = getMonthRef(i)
       const visible = height <= bottom && height + heights[i] >= top
 
-      if (visible && !currentMonth) {
-        currentMonth = month
+      if (visible && !currentMonthRef) {
+        currentMonthRef = month
         break
       }
 
       height += heights[i]
     }
 
-    if (currentMonth) {
-      const subtitle = subtitleRender(currentMonth.current.getValue())
-      setMonthSubtitle(currentMonth.current, subtitle)
-    }
-  }
-
-  function setMonthSubtitle(currentMonth: CalendarMonthInstance, subtitle: ReactNode) {
-    /* istanbul ignore else */
-    if (currentMonth) {
-      setSubtitle(subtitle)
+    if (currentMonthRef) {
+      setCurrentMonth(currentMonthRef.current.getValue())
     }
   }
 
   async function scrollToDate(targetDate?: Date) {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate as Date) === 0) {
-        const currentMonth = getMonthRef(index).current
-        const subtitle = subtitleRender(currentMonth.getValue())
-        setMonthSubtitle(currentMonth, subtitle)
-        nextTick(() => {
-          if (bodyRef.current) {
-            Promise.all([
-              getRect(bodyRef), //
-              getScrollTop(bodyRef),
-              currentMonth?.getScrollTop(subtitle),
-            ]).then(([{ top: bodyTop }, bodyScrollTop, monthScrollTop]) => {
-              const newBodyScrollTop = monthScrollTop - bodyTop + bodyScrollTop
-              if (bodyScrollTopRef.current !== newBodyScrollTop) {
-                setBodyScrollTop(bodyScrollTopRef.current)
-                setBodyScrollTop(newBodyScrollTop)
-              } else {
-                setBodyScrollTop(newBodyScrollTop)
-              }
-            })
-          }
-        })
+        const currentMonthRef = getMonthRef(index)
+        const month = currentMonthRef.current.getValue()
+        setCurrentMonth(month)
+        if (getEnv() === "WEB") {
+          nextTick(() => {
+            if (scrollViewRef.current) {
+              Promise.all([
+                getRect(scrollViewRef),
+                getScrollTop(scrollViewRef),
+                currentMonthRef.current?.getRectTop(),
+              ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
+                const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
+                scrollViewRef.current!.scrollTop = newBodyScrollTop
+              })
+            }
+          })
+        } else {
+          setScrollIntoView(genMonthId(month))
+        }
+
 
         return true
       }
@@ -365,24 +359,36 @@ function Calendar(props: CalendarProps) {
   }
 
   // scroll to current month
-  async function scrollIntoView(newValue?: CalendarValueType) {
+  async function scrollToCurrentDate(newValue?: CalendarValueType) {
+    if (poppable && !showPopup) {
+      return
+    }
     if (newValue) {
-      const targetDate = (() => {
-        if (type === "single" && _.isDate(newValue)) {
-          return newValue as Date
-        } else if (_.isArray(newValue)) {
-          return newValue[0] as Date
-        }
-      })()
-      await scrollToDate(targetDate)
+      const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0];
+      if (_.isDate(targetDate)) {
+        scrollToDate(targetDate);
+      }
     } else {
-      await onScroll()
+      onScroll()
     }
   }
 
-  const reset = (date?: CalendarValueType) => nextTick(() => scrollIntoView(date).then())
+  const reset = (date?: CalendarValueType) => nextTick(() => scrollToCurrentDate(date).then())
 
-  const init = () => reset(value)
+  const init = useMemoizedFn(() => {
+    if (poppable && !showPopup) {
+      setScrollIntoView("")
+      return;
+    }
+
+    raf(async () => {
+      // add Math.floor to avoid decimal height issues
+      // https://github.com/vant-ui/vant/issues/5640
+      const bodyHeight = (await getRect(scrollViewRef)).height
+      scrollViewHeightRef.current = Math.floor(bodyHeight);
+      reset(getInitialDate(value))
+    });
+  })
 
   useEffect(() => {
     if (value !== changeValueRef.current) {
@@ -394,9 +400,12 @@ function Calendar(props: CalendarProps) {
   useEffect(() => {
     reset(getInitialDate(value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, subtitleRender, minValue, maxValue])
+  }, [type, minValue, maxValue])
 
-  useMounted(init)
+  useEffect(() => {
+    init()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showPopup])
 
   const monthsRender = useMemo(() => {
     // When rerender, clear columns refs
@@ -408,11 +417,11 @@ function Calendar(props: CalendarProps) {
         ref={setMonthRefs(index)}
         key={month.getTime()}
         value={month}
-        top={index === 0}
+        showMonthTitle={index !== 0 || !showSubtitle}
         watermark={watermark}
       />
     ))
-  }, [clearMonthRefs, months, setMonthRefs, watermark])
+  }, [clearMonthRefs, months, setMonthRefs, watermark, showSubtitle])
 
   function notifyConfirm(hasConfirm: boolean) {
     hasConfirmRef.current = hasConfirm
@@ -426,7 +435,6 @@ function Calendar(props: CalendarProps) {
     <CalendarContext.Provider
       value={{
         type,
-        subtitle,
         firstDayOfWeek: dayOffset,
         min: minValue,
         max: maxValue,
@@ -437,29 +445,29 @@ function Calendar(props: CalendarProps) {
         onConfirm: handleConfirm,
       }}
     >
-      <View
-        className={classNames(
-          prefixClassname("calendar"),
-          prefixClassname(`calendar--${type}`),
-          className,
-        )}
-        style={style}
-      >
-        {(title || subtitle) && <CalendarHeader title={title} subtitle={subtitle} />}
-        <ScrollView
-          ref={bodyRef}
-          className={prefixClassname("calendar__body")}
-          scrollY
-          scrollTop={bodyScrollTop}
-          onScroll={async ({ detail }) => {
-            bodyScrollTopRef.current = detail.scrollTop
-            await onScroll()
-          }}
+      <Wrapper rounded={popupRounded} placement={popupPlacement} open={showPopup} onClose={onClose} className={classNames(prefixClassname("calendar--popup"))}>
+        {(poppable && showPopup && popupCloseIcon) && <Popup.Close /> }
+        <View
+          className={classNames(
+            prefixClassname("calendar"),
+            prefixClassname(`calendar--${type}`),
+            className,
+          )}
+          style={style}
         >
-          {monthsRender}
-        </ScrollView>
-        {footer}
-      </View>
+          <CalendarHeader title={title} subtitle={subtitle} date={currentMonth} showSubtitle={showSubtitle}  />
+          <ScrollView
+            ref={scrollViewRef}
+            className={prefixClassname("calendar__body")}
+            scrollY
+            scrollIntoView={scrollIntoView}
+            onScroll={onScroll}
+          >
+            {monthsRender}
+          </ScrollView>
+          {renderFooter()}
+        </View>
+      </Wrapper>
     </CalendarContext.Provider>
   )
 }

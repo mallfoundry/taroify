@@ -1,5 +1,20 @@
 @import "./variables";
 
+$popup-close-icon-size: var(--popup-close-icon-size, 22px * $hd);
+
+.#{$component-prefix}popup--bottom.#{$component-prefix}calendar--popup, .#{$component-prefix}popup--top.#{$component-prefix}calendar--popup{
+  height: $calendar-popup-height;
+}
+
+.#{$component-prefix}popup--left.#{$component-prefix}calendar--popup, .#{$component-prefix}popup--right.#{$component-prefix}calendar--popup{
+  height: 100%;
+}
+.#{$component-prefix}calendar--popup {
+  .#{$component-prefix}popup__close-icon {
+    --popup-close-icon-margin: calc((#{$calendar-header-title-height} - #{$popup-close-icon-size}) / 2);
+  }
+}
+
 .#{$component-prefix}calendar {
   display: flex;
   flex-direction: column;
@@ -177,12 +192,11 @@
   &__footer {
     flex-shrink: 0;
     padding: $calendar-footer-padding;
-  }
-
-  &__confirm {
-    height: $calendar-confirm-button-height;
-    margin: $calendar-confirm-button-margin;
-    background: $calendar-confirm-button-color;
-    border-color: $calendar-confirm-button-color;
+    .#{$component-prefix}calendar__confirm {
+      height: $calendar-confirm-button-height;
+      margin: $calendar-confirm-button-margin;
+      background: $calendar-confirm-button-color;
+      border-color: $calendar-confirm-button-color;
+    }
   }
 }

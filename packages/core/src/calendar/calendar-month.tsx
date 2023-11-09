@@ -1,5 +1,4 @@
 import { View } from "@tarojs/components"
-import { nextTick } from "@tarojs/taro"
 import * as _ from "lodash"
 import * as React from "react"
 import {
@@ -7,14 +6,13 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
 } from "react"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
-import { usePrevious } from "../utils/state"
+import { useHeight } from "../hooks"
 import CalendarDay from "./calendar-day"
 import CalendarContext from "./calendar.context"
 import {
@@ -24,6 +22,7 @@ import {
   compareDate,
   createNextDay,
   createPreviousDay,
+  genMonthId,
   getEndDayOfMonth,
 } from "./calendar.shared"
 
@@ -43,7 +42,7 @@ export interface CalendarMonthInstance {
 
   getHeight(): number
 
-  getScrollTop(subtitle: any): Promise<number>
+  getRectTop(): Promise<number>
 }
 
 function getBottom(type: CalendarType, dayType: CalendarDayType) {
@@ -62,7 +61,7 @@ function getBottom(type: CalendarType, dayType: CalendarDayType) {
 
 interface CalendarMonthProps {
   value?: Date
-  top?: boolean
+  showMonthTitle?: boolean
   readonly?: boolean
   watermark?: boolean
   children?: ReactNode
@@ -70,20 +69,18 @@ interface CalendarMonthProps {
 
 const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
   (props: CalendarMonthProps, ref) => {
-    const { value: monthValue = new Date(), watermark, top } = props
-    const { type, firstDayOfWeek, min, max, value: currentValue, subtitle, formatter } = useContext(
+    const { value: monthValue = new Date(), watermark, showMonthTitle } = props
+    const { type, firstDayOfWeek, min, max, value: currentValue, formatter } = useContext(
       CalendarContext,
     )
 
-    const previousTop = usePrevious(top)
-    const previousSubtitle = usePrevious(subtitle)
-
     const monthRef = useRef()
-    const daysRef = useRef()
+    // const daysRef = useRef()
 
-    const heightRef = useRef(0)
+    const height = useHeight(monthRef)
 
     const month = useMemo(() => monthValue.getMonth() + 1, [monthValue])
+    const id = useMemo(() => genMonthId(monthValue), [monthValue])
 
     const title = useMemo(() => `${monthValue.getFullYear()}年${monthValue.getMonth() + 1}月`, [
       monthValue,
@@ -211,30 +208,20 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       [days],
     )
 
-    const getScrollTop = useCallback((subtitle: any) => {
-      return getRect(subtitle ? daysRef : monthRef).then(({ top }) => top)
+    const getRectTop = useCallback(() => {
+      return getRect(monthRef).then(({ top }) => top)
     }, [])
 
     useImperativeHandle(
       ref,
       () => ({
-        getScrollTop,
+        getRectTop,
         disabledDays,
-        getHeight: () => heightRef.current,
+        getHeight: () => height,
         getValue: () => monthValue,
       }),
-      [disabledDays, getScrollTop, monthValue],
+      [disabledDays, getRectTop, monthValue, height],
     )
-
-    // Get height of month when top || subtitle
-    useEffect(() => {
-      if (!top || subtitle !== !previousTop || previousSubtitle) {
-        nextTick(() =>
-          getRect(monthRef) //
-            .then(({ height }) => (heightRef.current = height)),
-        )
-      }
-    }, [top, subtitle, previousTop, previousSubtitle])
 
     const content = useMemo(
       () =>
@@ -254,14 +241,9 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     )
 
     return (
-      <View ref={monthRef} className={prefixClassname("calendar__month")}>
-        {
-          //
-          (!top || !subtitle) && (
-            <View className={prefixClassname("calendar__month-title")} children={title} />
-          )
-        }
-        <View ref={daysRef} className={prefixClassname("calendar__days")}>
+      <View id={id} ref={monthRef} className={prefixClassname("calendar__month")}>
+        {showMonthTitle && <View className={prefixClassname("calendar__month-title")} children={title} />}
+        <View className={prefixClassname("calendar__days")}>
           {watermark && <CalendarMonthWatermark children={month} />}
           {content}
         </View>
