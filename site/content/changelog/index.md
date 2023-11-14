@@ -12,6 +12,30 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.6
+
+`2023-11-14`
+
+**Feature**
+
+- Calendar
+  - 添加 `poppable` `showPopup` `onClose` 属性，支持弹框展示日历 [636](https://github.com/mallfoundry/taroify/pull/636) [@hbztd](https://github.com/hbztd)
+  - 添加 `showConfirm` `confirmText` `confirmDisabledText`，支持自定义确认按钮文案 [636](https://github.com/mallfoundry/taroify/pull/636) [@hbztd](https://github.com/hbztd)
+  - 添加 `showSubtitle`，修改 `subtitle`，支持自定义副标题 [636](https://github.com/mallfoundry/taroify/pull/636) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Navbar
+  - 修复 `placeholder` 属性值默认为 false [634](https://github.com/mallfoundry/taroify/pull/634) [@Pilotager](https://github.com/Pilotager)
+
+- Tabs
+  - 修复 TabPane 内容 DOM 上不该有 `title` 属性 [635](https://github.com/mallfoundry/taroify/pull/635) [@hbztd](https://github.com/hbztd)
+
+- Calendar
+  - 修复日历在h5无法滑动
+  - 修复设置defaultValue，value没有跳转到对应位置
+  - 修复底部按钮在微信小程序里颜色不对
+
 ### v0.1.1-alpha.5
 
 `2023-11-05`
