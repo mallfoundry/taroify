@@ -10,7 +10,6 @@ import { prefixClassname } from "../styles"
 import { useRefs, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import { unitToPx } from "../utils/format/unit"
-import AreaPickerColumns from "../area-picker/area-picker-columns"
 import PickerColumns from "./picker-columns"
 import PickerToolbar from "./picker-toolbar"
 import PickerTitle from "./picker-title"
@@ -116,7 +115,6 @@ function Picker(props: PickerProps) {
     let toolbar: ReactNode = null
     const __children__: ReactNode[] = []
     const columns: ReactNode[] = []
-    let hasAreaColumnsComp = false
     Children.toArray(childrenProp).forEach((child: ReactNode) => {
       if (isElementOf(child, PickerColumn)) {
         const element = child as ReactElement
@@ -124,9 +122,6 @@ function Picker(props: PickerProps) {
       } else if (isElementOf(child, PickerToolbar)) {
         toolbar = child
       } else {
-        if (isElementOf(child, AreaPickerColumns)) {
-          hasAreaColumnsComp = true
-        }
         __children__.push(child)
       }
     })
@@ -137,15 +132,12 @@ function Picker(props: PickerProps) {
         <PickerButton type="confirm">{confirmText}</PickerButton>
       </PickerToolbar>
     }
-    if (!hasAreaColumnsComp && _.isEmpty(columns) && columnsProp && columnsProp.length > 0) {
+    if (_.isEmpty(columns) && columnsProp && columnsProp.length > 0) {
       (Array.isArray(columnsProp[0]) ? columnsProp : [columnsProp]).forEach((col, i) => {
         columns.push(<PickerColumn key={i}>{col.map((data, ii) => <PickerOption key={ii} label={data[fieldNames.label!]} value={data[fieldNames.value!]} disabled={data.disabled} />)}</PickerColumn>)
       })
     }
-    if (!hasAreaColumnsComp) {
-      __children__.unshift(<PickerColumns key="-1" children={columns} />)
-    }
-
+    __children__.unshift(<PickerColumns key="-1" children={columns} />)
     __children__.unshift(toolbar)
     return __children__
   }, [childrenProp, title, confirmText, cancelText, columnsProp, fieldNames])
