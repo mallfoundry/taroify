@@ -30,18 +30,23 @@ export default function PickerOption(props: PickerOptionProps) {
   const { optionHeight } = useContext(PickerContext)
 
   const children = useMemo(() => {
-    if (isValidElement(childrenProp) || isTextElement(childrenProp)) {
+    if (isValidElement(childrenProp)) {
       return childrenProp
     }
-    if (isValidElement(label) || isTextElement(label)) {
+    if (isTextElement(childrenProp)) {
+      return <View className={prefixClassname("ellipsis")}>{childrenProp}</View>
+    }
+    if (isValidElement(label)) {
       return label
+    }
+    if (isTextElement(label)) {
+      return <View className={prefixClassname("ellipsis")}>{label}</View>
     }
   }, [childrenProp, label])
 
   return (
     <View
       className={classNames(
-        prefixClassname("ellipsis"),
         prefixClassname("picker-option"),
         {
           [prefixClassname("picker-option--disabled")]: disabled,
