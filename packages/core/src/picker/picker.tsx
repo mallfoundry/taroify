@@ -31,7 +31,7 @@ function usePickerValues(value?: any): any[] {
   return _.isArray(value) ? value : [value]
 }
 
-interface PickerBaseProps extends ViewProps {
+export interface PickerBaseProps extends ViewProps {
   readonly?: boolean
   loading?: boolean
   siblingCount?: number
@@ -42,17 +42,6 @@ interface PickerBaseProps extends ViewProps {
   columns?: PickerOptionData[] | PickerOptionData[][]
   columnsFieldNames?: { label?: string; value?: string }
   children?: ReactNode
-}
-
-export interface MultiValuePickerProps extends PickerBaseProps {
-  defaultValue?: string[]
-  value?: string[]
-
-  onChange?(values: string[], option: PickerOptionObject, column: PickerOptionObject): void
-
-  onConfirm?(values: string[], options: PickerOptionObject[]): void
-
-  onCancel?(values: string[], options: PickerOptionObject[]): void
 }
 
 export interface PickerProps extends PickerBaseProps {

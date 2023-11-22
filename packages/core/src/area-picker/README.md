@@ -14,24 +14,10 @@ import { AreaPicker } from "@taroify/core"
 
 ### 基础用法
 
-初始化省市区组件时，需要通过 `AreaPicker.Columns` 子组件传入省市区数据。
+初始化省市区组件时，需要通过 `areaList` 属性传入省市区数据。
 
 ```tsx
-import { AreaPicker } from "@taroify/core"
-import { areaList } from "@vant/area-data"
-
-function BasicAreaPicker() {
-  return (
-    <AreaPicker>
-      <AreaPicker.Toolbar>
-        <AreaPicker.Button>取消</AreaPicker.Button>
-        <AreaPicker.Title>标题</AreaPicker.Title>
-        <AreaPicker.Button>确认</AreaPicker.Button>
-      </AreaPicker.Toolbar>
-      <AreaPicker.Columns children={areaList} />
-    </AreaPicker>
-  )
-}
+<AreaPicker areaList={areaList} />
 ```
 
 ### areaList 格式
@@ -80,22 +66,12 @@ import { areaList } from "@vant/area-data"
 ```
 
 ### 选中省市区
+通过 `defaultValue` 设置默认值
 
-如果想选中某个省市区，需要传入一个 `value` 属性，绑定对应的地区码。
+通过 `value` `onChange` 控制选中
 
 ```tsx
-function AreaPickerWithValue() {
-  return (
-    <AreaPicker value={["330000", "330300"]}>
-      <AreaPicker.Toolbar>
-        <AreaPicker.Button>取消</AreaPicker.Button>
-        <AreaPicker.Title>标题</AreaPicker.Title>
-        <AreaPicker.Button>确认</AreaPicker.Button>
-      </AreaPicker.Toolbar>
-      <AreaPicker.Columns children={areaList} />
-    </AreaPicker>
-  )
-}
+<AreaPicker areaList={areaList} defaultValue={["330000", "330300", "330305"]} />
 ```
 
 ### 配置显示列
@@ -103,9 +79,18 @@ function AreaPickerWithValue() {
 可以通过 `depth` 属性配置省市区显示的列数，默认情况下会显示省市区，当你设置为 `2`，则只会显示省市选择。
 
 ```tsx
-function AreaPickerWithColumns2() {
+ <AreaPicker depth={2} areaList={areaList} />
+```
+
+### 手动控制DOM
+初始化省市区组件时，需要通过 `AreaPicker.Columns` 子组件传入省市区数据。
+```tsx
+import { AreaPicker } from "@taroify/core"
+import { areaList } from "@vant/area-data"
+
+function BasicAreaPicker() {
   return (
-    <AreaPicker depth={2}>
+    <AreaPicker>
       <AreaPicker.Toolbar>
         <AreaPicker.Button>取消</AreaPicker.Button>
         <AreaPicker.Title>标题</AreaPicker.Title>
@@ -123,38 +108,22 @@ function AreaPickerWithColumns2() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| defaultValue | 默认选中的值 | _any[]_ | - |
-| value | 选中的值 | _any[]_ | - |
+| defaultValue | 默认选中的值 | _string[]_ | - |
+| value | 选中的值 | _string[]_ | - |
+| areaList | 省市区数据 | _object_ | - |
+| depth | 显示列数，3-省市区，2-省市，1-省 | _string_ | `3` |
+| title | 顶部栏标题 | _ReactNode_ | - |
+| confirmText | 确认按钮文字 | _ReactNode_ | `确认` |
+| cancelText | 取消按钮文字 | _ReactNode_| `取消` |
 | loading | 是否显示加载状态 | _boolean_ | `false` |
 | readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
 | siblingCount | 可见的选项相邻个数 | _number_ | `3` |
-| depth | 显示列数，3-省市区，2-省市，1-省 | _number \| string_ | `3` |
+| optionHeight | 选项高度，支持 `px` `vw` `vh` `rem` `rpx` 单位，默认 `px` | _number\|string_ | `44` |
 
 ### Events
 
 | 事件    | 说明               | 回调参数                       |
 | ------- | ------------------ | ------------------------------ |
-| onConfirm | 点击完成按钮时触发 | _values: any[], options: PickerOptionObject[]_        |
-| onCancel  | 点击取消按钮时触发 | -                              |
-| onChange  | 选项改变时触发     | _values: any[], option: PickerOptionObject, column: PickerOptionObject_ |
-
-### PickerOptionObject 格式
-
-onConfirm 事件返回的数据整体为一个数组，数组每一项对应一列选项中被选中的数据。
-
-```tsx
-[
-  {
-    value: "110000",
-    label: "北京市",
-  },
-  {
-    value: "110100",
-    label: "北京市",
-  },
-  {
-    value: "110101",
-    label: "东城区",
-  },
-];
-```
+| onConfirm | 点击完成按钮时触发 | _values: string[], options: PickerOptionObject[]_        |
+| onCancel  | 点击取消按钮时触发 | _values: string[], options: PickerOptionObject[]_                           |
+| onChange  | 选项改变时触发     | _values: string[], option: PickerOptionObject, column: PickerOptionObject_ |
