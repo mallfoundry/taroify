@@ -77,7 +77,7 @@ function AreaPicker({
   }, [origin, value])
   const handleChange = useMemoizedFn((val, option, column) => {
     const idx = val.findIndex(item => item === option.value)
-    let newVal = val
+    let newVal
     if (idx === 0) {
       newVal = [val[0]]
       if (columnsNum > 1) {
@@ -94,6 +94,8 @@ function AreaPicker({
       if (columnsNum > 2) {
         newVal.push(city?.children?.[0]?.value)
       }
+    } else if (idx === 2) {
+      newVal = [value?.[0], value?.[1], option.value]
     }
     hasChange.current = true
     setValue(newVal)
