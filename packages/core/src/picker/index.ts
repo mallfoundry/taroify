@@ -7,7 +7,7 @@ import PickerTitle from "./picker-title"
 import PickerToolbar from "./picker-toolbar"
 import { PickerColumn } from "./picker.composition"
 
-export type { PickerProps, MultiValuePickerProps } from "./picker"
+export type { PickerProps } from "./picker"
 export type { PickerOptionObject, PickerThemeVars } from "./picker.shared"
 export type { PickerColumnsProps } from "./picker-columns"
 export { default as PickerContext } from "./picker.context"
