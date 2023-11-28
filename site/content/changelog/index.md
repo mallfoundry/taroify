@@ -12,6 +12,23 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.7
+
+`2023-11-28`
+
+**Feature**
+
+- AreaPicker
+  - 添加 `areaList` `title` `confirmText` `cancelText` `optionHeight`, 支持通过属性配置 AreaPicker [639](https://github.com/mallfoundry/taroify/pull/639) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- AreaPicker
+  - 修复 AreaPicker 多了一个空白 [639](https://github.com/mallfoundry/taroify/pull/639) [@hbztd](https://github.com/hbztd)
+
+- Picker
+  - 修复选项文字内容超长时未省略 [639](https://github.com/mallfoundry/taroify/pull/639) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.6
 
 `2023-11-14`
