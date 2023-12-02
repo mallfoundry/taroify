@@ -108,6 +108,9 @@ function Picker(props: PickerProps) {
       if (isElementOf(child, PickerColumn)) {
         const element = child as ReactElement
         columns.push(element)
+      } else if (isElementOf(child, PickerColumns)) {
+        const element = child as ReactElement
+        columns.push(...element.props.children)
       } else if (isElementOf(child, PickerToolbar)) {
         toolbar = child
       } else {
