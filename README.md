@@ -10,7 +10,7 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 ## ✨ 特性
 
 - 🚀 性能极佳，组件平均体积小于 1KB（min+gzip）
-- 💎 60+ 个高质量组件，覆盖移动端主流场景
+- 💎 70+ 个高质量组件，覆盖移动端主流场景
 - 💪 使用 TypeScript 编写，提供完整的类型定义
 - 💪 单元测试覆盖率超过 90%，提供稳定性保障
 - 📖 提供完善的中文文档和组件示例
@@ -50,11 +50,11 @@ function Index() {
 }
 ```
 
-更多使用方式，请参考[快速上手](https://taroify.gitee.io/taroify.com/quickstart/)
+更多使用方式，请参考[快速上手](https://taroify.github.io/taroify.com/introduce/)
 
 ## 贡献代码
 
-修改代码请阅读我们的[开发指南](https://taroify.gitee.io/taroify.com/contribution/)。
+修改代码请阅读我们的[开发指南](https://taroify.github.io/taroify.com/contribution/)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
