@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.8
+
+`2023-12-07`
+
+**Bug Fixes**
+
+- DatetimePicker
+  - 修复 DatetimePicker 多了一个空白 [643](https://github.com/mallfoundry/taroify/pull/643) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.1-alpha.7
 
 `2023-11-28`
