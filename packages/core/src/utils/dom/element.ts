@@ -102,7 +102,7 @@ export function queryAllNodesRef(element: TaroElement, selector?: string) {
 
   const ancestor = getAncestorWrapper(element)
   if (ancestor) {
-    return createSelectorQuery().selectAll(`#${ancestor.uid}>>>#${element.uid}${selector}`)
+    return createSelectorQuery().selectAll(`#${ancestor.uid}>>>#${element.uid} ${selector}`)
   }
 
   return createSelectorQuery().selectAll("#" + element.uid + selector)
