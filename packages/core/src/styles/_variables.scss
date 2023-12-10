@@ -38,12 +38,12 @@ $text-color: var(--gray-8, $gray-8);
 $text-color-2: var(--gray-6, $gray-6);
 $text-color-3: var(--gray-5, $gray-5);
 $active-color: var(--gray-2, $gray-2);
-$active-opacity: 0.6;
-$disabled-opacity: 0.5;
+$active-opacity: var(--active-opacity, 0.6);
+$disabled-opacity: var(--disabled-opacity, 0.5);
 $background-color: var(--gray-1, $gray-1);
 $background-color-2: var(--white, $white);
 $background-color-light: var(--white, $white);
-$text-link-color: #576b95;
+$text-link-color: var(--text-link-color, #576b95);
 
 // Padding
 $padding-base: 4px * $hd;
