@@ -1,0 +1,14 @@
+@import "../../../styles/prefix";
+
+.text-props-ellipsis-demo {
+  background-color: white;
+  .#{$demo-prefix}page__content {
+    padding: 0;
+    // --text-ellipsis-content-font-size: 0.5rem;
+
+    .taroify-demo-block__title {
+      padding: 0.8rem;
+      padding-bottom: 0.2rem;
+    }
+  }
+}

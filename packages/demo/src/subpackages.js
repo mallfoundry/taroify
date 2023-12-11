@@ -307,6 +307,11 @@ const subpackages = [
         path: "tag/index",
       },
       {
+        title: "TextEllipsis 文本省略",
+        name: "TextEllipsis",
+        path: "text-ellipsis/index",
+      },
+      {
         title: "Timeline 时间轴",
         name: "Timeline",
         path: "timeline/index",

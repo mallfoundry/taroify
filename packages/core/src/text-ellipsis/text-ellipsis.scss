@@ -1,0 +1,21 @@
+@import "./variables";
+
+.#{$component-prefix}text-ellipsis {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  line-height: $text-ellipsis-line-height;
+  font-size: $text-ellipsis-font-size;
+  color: $text-ellipsis-font-color;
+
+  &__expand {
+    cursor: pointer;
+    color: $text-ellipsis-action-color;
+    display: inline-block;
+    &:active {
+      opacity: $active-opacity;
+    }
+  }
+  &__hidden {
+    visibility: hidden !important;
+  }
+}

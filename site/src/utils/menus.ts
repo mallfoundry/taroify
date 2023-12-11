@@ -271,6 +271,10 @@ const menus = [
         to: "/components/tag/",
       },
       {
+        title: "TextEllipsis 文本省略",
+        to: "/components/text-ellipsis/",
+      },
+      {
         title: "Timeline 时间轴",
         to: "/components/timeline/",
       },

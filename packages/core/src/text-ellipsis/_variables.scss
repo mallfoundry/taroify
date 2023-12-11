@@ -1,0 +1,7 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$text-ellipsis-line-height: var(--text-ellipsis-line-height, 1.6);
+$text-ellipsis-font-size: var(--text-ellipsis-content-font-size, $font-size-md);
+$text-ellipsis-font-color: var(--text-ellipsis-content-font-color, $text-color);
+$text-ellipsis-action-color: var(--text-ellipsis-action-color, $primary-color);
