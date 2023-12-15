@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.9
+
+`2023-12-15`
+
+**Feature**
+
+- TextEllipsis
+  - 添加 TextEllipsis 文字省略组件 [646](https://github.com/mallfoundry/taroify/pull/646) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.1-alpha.8
 
 `2023-12-07`
