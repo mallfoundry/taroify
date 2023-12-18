@@ -4,7 +4,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode } from "react"
 import { Helmet } from "react-helmet"
-import Handler from "../components/header"
+import Header from "../components/header"
 import SideNav from "../components/side-nav"
 import Simulator from "../components/simulator"
 import { prefixClassname } from "../styles/prefix"
@@ -28,7 +28,7 @@ export default function ComponentTemplate(props: ComponentTemplateProps) {
         <meta httpEquiv="Expires" content="0" />
       </Helmet>
       <div className={prefixClassname("docs")}>
-        <Handler />
+        <Header />
         <SideNav slug={slug} />
         <div
           className={classNames(
