@@ -1,7 +1,8 @@
 import classNames from "classnames"
 import { graphql } from "gatsby"
-import * as _ from "lodash"
+import { startsWith, debounce } from "lodash"
 import * as React from "react"
+import { useEffect, useState } from "react"
 import { ReactNode } from "react"
 import { Helmet } from "react-helmet"
 import Header from "../components/header"
@@ -19,6 +20,23 @@ export default function ComponentTemplate(props: ComponentTemplateProps) {
   const { data } = props
   const post = data.markdownRemark
   const { slug } = post.fields
+  const [isMobile, setIsMobile] = useState<undefined | boolean>(undefined)
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setIsMobile(document.documentElement.clientWidth < 576)
+    }, 100, {
+      leading: true,
+    })
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
+  if (isMobile === undefined) {
+    return null
+  }
 
   return (
     <>
@@ -27,22 +45,26 @@ export default function ComponentTemplate(props: ComponentTemplateProps) {
         <meta httpEquiv="Pragma" content="no-cache" />
         <meta httpEquiv="Expires" content="0" />
       </Helmet>
-      <div className={prefixClassname("docs")}>
-        <Header />
-        <SideNav slug={slug} />
-        <div
-          className={classNames(
-            prefixClassname("docs-container"),
-            prefixClassname("docs-container-with-simulator"),
-          )}
-        >
-          <div
-            className={prefixClassname("docs-content")}
-            dangerouslySetInnerHTML={{ __html: docsCardWrapper(post.html) }}
-          />
-        </div>
-        <Simulator slug={_.startsWith(slug, "/components") ? slug : undefined} />
-      </div>
+      {
+        isMobile ?
+          <Simulator slug={startsWith(slug, "/components") ? slug : undefined} isMobile /> :
+          <div className={prefixClassname("docs")}>
+            <Header />
+            <SideNav slug={slug} />
+            <div
+              className={classNames(
+                prefixClassname("docs-container"),
+                prefixClassname("docs-container-with-simulator"),
+              )}
+            >
+              <div
+                className={prefixClassname("docs-content")}
+                dangerouslySetInnerHTML={{ __html: docsCardWrapper(post.html) }}
+              />
+            </div>
+            <Simulator slug={startsWith(slug, "/components") ? slug : undefined} />
+          </div>
+      }
     </>
   )
 }

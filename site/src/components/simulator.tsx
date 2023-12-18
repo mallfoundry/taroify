@@ -56,6 +56,7 @@ function getIframeUrl(path?: string) {
 
 interface SimulatorProps {
   slug?: string
+  isMobile?: boolean
 }
 
 export default function Simulator(props: SimulatorProps) {
@@ -66,6 +67,9 @@ export default function Simulator(props: SimulatorProps) {
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
 
   useEffect(listeningSimulatorEvents, [])
+  if (props.isMobile) {
+    return <iframe title="simulator" src={iframeUrl} className={classNames(prefixClassname("simulator-mobile"))} />
+  }
 
   return (
     <div
