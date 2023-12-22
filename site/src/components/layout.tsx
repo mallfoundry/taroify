@@ -5,6 +5,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import type { PageProps } from "gatsby"
 import { prefixClassname } from "../styles/prefix"
+import { listeningSimulatorEvents } from "../utils/simulator-router"
 import Header from "./header"
 import SideNav from "./side-nav";
 import Simulator from "./simulator";
@@ -20,6 +21,10 @@ type DataProps = {
 export default function Layout({ children, data }: PageProps<DataProps>) {
   const { slug } = data.markdownRemark.fields
   const [isMobile, setIsMobile] = useState<undefined | boolean>(undefined)
+
+  useEffect(() => {
+    return listeningSimulatorEvents()
+  }, [])
 
   useEffect(() => {
     const handleResize = debounce(() => {

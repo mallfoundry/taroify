@@ -6,6 +6,7 @@ import menus from "./menus"
 const SOURCE_PROPERTY_NAME = "source"
 const SIMULATOR_SOURCE_NAME = "taroify-simulator"
 const NAVIGATE_TO_EVENT = "navigateTo"
+const NAVIGATE_BACK_EVENT = "navigateBack"
 
 function obtainComponentNames() {
   const componentNames: string[] = []
@@ -32,7 +33,7 @@ interface Message {
 }
 
 export function listeningSimulatorEvents() {
-  window.addEventListener("message", (event) => {
+  function messageHandler(event: MessageEvent) {
     const { data } = event
     if (
       _.isPlainObject(data) &&
@@ -42,13 +43,21 @@ export function listeningSimulatorEvents() {
       const message = event.data as Message
       if (message.event === NAVIGATE_TO_EVENT) {
         handleSimulatorNavigateTo(message.payload)
+      } else if (message.event === NAVIGATE_BACK_EVENT) {
+        handleSimulatorNavigateBack()
       }
     }
-  })
+  }
+  window.addEventListener("message", messageHandler)
+  return () => window.removeEventListener("message", messageHandler)
 }
 
 function navigateToComponent(component: string) {
   navigate(`/components/${component}`)
+}
+
+function handleSimulatorNavigateBack() {
+  navigate("/introduce")
 }
 
 interface NavigateToOptions {

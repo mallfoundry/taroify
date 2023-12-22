@@ -6,7 +6,6 @@ import useFixed from "../hooks/useFixed"
 import { prefixClassname } from "../styles/prefix"
 
 import menus from "../utils/menus"
-import { listeningSimulatorEvents } from "../utils/simulator-router"
 
 import "./simulator.scss"
 
@@ -66,7 +65,6 @@ export default function Simulator(props: SimulatorProps) {
 
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
 
-  useEffect(listeningSimulatorEvents, [])
   if (props.isMobile) {
     return <iframe title="simulator" src={iframeUrl} className={classNames(prefixClassname("simulator-mobile"))} />
   }
