@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
@@ -8,6 +7,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "outDir": "lib",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -19,13 +19,12 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "typeRoots": [
-      "node_modules/@types",
-      "global.d.ts"
-    ]
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
+  "include": ["./src", "./types", "./config"],
   "compileOnSave": false
 }

@@ -6,7 +6,6 @@ import useFixed from "../hooks/useFixed"
 import { prefixClassname } from "../styles/prefix"
 
 import menus from "../utils/menus"
-import { listeningSimulatorEvents } from "../utils/simulator-router"
 
 import "./simulator.scss"
 
@@ -44,7 +43,7 @@ function resolveComponentPath(componentName: string) {
 
 function h5Root() {
   if (process.env.NODE_ENV === "development") {
-    return `//localhost:${process.env.GATSBY_DEMO_PORT}/index.html`
+    return `//${window.location.hostname}:${process.env.GATSBY_DEMO_PORT}/index.html`
   }
   return "/taroify.com/h5/index.html"
 }
@@ -56,6 +55,7 @@ function getIframeUrl(path?: string) {
 
 interface SimulatorProps {
   slug?: string
+  isMobile?: boolean
 }
 
 export default function Simulator(props: SimulatorProps) {
@@ -65,7 +65,9 @@ export default function Simulator(props: SimulatorProps) {
 
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
 
-  useEffect(listeningSimulatorEvents, [])
+  if (props.isMobile) {
+    return <iframe title="simulator" src={iframeUrl} className={classNames(prefixClassname("simulator-mobile"))} />
+  }
 
   return (
     <div

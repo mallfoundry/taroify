@@ -10,7 +10,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "removeComments": true,

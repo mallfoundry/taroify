@@ -26,7 +26,7 @@ exports.serveDemo = () => {
 }
 
 exports.serveSite = () => {
-  exec(`cross-env GATSBY_DEMO_PORT=${portTool.getAvailablePort()} gatsby develop --open`, {
+  exec(`cross-env GATSBY_DEMO_PORT=${portTool.getAvailablePort()} gatsby develop --open --host 0.0.0.0`, {
     cwd: "site",
     stdio: "inherit",
   })
