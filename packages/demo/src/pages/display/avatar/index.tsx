@@ -6,7 +6,7 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function randomAvatar() {
-  return `https://joeschmoe.io/api/v1/random?t=${_.random(Number.MAX_VALUE)}`
+  return `https://joesch.moe/api/v1/random?t=${_.random(Number.MAX_VALUE)}`
 }
 
 export default function AvatarDemo() {
