@@ -12,6 +12,15 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.10
+
+`2024-01-01`
+
+**Bug Fixes**
+
+- Form
+  - 修复 CellTitle 导入问题 [651](https://github.com/mallfoundry/taroify/pull/651) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.1-alpha.9
 
 `2023-12-15`
