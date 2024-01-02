@@ -44,15 +44,6 @@ function MenuItem({ title, to, active, onRouted }: MenuItemProps) {
   )
 }
 
-function DiamondSponsor() {
-  return (
-    <div className={prefixClassname("diamond-sponsor")}>
-      广告招租
-      <span style={{ marginTop: "4px" }}>请加微信：tgioer</span>
-    </div>
-  )
-}
-
 interface SideNavProps {
   slug?: string
 }
@@ -83,9 +74,6 @@ export default function SideNav(props: SideNavProps) {
         )
       }
     >
-      <MenuItemGroup title="钻石赞助商">
-        <DiamondSponsor />
-      </MenuItemGroup>
       {
         //
         _.map(menus, (group) => (
