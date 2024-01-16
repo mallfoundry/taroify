@@ -1,0 +1,19 @@
+@import "../../../styles/prefix";
+
+.watermark-demo {
+  .#{$demo-prefix}page__content {
+    padding: 0;
+
+    .taroify-demo-block__title {
+      padding: 0.8rem;
+      padding-bottom: 0.2rem;
+    }
+
+  }
+  &-wrapper {
+    background-color: white;
+    position: relative;
+    height: 300px;
+    padding: 16px;
+  }
+}
