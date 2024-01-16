@@ -1,19 +1,18 @@
 import {
-  useEffect,
   useRef,
-  useState,
   useMemo,
   forwardRef,
   ForwardedRef,
   useImperativeHandle,
 } from "react"
 import * as React from "react"
-import { getWindowInfo, nextTick, createSelectorQuery, getEnv } from "@tarojs/taro"
+import { getEnv } from "@tarojs/taro"
 import { View, Canvas, CanvasTouchEvent } from "@tarojs/components"
 import cls from "classnames"
 import { prefixClassname } from "../styles"
 import { Rect, getRect } from "../utils/dom/rect"
 import { preventDefault } from "../utils/dom/event"
+import { useCanvas } from "../hooks"
 import { SignatureProps, SignatureInstance } from "./signature.shared"
 
 export type { SignatureInstance }
@@ -29,16 +28,19 @@ const Signature = forwardRef(function Signature(
     penColor = "#000",
     backgroundColor,
     className,
-    canvasId: _canvasId,
+    canvasId: canvasIdProp,
     onStart, onSigning, onEnd, ...rest
   } = props
   const wrapRef = useRef<HTMLElement>(null)
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
-  const [ctx, setCtx] = useState<CanvasRenderingContext2D | null | undefined>(null)
   const canvasRectRef = useRef<Rect>()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const canvasId = useMemo(() => _canvasId ? _canvasId : `taroify-canvas${_canvasIdx++}`, [])
-  const ratio = useMemo(() => getWindowInfo().pixelRatio || 1, [])
+  const canvasId = useMemo(() => canvasIdProp ? canvasIdProp : `taroify-canvas${_canvasIdx++}`, [])
+  const [canvas, ctx] = useCanvas(canvasId, wrapRef, {
+    async onLoaded(_, _ctx) {
+      canvasRectRef.current = await getRect(wrapRef)
+      setCanvasBgColor(_ctx)
+    }
+  })
   const emptyRef = useRef(true)
 
   const touchStartHandler = async () => {
@@ -125,55 +127,7 @@ const Signature = forwardRef(function Signature(
       clear: clearHandler,
     }
   })
-  useEffect(() => {
-    const env = getEnv()
-    let retry = 0
-    const init = () => {
-      if (env === "WEB") {
-        setCanvasData((wrapRef.current?.children as unknown as HTMLCanvasElement[] || [])[0])
-      } else {
-        nextTick(() => {
-          createSelectorQuery()
-            .select(`#${canvasId}`)
-            .fields({ node: true, size: true })
-            .exec((res) => {
-              setCanvasData(res[0]?.node)
-            })
-        })
-      }
-    }
 
-    const setCanvasData = async (_canvas: HTMLCanvasElement) => {
-      if (_canvas) {
-        canvasRectRef.current = await getRect(wrapRef)
-        _canvas.width = Math.floor((canvasRectRef.current.width || _canvas.width) * ratio)
-        _canvas.height = Math.floor((canvasRectRef.current.height || _canvas.height) * ratio)
-      }
-      const _ctx = _canvas?.getContext("2d");
-      if (_ctx) {
-        _ctx.scale(ratio, ratio)
-        setCanvas(_canvas)
-        setCtx(_ctx)
-        nextTick(() => {
-          setCanvasBgColor(_ctx)
-        })
-      } else {
-        setTimeout(() => {
-          if (retry++ < 5) {
-            init()
-            // eslint-disable-next-line
-            console.log('[Taroify] Signature: init again')
-          } else {
-            // eslint-disable-next-line
-            console.error('[Taroify] Signature: init fail')
-          }
-        }, 100 * (2 ** retry))
-      }
-    }
-
-    init()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
   return (
     <View className={cls(prefixClassname("signature"), className)} {...rest}>
       <View className={prefixClassname("signature__content")}>
