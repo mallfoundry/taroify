@@ -22,4 +22,12 @@
     margin-right: 5px * $hd;
     vertical-align: -2px * $hd;
   }
+
+  .badge-icon {
+    display: block;
+    margin-left: 0;
+    font-size: 10px * $hd;
+    line-height: 16px * $hd;
+    margin-right: 0;
+  }
 }
