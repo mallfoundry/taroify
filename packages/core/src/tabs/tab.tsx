@@ -5,6 +5,10 @@ import * as React from "react"
 import { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import TabsLine from "./tabs-line"
+import Badge, { createBadgeWrapper } from '../badge';
+import { isDef } from '../utils/validate'
+
+import '../badge/badge.scss'
 
 interface TabProps extends ViewProps {
   active?: boolean
@@ -25,9 +29,13 @@ export default function Tab(props: TabProps) {
     underline,
     ellipsis,
     flexBasis,
+    dot,
+    badge,
     children,
     ...restProps
   } = props
+
+  const ContentBadgeWrapper = createBadgeWrapper(<View />)
 
   return (
     <View
@@ -42,11 +50,16 @@ export default function Tab(props: TabProps) {
       )}
       {...restProps}
     >
-      <View
-        className={classNames(prefixClassname("tabs__tab__content"))}
-      >
-        <View className={classNames({[prefixClassname("tabs__tab__content-ellipsis")]: ellipsis})}>{children}</View>
-      </View>
+      <ContentBadgeWrapper>
+        <View
+          className={classNames(prefixClassname("tabs__tab__content"))}
+        >
+          <View className={classNames({[prefixClassname("tabs__tab__content-ellipsis")]: ellipsis})}>{children}</View>
+        </View>
+        {(dot || (isDef(badge) && badge !== '')) && (
+          <Badge dot={dot} content={badge} fixed />
+        )}
+      </ContentBadgeWrapper>
       {underline && <TabsLine active={active} />}
     </View>
   )

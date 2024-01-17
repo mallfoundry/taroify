@@ -32,6 +32,34 @@ function BasicTabs() {
 }
 ```
 
+### 徽标用法
+
+```tsx
+import { Tabs } from "@taroify/core"
+
+function BadgeTabs() {
+  return (
+    <Tabs>
+      <Tabs.TabPane title="标签 1" dot>内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2" badge={8}>内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3" badge="Hot">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4" badge={<Success className="badge-icon" />}>内容 4</Tabs.TabPane>
+    </Tabs>
+  )
+}
+```
+
+
+```scss
+.badge-icon {
+  display: block;
+  margin-left: 0;
+  font-size: 10px * $hd;
+  line-height: 16px * $hd;
+  margin-right: 0;
+}
+```
+
 ### 通过标识匹配
 
 在 `Tabs.TabPane` 标签指定 `value` 属性的情况下，`Tabs.defaultValue` 的值为当前标签的 `value`。

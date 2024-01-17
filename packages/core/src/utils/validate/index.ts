@@ -31,3 +31,5 @@ export function isElementOf(node?: ReactNode, type?: JSXElementConstructor<any>)
   }
   return false
 }
+
+export const isDef = <T>(val: T): val is NonNullable<T> => val !== undefined && val !== null
