@@ -22,8 +22,9 @@ $avatar-size-mini: var(--avatar-size-mini, var(--avatar-size, 16px * $hd));
 $avatar-size-small: var(--avatar-size-small, var(--avatar-size, 26px * $hd));
 $avatar-size-medium: var(--avatar-size-medium, var(--avatar-size, 38px * $hd));
 $avatar-size-large: var(--avatar-size-large, var(--avatar-size, 56px * $hd));
-//
-$avatar-spacing-mini: var(--avatar-spacing-mini, var(--avatar-spacing, var(--padding-xs, $padding-xs)));
-$avatar-spacing-small: var(--avatar-spacing-small, var(--avatar-spacing, var(--padding-sm, $padding-sm)));
-$avatar-spacing-medium: var(--avatar-spacing-medium, var(--avatar-spacing, var(--padding-md, $padding-md)));
-$avatar-spacing-large: var(--avatar-spacing-large, var(--avatar-spacing, var(--padding-lg, $padding-lg)));
+// https://github.com/postcss/postcss-calc/issues/104
+// doesn't support 3-level deep var()s inside a calc() yet
+$avatar-spacing-mini: var(--avatar-spacing-mini, var(--avatar-spacing, $padding-xs));
+$avatar-spacing-small: var(--avatar-spacing-small, var(--avatar-spacing, $padding-sm));
+$avatar-spacing-medium: var(--avatar-spacing-medium, var(--avatar-spacing, $padding-md));
+$avatar-spacing-large: var(--avatar-spacing-large, var(--avatar-spacing, $padding-lg));
