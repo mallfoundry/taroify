@@ -168,6 +168,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
             ...durationStyle,
             ...styleProp,
           }}
+          catchMove
           {...restProps}
         >
           {close}
