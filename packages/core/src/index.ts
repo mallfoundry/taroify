@@ -70,6 +70,7 @@ export { default as Tag } from "./tag"
 export { default as Timeline } from "./timeline"
 export { default as RollingText } from "./rolling-text"
 export { default as TextEllipsis } from "./text-ellipsis"
+export { default as Watermark } from "./watermark"
 // Navigation Components
 export { default as Grid } from "./grid"
 export { default as IndexList } from "./index-list"

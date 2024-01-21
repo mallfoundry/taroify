@@ -278,6 +278,10 @@ const menus = [
         title: "Timeline 时间轴",
         to: "/components/timeline/",
       },
+      {
+        title: "Watermark 水印",
+        to: "/components/watermark/"
+      }
     ],
   },
   {
