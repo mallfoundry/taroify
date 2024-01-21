@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.1-alpha.11
+
+`2024-01-21`
+
+**Bug Fixes**
+
+- Popup
+  - 修复滚动穿透问题 [657](https://github.com/mallfoundry/taroify/pull/657) [@Pilotager](https://github.com/Pilotager)
+
+**Feature**
+
+- Tabs
+  - 添加 `dot` 和 `badge` 属性 [655](https://github.com/mallfoundry/taroify/pull/655) [@Pilotager](https://github.com/Pilotager)
+
+- Watermark
+  - 添加 Watermark 水印 [658](https://github.com/mallfoundry/taroify/pull/658) [@hbztd](https://github.com/hbztd)
+
+
 ### v0.1.1-alpha.10
 
 `2024-01-01`
