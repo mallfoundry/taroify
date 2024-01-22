@@ -12,6 +12,7 @@
   border-top-left-radius: $floating-panel-rounded-border-radius;
   border-top-right-radius: $floating-panel-rounded-border-radius;
   background: $floating-panel-background;
+  will-change: transform;
 
   &::after {
     content: '';
