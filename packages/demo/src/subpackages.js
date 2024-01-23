@@ -372,6 +372,11 @@ const subpackages = [
         name: "BackTop",
         path: "back-top/index",
       },
+      {
+        title: "FixedNav 悬浮导航",
+        name: "FixedNav",
+        path: "fixed-nav/index",
+      },
     ],
   },
   {
