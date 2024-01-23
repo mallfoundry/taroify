@@ -1,0 +1,119 @@
+@import "./variables";
+
+.#{$component-prefix}fixed-nav {
+  position: fixed;
+  z-index: $fixed-nav-z-index;
+  display: inline-block;
+  height: 100px;
+  right: 0;
+
+  &_btn {
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    z-index: $fixed-nav-z-index;
+    width: 140px;
+    height: 100%;
+    background: $fixed-nav-button-background;
+    border-radius: 90px 0 0 90px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .#{$component-prefix}fixed-nav_btn-icon {
+      margin-right: 10px;
+      transform: rotate(0deg);
+      transition: all 0.3s;
+      transform-origin: center;
+      line-height: normal;
+    }
+
+    &-text {
+      width: 48px;
+      line-height: 26px;
+      font-size: $fixed-nav-button-font-size;
+      color: #fff;
+      flex-shrink: 0;
+    }
+  }
+
+  &_content {
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+    transition: all 0.5s;
+    z-index: $fixed-nav-content-z-index;
+    flex-shrink: 0;
+    height: 100%;
+    background: $fixed-nav-background-color;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 50px 0 0 50px;
+    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.2);
+    padding: 0 160px 0 40px;
+
+    &--item {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 100px;
+      flex-shrink: 0;
+      color: $fixed-nav-color;
+    }
+
+    &--img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 4px;
+    }
+
+    &--text {
+      font-size: 20px;
+    }
+  }
+
+  &--active {
+    .#{$component-prefix}fixed-nav_btn-icon {
+      transform: rotate(180deg);
+    }
+
+    .#{$component-prefix}fixed-nav_content {
+      transform: translateX(0%) !important;
+    }
+
+    .#{$component-prefix}fixed-nav--left {
+      .#{$component-prefix}icon {
+        transform: rotate(0deg) !important;;
+      }
+    }
+  }
+
+  &--left {
+    right: auto;
+    left: 0;
+
+    .#{$component-prefix}fixed-nav_btn {
+      flex-direction: row-reverse;
+      right: auto;
+      left: 0;
+      border-radius: 0 90px 90px 0;
+    }
+
+    .#{$component-prefix}fixed-nav_btn-icon {
+      transform: rotate(180deg);
+      margin-left: 10px;
+    }
+
+    .#{$component-prefix}fixed-nav_content {
+      transform: translateX(-100%);
+      right: auto;
+      border-radius: 0 50px 50px 0;
+      padding: 0 40px 0 160px;
+    }
+  }
+}

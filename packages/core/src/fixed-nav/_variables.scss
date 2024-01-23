@@ -1,0 +1,9 @@
+@import "../styles/prefix";
+@import "../styles/variables";
+
+$fixed-nav-z-index: var(--fixed-nav-z-index, 1010);
+$fixed-nav-content-z-index: var(--fixed-nav-z-content-index, 1009);
+$fixed-nav-button-background: var(--fixed-nav-button-background, $primary-color);
+$fixed-nav-button-font-size: var(--fixed-nav-button-font-size, $font-size-sm);
+$fixed-nav-background-color: var(--fixed-nav-background-color, $background-color-2);
+$fixed-nav-color: var(--fixed-nav-color, $text-color);

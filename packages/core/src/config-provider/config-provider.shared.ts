@@ -58,4 +58,5 @@ export type ConfigProviderThemeVars = import("../action-sheet").ActionSheetTheme
   import("../timeline").TimelineThemeVars &
   import("../toast").ToastThemeVars &
   import("../tree-select").TreeSelectThemeVars &
-  import("../uploader").UploadThemeVars
+  import("../uploader").UploadThemeVars &
+  import("../fixed-nav").FixedNavThemeVars
