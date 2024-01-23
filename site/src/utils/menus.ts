@@ -280,8 +280,8 @@ const menus = [
       },
       {
         title: "Watermark 水印",
-        to: "/components/watermark/"
-      }
+        to: "/components/watermark/",
+      },
     ],
   },
   {
@@ -324,6 +324,10 @@ const menus = [
       {
         title: "BackTop 回到顶部",
         to: "/components/back-top/",
+      },
+      {
+        title: "FixedNav 悬浮导航",
+        to: "/components/fixed-nav/",
       },
     ],
   },
