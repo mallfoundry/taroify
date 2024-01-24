@@ -39,32 +39,36 @@ function AreaPicker({
   const hasChange = useRef(false)
   const { value, setValue } = useUncontrolled({
     value: valueProp,
-    defaultValue
+    defaultValue,
   })
   const [areaList, columnsNum] = useMemo(() => {
     let __areaList__ = areaListProp || defaultAreaList
-    Children.forEach(childrenProps, child => {
+    Children.forEach(childrenProps, (child) => {
       if (isElementOf(child, AreaPickerColumns)) {
         __areaList__ = (child as ReactElement).props.children
       }
     })
 
-    return [__areaList__,  depthProp || 3]
+    return [__areaList__, depthProp || 3]
   }, [childrenProps, areaListProp, depthProp])
 
-  const [origin, provinceMap, cityMap] = useMemo(() => formatDataForCascade({
-    // @ts-ignore
-    areaList,
-    columnsNum
-  }), [areaList, columnsNum])
+  const [origin, provinceMap, cityMap] = useMemo(
+    () =>
+      formatDataForCascade({
+        // @ts-ignore
+        areaList,
+        columnsNum,
+      }),
+    [areaList, columnsNum],
+  )
 
   const columns = useMemo(() => {
     const ret: PickerOptionData[] = [origin]
-    let parent = origin;
+    let parent = origin
     for (let i = 0; i < columnsNum - 1; i++) {
       let selected: PickerOptionData | undefined
       if (value?.[i]) {
-        selected = parent.find(item => item.value === value?.[i])
+        selected = parent.find((item) => item.value === value?.[i])
       } else {
         selected = parent[0]
       }
@@ -73,10 +77,10 @@ function AreaPicker({
     }
 
     return ret
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [origin, value])
   const handleChange = useMemoizedFn((val, option, column) => {
-    const idx = val.findIndex(item => item === option.value)
+    const idx = val.findIndex((item) => item === option.value)
     let newVal
     if (idx === 0) {
       newVal = [val[0]]
@@ -104,14 +108,14 @@ function AreaPicker({
 
   const genValOption = (valueParam) => {
     const val = (hasChange.current ? value : valueParam) || []
-    const province = provinceMap.get(val[0].slice(0, 2)) || {}
+    const province = provinceMap.get(val[0]?.slice(0, 2)) || {}
     const option = [province]
     if (columnsNum > 1) {
       // @ts-ignore
-      const { children, ...city } = cityMap.get(val[1].slice(0, 4)) || {}
+      const { children, ...city } = cityMap.get(val[1]?.slice(0, 4)) || {}
       option.push(city)
       if (columnsNum > 2) {
-        const country = children?.find(item => item.value === val[2])
+        const country = children?.find((item) => item.value === val[2])
         option.push(country || {})
       }
     }
