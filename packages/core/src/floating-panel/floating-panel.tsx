@@ -81,7 +81,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
     () => ({
       height: addUnitPx(boundary.max),
       transform: `translateY(calc(100% + ${addUnitPx(-height)}))`,
-      transition: !dragging ? `transform ${duration}s` : "none",
+      transition: !dragging ? `transform ${duration}s cubic-bezier(0.18, 0.89, 0.32, 1.28)` : "none",
     }),
     [boundary.max, height, dragging, duration],
   )
