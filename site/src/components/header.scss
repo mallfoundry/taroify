@@ -62,4 +62,44 @@
       }
     }
   }
+
+  .DocSearch-Button {
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    line-height: 36px;
+    padding-left: 14px;
+
+    .DocSearch-Search-Icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.6rem;
+      color: rgba(69, 90, 100, 0.6);
+    }
+
+    .DocSearch-Button-Placeholder {
+      font-size: 15px;
+      font-weight: normal;
+      color: rgba(69, 90, 100, 0.6);
+    }
+
+    .DocSearch-Button-Key {
+      font-size: 11px;
+      vertical-align: middle;
+      text-align: center;
+      background: #f7f8fa;
+      border-radius: .375rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: none;
+      padding-bottom: 0;
+      top: 0;
+      color: #455a64;
+    }
+  }
 }
