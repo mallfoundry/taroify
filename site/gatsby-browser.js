@@ -1,6 +1,8 @@
+import "@docsearch/css"
 import "normalize.css/normalize.css"
 import "prismjs/themes/prism.css"
 import "./src/styles/global.scss"
 import "./src/styles/prism.scss"
 import "./src/styles/docs.scss"
+import "./src/styles/algolia.scss"
 export { default as wrapPageElement } from "./gatsby/wrapPageElement"
