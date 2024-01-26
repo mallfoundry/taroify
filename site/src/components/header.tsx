@@ -14,9 +14,9 @@ export default function Handler() {
           <span>Taroify</span>
         </div>
         <DocSearch
-          appId="R2IYF7ETH7"
-          apiKey="599cec31baffa4868cae4e79f180729b"
-          indexName="docsearch"
+          appId="PAKMKX78PV"
+          apiKey="974bc581b9fecf6765c93db8dacdc1fa"
+          indexName="taroify-com"
         />
         <ul className={prefixClassname("header__top-nav")}>
           <li className={prefixClassname("header__top-nav-item")}>
