@@ -12,6 +12,31 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.2-alpha.0
+
+`2024-01-27`
+
+**Bug Fixes**
+
+- AreaPicker
+  - 修复 AreaPicker 选中确认报错问题 [664](https://github.com/mallfoundry/taroify/pull/664) [@Pilotager](https://github.com/Pilotager)
+
+**Feature**
+
+- FixedNav
+  - 添加 FixedNav 组件 [662](https://github.com/mallfoundry/taroify/pull/662) [@Pilotager](https://github.com/Pilotager)
+
+- FloatingPanel
+  - 优化反弹动画 [661](https://github.com/mallfoundry/taroify/pull/661) [@Pilotager](https://github.com/Pilotager)
+
+- Watermark
+  - 添加 CSS Variables 类型 [665](https://github.com/mallfoundry/taroify/pull/665) [@Pilotager](https://github.com/Pilotager)
+
+**Doc**
+
+- 完善 Tab 文档，添加 `dot` `badge` 属性 [660](https://github.com/mallfoundry/taroify/pull/660) [@Pilotager](https://github.com/Pilotager)
+- 添加全文搜索功能 [666](https://github.com/mallfoundry/taroify/pull/666) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.1-alpha.11
 
 `2024-01-21`
