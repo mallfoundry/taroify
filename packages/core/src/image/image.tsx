@@ -102,12 +102,12 @@ export default function Image(props: ImageProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <>
+    <View className={classNames(prefixClassname("image"), className)}>
       {!failed && src && (
         <TaroImage
           ref={taroImageRef}
           src={src as string}
-          mode={(taroMode as unknown) as undefined}
+          mode={taroMode as unknown as undefined}
           lazyLoad={lazyLoad}
           className={classNames(
             prefixClassname("image"),
@@ -157,6 +157,6 @@ export default function Image(props: ImageProps) {
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
       )}
-    </>
+    </View>
   )
 }
