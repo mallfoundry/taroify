@@ -8,6 +8,8 @@ import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
 
 export interface FlexItemProps extends ViewProps {
+  __dataIndex__?: number
+  __dataLength__?: number
   style?: CSSProperties
   span?: number
   offset?: number
@@ -15,16 +17,30 @@ export interface FlexItemProps extends ViewProps {
 }
 
 export default function FlexItem(props: FlexItemProps) {
-  const { className, style, span, offset, ...restProps } = props
+  const {
+    __dataIndex__ = 0,
+    __dataLength__ = 0,
+    className,
+    style,
+    span,
+    offset,
+    ...restProps
+  } = props
   const { gutter: gutters } = useContext(FlexContext)
   const [horizontalGutter] = gutters
 
   // Horizontal gutter use padding
   const gutterStyle: React.CSSProperties = {}
   if (horizontalGutter) {
-    const averagePadding = horizontalGutter / 2
-    gutterStyle.paddingLeft = addUnitPx(averagePadding)
-    gutterStyle.paddingRight = addUnitPx(averagePadding)
+    if (__dataIndex__ === 0 && __dataLength__ > 1) {
+      gutterStyle.paddingRight = addUnitPx(horizontalGutter)
+    } else if (__dataIndex__ === __dataLength__ - 1) {
+      gutterStyle.paddingLeft = addUnitPx(horizontalGutter)
+    } else {
+      const averagePadding = horizontalGutter / 2
+      gutterStyle.paddingLeft = addUnitPx(averagePadding)
+      gutterStyle.paddingRight = addUnitPx(averagePadding)
+    }
   }
 
   return (

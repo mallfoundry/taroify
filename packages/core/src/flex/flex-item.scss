@@ -15,6 +15,6 @@
   }
 
   .#{$component-prefix}flex-item-offset-#{$i} {
-    margin-left: $i * calc(100% / 24) * $hd;
+    margin-left: $i * calc(100% / 24);
   }
 }

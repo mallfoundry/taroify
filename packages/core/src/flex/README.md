@@ -18,18 +18,22 @@ import { Flex } from "@taroify/core"
 
 ```tsx
 <Flex>
-  <Flex.Item span="8">span: 8</Flex.Item>
-  <Flex.Item span="8">span: 8</Flex.Item>
-  <Flex.Item span="8">span: 8</Flex.Item>
+  <Flex.Item span={8}>span: 8</Flex.Item>
+  <Flex.Item span={8}>span: 8</Flex.Item>
+  <Flex.Item span={8}>span: 8</Flex.Item>
 </Flex>
 
 <Flex>
-  <Flex.Item span="4">span: 4</Flex.Item>
-  <Flex.Item span="10" offset="4">offset: 4, span: 10</Flex.Item>
+  <Flex.Item span={4}>span: 4</Flex.Item>
+  <Flex.Item span={10} offset={4}>
+    offset: 4, span: 10
+  </Flex.Item>
 </Flex>
 
 <Flex>
-  <Flex.Item offset="12" span="12">offset: 12, span: 12</Flex.Item>
+  <Flex.Item offset={12} span={12}>
+    offset: 12, span: 12
+  </Flex.Item>
 </Flex>
 ```
 
@@ -38,10 +42,10 @@ import { Flex } from "@taroify/core"
 通过 `gutter` 属性可以设置列元素之间的间距，默认间距为 0。
 
 ```tsx
-<Flex gutter="20">
-  <Flex.Item span="8">span: 8</Flex.Item>
-  <Flex.Item span="8">span: 8</Flex.Item>
-  <Flex.Item span="8">span: 8</Flex.Item>
+<Flex gutter={20}>
+  <Flex.Item span={8}>span: 8</Flex.Item>
+  <Flex.Item span={8}>span: 8</Flex.Item>
+  <Flex.Item span={8}>span: 8</Flex.Item>
 </Flex>
 ```
 
@@ -52,30 +56,30 @@ import { Flex } from "@taroify/core"
 ```tsx
 <!-- 居中 -->
 <Flex justify="center">
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
 </Flex>
 
 <!-- 右对齐 -->
 <Flex justify="end">
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
 </Flex>
 
 <!-- 两端对齐 -->
 <Flex justify="space-between">
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
 </Flex>
 
 <!-- 每个元素的两侧间隔相等 -->
 <Flex justify="space-around">
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
-  <Flex.Item span="6">span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
+  <Flex.Item span={6}>span: 6</Flex.Item>
 </Flex>
 ```
 
