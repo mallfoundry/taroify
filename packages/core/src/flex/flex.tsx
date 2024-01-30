@@ -3,7 +3,15 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, forwardRef, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
@@ -52,7 +60,7 @@ const Flex = forwardRef((props: FlexProps, ref) => {
     wrap = "nowrap",
     justify = "start",
     align = "start",
-    children,
+    children: childrenProp,
     ...restProps
   } = props
   const gutter = useFlexGutter(gutterProp)
@@ -67,6 +75,17 @@ const Flex = forwardRef((props: FlexProps, ref) => {
     }
     return {}
   }, [horizontalGutter])
+
+  const children = useMemo(
+    () =>
+      Children.map(childrenProp, (item, index) =>
+        cloneElement(item as ReactElement, {
+          __dataIndex__: index,
+          __dataLength__: Children.count(childrenProp),
+        }),
+      ),
+    [childrenProp],
+  )
 
   return (
     <View
