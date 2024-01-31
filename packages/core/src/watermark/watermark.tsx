@@ -5,7 +5,6 @@ import { getEnv, getWindowInfo } from "@tarojs/taro"
 import cls from "classnames"
 import { useCanvas } from "../hooks"
 import { prefixClassname } from "../styles"
-import "./index.scss"
 
 type WatermarkProps = Partial<{
   gapX: number
