@@ -1,6 +1,6 @@
 import { Cell, Popup } from "@taroify/core"
 import { PopupPlacement } from "@taroify/core/popup"
-import { ArrowRight } from "@taroify/icons"
+import { ArrowRight, Close } from "@taroify/icons"
 import { CSSProperties, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
@@ -24,9 +24,34 @@ function BasicPopup() {
   )
 }
 
+function CenterRoundPopup() {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Cell
+        clickable
+        title="圆角弹窗（居中）"
+        rightIcon={<ArrowRight />}
+        onClick={() => setOpen(true)}
+      />
+      <Popup
+        open={open}
+        style={{
+          padding: "64px",
+        }}
+        onClose={setOpen}
+        rounded
+      >
+        内容
+      </Popup>
+    </>
+  )
+}
+
 interface OpenOptions {
   open?: boolean
   closeable?: boolean
+  customer?: boolean
   style?: CSSProperties
   placement?: PopupPlacement
   rounded?: boolean
@@ -35,17 +60,18 @@ interface OpenOptions {
 export default function PopupDemo() {
   const [options, setOptions] = useState<OpenOptions>({})
 
-  function handleOpen({ placement, rounded, closeable }: OpenOptions) {
+  function handleOpen({ placement, rounded, closeable, customer }: OpenOptions) {
     const openOptions: OpenOptions = {
       open: true,
       placement,
       rounded,
       closeable,
+      customer,
     }
     if (placement === "left" || placement === "right") {
       openOptions.style = {
-        height: "20%",
-        width: "100%",
+        height: "100%",
+        width: "40%",
       }
     } else if (placement) {
       openOptions.style = { height: "30%" }
@@ -112,11 +138,18 @@ export default function PopupDemo() {
           rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: "right", closeable: true })}
         />
-      </Block>
-      <Block variant="card" title="圆角弹窗">
         <Cell
           clickable
-          title="圆角弹窗"
+          title="自定义图标"
+          rightIcon={<ArrowRight />}
+          onClick={() => handleOpen({ placement: "bottom", closeable: true, customer: true })}
+        />
+      </Block>
+      <Block variant="card" title="圆角弹窗">
+        <CenterRoundPopup />
+        <Cell
+          clickable
+          title="圆角弹窗（底部）"
           rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: "bottom", rounded: true })}
         />
@@ -134,7 +167,12 @@ export default function PopupDemo() {
         }
       >
         <Popup.Backdrop />
-        {options.closeable && <Popup.Close />}
+        {options.closeable && !options.customer && <Popup.Close />}
+        {options.closeable && options.customer && (
+          <Popup.Close>
+            <Close />
+          </Popup.Close>
+        )}
       </Popup>
     </Page>
   )
