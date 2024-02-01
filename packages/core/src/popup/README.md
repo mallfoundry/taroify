@@ -42,7 +42,7 @@ import Popup from "@taroify/core/popup"
 <!-- 自定义图标 -->
 <Popup defaultOpen placement="bottom" style={{ height: '30%' }}>
   <Popup.Close>
-    <Cross />
+    <Close />
   </Popup.Close>
 </Popup>
 ```
@@ -52,6 +52,18 @@ import Popup from "@taroify/core/popup"
 设置 `rounded` 属性后，弹窗会根据弹出位置添加不同的圆角样式。
 
 ```tsx
+<!-- 圆角弹窗（居中） -->
+<Popup
+  open
+  style={{
+    padding: "64px",
+  }}
+  rounded
+>
+  内容
+</Popup>
+
+<!-- 圆角弹窗（底部） -->
 <Popup open rounded placement="bottom" style={{ height: '30%' }} />
 ```
 
