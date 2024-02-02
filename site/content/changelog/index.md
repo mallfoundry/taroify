@@ -12,6 +12,32 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.3-alpha.0
+
+`2024-02-02`
+
+**Bug Fixes**
+
+- Image
+  - 修复 `Image` 组件快速加载样式问题 [668](https://github.com/mallfoundry/taroify/pull/668) [@Pilotager](https://github.com/Pilotager)
+
+- Flex
+  - 优化 `Flex` 两边间距 [669](https://github.com/mallfoundry/taroify/pull/669) [@Pilotager](https://github.com/Pilotager)
+
+- Watermark
+  - 修复 `Watermark` 样式引入问题 [670](https://github.com/mallfoundry/taroify/pull/670) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+**Feature**
+
+- Popup
+  - `Popup` 居中弹出添加圆角属性 [672](https://github.com/mallfoundry/taroify/pull/672) [@Pilotager](https://github.com/Pilotager)
+
+**Doc**
+
+- Popup：添加居中弹出圆角示例
+- Popup：添加自定义图标示例
+- Flex: 优化示例内代码
+
 ### v0.1.2-alpha.0
 
 `2024-01-27`
