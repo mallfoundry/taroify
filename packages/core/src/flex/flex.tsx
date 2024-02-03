@@ -8,7 +8,7 @@ import {
   cloneElement,
   CSSProperties,
   forwardRef,
-  ReactElement,
+  isValidElement,
   ReactNode,
   useMemo,
 } from "react"
@@ -78,12 +78,14 @@ const Flex = forwardRef((props: FlexProps, ref) => {
 
   const children = useMemo(
     () =>
-      Children.map(childrenProp, (item, index) =>
-        cloneElement(item as ReactElement, {
-          __dataIndex__: index,
-          __dataLength__: Children.count(childrenProp),
-        }),
-      ),
+      Children.map(childrenProp, (item, index) => {
+        return isValidElement<any>(item)
+          ? cloneElement(item, {
+              __dataIndex__: index,
+              __dataLength__: Children.count(childrenProp),
+            })
+          : item
+      }),
     [childrenProp],
   )
 
