@@ -19,7 +19,7 @@ type DataProps = {
 }
 
 export default function Layout({ children, data }: PageProps<DataProps>) {
-  const { slug } = data.markdownRemark.fields
+  const slug = data?.markdownRemark?.fields?.slug
   const [isMobile, setIsMobile] = useState<undefined | boolean>(undefined)
 
   useEffect(() => {
