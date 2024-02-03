@@ -59,7 +59,7 @@ function BasicForm() {
 
 ### 校验规则
 
-通过 `rules` 定义表单校验规则，所有可用字段见[下方表格](#/zh-CN/form#rule-shu-ju-jie-gou)。
+通过 `rules` 定义表单校验规则，所有可用字段见[下方表格](#rule-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)。
 
 ```tsx
 function FormWithRules() {

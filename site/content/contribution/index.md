@@ -85,7 +85,7 @@ src
 
 ```bash
 # 添加主仓库到 remote，作为 fork 后仓库的上游仓库
-git remote add upstream https://gitee.com/mallfoundry/taroify.git
+git remote add upstream https://github.com/mallfoundry/taroify.git
 
 # 拉取主仓库最新代码
 git fetch upstream
