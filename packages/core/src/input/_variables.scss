@@ -14,7 +14,6 @@ $input-warning-color: var(--input-warning-color, var(--warning-color, $warning-c
 $input-danger-color: var(--input-danger-color, var(--danger-color, $danger-color));
 
 $input-disabled-color: var(--input-disabled-color, var(--text-color-3, $text-color-3));
-$input-readonly-color: var(--input-readonly-color, var(--text-color-3, $text-color-3));
 $input-placeholder-color: var(--input-placeholder-color, var(--text-color-3, $text-color-3));
 $input-clear-icon-size: var(--input-clear-icon-size, 16px * $hd);
 $input-clear-icon-color: var(--input-clear-icon-color, var(--gray-5, $gray-5));

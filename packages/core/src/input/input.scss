@@ -40,12 +40,9 @@
     -webkit-text-fill-color: $input-disabled-color;
   }
 
-  &--readonly,
-  &__placeholder--readonly {
-    color: $input-readonly-color;
+  &--readonly  {
+    color: $input-color;
     opacity: 1;
-    // fix disabled color in mobile safari
-    -webkit-text-fill-color: $input-readonly-color;
   }
 
   &--readonly {

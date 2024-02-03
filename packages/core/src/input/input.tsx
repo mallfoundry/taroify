@@ -15,7 +15,7 @@ import NativeInput from "./native-input"
 
 export function resolveOnChange<
   E extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
-  E2 extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail
+  E2 extends TaroInputProps.inputEventDetail | TaroInputProps.inputValueEventDetail,
 >(
   e: BaseEventOrig<E>,
   onChange: undefined | ((event: BaseEventOrig<E2>) => void),
@@ -35,7 +35,7 @@ export function resolveOnChange<
       },
     })
 
-    onChange((event as unknown) as BaseEventOrig<E2>)
+    onChange(event as unknown as BaseEventOrig<E2>)
     return
   }
 
@@ -50,10 +50,10 @@ export function resolveOnChange<
       },
     })
 
-    onChange((event as unknown) as BaseEventOrig<E2>)
+    onChange(event as unknown as BaseEventOrig<E2>)
     return
   }
-  onChange((e as unknown) as BaseEventOrig<E2>)
+  onChange(e as unknown as BaseEventOrig<E2>)
 }
 
 export interface InputProps extends TaroInputProps {
@@ -152,7 +152,7 @@ function Input(props: InputProps) {
           placeholderClassName,
           prefixClassname("input__placeholder"),
           {
-            [prefixClassname("input__placeholder--readonly")]: readonly,
+            // [prefixClassname("input__placeholder--readonly")]: readonly,
             // Color
             [prefixClassname("input__placeholder--primary")]: color === "primary",
             [prefixClassname("input__placeholder--info")]: color === "info",
