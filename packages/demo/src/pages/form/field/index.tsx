@@ -68,7 +68,7 @@ function DisabledField() {
   return (
     <Cell.Group inset>
       <Field label="文本">
-        <Input placeholder="输入框只读" readonly />
+        <Input placeholder="输入框只读" readonly value="输入框只读" />
       </Field>
       <Field label="文本">
         <Input placeholder="输入框已禁用" disabled />
