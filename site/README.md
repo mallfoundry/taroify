@@ -1,1 +1,1 @@
-Move To [introduce](https://taroify.gitee.io/taroify.com/introduce/).
+Move To [introduce](https://taroify.github.io/taroify.com/introduce/).

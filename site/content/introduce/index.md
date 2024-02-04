@@ -13,14 +13,13 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 ### 特性
 
 - 🚀 性能极佳，组件平均体积小于 1KB（min+gzip）
-- 💎 60+ 个高质量组件，覆盖移动端主流场景
+- 💎 70+ 个高质量组件，覆盖移动端主流场景
 - 💪 使用 TypeScript 编写，提供完整的类型定义
 - 💪 单元测试覆盖率超过 90%，提供稳定性保障
 - 📖 提供完善的中文文档和组件示例
 - 🍭 支持 React
 - 🍭 支持主题定制，内置 700+ 个主题变量
 - 🍭 支持按需引入和 Tree Shaking
-- 🌍 支持国际化和语言包定制
 
 ### 浏览器支持
 
@@ -53,11 +52,11 @@ function Index() {
 }
 ```
 
-更多使用方式，请参考[快速上手](https://taroify.gitee.io/taroify.com/quickstart/)
+更多使用方式，请参考[快速上手](https://taroify.github.io/taroify.com/quickstart/)
 
 ### 贡献代码
 
-修改代码请阅读我们的[开发指南](https://taroify.gitee.io/taroify.com/contribution/)。
+修改代码请阅读我们的[开发指南](https://taroify.github.io/taroify.com/contribution/)。
 
 使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
 给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
@@ -100,7 +99,7 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 | [3lang3/react-vant](https://github.com/3lang3/react-vant) | 参照 Vant 打造的 React 移动端组件库 |
 | [rc-ui-lib](https://github.com/rancui/rc-ui-lib) | 参照 Vant 打造的 React 框架移动端组件库 |
 | [vant-aliapp](https://github.com/ant-move/Vant-Aliapp) | Vant 支付宝小程序版 |
-| [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro React 版 |
+| [taroify](https://github.com/mallfoundry/taroify) | Vant Taro React 版 |
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Vant 在线主题预览工具 |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
@@ -108,7 +107,7 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 
 - [仓库地址](https://github.com/mallfoundry/taroify)
 - [意见反馈](https://github.com/mallfoundry/taroify/issues)
-- [更新日志](https://taroify.gitee.io/taroify.com/changelog/)
+- [更新日志](https://taroify.github.io/taroify.com/changelog/)
 
 ### 赞助者
 
