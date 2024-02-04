@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.3-alpha.1
+
+`2024-02-04`
+
+**Bug Fixes**
+
+- Input
+  - 修复 `Input` 在只读模式下字体颜色问题 [674](https://github.com/mallfoundry/taroify/pull/674) [@Pilotager](https://github.com/Pilotager)
+
+- Flex
+  - 修复 `Flex` 无法渲染文本节点(导致 `Timeline` 无法渲染) [676](https://github.com/mallfoundry/taroify/pull/676) [@hbztd](https://github.com/hbztd)
+
+**Doc**
+
+- 优化线上打开文档页面会闪一下 [675](https://github.com/mallfoundry/taroify/pull/675) [@hbztd](https://github.com/hbztd)
+- 优化文档内跳转 [675](https://github.com/mallfoundry/taroify/pull/675) [@hbztd](https://github.com/hbztd)
+- 链接地址修复 [675](https://github.com/mallfoundry/taroify/pull/675) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.3-alpha.0
 
 `2024-02-02`
