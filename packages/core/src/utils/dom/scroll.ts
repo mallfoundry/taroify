@@ -5,7 +5,7 @@ import { getComputedStyle } from "./computed-style"
 import { elementUnref, isRootElement, queryNodesRef } from "./element"
 
 const defaultRoot: HTMLElement | undefined = inBrowser
-  ? ((window as unknown) as HTMLElement)
+  ? (window as unknown as HTMLElement)
   : undefined
 
 const ELEMENT_NODE_TYPE = 1
@@ -21,7 +21,7 @@ export async function getScrollParent(
   elementOrRef?: any,
   root: HTMLElement | undefined = defaultRoot,
 ) {
-  let node: HTMLElement = (elementUnref(elementOrRef) as unknown) as HTMLElement
+  let node: HTMLElement = elementUnref(elementOrRef) as unknown as HTMLElement
 
   while (node && node !== root && isElementNode(node)) {
     const { overflowY } = await getComputedStyle(node, ["overflowY"])
@@ -29,7 +29,7 @@ export async function getScrollParent(
       return node
     }
     // Is root element
-    if (isRootElement((node as unknown) as TaroElement)) {
+    if (isRootElement(node as unknown as TaroElement)) {
       return node
     }
     node = node.parentNode as HTMLElement

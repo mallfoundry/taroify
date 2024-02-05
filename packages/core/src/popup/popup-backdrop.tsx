@@ -8,16 +8,18 @@ import PopupContext from "./popup.context"
 export interface PopupBackdropProps extends ViewProps {
   style?: CSSProperties
   open?: boolean
+  lock?: boolean
   duration?: number
   closeable?: boolean
 }
 
 export default function PopupBackdrop(props: PopupBackdropProps) {
-  const { open: openProp = true, duration, closeable = true, ...restProps } = props
+  const { open: openProp = true, duration, closeable = true, lock, ...restProps } = props
   const { open, duration: ctxDuration, onClose } = useContext(PopupContext)
   return (
     <SharedBackdrop
       open={openProp && open}
+      lock={lock}
       duration={duration ?? ctxDuration}
       closeable={closeable}
       onClose={onClose}

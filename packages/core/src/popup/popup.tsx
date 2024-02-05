@@ -18,6 +18,7 @@ import Backdrop from "../backdrop"
 import { prefixClassname } from "../styles"
 import Transition, { TransitionName } from "../transition"
 import { isElementOf } from "../utils/validate"
+import { useLockScrollTaro } from "../utils/dom/use-lock-scroll-taro"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 import PopupContext from "./popup.context"
@@ -82,6 +83,7 @@ export interface PopupProps extends ViewProps {
   placement?: PopupPlacement
   rounded?: boolean
   children?: ReactNode
+  lock?: boolean
 
   duration?: number
   mountOnEnter?: boolean
@@ -105,6 +107,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     open: openProp,
     placement,
     rounded = false,
+    lock = true,
     children,
     duration,
     transaction,
@@ -121,14 +124,18 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
 
   const { value: open } = useUncontrolled({ defaultValue: defaultOpen, value: openProp })
 
+  const refPopup = useLockScrollTaro(!!open && lock)
+
   const transactionName = transaction ?? toTransactionName(placement)
 
-  const { backdrop = <PopupBackdrop />, close, content } = usePopupChildren(children)
+  const { backdrop = <PopupBackdrop lock={lock} />, close, content } = usePopupChildren(children)
 
   const durationStyle = useMemo(
     () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
     [duration],
   )
+
+  console.log(lock)
 
   return (
     <PopupContext.Provider
@@ -151,7 +158,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         onExited={onTransitionExited}
       >
         <View
-          ref={ref}
+          ref={refPopup}
           className={classNames(
             prefixClassname("popup"),
             {
@@ -168,7 +175,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
             ...durationStyle,
             ...styleProp,
           }}
-          catchMove
+          catchMove={lock}
           {...restProps}
         >
           {close}
