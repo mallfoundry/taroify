@@ -80,6 +80,8 @@ function AreaPicker({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [origin, value])
   const handleChange = useMemoizedFn((val, option, column) => {
+    val = Array.isArray(val) && val.length? val : [val]
+
     const idx = val.findIndex((item) => item === option.value)
     let newVal
     if (idx === 0) {
