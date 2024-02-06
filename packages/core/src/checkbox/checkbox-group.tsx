@@ -8,17 +8,17 @@ import { prefixClassname } from "../styles"
 import CheckboxGroupContext from "./checkbox-group.context"
 import { CheckboxGroupDirection } from "./checkbox-group.shared"
 
-export interface CheckboxGroupProps extends ViewProps {
-  defaultValue?: any[]
-  value?: any[]
+export interface CheckboxGroupProps<T = any> extends ViewProps {
+  defaultValue?: T[]
+  value?: T[]
   max?: number
   direction?: CheckboxGroupDirection
   children?: ReactNode
 
-  onChange?(value: any[]): void
+  onChange?(value: T[]): void
 }
 
-function CheckboxGroup(props: CheckboxGroupProps) {
+function CheckboxGroup<T = any>(props: CheckboxGroupProps<T>) {
   const {
     defaultValue,
     value: valueProp,
