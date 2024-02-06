@@ -135,8 +135,6 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
     [duration],
   )
 
-  console.log(lock)
-
   return (
     <PopupContext.Provider
       value={{
