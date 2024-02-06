@@ -1,10 +1,10 @@
 import * as React from "react"
-import {ForwardRefExoticComponent} from "react"
-import RollingTextComponent, {RollingTextProps} from "./rolling-text"
+import { ForwardRefExoticComponent } from "react"
+import RollingTextComponent, { RollingTextProps } from "./rolling-text"
 
-export type {RollingTextRef} from './rolling-text';
+export type { RollingTextRef } from "./rolling-text"
 
-export type { RollingTextThemeVars } from './rolling-text.shared'
+export type { RollingTextThemeVars } from "./rolling-text.shared"
 
 interface RollingTextInterface extends ForwardRefExoticComponent<RollingTextProps> {
   (props: RollingTextProps): React.ReactElement
@@ -12,4 +12,4 @@ interface RollingTextInterface extends ForwardRefExoticComponent<RollingTextProp
 
 const RollingText = RollingTextComponent as RollingTextInterface
 
-export default RollingText;
+export default RollingText

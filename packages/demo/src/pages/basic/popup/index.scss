@@ -11,4 +11,9 @@
   .#{$demo-prefix}block__content {
     padding: 0;
   }
+
+  &-scroll {
+    height: 100%;
+    width: 100%;
+  }
 }

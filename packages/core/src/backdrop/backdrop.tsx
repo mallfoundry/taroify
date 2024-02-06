@@ -9,6 +9,7 @@ import { CSSProperties, ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Transition from "../transition"
 import { preventDefault } from "../utils/dom/event"
+import { useLockScrollTaro } from "../utils/dom/use-lock-scroll-taro"
 
 interface BackdropProps extends ViewProps {
   style?: CSSProperties
@@ -17,6 +18,7 @@ interface BackdropProps extends ViewProps {
   closeable?: boolean
   duration?: number
   children?: ReactNode
+  lock?: boolean
 
   onClose?(opened: boolean): void
 }
@@ -28,6 +30,7 @@ export default function Backdrop(props: BackdropProps) {
     defaultOpen,
     open: openProp,
     closeable = false,
+    lock = true,
     duration,
     children,
     onClick,
@@ -39,6 +42,8 @@ export default function Backdrop(props: BackdropProps) {
     defaultValue: defaultOpen,
     value: openProp,
   })
+
+  const refPopup = useLockScrollTaro(!!open && lock)
 
   const durationStyle = useMemo(
     () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
@@ -56,6 +61,7 @@ export default function Backdrop(props: BackdropProps) {
   return (
     <Transition in={open} appear mountOnEnter name="fade">
       <View
+        ref={refPopup}
         className={classNames(
           prefixClassname("backdrop"),
           {
@@ -67,7 +73,7 @@ export default function Backdrop(props: BackdropProps) {
           ...durationStyle,
           ...styleProp,
         }}
-        catchMove
+        catchMove={lock}
         children={children}
         onClick={handleClick}
         onTouchMove={preventDefault}

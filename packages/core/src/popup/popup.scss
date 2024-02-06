@@ -9,6 +9,10 @@
   animation-duration: $popup-animation-duration;
   -webkit-overflow-scrolling: touch;
 
+  &-overflow-hidden {
+    overflow: hidden !important;
+  }
+
   &--center {
     top: 50%;
     left: 50%;
