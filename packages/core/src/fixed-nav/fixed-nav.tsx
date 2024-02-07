@@ -44,7 +44,6 @@ const FixedNav: FC<FixedNavProps> = (props) => {
   } = props
 
   const onValueChange = (val: boolean) => {
-    console.log(val)
     onChange?.(val)
   }
 
