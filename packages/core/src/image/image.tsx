@@ -102,7 +102,7 @@ export default function Image(props: ImageProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <View className={classNames(prefixClassname("image"), className)}>
+    <View>
       {!failed && src && (
         <TaroImage
           ref={taroImageRef}
