@@ -12,6 +12,46 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.4-alpha.0
+
+`2024-02-09`
+
+**Bug Fixes**
+
+- Input
+
+  - 修复 Input 组件的 `font-size` 无法被正常继承问题 [680](https://github.com/mallfoundry/taroify/pull/680) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- Radio
+
+  - 添加泛型 [681](https://github.com/mallfoundry/taroify/pull/681) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- Checkbox
+
+  - 添加泛型 [681](https://github.com/mallfoundry/taroify/pull/681) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- AreaSelector
+
+  - 修复值未定义时异常处理 [682](https://github.com/mallfoundry/taroify/pull/682) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- Uploader
+
+  - `onChange` 事件添加优化类型定义 [683](https://github.com/mallfoundry/taroify/pull/683) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- Popup
+
+  - 去除 console [684](https://github.com/mallfoundry/taroify/pull/684) [@Pilotager](https://github.com/Pilotager)
+
+- FixedNav
+
+  - 去除 console [685](https://github.com/mallfoundry/taroify/pull/685) [@Pilotager](https://github.com/Pilotager)
+
+**Feature**
+
+- Popup
+
+  - 添加 `lock` 属性以及 H5 禁止滚动穿透 [679](https://github.com/mallfoundry/taroify/pull/679) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.3-alpha.1
 
 `2024-02-04`
@@ -19,6 +59,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Input
+
   - 修复 `Input` 在只读模式下字体颜色问题 [674](https://github.com/mallfoundry/taroify/pull/674) [@Pilotager](https://github.com/Pilotager)
 
 - Flex
@@ -37,9 +78,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Image
+
   - 修复 `Image` 组件快速加载样式问题 [668](https://github.com/mallfoundry/taroify/pull/668) [@Pilotager](https://github.com/Pilotager)
 
 - Flex
+
   - 优化 `Flex` 两边间距 [669](https://github.com/mallfoundry/taroify/pull/669) [@Pilotager](https://github.com/Pilotager)
 
 - Watermark
@@ -68,9 +111,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - FixedNav
+
   - 添加 FixedNav 组件 [662](https://github.com/mallfoundry/taroify/pull/662) [@Pilotager](https://github.com/Pilotager)
 
 - FloatingPanel
+
   - 优化反弹动画 [661](https://github.com/mallfoundry/taroify/pull/661) [@Pilotager](https://github.com/Pilotager)
 
 - Watermark
@@ -93,11 +138,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Tabs
+
   - 添加 `dot` 和 `badge` 属性 [655](https://github.com/mallfoundry/taroify/pull/655) [@Pilotager](https://github.com/Pilotager)
 
 - Watermark
   - 添加 Watermark 水印 [658](https://github.com/mallfoundry/taroify/pull/658) [@hbztd](https://github.com/hbztd)
-
 
 ### v0.1.1-alpha.10
 
@@ -138,6 +183,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - AreaPicker
+
   - 修复 AreaPicker 多了一个空白 [639](https://github.com/mallfoundry/taroify/pull/639) [@hbztd](https://github.com/hbztd)
 
 - Picker
@@ -157,14 +203,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Navbar
+
   - 修复 `placeholder` 属性值默认为 false [634](https://github.com/mallfoundry/taroify/pull/634) [@Pilotager](https://github.com/Pilotager)
 
 - Tabs
+
   - 修复 TabPane 内容 DOM 上不该有 `title` 属性 [635](https://github.com/mallfoundry/taroify/pull/635) [@hbztd](https://github.com/hbztd)
 
 - Calendar
-  - 修复日历在h5无法滑动
-  - 修复设置defaultValue，value没有跳转到对应位置
+  - 修复日历在 h5 无法滑动
+  - 修复设置 defaultValue，value 没有跳转到对应位置
   - 修复底部按钮在微信小程序里颜色不对
 
 ### v0.1.1-alpha.5
@@ -174,10 +222,12 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Picker
+
   - 添加 `optionHeight` 属性，支持配置选项高度 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
   - 添加 `title` `confirmText` `cancelText` `columns` `columnsFIle`，支持通过数据配置选项 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
 
 - Cell
+
   - Cell(Form.Item, Field) 添加 `isLink` `arrowDirection` 属性 [630](https://github.com/mallfoundry/taroify/pull/630) [@hbztd](https://github.com/hbztd)
 
 - Icon [631](https://github.com/mallfoundry/taroify/pull/631) [@Pilotager](https://github.com/Pilotager)
@@ -204,7 +254,6 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Picker
   - 修复 siblingCount 属性未生效 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
 
-
 ### v0.1.1-alpha.4
 
 `2023-10-27`
@@ -218,10 +267,11 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Bug Fixes**
 
 - Swiper
+
   - 修复动态设置 SwiperItem 时可能出现页面异常 [626](https://github.com/mallfoundry/taroify/pull/626) [@hbztd](https://github.com/hbztd)
 
 - Filed
-  - 修复单独使用 Filed 时，form为空报错 [627](https://github.com/mallfoundry/taroify/pull/627) [@hbztd](https://github.com/hbztd)
+  - 修复单独使用 Filed 时，form 为空报错 [627](https://github.com/mallfoundry/taroify/pull/627) [@hbztd](https://github.com/hbztd)
 
 ### v0.1.1-alpha.3
 
@@ -230,7 +280,8 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 **Feature**
 
 - Form
-  - Form表单支持动态增减表单项 [622](https://github.com/mallfoundry/taroify/pull/622) [@hbztd](https://github.com/hbztd)
+
+  - Form 表单支持动态增减表单项 [622](https://github.com/mallfoundry/taroify/pull/622) [@hbztd](https://github.com/hbztd)
 
 - NoticeBar
   - 添加 `reset` 实例方法 [#623](https://github.com/mallfoundry/taroify/pull/623) [@hbztd](https://github.com/hbztd)
