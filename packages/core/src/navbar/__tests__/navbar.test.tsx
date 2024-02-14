@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import * as React from "react"
 import { prefixClassname } from "../../styles"
-import { HAIRLINE_BOTTOM } from "../../styles/hairline"
+import { HAIRLINE_BORDER_BOTTOM } from "../../styles/hairline"
 import Navbar from "../navbar"
 
 describe("<Navbar />", () => {
@@ -15,6 +15,6 @@ describe("<Navbar />", () => {
   it("should have hairline--bottom of classNames", () => {
     const { container } = render(<Navbar bordered />)
     const el = container.querySelector(`.${prefixClassname("navbar")}`)
-    expect(el).toHaveClass(HAIRLINE_BOTTOM)
+    expect(el).toHaveClass(HAIRLINE_BORDER_BOTTOM)
   })
 })
