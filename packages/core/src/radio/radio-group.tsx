@@ -8,18 +8,18 @@ import { prefixClassname } from "../styles"
 import RadioGroupContext from "./radio-group.context"
 import { RadioGroupDirection } from "./radio-group.shared"
 
-export interface RadioGroupProps extends ViewProps {
-  defaultValue?: any
-  value?: any
+export interface RadioGroupProps<T = any> extends ViewProps {
+  defaultValue?: T
+  value?: T
   disabled?: boolean
   direction?: RadioGroupDirection
   size?: number
   children?: ReactNode
 
-  onChange?(value: any): void
+  onChange?(value: T): void
 }
 
-function RadioGroup(props: RadioGroupProps) {
+function RadioGroup<T = any>(props: RadioGroupProps<T>) {
   const {
     className,
     defaultValue,

@@ -1,3 +1,4 @@
+import { ScrollView } from "@tarojs/components"
 import { Cell, Popup } from "@taroify/core"
 import { PopupPlacement } from "@taroify/core/popup"
 import { ArrowRight, Close } from "@taroify/icons"
@@ -43,6 +44,37 @@ function CenterRoundPopup() {
         rounded
       >
         内容
+      </Popup>
+    </>
+  )
+}
+
+function LockPopup() {
+  const [open, setOpen] = useState(false)
+  const [data] = useState(new Array(30).fill(0))
+  return (
+    <>
+      <Cell
+        clickable
+        title="弹窗（禁止滚动穿透）"
+        rightIcon={<ArrowRight />}
+        onClick={() => setOpen(true)}
+      />
+      <Popup
+        open={open}
+        style={{
+          height: "30%",
+        }}
+        rounded
+        lock
+        placement="bottom"
+        onClose={setOpen}
+      >
+        <ScrollView className="popup-demo-scroll" scrollY>
+          {data.map((_, index) => (
+            <Cell key={index}>内容-{index}</Cell>
+          ))}
+        </ScrollView>
       </Popup>
     </>
   )
@@ -153,6 +185,9 @@ export default function PopupDemo() {
           rightIcon={<ArrowRight />}
           onClick={() => handleOpen({ placement: "bottom", rounded: true })}
         />
+      </Block>
+      <Block variant="card" title="禁止滚动穿透">
+        <LockPopup />
       </Block>
       <Popup
         open={options.open}
