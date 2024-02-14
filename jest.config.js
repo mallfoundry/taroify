@@ -4,10 +4,21 @@
  */
 
 module.exports = {
+  globals: {
+    window: true,
+    DEPRECATED_ADAPTER_COMPONENT: false,
+    ENABLE_INNER_HTML: true,
+    ENABLE_ADJACENT_HTML: true,
+    ENABLE_SIZE_APIS: true,
+    ENABLE_TEMPLATE_CONTENT: true,
+    ENABLE_CLONE_NODE: true,
+    ENABLE_CONTAINS: true,
+    ENABLE_MUTATION_OBSERVER: true,
+  },
   clearMocks: true,
   coverageDirectory: "coverage",
   moduleNameMapper: {
-    "@tarojs/components": "@tarojs/components/dist-h5/react",
+    '@tarojs/components': '@tarojs/components/lib/react',
   },
   setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.ts"],
   testEnvironment: "jest-environment-jsdom",
