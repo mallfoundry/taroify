@@ -18,7 +18,7 @@ module.exports = {
   clearMocks: true,
   coverageDirectory: "coverage",
   moduleNameMapper: {
-    '@tarojs/components': '@tarojs/components/lib/react',
+    "@tarojs/components": "@tarojs/components/lib/react",
   },
   setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.ts"],
   testEnvironment: "jest-environment-jsdom",
