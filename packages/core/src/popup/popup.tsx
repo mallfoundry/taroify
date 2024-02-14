@@ -156,7 +156,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
             prefixClassname("popup"),
             {
               [prefixClassname("popup--rounded")]: rounded,
-              [prefixClassname("popup--center")]: _.isUndefined(placement),
+              [prefixClassname("popup--center")]: placement === "center" || _.isUndefined(placement),
               [prefixClassname("popup--top")]: placement === "top",
               [prefixClassname("popup--right")]: placement === "right",
               [prefixClassname("popup--bottom")]: placement === "bottom",

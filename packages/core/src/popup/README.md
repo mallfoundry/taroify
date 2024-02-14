@@ -75,9 +75,10 @@ import Popup from "@taroify/core/popup"
 |-------------|-----------------------------------------|-----------|----------|
 | defaultOpen | 默认是否显示弹出层                               | _boolean_ | `false`  |
 | open        | 是否显示弹出层                                 | _boolean_ | `false`  |
-| placement   | 弹出位置，可选值为 `top` `bottom` `right` `left` | _string_  | `center` |
+| placement   | 弹出位置，可选值为 `top` `bottom` `right` `left` `center` | _string_  | `center` |
 | duration    | 动画时长，单位毫秒                               | _number \| string_  | `300` |
 | rounded     | 是否显示圆角                                  | _boolean_ | `false`  |
+| lock        | 是否锁定背景滚动                                 | _boolean_          | `true`   |
 
 ### Popup.Backdrop Props
 
