@@ -15,8 +15,8 @@ function LoadingSpinner(props: LoadingProps) {
   const { size } = props
   const rootStyle = useMemo(
     () => ({
-      width: addUnitPx(size) ?? "",
-      height: addUnitPx(size) ?? "",
+      width: addUnitPx(size) || "",
+      height: addUnitPx(size) || "",
     }),
     [size],
   )
@@ -31,8 +31,8 @@ function LoadingCircular(props: LoadingProps) {
   const { size } = props
   const rootStyle = useMemo(
     () => ({
-      width: addUnitPx(size) ?? "",
-      height: addUnitPx(size) ?? "",
+      width: addUnitPx(size) || "",
+      height: addUnitPx(size) || "",
     }),
     [size],
   )
