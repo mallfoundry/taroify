@@ -14,7 +14,7 @@ describe("<Navbar />", () => {
   it("should have default classNames", () => {
     const { container } = render(<Navbar />)
     const el = container.querySelector(`.${prefixClassname("navbar")}`)
-    expect(el).toBeInTheDocument();
+    expect(el).toBeInTheDocument()
   })
 
   it("should have hairline--bottom of classNames", () => {
@@ -25,7 +25,7 @@ describe("<Navbar />", () => {
 
   it("should render fixed navbar with placeholder", () => {
     const { container } = render(<Navbar fixed placeholder />)
-    const el = container.querySelector(`.${prefixClassname('fixed-view__placeholder')}`)
+    const el = container.querySelector(`.${prefixClassname("fixed-view__placeholder")}`)
     expect(el).toBeInTheDocument()
   })
 
@@ -39,16 +39,16 @@ describe("<Navbar />", () => {
         <Text>Normal</Text>
         {/* To Cover the case where node might not be a react node */}
         Text
-      </Navbar>
+      </Navbar>,
     )
-    expect(container.querySelector(`.${prefixClassname('navbar')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__content')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__left')}`)).toBeInTheDocument()
-    expect(await findByText('Left Content')).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__right')}`)).toBeInTheDocument()
-    expect(await findByText('Right Content')).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__title')}`)).toBeInTheDocument()
-    expect(await findByText('Title')).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__content")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__left")}`)).toBeInTheDocument()
+    expect(await findByText("Left Content")).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__right")}`)).toBeInTheDocument()
+    expect(await findByText("Right Content")).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__title")}`)).toBeInTheDocument()
+    expect(await findByText("Title")).toBeInTheDocument()
   })
 
   it("should render navbar with icon on left and right", () => {
@@ -58,17 +58,17 @@ describe("<Navbar />", () => {
           <Icon className="arrow-left-icon" size={20} />
         </NavBarLeft>
         <NavBarRight icon="Hello" className="navbar-right">
-         <Icon className="arrow-right-icon" size={20} />
+          <Icon className="arrow-right-icon" size={20} />
         </NavBarRight>
         <NavBarTitle className="navbar-title" />
-      </Navbar>
-    ) 
-    expect(container.querySelector(`.${prefixClassname('navbar')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__content')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__left')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__right')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.${prefixClassname('navbar__title')}`)).toBeInTheDocument()
-    expect(container.querySelector(`.arrow-left-icon`)).toHaveStyle('font-size: 20px')
-    expect(container.querySelector(`.arrow-right-icon`)).toHaveStyle('font-size: 20px')
+      </Navbar>,
+    )
+    expect(container.querySelector(`.${prefixClassname("navbar")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__content")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__left")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__right")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.${prefixClassname("navbar__title")}`)).toBeInTheDocument()
+    expect(container.querySelector(`.arrow-left-icon`)).toHaveStyle("font-size: 20px")
+    expect(container.querySelector(`.arrow-right-icon`)).toHaveStyle("font-size: 20px")
   })
 })
