@@ -4,13 +4,13 @@ import { View, Image, Text } from "@tarojs/components"
 import classNames from "classnames"
 import { ArrowLeft } from "@taroify/icons"
 import { prefixClassname } from "../styles"
-import { FixedNavItem, FixedNavPosition, FixedNavDirection } from "./fixed-nav.shared"
 import Backdrop from "../backdrop"
+import { FixedNavItem, FixedNavPosition, FixedNavDirection } from "./fixed-nav.shared"
 
 export interface FixedNavProps {
   className?: string
   style?: CSSProperties
-  open: boolean // 是否打开
+  open?: boolean // 是否打开
   data?: FixedNavItem[] // 悬浮列表
   backdrop?: boolean // 是否显示遮罩层
   activeText?: string // 收起按钮文案
@@ -27,7 +27,7 @@ const FixedNav: FC<FixedNavProps> = (props) => {
   const {
     className,
     style,
-    open,
+    open = false,
     backdrop = true,
     position = {
       top: "auto",
@@ -54,6 +54,7 @@ const FixedNav: FC<FixedNavProps> = (props) => {
         {
           [prefixClassname("fixed-nav--active")]: open,
           [prefixClassname("fixed-nav--left")]: type === "left",
+          [prefixClassname("fixed-nav--right")]: type === "right",
         },
         className,
       )}

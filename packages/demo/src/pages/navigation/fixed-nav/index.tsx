@@ -21,7 +21,6 @@ export default function BackTopDemo() {
     {
       id: 3,
       text: "购物车",
-      num: 2,
       icon: <ShoppingCartOutlined />,
     },
     {
