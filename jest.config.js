@@ -18,6 +18,7 @@ module.exports = {
   clearMocks: true,
   coverageDirectory: "coverage",
   moduleNameMapper: {
+    "@tarojs/taro": "@tarojs/taro-h5",
     "@tarojs/components": "@tarojs/components/lib/react",
   },
   setupFilesAfterEnv: ["<rootDir>/jest/jest-setup.ts"],
@@ -29,5 +30,8 @@ module.exports = {
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!@taro)", "^.+\\.(css|sass|scss|less)$"],
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!@taro|lodash-es)",
+    "^.+\\.(css|sass|scss|less)$",
+  ],
 }
