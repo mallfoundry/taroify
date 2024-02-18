@@ -1,8 +1,8 @@
 import * as React from "react"
-import { render, fireEvent } from "@testing-library/react"
+import { render } from "@testing-library/react"
 import FloatingPanel from "../index"
 import { prefixClassname } from "../../styles"
-import { sleep } from "../../utils/sleep"
+import { touchEvent, sleep } from "../../../test"
 
 describe("<FloatingPanel />", () => {
   it("should drag adsorption effect when anchors props is [100, 200, 400]", async () => {
@@ -16,33 +16,28 @@ describe("<FloatingPanel />", () => {
 
     expect(el.style.height).toBe("400px")
 
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: 10 }] })
-    fireEvent.touchEnd(el)
+    // drag 10
+    touchEvent(el, 0, 10)
     await sleep(0)
     expect(el.style.transform).toContain("-100px")
 
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -49 }] })
-    fireEvent.touchEnd(el)
+    // drag -49
+    touchEvent(el, 0, -49)
     await sleep(0)
     expect(el.style.transform).toContain("-100px")
 
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -199 }] })
-    fireEvent.touchEnd(el)
+    // drag -199
+    touchEvent(el, 0, -199)
     await sleep(0)
     expect(el.style.transform).toContain("-200px")
 
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -200 }] })
-    fireEvent.touchEnd(el)
+    // drag -200
+    touchEvent(el, 0, -200)
     await sleep(0)
     expect(el.style.transform).toContain("-400px")
 
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -500 }] })
-    fireEvent.touchEnd(el)
+    // drag -500
+    touchEvent(el, 0, -500)
     await sleep(0)
     expect(el.style.transform).toContain("-400px")
   })
@@ -55,9 +50,7 @@ describe("<FloatingPanel />", () => {
       </FloatingPanel>,
     )
     const el = container.querySelector(`.${prefixClassname("floating-panel")}`) as HTMLDivElement
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -199 }] })
-    fireEvent.touchEnd(el)
+    touchEvent(el, 0, -199)
     await sleep(0)
     expect(el.style.transform).toContain("-200px")
     expect(onChange).toBeCalledWith(299)
@@ -73,18 +66,14 @@ describe("<FloatingPanel />", () => {
     const el = container.querySelector(
       `.${prefixClassname("floating-panel__content")}`,
     ) as HTMLDivElement
-    fireEvent.touchStart(el, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(el, { touches: [{ clientX: 0, clientY: -199 }] })
-    fireEvent.touchEnd(el)
+    touchEvent(el, 0, -199)
     await sleep(0)
     expect(onChange).not.toHaveBeenCalled()
 
     const elHeader = container.querySelector(
       `.${prefixClassname("floating-panel__header")}`,
     ) as HTMLDivElement
-    fireEvent.touchStart(elHeader, { touches: [{ clientX: 0, clientY: 0 }] })
-    fireEvent.touchMove(elHeader, { touches: [{ clientX: 0, clientY: -199 }] })
-    fireEvent.touchEnd(elHeader)
+    touchEvent(elHeader, 0, -199)
     await sleep(0)
     expect(onChange).toBeTruthy()
   })
