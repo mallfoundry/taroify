@@ -12,6 +12,36 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.5-alpha.0
+
+`2024-02-19`
+
+**Bug Fixes**
+
+- Loading
+
+  - 修复 `addUnitPx` 判断条件错误 [693](https://github.com/mallfoundry/taroify/pull/693) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+**Feature**
+
+- Popup
+
+  - `placement` 添加 `center` 选项 [690](https://github.com/mallfoundry/taroify/pull/690) [@Hector-Chong](https://github.com/Hector-Chong)
+
+**Other**
+
+- 修复 `jest` 配置错误导致 `yarn test` 报错问题 [691](https://github.com/mallfoundry/taroify/pull/691) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+- 完善 `NavBar` 测试用例 [692](https://github.com/mallfoundry/taroify/pull/692) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+- 完善 `FixedNav` 测试用例 [694](https://github.com/mallfoundry/taroify/pull/694) [@Pilotager](https://github.com/Pilotager)
+
+- 完善 `FloatingPanel` 测试用例 [695](https://github.com/mallfoundry/taroify/pull/695) [@Pilotager](https://github.com/Pilotager)
+
+**Doc**
+
+- npm 文档更新 [698](https://github.com/mallfoundry/taroify/pull/698) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.4-alpha.0
 
 `2024-02-09`
