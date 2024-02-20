@@ -5,7 +5,7 @@
 
 module.exports = {
   globals: {
-    // window: true,
+    window: true,
     DEPRECATED_ADAPTER_COMPONENT: false,
     ENABLE_INNER_HTML: true,
     ENABLE_ADJACENT_HTML: true,

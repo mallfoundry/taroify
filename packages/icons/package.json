@@ -21,7 +21,7 @@
     "icons:generate": "node ./scripts/generate.js"
   },
   "peerDependencies": {
-    "@tarojs/components": "3.6.16"
+    "@tarojs/components": "3.6.23"
   },
   "dependencies": {
     "classnames": "^2.2.6"
