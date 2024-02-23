@@ -72,7 +72,7 @@ interface UseButtonChildrenOptions {
   iconPosition?: IconPosition
 }
 
-function useButtonChildren(options: UseButtonChildrenOptions = {}) {
+function useButtonChildren(options: UseButtonChildrenOptions) {
   const { loading, icon: iconProp, children, iconPosition } = options
   if (isElementOf(children, ButtonContent)) {
     return children
