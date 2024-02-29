@@ -1,10 +1,25 @@
 import * as React from "react"
+import { getSystemInfoSync } from "@tarojs/taro"
 import { render } from "@testing-library/react"
 import FloatingPanel from "../index"
 import { prefixClassname } from "../../styles"
 import { touchEvent, sleep } from "../../../test"
 
 describe("<FloatingPanel />", () => {
+  it("should minHeight 100 and maxHeight 0.6 innerHeight when anchors props do not", async () => {
+    const { asFragment, container } = render(<FloatingPanel>内容</FloatingPanel>)
+
+    expect(asFragment()).toMatchSnapshot()
+
+    const el = container.querySelector(`.${prefixClassname("floating-panel")}`) as HTMLDivElement
+
+    const height = Math.round(getSystemInfoSync().windowHeight * 0.6)
+
+    expect(el.style.height).toBe(`${height}px`)
+
+    expect(el.style.transform).toContain(`${height}px`)
+  })
+
   it("should drag adsorption effect when anchors props is [100, 200, 400]", async () => {
     const { container, asFragment } = render(
       <FloatingPanel anchors={[100, 200, 400]}>内容</FloatingPanel>,
