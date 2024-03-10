@@ -12,11 +12,11 @@ export function useDependenciesChange(dependencies: string[] | undefined, valida
   useDeepCompareEffect(() => {
     const validFields = dependencies || []
     validFields.forEach(dep => {
-      form.addEventListener(`fields.${dep}.value.change`, validateMemo)
+      form?.addEventListener(`fields.${dep}.value.change`, validateMemo)
     })
     return () => {
       validFields.forEach(dep => {
-        form.removeEventListener(`fields.${dep}.value.change`, validateMemo)
+        form?.removeEventListener(`fields.${dep}.value.change`, validateMemo)
       })
     }
   }, [dependencies, validateMemo])
@@ -33,8 +33,8 @@ export function useShouldUpdateSignal(shouldUpdate: boolean | ((prev, next) => b
   })
 
   useEffect(() => {
-    form.addEventListener("shouldUpdate", shouldUpdateMemo)
-    return () => form.removeEventListener("change", shouldUpdateMemo)
+    form?.addEventListener("shouldUpdate", shouldUpdateMemo)
+    return () => form?.removeEventListener("change", shouldUpdateMemo)
   }, [form, shouldUpdateMemo])
 
   return signal
