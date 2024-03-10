@@ -1,6 +1,5 @@
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { InputProps } from "@tarojs/components/types/Input"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -31,46 +30,60 @@ import { validateRules } from "./form.rule"
 import { FormItemInstance, FormRule, FormValidateTrigger } from "./form.shared"
 import useFormError from "./use-form-error"
 import useFormFieldValueEffect from "./use-form-field-value-effect"
+import { useDependenciesChange, useShouldUpdateSignal } from "./use-form-item"
 
 interface FormItemChildren {
   label?: ReactElement
   control?: ReactElement
   feedbacks?: ReactElement[]
+  children?: ReactElement
 }
 
-function useFormItemChildren(children?: ReactNode): FormItemChildren {
+function useFormItemChildren(childrenProps: FormItemProps["children"], shouldUpdateSignal: number, noStyle?: boolean): FormItemChildren {
   return useMemo<FormItemChildren>(() => {
+    if (noStyle) {
+      if (_.isFunction(childrenProps)) {
+        const children = childrenProps()
+        return {
+          children: isValidElement(children) ? children : undefined
+        }
+      } else {
+        // eslint-disable-next-line
+        console.warn('[Taroify] FormItem(noStyle): "children" should be function')
+        return {}
+      }
+    }
     const __children__: FormItemChildren = {
       feedbacks: [],
     }
-
+    const children = _.isFunction(childrenProps) ? childrenProps() : childrenProps
     Children.forEach(children, (child: ReactNode) => {
       if (!isValidElement(child)) {
         return
       }
-
-      const element = child as ReactElement
-      const { type: elementType } = element as ReactElement<InputProps>
-      if (isElementOf(element, Form.Label)) {
-        __children__.label = element
-      } else if (elementType === Form.Control) {
-        __children__.control = element
-      } else if (isElementOf(element, Form.Feedback)) {
-        __children__.feedbacks?.push(element)
+      if (isElementOf(child, Form.Label)) {
+        __children__.label = child
+      } else if (isElementOf(child, Form.Control)) {
+        __children__.control = child
+      } else if (isElementOf(child, Form.Feedback)) {
+        __children__.feedbacks?.push(child)
       }
     })
     return __children__
-  }, [children])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [childrenProps, shouldUpdateSignal, noStyle])
 }
 
-export interface FormItemProps extends CellProps {
+export interface FormItemProps extends Omit<CellProps, "children"> {
   name?: string
   defaultValue?: any
   required?: boolean
-
   rules?: FormRule[]
+  dependencies?: string[]
+  shouldUpdate?: boolean | ((prev, next) => boolean)
+  noStyle?: boolean
 
-  children?: ReactNode
+  children?: (() => ReactNode) | ReactNode
 }
 
 const FormItem = forwardRef<FormItemInstance, FormItemProps>(
@@ -88,10 +101,14 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       required,
       children: childrenProp,
       rules: rulesProp,
+      dependencies,
+      shouldUpdate,
+      noStyle,
       onClick,
     } = props
+    const shouldUpdateSignal = useShouldUpdateSignal(shouldUpdate)
 
-    const { label, control, feedbacks } = useFormItemChildren(childrenProp)
+    const { label, control, feedbacks, children } = useFormItemChildren(childrenProp, shouldUpdateSignal, noStyle)
 
     const rulesRef = useToRef(rulesProp)
 
@@ -165,6 +182,8 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     useFormFieldValueEffect(() => validateWithTrigger("onChange"), [value])
 
+    useDependenciesChange(dependencies, () => fulfillPromise(validate()))
+
     const explain = useMemo(
       () => !_.isEmpty(feedbacks) || !_.isEmpty(error?.errors),
       //
@@ -182,6 +201,18 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
         }),
       [control, name, setValue, validateWithTrigger, value],
     )
+
+    if (noStyle) {
+      return (
+        <FormItemContext.Provider
+          value={{
+            validateStatus,
+          }}
+        >
+          {children}
+        </FormItemContext.Provider>
+      )
+    }
 
     return (
       <FormItemContext.Provider
