@@ -231,7 +231,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
             className: prefixClassname("form-item__right-icon"),
           })}
           required={required}
-          onClick={onClick}
+          {...(onClick && { onClick })}
         >
           {label}
           <CellValue alone={false}>
