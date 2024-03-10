@@ -450,7 +450,7 @@ interface UseFormOptions<V> {
   values?: V
 }
 
-export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form {
+export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form | undefined {
   const { defaultValues, values } = options
   const hasForm = formContainer.hasForm(name)
   const immutableHasForm = useConstant(hasForm)

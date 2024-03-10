@@ -78,7 +78,7 @@ const Form = forwardRef<FormInstance, FormProps>(
     } = useForm<any>(name, {
       defaultValues,
       values,
-    })
+    })!
 
     const delegatingReset = useCallback(
       (e?: BaseEventOrig) => {
