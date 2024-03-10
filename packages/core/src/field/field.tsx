@@ -14,6 +14,11 @@ function Field(props: FieldProps) {
   const label = createVariantElement(Form.Label, labelProp as ReactNode)
   const feedback = createVariantElement(Form.Feedback, feedbackProp as ReactNode)
 
+  if ("noStyle" in restProps || "shouldUpdate" in restProps) {
+   // eslint-disable-next-line
+   console.warn('[Taroify] Field: not support noStyle & shouldUpdate property')
+  }
+
   return (
     <Form.Item {...restProps}>
       {label}

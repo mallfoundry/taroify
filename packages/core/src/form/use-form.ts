@@ -169,18 +169,23 @@ class FormAttributes {
   setValues(newValues: any, emitChange: boolean = true) {
     let changed = false
     const { values } = this
+    let prevValues
     _.forEach(newValues, (value, name) => {
       const oldValue = _.get(values, name)
       if (oldValue !== value) {
+        if (!changed) {
+          changed = true
+          prevValues = _.cloneDeep(values)
+        }
         const copyValue = _.cloneDeep(value)
         _.set(values, name, copyValue)
         if (emitChange) {
           this.emitEvent(`fields.${name}.value.change`, copyValue)
-          changed = true
         }
       }
     })
     if (changed) {
+      this.emitEvent("shouldUpdate", prevValues, values)
       this.emitEvent("change", newValues, values)
     }
   }
@@ -222,6 +227,8 @@ interface Form {
   linkField(name?: string, field?: FormItemInstance, inFormList?: boolean): void
 
   unlinkField(name?: string, inFormList?: boolean): void
+
+  hasField(name?: string): boolean
 
   getFields(): FormItemInstance[]
 
@@ -284,7 +291,7 @@ function defineForm(formName: string) {
     }
 
     hasField(name?: string) {
-      return name && getAttributiveForm(formName)?.hasField(name)
+      return !!(name && getAttributiveForm(formName)?.hasField(name))
     }
 
     unlinkField(name?: string, inFormList?: boolean) {
