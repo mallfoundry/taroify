@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 $checkbox-size: var(--checkbox-size, 20px * $hd);
-$checkbox-font-size: var(--checkbox-font-size, var(--font-size-lg, $font-size-lg));
+$checkbox-font-size: var(--checkbox-font-size, var(--font-size-md, $font-size-md));
 $checkbox-border-color: var(--checkbox-border-color, var(--gray-5, $gray-5));
 $checkbox-transition-duration: var(--checkbox-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
 $checkbox-gap: var(--checkbox-gap, var(--padding-sm, $padding-sm));
