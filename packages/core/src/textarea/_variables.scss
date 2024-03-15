@@ -1,7 +1,7 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-
+// placeholder class not support lineHeight in mini program
 $textarea-line-height: var(--textarea-line-height, 24px * $hd);
 $textarea-font-size: var(--textarea-font-size, var(--font-size-md, $font-size-md));
 
