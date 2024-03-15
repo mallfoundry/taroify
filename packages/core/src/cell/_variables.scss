@@ -11,6 +11,7 @@ $cell-border-color: var(--cell-border-color, var(--border-color, $border-color))
 $cell-value-color: var(--cell-value-color, var(--gray-6, $gray-6));
 $cell-active-color: var(--cell-active-color, var(--active-color, $active-color));
 $cell-required-color: var(--cell-required-color, var(--danger-color, $danger-color));
+$cell-required-padding-right: var(--cell-required-padding-right, 2px * $hd);
 
 $cell-icon-size: var(--cell-icon-size, 16px * $hd);
 $cell-icon-margin-left: var(--cell-icon-margin-left, 4px * $hd);

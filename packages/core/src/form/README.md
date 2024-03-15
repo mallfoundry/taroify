@@ -603,7 +603,6 @@ import {
 | form-label-width                   | _6.2em_                   | -   |
 | form-label-color                   | _var(--gray-7)_           | -   |
 | form-label-margin-right            | _var(--padding-sm)_       | -   |
-| form-label-required-color          | _var(--red)_              | -   |
 | form-label-disabled-color          | _var(--gray-5)_           | -   |
 | form-item-icon-size                | _16px * $hd_              | -   |
 | form-item-right-icon-color         | _var(--gray-6)_           | -   |
