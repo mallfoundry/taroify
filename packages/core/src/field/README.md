@@ -180,10 +180,11 @@ function ButtonField() {
 
 ```tsx
 import { Cell, Field, Textarea } from "@taroify/core"
-
+import { getEnv } from "@tarojs/taro"
+const env = getEnv();
 function FieldWithTextarea() {
   return (
-    <Cell.Group inset>
+    <Cell.Group inset style={{ "--textarea-line-height": env === "WEB" ? "1.2rem" : "1" }}>
       <Field align="start" label="留言">
         <Textarea autoHeight placeholder="请输入留言" />
       </Field>
@@ -191,6 +192,7 @@ function FieldWithTextarea() {
   )
 }
 ```
+>Tips: 微信placeholder不支持line-height
 
 ### 显示字数统计
 
@@ -198,10 +200,11 @@ function FieldWithTextarea() {
 
 ```tsx
 import { Cell, Field, Textarea } from "@taroify/core"
-
+import { getEnv } from "@tarojs/taro"
+const env = getEnv();
 function FieldWithTextareaLimit() {
   return (
-    <Cell.Group inset>
+    <Cell.Group inset style={{ "--textarea-line-height": env === "WEB" ? "1.2rem" : "1" }}>
       <Field align="start" label="留言">
         <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
       </Field>
