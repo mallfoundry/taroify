@@ -12,6 +12,44 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.6-alpha.0
+
+`2024-03-24`
+
+**Feature**
+
+- Form
+
+  - Form.Item 添加 `dependencies` `shouldUpdate` `noStyle` 属性 [705](https://github.com/mallfoundry/taroify/pull/705) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Grid
+
+  - 修复 `children` 为 null 引发的错误问题 [703](https://github.com/mallfoundry/taroify/pull/703) [@Hector-Chong](https://github.com/Hector-Chong)
+
+- Form
+
+  - 修复 Form.Item 点击报错(taro>=3.6.23 事件绑定 undefined 触发时报错) [705](https://github.com/mallfoundry/taroify/pull/705) [@hbztd](https://github.com/hbztd)
+  - 修复 Field 未提供 FormItemInstance [705](https://github.com/mallfoundry/taroify/pull/705) [@hbztd](https://github.com/hbztd)
+
+- Style
+
+  - 修复 `Radio` 和 `Checkbox` 默认字体大小比其他大，`Input` 和 `Textarea` 字体不一致问题 [706](https://github.com/mallfoundry/taroify/pull/706) [@hbztd](https://github.com/hbztd)
+  - 修复 `Form` 右对齐时，\*位置不对问题 [706](https://github.com/mallfoundry/taroify/pull/706) [@hbztd](https://github.com/hbztd)
+
+- FloatingPanel
+
+  - 修复 `FloatingPanel` 无法向下滑动关闭问题 [709](https://github.com/mallfoundry/taroify/pull/709) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- 升级 Taro 版本为 3.6.23 [700](https://github.com/mallfoundry/taroify/pull/700) [@Pilotager](https://github.com/Pilotager)
+
+- Button 测试率覆盖 100% [701](https://github.com/mallfoundry/taroify/pull/701) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+- 修复 Form 组件文档内连接链接多了前缀 [705](https://github.com/mallfoundry/taroify/pull/705) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.5-alpha.0
 
 `2024-02-19`
