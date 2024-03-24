@@ -1,7 +1,7 @@
 import * as React from "react"
 import { forwardRef, CSSProperties, useMemo, useState, useRef, useEffect } from "react"
-import { getSystemInfoSync } from "@tarojs/taro"
-import { View } from "@tarojs/components"
+import { getSystemInfoSync, getEnv } from "@tarojs/taro"
+import { View, ScrollView } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import SafeArea from "../safe-area"
@@ -41,6 +41,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
   const startY = useRef(0)
   const [height, setHeight] = useState(heightProp)
   const [dragging, setDragging] = useState(false)
+  const [scrollContentTop, setScrollContentTop] = useState(0)
   const touch = useTouch()
 
   const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
@@ -94,15 +95,28 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
     startY.current = -height
   }
 
-  const onTouchMove = (event): void => {
+  const onTouchMove = async (event) => {
     touch.move(event)
-    const target = event.target as Element
+    const target = event.target
 
-    if (target !== headerRef.current) {
+    let isHeader = false
+    if (getEnv() === "WEB") {
+      isHeader = target.dataset.id === "floating-panel__header"
+    } else {
+      isHeader = target.dataset.id === "floating-panel__header"
+    }
+
+    if (!isHeader) {
       if (!contentDraggable) return
+      let scrollTop = 0
+      if (getEnv() === "WEB") {
+        scrollTop = (contentRef.current as Element).scrollTop
+      } else {
+        scrollTop = scrollContentTop
+      }
       if (-startY.current < boundary.max) {
         preventDefault(event, true)
-      } else if (!((contentRef.current as Element).scrollTop <= 0 && touch.deltaY > 0)) {
+      } else if (!(scrollTop <= 0 && touch.deltaY > 0)) {
         return
       }
     }
@@ -119,6 +133,10 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
     }
   }
 
+  const onContentScroll = (e) => {
+    setScrollContentTop(e.detail.scrollTop)
+  }
+
   return (
     <View
       ref={ref}
@@ -132,13 +150,29 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
       onTouchEnd={onTouchEnd}
       onTouchCancel={onTouchEnd}
     >
-      <View className={classNames(prefixClassname("floating-panel__header"))} ref={headerRef}>
+      <View
+        className={classNames(prefixClassname("floating-panel__header"))}
+        ref={headerRef}
+        data-id="floating-panel__header"
+      >
         <View className={classNames(prefixClassname("floating-panel__header-bar"))} />
       </View>
-      <View className={classNames(prefixClassname("floating-panel__content"))} ref={contentRef}>
-        {children}
-        {safeAreaInsetBottom && <SafeArea position="bottom" />}
-      </View>
+      {getEnv() === "WEB" ? (
+        <View className={classNames(prefixClassname("floating-panel__content"))} ref={contentRef}>
+          {children}
+          {safeAreaInsetBottom && <SafeArea position="bottom" />}
+        </View>
+      ) : (
+        <ScrollView
+          scrollY
+          className={classNames(prefixClassname("floating-panel__content"))}
+          ref={contentRef}
+          onScroll={onContentScroll}
+        >
+          {children}
+          {safeAreaInsetBottom && <SafeArea position="bottom" />}
+        </ScrollView>
+      )}
     </View>
   )
 })
