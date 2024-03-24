@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 $radio-size: var(--radio-size, 20px * $hd);
-$radio-font-size: var(--radio-font-size, var(--font-size-lg, $font-size-lg));
+$radio-font-size: var(--radio-font-size, var(--font-size-md, $font-size-md));
 $radio-border-color: var(--radio-border-color, var(--gray-5, $gray-5));
 $radio-transition-duration: var(--radio-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
 $radio-gap: var(--radio-gap, var(--padding-sm, $padding-sm));

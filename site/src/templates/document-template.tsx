@@ -13,7 +13,8 @@ const renderAst = new rehypeReact({
   components: {
     wrapper: ({ children }: any) => <div className={prefixClassname("docs-card")}>{children}</div>,
     a: ({ href, ...rest }: any) => {
-      return <Link {...rest} to={href} />
+      const noPrefixHref = (href && href.startsWith("/taroify.com")) ? href.replace("/taroify.com", "") : href
+      return <Link {...rest} to={noPrefixHref} />
     }
   }
 }).Compiler

@@ -129,6 +129,7 @@ import { Cell } from "@taroify/core"
 | --cell-value-color               | _var(--gray-6)_                                                           | -   |
 | --cell-active-color              | _var(--active-color)_                                                     | -   |
 | --cell-required-color            | _var(--danger-color)_                                                     | -   |
+| --cell-required-padding-right    | _2px * $hd_                                                               | -   |
 | --cell-icon-size                 | _16px * $hd_                                                              | -   |
 | --cell-icon-margin-left          | _4px * $hd_                                                               | -   |
 | --cell-right-icon-margin-right   | _4px * $hd_                                                               | -   |

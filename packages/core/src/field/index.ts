@@ -1,9 +1,8 @@
-import { FunctionComponent } from "react"
 import FormFeedback from "../form/form-feedback"
 import FormLabel from "../form/form-label"
-import FieldComponent, { FieldProps } from "./field"
+import FieldComponent from "./field"
 
-interface FieldInterface extends FunctionComponent<FieldProps> {
+type FieldInterface = typeof FieldComponent & {
   Label: typeof FormLabel
   Feedback: typeof FormFeedback
 }

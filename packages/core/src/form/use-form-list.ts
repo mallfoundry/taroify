@@ -27,7 +27,7 @@ export default function useFormList(field: string, options?: UseFormListOptions)
     if ((values || []).length !== fields.length) {
       setFields(map(values, (_, i) => ({ name: `${field}.${i}`, key: ++fieldKey })))
     }
-    const formAttributes = form.getAttributiveForm()
+    const formAttributes = form?.getAttributiveForm()
     if (formAttributes?.errors?.[field]) {
       // @ts-ignore
       formAttributes.errors = {
@@ -42,8 +42,8 @@ export default function useFormList(field: string, options?: UseFormListOptions)
   })
 
   useEffect(() => {
-    form.addEventListener("reset", resetHandler)
-    return () => form.removeEventListener("reset", resetHandler)
+    form?.addEventListener("reset", resetHandler)
+    return () => form?.removeEventListener("reset", resetHandler)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form])
 
@@ -62,16 +62,16 @@ export default function useFormList(field: string, options?: UseFormListOptions)
   const add = useMemoizedFn((value) => {
     setFields(fields.concat([{ name: `${field}.${fields.length}`, key: ++fieldKey }]))
 
-    form.setValues({ [`${field}.${fields.length}`]: value })
+    form?.setValues({ [`${field}.${fields.length}`]: value })
   })
 
   const remove = useMemoizedFn((index) => {
-    const values: any[] = form.getValues<[]>(field)?.[field] || []
-    form.setValues({
+    const values: any[] = form?.getValues<[]>(field)?.[field] || []
+    form?.setValues({
       [field]: filter(values.slice(), (_, i) => i !== index)
     }, false)
 
-    const formAttributes = form.getAttributiveForm()
+    const formAttributes = form?.getAttributiveForm()
     if (formAttributes?.errors?.[field]) {
       const errors = formAttributes.errors[field]
       // @ts-ignore

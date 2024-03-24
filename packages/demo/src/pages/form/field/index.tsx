@@ -1,4 +1,5 @@
 import { Button, Cell, Field, Input, Textarea } from "@taroify/core"
+import { getEnv } from "@tarojs/taro"
 import { MusicOutlined, SmileOutlined, WarningOutlined } from "@taroify/icons"
 import { useState } from "react"
 import Block from "../../../components/block"
@@ -137,8 +138,11 @@ function FieldWithInputAlign() {
 }
 
 function TextareaWithAutoHeight() {
+  const env = getEnv();
+
   return (
-    <Cell.Group inset>
+    // @ts-ignore
+    <Cell.Group inset style={{ "--textarea-line-height": env === "WEB" ? "1.2rem" : "1" }}>
       <Field align="start" label="留言">
         <Textarea autoHeight placeholder="请输入留言" />
       </Field>
@@ -147,8 +151,10 @@ function TextareaWithAutoHeight() {
 }
 
 function TextareaWithLimit() {
+  const env = getEnv();
   return (
-    <Cell.Group inset>
+    // @ts-ignore
+    <Cell.Group inset style={{ "--textarea-line-height": env === "WEB" ? "1.2rem" : "1" }}>
       <Field align="start" label="留言">
         <Textarea style={{ height: "48px" }} limit={50} placeholder="请输入留言" />
       </Field>

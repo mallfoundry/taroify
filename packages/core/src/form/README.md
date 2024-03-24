@@ -476,6 +476,136 @@ function DynamicForm() {
 }
 ```
 
+### 依赖与自动更新
+通过dependencies自动触发校验
+```tsx
+function DependenciesDemo() {
+  const formRef = useRef<FormInstance>()
+  const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
+    Toast.open(JSON.stringify(event.detail.value))
+  }
+
+  return (
+    <Form ref={formRef} onSubmit={onSubmit}>
+      <Toast id="toast" />
+      <Cell.Group inset>
+        <Form.Item name="username" rules={[{ required: true, message: "请输入用户名" }]}>
+          <Form.Label>用户名</Form.Label>
+          <Form.Control>
+            <Input placeholder="用户名" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="password" rules={[{ required: true, message: "请输入密码" }]}>
+          <Form.Label>密码</Form.Label>
+          <Form.Control>
+            <Input placeholder="密码" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item
+          name="confirmPassword"
+          dependencies={["password"]}
+          rules={[{ required: true, message: "请再次输入密码" }, {
+            validator: (val) => {
+              return formRef.current?.getValues<any>()?.password === val ? true : "密码不一致"
+            }
+          }]}
+        >
+          <Form.Label>密码</Form.Label>
+          <Form.Control>
+            <Input placeholder="密码" />
+          </Form.Control>
+        </Form.Item>
+        <Field
+          name="confirmPassword2"
+          dependencies={["password"]}
+          label="密码"
+          rules={[{ required: true, message: "请再次输入密码" }, {
+            validator: (val) => {
+
+              return formRef.current?.getValues<any>()?.password === val ? true : "密码不一致"
+            }
+          }]}
+        >
+          <Input placeholder="密码" />
+        </Field>
+      </Cell.Group>
+      <View style={{ margin: "16px" }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+      </View>
+    </Form>
+  )
+}
+```
+通过shouldUpdate和noStyle触发重新渲染, Form.Item里包裹的子组件必须由函数返回，否则 shouldUpdate 不会起作用, Field暂不支持
+```tsx
+function ShouldUpdateDemo() {
+  const formRef = useRef<FormInstance>()
+  return <Form
+    ref={formRef}
+    onSubmit={(e) => {
+      Toast.open(JSON.stringify(e.detail.value, undefined, 2))
+    }}
+  >
+    <Toast id="toast" />
+    <Cell.Group inset>
+      <Form.Item name="type">
+        <Form.Label>复选框</Form.Label>
+        <Form.Control>
+          <Checkbox shape="square" />
+        </Form.Control>
+      </Form.Item>
+      <Form.Item name="radio">
+        <Form.Label>单选框</Form.Label>
+        <Form.Control>
+          <Radio.Group direction="horizontal">
+            <Radio name="1">单选框 1</Radio>
+            <Radio name="2">单选框 2</Radio>
+          </Radio.Group>
+        </Form.Control>
+      </Form.Item>
+      <Form.Item noStyle shouldUpdate={(prev, cur) => prev.type !== cur.type}>
+        {
+          () => {
+            const type = formRef.current?.getValues<any>()?.type
+            if (type) {
+              return <Form.Item name="a1">
+                <Form.Label>复选框选中</Form.Label>
+                <Form.Control><Input /></Form.Control>
+              </Form.Item>
+            } else {
+              return <>
+                <Form.Item name="a2">
+                  <Form.Label>复选框未选中</Form.Label>
+                  <Form.Control><Input /></Form.Control>
+                </Form.Item>
+                <Form.Item name="a3">
+                  <Form.Label>复选框未选中</Form.Label>
+                  <Form.Control><Input /></Form.Control>
+                </Form.Item>
+              </>
+            }
+          }
+        }
+      </Form.Item>
+      <Form.Item noStyle shouldUpdate={(prev, cur) => prev.radio !== cur.radio}>
+        {
+          () =>  <Field name="cc" label={`单选框${formRef.current?.getValues<any>()?.radio}`}>
+            <Input placeholder={`结果${JSON.stringify(formRef.current?.getValues<any>())}`} />
+          </Field>
+        }
+      </Form.Item>
+    </Cell.Group>
+    <View style={{ margin: "16px" }}>
+      <Button shape="round" block color="primary" formType="submit">
+        提交
+      </Button>
+    </View>
+  </Form>
+}
+```
+
 ## API
 
 ### Form Props
@@ -527,6 +657,9 @@ function DynamicForm() {
 | defaultValue | 表单项默认值 | _any_ | - |
 | required | 是否显示表单必填星号 | _boolean_ | `false` |
 | rules | 表单校验规则 | _FormRule[]_ | - |
+| dependencies | 当依赖的字段值改变时，触发自身的校验 | _string[]_ | - |
+| shouldUpdate | 当值为true时，触发当前区域重新渲染 | _boolean\|(prevValues, curValues) => boolean_ | - |
+| noStyle | 直接渲染children | boolean | - |
 
 > 属性继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
 
@@ -603,7 +736,6 @@ import {
 | form-label-width                   | _6.2em_                   | -   |
 | form-label-color                   | _var(--gray-7)_           | -   |
 | form-label-margin-right            | _var(--padding-sm)_       | -   |
-| form-label-required-color          | _var(--red)_              | -   |
 | form-label-disabled-color          | _var(--gray-5)_           | -   |
 | form-item-icon-size                | _16px * $hd_              | -   |
 | form-item-right-icon-color         | _var(--gray-6)_           | -   |

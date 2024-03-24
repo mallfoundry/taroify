@@ -41,7 +41,7 @@ function Grid(props: GridProps) {
   const children = useMemo(
     () =>
       Children.map(childrenProp, (item, index) =>
-        cloneElement(item as ReactElement, { __dataIndex__: index }),
+        item ? cloneElement(item as ReactElement, { __dataIndex__: index }) : null,
       ),
     [childrenProp],
   )

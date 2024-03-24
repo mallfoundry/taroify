@@ -24,13 +24,5 @@
     justify-content: flex-end;
     text-align: right;
   }
-
-  &--required {
-    &::before {
-      margin-right: 2px * $hd;
-      color: $form-label-required-color;
-      content: '*';
-    }
-  }
 }
 

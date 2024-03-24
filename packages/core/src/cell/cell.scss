@@ -26,6 +26,15 @@
     flex: 1;
   }
 
+  &--required {
+    .#{$component-prefix}cell__title::before {
+      font-size: $cell-font-size;
+      color: $cell-required-color;
+      padding-right: $cell-required-padding-right;
+      content: '*';
+    }
+  }
+
   &__brief {
     margin-top: $cell-brief-margin-top;
     font-size: $cell-brief-font-size;
@@ -65,19 +74,6 @@
       background: $cell-active-color;
     }
   }
-
-  &--required {
-    overflow: visible;
-
-    &::before {
-      position: absolute;
-      left: var(--padding-xs, $padding-xs);
-      font-size: $cell-font-size;
-      color: $cell-required-color;
-      content: '*';
-    }
-  }
-
 
   &__value {
     flex: 1;
