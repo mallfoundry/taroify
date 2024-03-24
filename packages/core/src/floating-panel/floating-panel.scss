@@ -15,7 +15,7 @@
   will-change: transform;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     bottom: -100vh;
