@@ -76,13 +76,22 @@ const Flex = forwardRef((props: FlexProps, ref) => {
     return {}
   }, [horizontalGutter])
 
+  const rowStyle = useMemo<CSSProperties>(() => {
+    const rowStyle: CSSProperties = {}
+    if (horizontalGutter) {
+      const averageMargin = _.toNumber(horizontalGutter) / 2
+      rowStyle.marginLeft = addUnitPx(-averageMargin)
+      rowStyle.marginRight = addUnitPx(-averageMargin)
+    }
+    return rowStyle
+  }, [horizontalGutter])
+
   const children = useMemo(
     () =>
       Children.map(childrenProp, (item, index) => {
         return isValidElement<any>(item)
           ? cloneElement(item, {
               __dataIndex__: index,
-              __dataLength__: Children.count(childrenProp),
             })
           : item
       }),
@@ -122,6 +131,7 @@ const Flex = forwardRef((props: FlexProps, ref) => {
       style={{
         ...style,
         ...gutterStyle,
+        ...rowStyle,
       }}
       {...restProps}
     >
