@@ -78,6 +78,7 @@ export function useDatetimePicker(options: UseDatetimePicker = {}) {
           }
           break
         case "month":
+          date.setDate(1)
           if (_.size(datetimeValue) > index) {
             date.setMonth(_.toNumber(datetimeValue[index]) - 1)
           }
