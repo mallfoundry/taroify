@@ -101,6 +101,8 @@ export default function TabsHeader(props: TabsHeaderProps) {
       )}
     >
       <ScrollView
+        enhanced
+        showScrollbar={false}
         scrollX={tabObjects.length > swipeThreshold || !ellipsis}
         scrollWithAnimation
         scrollLeft={scrollLeft}
