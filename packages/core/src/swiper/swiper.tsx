@@ -126,6 +126,8 @@ function Swiper(props: SwiperProps) {
 
   const itemInstances = useMemo<SwiperItemInstance[]>(() => [], [])
 
+  const [isInit, setIsInit] = useState(false)
+
   const touch = useTouch()
 
   const forceUpdate = useForceUpdate()
@@ -337,6 +339,8 @@ function Swiper(props: SwiperProps) {
         next()
         startAutoplay()
       }, +autoplay)
+    } else {
+      swipingRef.current = false
     }
   }, [autoplay, count, next, stopAutoplay])
 
@@ -445,7 +449,6 @@ function Swiper(props: SwiperProps) {
       if (!rootRef.current) {
         return
       }
-      rectRef.current = await getTrackRect()
       if (count) {
         activeIndex = Math.min(count - 1, activeIndex)
       }
@@ -458,28 +461,42 @@ function Swiper(props: SwiperProps) {
         forceUpdate()
       }
       itemInstances.forEach((item) => item.setOffset(0))
+      startAutoplay()
     }
   )
 
   const resize = useCallback(() => nextTick(() => initialize(activeIndexRef.current)), [initialize])
 
-  useWindowResize(resize)
+  useWindowResize(async () => {
+    rectRef.current = await getTrackRect()
+    resize()
+  })
 
   useEffect(() => {
+    if (!isInit) {
+      return
+    }
     if (count !== 0) {
       nextTick(initialize)
     }
-  }, [count, initialize])
+  }, [count, initialize, isInit])
 
   useEffect(() => {
+    if (!isInit) {
+      return
+    }
     // todo: delete activeIndexRef and only use value, setValue
     if (valueProp !== activeIndexRef.current) {
       nextTick(initialize)
     }
-  }, [valueProp, initialize])
+  }, [valueProp, initialize, isInit])
 
   useMounted(() => {
-    startAutoplay()
+    const fn = async () => {
+      rectRef.current = await getTrackRect()
+      setIsInit(true)
+    }
+    fn()
     return stopAutoplay
   })
 
@@ -506,7 +523,7 @@ function Swiper(props: SwiperProps) {
       transform: `translate${vertical ? "Y" : "X"}(${addUnitPx(offset)})`,
     }
 
-    const size = getSize?.()
+    const size = getTrackSize?.()
     if (size) {
       const mainAxis = vertical ? "height" : "width"
       style[mainAxis] = `${addUnitPx(size)}`
@@ -530,19 +547,23 @@ function Swiper(props: SwiperProps) {
           itemInstances,
         }}
       >
-        <View
-          className={classNames(prefixClassname("swiper__track"), {
-            [prefixClassname("swiper__track--vertical")]: vertical,
-          })}
-          catchMove={stopPropagation}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          onTouchCancel={onTouchEnd}
-          style={trackStyle}
-          children={items}
-        />
-        {indicator}
+        {
+          isInit && <>
+            <View
+              className={classNames(prefixClassname("swiper__track"), {
+                [prefixClassname("swiper__track--vertical")]: vertical,
+              })}
+              catchMove={stopPropagation}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+              onTouchCancel={onTouchEnd}
+              style={trackStyle}
+              children={items}
+            />
+            {indicator}
+          </>
+        }
       </SwiperContext.Provider>
     </View>
   )
