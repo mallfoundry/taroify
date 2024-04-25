@@ -43,7 +43,7 @@ export default function Backdrop(props: BackdropProps) {
     value: openProp,
   })
 
-  const refPopup = useLockScrollTaro(!!open && lock)
+  useLockScrollTaro(!!open && lock)
 
   const durationStyle = useMemo(
     () => (_.isNumber(duration) ? { "--animation-duration-base": `${duration as number}ms` } : {}),
@@ -61,7 +61,6 @@ export default function Backdrop(props: BackdropProps) {
   return (
     <Transition in={open} appear mountOnEnter name="fade">
       <View
-        ref={refPopup}
         className={classNames(
           prefixClassname("backdrop"),
           {

@@ -171,6 +171,7 @@ function DisabledDropdownMenu() {
 | value | 当前选中项对应的 value | _any_ | - |
 | title | 菜单项标题 | _string_ | 当前选中项文字 |
 | disabled | 是否禁用菜单 | _boolean_ | `false` |
+| lock     | 是否锁定背景滚动 | _boolean_  | `true`   |
 
 ### DropdownMenu.Item Events
 

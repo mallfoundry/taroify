@@ -13,6 +13,15 @@ function BasicDropdownMenu() {
         <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
         <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
         <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={3}>活动商品2</DropdownMenu.Option>
+        <DropdownMenu.Option value={4}>活动商品3</DropdownMenu.Option>
+        <DropdownMenu.Option value={5}>活动商品4</DropdownMenu.Option>
+        <DropdownMenu.Option value={6}>活动商品5</DropdownMenu.Option>
+        <DropdownMenu.Option value={7}>活动商品6</DropdownMenu.Option>
+        <DropdownMenu.Option value={8}>活动商品7</DropdownMenu.Option>
+        <DropdownMenu.Option value={9}>活动商品8</DropdownMenu.Option>
+        <DropdownMenu.Option value={10}>活动商品9</DropdownMenu.Option>
+        <DropdownMenu.Option value={11}>活动商品10</DropdownMenu.Option>
       </DropdownMenu.Item>
       <DropdownMenu.Item>
         <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>

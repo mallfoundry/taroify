@@ -1,5 +1,5 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { View } from "@tarojs/components"
+import { ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as _ from "lodash"
@@ -19,6 +19,7 @@ export interface DropdownMenuItemProps extends ViewProps {
   defaultValue?: any | any[]
   value?: any | any[]
   disabled?: boolean
+  lock?: boolean
   title?: ReactNode
   children?: ReactNode
 
@@ -39,6 +40,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     defaultValue,
     value: valueProp,
     disabled,
+    lock,
     children,
     onOpen,
     onClose,
@@ -135,6 +137,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
           open={_.isBoolean(active) && active}
           className={prefixClassname("dropdown-menu-item__content")}
           placement={down ? "top" : "bottom"}
+          lock={lock}
           onTransitionEnter={() => {
             setOpened(true)
             onOpen?.()
@@ -151,8 +154,10 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
             onClosed?.()
           }}
         >
-          <Popup.Backdrop style={{ position: "absolute" }} onClick={toggleItem} />
-          {children}
+          <Popup.Backdrop lock={lock} style={{ position: "absolute" }} onClick={toggleItem} />
+          <ScrollView  scrollY>
+            {children}
+          </ScrollView>
         </Popup>
       </View>
     </DropdownMenuItemContext.Provider>

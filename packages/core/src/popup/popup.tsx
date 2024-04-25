@@ -124,7 +124,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
 
   const { value: open } = useUncontrolled({ defaultValue: defaultOpen, value: openProp })
 
-  const refPopup = useLockScrollTaro(!!open && lock)
+   useLockScrollTaro(!!open && lock)
 
   const transactionName = transaction ?? toTransactionName(placement)
 
@@ -156,7 +156,6 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         onExited={onTransitionExited}
       >
         <View
-          ref={refPopup}
           className={classNames(
             prefixClassname("popup"),
             {
