@@ -11,7 +11,8 @@ import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
-import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
+import { DropdownMenuItemOption, DropdownMenuOptionEvent } from "./dropdown-menu.shared"
+import DropdownMenuOption from "./dropdown-menu-option"
 
 export interface DropdownMenuItemProps extends ViewProps {
   style?: CSSProperties
@@ -22,6 +23,7 @@ export interface DropdownMenuItemProps extends ViewProps {
   lock?: boolean
   title?: ReactNode
   children?: ReactNode
+  options?: DropdownMenuItemOption[]
 
   onChange?(value: any | any[]): void
 
@@ -41,7 +43,8 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     value: valueProp,
     disabled,
     lock,
-    children,
+    children: childProp,
+    options,
     onOpen,
     onClose,
     onOpened,
@@ -56,6 +59,10 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     defaultValue,
     onChange: onChangeProp,
   })
+
+  const children = useMemo(() => {
+    return childProp ? childProp : (options || []).map((option, idx) => <DropdownMenuOption key={option.value || idx} {...option} />)
+  }, [childProp, options])
 
   const {
     direction = "down",

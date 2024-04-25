@@ -7,6 +7,11 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicDropdownMenu() {
+  const [options] = useState([
+    { title: "默认排序", value: 0 },
+    { title: "好评排序", value: 1 },
+    { title: "销量排序", value: 2 },
+  ])
   return (
     <DropdownMenu>
       <DropdownMenu.Item>
@@ -23,11 +28,7 @@ function BasicDropdownMenu() {
         <DropdownMenu.Option value={10}>活动商品9</DropdownMenu.Option>
         <DropdownMenu.Option value={11}>活动商品10</DropdownMenu.Option>
       </DropdownMenu.Item>
-      <DropdownMenu.Item>
-        <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
-        <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
-        <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
-      </DropdownMenu.Item>
+      <DropdownMenu.Item options={options} />
     </DropdownMenu>
   )
 }
@@ -37,13 +38,14 @@ function DropdownMenuWithCustomContent() {
   const [option1, setOption1] = useState()
   const [switch1, setSwitch1] = useState(true)
   const [switch2, setSwitch2] = useState(false)
+  const [options] = useState([
+    { title: <View>默认<View>排序</View></View>, value: 0 },
+    { title: "好评排序", value: 1 },
+    { title: "销量排序", value: 2 },
+  ])
   return (
     <DropdownMenu value={value} onChange={setValue}>
-      <DropdownMenu.Item value={option1} onChange={setOption1}>
-        <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
-        <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
-        <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
-      </DropdownMenu.Item>
+      <DropdownMenu.Item value={option1} onChange={setOption1} options={options}></DropdownMenu.Item>
       <DropdownMenu.Item title="筛选">
         <Cell title="包邮" align="center">
           <Switch size="24" checked={switch1} onChange={setSwitch1} />
