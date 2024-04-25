@@ -177,7 +177,7 @@ const subpackages = [
       },
       {
         title: "DropdownMenu 下拉菜单",
-        name: "Dropdown",
+        name: "DropdownMenu",
         path: "dropdown-menu/index",
       },
       {
