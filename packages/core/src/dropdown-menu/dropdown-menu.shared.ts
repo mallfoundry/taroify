@@ -25,3 +25,9 @@ export type DropdownMenuThemeVars = {
   dropdownMenuItemContentAnimationDuration?: string
   dropdownMenuOptionActiveColor?: string
 }
+
+export type DropdownMenuItemOption = {
+  icon?: ReactNode
+  title?: ReactNode
+  value?: any
+}

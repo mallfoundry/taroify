@@ -7,13 +7,11 @@ import { ReactNode, useCallback, useContext } from "react"
 import Cell from "../cell"
 import { prefixClassname } from "../styles"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
+import { DropdownMenuItemOption } from "./dropdown-menu.shared"
 
-export interface DropdownMenuOptionProps extends ViewProps {
-  value?: any
+export type DropdownMenuOptionProps = ViewProps & DropdownMenuItemOption & {
   disabled?: boolean
   clickable?: boolean
-  icon?: ReactNode
-  title?: ReactNode
   children?: ReactNode
 }
 

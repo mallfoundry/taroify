@@ -26,16 +26,16 @@ import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
 import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
 import DropdownMenuContext from "./dropdown-menu.context"
-import { DropdownMenuDirection } from "./dropdown-menu.shared"
+import { DropdownMenuDirection, DropdownMenuItemOption } from "./dropdown-menu.shared"
 
-function getDropdownMenuTitle(options?: ReactNode, dropdownValue?: any | any[]): ReactNode {
+function getDropdownMenuTitle(children?: ReactNode, options?: DropdownMenuItemOption[],  dropdownValue?: any | any[]): ReactNode {
   const firstRef: MutableRefObject<ReactNode> = {
     current: undefined,
   }
   const nodeRef: MutableRefObject<ReactNode> = {
     current: undefined,
   }
-  Children.forEach(options, (child: ReactNode, index) => {
+  Children.forEach(children, (child: ReactNode, index) => {
     if (!isValidElement(child)) {
       return
     }
@@ -56,7 +56,11 @@ function getDropdownMenuTitle(options?: ReactNode, dropdownValue?: any | any[]):
   })
 
   if (!nodeRef.current) {
-    nodeRef.current = firstRef.current
+    if (options) {
+      nodeRef.current = options.find(option => option.value === dropdownValue)?.title || options[0].title
+    } else {
+      nodeRef.current = firstRef.current
+    }
   }
 
   return nodeRef.current
@@ -84,7 +88,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
       const elementType = element.type
       if (elementType === DropdownMenuItem) {
         const { key, props } = element
-        const { disabled, title, value, children: itemChildren }: DropdownMenuItemProps = props
+        const { disabled, title, value, children: itemChildren, options }: DropdownMenuItemProps = props
         const index = _.size(__children__.items)
         const itemKey = key ?? index
 
@@ -100,7 +104,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
             key={itemKey}
             __dataKey__={itemKey}
             disabled={disabled}
-            children={title ?? getDropdownMenuTitle(itemChildren, value)}
+            children={title ?? getDropdownMenuTitle(itemChildren, options, value)}
           />,
         )
       }
