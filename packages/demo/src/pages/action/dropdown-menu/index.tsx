@@ -1,6 +1,6 @@
 import { Button, Cell, DropdownMenu, Switch } from "@taroify/core"
-import { View } from "@tarojs/components"
-import { Key, useState } from "react"
+import { View, PageMeta } from "@tarojs/components"
+import { Key, useCallback, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 
@@ -11,31 +11,32 @@ function BasicDropdownMenu() {
     { title: "默认排序", value: 0 },
     { title: "好评排序", value: 1 },
     { title: "销量排序", value: 2 },
-  ])
+  ].concat(Array.from({ length: 20 }, (_, i) => ({ title: "选项" + i, value: 3 + i }))))
+  const [opened, setOpened] = useState(false)
+  const getScrollHeight = useCallback((len) => {
+    return len < 5 ? len * 46 : 5 * 46
+  }, [])
   return (
-    <DropdownMenu>
-      <DropdownMenu.Item>
-        <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
-        <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
-        <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
-        <DropdownMenu.Option value={3}>活动商品2</DropdownMenu.Option>
-        <DropdownMenu.Option value={4}>活动商品3</DropdownMenu.Option>
-        <DropdownMenu.Option value={5}>活动商品4</DropdownMenu.Option>
-        <DropdownMenu.Option value={6}>活动商品5</DropdownMenu.Option>
-        <DropdownMenu.Option value={7}>活动商品6</DropdownMenu.Option>
-        <DropdownMenu.Option value={8}>活动商品7</DropdownMenu.Option>
-        <DropdownMenu.Option value={9}>活动商品8</DropdownMenu.Option>
-        <DropdownMenu.Option value={10}>活动商品9</DropdownMenu.Option>
-        <DropdownMenu.Option value={11}>活动商品10</DropdownMenu.Option>
-      </DropdownMenu.Item>
-      <DropdownMenu.Item options={options} />
-    </DropdownMenu>
+    <>
+      <PageMeta pageStyle={opened ? "overflow: hidden;" : ""} />
+      <DropdownMenu>
+        {/* @ts-ignore */}
+        <DropdownMenu.Item style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(23) + "px" }} options={options} lock onOpen={() => setOpened(true)} onClose={() => setOpened(false)} />
+         {/* @ts-ignore */}
+        <DropdownMenu.Item style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(4) + "px" }} lock onOpen={() => setOpened(true)} onClose={() => setOpened(false)}>
+          <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
+          <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
+          <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
+          <DropdownMenu.Option value={3}>活动商品2</DropdownMenu.Option>
+        </DropdownMenu.Item>
+      </DropdownMenu>
+    </>
   )
 }
 
 function DropdownMenuWithCustomContent() {
   const [value, setValue] = useState<Key | false>()
-  const [option1, setOption1] = useState()
+  const [option1, setOption1] = useState(0)
   const [switch1, setSwitch1] = useState(true)
   const [switch2, setSwitch2] = useState(false)
   const [options] = useState([
@@ -132,6 +133,7 @@ export default function DropdownMenuDemo() {
       <Block title="禁用菜单">
         <DisabledDropdownMenu />
       </Block>
+      <View style={{ height: "400px", background: "transparent", width: "100vw" }}></View>
     </Page>
   )
 }

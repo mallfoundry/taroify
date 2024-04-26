@@ -42,7 +42,7 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
     defaultValue,
     value: valueProp,
     disabled,
-    lock,
+    lock = false,
     children: childProp,
     options,
     onOpen,
@@ -162,9 +162,13 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
           }}
         >
           <Popup.Backdrop lock={lock} style={{ position: "absolute" }} onClick={toggleItem} />
-          <ScrollView  scrollY>
-            {children}
-          </ScrollView>
+          {
+            lock ?
+              <ScrollView className={prefixClassname("dropdown-menu-item__content--scroll")} scrollY>
+                {children}
+              </ScrollView> :
+              children
+          }
         </Popup>
       </View>
     </DropdownMenuItemContext.Provider>
