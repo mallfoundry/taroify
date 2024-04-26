@@ -24,5 +24,9 @@
     position: absolute;
     max-height: $dropdown-menu-item-content-max-height;
     animation-duration: $dropdown-menu-item-content-animation-duration;
+
+    &--scroll {
+      height: $dropdown-menu-item-content-max-height;
+    }
   }
 }
