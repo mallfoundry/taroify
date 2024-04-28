@@ -12,6 +12,35 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.1.7-alpha.0
+
+`2024-04-28`
+
+**Feature**
+
+- Dropdown
+
+  - DropdownMenuItem: 支持 `lock` 和 `options` 属性 [718](https://github.com/mallfoundry/taroify/pull/718) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Flex
+
+  - 修复 `flex` 在 `wrap` 情况下，如果设置了 `gutter`, 换行后首个元素错位 [712](https://github.com/mallfoundry/taroify/pull/712) [@Pilotager](https://github.com/Pilotager)
+
+- DatetimePicker
+
+  - 修复 `DatetimePicker` 可选择月和日的情况下，由于代码中先设置月份，会导致所有最后一天小于 `minDate` 的日的月份被设置为下一个月 [714](https://github.com/mallfoundry/taroify/pull/714) [@SexySix](https://github.com/SexySix)
+
+- Swiper
+
+  - 修复 `SwiperItem` 初始化后再渲染 [717](https://github.com/mallfoundry/taroify/pull/717) [@hbztd](https://github.com/hbztd)
+  - 修复在微信上 `TabsHeader` 滚动时，不应显示滚动条 [717](https://github.com/mallfoundry/taroify/pull/717) [@hbztd](https://github.com/hbztd)
+
+- Dropdown
+
+  - 修复 `Search` 有两个 X [718](https://github.com/mallfoundry/taroify/pull/718) [@hbztd](https://github.com/hbztd)
+
 ### v0.1.6-alpha.0
 
 `2024-03-24`
