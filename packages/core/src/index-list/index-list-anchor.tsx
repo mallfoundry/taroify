@@ -35,20 +35,17 @@ interface InternalIndexListAnchorProps extends IndexListAnchorProps {
 
 const IndexListAnchor = forwardRef(
   (props: IndexListAnchorProps, ref: ForwardedRef<IndexListAnchorInstance>) => {
-    const {
-      arrayedIndex,
-      index,
-      children,
-      className,
-      ...restProps
-    } = props as InternalIndexListAnchorProps
+    const { arrayedIndex, index, children, className, ...restProps } =
+      props as InternalIndexListAnchorProps
 
     const {
       activeArrayedIndex,
       sticky: stickyProp,
       stickyOffsetTop,
+      inner,
       getAnchorRects,
       getListRect,
+      getFirstAnchorTop,
     } = useContext(IndexListContext)
 
     const rootRef = useRef<TaroElement>()
@@ -78,14 +75,14 @@ const IndexListAnchor = forwardRef(
       if (arrayedIndex === activeArrayedIndex) {
         const { top, height } = getAnchorRects()[arrayedIndex]
 
-        const activeAnchorSticky = top <= 0
+        const activeAnchorSticky = top - getFirstAnchorTop() <= 0
 
         if (activeAnchorSticky) {
           wrapperStyle = {
             height: addUnitPx(height),
           }
           anchorStyle = {
-            position: "fixed",
+            position: inner ? "absolute" : "fixed",
             top: addUnitPx(stickyOffsetTop),
           }
         }

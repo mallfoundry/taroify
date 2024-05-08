@@ -1,6 +1,19 @@
 @import "./variables";
 
 .#{$component-prefix}index-list {
+  height: 100%;
+  position: relative;
+
+  &_scroll {
+    height: 100%;
+    overflow: auto;
+    overflow-anchor: auto;
+  }
+
+  // &_inner {
+  //   position: relative;
+  // }
+
   &__sidebar {
     position: fixed;
     top: 50%;

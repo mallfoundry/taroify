@@ -1,6 +1,7 @@
-import { Cell, IndexList, Tabs } from "@taroify/core"
+import { Cell, IndexList, Tabs, Popup, Button } from "@taroify/core"
 import * as _ from "lodash"
 import { Fragment, useState } from "react"
+import { View } from "@tarojs/components"
 import Page from "../../../components/page"
 import "./index.scss"
 
@@ -47,6 +48,46 @@ function CustomIndexBar() {
   )
 }
 
+function PopupIndexBar() {
+  const [open, setOpen] = useState(false)
+
+  const indexList: string[] = []
+  const charCodeOfA = "A".charCodeAt(0)
+
+  for (let i = 0; i < 26; i++) {
+    indexList.push(String.fromCharCode(charCodeOfA + i))
+  }
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>打开弹窗</Button>
+      <Popup
+        open={open}
+        style={{ height: "80%" }}
+        placement="bottom"
+        rounded
+        onClose={() => setOpen(false)}
+      >
+        <Popup.Close />
+        <View className="index-list-demo_wrap">
+          <IndexList inner>
+            {_.map(indexList, (index) => {
+              return (
+                <Fragment key={index}>
+                  <IndexList.Anchor index={index} />
+                  <Cell title="文本" />
+                  <Cell title="文本" />
+                  <Cell title="文本" />
+                </Fragment>
+              )
+            })}
+          </IndexList>
+        </View>
+      </Popup>
+    </>
+  )
+}
+
 export default function IndexBarDemo() {
   const [tab, setTab] = useState(0)
   return (
@@ -57,6 +98,9 @@ export default function IndexBarDemo() {
         </Tabs.TabPane>
         <Tabs.TabPane title="自定义索引列表">
           <CustomIndexBar />
+        </Tabs.TabPane>
+        <Tabs.TabPane title="配合弹窗使用">
+          <PopupIndexBar />
         </Tabs.TabPane>
       </Tabs>
     </Page>
