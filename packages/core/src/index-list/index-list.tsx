@@ -1,6 +1,6 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { ITouchEvent, ScrollView, View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
-import { usePageScroll } from "@tarojs/taro"
+import { usePageScroll, getEnv } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -91,6 +91,8 @@ export interface IndexListProps extends ViewProps {
   sticky?: boolean
   stickyOffsetTop?: number | string
   children?: ReactNode
+  inner?: boolean
+  delay?: number
 }
 
 function IndexList(props: IndexListProps) {
@@ -98,9 +100,15 @@ function IndexList(props: IndexListProps) {
     className,
     sticky = true,
     stickyOffsetTop = 0,
+    inner = false,
+    delay: delayProp,
     children: childrenProp,
     ...restProps
   } = props
+  const delay = inner ? (_.isNumber(delayProp) ? delayProp : 300) : 0
+
+  const TagElement = inner ? ScrollView : View
+
   const { anchorProps, anchorRefs, children } = useIndexBarChildren(childrenProp)
 
   const scrollTopRef = useRef(0)
@@ -115,10 +123,17 @@ function IndexList(props: IndexListProps) {
 
   const anchorRectsRef = useRef<Rect[]>([])
 
+  const anchorRectsCacheRef = useRef<Rect[]>([])
+
+  const firstAnchorTop = useRef(0)
+
+  const scrolling = useRef(false)
+
   const [activeAnchor, setActiveAnchor] = useState<{
     index?: number | string
     arrayedIndex?: number
   }>({})
+  const [scrollTop, setScrollTop] = useState<number>()
 
   const getListRect = useCallback(
     () =>
@@ -144,7 +159,7 @@ function IndexList(props: IndexListProps) {
       const prevHeight = i > 0 ? anchorRects[i - 1].height : 0
       const reachTop = sticky ? prevHeight : 0
 
-      if (reachTop >= anchorRects[i].top) {
+      if (reachTop + firstAnchorTop.current >= anchorRects[i].top) {
         return i
       }
     }
@@ -166,6 +181,18 @@ function IndexList(props: IndexListProps) {
   const scrollToAnchor = useCallback(
     (anchorArrayedIndex: number) => {
       if (anchorArrayedIndex < 0 || scrollToAnchorIndexRef.current === anchorArrayedIndex) {
+        return
+      }
+
+      if (inner) {
+        setScrollTop(anchorRectsCacheRef.current[anchorArrayedIndex].top - firstAnchorTop.current)
+        // if (getEnv() === "TT") {
+
+        // } else {
+        //   listRef.current?.scrollTo({
+        //     top: anchorRectsCacheRef.current[anchorArrayedIndex].top - firstAnchorTop.current,
+        //   })
+        // }
         return
       }
 
@@ -203,6 +230,10 @@ function IndexList(props: IndexListProps) {
 
   const onSidebarClick = useCallback((event: ITouchEvent) => scrollToEvent(event), [scrollToEvent])
 
+  const onTouchStart = useCallback(() => {
+    scrolling.current = true
+  }, [scrolling])
+
   const onTouchMove = useCallback(
     (event) => {
       preventDefault(event)
@@ -213,27 +244,44 @@ function IndexList(props: IndexListProps) {
 
   const onTouchStop = useCallback(() => (scrollToAnchorIndexRef.current = undefined), [])
 
-  const getRectAll = () => {
-    setTimeout(() => {
-      Promise.all([getListRect(), getSidebarRect(), getAnchorRects()])
-        .then((rects) => {
-          const [listRect, sidebarRect, anchorRects] = rects
-          listRectRef.current = listRect
-          sidebarRectRef.current = sidebarRect
-          anchorRectsRef.current = anchorRects
-        })
-        .then(onScroll)
-    }, 0)
+  const getRectAll = (init?: boolean) => {
+    setTimeout(
+      () => {
+        Promise.all([getListRect(), getSidebarRect(), getAnchorRects()])
+          .then((rects) => {
+            const [listRect, sidebarRect, anchorRects] = rects
+            listRectRef.current = listRect
+            sidebarRectRef.current = sidebarRect
+            anchorRectsRef.current = anchorRects
+            if (init && inner) {
+              anchorRectsCacheRef.current = anchorRects
+              firstAnchorTop.current = anchorRects[0].top || 0
+            }
+          })
+          .then(onScroll)
+      },
+      _.isNumber(delay) ? delay + 1 : 0,
+    )
   }
 
   useEffect(() => {
-    getRectAll();
+    getRectAll(true)
   }, [])
 
   usePageScroll(({ scrollTop }) => {
     scrollTopRef.current = scrollTop
-    getRectAll();
+    getRectAll()
   })
+
+  const onPageScroll = (e) => {
+    const { scrollTop } = e.detail
+    scrollTopRef.current = scrollTop
+    getRectAll()
+    if (scrolling.current) {
+      return
+    }
+    getEnv() === "WEB" && setScrollTop(scrollTop)
+  }
 
   const sidebarIndexes = useMemo(
     () =>
@@ -248,27 +296,42 @@ function IndexList(props: IndexListProps) {
       value={{
         sticky,
         stickyOffsetTop,
+        inner,
         activeIndex: activeAnchor?.index ?? -1,
         activeArrayedIndex: activeAnchor?.arrayedIndex ?? -1,
         getListRect: () => listRectRef.current,
         getAnchorRects: () => anchorRectsRef.current,
+        getFirstAnchorTop: () => firstAnchorTop.current,
       }}
     >
-      <View
-        ref={listRef}
-        className={classNames(prefixClassname("index-list"), className)}
-        {...restProps}
-      >
-        <IndexListSidebar
-          ref={sidebarRef}
-          onClick={onSidebarClick}
-          onTouchMove={onTouchMove}
-          onTouchCancel={onTouchStop}
-          onTouchEnd={onTouchStop}
+      <View className={classNames(prefixClassname("index-list"), className)}>
+        <TagElement
+          scrollY
+          ref={listRef}
+          className={prefixClassname("index-list_scroll")}
+          scrollTop={scrollTop}
+          scrollWithAnimation
+          scrollAnchoring
+          onScroll={onPageScroll}
+          onTouchStart={() => {
+            scrolling.current = false
+          }}
+          {...restProps}
         >
-          {sidebarIndexes}
-        </IndexListSidebar>
-        {children}
+          {/* <View className={prefixClassname("index-list_inner")}> */}
+          <IndexListSidebar
+            ref={sidebarRef}
+            onClick={onSidebarClick}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchCancel={onTouchStop}
+            onTouchEnd={onTouchStop}
+          >
+            {sidebarIndexes}
+          </IndexListSidebar>
+          {children}
+          {/* </View> */}
+        </TagElement>
       </View>
     </IndexListContext.Provider>
   )
