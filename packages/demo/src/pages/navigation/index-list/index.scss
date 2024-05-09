@@ -2,8 +2,17 @@
 @import "../../../styles/prefix";
 
 .index-list-demo {
-
   .#{$demo-prefix}block__content {
     padding: 0;
+  }
+
+  &_btn {
+    margin: 40px 0;
+  }
+
+  &_wrap {
+    padding-top: 80px;
+    box-sizing: border-box;
+    height: 100%;
   }
 }
