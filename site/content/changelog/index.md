@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.2.0-alpha.0
+
+`2024-05-09`
+
+**Feature**
+
+- IndexList
+
+  - 添加底部弹窗内使用方式 [721](https://github.com/mallfoundry/taroify/pull/721) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- Taro 相关依赖项改为 >=3 [721](https://github.com/mallfoundry/taroify/pull/721) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.1.7-alpha.0
 
 `2024-04-28`
