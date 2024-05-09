@@ -92,7 +92,9 @@ export interface IndexListProps extends ViewProps {
   stickyOffsetTop?: number | string
   inner?: boolean
   delay?: number
+  showSidebar?: boolean
   children?: ReactNode
+  onChange?: (current: number, anchor: number | string) => void
 }
 
 function IndexList(props: IndexListProps) {
@@ -102,7 +104,9 @@ function IndexList(props: IndexListProps) {
     stickyOffsetTop = 0,
     inner = false,
     delay: delayProp,
+    showSidebar = true,
     children: childrenProp,
+    onChange,
     ...restProps
   } = props
   const delay = inner ? (_.isNumber(delayProp) ? delayProp : 300) : 0
@@ -173,6 +177,10 @@ function IndexList(props: IndexListProps) {
         arrayedIndex,
         index: anchorProps[arrayedIndex].index,
       })
+      if (scrollToAnchorIndexRef.current !== arrayedIndex) {
+        scrollToAnchorIndexRef.current = arrayedIndex
+        onChange?.(arrayedIndex, anchorProps[arrayedIndex].index)
+      }
     } else {
       setActiveAnchor({})
     }
@@ -309,17 +317,19 @@ function IndexList(props: IndexListProps) {
           className,
         )}
       >
-        <IndexListSidebar
-          ref={sidebarRef}
-          inner={inner}
-          onClick={onSidebarClick}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchCancel={onTouchStop}
-          onTouchEnd={onTouchStop}
-        >
-          {sidebarIndexes}
-        </IndexListSidebar>
+        {showSidebar && (
+          <IndexListSidebar
+            ref={sidebarRef}
+            inner={inner}
+            onClick={onSidebarClick}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchCancel={onTouchStop}
+            onTouchEnd={onTouchStop}
+          >
+            {sidebarIndexes}
+          </IndexListSidebar>
+        )}
         <TagElement
           scrollY
           ref={listRef}
