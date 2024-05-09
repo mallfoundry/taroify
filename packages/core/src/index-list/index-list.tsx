@@ -90,9 +90,9 @@ function useIndexBarChildren(children?: ReactNode): IndexBarChildren {
 export interface IndexListProps extends ViewProps {
   sticky?: boolean
   stickyOffsetTop?: number | string
-  children?: ReactNode
   inner?: boolean
   delay?: number
+  children?: ReactNode
 }
 
 function IndexList(props: IndexListProps) {
@@ -186,13 +186,6 @@ function IndexList(props: IndexListProps) {
 
       if (inner) {
         setScrollTop(anchorRectsCacheRef.current[anchorArrayedIndex].top - firstAnchorTop.current)
-        // if (getEnv() === "TT") {
-
-        // } else {
-        //   listRef.current?.scrollTo({
-        //     top: anchorRectsCacheRef.current[anchorArrayedIndex].top - firstAnchorTop.current,
-        //   })
-        // }
         return
       }
 
@@ -269,6 +262,9 @@ function IndexList(props: IndexListProps) {
   }, [])
 
   usePageScroll(({ scrollTop }) => {
+    if (inner) {
+      return
+    }
     scrollTopRef.current = scrollTop
     getRectAll()
   })
@@ -304,11 +300,32 @@ function IndexList(props: IndexListProps) {
         getFirstAnchorTop: () => firstAnchorTop.current,
       }}
     >
-      <View className={classNames(prefixClassname("index-list"), className)}>
+      <View
+        className={classNames(
+          prefixClassname("index-list"),
+          {
+            inner: inner,
+          },
+          className,
+        )}
+      >
+        <IndexListSidebar
+          ref={sidebarRef}
+          inner={inner}
+          onClick={onSidebarClick}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchCancel={onTouchStop}
+          onTouchEnd={onTouchStop}
+        >
+          {sidebarIndexes}
+        </IndexListSidebar>
         <TagElement
           scrollY
           ref={listRef}
-          className={prefixClassname("index-list_scroll")}
+          className={classNames({
+            [prefixClassname("index-list_scroll")]: inner,
+          })}
           scrollTop={scrollTop}
           scrollWithAnimation
           scrollAnchoring
@@ -318,19 +335,7 @@ function IndexList(props: IndexListProps) {
           }}
           {...restProps}
         >
-          {/* <View className={prefixClassname("index-list_inner")}> */}
-          <IndexListSidebar
-            ref={sidebarRef}
-            onClick={onSidebarClick}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchCancel={onTouchStop}
-            onTouchEnd={onTouchStop}
-          >
-            {sidebarIndexes}
-          </IndexListSidebar>
           {children}
-          {/* </View> */}
         </TagElement>
       </View>
     </IndexListContext.Provider>

@@ -1,8 +1,10 @@
 @import "./variables";
 
 .#{$component-prefix}index-list {
-  height: 100%;
-  position: relative;
+  &.inner {
+    height: 100%;
+    position: relative;
+  }
 
   &_scroll {
     height: 100%;
@@ -26,6 +28,10 @@
     cursor: pointer;
     user-select: none;
     transform: translateY(-50%);
+
+    &.inner {
+      position: absolute;
+    }
   }
 
   &__index {

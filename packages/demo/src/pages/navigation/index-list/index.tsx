@@ -60,7 +60,9 @@ function PopupIndexBar() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>打开弹窗</Button>
+      <Button block color="primary" className="index-list-demo_btn" onClick={() => setOpen(true)}>
+        打开弹窗
+      </Button>
       <Popup
         open={open}
         style={{ height: "80%" }}
@@ -70,7 +72,7 @@ function PopupIndexBar() {
       >
         <Popup.Close />
         <View className="index-list-demo_wrap">
-          <IndexList inner>
+          <IndexList inner delay={300} sticky={false}>
             {_.map(indexList, (index) => {
               return (
                 <Fragment key={index}>
