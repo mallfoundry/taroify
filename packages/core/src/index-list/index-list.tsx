@@ -17,6 +17,8 @@ import {
   useRef,
   useState,
   useEffect,
+  forwardRef,
+  useImperativeHandle,
 } from "react"
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
@@ -97,7 +99,7 @@ export interface IndexListProps extends ViewProps {
   onChange?: (current: number, anchor: number | string) => void
 }
 
-function IndexList(props: IndexListProps) {
+const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
   const {
     className,
     sticky = true,
@@ -295,6 +297,14 @@ function IndexList(props: IndexListProps) {
     [anchorProps],
   )
 
+  useImperativeHandle(ref, () => {
+    return {
+      scrollTo(index) {
+        scrollToAnchor(index)
+      },
+    }
+  })
+
   return (
     <IndexListContext.Provider
       value={{
@@ -350,6 +360,6 @@ function IndexList(props: IndexListProps) {
       </View>
     </IndexListContext.Provider>
   )
-}
+})
 
 export default IndexList
