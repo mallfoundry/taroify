@@ -12,6 +12,18 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.2.1-alpha.0
+
+`2024-05-10`
+
+**Feature**
+
+- IndexList
+
+  - 添加 `showSidebar` 和 `onChange` 属性 [723](https://github.com/mallfoundry/taroify/pull/723) [@Pilotager](https://github.com/Pilotager)
+
+  - 添加手动调用 `scrollTo` 方法 [724](https://github.com/mallfoundry/taroify/pull/724) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.2.0-alpha.0
 
 `2024-05-09`
