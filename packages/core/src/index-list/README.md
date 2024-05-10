@@ -129,6 +129,14 @@ function PopupIndexBar() {
 | -------- | ---------------- | ------------------------------------------- |
 | onChange | 索引位变化时触发 | _current: number, anchor: number \| string_ |
 
+### IndexList Method
+
+通过 `ref` 可以获取到 IndexList 实例并调用实例方法
+
+| 方法名   | 说明         | 参数  | 返回值 |
+| :------- | ------------ | ----- | ------ |
+| scrollTo | 跳转指定位置 | index | -      |
+
 ### IndexList.Anchor Props
 
 | 参数     | 说明     | 类型               | 默认值 |
