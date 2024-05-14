@@ -18,6 +18,7 @@ import {
   useMemo,
 } from "react"
 import { CellBase, CellProps, CellValue } from "../cell"
+import { iconMap } from "../cell/cell-base"
 import Form, { useFormField, useFormValue } from "../form"
 import FormContext from "../form/form.context"
 import { prefixClassname } from "../styles"
@@ -96,7 +97,10 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       align,
       bordered,
       icon,
-      rightIcon,
+      rightIcon: rightIconProp,
+      size,
+      isLink = false,
+      arrowDirection = "right",
       clickable,
       required,
       children: childrenProp,
@@ -109,6 +113,17 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
     const shouldUpdateSignal = useShouldUpdateSignal(shouldUpdate)
 
     const { label, control, feedbacks, children } = useFormItemChildren(childrenProp, shouldUpdateSignal, noStyle)
+    const rightIcon = useMemo(() => {
+      if (rightIconProp) {
+        return cloneIconElement(rightIconProp, {
+          className: prefixClassname("form-item__right-icon"),
+        })
+      } else if (isLink && iconMap[arrowDirection] ) {
+        const Icon = iconMap[arrowDirection]
+        return <Icon className={ prefixClassname("form-item__right-icon") } />
+      }
+      return null
+    }, [rightIconProp, isLink, arrowDirection])
 
     const rulesRef = useToRef(rulesProp)
 
@@ -226,10 +241,9 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
           bordered={bordered}
           align={align}
           clickable={clickable}
+          size={size}
           icon={cloneIconElement(icon, { className: prefixClassname("form-item__icon") })}
-          rightIcon={cloneIconElement(rightIcon, {
-            className: prefixClassname("form-item__right-icon"),
-          })}
+          rightIcon={rightIcon}
           required={required}
           {...(onClick && { onClick })}
         >

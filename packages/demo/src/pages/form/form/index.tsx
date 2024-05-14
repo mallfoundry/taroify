@@ -209,7 +209,7 @@ function DatetimePickerField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="datetimePicker" clickable rightIcon={<ArrowRight />}>
+      <Form.Item ref={itemRef} name="datetimePicker" clickable isLink>
         <Form.Label>时间选择</Form.Label>
         <Form.Control>
           {(controller) => (
@@ -255,7 +255,7 @@ function CalendarField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="calendar" clickable rightIcon={<ArrowRight />}>
+      <Form.Item ref={itemRef} name="calendar" clickable isLink>
         <Form.Label>日历</Form.Label>
         <Form.Control>
           {(controller) => (
