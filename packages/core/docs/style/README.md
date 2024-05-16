@@ -10,15 +10,15 @@ Taroify 中默认包含了一些常用样式，可以直接通过 className 的�
 
 ```jsx
 <!-- 最多显示一行 -->
-<View class="taroify-ellipsis">这是一段最多显示一行的文字，多余的内容会被省略</View>
+<View className="taroify-ellipsis">这是一段最多显示一行的文字，多余的内容会被省略</View>
 
 <!-- 最多显示两行 -->
-<View class="taroify-ellipsis--l2">
+<View className="taroify-ellipsis--l2">
   这是一段最多显示两行的文字，多余的内容会被省略
 </View>
 
 <!-- 最多显示三行 -->
-<View class="taroify-ellipsis--l3">
+<View className="taroify-ellipsis--l3">
   这是一段最多显示三行的文字，多余的内容会被省略
 </View>
 ```
@@ -29,22 +29,22 @@ Taroify 中默认包含了一些常用样式，可以直接通过 className 的�
 
 ```jsx
 <!-- 上边框 -->
-<View class="taroify-hairline--top"></View>
+<View className="taroify-hairline--top"></View>
 
 <!-- 下边框 -->
-<View class="taroify-hairline--bottom"></View>
+<View className="taroify-hairline--bottom"></View>
 
 <!-- 左边框 -->
-<View class="taroify-hairline--left"></View>
+<View className="taroify-hairline--left"></View>
 
 <!-- 右边框 -->
-<View class="taroify-hairline--right"></View>
+<View className="taroify-hairline--right"></View>
 
 <!-- 上下边框 -->
-<View class="taroify-hairline--top-bottom"></View>
+<View className="taroify-hairline--top-bottom"></View>
 
 <!-- 全边框 -->
-<View class="taroify-hairline--surround"></View>
+<View className="taroify-hairline--surround"></View>
 ```
 
 ### 动画
