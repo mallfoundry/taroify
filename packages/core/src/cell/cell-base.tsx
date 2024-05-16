@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
 import { CellBaseProps, ArrowDirection } from "./cell.shared"
 
-const iconMap: Record<ArrowDirection, any> = {
+export const iconMap: Record<ArrowDirection, any> = {
   right: ArrowRight,
   left: ArrowLeft,
   up: ArrowUp,

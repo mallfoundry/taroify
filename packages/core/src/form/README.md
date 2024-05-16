@@ -486,7 +486,7 @@ function DependenciesDemo() {
   }
 
   return (
-    <Form ref={formRef} onSubmit={onSubmit}>
+    <Form ref={formRef} onSubmit={onSubmit} validateTrigger="onChange">
       <Toast id="toast" />
       <Cell.Group inset>
         <Form.Item name="username" rules={[{ required: true, message: "请输入用户名" }]}>
@@ -510,24 +510,11 @@ function DependenciesDemo() {
             }
           }]}
         >
-          <Form.Label>密码</Form.Label>
+          <Form.Label>确认密码</Form.Label>
           <Form.Control>
-            <Input placeholder="密码" />
+            <Input placeholder="确认密码" />
           </Form.Control>
         </Form.Item>
-        <Field
-          name="confirmPassword2"
-          dependencies={["password"]}
-          label="密码"
-          rules={[{ required: true, message: "请再次输入密码" }, {
-            validator: (val) => {
-
-              return formRef.current?.getValues<any>()?.password === val ? true : "密码不一致"
-            }
-          }]}
-        >
-          <Input placeholder="密码" />
-        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">

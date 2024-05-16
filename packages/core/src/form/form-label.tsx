@@ -14,18 +14,22 @@ export interface FormLabelProps extends ViewProps {
 }
 
 function FormLabel(props: FormLabelProps) {
-  const { align: alignProp, colon: colonProp, children, ...restProps } = props
+  const { align: alignProp, colon: colonProp, children, className, ...restProps } = props
   const { colon: ctxColon, labelAlign } = useContext(FormContext)
   const align = alignProp ?? labelAlign
   const colon = colonProp ?? ctxColon
 
   return (
     <CellTitle
-      className={classNames(prefixClassname("form-label"), {
-        [prefixClassname("form-label--left")]: align === "left",
-        [prefixClassname("form-label--center")]: align === "center",
-        [prefixClassname("form-label--right")]: align === "right",
-      })}
+      className={classNames(
+        prefixClassname("form-label"),
+        {
+          [prefixClassname("form-label--left")]: align === "left",
+          [prefixClassname("form-label--center")]: align === "center",
+          [prefixClassname("form-label--right")]: align === "right",
+        },
+        className
+    )}
       {...restProps}
     >
       {children}
