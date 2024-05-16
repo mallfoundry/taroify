@@ -9,6 +9,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
+import { inBrowser } from "../utils/base"
 import { preventDefault } from "../utils/dom/event"
 import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
 import NativeInput from "./native-input"
@@ -161,7 +162,7 @@ function Input(props: InputProps) {
             // [prefixClassname("input__placeholder--danger")]: color === "danger",
           },
         )}
-        disabled={disabled}
+        disabled={inBrowser? disabled: (disabled || readonly)}
         readonly={readonly}
         color={color}
         value={value}
