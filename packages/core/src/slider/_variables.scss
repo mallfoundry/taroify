@@ -2,7 +2,7 @@
 @import "../styles/variables";
 
 $slider-border-radius: var(--slider-border-radius, var(--border-radius-max, $border-radius-max));
-$slider-active-background-color:  var(--slider-active-background-color, var(--blue, $blue));
+$slider-active-background-color:  var(--slider-active-background-color, $primary-color);
 $slider-inactive-background-color: var(--slider-inactive-background-color, var(--gray-3, $gray-3));
 $slider-disabled-opacity: var(--slider-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
 $slider-track-height: var(--slider-track-height, 2px * $hd);

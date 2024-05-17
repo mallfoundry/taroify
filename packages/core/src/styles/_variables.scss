@@ -29,7 +29,7 @@ $gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
 $gradient-orange: linear-gradient(to right, #ffd01e, #ff8917);
 
 // Component Colors
-$primary-color: var(--blue, $blue);
+$primary-color: var(--primary-color, $blue);
 $info-color: var(--cyan, $cyan);
 $success-color: var(--green, $green);
 $warning-color: var(--orange, $orange);

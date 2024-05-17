@@ -5,7 +5,7 @@ $pagination-height: var(--pagination-height, 40px * $hd);
 $pagination-font-size: var(--pagination-font-size, var(--font-size-md, $font-size-md));
 $pagination-background-color: var(--pagination-background-color, var(--white, $white));
 $pagination-item-min-width: var(--pagination-item-min-width, 36px * $hd);
-$pagination-item-color: var(--pagination-item-color, var(--blue, $blue));
+$pagination-item-color: var(--pagination-item-color, $primary-color);
 $pagination-item-active-color: var(--pagination-item-active-color, var(--white, $white));
 $pagination-item-active-background-color: var(--pagination-item-active-background-color, $pagination-item-color);
 $pagination-item-disabled-color: var(--pagination-item-disabled-color, var(--gray-7, $gray-7));
