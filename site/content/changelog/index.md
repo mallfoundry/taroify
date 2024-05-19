@@ -14,6 +14,50 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ### v0.2.1-alpha.0
 
+`2024-05-19`
+
+**Bug Fixes**
+
+- Input
+
+  - 修复 `readonly` 属性 [731](https://github.com/mallfoundry/taroify/pull/731) [@SexySix](https://github.com/SexySix)
+
+- Form
+
+  - 修复 `Form.Label`设置 `className` 后，组件本身 `className` 被覆盖 [733](https://github.com/mallfoundry/taroify/pull/733) [@hbztd](https://github.com/hbztd)
+
+  - 修复 `Form.Item`、`isLink` 属性不起作用 [733](https://github.com/mallfoundry/taroify/pull/733) [@hbztd](https://github.com/hbztd)
+
+- BackTop
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- Badge
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- NavBar
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- Pagination
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- Slider
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- Swiper
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+- Tabbar
+
+  - 组件默认高亮颜色应该从 `--primary-color` 取，而不是 `--blue` [734](https://github.com/mallfoundry/taroify/pull/734) [@hbztd](https://github.com/hbztd)
+
+### v0.2.1-alpha.0
+
 `2024-05-10`
 
 **Feature**
