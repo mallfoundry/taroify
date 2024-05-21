@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useMemo, useRef, useState, useEffect } from "react"
 import { Canvas, View } from "@tarojs/components"
-import { getEnv, getWindowInfo } from "@tarojs/taro"
+import { getEnv, getSystemInfoSync } from "@tarojs/taro"
 import cls from "classnames"
 import { useCanvas } from "../hooks"
 import { prefixClassname } from "../styles"
@@ -36,7 +36,7 @@ function Watermark(props: WatermarkProps) {
     fullPage = false,
     content = "",
     textSize = 20,
-    textColor = "#dcdee0"
+    textColor = "#dcdee0",
   } = props
   const width = useMemo(() => widthProp + gapX, [widthProp, gapX])
   const height = useMemo(() => heightProp + gapY, [heightProp, gapY])
@@ -63,62 +63,62 @@ function Watermark(props: WatermarkProps) {
       if (imageProp) {
         // @ts-ignore
         const image: HTMLImageElement = getEnv() === "WEB" ? new Image() : canvas.createImage()
-        image.crossOrigin = "anonymous";
-        image.referrerPolicy = "no-referrer";
+        image.crossOrigin = "anonymous"
+        image.referrerPolicy = "no-referrer"
 
         image.onload = () => {
-          canvas.width = (image.width + gapX)
-          canvas.height = (image.height + gapY)
+          canvas.width = image.width + gapX
+          canvas.height = image.height + gapY
           ctx.globalAlpha = opacity
-          ctx.translate(canvas.width / 2, canvas.height / 2);
-          ctx.rotate((rotate * Math.PI) / 180);
-          ctx.translate(-canvas.width / 2, -canvas.height / 2);
-          ctx?.drawImage(image, gapX, gapY);
+          ctx.translate(canvas.width / 2, canvas.height / 2)
+          ctx.rotate((rotate * Math.PI) / 180)
+          ctx.translate(-canvas.width / 2, -canvas.height / 2)
+          ctx?.drawImage(image, gapX, gapY)
           setWatermarkUrl(canvas.toDataURL())
-        };
-        image.src = imageProp;
+        }
+        image.src = imageProp
       } else {
-        const ratio = getWindowInfo().pixelRatio || 1
+        const ratio = getSystemInfoSync().pixelRatio || 1
         canvas.width = width * ratio
         canvas.height = height * ratio
         ctx.scale(ratio, ratio)
         ctx.globalAlpha = opacity
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.rotate((rotate * Math.PI) / 180);
-        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        ctx.translate(canvas.width / 2, canvas.height / 2)
+        ctx.rotate((rotate * Math.PI) / 180)
+        ctx.translate(-canvas.width / 2, -canvas.height / 2)
         ctx.textAlign = "left"
         ctx.font = `${textSize}px sans-serif`
-        ctx.fillStyle = textColor;
-        ctx.textBaseline = "top";
+        ctx.fillStyle = textColor
+        ctx.textBaseline = "top"
         ctx.fillText(content, gapX, gapY)
         setWatermarkUrl(canvas.toDataURL())
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gapX, gapY, imageProp, width, height, rotate, opacity, content, textSize, textColor, loaded])
-  const style = useMemo(() => ({
-    zIndex,
-    backgroundImage: `url(${watermarkUrl})`,
-    backgroundSize: `${width}px ${height}px`
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [zIndex, watermarkUrl])
+  const style = useMemo(
+    () => ({
+      zIndex,
+      backgroundImage: `url(${watermarkUrl})`,
+      backgroundSize: `${width}px ${height}px`,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }),
+    [zIndex, watermarkUrl],
+  )
 
-  return <View
-    className={cls({
-      [prefixClassname("watermark")]: true,
-      [prefixClassname("watermark--full")]: fullPage
-    })}
-    style={style}
-  >
-    <View className={prefixClassname("watermark__wrapper")}>
-      <Canvas
-        type="2d"
-        id={canvasId}
-        canvasId={canvasId}
-        ref={canvasRef}
-      />
+  return (
+    <View
+      className={cls({
+        [prefixClassname("watermark")]: true,
+        [prefixClassname("watermark--full")]: fullPage,
+      })}
+      style={style}
+    >
+      <View className={prefixClassname("watermark__wrapper")}>
+        <Canvas type="2d" id={canvasId} canvasId={canvasId} ref={canvasRef} />
+      </View>
     </View>
-  </View>
+  )
 }
 
 export default Watermark
