@@ -12,7 +12,25 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
-### v0.2.1-alpha.0
+### v0.2.2-alpha.1
+
+`2024-05-30`
+
+**Bug Fixes**
+
+- Tabbar
+
+  - 修复 `Tabbar icon` 传递 `ReactNode` 丢失原有 `className` [736](https://github.com/mallfoundry/taroify/pull/736) [@wenqiyun](https://github.com/wenqiyun)
+
+- Signature
+
+  - 修复 `getWindowInfo` 在抖音小程序报错问题 [738](https://github.com/mallfoundry/taroify/pull/736) [@Pilotager](https://github.com/Pilotager)
+
+- PullRefresh
+
+  - 修复小程序环境内 `throttle` 报 `now of undefined` [743](https://github.com/mallfoundry/taroify/pull/743) [@Pilotager](https://github.com/Pilotager)
+
+### v0.2.2-alpha.0
 
 `2024-05-19`
 
