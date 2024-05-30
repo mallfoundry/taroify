@@ -2,7 +2,6 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -22,6 +21,7 @@ import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { usePreviousRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
+import { throttle } from "../utils/lodash-polyfill"
 import {
   PullRefreshCompleted,
   PullRefreshCompletedProps,
@@ -200,7 +200,7 @@ function PullRefresh(props: PullRefreshProps) {
 
   const onTouchMove = useMemo(
     () =>
-      _.throttle((event) => {
+      throttle((event) => {
         if (isTouchable()) {
           if (!reachTopPreviousRef.current) {
             checkPosition(event)
@@ -333,7 +333,7 @@ function PullRefresh(props: PullRefreshProps) {
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
-          // 
+          //
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
