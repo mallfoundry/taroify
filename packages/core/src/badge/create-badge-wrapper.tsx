@@ -19,21 +19,25 @@ function acquireCloneElement(wrapper: ReactNode) {
 
 const createBadgeWrapper =
   <P extends StandardProps = PropsWithChildren<ViewProps>>(wrapper: ReactNode) =>
-    (props: P): JSX.Element => {
-      const { className, ...restProps } = props
-      const cloneElement = acquireCloneElement(wrapper)
+  (props: P): JSX.Element => {
+    const { className, ...restProps } = props
+    const cloneElement = acquireCloneElement(wrapper)
 
-      if (cloneElement) {
-        wrapper = cloneElement(
-          wrapper as ReactElement,
-          {
-            className: classNames(prefixClassname("badge-wrapper"), className, wrapper?.props?.className),
-            ...restProps,
-          } as IconProps,
-        )
-      }
-
-      return <BadgeWrapperContext.Provider value={{}} children={wrapper} />
+    if (cloneElement) {
+      wrapper = cloneElement(
+        wrapper as ReactElement,
+        {
+          className: classNames(
+            prefixClassname("badge-wrapper"),
+            className,
+            (wrapper as ReactElement)?.props?.className,
+          ),
+          ...restProps,
+        } as IconProps,
+      )
     }
+
+    return <BadgeWrapperContext.Provider value={{}} children={wrapper} />
+  }
 
 export default createBadgeWrapper
