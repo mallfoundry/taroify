@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ReactNode, useRef, useImperativeHandle, forwardRef } from "react"
+import { ReactNode, useRef, useImperativeHandle, forwardRef, ForwardRefExoticComponent } from "react"
 import Form, { FormController, FormFeedbackProps, FormItemInstance, FormItemProps, FormLabelProps } from "../form"
 import { createVariantElement } from "../utils/element"
 
@@ -33,4 +33,4 @@ function _Field(props: FieldProps, ref) {
 
 const Field = forwardRef<FormItemInstance, FieldProps>(_Field)
 
-export default Field
+export default Field as ForwardRefExoticComponent<FieldProps>
