@@ -114,7 +114,7 @@ function Calendar(props: CalendarProps) {
     onConfirm,
     onClose,
   } = props
-
+  const scrollToDateLoadingRef = useRef(false);
   const Wrapper = useMemo<React.FC<PopupProps>>(() => poppable ? Popup : ({children}) => <>{children}</>, [poppable])
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const defaultValue = useMemo(() => getInitialDate(defaultValueProp), [])
@@ -298,6 +298,9 @@ function Calendar(props: CalendarProps) {
   }
 
   async function onScroll() {
+    if (scrollToDateLoadingRef.current) {
+      return
+    }
     const top = await getScrollTop(scrollViewRef)
     const bottom = top + scrollViewHeightRef.current
     const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
@@ -331,6 +334,7 @@ function Calendar(props: CalendarProps) {
   async function scrollToDate(targetDate?: Date) {
     months.some((month, index) => {
       if (compareYearMonth(month, targetDate as Date) === 0) {
+        scrollToDateLoadingRef.current = true
         const currentMonthRef = getMonthRef(index)
         const month = currentMonthRef.current.getValue()
         setCurrentMonth(month)
@@ -344,11 +348,17 @@ function Calendar(props: CalendarProps) {
               ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
                 const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
                 scrollViewRef.current!.scrollTop = newBodyScrollTop
+                nextTick(() => {
+                  scrollToDateLoadingRef.current = false
+                })
               })
             }
           })
         } else {
           setScrollIntoView(genMonthId(month))
+          nextTick(() => {
+            scrollToDateLoadingRef.current = false
+          })
         }
 
 
@@ -368,8 +378,6 @@ function Calendar(props: CalendarProps) {
       if (_.isDate(targetDate)) {
         scrollToDate(targetDate);
       }
-    } else {
-      onScroll()
     }
   }
 
