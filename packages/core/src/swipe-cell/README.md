@@ -8,8 +8,6 @@
 
 ```tsx
 import { SwipeCell } from "@taroify/core"
-// or
-import SwipeCell from "@taroify/core/swipe-cell"
 ```
 
 ## 代码演示

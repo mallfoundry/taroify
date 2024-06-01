@@ -8,8 +8,6 @@
 
 ```ts
 import { Badge } from "@taroify/core"
-// or
-import Badge from "@taroify/core/badge"
 ```
 
 ## 代码演示

@@ -8,8 +8,6 @@
 
 ```tsx
 import { ActionSheet } from "@taroify/core"
-// or
-import ActionSheet from "@taroify/core/action-sheet"
 ```
 
 ## 代码演示

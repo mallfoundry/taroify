@@ -8,8 +8,6 @@
 
 ```ts
 import { Grid } from "@taroify/core"
-// or
-import Grid from "@taroify/core/grid"
 ```
 
 ## 代码演示

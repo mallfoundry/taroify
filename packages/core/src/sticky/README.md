@@ -8,8 +8,6 @@ Sticky 组件与 CSS 中 `position: sticky` 属性实现的效果一致，当组
 
 ```tsx
 import { Sticky } from "@taroify/core"
-// or
-import Sticky from "@taroify/core/sticky"
 ```
 
 ## 代码演示

@@ -7,7 +7,7 @@
 ### 引入
 
 ```tsx
-import { Button, Cell, Field, Input, Textarea } from "@taroify/core"
+import { Field } from "@taroify/core"
 ```
 
 ## 代码演示

@@ -8,8 +8,6 @@
 
 ```tsx
 import { NoticeBar } from "@taroify/core"
-// or
-import NoticeBar from "@taroify/core/notice-bar"
 ```
 
 ## 代码演示

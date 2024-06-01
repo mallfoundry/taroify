@@ -8,8 +8,6 @@
 
 ```ts
 import { Empty } from "@taroify/core"
-// or
-import Empty from "@taroify/core/empty"
 ```
 
 ## 代码演示

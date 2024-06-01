@@ -8,8 +8,6 @@
 
 ```tsx
 import { ShareSheet } from "@taroify/core"
-// or
-import ShareSheet from "@taroify/core/share-sheet"
 ```
 
 ## 代码演示
