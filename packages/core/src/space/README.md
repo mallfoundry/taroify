@@ -8,8 +8,6 @@
 
 ```tsx
 import { Button, Space } from "@taroify/core"
-// or
-import Space from "@taroify/core/space"
 ```
 
 ## 代码演示

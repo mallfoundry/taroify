@@ -8,8 +8,6 @@
 
 ```js
 import { Pagination } from "@taroify/core"
-// or
-import Pagination from "@taroify/core/pagination"
 ```
 
 ## 代码演示

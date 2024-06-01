@@ -8,8 +8,6 @@
 
 ```tsx
 import { ActionBar } from "@taroify/commerce"
-// or
-import ActionBar from "@taroify/commerce/action-bar"
 ```
 
 ## 代码演示

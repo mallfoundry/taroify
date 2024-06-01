@@ -8,8 +8,6 @@
 
 ```tsx
 import { Progress } from "@taroify/core"
-// or
-import Progress from "@taroify/core/progress"
 ```
 
 ## 代码演示

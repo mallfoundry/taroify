@@ -77,3 +77,22 @@ Taroify 中默认包含了一些常用样式，可以直接通过 className 的�
   <View>Slide Right</View>
 </Transition>
 ```
+Transition来源于 `react-transition-group` 的 `CSSTransition`,详情请查看其[文档](https://reactcommunity.org/react-transition-group/css-transition)
+
+```tsx
+interface TransitionProps {
+  name?: TransitionName | string
+  in?: boolean
+  appear?: boolean
+  mountOnEnter?: boolean
+  unmountOnExit?: boolean
+  timeout?: number | { appear?: number; enter?: number; exit?: number }
+  children?: ReactNode
+  onEnter?: EnterHandler<HTMLElement>
+  onEntering?: EnterHandler<HTMLElement>
+  onEntered?: EnterHandler<HTMLElement>
+  onExit?: ExitHandler<HTMLElement>
+  onExiting?: ExitHandler<HTMLElement>
+  onExited?: ExitHandler<HTMLElement>
+}
+```

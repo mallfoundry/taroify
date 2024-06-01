@@ -8,8 +8,6 @@
 
 ```ts
 import { Divider } from "@taroify/core"
-// or
-import Divider from "@taroify/core/divider"
 ```
 
 ## 代码演示

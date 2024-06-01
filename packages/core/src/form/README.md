@@ -14,7 +14,7 @@ import { Form } from "@taroify/core"
 
 ### 基础用法
 
-在表单中，每个 `Form.Item` 代表一个表单项，使用 Field 的 `rules` 属性定义校验规则。
+在表单中，每个 `Form.Item` 代表一个表单项
 
 ```tsx
 function BasicForm() {
@@ -55,7 +55,33 @@ function BasicForm() {
   )
 }
 ```
-> Tips: 推荐可以使用`Field`组件，可以减少代码量，提高可读性
+使用`Field`组件
+```tsx
+function BasicForm() {
+  const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
+    Toast.open(JSON.stringify(event.detail.value))
+  }
+
+  return (
+    <Form onSubmit={onSubmit}>
+      <Toast id="toast" />
+      <Cell.Group inset>
+        <Field  label="用户名" name="username" rules={[{ required: true, message: "请填写用户名" }]}>
+          <Input placeholder="用户名" />
+        </Field>
+        <Field label="密码" name="password" rules={[{ required: true, message: "请填写密码" }]}>
+          <Input password placeholder="密码" />
+        </Field>
+      </Cell.Group>
+      <View style={{ margin: "16px" }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+      </View>
+    </Form>
+  )
+}
+```
 
 ### 校验规则
 
@@ -86,39 +112,30 @@ function FormWithRules() {
     <Form defaultValues={{ validatorMessage: "abc" }} onValidate={onValidate}>
       <Toast id="toast" />
       <Cell.Group inset>
-        <Form.Item name="pattern" rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}>
-          <Form.Label>文本</Form.Label>
-          <Form.Control>
-            <Input placeholder="正则校验" />
-          </Form.Control>
-        </Form.Item>
-        <Form.Item
+        <Field label="文本" name="pattern" rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}>
+          <Input placeholder="正则校验" />
+        </Field>
+        <Field
+          label="文本"
           name="validator"
           rules={[{ validator: (val) => /1\d{10}/.test(val), message: "请输入正确内容" }]}
         >
-          <Form.Label>文本</Form.Label>
-          <Form.Control>
-            <Input placeholder="函数校验" />
-          </Form.Control>
-        </Form.Item>
-        <Form.Item
+          <Input placeholder="函数校验" />
+        </Field>
+        <Field
+          label="文本"
           name="validatorMessage"
           rules={[{ validator: (val) => `${val ?? ""} 不合法，请重新输入` }]}
         >
-          <Form.Label>文本</Form.Label>
-          <Form.Control>
-            <Input placeholder="校验函数返回错误提示" />
-          </Form.Control>
-        </Form.Item>
-        <Form.Item
+          <Input placeholder="校验函数返回错误提示" />
+        </Field>
+        <Field
+          label="文本"
           name="asyncValidator"
           rules={[{ validator: asyncValidator, message: "请输入正确内容" }]}
         >
-          <Form.Label>文本</Form.Label>
-          <Form.Control>
-            <Input placeholder="异步函数校验" />
-          </Form.Control>
-        </Form.Item>
+          <Input placeholder="异步函数校验" />
+        </Field>
       </Cell.Group>
       <View style={{ margin: "16px" }}>
         <Button shape="round" block color="primary" formType="submit">
@@ -134,13 +151,10 @@ function FormWithRules() {
 
 在表单中使用 [Switch 组件](/components/switch)。
 
-```tsx
-<Form.Item name="switch">
-  <Form.Label>开关</Form.Label>
-  <Form.Control>
-    <Switch size={20} />
-  </Form.Control>
-</Form.Item>
+```tsx        
+<Field label="开关" name="switch">
+  <Switch size={20} />
+</Field>
 ```
 
 ### 表单项类型 - 复选框
@@ -148,25 +162,19 @@ function FormWithRules() {
 在表单中使用 [Checkbox 组件](/components/checkbox)。
 
 ```tsx
-<Form.Item name="checkbox">
-  <Form.Label>复选框</Form.Label>
-  <Form.Control>
-    <Checkbox shape="square" />
-  </Form.Control>
-</Form.Item>
-<Form.Item name="checkboxGroup">
-  <Form.Label>复选框</Form.Label>
-  <Form.Control>
-    <Checkbox.Group direction="horizontal">
-      <Checkbox name="1" shape="square">
-        复选框 1
-      </Checkbox>
-      <Checkbox name="2" shape="square">
-        复选框 2
-      </Checkbox>
-    </Checkbox.Group>
-  </Form.Control>
-</Form.Item>
+<Field label="复选框" name="checkbox">
+  <Checkbox shape="square" />
+</Field>
+<Field label="复选框组" name="checkboxGroup">
+  <Checkbox.Group direction="horizontal">
+    <Checkbox name="1" shape="square">
+      复选框 1
+    </Checkbox>
+    <Checkbox name="2" shape="square">
+      复选框 2
+    </Checkbox>
+  </Checkbox.Group>
+</Field>
 ```
 
 ### 表单项类型 - 单选框
@@ -174,15 +182,12 @@ function FormWithRules() {
 在表单中使用 [Radio 组件](/components/radio)。
 
 ```tsx
-<Form.Item name="radio">
-  <Form.Label>单选框</Form.Label>
-  <Form.Control>
-    <Radio.Group direction="horizontal">
-      <Radio name="1">单选框 1</Radio>
-      <Radio name="2">单选框 2</Radio>
-    </Radio.Group>
-  </Form.Control>
-</Form.Item>
+<Field label="单选框" name="radio">
+  <Radio.Group direction="horizontal">
+    <Radio name="1">单选框 1</Radio>
+    <Radio name="2">单选框 2</Radio>
+  </Radio.Group>
+</Field>
 ```
 
 ### 表单项类型 - 步进器
@@ -190,12 +195,9 @@ function FormWithRules() {
 在表单中使用 [Stepper 组件](/components/stepper)。
 
 ```tsx
-<Form.Item name="stepper">
-  <Form.Label>步进器</Form.Label>
-  <Form.Control>
-    <Stepper />
-  </Form.Control>
-</Form.Item>
+<Field label="步进器" name="stepper">
+  <Stepper />
+</Field>
 ```
 
 ### 表单项类型 - 评分
@@ -203,12 +205,9 @@ function FormWithRules() {
 在表单中使用 [Rate 组件](/components/rate)。
 
 ```tsx
-<Form.Item name="rate">
-  <Form.Label>评分</Form.Label>
-  <Form.Control>
-    <Rate />
-  </Form.Control>
-</Form.Item>
+<Field label="评分" name="rate">
+  <Rate />
+</Field>
 ```
 
 ### 表单项类型 - 滑块
@@ -216,12 +215,9 @@ function FormWithRules() {
 在表单中使用 [Slider 组件](/components/slider)。
 
 ```tsx
-<Form.Item name="slider">
-  <Form.Label>滑块</Form.Label>
-  <Form.Control>
-    <Slider />
-  </Form.Control>
-</Form.Item>
+<Field label="滑块" name="slider">
+  <Slider />
+</Field>
 ```
 
 ### 表单项类型 - 文件上传
@@ -250,12 +246,9 @@ function UploaderField() {
   }
 
   return (
-    <Form.Item ref={itemRef} name="uploader">
-      <Form.Label>文件上传</Form.Label>
-      <Form.Control>
-        <Uploader multiple maxFiles={2} onUpload={onUpload} />
-      </Form.Control>
-    </Form.Item>
+    <Field label="文件上传" ref={itemRef} name="uploader">
+      <Uploader multiple maxFiles={2} onUpload={onUpload} />
+    </Field>
   )
 }
 ```
@@ -268,34 +261,30 @@ function UploaderField() {
 function PickerField() {
   const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
+  const columns = useMemo(() => [
+    { label: "杭州", value: "Hangzhou" },
+    { label: "宁波", value: "Ningbo" },
+    { label: "温州", value: "Wenzhou" },
+    { label: "绍兴", value: "Shaoxing" },
+    { label: "湖州", value: "Huzhou" }
+  ], [])
+
 
   return (
     <>
-      <Form.Item ref={itemRef} name="picker" isLink>
-        <Form.Label>选择器</Form.Label>
-        <Form.Control>
-          <Input readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
-        </Form.Control>
-      </Form.Item>
-      <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
+      <Field label="选择器" ref={itemRef} name="picker" clickable rightIcon={<ArrowRight />}>
+        <Input readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
+      </Field>
+      <Popup open={open} rounded placement="bottom" onClose={setOpen}>
         <Picker
+          title="选择城市"
+          columns={columns}
           onCancel={() => setOpen(false)}
           onConfirm={(newValue) => {
             itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
         >
-          <Picker.Toolbar>
-            <Picker.Button>取消</Picker.Button>
-            <Picker.Button>确认</Picker.Button>
-          </Picker.Toolbar>
-          <Picker.Column>
-            <Picker.Option>杭州</Picker.Option>
-            <Picker.Option>宁波</Picker.Option>
-            <Picker.Option>温州</Picker.Option>
-            <Picker.Option>嘉兴</Picker.Option>
-            <Picker.Option>湖州</Picker.Option>
-          </Picker.Column>
         </Picker>
       </Popup>
     </>
@@ -322,20 +311,17 @@ function DatetimePickerField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="datetimePicker" isLink>
-        <Form.Label>时间选择</Form.Label>
-        <Form.Control>
-          {(controller) => (
-            <Input
-              value={formatDate(controller.value)}
-              readonly
-              placeholder="点击选择时间"
-              onClick={() => setOpen(true)}
-            />
-          )}
-        </Form.Control>
-      </Form.Item>
-      <Popup mountOnEnter={false} open={open} rounded placement="bottom" onClose={setOpen}>
+      <Field label="时间选择" ref={itemRef} name="datetimePicker" clickable isLink>
+        {(controller) => (
+          <Input
+            value={formatDate(controller.value)}
+            readonly
+            placeholder="点击选择时间"
+            onClick={() => setOpen(true)}
+          />
+        )}
+      </Field>
+      <Popup open={open} rounded placement="bottom" onClose={setOpen}>
         <DatetimePicker
           type="hour-minute"
           onCancel={() => setOpen(false)}
@@ -344,10 +330,6 @@ function DatetimePickerField() {
             setOpen(false)
           }}
         >
-          <Picker.Toolbar>
-            <Picker.Button>取消</Picker.Button>
-            <Picker.Button>确认</Picker.Button>
-          </Picker.Toolbar>
         </DatetimePicker>
       </Popup>
     </>
@@ -374,40 +356,26 @@ function CalendarField() {
 
   return (
     <>
-      <Form.Item ref={itemRef} name="calendar" isLink>
-        <Form.Label>日历</Form.Label>
-        <Form.Control>
-          {(controller) => (
-            <Input
-              value={formatDate(controller.value)}
-              readonly
-              placeholder="点击选择日期"
-              onClick={() => setOpen(true)}
-            />
-          )}
-        </Form.Control>
-      </Form.Item>
-      <Popup
-        mountOnEnter={false}
-        style={{ height: "80%" }}
-        open={open}
-        rounded
-        placement="bottom"
-        onClose={setOpen}
+      <Field label="日历" ref={itemRef} name="calendar" clickable isLink>
+        {(controller) => (
+          <Input
+            value={formatDate(controller.value)}
+            readonly
+            placeholder="点击选择日期"
+            onClick={() => setOpen(true)}
+          />
+        )}
+      </Field>
+      <Calendar
+        type="single"
+        poppable
+        showPopup={open}
+        onConfirm={(newValue) => {
+          itemRef.current?.setValue(newValue)
+          setOpen(false)
+        }}
       >
-        <Popup.Close />
-        <Calendar
-          type="single"
-          onConfirm={(newValue) => {
-            itemRef.current?.setValue(newValue)
-            setOpen(false)
-          }}
-        >
-          <Calendar.Footer>
-            <Calendar.Button type="confirm">确定</Calendar.Button>
-          </Calendar.Footer>
-        </Calendar>
-      </Popup>
+      </Calendar>
     </>
   )
 }
@@ -432,29 +400,22 @@ function DynamicForm() {
     Toast.open(JSON.stringify(e.detail.value, undefined, 2))
   }}
   >
-    <Toast id="toast" />
     <Form.List name="contacts" defaultValue={[{name: "小明", phone: "10086"}]}>
       {
         (fields, { add, remove }) => <Cell.Group inset>
           {
             fields.map((field, idx) => <Fragment key={field.key}>
-              <Form.Item name={`${field.name}.name`} key={`${field.key}.name`}>
-                <Form.Label>姓名</Form.Label>
-                <Form.Control>
-                  {
-                    ({ value, onChange }) => <>
-                      <Input placeholder="请输入姓名" value={value} onChange={(e) => { onChange?.(e.detail.value) }} />
-                      <View style={{ flexShrink: 0 }} onClick={() => { remove(idx) }}>删除</View>
-                    </>
-                  }
-                </Form.Control>
-              </Form.Item>
-              <Form.Item name={`${field.name}.phone`} key={`${field.key}.phone`} rules={[{ required: true, message: "必填" }]}>
-                <Form.Label>电话</Form.Label>
-                <Form.Control>
-                  <Input placeholder="请输入电话" />
-                </Form.Control>
-              </Form.Item>
+              <Field label="姓名" name={`${field.name}.name`} key={`${field.key}.name`}>
+                {
+                  ({ value, onChange }) => <>
+                    <Input placeholder="请输入姓名" value={value} onChange={(e) => { onChange?.(e.detail.value) }} />
+                    <View style={{ flexShrink: 0 }} onClick={() => { remove(idx) }}>删除</View>
+                  </>
+                }
+              </Field>
+              <Field label="电话" name={`${field.name}.phone`} key={`${field.key}.phone`} rules={[{ required: true, message: "必填" }]}>
+                <Input placeholder="请输入电话" />
+              </Field>
             </Fragment>)
           }
           <Button variant="text" color="primary" onClick={() => add({})} >添加联系人</Button>

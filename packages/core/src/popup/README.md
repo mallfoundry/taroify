@@ -8,8 +8,6 @@
 
 ```tsx
 import { Popup } from "@taroify/core"
-// or
-import Popup from "@taroify/core/popup"
 ```
 
 ## 代码演示
@@ -96,6 +94,19 @@ import Popup from "@taroify/core/popup"
 | duration    | 动画时长，单位毫秒                               | _number \| string_ | `300`    |
 | rounded     | 是否显示圆角                                     | _boolean_          | `false`  |
 | lock        | 是否锁定背景滚动                                 | _boolean_          | `true`   |
+
+动画相关参数继承自 `Transition` 组件，详细属性参见：[Transition 组件](/components/style/#动画)
+| Popup参数      | Transition对应参数                  |
+| --------- | ---------------------- | 
+| mountOnEnter | mountOnEnter |
+| transactionName | name |
+| transitionAppear | appear |
+| transactionTimeout | timeout |
+| onTransitionEnter | onEnter |
+| onTransitionEntered | onEntered |
+| onTransitionExit | onExit |
+| onTransitionExited | onExited |
+
 
 ### Popup.Backdrop Props
 

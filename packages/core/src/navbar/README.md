@@ -8,8 +8,6 @@
 
 ```tsx
 import { Navbar } from "@taroify/core"
-// or
-import Navbar from "@taroify/core/navbar"
 ```
 
 ## 代码演示

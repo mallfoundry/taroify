@@ -8,8 +8,6 @@
 
 ```ts
 import { Tag } from "@taroify/core"
-// or
-import Tag from "@taroify/core/tag"
 ```
 
 ## 代码演示
