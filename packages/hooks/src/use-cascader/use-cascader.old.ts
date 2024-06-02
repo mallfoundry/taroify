@@ -31,25 +31,23 @@ const defaultFieldNames: CascaderFieldNames = {
 export default function useCascaderOld({
   value: values = emptyArr,
   depth = 0,
-  options = emptyArr,
+  options,
   fieldNames = defaultFieldNames,
   refreshKey = 0
 }: UseCascaderOldOptions): CascaderObjectOld {
   depth = _.clamp(depth, 0, depth)
   const cacheMapRef = useRef(new Map())
-  const cachedKeyRef = useRef<string[]>([])
   const [columns, setColumns] = useState<CascaderOption[][]>([])
 
   useEffect(() => {
     return () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       cacheMapRef.current.clear();
-      cachedKeyRef.current = [];
     }
   }, [options])
 
   useEffect(() => {
-    if (_.isEmpty(options)) {
+    if (options === undefined) {
       return
     }
 
