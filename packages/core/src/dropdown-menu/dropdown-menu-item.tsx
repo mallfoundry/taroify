@@ -61,12 +61,17 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
   })
 
   const children = useMemo(() => {
-    return childProp ? childProp : (options || []).map((option, idx) => <DropdownMenuOption key={option.value || idx} {...option} />)
+    return childProp
+      ? childProp
+      : (options || []).map((option, idx) => (
+          <DropdownMenuOption key={option.value || idx} {...option} />
+        ))
   }, [childProp, options])
 
   const {
     direction = "down",
     itemOffset,
+    backdropType = "inner",
     isItemToggle,
     toggleItem: triggerItem,
   } = useContext(DropdownMenuContext)
@@ -161,14 +166,18 @@ function DropdownMenuItem(props: DropdownMenuItemProps) {
             onClosed?.()
           }}
         >
-          <Popup.Backdrop lock={lock} style={{ position: "absolute" }} onClick={toggleItem} />
-          {
-            lock ?
-              <ScrollView className={prefixClassname("dropdown-menu-item__content--scroll")} scrollY>
-                {children}
-              </ScrollView> :
-              children
-          }
+          <Popup.Backdrop
+            lock={lock}
+            style={{ position: backdropType === "inner" ? "absolute" : "fixed" }}
+            onClick={toggleItem}
+          />
+          {lock ? (
+            <ScrollView className={prefixClassname("dropdown-menu-item__content--scroll")} scrollY>
+              {children}
+            </ScrollView>
+          ) : (
+            children
+          )}
         </Popup>
       </View>
     </DropdownMenuItemContext.Provider>

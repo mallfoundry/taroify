@@ -1,3 +1,3 @@
 export { default } from "./backdrop"
 
-export type { BackdropThemeVars } from './backdrop.shared'
+export type { BackdropThemeVars } from "./backdrop.shared"

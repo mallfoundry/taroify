@@ -5,18 +5,33 @@
 $dropdown-menu-height: var(--dropdown-menu-height, 48px * $hd);
 $dropdown-menu-background-color: var(--dropdown-menu-background-color, var(--white, $white));
 $dropdown-menu-z-index: var(--dropdown-menu-z-index, 11);
-$dropdown-menu-box-shadow: var(--dropdown-menu-box-shadow, 0 2px * $hd 12px * $hd rgba(100, 101, 102, 0.12));
+$dropdown-menu-box-shadow: var(
+  --dropdown-menu-box-shadow,
+  0 2px * $hd 12px * $hd rgba(100, 101, 102, 0.12)
+);
 // dropdown-menu title
 $dropdown-menu-title-font-size: var(--dropdown-menu-title-font-size, 15px * $hd);
 $dropdown-menu-title-color: var(--dropdown-menu-title-color, var(--text-color, $text-color));
 $dropdown-menu-title-padding: var(--dropdown-menu-title-padding, 0 var(--padding-xs, $padding-xs));
-$dropdown-menu-title-line-height: var(--dropdown-menu-title-line-height, var(--line-height-lg, $line-height-lg));
-$dropdown-menu-title-active-opacity: var(--dropdown-menu-title-active-opacity, var(--active-opacity, $active-opacity));
+$dropdown-menu-title-line-height: var(
+  --dropdown-menu-title-line-height,
+  var(--line-height-lg, $line-height-lg)
+);
+$dropdown-menu-title-active-opacity: var(
+  --dropdown-menu-title-active-opacity,
+  var(--active-opacity, $active-opacity)
+);
 $dropdown-menu-title-active-color: var(--dropdown-menu-title-active-color, $primary-color);
-$dropdown-menu-title-disabled-color: var(--dropdown-menu-title-disabled-color, var(--gray-6, $gray-6));
+$dropdown-menu-title-disabled-color: var(
+  --dropdown-menu-title-disabled-color,
+  var(--gray-6, $gray-6)
+);
 //
 $dropdown-menu-item-z-index: var(--dropdown-menu-item-z-index, calc(#{$dropdown-menu-z-index} - 1));
 $dropdown-menu-item-content-max-height: var(--dropdown-menu-item-content-max-height, 80%);
-$dropdown-menu-item-content-animation-duration: var(--dropdown-menu-item-content-animation-duration, var(--animation-duration-fast, $animation-duration-fast));
+$dropdown-menu-item-content-animation-duration: var(
+  --dropdown-menu-item-content-animation-duration,
+  var(--animation-duration-fast, $animation-duration-fast)
+);
 //
 $dropdown-menu-option-active-color: var(--dropdown-menu-option-active-color, $primary-color);
