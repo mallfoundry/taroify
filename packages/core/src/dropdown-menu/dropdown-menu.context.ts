@@ -4,6 +4,7 @@ import { DropdownMenuDirection } from "./dropdown-menu.shared"
 interface DropdownMenuContextValue {
   direction?: DropdownMenuDirection
   itemOffset?: number
+  backdropType?: "inner" | "outer"
 
   toggleItem?(value?: Key): void
 

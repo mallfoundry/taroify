@@ -7,11 +7,13 @@ import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicDropdownMenu() {
-  const [options] = useState([
-    { title: "默认排序", value: 0 },
-    { title: "好评排序", value: 1 },
-    { title: "销量排序", value: 2 },
-  ].concat(Array.from({ length: 20 }, (_, i) => ({ title: "选项" + i, value: 3 + i }))))
+  const [options] = useState(
+    [
+      { title: "默认排序", value: 0 },
+      { title: "好评排序", value: 1 },
+      { title: "销量排序", value: 2 },
+    ].concat(Array.from({ length: 20 }, (_, i) => ({ title: "选项" + i, value: 3 + i }))),
+  )
   const [opened, setOpened] = useState(false)
   const getScrollHeight = useCallback((len) => {
     return len < 5 ? len * 46 : 5 * 46
@@ -21,9 +23,20 @@ function BasicDropdownMenu() {
       <PageMeta pageStyle={opened ? "overflow: hidden;" : ""} />
       <DropdownMenu>
         {/* @ts-ignore */}
-        <DropdownMenu.Item style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(23) + "px" }} options={options} lock onOpen={() => setOpened(true)} onClose={() => setOpened(false)} />
-         {/* @ts-ignore */}
-        <DropdownMenu.Item style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(4) + "px" }} lock onOpen={() => setOpened(true)} onClose={() => setOpened(false)}>
+        <DropdownMenu.Item
+          style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(23) + "px" }}
+          options={options}
+          lock
+          onOpen={() => setOpened(true)}
+          onClose={() => setOpened(false)}
+        />
+        {/* @ts-ignore */}
+        <DropdownMenu.Item
+          style={{ "--dropdown-menu-item-content-max-height": getScrollHeight(4) + "px" }}
+          lock
+          onOpen={() => setOpened(true)}
+          onClose={() => setOpened(false)}
+        >
           <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
           <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
           <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
@@ -40,13 +53,24 @@ function DropdownMenuWithCustomContent() {
   const [switch1, setSwitch1] = useState(true)
   const [switch2, setSwitch2] = useState(false)
   const [options] = useState([
-    { title: <View>默认<View>排序</View></View>, value: 0 },
+    {
+      title: (
+        <View>
+          默认<View>排序</View>
+        </View>
+      ),
+      value: 0,
+    },
     { title: "好评排序", value: 1 },
     { title: "销量排序", value: 2 },
   ])
   return (
     <DropdownMenu value={value} onChange={setValue}>
-      <DropdownMenu.Item value={option1} onChange={setOption1} options={options}></DropdownMenu.Item>
+      <DropdownMenu.Item
+        value={option1}
+        onChange={setOption1}
+        options={options}
+      ></DropdownMenu.Item>
       <DropdownMenu.Item title="筛选">
         <Cell title="包邮" align="center">
           <Switch size="24" checked={switch1} onChange={setSwitch1} />
@@ -97,6 +121,22 @@ function UpDropdownMenu() {
     </DropdownMenu>
   )
 }
+function BackDropDropdownMenu() {
+  return (
+    <DropdownMenu backdropType="outer">
+      <DropdownMenu.Item>
+        <DropdownMenu.Option value={0}>全部商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>新款商品</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>活动商品</DropdownMenu.Option>
+      </DropdownMenu.Item>
+      <DropdownMenu.Item>
+        <DropdownMenu.Option value={0}>默认排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={1}>好评排序</DropdownMenu.Option>
+        <DropdownMenu.Option value={2}>销量排序</DropdownMenu.Option>
+      </DropdownMenu.Item>
+    </DropdownMenu>
+  )
+}
 
 function DisabledDropdownMenu() {
   return (
@@ -129,6 +169,9 @@ export default function DropdownMenuDemo() {
       </Block>
       <Block title="向上展开">
         <UpDropdownMenu />
+      </Block>
+      <Block title="背景板位置">
+        <BackDropDropdownMenu />
       </Block>
       <Block title="禁用菜单">
         <DisabledDropdownMenu />

@@ -28,7 +28,11 @@ import DropdownMenuTitle from "./dropdown-menu-title"
 import DropdownMenuContext from "./dropdown-menu.context"
 import { DropdownMenuDirection, DropdownMenuItemOption } from "./dropdown-menu.shared"
 
-function getDropdownMenuTitle(children?: ReactNode, options?: DropdownMenuItemOption[],  dropdownValue?: any | any[]): ReactNode {
+function getDropdownMenuTitle(
+  children?: ReactNode,
+  options?: DropdownMenuItemOption[],
+  dropdownValue?: any | any[],
+): ReactNode {
   const firstRef: MutableRefObject<ReactNode> = {
     current: undefined,
   }
@@ -57,7 +61,8 @@ function getDropdownMenuTitle(children?: ReactNode, options?: DropdownMenuItemOp
 
   if (!nodeRef.current) {
     if (options) {
-      nodeRef.current = options.find(option => option.value === dropdownValue)?.title || options[0].title
+      nodeRef.current =
+        options.find((option) => option.value === dropdownValue)?.title || options[0].title
     } else {
       nodeRef.current = firstRef.current
     }
@@ -88,7 +93,13 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
       const elementType = element.type
       if (elementType === DropdownMenuItem) {
         const { key, props } = element
-        const { disabled, title, value, children: itemChildren, options }: DropdownMenuItemProps = props
+        const {
+          disabled,
+          title,
+          value,
+          children: itemChildren,
+          options,
+        }: DropdownMenuItemProps = props
         const index = _.size(__children__.items)
         const itemKey = key ?? index
 
@@ -119,6 +130,7 @@ export interface DropdownMenuProps extends ViewProps {
   value?: Key | false
   direction?: DropdownMenuDirection
   children?: ReactNode
+  backdropType?: "inner" | "outer"
 
   onChange?(value: any): void
 }
@@ -129,6 +141,7 @@ function DropdownMenu(props: DropdownMenuProps) {
     defaultValue,
     value: valueProp,
     direction = "down",
+    backdropType = "inner",
     children: childrenProp,
     onChange: onChangeProp,
     ...restProps
@@ -187,7 +200,16 @@ function DropdownMenu(props: DropdownMenuProps) {
     [value],
   )
 
-  useEffect(() => setOpened(value !== false && value !== null && value !== undefined), [value])
+  useEffect(() => {
+    const val = value !== false && value !== null && value !== undefined
+    if (val) {
+      setOpened(val)
+    } else {
+      setTimeout(() => {
+        setOpened(val)
+      }, 300)
+    }
+  }, [value])
 
   usePageScroll(updateItemOffset)
 
@@ -203,6 +225,7 @@ function DropdownMenu(props: DropdownMenuProps) {
       value={{
         direction,
         itemOffset,
+        backdropType,
         toggleItem,
         isItemToggle,
       }}
