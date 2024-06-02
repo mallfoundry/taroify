@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { graphql, Link } from "gatsby"
-import React, { ReactNode, useMemo } from "react"
+import React, { ReactNode, useMemo, useRef, useState } from "react"
 // @ts-ignore
 import rehypeReact from "rehype-react"
+import copy from "copy-to-clipboard";
 import { prefixClassname } from "../styles/prefix"
 
 interface ComponentTemplateProps {
@@ -15,7 +17,25 @@ const renderAst = new rehypeReact({
     a: ({ href, ...rest }: any) => {
       const noPrefixHref = (href && href.startsWith("/taroify.com")) ? href.replace("/taroify.com", "") : href
       return <Link {...rest} to={noPrefixHref} />
-    }
+    },
+    v: ({ children }: any) => children,
+    codeWithCopy: ({ children, ...rest }: any) => {
+      const divRef = useRef<HTMLDivElement>()
+      const [copied, setCopied] = useState(false);
+      const onClickCopy = () => {
+        if(copy(divRef.current?.innerText || "")) {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 1000)
+        }
+      }
+      return <div {...rest} ref={divRef}>
+        {
+          copied && <div className="copied-tip">Copied!</div>
+        }
+        <div className="code-copy-btn" onClick={onClickCopy} />
+        {children}
+      </div>
+    },
   }
 }).Compiler
 
@@ -26,7 +46,10 @@ export default function ComponentTemplate(props: ComponentTemplateProps) {
     if (!post.htmlAst.children) {
       return ""
     }
-    const oldChildren = post.htmlAst.children
+    const oldChildren = post.htmlAst.children.map((item: any) => ({
+      ...item,
+      tagName: item.properties?.dataLanguage ? "codeWithCopy" : item.tagName
+    }))
     const indexes = oldChildren.reduce((acc: { idx:number; tag: string }[], node: any, idx: number) => {
       if (node.tagName === "h3") {
        return acc.concat({ idx, tag: "h3" })
