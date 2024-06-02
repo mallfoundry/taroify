@@ -12,6 +12,32 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.2.3-alpha.0
+
+`2024-06-02`
+
+**Bug Fixes**
+
+- Cascader
+
+  - 修复级联选择 `options` 无法设置为空 [746](https://github.com/mallfoundry/taroify/pull/746) [@hbztd](https://github.com/hbztd)
+
+- Calendar
+
+  - 修复日历 `subtitle` 在手动设置 `value` 时，可能出现显示错误 [747](https://github.com/mallfoundry/taroify/pull/747) [@hbztd](https://github.com/hbztd)
+
+**Feature**
+
+- DropdownMenu
+
+  - 背景板添加类型 [748](https://github.com/mallfoundry/taroify/pull/748) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- 文档代码示例添加复制按钮 [746](https://github.com/mallfoundry/taroify/pull/746) [@hbztd](https://github.com/hbztd)
+
+- 更新文档内示例以及属性 [747](https://github.com/mallfoundry/taroify/pull/747) [@hbztd](https://github.com/hbztd)
+
 ### v0.2.2-alpha.1
 
 `2024-05-30`
