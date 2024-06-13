@@ -4,6 +4,6 @@ export type FlexWrap = "nowrap" | "wrap" | "wrap-reverse"
 
 export type FlexJustify = "start" | "center" | "end" | "space-around" | "space-between"
 
-export type FlexAlign = "start" | "center" | "end" | "baseline" | "stretch"
+export type FlexAlign = "start" | "center" | "end" | "baseline" | "stretch" | "initial"
 
 export type FlexGutter = number | [number, number]
