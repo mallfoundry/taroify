@@ -1,8 +1,6 @@
 const gulp = require("gulp")
 const { series, watch } = require("gulp")
-const sourcemaps = require("gulp-sourcemaps")
 const ts = require("gulp-typescript")
-const babel = require("gulp-babel")
 
 const ignore = ["node_modules", "**/__tests__", "**/?(*.)+(spec|test).[tj]s?(x)"]
 
@@ -57,10 +55,7 @@ function compileTypescript(bundle, dist) {
       .src([`./packages/${bundle}/src/**/*.[jt]s?(x)`], {
         ignore,
       })
-      .pipe(sourcemaps.init())
       .pipe(tsProject())
-      .pipe(babel())
-      .pipe(sourcemaps.write("."))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   compileTypescriptTask.displayName = `compile typescript files to bundles/${
     dist ?? bundle
