@@ -1,6 +1,9 @@
 const gulp = require("gulp")
 const { series, watch } = require("gulp")
+const { Transform } = require('stream')
 const ts = require("gulp-typescript")
+const fs = require('fs-extra')
+const path = require('path')
 
 const ignore = ["node_modules", "**/__tests__", "**/?(*.)+(spec|test).[tj]s?(x)"]
 
@@ -56,6 +59,7 @@ function compileTypescript(bundle, dist) {
         ignore,
       })
       .pipe(tsProject())
+      .pipe(new AddExtTransform())
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   compileTypescriptTask.displayName = `compile typescript files to bundles/${
     dist ?? bundle
@@ -76,6 +80,32 @@ function generateDeclarationFiles(bundle, dist) {
     dist ?? bundle
   } from packages/${bundle}`
   return generateTypescriptDeclarationTask
+}
+
+class AddExtTransform extends Transform {
+  constructor() {
+    super({ objectMode: true });
+  }
+
+  _transform(file, encoding, callback) {
+    if (file.isBuffer() && file.extname === '.js') {
+      const content = file.contents.toString(encoding);
+      let newContent = content
+      const importPathRegex = /from\s+"(\.\S+)";/g;
+
+      let match;
+      while ((match = importPathRegex.exec(content)) !== null) {
+        if (fs.existsSync(path.resolve(file.dirname, match[1] + '.js'))) {
+          newContent = newContent.replace(`"${match[1]}"`, `"${match[1]}.js"`)
+        } else if (fs.existsSync(path.resolve(file.dirname, match[1] + '/index.js'))) {
+          newContent = newContent.replace(`"${match[1]}"`, `"${match[1]}/index.js"`)
+        }
+      }
+      file.contents = Buffer.from(newContent);
+    }
+
+    callback(null, file);
+  }
 }
 
 function buildTypescript(module, dist) {
