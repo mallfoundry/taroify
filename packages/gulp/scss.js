@@ -5,7 +5,6 @@ const gulp = require("gulp")
 const { watch, series } = require("gulp")
 const postcss = require("gulp-postcss")
 const sass = require("gulp-sass")(require("sass"))
-const sourcemaps = require("gulp-sourcemaps")
 
 function copyScssFiles(bundle, dist) {
   const copyScssFilesTask = () =>
@@ -80,7 +79,6 @@ function compileScss(bundle, dist) {
   const compileScssTask = () =>
     gulp
       .src(`./packages/${bundle}/src/**/index.scss`)
-      .pipe(sourcemaps.init())
       .pipe(
         sass({
           importer: npmModule,
@@ -88,7 +86,6 @@ function compileScss(bundle, dist) {
         }).on("error", sass.logError),
       )
       .pipe(postcss(plugins))
-      .pipe(sourcemaps.write("."))
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
 
   compileScssTask.displayName = `compile scss files to bundles/${
