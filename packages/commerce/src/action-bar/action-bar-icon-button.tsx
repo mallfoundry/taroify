@@ -1,7 +1,7 @@
 import Button, { ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { createBadge, createBadgeWrapper } from "@taroify/core/badge"
+import Badge from "@taroify/core/badge"
 import classnames from "classnames"
 import * as React from "react"
 import { Children, CSSProperties, PropsWithChildren, ReactNode, useMemo } from "react"
@@ -14,15 +14,7 @@ function useActionBarIconButtonChildren(
     () =>
       Children.toArray(children).map((child, index) => {
         if (isIconElement(child)) {
-          const IconBadgeWrapper = createBadgeWrapper(
-            cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") }),
-          )
-          const Badge = createBadge(badge)
-          return (
-            <IconBadgeWrapper key={index}>
-              <Badge />
-            </IconBadgeWrapper>
-          )
+          return <Badge content={badge} children={cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") })}  />
         }
         return child
       }),
