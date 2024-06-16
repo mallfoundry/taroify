@@ -1,7 +1,7 @@
 import { Badge, Flex, Notify, Tabs } from "@taroify/core"
 import { inBrowser } from "@taroify/core/utils/base"
 import * as icons from "@taroify/icons"
-import { CartOutlined, ChatOutlined, FireOutlined } from "@taroify/icons"
+import { CartOutlined, ChatOutlined, FireOutlined, Icon } from "@taroify/icons"
 import names from "@taroify/icons/van/names"
 import { View } from "@tarojs/components"
 import * as _ from "lodash"
@@ -110,7 +110,7 @@ export default function IconDemo() {
                 </Badge>
               </Flex.Item>
               <Flex.Item span={6}>
-                <Badge content="99+">
+                <Badge content={100} max={99}>
                   <ChatOutlined />
                 </Badge>
               </Flex.Item>
@@ -132,10 +132,20 @@ export default function IconDemo() {
                 <ChatOutlined size="40" />
               </Flex.Item>
               <Flex.Item span={6}>
-                <ChatOutlined size="2rem" />
+                <ChatOutlined size="3rem" />
               </Flex.Item>
             </Flex>
           </Block>
+          {/* <Block title="自定义图标">
+            <Flex>
+              <Flex.Item span={6}>
+                <Icon name="0-square" classPrefix="bi" size="40" />
+              </Flex.Item>
+              <Flex.Item span={6}>
+                <Icon name="0-square" classPrefix="bi" size="3rem" />
+              </Flex.Item>
+            </Flex>
+          </Block> */}
         </Tabs.TabPane>
         <Tabs.TabPane title="基础图标">
           <Flex wrap="wrap">

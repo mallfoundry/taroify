@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { CSSProperties, ReactNode } from "react"
@@ -18,20 +18,28 @@ interface VanIconProps extends ViewProps {
   style?: CSSProperties
   name?: string
   size?: IconSize | number | string
+  classPrefix?: string
   color?: IconColor | string
   children?: ReactNode
 }
 
-export default function VanIcon(props: VanIconProps) {
-  const { className, style, name, size = "inherit", color = "inherit", ...restProps } = props
+export default function VanIcon({
+  className,
+  style,
+  name,
+  size = "inherit",
+  classPrefix = "van-icon",
+  color = "inherit",
+  ...restProps
+}: VanIconProps) {
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
   const presetSize = ICON_PRESET_SIZES.includes(size as IconSize)
 
   return (
     <View
       className={classNames(
-        "van-icon",
-        `van-icon-${name}`,
+        classPrefix,
+        `${classPrefix}-${name}`,
         "taroify-icon",
         {
           [`taroify-icon--${color}`]: presetColor,
