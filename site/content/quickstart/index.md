@@ -4,18 +4,18 @@
 
 通过本章节你可以了解到 Taroify 的安装方法和基本使用姿势。
 
-## 安装
-
-### 通过 npm 安装
-
-在现有项目中使用 Taroify 时，可以通过 `npm` 或 `yarn` 进行安装：
-
+### 安装
+npm
 ```bash
-# 使用 npm 安装 Taroify：
-npm i @taroify/core -S
-
-# 使用 yarn 安装 Taroify：
+npm i @taroify/core
+```
+yarn
+```bash
 yarn add @taroify/core
+```
+pnpm
+```bash
+pnpm add @taroify/core
 ```
 
 ## 引入组件
@@ -84,7 +84,7 @@ import "@taroify/core/index.scss"
 
 > Tips: 配置按需引入后，将不允许直接导入所有组件。
 
-## 浏览器适配
+## 适配
 
 ### Rem 布局适配
 
@@ -95,6 +95,18 @@ Taroify 默认采用 `rem` 单位，需要对 `@taroify` 里的样式单位进�
 const config = {
   h5: {
     esnextModules: ["@taroify"],
+  }
+}
+```
+
+### designWidth
+Taroify designWidth为750，如果你的designWidth为375，显示效果为两倍大，可以通过修改sass变量`$hd`适配（或者你想修改显示大小）
+```tsx
+// config/index.js
+module.exports = {
+  // ...
+  sass: {
+    data: "$hd: 1;"
   }
 }
 ```

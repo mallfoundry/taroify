@@ -77,7 +77,7 @@ import { ChatOutlined } from "@taroify/icons"
 ```
 ```tsx
 import { Icon } from "@taroify/icons"
-<!-- 通过 class-prefix 指定类名为 my-icon -->
+<!-- 通过 classPrefix 指定类名为 my-icon -->
 <Icon classPrefix="my-icon" name="extra" />
 ```
 
