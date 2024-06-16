@@ -3,10 +3,9 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useMemo } from "react"
+import { CSSProperties, ReactNode, useMemo, cloneElement } from "react"
 import { prefixClassname } from "../styles"
-import BadgeWrapper from "./badge-wrapper"
-import BadgeWrapperContext from "./badge-wrapper.context"
+import { isElementOf } from "../utils/validate"
 
 export type BadgePosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 
@@ -26,17 +25,14 @@ function Badge(props: BadgeProps): JSX.Element {
     className,
     content: contentProp,
     max,
-    dot,
-    fixed: fixedProp,
+    dot: dotProp,
     position = "top-right",
     children,
     ...restProps
   } = props
-  const inWrapper = useContext(BadgeWrapperContext)
   const hasChildren = children !== undefined
-  const noChildren = children === undefined
-  const fixed = fixedProp ?? !!inWrapper
 
+  const dot = contentProp === true || dotProp
   const content = useMemo(
     () =>
       _.isNumber(contentProp)
@@ -52,29 +48,36 @@ function Badge(props: BadgeProps): JSX.Element {
         {
           [prefixClassname("badge--dot")]: dot,
           [prefixClassname("badge--content")]: content,
-          [prefixClassname("badge--fixed")]: fixed || hasChildren,
+          [prefixClassname("badge--fixed")]: hasChildren,
           [prefixClassname("badge--top-left")]: position === "top-left",
           [prefixClassname("badge--top-right")]: position === "top-right",
           [prefixClassname("badge--bottom-left")]: position === "bottom-left",
           [prefixClassname("badge--bottom-right")]: position === "bottom-right",
         },
-        className,
+        !hasChildren && className,
       )}
       children={!dot && content}
       {...restProps}
     />
   )
 
-  if (noChildren) {
-    return badge
+  if (isElementOf(contentProp, Badge)) {
+    // @ts-ignore
+    return cloneElement(contentProp, {
+      className,
+      children
+      // omit(props, 'content')
+    })
   }
 
-  return (
-    <BadgeWrapper>
+  if (hasChildren) {
+    return  <View className={classNames(prefixClassname("badge-wrapper"), className)} >
       {children}
       {(dot || content) && badge}
-    </BadgeWrapper>
-  )
+    </View>
+  }
+
+  return badge
 }
 
 export default Badge

@@ -1,4 +1,4 @@
-import { Grid, Sidebar, Toast } from "@taroify/core"
+import { Badge, Grid, Sidebar, Toast } from "@taroify/core"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -34,7 +34,7 @@ export default function SidebarDemo() {
             <Sidebar>
               <Sidebar.Tab badge>标签名</Sidebar.Tab>
               <Sidebar.Tab badge="5">标签名</Sidebar.Tab>
-              <Sidebar.Tab badge="20">标签名</Sidebar.Tab>
+              <Sidebar.Tab badge={<Badge position="bottom-right" max={99} content={100} />}>标签名</Sidebar.Tab>
             </Sidebar>
           </Block>
         </Grid.Item>

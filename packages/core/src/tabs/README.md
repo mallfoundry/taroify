@@ -252,7 +252,7 @@ function TabsWithCustomTitle() {
 | swipeThreshold | 滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动 | _number_  | `5`     |
 | lazyRender | 是否延迟渲染未展示的选项卡 | _boolean_                  | `false` |
 | dot | 是否展示为小红点 | _boolean_ | `false` |
-| badge | 徽标内容 | _ReactNode_ | - |
+| badge | 图标上徽标的内容 | _boolean \| number \| string \| Badge \| ReactNode_ | - |
 
 ### Tabs.Pane Props
 

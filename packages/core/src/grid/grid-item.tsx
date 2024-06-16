@@ -2,11 +2,11 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useMemo } from "react"
-import { useBadge, useBadgeWrapper } from "../badge"
+import { CSSProperties, ReactNode, useContext, useMemo, cloneElement, isValidElement } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import { addUnitPx } from "../utils/format/unit"
+import Badge from "../badge"
 import GridContext from "./grid.context"
 
 function useGridItemPercent(columns: number) {
@@ -28,7 +28,7 @@ export function GridItem(props: GridItemProps) {
     __dataIndex__ = 0,
     className,
     style: styleProp,
-    icon,
+    icon: iconProp,
     text,
     dot,
     badge,
@@ -45,10 +45,6 @@ export function GridItem(props: GridItemProps) {
     direction,
     square, //
   } = useContext(GridContext)
-
-  const IconBadgeWrapper = useBadgeWrapper(icon)
-
-  const Badge = useBadge(badge, { dot })
 
   const percent = useGridItemPercent(columns)
 
@@ -81,6 +77,8 @@ export function GridItem(props: GridItemProps) {
     }
   }, [square, gutter])
 
+  const icon = isValidElement(iconProp) ? cloneElement(iconProp as any, { className: prefixClassname("grid-item__icon") }) : iconProp
+
   return (
     <View
       className={classNames(
@@ -104,15 +102,18 @@ export function GridItem(props: GridItemProps) {
           [HAIRLINE_BORDER]: bordered,
         })}
       >
-        {!children && (
-          <>
-            <IconBadgeWrapper className={classNames(prefixClassname("grid-item__icon"))}>
-              <Badge />
-            </IconBadgeWrapper>
-            <View className={prefixClassname("grid-item__text")}>{text}</View>
-          </>
-        )}
-        {children}
+        {
+          children === undefined ? (
+            <>
+              {
+                badge ?
+                  <Badge className={prefixClassname("grid-item__icon-wrapper")} content={badge} dot={dot} children={icon} /> :
+                  icon
+              }
+              <View className={prefixClassname("grid-item__text")}>{text}</View>
+            </>
+          ) : children
+        }
       </View>
     </View>
   )
