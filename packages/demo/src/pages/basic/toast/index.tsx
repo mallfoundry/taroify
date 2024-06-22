@@ -13,25 +13,25 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="文字提示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ type: "text", message: "文字提示" })}
         />
         <Cell
           clickable
           title="加载提示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ type: "loading", message: "加载中..." })}
         />
         <Cell
           clickable
           title="成功提示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ type: "success", message: "成功文案" })}
         />
         <Cell
           clickable
           title="失败提示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ type: "fail", message: "失败文案" })}
         />
       </Block>
@@ -39,13 +39,13 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="自定义图标"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ message: "自定义图标", icon: <LikeOutlined /> })}
         />
         <Cell
           clickable
           title="自定义图片"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() =>
             Toast.open({
               message: "自定义图片",
@@ -64,7 +64,7 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="自定义加载图标"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => Toast.open({ message: "加载中...", icon: <Loading type="spinner" /> })}
         />
       </Block>
@@ -72,7 +72,7 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="顶部展示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() =>
             Toast.open({
               position: "top",
@@ -83,7 +83,7 @@ export default function ToastDemo() {
         <Cell
           clickable
           title="底部展示"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() =>
             Toast.open({
               position: "bottom",

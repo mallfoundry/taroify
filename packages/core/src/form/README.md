@@ -272,7 +272,7 @@ function PickerField() {
 
   return (
     <>
-      <Field label="选择器" ref={itemRef} name="picker" clickable rightIcon={<ArrowRight />}>
+      <Field label="选择器" ref={itemRef} name="picker" clickable isLink>
         <Input readonly placeholder="点击选择城市" onClick={() => setOpen(true)} />
       </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>

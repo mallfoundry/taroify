@@ -111,7 +111,7 @@ function ActionSheetWithStatuses() {
   ], [])
   return (
     <>
-      <Cell clickable title="选项状态" rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
+      <Cell clickable title="选项状态" isLink onClick={() => setOpen(true)} />
       <ActionSheet
         actions={actions}
         cancelText="取消"

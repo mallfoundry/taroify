@@ -18,7 +18,7 @@ function ImperativeToast() {
       <Cell
         title="函数调用"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Toast.open("文字提示")}
       />
     </>
@@ -57,7 +57,7 @@ function TextToast() {
       <Cell
         clickable
         title="文字提示"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Toast.open("文字提示")}
       />
     </>

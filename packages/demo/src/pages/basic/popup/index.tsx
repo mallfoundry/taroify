@@ -11,7 +11,7 @@ function BasicPopup() {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <Cell clickable title="显示遮盖层" rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
+      <Cell clickable title="显示遮盖层" isLink onClick={() => setOpen(true)} />
       <Popup
         open={open}
         style={{
@@ -32,7 +32,7 @@ function CenterRoundPopup() {
       <Cell
         clickable
         title="圆角弹窗（居中）"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Popup
@@ -57,7 +57,7 @@ function LockPopup() {
       <Cell
         clickable
         title="弹窗（禁止滚动穿透）"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Popup
@@ -123,25 +123,25 @@ export default function PopupDemo() {
         <Cell
           clickable
           title="顶部弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "top" })}
         />
         <Cell
           clickable
           title="底部弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "bottom" })}
         />
         <Cell
           clickable
           title="左侧弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "left" })}
         />
         <Cell
           clickable
           title="右侧弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "right" })}
         />
       </Block>
@@ -149,31 +149,31 @@ export default function PopupDemo() {
         <Cell
           clickable
           title="顶部弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "top", closeable: true })}
         />
         <Cell
           clickable
           title="底部弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "bottom", closeable: true })}
         />
         <Cell
           clickable
           title="左侧弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "left", closeable: true })}
         />
         <Cell
           clickable
           title="右侧弹出"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "right", closeable: true })}
         />
         <Cell
           clickable
           title="自定义图标"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "bottom", closeable: true, customer: true })}
         />
       </Block>
@@ -182,7 +182,7 @@ export default function PopupDemo() {
         <Cell
           clickable
           title="圆角弹窗（底部）"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => handleOpen({ placement: "bottom", rounded: true })}
         />
       </Block>
