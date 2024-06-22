@@ -14,7 +14,6 @@ import {
 } from "react"
 import ButtonBase, { ButtonBaseProps } from "../button-base"
 import Image from "../image"
-import { useSheetProps } from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
 
@@ -71,27 +70,24 @@ interface ShareSheetOptionProps
   className?: string
   style?: CSSProperties
   value?: any
+  loading?: boolean
   disabled?: boolean
   icon?: ReactNode
   name?: ReactNode
   description?: ReactNode
 }
 
-export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
-  const [
-    buttonProps,
-    {
-      className,
-      style,
-      value,
-      disabled,
-      icon,
-      name,
-      description,
-      onClick, //
-      ...restProps
-    },
-  ] = useSheetProps<ShareSheetOptionProps>(mixedProps)
+export function ShareSheetOption(props: ShareSheetOptionProps) {
+  const {
+    className,
+    style,
+    value,
+    icon,
+    name,
+    description,
+    onClick, //
+    ...restProps
+  } = props
   const { onSelect } = useContext(ShareSheetContext)
   const image = useShareSheetOptionIcon(icon)
 
@@ -99,16 +95,6 @@ export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
     <View
       className={classNames(prefixClassname("share-sheet__option"), className)}
       style={style}
-      onClick={(event) => {
-        onClick?.(event)
-        onSelect?.({
-          value,
-          disabled,
-          icon,
-          name,
-          description,
-        })
-      }}
       {...restProps}
     >
       {icon && image}
@@ -119,7 +105,19 @@ export function ShareSheetOption(mixedProps: ShareSheetOptionProps) {
           children={description}
         />
       )}
-      <ButtonBase className={prefixClassname("share-sheet__button")} {...buttonProps} />
+      <ButtonBase
+        className={prefixClassname("share-sheet__button")}
+        onClick={(event) => {
+          onClick?.(event)
+          onSelect?.({
+            value,
+            icon,
+            name,
+            description,
+          })
+        }}
+        {...restProps}
+      />
     </View>
   )
 }
