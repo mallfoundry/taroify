@@ -9,7 +9,7 @@ function BasicNotify() {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <Cell title="基础用法" clickable rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
+      <Cell title="基础用法" clickable isLink onClick={() => setOpen(true)} />
       <Notify open={open} onClose={setOpen} children="通知内容" />
     </>
   )
@@ -27,7 +27,7 @@ function CustomNotify() {
       <Cell
         title="自定义颜色"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => {
           setOptions({
             open: true,
@@ -38,7 +38,7 @@ function CustomNotify() {
       <Cell
         title="自定义时长"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() =>
           setOptions({
             open: true,
@@ -68,25 +68,25 @@ function NotifyWithPresetColors() {
       <Cell
         title="主要通知"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Notify.open({ color: "primary", message: "通知内容" })}
       />
       <Cell
         title="成功通知"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Notify.open({ color: "success", message: "通知内容" })}
       />
       <Cell
         title="危险通知"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Notify.open({ color: "danger", message: "通知内容" })}
       />
       <Cell
         title="警告通知"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Notify.open({ color: "warning", message: "通知内容" })}
       />
     </>

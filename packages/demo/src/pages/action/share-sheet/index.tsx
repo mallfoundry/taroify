@@ -12,7 +12,7 @@ function BasicShareSheet() {
       <Cell
         clickable
         title="显示分享面板"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <ShareSheet
@@ -44,7 +44,7 @@ function MultilineShareSheet() {
       <Cell
         clickable
         title="显示分享面板"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <ShareSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
@@ -74,7 +74,7 @@ function CustomShareSheet() {
       <Cell
         clickable
         title="显示分享面板"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <ShareSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
@@ -105,7 +105,7 @@ function ShareSheetWithDescription() {
       <Cell
         clickable
         title="显示分享面板"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <ShareSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
