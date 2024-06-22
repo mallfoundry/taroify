@@ -15,78 +15,121 @@ import { ActionSheet } from "@taroify/core"
 ### 基础用法
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
-
 function BasicActionSheet() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
+  const actions = useMemo(() => [
+    { name: "选项一", value: "1" },
+    { name: "选项二", value: "2" },
+    { name: "选项三", value: "3" },
+  ], [])
   return (
-    <ActionSheet open={open} onSelect={() => setOpen(false)} onClose={setOpen}>
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-    </ActionSheet>
+    <>
+      <Cell clickable isLink title="基础用法"  onClick={() => setOpen(true)} />
+      <ActionSheet actions={actions} open={open} onSelect={() => setOpen(false)} onClose={setOpen} />
+    </>
   )
 }
 ```
 
 ### 展示取消按钮
 
-使用 `ActionSheet.Button` 组件后，会在底部展示取消按钮，点击后关闭当前面板并触发 `onCancel` 事件。
+添加`cancelText`后，会在底部展示取消按钮，点击后关闭当前面板并触发 `onCancel` 事件。
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
-
 function ActionSheetWithCancel() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
+  const actions = useMemo(() => [
+    { name: "选项一", value: "1" },
+    { name: "选项二", value: "2" },
+    { name: "选项三", value: "3" },
+  ], [])
   return (
-    <ActionSheet
-      open={open}
-      onSelect={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      onClose={setOpen}
-    >
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-      <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
-    </ActionSheet>
+    <>
+      <Cell
+        clickable
+        isLink
+        title="展示取消按钮"
+        onClick={() => setOpen(true)}
+      />
+      <ActionSheet
+        cancelText="取消"
+        actions={actions}
+        open={open}
+        onSelect={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        onClose={setOpen}
+      />
+    </>
   )
 }
 ```
 
 ### 展示描述信息
 
-通过 `ActionSheet.Header` 组件可以在菜单顶部显示描述信息，通过选项的 `ActionSheet.Action.children` 属性可以在 `Action` 文字的下侧展示描述信息。
+通过 `description` 和 `subname` 添加描述信息
 
 ```tsx
-import { ActionSheet } from "@taroify/core"
-
 function ActionSheetWithDescription() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
+  const actions = useMemo(() => [
+    { name: "选项一", value: "1", subname: "这是一段描述信息" },
+    { name: "选项二", value: "2" },
+    { name: "选项三", value: "3" },
+  ], [])
   return (
-    <ActionSheet
-      open={open}
-      onSelect={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      onClose={setOpen}
-    >
-      <ActionSheet.Header>这是一段描述信息</ActionSheet.Header>
-      <ActionSheet.Action value="1" name="选项一" />
-      <ActionSheet.Action value="2" name="选项二" />
-      <ActionSheet.Action value="3" name="选项三" />
-      <ActionSheet.Button type="cancel">取消</ActionSheet.Button>
-    </ActionSheet>
+    <>
+      <Cell
+        clickable
+        title="展示描述信息"
+        isLink
+        onClick={() => setOpen(true)}
+      />
+      <ActionSheet
+        description="这是一段描述信息"
+        cancelText="取消"
+        actions={actions}
+        open={open}
+        onSelect={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        onClose={setOpen}
+      />
+    </>
   )
 }
 ```
 
 ### 选项状态
 
-可以通过 `loading` 和 `disabled` 将选项设置为加载状态或禁用状态，或者通过`style.color`设置选项的颜色
-
+通过 `loading` 和 `disabled` 将选项设置为加载状态或禁用状态，通过 `style`，`className` 修改样式
 ```tsx
-import { ActionSheet } from "@taroify/core"
+function ActionSheetWithStatuses() {
+  const [open, setOpen] = useState(false)
+  const actions = useMemo(() => [
+    { name: "选项一", value: "1", style: { color: "#ee0a24" } },
+    { name: "选项二", value: "2", disabled: true },
+    { name: "选项三", value: "3", loading: true },
+  ], [])
+  return (
+    <>
+      <Cell clickable title="选项状态" rightIcon={<ArrowRight />} onClick={() => setOpen(true)} />
+      <ActionSheet
+        actions={actions}
+        cancelText="取消"
+        open={open}
+        onSelect={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        onClose={setOpen}
+      />
+    </>
+  )
+}
+```
 
+### 手动控制DOM
+使用 `ActionSheet.Button` 组件后，会在底部展示取消按钮，点击后关闭当前面板并触发 `onCancel` 事件。<br>
+使用`ActionSheet.Action`组件添加选项， 通过 `loading` 和 `disabled` 将选项设置为加载状态或禁用状态 <br>
+通过 `ActionSheet.Header` 组件可以在菜单顶部显示描述信息，通过选项的 `ActionSheet.Action.children` 属性可以在 `Action` 文字的下侧展示描述信息。
+```tsx
 function ActionSheetWithStatuses() {
   const [open, setOpen] = useState(true)
   return (
@@ -108,9 +151,25 @@ function ActionSheetWithStatuses() {
 | --- | --- | --- | --- |
 | defaultOpen | 默认是否显示动作面板 | _boolean_ | `false` |
 | open      | 是否显示动作面板 | _boolean_ | `false` |
+| description | 选项上方的描述信息 | _ReactNode_ | - |
+| cancelText | 取消按钮文字 | _ReactNode_ | - |
+| actions | 面板选项列表 | _ActionSheetActionObject[]_ | - |
 | className | 样式类名 | _string_ | - |
 | style     | 样式对象 | _CSSProperties_ | - |
 | rounded   | 是否为圆角 | _string_ | - |
+
+### ActionSheetActionObject数据结构
+
+| 参数 | 说明 | 类型 |
+| --- | --- | --- |
+| name | 标题 | _ReactNode_ |
+| subname | 二级标题 | _ReactNode_ |
+| disabled | 是否为禁用状态 | _boolean_ |
+| loading | 是否为加载状态 | _boolean_ |
+| value | 值 | _any_ |
+| style | | |
+| className | | |
+
 
 ### ActionSheet.Backdrop Props
 
@@ -138,6 +197,8 @@ function ActionSheetWithStatuses() {
 | style     | 样式对象 | _CSSProperties_ | - |
 | name      | 标题    | _string_        | - |
 | value     | 选项值  | _string_        | - |
+| disabled | 是否为禁用状态 | _boolean_ | - |
+| loading | 是否为加载状态 | _boolean_ | - |
 | children  | 描述信息 | _string_        | - |
 
 ### ActionSheet.Button Props

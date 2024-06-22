@@ -28,8 +28,9 @@ export interface ActionSheetActionProps
 }
 
 export default function ActionSheetAction(props: ActionSheetActionProps) {
-  const     {
+  const {
     className,
+    style,
     disabled,
     loading,
     name,
@@ -41,6 +42,7 @@ export default function ActionSheetAction(props: ActionSheetActionProps) {
   const { onSelect } = useContext(ActionSheetContext)
   return (
     <Sheet.Item
+      style={style}
       className={classNames(prefixClassname("action-sheet__action"), className)}
       disabled={disabled}
       loading={loading}
