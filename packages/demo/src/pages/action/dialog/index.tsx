@@ -13,7 +13,7 @@ function BasicDialog() {
         title="提示弹窗"
         clickable
         bordered
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Dialog.alert("提示")}
       />
     </>
@@ -28,7 +28,7 @@ function NoTitleDialog() {
         title="提示弹窗（无标题）"
         clickable
         bordered
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onClose={setOpen}>
@@ -49,7 +49,7 @@ function ConfirmDialog() {
         title="确认弹窗"
         clickable
         bordered
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onClose={setOpen}>
@@ -72,7 +72,7 @@ function RoundedDialog() {
         title="提示弹窗"
         clickable
         bordered
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onClose={setOpen}>
@@ -95,7 +95,7 @@ function RoundedNoTitleDialog() {
         title="提示弹窗（无标题）"
         clickable
         bordered
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onClose={setOpen}>

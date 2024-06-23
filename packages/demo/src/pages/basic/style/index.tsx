@@ -34,31 +34,31 @@ export default function TransitionDemo() {
         <Cell
           clickable
           title="Fade"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => toggleTransition(TransitionName.Fade)}
         />
         <Cell
           clickable
           title="Slide Up"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => toggleTransition(TransitionName.SlideUp)}
         />
         <Cell
           clickable
           title="Slide Down"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => toggleTransition(TransitionName.SlideDown)}
         />
         <Cell
           clickable
           title="Slide Left"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => toggleTransition(TransitionName.SlideLeft)}
         />
         <Cell
           clickable
           title="Slide Right"
-          rightIcon={<ArrowRight />}
+          isLink
           onClick={() => toggleTransition(TransitionName.SlideRight)}
         />
         <Transition in={state} name={name} onEntered={() => setState(false)}>

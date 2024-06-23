@@ -20,7 +20,7 @@ function BasicNumberKeyboard(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出默认键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("basic")}
       />
       <NumberKeyboard
@@ -39,7 +39,7 @@ function SidebarNumberKeyboard(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出带右侧栏的键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("sidebar")}
       />
       <NumberKeyboard
@@ -66,7 +66,7 @@ function IdCardNumberKeyboard(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出身份证号键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("idCard")}
       />
       <NumberKeyboard
@@ -90,7 +90,7 @@ function TitleNumberKeyboard(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出带标题的键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("title")}
       />
       <NumberKeyboard
@@ -115,7 +115,7 @@ function NumberKeyboardWithKeys(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出配置多个按键的键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("keys")}
       />
       <NumberKeyboard
@@ -142,7 +142,7 @@ function RandomNumberKeyboard(props: KeyboardProps) {
       <Cell
         clickable
         title="弹出配置随机数字的键盘"
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => onKeyboard?.("random")}
       />
       <NumberKeyboard

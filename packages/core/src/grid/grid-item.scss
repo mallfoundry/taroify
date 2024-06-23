@@ -16,6 +16,10 @@
     }
   }
 
+  &__icon-wrapper {
+    line-height: 1;
+  }
+
   &__text {
     font-size: $grid-item-text-font-size;
     line-height: 1.5;
@@ -24,7 +28,7 @@
     word-break: break-all;
   }
 
-  &__icon + &__text {
+  &__icon-wrapper + &__text, &__icon + &__text {
     margin-top: var(--padding-xs, $padding-xs);
   }
 

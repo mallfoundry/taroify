@@ -12,7 +12,7 @@ function BasicCascader() {
   const [fieldValue, setFieldValue] = useState("")
   return (
     <>
-      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+      <Field label="选项值" isLink onClick={() => setOpen(true)}>
         <Input readonly placeholder="请选择部门" value={fieldValue} />
       </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>
@@ -41,7 +41,7 @@ function CustomColorCascader() {
   const [fieldValue, setFieldValue] = useState("")
   return (
     <>
-      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+      <Field label="选项值" isLink onClick={() => setOpen(true)}>
         <Input readonly placeholder="请选择地区" value={fieldValue} />
       </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>
@@ -72,7 +72,7 @@ function DynamicCascader() {
   const [fieldValue, setFieldValue] = useState("")
   return (
     <>
-      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+      <Field label="选项值" isLink onClick={() => setOpen(true)}>
         <Input readonly placeholder="请选择" value={fieldValue} />
       </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>
@@ -115,7 +115,7 @@ function CustomFieldCascader() {
   const [fieldValue, setFieldValue] = useState("")
   return (
     <>
-      <Field label="选项值" rightIcon={<ArrowRight />} onClick={() => setOpen(true)}>
+      <Field label="选项值" isLink onClick={() => setOpen(true)}>
         <Input readonly placeholder="请选择地区" value={fieldValue} />
       </Field>
       <Popup open={open} rounded placement="bottom" onClose={setOpen}>

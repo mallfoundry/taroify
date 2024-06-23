@@ -118,7 +118,7 @@ import { Grid } from "@taroify/core"
 ```tsx
 <Grid columns={2}>
   <Grid.Item icon={<HomeOutlined />} badge text="文字" />
-  <Grid.Item icon={<Search />} badge="99+" text="文字" />
+  <Grid.Item icon={<Search />} badge={<Badge content={100} max={99} />} text="文字" />
 </Grid>
 ```
 
@@ -143,7 +143,7 @@ import { Grid } from "@taroify/core"
 | --- | --- | --- | --- |
 | text | 文字 | _string_ | - |
 | icon | [图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
-| badge | 图标右上角徽标的内容 | _boolean \| number \| string \| Badge_ | - |
+| badge | 图标上徽标的内容 | _boolean \| number \| string \| Badge \| ReactNode_ | - |
 
 ### Grid.Item Events
 

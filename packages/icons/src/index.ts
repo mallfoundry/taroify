@@ -1,3 +1,4 @@
+export { VanIcon as Icon } from "./van"
 export { default as Arrow } from "./Arrow"
 export { default as ArrowRight } from "./ArrowRight"
 export { default as ArrowLeft } from "./ArrowLeft"

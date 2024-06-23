@@ -18,7 +18,7 @@ function ImperativeNotify() {
       <Cell
         title="函数调用"
         clickable
-        rightIcon={<ArrowRight />}
+        isLink
         onClick={() => Notify.open("通知内容")}
       />
     </>

@@ -30,7 +30,7 @@ import { Sidebar } from "@taroify/core"
 <Sidebar>
   <Sidebar.Tab badge>标签名</Sidebar.Tab>
   <Sidebar.Tab badge="5">标签名</Sidebar.Tab>
-  <Sidebar.Tab badge="20">标签名</Sidebar.Tab>
+  <Sidebar.Tab badge={<Badge position="bottom-right" max={99} content={100} />}>标签名</Sidebar.Tab>
 </Sidebar>
 ```
 
@@ -86,9 +86,9 @@ function EventSidebar() {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| badge | 图标右上角徽标的内容 | _boolean \| number \| string \| Badge_ | - |
 | disabled | 是否禁用该项 | _boolean_ | `false` |
 | children | 内容 | _ReactNode_ | - |
+| badge | 图标上徽标的内容 | _boolean \| number \| string \| Badge \| ReactNode_ | - |
 
 ### Sidebar.Tab Events
 
