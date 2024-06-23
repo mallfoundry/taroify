@@ -12,6 +12,44 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.3.0-alpha.0
+
+`2024-06-23`
+
+**Feature**
+
+- Flex
+
+  - 为 `flex align` 添加了初始属性 [753](https://github.com/mallfoundry/taroify/pull/753) [@sehmbimanvir](https://github.com/sehmbimanvir)
+
+- Badge
+
+  - 重构 `Badge` 组件，`Grid` `Sidebar` `Tabbar` `Tabs` `TreeSelect` 组件徽标相关代码调整 [754](https://github.com/mallfoundry/taroify/pull/754) [@hbztd](https://github.com/hbztd)
+
+- Icon
+
+  - 支持自定义图标 [754](https://github.com/mallfoundry/taroify/pull/754) [@hbztd](https://github.com/hbztd)
+
+- ActionSheet
+
+  - 添加 actions，description, cancelText 属性 [760](https://github.com/mallfoundry/taroify/pull/760) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- CountDown
+
+  - 修复 Countdown 组件在卸载时仍然继续执行倒计时并触发 onComplete [760](https://github.com/mallfoundry/taroify/pull/760) [@hbztd](https://github.com/hbztd)
+
+- ActionSheet
+
+  - 修复 loading 和 disabled 属性不起作用 [760](https://github.com/mallfoundry/taroify/pull/760) [@hbztd](https://github.com/hbztd)
+
+**Other**
+
+- 修复 `@taroify/core` `@taroify/icons`，taro 预编译失败 [755](https://github.com/mallfoundry/taroify/pull/755) [@hbztd](https://github.com/hbztd)
+
+- 删除 babel 转换和 sourcemap 文件[755](https://github.com/mallfoundry/taroify/pull/755) [@hbztd](https://github.com/hbztd)
+
 ### v0.2.3-alpha.0
 
 `2024-06-02`
