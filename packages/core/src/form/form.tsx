@@ -116,6 +116,7 @@ const Form = forwardRef<FormInstance, FormProps>(
     useImperativeHandle(
       ref,
       () => ({
+        submit: () => handleSubmit({} as any),
         getErrors,
         setErrors,
         getValues,
@@ -136,6 +137,7 @@ const Form = forwardRef<FormInstance, FormProps>(
         validateFields,
       }),
       [
+        handleSubmit,
         delegatingReset,
         getErrors,
         getFieldsValue,

@@ -16,6 +16,8 @@ export interface FormInstance {
    */
   getFieldsValue<V>(): V
 
+  submit(): void
+
   getErrors(name?: string | string[]): FormValidError[]
 
   setErrors(errors: FormValidError[]): void
