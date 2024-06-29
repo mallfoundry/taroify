@@ -30,7 +30,7 @@ export default function Checkbox(props: CheckboxProps) {
     name,
     defaultChecked,
     checked: checkedProp,
-    disabled,
+    disabled: disabledProp,
     shape = "round",
     icon = <Success />,
     size,
@@ -39,7 +39,7 @@ export default function Checkbox(props: CheckboxProps) {
     ...restProps
   } = props
 
-  const { value: names, max: namesMax = 0, direction, onChange: onNamesChange } = useContext(
+  const { value: names, max: namesMax = 0, direction, onChange: onNamesChange, disabled: disabledGroup } = useContext(
     CheckboxGroupContext,
   )
 
@@ -48,6 +48,8 @@ export default function Checkbox(props: CheckboxProps) {
     defaultValue: defaultChecked,
     onChange: onChangeProp,
   })
+
+  const disabled = disabledProp ?? disabledGroup
 
   function onClick() {
     if (disabled) {
