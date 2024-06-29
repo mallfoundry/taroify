@@ -18,7 +18,6 @@ import {
   Field,
 } from "@taroify/core"
 import { FormItemInstance, FormValidError, FormInstance } from "@taroify/core/form"
-import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
 import { BaseEventOrig } from "@tarojs/components/types/common"
 import { FormProps } from "@tarojs/components/types/Form"
@@ -192,6 +191,7 @@ function DatetimePickerField() {
         {(controller) => (
           <Input
             value={formatDate(controller.value)}
+            disabled={controller.disabled}
             readonly
             placeholder="点击选择时间"
             onClick={() => setOpen(true)}
@@ -231,6 +231,7 @@ function CalendarField() {
         {(controller) => (
           <Input
             value={formatDate(controller.value)}
+            disabled={controller.disabled}
             readonly
             placeholder="点击选择日期"
             onClick={() => setOpen(true)}
@@ -252,8 +253,10 @@ function CalendarField() {
 }
 
 function FormWithFields() {
+  const [disabled, setDisabled] = useState(false)
   return (
-    <Form onSubmit={(e) => Toast.open(JSON.stringify(e.detail.value, undefined, 2))}>
+    <Form disabled={disabled} onSubmit={(e) => Toast.open(JSON.stringify(e.detail.value, undefined, 2))}>
+      <Checkbox shape="square" style={{ marginLeft: "1rem" }} onChange={(e) => setDisabled(e)}>禁用</Checkbox>
       <Cell.Group inset>
         <Field label="开关" name="switch">
           <Switch size={20} />
