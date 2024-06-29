@@ -32,6 +32,7 @@ export interface FormProps extends TaroFormProps {
   controlAlign?: FormControlAlign
   validateTrigger?: FormValidateTrigger
   colon?: boolean
+  disabled?: boolean
 
   children?: ReactNode
 
@@ -50,6 +51,7 @@ const Form = forwardRef<FormInstance, FormProps>(
       controlAlign,
       validateTrigger = "onBlur",
       colon,
+      disabled,
       children: childrenProp,
       onValidate,
       onValuesChange,
@@ -171,6 +173,7 @@ const Form = forwardRef<FormInstance, FormProps>(
         value={{
           name,
           colon,
+          disabled,
           labelAlign,
           controlAlign,
           validateTrigger,

@@ -83,6 +83,7 @@ export interface FormItemProps extends Omit<CellProps, "children"> {
   dependencies?: string[]
   shouldUpdate?: boolean | ((prev, next) => boolean)
   noStyle?: boolean
+  disabled?: boolean
 
   children?: (() => ReactNode) | ReactNode
 }
@@ -108,6 +109,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       dependencies,
       shouldUpdate,
       noStyle,
+      disabled: disabledProp,
       onClick,
     } = props
     const shouldUpdateSignal = useShouldUpdateSignal(shouldUpdate)
@@ -127,7 +129,9 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     const rulesRef = useToRef(rulesProp)
 
-    const { validateTrigger } = useContext(FormContext)
+    const { validateTrigger, disabled: disabledContext } = useContext(FormContext)
+
+    const disabled = disabledProp ?? disabledContext
 
     const { validateStatus, error, setError, resetError } = useFormError(name)
 
@@ -211,10 +215,11 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
         cloneElement(control, {
           name,
           value,
+          disabled,
           onBlur: () => validateWithTrigger("onBlur"),
           onChange: setValue,
         }),
-      [control, name, setValue, validateWithTrigger, value],
+      [control, name, setValue, validateWithTrigger, value, disabled],
     )
 
     if (noStyle) {

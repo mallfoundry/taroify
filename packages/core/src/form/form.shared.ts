@@ -70,6 +70,7 @@ export interface FormController<V> {
   name?: string
   value?: V
   validateStatus?: FormValidateStatus
+  disabled?: boolean
 
   onChange?(value: V): void
 
