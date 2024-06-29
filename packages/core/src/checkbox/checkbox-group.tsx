@@ -11,6 +11,7 @@ import { CheckboxGroupDirection } from "./checkbox-group.shared"
 export interface CheckboxGroupProps<T = any> extends ViewProps {
   defaultValue?: T[]
   value?: T[]
+  disabled?: boolean
   max?: number
   direction?: CheckboxGroupDirection
   children?: ReactNode
@@ -22,6 +23,7 @@ function CheckboxGroup<T = any>(props: CheckboxGroupProps<T>) {
   const {
     defaultValue,
     value: valueProp,
+    disabled,
     max,
     direction = "vertical",
     children,
@@ -40,6 +42,7 @@ function CheckboxGroup<T = any>(props: CheckboxGroupProps<T>) {
       value={{
         value,
         max,
+        disabled,
         direction,
         onChange: setValue,
       }}

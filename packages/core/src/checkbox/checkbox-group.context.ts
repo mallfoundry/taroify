@@ -4,7 +4,7 @@ import { CheckboxGroupDirection } from "./checkbox-group.shared"
 interface CheckboxGroupContextValue {
   value?: any[]
   max?: number
-
+  disabled?: boolean
   direction?: CheckboxGroupDirection
 
   onChange?(value: any[]): void
