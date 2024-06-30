@@ -4,7 +4,7 @@
   position: fixed;
   z-index: $fixed-nav-z-index;
   display: inline-block;
-  height: 100px;
+  height: $fixed-nav-height;
   right: 0;
 
   &_btn {
@@ -12,17 +12,17 @@
     position: absolute;
     right: 0;
     z-index: $fixed-nav-z-index;
-    width: 140px;
+    width: 70px * $hd;
     height: 100%;
     background: $fixed-nav-button-background;
-    border-radius: 90px 0 0 90px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 45px * $hd 0 0 45px * $hd;
+    box-shadow: 0 2px * $hd 4px * $hd 0 rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
 
     .#{$component-prefix}fixed-nav_btn-icon {
-      margin-right: 10px;
+      margin-right: 5px * $hd;
       transform: rotate(0deg);
       transition: all 0.3s;
       transform-origin: center;
@@ -30,8 +30,8 @@
     }
 
     &-text {
-      width: 48px;
-      line-height: 26px;
+      width: 24px * $hd;
+      line-height: 13px * $hd;
       font-size: $fixed-nav-button-font-size;
       color: #fff;
       flex-shrink: 0;
@@ -49,9 +49,9 @@
     background: $fixed-nav-background-color;
     display: flex;
     justify-content: space-between;
-    border-radius: 50px 0 0 50px;
-    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.2);
-    padding: 0 160px 0 40px;
+    border-radius: 25px * $hd 0 0 25px * $hd;
+    box-shadow: 2px * $hd 2px * $hd 8px * $hd 0 rgba(0, 0, 0, 0.2);
+    padding: 0 80px * $hd 0 20px * $hd;
 
     &--item {
       position: relative;
@@ -61,19 +61,19 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-width: 100px;
+      min-width: 50px * $hd;
       flex-shrink: 0;
       color: $fixed-nav-color;
     }
 
     &--img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 4px;
+      width: 20px * $hd;
+      height: 20px * $hd;
+      margin-bottom: 2px * $hd;
     }
 
     &--text {
-      font-size: 20px;
+      font-size: 10px * $hd;
     }
   }
 
@@ -88,7 +88,7 @@
 
     .#{$component-prefix}fixed-nav--left {
       .#{$component-prefix}icon {
-        transform: rotate(0deg) !important;;
+        transform: rotate(0deg) !important;
       }
     }
   }
@@ -101,19 +101,19 @@
       flex-direction: row-reverse;
       right: auto;
       left: 0;
-      border-radius: 0 90px 90px 0;
+      border-radius: 0 45px * $hd 45px * $hd 0;
     }
 
     .#{$component-prefix}fixed-nav_btn-icon {
       transform: rotate(180deg);
-      margin-left: 10px;
+      margin-left: 5px * $hd;
     }
 
     .#{$component-prefix}fixed-nav_content {
       transform: translateX(-100%);
       right: auto;
-      border-radius: 0 50px 50px 0;
-      padding: 0 40px 0 160px;
+      border-radius: 0 25px * $hd 25px * $hd 0;
+      padding: 0 20px * $hd 0 80px * $hd;
     }
   }
 }

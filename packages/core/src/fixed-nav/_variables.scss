@@ -2,6 +2,7 @@
 @import "../styles/variables";
 
 $fixed-nav-z-index: var(--fixed-nav-z-index, 1010);
+$fixed-nav-height: var(--fixed-nav-height, 50px * $hd);
 $fixed-nav-content-z-index: var(--fixed-nav-z-content-index, 1009);
 $fixed-nav-button-background: var(--fixed-nav-button-background, $primary-color);
 $fixed-nav-button-font-size: var(--fixed-nav-button-font-size, $font-size-sm);
