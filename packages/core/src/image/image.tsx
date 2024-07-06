@@ -102,7 +102,7 @@ export default function Image(props: ImageProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <View>
+    <>
       {!failed && src && (
         <TaroImage
           ref={taroImageRef}
@@ -157,6 +157,6 @@ export default function Image(props: ImageProps) {
           <ImagePlaceholder prefix="fallback" children={fallback} />
         </View>
       )}
-    </View>
+    </>
   )
 }
