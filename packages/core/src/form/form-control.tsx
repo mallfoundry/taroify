@@ -21,6 +21,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
     className,
     name,
     value,
+    disabled,
     align: alignProp,
     children = <Input />,
     onChange: onDelegatingChange,
@@ -38,6 +39,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
         name,
         value: formName ? value : undefined,
         validateStatus,
+        disabled,
         onChange: onDelegatingChange,
         onBlur: onDelegatingBlur,
       })
@@ -52,6 +54,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
         name,
         value,
         validateStatus,
+        disabled,
         onChange: onDelegatingChange,
         onBlur: onDelegatingBlur,
       })
@@ -63,6 +66,7 @@ function FormControl<V = any>(props: FormControlProps<V>) {
     onDelegatingBlur,
     onDelegatingChange,
     validateStatus,
+    disabled,
     value,
   ]) as JSX.Element
 

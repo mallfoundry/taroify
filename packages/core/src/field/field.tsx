@@ -3,7 +3,7 @@ import { ReactNode, useRef, useImperativeHandle, forwardRef, ForwardRefExoticCom
 import Form, { FormController, FormFeedbackProps, FormItemInstance, FormItemProps, FormLabelProps } from "../form"
 import { createVariantElement } from "../utils/element"
 
-export interface FieldProps extends Omit<FormItemProps, "children"> {
+export interface FieldProps extends Omit<FormItemProps, "children" | "noStyle" | "shouldUpdate"> {
   label?: ReactNode | FormLabelProps
   feedback?: ReactNode | FormFeedbackProps
   children?: ReactNode | ((controller: FormController<any>) => ReactNode)

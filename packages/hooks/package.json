@@ -13,6 +13,13 @@
     "component",
     "components"
   ],
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/mallfoundry/taroify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mallfoundry/taroify/issues/new"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

@@ -147,6 +147,11 @@ function FormWithRules() {
 }
 ```
 
+### 禁用表单
+设置 `disabled` 后，会为 `Form` 内部的 `taroify` 组件 `Input`, `Textarea`, `Checkbox`, `Switch`, `Checkbox.Group`, `Radio.Group`, `Rate`, `Slider`, `Stepper`, `Uploader` 设置 `disabled` <br>
+
+form设置disabled后，也可以单独为表单项和组件设置disabled={false}, 优先级：表单 < 表单项 < 组件
+
 ### 表单项类型 - 开关
 
 在表单中使用 [Switch 组件](/components/switch)。
@@ -315,6 +320,7 @@ function DatetimePickerField() {
         {(controller) => (
           <Input
             value={formatDate(controller.value)}
+            disabled={controller.disabled}
             readonly
             placeholder="点击选择时间"
             onClick={() => setOpen(true)}
@@ -360,6 +366,7 @@ function CalendarField() {
         {(controller) => (
           <Input
             value={formatDate(controller.value)}
+            disabled={controller.disabled}
             readonly
             placeholder="点击选择日期"
             onClick={() => setOpen(true)}
@@ -560,10 +567,12 @@ function ShouldUpdateDemo() {
 
 | 参数              | 说明                                       | 类型         | 默认值      |
 |-----------------|------------------------------------------|------------|----------|
+| defaultValues   | 表单默认值       |  _object_  |    |
 | labelAlign      | 表单项 label 对齐方式，可选值为 `center` `right`     | _string_   | `left`   |
 | controlAlign    | 表单项 control 对齐方式，可选值为 `center` `right`   | _string_   | `left`   |
 | validateTrigger | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_   | `onBlur` |
 | colon           | 是否在 label 后面添加冒号                         | _boolean_  | `false`  |
+| disabled        | 是否禁用表单             | _boolean_ | `false` |
 
 ### Form Events
 
@@ -649,6 +658,7 @@ function ShouldUpdateDemo() {
 interface FormController<V> {
   value?: V // 当前表单项值
   validateStatus?: FormValidateStatus // 当前表单项验证状态
+  disabled?: boolean // 当前表单项是否禁用
 
   onChange?(value: V): void // 改变当前表单项值
 

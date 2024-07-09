@@ -59,4 +59,26 @@
       border-radius: $avatar-border-radius-large;
     }
   }
+
+  &__image {
+    &--mini {
+      width: $avatar-size-mini;
+      height: $avatar-size-mini;
+    }
+
+    &--small {
+      width: $avatar-size-small;
+      height: $avatar-size-small;
+    }
+
+    &--medium {
+      width: $avatar-size-medium;
+      height: $avatar-size-medium;
+    }
+
+    &--large {
+      width: $avatar-size-large;
+      height: $avatar-size-large;
+    }
+  }
 }

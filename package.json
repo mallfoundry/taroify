@@ -3,6 +3,13 @@
   "version": "0.3.0-alpha.0",
   "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/mallfoundry/taroify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mallfoundry/taroify/issues/new"
+  },
   "scripts": {
     "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",
     "install:node_modules": "yarn install && gulp createBundles && lerna bootstrap && cd ./site && yarn install",

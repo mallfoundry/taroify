@@ -4,6 +4,7 @@ import { FormControlAlign, FormLabelAlign, FormValidateTrigger } from "./form.sh
 interface FormContextValue {
   name?: string
   colon?: boolean
+  disabled?: boolean
   labelAlign?: FormLabelAlign
   controlAlign?: FormControlAlign
   validateTrigger?: FormValidateTrigger

@@ -38,7 +38,21 @@ function Avatar(props: AvatarProps) {
       )}
       {...restProps}
     >
-      {src ? <Image alt={alt} shape={shape} src={src} /> : children}
+      {
+        src ?
+          <Image
+            alt={alt}
+            shape={shape}
+            src={src}
+            className={classNames({
+              [prefixClassname("avatar__image--mini")]: size === "mini",
+              [prefixClassname("avatar__image--small")]: size === "small",
+              [prefixClassname("avatar__image--medium")]: size === "medium",
+              [prefixClassname("avatar__image--large")]: size === "large",
+            })}
+          /> :
+          children
+        }
     </View>
   )
 }

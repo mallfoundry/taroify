@@ -24,15 +24,17 @@ registerFormControlHandler(
         name,
         value,
         validateStatus,
+        disabled: disabledProp,
         onBlur: onDelegatingBlur,
         onChange: onDelegatingChange,
       } = controller
       const { props: elementProps } = element
-      const { name: nameProp, value: valueProp, color, onBlur, onInput } = elementProps
+      const { name: nameProp, value: valueProp, color, onBlur, onInput, disabled } = elementProps
       return cloneElement<InputProps>(element, {
         name: nameProp ?? name,
         value: valueProp ?? value,
         color: color ?? (validateStatus === "invalid" ? "danger" : undefined),
+        disabled: disabled ?? disabledProp,
         onInput: (e) => {
           onInput?.(e)
           onDelegatingChange?.(e.detail.value)
@@ -61,12 +63,13 @@ registerFormControlHandler(
       element: ReactElement<TaroSwitchProps>,
       controller: FormController<any>,
     ): ReactNode {
-      const { name, value, onChange: onDelegatingChange } = controller
+      const { name, value, onChange: onDelegatingChange, disabled: disabledProp } = controller
       const { props: elementProps } = element
-      const { name: nameProp, checked: checkedProp, onChange } = elementProps
+      const { name: nameProp, checked: checkedProp, onChange, disabled } = elementProps
       return cloneElement<TaroSwitchProps>(element, {
         name: nameProp ?? name,
         checked: checkedProp ?? value,
+        disabled: disabled ?? disabledProp,
         onChange: (e) => {
           onChange?.(e)
           onDelegatingChange?.(e.detail.value)
@@ -86,11 +89,12 @@ registerFormControlHandler(
       element: ReactElement<CheckboxProps | SwitchProps>,
       controller: FormController<any>,
     ): ReactNode {
-      const { value, onChange: onDelegatingChange } = controller
+      const { value, onChange: onDelegatingChange, disabled: disabledProp } = controller
       const { props: elementProps } = element
-      const { checked: checkedProp, onChange } = elementProps
+      const { checked: checkedProp, onChange, disabled } = elementProps
       return cloneElement<CheckboxProps | SwitchProps>(element, {
         checked: checkedProp ?? value,
+        disabled: disabled ?? disabledProp,
         onChange: (checked) => {
           onChange?.(checked)
           onDelegatingChange?.(checked)
@@ -126,9 +130,9 @@ registerFormControlHandler(
       >,
       controller: FormController<any>,
     ): ReactNode {
-      const { value, onChange: onDelegatingChange } = controller
+      const { value, onChange: onDelegatingChange, disabled: disabledProp } = controller
       const { props: elementProps } = element
-      const { value: valueProp, onChange } = elementProps
+      const { value: valueProp, onChange, disabled } = elementProps
       return cloneElement<
         | CheckboxGroupProps
         | RadioGroupProps
@@ -138,6 +142,7 @@ registerFormControlHandler(
         | UploaderProps
       >(element, {
         value: valueProp ?? value,
+        disabled: disabled ?? disabledProp,
         onChange: (nextValue: any) => {
           onChange?.(nextValue)
           onDelegatingChange?.(nextValue)

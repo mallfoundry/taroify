@@ -1,9 +1,9 @@
+const { Transform } = require("stream")
+const path = require("path")
 const gulp = require("gulp")
+const fs = require("fs-extra")
 const { series, watch } = require("gulp")
-const { Transform } = require('stream')
 const ts = require("gulp-typescript")
-const fs = require('fs-extra')
-const path = require('path')
 
 const ignore = ["node_modules", "**/__tests__", "**/?(*.)+(spec|test).[tj]s?(x)"]
 
@@ -59,7 +59,6 @@ function compileTypescript(bundle, dist) {
         ignore,
       })
       .pipe(tsProject())
-      .pipe(new AddExtTransform())
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   compileTypescriptTask.displayName = `compile typescript files to bundles/${
     dist ?? bundle
@@ -82,22 +81,38 @@ function generateDeclarationFiles(bundle, dist) {
   return generateTypescriptDeclarationTask
 }
 
+function addJsExt(bundle, dist) {
+  const addJsExtTask = () =>
+    gulp
+      .src([`./bundles/${dist ?? bundle}/**/*.js`])
+      .pipe(
+        new AddExtTransform(),
+      )
+      .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
+  addJsExtTask.displayName = `add js ext to bundles/${dist ?? bundle}`
+  return addJsExtTask
+}
+
 class AddExtTransform extends Transform {
   constructor() {
     super({ objectMode: true });
+    this.bundlesPath = path.resolve(process.cwd(), "./bundles");
   }
 
   _transform(file, encoding, callback) {
-    if (file.isBuffer() && file.extname === '.js') {
+    if (file.isBuffer() && file.extname === ".js" ) {
       const content = file.contents.toString(encoding);
       let newContent = content
-      const importPathRegex = /from\s+"(\.\S+)";/g;
+      const importPathRegex = /(?:import|export)[\s|\S]+?"((?:@taroify|\.)\S+)";/g;
 
       let match;
       while ((match = importPathRegex.exec(content)) !== null) {
-        if (fs.existsSync(path.resolve(file.dirname, match[1] + '.js'))) {
+        const dirname = match[1].startsWith("@taroify") ? this.bundlesPath : file.dirname
+        const matchPath = match[1].startsWith("@taroify") ? match[1].replace("@taroify", ".") : match[1]
+
+        if (fs.existsSync(path.resolve(dirname, matchPath + ".js"))) {
           newContent = newContent.replace(`"${match[1]}"`, `"${match[1]}.js"`)
-        } else if (fs.existsSync(path.resolve(file.dirname, match[1] + '/index.js'))) {
+        } else if (fs.existsSync(path.resolve(dirname, matchPath + "/index.js"))) {
           newContent = newContent.replace(`"${match[1]}"`, `"${match[1]}/index.js"`)
         }
       }
@@ -114,6 +129,7 @@ function buildTypescript(module, dist) {
     // copyTypescriptFiles(module, dist), //
     copyDeclarationFiles(module, dist), //
     compileTypescript(module, dist), //
+    addJsExt(module, dist),
     generateDeclarationFiles(module, dist), //
   )
 }

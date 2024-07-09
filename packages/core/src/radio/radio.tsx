@@ -39,7 +39,7 @@ export default function Radio(props: RadioProps) {
 
   const size = sizeProp ?? sizeGroup
 
-  const disabled = disabledProp || disabledGroup
+  const disabled = disabledProp ?? disabledGroup
 
   const checked = name === value
 
