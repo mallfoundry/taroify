@@ -12,6 +12,43 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.3.1-alpha.0
+
+`2024-07-09`
+
+**Feature**
+
+- Form
+
+  - Form 添加 `disabled` 属性，实例添加 `submit` 方法 [767](https://github.com/mallfoundry/taroify/pull/767) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- BackTop
+
+  - Scss 添加 `$hd` 变量配置 [762](https://github.com/mallfoundry/taroify/pull/762) [@Pilotager](https://github.com/Pilotager)
+
+- FixedNav
+
+  - Scss 添加 `$hd` 变量配置 [768](https://github.com/mallfoundry/taroify/pull/768) [@Pilotager](https://github.com/Pilotager)
+
+- Form
+
+  - 修复 `Checkbox.Group` 设置 `disabled` 无效 [767](https://github.com/mallfoundry/taroify/pull/767) [@hbztd](https://github.com/hbztd)
+
+- Avatar
+
+  - 修复 `Avatar` 里为图片时，样式不对 [777](https://github.com/mallfoundry/taroify/pull/767) [@hbztd](https://github.com/hbztd)
+  - `Image` 默认继承父元素宽高 [777](https://github.com/mallfoundry/taroify/pull/767) [@hbztd](https://github.com/hbztd)
+
+**Other**
+
+- 修复 `taro` 预编译 `@taroify/core` `@taroify/icons` 失败 [763](https://github.com/mallfoundry/taroify/pull/763) [@hbztd](https://github.com/hbztd)
+
+- package.json 添加 `repository` 和 `bugs` [764](https://github.com/mallfoundry/taroify/pull/764) [@Pilotager](https://github.com/Pilotager)
+
+**Feature**
+
 ### v0.3.0-alpha.0
 
 `2024-06-23`
