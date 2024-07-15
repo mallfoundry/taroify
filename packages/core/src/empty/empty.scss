@@ -11,6 +11,8 @@
   &__image {
     width: $empty-image-width;
     height: $empty-image-height;
+    margin-left: 50%;
+    transform: translateX(-50%);
 
     img {
       width: 100%;
