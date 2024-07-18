@@ -1,11 +1,11 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$floating-bubble-size: var(--floating-bubble-size, 96px);
-$floating-bubble-initial-gap: var(--floating-bubble-initial-gap, 48px);
+$floating-bubble-size: var(--floating-bubble-size, 48px * $hd);
+$floating-bubble-initial-gap: var(--floating-bubble-initial-gap, 24px * $hd);
 $floating-bubble-background: var(--floating-bubble-background, $primary-color);
 $floating-bubble-color: var(--floating-bubble-color, $background-color-2);
 $floating-bubble-border-radius: var(--floating-bubble-border-radius, $border-radius-max);
 $floating-bubble-z-index: var(--floating-bubble-z-index, 999);
 $floating-bubble-duration: var(--floating-bubble-duratio, $animation-duration-base);
-$floating-bubble-icon-size: var(--floating-bubble-icon-size, 56px);
+$floating-bubble-icon-size: var(--floating-bubble-icon-size, 28px * $hd);
