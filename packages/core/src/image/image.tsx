@@ -3,9 +3,11 @@ import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { ReactNode, useEffect, useMemo, useState, useRef } from "react"
+import { pxTransform } from "@tarojs/taro"
 import { prefixClassname } from "../styles"
 import { getLogger } from "../utils/logger"
 import { useMemoizedFn } from "../hooks"
+import mergeStyle from "../utils/merge-style"
 import ImagePlaceholder from "./image-placeholder"
 import { ImageMode, ImageShape } from "./image.shared"
 
@@ -43,7 +45,10 @@ function useImageShape(shape?: ImageShape, round?: boolean) {
 export interface ImageProps extends ViewProps {
   src?: string
   alt?: string
+  width?: string | number
+  height?: string | number
   mode?: ImageMode
+  /** @deprecated */
   round?: boolean
   shape?: ImageShape
   lazyLoad?: boolean
@@ -60,14 +65,17 @@ export default function Image(props: ImageProps) {
     className,
     src,
     alt,
+    width: widthProp,
+    height: heightProp,
     mode = "scaleToFill",
     round,
     shape: shapeProp,
     lazyLoad = false,
-    placeholder = true,
-    fallback = true,
+    placeholder = false,
+    fallback = false,
     onLoad,
     onError,
+    style: styleProp,
     ...restProps
   } = props
   const taroImageRef = useRef<any>()
@@ -76,6 +84,16 @@ export default function Image(props: ImageProps) {
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
   const isLoadedRef = useRef(false)
+
+  const [viewStyle, imgStyle] = useMemo(() => {
+    const width = widthProp ? typeof widthProp === "number" ? pxTransform(widthProp) : widthProp : undefined
+    const height = heightProp ? typeof heightProp === "number" ? pxTransform(heightProp) : heightProp : undefined
+    const imgStyle = mergeStyle(styleProp, {})
+    imgStyle.width = width || imgStyle.width
+    imgStyle.height = height || imgStyle.height
+    return [{ width: imgStyle.width || "100%", height: imgStyle.height || "100%", position: "relative" }, imgStyle] as const
+  }, [styleProp, widthProp, heightProp])
+
   const handleLoad = useMemoizedFn(() => {
     if (!isLoadedRef.current) {
       isLoadedRef.current = true
@@ -100,7 +118,7 @@ export default function Image(props: ImageProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src])
   return (
-    <View style={{ height: "100%", width: "100%" }}>
+    <View style={viewStyle}>
       {!failed && src && (
         <TaroImage
           ref={taroImageRef}
@@ -117,44 +135,15 @@ export default function Image(props: ImageProps) {
             },
             className,
           )}
+          style={imgStyle}
           imgProps={{ alt }}
           onLoad={handleLoad}
           onError={handleError}
           {...restProps}
         />
       )}
-      {loading && placeholder && (
-        <View
-          className={classNames(
-            prefixClassname("image"),
-            {
-              [prefixClassname("image--square")]: shape === "square",
-              [prefixClassname("image--rounded")]: shape === "rounded",
-              [prefixClassname("image--circle")]: shape === "circle",
-            },
-            className,
-          )}
-          {...restProps}
-        >
-          <ImagePlaceholder prefix="placeholder" children={placeholder} />
-        </View>
-      )}
-      {failed && fallback && (
-        <View
-          className={classNames(
-            prefixClassname("image"),
-            {
-              [prefixClassname("image--square")]: shape === "square",
-              [prefixClassname("image--rounded")]: shape === "rounded",
-              [prefixClassname("image--circle")]: shape === "circle",
-            },
-            className,
-          )}
-          {...restProps}
-        >
-          <ImagePlaceholder prefix="fallback" children={fallback} />
-        </View>
-      )}
+      {loading && placeholder && <ImagePlaceholder prefix="placeholder" children={placeholder} />}
+      {failed && fallback && <ImagePlaceholder prefix="fallback" children={fallback} />}
     </View>
   )
 }

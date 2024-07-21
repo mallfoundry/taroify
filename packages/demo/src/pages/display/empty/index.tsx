@@ -45,6 +45,7 @@ export default function EmptyDemo() {
       <Block title="自定义图片">
         <Empty>
           <Empty.Image
+            style={{ width: 160, height: 160 }}
             className="custom-empty__image"
             src="https://img.yzcdn.cn/vant/custom-empty-image.png"
           />
