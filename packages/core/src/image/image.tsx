@@ -91,16 +91,14 @@ export default function Image(props: ImageProps) {
 
   useEffect(() => {
     isLoadedRef.current = false
-    setLoading(true)
-  }, [src])
-
-  useEffect(() => {
     const nativeImg = taroImageRef.current?.children?.[0] as HTMLImageElement
     if (nativeImg && nativeImg.complete) {
       handleLoad()
+    } else {
+      setLoading(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
   return (
     <View style={{ height: "100%", width: "100%" }}>
       {!failed && src && (
