@@ -14,10 +14,12 @@ import { Image } from "@taroify/core"
 
 ### 基础用法
 
-基础用法与原生 `img` 标签一致，可以设置 `src`、`alt` 等原生属性。
+基础用法与原生 `img` 标签一致，可以设置 `src`、`alt` 等原生属性。<br>
+通过 `width` 和 `height` 设置图片大小，若未指定，会从style中读取`width`,`height`属性。 <br>
+width和height若为number, 会经过 `pxTransform` 转换
 
 ```tsx
-<Image style={{ width: "100px", height: "100px" }} src="https://img.yzcdn.cn/vant/cat.jpeg" />
+<Image width={200} height={200} src="https://img.yzcdn.cn/vant/cat.jpeg" />
 ```
 
 ### 填充模式
@@ -26,7 +28,8 @@ import { Image } from "@taroify/core"
 
 ```tsx
 <Image
-  style={{ width: "10rem", height: "10rem" }}
+  width={200}
+  height={200}
   mode="scaleToFill"
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
@@ -38,8 +41,9 @@ import { Image } from "@taroify/core"
 
 ```tsx
 <Image
-  round
-  style={{ width: "10rem", height: "10rem" }}
+  shape="round"
+  width={200}
+  height={200}
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
@@ -51,25 +55,23 @@ import { Image } from "@taroify/core"
 ```tsx
 <Image
   lazyLoad
-  style={{ width: "10rem", height: "10rem" }}
+  width={200}
+  height={200}
   src="https://img.yzcdn.cn/vant/cat.jpeg"
 />
 ```
 
-### 加载中提示
+### 加载中，加载失败提示
 
-`Image` 组件提供了默认的加载中提示，支持通过 `placeholder` 插槽自定义内容。
-
-```tsx
-<Image src="https://img.yzcdn.cn/vant/cat.jpeg" placeholder="加载中..." />
-```
-
-### 加载失败提示
-
-`Image` 组件提供了默认的加载失败提示，支持通过 `fallback` 插槽自定义内容。
+通过 `placeholder` 设置加载中提示，通过 `fallback`设置加载失败提示
 
 ```tsx
-<Image src="https://img.yzcdn.cn/vant/cat.jpeg" fallback="加载失败" />
+import { Photo, PhotoFail } from "@taroify/icons"
+
+<Image width={200} height={200} placeholder="加载中..." />
+<Image width={200} height={200} src="error" fallback="加载失败" />
+<Image width={200} height={200} src="error" fallback={<PhotoFail />} />
+<Image width={200} height={200} placeholder={<Photo />} />
 ```
 
 ## API
@@ -79,12 +81,14 @@ import { Image } from "@taroify/core"
 | 参数          | 说明                                  | 类型          | 默认值             |
 |-------------|-------------------------------------|-------------|-----------------|
 | src         | 图片链接                                | _string_    | -               |
-| mode        | 图片填充模式                              | _string_    | `fill`          |
+| mode        | 图片填充模式                              | _string_    | `scaleToFill`          |
 | alt         | 替代文本                                | _string_    | -               |
+| width       | 宽度                                    | _string\|number_ | -  |
+| height      | 长度                                    | _string\|number_ | - | 
 | shape       | 图片形状 `square` `rounded` `circle`    | _boolean_   | -               |
 | lazyLoad    | 是否开启图片懒加载                           | _boolean_   | `false`         |
-| placeholder | 加载时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<Photo />`     |
-| fallback    | 失败时提示的[图标名称](/components/icon)或图片链接 | _ReactNode_ | `<PhotoFail />` |
+| placeholder | 加载中提示 | _ReactNode_ | -     |
+| fallback    | 加载失败提示 | _ReactNode_ | - |
 
 ### Modes
 

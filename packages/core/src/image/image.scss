@@ -1,11 +1,6 @@
 @import "./variables";
 
 .#{$component-prefix}image {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-
   &--circle {
     overflow: hidden;
     border-radius: 50%;
