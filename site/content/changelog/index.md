@@ -12,6 +12,30 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.3.2-alpha.0
+
+`2024-08-04`
+
+**Feature**
+
+- Image
+
+  - 添加 `width` `height` 属性 [784](https://github.com/mallfoundry/taroify/pull/784) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- Empty
+
+  - 修复 `Empty` 组件图片居中问题 [779](https://github.com/mallfoundry/taroify/pull/779) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+
+- FloatingBubble
+
+  - 修复 `sass` 变量未进行适配 [782](https://github.com/mallfoundry/taroify/pull/782) [@Pilotager](https://github.com/Pilotager)
+
+- Image
+
+  - 修复加载中未显示 `placeholder` [784](https://github.com/mallfoundry/taroify/pull/784) [@hbztd](https://github.com/hbztd)
+
 ### v0.3.1-alpha.0
 
 `2024-07-09`
