@@ -2,5 +2,34 @@
 @import "../../../styles/prefix";
 
 .fixed-nav-demo {
+  .fixed-nav-text {
+    color: #fff;
+    line-height: 26px;
+    width: 48px;
+    font-size: 24px;
+  }
 
+  .taroify-fixed-nav_content {
+    &.customer {
+      border-radius: 0 50px 50px 0;
+      margin: 0;
+      padding-left: 160px;
+      padding-right: 40px;
+      right: auto;
+    }
+
+    &_item {
+      align-items: center;
+      color: #1a1a1a;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 100%;
+      justify-content: center;
+      min-width: 100px;
+      position: relative;
+      font-size: 28px;
+    }
+  }
 }
