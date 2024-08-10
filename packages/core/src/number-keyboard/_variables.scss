@@ -3,29 +3,65 @@
 
 $number-keyboard-z-index: var(--number-keyboard-z-index, 100);
 $number-keyboard-background-color: var(--number-keyboard-background-color, var(--gray-2, $gray-2));
-$number-keyboard-with-title-border-radius: var(--number-keyboard-with-title-border-radius, 20px * $hd 20px * $hd 0 0);
+$number-keyboard-with-title-border-radius: var(
+  --number-keyboard-with-title-border-radius,
+  20px * $hd 20px * $hd 0 0
+);
 //
 $number-keyboard-header-color: var(--number-keyboard-header-color, var(--gray-7, $gray-7));
 $number-keyboard-header-padding-top: var(--number-keyboard-header-padding-top, 6px * $hd);
 $number-keyboard-header-height: var(--number-keyboard-header-height, 34px * $hd);
-$number-keyboard-header-font-size: var(--number-keyboard-header-font-size, var(--font-size-lg, $font-size-lg));
+$number-keyboard-header-font-size: var(
+  --number-keyboard-header-font-size,
+  var(--font-size-lg, $font-size-lg)
+);
 //
 $number-keyboard-key-height: var(--number-keyboard-key-height, 48px * $hd);
 $number-keyboard-key-font-size: var(--number-keyboard-key-font-size, 28px * $hd);
-$number-keyboard-key-background-color: var(--number-keyboard-key-background-color, var(--white, $white));
-$number-keyboard-key-border-radius: var(--number-keyboard-key-font-size, var(--border-radius-lg, $border-radius-lg));
+$number-keyboard-key-background-color: var(
+  --number-keyboard-key-background-color,
+  var(--white, $white)
+);
+$number-keyboard-key-border-radius: var(
+  --number-keyboard-key-font-size,
+  var(--border-radius-lg, $border-radius-lg)
+);
 $number-keyboard-key-line-height: var(--number-keyboard-key-line-height, 1.5);
 //
-$number-keyboard-key-active-background-color: var(--number-keyboard-key-active-background-color, var(--gray-3, $gray-3));
-$number-keyboard-key-active-opacity: var(--number-keyboard-key-active-opacity, var(--active-opacity, $active-opacity));
+$number-keyboard-key-active-background-color: var(
+  --number-keyboard-key-active-background-color,
+  var(--gray-3, $gray-3)
+);
+$number-keyboard-key-active-opacity: var(
+  --number-keyboard-key-active-opacity,
+  var(--active-opacity, $active-opacity)
+);
 //
-$number-keyboard-large-key-font-size: var(--number-keyboard-large-key-font-size, var(--font-size-lg, $font-size-lg));
+$number-keyboard-large-key-font-size: var(
+  --number-keyboard-large-key-font-size,
+  var(--font-size-lg, $font-size-lg)
+);
 //
-$number-keyboard-hide-padding: var(--number-keyboard-hide-padding, 0 var(--padding-md, $padding-md));
-$number-keyboard-hide-font-size: var(--number-keyboard-hide-font-size, 24px * $hd);
-$number-keyboard-hide-color: var(--number-keyboard-hide-color, var(--text-link-color, $text-link-color));
-$number-keyboard-hide-active-opacity: var(--number-keyboard-hide-active-opacity, $number-keyboard-key-active-opacity);
+$number-keyboard-hide-padding: var(
+  --number-keyboard-hide-padding,
+  0 var(--padding-md, $padding-md)
+);
+$number-keyboard-hide-font-size: var(
+  --number-keyboard-hide-font-size,
+  var(--font-size-md, $font-size-md)
+);
+$number-keyboard-hide-color: var(
+  --number-keyboard-hide-color,
+  var(--text-link-color, $text-link-color)
+);
+$number-keyboard-hide-active-opacity: var(
+  --number-keyboard-hide-active-opacity,
+  $number-keyboard-key-active-opacity
+);
 //
 $number-keyboard-backspace-font-size: var(--number-keyboard-backspace-font-size, 22px * $hd);
 $number-keyboard-button-color: var(--number-keyboard-button-color, var(--white, $white));
-$number-keyboard-button-background-color: var(--number-keyboard-button-background-color, var(--primary-color, $primary-color));
+$number-keyboard-button-background-color: var(
+  --number-keyboard-button-background-color,
+  var(--primary-color, $primary-color)
+);
