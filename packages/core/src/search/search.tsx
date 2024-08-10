@@ -29,6 +29,7 @@ interface SearchProps extends ViewProps {
   focus?: boolean
   disabled?: boolean
   readonly?: boolean
+  enableNative?: boolean
 
   placeholder?: string
   placeholderClassName?: string
@@ -69,6 +70,7 @@ function Search(props: SearchProps) {
     focus,
     disabled,
     readonly,
+    enableNative = true,
     //
     placeholder,
     placeholderClassName,
@@ -139,6 +141,7 @@ function Search(props: SearchProps) {
             disabled={disabled}
             readonly={readonly}
             confirmType="search"
+            enableNative={enableNative}
             onConfirm={handleSearch}
             onClear={onClear}
             onChange={onChange}
