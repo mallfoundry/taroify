@@ -1,8 +1,42 @@
 import { useState } from "react"
 import { FixedNav } from "@taroify/core"
-import { WapHomeOutlined, AppsOutlined, ShoppingCartOutlined, UserOutlined } from "@taroify/icons"
+import {
+  WapHomeOutlined,
+  AppsOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+  GiftOutlined,
+} from "@taroify/icons"
 import Page from "../../../components/page"
 import "./index.scss"
+
+const CustomerFixedNav = () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <FixedNav
+      open={open}
+      onChange={setOpen}
+      type="left"
+      backdrop={false}
+      position={{ top: "400px" }}
+      content={
+        <>
+          <GiftOutlined color="#FFF" />
+          <span className="fixed-nav-text">{open ? "开" : "关"}</span>
+        </>
+      }
+    >
+      <ul className="taroify-fixed-nav_content customer">
+        <li className="taroify-fixed-nav_content_item">我</li>
+        <li className="taroify-fixed-nav_content_item">是</li>
+        <li className="taroify-fixed-nav_content_item">自</li>
+        <li className="taroify-fixed-nav_content_item">定</li>
+        <li className="taroify-fixed-nav_content_item">义</li>
+      </ul>
+    </FixedNav>
+  )
+}
 
 export default function BackTopDemo() {
   const [open, setOpen] = useState(false)
@@ -40,6 +74,7 @@ export default function BackTopDemo() {
         backdrop={false}
         position={{ top: "300px" }}
       />
+      <CustomerFixedNav />
     </Page>
   )
 }
