@@ -142,10 +142,12 @@ export default function Toast(props: ToastProps) {
 
   useEffect(() => {
     if (open) {
-      restartAutoClose(() => {
-        setOpen(false)
-        stopAutoClose()
-      }, duration)
+      if (duration) {
+        restartAutoClose(() => {
+          setOpen(false)
+          stopAutoClose()
+        }, duration)
+      }
     } else {
       stopAutoClose()
     }

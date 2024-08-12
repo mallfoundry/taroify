@@ -1,5 +1,5 @@
 import { Cell, Image, Loading, Toast } from "@taroify/core"
-import { ArrowRight, LikeOutlined } from "@taroify/icons"
+import { LikeOutlined } from "@taroify/icons"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 
@@ -52,8 +52,8 @@ export default function ToastDemo() {
               icon: (
                 <Image
                   style={{
-                    width: "1em",
-                    height: "1em",
+                    width: "40px",
+                    height: "40px",
                   }}
                   src="https://img01.yzcdn.cn/vant/logo.png"
                 />
