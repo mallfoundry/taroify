@@ -15,12 +15,7 @@ function ImperativeToast() {
   return (
     <>
       <Toast id="toast" />
-      <Cell
-        title="函数调用"
-        clickable
-        isLink
-        onClick={() => Toast.open("文字提示")}
-      />
+      <Cell title="函数调用" clickable isLink onClick={() => Toast.open("文字提示")} />
     </>
   )
 }
@@ -36,7 +31,9 @@ function BasicToast() {
 
   return (
     <>
-      <Toast open={open} onClose={setOpen}>文字提示</Toast>
+      <Toast open={open} onClose={setOpen}>
+        文字提示
+      </Toast>
       <Cell title="基础用法" clickable onClick={() => setOpen(true)} />
     </>
   )
@@ -54,12 +51,7 @@ function TextToast() {
   return (
     <>
       <Toast id="toast" />
-      <Cell
-        clickable
-        title="文字提示"
-        isLink
-        onClick={() => Toast.open("文字提示")}
-      />
+      <Cell clickable title="文字提示" isLink onClick={() => Toast.open("文字提示")} />
     </>
   )
 }
@@ -70,7 +62,9 @@ function TextToast() {
 使用 `type="loading"` 方法展示加载提示。
 
 ```tsx
-<Toast open type="loading">加载中...</Toast>
+<Toast open type="loading">
+  加载中...
+</Toast>
 ```
 
 ### 成功/失败提示
@@ -108,39 +102,39 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| defaultOpen | 默认是否显示弹出层 | _boolean_ | `false` |
-| open | 是否显示弹出层 | _boolean_ | `false` |
-| type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
-| icon | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_ | - |
-| position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
-| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
-| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
-| children | 文本内容 | _ReactNode_ | - |
-| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+| 参数        | 说明                                                       | 类型                       | 默认值   |
+| ----------- | ---------------------------------------------------------- | -------------------------- | -------- |
+| defaultOpen | 默认是否显示弹出层                                         | _boolean_                  | `false`  |
+| open        | 是否显示弹出层                                             | _boolean_                  | `false`  |
+| type        | 提示类型，可选值为 `loading` `success`<br>`fail` `html`    | _string_                   | `text`   |
+| icon        | 自定义图标，支持传入[图标名称](/components/icon)或图片链接 | _ReactNode_                | -        |
+| position    | 弹出位置，可选值为 `top` `bottom`                          | _string_                   | `center` |
+| duration    | 动画时长，单位毫秒，值为 0 时，toast 不会消失              | _number \| string_         | `300`    |
+| backdrop    | 是否显示遮罩层                                             | _boolean_                  | `false`  |
+| children    | 文本内容                                                   | _ReactNode_                | -        |
+| onClose     | 关闭时的回调函数                                           | _(open : boolean) => void_ | -        |
 
 ### Options
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| selector | 自定义节点选择器 | _string_ | `toast` |
-| type | 提示类型，可选值为 `loading` `success`<br>`fail` `html` | _string_ | `text` |
-| icon | 自定义图标，支持传入[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | - |
-| position | 弹出位置，可选值为 `top` `bottom` | _string_ | `center` |
-| duration | 动画时长，单位毫秒 | _number \| string_ | `300` |
-| backdrop | 是否显示遮罩层 | _boolean_ | `false` |
-| message | 文本内容 | _ReactNode_ | - |
-| onClose | 关闭时的回调函数 | _(open : boolean) => void_ | - |
+| 参数     | 说明                                                                    | 类型                       | 默认值   |
+| -------- | ----------------------------------------------------------------------- | -------------------------- | -------- |
+| selector | 自定义节点选择器                                                        | _string_                   | `toast`  |
+| type     | 提示类型，可选值为 `loading` `success`<br>`fail` `html`                 | _string_                   | `text`   |
+| icon     | 自定义图标，支持传入[图标](/components/icon)或[图片](/components/image) | _ReactNode_                | -        |
+| position | 弹出位置，可选值为 `top` `bottom`                                       | _string_                   | `center` |
+| duration | 动画时长，单位毫秒，值为 0 时，toast 不会消失                           | _number \| string_         | `300`    |
+| backdrop | 是否显示遮罩层                                                          | _boolean_                  | `false`  |
+| message  | 文本内容                                                                | _ReactNode_                | -        |
+| onClose  | 关闭时的回调函数                                                        | _(open : boolean) => void_ | -        |
 
 ### 方法
 
-| 方法名 | 参数 | 返回值 | 介绍 |
-| --- | --- | --- | --- |
-| Toast.open | _options \| message_ | - | 展示提示 |
-| Toast.loading | _options \| message_ | - | 展示加载提示 |
-| Toast.success | _options \| message_ | - | 展示成功提示 |
-| Toast.fail | _options \| message_ | - | 展示失败提示 |
+| 方法名        | 参数                 | 返回值 | 介绍         |
+| ------------- | -------------------- | ------ | ------------ |
+| Toast.open    | _options \| message_ | -      | 展示提示     |
+| Toast.loading | _options \| message_ | -      | 展示加载提示 |
+| Toast.success | _options \| message_ | -      | 展示成功提示 |
+| Toast.fail    | _options \| message_ | -      | 展示失败提示 |
 
 ## 主题定制
 
@@ -148,25 +142,25 @@ Toast 默认渲染在屏幕正中位置，通过 `position` 属性可以控制 T
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                               | 默认值                                   | 描述  |
-|----------------------------------|---------------------------------------|-----|
-| --toast-width                    | _88px * $hd_                          | -   |
-| --toast-width                    | _88px * $hd_                          | -   |
-| --toast-min-height               | _88px * $hd_                          | -   |
-| --toast-max-width                | _70%_                                 | -   |
-| --toast-padding                  | _var(--padding-md)_                   | -   |
-| --toast-font-size                | _var(--font-size-md)_                 | -   |
-| --toast-line-height              | _var(--line-height-md)_               | -   |
-| --toast-color                    | _var(--white)_                        | -   |
-| --toast-background-color         | _rgba(var(--black-rgb), $alpha: 0.7)_ | -   |
-| --toast-border-radius            | _var(--border-radius-lg)_             | -   |
-| --toast-transition-duration      | _var(--animation-duration-fast)_      | -   |
-| --toast-icon-font-size           | _36px * $hd_                          | -   |
-| --toast-icon-color               | _var(--white)_                        | -   |
-| --toast-loading-padding          | _3px * $hd_                           | -   |
-| --toast-loading-color            | _var(--white)_                        | -   |
-| --toast-text-min-width           | _96px * $hd_                          | -   |
-| --toast-text-padding             | _var(--padding-xs) var(--padding-sm)_ | -   |
-| --toast-position-distance        | _20%_                                 | -   |
-| --toast-position-top-distance    | _var(--toast-position-distance)_      | -   |
-| --toast-position-bottom-distance | _var(--toast-position-distance)_      | -   |
+| 名称                             | 默认值                                | 描述 |
+| -------------------------------- | ------------------------------------- | ---- |
+| --toast-width                    | _88px \* $hd_                         | -    |
+| --toast-width                    | _88px \* $hd_                         | -    |
+| --toast-min-height               | _88px \* $hd_                         | -    |
+| --toast-max-width                | _70%_                                 | -    |
+| --toast-padding                  | _var(--padding-md)_                   | -    |
+| --toast-font-size                | _var(--font-size-md)_                 | -    |
+| --toast-line-height              | _var(--line-height-md)_               | -    |
+| --toast-color                    | _var(--white)_                        | -    |
+| --toast-background-color         | _rgba(var(--black-rgb), $alpha: 0.7)_ | -    |
+| --toast-border-radius            | _var(--border-radius-lg)_             | -    |
+| --toast-transition-duration      | _var(--animation-duration-fast)_      | -    |
+| --toast-icon-font-size           | _36px \* $hd_                         | -    |
+| --toast-icon-color               | _var(--white)_                        | -    |
+| --toast-loading-padding          | _3px \* $hd_                          | -    |
+| --toast-loading-color            | _var(--white)_                        | -    |
+| --toast-text-min-width           | _96px \* $hd_                         | -    |
+| --toast-text-padding             | _var(--padding-xs) var(--padding-sm)_ | -    |
+| --toast-position-distance        | _20%_                                 | -    |
+| --toast-position-top-distance    | _var(--toast-position-distance)_      | -    |
+| --toast-position-bottom-distance | _var(--toast-position-distance)_      | -    |
