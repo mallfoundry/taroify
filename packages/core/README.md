@@ -60,11 +60,9 @@ function Index() {
 
 ## 微信交流群
 
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.jpg" width="200" style="width: 200px; height: 200px;"  />
 
 <p>备注 "taroify" 加好友后邀请进群</p>
-
-QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 
 ## 贡献者
 
@@ -95,7 +93,6 @@ QQ 交流群：[861675189](https://jq.qq.com/?_wv=1027&k=G4Bvbk6B)
 | --------------------------------------------------------- | --------------------------------------- |
 | [3lang3/react-vant](https://github.com/3lang3/react-vant) | 参照 Vant 打造的 React 移动端组件库     |
 | [rc-ui-lib](https://github.com/rancui/rc-ui-lib)          | 参照 Vant 打造的 React 框架移动端组件库 |
-| [vant-aliapp](https://github.com/ant-move/Vant-Aliapp)    | Vant 支付宝小程序版                     |
 | [taroify](https://github.com/mallfoundry/taroify)         | Vant Taro React 版                      |
 | [vant-theme](https://github.com/Aisen60/vant-theme)       | Vant 在线主题预览工具                   |
 
