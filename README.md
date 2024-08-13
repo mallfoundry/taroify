@@ -60,7 +60,7 @@ function Index() {
 
 ## 微信交流群
 
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.jpg" width="200" style="width: 200px; height: 200px;"  />
+<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.jpg" width="260" style="width: 260px;"  />
 
 <p>备注 "taroify" 加好友后邀请进群</p>
 
