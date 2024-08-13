@@ -60,7 +60,7 @@ function Index() {
 
 ## 微信交流群
 
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.png" width="200" style="width: 200px; height: 200px;"  />
+<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.jpg" width="200" style="width: 200px; height: 200px;"  />
 
 <p>备注 "taroify" 加好友后邀请进群</p>
 
@@ -104,7 +104,7 @@ function Index() {
 
 如果您认为 Taroify 帮助到了您的开发工作，您可以捐赠 Taroify 的研发工作，捐赠无门槛，哪怕是一杯可乐也好（相信这比打赏主播更有意义）。
 
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechatpay.jpg" width="260" style="width: 260px;" />
+<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechatpay.png" width="260" style="width: 260px;" />
 
 ### 支持者
 
