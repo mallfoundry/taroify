@@ -24,9 +24,8 @@ import { Progress } from "@taroify/core"
 
 通过 `stroke-width` 可以设置进度条的粗细。
 
-```html
-
-<van-progress :percentage="50" stroke-width="8" />
+```tsx
+<Progress :percentage={50} strokeWidth={8} />
 ```
 
 ### 置灰
@@ -67,7 +66,7 @@ import { Progress } from "@taroify/core"
 .custom-color3 {
   &:not(.taroify-progress--inactive) {
     .taroify-progress__portion {
-      background: linear-gradient(to right, #be99ff, #7232dd)_ | - |
+      background: linear-gradient(to right, #be99ff, #7232dd) _ | - |;
     }
   }
 }
@@ -77,13 +76,13 @@ import { Progress } from "@taroify/core"
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| percent | 进度百分比 | _number \| string_ | `0` |
-| strokeWidth | 进度条粗细，默认单位为`px` | _number \| string_ | `4px` |
-| color | 进度条颜色 | _string_ | `primary` |
-| inactive | 是否置灰 | _boolean_ | `false` |
-| label | 进度文字 | _boolean \| ReactNode_ | `true` |
+| 参数        | 说明                       | 类型                   | 默认值    |
+| ----------- | -------------------------- | ---------------------- | --------- |
+| percent     | 进度百分比                 | _number \| string_     | `0`       |
+| strokeWidth | 进度条粗细，默认单位为`px` | _number \| string_     | `4px`     |
+| color       | 进度条颜色                 | _string_               | `primary` |
+| inactive    | 是否置灰                   | _boolean_              | `false`   |
+| label       | 进度文字                   | _boolean \| ReactNode_ | `true`    |
 
 ## 主题定制
 
@@ -91,16 +90,16 @@ import { Progress } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                          | 默认值                      | 描述  |
-|---------------------------------------------|--------------------------|-----|
-| --progress-height                           | _14px * $hd_             | -   |
-| --progress-border-radius                    | _var(--progress-height)_ | -   |
-| --progress-background-color                 | _var(--gray-3)_          | -   |
-| --progress-portion-color                    | _var(--white)_           | -   |
-| --progress-portion-font-size                | _var(--font-size-xs)_    | -   |
-| --progress-inactive-background-color        | _#cacaca_                | -   |
-| --progress-portion-primary-background-color | _var(--primary-color)_   | -   |
-| --progress-portion-info-background-color    | _var(--info-color)_      | -   |
-| --progress-portion-success-background-color | _var(--success-color)_   | -   |
-| --progress-portion-warning-background-color | _var(--warning-color)_   | -   |
-| --progress-portion-danger-background-color  | _var(--danger-color)_    | -   |
+| 名称                                        | 默认值                   | 描述 |
+| ------------------------------------------- | ------------------------ | ---- |
+| --progress-height                           | _14px \* $hd_            | -    |
+| --progress-border-radius                    | _var(--progress-height)_ | -    |
+| --progress-background-color                 | _var(--gray-3)_          | -    |
+| --progress-portion-color                    | _var(--white)_           | -    |
+| --progress-portion-font-size                | _var(--font-size-xs)_    | -    |
+| --progress-inactive-background-color        | _#cacaca_                | -    |
+| --progress-portion-primary-background-color | _var(--primary-color)_   | -    |
+| --progress-portion-info-background-color    | _var(--info-color)_      | -    |
+| --progress-portion-success-background-color | _var(--success-color)_   | -    |
+| --progress-portion-warning-background-color | _var(--warning-color)_   | -    |
+| --progress-portion-danger-background-color  | _var(--danger-color)_    | -    |
