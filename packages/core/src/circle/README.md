@@ -18,10 +18,10 @@ import { Circle } from "@taroify/core"
 
 ```tsx
 function BasicCircle({ percent }: PercentProps) {
-  const [currentPercent, setCurrentPercent] = useState(0)
+  const [currentPercent, setCurrentPercent] = useState(70)
 
   return (
-    <Circle percent={70} onChange={setCurrentPercent}>
+    <Circle percent={currentPercent} onChange={setCurrentPercent}>
       {currentPercent.toFixed(0)}%
     </Circle>
   )
@@ -91,14 +91,15 @@ function BasicCircle({ percent }: PercentProps) {
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | percent | 当前进度 | _number_ | - |
-| size | 圆环直径，默认单位为 `px` | _number \| string_ | `100px` |
+| size | 圆环直径，默认单位为 `px` | _string_ | `100px` |
 | color | 进度条颜色，传入对象格式可以定义渐变色 | _string \| object_ | `#1989fa` |
 | layerColor | 轨道颜色 | _string_ | `white` |
 | fill | 填充颜色 | _string_ | `none` |
-| speed | 动画速度（单位为 rate/s） | _number \| string_ | `0` |
-| strokeWidth | 进度条宽度 | _number \| string_ | `40` |
-| strokeLinecap | 进度条端点的形状，可选值为 `sqaure` `butt` | _string_ | `round` |
+| speed | 动画速度（单位为 rate/s） | _number_ | `0` |
+| strokeWidth | 进度条宽度 | _number_ | `40` |
+| strokeLinecap | 进度条端点的形状，可选值为 `sqaure` `butt` `round`| _string_ | `round` |
 | clockwise | 是否顺时针增加 | _boolean_ | `true` |
+| startPosition | 进度起始位置，可选值为 `left` `right` `top` `bottom` | _string_ | `top` |
 | children | 文字 | _ReactNode_ | - |
 
 ## 主题定制

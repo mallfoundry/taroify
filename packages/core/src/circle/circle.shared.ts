@@ -14,8 +14,9 @@ export interface CircleProps {
   size?: number
   speed?: number
   strokeWidth?: number
-  strokeLinecap?: CircleStrokeLinecap
+  strokeLinecap?: CanvasLineCap
   clockwise?: boolean
+  startPosition?: "top" | "bottom" | "left" | "right"
   children?: ReactNode
 
   onChange?(value: number): void
