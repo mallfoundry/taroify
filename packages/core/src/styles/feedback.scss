@@ -1,0 +1,18 @@
+@import './prefix';
+@import './variables';
+
+.#{$component-prefix}haptics-feedback {
+  cursor: pointer;
+
+  &:active {
+    opacity: $active-opacity;
+  }
+}
+
+.#{$component-prefix}click-feedback {
+  cursor: pointer;
+
+  &:active {
+    background: $active-color;
+  }
+}

@@ -47,6 +47,15 @@ Taroify 中默认包含了一些常用样式，可以直接通过 className 的�
 <View className="taroify-hairline--surround"></View>
 ```
 
+### 触摸反馈
+为元素添加触碰反馈效果，触碰后，元素的透明度会降低。
+```tsx
+<View className="taroify-haptics-feedback"></View>
+```
+为元素添加触碰反馈效果，触碰后，元素的背景色会改变。
+```tsx
+<View className="taroify-click-feedback"></View>
+```
 ### 动画
 
 可以通过 `Transition` 组件使用内置的动画
