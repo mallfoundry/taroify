@@ -69,7 +69,7 @@
       left: 0;
       pointer-events: none;
       content: '';
-      border: 1px * $hd solid currentColor;
+      border: 1px * $hd solid $tag-border-color;
       border-radius: inherit;
     }
   }

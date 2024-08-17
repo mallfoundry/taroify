@@ -34,3 +34,4 @@ $tag-warning-background-color: var(--tag-warning-background-color, var(--warning
 $tag-danger-color: var(--tag-danger-color, var(--danger-color, $danger-color));
 $tag-danger-background-color: var(--tag-danger-background-color, var(--danger-color, $danger-color));
 $tag-outlined-background-color: var(--tag-outlined-background-color, var(--white, $white));
+$tag-border-color: var(--tag-border-color, currentColor);
