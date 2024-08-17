@@ -1,7 +1,7 @@
 @import "./variables";
 
 .#{$component-prefix}cascader {
-
+  min-height: calc($cascader-header-height + $cascader-tabs-height + $cascader-options-height);
   &__header {
     display: flex;
     align-items: center;
