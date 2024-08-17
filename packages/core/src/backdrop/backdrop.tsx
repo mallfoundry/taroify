@@ -59,7 +59,7 @@ export default function Backdrop(props: BackdropProps) {
   }
 
   return (
-    <Transition in={open} appear mountOnEnter name="fade">
+    <Transition in={open} appear mountOnEnter timeout={duration} name="fade">
       <View
         className={classNames(
           prefixClassname("backdrop"),

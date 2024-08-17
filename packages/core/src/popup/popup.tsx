@@ -148,7 +148,7 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
         in={open}
         name={transactionName}
         appear={transitionAppear}
-        timeout={transactionTimeout}
+        timeout={transactionTimeout || duration}
         mountOnEnter={mountOnEnter}
         onEnter={onTransitionEnter}
         onEntered={onTransitionEntered}
