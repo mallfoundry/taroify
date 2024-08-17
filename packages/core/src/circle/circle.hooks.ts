@@ -14,7 +14,7 @@ export function useAnimatePercent(percentProp: number, speed: number) {
     let rafId: number | undefined
     const startTime = Date.now()
     const startRate = currentRateRef.current
-    const endRate = format(percentProp)
+    const endRate = percentProp
     const duration = Math.abs(((startRate - endRate) * 1000) / speed)
 
     const animate = () => {

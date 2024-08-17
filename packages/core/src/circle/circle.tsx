@@ -1,41 +1,16 @@
 import { View } from "@tarojs/components"
 import * as React from "react"
-import { CSSProperties } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import CircleCanvas from "./circle-canvas"
-import { CircleProps, CircleStrokeLinecap } from "./circle.shared"
+import { CircleProps } from "./circle.shared"
 
-function getCircleSizeStyle(originSize?: string | number): CSSProperties | undefined {
-  if (originSize !== undefined && originSize !== null) {
-    const size = addUnitPx(originSize)
-    return {
-      width: size,
-      height: size,
-    }
-  }
-  return {}
-}
-
-function Circle(props: CircleProps) {
-  const {
-    speed = 100,
-    clockwise = true,
-    strokeWidth = 40,
-    strokeLinecap = CircleStrokeLinecap.Round,
-    size,
-    children,
-    ...restProps
-  } = props
+function Circle({ size = 100, children, ...props }: CircleProps) {
   return (
-    <View className={prefixClassname("circle")} style={getCircleSizeStyle(size)}>
+    <View className={prefixClassname("circle")} style={{ width: addUnitPx(size), height: addUnitPx(size) }}>
       <CircleCanvas
-        speed={speed}
-        clockwise={clockwise}
-        strokeWidth={strokeWidth}
-        strokeLinecap={strokeLinecap}
         size={size}
-        {...restProps}
+        {...props}
       />
       {children && <View className={prefixClassname("circle__text")} children={children} />}
     </View>

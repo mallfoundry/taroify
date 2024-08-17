@@ -21,23 +21,24 @@ function BasicCircle({ percent }: PercentProps) {
 function CustomCircle({ percent }: PercentProps) {
   return (
     <Space>
-      <Circle percent={percent} strokeWidth={60}>
-        宽度定制
+      <Circle strokeLinecap="square" percent={percent} strokeWidth={60}>
+        宽度定制 top
       </Circle>
-      <Circle percent={percent} color="#ee0a24" layerColor="#ebedf0">
-        颜色定制
+      <Circle strokeLinecap="butt" startPosition="bottom" percent={percent} color="#ee0a24" layerColor="#ebedf0">
+        颜色定制 bottom
       </Circle>
       <Circle
+        startPosition="left"
         percent={percent}
         color={{
           "0%": "#3fecff",
           "100%": "#6149f6",
         }}
       >
-        渐变色
+        渐变色 left
       </Circle>
-      <Circle percent={percent} clockwise={false} color="#07c160">
-        逆时针方向
+      <Circle clockwise={false} startPosition="right" percent={percent} color="#07c160">
+        逆时针方向 right
       </Circle>
       <Circle percent={percent} size={120} color="#7232dd">
         大小定制
