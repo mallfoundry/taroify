@@ -3,10 +3,6 @@ import { useEffect, useState } from "react"
 import { cancelRaf, raf } from "../utils/raf"
 import { useToRef } from "../utils/state"
 
-function format(rate: number) {
-  return Math.min(Math.max(rate, 0), 100)
-}
-
 export function useAnimatePercent(percentProp: number, speed: number) {
   const [percent, setPercent] = useState(percentProp)
   const currentRateRef = useToRef(percent)
