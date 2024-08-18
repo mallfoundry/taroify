@@ -12,6 +12,53 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.4.0-alpha.0
+
+`2024-08-18`
+
+**Feature**
+
+- Search
+
+  - 透传 `enableNative` 属性 [790](https://github.com/mallfoundry/taroify/pull/790) [@Pilotager](https://github.com/Pilotager)
+
+- Toast
+
+  - `duration` 为 `0` 时，提示不消失 [793](https://github.com/mallfoundry/taroify/pull/793) [@Pilotager](https://github.com/Pilotager)
+
+- Tag
+
+  - 添加边框颜色 `css` 变量 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
+- Circle
+
+  - 重构，WEB 和小程序都使用 `Canvas 2D` 接口实现 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+  - 添加 `startPosition` 属性 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- NumberKeyboard
+
+  - 优化按钮字体大小 [788](https://github.com/mallfoundry/taroify/pull/788) [@Pilotager](https://github.com/Pilotager)
+
+- Cascader
+
+  - 修复 `Cascader` 第一次打开时动画卡顿 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
+- Popup
+
+  - 修复 `duration` 属性不起作用 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
+- Backdrop
+
+  - 修复 `duration` 属性不起作用 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
+**Other**
+
+- 完善 `FixedNav` 文档 [789](https://github.com/mallfoundry/taroify/pull/789) [@Pilotager](https://github.com/Pilotager)
+- `Progress` 文档更新 [799](https://github.com/mallfoundry/taroify/pull/799) [@Pilotager](https://github.com/Pilotager)
+- 内置样式添加触摸反馈 [801](https://github.com/mallfoundry/taroify/pull/801) [@hbztd](https://github.com/hbztd)
+
 ### v0.3.2-alpha.0
 
 `2024-08-04`
