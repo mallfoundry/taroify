@@ -11,6 +11,7 @@ import {
   useEffect,
   useImperativeHandle,
 } from "react"
+import { nextTick } from "@tarojs/taro"
 import { useUniqueId } from "../hooks"
 import { preventDefault } from "../utils/dom/event"
 import FormContext from "./form.context"
@@ -84,8 +85,11 @@ const Form = forwardRef<FormInstance, FormProps>(
 
     const delegatingReset = useCallback(
       (e?: BaseEventOrig) => {
-        reset()
-        onReset?.(e as BaseEventOrig)
+        // await onBlur event trigger
+        nextTick(() => {
+          reset()
+          onReset?.(e as BaseEventOrig)
+        })
       },
       [onReset, reset],
     )
