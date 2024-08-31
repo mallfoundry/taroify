@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext, isValidElement, cloneElement } from "react"
+import { ReactNode, ReactElement, useContext, isValidElement, cloneElement } from "react"
 import Badge from "../badge"
 import { prefixClassname } from "../styles"
 import TabbarContext from "./tabbar.context"
@@ -19,7 +19,7 @@ export default function TabbarItem(props: TabbarItemProps) {
   const { className, icon: iconProp, value: valueProp, badge, children, onClick, ...restProps } = props
   const { value, onItemClick } = useContext(TabbarContext)
   const active = value === valueProp
-  const icon = isValidElement(iconProp) ? cloneElement(iconProp as any, { className: prefixClassname("tabbar-item__icon") }) : iconProp
+  const icon = isValidElement(iconProp) ? cloneElement(iconProp as any, { className: classNames((iconProp as ReactElement).props.className, prefixClassname("tabbar-item__icon")) }) : iconProp
 
   return (
     <View
