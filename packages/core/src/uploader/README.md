@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于将本地的图片或文件上传至服务器，并在上传过程中展示预览图和上传进度。目前 Uploader 组件不包含将文件上传至服务器的接口逻辑，该步骤需要自行实现。
+用于将本地的图片或文件上传至服务器，并在上传过程中展示预览图。目前 Uploader 组件不包含将文件上传至服务器的接口逻辑，该步骤需要自行实现。
 
 ### 引入
 
@@ -145,12 +145,29 @@ function MaxFilesUploader() {
 
 ### 自定义上传样式
 
-通过默认插槽可以自定义上传区域的样式。
+通过children可以自定义上传区域的样式。
 
 ```tsx
 function CustomUploader() {
+  const [files, setFiles] = useState<Uploader.File[]>([])
+  function onUpload() {
+    chooseImage({
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+    }).then(({ tempFiles }) => {
+      setFiles([
+        ...files,
+        ...tempFiles.map(({ path, type, originalFileObj }) => ({
+          type,
+          url: path,
+          name: originalFileObj?.name,
+        })),
+      ])
+    })
+  }
   return (
-    <Uploader>
+    <Uploader multiple value={files} onChange={setFiles} onUpload={onUpload}>
       <Button icon={<Plus />} color="primary">
         上传文件
       </Button>
@@ -161,8 +178,8 @@ function CustomUploader() {
 
 ### 自定义预览样式
 
-通过自定义 `Uploader.Image` 组件可以自定义覆盖在预览区域上方的内容。
-
+通过自定义 `Uploader.Image` 组件可以自定义覆盖在预览区域上方的内容。<br/>
+通过 `Uploader.Upload` 组件触发onUpload
 ```tsx
 function CustomPreviewUploader() {
   const [files, setFiles] = useState<Uploader.File[]>([
@@ -249,6 +266,18 @@ function CustomPreviewUploader() {
 | --------------------- | ---------------------- | ------------------- |
 | onUpload              | 点击上传区域时触发     | _event: ITouchEvent_ |
 | onChange              | 已上传图片列表改变后触发 | _file: UploadFile \| UploadFile[]_  |
+
+
+### UploadFile
+| 参数                  | 说明                   | 类型                 |
+| --------------------  | ---------------------- | -------------------  |
+| url                   | 下载地址               |    _string_          |
+| type                  | 文件类型(包含image时显示图标,其他显示)  |   _string_           |
+| name                  | 文件名称               | _string_             |
+| removable             | 是否可删除             | _boolean_            |
+| status                | 上传状态(uploading|failed|completed)          | _string_             |
+| message               | uploading|failed 状态时文字提示    | _string_ |
+
 
 ## 主题定制
 
