@@ -34,7 +34,7 @@ export function useShouldUpdateSignal(shouldUpdate: boolean | ((prev, next) => b
 
   useEffect(() => {
     form?.addEventListener("shouldUpdate", shouldUpdateMemo)
-    return () => form?.removeEventListener("change", shouldUpdateMemo)
+    return () => form?.removeEventListener("shouldUpdate", shouldUpdateMemo)
   }, [form, shouldUpdateMemo])
 
   return signal
