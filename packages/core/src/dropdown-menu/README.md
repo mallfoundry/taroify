@@ -222,8 +222,6 @@ function BasicDropdownMenu() {
 
 | 参数         | 说明                                 | 类型        | 默认值  |
 | ------------ | ------------------------------------ | ----------- | ------- |
-| defaultValue | 默认选中的 DropdownMenu.Item 的 标识 | _React.Key_ | -       |
-| value        | 当前选中的 DropdownMenu.Item 的 标识 | _React.Key_ | -       |
 | direction    | 菜单展开方向，可选值为`up`           | _string_    | `down`  |
 | backdropType | 背景板位置，可选值 `inner` `outer`   | _string_    | `inner` |
 

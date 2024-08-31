@@ -594,6 +594,7 @@ function ShouldUpdateDemo() {
 | setErrors | 设置表单验证错误信息(浅合并) | _FormValidError[]_ | _void_ |
 | getErrors | 获得表单验证错误信息，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _FormValidError[]_ |
 | validate  | 验证表单，支持传入 `name` 来验证单个或部分表单项   | _name?: string \| string[]_ | _Promise_ |
+| submit | 提交表单，与点击提交按钮的效果等价 | - | - |
 | reset     | 重置表单                                     | -                           | _void_ |
 
 ### validateTrigger 可选值
