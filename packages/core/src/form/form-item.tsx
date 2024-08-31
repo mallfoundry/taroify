@@ -176,7 +176,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
           })
 
           if (rules.length) {
-            fulfillPromise(validate(rulesProp))
+            fulfillPromise(validate(rules))
           } else if (defaultTrigger) {
             resetError()
           }
