@@ -115,8 +115,25 @@ function MaxFilesUploader() {
 }
 
 function CustomUploader() {
+  const [files, setFiles] = useState<Uploader.File[]>([])
+  function onUpload() {
+    chooseImage({
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+    }).then(({ tempFiles }) => {
+      setFiles([
+        ...files,
+        ...tempFiles.map(({ path, type, originalFileObj }) => ({
+          type,
+          url: path,
+          name: originalFileObj?.name,
+        })),
+      ])
+    })
+  }
   return (
-    <Uploader>
+    <Uploader multiple value={files} onChange={setFiles} onUpload={onUpload}>
       <Button icon={<Plus />} color="primary">
         上传文件
       </Button>

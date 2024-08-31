@@ -11,12 +11,12 @@ import UploaderContext from "./uploader.context"
 interface UploaderUploadProps extends ViewProps {
   readonly?: boolean
   icon?: ReactNode
-
+  children?: ReactNode
   onClick?(event: ITouchEvent): void
 }
 
 function UploaderUpload(props: UploaderUploadProps) {
-  const { className, readonly, icon = <Photograph />, onClick, ...restProps } = props
+  const { className, readonly, icon = <Photograph />, onClick, children,  ...restProps } = props
   const { disabled, onUpload } = useContext(UploaderContext)
 
   function handleClick(event: ITouchEvent) {
@@ -24,6 +24,10 @@ function UploaderUpload(props: UploaderUploadProps) {
     if (!readonly && !disabled) {
       onUpload?.()
     }
+  }
+
+  if (children) {
+    return <View onClick={handleClick}>{children}</View>
   }
 
   return (

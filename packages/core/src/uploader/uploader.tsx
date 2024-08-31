@@ -37,8 +37,8 @@ interface UseUploadFilesRenderProps {
   disabled?: boolean
   multiple?: boolean
   maxFiles?: number
-
-  onChange?(file:UploadFile | UploadFile[] | null): void
+  children?: ReactNode
+  onChange?(file:UploadFile | UploadFile[]): void
 }
 
 function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
@@ -48,6 +48,7 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     disabled,
     multiple,
     maxFiles = Number.MAX_VALUE,
+    children,
     onChange: onChangeProp,
   } = props
 
@@ -87,13 +88,13 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     }
     const __files__ = _.map(getUploadFiles(value) as UploadFile[], renderImage)
     if (__files__.length < maxFiles) {
-      __files__.push(<UploaderUpload key="upload" />)
+      __files__.push(<UploaderUpload key="upload" children={children} />)
     }
     return __files__ as ReactNode
-  }, [maxFiles, multiple, renderImage, value])
+  }, [maxFiles, multiple, renderImage, value, children])
 
   if (_.isEmpty(value)) {
-    return <UploaderUpload />
+    return <UploaderUpload children={children} />
   }
 
   if (!multiple) {
@@ -113,7 +114,7 @@ interface BaseUploaderProps extends ViewProps {
   removable?: boolean
   children?: ReactNode
   onUpload?(): void
-  onChange?(file: UploadFile | UploadFile[] | null): void
+  onChange?(file: UploadFile & undefined | UploadFile[] & undefined): void
 }
 
 export type UploaderProps = BaseUploaderProps
@@ -147,16 +148,15 @@ export default function Uploader(props: UploaderProps) {
             [prefixClassname("uploader__wrapper--disabled")]: disabled,
           })}
         >
-          {children ?? (
-            <UploadFilesRender
-              defaultValue={defaultValue}
-              value={value}
-              disabled={disabled}
-              maxFiles={maxFiles}
-              multiple={multiple}
-              onChange={onChange}
-            />
-          )}
+          <UploadFilesRender
+            defaultValue={defaultValue}
+            value={value}
+            disabled={disabled}
+            maxFiles={maxFiles}
+            multiple={multiple}
+            onChange={onChange}
+            children={children}
+          />
         </View>
       </View>
     </UploaderContext.Provider>
