@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cell /> prop title brief content test 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+      <taro-view-core
+        class="taroify-cell__brief"
+      >
+        描述信息
+      </taro-view-core>
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> prop title content test 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> render align 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell taroify-cell--end taroify-cell--clickable"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+      <taro-view-core
+        class="taroify-cell__brief"
+      >
+        align end
+      </taro-view-core>
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+    <taro-view-core
+      class="van-icon van-icon-arrow taroify-icon taroify-icon--inherit taroify-cell__right-icon"
+    />
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> render icon 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="van-icon van-icon-location-o taroify-icon taroify-icon--inherit taroify-cell__icon"
+    />
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+      <taro-view-core
+        class="taroify-cell__brief"
+      >
+        描述信息
+      </taro-view-core>
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> render isLink and arrowDirection 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell taroify-cell--clickable"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+    <taro-view-core
+      class="van-icon van-icon-arrow-down taroify-icon taroify-icon--inherit taroify-cell__right-icon"
+    />
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> render size 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell taroify-cell--large"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+      <taro-view-core
+        class="taroify-cell__brief"
+      >
+        描述信息
+      </taro-view-core>
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> renders title and content 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> renders title brief content and test 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="taroify-cell__title"
+    >
+      单元格
+      <taro-view-core
+        class="taroify-cell__brief"
+      >
+        描述信息
+      </taro-view-core>
+    </taro-view-core>
+    <taro-view-core
+      class="taroify-cell__value"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
+
+exports[`<Cell /> renders without title and brief 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-cell"
+  >
+    <taro-view-core
+      class="taroify-cell__value taroify-cell__value--alone"
+    >
+      内容
+    </taro-view-core>
+  </taro-view-core>
+</div>
+`;
