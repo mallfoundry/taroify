@@ -38,7 +38,7 @@ interface UseUploadFilesRenderProps {
   multiple?: boolean
   maxFiles?: number
   children?: ReactNode
-  onChange?(file:UploadFile | UploadFile[]): void
+  onChange?(file: UploadFile | UploadFile[]): void
 }
 
 function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
@@ -114,7 +114,7 @@ interface BaseUploaderProps extends ViewProps {
   removable?: boolean
   children?: ReactNode
   onUpload?(): void
-  onChange?(file: UploadFile & undefined | UploadFile[] & undefined): void
+  onChange?(file: (UploadFile & undefined) | (UploadFile[] & undefined)): void
 }
 
 export type UploaderProps = BaseUploaderProps
