@@ -118,7 +118,8 @@ registerFormControlHandler(
         | SliderProps
         | StepperProps
         | UploaderProps
-      > {
+      >
+  {
     doControlRender(
       element: ReactElement<
         | CheckboxGroupProps
@@ -144,6 +145,7 @@ registerFormControlHandler(
         value: valueProp ?? value,
         disabled: disabled ?? disabledProp,
         onChange: (nextValue: any) => {
+          // @ts-ignore
           onChange?.(nextValue)
           onDelegatingChange?.(nextValue)
         },
