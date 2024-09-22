@@ -12,6 +12,33 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.4.1-alpha.0
+
+`2024-09-22`
+
+**Bug Fixes**
+
+- Icon
+
+  - 修复 icon css 后加载导致 `Rate` 没有颜色 [804](https://github.com/mallfoundry/taroify/pull/804) [@hbztd](https://github.com/hbztd)
+
+- Tabbar
+
+  - 修复 `Tabbar.TabItem` icon className 丢失 [804](https://github.com/mallfoundry/taroify/pull/804) [@hbztd](https://github.com/hbztd)
+
+- Uploader
+
+  - 修复 `Uploader` 自定义样式，无法触发 `onUpload` [804](https://github.com/mallfoundry/taroify/pull/804) [@hbztd](https://github.com/hbztd)
+
+- Form
+
+  - 修复 Form rules 某些情况下，trigger 过滤错误 [804](https://github.com/mallfoundry/taroify/pull/804) [@hbztd](https://github.com/hbztd)
+  - 修复 Form Input 输入后立即调用 reset，未清空错误显示 [804](https://github.com/mallfoundry/taroify/pull/804) [@hbztd](https://github.com/hbztd)
+
+**Other**
+
+- 完善 `Cell` 单测 [805](https://github.com/mallfoundry/taroify/pull/805) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.4.0-alpha.0
 
 `2024-08-18`
