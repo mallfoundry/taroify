@@ -43,6 +43,7 @@ function useImageShape(shape?: ImageShape, round?: boolean) {
 }
 
 export interface ImageProps extends ViewProps {
+  wrapperClassName?: string
   src?: string
   alt?: string
   width?: string | number
@@ -63,6 +64,7 @@ export interface ImageProps extends ViewProps {
 export default function Image(props: ImageProps) {
   const {
     className,
+    wrapperClassName,
     src,
     alt,
     width: widthProp,
@@ -86,12 +88,23 @@ export default function Image(props: ImageProps) {
   const isLoadedRef = useRef(false)
 
   const [viewStyle, imgStyle] = useMemo(() => {
-    const width = widthProp ? typeof widthProp === "number" ? pxTransform(widthProp) : widthProp : undefined
-    const height = heightProp ? typeof heightProp === "number" ? pxTransform(heightProp) : heightProp : undefined
+    const width = widthProp
+      ? typeof widthProp === "number"
+        ? pxTransform(widthProp)
+        : widthProp
+      : undefined
+    const height = heightProp
+      ? typeof heightProp === "number"
+        ? pxTransform(heightProp)
+        : heightProp
+      : undefined
     const imgStyle = mergeStyle(styleProp, {})
     imgStyle.width = width || imgStyle.width
     imgStyle.height = height || imgStyle.height
-    return [{ width: imgStyle.width || "100%", height: imgStyle.height || "100%", position: "relative" }, imgStyle] as const
+    return [
+      { width: imgStyle.width || "100%", height: imgStyle.height || "100%", position: "relative" },
+      imgStyle,
+    ] as const
   }, [styleProp, widthProp, heightProp])
 
   const handleLoad = useMemoizedFn(() => {
@@ -115,10 +128,10 @@ export default function Image(props: ImageProps) {
     } else {
       setLoading(true)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src])
   return (
-    <View style={viewStyle}>
+    <View style={viewStyle} className={wrapperClassName}>
       {!failed && src && (
         <TaroImage
           ref={taroImageRef}

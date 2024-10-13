@@ -45,6 +45,7 @@ function UploaderImage(props: UploaderImageProps) {
     if (isImageFile({ type, url })) {
       return (
         <Image
+          wrapperClassName={prefixClassname("uploader__preview-image-wrapper")}
           className={prefixClassname("uploader__preview-image")}
           src={url}
           mode={mode}

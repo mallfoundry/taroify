@@ -39,7 +39,7 @@
       background: $uploader-upload-background-color;
     }
 
-    &-icon {
+    .#{$component-prefix}uploader__upload-icon {
       font-size: $uploader-upload-icon-font-size;
       color: $uploader-upload-icon-color;
     }
@@ -58,8 +58,14 @@
 
     &-image {
       display: block;
-      width: $uploader-preview-image-width;
-      height: $uploader-preview-image-height;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-image-wrapper {
+      display: block;
+      width: $uploader-preview-image-width !important;
+      height: $uploader-preview-image-height !important;
       overflow: hidden;
     }
 
@@ -72,7 +78,7 @@
       background: $uploader-remove-background-color;
       border-radius: $uploader-remove-border-radius;
 
-      &-icon {
+      .#{$component-prefix}uploader__preview-remove-icon {
         position: absolute;
         top: -2px * $hd;
         right: -2px * $hd;
