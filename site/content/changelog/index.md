@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.4.2-alpha.0
+
+`2024-10-13`
+
+**Bug Fixes**
+
+- Cascader
+
+  - 修复不能上下滑动问题 [813](https://github.com/mallfoundry/taroify/pull/813) [@Pilotager](https://github.com/Pilotager)
+
+- Uploader
+
+  - 修复图片加载中或者未加载出来样式问题 [814](https://github.com/mallfoundry/taroify/pull/814) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.4.1-alpha.0
 
 `2024-09-22`
