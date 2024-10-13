@@ -14,7 +14,6 @@
   }
 
   &__tabs {
-
     .#{$component-prefix}tabs__tab {
       flex: none;
       padding: 0 10px * $hd;
@@ -44,7 +43,7 @@
     box-sizing: border-box;
     height: $cascader-options-height;
     padding-top: 6px * $hd;
-    overflow-y: auto;
+    // overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -57,7 +56,8 @@
     line-height: $cascader-option-line-height;
     cursor: pointer;
 
-    &:active, &--hover {
+    &:active,
+    &--hover {
       background: $cascader-option-active-background-color;
     }
 

@@ -141,14 +141,55 @@ export const dept = [
           {
             label: "产品",
             value: "1-1-3",
-          }
-        ]
+          },
+          {
+            label: "产品2",
+            value: "1-1-4",
+          },
+          {
+            label: "产品3",
+            value: "1-1-5",
+          },
+          {
+            label: "产品4",
+            value: "1-1-6",
+          },
+          {
+            label: "产品5",
+            value: "1-1-7",
+          },
+          {
+            label: "产品6",
+            value: "1-1-8",
+          },
+          {
+            label: "产品7",
+            value: "1-1-9",
+          },
+          {
+            label: "产品8",
+            value: "1-1-10",
+          },
+          {
+            label: "产品9",
+            value: "1-1-11",
+          },
+
+          {
+            label: "产品10",
+            value: "1-1-12",
+          },
+          {
+            label: "产品11",
+            value: "1-1-13",
+          },
+        ],
       },
       {
         label: "产线2",
         value: "1-2",
-      }
-    ]
+      },
+    ],
   },
   {
     label: "客户中心",
@@ -161,9 +202,9 @@ export const dept = [
       {
         label: "销售",
         value: "2-2",
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]
 
 export const customArea = [
@@ -292,14 +333,14 @@ export const customArea = [
 export const dynamic = [
   {
     label: "产品",
-    value: "1"
+    value: "1",
   },
   {
     label: "测试",
-    value: "2"
+    value: "2",
   },
   {
     label: "研发",
-    value: "3"
-  }
+    value: "3",
+  },
 ]
