@@ -93,6 +93,7 @@ export interface CascaderProps {
   loadData?(values: string[], options: CascaderEventOption[]): Promise<any[]>
   fieldNames?: CascaderFieldNames
   children?: ReactNode
+  ellipsis?: boolean
   options?: CascaderDataOption[]
 
   onChange?(values: string[], options: CascaderEventOption[]): void
@@ -119,6 +120,7 @@ function Cascader(props: CascaderProps) {
     fieldNames: _fieldNames,
     animated = true,
     swipeable = false,
+    ellipsis = true,
     children: childrenProp,
     options,
     onChange,
@@ -279,6 +281,7 @@ function Cascader(props: CascaderProps) {
         onChange={(value) => setActiveTab(value)}
         onTabClick={onTabClick}
         children={panes}
+        ellipsis={ellipsis}
       />
     </View>
   )
