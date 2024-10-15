@@ -84,7 +84,7 @@ export interface FormItemProps extends Omit<CellProps, "children"> {
   shouldUpdate?: boolean | ((prev, next) => boolean)
   noStyle?: boolean
   disabled?: boolean
-
+  validateFirst?:boolean
   children?: (() => ReactNode) | ReactNode
 }
 
@@ -110,6 +110,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
       shouldUpdate,
       noStyle,
       disabled: disabledProp,
+      validateFirst = false,
       onClick,
     } = props
     const shouldUpdateSignal = useShouldUpdateSignal(shouldUpdate)
@@ -142,7 +143,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
         return new Promise<void>((resolve, reject) => {
           if (rules) {
             resetError()
-            validateRules(getValue(), rules) //
+            validateRules(getValue(), rules, validateFirst) //
               .then((errors) => {
                 if (_.isEmpty(errors)) {
                   resetError()
