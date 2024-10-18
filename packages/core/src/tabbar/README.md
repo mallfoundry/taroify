@@ -122,7 +122,7 @@ function TabbarWithCustomColor() {
 | value        | 当前选中标签的标识或索引值             | _any_     | `0`     |
 | bordered     | 是否显示外边框                   | _boolean_ | `false` |
 | fixed        | 是否固定在底部                   | _boolean_ | `false` |
-| safeArea     | 安全区域，可选值 `top` `bottom`   | _string_  | -       |
+| safeArea     | 安全区域，可选值 `top` `bottom`，仅在`fixed=true`时有效   | _string_  | -       |
 | placeholder  | 固定在底部时，是否在标签位置生成一个等高的占位元素 | _boolean_ | `false` |
 
 ### Tabbar Events
