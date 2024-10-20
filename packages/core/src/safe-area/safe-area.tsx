@@ -3,11 +3,10 @@ import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"
-import { getEnv, getSystemInfoSync } from "@tarojs/taro"
+import { getSystemInfoSync } from "@tarojs/taro"
+import { inBrowser } from "../utils/base"
 
 export type SafeAreaPosition = "top" | "bottom"
-const env = getEnv()
-const isWeb = env === "WEB"
 
 export interface SafeAreaProps extends ViewProps {
   position?: SafeAreaPosition
@@ -16,8 +15,8 @@ export interface SafeAreaProps extends ViewProps {
 function SafeArea(props: SafeAreaProps) {
   const { className, position, ...restProps } = props
   const customStyle = React.useMemo(() => {
-    if (isWeb) return {}
-    const { safeArea, windowHeight } = getSystemInfoSync()
+    if (inBrowser) return {}
+    const { safeArea, screenHeight } = getSystemInfoSync()
     let style = {}
     if (position === "top") {
       style = {
@@ -25,7 +24,7 @@ function SafeArea(props: SafeAreaProps) {
       }
     } else {
       style = {
-        paddingBottom: windowHeight - (safeArea?.bottom || 0),
+        paddingBottom: screenHeight - (safeArea?.bottom || 0),
       }
     }
     return style
@@ -35,8 +34,8 @@ function SafeArea(props: SafeAreaProps) {
       className={classNames(
         prefixClassname("safe-area"),
         {
-          [prefixClassname("safe-area--top")]: position === "top" && isWeb,
-          [prefixClassname("safe-area--bottom")]: position === "bottom" && isWeb,
+          [prefixClassname("safe-area--top")]: position === "top" && inBrowser,
+          [prefixClassname("safe-area--bottom")]: position === "bottom" && inBrowser,
         },
         className,
       )}
