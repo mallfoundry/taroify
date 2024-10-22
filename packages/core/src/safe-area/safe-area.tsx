@@ -15,7 +15,7 @@ export interface SafeAreaProps extends ViewProps {
 function SafeArea(props: SafeAreaProps) {
   const { className, position, ...restProps } = props
   const customStyle = React.useMemo(() => {
-    if (inBrowser) return {}
+    if (inBrowser || !position) return {}
     const { safeArea, screenHeight } = getSystemInfoSync()
     let style = {}
     if (position === "top") {
