@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SafeArea /> in browser renders bottom in browser 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area taroify-safe-area--bottom"
+  >
+    底部安全区
+  </taro-view-core>
+</div>
+`;
+
+exports[`<SafeArea /> in browser renders in browser without position 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area"
+  >
+    内容
+  </taro-view-core>
+</div>
+`;
+
+exports[`<SafeArea /> in browser renders top in browser 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area taroify-safe-area--top"
+  >
+    顶部安全区
+  </taro-view-core>
+</div>
+`;

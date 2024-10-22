@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SafeArea /> in non-browser environment renders bottom in non-browser environment 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area"
+    style="padding-bottom: 34px;"
+  >
+    底部安全区
+  </taro-view-core>
+</div>
+`;
+
+exports[`<SafeArea /> in non-browser environment renders in non-browser environment without position 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area"
+  >
+    内容
+  </taro-view-core>
+</div>
+`;
+
+exports[`<SafeArea /> in non-browser environment renders top in non-browser environment 1`] = `
+<div>
+  <taro-view-core
+    class="taroify-safe-area"
+    style="padding-top: 44px;"
+  >
+    顶部安全区
+  </taro-view-core>
+</div>
+`;
