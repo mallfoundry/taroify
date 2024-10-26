@@ -12,6 +12,38 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.5.0-alpha.0
+
+`2024-10-27`
+
+**Feature**
+
+- Cascader
+
+  - 新增 `ellipsis` 属性 [817](https://github.com/mallfoundry/taroify/pull/817) [@Pilotager](https://github.com/Pilotager)
+
+- Form
+
+  - `FormItem` 添加 `validateFirst` 属性， 用于只返回第一个失败校验 [818](https://github.com/mallfoundry/taroify/pull/818) [@Niubility-SunLight](https://github.com/Niubility-SunLight)
+
+**Bug Fixes**
+
+- Form
+
+  - 修复设置 `controlAlign` right 后，feedback 没有向右对齐 [820](https://github.com/mallfoundry/taroify/pull/820) [@Niubility-SunLight](https://github.com/Niubility-SunLight)
+
+- SafeArea
+
+  - 优化小程序环境顶部安全区距离 [826](https://github.com/mallfoundry/taroify/pull/826) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+
+- IndexList
+
+  - 修复异步传入数据时 `anchorRects` 报错问题 [828](https://github.com/mallfoundry/taroify/pull/828) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- `SafeArea` 新增单测[826](https://github.com/mallfoundry/taroify/pull/826) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+
 ### v0.4.2-alpha.0
 
 `2024-10-13`
