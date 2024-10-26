@@ -258,7 +258,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
             anchorRectsRef.current = anchorRects
             if (init && inner) {
               anchorRectsCacheRef.current = anchorRects
-              firstAnchorTop.current = anchorRects[0].top || 0
+              firstAnchorTop.current = anchorRects[0]?.top || 0
             }
           })
           .then(onScroll)
