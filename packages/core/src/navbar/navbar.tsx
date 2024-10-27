@@ -46,6 +46,7 @@ function useNavbarChildren(children?: ReactNode): NavbarChildren {
 export interface NavbarProps extends ViewProps {
   bordered?: boolean
   fixed?: boolean
+  nativeSafeTop?: boolean
   placeholder?: boolean
   safeArea?: SafeAreaPosition
   title?: ReactNode
@@ -59,6 +60,7 @@ function Navbar(props: NavbarProps) {
     fixed,
     placeholder,
     safeArea,
+    nativeSafeTop,
     title: titleProp,
     children: childrenProp,
     ...restProps
@@ -69,6 +71,7 @@ function Navbar(props: NavbarProps) {
     <FixedView
       position={fixed && "top"}
       safeArea={safeArea}
+      nativeSafeTop={nativeSafeTop}
       placeholder={fixed && placeholder && prefixClassname("navbar__placeholder")}
     >
       <View

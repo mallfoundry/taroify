@@ -1,46 +1,46 @@
+import { getSystemInfoSync } from "@tarojs/taro"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
+import { useMemo, CSSProperties } from "react"
 import { prefixClassname } from "../styles"
-import { getSystemInfoSync } from "@tarojs/taro"
-import { inBrowser } from "../utils/base"
 
 export type SafeAreaPosition = "top" | "bottom"
 
 export interface SafeAreaProps extends ViewProps {
   position?: SafeAreaPosition
+  style?: CSSProperties
+  nativeSafeTop?: boolean
 }
 
 function SafeArea(props: SafeAreaProps) {
-  const { className, position, ...restProps } = props
-  const customStyle = React.useMemo(() => {
-    if (inBrowser || !position) return {}
-    const { safeArea, screenHeight } = getSystemInfoSync()
-    let style = {}
-    if (position === "top") {
-      style = {
-        paddingTop: safeArea?.top || 0,
-      }
-    } else {
-      style = {
-        paddingBottom: screenHeight - (safeArea?.bottom || 0),
+  const { className, position, nativeSafeTop, style, ...restProps } = props
+
+  const { statusBarHeight } = getSystemInfoSync()
+
+  const customStyle = useMemo(() => {
+    if (position === "top" && nativeSafeTop) {
+      return {
+        paddingTop: `${statusBarHeight || 0}px`,
       }
     }
-    return style
+    return {}
   }, [position])
+
   return (
     <View
       className={classNames(
         prefixClassname("safe-area"),
         {
-          [prefixClassname("safe-area--top")]: position === "top" && inBrowser,
-          [prefixClassname("safe-area--bottom")]: position === "bottom" && inBrowser,
+          [prefixClassname("safe-area--top")]: position === "top",
+          [prefixClassname("safe-area--bottom")]: position === "bottom",
         },
         className,
       )}
       style={{
         ...customStyle,
+        ...style,
       }}
       {...restProps}
     />
