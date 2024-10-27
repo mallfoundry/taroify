@@ -12,6 +12,22 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.5.1-alpha.0
+
+`2024-10-28`
+
+**Feature**
+
+- SafeArea
+
+  - 新增 `nativeSafeTop` 属性，是否启用小程序顶部安全区高度 [830](https://github.com/mallfoundry/taroify/pull/830) [@Pilotager](https://github.com/Pilotager)
+
+**Bug Fixes**
+
+- SafeArea
+
+  - 修复安全区底部判断问题 [830](https://github.com/mallfoundry/taroify/pull/830) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.5.0-alpha.0
 
 `2024-10-27`
