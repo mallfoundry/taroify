@@ -30,6 +30,7 @@ function useFixedViewPlaceholder(placeholder?: boolean | string | PlaceholderPro
 interface FixedViewProps extends PropsWithChildren<ViewProps> {
   position?: boolean | FixedViewPosition
   safeArea?: SafeAreaPosition
+  nativeSafeTop?: boolean
   placeholder?: boolean | string | Omit<PlaceholderProps, "children">
 }
 
@@ -38,6 +39,7 @@ function FixedView<T>(props: FixedViewProps & T) {
     className,
     position,
     safeArea,
+    nativeSafeTop,
     placeholder: placeholderProp,
     children,
     ...restProps
@@ -63,7 +65,7 @@ function FixedView<T>(props: FixedViewProps & T) {
       )}
       {...restProps}
     >
-      {safeArea === "top" && <SafeArea position="top" />}
+      {safeArea === "top" && <SafeArea position="top" nativeSafeTop={nativeSafeTop} />}
       {children}
       {safeArea === "bottom" && <SafeArea position="bottom" />}
     </View>

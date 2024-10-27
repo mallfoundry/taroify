@@ -10,5 +10,8 @@ $navbar-icon-font-size: var(--navbar-icon-font-size, 16px * $hd);
 $navbar-icon-color: var(--navbar-icon-color, $primary-color);
 $navbar-text-color: var(--navbar-text-color, $primary-color);
 $navbar-title-font-size: var(--navbar-title-font-size, var(--font-size-lg, $font-size-lg));
-$navbar-title-font-weight: var(--navbar-title-font-weight, var(--font-weight-bold, $font-weight-bold));
+$navbar-title-font-weight: var(
+  --navbar-title-font-weight,
+  var(--font-weight-bold, $font-weight-bold)
+);
 $navbar-title-color: var(--navbar-title-color, var(--text-color, $text-color));
