@@ -179,6 +179,28 @@ function DateHourPicker() {
 }
 ```
 
+### 选择年月日时分
+
+将 type 设置为 `date-minute` 即可选择日期和时分，包括年月日时分。
+
+```tsx
+function DateMinutePicker() {
+  const [minDate] = useState(new Date(2020, 0, 1, 0, 0))
+  const [maxDate] = useState(new Date(2025, 10, 1, 23, 59))
+  const [defaultValue] = useState(new Date())
+
+  return (
+    <DatetimePicker type="date-minute" min={minDate} max={maxDate} defaultValue={defaultValue}>
+      <DatetimePicker.Toolbar>
+        <DatetimePicker.Button>取消</DatetimePicker.Button>
+        <DatetimePicker.Title>选择年月日时分</DatetimePicker.Title>
+        <DatetimePicker.Button>确认</DatetimePicker.Button>
+      </DatetimePicker.Toolbar>
+    </DatetimePicker>
+  )
+}
+```
+
 ### 选项过滤器
 
 通过传入 `filter` 函数，可以对选项数组进行过滤，实现自定义时间间隔。
