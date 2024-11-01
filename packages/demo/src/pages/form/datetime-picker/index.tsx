@@ -136,6 +136,22 @@ function DateHourPicker() {
   )
 }
 
+function DateMinutePicker() {
+  const [minDate] = useState(new Date(2020, 0, 1, 0, 0))
+  const [maxDate] = useState(new Date(2025, 10, 1, 23, 59))
+  const [defaultValue] = useState(new Date())
+
+  return (
+    <DatetimePicker type="date-minute" min={minDate} max={maxDate} defaultValue={defaultValue}>
+      <DatetimePicker.Toolbar>
+        <DatetimePicker.Button>取消</DatetimePicker.Button>
+        <DatetimePicker.Title>选择年月日时分</DatetimePicker.Title>
+        <DatetimePicker.Button>确认</DatetimePicker.Button>
+      </DatetimePicker.Toolbar>
+    </DatetimePicker>
+  )
+}
+
 function TimePickerWithFilter() {
   const [minDate] = useState(new Date(2020, 0, 1, 0, 0, 0))
   const [maxDate] = useState(new Date(2020, 0, 1, 23, 59, 59))
@@ -224,14 +240,19 @@ export default function PickerDemo() {
           <DateTimePicker />
         </CustomWrapper>
       </Block>
-      <Block variant="card" title="选项过滤器">
-        <CustomWrapper>
-          <TimePickerWithFilter />
-        </CustomWrapper>
-      </Block>
       <Block variant="card" title="选择年月日小时">
         <CustomWrapper>
           <DateHourPicker />
+        </CustomWrapper>
+      </Block>
+      <Block variant="card" title="选择年月日时分">
+        <CustomWrapper>
+          <DateMinutePicker />
+        </CustomWrapper>
+      </Block>
+      <Block variant="card" title="选项过滤器">
+        <CustomWrapper>
+          <TimePickerWithFilter />
         </CustomWrapper>
       </Block>
       <Block variant="card" title="自定义列排序">
