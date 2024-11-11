@@ -7,6 +7,7 @@ import ActionSheetContext from "./action-sheet.context"
 import { ActionSheetActionObject } from "./action-sheet.shared"
 import ActionSheetHeader from "./action-sheet-header"
 import ActionSheetAction from "./action-sheet-action"
+import SafeArea from "../safe-area"
 
 export interface ActionSheetProps extends SheetProps {
   // title?: ReactNode
@@ -30,13 +31,16 @@ function ActionSheet({
     if (childrenProp) {
       return childrenProp
     }
-    return <>
-      { description && <ActionSheetHeader children={description} /> }
-      {
-        (actions || []).map(({ subname, ...rest }, index) => <ActionSheetAction key={index} {...rest} children={subname} />)
-       }
-      { cancelText && <Sheet.Button type="cancel"  children={cancelText} /> }
-    </>
+    return (
+      <>
+        {description && <ActionSheetHeader children={description} />}
+        {(actions || []).map(({ subname, ...rest }, index) => (
+          <ActionSheetAction key={index} {...rest} children={subname} />
+        ))}
+        {cancelText && <Sheet.Button type="cancel" children={cancelText} />}
+        <SafeArea position="bottom" />
+      </>
+    )
   }
   return (
     <ActionSheetContext.Provider value={{ onSelect }}>
