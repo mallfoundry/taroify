@@ -10,6 +10,7 @@ import { isElementOf } from "../utils/validate"
 import SheetHeader from "./sheet-header"
 import SheetContext from "./sheet.context"
 import { SheetItemObject } from "./sheet.shared"
+import { SafeAreaPosition } from "../safe-area"
 
 interface SheetChildren {
   backdrop?: ReactNode
@@ -59,7 +60,7 @@ export interface SheetProps extends ViewProps {
   open?: boolean
   rounded?: boolean
   children?: ReactNode
-
+  safeArea?: SafeAreaPosition
   onSelect?(item: SheetItemObject): void
 
   onCancel?(): void

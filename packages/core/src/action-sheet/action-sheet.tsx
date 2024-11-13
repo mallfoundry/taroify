@@ -25,6 +25,7 @@ function ActionSheet({
   className,
   onSelect,
   children: childrenProp,
+  safeArea = "bottom",
   ...restProps
 }: ActionSheetProps) {
   const renderChildren = () => {
@@ -38,7 +39,7 @@ function ActionSheet({
           <ActionSheetAction key={index} {...rest} children={subname} />
         ))}
         {cancelText && <Sheet.Button type="cancel" children={cancelText} />}
-        <SafeArea position="bottom" />
+        <SafeArea position={safeArea} />
       </>
     )
   }
