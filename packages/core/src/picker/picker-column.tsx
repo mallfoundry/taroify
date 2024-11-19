@@ -70,6 +70,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const wrapperRef = useRef<HTMLElement>()
     const movingRef = useRef<boolean>()
     const startOffsetRef = useRef<number>(0)
+    const moveOffsetRef = useRef<number>(0)
     const momentumOffsetRef = useRef<number>(0)
     const touchStartTimeRef = useRef<number>(0)
     const currentDurationRef = useRef<number>(0)
@@ -122,6 +123,9 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         }
 
         setActiveOffset(offset)
+        if (movingRef.current) {
+          moveOffsetRef.current = offset
+        }
       },
       [adjustIndex, activeOffsetRef, childrenRef, onChange, optionHeight],
     )
@@ -200,9 +204,11 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       touch.start(event)
 
       if (movingRef.current) {
-        const translateY = await getElementTranslateY(wrapperRef.current!)
-        const offset = Math.min(0, translateY - baseOffset)
-        setActiveOffset(offset)
+        const translateY = moveOffsetRef.current
+        const offset = Math.min(0, translateY)
+        if (movingRef.current) {
+          setActiveOffset(offset)
+        }
         startOffsetRef.current = offset
       } else {
         startOffsetRef.current = activeOffset
@@ -232,12 +238,14 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         momentumOffsetRef.current = activeOffset
       }
 
+      const newOffset = _.clamp(
+        startOffsetRef.current + touch.deltaY,
+        -(countRef.current * optionHeight),
+        optionHeight,
+      )
+      moveOffsetRef.current = newOffset
       setActiveOffset(
-        _.clamp(
-          startOffsetRef.current + touch.deltaY,
-          -(countRef.current * optionHeight),
-          optionHeight,
-        ),
+        newOffset,
       )
     }
 
