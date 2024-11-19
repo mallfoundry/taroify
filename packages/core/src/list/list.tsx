@@ -75,7 +75,7 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
         return
       }
       const scrollParentRect = await getRect(scrollRef)
-      if (!scrollParentRect.height) {
+      if (!scrollParentRect?.height) {
         return
       }
 
