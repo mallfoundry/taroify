@@ -99,6 +99,36 @@ class AddExtTransform extends Transform {
     this.bundlesPath = path.resolve(process.cwd(), "./bundles");
   }
 
+  _transformLodash(file, encoding) {
+    const content = file.contents.toString(encoding)
+
+    const lodashImportCode = "import * as _ from \"lodash\";"
+
+    const hasLodashImport = lodashImportCode.includes(lodashImportCode)
+
+    if (!hasLodashImport) return
+
+    const methods = new Set()
+
+    const lodashMethodRegExp = /\s_\.([A-z]+?)\(/g
+
+    let transformed = content
+
+    transformed = transformed.replace(lodashMethodRegExp, (_, method) => {
+      methods.add(method)
+
+      return ` _${method}(`
+    })
+
+    const importCodes = [...methods.values()]
+      .map((method) => `import _${method} from "lodash/${method}";`)
+      .join("\n")
+
+    transformed = transformed.replace(lodashImportCode, importCodes)
+
+    file.contents = Buffer.from(transformed)
+  }
+
   _transform(file, encoding, callback) {
     if (file.isBuffer() && file.extname === ".js" ) {
       const content = file.contents.toString(encoding);
@@ -117,6 +147,8 @@ class AddExtTransform extends Transform {
         }
       }
       file.contents = Buffer.from(newContent);
+
+      this._transformLodash(file, encoding);
     }
 
     callback(null, file);
