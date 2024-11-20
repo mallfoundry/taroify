@@ -13,7 +13,7 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-import { getComputedStyle } from "../utils/dom/computed-style"
+// import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { fulfillPromise } from "../utils/promisify"
@@ -29,13 +29,13 @@ const MOMENTUM_LIMIT_TIME = 300
 const MOMENTUM_LIMIT_DISTANCE = 15
 const DEFAULT_DURATION = 200
 
-async function getElementTranslateY(element: Element) {
-  const style = await getComputedStyle(element, ["transform", "webkitTransform"])
-  const transform = style.transform || style.webkitTransform
-  const translateY = transform.slice(7, transform.length - 1).split(", ")[5]
+// async function getElementTranslateY(element: Element) {
+//   const style = await getComputedStyle(element, ["transform", "webkitTransform"])
+//   const transform = style.transform || style.webkitTransform
+//   const translateY = transform.slice(7, transform.length - 1).split(", ")[5]
 
-  return Number(translateY)
-}
+//   return Number(translateY)
+// }
 
 // type PickerColumnDuration = "zero" | "switch" | "momentum"
 
