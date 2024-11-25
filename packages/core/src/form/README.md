@@ -377,6 +377,7 @@ function CalendarField() {
         type="single"
         poppable
         showPopup={open}
+        onCancel={() => setOpen(false)}
         onConfirm={(newValue) => {
           itemRef.current?.setValue(newValue)
           setOpen(false)
