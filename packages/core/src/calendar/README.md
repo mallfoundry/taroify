@@ -265,6 +265,35 @@ function CustomConfirmCalendar() {
 通过传入 `formatter` 函数来对日历上每一格的内容进行格式化。
 
 ```tsx
+const dayFormatter = (day: Calendar.DayObject) => {
+  if (!day.value) {
+    return day
+  }
+
+  const month = day.value.getMonth() + 1
+  const date = day.value.getDate()
+
+  if (month === 5) {
+    if (date === 1) {
+      day.top = "劳动节"
+    } else if (date === 4) {
+      day.top = "青年节"
+    } else if (date === 11) {
+      day.children = "今天"
+    }
+  }
+
+  if (day.type === "start") {
+    day.bottom = "入店"
+  } else if (day.type === "end") {
+    day.bottom = "离店"
+  } else if (day.type === "active") {
+    day.bottom = "入店/离店"
+  }
+
+  return day
+}
+
 function CustomDayCalendar() {
   const [open, setOpen] = useState(false)
   const [minDate] = useState(new Date(2010, 4, 1))
@@ -474,7 +503,7 @@ function CustomConfirmCalendar() {
 
 | 键名 | 说明 | 类型 |
 | --- | --- | --- |
-| date | 日期对应的 Date 对象 | _Date_ |
+| value | 日期对应的 Date 对象 | _Date_ |
 | type | 日期类型，可选值为 `active` `start` `middle` `end` `disabled` | _string_ |
 | children | 中间显示的文字 | _string_ |
 | top | 上方的提示信息 | _string_ |
