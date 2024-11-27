@@ -1,4 +1,4 @@
-import { useUncontrolled } from "@taroify/hooks"
+import { useToRef, useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -12,6 +12,7 @@ import {
   ReactElement,
   ReactNode,
   useMemo,
+  useEffect,
 } from "react"
 import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import Backdrop from "../backdrop"
@@ -123,8 +124,14 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
   } = props
 
   const { value: open } = useUncontrolled({ defaultValue: defaultOpen, value: openProp })
+  const onClosePropRef = useToRef(onClose)
+  useLockScrollTaro(!!open && lock)
 
-   useLockScrollTaro(!!open && lock)
+  useEffect(() => {
+    if (open === false) {
+      onClosePropRef.current?.(false)
+    }
+  }, [onClosePropRef, open])
 
   const transactionName = transaction ?? toTransactionName(placement)
 
