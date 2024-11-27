@@ -28,12 +28,32 @@ import {
 } from "../utils/dom/element"
 import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
-import { ToastOptions, useToastClose, useToastOpen } from "./toast.imperative"
-import { ToastPosition, ToastType } from "./toast.shared"
+import { ToastPosition, ToastOptions, ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
 
 const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
 
 const TOAST_PRESET_POSITIONS = ["top", "middle", "bottom"]
+
+function useToastOpen(cb: (options: ToastOptions) => void) {
+  useEffect(() => {
+    toastEvents.on("open", cb)
+    return () => {
+      toastEvents.off("open", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
+
+function useToastClose(cb: (selector: string) => void) {
+  useEffect(() => {
+    toastEvents.on("close", cb)
+    return () => {
+      toastEvents.off("close", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
+
 
 function defaultToastIcon(icon?: ReactNode, type?: ToastType): ReactNode {
   if (icon) {
@@ -139,6 +159,15 @@ export default function Toast(props: ToastProps) {
   const icon = useToastIcon(iconProp, type)
 
   const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
+
+  useEffect(() => {
+    rootSelectorRef.current && toastSelectorSet.add(rootSelectorRef.current)
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      rootSelectorRef.current && toastSelectorSet.delete(rootSelectorRef.current)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (open) {

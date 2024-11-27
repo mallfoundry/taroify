@@ -1,8 +1,9 @@
-import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
-import { PopupBackdropProps } from "../popup"
-import { ToastPosition, ToastType } from "./toast.shared"
+import { createElement, isValidElement, ReactNode } from "react"
+import { document, TaroNode } from "@tarojs/runtime"
+import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
+import { ToastOptions, ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import Toast from "./toast"
 
 const initialToastOptions: ToastOptions = {
   className: undefined,
@@ -32,53 +33,34 @@ export function resetDefaultToastOptions() {
   })
 }
 
-const toastEvents = new Events()
-
-export function useToastOpen(cb: (options: ToastOptions) => void) {
-  useEffect(() => {
-    toastEvents.on("open", cb)
-    return () => {
-      toastEvents.off("open", cb)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-}
-
-export function useToastClose(cb: (selector: string) => void) {
-  useEffect(() => {
-    toastEvents.on("close", cb)
-    return () => {
-      toastEvents.off("close", cb)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-}
-
-export interface ToastOptions {
-  selector?: string
-  className?: string
-  style?: CSSProperties
-  backdrop?: boolean | Omit<PopupBackdropProps, "open">
-  type?: ToastType
-  position?: ToastPosition
-  icon?: ReactNode
-  duration?: number
-  message?: ReactNode
-
-  onClose?(opened: boolean): void
-}
-
 function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
   const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
   return _.assign({}, initialToastOptions, defaultToastOptions, options)
 }
 
+const toastView = document.createElement("view")
+toastEvents.on("close-by-function", () => {
+  unmountPortal(toastView)
+})
+
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
-  toastEvents.trigger("open", {
-    selector,
-    ...restOptions,
-  })
+  if (selector && toastSelectorSet.has(`${getPagePath()}__${selector}`)) {
+    toastEvents.trigger("open", {
+      selector,
+      ...restOptions,
+    })
+  } else {
+    const onTransitionExited = restOptions.onTransitionExited
+    restOptions.onTransitionExited = () => {
+      onTransitionExited?.()
+      unmountPortal(toastView)
+    }
+    mountPortal(
+      createElement(Toast, { ...restOptions, children: restOptions.message, defaultOpen: true }) as unknown as TaroNode,
+      toastView
+    )
+  }
 }
 
 export function createToast(type: ToastType) {
