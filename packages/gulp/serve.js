@@ -22,6 +22,9 @@ exports.serveDemo = () => {
   exec(`taro build --type h5 --watch --port ${portTool.getAvailablePort()}`, {
     cwd: "packages/demo",
     stdio: "inherit",
+  }).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.error(e)
   })
 }
 
@@ -29,5 +32,8 @@ exports.serveSite = () => {
   exec(`cross-env GATSBY_DEMO_PORT=${portTool.getAvailablePort()} gatsby develop --open --host 0.0.0.0`, {
     cwd: "site",
     stdio: "inherit",
+  }).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.error(e)
   })
 }
