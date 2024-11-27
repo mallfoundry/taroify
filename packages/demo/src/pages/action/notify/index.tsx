@@ -1,27 +1,17 @@
 import { Cell, Notify } from "@taroify/core"
-import { ArrowRight } from "@taroify/icons"
-import { ReactNode, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
 
 function BasicNotify() {
-  const [open, setOpen] = useState(false)
   return (
     <>
-      <Cell title="基础用法" clickable isLink onClick={() => setOpen(true)} />
-      <Notify open={open} onClose={setOpen} children="通知内容" />
+      <Cell title="基础用法" clickable isLink onClick={() => Notify.open("文字提示")} />
     </>
   )
 }
 
 function CustomNotify() {
-  const [options, setOptions] = useState<{
-    open?: boolean
-    duration?: number
-    children?: ReactNode
-  }>({})
-
   return (
     <>
       <Cell
@@ -29,9 +19,10 @@ function CustomNotify() {
         clickable
         isLink
         onClick={() => {
-          setOptions({
-            open: true,
-            children: "自定义颜色",
+          Notify.open({
+            color: "#ad0000",
+            background: "#ffe1e1",
+            message: "自定义颜色",
           })
         }}
       />
@@ -40,22 +31,11 @@ function CustomNotify() {
         clickable
         isLink
         onClick={() =>
-          setOptions({
-            open: true,
+          Notify.open({
             duration: 1000,
-            children: "自定义时长",
+            message: "自定义时长",
           })
         }
-      />
-      <Notify
-        open={options.open}
-        style={{
-          color: "#ad0000",
-          background: "#ffe1e1",
-        }}
-        duration={options.duration}
-        children={options.children}
-        onClose={() => setOptions({ open: false })}
       />
     </>
   )
@@ -64,7 +44,6 @@ function CustomNotify() {
 function NotifyWithPresetColors() {
   return (
     <>
-      <Notify id="notify" />
       <Cell
         title="主要通知"
         clickable
