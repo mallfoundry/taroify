@@ -9,7 +9,6 @@ export default function ToastDemo() {
   return (
     <Page title="Toast 轻提示" className="toast-demo">
       <Block variant="card" title="基础用法">
-        <Toast id="toast" />
         <Cell
           clickable
           title="文字提示"
