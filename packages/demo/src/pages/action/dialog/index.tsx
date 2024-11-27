@@ -1,6 +1,4 @@
-import { Button, Cell, Dialog } from "@taroify/core"
-import { ArrowRight } from "@taroify/icons"
-import { useState } from "react"
+import { Cell, Dialog } from "@taroify/core"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
 import "./index.scss"
@@ -8,20 +6,32 @@ import "./index.scss"
 function BasicDialog() {
   return (
     <>
-      <Dialog id="dialog" />
       <Cell
         title="提示弹窗"
         clickable
         bordered
         isLink
-        onClick={() => Dialog.alert("提示")}
+        onClick={() => Dialog.alert({ title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })}
       />
     </>
   )
+  // )
+  // return (
+  //   <>
+  //     <Dialog
+  //       open
+  //       title="标题"
+  //       message="代码是写出来给人看的，附带能在机器上运行"
+  //       messageAlign="left"
+  //       confirm="ok"
+  //       cancel="cancel"
+  //       onConfirm={() => console.log("confirm")} onCancel={() => console.log("cancel")}
+  //     />
+  //   </>
+  // )
 }
 
 function NoTitleDialog() {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Cell
@@ -29,20 +39,13 @@ function NoTitleDialog() {
         clickable
         bordered
         isLink
-        onClick={() => setOpen(true)}
+        onClick={() => Dialog.alert("生命远不止连轴转和忙到极限，人类的体验远比这辽阔、丰富得多。")}
       />
-      <Dialog open={open} onClose={setOpen}>
-        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions>
-          <Button onClick={() => setOpen(false)}>确认</Button>
-        </Dialog.Actions>
-      </Dialog>
     </>
   )
 }
 
 function ConfirmDialog() {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Cell
@@ -50,22 +53,13 @@ function ConfirmDialog() {
         clickable
         bordered
         isLink
-        onClick={() => setOpen(true)}
+        onClick={() => Dialog.confirm({ title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })}
       />
-      <Dialog open={open} onClose={setOpen}>
-        <Dialog.Header>标题</Dialog.Header>
-        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions>
-          <Button onClick={() => setOpen(false)}>取消</Button>
-          <Button onClick={() => setOpen(false)}>确认</Button>
-        </Dialog.Actions>
-      </Dialog>
     </>
   )
 }
 
 function RoundedDialog() {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Cell
@@ -73,22 +67,13 @@ function RoundedDialog() {
         clickable
         bordered
         isLink
-        onClick={() => setOpen(true)}
+        onClick={() => Dialog.confirm({ theme: "rounded", title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })}
       />
-      <Dialog open={open} onClose={setOpen}>
-        <Dialog.Header>标题</Dialog.Header>
-        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions variant="rounded">
-          <Button onClick={() => setOpen(false)}>取消</Button>
-          <Button onClick={() => setOpen(false)}>确认</Button>
-        </Dialog.Actions>
-      </Dialog>
     </>
   )
 }
 
 function RoundedNoTitleDialog() {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Cell
@@ -96,14 +81,39 @@ function RoundedNoTitleDialog() {
         clickable
         bordered
         isLink
-        onClick={() => setOpen(true)}
+        onClick={() => Dialog.alert({ theme: "rounded", title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })}
       />
-      <Dialog open={open} onClose={setOpen}>
-        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
-        <Dialog.Actions variant="rounded">
-          <Button onClick={() => setOpen(false)}>确认</Button>
-        </Dialog.Actions>
-      </Dialog>
+    </>
+  )
+}
+
+function AsyncCloseDialog() {
+  return (
+    <>
+      <Cell
+        title="异步关闭"
+        clickable
+        bordered
+        isLink
+        onClick={() => Dialog.confirm({
+          title: "标题",
+          message: "如果解决方法是丑陋的，那就肯定还有更好的解决方法，只是还没有发现而已。",
+          async onBeforeClose(action) {
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                // action !== 'confirm'  拦截取消操作
+                resolve(action === "confirm");
+              }, 1000);
+            });
+          },
+          onCancel() {
+            console.log("cancel")
+          },
+          onConfirm() {
+            console.log("confirm")
+          },
+        })}
+      />
     </>
   )
 }
@@ -119,6 +129,9 @@ export default function DialogDemo() {
       <Block variant="card" title="圆角按钮样式">
         <RoundedDialog />
         <RoundedNoTitleDialog />
+      </Block>
+      <Block variant="card" title="异步关闭">
+        <AsyncCloseDialog />
       </Block>
     </Page>
   )

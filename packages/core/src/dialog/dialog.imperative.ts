@@ -1,14 +1,14 @@
-import { Events } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties, isValidElement, ReactNode, useEffect } from "react"
-import { ButtonProps } from "../button"
-import { PopupBackdropProps } from "../popup"
+import { createElement, isValidElement, ReactNode } from "react"
+import { document, TaroNode } from "@tarojs/runtime"
+import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
+import { dialogEvents, dialogSelectorSet, DialogOptions } from "./dialog.shared"
+import Dialog from "./dialog"
 
 const initialDialogOptions: DialogOptions = {
   className: undefined,
   style: undefined,
   backdrop: undefined,
-  duration: undefined,
   message: undefined,
   title: undefined,
   messageAlign: undefined,
@@ -33,60 +33,28 @@ export function resetDefaultDialogOptions() {
   })
 }
 
-const dialogEvents = new Events()
-
-export function useDialogOpen(cb: (options: DialogOptions) => void) {
-  useEffect(() => {
-    dialogEvents.on("open", cb)
-    return () => {
-      dialogEvents.off("open", cb)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-}
-
-export function useDialogCancel(cb: (selector: string) => void) {
-  useEffect(() => {
-    dialogEvents.on("cancel", cb)
-    return () => {
-      dialogEvents.off("cancel", cb)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-}
-
-type DialogMessageAlign = "left" | "center" | "right"
-
-export interface DialogOptions {
-  selector?: string
-  className?: string
-  style?: CSSProperties
-  backdrop?: boolean | Omit<PopupBackdropProps, "open">
-  duration?: number
-  title?: ReactNode
-  message?: ReactNode
-  messageAlign?: DialogMessageAlign
-  confirm?: ReactNode | ButtonProps
-  cancel?: ReactNode | ButtonProps
-
-  onConfirm?(): void
-
-  onCancel?(): void
-
-  onClose?(opened: boolean): void
-}
-
 function parseDialogOptions(message: ReactNode | DialogOptions): DialogOptions {
   const options = !isValidElement(message) && _.isPlainObject(message) ? message : { message }
   return _.assign({}, initialDialogOptions, defaultDialogOptions, options)
 }
 
+const dialogView = document.createElement("view")
+
 export function openDialog(args: ReactNode | DialogOptions) {
   const { selector = "#dialog", ...restOptions } = parseDialogOptions(args)
-  dialogEvents.trigger("open", {
-    selector,
-    ...restOptions,
-  })
+  if (selector && dialogSelectorSet.has(`${getPagePath()}__${selector}`)) {
+    dialogEvents.trigger("open", {
+      selector,
+      ...restOptions,
+    })
+  } else {
+    const onTransitionExited = restOptions.onTransitionExited
+    restOptions.onTransitionExited = () => {
+      onTransitionExited?.()
+      unmountPortal(dialogView)
+    }
+    mountPortal(createElement(Dialog, {...restOptions, defaultOpen:true}) as unknown as TaroNode, dialogView)
+  }
 }
 
 export function confirmDialog(args: ReactNode | DialogOptions) {

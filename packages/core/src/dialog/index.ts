@@ -11,7 +11,7 @@ import {
   setDefaultDialogOptions,
 } from "./dialog.imperative"
 
-export type { DialogThemeVars } from './dialog.shared'
+export type { DialogThemeVars } from "./dialog.shared"
 
 interface DialogInterface {
   (props: DialogProps): JSX.Element
