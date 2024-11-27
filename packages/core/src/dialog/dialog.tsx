@@ -13,12 +13,14 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useState
 } from "react"
 import Backdrop from "../backdrop"
 import { ButtonProps, createButton } from "../button"
 import ButtonContext from "../button/button.context"
-import Popup, { usePopupBackdrop } from "../popup"
+import Popup, { PopupBackdropProps, usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import {
   getElementSelector,
@@ -28,10 +30,31 @@ import {
 } from "../utils/dom/element"
 import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
+import { useMemoizedFn } from "../hooks"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
 import DialogHeader from "./dialog-header"
-import { DialogOptions, useDialogCancel, useDialogOpen } from "./dialog.imperative"
+import { dialogEvents, dialogSelectorSet, DialogOptions, DialogMessageAlign, DialogActionsVariant } from "./dialog.shared"
+
+export function useDialogOpen(cb: (options: DialogOptions) => void) {
+  useEffect(() => {
+    dialogEvents.on("open", cb)
+    return () => {
+      dialogEvents.off("open", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
+
+export function useDialogCancel(cb: (selector: string) => void) {
+  useEffect(() => {
+    dialogEvents.on("cancel", cb)
+    return () => {
+      dialogEvents.off("cancel", cb)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+}
 
 interface DialogChildren {
   backdrop?: ReactElement
@@ -114,8 +137,44 @@ export interface DialogProps extends ViewProps {
   defaultOpen?: boolean
   open?: boolean
   children?: ReactNode
-
+  backdrop?: boolean | Omit<PopupBackdropProps, "open">
+  title?: ReactNode
+  message?: ReactNode
+  messageAlign?: DialogMessageAlign
+  theme?: DialogActionsVariant
+  confirm?: ReactNode | ButtonProps
+  cancel?: ReactNode | ButtonProps
+  onConfirm?(): void
+  onCancel?(): void
+  onBeforeClose?(action: "confirm" | "cancel"): boolean | Promise<boolean>
   onClose?(opened: boolean): void
+}
+
+function renderHeader(title, key?) {
+  return <DialogHeader key={key} children={title} />
+}
+
+function renderContent(message, messageAlign, key?) {
+  return <DialogContent key={key} align={messageAlign} children={message} />
+}
+
+function renderActions(confirm, cancel, variant, confirmLoading, cancelLoading, key?) {
+  if (cancel === undefined && confirm === undefined) {
+    return null
+  }
+  const actions: ReactNode[] = []
+  if (cancel) {
+    actions.push(createButton(cancel, { key: 1, loading: cancelLoading }))
+  }
+  if (confirm) {
+    actions.push(createButton(confirm, { key: 0, loading: confirmLoading }))
+  }
+  return <DialogActions key={key} children={actions} variant={variant} />
+}
+const transactionTimeout = {
+  enter: 100,
+  exit: 300,
+  appear: 100,
 }
 
 function Dialog(props: DialogProps) {
@@ -126,10 +185,17 @@ function Dialog(props: DialogProps) {
       defaultOpen,
       open: openProp,
       children,
-      backdrop: backdropOptions,
+      backdrop: backdropOptions = { closeable: false },
+      title: titleProp,
+      message: messageProp,
+      messageAlign: messageAlignProp,
+      theme: themeProp,
+      confirm: confirmProp,
+      cancel: cancelProp,
+      onBeforeClose: onBeforeCloseProp,
       onClose,
-      onConfirm,
-      onCancel,
+      onConfirm: onConfirmProp,
+      onCancel: onCancelProp,
       ...restProps
     },
     setObject,
@@ -142,11 +208,48 @@ function Dialog(props: DialogProps) {
     value: openProp,
   })
 
-  const onCancelRef = useToRef(onCancel)
-
+  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [cancelLoading, setCancelLoading]  = useState(false)
   const { onClick } = useContext(ButtonContext)
-  const { backdrop: backdropElement, header, content, actions } = useDialogChildren(children)
+  const { backdrop: backdropElement, header: headerChildren, content: contentChildren, actions: actionsChildren } = useDialogChildren(children)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
+  const header = useMemo(() => headerChildren ?? renderHeader(titleProp), [headerChildren, titleProp])
+  const content = useMemo(() => contentChildren ?? renderContent(messageProp, messageAlignProp), [contentChildren, messageProp, messageAlignProp])
+  const actions = useMemo(() => actionsChildren ?? renderActions(confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading), [actionsChildren, confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading])
+  const onConfirm = useMemoizedFn(async () => {
+    try {
+      setConfirmLoading(true)
+      let boolean = true
+      if (onBeforeCloseProp) {
+        boolean = await onBeforeCloseProp("confirm")
+      }
+      setConfirmLoading(false)
+      if (boolean) {
+        onConfirmProp?.()
+        setOpen(false)
+      }
+    } catch(err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+  })
+  const onCancel = useMemoizedFn(async () => {
+    try {
+      setCancelLoading(true)
+      let boolean = true
+      if (onBeforeCloseProp) {
+        boolean = await onBeforeCloseProp("cancel")
+      }
+      setCancelLoading(false)
+      if (boolean) {
+        onCancelProp?.()
+        setOpen(false)
+      }
+    } catch(err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+  })
 
   const hasHeader = header !== undefined
   const hasContent = content !== undefined
@@ -155,13 +258,12 @@ function Dialog(props: DialogProps) {
     onClick?.(event, btnProps)
     const { className } = btnProps
     if (className?.includes(prefixClassname("dialog__confirm"))) {
-      onConfirm?.()
+      onConfirm()
+    } else if (className?.includes(prefixClassname("dialog__cancel"))) {
+      onCancel()
+    } else {
+      setOpen(false)
     }
-    if (className?.includes(prefixClassname("dialog__cancel"))) {
-      onCancel?.()
-    }
-
-    setOpen(false)
   }
 
   const handleClose = useCallback(
@@ -172,6 +274,15 @@ function Dialog(props: DialogProps) {
     [onClose, setOpen],
   )
 
+  useEffect(() => {
+    rootSelectorRef.current && dialogSelectorSet.add(rootSelectorRef.current)
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      rootSelectorRef.current && dialogSelectorSet.delete(rootSelectorRef.current)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useDialogOpen(
     ({
       selector,
@@ -180,27 +291,18 @@ function Dialog(props: DialogProps) {
       messageAlign,
       confirm,
       cancel,
+      theme,
       ...restOptions
     }: DialogOptions) => {
       if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
         const children: ReactNode[] = []
-        const actions: ReactNode[] = []
-
         if (title) {
-          children.push(<DialogHeader key={0} children={title} />)
+          children.push(renderHeader(title, 0))
         }
         if (message) {
-          children.push(<DialogContent key={1} align={messageAlign} children={message} />)
+          children.push(renderContent(message, messageAlign, 1))
         }
-        if (cancel) {
-          actions.push(createButton(cancel, { key: 1 }))
-        }
-        if (confirm) {
-          actions.push(createButton(confirm, { key: 0 }))
-        }
-        if (!_.isEmpty(actions)) {
-          children.push(<DialogActions key={2} children={actions} />)
-        }
+        children.push(renderActions(confirm, cancel, theme, false, false, 2))
         setObject({
           children,
           ...restOptions,
@@ -212,7 +314,7 @@ function Dialog(props: DialogProps) {
 
   useDialogCancel((selector) => {
     if (matchSelector(prependPageSelector(selector), rootSelectorRef.current)) {
-      onCancelRef.current?.()
+      onCancel()
       setOpen(false)
     }
   })
@@ -228,7 +330,7 @@ function Dialog(props: DialogProps) {
         open={open}
         className={classNames(prefixClassname("dialog"), className)}
         transaction={prefixClassname("dialog-bounce")}
-        transactionTimeout={100}
+        transactionTimeout={transactionTimeout}
         onClose={handleClose}
         {...restProps}
       >

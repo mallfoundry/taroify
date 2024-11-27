@@ -6,19 +6,19 @@
 
 ### 函数调用
 
-由于小程序不支持 DOM 操作，因此需要手动在页面（page）里挂载一个 Dialog 组件并指定 id 为 `dialog`。
+版本大于`0.5.1`可以直接调用。低版本需要手动在页面（page）里挂载一个 Dialog 组件并指定 id 为 `dialog`。
 
 ```tsx
 function ImperativeDialog() {
   return (
     <>
-      <Dialog id="dialog" />
+      {/* <Dialog id="dialog" /> */}
       <Cell
         title="提示弹窗"
         clickable
         bordered
         isLink
-        onClick={() => Dialog.alert("提示")}
+        onClick={() => Dialog.alert({ title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })}
       />
     </>
   )
@@ -28,6 +28,18 @@ function ImperativeDialog() {
 ### 组件调用
 
 通过组件组合的方式调用 Dialog。
+
+```tsx
+<Dialog
+  open
+  title="标题"
+  message="代码是写出来给人看的，附带能在机器上运行"
+  messageAlign="left"
+  confirm="ok"
+  cancel="cancel"
+  onConfirm={() => console.log("confirm")} onCancel={() => console.log("cancel")}
+/>
+```
 
 ```tsx
 function TextDialog() {
@@ -42,8 +54,10 @@ function TextDialog() {
         onClick={() => setOpen(true)}
       />
       <Dialog open={open} onClose={setOpen}>
-        <Dialog.Content>提示</Dialog.Content>
+        <Dialog.Header>标题</Dialog.Header>
+        <Dialog.Content>代码是写出来给人看的，附带能在机器上运行</Dialog.Content>
         <Dialog.Actions>
+          <Button onClick={() => setOpen(false)}>取消</Button>
           <Button onClick={() => setOpen(false)}>确认</Button>
         </Dialog.Actions>
       </Dialog>
@@ -57,7 +71,9 @@ function TextDialog() {
 ### 消息提示
 
 用于提示一些消息，只包含一个确认按钮。
-
+```ts
+Dialog.alert("生命远不止连轴转和忙到极限，人类的体验远比这辽阔、丰富得多。")
+```
 ```tsx
 function BasicDialog() {
   const [open, setOpen] = useState(false)
@@ -85,7 +101,9 @@ function BasicDialog() {
 ### 消息确认
 
 用于确认消息，包含取消和确认按钮。
-
+```ts
+Dialog.confirm({ title: "标题", message: "代码是写出来给人看的，附带能在机器上运行" })
+```
 ```tsx
 function ConfirmDialog() {
   const [open, setOpen] = useState(false)
@@ -112,9 +130,15 @@ function ConfirmDialog() {
 ```
 
 ### 圆角按钮风格
-
-将 actions.variant 选项设置为 `rounded` 可以展示圆角按钮风格的弹窗。
-
+设置 `theme` 为 `rounded` 可以展示圆角按钮风格的弹窗
+```ts
+Dialog.confirm({ 
+  theme: "rounded", 
+  title: "标题", 
+  message: "代码是写出来给人看的，附带能在机器上运行" 
+})
+```
+将 `actions.variant ` 选项设置为 `rounded` 可以展示圆角按钮风格的弹窗。
 ```tsx
 function RoundedDialog() {
   const [open, setOpen] = useState(false)
@@ -140,6 +164,40 @@ function RoundedDialog() {
 }
 ```
 
+### 异步关闭
+```tsx
+function AsyncCloseDialog() {
+  return (
+    <>
+      <Cell
+        title="异步关闭"
+        clickable
+        bordered
+        isLink
+        onClick={() => Dialog.confirm({
+          title: "标题",
+          message: "如果解决方法是丑陋的，那就肯定还有更好的解决方法，只是还没有发现而已。",
+          async onBeforeClose(action) {
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                // action !== 'confirm'  拦截取消操作
+                resolve(action === "confirm");
+              }, 1000);
+            });
+          },
+          onCancel() {
+            console.log("cancel")
+          },
+          onConfirm() {
+            console.log("confirm")
+          },
+        })}
+      />
+    </>
+  )
+}
+```
+
 ## API
 
 ### Dialog Props
@@ -149,6 +207,19 @@ function RoundedDialog() {
 | defaultOpen | 默认是否显示弹窗 | _boolean_   | -   |
 | open        | 是否显示弹窗   | _boolean_   | -   |
 | children    | 组件内容     | _ReactNode_ | -   |
+| backdrop    | 遮罩层相关配置 | _boolean \| Omit<PopupBackdropProps, "open">_ | - |
+| title       | 标题 | _ReactNode_ | - |
+| message     | 文本内容，支持通过 `\n` 换行 | _ReactNode_ | - |
+| messageAlign| 内容对齐方式，可选值为 `left` `right` | _string_ | `center` |
+| confirm     | 确认按钮 | _string \| ButtonProps_ | - |
+| cancel      | 取消按钮 | _string \| ButtonProps_ | - |
+
+### Dialog Event
+
+| 事件名 | 说明           | 回调参数            |
+| ------ | -------------- | ------------------- |
+| onConfirm  | 点击确认时触发 | - |
+| onCancel  | 点击取消时触发 | - |
 
 ### Dialog.Header Props
 
@@ -180,8 +251,9 @@ function RoundedDialog() {
 | title | 标题 | _ReactNode_ | - |
 | message | 文本内容，支持通过 `\n` 换行 | _ReactNode_ | - |
 | messageAlign | 内容对齐方式，可选值为 `left` `right` | _string_ | `center` |
-| confirm | 确认按钮 | _string \| ButtonProps_ | `确认` |
-| cancel | 取消按钮 | _string \| ButtonProps_ | `取消` |
+| backdrop    | 遮罩层相关配置 | _boolean \| Omit<PopupBackdropProps, "open">_ | - |
+| confirm | 确认按钮 | _string \| ButtonProps_ | - |
+| cancel | 取消按钮 | _string \| ButtonProps_ | - |
 | onConfirm | 确认事件 | _() => void_ | - |
 | onCancel | 取消事件 | _() => void_ | - |
 
