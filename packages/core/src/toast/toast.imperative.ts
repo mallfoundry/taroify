@@ -39,9 +39,6 @@ function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
 }
 
 const toastView = document.createElement("view")
-toastEvents.on("close-by-function", () => {
-  unmountPortal(toastView)
-})
 
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)

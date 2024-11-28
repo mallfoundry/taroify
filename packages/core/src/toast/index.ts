@@ -7,12 +7,9 @@ import {
   openToast,
   resetDefaultToastOptions,
   setDefaultToastOptions,
-  ToastOptions,
 } from "./toast.imperative"
-
-export type { ToastOptions } from "./toast.imperative"
-
-export type { ToastType, ToastPosition, ToastThemeVars } from "./toast.shared"
+import { ToastOptions } from "./toast.shared"
+export type { ToastType, ToastPosition, ToastThemeVars, ToastOptions } from "./toast.shared"
 
 interface ToastInterface {
   (props: ToastProps): JSX.Element
