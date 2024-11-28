@@ -31,12 +31,6 @@ import {
 } from "./pull-refresh-children"
 import PullRefreshContext from "./pull-refresh.context"
 
-const lodashRoot = require("lodash/_root")
-
-if (typeof lodashRoot.Date === "undefined") {
-  lodashRoot.Date = Date
-}
-
 enum PullRefreshStatus {
   Awaiting = "awaiting",
   Pulling = "pulling",

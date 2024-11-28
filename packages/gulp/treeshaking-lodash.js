@@ -1,0 +1,63 @@
+const acron = require("acorn")
+const walk = require("acorn-walk")
+const MagicString = require("magic-string")
+
+function treeShakingLodash(content) {
+  if (!content.includes("lodash")) {
+    return content
+  }
+  const ast = acron.parse(content, { ecmaVersion: "latest", sourceType: "module" });
+  const importNamespaceSpecifierMap = new Map()
+  const magicString = new MagicString(content);
+  walk.simple(ast, {
+    ImportDeclaration(node) {
+      if (node.source.value === "lodash") {
+        const map = new Map();
+        node.specifiers.forEach((specifier) => {
+          if (specifier.type === "ImportNamespaceSpecifier" || specifier.type === "ImportDefaultSpecifier") {
+            if (importNamespaceSpecifierMap.has(specifier.local.name)) {
+              magicString.remove(node.start, node.end)
+            } else {
+              importNamespaceSpecifierMap.set(specifier.local.name, {
+                start: node.start,
+                end: node.end,
+                importedSet: new Set()
+              })
+            }
+          } else if (specifier.type === "ImportSpecifier") {
+            map.set(specifier.imported.name, specifier.local.name);
+          }
+        })
+        if (map.size > 0) {
+          magicString.overwrite(node.start, node.end, Array.from(map.entries()).map(([key, value]) => `import ${value} from "lodash/${key}";`).join("\n"));
+        }
+      }
+      // lodash/fp
+    }
+  })
+  if (importNamespaceSpecifierMap.size > 0) {
+    const importNamespaceSpecifierNames = Array.from(importNamespaceSpecifierMap.keys())
+    walk.simple(ast, {
+      CallExpression(node) {
+        if (node.callee.type === "MemberExpression" && node.callee.object.type === "Identifier") {
+          const name = node.callee.object.name;
+          if (importNamespaceSpecifierNames.includes(name)) {
+            const { importedSet } = importNamespaceSpecifierMap.get(name)
+            importedSet.add(node.callee.property.name)
+            magicString.overwrite(node.callee.start, node.callee.end, `${name}${node.callee.property.name}`);
+          }
+        }
+      }
+    })
+    importNamespaceSpecifierMap.forEach(({ start, end, importedSet }, key) => {
+      if (importedSet.size > 0) {
+        magicString.overwrite(start, end, Array.from(importedSet).map(name => `import ${key}${name} from "lodash/${name}";`).join("\n"));
+      } else {
+        magicString.remove(start, end)
+      }
+    })
+  }
+  return magicString.toString()
+}
+
+exports.treeShakingLodash = treeShakingLodash
