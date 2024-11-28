@@ -2,7 +2,6 @@ import { useUncontrolled } from "@taroify/hooks"
 import { ITouchEvent } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
@@ -218,12 +217,12 @@ function Dialog(props: DialogProps) {
   const actions = useMemo(() => actionsChildren ?? renderActions(confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading), [actionsChildren, confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading])
   const onConfirm = useMemoizedFn(async () => {
     try {
-      setConfirmLoading(true)
       let boolean = true
       if (onBeforeCloseProp) {
+        setConfirmLoading(true)
         boolean = await onBeforeCloseProp("confirm")
+        setConfirmLoading(false)
       }
-      setConfirmLoading(false)
       if (boolean) {
         onConfirmProp?.()
         setOpen(false)
@@ -235,12 +234,12 @@ function Dialog(props: DialogProps) {
   })
   const onCancel = useMemoizedFn(async () => {
     try {
-      setCancelLoading(true)
       let boolean = true
       if (onBeforeCloseProp) {
+        setCancelLoading(true)
         boolean = await onBeforeCloseProp("cancel")
+        setCancelLoading(false)
       }
-      setCancelLoading(false)
       if (boolean) {
         onCancelProp?.()
         setOpen(false)
