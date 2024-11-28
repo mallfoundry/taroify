@@ -4,7 +4,7 @@ const gulp = require("gulp")
 const fs = require("fs-extra")
 const { series, watch } = require("gulp")
 const ts = require("gulp-typescript")
-
+const { treeShakingLodash } = require("./treeshaking-lodash")
 const ignore = ["node_modules", "**/__tests__", "**/?(*.)+(spec|test).[tj]s?(x)"]
 
 function copyTypescriptFiles(bundle, dist) {
@@ -88,6 +88,7 @@ function addJsExt(bundle, dist) {
       .pipe(
         new AddExtTransform(),
       )
+      .pipe(new LodashTransform())
       .pipe(gulp.dest(`./bundles/${dist ?? bundle}`))
   addJsExtTask.displayName = `add js ext to bundles/${dist ?? bundle}`
   return addJsExtTask
@@ -120,6 +121,20 @@ class AddExtTransform extends Transform {
     }
 
     callback(null, file);
+  }
+}
+
+class LodashTransform extends Transform {
+  constructor() {
+    super({ objectMode: true });
+  }
+
+  _transform(file, encoding, callback) {
+    if (file.isBuffer() && file.extname === ".js" ) {
+      const content = file.contents.toString(encoding);
+      file.contents = Buffer.from(treeShakingLodash(content));
+      callback(null, file);
+    }
   }
 }
 
