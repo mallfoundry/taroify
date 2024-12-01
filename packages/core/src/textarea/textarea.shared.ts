@@ -12,5 +12,5 @@ export type TextareaThemeVars = {
 }
 
 export function getStringLength(chars: string = "") {
-  return _.size([...chars])
+  return chars.normalize().length
 }
