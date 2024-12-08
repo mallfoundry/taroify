@@ -12,6 +12,58 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.6.0-alpha.0
+
+`2024-12-08`
+
+**Feature**
+
+- Toast
+
+  - 支持直接函数调用 [852](https://github.com/mallfoundry/taroify/pull/852) [@hbztd](https://github.com/hbztd)
+
+- Notify
+
+  - 支持直接函数调用，添加 `color` `background` 属性 [852](https://github.com/mallfoundry/taroify/pull/852) [@hbztd](https://github.com/hbztd)
+
+- Dialog
+
+  - 支持直接函数调用，添加 `title` `message` `messageAlign` `theme` `confirm` `cancel` `onBeforeClose` 属性 [852](https://github.com/mallfoundry/taroify/pull/852) [@hbztd](https://github.com/hbztd)
+
+**Bug Fixes**
+
+- ActionSheet
+
+  - 为 `ActionSheet` 组件添加默认的安全区域 [840](https://github.com/mallfoundry/taroify/pull/840) [@sweet7788](https://github.com/sweet7788)
+
+- List
+
+  - `scrollParentRect` 判空 [843](https://github.com/mallfoundry/taroify/pull/843) [@Pilotager](https://github.com/Pilotager)
+
+- Pick
+
+  - 修复 picker 组件在快速上滑或者下滑时，执行惯性动画期间，再次滚动 picker-column 后出现的位置卡顿问题 [844](https://github.com/mallfoundry/taroify/pull/844) [@kunkuntang](https://github.com/kunkuntang)
+
+- Popup
+
+  - 修复手动关闭未触发 `onClose` 事件 [852](https://github.com/mallfoundry/taroify/pull/852) [@hbztd](https://github.com/hbztd)
+
+- TextArea
+
+  - 修复 `getStringLength` 在输入 emoji 时无法正确统计字符长度 [853](https://github.com/mallfoundry/taroify/pull/853) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+
+- Form
+
+  - 修复 `validateFirst` [857](https://github.com/mallfoundry/taroify/pull/857) [@linxianxi](https://github.com/linxianxi)
+
+**Other**
+
+- 完善 DateTimePicker 文档 [834](https://github.com/mallfoundry/taroify/pull/834) [@sweet7788 ](https://github.com/sweet7788)
+- 完善 FormItem 文档 [837](https://github.com/mallfoundry/taroify/pull/837) [@Niubility-SunLight](https://github.com/Niubility-SunLight)
+- 完善 Form 文档 [847](https://github.com/mallfoundry/taroify/pull/847) [@lvqq](https://github.com/lvqq)
+- 完善 Calendar 文档 [850](https://github.com/mallfoundry/taroify/pull/853) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+- lodash 支持 tree shaking [851](https://github.com/mallfoundry/taroify/pull/851) [@hbztd](https://github.com/hbztd)
+
 ### v0.5.1-alpha.0
 
 `2024-10-28`
