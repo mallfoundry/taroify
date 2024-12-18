@@ -38,16 +38,16 @@ function treeShakingLodash(content) {
   if (importNamespaceSpecifierMap.size > 0) {
     const importNamespaceSpecifierNames = Array.from(importNamespaceSpecifierMap.keys())
     walk.simple(ast, {
-      CallExpression(node) {
-        if (node.callee.type === "MemberExpression" && node.callee.object.type === "Identifier") {
-          const name = node.callee.object.name;
+      MemberExpression(node) {
+        if (node.type === "MemberExpression" && node.object.type === "Identifier") {
+          const name = node.object.name;
           if (importNamespaceSpecifierNames.includes(name)) {
             const { importedSet } = importNamespaceSpecifierMap.get(name)
-            importedSet.add(node.callee.property.name)
-            magicString.overwrite(node.callee.start, node.callee.end, `${name}${node.callee.property.name}`);
+            importedSet.add(node.property.name)
+            magicString.overwrite(node.start, node.end, `${name}${node.property.name}`);
           }
         }
-      }
+      },
     })
     importNamespaceSpecifierMap.forEach(({ start, end, importedSet }, key) => {
       if (importedSet.size > 0) {
