@@ -12,6 +12,14 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.6.1-alpha.0
+
+`2024-12-18`
+
+**Other**
+
+- lodash 支持 tree shaking [861](https://github.com/mallfoundry/taroify/pull/861) [@hbztd](https://github.com/hbztd)
+
 ### v0.6.0-alpha.0
 
 `2024-12-08`
