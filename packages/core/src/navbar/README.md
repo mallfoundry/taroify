@@ -44,7 +44,7 @@ import { Navbar } from "@taroify/core"
 | 参数          | 说明                                                    | 类型      | 默认值  |
 | ------------- | ------------------------------------------------------- | --------- | ------- |
 | title         | 标题                                                    | _string_  | `''`    |
-| bordered      | 是否显示下边框                                          | _boolean_ | `true`  |
+| bordered      | 是否显示下边框                                          | _boolean_ | `false`  |
 | fixed         | 是否固定在顶部                                          | _boolean_ | `false` |
 | safeArea      | 安全区域，可选值 `top` `bottom`，仅在`fixed=true`时有效 | _string_  | -       |
 | nativeSafeTop | 是否启用顶部安全区域原生属性                            | _boolean_ | `false` |
