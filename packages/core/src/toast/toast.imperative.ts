@@ -17,6 +17,7 @@ const initialToastOptions: ToastOptions = {
 }
 
 const DEFAULT_TOAST_SELECTOR = "#toast"
+const DEFAULT_TOAST_SELECTOR_CREATE = "toast"
 
 const defaultToastOptions: ToastOptions = {}
 
@@ -54,8 +55,13 @@ export function openToast(args: ReactNode | ToastOptions) {
       unmountPortal(toastView)
     }
     mountPortal(
-      createElement(Toast, { ...restOptions, children: restOptions.message, defaultOpen: true }) as unknown as TaroNode,
-      toastView
+      createElement(Toast, {
+        ...restOptions,
+        children: restOptions.message,
+        defaultOpen: true,
+        id: selector === DEFAULT_TOAST_SELECTOR ? DEFAULT_TOAST_SELECTOR_CREATE : selector,
+      }) as unknown as TaroNode,
+      toastView,
     )
   }
 }
@@ -69,5 +75,5 @@ export function createToast(type: ToastType) {
 }
 
 export function closeToast(selector?: string) {
-  toastEvents.trigger("close", selector ?? defaultToastOptions.selector)
+  toastEvents.trigger("close", selector ? `#${selector}` : defaultToastOptions.selector)
 }

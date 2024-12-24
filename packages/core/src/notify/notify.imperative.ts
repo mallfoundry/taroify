@@ -14,6 +14,7 @@ const initialNotifyOptions: NotifyOptions = {
 }
 
 const DEFAULT_NOTIFY_SELECTOR = "#notify"
+const DEFAULT_NOTIFY_SELECTOR_CREATE = "notify"
 
 const defaultNotifyOptions: NotifyOptions = {}
 
@@ -51,8 +52,13 @@ export function openNotify(args: ReactNode | NotifyOptions) {
       unmountPortal(notifyView)
     }
     mountPortal(
-      createElement(Notify, { ...restOptions, children: restOptions.message, defaultOpen: true }) as unknown as TaroNode,
-      notifyView
+      createElement(Notify, {
+        ...restOptions,
+        children: restOptions.message,
+        defaultOpen: true,
+        id: selector === DEFAULT_NOTIFY_SELECTOR ? DEFAULT_NOTIFY_SELECTOR_CREATE : selector,
+      }) as unknown as TaroNode,
+      notifyView,
     )
   }
 }
@@ -66,5 +72,5 @@ export function createNotify(color: NotifyColor) {
 }
 
 export function closeNotify(selector?: string) {
-  notifyEvents.trigger("close", selector ?? defaultNotifyOptions.selector)
+  notifyEvents.trigger("close", selector ? `#${selector}` : defaultNotifyOptions.selector)
 }

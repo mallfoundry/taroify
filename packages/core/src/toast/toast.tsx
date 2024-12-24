@@ -28,7 +28,13 @@ import {
 } from "../utils/dom/element"
 import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
-import { ToastPosition, ToastOptions, ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import {
+  ToastPosition,
+  ToastOptions,
+  ToastType,
+  toastEvents,
+  toastSelectorSet,
+} from "./toast.shared"
 
 const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
 
@@ -53,7 +59,6 @@ function useToastClose(cb: (selector: string) => void) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
-
 
 function defaultToastIcon(icon?: ReactNode, type?: ToastType): ReactNode {
   if (icon) {
@@ -166,7 +171,7 @@ export default function Toast(props: ToastProps) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       rootSelectorRef.current && toastSelectorSet.delete(rootSelectorRef.current)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
