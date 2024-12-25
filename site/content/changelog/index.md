@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.6.2-alpha.0
+
+`2024-12-25`
+
+**Bug Fixes**
+
+- Toast
+
+  - 修复 `close` 方法不生效问题 [865](https://github.com/mallfoundry/taroify/pull/865) [@Pilotager](https://github.com/Pilotager)
+
+- Notify
+
+  - 修复 `close` 方法不生效问题 [865](https://github.com/mallfoundry/taroify/pull/865) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- 添加属性新特性版本号 [867](https://github.com/mallfoundry/taroify/pull/867) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.6.1-alpha.0
 
 `2024-12-18`
