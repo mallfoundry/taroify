@@ -86,18 +86,18 @@ import { Popup } from "@taroify/core"
 
 ### Popup Props
 
-| 参数        | 说明                                             | 类型               | 默认值   |
-| ----------- | ------------------------------------------------ | ------------------ | -------- |
-| defaultOpen | 默认是否显示弹出层                               | _boolean_          | `false`  |
-| open        | 是否显示弹出层                                   | _boolean_          | `false`  |
-| placement   | 弹出位置，可选值为 `top` `bottom` `right` `left` `center` | _string_  | `center` |
-| duration    | 动画时长，单位毫秒                               | _number \| string_ | `300`    |
-| rounded     | 是否显示圆角                                     | _boolean_          | `false`  |
-| lock        | 是否锁定背景滚动                                 | _boolean_          | `true`   |
+| 参数                  | 说明                                                      | 类型               | 默认值   |
+| --------------------- | --------------------------------------------------------- | ------------------ | -------- |
+| defaultOpen           | 默认是否显示弹出层                                        | _boolean_          | `false`  |
+| open                  | 是否显示弹出层                                            | _boolean_          | `false`  |
+| placement             | 弹出位置，可选值为 `top` `bottom` `right` `left` `center` | _string_           | `center` |
+| duration              | 动画时长，单位毫秒                                        | _number \| string_ | `300`    |
+| rounded               | 是否显示圆角                                              | _boolean_          | `false`  |
+| lock `v0.1.4-alpha.0` | 是否锁定背景滚动                                          | _boolean_          | `true`   |
 
 动画相关参数继承自 `Transition` 组件，详细属性参见：[Transition 组件](/components/style/#动画)
-| Popup参数      | Transition对应参数                  |
-| --------- | ---------------------- | 
+| Popup 参数 | Transition 对应参数 |
+| --------- | ---------------------- |
 | mountOnEnter | mountOnEnter |
 | transactionName | name |
 | transitionAppear | appear |
@@ -106,7 +106,6 @@ import { Popup } from "@taroify/core"
 | onTransitionEntered | onEntered |
 | onTransitionExit | onExit |
 | onTransitionExited | onExited |
-
 
 ### Popup.Backdrop Props
 

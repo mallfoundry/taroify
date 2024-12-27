@@ -31,19 +31,19 @@ areaList 为对象结构，包含 `province_list`、`city_list`、`county_list` 
 ```js
 const areaList = {
   province_list: {
-    110000: '北京市',
-    120000: '天津市',
+    110000: "北京市",
+    120000: "天津市",
   },
   city_list: {
-    110100: '北京市',
-    120100: '天津市',
+    110100: "北京市",
+    120100: "天津市",
   },
   county_list: {
-    110101: '东城区',
-    110102: '西城区',
+    110101: "东城区",
+    110102: "西城区",
     // ....
   },
-};
+}
 ```
 
 ### @vant/area-data
@@ -66,6 +66,7 @@ import { areaList } from "@vant/area-data"
 ```
 
 ### 选中省市区
+
 通过 `defaultValue` 设置默认值
 
 通过 `value` `onChange` 控制选中
@@ -79,11 +80,13 @@ import { areaList } from "@vant/area-data"
 可以通过 `depth` 属性配置省市区显示的列数，默认情况下会显示省市区，当你设置为 `2`，则只会显示省市选择。
 
 ```tsx
- <AreaPicker depth={2} areaList={areaList} />
+<AreaPicker depth={2} areaList={areaList} />
 ```
 
-### 手动控制DOM
+### 手动控制 DOM
+
 初始化省市区组件时，需要通过 `AreaPicker.Columns` 子组件传入省市区数据。
+
 ```tsx
 import { AreaPicker } from "@taroify/core"
 import { areaList } from "@vant/area-data"
@@ -106,24 +109,24 @@ function BasicAreaPicker() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| defaultValue | 默认选中的值 | _string[]_ | - |
-| value | 选中的值 | _string[]_ | - |
-| areaList | 省市区数据 | _object_ | - |
-| depth | 显示列数，3-省市区，2-省市，1-省 | _string_ | `3` |
-| title | 顶部栏标题 | _ReactNode_ | - |
-| confirmText | 确认按钮文字 | _ReactNode_ | `确认` |
-| cancelText | 取消按钮文字 | _ReactNode_| `取消` |
-| loading | 是否显示加载状态 | _boolean_ | `false` |
-| readonly | 是否为只读状态，只读状态下无法切换选项 | _boolean_ | `false` |
-| siblingCount | 可见的选项相邻个数 | _number_ | `3` |
-| optionHeight | 选项高度，支持 `px` `vw` `vh` `rem` `rpx` 单位，默认 `px` | _number\|string_ | `44` |
+| 参数                              | 说明                                                      | 类型             | 默认值  |
+| --------------------------------- | --------------------------------------------------------- | ---------------- | ------- |
+| defaultValue                      | 默认选中的值                                              | _string[]_       | -       |
+| value                             | 选中的值                                                  | _string[]_       | -       |
+| areaList <br>`v0.1.1-alpha.7`     | 省市区数据                                                | _object_         | -       |
+| depth                             | 显示列数，3-省市区，2-省市，1-省                          | _string_         | `3`     |
+| title <br>`v0.1.1-alpha.7`        | 顶部栏标题                                                | _ReactNode_      | -       |
+| confirmText <br>`v0.1.1-alpha.7`  | 确认按钮文字                                              | _ReactNode_      | `确认`  |
+| cancelText <br>`v0.1.1-alpha.7`   | 取消按钮文字                                              | _ReactNode_      | `取消`  |
+| loading                           | 是否显示加载状态                                          | _boolean_        | `false` |
+| readonly                          | 是否为只读状态，只读状态下无法切换选项                    | _boolean_        | `false` |
+| siblingCount                      | 可见的选项相邻个数                                        | _number_         | `3`     |
+| optionHeight <br>`v0.1.1-alpha.7` | 选项高度，支持 `px` `vw` `vh` `rem` `rpx` 单位，默认 `px` | _number\|string_ | `44`    |
 
 ### Events
 
-| 事件    | 说明               | 回调参数                       |
-| ------- | ------------------ | ------------------------------ |
-| onConfirm | 点击完成按钮时触发 | _values: string[], options: PickerOptionObject[]_        |
-| onCancel  | 点击取消按钮时触发 | _values: string[], options: PickerOptionObject[]_                           |
+| 事件      | 说明               | 回调参数                                                                   |
+| --------- | ------------------ | -------------------------------------------------------------------------- |
+| onConfirm | 点击完成按钮时触发 | _values: string[], options: PickerOptionObject[]_                          |
+| onCancel  | 点击取消按钮时触发 | _values: string[], options: PickerOptionObject[]_                          |
 | onChange  | 选项改变时触发     | _values: string[], option: PickerOptionObject, column: PickerOptionObject_ |

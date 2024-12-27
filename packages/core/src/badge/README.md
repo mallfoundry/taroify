@@ -4,6 +4,8 @@
 
 在右上角展示徽标数字或小红点。
 
+请升级 `taroify` 到 >= `v0.3.0-alpha.0` 版本来使用该组件。
+
 ### 引入
 
 ```ts
@@ -34,7 +36,7 @@ import { Badge } from "@taroify/core"
 ```scss
 .badge-block {
   width: 40px * 2;
-  height: 40px* 2;
+  height: 40px * 2;
   background: #f2f3f5ff;
   border-radius: 4px * 2;
 }
@@ -138,12 +140,12 @@ import { Badge } from "@taroify/core"
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| content | 徽标内容 | _ReactNode_ | - |
-| dot | 是否展示为小红点 | _boolean_ | `false` |
-| max | 最大值，超过最大值会显示 `{max}+`，仅当 content 为数字时有效 | _number \| string_ | - |
-| position | 徽标位置，可选值为 `top-left` `bottom-left` `bottom-right` | _string_ | `top-right` |
+| 参数     | 说明                                                         | 类型               | 默认值      |
+| -------- | ------------------------------------------------------------ | ------------------ | ----------- |
+| content  | 徽标内容                                                     | _ReactNode_        | -           |
+| dot      | 是否展示为小红点                                             | _boolean_          | `false`     |
+| max      | 最大值，超过最大值会显示 `{max}+`，仅当 content 为数字时有效 | _number \| string_ | -           |
+| position | 徽标位置，可选值为 `top-left` `bottom-left` `bottom-right`   | _string_           | `top-right` |
 
 ## 主题定制
 
@@ -151,17 +153,17 @@ import { Badge } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                       | 默认值                                                     | 描述  |
-|--------------------------|---------------------------------------------------------|-----|
-| --badge-size             | _16px * $hd_                                            | -   |
-| --badge-color            | _var(--white)_                                          | -   |
-| --badge-padding          | _0 3px * $hd_                                           | -   |
-| --badge-font-family      | _-apple-system-font, helvetica neue, arial, sans-serif_ | -   |
-| --badge-font-size        | _var(--font-size-sm)_                                   | -   |
-| --badge-font-weight      | _var(--font-weight-bold)_                               | -   |
-| --badge-border-width     | _var(--border-width-base)_                              | -   |
-| --badge-border-color     | _var(--white)_                                          | -   |
-| --badge-border-radius    | _var(--border-radius-max)_                              | -   |
-| --badge-background-color | _var(--red)_                                            | -   |
-| --badge-dot-color        | _var(--badge-background-color)_                         | -   |
-| --badge-dot-size         | _8PX_                                                   | -   |
+| 名称                     | 默认值                                                  | 描述 |
+| ------------------------ | ------------------------------------------------------- | ---- |
+| --badge-size             | _16px \* $hd_                                           | -    |
+| --badge-color            | _var(--white)_                                          | -    |
+| --badge-padding          | _0 3px \* $hd_                                          | -    |
+| --badge-font-family      | _-apple-system-font, helvetica neue, arial, sans-serif_ | -    |
+| --badge-font-size        | _var(--font-size-sm)_                                   | -    |
+| --badge-font-weight      | _var(--font-weight-bold)_                               | -    |
+| --badge-border-width     | _var(--border-width-base)_                              | -    |
+| --badge-border-color     | _var(--white)_                                          | -    |
+| --badge-border-radius    | _var(--border-radius-max)_                              | -    |
+| --badge-background-color | _var(--red)_                                            | -    |
+| --badge-dot-color        | _var(--badge-background-color)_                         | -    |
+| --badge-dot-size         | _8PX_                                                   | -    |

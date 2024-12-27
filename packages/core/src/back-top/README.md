@@ -4,6 +4,8 @@
 
 返回页面顶部的操作按钮。
 
+请升级 `taroify` 到 >= `0.1.0-alpha.4` 版本来使用该组件。
+
 ### 引入
 
 ```tsx
@@ -17,13 +19,11 @@ import { BackTop } from "@taroify/core"
 请滚动右侧的示例页面，当页面滚动 200px 时，右下角会出现返回顶部按钮。
 
 ```tsx
-const list = [...Array(50).keys()];
-<View>
+const list = [...Array(50).keys()]
+;<View>
   <Cell.Group>
     {arr.map((v) => {
-      return (
-        <Cell key={v}>{v}</Cell>
-      )
+      return <Cell key={v}>{v}</Cell>
     })}
   </Cell.Group>
   <BackTop />
@@ -59,15 +59,13 @@ function CustomContent) {
 
 ```tsx
 function CustomContent() {
-  const list = [...Array(50).keys()];
+  const list = [...Array(50).keys()]
 
   return (
     <View>
       <Cell.Group>
         {list.map((v) => {
-          return (
-            <Cell key={v}>{v}</Cell>
-          )
+          return <Cell key={v}>{v}</Cell>
         })}
       </Cell.Group>
       <BackTop>返回顶部</BackTop>
@@ -90,15 +88,13 @@ function CustomContent() {
 
 ```tsx
 function SetImmediate() {
-  const list = [...Array(50).keys()];
+  const list = [...Array(50).keys()]
 
   return (
     <View>
       <Cell.Group>
         {list.map((v) => {
-          return (
-            <Cell key={v}>{v}</Cell>
-          )
+          return <Cell key={v}>{v}</Cell>
         })}
       </Cell.Group>
       <BackTop immediate />
@@ -111,18 +107,18 @@ function SetImmediate() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| right | 距离页面右侧的距离，默认单位为 `px` | _number_ | _string_ | `30` |
-| bottom | 	距离页面底部的距离，默认单位为 `px` | _number_ | _string_ | `40` |
-| offset | 	滚动高度达到此参数值时才显示组件 | _number_ | `200` |
-| immediate | 是否瞬间滚动到顶部 | _boolean_ | `false` |
-| zIndex | 设置组件的 z-index 层级 | _number_ | `100` |
+| 参数      | 说明                                | 类型      | 默认值   |
+| --------- | ----------------------------------- | --------- | -------- | ---- |
+| right     | 距离页面右侧的距离，默认单位为 `px` | _number_  | _string_ | `30` |
+| bottom    | 距离页面底部的距离，默认单位为 `px` | _number_  | _string_ | `40` |
+| offset    | 滚动高度达到此参数值时才显示组件    | _number_  | `200`    |
+| immediate | 是否瞬间滚动到顶部                  | _boolean_ | `false`  |
+| zIndex    | 设置组件的 z-index 层级             | _number_  | `100`    |
 
 ### Event
 
-| 事件 | 说明 | 回调参数 |
-| --- | --- | --- |
+| 事件    | 说明           | 回调参数            |
+| ------- | -------------- | ------------------- |
 | onClick | 点击组件时触发 | _event:ITouchEvent_ |
 
 ### 注意
@@ -135,12 +131,12 @@ function SetImmediate() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                      | 默认值                            | 描述  |
-|-----------------------------------------|--------------------------------|-----|
-| --back-top-size                         | _80px_                         | -   |
-| --back-top-icon-size                    | _40px_                         | -   |
-| --back-top-right                        | _60px_                         | -   |
-| --back-top-bottom                       | _80px_                         | -   |
-| --back-top-z-index                      | _100_                          | -   |
-| --back-top-text-color                   | _#fff_                         | -   |
-| --back-top-background                   | _var(--blue, $blue)_           | -   |
+| 名称                  | 默认值               | 描述 |
+| --------------------- | -------------------- | ---- |
+| --back-top-size       | _80px_               | -    |
+| --back-top-icon-size  | _40px_               | -    |
+| --back-top-right      | _60px_               | -    |
+| --back-top-bottom     | _80px_               | -    |
+| --back-top-z-index    | _100_                | -    |
+| --back-top-text-color | _#fff_               | -    |
+| --back-top-background | _var(--blue, $blue)_ | -    |

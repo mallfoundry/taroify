@@ -6,7 +6,7 @@
 
 ### 函数调用
 
-版本大于`0.5.1`可以直接调用。低版本需要手动在页面（page）里挂载一个 Dialog 组件并指定 id 为 `dialog`。
+版本 >= `v0.6.0-alpha.0`可以直接调用。低版本需要手动在页面（page）里挂载一个 Dialog 组件并指定 id 为 `dialog`。
 
 ```tsx
 function ImperativeDialog() {

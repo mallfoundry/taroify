@@ -157,17 +157,17 @@ function ActionSheetWithStatuses() {
 
 ### ActionSheet Props
 
-| 参数        | 说明                                  | 类型                        | 默认值   |
-| ----------- | ------------------------------------- | --------------------------- | -------- |
-| defaultOpen | 默认是否显示动作面板                  | _boolean_                   | `false`  |
-| open        | 是否显示动作面板                      | _boolean_                   | `false`  |
-| description | 选项上方的描述信息                    | _ReactNode_                 | -        |
-| cancelText  | 取消按钮文字                          | _ReactNode_                 | -        |
-| actions     | 面板选项列表                          | _ActionSheetActionObject[]_ | -        |
-| className   | 样式类名                              | _string_                    | -        |
-| style       | 样式对象                              | _CSSProperties_             | -        |
-| rounded     | 是否为圆角                            | _string_                    | -        |
-| safeArea    | 安全区的位置，可选值为 `top` `bottom` | _string_                    | `bottom` |
+| 参数                             | 说明                                  | 类型                        | 默认值   |
+| -------------------------------- | ------------------------------------- | --------------------------- | -------- |
+| defaultOpen                      | 默认是否显示动作面板                  | _boolean_                   | `false`  |
+| open                             | 是否显示动作面板                      | _boolean_                   | `false`  |
+| description <br>`v0.3.0-alpha.0` | 选项上方的描述信息                    | _ReactNode_                 | -        |
+| cancelText <br>`v0.3.0-alpha.0`  | 取消按钮文字                          | _ReactNode_                 | -        |
+| actions <br>`v0.3.0-alpha.0`     | 面板选项列表                          | _ActionSheetActionObject[]_ | -        |
+| className                        | 样式类名                              | _string_                    | -        |
+| style                            | 样式对象                              | _CSSProperties_             | -        |
+| rounded                          | 是否为圆角                            | _string_                    | -        |
+| safeArea                         | 安全区的位置，可选值为 `top` `bottom` | _string_                    | `bottom` |
 
 ### ActionSheetActionObject 数据结构
 

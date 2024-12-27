@@ -55,7 +55,9 @@ function BasicForm() {
   )
 }
 ```
+
 使用`Field`组件
+
 ```tsx
 function BasicForm() {
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
@@ -66,7 +68,7 @@ function BasicForm() {
     <Form onSubmit={onSubmit}>
       <Toast id="toast" />
       <Cell.Group inset>
-        <Field  label="用户名" name="username" rules={[{ required: true, message: "请填写用户名" }]}>
+        <Field label="用户名" name="username" rules={[{ required: true, message: "请填写用户名" }]}>
           <Input placeholder="用户名" />
         </Field>
         <Field label="密码" name="password" rules={[{ required: true, message: "请填写密码" }]}>
@@ -112,7 +114,11 @@ function FormWithRules() {
     <Form defaultValues={{ validatorMessage: "abc" }} onValidate={onValidate}>
       <Toast id="toast" />
       <Cell.Group inset>
-        <Field label="文本" name="pattern" rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}>
+        <Field
+          label="文本"
+          name="pattern"
+          rules={[{ pattern: /\d{6}/, message: "请输入正确内容" }]}
+        >
           <Input placeholder="正则校验" />
         </Field>
         <Field
@@ -148,15 +154,16 @@ function FormWithRules() {
 ```
 
 ### 禁用表单
+
 设置 `disabled` 后，会为 `Form` 内部的 `taroify` 组件 `Input`, `Textarea`, `Checkbox`, `Switch`, `Checkbox.Group`, `Radio.Group`, `Rate`, `Slider`, `Stepper`, `Uploader` 设置 `disabled` <br>
 
-form设置disabled后，也可以单独为表单项和组件设置disabled={false}, 优先级：表单 < 表单项 < 组件
+form 设置 disabled 后，也可以单独为表单项和组件设置 disabled={false}, 优先级：表单 < 表单项 < 组件
 
 ### 表单项类型 - 开关
 
 在表单中使用 [Switch 组件](/components/switch)。
 
-```tsx        
+```tsx
 <Field label="开关" name="switch">
   <Switch size={20} />
 </Field>
@@ -266,14 +273,16 @@ function UploaderField() {
 function PickerField() {
   const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
-  const columns = useMemo(() => [
-    { label: "杭州", value: "Hangzhou" },
-    { label: "宁波", value: "Ningbo" },
-    { label: "温州", value: "Wenzhou" },
-    { label: "绍兴", value: "Shaoxing" },
-    { label: "湖州", value: "Huzhou" }
-  ], [])
-
+  const columns = useMemo(
+    () => [
+      { label: "杭州", value: "Hangzhou" },
+      { label: "宁波", value: "Ningbo" },
+      { label: "温州", value: "Wenzhou" },
+      { label: "绍兴", value: "Shaoxing" },
+      { label: "湖州", value: "Huzhou" },
+    ],
+    [],
+  )
 
   return (
     <>
@@ -289,8 +298,7 @@ function PickerField() {
             itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
-        >
-        </Picker>
+        ></Picker>
       </Popup>
     </>
   )
@@ -335,8 +343,7 @@ function DatetimePickerField() {
             itemRef.current?.setValue(newValue)
             setOpen(false)
           }}
-        >
-        </DatetimePicker>
+        ></DatetimePicker>
       </Popup>
     </>
   )
@@ -382,17 +389,16 @@ function CalendarField() {
           itemRef.current?.setValue(newValue)
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
 ```
 
-
 ### 动态增减表单项
 
-通过Form.List动态增减表单项
+通过 Form.List 动态增减表单项 `v0.1.1-alpha.3`
+
 ```tsx
 function DynamicForm() {
   const ref = useRef<FormInstance>(null)
@@ -400,53 +406,79 @@ function DynamicForm() {
     ref.current?.setValues({
       contacts: [
         { name: "小红", phone: "10000" },
-        { name: "小绿", phone: "10086" }
-      ]
+        { name: "小绿", phone: "10086" },
+      ],
     })
   }
-  return <Form ref={ref}  onSubmit={(e) => {
-    Toast.open(JSON.stringify(e.detail.value, undefined, 2))
-  }}
-  >
-    <Form.List name="contacts" defaultValue={[{name: "小明", phone: "10086"}]}>
-      {
-        (fields, { add, remove }) => <Cell.Group inset>
-          {
-            fields.map((field, idx) => <Fragment key={field.key}>
-              <Field label="姓名" name={`${field.name}.name`} key={`${field.key}.name`}>
-                {
-                  ({ value, onChange }) => <>
-                    <Input placeholder="请输入姓名" value={value} onChange={(e) => { onChange?.(e.detail.value) }} />
-                    <View style={{ flexShrink: 0 }} onClick={() => { remove(idx) }}>删除</View>
-                  </>
-                }
-              </Field>
-              <Field label="电话" name={`${field.name}.phone`} key={`${field.key}.phone`} rules={[{ required: true, message: "必填" }]}>
-                <Input placeholder="请输入电话" />
-              </Field>
-            </Fragment>)
-          }
-          <Button variant="text" color="primary" onClick={() => add({})} >添加联系人</Button>
-        </Cell.Group>
-      }
-    </Form.List>
-    <View style={{ margin: "16px" }}>
-      <Button shape="round" block color="primary" formType="submit">
-        提交
-      </Button>
-      <Button style={{ marginTop: "16px" }} shape="round" block color="info" onClick={onManual}>
-        手动
-      </Button>
-      <Button style={{ marginTop: "16px" }} shape="round" block color="warning" formType="reset">
-        重置
-      </Button>
-    </View>
-  </Form>
+  return (
+    <Form
+      ref={ref}
+      onSubmit={(e) => {
+        Toast.open(JSON.stringify(e.detail.value, undefined, 2))
+      }}
+    >
+      <Form.List name="contacts" defaultValue={[{ name: "小明", phone: "10086" }]}>
+        {(fields, { add, remove }) => (
+          <Cell.Group inset>
+            {fields.map((field, idx) => (
+              <Fragment key={field.key}>
+                <Field label="姓名" name={`${field.name}.name`} key={`${field.key}.name`}>
+                  {({ value, onChange }) => (
+                    <>
+                      <Input
+                        placeholder="请输入姓名"
+                        value={value}
+                        onChange={(e) => {
+                          onChange?.(e.detail.value)
+                        }}
+                      />
+                      <View
+                        style={{ flexShrink: 0 }}
+                        onClick={() => {
+                          remove(idx)
+                        }}
+                      >
+                        删除
+                      </View>
+                    </>
+                  )}
+                </Field>
+                <Field
+                  label="电话"
+                  name={`${field.name}.phone`}
+                  key={`${field.key}.phone`}
+                  rules={[{ required: true, message: "必填" }]}
+                >
+                  <Input placeholder="请输入电话" />
+                </Field>
+              </Fragment>
+            ))}
+            <Button variant="text" color="primary" onClick={() => add({})}>
+              添加联系人
+            </Button>
+          </Cell.Group>
+        )}
+      </Form.List>
+      <View style={{ margin: "16px" }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+        <Button style={{ marginTop: "16px" }} shape="round" block color="info" onClick={onManual}>
+          手动
+        </Button>
+        <Button style={{ marginTop: "16px" }} shape="round" block color="warning" formType="reset">
+          重置
+        </Button>
+      </View>
+    </Form>
+  )
 }
 ```
 
 ### 依赖与自动更新
-通过dependencies自动触发校验
+
+通过 dependencies 自动触发校验
+
 ```tsx
 function DependenciesDemo() {
   const formRef = useRef<FormInstance>()
@@ -473,11 +505,14 @@ function DependenciesDemo() {
         <Form.Item
           name="confirmPassword"
           dependencies={["password"]}
-          rules={[{ required: true, message: "请再次输入密码" }, {
-            validator: (val) => {
-              return formRef.current?.getValues<any>()?.password === val ? true : "密码不一致"
-            }
-          }]}
+          rules={[
+            { required: true, message: "请再次输入密码" },
+            {
+              validator: (val) => {
+                return formRef.current?.getValues<any>()?.password === val ? true : "密码不一致"
+              },
+            },
+          ]}
         >
           <Form.Label>确认密码</Form.Label>
           <Form.Control>
@@ -494,71 +529,83 @@ function DependenciesDemo() {
   )
 }
 ```
-通过shouldUpdate和noStyle触发重新渲染, Form.Item里包裹的子组件必须由函数返回，否则 shouldUpdate 不会起作用, Field暂不支持
+
+通过 shouldUpdate 和 noStyle 触发重新渲染, Form.Item 里包裹的子组件必须由函数返回，否则 shouldUpdate 不会起作用, Field 暂不支持
+
 ```tsx
 function ShouldUpdateDemo() {
   const formRef = useRef<FormInstance>()
-  return <Form
-    ref={formRef}
-    onSubmit={(e) => {
-      Toast.open(JSON.stringify(e.detail.value, undefined, 2))
-    }}
-  >
-    <Toast id="toast" />
-    <Cell.Group inset>
-      <Form.Item name="type">
-        <Form.Label>复选框</Form.Label>
-        <Form.Control>
-          <Checkbox shape="square" />
-        </Form.Control>
-      </Form.Item>
-      <Form.Item name="radio">
-        <Form.Label>单选框</Form.Label>
-        <Form.Control>
-          <Radio.Group direction="horizontal">
-            <Radio name="1">单选框 1</Radio>
-            <Radio name="2">单选框 2</Radio>
-          </Radio.Group>
-        </Form.Control>
-      </Form.Item>
-      <Form.Item noStyle shouldUpdate={(prev, cur) => prev.type !== cur.type}>
-        {
-          () => {
+  return (
+    <Form
+      ref={formRef}
+      onSubmit={(e) => {
+        Toast.open(JSON.stringify(e.detail.value, undefined, 2))
+      }}
+    >
+      <Toast id="toast" />
+      <Cell.Group inset>
+        <Form.Item name="type">
+          <Form.Label>复选框</Form.Label>
+          <Form.Control>
+            <Checkbox shape="square" />
+          </Form.Control>
+        </Form.Item>
+        <Form.Item name="radio">
+          <Form.Label>单选框</Form.Label>
+          <Form.Control>
+            <Radio.Group direction="horizontal">
+              <Radio name="1">单选框 1</Radio>
+              <Radio name="2">单选框 2</Radio>
+            </Radio.Group>
+          </Form.Control>
+        </Form.Item>
+        <Form.Item noStyle shouldUpdate={(prev, cur) => prev.type !== cur.type}>
+          {() => {
             const type = formRef.current?.getValues<any>()?.type
             if (type) {
-              return <Form.Item name="a1">
-                <Form.Label>复选框选中</Form.Label>
-                <Form.Control><Input /></Form.Control>
-              </Form.Item>
+              return (
+                <Form.Item name="a1">
+                  <Form.Label>复选框选中</Form.Label>
+                  <Form.Control>
+                    <Input />
+                  </Form.Control>
+                </Form.Item>
+              )
             } else {
-              return <>
-                <Form.Item name="a2">
-                  <Form.Label>复选框未选中</Form.Label>
-                  <Form.Control><Input /></Form.Control>
-                </Form.Item>
-                <Form.Item name="a3">
-                  <Form.Label>复选框未选中</Form.Label>
-                  <Form.Control><Input /></Form.Control>
-                </Form.Item>
-              </>
+              return (
+                <>
+                  <Form.Item name="a2">
+                    <Form.Label>复选框未选中</Form.Label>
+                    <Form.Control>
+                      <Input />
+                    </Form.Control>
+                  </Form.Item>
+                  <Form.Item name="a3">
+                    <Form.Label>复选框未选中</Form.Label>
+                    <Form.Control>
+                      <Input />
+                    </Form.Control>
+                  </Form.Item>
+                </>
+              )
             }
-          }
-        }
-      </Form.Item>
-      <Form.Item noStyle shouldUpdate={(prev, cur) => prev.radio !== cur.radio}>
-        {
-          () =>  <Field name="cc" label={`单选框${formRef.current?.getValues<any>()?.radio}`}>
-            <Input placeholder={`结果${JSON.stringify(formRef.current?.getValues<any>())}`} />
-          </Field>
-        }
-      </Form.Item>
-    </Cell.Group>
-    <View style={{ margin: "16px" }}>
-      <Button shape="round" block color="primary" formType="submit">
-        提交
-      </Button>
-    </View>
-  </Form>
+          }}
+        </Form.Item>
+        <Form.Item noStyle shouldUpdate={(prev, cur) => prev.radio !== cur.radio}>
+          {() => (
+            <Field name="cc" label={`单选框${formRef.current?.getValues<any>()?.radio}`}>
+              <Input placeholder={`结果${JSON.stringify(formRef.current?.getValues<any>())}`} />
+            </Field>
+          )}
+        </Form.Item>
+      </Cell.Group>
+      <View style={{ margin: "16px" }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+      </View>
+    </Form>
+  )
 }
 ```
 
@@ -566,37 +613,37 @@ function ShouldUpdateDemo() {
 
 ### Form Props
 
-| 参数              | 说明                                       | 类型         | 默认值      |
-|-----------------|------------------------------------------|------------|----------|
-| defaultValues   | 表单默认值       |  _object_  |    |
-| labelAlign      | 表单项 label 对齐方式，可选值为 `center` `right`     | _string_   | `left`   |
-| controlAlign    | 表单项 control 对齐方式，可选值为 `center` `right`   | _string_   | `left`   |
-| validateTrigger | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_   | `onBlur` |
-| colon           | 是否在 label 后面添加冒号                         | _boolean_  | `false`  |
-| disabled        | 是否禁用表单             | _boolean_ | `false` |
+| 参数                          | 说明                                                        | 类型      | 默认值   |
+| ----------------------------- | ----------------------------------------------------------- | --------- | -------- |
+| defaultValues                 | 表单默认值                                                  | _object_  |          |
+| labelAlign                    | 表单项 label 对齐方式，可选值为 `center` `right`            | _string_  | `left`   |
+| controlAlign                  | 表单项 control 对齐方式，可选值为 `center` `right`          | _string_  | `left`   |
+| validateTrigger               | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_  | `onBlur` |
+| colon                         | 是否在 label 后面添加冒号                                   | _boolean_ | `false`  |
+| disabled <br>`v0.3.1-alpha.0` | 是否禁用表单                                                | _boolean_ | `false`  |
 
 ### Form Events
 
-| 事件名 | 说明 | 回调参数 |
-| --- | --- | --- |
-| onSubmit | 提交表单且验证通过后触发 | _event: BaseEventOrig<FormProps.onSubmitEventDetail>_ |
-| onReset  | 重置表单后触发         | _event: BaseEventOrig_ |
-| onValidate | 提交表单且验证不通过后触发 | _errors: { name: string, errors: string[] }[]_ |
-| onValuesChange | 字段值更新后触发 | _changedValues: object, allValues: object_ |
+| 事件名         | 说明                       | 回调参数                                              |
+| -------------- | -------------------------- | ----------------------------------------------------- |
+| onSubmit       | 提交表单且验证通过后触发   | _event: BaseEventOrig<FormProps.onSubmitEventDetail>_ |
+| onReset        | 重置表单后触发             | _event: BaseEventOrig_                                |
+| onValidate     | 提交表单且验证不通过后触发 | _errors: { name: string, errors: string[] }[]_        |
+| onValuesChange | 字段值更新后触发           | _changedValues: object, allValues: object_            |
 
 ### Form Methods
 
 通过 ref 可以获取到 Form 实例并调用实例方法。
 
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| setValues | 设置表单值(浅合并)                                   | _object_                    | - |
-| getValues | 获得表单值，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _object_ |
-| setErrors | 设置表单验证错误信息(浅合并) | _FormValidError[]_ | _void_ |
-| getErrors | 获得表单验证错误信息，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _FormValidError[]_ |
-| validate  | 验证表单，支持传入 `name` 来验证单个或部分表单项   | _name?: string \| string[]_ | _Promise_ |
-| submit | 提交表单，与点击提交按钮的效果等价 | - | - |
-| reset     | 重置表单                                     | -                           | _void_ |
+| 方法名                      | 说明                                                         | 参数                        | 返回值             |
+| --------------------------- | ------------------------------------------------------------ | --------------------------- | ------------------ |
+| setValues                   | 设置表单值(浅合并)                                           | _object_                    | -                  |
+| getValues                   | 获得表单值，支持传入 `name` 来获得单个或部分表单项           | _name?: string \| string[]_ | _object_           |
+| setErrors                   | 设置表单验证错误信息(浅合并)                                 | _FormValidError[]_          | _void_             |
+| getErrors                   | 获得表单验证错误信息，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _FormValidError[]_ |
+| validate                    | 验证表单，支持传入 `name` 来验证单个或部分表单项             | _name?: string \| string[]_ | _Promise_          |
+| submit <br>`v0.3.1-alpha.0` | 提交表单，与点击提交按钮的效果等价                           | -                           | -                  |
+| reset                       | 重置表单                                                     | -                           | _void_             |
 
 ### validateTrigger 可选值
 
@@ -610,15 +657,15 @@ function ShouldUpdateDemo() {
 
 ### Form.Item Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| name | 表单项名称，提交表单的标识符 | _string_ | - |
-| defaultValue | 表单项默认值 | _any_ | - |
-| required | 是否显示表单必填星号 | _boolean_ | `false` |
-| rules | 表单校验规则 | _FormRule[]_ | - |
-| dependencies | 当依赖的字段值改变时，触发自身的校验 | _string[]_ | - |
-| shouldUpdate | 当值为true时，触发当前区域重新渲染 | _boolean\|(prevValues, curValues) => boolean_ | - |
-| noStyle | 直接渲染children | boolean | - |
+| 参数                              | 说明                                 | 类型                                          | 默认值  |
+| --------------------------------- | ------------------------------------ | --------------------------------------------- | ------- |
+| name                              | 表单项名称，提交表单的标识符         | _string_                                      | -       |
+| defaultValue                      | 表单项默认值                         | _any_                                         | -       |
+| required                          | 是否显示表单必填星号                 | _boolean_                                     | `false` |
+| rules                             | 表单校验规则                         | _FormRule[]_                                  | -       |
+| dependencies <br>`v0.1.6-alpha.0` | 当依赖的字段值改变时，触发自身的校验 | _string[]_                                    | -       |
+| shouldUpdate <br>`v0.1.6-alpha.0` | 当值为 true 时，触发当前区域重新渲染 | _boolean\|(prevValues, curValues) => boolean_ | -       |
+| noStyle <br>`v0.1.6-alpha.0`      | 直接渲染 children                    | boolean                                       | -       |
 
 > 属性继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
 
@@ -631,31 +678,31 @@ function ShouldUpdateDemo() {
 | required | 是否为必选字段，当值为空字符串、空数组、`undefined`、`null` 时，校验不通过 | _boolean_ |
 | message | 错误提示文案 | _string \| (value, rule) => string_ |
 | validator | 通过函数进行校验 | _(value, rule) => boolean \| string \| Promise_ |
-| validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | _boolean_ | `false` |
+| validateFirst `v0.5.0-alpha.0` | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | _boolean_ | `false` |
 | pattern | 通过正则表达式进行校验 | _RegExp_ |
 | trigger | 本项规则的触发时机，可选值为 `onChange`、`onBlur` | _string_ |
 | formatter | 格式化函数，将表单项的值转换后进行校验 | _(value, rule) => any_ |
 
 ### Form.Label Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| colon | 是否在 label 后面添加冒号 | _boolean_ | `false` |
+| 参数  | 说明                                | 类型      | 默认值  |
+| ----- | ----------------------------------- | --------- | ------- |
+| align | 对齐方式，可选值为 `center` `right` | _string_  | `left`  |
+| colon | 是否在 label 后面添加冒号           | _boolean_ | `false` |
 
 ### Form.Feedback Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| status | 反馈状态，可选值为 `valid` `warning` `invalid` | _string_ | - |
+| 参数   | 说明                                           | 类型     | 默认值 |
+| ------ | ---------------------------------------------- | -------- | ------ |
+| align  | 对齐方式，可选值为 `center` `right`            | _string_ | `left` |
+| status | 反馈状态，可选值为 `valid` `warning` `invalid` | _string_ | -      |
 
 ### Form.Control Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| align | 对齐方式，可选值为 `center` `right` | _string_ | `left` |
-| children | 内容 | _ReactNode\|((controller: FormController<V>) => ReactNode)_ | --
+| 参数     | 说明                                | 类型                                                        | 默认值 |
+| -------- | ----------------------------------- | ----------------------------------------------------------- | ------ |
+| align    | 对齐方式，可选值为 `center` `right` | _string_                                                    | `left` |
+| children | 内容                                | _ReactNode\|((controller: FormController<V>) => ReactNode)_ | --     |
 
 ```tsx
 interface FormController<V> {
@@ -668,22 +715,23 @@ interface FormController<V> {
   onBlur?(value: V): void // 触发onBlur当前表单项校验
 }
 ```
-> Tips: 使用onBlur触发表单验证，自定义表单项时，要手动调用onBlur，才能触发校验
+
+> Tips: 使用 onBlur 触发表单验证，自定义表单项时，要手动调用 onBlur，才能触发校验
 
 ### Form.List
 
-| 参数 | 说明 | 类型 |
-| --- | --- | --- |
-| children | 渲染函数 | _(fields: { key: string, name: string }[], operation: { add, remove }) => ReactNode_ | _
-| name | 表单项名称，提交表单的标识符 | _string_ |
-| defaultValue | 表单项默认值 | _any_ | 
+| 参数         | 说明                         | 类型                                                                                 |
+| ------------ | ---------------------------- | ------------------------------------------------------------------------------------ | --- |
+| children     | 渲染函数                     | _(fields: { key: string, name: string }[], operation: { add, remove }) => ReactNode_ | \_  |
+| name         | 表单项名称，提交表单的标识符 | _string_                                                                             |
+| defaultValue | 表单项默认值                 | _any_                                                                                |
 
 ### 类型定义
+
 通过`@taroify/core/form`导入组件类型：
+
 ```tsx
-import { 
-  FormRule, FormItemInstance, FormListInstance, FormInstance 
-} from "@taroify/core/form"
+import { FormRule, FormItemInstance, FormListInstance, FormInstance } from "@taroify/core/form"
 ```
 
 ## 主题定制
@@ -692,20 +740,20 @@ import {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                 | 默认值                       | 描述  |
-|------------------------------------|---------------------------|-----|
-| form-label-width                   | _6.2em_                   | -   |
-| form-label-color                   | _var(--gray-7)_           | -   |
-| form-label-margin-right            | _var(--padding-sm)_       | -   |
-| form-label-disabled-color          | _var(--gray-5)_           | -   |
-| form-item-icon-size                | _16px * $hd_              | -   |
-| form-item-right-icon-color         | _var(--gray-6)_           | -   |
-| form-item-right-icon-padding       | _0 var(--padding-xs)_     | -   |
-| form-item-right-icon-margin-right  | _-8px * $hd_              | -   |
-| form-item-right-button-margin-left | _var(--padding-xs)_       | -   |
-| form-control-color                 | _var(--text-color)_       | -   |
-| form-control-min-height            | _var(--cell-line-height)_ | -   |
-| form-feedback-font-size            | _var(--font-size-sm)_     | -   |
-| form-feedback-valid-color          | _var(--success-color)_    | -   |
-| form-feedback-warning-color        | _var(--warning-color)_    | -   |
-| form-feedback-invalid-color        | _var(--danger-color)_     | -   |
+| 名称                               | 默认值                    | 描述 |
+| ---------------------------------- | ------------------------- | ---- |
+| form-label-width                   | _6.2em_                   | -    |
+| form-label-color                   | _var(--gray-7)_           | -    |
+| form-label-margin-right            | _var(--padding-sm)_       | -    |
+| form-label-disabled-color          | _var(--gray-5)_           | -    |
+| form-item-icon-size                | _16px \* $hd_             | -    |
+| form-item-right-icon-color         | _var(--gray-6)_           | -    |
+| form-item-right-icon-padding       | _0 var(--padding-xs)_     | -    |
+| form-item-right-icon-margin-right  | _-8px \* $hd_             | -    |
+| form-item-right-button-margin-left | _var(--padding-xs)_       | -    |
+| form-control-color                 | _var(--text-color)_       | -    |
+| form-control-min-height            | _var(--cell-line-height)_ | -    |
+| form-feedback-font-size            | _var(--font-size-sm)_     | -    |
+| form-feedback-valid-color          | _var(--success-color)_    | -    |
+| form-feedback-warning-color        | _var(--warning-color)_    | -    |
+| form-feedback-invalid-color        | _var(--danger-color)_     | -    |

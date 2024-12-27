@@ -2,7 +2,7 @@
 
 ### 介绍
 
-日历组件用于选择日期或日期区间。如要以弹层形式展示， 请使用poppable，不要手动嵌套
+日历组件用于选择日期或日期区间。如要以弹层形式展示， 请使用 poppable，不要手动嵌套
 
 ### 引入
 
@@ -30,12 +30,7 @@ function SingleCalendar() {
 
   return (
     <>
-      <Cell
-        title="选择单个日期"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="选择单个日期" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="single"
         value={value}
@@ -47,8 +42,7 @@ function SingleCalendar() {
           setOpen(false)
           setFormatValue(formatFullDate(newValue))
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -72,12 +66,7 @@ function MultipleCalendar() {
 
   return (
     <>
-      <Cell
-        title="选择多个日期"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="选择多个日期" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="multiple"
         value={value}
@@ -89,8 +78,7 @@ function MultipleCalendar() {
           setFormatValue(formatMultiple(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -115,12 +103,7 @@ function RangeCalendar() {
 
   return (
     <>
-      <Cell
-        title="选择日期区间"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="选择日期区间" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="range"
         value={value}
@@ -132,15 +115,16 @@ function RangeCalendar() {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
 ```
 
 ### 快捷选择
+
 将 `showConfirm` 设置为 `false` 可以隐藏确认按钮，这种情况下选择完成后会立即触发 confirm 事件。
+
 ```tsx
 function SingleQuicklyCalendar() {
   const [open, setOpen] = useState(false)
@@ -149,12 +133,7 @@ function SingleQuicklyCalendar() {
 
   return (
     <>
-      <Cell
-        title="选择单个日期"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="选择单个日期" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="single"
         value={value}
@@ -195,12 +174,7 @@ function CustomRangeCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义日期范围"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义日期范围" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="range"
         min={minDate}
@@ -214,8 +188,7 @@ function CustomRangeCalendar() {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -233,12 +206,7 @@ function CustomConfirmCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义按钮"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义按钮" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="range"
         value={value}
@@ -253,8 +221,7 @@ function CustomConfirmCalendar() {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -303,12 +270,7 @@ function CustomDayCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义日期文案"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义日期文案" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="range"
         min={minDate}
@@ -323,8 +285,7 @@ function CustomDayCalendar() {
           setFormatValue(formatRange(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -342,12 +303,7 @@ function CustomPositionCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义弹出位置"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义弹出位置" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         popupPlacement="right"
         type="single"
@@ -360,8 +316,7 @@ function CustomPositionCalendar() {
           setFormatValue(formatFullDate(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -379,12 +334,7 @@ function CustomFirstDayOfWeekCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义周起始日"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义周起始日" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         popupCloseIcon={false}
         popupRounded={false}
@@ -399,8 +349,7 @@ function CustomFirstDayOfWeekCalendar() {
           setFormatValue(formatFullDate(newValue))
           setOpen(false)
         }}
-      >
-      </Calendar>
+      ></Calendar>
     </>
   )
 }
@@ -426,11 +375,12 @@ function TiledCalendar() {
     />
   )
 }
-
 ```
 
-### 手动控制Footer DOM
-通过 `Calendar.Footer` `Calendar.Button` 手动控制Footer DOM。
+### 手动控制 Footer DOM
+
+通过 `Calendar.Footer` `Calendar.Button` 手动控制 Footer DOM。
+
 ```tsx
 function CustomConfirmCalendar() {
   const [open, setOpen] = useState(false)
@@ -440,12 +390,7 @@ function CustomConfirmCalendar() {
 
   return (
     <>
-      <Cell
-        title="自定义按钮"
-        isLink
-        children={formatValue}
-        onClick={() => setOpen(true)}
-      />
+      <Cell title="自定义按钮" isLink children={formatValue} onClick={() => setOpen(true)} />
       <Calendar
         type="range"
         value={value}
@@ -474,64 +419,64 @@ function CustomConfirmCalendar() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| type | 选择类型:<br>`single` 表示选择单个日期，<br>`multiple` 表示选择多个日期，<br>`range` 表示选择日期区间 | _string_ | `single` |
-| defaultValue | 默认选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
-| value | 选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择 | _Date \| Date[] \| null_ | 今天 |
-| formatter | 日期格式化函数 | _(day: Calendar.DayObject) => Calendar.DayObject_ | - |
-| title | 日历标题 | _ReactNode_ | `日期选择` |
-| showSubtitle | 是否展示日历副标题（年月） | _boolean_ | `true` |
-| subtitle | 自定义日历副标题 | _ReactNode\|((date: Date) => ReactNode)_ | (date) => \`${date.getFullYear()}年${date.getMonth() + 1}月\` |
-| watermark | 是否显示月份背景水印 | _boolean_ | `true` |
-| min | 可选择的最小日期 | _Date_ | 当前日期 |
-| max | 可选择的最大日期 | _Date_ | 当前日期的六个月后 |
-| poppable | 是否以弹层的形式展示日历 | _boolean_ | `false` |
-| showPopup | 是否显示日历弹窗, poppable: true时生效 | _boolean_ | `false` |
-| popupPlacement | 弹出位置，可选值为 `left` `right` `top` , poppable: true时生效 | _string_ | `bottom`
-| popupRound | 是否显示圆角弹窗, poppable: true时生效 | _boolean_ | `true` |
-| popupCloseIcon | 弹框是否显示关闭图标, poppable: true时生效 | _boolean_ | `true` |
-| readonly | 是否为只读状态，只读状态下不能选择日期 | _boolean_ | `false` |
-| showConfirm | 是否展示确认按钮 |  _boolean_ | `true` |
-| confirmText | 确认按钮的文字 |  _ReactNode_ | `确认` |
-| confirmDisabledText | 确认按钮处于禁用状态时的文字 |  _ReactNode_ | `确认` |
-| firstDayOfWeek | 设置周起始日 | _0-6_ | `0` |
+| 参数                                      | 说明                                                                                                  | 类型                                              | 默认值                                                        |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------- |
+| type                                      | 选择类型:<br>`single` 表示选择单个日期，<br>`multiple` 表示选择多个日期，<br>`range` 表示选择日期区间 | _string_                                          | `single`                                                      |
+| defaultValue                              | 默认选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择                  | _Date \| Date[] \| null_                          | 今天                                                          |
+| value                                     | 选中的日期，`type` 为 `multiple` 或 `range` 时为数组，传入 `null` 表示默认不选择                      | _Date \| Date[] \| null_                          | 今天                                                          |
+| formatter                                 | 日期格式化函数                                                                                        | _(day: Calendar.DayObject) => Calendar.DayObject_ | -                                                             |
+| title                                     | 日历标题                                                                                              | _ReactNode_                                       | `日期选择`                                                    |
+| showSubtitle<br> `v0.1.1-alpha.6`         | 是否展示日历副标题（年月）                                                                            | _boolean_                                         | `true`                                                        |
+| subtitle                                  | 自定义日历副标题                                                                                      | _ReactNode\|((date: Date) => ReactNode)_          | (date) => \`${date.getFullYear()}年${date.getMonth() + 1}月\` |
+| watermark                                 | 是否显示月份背景水印                                                                                  | _boolean_                                         | `true`                                                        |
+| min                                       | 可选择的最小日期                                                                                      | _Date_                                            | 当前日期                                                      |
+| max                                       | 可选择的最大日期                                                                                      | _Date_                                            | 当前日期的六个月后                                            |
+| poppable <br> `v0.1.1-alpha.6`            | 是否以弹层的形式展示日历                                                                              | _boolean_                                         | `false`                                                       |
+| showPopup <br> `v0.1.1-alpha.6`           | 是否显示日历弹窗, poppable: true 时生效                                                               | _boolean_                                         | `false`                                                       |
+| popupPlacement                            | 弹出位置，可选值为 `left` `right` `top` , poppable: true 时生效                                       | _string_                                          | `bottom`                                                      |
+| popupRound                                | 是否显示圆角弹窗, poppable: true 时生效                                                               | _boolean_                                         | `true`                                                        |
+| popupCloseIcon                            | 弹框是否显示关闭图标, poppable: true 时生效                                                           | _boolean_                                         | `true`                                                        |
+| readonly                                  | 是否为只读状态，只读状态下不能选择日期                                                                | _boolean_                                         | `false`                                                       |
+| showConfirm <br> `v0.1.1-alpha.6`         | 是否展示确认按钮                                                                                      | _boolean_                                         | `true`                                                        |
+| confirmText <br> `v0.1.1-alpha.6`         | 确认按钮的文字                                                                                        | _ReactNode_                                       | `确认`                                                        |
+| confirmDisabledText <br> `v0.1.1-alpha.6` | 确认按钮处于禁用状态时的文字                                                                          | _ReactNode_                                       | `确认`                                                        |
+| firstDayOfWeek                            | 设置周起始日                                                                                          | _0-6_                                             | `0`                                                           |
 
 ### Calendar.DayObject 数据结构
 
 日历中的每个日期都对应一个 Day 对象，通过`formatter`属性可以自定义 Day 对象的内容
 
-| 键名 | 说明 | 类型 |
-| --- | --- | --- |
-| value | 日期对应的 Date 对象 | _Date_ |
-| type | 日期类型，可选值为 `active` `start` `middle` `end` `disabled` | _string_ |
-| children | 中间显示的文字 | _string_ |
-| top | 上方的提示信息 | _string_ |
-| bottom | 下方的提示信息 | _string_ |
-| className | 额外类名 | _string_ |
+| 键名      | 说明                                                          | 类型     |
+| --------- | ------------------------------------------------------------- | -------- |
+| value     | 日期对应的 Date 对象                                          | _Date_   |
+| type      | 日期类型，可选值为 `active` `start` `middle` `end` `disabled` | _string_ |
+| children  | 中间显示的文字                                                | _string_ |
+| top       | 上方的提示信息                                                | _string_ |
+| bottom    | 下方的提示信息                                                | _string_ |
+| className | 额外类名                                                      | _string_ |
 
 ### Events
 
-| 事件名 | 说明 | 回调参数 |
-| --- | --- | --- |
-| onChange | 点击并选中任意日期时触发 | _value: Date \| Date[]_ |
-| onConfirm | 日期选择完成后触发，若使用 `Calendar.Button` 组件，则点击确认按钮后触发 | _value: Date \| Date[]_ |
-| onClose | 关闭弹层时出发 | _visible: boolean_ |
+| 事件名                       | 说明                                                                    | 回调参数                |
+| ---------------------------- | ----------------------------------------------------------------------- | ----------------------- |
+| onChange                     | 点击并选中任意日期时触发                                                | _value: Date \| Date[]_ |
+| onConfirm                    | 日期选择完成后触发，若使用 `Calendar.Button` 组件，则点击确认按钮后触发 | _value: Date \| Date[]_ |
+| onClose <br>`v0.1.1-alpha.6` | 关闭弹层时出发                                                          | _visible: boolean_      |
 
 ### Calendar.Footer Props
 
-| 参数       | 说明         | 类型        | 默认值 |
-| --------- | ------------ | ----------- | --- |
-| children  | 底部内容      | _ReactNoe_  | - |
+| 参数     | 说明     | 类型       | 默认值 |
+| -------- | -------- | ---------- | ------ |
+| children | 底部内容 | _ReactNoe_ | -      |
 
 ### Calendar.Button Props
 
-| 参数               | 说明                     | 类型               | 默认值 |
-| ------------------ | ------------------------ | ---------------- | --- |
-| children           | 按钮内容         | _ReactNoe_          | 确认 |
-| type               | 按钮类型     | _confirm_   | `confirm` |
-| confirmText           | 确认按钮的文字  | _ReactNode_          | - |
-| confirmDisabledText | 确认按钮处于禁用状态时的文字 |  _ReactNode_ | - |
+| 参数                | 说明                         | 类型        | 默认值    |
+| ------------------- | ---------------------------- | ----------- | --------- |
+| children            | 按钮内容                     | _ReactNoe_  | 确认      |
+| type                | 按钮类型                     | _confirm_   | `confirm` |
+| confirmText         | 确认按钮的文字               | _ReactNode_ | -         |
+| confirmDisabledText | 确认按钮处于禁用状态时的文字 | _ReactNode_ | -         |
 
 ## 主题定制
 
@@ -539,33 +484,33 @@ function CustomConfirmCalendar() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                         | 默认值                                                 | 描述  |
-|--------------------------------------------|-----------------------------------------------------|-----|
-| --calendar-active-color                    | _var(--blue, $blue)_                                | -   |
-| --calendar-background-color                | _var(--white)_                                      | -   |
-| --calendar-header-box-shadow               | _0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)_  | -   |
-| --calendar-header-title-height             | _44px * $hd_                                        | -   |
-| --calendar-header-title-font-size          | _var(--font-size-lg)_                               | -   |
-| --calendar-header-subtitle-font-size       | _var(--font-size-md)_                               | -   |
-| --calendar-weekdays-height                 | _30px * $hd_                                        | -   |
-| --calendar-weekdays-font-size              | _var(--font-size-sm)_                               | -   |
-| --calendar-month-title-font-size           | _var(--font-size-md)_                               | -   |
-| --calendar-month-watermark-color           | _rgba(242, 243, 245, 0.8)_                          | -   |
-| --calendar-month-watermark-font-size       | _160px * $hd_                                       | -   |
-| --calendar-range-edge-color                | _var(--white)_                                      | -   |
-| --calendar-range-edge-background-color     | _var(--calendar-active-color)_                      | -   |
-| --calendar-range-middle-color              | _var(--calendar-active-color)_                      | -   |
-| --calendar-range-middle-background-opacity | _0.1_                                               | -   |
-| --calendar-day-height                      | _64px * $hd_                                        | -   |
-| --calendar-day-font-size                   | _var(--font-size-lg)_                               | -   |
-| --calendar-day-disabled-color              | _var(--gray-5)_                                     | -   |
-| --calendar-active-day-size                 | _54px * $hd_                                        | -   |
-| --calendar-active-day-color                | _var(--white)_                                      | -   |
-| --calendar-active-day-background-color     | _var(--calendar-active-color)_                      | -   |
-| --calendar-active-day-border-radius        | _var(--border-radius-md)_                           | -   |
-| --calendar-day-info-font-size              | _var(--font-size-xs)_                               | -   |
-| --calendar-day-info-line-height            | _var(--line-height-xs)_                             | -   |
-| --calendar-confirm-button-height           | _36px * $hd_                                        | -   |
-| --calendar-confirm-button-margin           | _7px * $hd 0_                                       | -   |
-| --calendar-confirm-button-color            | _var(--calendar-active-color)_                      | -   |
-| --calendar-footer-padding                  | _0 var(--padding-md)_                               | -   |
+| 名称                                       | 默认值                                             | 描述 |
+| ------------------------------------------ | -------------------------------------------------- | ---- |
+| --calendar-active-color                    | _var(--blue, $blue)_                               | -    |
+| --calendar-background-color                | _var(--white)_                                     | -    |
+| --calendar-header-box-shadow               | _0 2px * $hd 10px * $hd rgba(125, 126, 128, 0.16)_ | -    |
+| --calendar-header-title-height             | _44px \* $hd_                                      | -    |
+| --calendar-header-title-font-size          | _var(--font-size-lg)_                              | -    |
+| --calendar-header-subtitle-font-size       | _var(--font-size-md)_                              | -    |
+| --calendar-weekdays-height                 | _30px \* $hd_                                      | -    |
+| --calendar-weekdays-font-size              | _var(--font-size-sm)_                              | -    |
+| --calendar-month-title-font-size           | _var(--font-size-md)_                              | -    |
+| --calendar-month-watermark-color           | _rgba(242, 243, 245, 0.8)_                         | -    |
+| --calendar-month-watermark-font-size       | _160px \* $hd_                                     | -    |
+| --calendar-range-edge-color                | _var(--white)_                                     | -    |
+| --calendar-range-edge-background-color     | _var(--calendar-active-color)_                     | -    |
+| --calendar-range-middle-color              | _var(--calendar-active-color)_                     | -    |
+| --calendar-range-middle-background-opacity | _0.1_                                              | -    |
+| --calendar-day-height                      | _64px \* $hd_                                      | -    |
+| --calendar-day-font-size                   | _var(--font-size-lg)_                              | -    |
+| --calendar-day-disabled-color              | _var(--gray-5)_                                    | -    |
+| --calendar-active-day-size                 | _54px \* $hd_                                      | -    |
+| --calendar-active-day-color                | _var(--white)_                                     | -    |
+| --calendar-active-day-background-color     | _var(--calendar-active-color)_                     | -    |
+| --calendar-active-day-border-radius        | _var(--border-radius-md)_                          | -    |
+| --calendar-day-info-font-size              | _var(--font-size-xs)_                              | -    |
+| --calendar-day-info-line-height            | _var(--line-height-xs)_                            | -    |
+| --calendar-confirm-button-height           | _36px \* $hd_                                      | -    |
+| --calendar-confirm-button-margin           | _7px \* $hd 0_                                     | -    |
+| --calendar-confirm-button-color            | _var(--calendar-active-color)_                     | -    |
+| --calendar-footer-padding                  | _0 var(--padding-md)_                              | -    |
