@@ -35,7 +35,9 @@ import { Cell } from "@taroify/core"
 通过 `icon` 属性在标题左侧展示图标。
 
 ```tsx
-<Cell icon={<LocationOutlined />} title="单元格">内容</Cell>
+<Cell icon={<LocationOutlined />} title="单元格">
+  内容
+</Cell>
 ```
 
 ### 只设置 value
@@ -83,34 +85,34 @@ import { Cell } from "@taroify/core"
 
 ### Cell.Group Props
 
-| 参数       | 说明          | 类型        | 默认值     |
-|----------|-------------|-----------|---------|
-| title    | 分组标题        | _string_  | `-`     |
-| inset    | 是否展示为圆角卡片风格 | _boolean_ | `false` |
-| bordered | 是否显示外边框     | _boolean_ | `true`  |
-| clickable | 是否开启点击反馈  | _boolean_   | `false` |
+| 参数      | 说明                   | 类型      | 默认值  |
+| --------- | ---------------------- | --------- | ------- |
+| title     | 分组标题               | _string_  | `-`     |
+| inset     | 是否展示为圆角卡片风格 | _boolean_ | `false` |
+| bordered  | 是否显示外边框         | _boolean_ | `true`  |
+| clickable | 是否开启点击反馈       | _boolean_ | `false` |
 
 ### Cell Props
 
-| 参数        | 说明                                               | 类型          | 默认值     |
-|-----------|--------------------------------------------------|-------------|---------|
-| title     | 左侧标题                                             | _number \| string_ | - |
-| children  | 右侧内容                                             | _number \| string_ | - |
-| brief     | 标题下方的描述信息                                        | _string_    | -       |
-| size      | 单元格大小，可选值为 `large`                               | _string_    | -       |
-| icon      | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | -       |
-| rightIcon | 右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_ | -       |
-| bordered  | 是否显示内边框                                          | _boolean_   | `true`  |
-| clickable | 是否开启点击反馈                                         | _boolean_   | `false` |
-| isLink  | 是否展示右侧箭头并开启点击反馈                              | _boolean_   | `false` |
-| arrowDirection  | 箭头方向，可选值为 `left` `right` `up` `down`      | _string_   | `right` |
-| required  | 是否显示表单必填星号                                       | _boolean_   | `false` |
-| align     | 对齐方式，可选值为 `start` `center` `end`                 | _string_    | -       |
+| 参数                                | 说明                                                    | 类型               | 默认值  |
+| ----------------------------------- | ------------------------------------------------------- | ------------------ | ------- |
+| title                               | 左侧标题                                                | _number \| string_ | -       |
+| children                            | 右侧内容                                                | _number \| string_ | -       |
+| brief                               | 标题下方的描述信息                                      | _string_           | -       |
+| size                                | 单元格大小，可选值为 `large`                            | _string_           | -       |
+| icon                                | 左侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_        | -       |
+| rightIcon                           | 右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_        | -       |
+| bordered                            | 是否显示内边框                                          | _boolean_          | `true`  |
+| clickable                           | 是否开启点击反馈                                        | _boolean_          | `false` |
+| isLink <br>`v0.1.1-alpha.5`         | 是否展示右侧箭头并开启点击反馈                          | _boolean_          | `false` |
+| arrowDirection <br>`v0.1.1-alpha.5` | 箭头方向，可选值为 `left` `right` `up` `down`           | _string_           | `right` |
+| required                            | 是否显示表单必填星号                                    | _boolean_          | `false` |
+| align                               | 对齐方式，可选值为 `start` `center` `end`               | _string_           | -       |
 
 ### Cell Events
 
-| 事件名     | 说明       | 回调参数                |
-|---------|----------|---------------------|
+| 事件名  | 说明             | 回调参数            |
+| ------- | ---------------- | ------------------- |
 | onClick | 点击单元格时触发 | _event: MouseEvent_ |
 
 ## 主题定制
@@ -119,34 +121,34 @@ import { Cell } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                               | 默认值                                                                       | 描述  |
-|----------------------------------|---------------------------------------------------------------------------|-----|
-| --cell-font-size                 | _var(--font-size-md)_                                                     | -   |
-| --cell-line-height               | _24px * $hd_                                                              | -   |
-| --cell-color                     | _var(--text-color)_                                                       | -   |
-| --cell-background-color          | _var(--white)_                                                            | -   |
-| --cell-border-color              | _var(--border-color)_                                                     | -   |
-| --cell-value-color               | _var(--gray-6)_                                                           | -   |
-| --cell-active-color              | _var(--active-color)_                                                     | -   |
-| --cell-required-color            | _var(--danger-color)_                                                     | -   |
-| --cell-required-padding-right    | _2px * $hd_                                                               | -   |
-| --cell-icon-size                 | _16px * $hd_                                                              | -   |
-| --cell-icon-margin-left          | _4px * $hd_                                                               | -   |
-| --cell-right-icon-margin-right   | _4px * $hd_                                                               | -   |
-| --cell-brief-margin-top          | _var(--padding-base)_                                                     | -   |
-| --cell-brief-font-size           | _var(--font-size-sm)_                                                     | -   |
-| --cell-brief-line-height         | _var(--line-height-sm)_                                                   | -   |
-| --cell-brief-color               | _var(--gray-6)_                                                           | -   |
-| --cell-vertical-padding          | _10px * $hd_                                                              | -   |
-| --cell-horizontal-padding        | _var(--padding-md)_                                                       | -   |
-| --cell-vertical-padding-large    | _var(--padding-sm)_                                                       | -   |
-| --cell-title-font-size-large     | _var(--font-size-lg)_                                                     | -   |
-| --cell-subtitle-font-size-large  | _var(--font-size-md)_                                                     | -   |
-| --cell-group-background-color    | _var(--white)_                                                            | -   |
-| --cell-group-title-color         | _var(--gray-6)_                                                           | -   |
-| --cell-group-title-padding       | _var(--padding-md) var(--padding-md) var(--padding-xs)_                   | -   |
-| --cell-group-title-font-size     | _var(--font-size-md)_                                                     | -   |
-| --cell-group-title-line-height   | _16px * $hd_                                                              | -   |
-| --cell-group-inset-padding       | _0 var(--padding-md)_                                                     | -   |
-| --cell-group-inset-border-radius | _var(--border-radius-lg)_                                                 | -   |
-| --cell-group-inset-title-padding | _var(--padding-md) var(--padding-md) var(--padding-xs) var(--padding-xl)_ | -   |
+| 名称                             | 默认值                                                                    | 描述 |
+| -------------------------------- | ------------------------------------------------------------------------- | ---- |
+| --cell-font-size                 | _var(--font-size-md)_                                                     | -    |
+| --cell-line-height               | _24px \* $hd_                                                             | -    |
+| --cell-color                     | _var(--text-color)_                                                       | -    |
+| --cell-background-color          | _var(--white)_                                                            | -    |
+| --cell-border-color              | _var(--border-color)_                                                     | -    |
+| --cell-value-color               | _var(--gray-6)_                                                           | -    |
+| --cell-active-color              | _var(--active-color)_                                                     | -    |
+| --cell-required-color            | _var(--danger-color)_                                                     | -    |
+| --cell-required-padding-right    | _2px \* $hd_                                                              | -    |
+| --cell-icon-size                 | _16px \* $hd_                                                             | -    |
+| --cell-icon-margin-left          | _4px \* $hd_                                                              | -    |
+| --cell-right-icon-margin-right   | _4px \* $hd_                                                              | -    |
+| --cell-brief-margin-top          | _var(--padding-base)_                                                     | -    |
+| --cell-brief-font-size           | _var(--font-size-sm)_                                                     | -    |
+| --cell-brief-line-height         | _var(--line-height-sm)_                                                   | -    |
+| --cell-brief-color               | _var(--gray-6)_                                                           | -    |
+| --cell-vertical-padding          | _10px \* $hd_                                                             | -    |
+| --cell-horizontal-padding        | _var(--padding-md)_                                                       | -    |
+| --cell-vertical-padding-large    | _var(--padding-sm)_                                                       | -    |
+| --cell-title-font-size-large     | _var(--font-size-lg)_                                                     | -    |
+| --cell-subtitle-font-size-large  | _var(--font-size-md)_                                                     | -    |
+| --cell-group-background-color    | _var(--white)_                                                            | -    |
+| --cell-group-title-color         | _var(--gray-6)_                                                           | -    |
+| --cell-group-title-padding       | _var(--padding-md) var(--padding-md) var(--padding-xs)_                   | -    |
+| --cell-group-title-font-size     | _var(--font-size-md)_                                                     | -    |
+| --cell-group-title-line-height   | _16px \* $hd_                                                             | -    |
+| --cell-group-inset-padding       | _0 var(--padding-md)_                                                     | -    |
+| --cell-group-inset-border-radius | _var(--border-radius-lg)_                                                 | -    |
+| --cell-group-inset-title-padding | _var(--padding-md) var(--padding-md) var(--padding-xs) var(--padding-xl)_ | -    |

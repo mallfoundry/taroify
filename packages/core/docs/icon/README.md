@@ -59,22 +59,27 @@ import { ChatOutlined } from "@taroify/icons"
 ```
 
 ### 自定义图标
+
 如果需要在现有 Icon 的基础上使用更多图标，可以引入第三方 iconfont 对应的字体文件和 CSS 文件，之后就可以在 Icon 组件中直接使用。
+
+请升级 `taroify` 到 >= `v0.3.0-alpha.0` 版本来使用该特性。
+
 ```css
 /* 引入第三方或自定义的字体图标样式 */
 @font-face {
-  font-family: 'my-icon';
-  src: url('./my-icon.ttf') format('truetype');
+  font-family: "my-icon";
+  src: url("./my-icon.ttf") format("truetype");
 }
 
 .my-icon {
-  font-family: 'my-icon';
+  font-family: "my-icon";
 }
 
 .my-icon-extra::before {
-  content: '\e626';
+  content: "\e626";
 }
 ```
+
 ```tsx
 import { Icon } from "@taroify/icons"
 <!-- 通过 classPrefix 指定类名为 my-icon -->
@@ -85,14 +90,14 @@ import { Icon } from "@taroify/icons"
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| color | 图标颜色 | _string_ | `inherit` |
-| size | 图标大小，如 `20px` `2em`，默认单位为 `px` | _number \| string_ | `inherit` |
-| classPrefix | 类名前缀，用于使用自定义图标 | _string_ | `van-icon`
+| 参数        | 说明                                       | 类型               | 默认值     |
+| ----------- | ------------------------------------------ | ------------------ | ---------- |
+| color       | 图标颜色                                   | _string_           | `inherit`  |
+| size        | 图标大小，如 `20px` `2em`，默认单位为 `px` | _number \| string_ | `inherit`  |
+| classPrefix | 类名前缀，用于使用自定义图标               | _string_           | `van-icon` |
 
 ### Events
 
-| 事件名 | 说明           | 回调参数            |
-| ------ | -------------- | ------------------- |
-| onClick  | 点击图标时触发 | _event: ITouchEvent_ |
+| 事件名  | 说明           | 回调参数             |
+| ------- | -------------- | -------------------- |
+| onClick | 点击图标时触发 | _event: ITouchEvent_ |

@@ -285,8 +285,6 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - package.json 添加 `repository` 和 `bugs` [764](https://github.com/mallfoundry/taroify/pull/764) [@Pilotager](https://github.com/Pilotager)
 
-**Feature**
-
 ### v0.3.0-alpha.0
 
 `2024-06-23`
@@ -748,7 +746,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - Picker
 
   - 添加 `optionHeight` 属性，支持配置选项高度 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
-  - 添加 `title` `confirmText` `cancelText` `columns` `columnsFIle`，支持通过数据配置选项 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
+  - 添加 `title` `confirmText` `cancelText` `columns` `columnsFieldNames`，支持通过数据配置选项 [629](https://github.com/mallfoundry/taroify/pull/629) [@hbztd](https://github.com/hbztd)
 
 - Cell
 

@@ -110,20 +110,20 @@ import { NoticeBar } from "@taroify/core"
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| className | 通知栏自定义类名 | _string_ | - |
-| style | 通知栏自定义样式 | _CSSProperties_ | - |
-| children | 通知文本内容 | _ReactNode_ | - |
-| delay | 动画延迟时间 (ms) | _number \| string_ | `1000` |
-| speed | 滚动速率 (px/s) | _number \| string_ | `60` |
-| scrollable | 是否开启滚动播放，内容长度溢出时默认开启 | _boolean_ | `false` |
-| wordwrap | 是否开启文本换行，只在禁用滚动时生效 | _boolean_ | `false` |
+| 参数       | 说明                                     | 类型               | 默认值  |
+| ---------- | ---------------------------------------- | ------------------ | ------- |
+| className  | 通知栏自定义类名                         | _string_           | -       |
+| style      | 通知栏自定义样式                         | _CSSProperties_    | -       |
+| children   | 通知文本内容                             | _ReactNode_        | -       |
+| delay      | 动画延迟时间 (ms)                        | _number \| string_ | `1000`  |
+| speed      | 滚动速率 (px/s)                          | _number \| string_ | `60`    |
+| scrollable | 是否开启滚动播放，内容长度溢出时默认开启 | _boolean_          | `false` |
+| wordwrap   | 是否开启文本换行，只在禁用滚动时生效     | _boolean_          | `false` |
 
 ### Events
 
-| 事件名 | 说明                         | 回调参数            |
-| ------ | ---------------------------- | ------------------- |
+| 事件名   | 说明                         | 回调参数            |
+| -------- | ---------------------------- | ------------------- |
 | onClick  | 点击通知栏时触发             | _event: MouseEvent_ |
 | onReplay | 每当滚动栏重新开始滚动时触发 | -                   |
 
@@ -131,9 +131,9 @@ import { NoticeBar } from "@taroify/core"
 
 通过 ref 可以获取到 NoticeBar 实例并调用实例方法
 
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| reset | 重置通知栏到初始状态 | - | - |
+| 方法名                 | 说明                 | 参数 | 返回值 |
+| ---------------------- | -------------------- | ---- | ------ |
+| reset `v0.1.1-alpha.3` | 重置通知栏到初始状态 | -    | -      |
 
 ## 主题定制
 
@@ -141,14 +141,14 @@ import { NoticeBar } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                            | 默认值                                   | 描述  |
-|-------------------------------|---------------------------------------|-----|
-| --notice-bar-height           | _40px * $hd_                          | -   |
-| --notice-bar-padding          | _0 var(--padding-md)_                 | -   |
-| --notice-bar-wordwrap-padding | _var(--padding-xs) var(--padding-md)_ | -   |
-| --notice-bar-color            | _var(--orange-dark)_                  | -   |
-| --notice-bar-font-size        | _var(--font-size-md)_                 | -   |
-| --notice-bar-line-height      | _24px * $hd_                          | -   |
-| --notice-bar-background-color | _var(--orange-light)_                 | -   |
-| --notice-bar-icon-size        | _16px * $hd_                          | -   |
-| --notice-bar-icon-min-width   | _24px * $hd_                          | -   |
+| 名称                          | 默认值                                | 描述 |
+| ----------------------------- | ------------------------------------- | ---- |
+| --notice-bar-height           | _40px \* $hd_                         | -    |
+| --notice-bar-padding          | _0 var(--padding-md)_                 | -    |
+| --notice-bar-wordwrap-padding | _var(--padding-xs) var(--padding-md)_ | -    |
+| --notice-bar-color            | _var(--orange-dark)_                  | -    |
+| --notice-bar-font-size        | _var(--font-size-md)_                 | -    |
+| --notice-bar-line-height      | _24px \* $hd_                         | -    |
+| --notice-bar-background-color | _var(--orange-light)_                 | -    |
+| --notice-bar-icon-size        | _16px \* $hd_                         | -    |
+| --notice-bar-icon-min-width   | _24px \* $hd_                         | -    |

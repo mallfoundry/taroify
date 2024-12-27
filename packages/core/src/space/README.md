@@ -27,12 +27,19 @@ import { Button, Space } from "@taroify/core"
 ```tsx
 <Block title="垂直">
   <Space direction="vertical" fill>
-    <Button color="primary" block>主要按钮</Button>
-    <Button color="primary" block>主要按钮</Button>
-    <Button color="primary" block>主要按钮</Button>
+    <Button color="primary" block>
+      主要按钮
+    </Button>
+    <Button color="primary" block>
+      主要按钮
+    </Button>
+    <Button color="primary" block>
+      主要按钮
+    </Button>
   </Space>
 </Block>
 ```
+
 ### 间距
 
 ```tsx
@@ -83,19 +90,18 @@ import { Button, Space } from "@taroify/core"
 </Space>
 ```
 
-
 ## API
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| direction | 垂直排列方式 可选值 `horizontal` `vertical` | _string_ | `horizontal` |
-| size | 间距，可选值为 `mini` `small` `medium` `large`，或者自定义间距 | _string \| number \| [number, number?]_ | `small` |
-| wrap | 子元素的换行方式，可选值为 `nowrap` `wrap` `wrap-reverse` | _boolean_ | `wrap` |
-| justify | 主轴对齐方式，可选值为 `start` `end` `center` `space-around` `space-between` | _string_ | `start` |
-| align | 交叉轴对齐方式，可选值为 `start` `center` `end` `baseline` `stretch` | _string_ | `start` |
-| fill | 是否填充整个父元素 | _boolean_ | `false` |
+| 参数                  | 说明                                                                         | 类型                                    | 默认值       |
+| --------------------- | ---------------------------------------------------------------------------- | --------------------------------------- | ------------ |
+| direction             | 垂直排列方式 可选值 `horizontal` `vertical`                                  | _string_                                | `horizontal` |
+| size                  | 间距，可选值为 `mini` `small` `medium` `large`，或者自定义间距               | _string \| number \| [number, number?]_ | `small`      |
+| wrap                  | 子元素的换行方式，可选值为 `nowrap` `wrap` `wrap-reverse`                    | _boolean_                               | `wrap`       |
+| justify               | 主轴对齐方式，可选值为 `start` `end` `center` `space-around` `space-between` | _string_                                | `start`      |
+| align                 | 交叉轴对齐方式，可选值为 `start` `center` `end` `baseline` `stretch`         | _string_                                | `start`      |
+| fill `v0.1.1-alpha.2` | 是否填充整个父元素                                                           | _boolean_                               | `false`      |
 
 ## 主题定制
 
@@ -103,17 +109,17 @@ import { Button, Space } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                 | 默认值                            | 描述  |
-|------------------------------------|--------------------------------|-----|
-| --space-item-gap-mini              | _var(--padding-xs)_            | -   |
-| --space-item-gap-small             | _var(--padding-sm)_            | -   |
-| --space-item-gap-medium            | _var(--padding-md)_            | -   |
-| --space-item-gap-large             | _var(--padding-lg)_            | -   |
-| --space-item-vertical-gap-mini     | _var(--space-item-gap-mini)_   | -   |
-| --space-item-vertical-gap-small    | _var(--space-item-gap-small)_  | -   |
-| --space-item-vertical-gap-medium   | _var(--space-item-gap-medium)_ | -   |
-| --space-item-vertical-gap-large    | _var(--space-item-gap-large)_  | -   |
-| --space-item-horizontal-gap-mini   | _var(--space-item-gap-mini)_   | -   |
-| --space-item-horizontal-gap-small  | _var(--space-item-gap-small)_  | -   |
-| --space-item-horizontal-gap-medium | _var(--space-item-gap-medium)_ | -   |
-| --space-item-horizontal-gap-large  | _var(--space-item-gap-large)_  | -   |
+| 名称                               | 默认值                         | 描述 |
+| ---------------------------------- | ------------------------------ | ---- |
+| --space-item-gap-mini              | _var(--padding-xs)_            | -    |
+| --space-item-gap-small             | _var(--padding-sm)_            | -    |
+| --space-item-gap-medium            | _var(--padding-md)_            | -    |
+| --space-item-gap-large             | _var(--padding-lg)_            | -    |
+| --space-item-vertical-gap-mini     | _var(--space-item-gap-mini)_   | -    |
+| --space-item-vertical-gap-small    | _var(--space-item-gap-small)_  | -    |
+| --space-item-vertical-gap-medium   | _var(--space-item-gap-medium)_ | -    |
+| --space-item-vertical-gap-large    | _var(--space-item-gap-large)_  | -    |
+| --space-item-horizontal-gap-mini   | _var(--space-item-gap-mini)_   | -    |
+| --space-item-horizontal-gap-small  | _var(--space-item-gap-small)_  | -    |
+| --space-item-horizontal-gap-medium | _var(--space-item-gap-medium)_ | -    |
+| --space-item-horizontal-gap-large  | _var(--space-item-gap-large)_  | -    |

@@ -7,7 +7,7 @@
 ### 引入
 
 ```tsx
-import { List } from '@taroify/core';
+import { List } from "@taroify/core"
 ```
 
 ## 代码演示
@@ -54,10 +54,11 @@ function BasicList() {
 }
 ```
 
-> Tips: 在Tabs里使用，通过设置disabled={tabKey !== activeTabKey}，避免其他tab里的List也触发了滑动
+> Tips: 在 Tabs 里使用，通过设置 disabled={tabKey !== activeTabKey}，避免其他 tab 里的 List 也触发了滑动
 
 ### 固定高度
-设置fixedHeight，通过class或者style指定容器高度
+
+设置 fixedHeight，通过 class 或者 style 指定容器高度
 
 ```tsx
 function FixedHeightList() {
@@ -134,11 +135,9 @@ function ErrorList() {
         }, 1000)
       }}
     >
-      {
-        list.map((item) => (
-          <Cell key={item}>{item}</Cell>
-        ))
-      }
+      {list.map((item) => (
+        <Cell key={item}>{item}</Cell>
+      ))}
       <List.Placeholder
         onClick={() => {
           if (error) {
@@ -196,11 +195,9 @@ function PullRefreshList() {
   return (
     <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
       <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
-        {
-          list.map((item) => (
-            <Cell key={item}>{item}</Cell>
-          ))
-        }
+        {list.map((item) => (
+          <Cell key={item}>{item}</Cell>
+        ))}
         {!refreshingRef.current && (
           <List.Placeholder>
             {loading && <Loading>加载中...</Loading>}
@@ -217,30 +214,31 @@ function PullRefreshList() {
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| fixedHeight | 是否固定高度 | _boolean_ | `false` |
-| loading | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
-| hasMore | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
-| offset | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_ | `100` |
-| immediateCheck | 是否在初始化时立即执行滚动位置检查 | _boolean_ | `true` |
-| disabled | 是否禁用滚动加载 | _boolean_ | `false` |
-| direction | 滚动触发加载的方向，可选值为 `up` | _string_ | `down` |
+| 参数                                                                    | 说明                                             | 类型      | 默认值  |
+| ----------------------------------------------------------------------- | ------------------------------------------------ | --------- | ------- |
+| fixedHeight <br>`v0.1.1-alpha.2`                                        | 是否固定高度                                     | _boolean_ | `false` |
+| loading                                                                 | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
+| hasMore                                                                 | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
+| offset                                                                  | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_  | `100`   |
+| immediateCheck <br>`v0.1.1-alpha.2`                                     | 是否在初始化时立即执行滚动位置检查               | _boolean_ | `true`  |
+| disabled <br>`v0.1.1-alpha.2`                                           | 是否禁用滚动加载                                 | _boolean_ | `false` |
+| direction                                                               | 滚动触发加载的方向，可选值为 `up`                | _string_  | `down`  |
+| <span style="color: red">~~scrollTop~~ <br>`v0.1.1-alpha.2 移除`</span> | 距离顶部的滚动距离                               | _number_  | `0`     |
 
 ### Events
 
-| 事件名       | 说明                    | 回调参数 |
-|-----------|-----------------------|------|
-| onLoad    | 滚动条与底部距离小于 offset 时触发 | -    |
-
+| 事件名                                                                 | 说明                               | 回调参数 |
+| ---------------------------------------------------------------------- | ---------------------------------- | -------- |
+| onLoad                                                                 | 滚动条与底部距离小于 offset 时触发 | -        |
+| <span style="color: red">~~onLoading~~ <br>`v0.1.1-alpha.2移除`</span> | 内部 loading 改变时触发            | -        |
 
 ### 方法
 
 通过 ref 可以获取到 List 实例并调用实例方法
 
-| 方法名 | 说明 | 参数 | 返回值 |
-| --- | --- | --- | --- |
-| check | 检查当前的滚动位置，若已滚动至底部，则会触发 load 事件 | - | - |
+| 方法名                 | 说明                                                   | 参数 | 返回值 |
+| ---------------------- | ------------------------------------------------------ | ---- | ------ |
+| check `v0.1.1-alpha.2` | 检查当前的滚动位置，若已滚动至底部，则会触发 load 事件 | -    | -      |
 
 ## 主题定制
 
@@ -248,21 +246,22 @@ function PullRefreshList() {
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                         | 默认值                             | 描述  |
-|----------------------------|---------------------------------|-----|
-| --list-text-color          | _var(--gray-6)_                 | -   |
-| --list-text-font-size      | _var(--font-size-md)_           | -   |
-| --list-text-line-height    | _50px * $hd_                    | -   |
-| --list-loading-icon-size   | _16px * $hd_                    | -   |
-| --list-loading-icon-width  | _var(--list-loading-icon-size)_ | -   |
-| --list-loading-icon-height | _var(--list-loading-icon-size)_ | -   |
+| 名称                       | 默认值                          | 描述 |
+| -------------------------- | ------------------------------- | ---- |
+| --list-text-color          | _var(--gray-6)_                 | -    |
+| --list-text-font-size      | _var(--font-size-md)_           | -    |
+| --list-text-line-height    | _50px \* $hd_                   | -    |
+| --list-loading-icon-size   | _16px \* $hd_                   | -    |
+| --list-loading-icon-width  | _var(--list-loading-icon-size)_ | -    |
+| --list-loading-icon-height | _var(--list-loading-icon-size)_ | -    |
 
 ## 常见问题
 
 ### List 的运行机制是什么？
-- 当设置fixedHeight为false时会监听页面滚动事件(usePageScroll)
-- 当设置fixedHeight为true时会监听滚动容器的滚动事件(onScroll)
-当列表底部与可视区域的距离小于 `offset` 时，List 会触发一次 load 事件。
+
+- 当设置 fixedHeight 为 false 时会监听页面滚动事件(usePageScroll)
+- 当设置 fixedHeight 为 true 时会监听滚动容器的滚动事件(onScroll)
+  当列表底部与可视区域的距离小于 `offset` 时，List 会触发一次 load 事件。
 
 ### 为什么 List 初始化后会立即触发 load 事件？
 
@@ -303,7 +302,7 @@ List 初始化后会触发一次 load 事件，用于加载第一屏的数据，
 ```css
 html,
 body {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 ```
 
