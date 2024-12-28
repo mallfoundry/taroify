@@ -1,4 +1,7 @@
-.cache
-package.json
-package-lock.json
-public
+**/*
+!**/*.md
+!**/*.mdx
+!**/*.html
+!**/*.htm
+!**/*.yaml
+!**/*.yml

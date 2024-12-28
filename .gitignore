@@ -60,3 +60,5 @@ yarn.lock
 .vscode
 
 .swc/
+
+bun.lockb

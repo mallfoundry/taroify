@@ -1,9 +1,0 @@
-{
-  "root": true,
-  "extends": [
-    "@taroify"
-  ],
-  "rules": {
-    "no-console": "warn"
-  }
-}
