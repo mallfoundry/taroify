@@ -18,10 +18,10 @@ pre-commit:
   commands:
     staged:
       priority: 1
-      run: echo {staged_files} | tr ' ' '\n'
-    # security:
-    #   priority: 2
-    #   run: gitleaks protect --staged --no-banner
+      run: echo {staged_files}
+    security:
+      priority: 2
+      run: gitleaks protect --staged --no-banner
     typescript:
       priority: 3
       glob: "*.{ts,tsx}"
@@ -35,7 +35,7 @@ pre-commit:
     #   priority: 5
     #   glob: "*.{ts,tsx,js,jsx}"
     #   run: na vitest related --run {staged_files}
-    prettier:
+    prettier: # Biome 尚不支持 markdown 文件
       priority: 6
       glob: "*.{md,mdx,html,htm,yaml,yml,scss}"
       run: na prettier --write {staged_files}
