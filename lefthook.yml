@@ -31,10 +31,10 @@ pre-commit:
     #   glob: "*.{ts,tsx,js,jsx,json,jsonc,css}"
     #   run: na biome check --fix {staged_files} --reporter summary
     #   stage_fixed: true
-    # test:
-    #   priority: 5
-    #   glob: "*.{ts,tsx,js,jsx}"
-    #   run: na vitest related --run {staged_files}
+    test:
+      priority: 5
+      glob: "*.{ts,tsx,js,jsx}"
+      run: na jest --findRelatedTests {staged_files}
     prettier: # Biome 尚不支持 markdown 文件
       priority: 6
       glob: "*.{md,mdx,html,htm,yaml,yml,scss}"
