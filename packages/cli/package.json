@@ -5,7 +5,6 @@
   "private": "true",
   "dependencies": {
     "@taroify/babel-preset": "^0.6.2-alpha.0",
-    "@taroify/eslint-config": "^0.6.2-alpha.0",
     "@taroify/gulp": "^0.6.2-alpha.0",
     "@taroify/stylelint-config": "^0.6.2-alpha.0",
     "@testing-library/jest-dom": "^5.11.10",

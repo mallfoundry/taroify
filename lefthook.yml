@@ -1,0 +1,45 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+#
+# pre-push:
+#   commands:
+#     packages-audit:
+#       tags: frontend security
+#       run: yarn audit
+#     gems-audit:
+#       tags: backend security
+#       run: bundle audit
+#
+pre-commit:
+  piped: true
+  follow: true
+  commands:
+    staged:
+      priority: 1
+      run: echo {staged_files} | tr ' ' '\n'
+    # security:
+    #   priority: 2
+    #   run: gitleaks protect --staged --no-banner
+    typescript:
+      priority: 3
+      glob: "*.{ts,tsx}"
+      run: na tsc {staged_files} --noEmit
+    # biome:
+    #   priority: 4
+    #   glob: "*.{ts,tsx,js,jsx,json,jsonc,css}"
+    #   run: na biome check --fix {staged_files} --reporter summary
+    #   stage_fixed: true
+    # test:
+    #   priority: 5
+    #   glob: "*.{ts,tsx,js,jsx}"
+    #   run: na vitest related --run {staged_files}
+    prettier:
+      priority: 6
+      glob: "*.{md,mdx,html,htm,yaml,yml,scss}"
+      run: na prettier --write {staged_files}
+    stylelint: # Biome 尚不支持 scss 文件
+      priority: 7
+      glob: "*.{css,scss}"
+      run: na stylelint --fix {staged_files}
