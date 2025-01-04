@@ -1,5 +1,5 @@
 import * as _ from "lodash"
-import { Key, ReactNode } from "react"
+import type { Key, ReactNode } from "react"
 import { isTextElement } from "../utils/validate"
 
 export const DEFAULT_SIBLING_COUNT = 3

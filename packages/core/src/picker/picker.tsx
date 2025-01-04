@@ -1,10 +1,10 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, ReactElement, ReactNode, useCallback, useRef, useMemo } from "react"
+import { Children, type ReactElement, type ReactNode, useCallback, useRef, useMemo } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { useRefs, useToRef } from "../utils/state"
@@ -20,12 +20,11 @@ import PickerOption from "./picker-option"
 import {
   DEFAULT_OPTION_HEIGHT,
   DEFAULT_SIBLING_COUNT,
-  PickerColumnInstance,
-  PickerOptionObject,
-  PickerOptionData,
+  type PickerColumnInstance,
+  type PickerOptionObject,
+  type PickerOptionData,
   validPickerColumn,
 } from "./picker.shared"
-
 
 function usePickerValues(value?: any): any[] {
   return _.isArray(value) ? value : [value]
@@ -57,7 +56,7 @@ export interface PickerProps extends PickerBaseProps {
 
 const defaultFieldNames = {
   label: "label",
-  value: "value"
+  value: "value",
 }
 
 function Picker(props: PickerProps) {
@@ -95,7 +94,7 @@ function Picker(props: PickerProps) {
 
   const fieldNames: PickerBaseProps["columnsFieldNames"] = useMemo(() => {
     if (!_.isEmpty(columnsFieldNamesProp) && _.isObject(columnsFieldNamesProp)) {
-      return Object.assign({...defaultFieldNames}, columnsFieldNamesProp)
+      return Object.assign({ ...defaultFieldNames }, columnsFieldNamesProp)
     }
     return defaultFieldNames
   }, [columnsFieldNamesProp])
@@ -104,6 +103,7 @@ function Picker(props: PickerProps) {
     let toolbar: ReactNode = null
     const __children__: ReactNode[] = []
     const columns: ReactNode[] = []
+    // biome-ignore lint/complexity/noForEach: <explanation>
     Children.toArray(childrenProp).forEach((child: ReactNode) => {
       if (isElementOf(child, PickerColumn)) {
         const element = child as ReactElement
@@ -118,17 +118,34 @@ function Picker(props: PickerProps) {
       }
     })
     if (!toolbar && (title || confirmText || cancelText)) {
-      toolbar = <PickerToolbar key="-2">
-        <PickerButton type="cancel">{cancelText}</PickerButton>
-        <PickerTitle>{title}</PickerTitle>
-        <PickerButton type="confirm">{confirmText}</PickerButton>
-      </PickerToolbar>
+      toolbar = (
+        <PickerToolbar key="-2">
+          <PickerButton type="cancel">{cancelText}</PickerButton>
+          <PickerTitle>{title}</PickerTitle>
+          <PickerButton type="confirm">{confirmText}</PickerButton>
+        </PickerToolbar>
+      )
     }
     if (_.isEmpty(columns) && columnsProp && columnsProp.length > 0) {
-      (Array.isArray(columnsProp[0]) ? columnsProp : [columnsProp]).forEach((col, i) => {
-        columns.push(<PickerColumn key={i}>{col.map((data, ii) => <PickerOption key={ii} label={data[fieldNames.label!]} value={data[fieldNames.value!]} disabled={data.disabled} />)}</PickerColumn>)
+      ;(Array.isArray(columnsProp[0]) ? columnsProp : [columnsProp]).forEach((col, i) => {
+        columns.push(
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          <PickerColumn key={i}>
+            {col.map((data, ii) => (
+              <PickerOption
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                key={ii}
+                label={data[fieldNames.label!]}
+                value={data[fieldNames.value!]}
+                disabled={data.disabled}
+              />
+            ))}
+          </PickerColumn>,
+        )
       })
     }
+
+    // biome-ignore lint/correctness/noChildrenProp: <explanation>
     __children__.unshift(<PickerColumns key="-1" children={columns} />)
     __children__.unshift(toolbar)
     return __children__
@@ -136,7 +153,10 @@ function Picker(props: PickerProps) {
 
   const valueOptionsRef = useRef<PickerOptionObject[]>([])
 
-  const optionHeight = useMemo(() => optionHeightProp ? unitToPx(optionHeightProp) : DEFAULT_OPTION_HEIGHT, [optionHeightProp])
+  const optionHeight = useMemo(
+    () => (optionHeightProp ? unitToPx(optionHeightProp) : DEFAULT_OPTION_HEIGHT),
+    [optionHeightProp],
+  )
 
   const setValueOptions = useCallback(
     (option: PickerOptionObject, unverifiedColumn: PickerOptionObject) => {
@@ -160,6 +180,7 @@ function Picker(props: PickerProps) {
 
   const stopMomentum = useCallback(
     () =>
+      // biome-ignore lint/complexity/noForEach: <explanation>
       getColumnRefs()
         .filter((columnRef) => columnRef.current)
         .forEach((columnRef) => columnRef.current.stopMomentum()),

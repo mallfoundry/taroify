@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -13,14 +13,19 @@ import {
   useState,
 } from "react"
 import { prefixClassname } from "../styles"
-// import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
 import { fulfillPromise } from "../utils/promisify"
 import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import PickerOption from "./picker-option"
-import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject, DEFAULT_SIBLING_COUNT, DEFAULT_OPTION_HEIGHT } from "./picker.shared"
+import {
+  getPickerOptionKey,
+  type PickerColumnInstance,
+  type PickerOptionObject,
+  DEFAULT_SIBLING_COUNT,
+  DEFAULT_OPTION_HEIGHT,
+} from "./picker.shared"
 
 // 惯性滑动思路:
 // 在手指离开屏幕时，如果和上一次 move 时的间隔小于 `MOMENTUM_LIMIT_TIME` 且 move
@@ -28,16 +33,6 @@ import { getPickerOptionKey, PickerColumnInstance, PickerOptionObject, DEFAULT_S
 const MOMENTUM_LIMIT_TIME = 300
 const MOMENTUM_LIMIT_DISTANCE = 15
 const DEFAULT_DURATION = 200
-
-// async function getElementTranslateY(element: Element) {
-//   const style = await getComputedStyle(element, ["transform", "webkitTransform"])
-//   const transform = style.transform || style.webkitTransform
-//   const translateY = transform.slice(7, transform.length - 1).split(", ")[5]
-
-//   return Number(translateY)
-// }
-
-// type PickerColumnDuration = "zero" | "switch" | "momentum"
 
 export interface PickerColumnProps extends Omit<ViewProps, "children"> {
   value: any
@@ -82,35 +77,36 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     const [activeOffset, setActiveOffset] = useState<number>(0)
     const activeOffsetRef = useToRef(activeOffset)
 
-    // const [duration, setDuration] = useState<PickerColumnDuration>("zero")
-
-    const baseOffset = useMemo(() => (optionHeight * (+visibleCount - 1)) / 2, [visibleCount, optionHeight])
+    const baseOffset = useMemo(
+      () => (optionHeight * (+visibleCount - 1)) / 2,
+      [visibleCount, optionHeight],
+    )
 
     const countRef = useRenderedRef(() => _.size(childrenProp))
 
     const adjustIndex = useCallback(
       (index: number) => {
-        index = _.clamp(index, 0, countRef.current)
-        for (let i = index; i < countRef.current; i++) {
+        const indexCache = _.clamp(index, 0, countRef.current)
+        for (let i = indexCache; i < countRef.current; i++) {
           if (!childrenRef.current[i].disabled) return i
         }
-        for (let i = index - 1; i >= 0; i--) {
+        for (let i = indexCache - 1; i >= 0; i--) {
           if (!childrenRef.current[i].disabled) return i
         }
-        return index
+        return indexCache
       },
       [countRef, childrenRef],
     )
 
     const setIndex = useCallback(
       (index: number, emitChange?: boolean) => {
-        index = adjustIndex(index) || 0
+        const indexCache = adjustIndex(index) || 0
 
-        const offset = -index * optionHeight
+        const offset = -indexCache * optionHeight
         const trigger = () => {
-          if (index !== activeIndexRef.current) {
-            activeIndexRef.current = index
-            const option = childrenRef.current[index]
+          if (indexCache !== activeIndexRef.current) {
+            activeIndexRef.current = indexCache
+            const option = childrenRef.current[indexCache]
             onChange?.(option, emitChange)
           }
         }
@@ -139,19 +135,25 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
     )
 
     const childrenChanged = useRendered(() =>
-      JSON.stringify(_.map(childrenProp, ({ value }) => value)),
+      JSON.stringify(_.map(childrenProp, ({ value, label }) => ({ value, label }))),
     )
 
-    useEffect(
-      () => {
-        const valueIndex = getIndexByValue(value)
-        if (valueIndex !== activeIndexRef.current) {
-          setIndex(valueIndex)
-        }
-      },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [value, childrenChanged],
-    )
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    useEffect(() => {
+      const valueIndex = getIndexByValue(value)
+
+      if (childrenChanged) {
+        activeIndexRef.current = -1
+      }
+
+      if (childrenProp.length !== 0 && childrenProp[valueIndex].value !== value) {
+        activeIndexRef.current = -1
+      }
+
+      if (valueIndex !== activeIndexRef.current) {
+        setIndex(valueIndex)
+      }
+    }, [value, childrenChanged])
 
     const getIndexByOffset = useCallback(
       (offset: number) => _.clamp(Math.round(-offset / optionHeight), 0, countRef.current - 1),
@@ -162,9 +164,8 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       (distance: number, duration: number) => {
         const speed = Math.abs(distance / duration)
 
-        distance = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
-        const index = getIndexByOffset(distance)
-        // setDuration("momentum")
+        const distanceCache = activeOffset + (speed / 0.003) * (distance < 0 ? -1 : 1)
+        const index = getIndexByOffset(distanceCache)
         currentDurationRef.current = 1000
         setIndex(index, true)
       },
@@ -173,7 +174,6 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
     const stopMomentum = useCallback(() => {
       movingRef.current = false
-      // setDuration("zero")
       currentDurationRef.current = 0
 
       if (transitionEndTriggerRef.current) {
@@ -190,7 +190,6 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
         transitionEndTriggerRef.current = undefined
         currentDurationRef.current = DEFAULT_DURATION
-        // setDuration("switch")
         setIndex(index, true)
       },
       [readonly, setIndex],
@@ -217,7 +216,6 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
       currentDurationRef.current = 0
       touchStartTimeRef.current = Date.now()
       momentumOffsetRef.current = startOffsetRef.current
-      // setDuration("zero")
     }
 
     const handleTouchMove = (event) => {
@@ -244,9 +242,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         optionHeight,
       )
       moveOffsetRef.current = newOffset
-      setActiveOffset(
-        newOffset,
-      )
+      setActiveOffset(newOffset)
     }
 
     const handleTouchEnd = () => {
@@ -265,7 +261,6 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
 
       const index = getIndexByOffset(activeOffset)
       currentDurationRef.current = DEFAULT_DURATION
-      // setDuration("switch")
       setIndex(index, true)
 
       // compatible with desktop scenario
@@ -317,11 +312,7 @@ const PickerColumn = forwardRef<PickerColumnInstance, PickerColumnProps>(
         <View
           ref={wrapperRef}
           style={wrapperStyle}
-          className={classNames(prefixClassname("picker-column__wrapper"), {
-            // [prefixClassname("picker-column__wrapper--zero")]: duration === "zero",
-            // [prefixClassname("picker-column__wrapper--momentum")]: duration === "momentum",
-            // [prefixClassname("picker-column__wrapper--switch")]: duration === "switch",
-          })}
+          className={classNames(prefixClassname("picker-column__wrapper"))}
           onTransitionEnd={stopMomentum}
         >
           {

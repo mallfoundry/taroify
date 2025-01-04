@@ -1,11 +1,18 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
-import PickerButton, { PickerButtonProps, PickerButtonType } from "./picker-button"
+import PickerButton, { type PickerButtonProps, PickerButtonType } from "./picker-button"
 import PickerTitle from "./picker-title"
 
 interface PickerToolbarChildren {
