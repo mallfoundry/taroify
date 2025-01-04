@@ -1,9 +1,9 @@
 import * as _ from "lodash"
-import { isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import { isValidElement, type ReactElement, type ReactNode, useMemo } from "react"
 import Children from "../utils/children"
 import { isTextElement } from "../utils/validate"
-import { PickerOptionProps } from "./picker-option"
-import { PickerOptionObject } from "./picker.shared"
+import type { PickerOptionProps } from "./picker-option"
+import type { PickerOptionObject } from "./picker.shared"
 
 function elementToObject(
   element: any,
@@ -22,7 +22,7 @@ function elementToObject(
       children:
         isTextElement(children) || depth === maxDepth
           ? children
-          : mapToChildrenOptions(children, depth + 1, maxDepth) as ReactNode,
+          : (mapToChildrenOptions(children, depth + 1, maxDepth) as ReactNode),
       ...restProps,
     }
   }
@@ -41,11 +41,9 @@ function mapToOption(
 }
 
 export function mapToChildrenOptions(children: ReactNode, depth: number, maxDepth: number) {
-  return Children.map<PickerOptionObject | undefined, ReactNode>(children, (child, index) =>
-    {
-      return mapToOption(child, index, depth, maxDepth)
-    },
-  )
+  return Children.map<PickerOptionObject | undefined, ReactNode>(children, (child, index) => {
+    return mapToOption(child, index, depth, maxDepth)
+  })
 }
 
 interface UsePickerOptionsOptions {

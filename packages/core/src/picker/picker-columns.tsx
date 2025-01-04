@@ -1,10 +1,10 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext } from "react"
+import { type CSSProperties, type ReactNode, useCallback, useContext } from "react"
 import PickerColumnsRender from "./picker-columns-render"
 import PickerContext from "./picker.context"
-import { getPickerValue, PickerOptionObject, validPickerColumn } from "./picker.shared"
+import { getPickerValue, type PickerOptionObject, validPickerColumn } from "./picker.shared"
 
 export interface PickerColumnsProps extends Omit<ViewProps, "children"> {
   style?: CSSProperties

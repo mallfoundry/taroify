@@ -1,7 +1,7 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { type ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import PickerContext from "./picker.context"
 
@@ -30,6 +30,7 @@ export default function PickerButton(props: PickerButtonProps) {
         [prefixClassname("picker__cancel")]: type === PickerButtonType.Cancel,
         [prefixClassname("picker__confirm")]: type === PickerButtonType.Confirm,
       })}
+      // biome-ignore lint/correctness/noChildrenProp: <explanation>
       children={children}
       onClick={(e) => {
         onClick?.(e)
