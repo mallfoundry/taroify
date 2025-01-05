@@ -12,6 +12,21 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.6.3-alpha.0
+
+`2025-01-05`
+
+**Bug Fixes**
+
+- Picker
+
+  - 修复 `Picker` 中 `columns` 更新未更新选中值 [875](https://github.com/mallfoundry/taroify/pull/875) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- 添加 Biome [872](https://github.com/mallfoundry/taroify/pull/872) [@ianzone](https://github.com/ianzone)
+- 文档新增新特性版本号 [870](https://github.com/mallfoundry/taroify/pull/870) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
+
 ### v0.6.2-alpha.0
 
 `2024-12-25`
