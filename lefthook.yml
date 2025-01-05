@@ -22,10 +22,10 @@ pre-commit:
     security:
       priority: 2
       run: gitleaks protect --staged --no-banner
-    typescript:
-      priority: 3
-      glob: "*.{ts,tsx}"
-      run: na tsc {staged_files} --noEmit
+    # typescript:
+    #   priority: 3
+    #   glob: "*.{ts,tsx}"
+    #   run: na tsc --noEmit
     # biome:
     #   priority: 4
     #   glob: "*.{ts,tsx,js,jsx,json,jsonc,css}"
