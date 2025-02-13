@@ -241,6 +241,8 @@ function PullRefresh(props: PullRefreshProps) {
     setTimeout(() => nextTick(() => updateStatus(0)), +completedDuration)
   }, [completedDuration, updateStatus])
 
+  const contextValue = useMemo(() => ({ distance, onTouchStart, onTouchMove, onTouchEnd }), [distance, onTouchStart, onTouchMove, onTouchEnd])
+
   useEffect(() => {
     if (loading) {
       updateStatus(headHeight, true)
@@ -319,9 +321,7 @@ function PullRefresh(props: PullRefreshProps) {
 
   return (
     <PullRefreshContext.Provider
-      value={{
-        distance,
-      }}
+      value={contextValue}
     >
       <View className={classNames(prefixClassname("pull-refresh"), className)} {...restProps}>
         <View

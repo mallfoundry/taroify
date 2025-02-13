@@ -1,5 +1,5 @@
 import { useGetter, useToRef } from "@taroify/hooks"
-import { View, ScrollView } from "@tarojs/components"
+import { View, ScrollView, ScrollViewProps, BaseEventOrig } from "@tarojs/components"
 import { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
@@ -13,6 +13,7 @@ import { getScrollParent } from "../utils/dom/scroll"
 import { raf } from "../utils/raf"
 import { debounce } from "../utils/lodash-polyfill"
 import { ListDirection, ListInstance } from "./list.shared"
+import PullRefreshContext from "../pull-refresh/pull-refresh.context"
 
 function useAssignLoading<T = any>(state?: T | (() => T)) {
   const getState = useGetter(state)
@@ -46,6 +47,7 @@ export interface ListProps extends ViewProps {
   fixedHeight?: boolean
   children?: ReactNode
   onLoad?(): void
+  onScroll?(e: BaseEventOrig<ScrollViewProps.onScrollDetail>): void
 }
 
 function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
@@ -55,19 +57,25 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
     hasMore = true,
     direction = "down",
     offset = 100,
-    immediateCheck: _immediateCheck = true,
+    immediateCheck: immediateCheckProp = true,
     fixedHeight = false,
     disabled = false,
     children,
     onLoad,
+    onScroll: onScrollProp,
     ...restProps
   } = props
   const rootRef = useRef<HTMLElement>()
   const scrollRef = useRef<HTMLElement>()
   const edgeRef = useRef<HTMLElement>()
   const onLoadRef = useToRef(onLoad)
-  const immediateCheck = useToRef(_immediateCheck)
+  const immediateCheck = useToRef(immediateCheckProp)
   const { isLoading, setLoading } = useAssignLoading(loadingProp)
+  const { 
+    onTouchStart: onPullRefreshTouchStart, 
+    onTouchEnd: onPullRefreshTouchEnd, 
+    onTouchMove: onPullRefreshTouchMove 
+  } = React.useContext(PullRefreshContext)
 
   const check = useMemoizedFn(debounce(() => {
     raf(async () => {
@@ -107,9 +115,28 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
     }
   })
 
-  const onScroll = () => {
+  const onScroll = (e) => {
+    onScrollProp?.(e)
     if (fixedHeight) {
       check()
+    }
+  }
+
+  const onTouchStart = (e) => {
+    if (fixedHeight) {
+      onPullRefreshTouchStart?.(e)
+    }
+  }
+
+  const onTouchMove = (e) => {
+    if (fixedHeight) {
+      onPullRefreshTouchMove?.(e)
+    }
+  }
+
+  const onTouchEnd = (e) => {
+    if (fixedHeight) {
+      onPullRefreshTouchEnd?.(e)
     }
   }
 
@@ -140,7 +167,16 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
   )
 
   return (
-    <Wrapper ref={rootRef} scrollY={fixedHeight} className={classNames(prefixClassname("list"), className)} {...restProps} onScroll={onScroll}>
+    <Wrapper 
+      ref={rootRef}
+      scrollY={fixedHeight}
+      className={classNames(prefixClassname("list"), className)} 
+      {...restProps}
+      onScroll={onScroll}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       {direction === "down" ? children : listEdge}
       {direction === "up" ? children : listEdge}
     </Wrapper>
