@@ -4,8 +4,9 @@
   box-sizing: border-box;
   display: block;
   width: 100%;
-  min-width: 0;
+  min-width: inherit;
   height: 100%;
+  min-height: inherit;
   padding: 0;
   margin: 0;
   line-height: inherit;
