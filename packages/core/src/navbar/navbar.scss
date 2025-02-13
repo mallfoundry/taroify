@@ -12,6 +12,10 @@
     color: $navbar-icon-color;
   }
 
+  &__placeholder {
+    height: $navbar-height;
+  }
+
   &__content {
     position: relative;
     display: flex;

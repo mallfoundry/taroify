@@ -15,6 +15,7 @@ export interface PlaceholderProps extends PropsWithChildren<ViewProps> {
 }
 
 export default function usePlaceholder(contentRef: any, { className }: UsePlaceholderOptions = {}) {
+  console.warn("[Taroify] usePlaceholder is deprecated, please don't use it.")
   return ({ className: classNameProp, style = {}, children, ...restProps }: PlaceholderProps) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const height = useHeight(contentRef, [children])
