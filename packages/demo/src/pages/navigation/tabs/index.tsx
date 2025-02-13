@@ -107,6 +107,25 @@ function StickyTabs() {
   )
 }
 
+function ShrinkTabs() {
+  return (
+    <>
+    <Tabs shrink>
+      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+    </Tabs>
+    <Tabs shrink theme="card">
+      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
+      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
+      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+    </Tabs>
+    </>
+  )
+}
+
 function TabsWithCustomTitle() {
   return (
     <Tabs>
@@ -181,11 +200,15 @@ export default function TabsDemo() {
       <Block title="禁用标签">
         <DisableTabs />
       </Block>
+
       <Block title="样式风格">
         <CardTabs />
       </Block>
       <Block title="点击事件">
         <TabsWithTabClick />
+      </Block>
+      <Block title="收缩布局">
+        <ShrinkTabs />
       </Block>
       <Block title="粘性布局">
         <StickyTabs />

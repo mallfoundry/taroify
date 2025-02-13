@@ -79,6 +79,7 @@ export interface TabsProps extends ViewProps {
   ellipsis?: boolean
   swipeThreshold?: number
   children?: ReactNode
+  shrink?: boolean
 
   onChange?(value: any, event: TabEvent): void
 
@@ -102,6 +103,7 @@ function Tabs(props: TabsProps) {
     bordered,
     swipeThreshold = 5,
     children: childrenProp,
+    shrink,
     onTabClick,
     onChange,
     onScroll,
@@ -154,6 +156,7 @@ function Tabs(props: TabsProps) {
         theme={theme}
         bordered={bordered}
         ellipsis={ellipsis}
+        shrink={shrink}
         tabObjects={tabObjects}
         swipeThreshold={swipeThreshold}
         onTabClick={handleTabClick}
