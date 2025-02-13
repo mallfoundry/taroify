@@ -40,6 +40,10 @@
       border-radius: $tabs-card-border-radius;
     }
 
+    &--shrink {
+      width: auto;
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -49,6 +53,9 @@
     .#{$component-prefix}tabs__tab {
       flex: 1 0 auto;
       padding: 0 var(--padding-sm, $padding-sm);
+      &--shrink {
+        flex: none;
+      }
     }
   }
 }
@@ -75,6 +82,10 @@
 
       &:last-child {
         border-right: 0 none;
+      }
+
+      &--shrink {
+        flex: none;
       }
 
       &--active {
