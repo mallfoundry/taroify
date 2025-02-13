@@ -4,10 +4,13 @@ import classNames from "classnames";
 import * as _ from "lodash";
 import * as React from "react";
 import { type PropsWithChildren, useRef } from "react";
-import { type PlaceholderProps, usePlaceholder } from "../placeholder";
+import { type PlaceholderProps } from "../placeholder";
 import SafeArea, { type SafeAreaPosition } from "../safe-area";
 import { prefixClassname } from "../styles";
 import type { FixedViewPosition } from "./fixed-view.shared";
+import { useHeight } from "../hooks";
+import { addUnitPx } from "../utils/format/unit";
+import mergeStyle from "../utils/merge-style"
 
 function useFixedViewPlaceholder(placeholder?: boolean | string | PlaceholderProps) {
   if (placeholder === true) {
@@ -46,7 +49,7 @@ function FixedView<T>(props: FixedViewProps & T) {
   } = props;
   const rootRef = useRef();
   const placeholder = useFixedViewPlaceholder(placeholderProp);
-  const Placeholder = usePlaceholder(rootRef);
+  const height = useHeight(rootRef);
 
   if (position !== "top" && position !== "bottom" && position !== true) {
     return children as JSX.Element;
@@ -72,12 +75,14 @@ function FixedView<T>(props: FixedViewProps & T) {
   );
 
   if (placeholder) {
-    const { className: placeholderClassName, ...restPlaceholder } = placeholder;
+    const { className: placeholderClassName, style: styleProp, ...restPlaceholder } = placeholder;
+    const style = mergeStyle(styleProp, height ? { height: addUnitPx(height) } : {});
     return (
-      <Placeholder
+      <View
         className={classNames(prefixClassname("fixed-view__placeholder"), placeholderClassName)}
-        {...restPlaceholder}
+        style={style}
         children={content}
+        {...restPlaceholder}
       />
     );
   }
