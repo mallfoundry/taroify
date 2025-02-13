@@ -157,7 +157,7 @@ function ErrorList() {
 
 ### 下拉刷新
 
-List 组件可以与 [PullRefresh](/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。
+List 组件可以与 [PullRefresh](/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。固定高度时，scrollTop可以从onScroll中获取`(e.detail.scrollTop)`
 
 ```tsx
 function PullRefreshList() {
@@ -231,6 +231,7 @@ function PullRefreshList() {
 | ---------------------------------------------------------------------- | ---------------------------------- | -------- |
 | onLoad                                                                 | 滚动条与底部距离小于 offset 时触发 | -        |
 | <span style="color: red">~~onLoading~~ <br>`v0.1.1-alpha.2移除`</span> | 内部 loading 改变时触发            | -        |
+| onScroll  | 滚动时触发      | e      |
 
 ### 方法
 
