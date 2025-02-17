@@ -15,15 +15,15 @@
 
   &__node {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2px * $hd;
+    left: 2px * $hd;
     width: $switch-node-width;
     height: $switch-node-height;
     // https://github.com/youzan/vant/issues/9839
     font-size: inherit;
     background: $switch-node-background-color;
     border-radius: 100%;
-    box-shadow:$switch-node-box-shadow;
+    box-shadow: $switch-node-box-shadow;
     transition: transform $switch-transition-duration cubic-bezier(0.3, 1.05, 0.4, 1.05);
   }
 
