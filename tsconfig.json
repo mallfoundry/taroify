@@ -11,6 +11,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "removeComments": true,
@@ -18,22 +19,11 @@
     "declarationMap": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
-    "types": [
-      "jest",
-      "node"
-    ],
+    "types": ["jest", "node"],
     "rootDir": ".",
     "jsx": "react",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "packages/*/src",
-    "jest/jest-setup.ts",
-    "typings.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["packages/*/src", "jest/jest-setup.ts", "typings.d.ts"],
+  "exclude": ["node_modules"]
 }

@@ -28,27 +28,27 @@
     "version:preminor": "yarn run lerna:preminor && node scripts/version.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "biome check packages",
+    "lint": "biome check --fix packages",
     "lint:style": "stylelint packages/**/*.scss site/**/*.scss --fix --color --syntax scss",
     "sort": "npx sort-package-json \"package.json\" \"packages/*/package.json\"",
-    "postinstall": "lefthook install && echo '请全局安装 `@antfu/ni` 以管理包管理器'",
-    "commit": "git add -A && git-cz"
+    "prepare": "lefthook install && echo '请全局安装 `@antfu/ni` 以管理包管理器'",
+    "commit": "git commit -a --no-edit"
   },
   "workspaces": ["packages/*", "bundles/*", "problems/*"],
   "browserslist": ["last 3 versions", "Android >= 4.1", "ios >= 8"],
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@taroify/cli": "^0.6.3-alpha.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.25",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^14.18.63",
     "cross-env": "^7.0.3",
     "git-cz": "^4.9.0",
-    "lefthook": "^1.10.1",
+    "lefthook": "^1.10.10",
     "lerna": "^3.22.1",
-    "prettier": "^3.4.2",
-    "sass": "^1.49.7",
-    "stylelint": "^13.12.0",
-    "typescript": "^4.2.4"
+    "prettier": "^3.5.1",
+    "sass": "^1.85.0",
+    "stylelint": "^13.13.1",
+    "typescript": "^4.9.5"
   },
   "resolutions": {
     "@types/react": "18.2.0"
