@@ -9,13 +9,19 @@ export function getPagePath() {
   return path
 }
 
+let portalView: TaroNode
+
 export function mountPortal(children: TaroNode, dom?: TaroNode) {
   const view = dom || document.createElement("view")
   const path = getPagePath();
   const pageElement = document.getElementById(path);
   if (pageElement) {
+    if (!portalView) {
+      portalView = document.createElement("view")
+      pageElement.appendChild(portalView)
+    }
     render(children, view)
-    pageElement.appendChild(view)
+    portalView.appendChild(view)
   } else {
     // eslint-disable-next-line
     console.error("[Taroify] cannot find page element")
@@ -28,7 +34,7 @@ export function unmountPortal(dom: TaroNode) {
   const pageElement = document.getElementById(path);
   unmountComponentAtNode(dom);
   if (pageElement) {
-    pageElement.removeChild(dom)
+    dom.parentElement?.removeChild(dom)
   } else {
     // eslint-disable-next-line
     console.error("[Taroify] cannot find page element")
