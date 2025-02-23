@@ -1,32 +1,33 @@
-import { getCurrentPages } from "@tarojs/taro"
-import { render, unmountComponentAtNode } from "@tarojs/react"
-import { document, TaroNode } from "@tarojs/runtime"
+import { getCurrentPages } from "@tarojs/taro";
+import { render, unmountComponentAtNode } from "@tarojs/react";
+import { document, type TaroNode } from "@tarojs/runtime";
 
 export function getPagePath() {
   const currentPages = getCurrentPages();
   const currentPage = currentPages[currentPages.length - 1];
   const path = currentPage.$taroPath;
-  return path
+  return path;
 }
 
-let portalView: TaroNode
+const portalViewMap: Map<string, TaroNode> = new Map();
 
 export function mountPortal(children: TaroNode, dom?: TaroNode) {
-  const view = dom || document.createElement("view")
+  const view = dom || document.createElement("view");
   const path = getPagePath();
   const pageElement = document.getElementById(path);
   if (pageElement) {
-    if (!portalView) {
-      portalView = document.createElement("view")
-      pageElement.appendChild(portalView)
+    if (!portalViewMap.has(path)) {
+      const portalView = document.createElement("view");
+      pageElement.appendChild(portalView);
+      portalViewMap.set(path, portalView);
     }
-    render(children, view)
-    portalView.appendChild(view)
+    render(children, view);
+    portalViewMap.get(path)?.appendChild(view);
   } else {
     // eslint-disable-next-line
-    console.error("[Taroify] cannot find page element")
+    console.error("[Taroify] cannot find page element");
   }
-  return view
+  return view;
 }
 
 export function unmountPortal(dom: TaroNode) {
@@ -34,9 +35,9 @@ export function unmountPortal(dom: TaroNode) {
   const pageElement = document.getElementById(path);
   unmountComponentAtNode(dom);
   if (pageElement) {
-    dom.parentElement?.removeChild(dom)
+    dom.parentElement?.removeChild(dom);
   } else {
     // eslint-disable-next-line
-    console.error("[Taroify] cannot find page element")
+    console.error("[Taroify] cannot find page element");
   }
 }
