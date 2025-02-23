@@ -36,8 +36,6 @@ pre-commit:
 prepare-commit-msg:
   commands:
     commit:
-      skip:
-        - run: node -e "require('fs').readFileSync('.git/COMMIT_EDITMSG','utf8').trim()||process.exit(1)"
       interactive: true
       run: na git-cz --hook
       env:
