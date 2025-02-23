@@ -12,6 +12,46 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.6.4-alpha.0
+
+`2025-02-23`
+
+**Feature**
+
+- List
+
+  - 新增 `onScroll` 事件 [892](https://github.com/mallfoundry/taroify/pull/892) [@hbztd](https://github.com/hbztd)
+
+- Tabs
+
+  - 新增 `shrink` 属性 [892](https://github.com/mallfoundry/taroify/pull/892) [@hbztd](https://github.com/hbztd)
+
+- Field
+
+  - Input、Textarea 设置 `min-height` 值为 `inherit` [892](https://github.com/mallfoundry/taroify/pull/892) [@hbztd](https://github.com/hbztd)
+
+- Switch
+
+  - 开关组件按有赞美化 [894](https://github.com/mallfoundry/taroify/pull/894) [@wenqiyun](https://github.com/wenqiyun)
+
+**Bug Fixes**
+
+- SafeArea
+
+  - 替换成 getWindowInfo 方法 [885](https://github.com/mallfoundry/taroify/pull/885) [@Pilotager](https://github.com/Pilotager)
+
+- FixedView
+
+  - 修复设置 placheholder 后 render 过程中 children 会重建 [892](https://github.com/mallfoundry/taroify/pull/892) [@hbztd](https://github.com/hbztd)
+
+- Navbar
+
+  - 修复设置 placheholder 后 render 过程中 children 会重建 [892](https://github.com/mallfoundry/taroify/pull/892) [@hbztd](https://github.com/hbztd)
+
+- Dialog
+
+  - 消除节点新增删除带来的副作用 [896](https://github.com/mallfoundry/taroify/pull/896) [@wenqiyun](https://github.com/wenqiyun)
+
 ### v0.6.3-alpha.0
 
 `2025-01-05`
