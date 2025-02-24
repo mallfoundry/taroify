@@ -1,8 +1,8 @@
 import { createContext } from "react"
 import {
-  CalendarDayObject,
-  CalendarType,
-  CalendarValueType,
+  type CalendarDayObject,
+  type CalendarType,
+  type CalendarValueType,
   MAX_DATE,
   MIN_DATE,
 } from "./calendar.shared"

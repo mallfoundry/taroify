@@ -1,11 +1,11 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useCallback, useContext } from "react"
+import { type ReactNode, useCallback, useContext } from "react"
 import { prefixClassname } from "../styles"
 import CalendarContext from "./calendar.context"
-import { CalendarDayType } from "./calendar.shared"
+import type { CalendarDayType } from "./calendar.shared"
 
 export interface CalendarDayProps extends ViewProps {
   type: CalendarDayType

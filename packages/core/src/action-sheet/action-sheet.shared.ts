@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import Sheet from "../sheet"
+import type { ReactNode } from "react"
+import type Sheet from "../sheet"
 
 export interface ActionSheetActionObject extends Sheet.ItemObject {
   name?: ReactNode

@@ -40,6 +40,9 @@
       }
     }
   },
+  "organizeImports": {
+    "enabled": false
+  },
   "formatter": {
     "lineWidth": 100,
     "indentStyle": "space"
@@ -52,6 +55,9 @@
   "javascript": {
     "parser": {
       "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "semicolons": "asNeeded"
     }
   }
 }

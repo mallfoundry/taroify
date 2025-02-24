@@ -1,5 +1,5 @@
-import { ViewProps } from "@tarojs/components"
-import { AreaData } from "./area-picker.shared"
+import type { ViewProps } from "@tarojs/components"
+import type { AreaData } from "./area-picker.shared"
 
 interface AreaPickerColumnsProps extends Omit<ViewProps, "children"> {
   children?: AreaData

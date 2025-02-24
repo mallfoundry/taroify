@@ -13,7 +13,6 @@ interface UseUncontrolledOptions<S> {
 export default function useUncontrolled<S>(options: UseUncontrolledOptions<S> = {}) {
   const { defaultValue, value: valueProp, onChange } = options
   const forceUpdate = useForceUpdate()
-  //
   const valueRef = useToRef(valueProp)
   const stateRef = useRef(defaultValue ?? valueRef.current)
 
@@ -21,6 +20,7 @@ export default function useUncontrolled<S>(options: UseUncontrolledOptions<S> = 
     stateRef.current = valueRef.current
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const setValue = useCallback(
     (newValue: S, emitChange?: (aValue: S) => void) => {
       // When state was changed,
@@ -34,19 +34,18 @@ export default function useUncontrolled<S>(options: UseUncontrolledOptions<S> = 
         ;(emitChange ?? onChange)?.(newValue)
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [onChange],
   )
 
   const getValue = useCallback(() => stateRef.current as S, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   return useMemo(
     () => ({
       value: stateRef.current,
       getValue,
       setValue,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [stateRef.current, getValue, setValue],
   )
 }

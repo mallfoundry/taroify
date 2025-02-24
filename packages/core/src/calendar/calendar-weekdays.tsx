@@ -5,9 +5,7 @@ import { useContext } from "react"
 import { prefixClassname } from "../styles"
 import CalendarContext from "./calendar.context"
 
-interface CalendarWeekdaysProps {}
-
-function CalendarWeekdays(props: CalendarWeekdaysProps) {
+function CalendarWeekdays() {
   const { firstDayOfWeek } = useContext(CalendarContext)
   const weekdays = ["日", "一", "二", "三", "四", "五", "六"]
 

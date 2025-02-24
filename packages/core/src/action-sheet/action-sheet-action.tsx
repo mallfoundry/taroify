@@ -1,9 +1,9 @@
-import { ITouchEvent, View } from "@tarojs/components"
+import { type ITouchEvent, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
-import ButtonBase, { ButtonBaseProps } from "../button-base"
-import Sheet, { SheetItemProps } from "../sheet"
+import { type ReactNode, useContext } from "react"
+import ButtonBase, { type ButtonBaseProps } from "../button-base"
+import Sheet, { type SheetItemProps } from "../sheet"
 import { prefixClassname } from "../styles"
 import ActionSheetContext from "./action-sheet.context"
 

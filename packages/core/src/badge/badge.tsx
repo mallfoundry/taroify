@@ -1,9 +1,9 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useMemo, cloneElement } from "react"
+import { type CSSProperties, type ReactNode, useMemo, cloneElement } from "react"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
 
@@ -65,16 +65,18 @@ function Badge(props: BadgeProps): JSX.Element {
     // @ts-ignore
     return cloneElement(contentProp, {
       className,
-      children
+      children,
       // omit(props, 'content')
     })
   }
 
   if (hasChildren) {
-    return  <View className={classNames(prefixClassname("badge-wrapper"), className)} >
-      {children}
-      {(dot || content) && badge}
-    </View>
+    return (
+      <View className={classNames(prefixClassname("badge-wrapper"), className)}>
+        {children}
+        {(dot || content) && badge}
+      </View>
+    )
   }
 
   return badge

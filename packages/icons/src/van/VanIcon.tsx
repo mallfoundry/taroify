@@ -2,14 +2,14 @@ import { View } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import {
   ICON_PRESET_COLORS,
   ICON_PRESET_SIZES,
   ICON_TYPE,
-  IconColor,
-  IconProps,
-  IconSize,
+  type IconColor,
+  type IconProps,
+  type IconSize,
 } from "../shared"
 import { addUnitPx } from "../utils/unit"
 
