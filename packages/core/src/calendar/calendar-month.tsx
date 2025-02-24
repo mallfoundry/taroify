@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import {
   forwardRef,
-  ReactNode,
+  type ReactNode,
   useCallback,
   useContext,
   useImperativeHandle,
@@ -16,9 +16,9 @@ import { useHeight } from "../hooks"
 import CalendarDay from "./calendar-day"
 import CalendarContext from "./calendar.context"
 import {
-  CalendarDayObject,
-  CalendarDayType,
-  CalendarType,
+  type CalendarDayObject,
+  type CalendarDayType,
+  type CalendarType,
   compareDate,
   createNextDay,
   createPreviousDay,
@@ -70,9 +70,14 @@ interface CalendarMonthProps {
 const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
   (props: CalendarMonthProps, ref) => {
     const { value: monthValue = new Date(), watermark, showMonthTitle } = props
-    const { type, firstDayOfWeek, min, max, value: currentValue, formatter } = useContext(
-      CalendarContext,
-    )
+    const {
+      type,
+      firstDayOfWeek,
+      min,
+      max,
+      value: currentValue,
+      formatter,
+    } = useContext(CalendarContext)
 
     const monthRef = useRef()
     // const daysRef = useRef()
@@ -82,9 +87,10 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
     const month = useMemo(() => monthValue.getMonth() + 1, [monthValue])
     const id = useMemo(() => genMonthId(monthValue), [monthValue])
 
-    const title = useMemo(() => `${monthValue.getFullYear()}年${monthValue.getMonth() + 1}月`, [
-      monthValue,
-    ])
+    const title = useMemo(
+      () => `${monthValue.getFullYear()}年${monthValue.getMonth() + 1}月`,
+      [monthValue],
+    )
 
     const offset = useMemo(() => {
       const realDay = monthValue.getDay()
@@ -227,7 +233,7 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
       () =>
         _.map(days, (day, index) => (
           <CalendarDay
-            key={index}
+            key={`${day.value}-${index}`}
             className={day.className}
             style={{ marginLeft: index === 0 ? `${(100 * offset) / 7}%` : "" }}
             value={day.value}
@@ -242,7 +248,9 @@ const CalendarMonth = forwardRef<CalendarMonthInstance, CalendarMonthProps>(
 
     return (
       <View id={id} ref={monthRef} className={prefixClassname("calendar__month")}>
-        {showMonthTitle && <View className={prefixClassname("calendar__month-title")} children={title} />}
+        {showMonthTitle && (
+          <View className={prefixClassname("calendar__month-title")} children={title} />
+        )}
         <View className={prefixClassname("calendar__days")}>
           {watermark && <CalendarMonthWatermark children={month} />}
           {content}

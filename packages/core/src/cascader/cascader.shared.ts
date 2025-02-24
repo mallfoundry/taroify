@@ -1,6 +1,6 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 export interface CascaderEventOption {
   key?: string | number
