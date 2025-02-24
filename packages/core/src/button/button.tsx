@@ -1,18 +1,18 @@
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
-import { ButtonProps as TaroButtonProps, View } from "@tarojs/components"
+import { type ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { cloneElement, ReactElement, ReactNode, useContext, useMemo } from "react"
+import { cloneElement, type ReactElement, type ReactNode, useContext, useMemo } from "react"
 import ButtonBase from "../button-base"
-import Loading, { LoadingProps } from "../loading"
+import Loading, { type LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
 import Children from "../utils/children"
 import { isElementOf, isObjectElement } from "../utils/validate"
 import ButtonContent from "./button-content"
 import ButtonGroupContext from "./button-group.context"
 import ButtonContext from "./button.context"
-import {
+import type {
   ButtonColor,
   ButtonFormType,
   ButtonShape,
@@ -98,6 +98,7 @@ function useButtonChildren(options: UseButtonChildrenOptions) {
             return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
           }
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <View key={index} className={prefixClassname("button__text")}>
               {child}
             </View>
