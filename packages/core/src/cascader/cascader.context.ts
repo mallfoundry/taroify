@@ -1,5 +1,5 @@
-import { ITouchEvent } from "@tarojs/components"
-import { createContext, ReactNode } from "react"
+import type { ITouchEvent } from "@tarojs/components"
+import { type ReactNode, createContext } from "react"
 
 interface CascaderContextValue {
   title?: ReactNode

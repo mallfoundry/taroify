@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ReactNode } from "react"
+import type { ViewProps } from "@tarojs/components/types/View"
 export type CellSize = "medium" | "large"
 
 export type CellAlign = "start" | "center" | "end"
