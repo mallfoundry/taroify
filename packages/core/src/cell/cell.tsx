@@ -1,10 +1,10 @@
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import CellBase from "./cell-base"
 import CellBrief from "./cell-brief"
 import CellTitle from "./cell-title"
 import CellValue from "./cell-value"
-import { CellBaseProps } from "./cell.shared"
+import type { CellBaseProps } from "./cell.shared"
 
 export interface CellProps extends CellBaseProps {
   title?: ReactNode

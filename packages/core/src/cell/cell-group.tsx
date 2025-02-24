@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
 
@@ -15,7 +15,15 @@ interface CellGroupProps extends ViewProps {
 }
 
 export function CellGroup(props: CellGroupProps) {
-  const { title, clickable = false, inset = false, bordered = true, children, className, ...restProps } = props
+  const {
+    title,
+    clickable = false,
+    inset = false,
+    bordered = true,
+    children,
+    className,
+    ...restProps
+  } = props
   return (
     <CellGroupContext.Provider
       value={{
