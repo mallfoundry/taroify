@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { CheckboxGroupDirection } from "./checkbox-group.shared"
+import type { CheckboxGroupDirection } from "./checkbox-group.shared"
 
 interface CheckboxGroupContextValue {
   value?: any[]
