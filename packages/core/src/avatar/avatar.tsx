@@ -1,11 +1,11 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import Image from "../image"
 import { prefixClassname } from "../styles"
-import { AvatarShape, AvatarSize } from "./avatar.shared"
+import type { AvatarShape, AvatarSize } from "./avatar.shared"
 
 export interface AvatarProps extends ViewProps {
   className?: string
@@ -38,21 +38,21 @@ function Avatar(props: AvatarProps) {
       )}
       {...restProps}
     >
-      {
-        src ?
-          <Image
-            alt={alt}
-            shape={shape}
-            src={src}
-            className={classNames({
-              [prefixClassname("avatar__image--mini")]: size === "mini",
-              [prefixClassname("avatar__image--small")]: size === "small",
-              [prefixClassname("avatar__image--medium")]: size === "medium",
-              [prefixClassname("avatar__image--large")]: size === "large",
-            })}
-          /> :
-          children
-        }
+      {src ? (
+        <Image
+          alt={alt}
+          shape={shape}
+          src={src}
+          className={classNames({
+            [prefixClassname("avatar__image--mini")]: size === "mini",
+            [prefixClassname("avatar__image--small")]: size === "small",
+            [prefixClassname("avatar__image--medium")]: size === "medium",
+            [prefixClassname("avatar__image--large")]: size === "large",
+          })}
+        />
+      ) : (
+        children
+      )}
     </View>
   )
 }

@@ -1,6 +1,6 @@
 import FixedView from "@taroify/core/fixed-view"
-import Flex, { FlexProps } from "@taroify/core/flex"
-import { SafeAreaPosition } from "@taroify/core/safe-area"
+import Flex, { type FlexProps } from "@taroify/core/flex"
+import type { SafeAreaPosition } from "@taroify/core/safe-area"
 import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"

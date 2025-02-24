@@ -1,11 +1,11 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 import ButtonGroupContext from "./button-group.context"
-import { ButtonColor, ButtonSize, ButtonVariant } from "./button.shared"
+import type { ButtonColor, ButtonSize, ButtonVariant } from "./button.shared"
 
 interface ButtonGroupProps extends PropsWithChildren<ViewProps> {
   variant?: ButtonVariant

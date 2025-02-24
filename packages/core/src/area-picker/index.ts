@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react"
+import type { FunctionComponent } from "react"
 import Picker from "../picker"
-import AreaPickerComponent, { AreaPickerProps } from "./area-picker"
+import AreaPickerComponent, { type AreaPickerProps } from "./area-picker"
 import AreaPickerColumns from "./area-picker-columns"
 
 interface AreaPickerInterface extends FunctionComponent<AreaPickerProps> {

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useMemo, useRef, Children, ReactElement } from "react"
+import { useMemo, useRef, Children, type ReactElement } from "react"
 import { useUncontrolled } from "@taroify/hooks"
 import Picker from "../picker"
 import type { PickerBaseProps } from "../picker/picker"
@@ -62,6 +62,7 @@ function AreaPicker({
     [areaList, columnsNum],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const columns = useMemo(() => {
     const ret: PickerOptionData[] = [origin]
     let parent = origin
@@ -77,15 +78,15 @@ function AreaPicker({
     }
 
     return ret
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [origin, value])
-  const handleChange = useMemoizedFn((val, option, column) => {
-    val = Array.isArray(val) && val.length? val : [val]
 
-    const idx = val.findIndex((item) => item === option.value)
-    let newVal
+  const handleChange = useMemoizedFn((val, option, column) => {
+    const valCache = Array.isArray(val) && val.length ? val : [val]
+
+    const idx = valCache.findIndex((item) => item === option.value)
+    let newVal: string[] = []
     if (idx === 0) {
-      newVal = [val[0]]
+      newVal = [valCache[0]]
       if (columnsNum > 1) {
         const province = provinceMap.get(option.value.slice(0, 2))
         const city = province?.children?.[0]
@@ -96,7 +97,7 @@ function AreaPicker({
       }
     } else if (idx === 1) {
       const city = cityMap.get(option.value.slice(0, 4))
-      newVal = [val[0], city?.value]
+      newVal = [valCache[0], city?.value]
       if (columnsNum > 2) {
         newVal.push(city?.children?.[0]?.value)
       }

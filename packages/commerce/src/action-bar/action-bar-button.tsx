@@ -1,9 +1,9 @@
-import Button, { ButtonProps } from "@taroify/core/button"
+import Button, { type ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import classnames from "classnames"
 import * as React from "react"
-import { CSSProperties, PropsWithChildren } from "react"
-import { ActionBarButtonColor, ActionBarButtonShape } from "./action-bar.shared"
+import type { CSSProperties, PropsWithChildren } from "react"
+import type { ActionBarButtonColor, ActionBarButtonShape } from "./action-bar.shared"
 
 export interface ActionBarButtonProps
   extends PropsWithChildren<Omit<ButtonProps, "shape" | "color" | "block">> {

@@ -29,11 +29,7 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch"
   },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
+  "browserslist": ["last 3 versions", "Android >= 4.1", "ios >= 8"],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@taroify/commerce": "^0.6.4-alpha.0",

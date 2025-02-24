@@ -1,5 +1,5 @@
-import { ViewProps } from "@tarojs/components/types/View"
-import { CSSProperties, ReactNode } from "react"
+import type { ViewProps } from "@tarojs/components/types/View"
+import type { CSSProperties, ReactNode } from "react"
 
 export const ICON_TYPE = Symbol("__iconType__")
 

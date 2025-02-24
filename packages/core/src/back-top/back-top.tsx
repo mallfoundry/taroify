@@ -1,8 +1,8 @@
 import * as React from "react"
-import { CSSProperties, FC, useMemo, useState, useRef, useEffect } from "react"
+import { type CSSProperties, type FC, useMemo, useState, useRef, useEffect } from "react"
 import { usePageScroll, nextTick } from "@tarojs/taro"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import { BackTop as BackTopIcon } from "@taroify/icons"
 import { prefixClassname } from "../styles"
@@ -48,6 +48,7 @@ const BackTop: FC<BackTopProps> = (props) => {
     setVisible(scrollParent.current ? top >= offset : false)
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const rootStyle = useMemo(
     () => ({
       zIndex,
@@ -58,7 +59,7 @@ const BackTop: FC<BackTopProps> = (props) => {
   )
 
   const onClick = (event: ITouchEvent) => {
-    onClickProp?.(event);
+    onClickProp?.(event)
     if (inBrowser) {
       scrollParent.current?.scrollTo({
         top: 0,

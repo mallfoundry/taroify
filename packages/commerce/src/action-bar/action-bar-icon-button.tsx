@@ -1,10 +1,16 @@
-import Button, { ButtonProps } from "@taroify/core/button"
+import Button, { type ButtonProps } from "@taroify/core/button"
 import { prefixClassname } from "@taroify/core/styles"
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import Badge from "@taroify/core/badge"
 import classnames from "classnames"
 import * as React from "react"
-import { Children, CSSProperties, PropsWithChildren, ReactNode, useMemo } from "react"
+import {
+  Children,
+  useMemo,
+  type CSSProperties,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react"
 
 function useActionBarIconButtonChildren(
   children?: ReactNode,
@@ -14,7 +20,14 @@ function useActionBarIconButtonChildren(
     () =>
       Children.toArray(children).map((child, index) => {
         if (isIconElement(child)) {
-          return <Badge content={badge} children={cloneIconElement(child, { className: prefixClassname("action-bar-icon-button__icon") })}  />
+          return (
+            <Badge
+              content={badge}
+              children={cloneIconElement(child, {
+                className: prefixClassname("action-bar-icon-button__icon"),
+              })}
+            />
+          )
         }
         return child
       }),

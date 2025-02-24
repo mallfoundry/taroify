@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@tarojs/components"
+import { Button, type ButtonProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"

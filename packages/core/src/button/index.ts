@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react"
-import ButtonComponent, { ButtonProps } from "./button"
+import type { FunctionComponent } from "react"
+import ButtonComponent, { type ButtonProps } from "./button"
 import ButtonContent from "./button-content"
 import ButtonGroup from "./button-group"
 
@@ -8,7 +8,7 @@ export { createButton } from "./button"
 export type { ButtonProps } from "./button"
 export { default as ButtonContext } from "./button.context"
 
-export type { ButtonThemeVars } from './button.shared'
+export type { ButtonThemeVars } from "./button.shared"
 
 interface ButtonInterface extends FunctionComponent<ButtonProps> {
   Content: typeof ButtonContent

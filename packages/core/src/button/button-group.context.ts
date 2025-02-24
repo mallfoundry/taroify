@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { ButtonColor, ButtonShape, ButtonSize, ButtonVariant } from "./button.shared"
+import type { ButtonColor, ButtonShape, ButtonSize, ButtonVariant } from "./button.shared"
 
 interface ButtonGroupContextValue {
   variant?: ButtonVariant

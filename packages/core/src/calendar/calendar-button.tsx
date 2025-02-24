@@ -1,19 +1,27 @@
-import { ITouchEvent } from "@tarojs/components"
+import type { ITouchEvent } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { useContext, useMemo } from "react"
-import Button, { ButtonProps } from "../button"
+import { useContext, useMemo, type ReactNode } from "react"
+import Button, { type ButtonProps } from "../button"
 import { prefixClassname } from "../styles"
 import CalendarContext from "./calendar.context"
 
 export interface CalendarButtonProps extends ButtonProps {
   type?: "confirm"
-  confirmText?: React.ReactNode
-  confirmDisabledText?: React.ReactNode
+  confirmText?: ReactNode
+  confirmDisabledText?: ReactNode
 }
 
 function CalendarButton(props: CalendarButtonProps) {
-  const { className, confirmText, confirmDisabledText, type = "confirm", children = "确定", onClick, ...restProps } = props
+  const {
+    className,
+    confirmText,
+    confirmDisabledText,
+    type = "confirm",
+    children = "确定",
+    onClick,
+    ...restProps
+  } = props
   const confirm = type === "confirm"
   const { value: currentValue, type: ctxType, onConfirm } = useContext(CalendarContext)
 
@@ -49,10 +57,7 @@ function CalendarButton(props: CalendarButtonProps) {
       }}
       {...restProps}
     >
-      {
-        props.children ? children :
-          disabled ? confirmDisabledText : confirmText
-      }
+      {props.children ? children : disabled ? confirmDisabledText : confirmText}
     </Button>
   )
 }
