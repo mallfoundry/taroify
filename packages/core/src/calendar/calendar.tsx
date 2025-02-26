@@ -1,6 +1,6 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { ScrollView, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { nextTick, getEnv } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -8,8 +8,9 @@ import * as React from "react"
 import {
   Children,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
+  type FC,
   useEffect,
   useMemo,
   useRef,
@@ -27,13 +28,13 @@ import { useMemoizedFn } from "../hooks"
 import CalendarFooter from "./calendar-footer"
 import CalendarButton from "./calendar-button"
 import CalendarHeader from "./calendar-header"
-import CalendarMonth, { CalendarMonthInstance } from "./calendar-month"
+import CalendarMonth, { type CalendarMonthInstance } from "./calendar-month"
 import CalendarContext from "./calendar.context"
 import {
-  CalendarDayObject,
-  CalendarType,
-  CalendarValueType,
-  CalendarSubtitle,
+  type CalendarDayObject,
+  type CalendarType,
+  type CalendarValueType,
+  type CalendarSubtitle,
   compareDate,
   compareYearMonth,
   createNextDay,
@@ -43,7 +44,6 @@ import {
   MIN_DATE,
   genMonthId,
 } from "./calendar.shared"
-
 
 function defaultSubtitleRender(date: Date) {
   return `${date.getFullYear()}年${date.getMonth() + 1}月`
@@ -114,9 +114,12 @@ function Calendar(props: CalendarProps) {
     onConfirm,
     onClose,
   } = props
-  const scrollToDateLoadingRef = useRef(false);
-  const Wrapper = useMemo<React.FC<PopupProps>>(() => poppable ? Popup : ({children}) => <>{children}</>, [poppable])
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const scrollToDateLoadingRef = useRef(false)
+  const Wrapper = useMemo<FC<PopupProps>>(
+    () => (poppable ? Popup : ({ children }) => <>{children}</>),
+    [poppable],
+  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const defaultValue = useMemo(() => getInitialDate(defaultValueProp), [])
   const { value, setValue } = useUncontrolled({
     defaultValue,
@@ -136,9 +139,15 @@ function Calendar(props: CalendarProps) {
       }
     })
     if (!_footer && showConfirm) {
-      _footer = <CalendarFooter>
-        <CalendarButton type="confirm" confirmText={confirmText} confirmDisabledText={confirmDisabledText}  />
-      </CalendarFooter>
+      _footer = (
+        <CalendarFooter>
+          <CalendarButton
+            type="confirm"
+            confirmText={confirmText}
+            confirmDisabledText={confirmDisabledText}
+          />
+        </CalendarFooter>
+      )
     }
     return _footer
   }
@@ -148,7 +157,7 @@ function Calendar(props: CalendarProps) {
 
   const hasConfirmRef = useRef(false)
 
-  const [currentMonth, setCurrentMonth] = useState<Date>();
+  const [currentMonth, setCurrentMonth] = useState<Date>()
 
   const changeValueRef = useRef<CalendarValueType>()
 
@@ -312,6 +321,7 @@ function Calendar(props: CalendarProps) {
     }
 
     let height = 0
+    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
     let currentMonthRef
 
     for (let i = 0; i < months.length; i++) {
@@ -361,7 +371,6 @@ function Calendar(props: CalendarProps) {
           })
         }
 
-
         return true
       }
       return false
@@ -374,9 +383,9 @@ function Calendar(props: CalendarProps) {
       return
     }
     if (newValue) {
-      const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0];
+      const targetDate = type === "single" ? (newValue as Date) : (newValue as Date[])[0]
       if (_.isDate(targetDate)) {
-        scrollToDate(targetDate);
+        scrollToDate(targetDate)
       }
     }
   }
@@ -386,33 +395,33 @@ function Calendar(props: CalendarProps) {
   const init = useMemoizedFn(() => {
     if (poppable && !showPopup) {
       setScrollIntoView("")
-      return;
+      return
     }
 
     raf(async () => {
       // add Math.floor to avoid decimal height issues
       // https://github.com/vant-ui/vant/issues/5640
       const bodyHeight = (await getRect(scrollViewRef)).height
-      scrollViewHeightRef.current = Math.floor(bodyHeight);
+      scrollViewHeightRef.current = Math.floor(bodyHeight)
       reset(getInitialDate(value))
-    });
+    })
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (value !== changeValueRef.current) {
       reset(getInitialDate(value))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     reset(getInitialDate(value))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, minValue, maxValue])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     init()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showPopup])
 
   const monthsRender = useMemo(() => {
@@ -453,8 +462,14 @@ function Calendar(props: CalendarProps) {
         onConfirm: handleConfirm,
       }}
     >
-      <Wrapper rounded={popupRounded} placement={popupPlacement} open={showPopup} onClose={onClose} className={classNames(prefixClassname("calendar--popup"))}>
-        {(poppable && showPopup && popupCloseIcon) && <Popup.Close /> }
+      <Wrapper
+        rounded={popupRounded}
+        placement={popupPlacement}
+        open={showPopup}
+        onClose={onClose}
+        className={classNames(prefixClassname("calendar--popup"))}
+      >
+        {poppable && showPopup && popupCloseIcon && <Popup.Close />}
         <View
           className={classNames(
             prefixClassname("calendar"),
@@ -463,7 +478,12 @@ function Calendar(props: CalendarProps) {
           )}
           style={style}
         >
-          <CalendarHeader title={title} subtitle={subtitle} date={currentMonth} showSubtitle={showSubtitle}  />
+          <CalendarHeader
+            title={title}
+            subtitle={subtitle}
+            date={currentMonth}
+            showSubtitle={showSubtitle}
+          />
           <ScrollView
             ref={scrollViewRef}
             className={prefixClassname("calendar__body")}
