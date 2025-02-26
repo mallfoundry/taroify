@@ -1,12 +1,12 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import CheckboxGroupContext from "./checkbox-group.context"
-import { CheckboxGroupDirection } from "./checkbox-group.shared"
+import type { CheckboxGroupDirection } from "./checkbox-group.shared"
 
 export interface CheckboxGroupProps<T = any> extends ViewProps {
   defaultValue?: T[]

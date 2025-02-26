@@ -23,7 +23,6 @@ exports.serveDemo = () => {
     cwd: "packages/demo",
     stdio: "inherit",
   }).catch((e) => {
-    // eslint-disable-next-line no-console
     console.error(e)
   })
 }
@@ -33,7 +32,6 @@ exports.serveSite = () => {
     cwd: "site",
     stdio: "inherit",
   }).catch((e) => {
-    // eslint-disable-next-line no-console
     console.error(e)
   })
 }

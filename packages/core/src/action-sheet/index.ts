@@ -21,7 +21,6 @@ ActionSheet.Header = ShareSheetHeader
 ActionSheet.Action = ActionSheetAction
 ActionSheet.Button = Sheet.Button
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace ActionSheet {
   export type ActionObject = ActionSheetActionObject
 }

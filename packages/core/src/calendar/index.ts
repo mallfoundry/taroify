@@ -17,7 +17,6 @@ const Calendar = CalendarComponent as CalendarInterface
 Calendar.Footer = CalendarFooter
 Calendar.Button = CalendarButton
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Calendar {
   export type DayObject = CalendarDayObject
 }
