@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef } from "react"
 import { useMemoizedFn, useUpdate } from "../hooks"
 import { cancelRaf, raf } from "../utils/raf"
 import { useToRef } from "../utils/state"
-import { CurrentTime } from "./countdown.shared"
+import type { CurrentTime } from "./countdown.shared"
 
 type CountdownStatus = "started" | "paused" | "stopped"
 
@@ -77,10 +77,7 @@ export default function useCountdown(options: UseCountdownOptions) {
       if (statusRef.current === "started") {
         const remain = Math.max(endTimeRef.current - Date.now(), 0)
 
-        if (
-          !isSameTime(remain, remainRef.current, intervalRef.current) ||
-          remain === 0
-        ) {
+        if (!isSameTime(remain, remainRef.current, intervalRef.current) || remain === 0) {
           remainRef.current = remain
           update()
           // current is immutable,
@@ -109,75 +106,54 @@ export default function useCountdown(options: UseCountdownOptions) {
     statusRef.current = "paused"
   }, [clearRaf])
 
-  const stop = useCallback(
-    () => {
-      clearRaf()
-      statusRef.current = "stopped"
-    },
-    [clearRaf],
-  )
+  const stop = useCallback(() => {
+    clearRaf()
+    statusRef.current = "stopped"
+  }, [clearRaf])
 
-  const start = useCallback(
-    () => {
-      if (statusRef.current !== "started") {
-        // If status is paused, set endTime to now() + remain.
-        // If status is stopped, set endTime to now() + initial value.
-        endTimeRef.current =
-          Date.now() + (statusRef.current === "paused" ? remainRef.current : valueRef.current)
-        statusRef.current = "started"
-        macroTick()
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const start = useCallback(() => {
+    if (statusRef.current !== "started") {
+      // If status is paused, set endTime to now() + remain.
+      // If status is stopped, set endTime to now() + initial value.
+      endTimeRef.current =
+        Date.now() + (statusRef.current === "paused" ? remainRef.current : valueRef.current)
+      statusRef.current = "started"
+      macroTick()
+    }
+  }, [])
 
-  const autostart = useCallback(
-    () => {
-      if (autostartRef.current) {
-        start()
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
-
-  const reset = useCallback(
-    () => {
-      stop()
-      autostart()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
-
-  const restart = useCallback(
-    () => {
-      stop()
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const autostart = useCallback(() => {
+    if (autostartRef.current) {
       start()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+    }
+  }, [])
 
-  useEffect(
-    () => {
-      autostart();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const reset = useCallback(() => {
+    stop()
+    autostart()
+  }, [])
 
-      return () => {
-        stop()
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const restart = useCallback(() => {
+    stop()
+    start()
+  }, [])
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    autostart()
+
+    return () => {
+      stop()
+    }
+  }, [])
 
   // Update remain to next value
-  useEffect(
-    () => restart(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [valueProp],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => restart(), [valueProp])
 
   return useMemo(
     () => ({

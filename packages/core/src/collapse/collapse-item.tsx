@@ -1,12 +1,12 @@
 import { ArrowRight } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
-  CSSProperties,
-  ReactNode,
+  type CSSProperties,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,

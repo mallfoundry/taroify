@@ -1,5 +1,5 @@
 import * as _ from "lodash"
-import {padZero} from "../utils/format/number";
+import { padZero } from "../utils/format/number"
 
 const REGEX_FORMAT = /\[([^\]]+)]|D{1,2}|H{1,2}|h{1,2}|m{1,2}|s{1,2}|S{1,3}/g
 
