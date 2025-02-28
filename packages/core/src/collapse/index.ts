@@ -1,7 +1,7 @@
-import CollapseElement, { CollapseProps } from "./collapse"
+import CollapseElement, { type CollapseProps } from "./collapse"
 import CollapseItem from "./collapse-item"
 
-export type { CollapseThemeVars } from './collapse.shared'
+export type { CollapseThemeVars } from "./collapse.shared"
 
 interface CollapseInterface {
   (props: CollapseProps): JSX.Element
