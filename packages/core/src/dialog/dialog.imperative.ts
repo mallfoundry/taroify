@@ -1,8 +1,8 @@
 import * as _ from "lodash"
-import { createElement, isValidElement, ReactNode } from "react"
-import { document, TaroNode } from "@tarojs/runtime"
+import { createElement, isValidElement, type ReactNode } from "react"
+import { document, type TaroNode } from "@tarojs/runtime"
 import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
-import { dialogEvents, dialogSelectorSet, DialogOptions } from "./dialog.shared"
+import { dialogEvents, dialogSelectorSet, type DialogOptions } from "./dialog.shared"
 import Dialog from "./dialog"
 
 const initialDialogOptions: DialogOptions = {
@@ -53,7 +53,10 @@ export function openDialog(args: ReactNode | DialogOptions) {
       onTransitionExited?.()
       unmountPortal(dialogView)
     }
-    mountPortal(createElement(Dialog, {...restOptions, defaultOpen:true}) as unknown as TaroNode, dialogView)
+    mountPortal(
+      createElement(Dialog, { ...restOptions, defaultOpen: true }) as unknown as TaroNode,
+      dialogView,
+    )
   }
 }
 

@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 type DialogContentAlign = "left" | "center" | "right"

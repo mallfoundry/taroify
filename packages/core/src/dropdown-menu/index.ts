@@ -1,8 +1,8 @@
-import { default as DropdownMenuElement, DropdownMenuProps } from "./dropdown-menu"
+import { default as DropdownMenuElement, type DropdownMenuProps } from "./dropdown-menu"
 import DropdownMenuItem from "./dropdown-menu-item"
 import DropdownMenuOption from "./dropdown-menu-option"
 
-export type { DropdownMenuThemeVars } from './dropdown-menu.shared'
+export type { DropdownMenuThemeVars } from "./dropdown-menu.shared"
 
 interface DropdownMenuInterface {
   (props: DropdownMenuProps): JSX.Element

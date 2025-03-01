@@ -1,17 +1,24 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { ScrollView, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext, useMemo, useState } from "react"
-import { ExitHandler } from "react-transition-group/Transition"
+import {
+  type CSSProperties,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react"
+import type { ExitHandler } from "react-transition-group/Transition"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
 import DropdownMenuContext from "./dropdown-menu.context"
-import { DropdownMenuItemOption, DropdownMenuOptionEvent } from "./dropdown-menu.shared"
+import type { DropdownMenuItemOption, DropdownMenuOptionEvent } from "./dropdown-menu.shared"
 import DropdownMenuOption from "./dropdown-menu-option"
 
 export interface DropdownMenuItemProps extends ViewProps {

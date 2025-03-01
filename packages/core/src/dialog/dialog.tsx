@@ -1,25 +1,25 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { ITouchEvent } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ITouchEvent } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
   useMemo,
-  useState
+  useState,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
 } from "react"
 import Backdrop from "../backdrop"
-import { ButtonProps, createButton } from "../button"
+import { type ButtonProps, createButton } from "../button"
 import ButtonContext from "../button/button.context"
-import Popup, { PopupBackdropProps, usePopupBackdrop } from "../popup"
+import Popup, { type PopupBackdropProps, usePopupBackdrop } from "../popup"
 import { prefixClassname } from "../styles"
 import {
   getElementSelector,
@@ -33,25 +33,31 @@ import { useMemoizedFn } from "../hooks"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
 import DialogHeader from "./dialog-header"
-import { dialogEvents, dialogSelectorSet, DialogOptions, DialogMessageAlign, DialogActionsVariant } from "./dialog.shared"
+import {
+  dialogEvents,
+  dialogSelectorSet,
+  type DialogOptions,
+  type DialogMessageAlign,
+  type DialogActionsVariant,
+} from "./dialog.shared"
 
 export function useDialogOpen(cb: (options: DialogOptions) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     dialogEvents.on("open", cb)
     return () => {
       dialogEvents.off("open", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
 export function useDialogCancel(cb: (selector: string) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     dialogEvents.on("cancel", cb)
     return () => {
       dialogEvents.off("cancel", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
@@ -208,13 +214,29 @@ function Dialog(props: DialogProps) {
   })
 
   const [confirmLoading, setConfirmLoading] = useState(false)
-  const [cancelLoading, setCancelLoading]  = useState(false)
+  const [cancelLoading, setCancelLoading] = useState(false)
   const { onClick } = useContext(ButtonContext)
-  const { backdrop: backdropElement, header: headerChildren, content: contentChildren, actions: actionsChildren } = useDialogChildren(children)
+  const {
+    backdrop: backdropElement,
+    header: headerChildren,
+    content: contentChildren,
+    actions: actionsChildren,
+  } = useDialogChildren(children)
   const backdrop = usePopupBackdrop(backdropElement, backdropOptions)
-  const header = useMemo(() => headerChildren ?? renderHeader(titleProp), [headerChildren, titleProp])
-  const content = useMemo(() => contentChildren ?? renderContent(messageProp, messageAlignProp), [contentChildren, messageProp, messageAlignProp])
-  const actions = useMemo(() => actionsChildren ?? renderActions(confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading), [actionsChildren, confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading])
+  const header = useMemo(
+    () => headerChildren ?? renderHeader(titleProp),
+    [headerChildren, titleProp],
+  )
+  const content = useMemo(
+    () => contentChildren ?? renderContent(messageProp, messageAlignProp),
+    [contentChildren, messageProp, messageAlignProp],
+  )
+  const actions = useMemo(
+    () =>
+      actionsChildren ??
+      renderActions(confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading),
+    [actionsChildren, confirmProp, cancelProp, themeProp, confirmLoading, cancelLoading],
+  )
   const onConfirm = useMemoizedFn(async () => {
     try {
       let boolean = true
@@ -227,8 +249,7 @@ function Dialog(props: DialogProps) {
         onConfirmProp?.()
         setOpen(false)
       }
-    } catch(err) {
-      // eslint-disable-next-line no-console
+    } catch (err) {
       console.error(err)
     }
   })
@@ -244,8 +265,7 @@ function Dialog(props: DialogProps) {
         onCancelProp?.()
         setOpen(false)
       }
-    } catch(err) {
-      // eslint-disable-next-line no-console
+    } catch (err) {
       console.error(err)
     }
   })
@@ -273,13 +293,12 @@ function Dialog(props: DialogProps) {
     [onClose, setOpen],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     rootSelectorRef.current && dialogSelectorSet.add(rootSelectorRef.current)
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       rootSelectorRef.current && dialogSelectorSet.delete(rootSelectorRef.current)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useDialogOpen(

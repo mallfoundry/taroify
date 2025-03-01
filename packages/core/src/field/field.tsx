@@ -1,6 +1,18 @@
 import * as React from "react"
-import { ReactNode, useRef, useImperativeHandle, forwardRef, ForwardRefExoticComponent } from "react"
-import Form, { FormController, FormFeedbackProps, FormItemInstance, FormItemProps, FormLabelProps } from "../form"
+import {
+  type ReactNode,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+  type ForwardRefExoticComponent,
+} from "react"
+import Form, {
+  type FormController,
+  type FormFeedbackProps,
+  type FormItemInstance,
+  type FormItemProps,
+  type FormLabelProps,
+} from "../form"
 import { createVariantElement } from "../utils/element"
 
 export interface FieldProps extends Omit<FormItemProps, "children" | "noStyle" | "shouldUpdate"> {
@@ -15,11 +27,11 @@ function _Field(props: FieldProps, ref) {
   const feedback = createVariantElement(Form.Feedback, feedbackProp as ReactNode)
   const formItemRef = useRef<FormItemInstance>()
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useImperativeHandle(ref, () => formItemRef.current, [formItemRef])
 
   if ("noStyle" in restProps || "shouldUpdate" in restProps) {
-   // eslint-disable-next-line
-   console.warn('[Taroify] Field: not support noStyle & shouldUpdate property')
+    console.warn("[Taroify] Field: not support noStyle & shouldUpdate property")
   }
 
   return (

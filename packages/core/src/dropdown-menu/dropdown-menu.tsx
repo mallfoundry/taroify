@@ -1,6 +1,6 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
 import classnames from "classnames"
 import * as _ from "lodash"
@@ -9,24 +9,24 @@ import {
   Children,
   cloneElement,
   isValidElement,
-  Key,
-  MutableRefObject,
-  ReactElement,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
+  type Key,
+  type MutableRefObject,
+  type ReactElement,
+  type ReactNode,
 } from "react"
 import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getRect } from "../utils/dom/rect"
-import DropdownMenuItem, { DropdownMenuItemProps } from "./dropdown-menu-item"
-import DropdownMenuOption, { DropdownMenuOptionProps } from "./dropdown-menu-option"
+import DropdownMenuItem, { type DropdownMenuItemProps } from "./dropdown-menu-item"
+import DropdownMenuOption, { type DropdownMenuOptionProps } from "./dropdown-menu-option"
 import DropdownMenuTitle from "./dropdown-menu-title"
 import DropdownMenuContext from "./dropdown-menu.context"
-import { DropdownMenuDirection, DropdownMenuItemOption } from "./dropdown-menu.shared"
+import type { DropdownMenuDirection, DropdownMenuItemOption } from "./dropdown-menu.shared"
 
 function getDropdownMenuTitle(
   children?: ReactNode,

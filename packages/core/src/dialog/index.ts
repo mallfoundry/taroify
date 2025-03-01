@@ -1,4 +1,4 @@
-import DialogComponent, { DialogProps } from "./dialog"
+import DialogComponent, { type DialogProps } from "./dialog"
 import DialogActions from "./dialog-actions"
 import DialogContent from "./dialog-content"
 import DialogHeader from "./dialog-header"

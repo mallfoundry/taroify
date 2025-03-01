@@ -1,19 +1,20 @@
 import { Success } from "@taroify/icons"
-import { ITouchEvent } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ITouchEvent } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as React from "react"
-import { ReactNode, useCallback, useContext } from "react"
+import { type ReactNode, useCallback, useContext } from "react"
 import Cell from "../cell"
 import { prefixClassname } from "../styles"
 import DropdownMenuItemContext from "./dropdown-menu-item.context"
-import { DropdownMenuItemOption } from "./dropdown-menu.shared"
+import type { DropdownMenuItemOption } from "./dropdown-menu.shared"
 
-export type DropdownMenuOptionProps = ViewProps & DropdownMenuItemOption & {
-  disabled?: boolean
-  clickable?: boolean
-  children?: ReactNode
-}
+export type DropdownMenuOptionProps = ViewProps &
+  DropdownMenuItemOption & {
+    disabled?: boolean
+    clickable?: boolean
+    children?: ReactNode
+  }
 
 function DropdownMenuOption(props: DropdownMenuOptionProps) {
   const {

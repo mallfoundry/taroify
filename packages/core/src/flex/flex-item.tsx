@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext } from "react"
+import { type CSSProperties, type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
@@ -21,7 +21,7 @@ export default function FlexItem(props: FlexItemProps) {
   const [horizontalGutter] = gutters
 
   // Horizontal gutter use padding
-  const gutterStyle: React.CSSProperties = {}
+  const gutterStyle: CSSProperties = {}
   if (horizontalGutter) {
     const averagePadding = horizontalGutter / 2
     gutterStyle.paddingLeft = addUnitPx(averagePadding)

@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent } from "react"
-import FloatingPanelComponent, { FloatingPanelProps } from "./floating-panel"
+import type { ForwardRefExoticComponent } from "react"
+import FloatingPanelComponent, { type FloatingPanelProps } from "./floating-panel"
 
 export type { FloatingPanelThemeVars } from "./floating-panel.shared"
 
