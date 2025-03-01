@@ -1,5 +1,5 @@
 import Picker from "../picker"
-import DatetimePickerElement, { DatetimePickerProps } from "./datetime-picker"
+import DatetimePickerElement, { type DatetimePickerProps } from "./datetime-picker"
 
 interface DatetimePickerInterface {
   (props: DatetimePickerProps): JSX.Element

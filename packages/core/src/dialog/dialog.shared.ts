@@ -1,7 +1,7 @@
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { Events } from "@tarojs/taro"
-import { PopupBackdropProps } from "../popup"
-import { ButtonProps } from "../button"
+import type { PopupBackdropProps } from "../popup"
+import type { ButtonProps } from "../button"
 
 export type DialogActionsTheme = "round"
 export type DialogActionsVariant = "rounded"

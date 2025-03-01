@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as React from "react"
-import { Key, ReactNode, useContext, useMemo } from "react"
+import { type Key, type ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import DropdownMenuContext from "./dropdown-menu.context"
 

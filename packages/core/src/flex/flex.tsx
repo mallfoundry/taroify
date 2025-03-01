@@ -1,21 +1,21 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  useMemo,
   forwardRef,
   isValidElement,
-  ReactNode,
-  useMemo,
+  type ReactNode,
+  type CSSProperties,
 } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import FlexContext from "./flex.context"
-import { FlexAlign, FlexDirection, FlexGutter, FlexJustify, FlexWrap } from "./flex.shared"
+import type { FlexAlign, FlexDirection, FlexGutter, FlexJustify, FlexWrap } from "./flex.shared"
 
 function useFlexGutter(gutter?: FlexGutter): [undefined | number, undefined | number] {
   return useMemo(() => {

@@ -1,8 +1,8 @@
 import * as React from "react"
-import { forwardRef, CSSProperties, useMemo, useState, useRef, useEffect } from "react"
+import { forwardRef, type CSSProperties, useMemo, useState, useRef, useEffect } from "react"
 import { getSystemInfoSync, getEnv } from "@tarojs/taro"
 import { View, ScrollView } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import SafeArea from "../safe-area"
 import { prefixClassname } from "../styles"
@@ -74,6 +74,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
     [anchorsProp, boundary.min, boundary.max],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setHeight(closest(anchors, height))
   }, [boundary.max, boundary.min])

@@ -1,11 +1,11 @@
 import * as React from "react"
-import { ReactNode, FC, CSSProperties, Fragment, isValidElement } from "react"
+import { type CSSProperties, type FC, type ReactNode, Fragment, isValidElement } from "react"
 import { View, Image, Text } from "@tarojs/components"
 import classNames from "classnames"
 import { ArrowLeft } from "@taroify/icons"
 import { prefixClassname } from "../styles"
 import Backdrop from "../backdrop"
-import { FixedNavItem, FixedNavPosition, FixedNavDirection } from "./fixed-nav.shared"
+import type { FixedNavDirection, FixedNavItem, FixedNavPosition } from "./fixed-nav.shared"
 
 export interface FixedNavProps {
   className?: string

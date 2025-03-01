@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent } from "react"
-import FlexComponent, { FlexProps } from "./flex"
+import type { ForwardRefExoticComponent } from "react"
+import FlexComponent, { type FlexProps } from "./flex"
 import FlexItem from "./flex-item"
 
 export type { FlexProps } from "./flex"

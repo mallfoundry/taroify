@@ -2,8 +2,8 @@ import * as _ from "lodash"
 import { useMemo } from "react"
 import {
   clampDate,
-  DatetimePickerColumnType,
-  DatetimePickerType,
+  type DatetimePickerColumnType,
+  type DatetimePickerType,
   getDatetime,
   getEndDayOfMonth,
   MAX_DATE,
