@@ -1,11 +1,11 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import CellTitle from "../cell/cell-title"
 import { prefixClassname } from "../styles"
 import FormContext from "./form.context"
-import { FormLabelAlign } from "./form.shared"
+import type { FormLabelAlign } from "./form.shared"
 
 export interface FormLabelProps extends ViewProps {
   align?: FormLabelAlign
@@ -28,8 +28,8 @@ function FormLabel(props: FormLabelProps) {
           [prefixClassname("form-label--center")]: align === "center",
           [prefixClassname("form-label--right")]: align === "right",
         },
-        className
-    )}
+        className,
+      )}
       {...restProps}
     >
       {children}

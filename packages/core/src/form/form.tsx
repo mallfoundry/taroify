@@ -1,22 +1,21 @@
 import { useForceUpdate } from "@taroify/hooks"
 import { Form as TaroForm } from "@tarojs/components"
-import { BaseEventOrig } from "@tarojs/components/types/common"
-import { FormProps as TaroFormProps } from "@tarojs/components/types/Form"
+import type { BaseEventOrig } from "@tarojs/components/types/common"
+import type { FormProps as TaroFormProps } from "@tarojs/components/types/Form"
 import * as React from "react"
 import {
-  ForwardedRef,
   forwardRef,
-  ReactNode,
   useCallback,
   useEffect,
   useImperativeHandle,
+  type ForwardedRef,
+  type ReactNode,
 } from "react"
 import { nextTick } from "@tarojs/taro"
 import { useUniqueId } from "../hooks"
 import { preventDefault } from "../utils/dom/event"
 import FormContext from "./form.context"
-
-import {
+import type {
   FormControlAlign,
   FormInstance,
   FormLabelAlign,
@@ -167,6 +166,7 @@ const Form = forwardRef<FormInstance, FormProps>(
       }
     }, [addEventListener, onValuesChange, removeEventListener])
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
       addEventListener("reset", forceUpdate)
       return () => removeEventListener("reset", forceUpdate)

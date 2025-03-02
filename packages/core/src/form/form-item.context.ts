@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { FormValidateStatus } from "./form.shared"
+import type { FormValidateStatus } from "./form.shared"
 
 interface FormItemContextValue {
   validateStatus?: FormValidateStatus
