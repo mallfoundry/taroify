@@ -31,17 +31,17 @@ export default function useFormValue(name?: string, options?: UseFormValueOption
     return () => form?.removeEventListener(`fields.${name}.value.change`, onValueChange)
   }, [form, name, onValueChange])
 
-  useEffect(
-    () => {
-      if (name && defaultValue) {
-        form?.setDefaultValues({
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    if (name && defaultValue) {
+      form?.setDefaultValues(
+        {
           [name]: defaultValue,
-        }, inFormList)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+        },
+        inFormList,
+      )
+    }
+  }, [])
 
   const getValue = useCallback(() => {
     if (form) {

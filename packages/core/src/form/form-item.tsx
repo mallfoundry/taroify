@@ -6,18 +6,18 @@ import * as React from "react"
 import {
   Children,
   cloneElement,
-  ForwardedRef,
-  forwardRef,
-  ForwardRefExoticComponent,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  forwardRef,
   useCallback,
   useContext,
   useImperativeHandle,
   useMemo,
+  type ForwardedRef,
+  type ForwardRefExoticComponent,
+  type ReactElement,
+  type ReactNode,
 } from "react"
-import { CellBase, CellProps, CellValue } from "../cell"
+import { CellBase, type CellProps, CellValue } from "../cell"
 import { iconMap } from "../cell/cell-base"
 import Form, { useFormField, useFormValue } from "../form"
 import FormContext from "../form/form.context"
@@ -28,7 +28,7 @@ import { isElementOf } from "../utils/validate"
 import FormFeedback from "./form-feedback"
 import FormItemContext from "./form-item.context"
 import { validateRules } from "./form.rule"
-import { FormItemInstance, FormRule, FormValidateTrigger } from "./form.shared"
+import type { FormItemInstance, FormRule, FormValidateTrigger } from "./form.shared"
 import useFormError from "./use-form-error"
 import useFormFieldValueEffect from "./use-form-field-value-effect"
 import { useDependenciesChange, useShouldUpdateSignal } from "./use-form-item"
@@ -40,16 +40,21 @@ interface FormItemChildren {
   children?: ReactElement
 }
 
-function useFormItemChildren(childrenProps: FormItemProps["children"], shouldUpdateSignal: number, noStyle?: boolean): FormItemChildren {
+function useFormItemChildren(
+  childrenProps: FormItemProps["children"],
+  shouldUpdateSignal: number,
+  noStyle?: boolean,
+): FormItemChildren {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   return useMemo<FormItemChildren>(() => {
     if (noStyle) {
       if (_.isFunction(childrenProps)) {
         const children = childrenProps()
         return {
-          children: isValidElement(children) ? children : undefined
+          children: isValidElement(children) ? children : undefined,
         }
+        // biome-ignore lint/style/noUselessElse: <explanation>
       } else {
-        // eslint-disable-next-line
         console.warn('[Taroify] FormItem(noStyle): "children" should be function')
         return {}
       }
@@ -71,7 +76,6 @@ function useFormItemChildren(childrenProps: FormItemProps["children"], shouldUpd
       }
     })
     return __children__
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [childrenProps, shouldUpdateSignal, noStyle])
 }
 
@@ -84,7 +88,7 @@ export interface FormItemProps extends Omit<CellProps, "children"> {
   shouldUpdate?: boolean | ((prev, next) => boolean)
   noStyle?: boolean
   disabled?: boolean
-  validateFirst?:boolean
+  validateFirst?: boolean
   children?: (() => ReactNode) | ReactNode
 }
 
@@ -115,15 +119,20 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
     } = props
     const shouldUpdateSignal = useShouldUpdateSignal(shouldUpdate)
 
-    const { label, control, feedbacks, children } = useFormItemChildren(childrenProp, shouldUpdateSignal, noStyle)
+    const { label, control, feedbacks, children } = useFormItemChildren(
+      childrenProp,
+      shouldUpdateSignal,
+      noStyle,
+    )
     const rightIcon = useMemo(() => {
       if (rightIconProp) {
         return cloneIconElement(rightIconProp, {
           className: prefixClassname("form-item__right-icon"),
         })
-      } else if (isLink && iconMap[arrowDirection] ) {
+        // biome-ignore lint/style/noUselessElse: <explanation>
+      } else if (isLink && iconMap[arrowDirection]) {
         const Icon = iconMap[arrowDirection]
-        return <Icon className={ prefixClassname("form-item__right-icon") } />
+        return <Icon className={prefixClassname("form-item__right-icon")} />
       }
       return null
     }, [rightIconProp, isLink, arrowDirection])
@@ -138,6 +147,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
 
     const { value, getValue, setValue } = useFormValue(name, { defaultValue })
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     const validate = useCallback(
       (rules = rulesRef.current) => {
         return new Promise<void>((resolve, reject) => {
@@ -260,6 +270,7 @@ const FormItem = forwardRef<FormItemInstance, FormItemProps>(
               <View className={classNames(prefixClassname("form__feedbacks"))}>
                 {feedbacks}
                 {_.map(error?.errors, (message, messageKey) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   <FormFeedback key={messageKey} status="invalid" children={message} />
                 ))}
               </View>

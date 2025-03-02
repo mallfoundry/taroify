@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent } from "react"
-import FormComponent, { FormProps } from "./form"
+import type { ForwardRefExoticComponent } from "react"
+import FormComponent, { type FormProps } from "./form"
 import FormControl from "./form-control"
 import FormFeedback from "./form-feedback"
 import FormItem from "./form-item"
@@ -17,7 +17,7 @@ export type {
   FormFeedbackAlign,
   FormFeedbackStatus,
   FormController,
-  FormThemeVars
+  FormThemeVars,
 } from "./form.shared"
 
 export type { FormItemProps } from "./form-item"

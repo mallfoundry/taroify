@@ -1,15 +1,22 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useContext, useMemo } from "react"
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import Input from "../input"
 import { prefixClassname } from "../styles"
 import { doFormControlHandler } from "./control"
 import FormItemContext from "./form-item.context"
 import FormContext from "./form.context"
-import { FormControlAlign, FormController } from "./form.shared"
+import type { FormControlAlign, FormController } from "./form.shared"
 
 interface FormControlProps<V> extends Omit<ViewProps, "children">, FormController<V> {
   align?: FormControlAlign
