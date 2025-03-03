@@ -1,17 +1,17 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Clear } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent } from "@tarojs/components"
-import { BaseEventOrig } from "@tarojs/components/types/common"
-import { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
+import type { ITouchEvent } from "@tarojs/components"
+import type { BaseEventOrig } from "@tarojs/components/types/common"
+import type { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useMemo, useState } from "react"
+import { type ReactNode, useMemo, useState } from "react"
 import { prefixClassname } from "../styles"
 import { inBrowser } from "../utils/base"
 import { preventDefault } from "../utils/dom/event"
-import { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
+import type { InputAlign, InputClearTrigger, InputColor } from "./input.shared"
 import NativeInput from "./native-input"
 
 export function resolveOnChange<
@@ -162,7 +162,7 @@ function Input(props: InputProps) {
             // [prefixClassname("input__placeholder--danger")]: color === "danger",
           },
         )}
-        disabled={inBrowser? disabled: (disabled || readonly)}
+        disabled={inBrowser ? disabled : disabled || readonly}
         readonly={readonly}
         color={color}
         value={value}

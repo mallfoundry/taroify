@@ -1,8 +1,15 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useMemo, cloneElement, isValidElement } from "react"
+import {
+  type CSSProperties,
+  type ReactNode,
+  useContext,
+  useMemo,
+  cloneElement,
+  isValidElement,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import { addUnitPx } from "../utils/format/unit"
@@ -77,7 +84,9 @@ export function GridItem(props: GridItemProps) {
     }
   }, [square, gutter])
 
-  const icon = isValidElement(iconProp) ? cloneElement(iconProp as any, { className: prefixClassname("grid-item__icon") }) : iconProp
+  const icon = isValidElement(iconProp)
+    ? cloneElement(iconProp as any, { className: prefixClassname("grid-item__icon") })
+    : iconProp
 
   return (
     <View
@@ -102,18 +111,23 @@ export function GridItem(props: GridItemProps) {
           [HAIRLINE_BORDER]: bordered,
         })}
       >
-        {
-          children === undefined ? (
-            <>
-              {
-                badge ?
-                  <Badge className={prefixClassname("grid-item__icon-wrapper")} content={badge} dot={dot} children={icon} /> :
-                  icon
-              }
-              <View className={prefixClassname("grid-item__text")}>{text}</View>
-            </>
-          ) : children
-        }
+        {children === undefined ? (
+          <>
+            {badge ? (
+              <Badge
+                className={prefixClassname("grid-item__icon-wrapper")}
+                content={badge}
+                dot={dot}
+                children={icon}
+              />
+            ) : (
+              icon
+            )}
+            <View className={prefixClassname("grid-item__text")}>{text}</View>
+          </>
+        ) : (
+          children
+        )}
       </View>
     </View>
   )

@@ -1,6 +1,6 @@
-import { ITouchEvent, View, ViewProps } from "@tarojs/components"
+import { type ITouchEvent, View, type ViewProps } from "@tarojs/components"
 import * as React from "react"
-import { ForwardedRef, forwardRef, ReactNode } from "react"
+import { type ForwardedRef, forwardRef, type ReactNode } from "react"
 import classNames from "classnames"
 import { prefixClassname } from "../styles"
 
