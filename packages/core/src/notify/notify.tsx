@@ -1,8 +1,8 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useEffect } from "react"
+import { type CSSProperties, type ReactNode, useEffect } from "react"
 import { useTimeout } from "../hooks"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
@@ -14,27 +14,32 @@ import {
 } from "../utils/dom/element"
 import { useObject, useToRef } from "../utils/state"
 import mergeStyle from "../utils/merge-style"
-import { NotifyColor, NotifyOptions, notifyEvents, notifySelectorSet } from "./notify.shared"
+import {
+  type NotifyColor,
+  type NotifyOptions,
+  notifyEvents,
+  notifySelectorSet,
+} from "./notify.shared"
 
 const PRESET_COLORS = ["primary", "success", "warning", "danger"]
 
 function useNotifyOpen(cb: (options: NotifyOptions) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     notifyEvents.on("open", cb)
     return () => {
       notifyEvents.off("open", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
 function useNotifyClose(cb: (selector: string) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     notifyEvents.on("close", cb)
     return () => {
       notifyEvents.off("close", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
@@ -72,7 +77,7 @@ function Notify(props: NotifyProps) {
 
   const style = mergeStyle(styleProp, {
     background: backgroundProp,
-    ...(!PRESET_COLORS.includes(colorProp) && ({"--notify-color": colorProp}))
+    ...(!PRESET_COLORS.includes(colorProp) && { "--notify-color": colorProp }),
   })
 
   const rootSelectorRef = useToRef(usePrependPageSelector(getElementSelector(id)))
@@ -85,15 +90,15 @@ function Notify(props: NotifyProps) {
 
   const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     rootSelectorRef.current && notifySelectorSet.add(rootSelectorRef.current)
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       rootSelectorRef.current && notifySelectorSet.delete(rootSelectorRef.current)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (open) {
       restartAutoClose(() => {
@@ -129,7 +134,9 @@ function Notify(props: NotifyProps) {
       className={classNames(
         prefixClassname("notify"),
         {
-          [prefixClassname(`notify--${typeProp || colorProp}`)]: PRESET_COLORS.includes(typeProp! || colorProp!),
+          [prefixClassname(`notify--${typeProp || colorProp}`)]: PRESET_COLORS.includes(
+            typeProp! || colorProp!,
+          ),
         },
         className,
       )}

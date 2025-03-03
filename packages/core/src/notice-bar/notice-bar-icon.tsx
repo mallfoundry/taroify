@@ -1,7 +1,7 @@
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface NoticeBarIconProps extends ViewProps {

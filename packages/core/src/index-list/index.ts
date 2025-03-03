@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent } from "react"
-import { default as IndexBarElement, IndexListProps } from "./index-list"
+import type { ForwardRefExoticComponent } from "react"
+import { default as IndexBarElement, type IndexListProps } from "./index-list"
 import IndexListAnchor from "./index-list-anchor"
 
 export type { IndexListThemeVars } from "./index-list.shared"

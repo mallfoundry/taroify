@@ -1,4 +1,4 @@
-import NotifyComponent, { NotifyProps } from "./notify"
+import NotifyComponent, { type NotifyProps } from "./notify"
 import {
   closeNotify,
   openNotify,

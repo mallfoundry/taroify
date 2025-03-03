@@ -1,6 +1,7 @@
 import FakePromise from "promise"
 import { isPromise } from "../utils/promisify"
 
+// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 export type FunctionInterceptor = (...args: any[]) => Promise<boolean> | boolean | undefined | void
 
 export default function useFunctionInterceptor(interceptor?: FunctionInterceptor) {

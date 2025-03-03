@@ -26,18 +26,15 @@ function useTimeout() {
     timerRef.current = setTimeout(callback, ms, args)
   }, [])
 
-  const restart = useCallback(
-    (callback?: UseTimeoutCallback, ms?: number, ...args: any[]) => {
-      stop()
-      if (callback) {
-        start(callback, ms, args)
-      } else if (cbRef.current) {
-        start(cbRef.current, msRef.current, argsRef.current)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const restart = useCallback((callback?: UseTimeoutCallback, ms?: number, ...args: any[]) => {
+    stop()
+    if (callback) {
+      start(callback, ms, args)
+    } else if (cbRef.current) {
+      start(cbRef.current, msRef.current, argsRef.current)
+    }
+  }, [])
 
   return useMemo(
     () => ({

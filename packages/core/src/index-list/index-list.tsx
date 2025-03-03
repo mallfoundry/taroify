@@ -1,17 +1,18 @@
-import { ITouchEvent, ScrollView, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, ScrollView, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { usePageScroll, getEnv } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
+  type Key,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
   Children,
   cloneElement,
   createRef,
   isValidElement,
-  ReactElement,
-  ReactNode,
-  RefObject,
   useCallback,
   useMemo,
   useRef,
@@ -23,8 +24,11 @@ import {
 import { isFragment } from "react-is"
 import { prefixClassname } from "../styles"
 import { getClientCoordinates, preventDefault } from "../utils/dom/event"
-import { getRect, getRects, makeRect, Rect } from "../utils/dom/rect"
-import IndexListAnchor, { IndexListAnchorInstance, IndexListAnchorProps } from "./index-list-anchor"
+import { getRect, getRects, makeRect, type Rect } from "../utils/dom/rect"
+import IndexListAnchor, {
+  type IndexListAnchorInstance,
+  type IndexListAnchorProps,
+} from "./index-list-anchor"
 import IndexListIndex from "./index-list-index"
 import IndexListSidebar from "./index-list-sidebar"
 import IndexListContext from "./index-list.context"
@@ -35,11 +39,7 @@ interface IndexBarChildren {
   anchorProps: IndexListAnchorProps[]
 }
 
-function childrenIndexBar(
-  children: ReactNode,
-  __children__: IndexBarChildren,
-  parentIndex?: React.Key,
-) {
+function childrenIndexBar(children: ReactNode, __children__: IndexBarChildren, parentIndex?: Key) {
   Children.forEach(children, (child: ReactNode, index: number) => {
     if (!isValidElement(child)) {
       return
@@ -172,6 +172,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
     return -1
   }, [anchorRefs.length, sticky])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const onScroll = useCallback(async () => {
     const arrayedIndex = getActiveAnchor()
     if (arrayedIndex >= 0) {
@@ -188,6 +189,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
     }
   }, [anchorProps, getActiveAnchor])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const scrollToAnchor = useCallback(
     (anchorArrayedIndex: number) => {
       if (anchorArrayedIndex < 0 || scrollToAnchorIndexRef.current === anchorArrayedIndex) {
@@ -233,6 +235,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
 
   const onSidebarClick = useCallback((event: ITouchEvent) => scrollToEvent(event), [scrollToEvent])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const onTouchStart = useCallback(() => {
     scrolling.current = true
   }, [scrolling])
@@ -245,6 +248,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
     [scrollToEvent],
   )
 
+  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   const onTouchStop = useCallback(() => (scrollToAnchorIndexRef.current = undefined), [])
 
   const getRectAll = (init?: boolean) => {
@@ -267,6 +271,7 @@ const IndexList = forwardRef<any, IndexListProps>((props, ref) => {
     )
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     getRectAll(true)
   }, [])

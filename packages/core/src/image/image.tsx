@@ -1,15 +1,15 @@
-import { Image as TaroImage, View, ViewProps } from "@tarojs/components"
+import { Image as TaroImage, View, type ViewProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useEffect, useMemo, useState, useRef } from "react"
+import { type ReactNode, useEffect, useMemo, useState, useRef } from "react"
 import { pxTransform } from "@tarojs/taro"
 import { prefixClassname } from "../styles"
 import { getLogger } from "../utils/logger"
 import { useMemoizedFn } from "../hooks"
 import mergeStyle from "../utils/merge-style"
 import ImagePlaceholder from "./image-placeholder"
-import { ImageMode, ImageShape } from "./image.shared"
+import type { ImageMode, ImageShape } from "./image.shared"
 
 const { warn } = getLogger("Image")
 
@@ -32,14 +32,15 @@ function useImageMode(mode: ImageMode) {
 }
 
 function useImageShape(shape?: ImageShape, round?: boolean) {
+  let shapeResult = shape
   if (_.isBoolean(round) && round) {
-    shape = "circle"
-    warn(`Use the shape="${shape}" prop instead of the round prop`)
+    shapeResult = "circle"
+    warn(`Use the shape="${shapeResult}" prop instead of the round prop`)
     if (round) {
-      return shape
+      return shapeResult
     }
   }
-  return shape
+  return shapeResult
 }
 
 export interface ImageProps extends ViewProps {
@@ -120,16 +121,17 @@ export default function Image(props: ImageProps) {
     setFailed(true)
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     isLoadedRef.current = false
     const nativeImg = taroImageRef.current?.children?.[0] as HTMLImageElement
-    if (nativeImg && nativeImg.complete) {
+    if (nativeImg?.complete) {
       handleLoad()
     } else {
       setLoading(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src])
+
   return (
     <View style={viewStyle} className={wrapperClassName}>
       {!failed && src && (
