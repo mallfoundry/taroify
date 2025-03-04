@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { SidebarTabObject } from "./sidebar-tab.shared"
+import type { SidebarTabObject } from "./sidebar-tab.shared"
 
 interface SidebarContextProps {
   value?: any

@@ -1,19 +1,19 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Fail, Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useEffect,
   useMemo,
-  Attributes,
+  type Attributes,
 } from "react"
 import Backdrop from "../backdrop"
 import { useTimeout } from "../hooks"
@@ -29,9 +29,9 @@ import {
 import { useObject, useToRef } from "../utils/state"
 import { isElementOf } from "../utils/validate"
 import {
-  ToastPosition,
-  ToastOptions,
-  ToastType,
+  type ToastPosition,
+  type ToastOptions,
+  type ToastType,
   toastEvents,
   toastSelectorSet,
 } from "./toast.shared"
@@ -41,22 +41,22 @@ const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
 const TOAST_PRESET_POSITIONS = ["top", "middle", "bottom"]
 
 function useToastOpen(cb: (options: ToastOptions) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     toastEvents.on("open", cb)
     return () => {
       toastEvents.off("open", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
 function useToastClose(cb: (selector: string) => void) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     toastEvents.on("close", cb)
     return () => {
       toastEvents.off("close", cb)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
@@ -165,15 +165,15 @@ export default function Toast(props: ToastProps) {
 
   const { stop: stopAutoClose, restart: restartAutoClose } = useTimeout()
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     rootSelectorRef.current && toastSelectorSet.add(rootSelectorRef.current)
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       rootSelectorRef.current && toastSelectorSet.delete(rootSelectorRef.current)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (open) {
       if (duration) {

@@ -1,7 +1,7 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, useMemo } from "react"
+import { type CSSProperties, useMemo } from "react"
 import { prefixClassname } from "../styles"
 
 export enum WhiteSpaceSize {

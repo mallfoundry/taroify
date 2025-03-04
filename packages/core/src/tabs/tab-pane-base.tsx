@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useMemo, useRef } from "react"
+import { type CSSProperties, type ReactNode, useContext, useMemo, useRef } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import TabsContext from "./tabs.context"
@@ -18,9 +18,7 @@ interface TabPaneBaseProps extends ViewProps {
 
 export default function TabPaneBase(props: TabPaneBaseProps) {
   const { className, style, index, value, children, title, ...restProps } = props
-  const { value: activeValue, lazyRender, animated, swipeable } = useContext(
-    TabsContext,
-  )
+  const { value: activeValue, lazyRender, animated, swipeable } = useContext(TabsContext)
 
   const active = activeValue === value
 

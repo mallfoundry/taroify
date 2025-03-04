@@ -1,7 +1,7 @@
 import * as React from "react"
-import { isValidElement, ReactElement, ReactNode, useMemo, useState } from "react"
+import { isValidElement, type ReactElement, type ReactNode, useMemo, useState } from "react"
 import { CSSTransition } from "react-transition-group"
-import { EnterHandler, ExitHandler } from "react-transition-group/Transition"
+import type { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import { prefixClassname } from "../styles"
 
 export enum TransitionName {

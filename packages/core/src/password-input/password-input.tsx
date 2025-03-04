@@ -1,15 +1,15 @@
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useCallback, useMemo } from "react"
+import { type ReactNode, type CSSProperties, useCallback, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_SURROUND } from "../styles/hairline"
 import { stopPropagation } from "../utils/dom/event"
 import { createVariantElement } from "../utils/element"
 import { addUnitPx } from "../utils/format/unit"
-import PasswordInputFeedback, { PasswordInputFeedbackProps } from "./password-input-feedback"
+import PasswordInputFeedback, { type PasswordInputFeedbackProps } from "./password-input-feedback"
 
 export interface PasswordInputProps extends ViewProps {
   value?: string
@@ -18,7 +18,7 @@ export interface PasswordInputProps extends ViewProps {
   mask?: boolean
   focused?: boolean
   focus?: boolean
-  feedback?: ReactNode | PasswordInputFeedbackProps 
+  feedback?: ReactNode | PasswordInputFeedbackProps
 
   onFocus?(event: ITouchEvent): void
 }
@@ -39,13 +39,12 @@ function PasswordInput(props: PasswordInputProps) {
 
   const feedback = createVariantElement(PasswordInputFeedback, feedbackProp as ReactNode)
 
-  const focus = useMemo(() => (_.isBoolean(focusedProp) ? focusedProp : focusProp), [
-    focusProp,
-    focusedProp,
-  ])
+  const focus = useMemo(
+    () => (_.isBoolean(focusedProp) ? focusedProp : focusProp),
+    [focusProp, focusedProp],
+  )
 
   if (_.isBoolean(focusedProp)) {
-    // eslint-disable-next-line no-console
     console.warn("[Deprecated] The focused prop is deprecated. Please use the focus prop.")
   }
 
@@ -65,7 +64,7 @@ function PasswordInput(props: PasswordInputProps) {
       const bordered = i !== 0 && !gutter
       const showCursor = focus && i === value.length
 
-      let style
+      let style: CSSProperties = {}
       if (i !== 0 && gutter) {
         style = { marginLeft: addUnitPx(gutter) }
       }

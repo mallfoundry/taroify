@@ -1,7 +1,7 @@
 import Step from "./step"
-import StepsComponent, { StepsProps } from "./steps"
+import StepsComponent, { type StepsProps } from "./steps"
 
-export type { StepsThemeVars } from './steps.shared'
+export type { StepsThemeVars } from "./steps.shared"
 
 interface StepsInterface {
   (props: StepsProps): JSX.Element

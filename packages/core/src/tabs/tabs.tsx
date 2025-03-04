@@ -1,15 +1,15 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
-import { PageScrollObject } from "@tarojs/taro"
+import type { ViewProps } from "@tarojs/components/types/View"
+import type { PageScrollObject } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -20,7 +20,7 @@ import TabPane from "./tab-pane"
 import { TabsContent } from "./tabs-content"
 import TabsHeader from "./tabs-header"
 import TabsContext from "./tabs.context"
-import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
+import type { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 function useTabObjects(children: ReactNode) {
   return useMemo(() => {
@@ -110,7 +110,11 @@ function Tabs(props: TabsProps) {
     ...restProps
   } = props
 
-  const { value = 0, getValue, setValue } = useUncontrolled({
+  const {
+    value = 0,
+    getValue,
+    setValue,
+  } = useUncontrolled({
     defaultValue,
     value: valueProp,
   })
@@ -149,6 +153,7 @@ function Tabs(props: TabsProps) {
     [onTabChange, onTabClick],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const headerRender = useMemo(
     () => (
       <TabsHeader

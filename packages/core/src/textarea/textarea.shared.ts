@@ -11,6 +11,6 @@ export type TextareaThemeVars = {
   textareaLimitLineHeight?: string
 }
 
-export function getStringLength(chars: string = "") {
+export function getStringLength(chars = "") {
   return chars.normalize().length
 }

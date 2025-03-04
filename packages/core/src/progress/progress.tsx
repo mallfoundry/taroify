@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useMemo } from "react"
+import { type CSSProperties, type ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 
 type ProgressColor = "primary" | "info" | "success" | "warning" | "danger"
@@ -32,6 +32,7 @@ function Progress(props: ProgressProps) {
   function renderLabel() {
     if (label === undefined) {
       return `${percent}%`
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else if (!label) {
       return undefined
     }

@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { TimelinePosition } from "./timeline.shared"
+import type { TimelinePosition } from "./timeline.shared"
 
 interface TimelineContextValue {
   position?: TimelinePosition

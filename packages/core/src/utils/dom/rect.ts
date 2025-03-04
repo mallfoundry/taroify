@@ -34,22 +34,21 @@ export function getRect(elementOrRef: any): Promise<Rect> {
       }
 
       return Promise.resolve(
-        (((element as unknown) as HTMLElement).getBoundingClientRect() as unknown) as Rect,
+        (element as unknown as HTMLElement).getBoundingClientRect() as unknown as Rect,
       )
-    } else {
-      return new Promise<Rect>((resolve) => {
-        queryNodesRef(element)
-          .boundingClientRect()
-          .exec(([rect]) => {
-            if (isRootElement(element)) {
-              const { width, height } = rect
-              resolve(makeRect(width, height))
-            } else {
-              resolve(rect)
-            }
-          })
-      })
     }
+    return new Promise<Rect>((resolve) => {
+      queryNodesRef(element)
+        .boundingClientRect()
+        .exec(([rect]) => {
+          if (isRootElement(element)) {
+            const { width, height } = rect
+            resolve(makeRect(width, height))
+          } else {
+            resolve(rect)
+          }
+        })
+    })
   }
   return Promise.resolve(makeRect(0, 0))
 }
@@ -59,19 +58,17 @@ export function getRects(elementOrRef: any, selector: string): Promise<Rect[]> {
   if (element) {
     if (inBrowser) {
       const rects: Rect[] = []
-      ;((element as unknown) as HTMLElement)
+      // biome-ignore lint/complexity/noForEach: <explanation>
+      ;(element as unknown as HTMLElement)
         .querySelectorAll(selector)
-        .forEach((oneElement) =>
-          rects.push((oneElement.getBoundingClientRect() as unknown) as Rect),
-        )
+        .forEach((oneElement) => rects.push(oneElement.getBoundingClientRect() as unknown as Rect))
       return Promise.resolve(rects)
-    } else {
-      return new Promise<Rect[]>((resolve) => {
-        queryAllNodesRef(element, selector)
-          .boundingClientRect()
-          .exec(([rects]) => resolve((rects as unknown) as Rect[]))
-      })
     }
+    return new Promise<Rect[]>((resolve) => {
+      queryAllNodesRef(element, selector)
+        .boundingClientRect()
+        .exec(([rects]) => resolve(rects as unknown as Rect[]))
+    })
   }
   return Promise.resolve([])
 }

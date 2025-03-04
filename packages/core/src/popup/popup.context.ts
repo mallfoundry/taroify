@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { PopupPlacement } from "./popup.shared"
+import type { PopupPlacement } from "./popup.shared"
 
 interface PopupContextProps {
   open?: boolean

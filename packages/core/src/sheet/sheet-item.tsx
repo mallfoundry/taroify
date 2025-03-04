@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 

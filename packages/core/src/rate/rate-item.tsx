@@ -1,9 +1,9 @@
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, useContext } from "react"
+import { type CSSProperties, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import RateContext from "./rate.context"
@@ -48,7 +48,7 @@ function RateItem(props: RateItemProps) {
         //
         half &&
           cloneIconElement(icon, {
-            style: { width: value + "em" },
+            style: { width: `${value}em` },
             size,
             className: classNames(
               prefixClassname("rate__icon"),

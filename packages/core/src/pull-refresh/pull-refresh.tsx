@@ -1,14 +1,14 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -24,7 +24,7 @@ import { useTouch } from "../utils/touch"
 import { throttle } from "../utils/lodash-polyfill"
 import {
   PullRefreshCompleted,
-  PullRefreshCompletedProps,
+  type PullRefreshCompletedProps,
   PullRefreshLoading,
   PullRefreshLoosing,
   PullRefreshPulling,
@@ -142,12 +142,13 @@ function PullRefresh(props: PullRefreshProps) {
   const easeDistance = useCallback(
     (distance: number) => {
       const pullDistance = +(pullDistanceProp || headHeight)
+      let easedDistance = distance
 
       if (distance > pullDistance) {
         if (distance < pullDistance * 2) {
-          distance = pullDistance + (distance - pullDistance) / 2
+          easedDistance = pullDistance + (distance - pullDistance) / 2
         } else {
-          distance = pullDistance * 1.5 + (distance - pullDistance * 2) / 4
+          easedDistance = pullDistance * 1.5 + (distance - pullDistance * 2) / 4
         }
       }
 
@@ -156,6 +157,7 @@ function PullRefresh(props: PullRefreshProps) {
     [headHeight, pullDistanceProp],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const checkPosition = useCallback(
     (event) => {
       if (reachTopRef.current) {
@@ -235,13 +237,17 @@ function PullRefresh(props: PullRefreshProps) {
     }
   }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, updateStatus])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const showCompleted = useCallback(() => {
     statusRef.current = PullRefreshStatus.Completed
     resetDuration()
     setTimeout(() => nextTick(() => updateStatus(0)), +completedDuration)
   }, [completedDuration, updateStatus])
 
-  const contextValue = useMemo(() => ({ distance, onTouchStart, onTouchMove, onTouchEnd }), [distance, onTouchStart, onTouchMove, onTouchEnd])
+  const contextValue = useMemo(
+    () => ({ distance, onTouchStart, onTouchMove, onTouchEnd }),
+    [distance, onTouchStart, onTouchMove, onTouchEnd],
+  )
 
   useEffect(() => {
     if (loading) {
@@ -320,14 +326,11 @@ function PullRefresh(props: PullRefreshProps) {
   }, [headHeight])
 
   return (
-    <PullRefreshContext.Provider
-      value={contextValue}
-    >
+    <PullRefreshContext.Provider value={contextValue}>
       <View className={classNames(prefixClassname("pull-refresh"), className)} {...restProps}>
         <View
           className={prefixClassname("pull-refresh__track")}
           style={trackStyle}
-          //
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}

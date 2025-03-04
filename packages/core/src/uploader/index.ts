@@ -1,11 +1,11 @@
-import UploaderComponent, { UploaderProps } from "./uploader"
+import UploaderComponent, { type UploaderProps } from "./uploader"
 import UploaderImage from "./uploader-image"
 import UploaderUpload from "./uploader-upload"
-import { UploadFile } from "./uploader.shared"
+import type { UploadFile } from "./uploader.shared"
 
 export type { UploaderProps } from "./uploader"
 
-export type { UploadThemeVars } from './uploader.shared'
+export type { UploadThemeVars } from "./uploader.shared"
 
 interface UploaderInterface {
   (props: UploaderProps): JSX.Element
@@ -19,7 +19,6 @@ const Uploader = UploaderComponent as UploaderInterface
 Uploader.Upload = UploaderUpload
 Uploader.Image = UploaderImage
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Uploader {
   export type File = UploadFile
 }

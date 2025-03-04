@@ -8,7 +8,7 @@ import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import { getRect, getRects } from "../utils/dom/rect"
 import Tab from "./tab"
-import { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
+import type { TabEvent, TabObject, TabsTheme } from "./tabs.shared"
 
 export interface NavOffset {
   left?: number
@@ -33,7 +33,16 @@ interface TabsHeaderProps {
 }
 
 export default function TabsHeader(props: TabsHeaderProps) {
-  const { value: activeValue, theme, ellipsis, bordered, shrink, tabObjects, swipeThreshold, onTabClick } = props
+  const {
+    value: activeValue,
+    theme,
+    ellipsis,
+    bordered,
+    shrink,
+    tabObjects,
+    swipeThreshold,
+    onTabClick,
+  } = props
   const themeLine = theme === "line"
   const themeCard = theme === "card"
 
@@ -42,10 +51,10 @@ export default function TabsHeader(props: TabsHeaderProps) {
   const [navOffset, setNavOffset] = useState<NavOffset>({})
   const [tabOffsets, setTabOffsets] = useState<TabOffset[]>([])
 
-  const activeIndex = useMemo(() => _.findIndex(tabObjects, (tab) => tab.value === activeValue), [
-    tabObjects,
-    activeValue,
-  ])
+  const activeIndex = useMemo(
+    () => _.findIndex(tabObjects, (tab) => tab.value === activeValue),
+    [tabObjects, activeValue],
+  )
 
   const activeOffset = useMemo(() => {
     if (_.isEmpty(tabOffsets) || activeIndex === -1 || activeIndex >= _.size(tabOffsets)) {
@@ -84,6 +93,7 @@ export default function TabsHeader(props: TabsHeaderProps) {
     return ellipsis && themeLine ? `${88 / swipeThreshold}%` : ""
   }, [ellipsis, themeLine, swipeThreshold, shrink])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => nextTick(resize), [resize, tabObjects])
 
   // resize
@@ -129,7 +139,9 @@ export default function TabsHeader(props: TabsHeaderProps) {
                 flexBasis={flexBasis}
                 // TODO swipeThreshold does not support
                 // flexBasis={themeLine && ellipsis ? `${88 / 4}%` : ""}
-                className={classNames(tabObject?.classNames?.title, { [prefixClassname("tabs__tab--shrink")]: shrink })}
+                className={classNames(tabObject?.classNames?.title, {
+                  [prefixClassname("tabs__tab--shrink")]: shrink,
+                })}
                 dot={tabObject.dot}
                 badge={tabObject.badge}
                 active={activeValue === tabObject.value}

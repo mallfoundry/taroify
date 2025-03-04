@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { Page } from "./pagination.shared"
+import type { Page } from "./pagination.shared"
 
 interface PaginationContextValue {
   current: number

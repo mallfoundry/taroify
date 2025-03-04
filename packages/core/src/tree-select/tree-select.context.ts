@@ -1,5 +1,5 @@
-import { createContext, ReactNode } from "react"
-import { TreeSelectOptionObject } from "./tree-select.shared"
+import { createContext, type ReactNode } from "react"
+import type { TreeSelectOptionObject } from "./tree-select.shared"
 
 interface TreeSelectContextValue {
   activeIcon?: ReactNode

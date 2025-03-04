@@ -1,4 +1,4 @@
-import { TaroElement } from "@tarojs/runtime"
+import type { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery, getCurrentInstance, useRouter } from "@tarojs/taro"
 import * as _ from "lodash"
 import { inWechat } from "../base"
@@ -92,7 +92,7 @@ export function queryNodesRef(element: TaroElement) {
     return createSelectorQuery().select(`#${ancestor.uid}>>>#${element.uid}`)
   }
 
-  return createSelectorQuery().select("#" + element.uid)
+  return createSelectorQuery().select(`#${element.uid}`)
 }
 
 export function queryAllNodesRef(element: TaroElement, selector?: string) {
@@ -105,5 +105,5 @@ export function queryAllNodesRef(element: TaroElement, selector?: string) {
     return createSelectorQuery().selectAll(`#${ancestor.uid}>>>#${element.uid} ${selector}`)
   }
 
-  return createSelectorQuery().selectAll("#" + element.uid + selector)
+  return createSelectorQuery().selectAll(`#${element.uid}${selector}`)
 }

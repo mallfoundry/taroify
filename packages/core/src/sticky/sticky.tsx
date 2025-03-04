@@ -1,12 +1,12 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
-import { PageScrollObject, usePageScroll } from "@tarojs/taro"
+import type { ViewProps } from "@tarojs/components/types/View"
+import { type PageScrollObject, usePageScroll } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
-  CSSProperties,
-  MutableRefObject,
-  ReactNode,
+  type CSSProperties,
+  type MutableRefObject,
+  type ReactNode,
   useEffect,
   useMemo,
   useRef,
@@ -63,11 +63,9 @@ export default function Sticky(props: StickyProps) {
   if (offsetProp) {
     const { top, bottom } = offsetProp
     if (top) {
-      // eslint-disable-next-line no-console
       console.warn("[Deprecated] Use the 'offsetTop' prop instead of the 'offset.top' prop.")
     }
     if (bottom) {
-      // eslint-disable-next-line no-console
       console.warn("[Deprecated] Use the 'offsetBottom' prop instead of the 'offset.bottom' prop.")
     }
   }

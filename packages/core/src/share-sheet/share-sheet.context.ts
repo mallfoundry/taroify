@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { ShareSheetOptionObject } from "./share-sheet.shared"
+import type { ShareSheetOptionObject } from "./share-sheet.shared"
 
 interface ShareSheetContextValue {
   onSelect?(event: ShareSheetOptionObject): void

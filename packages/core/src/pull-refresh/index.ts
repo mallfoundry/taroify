@@ -1,4 +1,4 @@
-import PullRefreshElement, { PullRefreshProps } from "./pull-refresh"
+import PullRefreshElement, { type PullRefreshProps } from "./pull-refresh"
 import {
   PullRefreshCompleted,
   PullRefreshLoading,
@@ -6,7 +6,7 @@ import {
   PullRefreshPulling,
 } from "./pull-refresh-children"
 
-export type { PullRefreshThemeVars } from './pull-refresh.shared'
+export type { PullRefreshThemeVars } from "./pull-refresh.shared"
 
 interface PullRefreshInterface {
   (props: PullRefreshProps): JSX.Element

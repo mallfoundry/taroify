@@ -1,8 +1,8 @@
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useCallback, useContext } from "react"
+import { type ReactNode, useCallback, useContext } from "react"
 import Badge from "../badge"
 import SidebarContext from "../sidebar/sidebar.context"
 import { prefixClassname } from "../styles"
@@ -15,11 +15,13 @@ interface SidebarTabContentProps {
 function SidebarTabContent(props: SidebarTabContentProps) {
   const { badge, children } = props
 
-  return <Badge
-    className={prefixClassname("sidebar-tab__content")}
-    children={children}
-    content={badge}
-  />
+  return (
+    <Badge
+      className={prefixClassname("sidebar-tab__content")}
+      children={children}
+      content={badge}
+    />
+  )
 }
 
 interface SidebarTabProps extends ViewProps {

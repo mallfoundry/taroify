@@ -1,10 +1,10 @@
 import { Photograph } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import UploaderContext from "./uploader.context"
 
@@ -16,7 +16,7 @@ interface UploaderUploadProps extends ViewProps {
 }
 
 function UploaderUpload(props: UploaderUploadProps) {
-  const { className, readonly, icon = <Photograph />, onClick, children,  ...restProps } = props
+  const { className, readonly, icon = <Photograph />, onClick, children, ...restProps } = props
   const { disabled, onUpload } = useContext(UploaderContext)
 
   function handleClick(event: ITouchEvent) {

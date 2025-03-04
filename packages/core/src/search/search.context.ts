@@ -1,4 +1,4 @@
-import { ITouchEvent } from "@tarojs/components"
+import type { ITouchEvent } from "@tarojs/components"
 import { createContext } from "react"
 
 interface SearchContextValue {

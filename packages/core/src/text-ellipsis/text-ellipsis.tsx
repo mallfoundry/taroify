@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useRef, useLayoutEffect, useMemo } from "react"
-import { View, ViewProps } from "@tarojs/components"
+import { View, type ViewProps } from "@tarojs/components"
 import { nextTick } from "@tarojs/taro"
 import cls from "classnames"
 import { prefixClassname } from "../styles"
@@ -80,8 +80,10 @@ export default function TextEllipsis({
     }
     if (Array.isArray(index)) {
       return textProps.slice(0, index[0]) + dots + textProps.slice(index[1])
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else if (index > 0) {
       return textProps.slice(0, index) + dots
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
       return dots + textProps.slice(+index)
     }
@@ -89,8 +91,10 @@ export default function TextEllipsis({
   const getPrevIndex = useMemoizedFn((idx: IndexType): IndexType => {
     if (Array.isArray(idx)) {
       return [idx[0] - 1, idx[1]]
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else if (idx >= 0) {
       return idx - 1
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
       return idx + 1
     }
@@ -98,8 +102,10 @@ export default function TextEllipsis({
   const getNextIndex = useMemoizedFn((idx: IndexType): IndexType => {
     if (Array.isArray(idx)) {
       return [idx[0] + 1, idx[1]]
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else if (idx >= 0) {
       return idx + 1
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
       return idx - 1
     }
@@ -153,6 +159,7 @@ export default function TextEllipsis({
     })
   }, [textProps, dots, expandText])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useLayoutEffect(() => {
     const fn = async () => {
       const { width: containerWidth, height: containerHeight } = await getRect(containerRef.current)
@@ -172,12 +179,16 @@ export default function TextEllipsis({
           const widthCache = widthCacheRef.current
           if (charCode >= zhCharCodeStart && charCode <= zhChartCodeEnd) {
             return widthCache.get(zhChartCodeEnd)
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else if (charCode >= numberChartCodeStart && charCode <= numberChartCodeEnd) {
             return widthCache.get(numberChartCodeEnd)
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else if (charCode >= letterLowerChartCodeStart && charCode <= letterLowerChartCodeEnd) {
             return widthCache.get(letterLowerChartCodeEnd)
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else if (charCode >= letterUpperChartCodeStart && charCode <= letterUpperChartCodeEnd) {
             return widthCache.get(letterUpperChartCodeEnd)
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else {
             return widthCache.get(charCode)
           }
@@ -188,7 +199,7 @@ export default function TextEllipsis({
         const placeholderWidth = charCodesCache
           .slice(textProps.length)
           .reduce((acc, cur) => acc + (calcCharWidth(cur) || 0), 0)
-        const maxWidth = containerWidth * (isNaN(Number(rows)) ? 1 : Number(rows))
+        const maxWidth = containerWidth * (Number.isNaN(Number(rows)) ? 1 : Number(rows))
         if (position === "end") {
           let index = 0
           for (let i = 0; i < textProps.length; i++) {
@@ -250,13 +261,14 @@ export default function TextEllipsis({
     nextTick(() => {
       fn()
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseString, position, rows])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useLayoutEffect(() => {
     let tempUnConfirmedIndex = unConfirmedIndex
-    const maxHeight = containerHeightRef.current * ((isNaN(Number(rows)) ? 1 : Number(rows)) + 0.01)
-    let flag // true: find first smaller, false: find first bigger
+    const maxHeight =
+      containerHeightRef.current * ((Number.isNaN(Number(rows)) ? 1 : Number(rows)) + 0.01)
+    let flag: boolean | undefined // true: find first smaller, false: find first bigger
     const max = 5
     let i = 0
     const fn = () => {
@@ -302,15 +314,13 @@ export default function TextEllipsis({
     } else {
       setCorrectIndex(unConfirmedIndex)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unConfirmedIndex])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const text = useMemo(() => {
     setHasAction(hasActionRef.current)
     setStatus("initd")
     return getText(correctIndex)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correctIndex])
 
   const onClickAction = () => {
@@ -321,7 +331,9 @@ export default function TextEllipsis({
   return (
     <View
       ref={containerRef}
-      className={cls(prefixClassname("text-ellipsis"), classNameProp, { [prefixClassname("text-ellipsis__hidden")]: status !== "initd" })}
+      className={cls(prefixClassname("text-ellipsis"), classNameProp, {
+        [prefixClassname("text-ellipsis__hidden")]: status !== "initd",
+      })}
       style={styleProp}
       {...rest}
     >
@@ -349,18 +361,18 @@ export default function TextEllipsis({
           className={cls(prefixClassname("text-ellipsis"), classNameProp)}
           {...rest}
         >
-          {
-            baseString.map((char, index) => (
-              <View
-                ref={(r) => (placeholderBaseDomsRef.current[index] = r)}
-                key={index}
-                className={placeholderBaseCls}
-                style={{ display: "inline" }}
-              >
-                {char}
-              </View>
-            ))
-          }
+          {baseString.map((char, index) => (
+            <View
+              // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+              ref={(r) => (placeholderBaseDomsRef.current[index] = r)}
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              key={index}
+              className={placeholderBaseCls}
+              style={{ display: "inline" }}
+            >
+              {char}
+            </View>
+          ))}
         </View>
       )}
     </View>

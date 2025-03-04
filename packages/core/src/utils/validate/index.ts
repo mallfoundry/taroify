@@ -1,5 +1,10 @@
 import * as _ from "lodash"
-import { isValidElement, JSXElementConstructor, ReactElement, ReactNode } from "react"
+import {
+  isValidElement,
+  type JSXElementConstructor,
+  type ReactElement,
+  type ReactNode,
+} from "react"
 
 export function isNoneElement(node: ReactNode) {
   return _.isUndefined(node) || _.isNull(node)

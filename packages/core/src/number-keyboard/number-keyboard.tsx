@@ -1,17 +1,24 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
 import Transition from "../transition"
 import NumberKeyboardHeader from "./number-keyboard-header"
-import NumberKeyboardKey, { NumberKeyboardKeyProps } from "./number-keyboard-key"
+import NumberKeyboardKey, { type NumberKeyboardKeyProps } from "./number-keyboard-key"
 import {
   isNumberKeyboardKeyElement,
-  NumberKeyboardKeyCode,
-  NumberKeyboardKeyOnPress,
+  type NumberKeyboardKeyCode,
+  type NumberKeyboardKeyOnPress,
 } from "./number-keyboard-key.shared"
 import NumberKeyboardKeys from "./number-keyboard-keys"
 import NumberKeyboardSidebar from "./number-keyboard-sidebar"
@@ -20,6 +27,7 @@ import NumberKeyboardContext from "./number-keyboard.context"
 function createBasicKeys(random: boolean): ReactNode[] {
   const keys = Array(9)
     .fill("")
+    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
     .map((_, i) => <NumberKeyboardKey key={i + 1} children={i + 1} />)
 
   if (random) {
@@ -32,6 +40,7 @@ function createBasicKeys(random: boolean): ReactNode[] {
 export function createExtraNumberKeyboardKey(extraKey: ReactNode): ReactNode {
   if (_.isString(extraKey) || _.isNumber(extraKey)) {
     return <NumberKeyboardKey key={extraKey} children={extraKey} />
+    // biome-ignore lint/style/noUselessElse: <explanation>
   } else if (isNumberKeyboardKeyElement(extraKey)) {
     const element = extraKey as ReactElement
     const elementProps = element.props as NumberKeyboardKeyProps

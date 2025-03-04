@@ -1,6 +1,6 @@
 import { getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties } from "react"
+import type { CSSProperties } from "react"
 
 export function addUnitPx(value?: string | number): string {
   return value === undefined ? "" : `${unitToPx(value)}px`
@@ -33,7 +33,7 @@ function getRootFontSize() {
     const doc = document.documentElement
     const fontSize = doc.style.fontSize || window.getComputedStyle(doc).fontSize
 
-    rootFontSize = parseFloat(fontSize)
+    rootFontSize = Number.parseFloat(fontSize)
   }
 
   return rootFontSize
@@ -87,5 +87,5 @@ export function unitToPx(value: string | number): number {
     return convertVh(value)
   }
 
-  return parseFloat(value)
+  return Number.parseFloat(value)
 }

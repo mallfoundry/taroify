@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { StepsDirection } from "./steps.shared"
+import type { StepsDirection } from "./steps.shared"
 
 interface StepsContextValue {
   value?: number

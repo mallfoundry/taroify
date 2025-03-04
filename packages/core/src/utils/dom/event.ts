@@ -1,4 +1,4 @@
-import { CommonEvent, ITouchEvent } from "@tarojs/components"
+import type { CommonEvent, ITouchEvent } from "@tarojs/components"
 import { inBrowser } from "../base"
 
 export function stopPropagation(event: CommonEvent) {

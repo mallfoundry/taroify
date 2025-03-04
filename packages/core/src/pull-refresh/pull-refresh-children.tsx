@@ -1,6 +1,6 @@
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import PullRefreshContext from "./pull-refresh.context"
 
 interface PullRefreshRenderProps {

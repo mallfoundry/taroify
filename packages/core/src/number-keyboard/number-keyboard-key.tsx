@@ -4,7 +4,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import { prefixClassname } from "../styles"
 import { useTouch } from "../utils/touch"
-import { NumberKeyboardKeyCode, NumberKeyboardKeyOnPress } from "./number-keyboard-key.shared"
+import type { NumberKeyboardKeyCode, NumberKeyboardKeyOnPress } from "./number-keyboard-key.shared"
 import NumberKeyboardContext from "./number-keyboard.context"
 
 type NumberKeyboardKeySize = "small" | "medium" | "large"

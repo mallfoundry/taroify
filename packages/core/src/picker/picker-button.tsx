@@ -30,7 +30,6 @@ export default function PickerButton(props: PickerButtonProps) {
         [prefixClassname("picker__cancel")]: type === PickerButtonType.Cancel,
         [prefixClassname("picker__confirm")]: type === PickerButtonType.Confirm,
       })}
-      // biome-ignore lint/correctness/noChildrenProp: <explanation>
       children={children}
       onClick={(e) => {
         onClick?.(e)

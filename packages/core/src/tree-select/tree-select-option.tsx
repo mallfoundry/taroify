@@ -1,10 +1,10 @@
 import { cloneIconElement } from "@taroify/icons/utils"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { CSSProperties, ReactNode, useCallback, useContext, useMemo } from "react"
+import { type CSSProperties, type ReactNode, useCallback, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import TreeSelectContext from "./tree-select.context"
 

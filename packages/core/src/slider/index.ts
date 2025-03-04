@@ -1,9 +1,9 @@
-import SliderComponent, { SliderProps } from "./slider"
+import SliderComponent, { type SliderProps } from "./slider"
 import SliderThumb from "./slider-thumb"
 
 export type { SliderProps } from "./slider"
 
-export type { SliderThemeVars } from './slider.shared'
+export type { SliderThemeVars } from "./slider.shared"
 
 interface SliderInterface {
   (props: SliderProps): JSX.Element

@@ -1,11 +1,11 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 import TimelineContext from "./timeline.context"
-import { TimelinePosition } from "./timeline.shared"
+import type { TimelinePosition } from "./timeline.shared"
 
 export interface TimelineProps extends PropsWithChildren<ViewProps> {
   position?: TimelinePosition
