@@ -10,6 +10,5 @@ interface PickerTitleProps {
 
 export default function PickerTitle(props: PickerTitleProps) {
   const { children } = props
-  // biome-ignore lint/correctness/noChildrenProp: <explanation>
   return <View className={prefixClassname("picker__title")} children={children} />
 }

@@ -1,12 +1,12 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import { useMemo } from "react"
 import * as React from "react"
 import { pxTransform } from "@tarojs/taro"
-import { Children, CSSProperties, ReactNode } from "react"
+import { Children, type CSSProperties, type ReactNode } from "react"
 import Flex from "../flex"
 import { prefixClassname } from "../styles"
-import { SpaceAlign, SpaceDirection, SpaceJustify, SpaceSize, SpaceWrap } from "./space.shared"
+import type { SpaceAlign, SpaceDirection, SpaceJustify, SpaceSize, SpaceWrap } from "./space.shared"
 
 interface SpaceProps extends ViewProps {
   style?: CSSProperties
@@ -22,10 +22,13 @@ interface SpaceProps extends ViewProps {
 function normalizeSize(size: SpaceSize) {
   if (Array.isArray(size)) {
     return ["", pxTransform(size[0]), pxTransform(size[1]!)]
+    // biome-ignore lint/style/noUselessElse: <explanation>
   } else if (typeof size === "number") {
     return ["", pxTransform(size), pxTransform(size)]
-  }  else if (["mini", "small", "medium", "large"].includes(size)) {
+    // biome-ignore lint/style/noUselessElse: <explanation>
+  } else if (["mini", "small", "medium", "large"].includes(size)) {
     return [size]
+    // biome-ignore lint/style/noUselessElse: <explanation>
   } else {
     return ["small"]
   }
@@ -73,10 +76,11 @@ export default function Space(props: SpaceProps) {
         //
         Children.map(children, (item, index) => (
           <Flex.Item
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             key={index}
             style={{
               marginRight: gapX,
-              marginBottom: gapY
+              marginBottom: gapY,
             }}
             className={classNames(prefixClassname("space__item"), {
               [prefixClassname("space__item--mini")]: size === "mini",

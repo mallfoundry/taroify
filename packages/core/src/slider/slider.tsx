@@ -1,16 +1,16 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useRef,

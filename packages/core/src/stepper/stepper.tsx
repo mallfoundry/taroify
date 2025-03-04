@@ -1,14 +1,14 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
   cloneElement,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
 } from "react"
@@ -19,7 +19,7 @@ import { useToRef } from "../utils/state"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
 import StepperContext from "./stepper.context"
-import { StepperActionType, StepperShape } from "./stepper.shared"
+import type { StepperActionType, StepperShape } from "./stepper.shared"
 
 const { deprecated } = getLogger("Stepper")
 
@@ -110,7 +110,6 @@ function Stepper(props: StepperProps) {
   } = props
 
   if (shape === "round") {
-    // eslint-disable-next-line quotes
     deprecated('Use the shape="circular" prop instead of the shape="round" prop')
   }
 
@@ -127,18 +126,18 @@ function Stepper(props: StepperProps) {
       if (value === "") {
         return value
       }
-
-      value = formatNumber(String(value), precision > 0)
-      value = value === "" ? 0 : +value
-      value = Number.isNaN(value) ? +min : value
-      value = Math.max(Math.min(+max, value), +min)
+      let valueCache = value
+      valueCache = formatNumber(String(valueCache), precision > 0)
+      valueCache = valueCache === "" ? 0 : +valueCache
+      valueCache = Number.isNaN(valueCache) ? +min : valueCache
+      valueCache = Math.max(Math.min(+max, valueCache), +min)
 
       // format decimal
       if (precision > 0) {
-        value = value.toFixed(+precision)
+        valueCache = valueCache.toFixed(+precision)
       }
 
-      return value
+      return valueCache
     },
     [max, min, precision],
   )

@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import Popup from "../popup"
-import ToastComponent, { ToastProps } from "./toast"
+import ToastComponent, { type ToastProps } from "./toast"
 import {
   closeToast,
   createToast,
@@ -8,7 +8,7 @@ import {
   resetDefaultToastOptions,
   setDefaultToastOptions,
 } from "./toast.imperative"
-import { ToastOptions } from "./toast.shared"
+import type { ToastOptions } from "./toast.shared"
 export type { ToastType, ToastPosition, ToastThemeVars, ToastOptions } from "./toast.shared"
 
 interface ToastInterface {

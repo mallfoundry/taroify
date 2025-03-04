@@ -1,6 +1,6 @@
 import { useForceUpdate, useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
@@ -8,10 +8,10 @@ import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -22,15 +22,15 @@ import { useMounted, useWindowResize, useMemoizedFn } from "../hooks"
 import { prefixClassname } from "../styles"
 import { getComputedStyle } from "../utils/dom/computed-style"
 import { preventDefault } from "../utils/dom/event"
-import { getRect, makeRect, Rect } from "../utils/dom/rect"
+import { getRect, makeRect, type Rect } from "../utils/dom/rect"
 import { addUnitPx, unitToPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
 import { useRendered, useRenderedRef, useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import SwiperIndicator from "./swiper-indicator"
 import SwiperItem from "./swiper-item"
-import SwiperContext, { SwiperItemInstance } from "./swiper.context"
-import { SwiperDirection } from "./swiper.shared"
+import SwiperContext, { type SwiperItemInstance } from "./swiper.context"
+import type { SwiperDirection } from "./swiper.shared"
 
 interface SwiperChildren {
   items: ReactNode[]
@@ -152,17 +152,11 @@ function Swiper(props: SwiperProps) {
 
   const activeIndicatorRef = useRenderedRef(() => getIndicatorValue(activeIndexRef.current, count))
 
-  const getDelta = useCallback(
-    () => (vertical ? touch.deltaY : touch.deltaX),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const getDelta = useCallback(() => (vertical ? touch.deltaY : touch.deltaX), [])
 
-  const getCorrectDirection = useCallback(
-    () => touch.direction === direction,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const getCorrectDirection = useCallback(() => touch.direction === direction, [])
 
   const getCustomRect = useCallback(
     () => ({
@@ -228,6 +222,7 @@ function Swiper(props: SwiperProps) {
     [getMinOffset, getSize, loop],
   )
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const moveTo = useCallback(
     ({ pace = 0, offset = 0, emitChange = false }) => {
       if (count <= 1) {
@@ -286,7 +281,7 @@ function Swiper(props: SwiperProps) {
       touch.reset()
 
       doubleRaf(() => {
-        let targetIndex
+        let targetIndex: number
         if (loop && index === count) {
           targetIndex = activeIndexRef.current === 0 ? 0 : index
         } else {
@@ -303,17 +298,6 @@ function Swiper(props: SwiperProps) {
     },
     [correctPosition, count, loop, moveTo, touch],
   )
-
-  // const previous = useCallback(() => {
-  //   correctPosition()
-  //   doubleRaf(() => {
-  //     swipingRef.current = false
-  //     moveTo({
-  //       pace: -1,
-  //       emitChange: true,
-  //     })
-  //   })
-  // }, [correctPosition, moveTo])
 
   const next = useCallback(() => {
     correctPosition()
@@ -444,26 +428,26 @@ function Swiper(props: SwiperProps) {
     [],
   )
 
-  const initialize = useMemoizedFn(
-    async (activeIndex = valueRef.current) => {
-      if (!rootRef.current) {
-        return
-      }
-      if (count) {
-        activeIndex = Math.min(count - 1, activeIndex)
-      }
-      activeIndexRef.current = activeIndex
-      swipingRef.current = true
-      const targetOffset = getTargetOffset(activeIndex)
-      setOffset(targetOffset)
-      // Force update render
-      if (targetOffset === offset) {
-        forceUpdate()
-      }
-      itemInstances.forEach((item) => item.setOffset(0))
-      startAutoplay()
+  const initialize = useMemoizedFn(async (activeIndex = valueRef.current) => {
+    if (!rootRef.current) {
+      return
     }
-  )
+    let activeIndexCache = activeIndex
+    if (count) {
+      activeIndexCache = Math.min(count - 1, activeIndexCache)
+    }
+    activeIndexRef.current = activeIndexCache
+    swipingRef.current = true
+    const targetOffset = getTargetOffset(activeIndexCache)
+    setOffset(targetOffset)
+    // Force update render
+    if (targetOffset === offset) {
+      forceUpdate()
+    }
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    itemInstances.forEach((item) => item.setOffset(0))
+    startAutoplay()
+  })
 
   const resize = useCallback(() => nextTick(() => initialize(activeIndexRef.current)), [initialize])
 
@@ -500,22 +484,19 @@ function Swiper(props: SwiperProps) {
     return stopAutoplay
   })
 
-  useEffect(
-    () => {
-      const valueIndicator = valueIndicatorRef.current
-      const activeIndicator = activeIndicatorRef.current
-      if (valueIndicator !== activeIndicator) {
-        try {
-          stopAutoplay()
-          swipeTo(valueIndicator)
-        } finally {
-          startAutoplay()
-        }
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    const valueIndicator = valueIndicatorRef.current
+    const activeIndicator = activeIndicatorRef.current
+    if (valueIndicator !== activeIndicator) {
+      try {
+        stopAutoplay()
+        swipeTo(valueIndicator)
+      } finally {
+        startAutoplay()
       }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [valueIndicatorRef.current],
-  )
+    }
+  }, [valueIndicatorRef.current])
 
   const trackStyle = useRendered(() => {
     const style: CSSProperties = {
@@ -547,8 +528,8 @@ function Swiper(props: SwiperProps) {
           itemInstances,
         }}
       >
-        {
-          isInit && <>
+        {isInit && (
+          <>
             <View
               className={classNames(prefixClassname("swiper__track"), {
                 [prefixClassname("swiper__track--vertical")]: vertical,
@@ -563,7 +544,7 @@ function Swiper(props: SwiperProps) {
             />
             {indicator}
           </>
-        }
+        )}
       </SwiperContext.Provider>
     </View>
   )

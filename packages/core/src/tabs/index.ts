@@ -1,6 +1,6 @@
 import TabPane from "./tab-pane"
-import TabsElement, { TabsProps } from "./tabs"
-import { TabEvent as SharedTabEvent } from "./tabs.shared"
+import TabsElement, { type TabsProps } from "./tabs"
+import type { TabEvent as SharedTabEvent } from "./tabs.shared"
 
 export type { TabThemeVars } from "./tabs.shared"
 
@@ -14,7 +14,6 @@ const Tabs = TabsElement as TabsInterface
 
 Tabs.TabPane = TabPane
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Tabs {
   export type TabEvent = SharedTabEvent
 }

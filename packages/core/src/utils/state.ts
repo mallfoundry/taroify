@@ -2,8 +2,8 @@ import { useForceUpdate } from "@taroify/hooks"
 import * as _ from "lodash"
 import {
   createRef,
-  MutableRefObject,
-  RefCallback,
+  type MutableRefObject,
+  type RefCallback,
   useCallback,
   useEffect,
   useMemo,
@@ -57,6 +57,7 @@ export function useRefs<T = Element>() {
 
   const getRefs = useCallback(() => refs.current, [])
 
+  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   const clearRefs = useCallback(() => (refs.current = []), [])
 
   return useMemo(
@@ -85,20 +86,17 @@ export function useObject<S>(state: S) {
     stateRef.current = state
   }
 
-  const setObject = useCallback(
-    (newState: S) => {
-      stateRef.current = { ...stateRef.current, ...newState }
-      forceUpdate()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const setObject = useCallback((newState: S) => {
+    stateRef.current = { ...stateRef.current, ...newState }
+    forceUpdate()
+  }, [])
 
   const getObject = useCallback(() => stateRef.current as S, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   return useMemo(
     () => ({ object: stateRef.current, getObject, setObject }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [stateRef.current, getObject, setObject],
   )
 }

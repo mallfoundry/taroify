@@ -1,18 +1,18 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Close } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useCallback, useMemo } from "react"
+import { type ReactNode, useCallback, useMemo } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import UploaderImage from "./uploader-image"
 import UploaderMask from "./uploader-mask"
 import UploaderUpload from "./uploader-upload"
 import UploaderContext from "./uploader.context"
-import { getOneUploadFile, getUploadFiles, UploadFile } from "./uploader.shared"
+import { getOneUploadFile, getUploadFiles, type UploadFile } from "./uploader.shared"
 
 function renderUploaderMask(file: UploadFile) {
   return (

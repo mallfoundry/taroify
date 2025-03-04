@@ -1,11 +1,11 @@
 import Sheet from "../sheet"
-import ShareSheetComponent, { ShareSheetProps } from "./share-sheet"
+import ShareSheetComponent, { type ShareSheetProps } from "./share-sheet"
 import ShareSheetHeader from "./share-sheet-header"
 import ShareSheetOption from "./share-sheet-option"
 import ShareSheetOptions from "./share-sheet-options"
-import { ShareSheetOptionObject } from "./share-sheet.shared"
+import type { ShareSheetOptionObject } from "./share-sheet.shared"
 
-export type { ShareSheetThemeVars } from './share-sheet.shared'
+export type { ShareSheetThemeVars } from "./share-sheet.shared"
 
 interface ShareSheetInterface {
   (props: ShareSheetProps): JSX.Element
@@ -24,7 +24,6 @@ ShareSheet.Options = ShareSheetOptions
 ShareSheet.Option = ShareSheetOption
 ShareSheet.Button = Sheet.Button
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace ShareSheet {
   export type OptionObject = ShareSheetOptionObject
 }

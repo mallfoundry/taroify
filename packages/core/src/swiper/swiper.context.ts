@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { SwiperDirection } from "./swiper.shared"
+import type { SwiperDirection } from "./swiper.shared"
 
 export interface SwiperItemInstance {
   setOffset: (offset: number) => void

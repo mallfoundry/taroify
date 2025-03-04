@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, PropsWithChildren } from "react"
+import type { CSSProperties, PropsWithChildren } from "react"
 import { useHeight } from "../hooks"
 import { addUnitPx } from "../utils/format/unit"
 
@@ -17,7 +17,7 @@ export interface PlaceholderProps extends PropsWithChildren<ViewProps> {
 export default function usePlaceholder(contentRef: any, { className }: UsePlaceholderOptions = {}) {
   console.warn("[Taroify] usePlaceholder is deprecated, please don't use it.")
   return ({ className: classNameProp, style = {}, children, ...restProps }: PlaceholderProps) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    // biome-ignore lint/correctness/useHookAtTopLevel: <explanation>
     const height = useHeight(contentRef, [children])
     return (
       <View

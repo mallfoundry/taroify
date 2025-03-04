@@ -145,7 +145,6 @@ function Picker(props: PickerProps) {
       })
     }
 
-    // biome-ignore lint/correctness/noChildrenProp: <explanation>
     __children__.unshift(<PickerColumns key="-1" children={columns} />)
     __children__.unshift(toolbar)
     return __children__

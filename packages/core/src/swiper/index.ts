@@ -1,9 +1,9 @@
-import SwiperElement, { SwiperProps } from "./swiper"
-import SwiperIndicator, { SwiperIndicatorProps } from "./swiper-indicator"
-import SwiperItem, { SwiperItemProps } from "./swiper-item"
-import { SwiperItemEvent } from "./swiper.shared"
+import SwiperElement, { type SwiperProps } from "./swiper"
+import SwiperIndicator, { type SwiperIndicatorProps } from "./swiper-indicator"
+import SwiperItem, { type SwiperItemProps } from "./swiper-item"
+import type { SwiperItemEvent } from "./swiper.shared"
 
-export type { SwiperThemeVars } from './swiper.shared'
+export type { SwiperThemeVars } from "./swiper.shared"
 
 interface SwiperInterface {
   (props: SwiperProps): JSX.Element
@@ -12,12 +12,11 @@ interface SwiperInterface {
   Indicator: typeof SwiperIndicator
 }
 
-const Swiper = (SwiperElement as unknown) as SwiperInterface
+const Swiper = SwiperElement as unknown as SwiperInterface
 
 Swiper.Item = SwiperItem
 Swiper.Indicator = SwiperIndicator
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Swiper {
   export type ItemEvent = SwiperItemEvent
 

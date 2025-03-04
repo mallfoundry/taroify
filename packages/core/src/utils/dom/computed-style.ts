@@ -9,18 +9,17 @@ export function getComputedStyle(
   if (element) {
     if (inBrowser) {
       return Promise.resolve(window.getComputedStyle(element as any))
-    } else {
-      return new Promise<CSSStyleDeclaration>((resolve) => {
-        queryNodesRef(element)
-          .fields(
-            {
-              computedStyle,
-            },
-            (result) => resolve(result as CSSStyleDeclaration),
-          )
-          .exec()
-      })
     }
+    return new Promise<CSSStyleDeclaration>((resolve) => {
+      queryNodesRef(element)
+        .fields(
+          {
+            computedStyle,
+          },
+          (result) => resolve(result as CSSStyleDeclaration),
+        )
+        .exec()
+    })
   }
 
   return Promise.resolve({} as CSSStyleDeclaration)

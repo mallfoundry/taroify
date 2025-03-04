@@ -1,5 +1,5 @@
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import { useCallback, useContext, useRef } from "react"
@@ -7,7 +7,7 @@ import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { getSizeStyle } from "../utils/format/unit"
 import StepperContext from "./stepper.context"
-import { StepperActionType } from "./stepper.shared"
+import type { StepperActionType } from "./stepper.shared"
 
 const LONG_PRESS_INTERVAL = 200
 
@@ -54,7 +54,7 @@ function StepperButton(props: StepperButtonProps) {
 
   const longPressRef = useRef(false)
 
-  let longPressTimerRef = useRef<NodeJS.Timeout>()
+  const longPressTimerRef = useRef<NodeJS.Timeout>()
 
   const longPressStep = useCallback(() => {
     longPressTimerRef.current = setTimeout(() => {

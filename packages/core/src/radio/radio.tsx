@@ -1,9 +1,9 @@
 import { Success } from "@taroify/icons"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import RadioGroupContext from "./radio-group.context"
@@ -33,9 +33,13 @@ export default function Radio(props: RadioProps) {
     ...restProps
   } = props
 
-  const { value, direction, disabled: disabledGroup, size: sizeGroup, onChange } = useContext(
-    RadioGroupContext,
-  )
+  const {
+    value,
+    direction,
+    disabled: disabledGroup,
+    size: sizeGroup,
+    onChange,
+  } = useContext(RadioGroupContext)
 
   const size = sizeProp ?? sizeGroup
 

@@ -44,6 +44,8 @@ function Watermark(props: WatermarkProps) {
   const canvasRef = useRef<HTMLDivElement>(null)
   const [watermarkUrl, setWatermarkUrl] = useState("")
   const [canvas, ctx, loaded] = useCanvas(canvasId, canvasRef)
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // not supported in mini program
     // const svgStr =
@@ -94,14 +96,14 @@ function Watermark(props: WatermarkProps) {
         setWatermarkUrl(canvas.toDataURL())
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gapX, gapY, imageProp, width, height, rotate, opacity, content, textSize, textColor, loaded])
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const style = useMemo(
     () => ({
       zIndex,
       backgroundImage: `url(${watermarkUrl})`,
       backgroundSize: `${width}px ${height}px`,
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }),
     [zIndex, watermarkUrl],
   )

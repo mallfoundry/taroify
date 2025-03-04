@@ -1,7 +1,7 @@
 import { Cross } from "@taroify/icons"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactElement, ReactNode, useContext } from "react"
+import { type ReactElement, type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import PopupContext from "./popup.context"
 

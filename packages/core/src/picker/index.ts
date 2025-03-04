@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react"
-import PickerComponent, { PickerProps } from "./picker"
+import type { FunctionComponent } from "react"
+import PickerComponent, { type PickerProps } from "./picker"
 import PickerButton from "./picker-button"
 import PickerColumns from "./picker-columns"
 import PickerOption from "./picker-option"

@@ -1,11 +1,18 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+} from "react"
 import FixedView from "../fixed-view"
-import { SafeAreaPosition } from "../safe-area"
+import type { SafeAreaPosition } from "../safe-area"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import TabbarItem from "./tabbar-item"

@@ -1,17 +1,17 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  LegacyRef,
-  ReactElement,
-  ReactNode,
+  type LegacyRef,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -155,15 +155,17 @@ function SwipeCell(props: SwipeCellProps) {
   const updateLeftWidth = () =>
     getRect(leftRef)
       .then(({ width }) => width ?? 0)
+      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
       .then((leftWidth) => (leftWidthRef.current = leftWidth))
 
   const updateRightWidth = () =>
     getRect(rightRef)
       .then(({ width }) => width ?? 0)
+      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
       .then((rightWidth) => (rightWidthRef.current = rightWidth))
 
   const open = useCallback(
-    (side: SwipeCellPosition, emitOpen: boolean = true) => {
+    (side: SwipeCellPosition, emitOpen = true) => {
       openedRef.current = true
       setOffset(side === "left" ? leftWidthRef.current : -rightWidthRef.current)
       if (emitOpen) {
@@ -174,7 +176,7 @@ function SwipeCell(props: SwipeCellProps) {
   )
 
   const close = useCallback(
-    (position: SwipeCellPosition, emitClose: boolean = true) => {
+    (position: SwipeCellPosition, emitClose = true) => {
       openedRef.current = false
       setOffset(0)
       if (emitClose) {

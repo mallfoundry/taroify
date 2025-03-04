@@ -1,10 +1,10 @@
-import { default as StepperComponent, StepperProps } from "./stepper"
+import { default as StepperComponent, type StepperProps } from "./stepper"
 import StepperButton from "./stepper-button"
 import StepperInput from "./stepper-input"
 
 export type { StepperProps } from "./stepper"
 
-export type { StepperThemeVars } from './stepper.shared'
+export type { StepperThemeVars } from "./stepper.shared"
 
 interface StepperInterface {
   (props: StepperProps): JSX.Element

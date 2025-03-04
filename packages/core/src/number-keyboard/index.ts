@@ -1,10 +1,10 @@
-import NumberKeyboardElement, { NumberKeyboardProps } from "./number-keyboard"
+import NumberKeyboardElement, { type NumberKeyboardProps } from "./number-keyboard"
 import NumberKeyboardButton from "./number-keyboard-button"
 import NumberKeyboardHeader from "./number-keyboard-header"
 import NumberKeyboardKey from "./number-keyboard-key"
 import NumberKeyboardSidebar from "./number-keyboard-sidebar"
 
-export type { NumberKeyboardThemeVars } from './number-keyboard.shared'
+export type { NumberKeyboardThemeVars } from "./number-keyboard.shared"
 
 interface NumberKeyboardInterface {
   (props: NumberKeyboardProps): JSX.Element

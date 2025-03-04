@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
 import { prefixClassname } from "../styles"
 
 const TIMELINE_DOT_COLORS = ["default", "primary", "info", "success", "warning", "danger"]

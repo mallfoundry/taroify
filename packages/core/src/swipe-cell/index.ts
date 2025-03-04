@@ -1,4 +1,4 @@
-import SwipeCellElement, { SwipeCellProps } from "./swipe-cell"
+import SwipeCellElement, { type SwipeCellProps } from "./swipe-cell"
 import SwipeCellActions from "./swipe-cell-actions"
 
 interface SwipeCellInterface {

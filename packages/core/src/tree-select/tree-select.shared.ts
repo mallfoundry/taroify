@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import Sidebar from "../sidebar"
+import type { ReactNode } from "react"
+import type Sidebar from "../sidebar"
 
 export type TreeSelectTabObject = Sidebar.TabObject
 

@@ -1,12 +1,12 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 import RadioGroupContext from "./radio-group.context"
-import { RadioGroupDirection } from "./radio-group.shared"
+import type { RadioGroupDirection } from "./radio-group.shared"
 
 export interface RadioGroupProps<T = any> extends ViewProps {
   defaultValue?: T

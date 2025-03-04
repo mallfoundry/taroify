@@ -1,21 +1,21 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
 } from "react"
 import { prefixClassname } from "../styles"
 import SidebarTab from "./sidebar-tab"
-import { SidebarTabObject } from "./sidebar-tab.shared"
+import type { SidebarTabObject } from "./sidebar-tab.shared"
 import SidebarContext from "./sidebar.context"
 
 function useSidebarChildren(children: ReactNode) {

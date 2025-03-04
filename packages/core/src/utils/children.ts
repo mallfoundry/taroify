@@ -1,5 +1,5 @@
 import * as _ from "lodash"
-import { Children as ReactChildren, ReactNode } from "react"
+import { Children as ReactChildren, type ReactNode } from "react"
 import { isObjectElement } from "./validate"
 
 function isObjectChildren(children?: ReactNode) {
@@ -10,7 +10,10 @@ function isObjectChildren(children?: ReactNode) {
   return isObjectElement(node)
 }
 
-function forEachChildren(children: ReactNode | ReactNode[], fn: (child: ReactNode, index: number) => void) {
+function forEachChildren(
+  children: ReactNode | ReactNode[],
+  fn: (child: ReactNode, index: number) => void,
+) {
   const objectified = isObjectChildren(children)
   const forEach = objectified ? _.forEach : ReactChildren.forEach
   return forEach(children, fn)

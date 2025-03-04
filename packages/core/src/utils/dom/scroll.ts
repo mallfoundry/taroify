@@ -1,4 +1,4 @@
-import { TaroElement } from "@tarojs/runtime"
+import type { TaroElement } from "@tarojs/runtime"
 import { createSelectorQuery } from "@tarojs/taro"
 import { inBrowser } from "../base"
 import { getComputedStyle } from "./computed-style"
@@ -74,17 +74,18 @@ export function getScrollOffset(elementOrRef: any): Promise<ScrollOffset> {
     if (inBrowser) {
       const $element = element as any
 
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
       const top = "scrollTop" in element ? $element.scrollTop : $element["pageYOffset"]
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
       const left = "scrollLeft" in element ? $element.scrollLeft : $element["pageXOffset"]
       return Promise.resolve({
         scrollTop: Math.max(top, 0),
         scrollLeft: Math.max(left, 0),
       } as ScrollOffset)
-    } else {
-      return new Promise<ScrollOffset>((resolve) => {
-        queryNodesRef(element).scrollOffset(resolve).exec()
-      })
     }
+    return new Promise<ScrollOffset>((resolve) => {
+      queryNodesRef(element).scrollOffset(resolve).exec()
+    })
   }
   return Promise.resolve(makeScrollOffset())
 }

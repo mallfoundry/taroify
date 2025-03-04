@@ -14,8 +14,8 @@ function compareVersion(o1: string, o2: string) {
   }
 
   for (let i = 0; i < len; i++) {
-    const num1 = parseInt(v1[i], 10)
-    const num2 = parseInt(v2[i], 10)
+    const num1 = Number.parseInt(v1[i], 10)
+    const num2 = Number.parseInt(v2[i], 10)
 
     if (num1 > num2) {
       return 1

@@ -1,10 +1,10 @@
 import {
-  ComponentClass,
+  type ComponentClass,
   createElement,
-  FunctionComponent,
+  type FunctionComponent,
   isValidElement,
-  PropsWithChildren,
-  ReactNode,
+  type PropsWithChildren,
+  type ReactNode,
 } from "react"
 import { isObjectElement, isTextElement } from "./validate"
 

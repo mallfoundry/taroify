@@ -1,16 +1,23 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, CSSProperties, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  type CSSProperties,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+} from "react"
 import Backdrop from "../backdrop"
 import Popup from "../popup"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
 import SheetHeader from "./sheet-header"
 import SheetContext from "./sheet.context"
-import { SheetItemObject } from "./sheet.shared"
-import { SafeAreaPosition } from "../safe-area"
+import type { SheetItemObject } from "./sheet.shared"
+import type { SafeAreaPosition } from "../safe-area"
 
 interface SheetChildren {
   backdrop?: ReactNode

@@ -1,8 +1,8 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, PropsWithChildren } from "react"
-import Flex, { FlexAlign, FlexDirection, FlexJustify } from "../flex"
+import type { CSSProperties, PropsWithChildren } from "react"
+import Flex, { type FlexAlign, type FlexDirection, type FlexJustify } from "../flex"
 import { prefixClassname } from "../styles"
 
 export interface TimeLineContentProps extends PropsWithChildren<ViewProps> {

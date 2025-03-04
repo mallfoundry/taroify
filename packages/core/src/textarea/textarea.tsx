@@ -1,12 +1,12 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { BaseEventOrig } from "@tarojs/components/types/common"
-import { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
+import type { BaseEventOrig } from "@tarojs/components/types/common"
+import type { InputProps as TaroInputProps } from "@tarojs/components/types/Input"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import { prefixClassname } from "../styles"
-import NativeTextarea, { NativeTextareaProps } from "./native-textarea"
+import NativeTextarea, { type NativeTextareaProps } from "./native-textarea"
 import { getStringLength } from "./textarea.shared"
 
 export interface TextareaProps extends NativeTextareaProps {

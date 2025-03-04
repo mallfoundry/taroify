@@ -1,8 +1,8 @@
 import * as _ from "lodash"
-import { createElement, isValidElement, ReactNode } from "react"
-import { document, TaroNode } from "@tarojs/runtime"
+import { createElement, isValidElement, type ReactNode } from "react"
+import { document, type TaroNode } from "@tarojs/runtime"
 import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
-import { ToastOptions, ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import { type ToastOptions, type ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
 import Toast from "./toast"
 
 const initialToastOptions: ToastOptions = {

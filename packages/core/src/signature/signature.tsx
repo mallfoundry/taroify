@@ -1,19 +1,13 @@
-import {
-  useRef,
-  useMemo,
-  forwardRef,
-  ForwardedRef,
-  useImperativeHandle,
-} from "react"
+import { useRef, useMemo, forwardRef, type ForwardedRef, useImperativeHandle } from "react"
 import * as React from "react"
 import { getEnv } from "@tarojs/taro"
-import { View, Canvas, CanvasTouchEvent } from "@tarojs/components"
+import { View, Canvas, type CanvasTouchEvent } from "@tarojs/components"
 import cls from "classnames"
 import { prefixClassname } from "../styles"
-import { Rect, getRect } from "../utils/dom/rect"
+import { type Rect, getRect } from "../utils/dom/rect"
 import { preventDefault } from "../utils/dom/event"
 import { useCanvas } from "../hooks"
-import { SignatureProps, SignatureInstance } from "./signature.shared"
+import type { SignatureProps, SignatureInstance } from "./signature.shared"
 
 export type { SignatureInstance }
 
@@ -29,17 +23,24 @@ const Signature = forwardRef(function Signature(
     backgroundColor,
     className,
     canvasId: canvasIdProp,
-    onStart, onSigning, onEnd, ...rest
+    onStart,
+    onSigning,
+    onEnd,
+    ...rest
   } = props
   const wrapRef = useRef<HTMLElement>(null)
   const canvasRectRef = useRef<Rect>()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const canvasId = useMemo(() => canvasIdProp ? canvasIdProp : `taroify-canvas${_canvasIdx++}`, [])
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const canvasId = useMemo(
+    () => (canvasIdProp ? canvasIdProp : `taroify-canvas${_canvasIdx++}`),
+    [],
+  )
   const [canvas, ctx] = useCanvas(canvasId, wrapRef, {
     async onLoaded(_, _ctx) {
       canvasRectRef.current = await getRect(wrapRef)
       setCanvasBgColor(_ctx)
-    }
+    },
   })
   const emptyRef = useRef(true)
 
@@ -59,15 +60,15 @@ const Signature = forwardRef(function Signature(
       // H5 disable scroll
       preventDefault(event)
       emptyRef.current = false
-      const touch = event.touches[0];
+      const touch = event.touches[0]
       const env = getEnv()
       let mouseX = touch.x
       let mouseY = touch.y
       if (env === "WEB") {
         // @ts-ignore
-        mouseX = (touch.clientX - (canvasRectRef.current?.left || 0));
+        mouseX = touch.clientX - (canvasRectRef.current?.left || 0)
         // @ts-ignore
-        mouseY = (touch.clientY - (canvasRectRef.current?.top || 0));
+        mouseY = touch.clientY - (canvasRectRef.current?.top || 0)
       }
       ctx.lineCap = "round"
       ctx.lineJoin = "round"
@@ -105,12 +106,12 @@ const Signature = forwardRef(function Signature(
                 jpeg: (): string => canvas.toDataURL("image/jpeg", 0.8),
               }[type] as () => string
             )?.() || canvas.toDataURL(`image/${type}`),
-          canvas
+        canvas,
       }
     }
     return {
       image: "",
-      canvas: null
+      canvas: null,
     }
   }
 

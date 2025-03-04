@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, ReactElement, useContext, isValidElement, cloneElement } from "react"
+import { type ReactElement, type ReactNode, cloneElement, isValidElement, useContext } from "react"
 import Badge from "../badge"
 import { prefixClassname } from "../styles"
 import TabbarContext from "./tabbar.context"
@@ -16,10 +16,25 @@ interface TabbarItemProps extends ViewProps {
 }
 
 export default function TabbarItem(props: TabbarItemProps) {
-  const { className, icon: iconProp, value: valueProp, badge, children, onClick, ...restProps } = props
+  const {
+    className,
+    icon: iconProp,
+    value: valueProp,
+    badge,
+    children,
+    onClick,
+    ...restProps
+  } = props
   const { value, onItemClick } = useContext(TabbarContext)
   const active = value === valueProp
-  const icon = isValidElement(iconProp) ? cloneElement(iconProp as any, { className: classNames((iconProp as ReactElement).props.className, prefixClassname("tabbar-item__icon")) }) : iconProp
+  const icon = isValidElement(iconProp)
+    ? cloneElement(iconProp as any, {
+        className: classNames(
+          (iconProp as ReactElement).props.className,
+          prefixClassname("tabbar-item__icon"),
+        ),
+      })
+    : iconProp
 
   return (
     <View
@@ -36,9 +51,7 @@ export default function TabbarItem(props: TabbarItemProps) {
       }}
       {...restProps}
     >
-      {
-        icon && <Badge content={badge} children={icon} />
-      }
+      {icon && <Badge content={badge} children={icon} />}
       <View className={prefixClassname("tabbar-item__label")} children={children} />
     </View>
   )

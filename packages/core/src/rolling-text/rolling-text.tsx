@@ -1,12 +1,12 @@
 import * as React from "react"
-import {useMemo, useState, useEffect, forwardRef, useImperativeHandle} from "react"
-import {View} from "@tarojs/components"
-import {ViewProps} from "@tarojs/components/types/View"
+import { useMemo, useState, useEffect, forwardRef, useImperativeHandle } from "react"
+import { View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import RollingTextItem from './rolling-text-item'
-import {prefixClassname} from "../styles"
-import {RollingTextDirection, RollingTextStopOrder} from "./rolling-text.shared"
-import {padZero} from '../utils/format/number'
+import RollingTextItem from "./rolling-text-item"
+import { prefixClassname } from "../styles"
+import type { RollingTextDirection, RollingTextStopOrder } from "./rolling-text.shared"
+import { padZero } from "../utils/format/number"
 
 const CIRCLE_NUM = 2
 
@@ -22,12 +22,11 @@ export interface RollingTextProps extends ViewProps {
 }
 
 export interface RollingTextRef {
-  start: () => void;
-  reset: () => void;
+  start: () => void
+  reset: () => void
 }
 
-const RollingText = forwardRef<any, RollingTextProps>(
-  (props, ref) => {
+const RollingText = forwardRef<any, RollingTextProps>((props, ref) => {
   const {
     className,
     startNum = 0,
@@ -35,31 +34,26 @@ const RollingText = forwardRef<any, RollingTextProps>(
     textList = [],
     duration = 2,
     autoStart = true,
-    direction = 'down',
-    stopOrder = 'ltr',
+    direction = "down",
+    stopOrder = "ltr",
     height = 40,
   } = props
 
-  const [rolling, setRolling] = useState(autoStart);
+  const [rolling, setRolling] = useState(autoStart)
 
-  const isCustomType = useMemo(
-    () => Array.isArray(textList) && textList.length,
-    [textList]
-  )
+  const isCustomType = useMemo(() => Array.isArray(textList) && textList.length, [textList])
 
   const itemLength = useMemo(() => {
     if (isCustomType) return textList[0].length
     return `${Math.max(startNum, targetNum!)}`.length
   }, [isCustomType, textList, startNum, targetNum])
 
-  const startNumArr = useMemo(() =>
-      padZero(startNum, itemLength).split('')
-    , [startNum, itemLength])
+  const startNumArr = useMemo(() => padZero(startNum, itemLength).split(""), [startNum, itemLength])
 
   const targetNumArr = useMemo(() => {
-    if (isCustomType) return new Array(itemLength).fill('')
-    return padZero(targetNum!, itemLength).split('')
-  }, [isCustomType, itemLength, targetNum, ])
+    if (isCustomType) return new Array(itemLength).fill("")
+    return padZero(targetNum!, itemLength).split("")
+  }, [isCustomType, itemLength, targetNum])
 
   const getTextArrByIdx = (idx: number) => {
     const result: string[] = []
@@ -67,12 +61,12 @@ const RollingText = forwardRef<any, RollingTextProps>(
       result.push(textList[i][idx])
     }
     return result
-  };
+  }
 
   const getFigureArr = (i: number) => {
     const start = +startNumArr[i]
     const target = +targetNumArr[i]
-    const result:  number[] = []
+    const result: number[] = []
     for (let i = start; i <= 9; i++) {
       result.push(i)
     }
@@ -88,22 +82,23 @@ const RollingText = forwardRef<any, RollingTextProps>(
   }
 
   const getDelay = (i: number, len: number) => {
-    if (stopOrder === 'ltr') return 0.2 * i
+    if (stopOrder === "ltr") return 0.2 * i
     return 0.2 * (len - 1 - i)
   }
 
   const start = () => {
-    setRolling(true);
+    setRolling(true)
   }
 
   const reset = () => {
-    setRolling(false);
+    setRolling(false)
 
     if (autoStart) {
       start()
     }
-  };
+  }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (autoStart) {
       start()
@@ -117,20 +112,17 @@ const RollingText = forwardRef<any, RollingTextProps>(
       },
       reset() {
         reset()
-      }
+      },
     }
   })
 
   return (
-    <View
-      className={classNames(prefixClassname("rolling-text"), className)}
-    >
+    <View className={classNames(prefixClassname("rolling-text"), className)}>
       {targetNumArr.map((_, i) => (
         <RollingTextItem
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={i}
-          figureArr={
-            isCustomType ? getTextArrByIdx(i) : getFigureArr(i)
-          }
+          figureArr={isCustomType ? getTextArrByIdx(i) : getFigureArr(i)}
           duration={duration}
           direction={direction}
           isStart={rolling}
@@ -142,4 +134,4 @@ const RollingText = forwardRef<any, RollingTextProps>(
   )
 })
 
-export default RollingText;
+export default RollingText

@@ -1,6 +1,10 @@
 import { Input } from "@tarojs/components"
-import { BaseEventOrig, CommonEventFunction, ITouchEvent } from "@tarojs/components/types/common"
-import { InputProps } from "@tarojs/components/types/Input"
+import type {
+  BaseEventOrig,
+  CommonEventFunction,
+  ITouchEvent,
+} from "@tarojs/components/types/common"
+import type { InputProps } from "@tarojs/components/types/Input"
 import * as React from "react"
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { prefixClassname } from "../styles"
