@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode } from "react"
-import { FormController } from "../form.shared"
+import type { ReactElement, ReactNode } from "react"
+import type { FormController } from "../form.shared"
 
 export default interface FormControlHandler<P> {
   doControlRender(element: ReactElement<P>, controller: FormController<any>): ReactNode

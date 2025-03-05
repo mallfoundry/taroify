@@ -3,19 +3,20 @@ import {
   Switch as TaroSwitch,
   Textarea as TaroTextarea,
 } from "@tarojs/components"
-import { SwitchProps as TaroSwitchProps } from "@tarojs/components/types/Switch"
-import { cloneElement, ReactElement, ReactNode } from "react"
-import Checkbox, { CheckboxGroupProps, CheckboxProps } from "../../checkbox"
-import Input, { InputProps } from "../../input"
-import Radio, { RadioGroupProps } from "../../radio"
-import Rate, { RateProps } from "../../rate"
-import Slider, { SliderProps } from "../../slider"
-import Stepper, { StepperProps } from "../../stepper"
-import Switch, { SwitchProps } from "../../switch"
+import type { SwitchProps as TaroSwitchProps } from "@tarojs/components/types/Switch"
+import { cloneElement, type ReactElement, type ReactNode } from "react"
+import Checkbox, { type CheckboxGroupProps, type CheckboxProps } from "../../checkbox"
+import Input, { type InputProps } from "../../input"
+import Radio, { type RadioGroupProps } from "../../radio"
+import Rate, { type RateProps } from "../../rate"
+import Slider, { type SliderProps } from "../../slider"
+import Stepper, { type StepperProps } from "../../stepper"
+import Switch, { type SwitchProps } from "../../switch"
 import Textarea from "../../textarea"
-import Uploader, { UploaderProps } from "../../uploader"
-import { FormController } from "../form.shared"
-import FormControlHandler, { registerFormControlHandler } from "./form-control-handler"
+import Uploader, { type UploaderProps } from "../../uploader"
+import type{ FormController } from "../form.shared"
+import type FormControlHandler from "./form-control-handler"
+import {  registerFormControlHandler } from "./form-control-handler"
 
 registerFormControlHandler(
   new (class implements FormControlHandler<InputProps> {

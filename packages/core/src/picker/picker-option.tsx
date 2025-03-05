@@ -56,7 +56,6 @@ export default function PickerOption(props: PickerOptionProps) {
       style={{
         height: `${optionHeight}px`,
       }}
-      // biome-ignore lint/correctness/noChildrenProp: <explanation>
       children={children}
       {...restProps}
     />

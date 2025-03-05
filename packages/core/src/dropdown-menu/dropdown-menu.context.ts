@@ -1,5 +1,5 @@
-import { createContext, Key } from "react"
-import { DropdownMenuDirection } from "./dropdown-menu.shared"
+import { createContext, type Key } from "react"
+import type { DropdownMenuDirection } from "./dropdown-menu.shared"
 
 interface DropdownMenuContextValue {
   direction?: DropdownMenuDirection
