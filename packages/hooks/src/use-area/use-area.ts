@@ -2,7 +2,7 @@ import * as _ from "lodash"
 import { useCallback, useEffect, useMemo, useRef } from "react"
 import useForceUpdate from "../use-force-update"
 import useToRef from "../use-to-ref"
-import { AreaData, AreaDivision, getAreaData } from "./area.shared"
+import { type AreaData, type AreaDivision, getAreaData } from "./area.shared"
 
 export type AreaFormatter = (record?: Record<string, string>, prefix?: any) => AreaDivision[]
 

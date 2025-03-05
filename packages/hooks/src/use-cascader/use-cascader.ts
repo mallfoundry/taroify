@@ -1,6 +1,12 @@
-import useCascaderNew, { CascaderObjectNew, UseCascaderNewOptions } from "./use-cascader.new"
-import useCascaderOld, { CascaderObjectOld, UseCascaderOldOptions } from "./use-cascader.old"
-import { CascaderOption } from "./use-cascader.shared"
+import useCascaderNew, {
+  type CascaderObjectNew,
+  type UseCascaderNewOptions,
+} from "./use-cascader.new"
+import useCascaderOld, {
+  type CascaderObjectOld,
+  type UseCascaderOldOptions,
+} from "./use-cascader.old"
+import type { CascaderOption } from "./use-cascader.shared"
 
 interface UseCascaderOptions {
   options?: CascaderOption[]
