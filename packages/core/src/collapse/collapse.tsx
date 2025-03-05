@@ -1,10 +1,17 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP_BOTTOM } from "../styles/hairline"
 import CollapseItem from "./collapse-item"
@@ -12,12 +19,10 @@ import CollapseContext from "./collapse.context"
 
 function validateActiveValue(value: string | number | Array<string | number>, accordion: boolean) {
   if (accordion && Array.isArray(value)) {
-    // eslint-disable-next-line
     console.error('[Taroify] Collapse: "value" should not be Array in accordion mode')
     return false
   }
   if (!accordion && !Array.isArray(value)) {
-    // eslint-disable-next-line
     console.error('[Taroify] Collapse: "value" should be Array in non-accordion mode')
     return false
   }

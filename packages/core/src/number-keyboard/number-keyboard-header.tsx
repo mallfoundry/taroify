@@ -1,10 +1,17 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useContext, useMemo } from "react"
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import { prefixClassname } from "../styles"
-import NumberKeyboardButton, { NumberKeyboardButtonProps } from "./number-keyboard-button"
+import NumberKeyboardButton, { type NumberKeyboardButtonProps } from "./number-keyboard-button"
 import NumberKeyboardContext from "./number-keyboard.context"
 
 interface NumberKeyboardHeaderChildren {

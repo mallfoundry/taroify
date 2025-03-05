@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import * as _ from "lodash"
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
-import { ICON_TYPE, IconProps } from "../shared"
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react"
+import { ICON_TYPE, type IconProps } from "../shared"
 
 export function isIconElement(node?: ReactNode): boolean {
   // Is`t not ReactElement

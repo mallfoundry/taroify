@@ -1,6 +1,7 @@
 import * as _ from "lodash"
 import { useEffect, useState, useRef } from "react"
-import { CascaderOption } from "./use-cascader.shared"
+import type { CascaderOption } from "./use-cascader.shared"
+
 interface CascaderFieldNames {
   label?: string
   value?: string
@@ -25,7 +26,7 @@ const emptyArr = []
 const defaultFieldNames: CascaderFieldNames = {
   label: "label",
   value: "value",
-  children: "children"
+  children: "children",
 }
 
 export default function useCascaderOld({
@@ -33,19 +34,20 @@ export default function useCascaderOld({
   depth = 0,
   options,
   fieldNames = defaultFieldNames,
-  refreshKey = 0
+  refreshKey = 0,
 }: UseCascaderOldOptions): CascaderObjectOld {
   depth = _.clamp(depth, 0, depth)
   const cacheMapRef = useRef(new Map())
   const [columns, setColumns] = useState<CascaderOption[][]>([])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      cacheMapRef.current.clear();
+      cacheMapRef.current.clear()
     }
   }, [options])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (options === undefined) {
       return
@@ -59,7 +61,8 @@ export default function useCascaderOld({
 
       for (const value of values) {
         if (!cacheMapRef.current.has(value)) {
-          cursorOptions.forEach(item => {
+          // biome-ignore lint/complexity/noForEach: <explanation>
+          cursorOptions.forEach((item) => {
             cacheMapRef.current.set(item[fieldNames.value!], item)
           })
         }
@@ -76,8 +79,8 @@ export default function useCascaderOld({
       }
     }
     if (depth !== 0 && depth > _.size(newColumns)) {
-      _.range(depth - _.size(newColumns))
-        .forEach(() => newColumns.push([]))
+      // biome-ignore lint/complexity/noForEach: <explanation>
+      _.range(depth - _.size(newColumns)).forEach(() => newColumns.push([]))
     }
     setColumns(newColumns)
   }, [depth, options, values, fieldNames, refreshKey])

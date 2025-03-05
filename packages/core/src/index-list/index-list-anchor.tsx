@@ -1,14 +1,14 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
-import { TaroElement } from "@tarojs/runtime"
+import type { ViewProps } from "@tarojs/components/types/View"
+import type { TaroElement } from "@tarojs/runtime"
 import { pageScrollTo } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
-  CSSProperties,
-  ForwardedRef,
+  type CSSProperties,
+  type ForwardedRef,
+  type ReactNode,
   forwardRef,
-  ReactNode,
   useCallback,
   useContext,
   useImperativeHandle,
@@ -69,7 +69,7 @@ const IndexListAnchor = forwardRef(
 
     let anchorStyle: CSSProperties = {}
 
-    let active: boolean = false
+    let active = false
 
     if (stickyProp) {
       if (arrayedIndex === activeArrayedIndex) {

@@ -5,14 +5,14 @@ import * as _ from "lodash"
 import * as React from "react"
 import {
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useContext,
   useMemo,
 } from "react"
-import ButtonBase, { ButtonBaseProps } from "../button-base"
+import ButtonBase, { type ButtonBaseProps } from "../button-base"
 import Image from "../image"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
@@ -44,6 +44,7 @@ function renderShareSheetOptionIcon(node?: ReactNode): ReactNode {
     return cloneElement(element, {
       className: classNames(element.props.className, prefixClassname("share-sheet__option-icon")),
     })
+    // biome-ignore lint/style/noUselessElse: <explanation>
   } else if (isIconElement(element)) {
     return cloneIconElement(element, { className: prefixClassname("share-sheet__option-icon") })
   }

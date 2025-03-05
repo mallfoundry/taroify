@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import { useCallback, useContext, useEffect, useMemo } from "react"
 import { useRendered } from "../utils/state"
 import FormContext from "./form.context"
-import { FormValidateStatus, FormValidError } from "./form.shared"
+import type { FormValidateStatus, FormValidError } from "./form.shared"
 import useForm from "./use-form"
 
 export default function useFormError(name?: string) {

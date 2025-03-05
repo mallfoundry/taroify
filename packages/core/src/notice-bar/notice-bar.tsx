@@ -1,15 +1,15 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
-import { useImperativeHandle, forwardRef, ForwardedRef } from "react"
+import { useImperativeHandle, forwardRef, type ForwardedRef } from "react"
 import {
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
   Children,
-  CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
   useEffect,
   useMemo,
   useRef,
@@ -21,7 +21,7 @@ import { addUnitPx } from "../utils/format/unit"
 import { doubleRaf } from "../utils/raf"
 import { NoticeBarAction } from "./notice-bar-action"
 import { NoticeBarIcon } from "./notice-bar-icon"
-import { NoticeBarInterface } from "./notice-bar.shared"
+import type { NoticeBarInterface } from "./notice-bar.shared"
 
 interface NoticeBarChildren {
   icon: ReactNode
@@ -144,10 +144,9 @@ function NoticeBar(props: NoticeBarProps, ref: ForwardedRef<NoticeBarInterface>)
   }
 
   useImperativeHandle(ref, () => ({
-    reset
+    reset,
   }))
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(reset, [])
 
   return (

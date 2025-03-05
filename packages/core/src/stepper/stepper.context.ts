@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { StepperActionType } from "./stepper.shared"
+import type { StepperActionType } from "./stepper.shared"
 
 interface StepperContextValue {
   value?: number | string

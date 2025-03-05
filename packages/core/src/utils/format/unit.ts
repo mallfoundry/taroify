@@ -1,6 +1,6 @@
 import { getSystemInfoSync } from "@tarojs/taro"
 import * as _ from "lodash"
-import { CSSProperties } from "react"
+import type { CSSProperties } from "react"
 
 export function addUnitPx(value?: string | number): string {
   return value === undefined ? "" : `${unitToPx(value)}px`
@@ -33,37 +33,42 @@ function getRootFontSize() {
     const doc = document.documentElement
     const fontSize = doc.style.fontSize || window.getComputedStyle(doc).fontSize
 
-    rootFontSize = parseFloat(fontSize)
+    rootFontSize = Number.parseFloat(fontSize)
   }
 
   return rootFontSize
 }
 
 function convertRpx(value: string) {
-  value = value.replace(/rpx/g, "")
+  let valueCache = value
+  valueCache = valueCache.replace(/rpx/g, "")
   const { windowWidth } = getSystemInfoSync()
   const pixelRatio = 750 / windowWidth
-  return +value / pixelRatio
+  return +valueCache / pixelRatio
 }
 
 function convertPx(value: string) {
-  value = value.replace(/px/g, "")
-  return +value
+  let valueCache = value
+  valueCache = valueCache.replace(/px/g, "")
+  return +valueCache
 }
 
 function convertRem(value: string) {
-  value = value.replace(/rem/g, "")
-  return +value * getRootFontSize()
+  let valueCache = value
+  valueCache = valueCache.replace(/rem/g, "")
+  return +valueCache * getRootFontSize()
 }
 
 function convertVw(value: string) {
-  value = value.replace(/vw/g, "")
-  return (+value * window.innerWidth) / 100
+  let valueCache = value
+  valueCache = valueCache.replace(/vw/g, "")
+  return (+valueCache * window.innerWidth) / 100
 }
 
 function convertVh(value: string) {
-  value = value.replace(/vh/g, "")
-  return (+value * window.innerHeight) / 100
+  let valueCache = value
+  valueCache = valueCache.replace(/vh/g, "")
+  return (+valueCache * window.innerHeight) / 100
 }
 
 export function unitToPx(value: string | number): number {
@@ -87,5 +92,5 @@ export function unitToPx(value: string | number): number {
     return convertVh(value)
   }
 
-  return parseFloat(value)
+  return Number.parseFloat(value)
 }

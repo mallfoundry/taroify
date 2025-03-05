@@ -1,3 +1,4 @@
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 const fs = require("fs")
 const rimraf = require("rimraf")
 const gulp = require("gulp")
@@ -28,6 +29,7 @@ function initBundle(name) {
     const packageFile = fs.readFileSync(`./packages/${name}/package.json`, "utf8")
     const packageJson = JSON.parse(packageFile)
     if (packageJson.private) {
+      // biome-ignore lint/performance/noDelete: <explanation>
       delete packageJson.private
     }
     if (packageJson.name) {

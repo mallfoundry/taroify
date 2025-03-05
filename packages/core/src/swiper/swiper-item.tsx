@@ -1,8 +1,16 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react"
+import {
+  type CSSProperties,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { useMounted } from "../hooks"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
@@ -25,9 +33,15 @@ export default function SwiperItem(props: SwiperItemProps) {
     ...restProps
   } = props
 
-  const { lazyRender, getSize, direction, loop, indicator = 0, count = 0, itemInstances } = useContext(
-    SwiperContext,
-  )
+  const {
+    lazyRender,
+    getSize,
+    direction,
+    loop,
+    indicator = 0,
+    count = 0,
+    itemInstances,
+  } = useContext(SwiperContext)
   const vertical = direction === "vertical"
 
   const initializedRef = useRef(false)
@@ -66,7 +80,7 @@ export default function SwiperItem(props: SwiperItemProps) {
 
   const rootStyle = useRendered(() => {
     const style: CSSProperties = {}
-    const size= getSize?.()
+    const size = getSize?.()
     if (size) {
       const mainAxis = vertical ? "height" : "width"
       style[mainAxis] = addUnitPx(size)

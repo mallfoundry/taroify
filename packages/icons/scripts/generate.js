@@ -1,11 +1,13 @@
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 const { writeFileSync, appendFileSync, truncateSync } = require("fs")
 const _ = require("lodash")
 const names = require("../src/van/names")
 
 function convertIconComponentName(name) {
   const isOutline = _.endsWith(name, "-o")
-  name = isOutline ? name.substring(0, _.size(name) - 2) + "-outlined" : name
-  return _.upperFirst(_.camelCase(name))
+  // biome-ignore lint/style/useTemplate: <explanation>
+  const newName = isOutline ? name.substring(0, _.size(name) - 2) + "-outlined" : name
+  return _.upperFirst(_.camelCase(newName))
 }
 
 function createVanIconTsxContent(componentName, name) {

@@ -7,7 +7,6 @@ import { ArrowLeft as Icon } from "@taroify/icons"
 import ButtonContent from "../button-content"
 import ButtonGroupContext from "../button-group.context"
 
-
 describe("<Button />", () => {
   // The default button contains prefix--contained --medium --default
   it("should have default classNames", () => {
@@ -171,30 +170,39 @@ describe("<Button />", () => {
         Test
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`);
+    const el = container.querySelector(`.${prefixClassname("button")}`)
     expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
   })
 
   it("should render with custom loading props", () => {
     const { container } = render(
-      <Button loading={{
-        className: 'custom-loading',
-        size: 20,
-      }} color="danger" icon="icon">
+      <Button
+        loading={{
+          className: "custom-loading",
+          size: 20,
+        }}
+        color="danger"
+        icon="icon"
+      >
         Test
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`);
+    const el = container.querySelector(`.${prefixClassname("button")}`)
     expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
   })
 
   it("should render with custom loading children", () => {
     const { container } = render(
-      <Button iconPosition="right" loading={<Loading  className="test" />} color="danger" icon={<Icon className="test-icon" />}>
+      <Button
+        iconPosition="right"
+        loading={<Loading className="test" />}
+        color="danger"
+        icon={<Icon className="test-icon" />}
+      >
         Test
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`);
+    const el = container.querySelector(`.${prefixClassname("button")}`)
     expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
   })
 
@@ -204,8 +212,8 @@ describe("<Button />", () => {
         <ButtonContent className="custom-icon" />
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`);
-    expect(el).toBeInTheDocument();
+    const el = container.querySelector(`.${prefixClassname("button")}`)
+    expect(el).toBeInTheDocument()
   })
 
   it("should render with Button Content children", () => {
@@ -215,66 +223,67 @@ describe("<Button />", () => {
         <Icon />
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`);
-    expect(el).toBeInTheDocument();
+    const el = container.querySelector(`.${prefixClassname("button")}`)
+    expect(el).toBeInTheDocument()
   })
 
   it("should call onClick Event", () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = jest.fn()
     const { container } = render(
-      <Button onClick={mockOnClick} color="danger">Click Here</Button>,
+      <Button onClick={mockOnClick} color="danger">
+        Click Here
+      </Button>,
     )
-    const btn = container.querySelector(`.${prefixClassname("button")}`);
-    if (!btn) throw "err";
+    const btn = container.querySelector(`.${prefixClassname("button")}`)
+    if (!btn) throw "err"
 
-    fireEvent.click(btn);
+    fireEvent.click(btn)
 
-    expect(mockOnClick).toHaveBeenCalled();
-
+    expect(mockOnClick).toHaveBeenCalled()
   })
 
   it("should not call onClick Event", () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = jest.fn()
     const { container } = render(
-      <Button disabled loading onClick={mockOnClick} color="danger">Click Here</Button>,
+      <Button disabled loading onClick={mockOnClick} color="danger">
+        Click Here
+      </Button>,
     )
-    const btn = container.querySelector(`.${prefixClassname("button")}`);
-    if (!btn) throw "err";
+    const btn = container.querySelector(`.${prefixClassname("button")}`)
+    if (!btn) throw "err"
 
-    fireEvent.click(btn);
+    fireEvent.click(btn)
 
-    expect(mockOnClick).toHaveBeenCalledTimes(0);
-
+    expect(mockOnClick).toHaveBeenCalledTimes(0)
   })
 
   it("should render Button using createButton function with label only", () => {
-    const button = createButton('Click Me');
-    const { container } = render(button);
-    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`);
-    expect(renderedBtn).toBeInTheDocument();
+    const button = createButton("Click Me")
+    const { container } = render(button)
+    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`)
+    expect(renderedBtn).toBeInTheDocument()
   })
 
   it("should render Button using createButton function with props only", () => {
     const button = createButton({
-      id: 'btn1',
-    });
-    const { container } = render(button);
-    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`);
-    expect(renderedBtn).toBeInTheDocument();
+      id: "btn1",
+    })
+    const { container } = render(button)
+    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`)
+    expect(renderedBtn).toBeInTheDocument()
   })
 
   it("should render with buttonGroupContext", () => {
     const { container } = render(
-      <ButtonGroupContext.Provider value={{
-        variant: 'outlined',
-      }}>
+      <ButtonGroupContext.Provider
+        value={{
+          variant: "outlined",
+        }}
+      >
         <Button>Click Me</Button>
-      </ButtonGroupContext.Provider>
+      </ButtonGroupContext.Provider>,
     )
 
-    expect(container.querySelector(`.${prefixClassname("button")}`)).toHaveTextContent('Click Me')
-
+    expect(container.querySelector(`.${prefixClassname("button")}`)).toHaveTextContent("Click Me")
   })
-
-
 })

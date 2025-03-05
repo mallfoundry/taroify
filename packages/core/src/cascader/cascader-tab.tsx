@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 export interface CascaderTabBaseProps {
   className?: string

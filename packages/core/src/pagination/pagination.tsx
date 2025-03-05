@@ -1,14 +1,14 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useContext,
   useMemo,
   Fragment,
@@ -16,7 +16,7 @@ import {
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import PaginationContext from "./pagination.context"
-import { ItemType, Page as SharedPage, PaginationMode } from "./pagination.shared"
+import { ItemType, type Page as SharedPage, type PaginationMode } from "./pagination.shared"
 
 function rangePages(start: number, end: number) {
   const length = end - start + 1
@@ -58,6 +58,7 @@ function usePagination(options: UsePaginationOptions): PaginationChildren {
   const hasEndEllipsis = end < count
   const hasNext = current < count
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const items = useMemo(
     () => (mode === "simple" ? undefined : makePageItems(start, end)),
     [start, end],

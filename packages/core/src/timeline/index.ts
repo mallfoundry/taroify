@@ -1,12 +1,12 @@
-import { FunctionComponent } from "react"
-import TimelineComponent, { TimelineProps } from "./timeline"
+import type { FunctionComponent } from "react"
+import TimelineComponent, { type TimelineProps } from "./timeline"
 import TimelineConnector from "./timeline-connector"
 import TimelineContent from "./timeline-content"
 import TimelineDot from "./timeline-dot"
 import TimelineItem from "./timeline-item"
 import TimelineSeparator from "./timeline-separator"
 
-export type { TimelineThemeVars } from './timeline.shared'
+export type { TimelineThemeVars } from "./timeline.shared"
 
 interface TimelineInterface extends FunctionComponent<TimelineProps> {
   Connector: typeof TimelineConnector

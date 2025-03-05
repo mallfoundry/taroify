@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent } from "react"
-import PopupComponent, { PopupProps } from "./popup"
+import type { ForwardRefExoticComponent } from "react"
+import PopupComponent, { type PopupProps } from "./popup"
 import PopupBackdrop from "./popup-backdrop"
 import PopupClose from "./popup-close"
 

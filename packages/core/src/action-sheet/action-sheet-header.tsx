@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import * as React from "react"
-import Sheet, { SheetHeaderProps } from "../sheet"
+import Sheet, { type SheetHeaderProps } from "../sheet"
 import { prefixClassname } from "../styles"
 
 export interface ActionSheetHeaderProps extends SheetHeaderProps {}

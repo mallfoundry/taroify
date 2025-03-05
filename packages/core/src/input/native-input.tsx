@@ -1,8 +1,8 @@
-import { Input, InputProps } from "@tarojs/components"
+import { Input, type InputProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"
-import { InputColor } from "./input.shared"
+import type { InputColor } from "./input.shared"
 
 export interface NativeInputProps extends InputProps {
   readonly?: boolean

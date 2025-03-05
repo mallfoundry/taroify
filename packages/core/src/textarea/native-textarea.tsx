@@ -1,4 +1,4 @@
-import { Textarea, TextareaProps } from "@tarojs/components"
+import { Textarea, type TextareaProps } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
 import { prefixClassname } from "../styles"

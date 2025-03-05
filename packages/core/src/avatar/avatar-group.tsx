@@ -6,15 +6,15 @@ import {
   Children,
   cloneElement,
   isValidElement,
-  ReactChild,
-  ReactElement,
-  ReactNode,
+  type ReactChild,
+  type ReactElement,
+  type ReactNode,
   useMemo,
 } from "react"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
-import Avatar, { AvatarProps } from "./avatar"
-import { AvatarShape, AvatarSize, AvatarSpacing } from "./avatar.shared"
+import Avatar, { type AvatarProps } from "./avatar"
+import type { AvatarShape, AvatarSize, AvatarSpacing } from "./avatar.shared"
 
 const useAvatars = (
   children: ReactNode,

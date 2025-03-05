@@ -1,4 +1,11 @@
-import { DependencyList, EffectCallback, useCallback, useContext, useEffect, useRef } from "react"
+import {
+  type DependencyList,
+  type EffectCallback,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react"
 import FormContext from "./form.context"
 import useForm from "./use-form"
 
@@ -8,6 +15,7 @@ function useFormFieldValueEffect(effect: EffectCallback, deps?: DependencyList) 
 
   const mountedRef = useRef(false)
 
+  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   const onReset = useCallback(() => (mountedRef.current = false), [])
 
   useEffect(() => {
@@ -15,17 +23,14 @@ function useFormFieldValueEffect(effect: EffectCallback, deps?: DependencyList) 
     return () => form?.removeEventListener("reset", onReset)
   }, [form, onReset])
 
-  useEffect(
-    () => {
-      if (mountedRef.current) {
-        effect?.()
-      } else {
-        mountedRef.current = true
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    deps,
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    if (mountedRef.current) {
+      effect?.()
+    } else {
+      mountedRef.current = true
+    }
+  }, deps)
 }
 
 export default useFormFieldValueEffect

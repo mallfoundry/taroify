@@ -1,7 +1,7 @@
-import CalendarComponent, { CalendarProps } from "./calendar"
+import CalendarComponent, { type CalendarProps } from "./calendar"
 import CalendarButton from "./calendar-button"
 import CalendarFooter from "./calendar-footer"
-import { CalendarDayObject } from "./calendar.shared"
+import type { CalendarDayObject } from "./calendar.shared"
 
 export type { CalendarType, CalendarDayType, CalendarThemeVars } from "./calendar.shared"
 
@@ -17,7 +17,6 @@ const Calendar = CalendarComponent as CalendarInterface
 Calendar.Footer = CalendarFooter
 Calendar.Button = CalendarButton
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Calendar {
   export type DayObject = CalendarDayObject
 }

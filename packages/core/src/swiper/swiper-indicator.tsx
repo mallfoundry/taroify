@@ -1,9 +1,9 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useCallback, useContext, useMemo } from "react"
+import { type ReactNode, useCallback, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import SwiperContext from "./swiper.context"
 
@@ -28,11 +28,10 @@ export default function SwiperIndicator(props: SwiperIndicatorProps) {
     [indicator],
   )
 
-  const indicators = useMemo(() => !children && _.range(0, count).map(renderIndicator), [
-    children,
-    count,
-    renderIndicator,
-  ])
+  const indicators = useMemo(
+    () => !children && _.range(0, count).map(renderIndicator),
+    [children, count, renderIndicator],
+  )
 
   return (
     <View

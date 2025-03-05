@@ -1,8 +1,8 @@
 import ShareSheetHeader from "../share-sheet/share-sheet-header"
 import Sheet from "../sheet"
-import ActionSheetComponent, { ActionSheetProps } from "./action-sheet"
+import ActionSheetComponent, { type ActionSheetProps } from "./action-sheet"
 import ActionSheetAction from "./action-sheet-action"
-import { ActionSheetActionObject } from "./action-sheet.shared"
+import type { ActionSheetActionObject } from "./action-sheet.shared"
 
 export type { ActionSheetActionObject, ActionSheetThemeVars } from "./action-sheet.shared"
 
@@ -21,7 +21,6 @@ ActionSheet.Header = ShareSheetHeader
 ActionSheet.Action = ActionSheetAction
 ActionSheet.Button = Sheet.Button
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace ActionSheet {
   export type ActionObject = ActionSheetActionObject
 }

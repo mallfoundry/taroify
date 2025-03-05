@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import { useEffect, useMemo, useState } from "react"
 import { getLogger } from "../utils/logger"
 import { useToRef } from "../utils/state"
-import { FormItemInstance, FormValidError } from "./form.shared"
+import type { FormItemInstance, FormValidError } from "./form.shared"
 import { validateAll } from "./form.validate"
 
 const { warn } = getLogger("useForm")
@@ -13,6 +13,7 @@ const containerFormRefs = new Map<string, number>()
 
 function toMapValueArray<T>(map?: Map<string, T>): T[] {
   const array: T[] = []
+  // biome-ignore lint/complexity/noForEach: <explanation>
   map?.forEach((value) => array.push(value))
   return array
 }
@@ -76,7 +77,10 @@ class FormAttributes {
   findFields(predicate: (field: FormItemInstance) => boolean) {
     const fields = toMapValueArray(this.fields)
     const inFormListFields = toMapValueArray(this.#inFormListFields)
-    return _.filter<FormItemInstance>(fields.concat(inFormListFields), predicate) as FormItemInstance[]
+    return _.filter<FormItemInstance>(
+      fields.concat(inFormListFields),
+      predicate,
+    ) as FormItemInstance[]
   }
 
   addField(name: string, field: FormItemInstance, inFormList?: boolean) {
@@ -125,7 +129,7 @@ class FormAttributes {
     )
   }
 
-  setErrors(newErrors: FormValidError[], emitChange: boolean = true) {
+  setErrors(newErrors: FormValidError[], emitChange = true) {
     const { errors } = this
     _.forEach(newErrors, (error) => {
       const { name } = error
@@ -159,17 +163,17 @@ class FormAttributes {
       return values
     }
 
-    for (let attr of names) {
+    for (const attr of names) {
       _.set(values, attr, _.get(this.values, attr))
     }
 
     return values as V
   }
 
-  setValues(newValues: any, emitChange: boolean = true) {
+  setValues(newValues: any, emitChange = true) {
     let changed = false
     const { values } = this
-    let prevValues
+    let prevValues: any
     _.forEach(newValues, (value, name) => {
       const oldValue = _.get(values, name)
       if (oldValue !== value) {
@@ -450,7 +454,10 @@ interface UseFormOptions<V> {
   values?: V
 }
 
-export default function useForm<V = any>(name: string = "", options: UseFormOptions<V> = {}): Form | undefined {
+export default function useForm<V = any>(
+  name = "",
+  options: UseFormOptions<V> = {},
+): Form | undefined {
   const { defaultValues, values } = options
   const hasForm = formContainer.hasForm(name)
   const immutableHasForm = useConstant(hasForm)
@@ -460,29 +467,23 @@ export default function useForm<V = any>(name: string = "", options: UseFormOpti
     formContainer.newForm(name)
   }
 
-  useEffect(
-    () => {
-      //  First time if hasForm is false,
-      //  Set the form to defaultValues when defaultValues is value object
-      if (!immutableHasForm && _.isPlainObject(defaultValues)) {
-        formContainer.getForm(nameRef.current)?.setDefaultValues(defaultValues)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    //  First time if hasForm is false,
+    //  Set the form to defaultValues when defaultValues is value object
+    if (!immutableHasForm && _.isPlainObject(defaultValues)) {
+      formContainer.getForm(nameRef.current)?.setDefaultValues(defaultValues)
+    }
+  }, [])
 
-  useEffect(
-    () => {
-      //  First time if hasForm is false,
-      //  Set the form to values when values is value object
-      if (!immutableHasForm && _.isPlainObject(values)) {
-        formContainer.getForm(nameRef.current)?.setValues(values)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [nameRef, values],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    //  First time if hasForm is false,
+    //  Set the form to values when values is value object
+    if (!immutableHasForm && _.isPlainObject(values)) {
+      formContainer.getForm(nameRef.current)?.setValues(values)
+    }
+  }, [nameRef, values])
 
   useEffect(() => () => formContainer.releaseForm(name), [name])
 

@@ -10,30 +10,30 @@ function getRootFontSize() {
     const doc = document.documentElement
     const fontSize = doc.style.fontSize || window.getComputedStyle(doc).fontSize
 
-    rootFontSize = parseFloat(fontSize)
+    rootFontSize = Number.parseFloat(fontSize)
   }
 
   return rootFontSize
 }
 
 function convertPx(value: string) {
-  value = value.replace(/px/g, "")
-  return +value
+  const valueCache = value.replace(/px/g, "")
+  return +valueCache
 }
 
 function convertRem(value: string) {
-  value = value.replace(/rem/g, "")
-  return +value * getRootFontSize()
+  const valueCache = value.replace(/rem/g, "")
+  return +valueCache * getRootFontSize()
 }
 
 function convertVw(value: string) {
-  value = value.replace(/vw/g, "")
-  return (+value * window.innerWidth) / 100
+  const valueCache = value.replace(/vw/g, "")
+  return (+valueCache * window.innerWidth) / 100
 }
 
 function convertVh(value: string) {
-  value = value.replace(/vh/g, "")
-  return (+value * window.innerHeight) / 100
+  const valueCache = value.replace(/vh/g, "")
+  return (+valueCache * window.innerHeight) / 100
 }
 
 export function unitToPx(value: string | number): number {
@@ -54,5 +54,5 @@ export function unitToPx(value: string | number): number {
     return convertVh(value)
   }
 
-  return parseFloat(value)
+  return Number.parseFloat(value)
 }

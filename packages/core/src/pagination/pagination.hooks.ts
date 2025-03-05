@@ -1,4 +1,4 @@
-import { ItemType, Page } from "./pagination.shared"
+import { ItemType, type Page } from "./pagination.shared"
 
 export function makePages(count: number): Page[] {
   const range = (start: number, end: number) => {

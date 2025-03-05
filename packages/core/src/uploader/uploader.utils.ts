@@ -1,4 +1,4 @@
-import { UploadFile } from "./uploader.shared"
+import type { UploadFile } from "./uploader.shared"
 
 const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i
 

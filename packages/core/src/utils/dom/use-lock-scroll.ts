@@ -1,5 +1,5 @@
-import { useEffect, RefObject } from "react"
-import { ITouchEvent } from "@tarojs/components"
+import { useEffect, type RefObject } from "react"
+import type { ITouchEvent } from "@tarojs/components"
 import { getScrollParent } from "./scroll"
 import { useTouch } from "../touch"
 import { preventDefault } from "./event"
@@ -33,7 +33,11 @@ export function useLockScroll(rootRef: RefObject<HTMLElement>, shouldLock: boole
       status = "10"
     }
 
-    if (status !== "11" && touch.isVertical() && !(parseInt(status, 2) & parseInt(direction, 2))) {
+    if (
+      status !== "11" &&
+      touch.isVertical() &&
+      !(Number.parseInt(status, 2) & Number.parseInt(direction, 2))
+    ) {
       preventDefault(event, true)
     }
   }
@@ -66,6 +70,7 @@ export function useLockScroll(rootRef: RefObject<HTMLElement>, shouldLock: boole
     }
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (shouldLock) {
       lock()

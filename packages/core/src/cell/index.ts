@@ -1,4 +1,4 @@
-import CellElement, { CellProps } from "./cell"
+import CellElement, { type CellProps } from "./cell"
 import CellGroup from "./cell-group"
 
 export type { CellAlign, CellSize, CellThemeVars } from "./cell.shared"

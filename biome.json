@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["problems"]
+    "ignore": ["problems", "packages/demo"]
   },
   "vcs": {
     "enabled": true,
@@ -40,6 +40,9 @@
       }
     }
   },
+  "organizeImports": {
+    "enabled": false
+  },
   "formatter": {
     "lineWidth": 100,
     "indentStyle": "space"
@@ -52,6 +55,9 @@
   "javascript": {
     "parser": {
       "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "semicolons": "asNeeded"
     }
   }
 }

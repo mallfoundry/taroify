@@ -1,13 +1,20 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, cloneElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  useMemo,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_TOP } from "../styles/hairline"
 import { addUnitPx } from "../utils/format/unit"
 import GridContext from "./grid.context"
-import { GridDirection } from "./grid.shared"
+import type { GridDirection } from "./grid.shared"
 
 const DEFAULT_GRID_COLUMNS = 4
 

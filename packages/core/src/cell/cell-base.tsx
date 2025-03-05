@@ -6,13 +6,13 @@ import { useContext, useMemo } from "react"
 import { ArrowLeft, ArrowRight, ArrowDown, ArrowUp } from "@taroify/icons"
 import { prefixClassname } from "../styles"
 import CellGroupContext from "./cell-group.context"
-import { CellBaseProps, ArrowDirection } from "./cell.shared"
+import type { CellBaseProps, ArrowDirection } from "./cell.shared"
 
 export const iconMap: Record<ArrowDirection, any> = {
   right: ArrowRight,
   left: ArrowLeft,
   up: ArrowUp,
-  down: ArrowDown
+  down: ArrowDown,
 }
 
 function CellBase(props: CellBaseProps) {
@@ -48,9 +48,10 @@ function CellBase(props: CellBaseProps) {
       return isIconElement(rightIconProps)
         ? cloneIconElement(rightIconProps, { className: prefixClassname("cell__right-icon") })
         : rightIconProps
-    } else if (isLink && iconMap[arrowDirection] ) {
+      // biome-ignore lint/style/noUselessElse: <explanation>
+    } else if (isLink && iconMap[arrowDirection]) {
       const Icon = iconMap[arrowDirection]
-      return <Icon className={ prefixClassname("cell__right-icon") } />
+      return <Icon className={prefixClassname("cell__right-icon")} />
     }
     return null
   }, [rightIconProps, isLink, arrowDirection])

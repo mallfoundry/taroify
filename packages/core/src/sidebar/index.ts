@@ -1,8 +1,8 @@
-import SidebarElement, { SidebarProps } from "./sidebar"
+import SidebarElement, { type SidebarProps } from "./sidebar"
 import SidebarTab from "./sidebar-tab"
-import { SidebarTabObject } from "./sidebar-tab.shared"
+import type { SidebarTabObject } from "./sidebar-tab.shared"
 
-export type { SidebarThemeVars } from './sidebar.shared'
+export type { SidebarThemeVars } from "./sidebar.shared"
 
 interface SidebarInterface {
   (props: SidebarProps): JSX.Element
@@ -13,7 +13,6 @@ interface SidebarInterface {
 const Sidebar = SidebarElement as SidebarInterface
 Sidebar.Tab = SidebarTab
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 namespace Sidebar {
   export type TabObject = SidebarTabObject
 }

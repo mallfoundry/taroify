@@ -1,12 +1,12 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { forwardRef, ReactNode, useImperativeHandle, useMemo } from "react"
+import { forwardRef, type ReactNode, useImperativeHandle, useMemo } from "react"
 import { prefixClassname } from "../styles"
-import { CountdownInstance, CurrentTime, parseFormat } from "./countdown.shared"
-import useCountdown, { UseCountdownOptions } from "./use-countdown"
+import { type CountdownInstance, type CurrentTime, parseFormat } from "./countdown.shared"
+import useCountdown, { type UseCountdownOptions } from "./use-countdown"
 
 interface CountdownProps extends Omit<ViewProps, "children">, UseCountdownOptions {
   format?: string | ((current: CurrentTime) => ReactNode)

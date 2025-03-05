@@ -1,5 +1,5 @@
 import { Canvas } from "@tarojs/components"
-import { TaroElement } from "@tarojs/runtime"
+import type { TaroElement } from "@tarojs/runtime"
 import * as _ from "lodash"
 import * as React from "react"
 import { useEffect, useMemo, useRef } from "react"
@@ -7,7 +7,7 @@ import { useCanvas, useUniqueId } from "../hooks"
 import { BLUE, WHITE } from "../styles/variables"
 import { addUnitPx } from "../utils/format/unit"
 import { useAnimatePercent } from "./circle.hooks"
-import { CircleProps } from "./circle.shared"
+import type { CircleProps } from "./circle.shared"
 
 function clampFormat(rate: number) {
   return _.clamp(rate, 0, 100)
@@ -19,7 +19,7 @@ const BEGIN_ANGLE_MAP = {
   top: 1.5 * Math.PI,
   right: 0,
   bottom: 0.5 * Math.PI,
-  left: Math.PI
+  left: Math.PI,
 }
 
 function CircleCanvas(props: CircleProps) {
@@ -39,7 +39,7 @@ function CircleCanvas(props: CircleProps) {
 
   const canvasId = useUniqueId()
   const canvasRef = useRef<TaroElement>()
-  const [__, canvasContext] = useCanvas(canvasId, canvasRef);
+  const [__, canvasContext] = useCanvas(canvasId, canvasRef)
 
   const strokeWidth = useMemo(() => strokeWidthProp / 10, [strokeWidthProp])
 
@@ -48,12 +48,11 @@ function CircleCanvas(props: CircleProps) {
     if (_.isObject(color) && canvasContext) {
       const LinearColor = canvasContext.createLinearGradient(size, 0, 0, 0)
       if (LinearColor) {
+        // biome-ignore lint/complexity/noForEach: <explanation>
         Object.keys(color)
-          .sort((a, b) => parseFloat(a) - parseFloat(b))
-          .forEach((key) =>
-            LinearColor.addColorStop(parseFloat(key) / 100, color[key]),
-          )
-        return LinearColor;
+          .sort((a, b) => Number.parseFloat(a) - Number.parseFloat(b))
+          .forEach((key) => LinearColor.addColorStop(Number.parseFloat(key) / 100, color[key]))
+        return LinearColor
       }
     } else {
       return color as string
@@ -78,10 +77,19 @@ function CircleCanvas(props: CircleProps) {
       if (formatValue !== 0) {
         const progressAngle = PERIMETER * (formatValue / 100)
         const beginAngle = BEGIN_ANGLE_MAP[startPosition]
-        const endAngle = clockwise ? (beginAngle + progressAngle) : (beginAngle - progressAngle + 2 * Math.PI)
+        const endAngle = clockwise
+          ? beginAngle + progressAngle
+          : beginAngle - progressAngle + 2 * Math.PI
         canvasContext.strokeStyle = hoverColor!
         canvasContext.beginPath()
-        canvasContext.arc(position, position, radius, beginAngle, beginAngle === endAngle ? endAngle + 0.0001 : endAngle, !clockwise)
+        canvasContext.arc(
+          position,
+          position,
+          radius,
+          beginAngle,
+          beginAngle === endAngle ? endAngle + 0.0001 : endAngle,
+          !clockwise,
+        )
         canvasContext.stroke()
       }
 
@@ -90,13 +98,21 @@ function CircleCanvas(props: CircleProps) {
         canvasContext.fill()
       }
     }
-  }, [canvasContext, clockwise, fill, hoverColor, layerColor, percent, size, startPosition, strokeLinecap, strokeWidth])
+  }, [
+    canvasContext,
+    clockwise,
+    fill,
+    hoverColor,
+    layerColor,
+    percent,
+    size,
+    startPosition,
+    strokeLinecap,
+    strokeWidth,
+  ])
 
-  useEffect(
-    () => onChange?.(percent),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [percent],
-  )
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => onChange?.(percent), [percent])
 
   return (
     <Canvas

@@ -1,24 +1,24 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   isValidElement,
-  PropsWithChildren,
-  ReactElement,
-  ReactNode,
+  type PropsWithChildren,
+  type ReactElement,
+  type ReactNode,
   useContext,
 } from "react"
 import { prefixClassname } from "../styles"
 import { isElementOf } from "../utils/validate"
 import TimelineConnector from "./timeline-connector"
 import TimelineContent from "./timeline-content"
-import TimelineDot, { TimelineDotProps } from "./timeline-dot"
+import TimelineDot, { type TimelineDotProps } from "./timeline-dot"
 import TimelineItemBase from "./timeline-item-base"
 import TimelineSeparator from "./timeline-separator"
 import TimelineContext from "./timeline.context"
-import { TimelinePosition } from "./timeline.shared"
+import type { TimelinePosition } from "./timeline.shared"
 
 interface UseTimelineItemChildrenOptions {
   position?: TimelinePosition

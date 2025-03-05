@@ -7,8 +7,8 @@ import * as React from "react"
 import {
   Children,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useReducer,
   useMemo,
   useState,
@@ -21,12 +21,12 @@ import CascaderOption from "./cascader-option"
 import CascaderOptionBase from "./cascader-option-base"
 import CascaderTab from "./cascader-tab"
 import {
-  CascaderOptionObject,
-  CascaderEventOption,
-  CascaderTabObject,
+  type CascaderOptionObject,
+  type CascaderEventOption,
+  type CascaderTabObject,
   isActiveOption,
-  CascaderDataOption,
-  CascaderFieldNames,
+  type CascaderDataOption,
+  type CascaderFieldNames,
 } from "./cascader.shared"
 
 function getCascaderOptions(children: ReactNode, tabIndex: number): CascaderOptionObject[] {
@@ -163,12 +163,13 @@ function Cascader(props: CascaderProps) {
               value: item[fieldNames.value!],
               disabled: item.disabled,
               tabIndex: idx,
-            } as CascaderOptionObject),
+            }) as CascaderOptionObject,
         ),
       }))
     } else {
       ret = _tab
     }
+    // biome-ignore lint/complexity/noForEach: <explanation>
     ret.forEach((r) => r.options?.forEach((rr) => cache.set(rr.value, rr)))
     return [ret, cache] as const
   }, [columns, _tab, fieldNames])
@@ -183,6 +184,7 @@ function Cascader(props: CascaderProps) {
     onSelect?.(newValues, newActiveOptions)
     if (!_.isEqual(newValues, valueProp)) {
       if (columns.length > 0) {
+        // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
         let children
         if (loadData) {
           // @ts-ignore
@@ -235,6 +237,7 @@ function Cascader(props: CascaderProps) {
     () =>
       _.map(renderedTabs, (tab, index) => (
         <Tabs.TabPane
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={index}
           value={index}
           title={_.get(renderedOptions, index)?.children ?? placeholder}

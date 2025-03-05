@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { default as TaroImage } from "../image"
 import { prefixClassname } from "../styles"
 

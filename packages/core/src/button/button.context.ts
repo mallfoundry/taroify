@@ -1,6 +1,6 @@
-import { ITouchEvent } from "@tarojs/components"
+import type { ITouchEvent } from "@tarojs/components"
 import { createContext } from "react"
-import { ButtonProps } from "./button"
+import type { ButtonProps } from "./button"
 
 interface ButtonContextValue {
   onClick?(event: ITouchEvent, props: ButtonProps): void

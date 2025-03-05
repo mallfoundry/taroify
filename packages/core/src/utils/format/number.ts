@@ -15,21 +15,22 @@ function trimExtraChar(value: string, char: string, regExp: RegExp) {
 }
 
 export function formatNumber(value: string, allowDot = true, allowMinus = true) {
+  let valueCache = value
   if (allowDot) {
-    value = trimExtraChar(value, ".", /\./g)
+    valueCache = trimExtraChar(valueCache, ".", /\./g)
   } else {
-    value = value.split(".")[0]
+    valueCache = valueCache.split(".")[0]
   }
 
   if (allowMinus) {
-    value = trimExtraChar(value, "-", /-/g)
+    valueCache = trimExtraChar(valueCache, "-", /-/g)
   } else {
-    value = value.replace(/-/, "")
+    valueCache = valueCache.replace(/-/, "")
   }
 
   const regExp = allowDot ? /[^-0-9.]/g : /[^-0-9]/g
 
-  return value.replace(regExp, "")
+  return valueCache.replace(regExp, "")
 }
 
 // add num and avoid float number

@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react"
-import ActionBarComponent, { ActionBarProps } from "./action-bar"
+import type { FunctionComponent } from "react"
+import ActionBarComponent, { type ActionBarProps } from "./action-bar"
 import ActionBarButton from "./action-bar-button"
 import ActionBarButtonGroup from "./action-bar-button-group"
 import ActionBarIconButton from "./action-bar-icon-button"

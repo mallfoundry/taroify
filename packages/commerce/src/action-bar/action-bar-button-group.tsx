@@ -1,10 +1,10 @@
 import Flex from "@taroify/core/flex"
 import { prefixClassname } from "@taroify/core/styles"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classnames from "classnames"
 import * as React from "react"
-import { CSSProperties, PropsWithChildren } from "react"
-import { ActionBarButtonShape } from "./action-bar.shared"
+import type { CSSProperties, PropsWithChildren } from "react"
+import type { ActionBarButtonShape } from "./action-bar.shared"
 
 export interface ActionBarButtonGroupProps extends PropsWithChildren<ViewProps> {
   style?: CSSProperties

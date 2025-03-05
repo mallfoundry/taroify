@@ -2,7 +2,7 @@ import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react"
 import Loading from "../loading"
 import { prefixClassname } from "../styles"
 

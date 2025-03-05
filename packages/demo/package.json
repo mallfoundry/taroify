@@ -1,6 +1,6 @@
 {
   "name": "@taroify/demo",
-  "version": "0.6.3-alpha.0",
+  "version": "0.6.4-alpha.0",
   "description": "",
   "author": "Taroify",
   "private": "true",
@@ -29,17 +29,13 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch"
   },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
+  "browserslist": ["last 3 versions", "Android >= 4.1", "ios >= 8"],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@taroify/commerce": "^0.6.3-alpha.0",
-    "@taroify/core": "^0.6.3-alpha.0",
-    "@taroify/hooks": "^0.6.3-alpha.0",
-    "@taroify/icons": "^0.6.3-alpha.0",
+    "@taroify/commerce": "^0.6.4-alpha.0",
+    "@taroify/core": "^0.6.4-alpha.0",
+    "@taroify/hooks": "^0.6.4-alpha.0",
+    "@taroify/icons": "^0.6.4-alpha.0",
     "@tarojs/components": "3.6.23",
     "@tarojs/plugin-framework-react": "3.6.23",
     "@tarojs/plugin-platform-h5": "3.6.23",

@@ -1,10 +1,10 @@
 import { ArrowLeft } from "@taroify/icons"
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { isValidElement, ReactNode } from "react"
+import { isValidElement, type ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface NavBarLeftProps extends ViewProps {

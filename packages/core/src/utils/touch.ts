@@ -1,4 +1,4 @@
-import { ITouchEvent } from "@tarojs/components"
+import type { ITouchEvent } from "@tarojs/components"
 import { useCallback, useEffect, useRef } from "react"
 
 const MIN_DISTANCE = 10
@@ -65,7 +65,7 @@ export function useTouch() {
     [],
   )
 
-  const reset = useCallback(function () {
+  const reset = useCallback(() => {
     touchRef.current.deltaX = 0
     touchRef.current.deltaY = 0
     touchRef.current.offsetX = 0
@@ -75,7 +75,7 @@ export function useTouch() {
   }, [])
 
   const start = useCallback(
-    function (event: ITouchEvent) {
+    (event: ITouchEvent) => {
       reset()
       touchRef.current.startX = event.touches[0].clientX
       touchRef.current.startY = event.touches[0].clientY
@@ -83,7 +83,7 @@ export function useTouch() {
     [reset],
   )
 
-  const move = useCallback(function (event: ITouchEvent) {
+  const move = useCallback((event: ITouchEvent) => {
     const touch = event.touches[0]
     // Fix: Safari back will set clientX to negative number
     touchRef.current.deltaX = touch.clientX < 0 ? 0 : touch.clientX - touchRef.current.startX
@@ -103,30 +103,35 @@ export function useTouch() {
     }
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (touchRef.current.isHorizontal !== isHorizontal) {
       touchRef.current.isHorizontal = isHorizontal
     }
   }, [touchRef, isHorizontal])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (touchRef.current.isVertical !== isVertical) {
       touchRef.current.isVertical = isVertical
     }
   }, [touchRef, isVertical])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (touchRef.current.reset !== reset) {
       touchRef.current.reset = reset
     }
   }, [touchRef, reset])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (touchRef.current.start !== start) {
       touchRef.current.start = start
     }
   }, [touchRef, start])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (touchRef.current.move !== move) {
       touchRef.current.move = move

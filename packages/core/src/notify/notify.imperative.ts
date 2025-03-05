@@ -1,8 +1,13 @@
 import * as _ from "lodash"
-import { createElement, isValidElement, ReactNode } from "react"
-import { document, TaroNode } from "@tarojs/runtime"
+import { createElement, isValidElement, type ReactNode } from "react"
+import { document, type TaroNode } from "@tarojs/runtime"
 import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
-import { NotifyColor, notifyEvents, NotifyOptions, notifySelectorSet } from "./notify.shared"
+import {
+  type NotifyColor,
+  type NotifyOptions,
+  notifyEvents,
+  notifySelectorSet,
+} from "./notify.shared"
 import Notify from "./notify"
 
 const initialNotifyOptions: NotifyOptions = {

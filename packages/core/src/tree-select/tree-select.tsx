@@ -1,17 +1,24 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { Success } from "@taroify/icons"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useCallback } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+} from "react"
 import Sidebar from "../sidebar"
 import { prefixClassname } from "../styles"
 import TreeSelectOption from "./tree-select-option"
 import TreeSelectTab from "./tree-select-tab"
 import TreeSelectContext from "./tree-select.context"
-import { TreeSelectOptionObject, TreeSelectTabObject } from "./tree-select.shared"
+import type { TreeSelectOptionObject, TreeSelectTabObject } from "./tree-select.shared"
 
 interface TreeSelectChildren {
   tabs: ReactNode[]

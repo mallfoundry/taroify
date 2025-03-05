@@ -58,7 +58,7 @@ exports.develop = series(
     watchSymlink,
     serveDemo,
     serveSite,
-  )
+  ),
 )
 
 exports.watch = watch

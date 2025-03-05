@@ -1,9 +1,9 @@
 import { cloneIconElement } from "@taroify/icons/utils"
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext, useMemo } from "react"
+import { type ReactNode, useContext, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER } from "../styles/hairline"
 import StepsContext from "./steps.context"
@@ -13,7 +13,6 @@ interface StepProps extends ViewProps {
   index?: number
   active?: boolean
   completed?: boolean
-  // error?: boolean
   disabled?: boolean
   icon?: ReactNode
   label?: ReactNode

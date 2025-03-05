@@ -1,5 +1,5 @@
 import * as React from "react"
-import Input, { InputProps } from "../input"
+import Input, { type InputProps } from "../input"
 
 interface SearchInputProps extends InputProps {}
 

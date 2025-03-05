@@ -1,7 +1,14 @@
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import * as _ from "lodash"
 import * as React from "react"
-import { cloneElement, CSSProperties, ReactElement, ReactNode, useContext, useMemo } from "react"
+import {
+  cloneElement,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import { default as SharedBackdrop } from "../backdrop"
 import PopupContext from "./popup.context"
 

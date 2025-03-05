@@ -1,6 +1,6 @@
-import { CSSProperties, ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { Events } from "@tarojs/taro"
-import { PopupBackdropProps } from "../popup"
+import type { PopupBackdropProps } from "../popup"
 
 export type ToastType = "text" | "loading" | "success" | "fail" | "html"
 

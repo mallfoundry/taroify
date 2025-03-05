@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { PropsWithChildren } from "react"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { PropsWithChildren } from "react"
+import type { ViewProps } from "@tarojs/components/types/View"
 import { prefixClassname } from "../styles"
 
 export interface TimeLineSeparatorProps extends PropsWithChildren<ViewProps> {}

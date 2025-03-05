@@ -1,12 +1,11 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { ReactNode, useContext } from "react"
+import { type ReactNode, useContext } from "react"
 import FormContext from "./form.context"
 import { prefixClassname } from "../styles"
-
-import { FormFeedbackAlign, FormFeedbackStatus } from "./form.shared"
+import type { FormFeedbackAlign, FormFeedbackStatus } from "./form.shared"
 
 export interface FormFeedbackProps extends ViewProps {
   align?: FormFeedbackAlign
@@ -15,7 +14,7 @@ export interface FormFeedbackProps extends ViewProps {
 }
 
 function FormFeedback(props: FormFeedbackProps) {
-  const { className, align:alignProp, status, ...restProps } = props
+  const { className, align: alignProp, status, ...restProps } = props
   const { controlAlign } = useContext(FormContext)
   const align = alignProp ?? controlAlign ?? "left"
   return (

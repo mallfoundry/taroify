@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
+import type { DropdownMenuOptionEvent } from "./dropdown-menu.shared"
 
 interface DropdownMenuItemContextValue {
   toggleOption?(event: DropdownMenuOptionEvent): void

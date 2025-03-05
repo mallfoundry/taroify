@@ -1,4 +1,4 @@
-import { DependencyList, useCallback, useMemo } from "react"
+import { type DependencyList, useCallback, useMemo } from "react"
 
 export interface ComputedRef<T = any> {
   readonly value: T
@@ -22,6 +22,7 @@ export function useComputed<T>(
   getter: ComputedGetter<T>,
   deps: DependencyList | undefined = [],
 ): ComputedRef<T> {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const __getter__ = useCallback(getter, [getter, ...deps])
   return useMemo(() => {
     return new GetterRef(__getter__)

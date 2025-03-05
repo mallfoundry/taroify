@@ -1,10 +1,17 @@
 import { View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, isValidElement, ReactElement, ReactNode, useContext, useEffect } from "react"
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useEffect,
+} from "react"
 import { prefixClassname } from "../styles"
-import CalendarButton, { CalendarButtonProps } from "./calendar-button"
+import CalendarButton, { type CalendarButtonProps } from "./calendar-button"
 import CalendarContext from "./calendar.context"
 
 interface CalendarFooterProps extends ViewProps {

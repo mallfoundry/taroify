@@ -1,11 +1,18 @@
 import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as React from "react"
-import { Children, cloneElement, isValidElement, ReactElement, ReactNode, useMemo } from "react"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  useMemo,
+  type ReactElement,
+  type ReactNode,
+} from "react"
 import { prefixClassname } from "../styles"
 import { HAIRLINE_BORDER_LEFT, HAIRLINE_BORDER_TOP } from "../styles/hairline"
 import { getLogger } from "../utils/logger"
-import { DialogActionsTheme, DialogActionsVariant } from "./dialog.shared"
+import type { DialogActionsTheme, DialogActionsVariant } from "./dialog.shared"
 
 const { deprecated } = getLogger("Dialog.Actions")
 
@@ -68,7 +75,6 @@ export default function DialogActions(props: DialogActionsProps) {
   const { theme, variant: variantProp, children: childrenProp } = props
 
   if (theme === "round") {
-    // eslint-disable-next-line quotes
     deprecated('Use the variant="rounded" prop instead of the theme="round" prop')
   }
 

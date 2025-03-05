@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface ImagePlaceholderProps {

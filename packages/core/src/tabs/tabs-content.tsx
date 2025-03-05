@@ -2,12 +2,12 @@ import { View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { ReactNode, useMemo } from "react"
+import { type ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import { useRendered } from "../utils/state"
 import TabPaneBase from "./tab-pane-base"
-import { TabEvent, TabObject } from "./tabs.shared"
+import type { TabEvent, TabObject } from "./tabs.shared"
 
 function useTabPanes(tabObjects?: TabObject[]): ReactNode {
   return useMemo(() => _.map(tabObjects, (props) => <TabPaneBase {...props} />), [tabObjects])
@@ -27,10 +27,10 @@ interface TabsContentProps {
 export function TabsContent(props: TabsContentProps) {
   const { value: activeValue, duration, animated, swipeable, tabObjects, onTabChange } = props
 
-  const activeIndex = useMemo(() => _.find(tabObjects, (tab) => tab.value === activeValue)?.index, [
-    activeValue,
-    tabObjects,
-  ])
+  const activeIndex = useMemo(
+    () => _.find(tabObjects, (tab) => tab.value === activeValue)?.index,
+    [activeValue, tabObjects],
+  )
 
   const panes = useTabPanes(tabObjects)
 

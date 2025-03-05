@@ -1,7 +1,7 @@
-import GridComponent, { GridProps } from "./grid"
+import GridComponent, { type GridProps } from "./grid"
 import GridItem from "./grid-item"
 
-export type { GridThemeVars } from './grid.shared'
+export type { GridThemeVars } from "./grid.shared"
 
 interface GridInterface {
   (props: GridProps): JSX.Element

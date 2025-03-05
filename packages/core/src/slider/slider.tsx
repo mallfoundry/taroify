@@ -1,16 +1,16 @@
 import { useUncontrolled } from "@taroify/hooks"
-import { ITouchEvent, View } from "@tarojs/components"
-import { ViewProps } from "@tarojs/components/types/View"
+import { type ITouchEvent, View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
 import {
   Children,
   cloneElement,
-  CSSProperties,
+  type CSSProperties,
   isValidElement,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -181,8 +181,8 @@ function Slider(props: SliderProps) {
   }, [calcMainAxis, calcOffset, vertical])
 
   const formatValue = (value: number) => {
-    value = _.clamp(value, min, max)
-    const diff = Math.round((value - min) / step) * step
+    const valueCache = _.clamp(value, min, max)
+    const diff = Math.round((valueCache - min) / step) * step
     return addNumber(min, diff)
   }
 
@@ -197,14 +197,15 @@ function Slider(props: SliderProps) {
   }
 
   const updateValue = (newValue: SliderValue) => {
-    if (isRange(newValue)) {
-      newValue = handleOverlap(newValue).map(formatValue) as [number, number]
+    let newValueCache = newValue
+    if (isRange(newValueCache)) {
+      newValueCache = handleOverlap(newValueCache).map(formatValue) as [number, number]
     } else {
-      newValue = formatValue(newValue as number)
+      newValueCache = formatValue(newValueCache as number)
     }
 
-    if (!isSameValue(newValue, value)) {
-      setValue(newValue as any)
+    if (!isSameValue(newValueCache, value)) {
+      setValue(newValueCache as any)
     }
   }
 

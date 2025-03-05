@@ -1,5 +1,5 @@
 import * as _ from "lodash"
-import { FormItemInstance, FormValidError } from "./form.shared"
+import type { FormItemInstance, FormValidError } from "./form.shared"
 
 export function validateAll(fields: FormItemInstance[]) {
   return new Promise<void>((resolve, reject) => {

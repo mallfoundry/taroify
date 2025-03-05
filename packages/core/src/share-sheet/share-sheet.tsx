@@ -1,9 +1,9 @@
 import classNames from "classnames"
 import * as React from "react"
-import Sheet, { SheetProps } from "../sheet"
+import Sheet, { type SheetProps } from "../sheet"
 import { prefixClassname } from "../styles"
 import ShareSheetContext from "./share-sheet.context"
-import { ShareSheetOptionObject } from "./share-sheet.shared"
+import type { ShareSheetOptionObject } from "./share-sheet.shared"
 
 export interface ShareSheetProps extends SheetProps {
   onSelect?(event: ShareSheetOptionObject): void

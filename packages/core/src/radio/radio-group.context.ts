@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { RadioGroupDirection } from "./radio-group.shared"
+import type { RadioGroupDirection } from "./radio-group.shared"
 
 interface RadioGroupContextValue {
   value?: any
