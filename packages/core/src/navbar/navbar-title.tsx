@@ -2,7 +2,7 @@ import { View } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as React from "react"
-import { type ReactNode } from "react"
+import type { ReactNode } from "react"
 import { prefixClassname } from "../styles"
 
 interface NavBarTitleProps extends ViewProps {

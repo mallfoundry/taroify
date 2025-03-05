@@ -72,7 +72,6 @@ function PickerColumnsRender(props: PickerColumnsRenderProps) {
           ref={setColumnRefs?.(columnIndex)}
           key={getPickerOptionKey(column) ?? columnIndex}
           // @ts-ignore
-          // biome-ignore lint/correctness/noChildrenProp: <explanation>
           children={options}
           readonly={readonly}
           {...restColumnProps}

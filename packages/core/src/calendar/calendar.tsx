@@ -202,27 +202,31 @@ function Calendar(props: CalendarProps) {
     }
 
     const now = createToday()
-
+    let defaultDateCache = defaultDate
     if (type === "range") {
-      if (!Array.isArray(defaultDate)) {
-        defaultDate = []
+      if (!Array.isArray(defaultDateCache)) {
+        defaultDateCache = []
       }
-      const start = limitDateRange(defaultDate[0] || now, minValue, createPreviousDay(maxValue))
-      const end = limitDateRange(defaultDate[1] || now, createNextDay(minValue))
+      const start = limitDateRange(
+        defaultDateCache[0] || now,
+        minValue,
+        createPreviousDay(maxValue),
+      )
+      const end = limitDateRange(defaultDateCache[1] || now, createNextDay(minValue))
       return [start, end]
     }
 
     if (type === "multiple") {
-      if (Array.isArray(defaultDate)) {
-        return defaultDate.map((date) => limitDateRange(date))
+      if (Array.isArray(defaultDateCache)) {
+        return defaultDateCache.map((date) => limitDateRange(date))
       }
       return [limitDateRange(now)]
     }
 
-    if (!defaultDate || Array.isArray(defaultDate)) {
-      defaultDate = now
+    if (!defaultDateCache || Array.isArray(defaultDateCache)) {
+      defaultDateCache = now
     }
-    return limitDateRange(defaultDate)
+    return limitDateRange(defaultDateCache)
   }
 
   // get first disabled calendarDay between date range

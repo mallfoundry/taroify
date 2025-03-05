@@ -1,5 +1,5 @@
-import { createContext, ReactNode } from "react"
-import { NumberKeyboardKeyOnPress } from "./number-keyboard-key.shared"
+import { createContext, type ReactNode } from "react"
+import type { NumberKeyboardKeyOnPress } from "./number-keyboard-key.shared"
 
 interface NumberKeyboardContextValue {
   title?: ReactNode
