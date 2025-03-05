@@ -1,3 +1,4 @@
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 const path = require("path")
 const autoprefixer = require("autoprefixer")
 const cssnano = require("cssnano")
@@ -54,12 +55,12 @@ function npmModule(url, file, done) {
     return done({ file: url })
   }
   // Remove ~ character
-  url = url.substring(1)
+  const urlWithoutTilde = url.substring(1)
   try {
-    const toPath = resolveNpmPath(url)
+    const toPath = resolveNpmPath(urlWithoutTilde)
     return done({ file: toPath })
   } catch (e) {
-    return done({ file: url })
+    return done({ file: urlWithoutTilde })
   }
 }
 
