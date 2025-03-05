@@ -1,17 +1,6 @@
-# EXAMPLE USAGE:
-#
-#   Refer for explanation to following link:
-#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
-#
-# pre-push:
-#   commands:
-#     packages-audit:
-#       tags: frontend security
-#       run: yarn audit
-#     gems-audit:
-#       tags: backend security
-#       run: bundle audit
-#
+# yaml-language-server:$schema=./node_modules/lefthook/schema.json
+# https://evilmartians.github.io/lefthook/configuration/
+
 pre-commit:
   piped: true
   follow: true
@@ -25,7 +14,7 @@ pre-commit:
     # typescript:
     #   priority: 3
     #   glob: "*.{ts,tsx}"
-    #   run: na tsc --noEmit
+    #   run: na tsc
     biome:
       priority: 4
       glob: "*.{ts,tsx,js,jsx,json,jsonc,css}"
@@ -41,5 +30,13 @@ pre-commit:
       run: na prettier --write {staged_files}
     stylelint: # Biome 尚不支持 scss 文件
       priority: 7
-      glob: "*.{css,scss}"
+      glob: "*.{scss}"
       run: na stylelint --fix {staged_files}
+
+prepare-commit-msg:
+  commands:
+    commit:
+      interactive: true
+      run: na git-cz --hook
+      env:
+        LEFTHOOK: "0"

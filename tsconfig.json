@@ -11,6 +11,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "removeComments": true,
