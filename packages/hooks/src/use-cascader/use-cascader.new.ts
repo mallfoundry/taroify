@@ -1,7 +1,7 @@
 import * as _ from "lodash"
 import { useEffect, useMemo } from "react"
 import useToRef from "../use-to-ref"
-import { CascaderOption, findCascadeOption } from "./use-cascader.shared"
+import { type CascaderOption, findCascadeOption } from "./use-cascader.shared"
 
 interface UseCascadeSelectOptions {
   data: CascaderOption[]
@@ -73,6 +73,7 @@ export default function useCascaderNew({
 
   useEffect(() => {
     if (maxDepth !== 0 && maxDepth > _.size(columns)) {
+      // biome-ignore lint/complexity/noForEach: <explanation>
       _.range(maxDepth - _.size(columns))
         .map(() => [])
         .forEach((e) => columns.push(e))

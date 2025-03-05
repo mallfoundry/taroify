@@ -1,5 +1,5 @@
 import * as _ from "lodash"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 export interface AreaData {
   province_list: Record<string, string>
