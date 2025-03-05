@@ -14,9 +14,9 @@ import Stepper, { type StepperProps } from "../../stepper"
 import Switch, { type SwitchProps } from "../../switch"
 import Textarea from "../../textarea"
 import Uploader, { type UploaderProps } from "../../uploader"
-import type{ FormController } from "../form.shared"
+import type { FormController } from "../form.shared"
 import type FormControlHandler from "./form-control-handler"
-import {  registerFormControlHandler } from "./form-control-handler"
+import { registerFormControlHandler } from "./form-control-handler"
 
 registerFormControlHandler(
   new (class implements FormControlHandler<InputProps> {

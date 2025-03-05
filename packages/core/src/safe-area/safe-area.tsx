@@ -1,32 +1,32 @@
-import { getWindowInfo } from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import type { ViewProps } from "@tarojs/components/types/View";
-import classNames from "classnames";
-import * as React from "react";
-import { useMemo, type CSSProperties } from "react";
-import { prefixClassname } from "../styles";
+import { getWindowInfo } from "@tarojs/taro"
+import { View } from "@tarojs/components"
+import type { ViewProps } from "@tarojs/components/types/View"
+import classNames from "classnames"
+import * as React from "react"
+import { useMemo, type CSSProperties } from "react"
+import { prefixClassname } from "../styles"
 
-export type SafeAreaPosition = "top" | "bottom";
+export type SafeAreaPosition = "top" | "bottom"
 
 export interface SafeAreaProps extends ViewProps {
-  position?: SafeAreaPosition;
-  style?: CSSProperties;
-  nativeSafeTop?: boolean;
+  position?: SafeAreaPosition
+  style?: CSSProperties
+  nativeSafeTop?: boolean
 }
 
 function SafeArea(props: SafeAreaProps) {
-  const { className, position, nativeSafeTop, style, ...restProps } = props;
+  const { className, position, nativeSafeTop, style, ...restProps } = props
 
-  const { statusBarHeight } = getWindowInfo();
+  const { statusBarHeight } = getWindowInfo()
 
   const customStyle = useMemo(() => {
     if (position === "top" && nativeSafeTop) {
       return {
         paddingTop: `${statusBarHeight || 0}px`,
-      };
+      }
     }
-    return {};
-  }, [position, nativeSafeTop, statusBarHeight]);
+    return {}
+  }, [position, nativeSafeTop, statusBarHeight])
 
   return (
     <View
@@ -44,7 +44,7 @@ function SafeArea(props: SafeAreaProps) {
       }}
       {...restProps}
     />
-  );
+  )
 }
 
-export default SafeArea;
+export default SafeArea

@@ -1,5 +1,5 @@
-export type RollingTextDirection = 'up' | 'down';
-export type RollingTextStopOrder = 'ltr' | 'rtl';
+export type RollingTextDirection = "up" | "down"
+export type RollingTextStopOrder = "ltr" | "rtl"
 
 export type RollingTextThemeVars = {
   rollingTextFontSize?: string

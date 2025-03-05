@@ -1,2 +1,2 @@
 export { default } from "./skeleton"
-export type { SkeletonThemeVars } from './skeleton.shared'
+export type { SkeletonThemeVars } from "./skeleton.shared"

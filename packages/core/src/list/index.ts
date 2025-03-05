@@ -3,7 +3,7 @@ import ListPlaceholder from "./list-placeholder"
 
 export type { ListDirection, ListThemeVars } from "./list.shared"
 
-type ListType = (typeof ListComponent) & {
+type ListType = typeof ListComponent & {
   Placeholder: typeof ListPlaceholder
 }
 
