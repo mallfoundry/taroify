@@ -1,5 +1,6 @@
 export type DividerThemeVars = {
   dividerMargin?: string
+  dividerVerticalPadding?: string
   dividerColor?: string
   dividerFontSize?: string
   dividerLineHeight?: string

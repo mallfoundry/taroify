@@ -27,6 +27,7 @@
   }
 
   &--hairline {
+
     &::before,
     &::after {
       transform: scaleY(0.5);
@@ -59,6 +60,22 @@
   &--content-right {
     &::after {
       max-width: $divider-content-right-width;
+    }
+  }
+
+  &--vertical {
+    position: relative;
+    display: inline-flex;
+    height: 0.9em;
+    vertical-align: middle;
+    border-top: 0;
+    margin: 0;
+    border-left-width: $border-width-base;
+    padding: $divider-vertical-padding;
+
+    &::before,
+    &::after {
+      content: none;
     }
   }
 }

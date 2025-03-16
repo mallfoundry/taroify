@@ -2,6 +2,7 @@
 @import "../styles/variables";
 
 $divider-margin: var(--divider-margin, var(--padding-md, $padding-md) 0);
+$divider-vertical-padding: var(--divider-vertical-padding, 0 var(--padding-xs, $padding-xs));
 $divider-color: var(--divider-color, var(--gray-6, $gray-6));
 $divider-font-size: var(--divider-font-size, var(--font-size-md, $font-size-md));
 $divider-line-height: var(--divider-line-height, 24px * $hd);

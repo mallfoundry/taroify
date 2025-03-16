@@ -28,6 +28,18 @@ export default function DividerDemo() {
           文本
         </Divider>
       </Block>
+      <Block title="垂直分割线">
+        <Divider type="vertical">文本</Divider>
+        <Divider type="vertical" dashed>
+          文本
+        </Divider>
+        <Divider type="vertical" hairline>
+          文本
+        </Divider>
+        <Divider type="vertical" style={{ color: "#1989fa", borderColor: "#1989fa" }}>
+          文本
+        </Divider>
+      </Block>
     </Page>
   )
 }
