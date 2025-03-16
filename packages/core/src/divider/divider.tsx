@@ -39,11 +39,19 @@ function findDividerText(node?: ReactNode): DividerText {
 interface DividerProps extends ViewProps {
   dashed?: boolean
   hairline?: boolean
+  type?: "horizontal" | "vertical"
   children?: ReactNode
 }
 
 function Divider(props: DividerProps) {
-  const { className, dashed = false, hairline = true, children: childrenProp, ...restProps } = props
+  const {
+    className,
+    dashed = false,
+    hairline = true,
+    type = "horizontal",
+    children: childrenProp,
+    ...restProps
+  } = props
   const { orientation = "center", children } = findDividerText(childrenProp)
   return (
     <View
@@ -52,6 +60,7 @@ function Divider(props: DividerProps) {
         {
           [prefixClassname("divider--hairline")]: hairline && !dashed,
           [prefixClassname("divider--dashed")]: dashed,
+          [prefixClassname("divider--vertical")]: type === "vertical",
           [prefixClassname("divider--content-left")]: children && orientation === "left",
           [prefixClassname("divider--content-center")]: children && orientation === "center",
           [prefixClassname("divider--content-right")]: children && orientation === "right",

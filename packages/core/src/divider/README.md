@@ -59,6 +59,19 @@ import { Divider } from "@taroify/core"
 </Divider>
 ```
 
+### 垂直
+
+添加 `type` 属性使分割线垂直展示。
+
+```tsx
+<Divider type='vertical'>文本</Divider>
+<Divider type='vertical' dashed>文本</Divider>
+<Divider type='vertical' dashed hairline>文本</Divider>
+<Divider type="vertical" style={{ color: "#1989fa", borderColor: "#1989fa" }}>
+  文本
+</Divider>
+```
+
 ## API
 
 ### Divider Props
@@ -67,6 +80,7 @@ import { Divider } from "@taroify/core"
 |----------|--------------|-----------|---------|
 | dashed   | 是否使用虚线       | _boolean_ | `false` |
 | hairline | 是否使用 0.5px 线 | _boolean_ | `true`  |
+| type `v0.6.5` | 水平还是垂直类型 | _horizontal \| vertical_ | `horizontal`  |
 
 ### Divider.Text Props
 
@@ -83,6 +97,7 @@ import { Divider } from "@taroify/core"
 | 名称                            | 默认值                            | 描述  |
 |-------------------------------|--------------------------------|-----|
 | --divider-margin              | _var(--padding-md) 0_          | -   |
+| --divider-vertical-padding    | _0 var(--padding-xs)_          | -   |
 | --divider-color               | _var(--gray-6)_                | -   |
 | --divider-font-size           | _var(--font-size-md)_          | -   |
 | --divider-line-height         | _24px * $hd_                   | -   |
