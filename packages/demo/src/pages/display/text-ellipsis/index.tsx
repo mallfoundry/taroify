@@ -1,7 +1,25 @@
-import { TextEllipsis } from "@taroify/core"
+import { useRef } from "react"
+import { TextEllipsis, Button } from "@taroify/core"
+import type { TextEllipsisInstance } from "@taroify/core/text-ellipsis";
 import Block from "../../../components/block"
 import Page from "../../../components/page"
+
 import "./index.scss"
+
+const FunTextEllipsis = () => {
+  const wrapRef = useRef<TextEllipsisInstance>(null);
+
+  const onClick = () => {
+    wrapRef.current?.toggle(true)
+  }
+
+  return (
+    <Block variant="card" title="方法调用">
+      <TextEllipsis ref={wrapRef} content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="start" rows={3} expandText="展开" collapseText="收起" />
+      <Button onClick={onClick}>展开</Button>
+    </Block>
+  )
+}
 
 export default function TextEllipsisDemo() {
   return (
@@ -17,9 +35,10 @@ export default function TextEllipsisDemo() {
         <TextEllipsis style={{ marginTop: "0.2rem" }} content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" rows={4} expandText="展开" collapseText="收起" />
       </Block>
       <Block variant="card" title="自定义省略位置">
-          <TextEllipsis content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="start" rows={3} expandText="展开" collapseText="收起" />
-          <TextEllipsis style={{ marginTop: "0.2rem" }} content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="middle" rows={3} expandText="展开" collapseText="收起" />
+        <TextEllipsis content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="start" rows={3} expandText="展开" collapseText="收起" />
+        <TextEllipsis style={{ marginTop: "0.2rem" }} content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="middle" rows={3} expandText="展开" collapseText="收起" />
       </Block>
+      <FunTextEllipsis />
     </Page>
   )
 }
