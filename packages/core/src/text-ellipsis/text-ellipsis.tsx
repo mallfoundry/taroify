@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useRef, useLayoutEffect, useMemo } from "react"
+import { useState, useRef, useLayoutEffect, useMemo, useImperativeHandle, forwardRef } from "react"
 import { View, type ViewProps } from "@tarojs/components"
 import { nextTick } from "@tarojs/taro"
 import cls from "classnames"
@@ -10,7 +10,7 @@ import { useMemoizedFn, useDeepCompareMemo } from "../hooks"
 
 type IndexType = number | [number, number]
 
-interface TextEllipsisProps extends ViewProps {
+export interface TextEllipsisProps extends ViewProps {
   rows?: number | string
   content?: string
   children?: string
@@ -19,6 +19,10 @@ interface TextEllipsisProps extends ViewProps {
   dots?: string
   position?: "start" | "middle" | "end"
   onClickAction?: (expanded: boolean) => void
+}
+
+export interface TextEllipsisInstance {
+  toggle: (isExpanded?: boolean) => void
 }
 
 const zhCharCodeStart = 19968
@@ -31,19 +35,21 @@ const letterUpperChartCodeStart = 65
 const letterUpperChartCodeEnd = 90
 const placeholderBaseCls = prefixClassname("text-ellipsis__placeholder-base")
 
-export default function TextEllipsis({
-  rows = 1,
-  content,
-  children,
-  expandText = "",
-  collapseText = "",
-  dots = "...",
-  position = "end",
-  onClickAction: onClickActionProp,
-  className: classNameProp,
-  style: styleProp,
-  ...rest
-}: TextEllipsisProps) {
+const TextEllipsis = forwardRef<TextEllipsisInstance, TextEllipsisProps>((props, ref) => {
+  const {
+    rows = 1,
+    content,
+    children,
+    expandText = "",
+    collapseText = "",
+    dots = "...",
+    position = "end",
+    onClickAction: onClickActionProp,
+    className: classNameProp,
+    style: styleProp,
+    ...rest
+  } = props
+
   const textProps = content || children || ""
   const cloneStyle = useDeepCompareMemo(
     () =>
@@ -71,6 +77,7 @@ export default function TextEllipsis({
   const charCodesCacheRef = useRef<number[]>([])
   const containerHeightRef = useRef<number>(0)
   const hasActionRef = useRef(false)
+
   const getText = useMemoizedFn((index: IndexType) => {
     if (index === 0) {
       return ""
@@ -88,6 +95,7 @@ export default function TextEllipsis({
       return dots + textProps.slice(+index)
     }
   })
+
   const getPrevIndex = useMemoizedFn((idx: IndexType): IndexType => {
     if (Array.isArray(idx)) {
       return [idx[0] - 1, idx[1]]
@@ -99,6 +107,7 @@ export default function TextEllipsis({
       return idx + 1
     }
   })
+
   const getNextIndex = useMemoizedFn((idx: IndexType): IndexType => {
     if (Array.isArray(idx)) {
       return [idx[0] + 1, idx[1]]
@@ -110,6 +119,7 @@ export default function TextEllipsis({
       return idx - 1
     }
   })
+
   useLayoutEffect(() => {
     setStatus("beforeInit")
     hasActionRef.current = false
@@ -328,6 +338,16 @@ export default function TextEllipsis({
     onClickActionProp?.(!expanded)
   }
 
+  const toggle = (isExpanded = !expanded) => {
+    setExpanded(isExpanded)
+  }
+
+  useImperativeHandle(ref, () => {
+    return {
+      toggle,
+    }
+  })
+
   return (
     <View
       ref={containerRef}
@@ -377,4 +397,6 @@ export default function TextEllipsis({
       )}
     </View>
   )
-}
+})
+
+export default TextEllipsis

@@ -75,6 +75,25 @@ import { TextEllipsis } from "@taroify/core"
 />
 ```
 
+### 手动控制
+
+通过 ref 可以获取到 TextEllipsis 实例并调用实例方法
+
+```tsx
+const wrapRef = useRef<TextEllipsisInstance>(null);
+
+const onClick = () => {
+  wrapRef.current?.toggle(true)
+}
+
+return (
+  <Block variant="card" title="方法调用">
+    <TextEllipsis ref={wrapRef} content="那一天我二十一岁，在我一生的黄金时代。我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。后来我才知道，生活就是个缓慢受锤的过程，人一天天老下去，奢望也一天天消失，最后变得像挨了锤的牛一样。可是我过二十一岁生日时没有预见到这一点。我觉得自己会永远生猛下去，什么也锤不了我。" position="start" rows={3} expandText="展开" collapseText="收起" />
+    <Button onClick={onClick}>展开</Button>
+  </Block>
+)
+```
+
 ## API
 
 ### Props
@@ -93,6 +112,14 @@ import { TextEllipsis } from "@taroify/core"
 | 事件名        | 说明                | 回调参数            |
 | ------------- | ------------------- | ------------------- |
 | onClickAction | 点击展开/收起时触发 | _expanded: boolean_ |
+
+### 方法
+
+通过 `ref` 可以获取到 TextEllipsis 实例并调用实例方法
+
+| 方法名 | 说明     | 参数 | 返回值 |
+| :----- | -------- | ---- | ------ |
+| toggle  | 切换文本的展开状态，传 true 为展开，false 为收起，不传参为切换 | _expanded?: boolean_   | -      |
 
 ## 主题定制
 

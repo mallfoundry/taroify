@@ -1,7 +1,7 @@
-import {useRef} from "react";
-import {View} from '@tarojs/components'
-import {RollingText, Button} from "@taroify/core"
-import type {RollingTextRef} from '@taroify/core/rolling-text'
+import { useRef } from "react";
+import { View } from "@tarojs/components"
+import { RollingText, Button } from "@taroify/core"
+import type { RollingTextRef } from "@taroify/core/rolling-text"
 import Page from "../../../components/page"
 import Block from "../../../components/block"
 import "./index.scss"
@@ -16,8 +16,8 @@ function BasicRollingText() {
 
   return (
     <View>
-      <RollingText ref={ref} targetNum={123} autoStart={false}/>
-      <View className='rolling-text-btn'>
+      <RollingText ref={ref} targetNum={123} autoStart={false} />
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={onClick}>向下翻滚</Button>
       </View>
     </View>
@@ -33,8 +33,8 @@ function SetDirectionRollingText() {
 
   return (
     <View>
-      <RollingText ref={ref} targetNum={432} autoStart={false} direction="up"/>
-      <View className='rolling-text-btn'>
+      <RollingText ref={ref} targetNum={432} autoStart={false} direction="up" />
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={onClick}>向上翻滚</Button>
       </View>
     </View>
@@ -50,8 +50,8 @@ function StopOrderRollingText() {
 
   return (
     <View>
-      <RollingText ref={ref} targetNum={54321} autoStart={false} stopOrder='rtl'/>
-      <View className='rolling-text-btn'>
+      <RollingText ref={ref} targetNum={54321} autoStart={false} stopOrder="rtl" />
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={onClick}>从个位停止</Button>
       </View>
     </View>
@@ -59,13 +59,13 @@ function StopOrderRollingText() {
 }
 
 const textList = [
-  'aaaaa',
-  'bbbbb',
-  'ccccc',
-  'ddddd',
-  'eeeee',
-  'fffff',
-  'ggggg',
+  "aaaaa",
+  "bbbbb",
+  "ccccc",
+  "ddddd",
+  "eeeee",
+  "fffff",
+  "ggggg",
 ]
 
 function TextListRollingText() {
@@ -78,7 +78,7 @@ function TextListRollingText() {
   return (
     <View>
       <RollingText ref={ref} textList={textList} duration={1} autoStart={false} />
-      <View className='rolling-text-btn'>
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={onClick}>开始</Button>
       </View>
     </View>
@@ -94,8 +94,8 @@ function CustomerRollingText() {
 
   return (
     <View>
-      <RollingText ref={ref} className='my-rolling-text' height={54} startNum={12345} targetNum={54321} autoStart={false} />
-      <View className='rolling-text-btn'>
+      <RollingText ref={ref} className="my-rolling-text" height={54} startNum={12345} targetNum={54321} autoStart={false} />
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={onClick}>开始</Button>
       </View>
     </View>
@@ -115,10 +115,10 @@ function HandRollingText() {
 
   return (
     <View>
-      <RollingText ref={ref} className='my-rolling-text' height={54} startNum={0} targetNum={54321} autoStart={false} />
-      <View className='rolling-text-btn'>
+      <RollingText ref={ref} className="my-rolling-text" height={54} startNum={0} targetNum={54321} autoStart={false} />
+      <View className="rolling-text-btn">
         <Button color="primary" onClick={start}>开始</Button>
-        <Button color="primary" className='rolling-text-right' onClick={reset}>重置</Button>
+        <Button color="primary" className="rolling-text-right" onClick={reset}>重置</Button>
       </View>
     </View>
   )
@@ -128,22 +128,22 @@ export default function RollingTextDemo() {
   return (
     <Page title="RollingText 翻滚文本动效" className="rolling-text">
       <Block title="基础用法">
-        <BasicRollingText/>
+        <BasicRollingText />
       </Block>
       <Block title="设置翻滚方向">
-        <SetDirectionRollingText/>
+        <SetDirectionRollingText />
       </Block>
       <Block title="设置各数位停止顺序">
-        <StopOrderRollingText/>
+        <StopOrderRollingText />
       </Block>
       <Block title="翻转非数字内容">
-        <TextListRollingText/>
+        <TextListRollingText />
       </Block>
       <Block title="自定义样式">
-        <CustomerRollingText/>
+        <CustomerRollingText />
       </Block>
       <Block title="手动控制">
-        <HandRollingText/>
+        <HandRollingText />
       </Block>
     </Page>
   )
