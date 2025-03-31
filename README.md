@@ -98,14 +98,6 @@ function Index() {
 | [vant-theme](https://github.com/Aisen60/vant-theme)       | Vant 在线主题预览工具                                    |
 | [@antmjs/vantui](https://github.com/antmjs/vantui)        | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
 
-## 赞助者
-
-开发一个 UI 组件库是一项耗时的工作，尤其是要多端适配。Taroify 经常为此肝到深夜 ……
-
-如果您认为 Taroify 帮助到了您的开发工作，您可以捐赠 Taroify 的研发工作，捐赠无门槛，哪怕是一杯可乐也好（相信这比打赏主播更有意义）。
-
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechatpay.png" width="260" style="width: 260px;" />
-
 ### 支持者
 
 <a href="https://github.com/Yorksh1re">@Yorksh1re</a>
