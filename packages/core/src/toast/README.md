@@ -224,7 +224,7 @@ function MultipleToastClose() {
 | Toast.success     | _options \| message_ | _string \| undefined_ | 展示成功提示，返回 Toast 实例标识符 |
 | Toast.fail        | _options \| message_ | _string \| undefined_ | 展示失败提示，返回 Toast 实例标识符 |
 | Toast.close       | _selector? \| id?_   | -      | 关闭提示，不传参时关闭所有提示，传入实例标识符时关闭指定提示 |
-| Toast.allowMultiple | _boolean_          | -      | 允许同时存在多个 Toast 提示，默认为 `false`    |
+| Toast.allowMultiple `v0.7.0` | _boolean_          | -      | 允许同时存在多个 Toast 提示，默认为 `false`    |
 
 ## 主题定制
 
