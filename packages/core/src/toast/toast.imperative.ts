@@ -5,6 +5,8 @@ import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
 import { type ToastOptions, type ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
 import Toast from "./toast"
 
+let _isMultipleAllowed = false
+
 const initialToastOptions: ToastOptions = {
   className: undefined,
   style: undefined,
@@ -39,41 +41,71 @@ function parseToastOptions(message: ReactNode | ToastOptions): ToastOptions {
   return _.assign({}, initialToastOptions, defaultToastOptions, options)
 }
 
-const toastView = document.createElement("view")
+// Set whether multiple toasts are allowed
+export function allowMultiple(allow: boolean) {
+  _isMultipleAllowed = allow
+}
 
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
-  if (selector && toastSelectorSet.has(`${getPagePath()}__${selector}`)) {
-    toastEvents.trigger("open", {
-      selector,
-      ...restOptions,
-    })
-  } else {
+
+  // Check if a toast with this selector already exists
+  const hasExistingToast = selector && toastSelectorSet.has(`${getPagePath()}__${selector}`)
+
+  // If multiple toasts are allowed, or no existing toast with this selector
+  if ((_isMultipleAllowed && !hasExistingToast) || (!_isMultipleAllowed && !hasExistingToast)) {
+    // Create a new toast view for each instance if multiple are allowed
+    const toastView = document.createElement("view")
     const onTransitionExited = restOptions.onTransitionExited
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
       unmountPortal(toastView)
     }
+
+    const selectorId =
+      selector === DEFAULT_TOAST_SELECTOR ? DEFAULT_TOAST_SELECTOR_CREATE : selector
+
+    // If multiple toasts are allowed, append a unique identifier to ensure uniqueness
+    const uniqueId = _isMultipleAllowed ? `${selectorId}-${Date.now()}` : selectorId
+
     mountPortal(
       createElement(Toast, {
         ...restOptions,
         children: restOptions.message,
         defaultOpen: true,
-        id: selector === DEFAULT_TOAST_SELECTOR ? DEFAULT_TOAST_SELECTOR_CREATE : selector,
+        id: uniqueId,
       }) as unknown as TaroNode,
       toastView,
     )
+
+    // Return the uniqueId so it can be used to close this specific toast
+    return uniqueId
   }
+
+  // Update existing toast
+  toastEvents.trigger("open", {
+    selector,
+    ...restOptions,
+  })
+  // Return the selector for the existing toast
+  return selector
 }
 
 export function createToast(type: ToastType) {
   return (args: string | Omit<ToastOptions, "type">) => {
     const options = parseToastOptions(args)
     options.type = type
-    openToast(options)
+    return openToast(options)
   }
 }
 
 export function closeToast(selector?: string) {
-  toastEvents.trigger("close", selector ? `#${selector}` : defaultToastOptions.selector)
+  if (selector) {
+    // 处理传入的是实例 ID 的情况，转换为选择器格式
+    const selectorWithPrefix = selector.startsWith("#") ? selector : `#${selector}`
+    toastEvents.trigger("close", selectorWithPrefix)
+  } else {
+    // 未传参数时关闭默认 Toast
+    toastEvents.trigger("close", defaultToastOptions.selector)
+  }
 }

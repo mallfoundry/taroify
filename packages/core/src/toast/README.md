@@ -122,6 +122,70 @@ Toast.open({
 <Toast open position="bottom">底部展示</Toast>
 ```
 
+### 多例模式
+
+Toast 默认采用单例模式，即同一时间只会存在一个 Toast。通过调用 `Toast.allowMultiple(true)` 可以在页面中同时存在多个 Toast 实例。
+
+```tsx
+import { Cell, Toast } from "@taroify/core"
+
+function MultipleToast() {
+  return (
+    <>
+      <Cell 
+        title="允许多个实例" 
+        clickable 
+        isLink 
+        onClick={() => {
+          Toast.allowMultiple(true)
+          // 同时展示多个 Toast
+          Toast.success("成功提示")
+          setTimeout(() => {
+            Toast.fail("失败提示")
+          }, 1000)
+        }} 
+      />
+    </>
+  )
+}
+```
+
+### 关闭特定 Toast 实例
+
+在多例模式下，`Toast.open()`、`Toast.success()`、`Toast.fail()` 和 `Toast.loading()` 方法会返回一个唯一标识符，可以使用该标识符来关闭特定的 Toast 实例。
+
+```tsx
+import { Cell, Toast } from "@taroify/core"
+
+function MultipleToastClose() {
+  return (
+    <>
+      <Cell 
+        title="关闭特定 Toast 实例" 
+        clickable 
+        isLink 
+        onClick={() => {
+          // 启用多例模式
+          Toast.allowMultiple(true)
+          
+          // 创建并保存 Toast 实例标识符
+          const toast1 = Toast.success("成功提示")
+          const toast2 = Toast.loading("加载中...")
+          
+          // 3秒后只关闭成功提示，保留加载提示
+          setTimeout(() => {
+            // 直接使用 close 方法关闭特定的 Toast
+            if (toast1) {
+              Toast.close(toast1)
+            }
+          }, 3000)
+        }} 
+      />
+    </>
+  )
+}
+```
+
 ## API
 
 ### Props
@@ -153,12 +217,14 @@ Toast.open({
 
 ### 方法
 
-| 方法名        | 参数                 | 返回值 | 介绍         |
-| ------------- | -------------------- | ------ | ------------ |
-| Toast.open    | _options \| message_ | -      | 展示提示     |
-| Toast.loading | _options \| message_ | -      | 展示加载提示 |
-| Toast.success | _options \| message_ | -      | 展示成功提示 |
-| Toast.fail    | _options \| message_ | -      | 展示失败提示 |
+| 方法名            | 参数                 | 返回值 | 介绍                                           |
+| ----------------- | -------------------- | ------ | ---------------------------------------------- |
+| Toast.open        | _options \| message_ | _string \| undefined_ | 展示提示，返回 Toast 实例标识符  |
+| Toast.loading     | _options \| message_ | _string \| undefined_ | 展示加载提示，返回 Toast 实例标识符 |
+| Toast.success     | _options \| message_ | _string \| undefined_ | 展示成功提示，返回 Toast 实例标识符 |
+| Toast.fail        | _options \| message_ | _string \| undefined_ | 展示失败提示，返回 Toast 实例标识符 |
+| Toast.close       | _selector? \| id?_   | -      | 关闭提示，不传参时关闭所有提示，传入实例标识符时关闭指定提示 |
+| Toast.allowMultiple | _boolean_          | -      | 允许同时存在多个 Toast 提示，默认为 `false`    |
 
 ## 主题定制
 
