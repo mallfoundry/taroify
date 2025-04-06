@@ -12,6 +12,42 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.7.0
+
+`2025-04-06`
+
+**Feature**
+
+- Divider
+
+  - 添加 `type` 属性使分割线垂直展示 [909](https://github.com/mallfoundry/taroify/pull/909) [@Pilotager](https://github.com/Pilotager)
+
+- TextEllipsis
+
+  - 增加 `toggle` 方法 [915](https://github.com/mallfoundry/taroify/pull/915) [@Pilotager](https://github.com/Pilotager)
+
+- Toast
+
+  - 增加 `Toast.allowMultiple()` 方法 [921](https://github.com/mallfoundry/taroify/pull/921) [@Pilotager](https://github.com/Pilotager)
+
+- Dialog
+
+  - 实现多实例 [922](https://github.com/mallfoundry/taroify/pull/922) [@Pilotager](https://github.com/Pilotager)
+
+**Bug Fixes**
+
+- ActionBar
+
+  - 优化文字换行 [899](https://github.com/mallfoundry/taroify/pull/899) [@Pilotager](https://github.com/Pilotager)
+
+- Toast
+
+  - 微信小程序Toast或Dialog在特定的回调里报错 [917](https://github.com/mallfoundry/taroify/pull/917) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- Biome 格式化 [904](https://github.com/mallfoundry/taroify/pull/904) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.6.4-alpha.0
 
 `2025-02-23`

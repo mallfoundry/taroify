@@ -119,7 +119,7 @@ return (
 
 | 方法名 | 说明     | 参数 | 返回值 |
 | :----- | -------- | ---- | ------ |
-| toggle  | 切换文本的展开状态，传 true 为展开，false 为收起，不传参为切换 | _expanded?: boolean_   | -      |
+| toggle `v0.7.0`  | 切换文本的展开状态，传 true 为展开，false 为收起，不传参为切换 | _expanded?: boolean_   | -      |
 
 ## 主题定制
 

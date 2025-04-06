@@ -80,7 +80,7 @@ import { Divider } from "@taroify/core"
 |----------|--------------|-----------|---------|
 | dashed   | 是否使用虚线       | _boolean_ | `false` |
 | hairline | 是否使用 0.5px 线 | _boolean_ | `true`  |
-| type `v0.6.5` | 水平还是垂直类型 | _horizontal \| vertical_ | `horizontal`  |
+| type `v0.7.0` | 水平还是垂直类型 | _horizontal \| vertical_ | `horizontal`  |
 
 ### Divider.Text Props
 
