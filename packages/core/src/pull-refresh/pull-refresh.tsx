@@ -144,15 +144,15 @@ function PullRefresh(props: PullRefreshProps) {
       const pullDistance = +(pullDistanceProp || headHeight)
       let easedDistance = distance
 
-      if (distance > pullDistance) {
-        if (distance < pullDistance * 2) {
-          easedDistance = pullDistance + (distance - pullDistance) / 2
+      if (easedDistance > pullDistance) {
+        if (easedDistance < pullDistance * 2) {
+          easedDistance = pullDistance + (easedDistance - pullDistance) / 2
         } else {
-          easedDistance = pullDistance * 1.5 + (distance - pullDistance * 2) / 4
+          easedDistance = pullDistance * 1.5 + (easedDistance - pullDistance * 2) / 4
         }
       }
 
-      return Math.round(distance)
+      return Math.round(easedDistance)
     },
     [headHeight, pullDistanceProp],
   )
