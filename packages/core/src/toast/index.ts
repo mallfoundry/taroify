@@ -7,6 +7,7 @@ import {
   openToast,
   resetDefaultToastOptions,
   setDefaultToastOptions,
+  allowMultiple,
 } from "./toast.imperative"
 import type { ToastOptions } from "./toast.shared"
 export type { ToastType, ToastPosition, ToastThemeVars, ToastOptions } from "./toast.shared"
@@ -18,17 +19,19 @@ interface ToastInterface {
 
   open: typeof openToast
 
-  loading(option: ReactNode | Omit<ToastOptions, "type">): void
+  loading(option: ReactNode | Omit<ToastOptions, "type">): string | undefined
 
-  success(option: ReactNode | Omit<ToastOptions, "type">): void
+  success(option: ReactNode | Omit<ToastOptions, "type">): string | undefined
 
-  fail(option: ReactNode | Omit<ToastOptions, "type">): void
+  fail(option: ReactNode | Omit<ToastOptions, "type">): string | undefined
 
   close: typeof closeToast
 
   setDefaultOptions: typeof setDefaultToastOptions
 
   resetDefaultOptions: typeof resetDefaultToastOptions
+
+  allowMultiple: typeof allowMultiple
 }
 
 const Toast = ToastComponent as ToastInterface
@@ -40,5 +43,6 @@ Toast.fail = createToast("fail")
 Toast.close = closeToast
 Toast.setDefaultOptions = setDefaultToastOptions
 Toast.resetDefaultOptions = resetDefaultToastOptions
+Toast.allowMultiple = allowMultiple
 
 export default Toast
