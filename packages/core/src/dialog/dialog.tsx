@@ -293,13 +293,23 @@ function Dialog(props: DialogProps) {
     [onClose, setOpen],
   )
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    rootSelectorRef.current && dialogSelectorSet.add(rootSelectorRef.current)
-    return () => {
-      rootSelectorRef.current && dialogSelectorSet.delete(rootSelectorRef.current)
+  const { selector } = useMemo(() => {
+    return {
+      selector: props?.id
+        ? prependPageSelector(getElementSelector(props?.id))
+        : prependPageSelector(`${getElementSelector(id)}`),
     }
-  }, [])
+  }, [id, props?.id])
+
+  useEffect(() => {
+    if (selector) {
+      dialogSelectorSet.add(selector)
+      return () => {
+        dialogSelectorSet.delete(selector)
+      }
+    }
+    return undefined
+  }, [selector])
 
   useDialogOpen(
     ({

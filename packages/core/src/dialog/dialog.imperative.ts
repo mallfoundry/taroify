@@ -20,6 +20,9 @@ const DEFAULT_DIALOG_SELECTOR = "#dialog"
 
 const defaultDialogOptions: DialogOptions = {}
 
+// Store for dialog views and their unmount functions
+const dialogViewMap = new Map<string, { view: any; unmountFn: () => void }>()
+
 // First, Once
 resetDefaultDialogOptions()
 
@@ -38,25 +41,47 @@ function parseDialogOptions(message: ReactNode | DialogOptions): DialogOptions {
   return _.assign({}, initialDialogOptions, defaultDialogOptions, options)
 }
 
-const dialogView = document.createElement("view")
+function generateDialogId(selector: string = DEFAULT_DIALOG_SELECTOR): string {
+  return `${getPagePath()}__${selector}__${Date.now()}`
+}
 
 export function openDialog(args: ReactNode | DialogOptions) {
   const { selector = "#dialog", ...restOptions } = parseDialogOptions(args)
-  if (selector && dialogSelectorSet.has(`${getPagePath()}__${selector}`)) {
+  const pageSelector = `${getPagePath()}__${selector}`
+
+  if (selector && dialogSelectorSet.has(pageSelector)) {
     dialogEvents.trigger("open", {
       selector,
       ...restOptions,
     })
   } else {
+    const dialogId = generateDialogId(selector)
+    const dialogView = document.createElement("view")
+
     const onTransitionExited = restOptions.onTransitionExited
+
+    const unmountFn = () => {
+      unmountPortal(dialogView)
+      dialogViewMap.delete(dialogId)
+    }
+
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
-      unmountPortal(dialogView)
+      unmountFn()
     }
+
     mountPortal(
-      createElement(Dialog, { ...restOptions, defaultOpen: true }) as unknown as TaroNode,
+      createElement(Dialog, {
+        ...restOptions,
+        defaultOpen: true,
+        id: dialogId,
+      }) as unknown as TaroNode,
       dialogView,
     )
+
+    dialogViewMap.set(dialogId, { view: dialogView, unmountFn })
+
+    return dialogId
   }
 }
 
