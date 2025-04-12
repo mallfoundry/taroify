@@ -1,0 +1,14 @@
+@import './variables';
+
+.#{$component-prefix}skeleton__paragraph {
+  height: $skeleton-paragraph-height;
+  background: $skeleton-paragraph-background;
+
+  &--round {
+    border-radius: var(--border-radius-max, $border-radius-max);
+  }
+
+  &:not(:first-child) {
+    margin-top: $skeleton-paragraph-margin-top;
+  }
+}

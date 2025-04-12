@@ -1,0 +1,21 @@
+@import './variables';
+
+.#{$component-prefix}skeleton__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $skeleton-image-size;
+  height: $skeleton-image-size;
+  background: var(--active-color, $active-color);
+
+  &--round {
+    border-radius: $skeleton-image-radius;
+  }
+
+  &-icon {
+    width: calc($skeleton-image-size / 2);
+    height: calc($skeleton-image-size / 2);
+    font-size: calc($skeleton-image-size / 2);
+    color: var(--gray-5, $gray-5);
+  }
+}
