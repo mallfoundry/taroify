@@ -1,0 +1,17 @@
+@import './variables';
+
+.#{$component-prefix}skeleton__avatar {
+  flex-shrink: 0;
+  width: $skeleton-avatar-size;
+  height: $skeleton-avatar-size;
+  margin-right: var(--padding-md, $padding-md);
+  background: $skeleton-avatar-background;
+
+  &--round {
+    border-radius: var(--border-radius-max, $border-radius-max);
+  }
+
+  &-avatar+&__content {
+    padding-top: var(--padding-xs, $padding-xs);
+  }
+}

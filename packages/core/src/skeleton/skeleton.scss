@@ -1,65 +1,20 @@
 @import './variables';
 
 .#{$component-prefix}skeleton {
-  height: $skeleton-height;
-  background: $skeleton-background-color;
+  display: flex;
+  padding: 0 $padding-md;
 
-  &--circle {
-    width: $skeleton-circle-width;
-    height: $skeleton-circle-height;
-    border-radius: $skeleton-circle-border-radius;
+  &__content {
+    width: 100%;
   }
 
-  &--pulse {
-    animation: #{$component-prefix}skeleton-pulse //
-    $skeleton-pulse-animation-duration //
-    $skeleton-pulse-animation-timing-function //
-    $skeleton-pulse-animation-delay infinite;
-  }
-
-  &--wave {
-    position: relative;
-    display: block;
-    overflow: hidden;
-
-    &::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      content: "";
-      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
-      transform: translateX(-100%);
-      animation: #{$component-prefix}skeleton-wave //
-      $skeleton-wave-animation-duration //
-      $skeleton-wave-animation-timing-function //
-      $skeleton-wave-animation-delay infinite;
-    }
+  &--animate {
+    animation: skeleton-blink $skeleton-duration ease-in-out infinite;
   }
 }
 
-@keyframes #{$component-prefix}skeleton-pulse {
-  0% {
-    opacity: 1;
-  }
+@keyframes skeleton-blink {
   50% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes #{$component-prefix}skeleton-wave {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    /* +0.5s of delay between each loop */
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(100%);
+    opacity: 0.6;
   }
 }

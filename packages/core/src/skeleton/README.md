@@ -14,26 +14,56 @@ import { Skeleton } from "@taroify/core"
 
 ### 基础用法
 
+通过 `title` 属性显示标题占位图，通过 `row` 属性配置占位段落行数。
+
 ```tsx
-<Skeleton variant="circle" />
-<WhiteSpace />
-<Skeleton style={{ width: "40%" }} />
-<WhiteSpace size="20px" />
-<Skeleton />
-<WhiteSpace />
-<Skeleton />
-<WhiteSpace />
-<Skeleton style={{ width: "60%" }} />
+<Skeleton title row={3} />
 ```
 
-### 动画效果
+### 显示头像
+
+通过 `avatar` 属性显示头像占位图。
 
 ```tsx
-<Skeleton />
-<WhiteSpace />
-<Skeleton animation={false} />
-<WhiteSpace />
-<Skeleton animation="wave" />
+<Skeleton title avatar row={3} />
+```
+
+### 展示子组件
+
+将 `loading` 属性设置成 `false` 表示内容加载完成，此时会隐藏占位图，并显示 `Skeleton` 的子组件。
+
+```tsx
+<Skeleton title avatar row={3} loading={loading}>
+  <View>实际内容</View>
+</Skeleton>
+```
+
+### 自定义展示内容
+
+通过 `template` 属性完成自定义内容的展示。
+
+```tsx
+const template = () => {
+  return (
+    <View
+      style={{ display: "flex", width: "100%" }}
+    >
+      <Skeleton.Image />
+      <View
+        style={{ flex: 1, marginLeft: 16 }}
+      >
+        <Skeleton.Paragraph rowWidth="60%" />
+        <Skeleton.Paragraph />
+        <Skeleton.Paragraph />
+        <Skeleton.Paragraph />
+        <Skeleton.Paragraph />
+        <Skeleton.Paragraph />
+      </View>
+    </View>
+  )
+}
+
+<Skeleton template={template}/>
 ```
 
 ## API
@@ -42,8 +72,45 @@ import { Skeleton } from "@taroify/core"
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| variant | 骨架屏形状，可选值为 `circle` | _string_ | `rect` |
-| animation | 动画效果，可选值为 `wave` | _string \| boolean_ | `pulse` |
+| row | 段落占位图行数 | _number \| string_ | `0` |
+| rowWidth | 段落占位图宽度，可传数组来设置每一行的宽度 | _number \| string \| (number \| string)[]_ | `100%` |
+| title | 是否显示标题占位图 | _boolean_ | `false` |
+| avatar | 是否显示头像占位图 | _boolean_ | `false` |
+| loading | 是否显示骨架屏，传 `false` 时会展示子组件内容 | _boolean_ | `true` |
+| animate | 是否开启动画 | _boolean_ | `true` |
+| round | 是否将标题和段落显示为圆角风格 | _boolean_ | `false` |
+| titleWidth | 标题占位图宽度 | _number \| string_ | `40%` |
+| avatarSize | 头像占位图大小 | _number \| string_ | `32px` |
+| avatarShape | 头像占位图形状，可选值为 `square` | _square \| round_ | `round` |
+| template | 骨架屏自定义 | _ReactNode_ | `-` |
+
+### Skeleton.Paragraph Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| round | 是否将段落显示为圆角风格 | _boolean_ | `false` |
+| rowWidth | 段落占位图宽度 | _number \| string_ | `100%` |
+
+### Skeleton.Title Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| round | 是否将段落显示为圆角风格 | _boolean_ | `false` |
+| titleWidth | 标题占位图宽度 | _number \| string_ | `100%` |
+
+### Skeleton.Avatar Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| avatarSize | 头像占位图大小 | _number \| string_ | `32px` |
+| avatarShape | 头像占位图形状，可选值为 `square` | _square \| round_ | `round` |
+
+### Skeleton.Image Props
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| imageSize | 图片占位图大小 | _number \| string_ | `32px` |
+| imageShape | 图片占位图形状，可选值为 `square` | _square \| round_ | `round` |
 
 ## 主题定制
 
@@ -51,17 +118,14 @@ import { Skeleton } from "@taroify/core"
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider](/components/config-provider/) 组件。
 
-| 名称                                         | 默认值                           | 描述  |
-|--------------------------------------------|-------------------------------|-----|
-| --skeleton-height                          | _16px * $hd_                  | -   |
-| --skeleton-background-color                | _var(--active-color)_         | -   |
-| --skeleton-circle-size                     | _32px * $hd_                  | -   |
-| --skeleton-circle-width                    | _var(--skeleton-circle-size)_ | -   |
-| --skeleton-circle-height                   | _var(--skeleton-circle-size)_ | -   |
-| --skeleton-circle-border-radius            | _var(--border-radius-max)_    | -   |
-| --skeleton-pulse-animation-duration        | _1.5s_                        | -   |
-| --skeleton-pulse-animation-timing-function | _ease-in-out_                 | -   |
-| --skeleton-pulse-animation-delay           | _0.5s_                        | -   |
-| --skeleton-wave-animation-duration         | _1.6s_                        | -   |
-| --skeleton-wave-animation-timing-function  | _linear_                      | -   |
-| --skeleton-wave-animation-delay            | _0.5s_                        | -   |
+| 名称                                         | 默认值                         | 描述 |
+|---------------------------------------------|-------------------------------|-----|
+| --skeleton-avatar-size                      | _32px * $hd_                  | -   |
+| --skeleton-avatar-background                | _var(--active-color)_         | -   |
+| --skeleton-duration                         | _1.2s_                        | -   |
+| --skeleton-paragraph-height                 | _16px * $hd_                  | -   |
+| --skeleton-paragraph-background             | _var(--active-color)_         | -   |
+| --skeleton-title-width                      | _40%_                         | -   |
+| --skeleton-paragraph-margin-top             | _var(--padding-xs)_           | -   |
+| --skeleton-image-size                       | _96px * $hd_                  | -   |
+| --skeleton-image-radius                     | _24px * $hd_                  | -   |

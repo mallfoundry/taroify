@@ -1,0 +1,12 @@
+@import './variables';
+
+.#{$component-prefix}skeleton__title {
+  width: $skeleton-title-width;
+  height: $skeleton-paragraph-height;
+  margin: 0;
+  background: $skeleton-paragraph-background;
+
+  &--round {
+    border-radius: var(--border-radius-max, $border-radius-max);
+  }
+}

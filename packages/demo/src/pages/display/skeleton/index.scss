@@ -5,4 +5,30 @@
   .#{$demo-prefix}page__content {
     background: #fff;
   }
+
+  .#{$demo-prefix}block__content {
+    padding: 0;
+  }
+
+  .demo-switch {
+    margin-left: 32px;
+  }
+
+  .demo-preview {
+    padding: 0 32px;
+    display: flex;
+  }
+
+  .demo-image {
+    width: 64px;
+    height: 64px;
+    margin-right: 32px;
+    flex-shrink: 0;
+  }
+
+  .demo-content {
+    padding-top: 12px;
+    font-size: 28px;
+    line-height: 40px;
+  }
 }

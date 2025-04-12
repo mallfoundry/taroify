@@ -1,15 +1,12 @@
 @import "../styles/prefix";
 @import "../styles/variables";
 
-$skeleton-height: var(--skeleton-height, 16px * $hd);
-$skeleton-background-color: var(--skeleton-background-color, var(--active-color, $active-color));
-$skeleton-circle-size: var(--skeleton-circle-size, 32px * $hd);
-$skeleton-circle-width: var(--skeleton-circle-width, $skeleton-circle-size);
-$skeleton-circle-height: var(--skeleton-circle-height, $skeleton-circle-size);
-$skeleton-circle-border-radius: var(--skeleton-circle-border-radius, var(--border-radius-max, $border-radius-max));
-$skeleton-pulse-animation-duration: var(--skeleton-pulse-animation-duration, 1.5s);
-$skeleton-pulse-animation-timing-function: var(--skeleton-pulse-animation-timing-function, ease-in-out);
-$skeleton-pulse-animation-delay: var(--skeleton-pulse-animation-delay, 0.5s);
-$skeleton-wave-animation-duration: var(--skeleton-wave-animation-duration, 1.6s);
-$skeleton-wave-animation-timing-function: var(--skeleton-wave-animation-timing-function, linear);
-$skeleton-wave-animation-delay: var(--skeleton-wave-animation-delay, 0.5s);
+$skeleton-avatar-size: var(--skeleton-avatar-size, 32px * $hd);
+$skeleton-avatar-background: var(--skeleton-avatar-background, var(--active-color, $active-color));
+$skeleton-duration: var(--skeleton-duration, 1.2s);
+$skeleton-paragraph-height: var(--skeleton-paragraph-height, 16px * $hd);
+$skeleton-paragraph-background: var(--skeleton-paragraph-background, var(--active-color, $active-color));
+$skeleton-title-width: var(--skeleton-title-width, 40%);
+$skeleton-paragraph-margin-top: var(--skeleton-paragraph-margin-top, var(--padding-xs, $padding-xs));
+$skeleton-image-size: var(--skeleton-image-size, 96px * $hd);
+$skeleton-image-radius: var(--skeleton-image-radius, 24px * $hd);
