@@ -1,6 +1,6 @@
 import * as React from "react"
 import { forwardRef, type CSSProperties, useMemo, useState, useRef, useEffect } from "react"
-import { getSystemInfoSync, getEnv } from "@tarojs/taro"
+import { getWindowInfo, getEnv } from "@tarojs/taro"
 import { View, ScrollView } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
@@ -44,7 +44,7 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
   const [scrollContentTop, setScrollContentTop] = useState(0)
   const touch = useTouch()
 
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
+  const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
 
   const ease = (moveY: number): number => {
     const absDistance = Math.abs(moveY)

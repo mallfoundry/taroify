@@ -45,7 +45,7 @@ FloatingPanel 的默认高度为 `100px`，用户可以拖动来展开面板，�
 
 ```tsx
 function CustomAnchors() {
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
+  const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
 
   const anchors = useMemo(
     () => [200, Math.round(0.4 * windowHeight), Math.round(0.7 * windowHeight)],

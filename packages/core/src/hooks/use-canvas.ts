@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, type RefObject } from "react"
-import { getEnv, nextTick, createSelectorQuery, getSystemInfoSync } from "@tarojs/taro"
+import { getEnv, nextTick, createSelectorQuery, getWindowInfo } from "@tarojs/taro"
 import { getRect } from "../utils/dom/rect"
 import useMemoizedFn from "./use-memoized-fn"
 
@@ -11,7 +11,7 @@ function useCanvas(canvasId: string, canvasRef: RefObject<any>, options: UseCanv
   const [loaded, setLoaded] = useState(false)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
-  const ratio = useMemo(() => getSystemInfoSync().pixelRatio || 1, [])
+  const ratio = useMemo(() => getWindowInfo().pixelRatio || 1, [])
   const { onLoaded: onLoadedProp } = options
   const onLoaded = useMemoizedFn((a: HTMLCanvasElement, b: CanvasRenderingContext2D) =>
     onLoadedProp?.(a, b),

@@ -8,7 +8,7 @@ import {
   useState,
   useEffect,
 } from "react"
-import { getSystemInfoSync, nextTick } from "@tarojs/taro"
+import { getWindowInfo, nextTick } from "@tarojs/taro"
 import { View } from "@tarojs/components"
 import type { ITouchEvent } from "@tarojs/components/types/common"
 import { cloneIconElement, isIconElement } from "@taroify/icons/utils"
@@ -60,8 +60,8 @@ const FloatingBubble: FC<FloatingBubbleProps> = (props) => {
   const prevX = useRef(0)
   const prevY = useRef(0)
 
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
-  const windowWidth = useMemo(() => getSystemInfoSync().windowWidth, [])
+  const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
+  const windowWidth = useMemo(() => getWindowInfo().windowWidth, [])
 
   const boundary = useMemo<FloatingBubbleBoundary>(() => {
     return {
