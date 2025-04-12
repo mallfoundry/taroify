@@ -1,4 +1,4 @@
-import { getSystemInfoSync } from "@tarojs/taro"
+import { getWindowInfo } from "@tarojs/taro"
 import * as _ from "lodash"
 import type { CSSProperties } from "react"
 
@@ -42,7 +42,7 @@ function getRootFontSize() {
 function convertRpx(value: string) {
   let valueCache = value
   valueCache = valueCache.replace(/rpx/g, "")
-  const { windowWidth } = getSystemInfoSync()
+  const { windowWidth } = getWindowInfo()
   const pixelRatio = 750 / windowWidth
   return +valueCache / pixelRatio
 }

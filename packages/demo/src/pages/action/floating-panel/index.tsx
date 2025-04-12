@@ -1,6 +1,6 @@
 import { FloatingPanel, Cell, Tabs } from "@taroify/core"
 import { useState, useMemo } from "react"
-import { getSystemInfoSync } from "@tarojs/taro"
+import { getWindowInfo } from "@tarojs/taro"
 import Page from "../../../components/page"
 
 import "./index.scss"
@@ -28,7 +28,7 @@ function BasicFloatingPanel() {
 }
 
 function CustomAnchors() {
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
+  const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
 
   const anchors = useMemo(
     () => [200, Math.round(0.4 * windowHeight), Math.round(0.7 * windowHeight)],

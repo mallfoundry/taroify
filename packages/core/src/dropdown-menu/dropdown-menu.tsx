@@ -1,7 +1,7 @@
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
-import { getSystemInfoSync, usePageScroll } from "@tarojs/taro"
+import { getWindowInfo, usePageScroll } from "@tarojs/taro"
 import classnames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
@@ -162,7 +162,7 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   const toggleKeyRef = useRef<Key>()
 
-  const windowHeight = useMemo(() => getSystemInfoSync().windowHeight, [])
+  const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
 
   const updateItemOffset = useCallback(() => {
     getRect(barRef).then((rect) => {

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { getSystemInfoSync } from "@tarojs/taro"
+import { getWindowInfo } from "@tarojs/taro"
 import { render } from "@testing-library/react"
 import FloatingPanel from "../index"
 import { prefixClassname } from "../../styles"
@@ -13,7 +13,7 @@ describe("<FloatingPanel />", () => {
 
     const el = container.querySelector(`.${prefixClassname("floating-panel")}`) as HTMLDivElement
 
-    const height = Math.round(getSystemInfoSync().windowHeight * 0.6)
+    const height = Math.round(getWindowInfo().windowHeight * 0.6)
 
     expect(el.style.height).toBe(`${height}px`)
 

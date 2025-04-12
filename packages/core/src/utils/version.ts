@@ -1,4 +1,4 @@
-import { getSystemInfoSync } from "@tarojs/taro"
+import { getAppBaseInfo } from "@tarojs/taro"
 import { inQQ, inWechat } from "./base"
 
 function compareVersion(o1: string, o2: string) {
@@ -29,7 +29,7 @@ function compareVersion(o1: string, o2: string) {
 }
 
 function gte(version: string) {
-  const { SDKVersion } = getSystemInfoSync()
+  const { SDKVersion } = getAppBaseInfo()
   return SDKVersion && compareVersion(SDKVersion, version) >= 0
 }
 

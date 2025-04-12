@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useMemo, useRef, useState, useEffect } from "react"
 import { Canvas, View } from "@tarojs/components"
-import { getEnv, getSystemInfoSync } from "@tarojs/taro"
+import { getEnv, getWindowInfo } from "@tarojs/taro"
 import cls from "classnames"
 import { useCanvas } from "../hooks"
 import { prefixClassname } from "../styles"
@@ -80,7 +80,7 @@ function Watermark(props: WatermarkProps) {
         }
         image.src = imageProp
       } else {
-        const ratio = getSystemInfoSync().pixelRatio || 1
+        const ratio = getWindowInfo().pixelRatio || 1
         canvas.width = width * ratio
         canvas.height = height * ratio
         ctx.scale(ratio, ratio)
