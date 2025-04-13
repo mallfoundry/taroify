@@ -104,10 +104,14 @@ import { Cell } from "@taroify/core"
 | rightIcon                           | 右侧[图标](/components/icon)或[图片](/components/image) | _ReactNode_        | -       |
 | bordered                            | 是否显示内边框                                          | _boolean_          | `true`  |
 | clickable                           | 是否开启点击反馈                                        | _boolean_          | `false` |
-| isLink <br>`v0.1.1-alpha.5`         | 是否展示右侧箭头并开启点击反馈                          | _boolean_          | `false` |
-| arrowDirection <br>`v0.1.1-alpha.5` | 箭头方向，可选值为 `left` `right` `up` `down`           | _string_           | `right` |
+| isLink `v0.1.1-alpha.5`         | 是否展示右侧箭头并开启点击反馈                          | _boolean_          | `false` |
+| arrowDirection `v0.1.1-alpha.5` | 箭头方向，可选值为 `left` `right` `up` `down`           | _string_           | `right` |
 | required                            | 是否显示表单必填星号                                    | _boolean_          | `false` |
 | align                               | 对齐方式，可选值为 `start` `center` `end`               | _string_           | -       |
+| titleStyle `v0.8.0`                 | 左侧标题额外样式               | _CSSProperties_           | -       |
+| titleClass `v0.8.0`                 | 左侧标题额外类名               | _string_           | -       |
+| valueClass `v0.8.0`                 | 右侧内容额外类名               | _string_           | -       |
+| briefClass  `v0.8.0`                | 标题下方的描述信息额外类名               | _string_           | -       |
 
 ### Cell Events
 

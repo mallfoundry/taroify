@@ -8,10 +8,11 @@ import { prefixClassname } from "../styles"
 interface CellValueProps extends ViewProps {
   alone?: boolean
   children: ReactNode
+  valueClass?: string
 }
 
 function CellValue(props: CellValueProps) {
-  const { className, alone, ...restProps } = props
+  const { className, alone, valueClass, ...restProps } = props
   return (
     <View
       className={classNames(
@@ -20,6 +21,7 @@ function CellValue(props: CellValueProps) {
           [prefixClassname("cell__value--alone")]: alone,
         },
         className,
+        valueClass,
       )}
       {...restProps}
     />

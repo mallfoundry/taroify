@@ -7,11 +7,17 @@ import { prefixClassname } from "../styles"
 
 interface CellBriefProps extends ViewProps {
   children: ReactNode
+  briefClass?: string
 }
 
 function CellBrief(props: CellBriefProps) {
-  const { className, ...restProps } = props
-  return <View className={classNames(prefixClassname("cell__brief"), className)} {...restProps} />
+  const { className, briefClass, ...restProps } = props
+  return (
+    <View
+      className={classNames(prefixClassname("cell__brief"), className, briefClass)}
+      {...restProps}
+    />
+  )
 }
 
 export default CellBrief
