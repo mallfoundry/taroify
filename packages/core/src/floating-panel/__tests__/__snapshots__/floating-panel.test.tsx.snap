@@ -8,19 +8,21 @@ exports[`<FloatingPanel /> should drag adsorption effect when anchors props is [
   >
     <taro-view-core
       class="taroify-floating-panel__header"
+      data-id="floating-panel__header"
     >
       <taro-view-core
         class="taroify-floating-panel__header-bar"
       />
     </taro-view-core>
-    <taro-view-core
+    <taro-scroll-view-core
       class="taroify-floating-panel__content"
+      scroll-y="true"
     >
       内容
       <taro-view-core
         class="taroify-safe-area taroify-safe-area--bottom"
       />
-    </taro-view-core>
+    </taro-scroll-view-core>
   </taro-view-core>
 </DocumentFragment>
 `;
@@ -33,19 +35,21 @@ exports[`<FloatingPanel /> should minHeight 100 and maxHeight 0.6 innerHeight wh
   >
     <taro-view-core
       class="taroify-floating-panel__header"
+      data-id="floating-panel__header"
     >
       <taro-view-core
         class="taroify-floating-panel__header-bar"
       />
     </taro-view-core>
-    <taro-view-core
+    <taro-scroll-view-core
       class="taroify-floating-panel__content"
+      scroll-y="true"
     >
       内容
       <taro-view-core
         class="taroify-safe-area taroify-safe-area--bottom"
       />
-    </taro-view-core>
+    </taro-scroll-view-core>
   </taro-view-core>
 </DocumentFragment>
 `;
