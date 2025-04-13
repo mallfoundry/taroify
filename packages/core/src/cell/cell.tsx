@@ -12,13 +12,14 @@ export interface CellProps extends CellBaseProps {
 }
 
 function Cell(props: CellProps) {
-  const { title, brief, children, ...restProps } = props
+  const { title, brief, children, titleStyle, titleClass, valueClass, briefClass, ...restProps } =
+    props
   return (
     <CellBase {...restProps}>
       {title && (
-        <CellTitle>
+        <CellTitle titleStyle={titleStyle} titleClass={titleClass}>
           {title}
-          {brief && <CellBrief children={brief} />}
+          {brief && <CellBrief children={brief} briefClass={briefClass} />}
         </CellTitle>
       )}
       <CellValue alone={!title} children={children} />

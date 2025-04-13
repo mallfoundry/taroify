@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { ReactNode, CSSProperties } from "react"
 import type { ViewProps } from "@tarojs/components/types/View"
 export type CellSize = "medium" | "large"
 
@@ -17,6 +17,14 @@ export type CellBaseProps = {
   isLink?: boolean
   arrowDirection?: ArrowDirection
   children?: ReactNode
+  /** 左侧标题额外样式 */
+  titleStyle?: CSSProperties
+  /** 左侧标题额外类名 */
+  titleClass?: string
+  /** 右侧内容额外类名 */
+  valueClass?: string
+  /** 标题下方的描述信息额外类名 */
+  briefClass?: string
 } & ViewProps
 
 export type CellThemeVars = {
