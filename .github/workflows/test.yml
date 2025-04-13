@@ -24,7 +24,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install:node_modules
+          npm run install:node_modules
 
       - name: Run linter
         run: npm run lint
@@ -41,7 +41,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install:node_modules
+          npm run install:node_modules
 
       - name: Run test cases
         run: npm run test:coverage
@@ -50,4 +50,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./packages/vant/test/coverage
+          directory: ./coverage
