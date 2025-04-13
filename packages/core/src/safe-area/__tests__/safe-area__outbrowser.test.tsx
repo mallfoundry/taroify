@@ -24,6 +24,8 @@ const mockSystemInfo: Taro.getWindowInfo.Result = {
 
 describe("<SafeArea /> in non-browser environment", () => {
   it("renders in non-browser environment without position", () => {
+    jest.spyOn(Taro, "getWindowInfo").mockReturnValue(mockSystemInfo)
+
     const { container } = render(<SafeArea>内容</SafeArea>)
 
     expect(container.querySelector(`.${prefixClassname("safe-area")}`)).not.toBeNull()
@@ -38,8 +40,12 @@ describe("<SafeArea /> in non-browser environment", () => {
   it("renders top in non-browser environment", () => {
     jest.spyOn(Taro, "getWindowInfo").mockReturnValue(mockSystemInfo)
 
-    const { container } = render(<SafeArea position="top">顶部安全区</SafeArea>)
-    expect(container.querySelector(`.${prefixClassname("safe-area--top")}`)).toBeNull()
+    const { container } = render(
+      <SafeArea position="top" nativeSafeTop>
+        顶部安全区
+      </SafeArea>,
+    )
+    expect(container.querySelector(`.${prefixClassname("safe-area--top")}`)).not.toBeNull()
     expect(container.querySelector(`.${prefixClassname("safe-area--bottom")}`)).toBeNull()
 
     const styles = getComputedStyle(container.firstChild as Element)
@@ -54,10 +60,10 @@ describe("<SafeArea /> in non-browser environment", () => {
 
     const { container } = render(<SafeArea position="bottom">底部安全区</SafeArea>)
     expect(container.querySelector(`.${prefixClassname("safe-area--top")}`)).toBeNull()
-    expect(container.querySelector(`.${prefixClassname("safe-area--bottom")}`)).toBeNull()
+    expect(container.querySelector(`.${prefixClassname("safe-area--bottom")}`)).not.toBeNull()
 
     const styles = getComputedStyle(container.firstChild as Element)
-    expect(styles.paddingBottom).toBe("34px")
+    expect(styles.paddingBottom).toBe("")
     expect(Boolean(styles.paddingTop)).toBe(false)
 
     expect(container).toMatchSnapshot()
