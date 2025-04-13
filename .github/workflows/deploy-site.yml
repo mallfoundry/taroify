@@ -1,0 +1,36 @@
+name: Deploy Site
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-deploy:
+    if: github.repository == 'mallfoundry/taroify'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.1'
+
+      - name: Run Build Site
+        run: |
+          yarn install:node_modules
+          yarn build:www
+
+      - name: Deploy for GitHub 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          branch: gh-pages
+          folder: bundles/www
+          token: ${{ secrets.TAROIFY_SITE_TOKEN }}
+          repository-name: taroify/taroify.com
+          single-commit: true
+          clean: true

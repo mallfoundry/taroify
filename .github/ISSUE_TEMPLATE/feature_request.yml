@@ -1,25 +1,44 @@
-name: Request a feature
+name: 🎸 新功能请求 Feature Request
 description: 为这个项目提出一个想法
-title: '[Feature Request] '
+title: '🎸 [Feature]: '
 labels: 'feature'
 body:
   - type: markdown
     attributes:
-      value: '## 感谢您伸出援手！'
+      value: |
+        ## 感谢您伸出援手！
+        在提交问题之前，请确保您使用的是所有最新版本 @taroify/* 包，或者优先使用以下方式寻找解决方案：
+
+        - 查看组件文档 [@taroify/core](https://taroify.github.io/taroify.com/introduce)
+        - 在 [Issue](https://github.com/mallfoundry/taroify/issues?q=is%3Aissue) 列表中查找解决方案
+
   - type: textarea
     id: example
     attributes:
-      label: 使用示例，包括组件或 Hooks
-      description: 请尽可能详细地说明这个功能的使用场景
+      label: 这个功能解决了什么问题？
+      description: |
+        请尽可能详尽地说明这个需求的用例和场景。最重要的是：解释清楚是怎样的用户体验需求催生了这个功能上的需求。
+
+        通常来说，我们只考虑添加在现有的组件方式无法轻松实现的功能。新功能的用例也应当足够常见。
+      placeholder: 请填写
+    validations:
+      required: true
+
   - type: textarea
     id: implementation
     attributes:
-      label: 解决方案
-      description: 描述一下这个新功能的方案，并提供一些代码示例
+      label: 你期望的组件设计是怎样的？
+      description: |
+        描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请务必使用 Markdown 格式化你的代码片段。
+      placeholder: 请填写
+    validations:
+      required: true
+
   - type: dropdown
     id: participate
     attributes:
-      label: 你想为这个功能创建一个 PR 吗
+      label: 你想为这个功能创建一个 PR 吗？
+      description: 如果你愿意，请告诉我们，我们会很乐意接受你的贡献！
       options:
         - 'Yes'
         - 'No'

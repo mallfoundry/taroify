@@ -1,0 +1,21 @@
+name: Create Release Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    if: github.repository == 'mallfoundry/taroify'
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Release for Tag
+        id: release_tag
+        uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: "true"
