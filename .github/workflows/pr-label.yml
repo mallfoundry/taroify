@@ -8,6 +8,7 @@ on:
 
 jobs:
   change-labeling:
+    if: github.repository == 'mallfoundry/taroify'
     name: Labeling for changes
     runs-on: ubuntu-latest
     steps:
