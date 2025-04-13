@@ -1,18 +1,21 @@
-name: Report an issue
+name: 🐛 错误报告 Bug Report
 description: 如果有什么事情不像预期的那样工作，请告诉我们
-title: '[Bug Report] '
-labels: 'bug: need confirm'
+title: '🐛 [Bug]:  '
+labels: 'bug'
 body:
   - type: markdown
     attributes:
       value: |
         ## 感谢您的反馈！
-        在提交问题之前，请确保您使用的是所有最新版本 @taroify/* 包。
+        在提交问题之前，请确保您使用的是所有最新版本 @taroify/* 包，或者优先使用以下方式寻找解决方案：
+
+        - 查看组件文档 [@taroify/core](https://taroify.github.io/taroify.com/introduce)
+        - 在 [Issue](https://github.com/mallfoundry/taroify/issues?q=is%3Aissue) 列表中查找解决方案
   - type: dropdown
     id: package
     attributes:
       label: 问题出在哪个包
-      multiple: true
+      description: 选择使用的 Taroify NPM 包名
       options:
         - '@taroify/core'
         - '@taroify/icons'
@@ -20,45 +23,54 @@ body:
         - '@taroify/commerce'
     validations:
       required: true
+  - type: input
+    id: version
+    attributes:
+      label: 正在使用的 Taroify 版本是多少
+      description: 请填写 node_modules/@taroify/core/package.json 里实际安装的版本
+      placeholder: 例如：0.7.5
+    validations:
+      required: true
   - type: dropdown
     id: platform
     attributes:
       label: 问题出在哪个平台/设备/浏览器
+      description: 选择对应的平台/设备/浏览器
       multiple: true
       options:
-        - 'H5'
-        - '微信小程序'
-        - '支付宝小程序'
-        - '百度小程序'
-    validations:
-      required: true
-  - type: input
-    id: user_agent
-    attributes:
-      label: 平台/设备/浏览器
-      description: 在哪些平台/设备/浏览器上能重现这个问题
-      placeholder: 如果有必要，可以填写更详细的信息
-  - type: input
-    id: version
-    attributes:
-      label: 你正在使用的 Taroify 版本是多少
-      description: 请填写 node_modules/@taroify/core/package.json 里实际安装的版本
-      placeholder: 比如 1.0.0
-    validations:
-      required: true
-  - type: textarea
-    id: description
-    attributes:
-      label: 描述一下您遇到的问题以及重现步骤
-      description: 请提供一个最简单的操作步骤，方便我们快速重现问题
-      placeholder: 比如：弹窗无法展示、日历组件报错
+        - h5
+        - weapp
+        - alipay
+        - tt
+        - 其他小程序
     validations:
       required: true
   - type: input
     id: link
     attributes:
-      label: 如果可能的话，请包含一个代码框的链接与复制的问题
-      description: Codesandbox template – https://codesandbox.io/s/taroify-template-t2fjh
+      label: 重现链接
+      如果可能的话，请提供一个 **最小化** **可复现** 的代码实例。
+      - 最小化：意味着它应该只包含与问题相关的代码与配置，而不是一个庞大的、难以排查问题的仓库。
+      - 可复现：这是创建 issue 的基础要求。
+
+      1、Codesandbox template – https://codesandbox.io/s/taroify-template-t2fjh
+
+      请不要乱填一个链接，那只会让你的 issue 被直接关闭。
+  - type: textarea
+    id: taro
+    attributes:
+      label: 环境信息
+      description: 你可以在项目根目录执行 `taro info`，并将结果粘贴在这里。
+  - type: textarea
+    id: description
+    attributes:
+      label: 重现步骤
+      description: |
+        简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。
+
+        请使用 Markdown 语法格式化步骤中涉及的列表、代码片段等，否则它将会非常丑陋。
+    validations:
+      required: true
   - type: dropdown
     id: fix
     attributes:

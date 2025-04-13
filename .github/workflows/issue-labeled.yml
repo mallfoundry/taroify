@@ -1,0 +1,41 @@
+name: Issue Labeled
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  reply-labeled:
+    if: github.repository == 'mallfoundry/taroify'
+    runs-on: ubuntu-latest
+    steps:
+      - name: contribution welcome
+        if: github.event.label.name == 'contribution welcome' || github.event.label.name == 'help wanted'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment, remove-labels'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            你好 @${{github.event.issue.user.login}}。我们喜欢您的建议/反馈，并希望您或其他社区成员通过Pull Request做出贡献。我们提前感谢您的贡献，并期待着审阅！
+          labels: 'pending triage, need reproduction'
+
+      - name: remove pending
+        if: github.event.label.name == 'enhancement' || github.event.label.name == 'bug' || (contains(github.event.label.name, 'pending triage') == false && startsWith(github.event.label.name, 'bug:') == true)
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'remove-labels'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          labels: 'pending triage'
+
+      - name: need reproduction
+        if: github.event.label.name == 'need reproduction'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment, remove-labels'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            你好 @${{github.event.issue.user.login}}。请提供[最小复制](https://stackoverflow.com/help/minimal-reproducible-example)使用GitHub存储库或点击[此处](https://codesandbox.io/s/taroify-template-t2fjh). 标有“need reproduction”的问题如果在3天内没有活动，将被关闭。
+          labels: 'pending triage'
