@@ -11,6 +11,7 @@ body:
 
         - 查看组件文档 [@taroify/core](https://taroify.github.io/taroify.com/introduce)
         - 在 [Issue](https://github.com/mallfoundry/taroify/issues?q=is%3Aissue) 列表中查找解决方案
+
   - type: dropdown
     id: package
     attributes:
@@ -23,6 +24,7 @@ body:
         - '@taroify/commerce'
     validations:
       required: true
+
   - type: input
     id: version
     attributes:
@@ -31,6 +33,7 @@ body:
       placeholder: 例如：0.7.5
     validations:
       required: true
+
   - type: dropdown
     id: platform
     attributes:
@@ -45,25 +48,30 @@ body:
         - 其他小程序
     validations:
       required: true
+
   - type: input
     id: link
     attributes:
       label: 重现链接
       description: |
-      如果可能的话，请提供一个 **最小化** **可复现** 的代码实例。
-      - 最小化：意味着它应该只包含与问题相关的代码与配置，而不是一个庞大的、难以排查问题的仓库。
-      - 可复现：这是创建 issue 的基础要求。
+        请提供一个 **最小化** **可复现** 的代码实例。
+        - 最小化：意味着它应该只包含与问题相关的代码与配置，而不是一个庞大的、难以排查问题的仓库。
+        - 可复现：这是创建 issue 的基础要求。
 
-      1、Codesandbox template – https://codesandbox.io/s/taroify-template-t2fjh
+        你可以通过 [CodeSandbox](https://codesandbox.io/s/taroify-template-t2fjh) 创建一个可复现实例。
 
-      请不要乱填一个链接，那只会让你的 issue 被直接关闭。
+        请不要乱填一个链接，那只会让你的 issue 被直接关闭。
+    validations:
+      required: true
+
   - type: textarea
     id: taro
     attributes:
       label: 环境信息
       description: 你可以在项目根目录执行 `taro info`，并将结果粘贴在这里。
+
   - type: textarea
-    id: description
+    id: steps
     attributes:
       label: 重现步骤
       description: |
@@ -72,6 +80,7 @@ body:
         请使用 Markdown 语法格式化步骤中涉及的列表、代码片段等，否则它将会非常丑陋。
     validations:
       required: true
+
   - type: dropdown
     id: fix
     attributes:
@@ -79,6 +88,7 @@ body:
       options:
         - 'Yes'
         - 'No'
+
   - type: dropdown
     id: participate
     attributes:
@@ -86,6 +96,7 @@ body:
       options:
         - 'Yes'
         - 'No'
+
   - type: textarea
     id: fix_content
     attributes:
