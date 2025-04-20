@@ -21,6 +21,16 @@ const menus = [
     ],
   },
   {
+    title: "MCP",
+    subpackage: "mcp",
+    children: [
+      {
+        title: "介绍",
+        to: "/mcp/",
+      },
+    ],
+  },
+  {
     title: "基础组件",
     subpackage: "basic",
     children: [
