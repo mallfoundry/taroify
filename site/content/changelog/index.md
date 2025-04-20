@@ -12,6 +12,24 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.8.0
+
+`2025-04-20`
+
+**Feature**
+
+- Skeleton
+
+  - 重构 `Skeleton`，放弃旧版本 `Skeleton` 使用方式 [925](https://github.com/mallfoundry/taroify/pull/925) [@Pilotager](https://github.com/Pilotager)
+
+- Cell
+
+  - 添加 `titleStyle`、`titleClass`、`valueClass`、`briefClass` 属性 [930](https://github.com/mallfoundry/taroify/pull/930) [@Pilotager](https://github.com/Pilotager)
+
+**Other**
+
+- 文档更新 `MCP` 使用方式 [939](https://github.com/mallfoundry/taroify/pull/939) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.7.0
 
 `2025-04-06`
@@ -175,7 +193,7 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 **Other**
 
-- 完善 DateTimePicker 文档 [834](https://github.com/mallfoundry/taroify/pull/834) [@sweet7788 ](https://github.com/sweet7788)
+- 完善 DateTimePicker 文档 [834](https://github.com/mallfoundry/taroify/pull/834) [@sweet7788](https://github.com/sweet7788)
 - 完善 FormItem 文档 [837](https://github.com/mallfoundry/taroify/pull/837) [@Niubility-SunLight](https://github.com/Niubility-SunLight)
 - 完善 Form 文档 [847](https://github.com/mallfoundry/taroify/pull/847) [@lvqq](https://github.com/lvqq)
 - 完善 Calendar 文档 [850](https://github.com/mallfoundry/taroify/pull/853) [@CodeMak1r-zy](https://github.com/CodeMak1r-zy)
