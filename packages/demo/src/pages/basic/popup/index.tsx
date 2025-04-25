@@ -1,7 +1,7 @@
 import { ScrollView } from "@tarojs/components"
 import { Cell, Popup } from "@taroify/core"
 import { PopupPlacement } from "@taroify/core/popup"
-import { ArrowRight, Close } from "@taroify/icons"
+import { Close } from "@taroify/icons"
 import { CSSProperties, useState } from "react"
 import Block from "../../../components/block"
 import Page from "../../../components/page"
