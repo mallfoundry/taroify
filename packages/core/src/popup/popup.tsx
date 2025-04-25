@@ -125,13 +125,17 @@ const Popup = forwardRef<any, PopupProps>((props, ref) => {
 
   const { value: open } = useUncontrolled({ defaultValue: defaultOpen, value: openProp })
   const onClosePropRef = useToRef(onClose)
+  const initializedRef = useToRef(open)
   useLockScrollTaro(!!open && lock)
 
   useEffect(() => {
-    if (open === false) {
-      onClosePropRef.current?.(false)
+    if (initializedRef.current) {
+      if (open === false)
+        onClosePropRef.current?.(false)
+    } else {
+      initializedRef.current = true
     }
-  }, [onClosePropRef, open])
+  }, [open])
 
   const transactionName = transaction ?? toTransactionName(placement)
 
