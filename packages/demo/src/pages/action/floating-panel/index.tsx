@@ -1,5 +1,5 @@
-import { FloatingPanel, Cell, Tabs } from "@taroify/core"
-import { useState, useMemo } from "react"
+import { FloatingPanel, Cell, Tabs, Button } from "@taroify/core"
+import { useState, useMemo, useRef } from "react"
 import { getWindowInfo } from "@tarojs/taro"
 import Page from "../../../components/page"
 
@@ -78,6 +78,35 @@ function HeadDragOnly() {
   )
 }
 
+function CustomHeight() {
+  const floatingPanelRef = useRef<any>()
+
+  const resetHeight = () => {
+    floatingPanelRef.current?.setHeight(100)
+  }
+
+  return (<>
+  <Button color="default" onClick={resetHeight}>重置高度</Button>
+  <FloatingPanel ref={floatingPanelRef}>
+    <Cell.Group>
+      <Cell>1</Cell>
+      <Cell>2</Cell>
+      <Cell>3</Cell>
+      <Cell>4</Cell>
+      <Cell>5</Cell>
+      <Cell>6</Cell>
+      <Cell>7</Cell>
+      <Cell>8</Cell>
+      <Cell>9</Cell>
+      <Cell>10</Cell>
+      <Cell>11</Cell>
+      <Cell>12</Cell>
+      <Cell>13</Cell>
+    </Cell.Group>
+  </FloatingPanel>
+</>)
+}
+
 export default function FloatingPanelDemo() {
   const [value, setValue] = useState(0)
 
@@ -92,6 +121,9 @@ export default function FloatingPanelDemo() {
         </Tabs.TabPane>
         <Tabs.TabPane title="仅头部拖拽">
           <HeadDragOnly />
+        </Tabs.TabPane>
+        <Tabs.TabPane title="手动设置高度">
+          <CustomHeight />
         </Tabs.TabPane>
       </Tabs>
     </Page>

@@ -102,6 +102,40 @@ function HeadDragOnly() {
 }
 ```
 
+### 手动设置高度
+
+通过 `ref` 可以获取到 FloatingPanel 的实例，调用 `setHeight` 方法可以手动设置 FloatingPanel 的高度。
+
+```tsx
+function CustomHeight() {
+  const floatingPanelRef = useRef<any>()
+  const resetHeight = () => {
+    floatingPanelRef.current?.setHeight(100)
+  }
+
+  return (<>
+  <Button color="default" onClick={resetHeight}>重置高度</Button>
+  <FloatingPanel ref={floatingPanelRef}>
+    <Cell.Group>
+      <Cell>1</Cell>
+      <Cell>2</Cell>
+      <Cell>3</Cell>
+      <Cell>4</Cell>
+      <Cell>5</Cell>
+      <Cell>6</Cell>
+      <Cell>7</Cell>
+      <Cell>8</Cell>
+      <Cell>9</Cell>
+      <Cell>10</Cell>
+      <Cell>11</Cell>
+      <Cell>12</Cell>
+      <Cell>13</Cell>
+    </Cell.Group>
+  </FloatingPanel>
+</>)
+}
+```
+
 ## API
 
 ### Flex Props
@@ -113,6 +147,15 @@ function HeadDragOnly() {
 | duration            | 动画时长，单位秒，设置为 0 可以禁用动画 | _number_   | `0.3`                            |
 | contentDraggable    | 允许拖拽内容容器                        | _boolean_  | `true`                           |
 | safeAreaInsetBottom | 是否开启底部安全区适配                  | _boolean_  | `true`                           |
+
+### 方法
+
+通过 ref 可以获取到 FloatingPanel 实例并调用实例方法。
+
+| 方法名     | 说明                                       | 参数  | 返回值 |
+|---------|------------------------------------------|-----|-----|
+| setHieght   | 设置面板高度                                    | _number_   | -   |
+
 
 ## 主题定制
 

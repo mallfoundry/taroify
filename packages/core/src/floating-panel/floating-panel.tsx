@@ -1,5 +1,5 @@
 import * as React from "react"
-import { forwardRef, type CSSProperties, useMemo, useState, useRef, useEffect } from "react"
+import { forwardRef, type CSSProperties, useMemo, useState, useRef, useEffect, useImperativeHandle } from "react"
 import { getWindowInfo, getEnv } from "@tarojs/taro"
 import { View, ScrollView } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
@@ -23,7 +23,11 @@ export interface FloatingPanelProps extends ViewProps {
   handleChange?: (height: number) => void
 }
 
-const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
+export interface FloatingPanelInstance {
+  setHeight: (height: number) => void
+}
+
+const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((props, ref) => {
   const {
     className,
     style: styleProp,
@@ -45,6 +49,8 @@ const FloatingPanel = forwardRef<any, FloatingPanelProps>((props, ref) => {
   const touch = useTouch()
 
   const windowHeight = useMemo(() => getWindowInfo().windowHeight, [])
+
+  useImperativeHandle(ref, () => ({ setHeight }))
 
   const ease = (moveY: number): number => {
     const absDistance = Math.abs(moveY)
