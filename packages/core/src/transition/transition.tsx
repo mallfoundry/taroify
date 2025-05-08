@@ -1,5 +1,5 @@
 import * as React from "react"
-import { isValidElement, type ReactElement, type ReactNode, useMemo, useState } from "react"
+import { cloneElement, isValidElement, type ReactElement, type ReactNode, useMemo, useRef, useState } from "react"
 import { CSSTransition } from "react-transition-group"
 import type { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import { prefixClassname } from "../styles"
@@ -72,10 +72,16 @@ export default function Transition(props: TransitionProps) {
   const transactionName = isTransitionPreset(name) ? prefixClassname(`transition-${name}`) : name
   const [enter, setEnter] = useState(false)
   const [exited, setExited] = useState(false)
+  const ref = useRef(null);
+
+  const setRef = (value) => {
+    ref.current = value;
+  };
 
   return (
     <CSSTransition
       in={inProp}
+      nodeRef={ref}
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
       timeout={timeout}
@@ -85,7 +91,6 @@ export default function Transition(props: TransitionProps) {
         ...childrenStyle,
         display: enter && !exited ? "" : "none",
       }}
-      children={children}
       onEnter={(node, isAppearing) => {
         setEnter(true)
         setExited(false)
@@ -102,6 +107,8 @@ export default function Transition(props: TransitionProps) {
         // @ts-ignore
         onExited?.(node)
       }}
-    />
+    >
+      {cloneElement(children as ReactElement, { ref: setRef })}
+    </CSSTransition>
   )
 }
