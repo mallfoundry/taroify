@@ -58,7 +58,7 @@
     &--checked {
       .#{$component-prefix}icon {
         color: $checkbox-checked-icon-color;
-        background: $checkbox-checked-icon-border-color;
+        background: $checkbox-checked-icon-background-color;
         border-color: $checkbox-checked-icon-border-color;
       }
 
