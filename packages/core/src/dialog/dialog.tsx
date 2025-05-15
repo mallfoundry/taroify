@@ -156,6 +156,9 @@ export interface DialogProps extends ViewProps {
 }
 
 function renderHeader(title, key?) {
+  if (title === undefined) {
+    return null
+  }
   return <DialogHeader key={key} children={title} />
 }
 
