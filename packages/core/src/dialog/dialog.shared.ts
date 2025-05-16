@@ -43,9 +43,11 @@ export type DialogThemeVars = {
   dialogMessagePadding?: string
   dialogMessageFontSize?: string
   dialogMessageLineHeight?: string
+  dialogMessageFontWeight?: string
   dialogMessageMaxHeight?: string
   dialogHasTitleMessageColor?: string
   dialogHasTitleMessagePaddingTop?: string
+  dialogHasTitleMessageFontWeight?: string
   dialogButtonHeight?: string
   dialogConfirmButtonColor?: string
   dialogFooterRoundedPadding?: string

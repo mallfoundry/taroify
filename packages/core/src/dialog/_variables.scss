@@ -14,9 +14,11 @@ $dialog-header-isolated-padding: var(--dialog-header-isolated-padding, var(--pad
 $dialog-message-padding: var(--dialog-message-padding, 26px * $hd var(--padding-lg, $padding-lg));
 $dialog-message-font-size: var(--dialog-message-font-size, var(--font-size-md, $font-size-md));
 $dialog-message-line-height: var(--dialog-message-line-height, var(--line-height-md, $line-height-md));
+$dialog-message-font-weight: var(--dialog-message-font-weight, 'normal');
 $dialog-message-max-height: var(--dialog-message-max-height, 60vh);
 $dialog-has-title-message-color: var(--dialog-has-title-message-color, var(--gray-7, $gray-7));
 $dialog-has-title-message-padding-top: var(--dialog-has-title-message-padding-top, var(--padding-xs, $padding-xs));
+$dialog-has-title-message-font-weight: var(--dialog-has-title-message-font-weight, 'normal');
 
 $dialog-button-height: var(--dialog-button-height, 48px * $hd);
 $dialog-confirm-button-color: var(--dialog-confirm-button-color, $primary-color);
