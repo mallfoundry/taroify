@@ -276,9 +276,11 @@ function AsyncCloseDialog() {
 | --dialog-message-padding                         | _26px \* $hd var(--padding-lg)_                         | -    |
 | --dialog-message-font-size                       | _var(--font-size-md)_                                   | -    |
 | --dialog-message-line-height                     | _var(--line-height-md)_                                 | -    |
+| --dialog-message-font-weight                     | _var(--dialog-message-font-weight)_                     | -    |
 | --dialog-message-max-height                      | _60vh_                                                  | -    |
 | --dialog-has-title-message-color                 | _var(--gray-7)_                                         | -    |
 | --dialog-has-title-message-padding-top           | _var(--padding-xs)_                                     | -    |
+| --dialog-has-title-message-font-weight           | _var(--dialog-has-title-message-font-weight)_           | -    |
 | --dialog-button-height                           | _48px \* $hd_                                           | -    |
 | --dialog-confirm-button-color                    | _var(--red)_                                            | -    |
 | --dialog-footer-rounded-padding                  | _var(--padding-xs) var(--padding-lg) var(--padding-md)_ | -    |

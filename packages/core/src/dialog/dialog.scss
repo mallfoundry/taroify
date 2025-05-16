@@ -40,6 +40,7 @@
     .#{$component-prefix}dialog__message {
       padding-top: $dialog-has-title-message-padding-top;
       color: $dialog-has-title-message-color;
+      font-weight: $dialog-has-title-message-font-weight;
     }
   }
 
@@ -50,6 +51,7 @@
     overflow-y: auto;
     font-size: $dialog-message-font-size;
     line-height: $dialog-message-line-height;
+    font-weight: $dialog-message-font-weight;
     text-align: center;
     word-wrap: break-word;
 
