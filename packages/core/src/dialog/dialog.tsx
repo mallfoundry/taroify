@@ -111,9 +111,9 @@ interface DialogHeaderProps {
 }
 
 function renderDialogHeader(
-  header: ReactElement | undefined,
+  header: ReactElement | undefined | null,
   props: DialogHeaderProps,
-): ReactElement | undefined {
+): ReactElement | undefined | null {
   if (!isValidElement(header)) {
     return header
   }
