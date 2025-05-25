@@ -12,6 +12,36 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.8.1
+
+`2025-05-25`
+
+**Feature**
+
+- FloatingPanel [943](https://github.com/mallfoundry/taroify/pull/944) [@HyaCiovo](https://github.com/HyaCiovo)
+
+  - 添加手动设置高度功能
+
+**Bug Fixes**
+
+- Popup
+
+  - Popup 组件初次挂载时会执行 onClose 事件 [943](https://github.com/mallfoundry/taroify/pull/943) [@HyaCiovo](https://github.com/HyaCiovo)
+
+- Transition
+
+  - 修复 Transition 组件的 findDOMNode API报错问题 [949](https://github.com/mallfoundry/taroify/pull/949) [@HyaCiovo](https://github.com/HyaCiovo)
+
+- Checkbox
+
+  - 在背景中使用正确的变量 [951](https://github.com/mallfoundry/taroify/pull/951) [@lvqq](https://github.com/lvqq)
+
+- Dialog
+
+  - 未传入 title 时仍然渲染 header 的问题 [954](https://github.com/mallfoundry/taroify/pull/954) [@twomoonbird](https://github.com/twomoonbird)
+
+  - 支持设置 message 的 font-weight [955](https://github.com/mallfoundry/taroify/pull/955) [@twomoonbird](https://github.com/twomoonbird)
+
 ### v0.8.0
 
 `2025-04-20`
