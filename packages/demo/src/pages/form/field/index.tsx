@@ -32,7 +32,7 @@ function CustomField() {
       <Field label="身份证号">
         <Input
           type="idcard"
-          placeholder="请输入手机号"
+          placeholder="请输入身份证号"
           value={idcard}
           onChange={(e) => setIdcard(e.detail.value)}
         />
