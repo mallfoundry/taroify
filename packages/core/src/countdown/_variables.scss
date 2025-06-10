@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $countdown-color: var(--countdown-color, var(--text-color, $text-color));
 $countdown-font-size: var(--countdown-font-size, var(--font-size-md, $font-size-md));

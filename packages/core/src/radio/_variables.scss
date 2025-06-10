@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $radio-size: var(--radio-size, 20px * $hd);
 $radio-font-size: var(--radio-font-size, var(--font-size-md, $font-size-md));

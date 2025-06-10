@@ -82,8 +82,22 @@ function compileScss(bundle, dist) {
       .src(`./packages/${bundle}/src/**/index.scss`)
       .pipe(
         sass({
-          importer: npmModule,
-          outputStyle: "compressed",
+          importers: [
+            {
+              findFileUrl(url) {
+                if (!url.startsWith("~@taroify/core")) return null
+                const relativeUrl = url.substring(15)
+                const realUrl = path.join(__dirname, "../core/src", relativeUrl)
+                const dirname = path.dirname(realUrl)
+                const basename = path.basename(realUrl)
+                const partialBasename = getScssPartialBasename(basename)
+                const partialFilename = addScssFileExtname(partialBasename)
+                const partialFilepath = path.join(dirname, partialFilename)
+                return new URL(`file://${partialFilepath}`)
+              },
+            },
+          ],
+          style: "compressed",
         }).on("error", sass.logError),
       )
       .pipe(postcss(plugins))

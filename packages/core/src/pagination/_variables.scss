@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $pagination-height: var(--pagination-height, 40px * $hd);
 $pagination-font-size: var(--pagination-font-size, var(--font-size-md, $font-size-md));

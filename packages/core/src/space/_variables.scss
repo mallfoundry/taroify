@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $space-item-gap-mini: var(--space-item-gap-mini, var(--padding-xs, $padding-xs));
 $space-item-gap-small: var(--space-item-gap-small, var(--padding-sm, $padding-sm));

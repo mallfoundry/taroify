@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}dialog {
   top: 45%;
@@ -39,8 +39,8 @@
   &__header + &__content {
     .#{$component-prefix}dialog__message {
       padding-top: $dialog-has-title-message-padding-top;
-      color: $dialog-has-title-message-color;
       font-weight: $dialog-has-title-message-font-weight;
+      color: $dialog-has-title-message-color;
     }
   }
 
@@ -50,8 +50,8 @@
     padding: $dialog-message-padding;
     overflow-y: auto;
     font-size: $dialog-message-font-size;
-    line-height: $dialog-message-line-height;
     font-weight: $dialog-message-font-weight;
+    line-height: $dialog-message-line-height;
     text-align: center;
     word-wrap: break-word;
 

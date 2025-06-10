@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 $popup-close-icon-size: var(--popup-close-icon-size, 22px * $hd);
 

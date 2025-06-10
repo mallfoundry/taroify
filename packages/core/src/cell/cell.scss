@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 // TODO The base variables need to be migrated
 .#{$component-prefix}cell {
@@ -28,9 +28,9 @@
 
   &--required {
     .#{$component-prefix}cell__title::before {
+      padding-right: $cell-required-padding-right;
       font-size: $cell-font-size;
       color: $cell-required-color;
-      padding-right: $cell-required-padding-right;
       content: '*';
     }
   }

@@ -1,4 +1,5 @@
-@import "./variables";
+/* stylelint-disable order/properties-alphabetical-order */
+@use "./variables" as *;
 
 .#{$component-prefix}tabs__tab {
   position: relative;
@@ -30,10 +31,10 @@
     justify-content: center;
 
     &-ellipsis {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
+      display: -webkit-box; /* stylelint-disable-line */
+      overflow: hidden; /* stylelint-disable-line */
+      -webkit-line-clamp: 1; /* stylelint-disable-line */
+      -webkit-box-orient: vertical; /* stylelint-disable-line */
     }
   }
 }

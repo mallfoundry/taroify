@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}native-input {
   box-sizing: inherit;
@@ -7,12 +7,12 @@
   min-width: inherit;
   height: inherit;
   min-height: inherit;
-  line-height: inherit;
+  font: inherit;
+  line-height: inherit; 
   color: inherit;
   resize: inherit;
   background: inherit;
   border: inherit;
-  font: inherit;
 
   // for ios wechat
   &[type='date'],

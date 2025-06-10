@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}form-feedback {
   font-size: $form-feedback-font-size;

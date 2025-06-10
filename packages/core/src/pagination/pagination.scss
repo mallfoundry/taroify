@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}pagination {
   display: flex;
@@ -66,11 +66,11 @@
   }
 
   &__desc {
-    flex: 1;
-    height: $pagination-height;
-    color: $pagination-desc-color;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
+    height: $pagination-height;
+    color: $pagination-desc-color;
   }
 }

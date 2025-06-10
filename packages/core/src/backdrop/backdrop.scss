@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}backdrop {
   position: fixed;
@@ -9,3 +9,4 @@
   height: 100%;
   background: $backdrop-background-color;
 }
+  

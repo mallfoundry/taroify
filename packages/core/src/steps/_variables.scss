@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $steps-background-color: var(--steps-background-color, var(--white, $white));
 $steps-horizontal-padding: var(--steps-horizontal-padding, 10px * $hd 0);

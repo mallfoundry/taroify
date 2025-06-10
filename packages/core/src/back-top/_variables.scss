@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $back-top-size: var(--back-top-size, 40px * $hd);
 $back-top-icon-size: var(--back-top-icon-size, 20px * $hd);

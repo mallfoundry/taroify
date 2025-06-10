@@ -1,5 +1,4 @@
-@import "../styles/prefix";
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}picker-column {
   flex: 1;

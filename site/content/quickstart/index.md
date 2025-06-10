@@ -28,7 +28,7 @@ pnpm add @taroify/core
 # 安装插件
 npm i babel-plugin-import -D
 ```
-
+加载Sass源文件，通过Taro转成CSS
 ```js
 // babel.config.js
 module.exports = {
@@ -56,6 +56,34 @@ module.exports = {
   ],
 };
 ```
+若不想加载Sass源文件或者其他情况，也可以加载编译后的CSS文件
+```js
+// babel.config.js
+module.exports = {
+  plugins: [
+    [
+      "import",
+      {
+        libraryName: "@taroify/core",
+        libraryDirectory: "",
+        style: (name) => `${name}/index.css`,
+      },
+      "@taroify/core",
+    ],
+    [
+      "import",
+      {
+        libraryName: "@taroify/icons",
+        libraryDirectory: "",
+        camel2DashComponentName: false,
+        style: () => "@taroify/icons/index.css",
+        customName: (name) => name === "Icon" ? "@taroify/icons/van/VanIcon" : `@taroify/icons/${name}`,
+      },
+      "@taroify/icons",
+    ],
+  ],
+};
+```
 
 接着你可以在代码中直接引入 Taroify 组件：
 
@@ -70,7 +98,18 @@ import { Button } from "@taroify/core"
 
 ```tsx
 import "@taroify/core/button/style"
-import Button from "@taroify/core/button"
+import { Button } from "@taroify/core"
+// css
+import "@taroify/core/button/index.css"
+import { Button } from "@taroify/core"
+```
+
+###
+
+在使用上面两种CSS方式引入时，若要使用[Style 内置样式](/components/style), 需要单独引入(版本 > 0.8.1 才产出次文件，之前未产出，低版本无法通过CSS方式引入)
+
+```tsx
+import "@taroify/core/styles/index.css"
 ```
 
 ### 方式三. 导入所有组件样式
@@ -81,6 +120,9 @@ Taroify 支持一次性导入所有组件，引入所有组件会增加代码包
 // app.ts
 import "@taroify/icons/index.scss"
 import "@taroify/core/index.scss"
+// css
+import "@taroify/icons/index.css"
+import "@taroify/core/index.css"
 ```
 
 > Tips: 配置按需引入后，将不允许直接导入所有组件。

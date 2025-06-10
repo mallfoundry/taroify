@@ -1,7 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@use "../styles/prefix";
+@use "../styles/variables" as *;
 
-.#{$component-prefix}safe-area {
+.#{prefix.$component-prefix}safe-area {
   display: block;
   width: 100%;
 

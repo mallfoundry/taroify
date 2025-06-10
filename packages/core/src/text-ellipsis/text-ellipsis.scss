@@ -1,16 +1,16 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}text-ellipsis {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  line-height: $text-ellipsis-line-height;
   font-size: $text-ellipsis-font-size;
+  line-height: $text-ellipsis-line-height;
   color: $text-ellipsis-font-color;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 
   &__expand {
-    cursor: pointer;
-    color: $text-ellipsis-action-color;
     display: inline-block;
+    color: $text-ellipsis-action-color;
+    cursor: pointer;
     &:active {
       opacity: $active-opacity;
     }

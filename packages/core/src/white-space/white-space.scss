@@ -1,7 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@use "../styles/prefix";
+@use "../styles/variables" as *;
 
-.#{$component-prefix}white-space {
+.#{prefix.$component-prefix}white-space {
   box-sizing: border-box;
   display: block;
   user-select: none;

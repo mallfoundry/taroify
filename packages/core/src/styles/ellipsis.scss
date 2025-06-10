@@ -1,14 +1,14 @@
-@import './prefix';
-@import './mixins/ellipsis';
+@use './prefix';
+@use './mixins/ellipsis' as *;
 
-.#{$component-prefix}ellipsis {
+.#{prefix.$component-prefix}ellipsis {
   @include ellipsis();
 }
 
-.#{$component-prefix}ellipsis--l2 {
+.#{prefix.$component-prefix}ellipsis--l2 {
   @include ellipsis(2);
 }
 
-.#{$component-prefix}ellipsis--l3 {
+.#{prefix.$component-prefix}ellipsis--l3 {
   @include ellipsis(3);
 }

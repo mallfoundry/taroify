@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $sidebar-width: var(--sidebar-width, 80px * $hd);
 $sidebar-disabled-color: var(--sidebar-disabled-color, var(--gray-5, $gray-5));

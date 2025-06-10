@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $floating-bubble-size: var(--floating-bubble-size, 48px * $hd);
 $floating-bubble-initial-gap: var(--floating-bubble-initial-gap, 24px * $hd);

@@ -1,6 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/variables";
-@import "../styles/mixins/hairline";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@forward "../styles/mixins/hairline";
+@use "../styles/variables" as *;
 
 $cell-font-size: var(--cell-font-size, var(--font-size-md, $font-size-md));
 $cell-line-height: var(--cell-line-height, 24px * $hd);

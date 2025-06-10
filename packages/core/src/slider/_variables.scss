@@ -1,8 +1,9 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $slider-border-radius: var(--slider-border-radius, var(--border-radius-max, $border-radius-max));
-$slider-active-background-color:  var(--slider-active-background-color, $primary-color);
+$slider-active-background-color: var(--slider-active-background-color, $primary-color);
 $slider-inactive-background-color: var(--slider-inactive-background-color, var(--gray-3, $gray-3));
 $slider-disabled-opacity: var(--slider-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
 $slider-track-height: var(--slider-track-height, 2px * $hd);
@@ -10,5 +11,5 @@ $slider-track-transition-duration: var(--slider-track-transition-duration, var(-
 $slider-thumb-width: var(--slider-thumb-width, 24px * $hd);
 $slider-thumb-height: var(--slider-thumb-height, 24px * $hd);
 $slider-thumb-border-radius: var(--slider-thumb-border-radius,  50%);
-$slider-thumb-background-color:  var(--slider-thumb-background-color, var(--white, $white));
+$slider-thumb-background-color: var(--slider-thumb-background-color, var(--white, $white));
 $slider-thumb-box-shadow: var(--slider-thumb-box-shadow, 0 1px * $hd 2px * $hd rgba(0, 0, 0, 0.5));

@@ -1,25 +1,25 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}floating-bubble {
   position: fixed;
-  left: 0;
   top: 0;
   right: $floating-bubble-initial-gap;
   bottom: $floating-bubble-initial-gap;
-  width: $floating-bubble-size;
-  height: $floating-bubble-size;
+  left: 0;
+  z-index: $floating-bubble-z-index;
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: $floating-bubble-size;
+  height: $floating-bubble-size;
   overflow: hidden;
+  color: $floating-bubble-color;
+  touch-action: none;
   cursor: pointer;
   user-select: none;
-  touch-action: none;
   background: $floating-bubble-background;
-  color: $floating-bubble-color;
   border-radius: $floating-bubble-border-radius;
-  z-index: $floating-bubble-z-index;
   transition: $floating-bubble-duration;
 
   &:active {

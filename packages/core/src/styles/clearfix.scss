@@ -1,6 +1,6 @@
-@import './prefix';
-@import './mixins/clearfix';
+@use './prefix';
+@use './mixins/clearfix' as *;
 
-.#{$component-prefix}clearfix {
+.#{prefix.$component-prefix}clearfix {
   @include clearfix();
 }

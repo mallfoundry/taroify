@@ -1,17 +1,17 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}signature {
   padding: $signature-padding;
 
   &__content {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: $signature-content-height;
+    overflow: hidden;
     background-color: $signature-content-background;
     border: $signature-content-border;
     border-radius: $signature-border-radius;
-    overflow: hidden;
 
     canvas {
       width: 100%;

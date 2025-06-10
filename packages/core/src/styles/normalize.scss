@@ -1,5 +1,4 @@
-@import "./prefix";
-@import "./variables";
+@use "./prefix" as *;
 
 [class*="#{$component-prefix}"] {
   -webkit-tap-highlight-color: transparent;

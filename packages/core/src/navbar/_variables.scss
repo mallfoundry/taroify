@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $navbar-z-index: var(--navbar-z-index, 1);
 $navbar-height: var(--navbar-height, 46px * $hd);

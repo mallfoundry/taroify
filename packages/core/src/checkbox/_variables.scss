@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $checkbox-size: var(--checkbox-size, 20px * $hd);
 $checkbox-font-size: var(--checkbox-font-size, var(--font-size-md, $font-size-md));

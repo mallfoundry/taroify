@@ -1,6 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/variables";
-@import '../styles/mixins/hairline';
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@forward '../styles/mixins/hairline';
+@use "../styles/variables" as *;
 
 $collapse-item-title-disabled-color: var(--collapse-item-title-disabled-color, var(--gray-5, $gray-5));
 $collapse-item-transition-duration: var(--collapse-item-transition-duration, var(--animation-duration-base, $animation-duration-base));

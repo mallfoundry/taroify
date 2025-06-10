@@ -1,5 +1,4 @@
-@import './prefix';
-@import './variables';
+@use './prefix' as *;
 
 @keyframes #{$component-prefix}-rotate {
   from {

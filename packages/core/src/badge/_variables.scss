@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $badge-size: var(--badge-size, 16px * $hd);
 $badge-color: var(--badge-color, var(--white, $white));

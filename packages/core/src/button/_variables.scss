@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $button-line-height: var(--button-line-height, 1.2);
 $button-border-width: var(--button-border-width, var(--border-width-base, $border-width-base));

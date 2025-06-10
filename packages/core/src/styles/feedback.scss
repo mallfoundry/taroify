@@ -1,7 +1,7 @@
-@import './prefix';
-@import './variables';
+@use './prefix';
+@use './variables' as *;
 
-.#{$component-prefix}haptics-feedback {
+.#{prefix.$component-prefix}haptics-feedback {
   cursor: pointer;
 
   &:active {
@@ -9,7 +9,7 @@
   }
 }
 
-.#{$component-prefix}click-feedback {
+.#{prefix.$component-prefix}click-feedback {
   cursor: pointer;
 
   &:active {
