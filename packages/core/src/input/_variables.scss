@@ -1,6 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/variables";
-@import "../cell/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@forward "../cell/variables";
+@use "../styles/variables" as *;
 
 $input-height: var(--input-height, 24px * $hd);
 $input-line-height: var(--input-line-height, 24px * $hd);

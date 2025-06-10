@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}search {
   box-sizing: border-box;

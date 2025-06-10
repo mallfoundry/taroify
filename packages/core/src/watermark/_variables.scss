@@ -1,3 +1,4 @@
-@import "../styles/prefix";
+@forward "../styles/prefix";
+@use "../styles/variables" as *;
 
 $watermark-z-index: var(--watermark-z-index, 100);

@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $timeline-color: var(--avatar-color, var(--white, $white));
 $timeline-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));

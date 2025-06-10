@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}action-bar {
   box-sizing: border-box;
@@ -6,6 +6,6 @@
   align-items: center;
   width: 100%;
   height: $action-bar-height;
-  background: $action-bar-background;
   white-space: nowrap;
+  background: $action-bar-background;
 }

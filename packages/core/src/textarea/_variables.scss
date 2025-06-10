@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 // placeholder class not support lineHeight in mini program
 $textarea-line-height: var(--textarea-line-height, 24px * $hd);

@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $popup-z-index: var(--popup-z-index, 1010);
 $popup-background-color: var(--popup-background-color, var(--background-color-light, $background-color-light));

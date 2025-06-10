@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $floating-panel-z-index: var(--floating-panel-z-index, 1010);
 $floating-panel-rounded-border-radius: var(--floating-panel-rounded-border-radius, 16px * $hd);

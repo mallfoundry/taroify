@@ -1,6 +1,6 @@
-@import "./normalize";
-@import "./animation";
-@import "./clearfix";
-@import "./ellipsis";
-@import "./hairline";
-@import "./feedback"
+@forward "./normalize";
+@forward "./animation";
+@forward "./clearfix";
+@forward "./ellipsis";
+@forward "./hairline";
+@forward "./feedback";

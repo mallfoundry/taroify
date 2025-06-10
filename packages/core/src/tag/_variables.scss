@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $tag-padding: var(--tag-padding, 0 var(--padding-base, $padding-base));
 $tag-color: var(--tag-color, var(--white, $white));

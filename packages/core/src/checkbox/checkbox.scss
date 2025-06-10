@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}checkbox {
   display: inline-flex;
@@ -80,8 +80,8 @@
   }
 
   &__label {
-    line-height: $checkbox-label-line-height;
     margin-left: $checkbox-label-margin;
+    line-height: $checkbox-label-line-height;
     color: $checkbox-label-color;
 
     &--left {

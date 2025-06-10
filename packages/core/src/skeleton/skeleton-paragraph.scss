@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as *;
 
 .#{$component-prefix}skeleton__paragraph {
   height: $skeleton-paragraph-height;

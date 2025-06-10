@@ -1,22 +1,22 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}back-top {
   position: fixed;
+  right: $back-top-right;
+  bottom: $back-top-bottom;
+  z-index: $back-top-z-index;
   display: flex;
   align-items: center;
   justify-content: center;
   width: $back-top-size;
   height: $back-top-size;
-  right: $back-top-right;
-  bottom: $back-top-bottom;
-  z-index: $back-top-z-index;
-  cursor: pointer;
   color: $back-top-text-color;
-  border-radius: $border-radius-max;
-  box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.12);
-  transform: scale(0);
-  transition: $animation-duration-base cubic-bezier(0.25, 0.8, 0.5, 1);
+  cursor: pointer;
   background-color: $back-top-background;
+  border-radius: $border-radius-max;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  transition: $animation-duration-base cubic-bezier(0.25, 0.8, 0.5, 1);
+  transform: scale(0);
 
   &:active {
     opacity: $active-opacity;

@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $dialog-width: var(--dialog-width, 320px * $hd);
 $dialog-small-screen-width: var(--dialog-small-screen-width, 90%);
