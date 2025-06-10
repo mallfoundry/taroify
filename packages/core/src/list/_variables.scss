@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $list-text-color: var(--list-text-color, var(--gray-6, $gray-6));
 $list-text-font-size: var(--list-text-font-size, var(--font-size-md, $font-size-md));

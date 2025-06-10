@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $skeleton-avatar-size: var(--skeleton-avatar-size, 32px * $hd);
 $skeleton-avatar-background: var(--skeleton-avatar-background, var(--active-color, $active-color));

@@ -1,14 +1,14 @@
-@import './prefix';
-@import './variables';
-@import './mixins/hairline';
+@use './prefix';
+@use './variables';
+@use './mixins/hairline' as *;
 
-[class*='#{$component-prefix}hairline'] {
+[class*='#{prefix.$component-prefix}hairline'] {
   &::after {
     @include hairline;
   }
 }
 
-.#{$component-prefix}hairline {
+.#{prefix.$component-prefix}hairline {
   &,
   &--top,
   &--left,
@@ -20,29 +20,29 @@
   }
 
   &--top::after {
-    border-top-width: $border-width-base;
+    border-top-width: variables.$border-width-base;
   }
 
   &--left::after {
-    border-left-width: $border-width-base;
+    border-left-width: variables.$border-width-base;
   }
 
   &--right::after {
-    border-right-width: $border-width-base;
+    border-right-width: variables.$border-width-base;
   }
 
   &--bottom::after {
-    border-bottom-width: $border-width-base;
+    border-bottom-width: variables.$border-width-base;
   }
 
   &,
   &-unset {
     &--top-bottom::after {
-      border-width: $border-width-base 0;
+      border-width: variables.$border-width-base 0;
     }
   }
 
   &--surround::after {
-    border-width: $border-width-base;
+    border-width: variables.$border-width-base;
   }
 }

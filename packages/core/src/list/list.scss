@@ -1,12 +1,12 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}list {
   &__loading,
   &__finished,
   &__error,
   &__placeholder {
-    font-size: $list-text-font-size;
     min-height: $list-text-line-height; // wx
+    font-size: $list-text-font-size;
     line-height: $list-text-line-height;
     color: $list-text-color;
     text-align: center;

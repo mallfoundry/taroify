@@ -1,6 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/mixins/hairline";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/mixins/hairline";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $share-sheet-description-font-size: var(--share-sheet-description-font-size, var(--font-size-sm, $font-size-sm));
 $share-sheet-options-padding: var(--share-sheet-options-padding, var(--padding-md, $padding-md) 0 var(--padding-md, $padding-md) var(--padding-xs, $padding-xs));

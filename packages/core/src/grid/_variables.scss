@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $grid-item-content-padding: var(--grid-item-content-padding, var(--padding-md, $padding-md) var(--padding-xs, $padding-xs));
 $grid-item-content-background-color: var(--grid-item-content-background-color, var(--white, $white));

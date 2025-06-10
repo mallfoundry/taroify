@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}input {
   box-sizing: border-box;
@@ -42,11 +42,8 @@
 
   &--readonly  {
     color: $input-color;
-    opacity: 1;
-  }
-
-  &--readonly {
     cursor: default;
+    opacity: 1;
   }
 
   &--primary,

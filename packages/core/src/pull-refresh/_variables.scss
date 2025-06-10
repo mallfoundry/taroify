@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $pull-refresh-head-height: var(--pull-refresh-head-height, 50px * $hd);
 $pull-refresh-head-line-height: var(--pull-refresh-head-line-height, $pull-refresh-head-height);

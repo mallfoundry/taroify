@@ -1,4 +1,4 @@
-@import "../styles/prefix";
+@use "../styles/prefix" as *;
 
 .#{$component-prefix}flex {
   display: flex;

@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}form-label {
   box-sizing: border-box;

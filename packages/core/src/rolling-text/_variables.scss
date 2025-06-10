@@ -1,11 +1,12 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $rolling-text-font-size: var(--rolling-text-font-size, $font-size-md);
 $rolling-text-color: var(--rolling-text-color, $text-color);
-$rolling-text-gap: var(--rolling-text-gap, 0px);
+$rolling-text-gap: var(--rolling-text-gap, 0);
 $rolling-text-item-width: var(--rolling-text-item-width, 30px);
-$rolling-text-item-border-radius: var(--rolling-text-item-border-radius, 0px);
+$rolling-text-item-border-radius: var(--rolling-text-item-border-radius, 0);
 $rolling-text-background: var(--rolling-text-background, inherit);
 $rolling-text-duration: var(--rolling-text-duration, $animation-duration-base);
 $rolling-text-delay: var(--rolling-text-delay);

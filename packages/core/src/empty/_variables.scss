@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $empty-padding: var(--empty-padding, var(--padding-xl, $padding-xl) 0);
 $empty-image-size: var(--empty-image-size, 160px * $hd);

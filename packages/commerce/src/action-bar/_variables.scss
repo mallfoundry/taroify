@@ -1,6 +1,7 @@
-@import "~@taroify/core/styles/prefix";
-@import "~@taroify/core/styles/mixins/hairline";
-@import "~@taroify/core/styles/variables";
+@forward "~@taroify/core/styles/prefix";
+@forward "~@taroify/core/styles/mixins/hairline" show hairline-common, hairline, hairline-top, hairline-bottom;
+@forward "~@taroify/core/styles/variables";
+@use "~@taroify/core/styles/variables" as *;
 
 $action-bar-color: var(--action-bar-color, var(--gray-6, $gray-6));
 $action-bar-height: var(--action-bar-height, 50px * $hd);

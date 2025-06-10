@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}cascader {
   min-height: calc($cascader-header-height + $cascader-tabs-height + $cascader-options-height);
@@ -42,9 +42,9 @@
   &__options {
     box-sizing: border-box;
     height: $cascader-options-height;
-    padding-top: 6px * $hd;
     // overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    padding-top: 6px * $hd;
   }
 
   &__option {

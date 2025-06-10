@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $toast-width: var(--toast-width, 88px * $hd);
 $toast-min-height: var(--toast-min-height, 88px * $hd);

@@ -1,6 +1,8 @@
-@import "../styles/prefix";
-@import "../styles/variables";
-@import "../cell/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@forward "../cell/variables";
+@use "../styles/variables" as *;
+@use "../cell/variables" as cell;
 
 $form-label-width: var(--form-label-width, 6.2em);
 $form-label-color: var(--form-label-color, var(--gray-7, $gray-7));
@@ -14,7 +16,7 @@ $form-item-right-icon-margin-right: var(--form-item-right-icon-margin-right, -8p
 $form-item-right-button-margin-left: var(--form-item-right-button-margin-left, var(--padding-xs, $padding-xs));
 
 $form-control-color: var(--form-control-color, var(--text-color, $text-color));
-$form-control-min-height: var(--form-control-min-height, $cell-line-height);
+$form-control-min-height: var(--form-control-min-height, cell.$cell-line-height);
 
 $form-feedback-font-size: var(--form-feedback-font-size, var(--font-size-sm, $font-size-sm));
 $form-feedback-valid-color: var(--form-feedback-valid-color, var(--success-color, $success-color));

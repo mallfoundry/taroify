@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $notice-bar-height: var(--notice-bar-height, 40px * $hd);
 $notice-bar-padding: var(--notice-bar-padding, 0 var(--padding-md, $padding-md));

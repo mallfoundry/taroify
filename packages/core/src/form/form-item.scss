@@ -1,4 +1,4 @@
-@import "./variables";
+@use "./variables" as *;
 
 .#{$component-prefix}form-item {
   > .#{$component-prefix}cell__value {

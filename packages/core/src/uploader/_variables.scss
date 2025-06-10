@@ -1,5 +1,6 @@
-@import "../styles/prefix";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $uploader-size: var(--uploader-size, 80px * $hd);
 $uploader-disabled-opacity: var(--uploader-disabled-opacity, var(--disabled-opacity, $disabled-opacity));

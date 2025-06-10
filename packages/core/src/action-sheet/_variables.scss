@@ -1,6 +1,7 @@
-@import "../styles/prefix";
-@import "../styles/mixins/hairline";
-@import "../styles/variables";
+@forward "../styles/prefix";
+@forward "../styles/mixins/hairline";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
 
 $action-sheet-description-padding-bottom: var(--action-sheet-description-padding-bottom, var(--padding-md, $padding-md));
 $action-sheet-subname-margin-top: var(--action-sheet-subname-margin-top, var(--padding-xs, $padding-xs));

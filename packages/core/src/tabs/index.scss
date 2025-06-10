@@ -1,4 +1,4 @@
-@import "./tab";
-@import "./tabs";
-@import "./tabs-header";
-@import "./tabs-line";
+@forward "./tab";
+@forward "./tabs";
+@forward "./tabs-header";
+@forward "./tabs-line";
