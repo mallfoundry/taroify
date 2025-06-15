@@ -1,7 +1,7 @@
 {
   "name": "@taroify/~icons",
   "description": "Taroify icon components built on Taro",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "license": "MIT",
   "private": "true",
   "keywords": ["ui", "taro", "react", "mobile", "frontend", "component", "components"],
