@@ -12,6 +12,16 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.9.0
+
+`2025-06-15`
+
+**Other**
+
+- sass 里使用 @use 和 @forward 替换 @import [961](https://github.com/mallfoundry/taroify/pull/961) [@hbztd](https://github.com/hbztd)
+- 文档添加可以使用编译后的css相关说明 [961](https://github.com/mallfoundry/taroify/pull/961) [@hbztd](https://github.com/hbztd)
+- Field 文档更新 [960](https://github.com/mallfoundry/taroify/pull/960) [@Zhengxing-Gu](https://github.com/Zhengxing-Gu)
+
 ### v0.8.1
 
 `2025-05-25`
