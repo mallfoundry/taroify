@@ -1,7 +1,7 @@
 @use "./variables" as *;
 
 .#{$component-prefix}pull-refresh {
-  overflow: hidden;
+  overflow: scroll;
   user-select: none;
 
   &__track {
