@@ -164,21 +164,28 @@ function CustomPreviewUploader() {
     })
   }
 
+  const itemRender = ({ file }: { file: Uploader.File }) => {
+    return (
+      <Uploader.Image
+        key={file.url}
+        url={file.url}
+        name={file.name}
+        type={file.type}
+        onRemove={() => setFiles(files.filter((item) => item !== file))}
+      >
+        <View className="preview-cover taroify-ellipsis">图片名称</View>
+      </Uploader.Image>
+    )
+  }
+
   return (
-    <Uploader value={files} multiple onUpload={onUpload} onChange={setFiles}>
-      {files.map((image) => (
-        <Uploader.Image
-          key={image.url}
-          url={image.url}
-          name={image.name}
-          type={image.type}
-          onRemove={() => setFiles(files.filter((item) => item !== image))}
-        >
-          <View className="preview-cover taroify-ellipsis">图片名称</View>
-        </Uploader.Image>
-      ))}
-      <Uploader.Upload />
-    </Uploader>
+    <Uploader
+      value={files}
+      multiple
+      onUpload={onUpload}
+      onChange={setFiles}
+      itemRender={itemRender}
+    />
   )
 }
 
@@ -204,7 +211,7 @@ export default function UploaderDemo() {
       <Block title="自定义上传样式">
         <CustomUploader />
       </Block>
-      <Block title="自定义预览样式">
+      <Block title="自定义上传列表项">
         <CustomPreviewUploader />
       </Block>
       <Block title="禁用文件上传">
