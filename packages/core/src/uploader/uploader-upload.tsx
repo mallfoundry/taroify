@@ -17,7 +17,7 @@ interface UploaderUploadProps extends ViewProps {
 
 function UploaderUpload(props: UploaderUploadProps) {
   const { className, readonly, icon = <Photograph />, onClick, children, ...restProps } = props
-  const { disabled, onUpload } = useContext(UploaderContext)
+  const { disabled, onUpload, customUploadButton } = useContext(UploaderContext)
 
   function handleClick(event: ITouchEvent) {
     onClick?.(event)
@@ -26,8 +26,8 @@ function UploaderUpload(props: UploaderUploadProps) {
     }
   }
 
-  if (children) {
-    return <View onClick={handleClick}>{children}</View>
+  if (children || customUploadButton) {
+    return <View onClick={handleClick}>{children || customUploadButton}</View>
   }
 
   return (

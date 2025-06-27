@@ -13,6 +13,7 @@ import UploaderMask from "./uploader-mask"
 import UploaderUpload from "./uploader-upload"
 import UploaderContext from "./uploader.context"
 import { getOneUploadFile, getUploadFiles, type UploadFile } from "./uploader.shared"
+import { isExitChildren } from "./uploader.utils"
 
 function renderUploaderMask(file: UploadFile) {
   return (
@@ -37,7 +38,7 @@ interface UseUploadFilesRenderProps {
   disabled?: boolean
   multiple?: boolean
   maxFiles?: number
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
   onChange?(file: UploadFile | UploadFile[]): void
 }
 
@@ -84,24 +85,32 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
 
   const files = useMemo(() => {
     if (!multiple) {
-      return []
+      return <></>
     }
+
     const __files__ = _.map(getUploadFiles(value) as UploadFile[], renderImage)
+
     if (__files__.length < maxFiles) {
-      __files__.push(<UploaderUpload key="upload" children={children} />)
+      __files__.push(<UploaderUpload key="upload" />)
     }
-    return __files__ as ReactNode
+
+    return <>{__files__}</>
   }, [maxFiles, multiple, renderImage, value, children])
 
-  if (_.isEmpty(value)) {
-    return <UploaderUpload children={children} />
+  if (_.isEmpty(value) && !isExitChildren(children)) {
+    return <UploaderUpload />
   }
 
   if (!multiple) {
     const file = getOneUploadFile(value)
-    return renderImage(file)
+    return file ? renderImage(file) : <UploaderUpload />
   }
-  return files as JSX.Element
+
+  if (isExitChildren(children)) {
+    return <>{children}</>
+  }
+
+  return files
 }
 
 interface BaseUploaderProps extends ViewProps {
@@ -112,7 +121,8 @@ interface BaseUploaderProps extends ViewProps {
   multiple?: boolean
   maxFiles?: number
   removable?: boolean
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
+  customUploadButton?: ReactNode
   onUpload?(): void
   onChange?(file: (UploadFile & undefined) | (UploadFile[] & undefined)): void
 }
@@ -128,6 +138,7 @@ export default function Uploader(props: UploaderProps) {
     removable = true,
     maxFiles,
     multiple,
+    customUploadButton,
     children,
     onUpload,
     onChange,
@@ -139,6 +150,7 @@ export default function Uploader(props: UploaderProps) {
       value={{
         removable,
         disabled,
+        customUploadButton,
         onUpload,
       }}
     >

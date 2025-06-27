@@ -143,9 +143,9 @@ function MaxFilesUploader() {
 }
 ```
 
-### 自定义上传样式
+### 自定义上传按钮
 
-通过children可以自定义上传区域的样式。
+通过 `customUploadButton` 可以自定义上传按钮的样式
 
 ```tsx
 function CustomUploader() {
@@ -167,19 +167,27 @@ function CustomUploader() {
     })
   }
   return (
-    <Uploader multiple value={files} onChange={setFiles} onUpload={onUpload}>
-      <Button icon={<Plus />} color="primary">
-        上传文件
-      </Button>
-    </Uploader>
+    <Uploader
+      multiple
+      value={files}
+      onChange={setFiles}
+      onUpload={onUpload}
+      customUploadButton={
+        <Button icon={<Plus />} color="primary">
+          上传文件
+        </Button>
+      }
+    />
   )
 }
 ```
 
-### 自定义预览样式
+### 自定义上传预览样式
 
-通过自定义 `Uploader.Image` 组件可以自定义覆盖在预览区域上方的内容。<br/>
-通过 `Uploader.Upload` 组件触发onUpload
+通过 `React.children` 属性可以定义上传按钮和文件展示形式 <br/>
+通过自定义 `Uploader.Image` 组件可以自定义覆盖在预览区域上方的内容 <br/>
+通过 `Uploader.Upload` 组件触发 `onUpload` <br/>
+自定义预览不应该使用 `value`
 ```tsx
 function CustomPreviewUploader() {
   const [files, setFiles] = useState<Uploader.File[]>([
@@ -205,7 +213,7 @@ function CustomPreviewUploader() {
   }
 
   return (
-    <Uploader value={files} multiple onUpload={onUpload} onChange={setFiles}>
+    <Uploader multiple onUpload={onUpload} onChange={setFiles}>
       {files.map((image) => (
         <Uploader.Image
           key={image.url}

@@ -133,11 +133,17 @@ function CustomUploader() {
     })
   }
   return (
-    <Uploader multiple value={files} onChange={setFiles} onUpload={onUpload}>
-      <Button icon={<Plus />} color="primary">
-        上传文件
-      </Button>
-    </Uploader>
+    <Uploader
+      multiple
+      value={files}
+      onChange={setFiles}
+      onUpload={onUpload}
+      customUploadButton={
+        <Button icon={<Plus />} color="primary">
+          上传文件
+        </Button>
+      }
+    />
   )
 }
 
@@ -165,8 +171,8 @@ function CustomPreviewUploader() {
   }
 
   return (
-    <Uploader value={files} multiple onUpload={onUpload} onChange={setFiles}>
-      {files.map((image) => (
+    <Uploader multiple onUpload={onUpload} onChange={setFiles}>
+      {files?.map((image) => (
         <Uploader.Image
           key={image.url}
           url={image.url}
