@@ -37,8 +37,9 @@ interface UseUploadFilesRenderProps {
   disabled?: boolean
   multiple?: boolean
   maxFiles?: number
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
   onChange?(file: UploadFile | UploadFile[]): void
+  itemRender?({ file }: { file: UploadFile }): ReactNode
 }
 
 function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
@@ -50,6 +51,7 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     maxFiles = Number.MAX_VALUE,
     children,
     onChange: onChangeProp,
+    itemRender,
   } = props
 
   const { value = [], setValue } = useUncontrolled({
@@ -82,17 +84,6 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     [disabled, multiple, setValue, value],
   )
 
-  const files = useMemo(() => {
-    if (!multiple) {
-      return []
-    }
-    const __files__ = _.map(getUploadFiles(value) as UploadFile[], renderImage)
-    if (__files__.length < maxFiles) {
-      __files__.push(<UploaderUpload key="upload" children={children} />)
-    }
-    return __files__ as ReactNode
-  }, [maxFiles, multiple, renderImage, value, children])
-
   if (_.isEmpty(value)) {
     return <UploaderUpload children={children} />
   }
@@ -101,7 +92,18 @@ function UploadFilesRender(props: UseUploadFilesRenderProps): JSX.Element {
     const file = getOneUploadFile(value)
     return renderImage(file)
   }
-  return files as JSX.Element
+
+  return (
+    <>
+      {getUploadFiles(value).map((file, index) => {
+        return itemRender ? itemRender({ file }) : renderImage(file, index)
+      })}
+
+      {getUploadFiles(value).length < maxFiles && (
+        <UploaderUpload key="upload" children={children} />
+      )}
+    </>
+  )
 }
 
 interface BaseUploaderProps extends ViewProps {
@@ -112,9 +114,10 @@ interface BaseUploaderProps extends ViewProps {
   multiple?: boolean
   maxFiles?: number
   removable?: boolean
-  children?: ReactNode
+  children?: ReactNode | ReactNode[]
   onUpload?(): void
   onChange?(file: (UploadFile & undefined) | (UploadFile[] & undefined)): void
+  itemRender?({ file }: { file: UploadFile }): ReactNode
 }
 
 export type UploaderProps = BaseUploaderProps
@@ -131,6 +134,7 @@ export default function Uploader(props: UploaderProps) {
     children,
     onUpload,
     onChange,
+    itemRender,
     ...restProps
   } = props
 
@@ -155,6 +159,7 @@ export default function Uploader(props: UploaderProps) {
             maxFiles={maxFiles}
             multiple={multiple}
             onChange={onChange}
+            itemRender={itemRender}
             children={children}
           />
         </View>

@@ -176,10 +176,9 @@ function CustomUploader() {
 }
 ```
 
-### 自定义预览样式
+### 自定义上传列表项
 
-通过自定义 `Uploader.Image` 组件可以自定义覆盖在预览区域上方的内容。<br/>
-通过 `Uploader.Upload` 组件触发onUpload
+通过自定义 `itemrender` 控制每个上传区块
 ```tsx
 function CustomPreviewUploader() {
   const [files, setFiles] = useState<Uploader.File[]>([
@@ -204,21 +203,28 @@ function CustomPreviewUploader() {
     })
   }
 
+  const itemRender = ({ file }: { file: Uploader.File }) => {
+    return (
+      <Uploader.Image
+        key={file.url}
+        url={file.url}
+        name={file.name}
+        type={file.type}
+        onRemove={() => setFiles(files.filter((item) => item !== file))}
+      >
+        <View className="preview-cover taroify-ellipsis">图片名称</View>
+      </Uploader.Image>
+    )
+  }
+
   return (
-    <Uploader value={files} multiple onUpload={onUpload} onChange={setFiles}>
-      {files.map((image) => (
-        <Uploader.Image
-          key={image.url}
-          url={image.url}
-          name={image.name}
-          type={image.type}
-          onRemove={() => setFiles(files.filter((item) => item !== image))}
-        >
-          <View className="preview-cover taroify-ellipsis">图片名称</View>
-        </Uploader.Image>
-      ))}
-      <Uploader.Upload />
-    </Uploader>
+    <Uploader
+      value={files}
+      multiple
+      onUpload={onUpload}
+      onChange={setFiles}
+      itemRender={itemRender}
+    />
   )
 }
 ```
