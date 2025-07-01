@@ -88,8 +88,8 @@ function FixedHeightList({ disabled }) {
               ref.current?.check()
             }}
           >
-          check
-        </Button>
+            check
+          </Button>
         </Flex.Item>
       </Flex>
     </>
@@ -175,8 +175,8 @@ function PullRefreshList({ disabled }) {
   }
 
   return (
-    <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} onLoad={onLoad} disabled={disabled}>
+    <List loading={loading} hasMore={hasMore} onLoad={onLoad} disabled={disabled}>
+      <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
         {
           //
           list.map((item) => (
@@ -189,8 +189,8 @@ function PullRefreshList({ disabled }) {
             {!hasMore && "没有更多了"}
           </List.Placeholder>
         )}
-      </List>
-    </PullRefresh>
+      </PullRefresh>
+    </List>
   )
 }
 

@@ -130,6 +130,38 @@ function CustomPullRefresh() {
 }
 ```
 
+### 搭配 ScrollView
+
+可搭配 ScrollView 组件
+
+```tsx
+function BasicPullRefresh() {
+  const [loading, setLoading] = useState(false)
+  const [counter, setCounter] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop }) => setReachTop(scrollTop === 0))
+
+  return (
+    <ScrollView scrollY>
+      <PullRefresh
+        loading={loading}
+        reachTop={reachTop}
+        onRefresh={() => {
+          setLoading(true)
+          setTimeout(() => {
+            setCounter(counter + 1)
+            setLoading(false)
+          }, 1000)
+        }}
+      >
+        <View className="pull-text">{counter ? "刷新次数：" + counter : "下拉试试"}</View>
+      </PullRefresh>
+    </ScrollView>
+  )
+}
+```
+
 ## API
 
 ### Props
