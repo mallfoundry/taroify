@@ -193,8 +193,8 @@ function PullRefreshList() {
   }
 
   return (
-    <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
-      <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
+    <List loading={loading} hasMore={hasMore} onLoad={onLoad}>
+      <PullRefresh loading={refreshingRef.current} reachTop={reachTop} onRefresh={onRefresh}>
         {list.map((item) => (
           <Cell key={item}>{item}</Cell>
         ))}
@@ -204,8 +204,8 @@ function PullRefreshList() {
             {!hasMore && "没有更多了"}
           </List.Placeholder>
         )}
-      </List>
-    </PullRefresh>
+      </PullRefresh>
+    </List>
   )
 }
 ```

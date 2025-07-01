@@ -1,5 +1,5 @@
 import { Image, PullRefresh, Tabs } from "@taroify/core"
-import { View } from "@tarojs/components"
+import { ScrollView, View } from "@tarojs/components"
 import { usePageScroll } from "@tarojs/taro"
 import { useState } from "react"
 import CustomWrapper from "../../../components/custom-wrapper"
@@ -95,6 +95,33 @@ function CustomPullRefresh() {
   )
 }
 
+
+function ScrollViewPullRefresh() {
+  const [loading, setLoading] = useState(false)
+  const [counter, setCounter] = useState(0)
+  const [reachTop, setReachTop] = useState(true)
+
+  usePageScroll(({ scrollTop }) => setReachTop(scrollTop === 0))
+
+  return (
+    <ScrollView scrollY>
+      <PullRefresh
+        loading={loading}
+        reachTop={reachTop}
+        onRefresh={() => {
+          setLoading(true)
+          setTimeout(() => {
+            setCounter(counter + 1)
+            setLoading(false)
+          }, 1000)
+        }}
+      >
+        <View className="pull-text">{counter ? "刷新次数：" + counter : "下拉试试"}</View>
+      </PullRefresh>
+    </ScrollView>
+  )
+}
+
 export default function PullRefreshDemo() {
   const [tab, setTab] = useState(0)
   return (
@@ -113,6 +140,11 @@ export default function PullRefreshDemo() {
         <Tabs.TabPane title="自定义提示">
           <CustomWrapper>
             <CustomPullRefresh />
+          </CustomWrapper>
+        </Tabs.TabPane>
+        <Tabs.TabPane title="ScrollView">
+          <CustomWrapper>
+            <ScrollViewPullRefresh />
           </CustomWrapper>
         </Tabs.TabPane>
       </Tabs>
