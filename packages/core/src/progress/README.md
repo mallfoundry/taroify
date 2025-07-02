@@ -25,7 +25,7 @@ import { Progress } from "@taroify/core"
 通过 `stroke-width` 可以设置进度条的粗细。
 
 ```tsx
-<Progress :percentage={50} strokeWidth={8} />
+<Progress percent={50} strokeWidth={8} />
 ```
 
 ### 置灰
