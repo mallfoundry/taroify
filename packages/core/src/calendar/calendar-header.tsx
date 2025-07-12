@@ -7,6 +7,7 @@ import CalendarWeekdays from "./calendar-weekdays"
 import type { CalendarSubtitle } from "./calendar.shared"
 
 interface CalendarHeaderProps {
+  showTitle?: boolean
   title?: ReactNode
   subtitle?: CalendarSubtitle
   showSubtitle?: boolean
@@ -14,10 +15,12 @@ interface CalendarHeaderProps {
 }
 
 function CalendarHeader(props: CalendarHeaderProps) {
-  const { title, subtitle, showSubtitle, date } = props
+  const { showTitle, title, subtitle, showSubtitle, date } = props
   return (
     <View className={prefixClassname("calendar__header")}>
-      <View className={prefixClassname("calendar__header-title")}>{title}</View>
+      {showTitle && (
+          <View className={prefixClassname("calendar__header-title")}>{title}</View>
+      )}
       {showSubtitle && (
         <View className={prefixClassname("calendar__header-subtitle")}>
           {isFunction(subtitle) ? (date ? subtitle(date) : "") : subtitle}
