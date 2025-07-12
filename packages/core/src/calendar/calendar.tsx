@@ -55,6 +55,7 @@ function defaultFormatter(day: CalendarDayObject) {
 
 export interface CalendarProps extends ViewProps {
   type?: CalendarType
+  showTitle?: boolean
   title?: ReactNode
   subtitle?: CalendarSubtitle
   showSubtitle?: boolean
@@ -88,6 +89,7 @@ function Calendar(props: CalendarProps) {
   const {
     className,
     style,
+    showTitle = true,
     title = "日期选择",
     subtitle = defaultSubtitleRender,
     showSubtitle = true,
@@ -483,6 +485,7 @@ function Calendar(props: CalendarProps) {
           style={style}
         >
           <CalendarHeader
+            showTitle={showTitle}
             title={title}
             subtitle={subtitle}
             date={currentMonth}
