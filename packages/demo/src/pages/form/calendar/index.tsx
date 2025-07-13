@@ -408,6 +408,24 @@ function CustomFirstDayOfWeekCalendar() {
   )
 }
 
+
+function CustomWithoutTitleCalendar() {
+  const [minDate] = useState(new Date(2025, 6, 1))
+  const [maxDate] = useState(new Date(2025, 6, 30))
+  const [value, setValue] = useState<Date>()
+  return (
+    <Calendar
+      style={{ height: "500px" }}
+      showTitle={false}
+      showSubtitle={false}
+      min={minDate}
+      max={maxDate}
+      value={value}
+      onChange={setValue}
+    />
+  )
+}
+
 function TiledCalendar() {
   const [minDate] = useState(new Date(2012, 1, 10))
   const [maxDate] = useState(new Date(2012, 10, 20))
@@ -474,6 +492,9 @@ export default function CalendarDemo() {
       </Block>
       <Block variant="card" title="平铺展示">
         <TiledCalendar />
+      </Block>
+      <Block variant="card" title="隐藏标题">
+        <CustomWithoutTitleCalendar />
       </Block>
     </Page>
   )
