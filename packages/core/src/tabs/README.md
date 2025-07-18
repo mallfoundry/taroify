@@ -23,10 +23,10 @@ function BasicTabs() {
   const [value, setValue] = useState(0)
   return (
     <Tabs value={value} onChange={setValue}>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -40,18 +40,18 @@ import { Tabs } from "@taroify/core"
 function BadgeTabs() {
   return (
     <Tabs>
-      <Tabs.TabPane title="标签 1" dot>
+      <Tabs.TabPanel title="标签 1" dot>
         内容 1
-      </Tabs.TabPane>
-      <Tabs.TabPane title="标签 2" badge={8}>
+      </Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2" badge={8}>
         内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane title="标签 3" badge="Hot">
+      </Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3" badge="Hot">
         内容 3
-      </Tabs.TabPane>
-      <Tabs.TabPane title="标签 4" badge={<Success className="badge-icon" />}>
+      </Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4" badge={<Success className="badge-icon" />}>
         内容 4
-      </Tabs.TabPane>
+      </Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -69,22 +69,22 @@ function BadgeTabs() {
 
 ### 通过标识匹配
 
-在 `Tabs.TabPane` 标签指定 `value` 属性的情况下，`Tabs.defaultValue` 的值为当前标签的 `value`。
+在 `Tabs.TabPanel` 标签指定 `value` 属性的情况下，`Tabs.defaultValue` 的值为当前标签的 `value`。
 
 ```tsx
 <Tabs defaultValue="a">
-  <Tabs.TabPane value="a" title="标签 1">
+  <Tabs.TabPanel value="a" title="标签 1">
     内容 1
-  </Tabs.TabPane>
-  <Tabs.TabPane value="b" title="标签 2">
+  </Tabs.TabPanel>
+  <Tabs.TabPanel value="b" title="标签 2">
     内容 2
-  </Tabs.TabPane>
-  <Tabs.TabPane value="c" title="标签 3">
+  </Tabs.TabPanel>
+  <Tabs.TabPanel value="c" title="标签 3">
     内容 3
-  </Tabs.TabPane>
-  <Tabs.TabPane value="d" title="标签 4">
+  </Tabs.TabPanel>
+  <Tabs.TabPanel value="d" title="标签 4">
     内容 4
-  </Tabs.TabPane>
+  </Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -94,13 +94,13 @@ function BadgeTabs() {
 
 ```tsx
 <Tabs>
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-  <Tabs.TabPane title="标签 5">内容 5</Tabs.TabPane>
-  <Tabs.TabPane title="标签 6">内容 6</Tabs.TabPane>
-  <Tabs.TabPane title="标签 7">内容 7</Tabs.TabPane>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 5">内容 5</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 6">内容 6</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 7">内容 7</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -110,11 +110,11 @@ function BadgeTabs() {
 
 ```tsx
 <Tabs>
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2" disabled>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2" disabled>
     内容 2
-  </Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  </Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -124,9 +124,9 @@ function BadgeTabs() {
 
 ```tsx
 <Tabs theme="card">
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -142,9 +142,9 @@ function TabsWithTabClick() {
     <>
       <Toast id="toast" />
       <Tabs onTabClick={({ title }) => Toast.open(title)}>
-        <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-        <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-        <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+        <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+        <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+        <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
       </Tabs>
       <Toast id="toast" />
     </>
@@ -158,10 +158,10 @@ function TabsWithTabClick() {
 
 ```tsx
 <Tabs sticky>
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -176,7 +176,7 @@ import { MoreOutlined } from "@taroify/icons"
 function TabsWithCustomTitle() {
   return (
     <Tabs>
-      <Tabs.TabPane
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 1
@@ -184,8 +184,8 @@ function TabsWithCustomTitle() {
         }
       >
         内容 1
-      </Tabs.TabPane>
-      <Tabs.TabPane
+      </Tabs.TabPanel>
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 2
@@ -193,8 +193,8 @@ function TabsWithCustomTitle() {
         }
       >
         内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane
+      </Tabs.TabPanel>
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 3
@@ -202,7 +202,7 @@ function TabsWithCustomTitle() {
         }
       >
         内容 3
-      </Tabs.TabPane>
+      </Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -221,10 +221,10 @@ function TabsWithCustomTitle() {
 
 ```tsx
 <Tabs animated>
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -234,10 +234,10 @@ function TabsWithCustomTitle() {
 
 ```tsx
 <Tabs animated swipeable>
-  <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-  <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-  <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-  <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+  <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+  <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
 </Tabs>
 ```
 
@@ -255,7 +255,7 @@ function TabsWithCustomTitle() {
 | bordered                            | 是否显示标签栏外边框，仅在 `type="line"` 时有效                | _boolean_                                           | `false` |
 | ellipsis                            | 是否省略过长的标题文字                                         | _boolean_                                           | `true`  |
 | sticky                              | 是否使用粘性定位布局                                           | _boolean \| { offsetTop }_                          | `false` |
-| shrink                              | 是否使用收缩布局                                               | _boolean                                            | `false` |
+| shrink                              | 是否使用收缩布局                                               | _booleans_                                            | `false` |
 | swipeable                           | 是否开启手势左右滑动切换                                       | _boolean_                                           | `false` |
 | swipeThreshold <br>`v0.1.0-alpha.8` | 滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动 | _number_                                            | `5`     |
 | lazyRender                          | 是否延迟渲染未展示的选项卡                                     | _boolean_                                           | `false` |

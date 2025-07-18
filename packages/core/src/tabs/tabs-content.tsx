@@ -6,11 +6,11 @@ import { type ReactNode, useMemo } from "react"
 import { prefixClassname } from "../styles"
 import Swiper from "../swiper"
 import { useRendered } from "../utils/state"
-import TabPaneBase from "./tab-pane-base"
+import TabPanelBase from "./tab-panel-base"
 import type { TabEvent, TabObject } from "./tabs.shared"
 
-function useTabPanes(tabObjects?: TabObject[]): ReactNode {
-  return useMemo(() => _.map(tabObjects, (props) => <TabPaneBase {...props} />), [tabObjects])
+function useTabPanels(tabObjects?: TabObject[]): ReactNode {
+  return useMemo(() => _.map(tabObjects, (props) => <TabPanelBase {...props} />), [tabObjects])
 }
 
 interface TabsContentProps {
@@ -32,7 +32,7 @@ export function TabsContent(props: TabsContentProps) {
     [activeValue, tabObjects],
   )
 
-  const panes = useTabPanes(tabObjects)
+  const panes = useTabPanels(tabObjects)
 
   function onSwiperChange(index: number) {
     const tabObject = _.get(tabObjects, index)

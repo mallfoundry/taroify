@@ -1,10 +1,10 @@
+import * as React from "react"
 import { useUncontrolled } from "@taroify/hooks"
 import { View } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
 import type { PageScrollObject } from "@tarojs/taro"
 import classNames from "classnames"
 import * as _ from "lodash"
-import * as React from "react"
 import {
   Children,
   isValidElement,
@@ -16,7 +16,7 @@ import {
 } from "react"
 import Sticky from "../sticky"
 import { prefixClassname } from "../styles"
-import TabPane from "./tab-pane"
+import TabPanel from "./tab-panel"
 import { TabsContent } from "./tabs-content"
 import TabsHeader from "./tabs-header"
 import TabsContext from "./tabs.context"
@@ -31,7 +31,7 @@ function useTabObjects(children: ReactNode) {
         return node
       }
       const element = node as ReactElement
-      if (element.type !== TabPane) {
+      if (element.type !== TabPanel) {
         return element
       }
       const { key, props } = element
@@ -62,7 +62,7 @@ function useTabsSticky(sticky?: boolean | TabsSticky): TabsSticky | undefined {
       offsetTop: 0,
     }
   }
-  return sticky
+  return typeof sticky === "object" ? sticky : { offsetTop: 0 }
 }
 
 export interface TabsProps extends ViewProps {
