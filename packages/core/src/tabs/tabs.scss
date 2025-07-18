@@ -17,7 +17,8 @@
       overflow: hidden;
     }
 
-    .#{$component-prefix}tabs__tab-pane {
+    .#{$component-prefix}tabs__tab-pane,
+    .#{$component-prefix}tabs__tab-panel {
       &,
       &-wrapper {
         box-sizing: border-box;

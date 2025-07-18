@@ -2,7 +2,7 @@ import type { ViewProps } from "@tarojs/components/types/View"
 import * as React from "react"
 import type { ReactNode } from "react"
 
-interface TabPaneProps extends ViewProps {
+interface TabPanelProps extends ViewProps {
   className?: string
   value?: any
   classNames?: { title: string }
@@ -13,6 +13,6 @@ interface TabPaneProps extends ViewProps {
   children?: ReactNode
 }
 
-export default function TabPane(props: TabPaneProps) {
+export default function TabPanel(props: TabPanelProps) {
   return <></>
 }

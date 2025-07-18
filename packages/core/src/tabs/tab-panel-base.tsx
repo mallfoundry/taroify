@@ -45,7 +45,11 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
         ...style,
         display: !(animated || swipeable) && !active ? "none" : "",
       }}
-      className={classNames(prefixClassname("tabs__tab-pane"), className)}
+      className={classNames(
+        prefixClassname("tabs__tab-pane"),
+        prefixClassname("tabs__tab-panel"),
+        className,
+      )}
       children={shouldRender ? children : undefined}
       {...restProps}
     />
@@ -54,9 +58,14 @@ export default function TabPaneBase(props: TabPaneBaseProps) {
   if (animated || swipeable) {
     return (
       <Swiper.Item
-        className={classNames(prefixClassname("tabs__tab-pane-wrapper"), {
-          [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
-        })}
+        className={classNames(
+          prefixClassname("tabs__tab-pane-wrapper"),
+          prefixClassname("tabs__tab-panel-wrapper"),
+          {
+            [prefixClassname("tabs__tab-pane-wrapper--inactive")]: !active,
+            [prefixClassname("tabs__tab-panel-wrapper--inactive")]: !active,
+          },
+        )}
         children={tabPane}
       />
     )

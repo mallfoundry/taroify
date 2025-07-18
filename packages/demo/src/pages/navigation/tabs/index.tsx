@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Tabs, Toast } from "@taroify/core"
 import { MoreOutlined, Success } from "@taroify/icons"
 import Block from "../../../components/block"
@@ -8,10 +9,10 @@ import "./index.scss"
 function BasicTabs() {
   return (
     <Tabs>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -19,10 +20,10 @@ function BasicTabs() {
 function BadgeTabs() {
   return (
     <Tabs>
-      <Tabs.TabPane title="标签 1" dot>内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2" badge={8}>内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3" badge="Hot">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4" badge={<Success className="badge-icon" />}>内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1" dot>内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2" badge={8}>内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3" badge="Hot">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4" badge={<Success className="badge-icon" />}>内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -30,18 +31,18 @@ function BadgeTabs() {
 function KeyedTabs() {
   return (
     <Tabs defaultValue="a">
-      <Tabs.TabPane value="a" title="标签 1">
+      <Tabs.TabPanel value="a" title="标签 1">
         内容 1
-      </Tabs.TabPane>
-      <Tabs.TabPane value="b" title="标签 2">
+      </Tabs.TabPanel>
+      <Tabs.TabPanel value="b" title="标签 2">
         内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane value="c" title="标签 3">
+      </Tabs.TabPanel>
+      <Tabs.TabPanel value="c" title="标签 3">
         内容 3
-      </Tabs.TabPane>
-      <Tabs.TabPane value="d" title="标签 4">
+      </Tabs.TabPanel>
+      <Tabs.TabPanel value="d" title="标签 4">
         内容 4
-      </Tabs.TabPane>
+      </Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -49,13 +50,13 @@ function KeyedTabs() {
 function ScrollTabs() {
   return (
     <Tabs>
-      <Tabs.TabPane title="标签 1内容 1内容 1内容 1内容 1内容 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
-      <Tabs.TabPane title="标签 5">内容 5</Tabs.TabPane>
-      <Tabs.TabPane title="标签 6">内容 6</Tabs.TabPane>
-      <Tabs.TabPane title="标签 7">内容 7</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1内容 1内容 1内容 1内容 1内容 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 5">内容 5</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 6">内容 6</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 7">内容 7</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -63,11 +64,11 @@ function ScrollTabs() {
 function DisableTabs() {
   return (
     <Tabs>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2" disabled>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2" disabled>
         内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      </Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -75,9 +76,9 @@ function DisableTabs() {
 function CardTabs() {
   return (
     <Tabs theme="card">
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -87,9 +88,9 @@ function TabsWithTabClick() {
     <>
       <Toast id="toast" />
       <Tabs onTabClick={({ title }) => Toast.open(title)}>
-        <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-        <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-        <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
+        <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+        <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+        <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
       </Tabs>
       <Toast id="toast" />
     </>
@@ -99,10 +100,10 @@ function TabsWithTabClick() {
 function StickyTabs() {
   return (
     <Tabs sticky>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -111,16 +112,16 @@ function ShrinkTabs() {
   return (
     <>
     <Tabs shrink>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
     <Tabs shrink theme="card">
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
     </>
   )
@@ -129,7 +130,7 @@ function ShrinkTabs() {
 function TabsWithCustomTitle() {
   return (
     <Tabs>
-      <Tabs.TabPane
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 1
@@ -137,8 +138,8 @@ function TabsWithCustomTitle() {
         }
       >
         内容 1
-      </Tabs.TabPane>
-      <Tabs.TabPane
+      </Tabs.TabPanel>
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 2
@@ -146,8 +147,8 @@ function TabsWithCustomTitle() {
         }
       >
         内容 2
-      </Tabs.TabPane>
-      <Tabs.TabPane
+      </Tabs.TabPanel>
+      <Tabs.TabPanel
         title={
           <>
             <MoreOutlined /> 标签 3
@@ -155,7 +156,7 @@ function TabsWithCustomTitle() {
         }
       >
         内容 3
-      </Tabs.TabPane>
+      </Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -163,10 +164,10 @@ function TabsWithCustomTitle() {
 function AnimatedTabs() {
   return (
     <Tabs animated>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
@@ -174,10 +175,10 @@ function AnimatedTabs() {
 function SwipeableTabs() {
   return (
     <Tabs animated swipeable>
-      <Tabs.TabPane title="标签 1">内容 1</Tabs.TabPane>
-      <Tabs.TabPane title="标签 2">内容 2</Tabs.TabPane>
-      <Tabs.TabPane title="标签 3">内容 3</Tabs.TabPane>
-      <Tabs.TabPane title="标签 4">内容 4</Tabs.TabPane>
+      <Tabs.TabPanel title="标签 1">内容 1</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 2">内容 2</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 3">内容 3</Tabs.TabPanel>
+      <Tabs.TabPanel title="标签 4">内容 4</Tabs.TabPanel>
     </Tabs>
   )
 }
