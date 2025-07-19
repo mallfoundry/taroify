@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Tabs, Toast } from "@taroify/core"
 import { MoreOutlined, Success } from "@taroify/icons"
 import Block from "../../../components/block"
