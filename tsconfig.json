@@ -21,7 +21,7 @@
     "noImplicitAny": false,
     "types": ["jest", "node"],
     "rootDir": ".",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "typeRoots": ["node_modules/@types"]
   },
   "include": ["packages/*/src", "jest/jest-setup.ts", "typings.d.ts"],
