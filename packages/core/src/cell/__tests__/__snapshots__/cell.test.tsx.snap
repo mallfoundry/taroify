@@ -1,48 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Cell /> prop title brief content test 1`] = `
-<div>
-  <taro-view-core
-    class="taroify-cell"
-  >
-    <taro-view-core
-      class="taroify-cell__title"
-    >
-      单元格
-      <taro-view-core
-        class="taroify-cell__brief"
-      >
-        描述信息
-      </taro-view-core>
-    </taro-view-core>
-    <taro-view-core
-      class="taroify-cell__value"
-    >
-      内容
-    </taro-view-core>
-  </taro-view-core>
-</div>
-`;
-
-exports[`<Cell /> prop title content test 1`] = `
-<div>
-  <taro-view-core
-    class="taroify-cell"
-  >
-    <taro-view-core
-      class="taroify-cell__title"
-    >
-      单元格
-    </taro-view-core>
-    <taro-view-core
-      class="taroify-cell__value"
-    >
-      内容
-    </taro-view-core>
-  </taro-view-core>
-</div>
-`;
-
 exports[`<Cell /> render align 1`] = `
 <div>
   <taro-view-core
