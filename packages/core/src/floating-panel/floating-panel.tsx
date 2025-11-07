@@ -1,5 +1,13 @@
 import * as React from "react"
-import { forwardRef, type CSSProperties, useMemo, useState, useRef, useEffect, useImperativeHandle } from "react"
+import {
+  forwardRef,
+  type CSSProperties,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+  useImperativeHandle,
+} from "react"
 import { getWindowInfo, getEnv } from "@tarojs/taro"
 import { View, ScrollView } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
@@ -172,6 +180,8 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
       ) : (
         <ScrollView
           scrollY
+          enhanced={true}
+          bounces={false}
           className={classNames(prefixClassname("floating-panel__content"))}
           ref={contentRef}
           onScroll={onContentScroll}
