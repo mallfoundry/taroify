@@ -22,7 +22,7 @@ function Cell(props: CellProps) {
           {brief && <CellBrief children={brief} briefClass={briefClass} />}
         </CellTitle>
       )}
-      <CellValue alone={!title} children={children} />
+      <CellValue alone={!title} children={children} valueClass={valueClass} />
     </CellBase>
   )
 }
