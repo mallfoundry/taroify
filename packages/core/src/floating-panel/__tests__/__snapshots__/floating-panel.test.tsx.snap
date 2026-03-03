@@ -15,7 +15,9 @@ exports[`<FloatingPanel /> should drag adsorption effect when anchors props is [
       />
     </taro-view-core>
     <taro-scroll-view-core
+      bounces="false"
       class="taroify-floating-panel__content"
+      enhanced="true"
       scroll-y="true"
     >
       内容
@@ -42,7 +44,9 @@ exports[`<FloatingPanel /> should minHeight 100 and maxHeight 0.6 innerHeight wh
       />
     </taro-view-core>
     <taro-scroll-view-core
+      bounces="false"
       class="taroify-floating-panel__content"
+      enhanced="true"
       scroll-y="true"
     >
       内容
