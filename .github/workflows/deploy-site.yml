@@ -30,6 +30,7 @@ jobs:
           cache: yarn
           cache-dependency-path: |
             yarn.lock
+            site/yarn.lock
 
       - name: Run Build Site
         run: |
