@@ -85,6 +85,46 @@ module.exports = {
 };
 ```
 
+Vite 版本
+
+```js
+// config/index.ts
+import { createStyleImportPlugin } from "vite-plugin-style-import";
+
+export default defineConfig<"vite">(async (merge, { command, mode }) => {
+  const baseConfig: UserConfigExport<"vite"> = {
+    compiler: {
+      type: "vite",
+      vitePlugins: [
+        createStyleImportPlugin({
+          libs: [
+            {
+              libraryName: "@taroify/core",
+              esModule: true,
+              resolveStyle: (name: string) => `@taroify/core/${name}/index.css`,
+            },
+            {
+              libraryName: "@taroify/icons",
+              esModule: true,
+              resolveStyle: () => "@taroify/icons/style",
+            },
+          ],
+        }),
+      ],
+    },
+  }
+
+  process.env.BROWSERSLIST_ENV = process.env.NODE_ENV;
+
+  if (process.env.NODE_ENV === "development") {
+    // 本地开发构建配置（不混淆压缩）
+    return merge({}, baseConfig, devConfig);
+  }
+  // 生产构建配置（默认开启压缩混淆等）
+  return merge({}, baseConfig, prodConfig);
+})
+```
+
 接着你可以在代码中直接引入 Taroify 组件：
 
 ```tsx
