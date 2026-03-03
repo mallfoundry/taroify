@@ -3,7 +3,7 @@ import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { type PropsWithChildren, useRef } from "react"
+import { type PropsWithChildren, useEffect, useRef } from "react"
 import type { PlaceholderProps } from "../placeholder"
 import SafeArea, { type SafeAreaPosition } from "../safe-area"
 import { prefixClassname } from "../styles"
@@ -50,6 +50,13 @@ function FixedView<T>(props: FixedViewProps & T) {
   const rootRef = useRef()
   const placeholder = useFixedViewPlaceholder(placeholderProp)
   const height = useHeight(rootRef)
+  const placeholderHeightRef = useRef(0)
+
+  useEffect(() => {
+    if (height > 0) {
+      placeholderHeightRef.current = height
+    }
+  }, [height])
 
   if (position !== "top" && position !== "bottom" && position !== true) {
     return children as JSX.Element
@@ -76,7 +83,11 @@ function FixedView<T>(props: FixedViewProps & T) {
 
   if (placeholder) {
     const { className: placeholderClassName, style: styleProp, ...restPlaceholder } = placeholder
-    const style = mergeStyle(styleProp, height ? { height: addUnitPx(height) } : {})
+    const placeholderHeight = height > 0 ? height : placeholderHeightRef.current
+    const style = mergeStyle(
+      styleProp,
+      placeholderHeight ? { height: addUnitPx(placeholderHeight) } : {},
+    )
     return (
       <View
         className={classNames(prefixClassname("fixed-view__placeholder"), placeholderClassName)}
