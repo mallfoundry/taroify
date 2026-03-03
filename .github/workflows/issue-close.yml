@@ -5,6 +5,9 @@ on:
     - cron: "0 2 * * 1"
   workflow_dispatch: # Allow for running this manually.
 
+permissions:
+  issues: write
+
 jobs:
   issue-to-be-closed:
     if: github.repository == 'mallfoundry/taroify'
