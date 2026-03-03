@@ -1,15 +1,33 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - '**'
-
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - "**/*.md"
+      - ".github/ISSUE_TEMPLATE/**"
+
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+    paths-ignore:
+      - "**/*.md"
+      - ".github/ISSUE_TEMPLATE/**"
 
   workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "20.18.1"
 
 jobs:
   lint:
@@ -21,38 +39,35 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.18.1'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
 
       - name: Install
-        run: |
-          yarn install:node_modules
+        run: yarn install --frozen-lockfile
 
       - name: Run linter
-        run: |
-          yarn run lint
+        run: yarn run lint
 
   test:
     if: github.repository == 'mallfoundry/taroify'
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.18.1'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
 
       - name: Install
-        run: |
-          yarn install:node_modules
+        run: yarn install --frozen-lockfile
 
       - name: Build
-        run: |
-          yarn run build:packages
+        run: yarn run build:packages
 
       - name: Run test cases
-        run: |
-          yarn run test:coverage
+        run: yarn run test:coverage --watchman=false
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
