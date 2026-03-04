@@ -34,6 +34,7 @@ import {
   type ToastType,
   toastEvents,
   toastSelectorSet,
+  pendingToastSelectorSet,
 } from "./toast.shared"
 
 const TOAST_PRESET_TYPES = ["text", "loading", "success", "fail", "html"]
@@ -169,7 +170,10 @@ export default function Toast(props: ToastProps) {
   useEffect(() => {
     rootSelectorRef.current && toastSelectorSet.add(rootSelectorRef.current)
     return () => {
+      // Clean up both sets on unmount to handle force-unmount scenarios
+      // where onTransitionExited may not fire (e.g. page navigation)
       rootSelectorRef.current && toastSelectorSet.delete(rootSelectorRef.current)
+      rootSelectorRef.current && pendingToastSelectorSet.delete(rootSelectorRef.current)
     }
   }, [])
 
