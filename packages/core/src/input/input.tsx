@@ -60,6 +60,7 @@ export function resolveOnChange<
 export interface InputProps extends TaroInputProps {
   placeholderClassName?: string
   readonly?: boolean
+  enableNative?: boolean
   align?: InputAlign
   color?: InputColor
   clearable?: boolean
