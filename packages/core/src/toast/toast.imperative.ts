@@ -23,6 +23,10 @@ const DEFAULT_TOAST_SELECTOR_CREATE = "toast"
 
 const defaultToastOptions: ToastOptions = {}
 
+// Synchronous set to track toasts that are being mounted but haven't completed
+// useEffect registration yet, preventing race conditions on rapid calls.
+const pendingToastSelectorSet = new Set<string>()
+
 // First, Once
 resetDefaultToastOptions()
 
@@ -49,17 +53,23 @@ export function allowMultiple(allow: boolean) {
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
 
-  // Check if a toast with this selector already exists
-  const hasExistingToast = selector && toastSelectorSet.has(`${getPagePath()}__${selector}`)
+  const pageSelector = selector ? `${getPagePath()}__${selector}` : undefined
 
-  // If multiple toasts are allowed, or no existing toast with this selector
-  if ((_isMultipleAllowed && !hasExistingToast) || (!_isMultipleAllowed && !hasExistingToast)) {
-    // Create a new toast view for each instance if multiple are allowed
+  // Check mounted set and pending (pre-useEffect) set to cover the async registration gap
+  const hasExistingToast =
+    pageSelector &&
+    (toastSelectorSet.has(pageSelector) || pendingToastSelectorSet.has(pageSelector))
+
+  // In single mode: only create when no existing toast
+  // In multiple mode: always create a new instance
+  if (_isMultipleAllowed || !hasExistingToast) {
     const toastView = document.createElement("view")
     const onTransitionExited = restOptions.onTransitionExited
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
       unmountPortal(toastView)
+      // Clean up pending set when the toast fully unmounts
+      if (pageSelector) pendingToastSelectorSet.delete(pageSelector)
     }
 
     const selectorId =
@@ -67,6 +77,12 @@ export function openToast(args: ReactNode | ToastOptions) {
 
     // If multiple toasts are allowed, append a unique identifier to ensure uniqueness
     const uniqueId = _isMultipleAllowed ? `${selectorId}-${Date.now()}` : selectorId
+
+    // Register synchronously before mountPortal to prevent race conditions
+    // where rapid successive calls see an empty toastSelectorSet before useEffect fires
+    if (!_isMultipleAllowed && pageSelector) {
+      pendingToastSelectorSet.add(pageSelector)
+    }
 
     mountPortal(
       createElement(Toast, {
