@@ -2,7 +2,13 @@ import * as _ from "lodash"
 import { createElement, isValidElement, type ReactNode } from "react"
 import { document, type TaroNode } from "@tarojs/runtime"
 import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
-import { type ToastOptions, type ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import {
+  type ToastOptions,
+  type ToastType,
+  toastEvents,
+  toastSelectorSet,
+  pendingToastSelectorSet,
+} from "./toast.shared"
 import Toast from "./toast"
 
 let _isMultipleAllowed = false
@@ -22,10 +28,6 @@ const DEFAULT_TOAST_SELECTOR = "#toast"
 const DEFAULT_TOAST_SELECTOR_CREATE = "toast"
 
 const defaultToastOptions: ToastOptions = {}
-
-// Synchronous set to track toasts that are being mounted but haven't completed
-// useEffect registration yet, preventing race conditions on rapid calls.
-const pendingToastSelectorSet = new Set<string>()
 
 // First, Once
 resetDefaultToastOptions()
@@ -55,7 +57,9 @@ export function openToast(args: ReactNode | ToastOptions) {
 
   const pageSelector = selector ? `${getPagePath()}__${selector}` : undefined
 
-  // Check mounted set and pending (pre-useEffect) set to cover the async registration gap
+  // Check both the mounted set and the pending (pre-useEffect) set.
+  // pendingToastSelectorSet covers the async gap between mountPortal and useEffect,
+  // preventing duplicate toasts on rapid successive calls.
   const hasExistingToast =
     pageSelector &&
     (toastSelectorSet.has(pageSelector) || pendingToastSelectorSet.has(pageSelector))
@@ -68,7 +72,8 @@ export function openToast(args: ReactNode | ToastOptions) {
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
       unmountPortal(toastView)
-      // Clean up pending set when the toast fully unmounts
+      // Also clean up pending set here as a safety net
+      // (primary cleanup happens in toast.tsx useEffect on unmount)
       if (pageSelector) pendingToastSelectorSet.delete(pageSelector)
     }
 
