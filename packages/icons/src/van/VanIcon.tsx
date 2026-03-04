@@ -34,6 +34,8 @@ export default function VanIcon({
 }: VanIconProps) {
   const presetColor = ICON_PRESET_COLORS.includes(color as IconColor)
   const presetSize = ICON_PRESET_SIZES.includes(size as IconSize)
+  const colorClass = presetColor && color !== "inherit" ? `taroify-icon--${color}` : undefined
+  const sizeClass = presetSize && size !== "inherit" ? `taroify-icon--${size}` : undefined
 
   return (
     <View
@@ -41,10 +43,8 @@ export default function VanIcon({
         classPrefix,
         `${classPrefix}-${name}`,
         "taroify-icon",
-        {
-          [`taroify-icon--${color}`]: presetColor,
-          [`taroify-icon--${size}`]: presetSize,
-        },
+        colorClass,
+        sizeClass,
         className,
       )}
       style={{
