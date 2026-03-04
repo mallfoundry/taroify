@@ -46,3 +46,7 @@ export type ToastThemeVars = {
 export const toastEvents = new Events()
 
 export const toastSelectorSet = new Set<string>()
+
+// Synchronous set to track toasts being mounted before useEffect registration completes.
+// Exported so toast.tsx can also clean it up on unmount, covering force-unmount scenarios.
+export const pendingToastSelectorSet = new Set<string>()
