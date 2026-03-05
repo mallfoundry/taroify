@@ -51,6 +51,7 @@ export function usePopupBackdrop(
     if (_.isBoolean(options) && !options) {
       return cloneElement(backdrop as ReactElement, { open: false })
     }
+    // @ts-ignore
     return cloneElement(backdrop as ReactElement, { ...options, open: true })
   }, [backdrop, options])
 }
