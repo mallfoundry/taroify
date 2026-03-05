@@ -1,14 +1,9 @@
 import * as _ from "lodash"
 import { createElement, isValidElement, type ReactNode } from "react"
 import { document, type TaroNode } from "@tarojs/runtime"
-import { mountPortal, unmountPortal, getPagePath } from "../utils/dom/portal"
-import {
-  type ToastOptions,
-  type ToastType,
-  toastEvents,
-  toastSelectorSet,
-  pendingToastSelectorSet,
-} from "./toast.shared"
+import { mountPortal, unmountPortal } from "../utils/dom/portal"
+import { type ToastOptions, type ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import { prependPageSelector } from "../utils/dom/element"
 import Toast from "./toast"
 
 let _isMultipleAllowed = false
@@ -55,26 +50,18 @@ export function allowMultiple(allow: boolean) {
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
 
-  const pageSelector = selector ? `${getPagePath()}__${selector}` : undefined
-
-  // Check both the mounted set and the pending (pre-useEffect) set.
-  // pendingToastSelectorSet covers the async gap between mountPortal and useEffect,
-  // preventing duplicate toasts on rapid successive calls.
+  // Check if a toast with this selector already exists
   const hasExistingToast =
-    pageSelector &&
-    (toastSelectorSet.has(pageSelector) || pendingToastSelectorSet.has(pageSelector))
+    !!selector && toastSelectorSet.has(prependPageSelector(selector) || selector)
 
-  // In single mode: only create when no existing toast
-  // In multiple mode: always create a new instance
-  if (_isMultipleAllowed || !hasExistingToast) {
+  // If multiple toasts are allowed, or no existing toast with this selector
+  if ((_isMultipleAllowed && !hasExistingToast) || (!_isMultipleAllowed && !hasExistingToast)) {
+    // Create a new toast view for each instance if multiple are allowed
     const toastView = document.createElement("view")
     const onTransitionExited = restOptions.onTransitionExited
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
       unmountPortal(toastView)
-      // Also clean up pending set here as a safety net
-      // (primary cleanup happens in toast.tsx useEffect on unmount)
-      if (pageSelector) pendingToastSelectorSet.delete(pageSelector)
     }
 
     const selectorId =
@@ -82,12 +69,6 @@ export function openToast(args: ReactNode | ToastOptions) {
 
     // If multiple toasts are allowed, append a unique identifier to ensure uniqueness
     const uniqueId = _isMultipleAllowed ? `${selectorId}-${Date.now()}` : selectorId
-
-    // Register synchronously before mountPortal to prevent race conditions
-    // where rapid successive calls see an empty toastSelectorSet before useEffect fires
-    if (!_isMultipleAllowed && pageSelector) {
-      pendingToastSelectorSet.add(pageSelector)
-    }
 
     mountPortal(
       createElement(Toast, {

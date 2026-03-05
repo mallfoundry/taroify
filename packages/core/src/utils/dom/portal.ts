@@ -1,12 +1,11 @@
-import { getCurrentPages } from "@tarojs/taro"
+import { getCurrentPages, getCurrentInstance } from "@tarojs/taro"
 import { render, unmountComponentAtNode } from "@tarojs/react"
 import { document, type TaroNode } from "@tarojs/runtime"
 
 export function getPagePath() {
   const currentPages = getCurrentPages()
   const currentPage = currentPages[currentPages.length - 1]
-  const path = currentPage.$taroPath
-  return path
+  return currentPage?.$taroPath || currentPage?.route || getCurrentInstance()?.router?.path || ""
 }
 
 const portalViewMap: Map<string, TaroNode> = new Map()
@@ -14,28 +13,23 @@ const portalViewMap: Map<string, TaroNode> = new Map()
 export function mountPortal(children: TaroNode, dom?: TaroNode) {
   const view = dom || document.createElement("view")
   const path = getPagePath()
-  const pageElement = document.getElementById(path)
+  const portalKey = path || "__app__"
+  const pageElement = (path && document.getElementById(path)) || document.body
   if (pageElement) {
-    if (!portalViewMap.has(path)) {
+    if (!portalViewMap.has(portalKey)) {
       const portalView = document.createElement("view")
       pageElement.appendChild(portalView)
-      portalViewMap.set(path, portalView)
+      portalViewMap.set(portalKey, portalView)
     }
     render(children, view)
-    portalViewMap.get(path)?.appendChild(view)
+    portalViewMap.get(portalKey)?.appendChild(view)
   } else {
-    console.error("[Taroify] cannot find page element")
+    console.error("[Taroify] cannot find page element or app root element")
   }
   return view
 }
 
 export function unmountPortal(dom: TaroNode) {
-  const path = getPagePath()
-  const pageElement = document.getElementById(path)
   unmountComponentAtNode(dom)
-  if (pageElement) {
-    dom.parentElement?.removeChild(dom)
-  } else {
-    console.error("[Taroify] cannot find page element")
-  }
+  dom.parentElement?.removeChild(dom)
 }
