@@ -2,7 +2,13 @@ import * as _ from "lodash"
 import { createElement, isValidElement, type ReactNode } from "react"
 import { document, type TaroNode } from "@tarojs/runtime"
 import { mountPortal, unmountPortal } from "../utils/dom/portal"
-import { type ToastOptions, type ToastType, toastEvents, toastSelectorSet } from "./toast.shared"
+import {
+  type ToastOptions,
+  type ToastType,
+  toastEvents,
+  toastSelectorSet,
+  pendingToastSelectorSet,
+} from "./toast.shared"
 import { prependPageSelector } from "../utils/dom/element"
 import Toast from "./toast"
 
@@ -50,18 +56,21 @@ export function allowMultiple(allow: boolean) {
 export function openToast(args: ReactNode | ToastOptions) {
   const { selector, ...restOptions } = parseToastOptions(args)
 
-  // Check if a toast with this selector already exists
-  const hasExistingToast =
-    !!selector && toastSelectorSet.has(prependPageSelector(selector) || selector)
+  const pageSelector = selector ? prependPageSelector(selector) || selector : undefined
 
-  // If multiple toasts are allowed, or no existing toast with this selector
-  if ((_isMultipleAllowed && !hasExistingToast) || (!_isMultipleAllowed && !hasExistingToast)) {
-    // Create a new toast view for each instance if multiple are allowed
+  const hasExistingToast =
+    !!pageSelector &&
+    (toastSelectorSet.has(pageSelector) || pendingToastSelectorSet.has(pageSelector))
+
+  if (_isMultipleAllowed || !hasExistingToast) {
     const toastView = document.createElement("view")
     const onTransitionExited = restOptions.onTransitionExited
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
       unmountPortal(toastView)
+      if (pageSelector) {
+        pendingToastSelectorSet.delete(pageSelector)
+      }
     }
 
     const selectorId =
@@ -69,6 +78,12 @@ export function openToast(args: ReactNode | ToastOptions) {
 
     // If multiple toasts are allowed, append a unique identifier to ensure uniqueness
     const uniqueId = _isMultipleAllowed ? `${selectorId}-${Date.now()}` : selectorId
+
+    // Register synchronously before mountPortal to prevent duplicate creation
+    // during rapid successive calls before useEffect registration completes.
+    if (!_isMultipleAllowed && pageSelector) {
+      pendingToastSelectorSet.add(pageSelector)
+    }
 
     mountPortal(
       createElement(Toast, {
