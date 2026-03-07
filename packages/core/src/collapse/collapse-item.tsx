@@ -59,35 +59,54 @@ function CollapseItem(props: CollapseItemProps) {
   const contentRef = useRef<HTMLElement>()
   const { isExpanded, toggleItem } = useContext(CollapseContext)
   const expanded = isExpanded?.(value)
+  const expandedRef = useRef(expanded)
+  const transitionIdRef = useRef(0)
 
   const [visibility, setVisibility] = useState(expanded)
   const [expandHeight, setExpandHeight] = useState("0")
 
   const onTransitionEnd = useCallback(() => {
-    if (!expanded) {
+    if (!expandedRef.current) {
       setVisibility(false)
     } else {
       setExpandHeight("")
     }
+  }, [])
+
+  useEffect(() => {
+    expandedRef.current = expanded
   }, [expanded])
 
   useEffect(() => {
+    const transitionId = transitionIdRef.current + 1
+    transitionIdRef.current = transitionId
+
     if (expanded) {
       setVisibility(true)
     }
 
-    // Use raf: flick when opened in safari
-    // Use nextTick: closing animation failed when set `user-select: none`
-    const tickRaf = expanded ? nextTick : raf
+    const isStale = () => transitionIdRef.current !== transitionId
 
-    tickRaf(async () => {
+    const queueLayout = expanded ? nextTick : raf
+
+    queueLayout(async () => {
+      if (isStale()) {
+        return
+      }
+
       const { height } = await getRect(contentRef)
+      if (isStale()) {
+        return
+      }
+
       if (height) {
         const heightPx = addUnitPx(height)
         setExpandHeight(expanded ? "0" : heightPx)
 
-        // use double raf to ensure animation can start
         doubleRaf(() => {
+          if (isStale()) {
+            return
+          }
           setExpandHeight(expanded ? heightPx : "0")
         })
       } else {
