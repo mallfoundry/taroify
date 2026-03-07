@@ -5,15 +5,21 @@
 通过本章节你可以了解到 Taroify 的安装方法和基本使用姿势。
 
 ### 安装
+
 npm
+
 ```bash
 npm i @taroify/core
 ```
+
 yarn
+
 ```bash
 yarn add @taroify/core
 ```
+
 pnpm
+
 ```bash
 pnpm add @taroify/core
 ```
@@ -28,7 +34,9 @@ pnpm add @taroify/core
 # 安装插件
 npm i babel-plugin-import -D
 ```
+
 加载Sass源文件，通过Taro转成CSS
+
 ```js
 // babel.config.js
 module.exports = {
@@ -56,7 +64,9 @@ module.exports = {
   ],
 };
 ```
+
 若不想加载Sass源文件或者其他情况，也可以加载编译后的CSS文件
+
 ```js
 // babel.config.js
 module.exports = {
@@ -183,13 +193,24 @@ const config = {
 ```
 
 ### designWidth
-Taroify designWidth为750，如果你的designWidth为375，显示效果为两倍大，可以通过修改sass变量`$hd`适配（或者你想修改显示大小）
+
+Taroify designWidth 为 750。如果你的 `designWidth` 为 375，显示效果会放大两倍。由于 Taroify 内部样式已经改为 Sass Modules（`@use`），旧的 `sass.data: "$hd: 1;"` 写法已经不会生效，需要改为在构建时配置 `variables` 模块：
+
 ```tsx
 // config/index.js
 module.exports = {
   // ...
   sass: {
-    data: "$hd: 1;"
+    data: '@use "@taroify/core/styles/variables" as taroify_variables with ($hd: 1);'
   }
 }
 ```
+
+同时需要确保引入的是 scss 入口：
+
+```tsx
+import "@taroify/core/index.scss"
+import "@taroify/icons/index.scss"
+```
+
+如果引入的是 `@taroify/core/index.css` 或 `@taroify/icons/index.css`，Sass 变量覆盖不会生效。
