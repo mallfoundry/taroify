@@ -76,11 +76,11 @@
   }
 
   &__value {
-    flex:  0 0 auto;
     color: $cell-value-color;
     text-align: right;
 
     &--alone {
+      flex: 1;
       color: $text-color;
       text-align: left;
     }
