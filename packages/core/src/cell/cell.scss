@@ -76,9 +76,13 @@
   }
 
   &__value {
-    flex:  0 0 auto;
+    flex: 1;
     color: $cell-value-color;
     text-align: right;
+
+    &--empty {
+      flex: 0 0 auto;
+    }
 
     &--alone {
       color: $text-color;
