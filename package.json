@@ -1,6 +1,6 @@
 {
   "name": "taroify",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "license": "MIT",
   "private": true,
   "repository": {
@@ -38,7 +38,7 @@
   "browserslist": ["last 3 versions"],
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@taroify/cli": "^0.9.1",
+    "@taroify/cli": "^0.9.2",
     "@types/jest": "^26.0.24",
     "@types/node": "^14.18.63",
     "cross-env": "^7.0.3",

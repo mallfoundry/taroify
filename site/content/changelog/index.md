@@ -12,6 +12,20 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 更新内容
 
+### v0.9.2
+
+`2026-03-10`
+
+**Bug Fixes**
+
+- Cell
+
+  - 修复 `value` 空占位问题 [1006](https://github.com/mallfoundry/taroify/pull/1006) [@Duo-Huang](https://github.com/Duo-Huang)
+
+- Collapse
+
+  - 修复在小程序上表现卡顿问题 [1002](https://github.com/mallfoundry/taroify/pull/1002) [@Pilotager](https://github.com/Pilotager)
+
 ### v0.9.1
 
 `2026-03-08`
@@ -47,33 +61,33 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 - Cell
 
-  - 修复 taroify-cell__value 为空的时候依然占位 [968](https://github.com/mallfoundry/taroify/pull/968) [felix9ia](https://github.com/felix9ia)
+  - 修复 taroify-cell__value 为空的时候依然占位 [968](https://github.com/mallfoundry/taroify/pull/968) [@felix9ia](https://github.com/felix9ia)
 
 - FixedView
 
-  - 修复切换页面高度问题 [996](https://github.com/mallfoundry/taroify/pull/996) [Pilotager](https://github.com/Pilotager)
+  - 修复切换页面高度问题 [996](https://github.com/mallfoundry/taroify/pull/996) [@Pilotager](https://github.com/Pilotager)
 
 - Toast
 
-  - 修复多个 `Toast` 叠加问题 [998](https://github.com/mallfoundry/taroify/pull/998) [Duo-Huang](https://github.com/Duo-Huang)
+  - 修复多个 `Toast` 叠加问题 [998](https://github.com/mallfoundry/taroify/pull/998) [@Duo-Huang](https://github.com/Duo-Huang)
 
 - Icon
 
-  - 修复 `color` 属性不生效问题 [999](https://github.com/mallfoundry/taroify/pull/999) [Pilotager](https://github.com/Pilotager)
+  - 修复 `color` 属性不生效问题 [999](https://github.com/mallfoundry/taroify/pull/999) [@Pilotager](https://github.com/Pilotager)
 
 - Radio
 
-  - 修复 `1px` 边框问题 [1000](https://github.com/mallfoundry/taroify/pull/1000) [Pilotager](https://github.com/Pilotager)
+  - 修复 `1px` 边框问题 [1000](https://github.com/mallfoundry/taroify/pull/1000) [@Pilotager](https://github.com/Pilotager)
 
 **Other**
 
-- 修正 `List` 搭配 `PullRefresh` 的使用示例 [968](https://github.com/mallfoundry/taroify/pull/968) [felix9ia](https://github.com/felix9ia)
-- 更新 `Progress` 示例 [969](https://github.com/mallfoundry/taroify/pull/969) [lvqq](https://github.com/lvqq)
-- 修复 `CI` 环境报错 [970](https://github.com/mallfoundry/taroify/pull/970) [lvqq](https://github.com/lvqq)
-- 更新 `Dialog` 样式文档 [973](https://github.com/mallfoundry/taroify/pull/973) [lvqq](https://github.com/lvqq)
-- 更新 `Cell` 测试快照 [981](https://github.com/mallfoundry/taroify/pull/981) [Pilotager](https://github.com/Pilotager)
-- 更新 `Vite` 按需加载示例 [996](https://github.com/mallfoundry/taroify/pull/996) [Pilotager](https://github.com/Pilotager)
-- 更新 `$hd` 注入文档 [1001](https://github.com/mallfoundry/taroify/pull/1001) [Pilotager](https://github.com/Pilotager)
+- 修正 `List` 搭配 `PullRefresh` 的使用示例 [968](https://github.com/mallfoundry/taroify/pull/968) [@felix9ia](https://github.com/felix9ia)
+- 更新 `Progress` 示例 [969](https://github.com/mallfoundry/taroify/pull/969) [@lvqq](https://github.com/lvqq)
+- 修复 `CI` 环境报错 [970](https://github.com/mallfoundry/taroify/pull/970) [@lvqq](https://github.com/lvqq)
+- 更新 `Dialog` 样式文档 [973](https://github.com/mallfoundry/taroify/pull/973) [@lvqq](https://github.com/lvqq)
+- 更新 `Cell` 测试快照 [981](https://github.com/mallfoundry/taroify/pull/981) [@Pilotager](https://github.com/Pilotager)
+- 更新 `Vite` 按需加载示例 [996](https://github.com/mallfoundry/taroify/pull/996) [@Pilotager](https://github.com/Pilotager)
+- 更新 `$hd` 注入文档 [1001](https://github.com/mallfoundry/taroify/pull/1001) [@Pilotager](https://github.com/Pilotager)
 
 ### v0.9.0
 
