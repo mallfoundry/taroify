@@ -26,7 +26,9 @@ function CellValue(props: CellValueProps) {
         valueClass,
       )}
       {...restProps}
-    />
+    >
+      {children}
+    </View>
   )
 }
 
