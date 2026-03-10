@@ -12,13 +12,15 @@ interface CellValueProps extends ViewProps {
 }
 
 function CellValue(props: CellValueProps) {
-  const { className, alone, valueClass, ...restProps } = props
+  const { className, alone, valueClass, children, ...restProps } = props
+  const empty = React.Children.count(children) === 0
   return (
     <View
       className={classNames(
         prefixClassname("cell__value"),
         {
           [prefixClassname("cell__value--alone")]: alone,
+          [prefixClassname("cell__value--empty")]: empty,
         },
         className,
         valueClass,
