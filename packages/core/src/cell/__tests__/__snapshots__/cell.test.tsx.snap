@@ -21,7 +21,7 @@ exports[`<Cell /> render align 1`] = `
       内容
     </taro-view-core>
     <taro-view-core
-      class="van-icon van-icon-arrow taroify-icon taroify-icon--inherit taroify-cell__right-icon"
+      class="van-icon van-icon-arrow taroify-icon taroify-cell__right-icon"
     />
   </taro-view-core>
 </div>
@@ -33,7 +33,7 @@ exports[`<Cell /> render icon 1`] = `
     class="taroify-cell"
   >
     <taro-view-core
-      class="van-icon van-icon-location-o taroify-icon taroify-icon--inherit taroify-cell__icon"
+      class="van-icon van-icon-location-o taroify-icon taroify-cell__icon"
     />
     <taro-view-core
       class="taroify-cell__title"
@@ -70,7 +70,7 @@ exports[`<Cell /> render isLink and arrowDirection 1`] = `
       内容
     </taro-view-core>
     <taro-view-core
-      class="van-icon van-icon-arrow-down taroify-icon taroify-icon--inherit taroify-cell__right-icon"
+      class="van-icon van-icon-arrow-down taroify-icon taroify-cell__right-icon"
     />
   </taro-view-core>
 </div>
