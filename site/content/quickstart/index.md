@@ -97,6 +97,8 @@ module.exports = {
 
 Vite 版本
 
+`npm install -D vite-plugin-style-import consola`
+
 ```js
 // config/index.ts
 import { createStyleImportPlugin } from "vite-plugin-style-import";
@@ -111,7 +113,8 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
             {
               libraryName: "@taroify/core",
               esModule: true,
-              resolveStyle: (name: string) => `@taroify/core/${name}/index.css`,
+              resolveStyle: (name: string) => `@taroify/core/${name}/style/index.js`,
+              ensureStyleFile: true,
             },
             {
               libraryName: "@taroify/icons",
