@@ -7,7 +7,7 @@ function isEmptyValue(value: any) {
   if (Array.isArray(value)) {
     return !value.length
   }
-  if (value === 0) {
+  if (value === 0 || value === false) {
     return false
   }
   return !value
