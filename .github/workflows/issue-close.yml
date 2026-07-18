@@ -6,6 +6,7 @@ on:
   workflow_dispatch: # Allow for running this manually.
 
 permissions:
+  actions: write
   issues: write
 
 jobs:
@@ -14,10 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: close-issues
-        uses: actions-cool/issues-helper@v3
+        uses: actions/stale@v10
         with:
-          actions: 'close-issues'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          labels: 'to be closed'
-          inactive-day: 7
-          close-reason: 'completed'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-label: 'to be closed'
+          days-before-issue-stale: -1
+          days-before-issue-close: 7
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          remove-issue-stale-when-updated: false
+          close-issue-reason: 'completed'
