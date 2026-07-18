@@ -77,6 +77,7 @@ function Input(props: InputProps) {
     className,
     placeholderClass,
     placeholderClassName,
+    type,
     value: valueProp,
     readonly,
     disabled,
@@ -118,6 +119,21 @@ function Input(props: InputProps) {
   }
 
   const handleInput = (event: BaseEventOrig<TaroInputProps.inputEventDetail>) => {
+    if (type === "number") {
+      const inputValue = event.detail.value
+      const nextValue = inputValue.replace(/\D/g, "")
+
+      if (nextValue === inputValue) {
+        onInput?.(event)
+        onChange?.(event)
+      } else {
+        resolveOnChange(event, onInput, nextValue)
+        resolveOnChange(event, onChange, nextValue)
+      }
+      setValue(nextValue)
+      return nextValue
+    }
+
     onInput?.(event)
     onChange?.(event)
     setValue(event.detail.value)
@@ -166,6 +182,7 @@ function Input(props: InputProps) {
         disabled={inBrowser ? disabled : disabled || readonly}
         readonly={readonly}
         color={color}
+        type={type}
         value={value}
         onFocus={handleFocus}
         onInput={handleInput}
