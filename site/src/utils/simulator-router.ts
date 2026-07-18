@@ -2,6 +2,7 @@ import { navigate } from "gatsby"
 import * as _ from "lodash"
 
 import menus from "./menus"
+import { SIMULATOR_READY_EVENT } from "./theme-message"
 
 const SOURCE_PROPERTY_NAME = "source"
 const SIMULATOR_SOURCE_NAME = "taroify-simulator"
@@ -32,7 +33,11 @@ interface Message {
   payload?: any
 }
 
-export function listeningSimulatorEvents() {
+interface SimulatorEventHandlers {
+  onReady?(source: Window | null): void
+}
+
+export function listeningSimulatorEvents(handlers: SimulatorEventHandlers = {}) {
   function messageHandler(event: MessageEvent) {
     const { data } = event
     if (
@@ -45,6 +50,8 @@ export function listeningSimulatorEvents() {
         handleSimulatorNavigateTo(message.payload)
       } else if (message.event === NAVIGATE_BACK_EVENT) {
         handleSimulatorNavigateBack()
+      } else if (message.event === SIMULATOR_READY_EVENT) {
+        handlers.onReady?.(event.source as Window | null)
       }
     }
   }

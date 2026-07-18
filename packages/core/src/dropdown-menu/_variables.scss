@@ -4,7 +4,7 @@
 
 // dropdown-menu
 $dropdown-menu-height: var(--dropdown-menu-height, 48px * $hd);
-$dropdown-menu-background-color: var(--dropdown-menu-background-color, var(--white, $white));
+$dropdown-menu-background-color: var(--dropdown-menu-background-color, var(--background-color-2, $background-color-2));
 $dropdown-menu-z-index: var(--dropdown-menu-z-index, 11);
 $dropdown-menu-box-shadow: var(
   --dropdown-menu-box-shadow,

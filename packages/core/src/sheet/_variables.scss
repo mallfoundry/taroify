@@ -15,7 +15,7 @@ $sheet-description-color: var(--gray-6, $gray-6);
 $sheet-description-font-size: var(--font-size-md, $font-size-md);
 $sheet-description-line-height: 16px * $hd;
 
-$sheet-item-background: var(--white, $white);
+$sheet-item-background: var(--sheet-item-background, var(--background-color-2, $background-color-2));
 $sheet-item-font-size: var(--font-size-lg, $font-size-lg);
 $sheet-item-line-height: var(--line-height-md, $line-height-md);
 $sheet-item-text-color: var(--text-color, $text-color);

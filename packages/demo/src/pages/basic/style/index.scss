@@ -1,4 +1,5 @@
 @import "~@taroify/core/styles/hairline";
+@import "~@taroify/core/styles/variables";
 
 .style-demo {
 
@@ -17,7 +18,7 @@
     margin-bottom: 16px * 2;
     font-size: 14px * 2;
     line-height: 18px * 2;
-    color: #323233;
+    color: $text-color;
 
     &:last-child {
       margin-bottom: 0;
@@ -26,7 +27,7 @@
 
   .hairline-line {
     height: 30px * 2;
-    background-color: #fff;
+    background-color: $background-color-2;
 
     &::after {
       top: 5px * 2;

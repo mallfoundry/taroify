@@ -7,7 +7,7 @@ $circle-width: var(--circle-width, $circle-size);
 $circle-height: var(--circle-height, $circle-size);
 $circle-color: var(--circle-color, var(--primary-color, $primary-color));
 $circle-hover-stroke: var(--circle-hover-stroke, $circle-color);
-$circle-layer-stroke: var(--circle-layer-stroke, var(--white, $white));
+$circle-layer-stroke: var(--circle-layer-stroke, var(--background-color-2, $background-color-2));
 $circle-text-padding: var(--circle-text-padding, 0 var(--padding-base, $padding-base));
 $circle-text-color: var(--circle-text-color, var(--text-color, $text-color));
 $circle-text-font-weight: var(--circle-text-font-weight, var(--font-weight-bold, $font-weight-bold));

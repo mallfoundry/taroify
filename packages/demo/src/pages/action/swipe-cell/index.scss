@@ -17,11 +17,11 @@
     }
 
     .custom-card {
-      background: #fff;
+      background: $background-color-2;
       position: relative;
       box-sizing: border-box;
       padding: 8px * $hd 16px * $hd;
-      color: #323233;
+      color: $text-color;
       font-size: 12px * $hd;
       display: flex;
 

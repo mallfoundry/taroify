@@ -34,15 +34,15 @@ $info-color: var(--cyan, $cyan);
 $success-color: var(--green, $green);
 $warning-color: var(--orange, $orange);
 $danger-color: var(--red, $red);
-$text-color: var(--gray-8, $gray-8);
-$text-color-2: var(--gray-6, $gray-6);
-$text-color-3: var(--gray-5, $gray-5);
-$active-color: var(--gray-2, $gray-2);
+$text-color: var(--text-color, var(--gray-8, $gray-8));
+$text-color-2: var(--text-color-2, var(--gray-6, $gray-6));
+$text-color-3: var(--text-color-3, var(--gray-5, $gray-5));
+$active-color: var(--active-color, var(--gray-2, $gray-2));
 $active-opacity: var(--active-opacity, 0.6);
 $disabled-opacity: var(--disabled-opacity, 0.5);
-$background-color: var(--gray-1, $gray-1);
-$background-color-2: var(--white, $white);
-$background-color-light: var(--white, $white);
+$background-color: var(--background-color, var(--gray-1, $gray-1));
+$background-color-2: var(--background-color-2, var(--white, $white));
+$background-color-light: var(--background-color-light, $background-color-2);
 $text-link-color: var(--text-link-color, #576b95);
 
 // Padding
@@ -85,7 +85,7 @@ $animation-timing-function-enter: ease-out;
 $animation-timing-function-exit: ease-in;
 
 // Border
-$border-color: var(--gray-3, $gray-3);
+$border-color: var(--border-color, var(--gray-3, $gray-3));
 $border-width-base: 1px * $hd;
 $border-radius-sm: 2px * $hd;
 $border-radius-md: 4px * $hd;

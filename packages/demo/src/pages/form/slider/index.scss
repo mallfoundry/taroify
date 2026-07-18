@@ -3,7 +3,7 @@
 @import "../../../styles/prefix";
 
 .slider-demo {
-  background: #fff;
+  background: $background-color-2;
 
   .#{$demo-prefix}block__content {
     padding: 0 16px * $hd 20px * $hd;

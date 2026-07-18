@@ -4,7 +4,8 @@
 
 .#{$demo-prefix}home {
   padding: 46px * $hd 20px * $hd 20px * $hd;
-  background: #fff;
+  color: $text-color;
+  background: $background-color-2;
 
   &__title,
   &__description {
@@ -19,6 +20,7 @@
     align-items: center;
     margin: 0 0 16px * $hd;
     font-size: 32px * $hd;
+    font-weight: 600;
   }
 
   &__logo {
@@ -35,6 +37,6 @@
     display: block;
     margin: 0 0 40px * $hd;
     font-size: 14px * $hd;
-    color: rgba(69, 90, 100, 0.6);
+    color: $text-color-2;
   }
 }

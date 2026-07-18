@@ -28,7 +28,7 @@ $button-height-large: var(--button-height-large, 50px * $hd);
 $button-font-size-large: var(--button-font-size-large, var(--font-size-lg, $font-size-lg));
 
 $button-default-color: var(--button-default-color, var(--text-color, $text-color));
-$button-default-background-color: var(--button-default-background-color, var(--white, $background-color-2));
+$button-default-background-color: var(--button-default-background-color, var(--background-color-2, $background-color-2));
 $button-default-border-color: var(--button-default-border-color, var(--border-color, $gray-4));
 
 $button-primary-color: var(--button-primary-color, var(--white, $white));

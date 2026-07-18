@@ -10,9 +10,9 @@
   width: 360px;
   min-width: 360px;
   overflow: hidden;
-  background: #fafafa;
+  background: var(--site-surface-muted);
   border-radius: $vant-border-radius;
-  box-shadow: 0 8px 12px #ebedf0;
+  box-shadow: 0 8px 12px var(--site-shadow);
 
   iframe {
     display: block;

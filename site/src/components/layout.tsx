@@ -2,10 +2,12 @@ import cls from "classnames";
 import { Helmet } from "react-helmet"
 import { debounce, startsWith } from "lodash";
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PageProps } from "gatsby"
+import useTheme from "../hooks/useTheme"
 import { prefixClassname } from "../styles/prefix"
 import { listeningSimulatorEvents } from "../utils/simulator-router"
+import { sendThemeChange } from "../utils/theme-message"
 import Header from "./header"
 import SideNav from "./side-nav";
 import Simulator from "./simulator";
@@ -21,9 +23,17 @@ type DataProps = {
 export default function Layout({ children, data }: PageProps<DataProps>) {
   const slug = data?.markdownRemark?.fields?.slug
   const [isMobile, setIsMobile] = useState<undefined | boolean>(undefined)
+  const { themeMode, toggleThemeMode } = useTheme()
+  const themeModeRef = useRef(themeMode)
 
   useEffect(() => {
-    return listeningSimulatorEvents()
+    themeModeRef.current = themeMode
+  }, [themeMode])
+
+  useEffect(() => {
+    return listeningSimulatorEvents({
+      onReady: (source) => sendThemeChange(source, themeModeRef.current),
+    })
   }, [])
 
   useEffect(() => {
@@ -47,9 +57,13 @@ export default function Layout({ children, data }: PageProps<DataProps>) {
       </Helmet>
       {
         isMobile ?
-          <Simulator slug={startsWith(slug, "/components") ? slug : undefined} isMobile /> :
+          <Simulator
+            slug={startsWith(slug, "/components") ? slug : undefined}
+            themeMode={themeMode}
+            isMobile
+          /> :
           <div className={prefixClassname("docs")}>
-            <Header />
+            <Header themeMode={themeMode} onThemeChange={toggleThemeMode} />
             <SideNav slug={slug} />
             <div
               className={cls(
@@ -59,7 +73,10 @@ export default function Layout({ children, data }: PageProps<DataProps>) {
             >
               { children }
             </div>
-            <Simulator slug={startsWith(slug, "/components") ? slug : undefined} />
+            <Simulator
+              slug={startsWith(slug, "/components") ? slug : undefined}
+              themeMode={themeMode}
+            />
           </div>
       }
     </>

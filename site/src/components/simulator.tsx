@@ -1,9 +1,11 @@
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import useFixed from "../hooks/useFixed"
+import type { ThemeMode } from "../hooks/useTheme"
 import { prefixClassname } from "../styles/prefix"
+import { sendThemeChange } from "../utils/theme-message"
 
 import menus from "../utils/menus"
 
@@ -55,18 +57,37 @@ function getIframeUrl(path?: string) {
 
 interface SimulatorProps {
   slug?: string
+  themeMode: ThemeMode
   isMobile?: boolean
 }
 
 export default function Simulator(props: SimulatorProps) {
-  const { slug } = props
+  const { slug, themeMode } = props
   const fixed = useFixed()
   const [iframeUrl, setIframeUrl] = useState("")
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => setIframeUrl(getIframeUrl(slug)), [slug])
 
+  const syncTheme = useCallback(
+    () => sendThemeChange(iframeRef.current?.contentWindow ?? null, themeMode),
+    [themeMode],
+  )
+
+  useEffect(() => {
+    sendThemeChange(iframeRef.current?.contentWindow ?? null, themeMode)
+  }, [themeMode])
+
   if (props.isMobile) {
-    return <iframe title="simulator" src={iframeUrl} className={classNames(prefixClassname("simulator-mobile"))} />
+    return (
+      <iframe
+        ref={iframeRef}
+        title="simulator"
+        src={iframeUrl}
+        className={classNames(prefixClassname("simulator-mobile"))}
+        onLoad={syncTheme}
+      />
+    )
   }
 
   return (
@@ -75,7 +96,7 @@ export default function Simulator(props: SimulatorProps) {
         [prefixClassname("simulator--fixed")]: fixed,
       })}
     >
-      <iframe title="simulator" src={iframeUrl} frameBorder="0" />
+      <iframe ref={iframeRef} title="simulator" src={iframeUrl} frameBorder="0" onLoad={syncTheme} />
     </div>
   )
 }

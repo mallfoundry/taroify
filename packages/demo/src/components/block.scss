@@ -14,8 +14,9 @@
   &__title {
     padding: 32px * $hd 16px * $hd 16px * $hd;
     font-size: 14px * $hd;
+    font-weight: 600;
     line-height: 16px * $hd;
-    color: rgba(69, 90, 100, 0.6);
+    color: $text-color-2;
   }
 
   &:first-of-type {

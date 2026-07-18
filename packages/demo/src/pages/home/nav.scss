@@ -9,7 +9,8 @@
     display: block;
     margin: 24px * $hd 0 8px * $hd 16px * $hd;
     font-size: 14px * $hd;
-    color: rgba(69, 90, 100, 0.6);
+    font-weight: 600;
+    color: $text-color-2;
   }
 
   &__block {
@@ -17,20 +18,20 @@
     display: flex;
     margin: 0 0 12px * $hd;
     padding-left: 20px * $hd;
-    color: #323233;
+    color: $text-color;
     font-weight: 600;
     font-size: 14px * $hd;
     line-height: 40px * $hd;
-    background: #f7f8fa;
+    background: $background-color;
     border-radius: 99px * $hd;
     transition: background 0.3s;
 
     &:hover {
-      background: darken(#f7f8fa, 3%);
+      background: $active-color;
     }
 
     &:active {
-      background: darken(#f7f8fa, 6%);
+      opacity: $active-opacity;
     }
 
     .#{$component-prefix}icon {
