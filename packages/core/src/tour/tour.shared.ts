@@ -22,7 +22,6 @@ export interface TourStep {
   target: TourTarget
   content?: ReactNode
   placement?: TourPlacement
-  location?: TourPlacement
   popoverOffset?: [number, number]
   arrowOffset?: number
 }

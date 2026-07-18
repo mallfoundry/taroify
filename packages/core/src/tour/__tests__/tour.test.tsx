@@ -131,23 +131,4 @@ describe("<Tour />", () => {
     expect(onClose).toHaveBeenCalledWith(false, expect.anything())
     expect(container.querySelector(`.${prefixClassname("tour")}`)).not.toBeInTheDocument()
   })
-
-  it("supports NutUI-compatible prop aliases", async () => {
-    const { container } = render(
-      <>
-        <div id="tour-target-2">目标</div>
-        <Tour
-          visible
-          type="tile"
-          location="top-end"
-          list={[{ target: "tour-target-2", content: "兼容写法" }]}
-        />
-      </>,
-    )
-
-    await waitFor(() => {
-      expect(container).toHaveTextContent("兼容写法")
-      expect(container.querySelector(`.${prefixClassname("tour__arrow--top")}`)).toBeInTheDocument()
-    })
-  })
 })
