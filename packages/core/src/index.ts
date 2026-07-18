@@ -48,6 +48,7 @@ export { default as PullRefresh } from "./pull-refresh"
 export { default as ShareSheet } from "./share-sheet"
 export { default as SwipeCell } from "./swipe-cell"
 export { default as FloatingPanel } from "./floating-panel"
+export type { FloatingPanelDragEvent } from "./floating-panel"
 export { default as FloatingBubble } from "./floating-bubble"
 // Display Components
 export { default as Avatar } from "./avatar"

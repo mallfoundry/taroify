@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
-import { nextTick } from "@tarojs/taro"
+import { getEnv, getSystemInfoSync, nextTick } from "@tarojs/taro"
 import classNames from "classnames"
 import * as React from "react"
 import {
@@ -40,6 +40,23 @@ enum PullRefreshStatus {
 }
 
 const TEXT_STATUS = ["pulling", "loosing", "success"]
+const ANDROID_WEAPP_PULLING_DURATION = 300
+
+function getPullingDuration() {
+  try {
+    if (
+      typeof getEnv === "function" &&
+      getEnv() === "WEAPP" &&
+      typeof getSystemInfoSync === "function" &&
+      getSystemInfoSync().platform === "android"
+    ) {
+      return ANDROID_WEAPP_PULLING_DURATION
+    }
+  } catch {
+    // Ignore unavailable platform APIs, for example during SSR.
+  }
+  return 0
+}
 
 interface PullRefreshChildren {
   pulling?: ReactNode
@@ -142,6 +159,10 @@ function PullRefresh(props: PullRefreshProps) {
     durationRef.current = 0
   }
 
+  function setPullingDuration() {
+    durationRef.current = getPullingDuration()
+  }
+
   const isTouchable = useCallback(
     () =>
       PullRefreshStatus.Loading !== statusRef.current &&
@@ -170,9 +191,9 @@ function PullRefresh(props: PullRefreshProps) {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const checkPosition = useCallback(
-    (event) => {
+    (event: any) => {
       if (isReachTop()) {
-        resetDuration()
+        setPullingDuration()
         touch.start(event)
         touchStartedRef.current = true
       }
@@ -181,7 +202,7 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const onTouchStart = useCallback(
-    (event) => {
+    (event: any) => {
       touchStartedRef.current = false
       if (isTouchable()) {
         checkPosition(event)
@@ -209,14 +230,14 @@ function PullRefresh(props: PullRefreshProps) {
 
   const onTouchMove = useMemo(
     () =>
-      throttle((event) => {
+      throttle((event: any) => {
         if (isTouchable()) {
           if (!touchStartedRef.current) {
             checkPosition(event)
           }
 
-          const { deltaY } = touch
           touch.move(event)
+          const { deltaY } = touch
 
           if (isReachTop() && deltaY >= 0 && touch.isVertical()) {
             preventDefault(event)
@@ -228,9 +249,16 @@ function PullRefresh(props: PullRefreshProps) {
   )
 
   const onTouchEnd = useCallback(() => {
-    if (isReachTop() && isTouchable()) {
+    onTouchMove.flush()
+    onTouchMove.cancel()
+
+    const touchStarted = touchStartedRef.current
+    touchStartedRef.current = false
+    touch.reset()
+
+    if (touchStarted && isTouchable()) {
       durationRef.current = durationProp
-      if (statusRef.current === PullRefreshStatus.Loosing) {
+      if (isReachTop() && statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
         // TODO Nested in CustomWrapper does not call.
         // ensure value change can be watched
@@ -240,8 +268,29 @@ function PullRefresh(props: PullRefreshProps) {
         updateStatus(0)
       }
     }
+  }, [
+    durationProp,
+    headHeight,
+    isReachTop,
+    isTouchable,
+    onRefresh,
+    onTouchMove,
+    touch,
+    updateStatus,
+  ])
+
+  const onTouchCancel = useCallback(() => {
+    onTouchMove.cancel()
+
+    const touchStarted = touchStartedRef.current
     touchStartedRef.current = false
-  }, [durationProp, headHeight, isReachTop, isTouchable, onRefresh, updateStatus])
+    touch.reset()
+
+    if (touchStarted && isTouchable()) {
+      durationRef.current = durationProp
+      updateStatus(0)
+    }
+  }, [durationProp, isTouchable, onTouchMove, touch, updateStatus])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const showCompleted = useCallback(() => {
@@ -274,6 +323,8 @@ function PullRefresh(props: PullRefreshProps) {
     }
   }, [completedElement, loading, showCompleted])
 
+  useEffect(() => () => onTouchMove.cancel(), [onTouchMove])
+
   const getStatusText = useCallback(() => {
     if (statusRef.current === PullRefreshStatus.Pulling) {
       return "下拉即可刷新..."
@@ -288,7 +339,7 @@ function PullRefresh(props: PullRefreshProps) {
   }, [])
 
   const renderStatus = useCallback(() => {
-    const statusSlot = children[statusRef.current as string]
+    const statusSlot = children[statusRef.current as keyof PullRefreshChildren]
     if (statusSlot) {
       return statusSlot
     }
@@ -340,7 +391,7 @@ function PullRefresh(props: PullRefreshProps) {
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
-          onTouchCancel={onTouchEnd}
+          onTouchCancel={onTouchCancel}
         >
           <View
             className={prefixClassname("pull-refresh__head")}

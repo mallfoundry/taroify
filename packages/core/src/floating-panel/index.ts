@@ -1,6 +1,7 @@
 import type { ForwardRefExoticComponent } from "react"
 import FloatingPanelComponent, { type FloatingPanelProps } from "./floating-panel"
 
+export type { FloatingPanelDragEvent } from "./floating-panel"
 export type { FloatingPanelThemeVars } from "./floating-panel.shared"
 
 interface FloatingPanelInterface extends ForwardRefExoticComponent<FloatingPanelProps> {

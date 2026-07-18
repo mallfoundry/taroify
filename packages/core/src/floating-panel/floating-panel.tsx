@@ -21,6 +21,10 @@ import { closest } from "../utils/closest"
 
 const DAMP = 0.2
 
+export interface FloatingPanelDragEvent {
+  height: number
+}
+
 export interface FloatingPanelProps extends ViewProps {
   style?: CSSProperties
   height?: number // 当前面板的显示高度
@@ -30,6 +34,9 @@ export interface FloatingPanelProps extends ViewProps {
   safeAreaInsetBottom?: boolean // 是否开启底部安全区适配
   safeAreaProps?: Omit<SafeAreaProps, "position"> // 底部安全区属性
   handleChange?: (height: number) => void
+  onDragStart?: (event: FloatingPanelDragEvent) => void
+  onDragging?: (event: FloatingPanelDragEvent) => void
+  onDragEnd?: (event: FloatingPanelDragEvent) => void
 }
 
 export interface FloatingPanelInstance {
@@ -48,11 +55,16 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
     safeAreaProps,
     children,
     handleChange,
+    onDragStart,
+    onDragging,
+    onDragEnd,
   } = props
 
   const contentRef = useRef<Element>()
   const headerRef = useRef<Element>()
   const startY = useRef(0)
+  const dragHeight = useRef(heightProp)
+  const dragStarted = useRef(false)
   const [height, setHeight] = useState(heightProp)
   const [dragging, setDragging] = useState(false)
   const [scrollContentTop, setScrollContentTop] = useState(0)
@@ -110,6 +122,8 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
     touch.start(event)
     setDragging(true)
     startY.current = -height
+    dragHeight.current = height
+    dragStarted.current = false
   }
 
   const onTouchMove = async (event) => {
@@ -139,15 +153,35 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
     }
 
     const moveY = touch.deltaY + startY.current
-    setHeight(-ease(moveY))
+    const nextHeight = -ease(moveY)
+
+    if (nextHeight === dragHeight.current) return
+
+    if (!dragStarted.current) {
+      dragStarted.current = true
+      onDragStart?.({ height: dragHeight.current })
+    }
+
+    dragHeight.current = nextHeight
+    setHeight(nextHeight)
+    onDragging?.({ height: nextHeight })
   }
 
   const onTouchEnd = (): void => {
     setDragging(false)
-    setHeight(closest(anchors, height))
-    if (height !== -startY.current) {
-      handleChange?.(height)
+    const currentHeight = dragHeight.current
+    const targetHeight = closest(anchors, currentHeight)
+
+    setHeight(targetHeight)
+    if (currentHeight !== -startY.current) {
+      handleChange?.(currentHeight)
     }
+    if (dragStarted.current) {
+      onDragEnd?.({ height: targetHeight })
+    }
+
+    dragHeight.current = targetHeight
+    dragStarted.current = false
   }
 
   const onContentScroll = (e) => {

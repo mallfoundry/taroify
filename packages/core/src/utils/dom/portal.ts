@@ -1,6 +1,7 @@
 import { getCurrentPages, getCurrentInstance } from "@tarojs/taro"
-import { render, unmountComponentAtNode } from "@tarojs/react"
 import { document, type TaroNode } from "@tarojs/runtime"
+import type { ReactElement } from "react"
+import { createRoot, type Root } from "react-dom/client"
 
 export function getPagePath() {
   const currentPages = getCurrentPages()
@@ -9,6 +10,7 @@ export function getPagePath() {
 }
 
 const portalViewMap: Map<string, TaroNode> = new Map()
+const portalRootMap: Map<TaroNode, Root> = new Map()
 
 export function mountPortal(children: TaroNode, dom?: TaroNode) {
   const view = dom || document.createElement("view")
@@ -21,7 +23,12 @@ export function mountPortal(children: TaroNode, dom?: TaroNode) {
       pageElement.appendChild(portalView)
       portalViewMap.set(portalKey, portalView)
     }
-    render(children, view)
+    let root = portalRootMap.get(view)
+    if (!root) {
+      root = createRoot(view as unknown as Element)
+      portalRootMap.set(view, root)
+    }
+    root.render(children as unknown as ReactElement)
     portalViewMap.get(portalKey)?.appendChild(view)
   } else {
     console.error("[Taroify] cannot find page element or app root element")
@@ -30,6 +37,7 @@ export function mountPortal(children: TaroNode, dom?: TaroNode) {
 }
 
 export function unmountPortal(dom: TaroNode) {
-  unmountComponentAtNode(dom)
+  portalRootMap.get(dom)?.unmount()
+  portalRootMap.delete(dom)
   dom.parentElement?.removeChild(dom)
 }
