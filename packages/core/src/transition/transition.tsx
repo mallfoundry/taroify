@@ -1,8 +1,17 @@
 import * as React from "react"
-import { cloneElement, isValidElement, type ReactElement, type ReactNode, useMemo, useRef, useState } from "react"
+import {
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { CSSTransition } from "react-transition-group"
 import type { EnterHandler, ExitHandler } from "react-transition-group/Transition"
 import { prefixClassname } from "../styles"
+import { inWechat } from "../utils/base"
 
 export enum TransitionName {
   Fade = "fade",
@@ -72,16 +81,16 @@ export default function Transition(props: TransitionProps) {
   const transactionName = isTransitionPreset(name) ? prefixClassname(`transition-${name}`) : name
   const [enter, setEnter] = useState(false)
   const [exited, setExited] = useState(false)
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   const setRef = (value) => {
-    ref.current = value;
-  };
+    ref.current = value
+  }
 
   return (
     <CSSTransition
       in={inProp}
-      nodeRef={ref}
+      nodeRef={inWechat ? undefined : ref}
       mountOnEnter={mountOnEnter}
       unmountOnExit={unmountOnExit}
       timeout={timeout}
