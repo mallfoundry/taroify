@@ -19,7 +19,7 @@ import Loading from "../loading"
 import { prefixClassname } from "../styles"
 import { preventDefault } from "../utils/dom/event"
 import { addUnitPx } from "../utils/format/unit"
-import { usePreviousRef, useToRef } from "../utils/state"
+import { useToRef } from "../utils/state"
 import { useTouch } from "../utils/touch"
 import { throttle } from "../utils/lodash-polyfill"
 import {
@@ -107,7 +107,7 @@ function PullRefresh(props: PullRefreshProps) {
     loading,
     disabled = false,
     headHeight = 50,
-    reachTop: reachTopProp = true,
+    reachTop: reachTopProp,
     pullDistance: pullDistanceProp,
     duration: durationProp = 300,
     children: childrenProp,
@@ -121,11 +121,22 @@ function PullRefresh(props: PullRefreshProps) {
 
   const statusRef = useRef(PullRefreshStatus.Awaiting)
   const [distance, setDistance] = useState(0)
-  const reachTopPreviousRef = usePreviousRef(reachTopProp)
-  const reachTopRef = useToRef(reachTopProp)
+  const reachTopPropRef = useToRef(reachTopProp)
+  const internalReachTopRef = useRef(true)
+  const touchStartedRef = useRef(false)
   const durationRef = useRef(0)
 
   const touch = useTouch()
+
+  const isReachTop = useCallback(
+    () =>
+      reachTopPropRef.current === undefined ? internalReachTopRef.current : reachTopPropRef.current,
+    [reachTopPropRef],
+  )
+
+  const updateReachTop = useCallback((reachTop: boolean) => {
+    internalReachTopRef.current = reachTop
+  }, [])
 
   function resetDuration() {
     durationRef.current = 0
@@ -160,16 +171,18 @@ function PullRefresh(props: PullRefreshProps) {
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const checkPosition = useCallback(
     (event) => {
-      if (reachTopRef.current) {
+      if (isReachTop()) {
         resetDuration()
         touch.start(event)
+        touchStartedRef.current = true
       }
     },
-    [reachTopRef, touch],
+    [isReachTop, touch],
   )
 
   const onTouchStart = useCallback(
     (event) => {
+      touchStartedRef.current = false
       if (isTouchable()) {
         checkPosition(event)
       }
@@ -198,32 +211,24 @@ function PullRefresh(props: PullRefreshProps) {
     () =>
       throttle((event) => {
         if (isTouchable()) {
-          if (!reachTopPreviousRef.current) {
+          if (!touchStartedRef.current) {
             checkPosition(event)
           }
 
           const { deltaY } = touch
           touch.move(event)
 
-          if (reachTopRef.current && deltaY >= 0 && touch.isVertical()) {
+          if (isReachTop() && deltaY >= 0 && touch.isVertical()) {
             preventDefault(event)
             updateStatus(easeDistance(deltaY))
           }
         }
       }, 16.7),
-    [
-      checkPosition,
-      easeDistance,
-      isTouchable,
-      reachTopPreviousRef,
-      reachTopRef,
-      touch,
-      updateStatus,
-    ],
+    [checkPosition, easeDistance, isReachTop, isTouchable, touch, updateStatus],
   )
 
   const onTouchEnd = useCallback(() => {
-    if (reachTopRef.current && isTouchable()) {
+    if (isReachTop() && isTouchable()) {
       durationRef.current = durationProp
       if (statusRef.current === PullRefreshStatus.Loosing) {
         updateStatus(headHeight, true)
@@ -235,7 +240,8 @@ function PullRefresh(props: PullRefreshProps) {
         updateStatus(0)
       }
     }
-  }, [durationProp, headHeight, isTouchable, onRefresh, reachTopRef, updateStatus])
+    touchStartedRef.current = false
+  }, [durationProp, headHeight, isReachTop, isTouchable, onRefresh, updateStatus])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const showCompleted = useCallback(() => {
@@ -245,8 +251,8 @@ function PullRefresh(props: PullRefreshProps) {
   }, [completedDuration, updateStatus])
 
   const contextValue = useMemo(
-    () => ({ distance, onTouchStart, onTouchMove, onTouchEnd }),
-    [distance, onTouchStart, onTouchMove, onTouchEnd],
+    () => ({ distance, updateReachTop, onTouchStart, onTouchMove, onTouchEnd }),
+    [distance, onTouchStart, onTouchMove, onTouchEnd, updateReachTop],
   )
 
   useEffect(() => {

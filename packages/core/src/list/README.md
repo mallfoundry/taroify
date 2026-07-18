@@ -157,7 +157,7 @@ function ErrorList() {
 
 ### 下拉刷新
 
-List 组件可以与 [PullRefresh](/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。固定高度时，scrollTop可以从onScroll中获取`(e.detail.scrollTop)`
+List 组件可以与 [PullRefresh](/components/pull-refresh/) 组件结合使用，实现下拉刷新的效果。
 
 ```tsx
 function PullRefreshList() {
@@ -210,6 +210,35 @@ function PullRefreshList() {
 }
 ```
 
+#### 固定高度
+
+固定高度的 List 使用 ScrollView 作为滚动容器。将 `PullRefresh` 放在 List 外层，并开启
+`pullRefresh`，List 会根据滚动位置自动判断是否到达顶部，无需手动维护 `reachTop`。
+
+```tsx
+function FixedHeightPullRefreshList() {
+  const [refreshing, setRefreshing] = useState(false)
+
+  return (
+    <PullRefresh
+      loading={refreshing}
+      onRefresh={() => {
+        setRefreshing(true)
+        setTimeout(() => setRefreshing(false), 1000)
+      }}
+    >
+      <List fixedHeight pullRefresh style={{ height: 300 }}>
+        {list.map((item) => (
+          <Cell key={item}>{item}</Cell>
+        ))}
+      </List>
+    </PullRefresh>
+  )
+}
+```
+
+如果显式设置了 `PullRefresh` 的 `reachTop`，仍以该值为准。
+
 ## API
 
 ### Props
@@ -217,6 +246,7 @@ function PullRefreshList() {
 | 参数                                                                    | 说明                                             | 类型      | 默认值  |
 | ----------------------------------------------------------------------- | ------------------------------------------------ | --------- | ------- |
 | fixedHeight <br>`v0.1.1-alpha.2`                                        | 是否固定高度                                     | _boolean_ | `false` |
+| pullRefresh                                                             | 固定高度时自动同步下拉刷新的顶部状态             | _boolean_ | `false` |
 | loading                                                                 | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
 | hasMore                                                                 | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
 | offset                                                                  | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_  | `100`   |
