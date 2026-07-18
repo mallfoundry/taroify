@@ -12,7 +12,7 @@ import { getWindowInfo, getEnv } from "@tarojs/taro"
 import { View, ScrollView } from "@tarojs/components"
 import type { ViewProps } from "@tarojs/components/types/View"
 import classNames from "classnames"
-import SafeArea from "../safe-area"
+import SafeArea, { type SafeAreaProps } from "../safe-area"
 import { prefixClassname } from "../styles"
 import { useTouch } from "../utils/touch"
 import { addUnitPx } from "../utils/format/unit"
@@ -28,6 +28,7 @@ export interface FloatingPanelProps extends ViewProps {
   duration?: number // 动画时长，单位秒，设置为 0 可以禁用动画
   contentDraggable?: boolean // 允许拖拽内容容器
   safeAreaInsetBottom?: boolean // 是否开启底部安全区适配
+  safeAreaProps?: Omit<SafeAreaProps, "position"> // 底部安全区属性
   handleChange?: (height: number) => void
 }
 
@@ -44,6 +45,7 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
     duration = 0.3,
     contentDraggable = true,
     safeAreaInsetBottom = true,
+    safeAreaProps,
     children,
     handleChange,
   } = props
@@ -175,7 +177,6 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
       {getEnv() === "WEB" ? (
         <View className={classNames(prefixClassname("floating-panel__content"))} ref={contentRef}>
           {children}
-          {safeAreaInsetBottom && <SafeArea position="bottom" />}
         </View>
       ) : (
         <ScrollView
@@ -187,8 +188,17 @@ const FloatingPanel = forwardRef<FloatingPanelInstance, FloatingPanelProps>((pro
           onScroll={onContentScroll}
         >
           {children}
-          {safeAreaInsetBottom && <SafeArea position="bottom" />}
         </ScrollView>
+      )}
+      {safeAreaInsetBottom && (
+        <SafeArea
+          {...safeAreaProps}
+          position="bottom"
+          className={classNames(
+            prefixClassname("floating-panel__safe-area"),
+            safeAreaProps?.className,
+          )}
+        />
       )}
     </View>
   )

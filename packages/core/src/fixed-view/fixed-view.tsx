@@ -5,7 +5,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import { type PropsWithChildren, useEffect, useRef } from "react"
 import type { PlaceholderProps } from "../placeholder"
-import SafeArea, { type SafeAreaPosition } from "../safe-area"
+import SafeArea, { type SafeAreaPosition, type SafeAreaProps } from "../safe-area"
 import { prefixClassname } from "../styles"
 import type { FixedViewPosition } from "./fixed-view.shared"
 import { useHeight } from "../hooks"
@@ -34,6 +34,7 @@ interface FixedViewProps extends PropsWithChildren<ViewProps> {
   position?: boolean | FixedViewPosition
   safeArea?: SafeAreaPosition
   nativeSafeTop?: boolean
+  safeAreaProps?: Omit<SafeAreaProps, "position" | "nativeSafeTop">
   placeholder?: boolean | string | Omit<PlaceholderProps, "children">
 }
 
@@ -43,6 +44,7 @@ function FixedView<T>(props: FixedViewProps & T) {
     position,
     safeArea,
     nativeSafeTop,
+    safeAreaProps,
     placeholder: placeholderProp,
     children,
     ...restProps
@@ -75,9 +77,11 @@ function FixedView<T>(props: FixedViewProps & T) {
       )}
       {...restProps}
     >
-      {safeArea === "top" && <SafeArea position="top" nativeSafeTop={nativeSafeTop} />}
+      {safeArea === "top" && (
+        <SafeArea {...safeAreaProps} position="top" nativeSafeTop={nativeSafeTop} />
+      )}
       {children}
-      {safeArea === "bottom" && <SafeArea position="bottom" />}
+      {safeArea === "bottom" && <SafeArea {...safeAreaProps} position="bottom" />}
     </View>
   )
 

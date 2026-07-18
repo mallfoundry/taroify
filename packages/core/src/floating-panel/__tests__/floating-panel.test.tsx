@@ -92,4 +92,37 @@ describe("<FloatingPanel />", () => {
     await sleep(0)
     expect(onChange).toBeTruthy()
   })
+
+  it("should render the safe area outside content and pass safeAreaProps", () => {
+    const { container } = render(
+      <FloatingPanel
+        safeAreaProps={{
+          className: "custom-safe-area",
+          style: { backgroundColor: "transparent" },
+        }}
+      >
+        内容
+      </FloatingPanel>,
+    )
+
+    const content = container.querySelector(
+      `.${prefixClassname("floating-panel__content")}`,
+    ) as HTMLElement
+    const safeArea = container.querySelector(
+      `.${prefixClassname("floating-panel__safe-area")}`,
+    ) as HTMLElement
+
+    expect(content.contains(safeArea)).toBe(false)
+    expect(content.nextElementSibling).toBe(safeArea)
+    expect(safeArea).toHaveClass("custom-safe-area")
+    expect(safeArea).toHaveStyle({ backgroundColor: "transparent" })
+  })
+
+  it("should hide the safe area when safeAreaInsetBottom is false", () => {
+    const { container } = render(<FloatingPanel safeAreaInsetBottom={false}>内容</FloatingPanel>)
+
+    expect(
+      container.querySelector(`.${prefixClassname("floating-panel__safe-area")}`),
+    ).not.toBeInTheDocument()
+  })
 })
