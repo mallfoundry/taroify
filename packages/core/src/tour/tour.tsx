@@ -49,17 +49,9 @@ interface TourPopoverLayout {
 export interface TourProps extends Omit<ViewProps, "title" | "onChange"> {
   defaultOpen?: boolean
   open?: boolean
-  /**
-   * @deprecated Use `open` instead.
-   */
-  visible?: boolean
   type?: TourType
   list?: TourStep[]
   placement?: TourPlacement
-  /**
-   * @deprecated Use `placement` instead.
-   */
-  location?: TourPlacement
   mask?: boolean
   maskWidth?: number | string
   maskHeight?: number | string
@@ -249,11 +241,9 @@ export default function Tour(props: TourProps) {
     style: styleProp,
     defaultOpen,
     open: openProp,
-    visible,
     type = "step",
     list = [],
     placement: placementProp,
-    location,
     mask = true,
     maskWidth,
     maskHeight,
@@ -274,7 +264,7 @@ export default function Tour(props: TourProps) {
 
   const { value: open = false, setValue: setOpen } = useUncontrolled<boolean>({
     defaultValue: defaultOpen,
-    value: openProp ?? visible,
+    value: openProp,
   })
   const [current, setCurrent] = useState(0)
   const [targetRect, setTargetRect] = useState<TourRect>()
@@ -284,8 +274,7 @@ export default function Tour(props: TourProps) {
   const measurementIdRef = useRef(0)
 
   const activeStep = list[current]
-  const activePlacement =
-    activeStep?.placement ?? activeStep?.location ?? placementProp ?? location ?? "bottom"
+  const activePlacement = activeStep?.placement ?? placementProp ?? "bottom"
   const activePopoverOffset = activeStep?.popoverOffset ?? DEFAULT_POPOVER_OFFSET
   const activeArrowOffset = activeStep?.arrowOffset ?? 0
 

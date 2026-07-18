@@ -127,11 +127,9 @@ const steps = [
 | ------------------- | ------------------------------------------------ | -------------------------- | ---------- |
 | defaultOpen         | 默认是否展示引导                                 | _boolean_                  | `false`    |
 | open                | 是否展示引导                                     | _boolean_                  | `false`    |
-| visible             | 是否展示引导，兼容 NutUI 写法，推荐使用 `open`   | _boolean_                  | `-`        |
 | type                | 引导类型                                         | _step \| tile_             | `step`     |
 | list                | 引导步骤                                         | _TourStep[]_               | `[]`       |
 | placement           | 气泡位置                                         | _TourPlacement_            | `bottom`   |
-| location            | 气泡位置，兼容 NutUI 写法，推荐使用 `placement`  | _TourPlacement_            | `-`        |
 | offset              | 高亮区域纵向、横向扩展距离                       | _[number, number]_         | `[8, 10]`  |
 | mask                | 是否显示遮罩                                     | _boolean_                  | `true`     |
 | maskWidth           | 高亮区域宽度                                     | _number \| string_         | 目标宽度   |
@@ -154,7 +152,6 @@ const steps = [
 | target        | 目标元素的 `id`、CSS 选择器、DOM 元素或 React Ref         | _TourTarget_               | `-`    |
 | content       | 引导内容                                                  | _ReactNode_                | `-`    |
 | placement     | 当前步骤的气泡位置                                        | _TourPlacement_            | `-`    |
-| location      | 当前步骤的气泡位置，兼容 NutUI 写法                       | _TourPlacement_            | `-`    |
 | popoverOffset | 气泡在交叉轴、主轴方向的偏移量                            | _[number, number]_         | `[0, 12]` |
 | arrowOffset   | 箭头在交叉轴方向的偏移量                                  | _number_                   | `0`    |
 
