@@ -9,6 +9,7 @@ import {
   useMemo,
   type CSSProperties,
   type PropsWithChildren,
+  type ReactElement,
   type ReactNode,
 } from "react"
 
@@ -22,6 +23,7 @@ function useActionBarIconButtonChildren(
         if (isIconElement(child)) {
           return (
             <Badge
+              key={(child as ReactElement).key ?? index}
               content={badge}
               children={cloneIconElement(child, {
                 className: prefixClassname("action-bar-icon-button__icon"),
