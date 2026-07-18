@@ -1,0 +1,22 @@
+@forward "../styles/prefix";
+@forward "../styles/variables";
+@use "../styles/variables" as *;
+
+$tour-z-index: var(--tour-z-index, 1100);
+$tour-mask-color: var(--tour-mask-color, rgba(0, 0, 0, 0.7));
+$tour-mask-border-radius: var(--tour-mask-border-radius, var(--border-radius-lg, $border-radius-lg));
+$tour-popover-min-width: var(--tour-popover-min-width, 140px * $hd);
+$tour-popover-max-width: var(--tour-popover-max-width, calc(100vw - 32px * $hd));
+$tour-popover-padding: var(--tour-popover-padding, 12px * $hd);
+$tour-popover-color: var(--tour-popover-color, var(--text-color, $text-color));
+$tour-popover-background-color: var(--tour-popover-background-color, var(--background-color-2, $background-color-2));
+$tour-popover-border-radius: var(--tour-popover-border-radius, var(--border-radius-md, $border-radius-md));
+$tour-popover-box-shadow: var(--tour-popover-box-shadow, 0 4px * $hd 16px * $hd rgba(0, 0, 0, 0.12));
+$tour-arrow-size: var(--tour-arrow-size, 6px * $hd);
+$tour-content-font-size: var(--tour-content-font-size, var(--font-size-md, $font-size-md));
+$tour-content-line-height: var(--tour-content-line-height, var(--line-height-md, $line-height-md));
+$tour-footer-margin-top: var(--tour-footer-margin-top, 12px * $hd);
+$tour-button-gap: var(--tour-button-gap, 6px * $hd);
+$tour-button-padding: var(--tour-button-padding, 3px * $hd 8px * $hd);
+$tour-button-font-size: var(--tour-button-font-size, var(--font-size-sm, $font-size-sm));
+$tour-button-border-radius: var(--tour-button-border-radius, var(--border-radius-sm, $border-radius-sm));

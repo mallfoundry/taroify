@@ -191,6 +191,11 @@ const subpackages = [
         path: "floating-bubble/index",
       },
       {
+        title: "Tour 引导",
+        name: "Tour",
+        path: "tour/index",
+      },
+      {
         title: "Loading 加载",
         name: "Loading",
         path: "loading/index",

@@ -1,0 +1,37 @@
+@import "~@taroify/core/styles/variables";
+
+.tour-demo {
+  &__target {
+    display: inline-block;
+  }
+
+  &__steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px * $hd;
+    overflow: hidden;
+    background: $background-color-2;
+    border-radius: $border-radius-md;
+  }
+
+  &__step {
+    flex: 1;
+    padding: 14px * $hd 0;
+    font-size: $font-size-md;
+    color: $text-color;
+    text-align: center;
+  }
+
+  &__custom {
+    display: flex;
+    gap: 16px * $hd;
+    align-items: center;
+    font-size: $font-size-md;
+    white-space: nowrap;
+  }
+
+  &__known {
+    color: $primary-color;
+    cursor: pointer;
+  }
+}
