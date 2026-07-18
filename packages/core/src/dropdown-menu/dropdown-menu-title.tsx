@@ -9,11 +9,20 @@ import DropdownMenuContext from "./dropdown-menu.context"
 interface DropdownMenuTitleProps extends ViewProps {
   __dataKey__?: Key
   disabled?: boolean
+  ellipsis?: boolean
   children?: ReactNode
 }
 
 function DropdownMenuTitle(props: DropdownMenuTitleProps) {
-  const { className, __dataKey__: dataKey, disabled, children, onClick, ...restProps } = props
+  const {
+    className,
+    __dataKey__: dataKey,
+    disabled,
+    ellipsis = true,
+    children,
+    onClick,
+    ...restProps
+  } = props
   const { isItemToggle, toggleItem } = useContext(DropdownMenuContext)
   const active = useMemo(() => isItemToggle?.(dataKey), [dataKey, isItemToggle])
 
@@ -37,7 +46,10 @@ function DropdownMenuTitle(props: DropdownMenuTitleProps) {
       {...restProps}
     >
       <View className={prefixClassname("dropdown-menu-title__content")}>
-        <View className={prefixClassname("ellipsis")} children={children} />
+        <View
+          className={classnames({ [prefixClassname("ellipsis")]: ellipsis })}
+          children={children}
+        />
       </View>
     </View>
   )

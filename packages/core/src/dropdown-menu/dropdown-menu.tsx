@@ -76,7 +76,7 @@ interface DropdownMenuChildren {
   items: ReactNode[]
 }
 
-function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
+function useDropdownMenuChildren(children?: ReactNode, ellipsis = true): DropdownMenuChildren {
   return useMemo(() => {
     const __children__: DropdownMenuChildren = {
       titles: [],
@@ -115,6 +115,7 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
             key={itemKey}
             __dataKey__={itemKey}
             disabled={disabled}
+            ellipsis={ellipsis}
             children={title ?? getDropdownMenuTitle(itemChildren, options, value)}
           />,
         )
@@ -122,13 +123,14 @@ function useDropdownMenuChildren(children?: ReactNode): DropdownMenuChildren {
     })
 
     return __children__
-  }, [children])
+  }, [children, ellipsis])
 }
 
 export interface DropdownMenuProps extends ViewProps {
   defaultValue?: any
   value?: Key | false
   direction?: DropdownMenuDirection
+  ellipsis?: boolean
   children?: ReactNode
   backdropType?: "inner" | "outer"
 
@@ -141,6 +143,7 @@ function DropdownMenu(props: DropdownMenuProps) {
     defaultValue,
     value: valueProp,
     direction = "down",
+    ellipsis = true,
     backdropType = "inner",
     children: childrenProp,
     onChange: onChangeProp,
@@ -158,7 +161,7 @@ function DropdownMenu(props: DropdownMenuProps) {
 
   const [itemOffset, setItemOffset] = useState(0)
 
-  const { titles, items } = useDropdownMenuChildren(childrenProp)
+  const { titles, items } = useDropdownMenuChildren(childrenProp, ellipsis)
 
   const toggleKeyRef = useRef<Key>()
 
