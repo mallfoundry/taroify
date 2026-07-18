@@ -7,14 +7,17 @@ const subPackages = __subpackages__.map(({ root, pages }) => ({
 
 export default defineAppConfig({
   window: {
-    backgroundTextStyle: "light",
-    navigationBarBackgroundColor: "#4fc08d",
+    backgroundColor: "@backgroundColor",
+    backgroundTextStyle: "@backgroundTextStyle",
+    navigationBarBackgroundColor: "@navigationBarBackgroundColor",
     navigationBarTitleText: "Taroify",
-    navigationBarTextStyle: "black",
+    navigationBarTextStyle: "@navigationBarTextStyle",
     allowsBounceVertical: "NO",
   },
   pages: ["pages/home/index"],
   subpackages: subPackages,
   subPackages,
   animation: false,
+  darkmode: true,
+  themeLocation: "theme.json",
 })

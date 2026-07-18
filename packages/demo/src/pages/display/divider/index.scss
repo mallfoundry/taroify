@@ -2,7 +2,7 @@
 @import "../../../styles/prefix";
 
 .divider-demo {
-  background: #fff;
+  background: $background-color-2;
 
   .#{$demo-prefix}page__content {
     background: inherit;

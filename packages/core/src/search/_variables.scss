@@ -3,7 +3,7 @@
 @use "../styles/variables" as *;
 
 $search-padding: var(--search-padding, 10px * $hd var(--padding-sm, $padding-sm));
-$search-background-color: var(--search-background-color, var(--white, $white));
+$search-background-color: var(--search-background-color, var(--background-color-2, $background-color-2));
 $search-content-padding-left: var(--search-content-padding-left, var(--padding-sm, $padding-sm));
 $search-content-background-color: var(--search-content-background-color, var(--gray-1, $gray-1));
 $search-content-border-radius: var(--search-content-border-radius, var(--border-radius-sm, $border-radius-sm));

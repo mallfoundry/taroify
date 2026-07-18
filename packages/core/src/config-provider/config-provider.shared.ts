@@ -1,4 +1,72 @@
-export type ConfigProviderThemeVars = import("../action-sheet").ActionSheetThemeVars &
+export type ConfigProviderTheme = "light" | "dark"
+
+export type ConfigProviderBaseThemeVars = {
+  black?: string
+  blackRgb?: string
+  white?: string
+  gray1?: string
+  gray2?: string
+  gray3?: string
+  gray4?: string
+  gray5?: string
+  gray6?: string
+  gray7?: string
+  gray8?: string
+  red?: string
+  blue?: string
+  cyan?: string
+  green?: string
+  orange?: string
+  orangeDark?: string
+  orangeLight?: string
+  gradientRed?: string
+  gradientOrange?: string
+  primaryColor?: string
+  infoColor?: string
+  successColor?: string
+  warningColor?: string
+  dangerColor?: string
+  textColor?: string
+  textColor2?: string
+  textColor3?: string
+  activeColor?: string
+  activeOpacity?: string | number
+  disabledOpacity?: string | number
+  backgroundColor?: string
+  backgroundColor2?: string
+  backgroundColorLight?: string
+  textLinkColor?: string
+  paddingBase?: string
+  paddingXs?: string
+  paddingSm?: string
+  paddingMd?: string
+  paddingLg?: string
+  paddingXl?: string
+  fontSizeXs?: string
+  fontSizeSm?: string
+  fontSizeMd?: string
+  fontSizeLg?: string
+  fontWeightBold?: string | number
+  lineHeightXs?: string
+  lineHeightSm?: string
+  lineHeightMd?: string
+  lineHeightLg?: string
+  baseFontFamily?: string
+  priceIntegerFontFamily?: string
+  animationDurationBase?: string
+  animationDurationFast?: string
+  animationTimingFunctionEnter?: string
+  animationTimingFunctionExit?: string
+  borderColor?: string
+  borderWidthBase?: string
+  borderRadiusSm?: string
+  borderRadiusMd?: string
+  borderRadiusLg?: string
+  borderRadiusMax?: string
+}
+
+export type ConfigProviderThemeVars = ConfigProviderBaseThemeVars &
+  import("../action-sheet").ActionSheetThemeVars &
   import("../avatar").AvatarThemeVars &
   import("../back-top").BackTopThemeVars &
   import("../backdrop").BackdropThemeVars &

@@ -2,7 +2,7 @@
 @forward "../styles/variables";
 @use "../styles/variables" as *;
 
-$steps-background-color: var(--steps-background-color, var(--white, $white));
+$steps-background-color: var(--steps-background-color, var(--background-color-2, $background-color-2));
 $steps-horizontal-padding: var(--steps-horizontal-padding, 10px * $hd 0);
 $steps-vertical-padding: var(--steps-vertical-padding, 0 0 0 var(--padding-xl, $padding-xl));
 //

@@ -21,7 +21,7 @@
   color: $vant-code-color;
   word-wrap: break-word;
   white-space: pre-wrap;
-  background-color: #fafafa;
+  background-color: var(--site-surface-muted);
   border-radius: 16px;
   &:hover {
     .code-copy-btn {
@@ -59,6 +59,7 @@ code[class*='language-'], pre[class*='language-'] {
   margin: 0;
   color: $vant-code-color;
   background: transparent;
+  text-shadow: none;
 }
 
 .token.subst {

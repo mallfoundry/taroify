@@ -2,7 +2,12 @@
 export { default as Button } from "./button"
 export { default as Cell } from "./cell"
 export { default as ConfigProvider } from "./config-provider"
-export type { ConfigProviderThemeVars } from "./config-provider"
+export type {
+  ConfigProviderBaseThemeVars,
+  ConfigProviderProps,
+  ConfigProviderTheme,
+  ConfigProviderThemeVars,
+} from "./config-provider"
 export { default as Col } from "./col"
 export { default as Row } from "./row"
 export { default as Flex } from "./flex"

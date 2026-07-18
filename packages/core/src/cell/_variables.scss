@@ -7,7 +7,7 @@ $cell-font-size: var(--cell-font-size, var(--font-size-md, $font-size-md));
 $cell-line-height: var(--cell-line-height, 24px * $hd);
 
 $cell-color: var(--cell-color, var(--text-color, $text-color));
-$cell-background-color: var(--cell-background-color, var(--white, $white));
+$cell-background-color: var(--cell-background-color, var(--background-color-2, $background-color-2));
 $cell-border-color: var(--cell-border-color, var(--border-color, $border-color));
 $cell-value-color: var(--cell-value-color, var(--gray-6, $gray-6));
 $cell-active-color: var(--cell-active-color, var(--active-color, $active-color));
@@ -30,7 +30,7 @@ $cell-vertical-padding-large: var(--cell-vertical-padding-large, var(--padding-s
 $cell-title-font-size-large: var(--cell-title-font-size-large, var(--font-size-lg, $font-size-lg));
 $cell-subtitle-font-size-large: var(--cell-subtitle-font-size-large, var(--font-size-md, $font-size-md));
 
-$cell-group-background-color: var(--cell-group-background-color, var(--white, $white));
+$cell-group-background-color: var(--cell-group-background-color, var(--background-color-2, $background-color-2));
 $cell-group-title-color: var(--cell-group-title-color, var(--gray-6, $gray-6));
 $cell-group-title-padding: var(--cell-group-title-padding, var(--padding-md, $padding-md) var(--padding-md, $padding-md) var(--padding-xs, $padding-xs));
 $cell-group-title-font-size: var(--cell-group-title-font-size, var(--font-size-md, $font-size-md));

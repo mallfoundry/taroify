@@ -2,7 +2,7 @@
 @import "~@taroify/core/styles/variables";
 
 .list-demo {
-  background: #fff;
+  background: $background-color-2;
 
   .#{$component-prefix}cell__value {
     text-align: center;

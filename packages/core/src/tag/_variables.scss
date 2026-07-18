@@ -34,5 +34,5 @@ $tag-warning-color: var(--tag-warning-color, var(--warning-color, $warning-color
 $tag-warning-background-color: var(--tag-warning-background-color, var(--warning-color, $warning-color));
 $tag-danger-color: var(--tag-danger-color, var(--danger-color, $danger-color));
 $tag-danger-background-color: var(--tag-danger-background-color, var(--danger-color, $danger-color));
-$tag-outlined-background-color: var(--tag-outlined-background-color, var(--white, $white));
+$tag-outlined-background-color: var(--tag-outlined-background-color, var(--background-color-2, $background-color-2));
 $tag-border-color: var(--tag-border-color, currentColor);

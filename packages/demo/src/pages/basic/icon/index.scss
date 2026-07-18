@@ -40,7 +40,7 @@
   .#{$component-prefix}tabs__tab-pane {
     width: auto;
     margin: 20px * $hd;
-    background-color: #fff;
+    background-color: $background-color-2;
     border-radius: 12px * $hd;
   }
 

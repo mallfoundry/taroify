@@ -7,7 +7,7 @@ $dialog-small-screen-width: var(--dialog-small-screen-width, 90%);
 $dialog-font-size: var(--dialog-font-size, var(--font-size-lg, $font-size-lg));
 $dialog-transition: var(--dialog-transition, var(--animation-duration-base, $animation-duration-base));
 $dialog-border-radius: var(--dialog-border-radius, 16px * $hd);
-$dialog-background-color: var(--dialog-background-color, var(--white, $white));
+$dialog-background-color: var(--dialog-background-color, var(--background-color-2, $background-color-2));
 $dialog-header-font-weight: var(--dialog-header-font-weight, var(--font-weight-bold, $font-weight-bold));
 $dialog-header-line-height: var(--dialog-header-line-height, 24px * $hd);
 $dialog-header-padding-top: var(--dialog-header-padding-top, 26px * $hd);

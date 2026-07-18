@@ -21,7 +21,7 @@ $number-keyboard-key-height: var(--number-keyboard-key-height, 48px * $hd);
 $number-keyboard-key-font-size: var(--number-keyboard-key-font-size, 28px * $hd);
 $number-keyboard-key-background-color: var(
   --number-keyboard-key-background-color,
-  var(--white, $white)
+  var(--background-color-2, $background-color-2)
 );
 $number-keyboard-key-border-radius: var(
   --number-keyboard-key-font-size,

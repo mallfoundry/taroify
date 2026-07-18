@@ -4,7 +4,7 @@
 
 $avatar-color: var(--avatar-color, var(--white, $white));
 $avatar-background-color: var(--avatar-background-color, var(--gray-5, $gray-5));
-$avatar-border-color: var(--avatar-border-color, var(--white, $white));
+$avatar-border-color: var(--avatar-border-color, var(--background-color-2, $background-color-2));
 $avatar-border-width: var(--avatar-border-width, 2PX);
 $avatar-font-weight: var(--avatar-font-weight, var(--font-weight-bold, $font-weight-bold));
 $avatar-font-family: var(--avatar-font-family, #{Roboto, Helvetica, Arial, sans-serif});

@@ -9,7 +9,7 @@ $badge-font-family: var(--badge-font-family, #{-apple-system-font, helvetica neu
 $badge-font-size: var(--badge-font-size, var(--font-size-sm, $font-size-sm));
 $badge-font-weight: var(--badge-font-weight, var(--font-weight-bold, $font-weight-bold));
 $badge-border-width: var(--badge-border-width, var(--border-width-base, $border-width-base));
-$badge-border-color: var(--badge-border-color, var(--white, $white));
+$badge-border-color: var(--badge-border-color, var(--background-color-2, $background-color-2));
 $badge-border-radius: var(--badge-border-radius, var(--border-radius-max, $border-radius-max));
 $badge-background-color: var(--badge-background-color, $primary-color);
 $badge-dot-color: var(--badge-dot-color, $badge-background-color);

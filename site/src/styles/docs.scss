@@ -44,9 +44,9 @@
     h4,
     h5,
     h6 {
-      font-weight: normal;
+      color: var(--site-heading-color);
+      font-weight: var(--site-heading-font-weight);
       line-height: 1.5;
-      color: $vant-black;
 
       &[id] {
         cursor: pointer;
@@ -173,7 +173,7 @@
     hr {
       margin: 30px 0;
       border: 0 none;
-      border-top: 1px solid #eee;
+      border-top: 1px solid $vant-border-color;
     }
 
     p > code,
@@ -202,7 +202,7 @@
     blockquote {
       padding: 16px;
       margin: 16px 0 0;
-      background-color: #ecf9ff;
+      background-color: var(--site-info-background);
       border-radius: $vant-border-radius;
 
       p {
@@ -220,9 +220,9 @@
   &-card {
     padding: 24px;
     margin-bottom: 24px;
-    background-color: #fff;
+    background-color: var(--site-surface);
     border-radius: $vant-border-radius;
-    box-shadow: 0 8px 12px #ebedf0;
+    box-shadow: 0 8px 12px var(--site-shadow);
 
     h3 {
       margin-top: 0;

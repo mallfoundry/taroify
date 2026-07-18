@@ -4,7 +4,7 @@
 
 $tree-select-font-size: var(--tree-select-font-size, var(--font-size-md, $font-size-md));
 $tree-select-sidebar-background-color: var(--tree-select-sidebar-background-color, var(--background-color, $background-color));
-$tree-select-content-background-color: var(--tree-select-content-background-color, var(--white, $white));
+$tree-select-content-background-color: var(--tree-select-content-background-color, var(--background-color-2, $background-color-2));
 
 $tree-select-tab-padding: var(--tree-select-tab-padding, 14px * $hd var(--padding-sm, $padding-sm));
 
