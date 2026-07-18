@@ -71,6 +71,44 @@ describe("<FloatingPanel />", () => {
     expect(onChange).toBeCalledWith(299)
   })
 
+  it("should emit drag lifecycle events with the current panel height", async () => {
+    const calls: string[] = []
+    const { container } = render(
+      <FloatingPanel
+        anchors={[100, 200, 400]}
+        onDragStart={({ height }) => calls.push(`start:${height}`)}
+        onDragging={({ height }) => calls.push(`dragging:${height}`)}
+        onDragEnd={({ height }) => calls.push(`end:${height}`)}
+      >
+        内容
+      </FloatingPanel>,
+    )
+    const el = container.querySelector(`.${prefixClassname("floating-panel")}`) as HTMLDivElement
+
+    touchEvent(el, 0, -199)
+    await sleep(0)
+
+    expect(calls).toEqual(["start:100", "dragging:299", "end:200"])
+  })
+
+  it("should not emit drag lifecycle events when the panel does not move", () => {
+    const onDragStart = jest.fn()
+    const onDragging = jest.fn()
+    const onDragEnd = jest.fn()
+    const { container } = render(
+      <FloatingPanel onDragStart={onDragStart} onDragging={onDragging} onDragEnd={onDragEnd}>
+        内容
+      </FloatingPanel>,
+    )
+    const el = container.querySelector(`.${prefixClassname("floating-panel")}`) as HTMLDivElement
+
+    touchEvent(el)
+
+    expect(onDragStart).not.toHaveBeenCalled()
+    expect(onDragging).not.toHaveBeenCalled()
+    expect(onDragEnd).not.toHaveBeenCalled()
+  })
+
   it("should only drag header when allowDraggingContent is false", async () => {
     const onChange = jest.fn()
     const { container } = render(

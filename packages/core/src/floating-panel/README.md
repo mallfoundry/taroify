@@ -102,6 +102,28 @@ function HeadDragOnly() {
 }
 ```
 
+### 监听拖拽
+
+通过 `onDragStart`、`onDragging` 和 `onDragEnd` 可以监听面板的拖拽过程。事件参数中的 `height` 表示当前面板高度，其中 `onDragEnd` 返回吸附到锚点后的最终高度。
+
+```tsx
+<FloatingPanel
+  onDragStart={({ height }) => {
+    console.log("drag start", height)
+  }}
+  onDragging={({ height }) => {
+    console.log("dragging", height)
+  }}
+  onDragEnd={({ height }) => {
+    console.log("drag end", height)
+  }}
+>
+  <Cell.Group>
+    <Cell>内容</Cell>
+  </Cell.Group>
+</FloatingPanel>
+```
+
 ### 手动设置高度
 
 通过 `ref` 可以获取到 FloatingPanel 的实例，调用 `setHeight` 方法可以手动设置 FloatingPanel 的高度。
@@ -147,6 +169,14 @@ function CustomHeight() {
 | duration            | 动画时长，单位秒，设置为 0 可以禁用动画 | _number_   | `0.3`                            |
 | contentDraggable    | 允许拖拽内容容器                        | _boolean_  | `true`                           |
 | safeAreaInsetBottom | 是否开启底部安全区适配                  | _boolean_  | `true`                           |
+
+### Events
+
+| 事件名      | 说明                             | 回调参数             |
+| ----------- | -------------------------------- | -------------------- |
+| onDragStart | 面板开始拖拽时触发               | _{ height: number }_ |
+| onDragging  | 面板拖拽过程中持续触发           | _{ height: number }_ |
+| onDragEnd   | 面板结束拖拽并吸附到锚点后触发   | _{ height: number }_ |
 
 ### 方法
 

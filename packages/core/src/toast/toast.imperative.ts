@@ -67,10 +67,14 @@ export function openToast(args: ReactNode | ToastOptions) {
     const onTransitionExited = restOptions.onTransitionExited
     restOptions.onTransitionExited = () => {
       onTransitionExited?.()
-      unmountPortal(toastView)
-      if (pageSelector) {
-        pendingToastSelectorSet.delete(pageSelector)
-      }
+      // onTransitionExited runs during React's commit phase. Defer unmounting the
+      // independent root until the current render has finished.
+      setTimeout(() => {
+        unmountPortal(toastView)
+        if (pageSelector) {
+          pendingToastSelectorSet.delete(pageSelector)
+        }
+      }, 0)
     }
 
     const selectorId =

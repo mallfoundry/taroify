@@ -135,6 +135,36 @@ import { Button } from "@taroify/core"
 <Button style={{ background: "linear-gradient(to right, #ff6034, #ee0a24)", color: "#fff" }}>渐变色按钮</Button>
 ```
 
+### 微信开放能力
+
+Button 继承了 Taro 原生 Button 的属性，可以通过 `openType` 使用微信小程序开放能力。JSX 中需要使用驼峰写法，例如原生小程序的 `open-type`、`bindgetphonenumber` 分别写为 `openType`、`onGetPhoneNumber`。
+
+```tsx
+<Button
+  openType="getPhoneNumber"
+  onGetPhoneNumber={(event) => {
+    console.log(event.detail.code)
+  }}
+>
+  获取手机号
+</Button>
+
+<Button openType="contact">联系客服</Button>
+
+<Button
+  openType="chooseAvatar"
+  onChooseAvatar={(event) => {
+    console.log(event.detail.avatarUrl)
+  }}
+>
+  选择头像
+</Button>
+
+<Button openType="share">分享</Button>
+```
+
+开放能力的可用范围、参数和回调由目标小程序平台决定，H5 等不支持对应能力的平台不会生效，具体请参考 [Taro Button 文档](https://docs.taro.zone/docs/components/forms/button)。
+
 ### 按钮组
 
 ```tsx
@@ -174,8 +204,10 @@ import { Button } from "@taroify/core"
 | disabled     | 是否禁用按钮                                           | _boolean_                                               | `false`     |
 | hairline     | 是否使用 0.5px 边框                                    | _boolean_                                               | `false`     |
 | loading      | 是否显示为加载状态                                        | _boolean \| [LoadingProps](/components/loading/#props)_ | `false`     |
+| openType     | 小程序开放能力，取值和相关事件请参考 [Taro Button](https://docs.taro.zone/docs/components/forms/button) | _string_ | - |
 | children     | 按钮文字                                             | _string_                                                | -           |
 
+除上述属性外，Button 还支持 Taro 原生 Button 的开放能力参数及事件，例如 `onGetPhoneNumber`、`onContact`、`onChooseAvatar` 和 `onOpenSetting`。
 
 ### Button.Group Props
 
