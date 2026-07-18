@@ -6,4 +6,5 @@ export type FloatingPanelThemeVars = {
   floatingPanelBarWidth?: string
   floatingPanelBarColor?: string
   floatingPanelBackground?: string
+  floatingPanelSafeAreaBackground?: string
 }

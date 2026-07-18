@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 100vw;
   touch-action: none;
-  background: $floating-panel-background;
+  background: transparent;
   border-top-left-radius: $floating-panel-rounded-border-radius;
   border-top-right-radius: $floating-panel-rounded-border-radius;
   will-change: transform;
@@ -21,11 +21,14 @@
     width: 100vw;
     height: 100vh;
     content: "";
-    background-color: inherit;
+    background-color: $floating-panel-safe-area-background;
   }
 
   &__header {
-    display: flex;
+    background: $floating-panel-background;
+    border-top-left-radius: $floating-panel-rounded-border-radius;
+    border-top-right-radius: $floating-panel-rounded-border-radius;
+    display: flex; /* stylelint-disable-line order/properties-order */
     align-items: center;
     justify-content: center;
     height: $floating-panel-header-height;
@@ -44,5 +47,9 @@
     flex: 1;
     overflow-y: auto;
     background-color: $floating-panel-background;
+  }
+
+  &__safe-area {
+    background-color: $floating-panel-safe-area-background;
   }
 }

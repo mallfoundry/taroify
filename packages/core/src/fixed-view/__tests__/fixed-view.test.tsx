@@ -34,4 +34,26 @@ describe("<FixedView />", () => {
 
     expect(el).toHaveStyle("height: 97px")
   })
+
+  it("should pass safeAreaProps to the safe area", () => {
+    mockedUseHeight.mockReturnValue(0)
+
+    const { container } = render(
+      <FixedView
+        position="bottom"
+        safeArea="bottom"
+        safeAreaProps={{
+          className: "custom-safe-area",
+          style: { backgroundColor: "transparent" },
+        }}
+      >
+        <View>content</View>
+      </FixedView>,
+    )
+
+    const safeArea = container.querySelector(`.${prefixClassname("safe-area--bottom")}`)
+
+    expect(safeArea).toHaveClass("custom-safe-area")
+    expect(safeArea).toHaveStyle({ backgroundColor: "transparent" })
+  })
 })

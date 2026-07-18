@@ -9,3 +9,4 @@ $floating-panel-bar-height: var(--floating-panel-bar-height, 6px);
 $floating-panel-bar-width: var(--floating-panel-bar-width, 40px);
 $floating-panel-bar-color: var(--floating-panel-bar-color, var(--gray-5, $gray-5));
 $floating-panel-background: var(--floating-panel-background, var(--background-color-light, $background-color-light));
+$floating-panel-safe-area-background: var(--floating-panel-safe-area-background, $floating-panel-background);
