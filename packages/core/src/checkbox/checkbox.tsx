@@ -76,6 +76,7 @@ export default function Checkbox(props: CheckboxProps) {
       className={classNames(
         prefixClassname("checkbox"),
         {
+          [prefixClassname("checkbox--disabled")]: disabled,
           [prefixClassname("checkbox--horizontal")]: direction === "horizontal",
           [prefixClassname("checkbox--vertical")]: direction === "vertical",
         },
@@ -84,25 +85,37 @@ export default function Checkbox(props: CheckboxProps) {
       onClick={onClick}
       {...restProps}
     >
-      <View
-        className={classNames(
-          prefixClassname("checkbox__icon"),
-          prefixClassname(`checkbox__icon--${shape}`),
-          {
-            [prefixClassname("checkbox__icon--disabled")]: disabled,
-            [prefixClassname("checkbox__icon--checked")]: checked,
-          },
-        )}
-        style={{ fontSize: size ? addUnitPx(size) : "" }}
-        children={icon}
-      />
-      {children && (
+      {shape === "button" ? (
         <View
-          className={classNames(prefixClassname("checkbox__label"), {
-            [prefixClassname("checkbox__label--disabled")]: disabled,
+          className={classNames(prefixClassname("checkbox__button"), {
+            [prefixClassname("checkbox__button--checked")]: checked,
+            [prefixClassname("checkbox__button--disabled")]: disabled,
           })}
           children={children}
         />
+      ) : (
+        <>
+          <View
+            className={classNames(
+              prefixClassname("checkbox__icon"),
+              prefixClassname(`checkbox__icon--${shape}`),
+              {
+                [prefixClassname("checkbox__icon--disabled")]: disabled,
+                [prefixClassname("checkbox__icon--checked")]: checked,
+              },
+            )}
+            style={{ fontSize: size ? addUnitPx(size) : "" }}
+            children={icon}
+          />
+          {children && (
+            <View
+              className={classNames(prefixClassname("checkbox__label"), {
+                [prefixClassname("checkbox__label--disabled")]: disabled,
+              })}
+              children={children}
+            />
+          )}
+        </>
       )}
     </View>
   )

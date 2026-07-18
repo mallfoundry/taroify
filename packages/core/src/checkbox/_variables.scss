@@ -22,3 +22,13 @@ $checkbox-checked-icon-background-color: var(--checkbox-checked-icon-background-
 $checkbox-disabled-icon-color: var(--checkbox-disabled-icon-color, var(--gray-5, $gray-5));
 $checkbox-disabled-icon-border-color: var(--checkbox-disabled-icon-border-color, var(--gray-5, $gray-5));
 $checkbox-disabled-icon-background-color: var(--checkbox-disabled-icon-background-color, var(--border-color, $border-color));
+//
+$checkbox-button-padding: var(--checkbox-button-padding, 5px * $hd 18px * $hd);
+$checkbox-button-border-radius: var(--checkbox-button-border-radius, var(--border-radius-max, $border-radius-max));
+$checkbox-button-color: var(--checkbox-button-color, var(--text-color, $text-color));
+$checkbox-button-background-color: var(--checkbox-button-background-color, var(--gray-1, $gray-1));
+$checkbox-button-border-color: var(--checkbox-button-border-color, $checkbox-button-background-color);
+$checkbox-button-checked-color: var(--checkbox-button-checked-color, var(--primary-color, $primary-color));
+$checkbox-button-checked-background-color: var(--checkbox-button-checked-background-color, var(--white, $white));
+$checkbox-button-checked-border-color: var(--checkbox-button-checked-border-color, var(--primary-color, $primary-color));
+$checkbox-button-disabled-opacity: var(--checkbox-button-disabled-opacity, var(--disabled-opacity, $disabled-opacity));

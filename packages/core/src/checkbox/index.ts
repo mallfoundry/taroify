@@ -4,7 +4,7 @@ import CheckboxGroup from "./checkbox-group"
 export type { CheckboxProps } from "./checkbox"
 export type { CheckboxGroupProps } from "./checkbox-group"
 
-export type { CheckboxThemeVars } from "./checkbox.shared"
+export type { CheckboxShape, CheckboxThemeVars } from "./checkbox.shared"
 
 interface CheckboxInterface {
   (props: CheckboxProps): JSX.Element

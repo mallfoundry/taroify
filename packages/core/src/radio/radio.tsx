@@ -7,8 +7,7 @@ import { type ReactNode, useContext } from "react"
 import { prefixClassname } from "../styles"
 import { addUnitPx } from "../utils/format/unit"
 import RadioGroupContext from "./radio-group.context"
-
-type RadioShape = "square" | "round"
+import type { RadioShape } from "./radio.shared"
 
 export interface RadioProps extends ViewProps {
   className?: string
@@ -59,6 +58,7 @@ export default function Radio(props: RadioProps) {
       className={classNames(
         prefixClassname("radio"),
         {
+          [prefixClassname("radio--disabled")]: disabled,
           [prefixClassname("radio--horizontal")]: direction === "horizontal",
           [prefixClassname("radio--vertical")]: direction === "vertical",
         },
@@ -67,25 +67,37 @@ export default function Radio(props: RadioProps) {
       onClick={handleClick}
       {...restProps}
     >
-      <View
-        className={classNames(
-          prefixClassname("radio__icon"),
-          prefixClassname(`radio__icon--${shape}`),
-          {
-            [prefixClassname("radio__icon--disabled")]: disabled,
-            [prefixClassname("radio__icon--checked")]: checked,
-          },
-        )}
-        style={{ fontSize: size ? addUnitPx(size) : "" }}
-        children={icon}
-      />
-      {children && (
+      {shape === "button" ? (
         <View
-          className={classNames(prefixClassname("radio__label"), {
-            [prefixClassname("radio__label--disabled")]: disabled,
+          className={classNames(prefixClassname("radio__button"), {
+            [prefixClassname("radio__button--checked")]: checked,
+            [prefixClassname("radio__button--disabled")]: disabled,
           })}
           children={children}
         />
+      ) : (
+        <>
+          <View
+            className={classNames(
+              prefixClassname("radio__icon"),
+              prefixClassname(`radio__icon--${shape}`),
+              {
+                [prefixClassname("radio__icon--disabled")]: disabled,
+                [prefixClassname("radio__icon--checked")]: checked,
+              },
+            )}
+            style={{ fontSize: size ? addUnitPx(size) : "" }}
+            children={icon}
+          />
+          {children && (
+            <View
+              className={classNames(prefixClassname("radio__label"), {
+                [prefixClassname("radio__label--disabled")]: disabled,
+              })}
+              children={children}
+            />
+          )}
+        </>
       )}
     </View>
   )

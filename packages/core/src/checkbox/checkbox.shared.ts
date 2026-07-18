@@ -1,4 +1,4 @@
-export type CheckboxShape = "square" | "round"
+export type CheckboxShape = "square" | "round" | "button"
 
 export type CheckboxThemeVars = {
   checkboxSize?: string
@@ -17,4 +17,13 @@ export type CheckboxThemeVars = {
   checkboxDisabledIconColor?: string
   checkboxDisabledIconBorderColor?: string
   checkboxDisabledIconBackgroundColor?: string
+  checkboxButtonPadding?: string
+  checkboxButtonBorderRadius?: string
+  checkboxButtonColor?: string
+  checkboxButtonBackgroundColor?: string
+  checkboxButtonBorderColor?: string
+  checkboxButtonCheckedColor?: string
+  checkboxButtonCheckedBackgroundColor?: string
+  checkboxButtonCheckedBorderColor?: string
+  checkboxButtonDisabledOpacity?: string
 }

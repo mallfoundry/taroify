@@ -37,6 +37,17 @@ import { Checkbox } from "@taroify/core"
 <Checkbox shape="square">自定义形状</Checkbox>
 ```
 
+### 按钮形状
+
+将 `shape` 属性设置为 `button`，复选框会变成适合规格选择等场景的按钮。按钮形状下，`icon` 和 `size` 属性不生效。
+
+```tsx
+<Checkbox.Group defaultValue={["a"]} direction="horizontal">
+  <Checkbox name="a" shape="button">复选框 a</Checkbox>
+  <Checkbox name="b" shape="button">复选框 b</Checkbox>
+</Checkbox.Group>
+```
+
 ### 自定义颜色
 
 通过 `css` 设置选中状态的图标颜色。
@@ -150,7 +161,7 @@ function CheckboxWithCustomIcon() {
 | defaultChecked | 默认是否为选中状态            | _boolean_          | `false`   |
 | checked        | 是否为选中状态            | _boolean_          | `false`   |
 | name           | 标识符                    | _any_              | -         |
-| shape          | 形状，可选值为 `square`   | _string_           | `round`   |
+| shape          | 形状，可选值为 `square` `button` | _string_      | `round`   |
 | disabled       | 是否禁用复选框            | _boolean_          | `false`   |
 | size      | 图标大小，默认单位为 `px` | _number \| string_ | `20px`    |
 
@@ -201,3 +212,12 @@ function CheckboxWithCustomIcon() {
 | --checkbox-disabled-icon-color            | _var(--gray-5)_                  | -   |
 | --checkbox-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
 | --checkbox-disabled-icon-background-color | _var(--border-color)_            | -   |
+| --checkbox-button-padding                 | _5px * $hd 18px * $hd_           | -   |
+| --checkbox-button-border-radius           | _var(--border-radius-max)_        | -   |
+| --checkbox-button-color                   | _var(--text-color)_               | -   |
+| --checkbox-button-background-color        | _var(--gray-1)_                   | -   |
+| --checkbox-button-border-color            | _var(--checkbox-button-background-color)_ | -   |
+| --checkbox-button-checked-color           | _var(--primary-color)_            | -   |
+| --checkbox-button-checked-background-color | _var(--white)_                   | -   |
+| --checkbox-button-checked-border-color    | _var(--primary-color)_            | -   |
+| --checkbox-button-disabled-opacity        | _var(--disabled-opacity)_         | -   |

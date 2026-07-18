@@ -60,6 +60,17 @@ import { Radio } from "@taroify/core";
 </Radio.Group>
 ```
 
+### 按钮形状
+
+将 `shape` 属性设置为 `button`，单选框会变成适合规格选择等场景的按钮。按钮形状下，`icon` 和 `size` 属性不生效。
+
+```tsx
+<Radio.Group defaultValue="a" direction="horizontal">
+  <Radio name="a" shape="button">单选框 a</Radio>
+  <Radio name="b" shape="button">单选框 b</Radio>
+</Radio.Group>
+```
+
 ### 自定义颜色
 
 通过 `css` 属性设置选中状态的图标颜色。
@@ -155,7 +166,7 @@ function CustomIconRadio() {
 | 参数           | 说明                      | 类型               | 默认值    |
 | -------------- | ------------------------- | ------------------ | --------- |
 | name           | 标识符                    | _any_              | -         |
-| shape          | 形状，可选值为 `square`   | _string_           | `round`   |
+| shape          | 形状，可选值为 `square` `button` | _string_      | `round`   |
 | disabled       | 是否为禁用状态            | _boolean_          | `false`   |
 | size           | 图标大小，默认单位为`px`  | _number \| string_ | `20px`    |
 
@@ -199,3 +210,12 @@ function CustomIconRadio() {
 | --radio-disabled-icon-color            | _var(--gray-5)_                  | -   |
 | --radio-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
 | --radio-disabled-icon-background-color | _var(--border-color)_            | -   |
+| --radio-button-padding                 | _5px * $hd 18px * $hd_           | -   |
+| --radio-button-border-radius           | _var(--border-radius-max)_        | -   |
+| --radio-button-color                   | _var(--text-color)_               | -   |
+| --radio-button-background-color        | _var(--gray-1)_                   | -   |
+| --radio-button-border-color            | _var(--radio-button-background-color)_ | -   |
+| --radio-button-checked-color           | _var(--primary-color)_            | -   |
+| --radio-button-checked-background-color | _var(--white)_                   | -   |
+| --radio-button-checked-border-color    | _var(--primary-color)_            | -   |
+| --radio-button-disabled-opacity        | _var(--disabled-opacity)_         | -   |

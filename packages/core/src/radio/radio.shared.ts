@@ -1,3 +1,5 @@
+export type RadioShape = "square" | "round" | "button"
+
 export type RadioThemeVars = {
   radioSize?: string
   radioFontSize?: string
@@ -15,4 +17,13 @@ export type RadioThemeVars = {
   radioDisabledIconColor?: string
   radioDisabledIconBorderColor?: string
   radioDisabledIconBackgroundColor?: string
+  radioButtonPadding?: string
+  radioButtonBorderRadius?: string
+  radioButtonColor?: string
+  radioButtonBackgroundColor?: string
+  radioButtonBorderColor?: string
+  radioButtonCheckedColor?: string
+  radioButtonCheckedBackgroundColor?: string
+  radioButtonCheckedBorderColor?: string
+  radioButtonDisabledOpacity?: string
 }
