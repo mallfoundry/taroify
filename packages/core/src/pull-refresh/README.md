@@ -43,6 +43,8 @@ function BasicPullRefresh() {
 ```
 
 > Tips：在 PullRefresh 组件内部采用 Selector API 获得父滚动元素的 scrollTop 值会带来下拉卡顿的性能问题。因此需要在 PullRefresh 组件外部判断 scrollTop 值，在页面中使用 usePageScroll() 钩子获得 scrollTop 值，在 ScrollView 组件内监听 onScroll 事件获得 scrollTop 值。
+> 固定高度的 List 可以开启 `pullRefresh` 自动同步滚动位置，具体用法请参考
+> [List 下拉刷新](/components/list/#固定高度)。
 
 ### 完成提示
 

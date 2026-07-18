@@ -46,6 +46,7 @@ export interface ListProps extends ViewProps {
   immediateCheck?: boolean
   disabled?: boolean
   fixedHeight?: boolean
+  pullRefresh?: boolean
   children?: ReactNode
   onLoad?(): void
   onScroll?(e: BaseEventOrig<ScrollViewProps.onScrollDetail>): void
@@ -60,6 +61,7 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
     offset = 100,
     immediateCheck: immediateCheckProp = true,
     fixedHeight = false,
+    pullRefresh = false,
     disabled = false,
     children,
     onLoad,
@@ -68,15 +70,23 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
   } = props
   const rootRef = useRef<HTMLElement>()
   const scrollRef = useRef<HTMLElement>()
+  const scrollTopRef = useRef(0)
   const edgeRef = useRef<HTMLElement>()
   const onLoadRef = useToRef(onLoad)
   const immediateCheck = useToRef(immediateCheckProp)
   const { isLoading, setLoading } = useAssignLoading(loadingProp)
   const {
+    updateReachTop: updatePullRefreshReachTop,
     onTouchStart: onPullRefreshTouchStart,
     onTouchEnd: onPullRefreshTouchEnd,
     onTouchMove: onPullRefreshTouchMove,
   } = React.useContext(PullRefreshContext)
+
+  const syncPullRefreshReachTop = useCallback(() => {
+    if (fixedHeight && pullRefresh) {
+      updatePullRefreshReachTop(scrollTopRef.current <= 0)
+    }
+  }, [fixedHeight, pullRefresh, updatePullRefreshReachTop])
 
   const check = useMemoizedFn(
     debounce(() => {
@@ -121,18 +131,22 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
   const onScroll = (e) => {
     onScrollProp?.(e)
     if (fixedHeight) {
+      scrollTopRef.current = e.detail.scrollTop
+      syncPullRefreshReachTop()
       check()
     }
   }
 
   const onTouchStart = (e) => {
     if (fixedHeight) {
+      syncPullRefreshReachTop()
       onPullRefreshTouchStart?.(e)
     }
   }
 
   const onTouchMove = (e) => {
     if (fixedHeight) {
+      syncPullRefreshReachTop()
       onPullRefreshTouchMove?.(e)
     }
   }
@@ -142,6 +156,16 @@ function List(props: ListProps, ref: ForwardedRef<ListInstance>) {
       onPullRefreshTouchEnd?.(e)
     }
   }
+
+  useEffect(() => {
+    if (fixedHeight && pullRefresh) {
+      syncPullRefreshReachTop()
+      return () => updatePullRefreshReachTop(true)
+    }
+    if (!fixedHeight) {
+      scrollTopRef.current = 0
+    }
+  }, [fixedHeight, pullRefresh, syncPullRefreshReachTop, updatePullRefreshReachTop])
 
   useDidEffect(() => {
     check()
