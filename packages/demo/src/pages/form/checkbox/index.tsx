@@ -45,6 +45,19 @@ export default function CheckboxDemo() {
       <Block title="自定义形状">
         <Checkbox shape="square">自定义形状</Checkbox>
       </Block>
+      <Block title="按钮形状">
+        <Checkbox.Group defaultValue={["a", "c"]} direction="horizontal">
+          <Checkbox name="a" shape="button">
+            复选框 a
+          </Checkbox>
+          <Checkbox name="b" shape="button">
+            复选框 b
+          </Checkbox>
+          <Checkbox name="c" shape="button" disabled>
+            复选框 c
+          </Checkbox>
+        </Checkbox.Group>
+      </Block>
       <Block title="自定义颜色">
         <Checkbox className="custom-color">自定义颜色</Checkbox>
       </Block>

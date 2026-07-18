@@ -92,4 +92,29 @@
       color: $checkbox-disabled-label-color;
     }
   }
+
+  &__button {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $checkbox-button-padding;
+    color: $checkbox-button-color;
+    background-color: $checkbox-button-background-color;
+    border: 1PX solid $checkbox-button-border-color;
+    border-radius: $checkbox-button-border-radius;
+    transition-duration: $checkbox-transition-duration;
+    transition-property: color, border-color, background-color, opacity;
+
+    &--checked {
+      color: $checkbox-button-checked-color;
+      background-color: $checkbox-button-checked-background-color;
+      border-color: $checkbox-button-checked-border-color;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: $checkbox-button-disabled-opacity;
+    }
+  }
 }

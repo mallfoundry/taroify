@@ -71,6 +71,19 @@ export default function RadioDemo() {
           </Radio>
         </Radio.Group>
       </Block>
+      <Block title="按钮形状">
+        <Radio.Group defaultValue="a" direction="horizontal">
+          <Radio name="a" shape="button">
+            单选框 a
+          </Radio>
+          <Radio name="b" shape="button">
+            单选框 b
+          </Radio>
+          <Radio name="c" shape="button" disabled>
+            单选框 c
+          </Radio>
+        </Radio.Group>
+      </Block>
       <Block title="自定义颜色">
         <Radio.Group className="custom-color" defaultValue="1">
           <Radio name="1">单选框 1</Radio>

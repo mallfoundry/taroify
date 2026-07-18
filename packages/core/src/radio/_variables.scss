@@ -22,3 +22,13 @@ $radio-checked-icon-background-color: var(--radio-checked-icon-background-color,
 $radio-disabled-icon-color: var(--radio-disabled-icon-color, var(--gray-5, $gray-5));
 $radio-disabled-icon-border-color: var(--radio-disabled-icon-border-color, var(--gray-5, $gray-5));
 $radio-disabled-icon-background-color: var(--radio-disabled-icon-background-color, var(--border-color, $border-color));
+//
+$radio-button-padding: var(--radio-button-padding, 5px * $hd 18px * $hd);
+$radio-button-border-radius: var(--radio-button-border-radius, var(--border-radius-max, $border-radius-max));
+$radio-button-color: var(--radio-button-color, var(--text-color, $text-color));
+$radio-button-background-color: var(--radio-button-background-color, var(--gray-1, $gray-1));
+$radio-button-border-color: var(--radio-button-border-color, $radio-button-background-color);
+$radio-button-checked-color: var(--radio-button-checked-color, var(--primary-color, $primary-color));
+$radio-button-checked-background-color: var(--radio-button-checked-background-color, var(--white, $white));
+$radio-button-checked-border-color: var(--radio-button-checked-border-color, var(--primary-color, $primary-color));
+$radio-button-disabled-opacity: var(--radio-button-disabled-opacity, var(--disabled-opacity, $disabled-opacity));

@@ -4,7 +4,7 @@ import RadoGroup from "./radio-group"
 export type { RadioProps } from "./radio"
 export type { RadioGroupProps } from "./radio-group"
 
-export type { RadioThemeVars } from "./radio.shared"
+export type { RadioShape, RadioThemeVars } from "./radio.shared"
 
 interface RadioInterface {
   (props: RadioProps): JSX.Element

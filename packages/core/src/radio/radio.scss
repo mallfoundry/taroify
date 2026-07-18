@@ -92,4 +92,29 @@
       color: $radio-disabled-label-color;
     }
   }
+
+  &__button {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $radio-button-padding;
+    color: $radio-button-color;
+    background-color: $radio-button-background-color;
+    border: 1PX solid $radio-button-border-color;
+    border-radius: $radio-button-border-radius;
+    transition-duration: $radio-transition-duration;
+    transition-property: color, border-color, background-color, opacity;
+
+    &--checked {
+      color: $radio-button-checked-color;
+      background-color: $radio-button-checked-background-color;
+      border-color: $radio-button-checked-border-color;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: $radio-button-disabled-opacity;
+    }
+  }
 }
