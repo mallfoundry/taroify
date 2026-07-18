@@ -18,6 +18,19 @@ function toMapValueArray<T>(map?: Map<string, T>): T[] {
   return array
 }
 
+function defineLegacyPathValue(values: any, name: string, value: any) {
+  if (_.toPath(name).length > 1) {
+    // Keep direct access to the flat key used by previous versions without
+    // duplicating it in enumerable or serialized form values.
+    Object.defineProperty(values, name, {
+      configurable: true,
+      enumerable: false,
+      value,
+      writable: true,
+    })
+  }
+}
+
 function getAttributiveForm(formName: string) {
   return containerForms.get(formName)
 }
@@ -157,7 +170,9 @@ class FormAttributes {
     if (_.isEmpty(names)) {
       for (const field of this.fields.values()) {
         if (field.name) {
-          values[field.name] = _.get(this.values, field.name)
+          const value = _.get(this.values, field.name)
+          _.set(values, field.name, value)
+          defineLegacyPathValue(values, field.name, value)
         }
       }
       return values
