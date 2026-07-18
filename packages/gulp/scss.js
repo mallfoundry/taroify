@@ -128,7 +128,7 @@ function watchScssSymlink(module) {
     [`./packages/${module}/src/**/*.scss`],
     {
       events: ["add", "addDir", "unlink", "unlinkDir"],
-      ignoreInitial: false,
+      ignoreInitial: true,
     },
     series(symlinkScssFiles(module)),
   )
@@ -136,4 +136,5 @@ function watchScssSymlink(module) {
 
 exports.buildScss = buildScss
 exports.watchScss = watchScss
+exports.symlinkScssFiles = symlinkScssFiles
 exports.watchScssSymlink = watchScssSymlink

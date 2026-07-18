@@ -1,9 +1,49 @@
+<div align="center">
 <p align="center">
   <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style="margin-bottom: 10px;">
 </p>
-<h3 align="center">轻量、可靠的小程序端 Taro React UI 组件库</h3>
+  <p>
+    <strong>轻量、可靠、面向多端的 Taro React UI 组件库</strong>
+  </p>
 
-## 介绍
+  <p>
+    基于 Vant 设计语言，为小程序与 H5 提供一致、类型安全且高度可定制的开发体验。
+  </p>
+
+  <p>
+    <a href="https://www.npmjs.com/package/@taroify/core">
+      <img src="https://img.shields.io/npm/v/@taroify/core?style=flat-square&color=2f80ed" alt="npm version" />
+    </a>
+    <a href="https://www.npmjs.com/package/@taroify/core">
+      <img src="https://img.shields.io/npm/dm/@taroify/core?style=flat-square&color=67d5b5" alt="npm downloads" />
+    </a>
+    <a href="https://github.com/mallfoundry/taroify/actions/workflows/test.yml">
+      <img src="https://github.com/mallfoundry/taroify/actions/workflows/test.yml/badge.svg" alt="CI status" />
+    </a>
+    <a href="https://codecov.io/gh/mallfoundry/taroify">
+      <img src="https://img.shields.io/codecov/c/github/mallfoundry/taroify?style=flat-square&color=2f80ed" alt="coverage" />
+    </a>
+    <a href="./LICENSE">
+      <img src="https://img.shields.io/github/license/mallfoundry/taroify?style=flat-square&color=67d5b5" alt="license" />
+    </a>
+  </p>
+
+  <p>
+    <a href="https://taroify.github.io/taroify.com/"><strong>官网</strong></a>
+    ·
+    <a href="https://taroify.github.io/taroify.com/quickstart/"><strong>快速上手</strong></a>
+    ·
+    <a href="https://taroify.github.io/taroify.com/h5/index.html"><strong>在线演示</strong></a>
+    ·
+    <a href="https://taroify.github.io/taroify.com/mcp/"><strong>MCP</strong></a>
+    ·
+    <a href="https://github.com/mallfoundry/taroify/discussions"><strong>讨论区</strong></a>
+  </p>
+</div>
+
+---
+
+## Taroify 是什么
 
 Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro React 版本，两者基于相同的视觉规范，提供近似一致的 API 接口，助力开发者快速搭建小程序应用。
 
@@ -26,11 +66,15 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 
 在现有项目中使用 Taroify 时，可以通过 `npm` 进行安装
 
+## 快速开始
+
+### 安装
+
 ```bash
-npm i @taroify/core
+npm install @taroify/core
 ```
 
-当然，你也可以通过 `yarn` 或 `pnpm` 进行安装
+也可以使用 Yarn 或 pnpm：
 
 ```bash
 yarn add @taroify/core
@@ -38,89 +82,125 @@ yarn add @taroify/core
 pnpm add @taroify/core
 ```
 
-## 快速上手
+### 使用组件
 
 ```tsx
 import { Button } from "@taroify/core"
 import "@taroify/core/button/style"
 
-function Index() {
-  return <Button color="primary">按钮</Button>
+export default function Index() {
+  return <Button color="primary">开始使用 Taroify</Button>
 }
 ```
 
-更多使用方式，请参考[快速上手](https://taroify.github.io/taroify.com/introduce/)
+推荐配置自动按需引入，以获得更简洁的源码和更小的构建产物。完整配置请查看
+[快速上手](https://taroify.github.io/taroify.com/quickstart/)。
 
-## 贡献代码
+## Packages
 
-修改代码请阅读我们的[开发指南](https://taroify.github.io/taroify.com/contribution/)。
+Taroify 采用 Monorepo 组织，各能力可以独立安装和组合：
 
-使用过程中发现任何问题都可以提 [Issue](https://github.com/mallfoundry/taroify/issues)
-给我们，当然，我们也非常欢迎你给我们发 [PR](https://github.com/mallfoundry/taroify/pulls)。
+| Package                                                                | 说明                             |
+| :--------------------------------------------------------------------- | :------------------------------- |
+| [`@taroify/core`](https://www.npmjs.com/package/@taroify/core)         | 核心 UI 组件与主题系统           |
+| [`@taroify/icons`](https://www.npmjs.com/package/@taroify/icons)       | Taro React 图标组件              |
+| [`@taroify/hooks`](https://www.npmjs.com/package/@taroify/hooks)       | 面向组件与业务场景的 React Hooks |
+| [`@taroify/commerce`](https://www.npmjs.com/package/@taroify/commerce) | 电商场景扩展组件                 |
+| [`@taroify/mcp`](https://www.npmjs.com/package/@taroify/mcp)           | 面向 AI 编码助手的文档检索服务   |
 
-## 微信交流群
+## 本地开发
 
-<img src="https://raw.githubusercontent.com/mallfoundry/taroify/main/wechat-qrcode.jpg" width="260" style="width: 260px;"  />
+```bash
+# 克隆仓库
+git clone https://github.com/mallfoundry/taroify.git
+cd taroify
 
-<p>备注 "taroify" 加好友后邀请进群</p>
+# 安装根目录、工作区和官网依赖
+yarn run install:node_modules
+
+# 启动 H5 组件示例与文档站点
+yarn develop
+```
+
+更多仓库结构、组件开发与提交规范，请阅读
+[贡献指南](https://taroify.github.io/taroify.com/contribution/)。
+
+## 社区
+
+如果你发现问题、希望增加组件，或对 API 设计有建议，欢迎通过以下方式参与：
+
+- [提交 Issue](https://github.com/mallfoundry/taroify/issues)
+- [发起 Pull Request](https://github.com/mallfoundry/taroify/pulls)
+- [参与 Discussions](https://github.com/mallfoundry/taroify/discussions)
+- [查看更新日志](https://taroify.github.io/taroify.com/changelog/)
+
+<details>
+  <summary><strong>加入微信交流群</strong></summary>
+
+  <br />
+
+  <img src="./wechat-qrcode.jpg" alt="Taroify 微信交流群" width="240" />
+
+  <p>添加好友时请备注「taroify」，通过后邀请进群。</p>
+</details>
 
 ## 贡献者
 
+感谢每一位为 Taroify 提交代码、文档、设计、Issue 与建议的贡献者。
+
 <a href="https://github.com/mallfoundry/taroify/graphs/contributors">
-  <img src="https://opencollective.com/taroify/contributors.svg?width=890&button=false"/>
+  <img src="https://contrib.rocks/image?repo=mallfoundry/taroify" alt="contributors"/>
 </a>
 
-- 部分图形设计来自 [@BiscuitCoder](https://uyyu.xyz/)
+部分图形设计来自 [@BiscuitCoder](https://uyyu.xyz/)。
 
-## Vant 官方生态
+## 生态与致谢
 
-由 Vant 官方团队维护的项目如下：
+Taroify 的设计规范与大量组件经验来自 Vant。感谢
+[Vant 团队](https://github.com/youzan/vant) 多年来对移动端组件生态的持续投入，也感谢
+[JetBrains](https://www.jetbrains.com/) 为开源项目提供开发工具支持。
 
-| 项目                                                                                        | 描述                       |
-| ------------------------------------------------------------------------------------------- | -------------------------- |
-| [vant](https://github.com/youzan/vant)                                                      | Vant Vue 版                |
-| [vant-weapp](https://github.com/youzan/vant-weapp)                                          | Vant 微信小程序版          |
-| [vant-demo](https://github.com/youzan/vant-demo)                                            | Vant 官方示例合集          |
-| [vant-cli](https://github.com/youzan/vant/tree/dev/packages/vant-cli)                       | 开箱即用的组件库搭建工具   |
-| [vant-icons](https://github.com/youzan/vant/tree/dev/packages/vant-icons)                   | Vant 图标库                |
-| [vant-touch-emulator](https://github.com/youzan/vant/tree/dev/packages/vant-touch-emulator) | 在桌面端使用 Vant 的辅助库 |
+<details>
+  <summary><strong>Vant 官方生态</strong></summary>
 
-## 社区生态
+  <br />
 
-由社区维护的项目如下，欢迎补充：
+| 项目                                                                                        | 描述                     |
+| :------------------------------------------------------------------------------------------ | :----------------------- |
+| [Vant](https://github.com/youzan/vant)                                                      | Vant Vue 版              |
+| [Vant Weapp](https://github.com/youzan/vant-weapp)                                          | Vant 微信小程序版        |
+| [Vant Demo](https://github.com/youzan/vant-demo)                                            | Vant 官方示例合集        |
+| [Vant CLI](https://github.com/youzan/vant/tree/dev/packages/vant-cli)                       | 开箱即用的组件库搭建工具 |
+| [Vant Icons](https://github.com/youzan/vant/tree/dev/packages/vant-icons)                   | Vant 图标库              |
+| [Vant Touch Emulator](https://github.com/youzan/vant/tree/dev/packages/vant-touch-emulator) | 桌面端触摸事件模拟工具   |
 
-| 项目                                                      | 描述                                                     |
-| --------------------------------------------------------- | -------------------------------------------------------- |
-| [3lang3/react-vant](https://github.com/3lang3/react-vant) | 参照 Vant 打造的 React 移动端组件库                      |
-| [rc-ui-lib](https://github.com/rancui/rc-ui-lib)          | 参照 Vant 打造的 React 框架移动端组件库                  |
-| [vant-aliapp](https://github.com/ant-move/Vant-Aliapp)    | Vant 支付宝小程序版                                      |
-| [taroify](https://github.com/mallfoundry/taroify)         | Vant Taro React 版                                       |
-| [vant-theme](https://github.com/Aisen60/vant-theme)       | Vant 在线主题预览工具                                    |
-| [@antmjs/vantui](https://github.com/antmjs/vantui)        | 基于 Vant Weapp 开发的多端组件库，同时支持 Taro 和 React |
+</details>
+
+<details>
+  <summary><strong>社区生态与友情推荐</strong></summary>
+
+  <br />
+
+| 项目                                                                 | 描述                                 |
+| :------------------------------------------------------------------- | :----------------------------------- |
+| [React Vant](https://github.com/3lang3/react-vant)                   | 参照 Vant 打造的 React 移动端组件库  |
+| [mockm](https://github.com/wll8/mockm)                               | 面向前端开发的接口模拟工具           |
+| [taro-hooks](https://github.com/innocces/taro-hooks)                 | 为 Taro 设计的 Hooks Library         |
+| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | 提供类型提示与参数能力的 Taro 路由库 |
+
+</details>
 
 ### 支持者
 
-<a href="https://github.com/Yorksh1re">@Yorksh1re</a>
-<a href="https://github.com/akazwz">@akazwz</a>
-<a href="https://github.com/programmer-yang">@Yang</a>
-<a href="https://github.com/coderYarn">@coderYarn</a>
-<a href="https://github.com/shaolongcai">@蔡包</a>
-<a href="https://github.com/lifeneedspassion">@王昆</a>
+感谢
+[@Yorksh1re](https://github.com/Yorksh1re)、
+[@akazwz](https://github.com/akazwz)、
+[@Yang](https://github.com/programmer-yang)、
+[@coderYarn](https://github.com/coderYarn)、
+[@蔡包](https://github.com/shaolongcai)、
+[@王昆](https://github.com/lifeneedspassion)
+以及所有支持 Taroify 的开发者。
 
-## 鸣谢
+## License
 
-[Vant](https://github.com/youzan/vant) - 感谢 Vant 团队多年来的不断维护，让 Taroify 能够站在巨人的肩膀上。
-
-[WebStorm](https://www.jetbrains.com) - 感谢 JetBrains 团队提供的集成开发环境，使得 Taroify 可以快速开发。
-
-## 开源协议
-
-本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89) 协议，请自由地享受和参与开源。
-
-## 友情推荐
-
-| 项目                                                                 | 描述                                                                                                                                        |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [mockm](https://github.com/wll8/mockm)                               | 一款优雅解决前端开发过程中各种接口问题的 nodejs 工具                                                                                        |
-| [taro-hooks](https://github.com/innocces/taro-hooks)                 | 为 Taro 而设计的 Hooks Library                                                                                                              |
-| [tarojs-router-next](https://github.com/lblblong/tarojs-router-next) | Taro 小程序路由库 / 自动生成带参数类型提示的路由方法 / 允许传递任意类型、任意大小的参数数据 / 同步的路由方法调用 / koa 体验一致的路由中间件 |
+[MIT](./LICENSE) © Taroify Contributors

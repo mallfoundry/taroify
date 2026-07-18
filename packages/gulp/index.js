@@ -1,11 +1,16 @@
 const { series, parallel } = require("gulp")
 const { task } = require("gulp-execa")
-const { buildTypescript, watchTypescript, watchTypescriptSymlink } = require("./typescript")
+const {
+  buildTypescript,
+  symlinkTypescriptFiles,
+  watchTypescript,
+  watchTypescriptSymlink,
+} = require("./typescript")
 const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
-const { buildScss, watchScss, watchScssSymlink } = require("./scss")
+const { buildScss, symlinkScssFiles, watchScss, watchScssSymlink } = require("./scss")
 const { createBundle, cleanBundle } = require("./bundle")
 const { detectPort, serveDemo, serveSite } = require("./serve")
-const { copyFontFiles } = require("./font")
+const { copyFontFiles, symlinkFontFiles, watchFontFilesSymlink } = require("./font")
 const { buildH5, buildSite, copyH5, copySite, copyGitIgnore } = require("./www")
 
 function watch() {
@@ -28,6 +33,8 @@ function watchSymlink() {
   watchTypescriptSymlink("hooks")
   watchTypescriptSymlink("core")
   watchTypescriptSymlink("commerce")
+  watchFontFilesSymlink("core")
+  watchFontFilesSymlink("commerce")
   watchReadmeFiles("core/src", "components")
   watchReadmeFiles("core/docs", "components")
   watchReadmeFiles("commerce/src", "components")
@@ -43,6 +50,19 @@ const createBundles = parallel(
 
 exports.createBundles = createBundles
 
+const symlinkBundles = parallel(
+  symlinkScssFiles("icons"),
+  symlinkScssFiles("core"),
+  symlinkTypescriptFiles("icons"),
+  symlinkTypescriptFiles("hooks"),
+  symlinkTypescriptFiles("core"),
+  symlinkTypescriptFiles("commerce"),
+  symlinkFontFiles("core"),
+  symlinkFontFiles("commerce"),
+)
+
+exports.symlinkBundles = symlinkBundles
+
 exports.clean = series(
   createBundles,
   task("gatsby clean", {
@@ -53,12 +73,9 @@ exports.clean = series(
 
 exports.develop = series(
   detectPort,
-  parallel(
-    createBundles, //
-    watchSymlink,
-    serveDemo,
-    serveSite,
-  ),
+  createBundles,
+  symlinkBundles,
+  parallel(watchSymlink, serveDemo, serveSite),
 )
 
 exports.watch = watch

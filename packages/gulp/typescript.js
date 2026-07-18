@@ -173,7 +173,7 @@ function watchTypescriptSymlink(module, dist) {
     [`./packages/${module}/src/**/*.[jt]s?(x)`],
     {
       events: ["add", "addDir", "unlink", "unlinkDir"],
-      ignoreInitial: false,
+      ignoreInitial: true,
     },
     series(symlinkTypescriptFiles(module, dist)),
   )
@@ -181,4 +181,5 @@ function watchTypescriptSymlink(module, dist) {
 
 exports.buildTypescript = buildTypescript
 exports.watchTypescript = watchTypescript
+exports.symlinkTypescriptFiles = symlinkTypescriptFiles
 exports.watchTypescriptSymlink = watchTypescriptSymlink

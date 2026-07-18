@@ -187,6 +187,10 @@ const menus = [
         to: "/components/floating-bubble/",
       },
       {
+        title: "Tour 引导",
+        to: "/components/tour/",
+      },
+      {
         title: "Loading 加载",
         to: "/components/loading/",
       },

@@ -3,7 +3,7 @@ name: Deploy Site
 on:
   push:
     tags:
-      - 'v*'
+      - "v*.*.*"
 
 concurrency:
   group: deploy-site-${{ github.ref }}
@@ -28,10 +28,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Run Build Site
+      - name: Install
         run: |
           yarn install --frozen-lockfile
-          yarn run build:www
+          yarn --cwd site install --frozen-lockfile
+
+      - name: Build Site
+        run: yarn run build:www
 
       - name: Deploy for GitHub 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3

@@ -125,6 +125,7 @@ export type ConfigProviderThemeVars = ConfigProviderBaseThemeVars &
   import("../textarea").TextareaThemeVars &
   import("../timeline").TimelineThemeVars &
   import("../toast").ToastThemeVars &
+  import("../tour").TourThemeVars &
   import("../tree-select").TreeSelectThemeVars &
   import("../uploader").UploadThemeVars &
   import("../watermark").WatermarkThemeVars &

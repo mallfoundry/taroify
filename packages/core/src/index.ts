@@ -55,6 +55,8 @@ export { default as SwipeCell } from "./swipe-cell"
 export { default as FloatingPanel } from "./floating-panel"
 export type { FloatingPanelDragEvent } from "./floating-panel"
 export { default as FloatingBubble } from "./floating-bubble"
+export { default as Tour } from "./tour"
+export type { TourPlacement, TourStep, TourTarget, TourType } from "./tour"
 // Display Components
 export { default as Avatar } from "./avatar"
 export { default as Badge } from "./badge"
