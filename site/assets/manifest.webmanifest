@@ -1,0 +1,16 @@
+{
+  "name": "Taroify",
+  "short_name": "Taroify",
+  "description": "轻量、可靠的小程序端 Taro React UI 组件库",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f8f6",
+  "theme_color": "#0c1713",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

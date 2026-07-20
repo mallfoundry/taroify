@@ -1,0 +1,30 @@
+// This file is compiled from Taroify's own component styles.
+// Keep the source imports as the single source of truth for homepage component visuals.
+@use "../../../packages/core/src/styles/variables" with (
+  $hd: 1
+);
+@use "../../../packages/core/src/styles/ellipsis";
+@use "../../../packages/core/src/input/input";
+@use "../../../packages/core/src/cell/cell";
+@use "../../../packages/core/src/form/form-control";
+@use "../../../packages/core/src/form/form-item";
+@use "../../../packages/core/src/search/search";
+@use "../../../packages/core/src/notice-bar/notice-bar";
+@use "../../../packages/core/src/popup/popup";
+@use "../../../packages/core/src/toast/toast";
+@use "../../../packages/core/src/calendar/calendar";
+@use "../../../packages/core/src/badge/badge";
+@use "../../../packages/core/src/tabs/tabs";
+@use "../../../packages/core/src/tabs/tabs-header";
+@use "../../../packages/core/src/tabs/tabs-line";
+@use "../../../packages/core/src/tabs/tab";
+@use "../../../packages/core/src/switch/switch";
+@use "../../../packages/core/src/checkbox/checkbox";
+@use "../../../packages/core/src/stepper/stepper";
+@use "../../../packages/core/src/slider/slider";
+@use "../../../packages/core/src/button-base/button-base";
+@use "../../../packages/core/src/sheet/sheet";
+@use "../../../packages/core/src/action-sheet/action-sheet";
+@use "../../../packages/core/src/safe-area/safe-area";
+@use "../../../packages/core/src/swiper/swiper";
+@use "../../../packages/icons/src/van/VanIcon";

@@ -1,0 +1,359 @@
+body:has(.tf-home) {
+  --tf-primary: #1989fa;
+  --tf-primary-strong: #0b73d5;
+  --tf-primary-soft: rgba(25, 137, 250, 0.1);
+  --tf-page: #f5f7fa;
+  --tf-surface: #ffffff;
+  --tf-surface-soft: #fafbfc;
+  --tf-surface-raised: #ffffff;
+  --tf-ink: #17202b;
+  --tf-ink-soft: #5d6672;
+  --tf-ink-faint: #8c95a1;
+  --tf-line: rgba(23, 32, 43, 0.1);
+  --tf-line-strong: rgba(23, 32, 43, 0.17);
+  --tf-shadow: 0 18px 48px rgba(42, 55, 73, 0.09);
+  --tf-shadow-soft: 0 8px 24px rgba(42, 55, 73, 0.07);
+  --tf-ambient: rgba(25, 137, 250, 0.1);
+  --tf-command: #1c2025;
+  --tf-command-ink: #f5f7fa;
+  --tf-command-soft: #9da4ad;
+  --tf-on-primary: #ffffff;
+  --tf-nav-bg: rgba(245, 247, 250, 0.88);
+  --rp-c-brand: var(--tf-primary);
+  --rp-c-brand-dark: var(--tf-primary-strong);
+  --rp-c-bg: var(--tf-page);
+  --rp-c-bg-soft: var(--tf-surface-soft);
+  --rp-c-divider: var(--tf-line);
+  --rp-c-text-1: var(--tf-ink);
+  --rp-c-text-2: var(--tf-ink-soft);
+  color-scheme: light;
+  background: var(--tf-page);
+  color: var(--tf-ink);
+}
+
+.dark body:has(.tf-home) {
+  --tf-primary: #3a9cff;
+  --tf-primary-strong: #1989fa;
+  --tf-primary-soft: rgba(58, 156, 255, 0.14);
+  --tf-page: #08111c;
+  --tf-surface: #0e1824;
+  --tf-surface-soft: #0b1520;
+  --tf-surface-raised: #111c29;
+  --tf-ink: #f2f6fb;
+  --tf-ink-soft: #a3aebb;
+  --tf-ink-faint: #707d8c;
+  --tf-line: rgba(189, 211, 234, 0.14);
+  --tf-line-strong: rgba(189, 211, 234, 0.24);
+  --tf-shadow: 0 20px 52px rgba(0, 0, 0, 0.28);
+  --tf-shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.22);
+  --tf-ambient: rgba(58, 156, 255, 0.14);
+  --tf-command: #111a24;
+  --tf-command-ink: #f4f7fa;
+  --tf-command-soft: #7f8a97;
+  --tf-on-primary: #ffffff;
+  --tf-nav-bg: rgba(8, 17, 28, 0.88);
+  color-scheme: dark;
+}
+
+body:has(.tf-home) .rp-nav {
+  border-bottom: 1px solid var(--tf-line) !important;
+  background: var(--tf-nav-bg) !important;
+  backdrop-filter: blur(16px) saturate(120%);
+}
+
+@media (min-width: 961px) {
+  body:has(.tf-home) .rp-nav__others {
+    display: flex;
+  }
+
+  body:has(.tf-home) .rp-nav-hamburger__md,
+  body:has(.tf-home) .rp-nav-hamburger__sm {
+    display: none;
+  }
+}
+
+.tf-home {
+  position: relative;
+  isolation: isolate;
+  height: calc(100dvh - var(--rp-nav-height));
+  overflow: hidden;
+  background: var(--tf-page);
+  color: var(--tf-ink);
+}
+
+.tf-home::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: radial-gradient(
+      circle at 8% 16%,
+      color-mix(in srgb, var(--tf-primary) 7%, transparent),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 92% 78%,
+      color-mix(in srgb, var(--tf-primary) 6%, transparent),
+      transparent 27%
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.tf-home-single {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+  padding: 20px 24px 28px;
+}
+
+.tf-home-single__copy {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: min(100%, 720px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tf-home-single__copy::before {
+  position: absolute;
+  z-index: -1;
+  inset: -112px -170px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--tf-page) 99%, transparent) 0%,
+    color-mix(in srgb, var(--tf-page) 94%, transparent) 46%,
+    color-mix(in srgb, var(--tf-page) 52%, transparent) 66%,
+    transparent 79%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.tf-home-single h1 {
+  margin: 0;
+  padding: 0.08em 0 0.09em;
+  color: var(--tf-ink);
+  font-size: clamp(90px, 9.2vw, 132px);
+  font-weight: 780;
+  letter-spacing: -0.082em;
+  line-height: 0.82;
+}
+
+.tf-home-single h2 {
+  max-width: 690px;
+  margin: 30px 0 0;
+  color: var(--tf-ink);
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", "Noto Serif SC", Georgia, serif;
+  font-size: clamp(34px, 3.2vw, 46px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.tf-home-single h2 span {
+  color: var(--tf-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 0.9em;
+  font-weight: 690;
+  letter-spacing: -0.055em;
+}
+
+.tf-home-promise {
+  margin: 18px 0 0;
+  color: var(--tf-ink);
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.008em;
+}
+
+.tf-home-description {
+  max-width: 570px;
+  margin: 12px 0 0;
+  color: var(--tf-ink-soft);
+  font-size: 15px;
+  line-height: 1.72;
+  text-wrap: balance;
+}
+
+.tf-install-command {
+  display: grid;
+  width: min(100%, 510px);
+  min-height: 56px;
+  grid-template-columns: auto minmax(0, 1fr) 56px;
+  align-items: center;
+  margin-top: 25px;
+  border: 1px solid var(--tf-line-strong);
+  border-radius: 12px;
+  background: var(--tf-command);
+  box-shadow: var(--tf-shadow-soft);
+  color: var(--tf-command-ink);
+  transform-origin: center;
+}
+
+.tf-install-command > span {
+  padding-left: 18px;
+  color: var(--tf-command-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+}
+
+.tf-install-command code {
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  color: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  letter-spacing: -0.015em;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tf-install-command button {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--tf-command-soft);
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.tf-install-command button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tf-command-ink);
+}
+
+.tf-install-command svg {
+  width: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.tf-install-command__copied {
+  color: var(--tf-command-ink) !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+}
+
+.tf-home :where(a, button, input):focus-visible {
+  outline: 3px solid var(--tf-primary-soft);
+  outline-offset: 3px;
+}
+
+@media (max-width: 960px) {
+  .tf-home-single {
+    padding-inline: 20px;
+  }
+
+  .tf-home-single h1 {
+    font-size: clamp(76px, 12vw, 104px);
+  }
+
+  .tf-home-single h2 {
+    max-width: 620px;
+    margin-top: 25px;
+    font-size: clamp(31px, 4.8vw, 40px);
+  }
+}
+
+@media (max-width: 760px) {
+  .tf-home-single {
+    padding: 16px 14px 22px;
+  }
+
+  .tf-home-single__copy {
+    width: 100%;
+  }
+
+  .tf-home-single__copy::before {
+    inset: -54px -58px;
+  }
+
+  .tf-home-single h1 {
+    font-size: clamp(56px, 16vw, 68px);
+  }
+
+  .tf-home-single h2 {
+    max-width: 390px;
+    margin-top: 17px;
+    font-size: clamp(27px, 7.8vw, 32px);
+    line-height: 1.18;
+  }
+
+  .tf-home-promise {
+    margin-top: 11px;
+    font-size: 13px;
+  }
+
+  .tf-home-description {
+    display: none;
+  }
+
+  .tf-install-command {
+    width: min(100%, 410px);
+    min-height: 43px;
+    grid-template-columns: auto minmax(0, 1fr) 46px;
+    margin-top: 16px;
+  }
+
+  .tf-install-command > span {
+    padding-left: 13px;
+    font-size: 11px;
+  }
+
+  .tf-install-command code {
+    padding: 0 9px;
+    font-size: 11px;
+  }
+
+  .tf-install-command svg {
+    width: 16px;
+  }
+}
+
+@media (max-width: 430px) and (max-height: 720px) {
+  .tf-home-single h1 {
+    font-size: 51px;
+  }
+
+  .tf-home-single h2 {
+    margin-top: 12px;
+    font-size: 24px;
+  }
+
+  .tf-home-promise {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .tf-install-command {
+    min-height: 38px;
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-home *,
+  .tf-home *::before,
+  .tf-home *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,26 +1,23 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowJs": false,
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
+    "jsx": "react-jsx",
+    "target": "ES2023",
+    "noEmit": true,
+    "skipLibCheck": true,
     "strict": true,
-    "noUnusedLocals": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
+    "types": ["@rsbuild/core/types"],
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
-    "removeComments": true,
-    "declaration": true,
-    "declarationMap": true,
-    "types": [
-      "jest",
-      "node"
-    ],
-    "rootDir": ".",
-    "jsx": "react",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true
   },
+  "include": ["theme", "rspress.config.ts"],
+  "mdx": {
+    "checkMdx": true
+  }
 }

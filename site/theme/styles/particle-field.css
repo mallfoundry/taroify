@@ -1,0 +1,185 @@
+.tf-particle-morph {
+  --tf-particle-webgl: #277bbb;
+  --tf-particle-webgl-soft: #8fb4d2;
+  --tf-particle-webgl-dust: #91aabd;
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dark .tf-particle-morph {
+  --tf-particle-webgl: #69adf5;
+  --tf-particle-webgl-soft: #a9caeb;
+  --tf-particle-webgl-dust: #597c9e;
+}
+
+.tf-particle-morph::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(
+      ellipse at 12% 36%,
+      color-mix(in srgb, var(--tf-primary) 6%, transparent),
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 88% 64%,
+      color-mix(in srgb, var(--tf-primary) 5%, transparent),
+      transparent 32%
+    );
+  content: "";
+}
+
+.dark .tf-particle-morph::before {
+  background: radial-gradient(
+      ellipse at 12% 36%,
+      color-mix(in srgb, var(--tf-primary) 10%, transparent),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 88% 64%,
+      color-mix(in srgb, var(--tf-primary) 8%, transparent),
+      transparent 34%
+    );
+}
+
+.tf-particle-morph__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.tf-particle-morph[data-webgl="ready"] .tf-particle-morph__canvas {
+  opacity: 1;
+}
+
+.tf-particle-morph__fallback {
+  position: absolute;
+  inset: 5% 3%;
+  opacity: 0.72;
+  transition: opacity 400ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tf-particle-morph__fallback span {
+  position: absolute;
+  display: block;
+  border: 1px solid color-mix(in srgb, var(--tf-primary) 32%, transparent);
+  border-radius: 18px;
+}
+
+.tf-particle-morph__fallback span::after {
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  width: 48%;
+  height: 1px;
+  background: color-mix(in srgb, var(--tf-primary) 24%, transparent);
+  content: "";
+}
+
+.tf-particle-morph__fallback span:nth-child(1) {
+  top: 12%;
+  left: 4%;
+  width: 23%;
+  height: 9%;
+}
+
+.tf-particle-morph__fallback span:nth-child(2) {
+  top: 14%;
+  right: 6%;
+  width: 13%;
+  height: 7%;
+  border-radius: 999px;
+}
+
+.tf-particle-morph__fallback span:nth-child(3) {
+  top: 40%;
+  left: 1%;
+  width: 24%;
+  height: 12%;
+}
+
+.tf-particle-morph__fallback span:nth-child(4) {
+  top: 36%;
+  right: 3%;
+  width: 18%;
+  height: 24%;
+}
+
+.tf-particle-morph__fallback span:nth-child(5) {
+  bottom: 10%;
+  left: 7%;
+  width: 22%;
+  height: 8%;
+  border-radius: 999px;
+}
+
+.tf-particle-morph__fallback span:nth-child(6) {
+  right: 5%;
+  bottom: 8%;
+  width: 21%;
+  height: 12%;
+}
+
+.tf-particle-morph[data-webgl="ready"] .tf-particle-morph__fallback {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+.tf-particle-morph[data-webgl="fallback"] .tf-particle-morph__fallback {
+  opacity: 1;
+}
+
+.tf-particle-morph__label {
+  position: absolute;
+  right: 26px;
+  bottom: 22px;
+  color: color-mix(in srgb, var(--tf-ink-faint) 76%, var(--tf-primary));
+  font-family: var(--rp-font-family-mono);
+  font-size: 10px;
+  font-weight: 580;
+  letter-spacing: 0.055em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.dark .tf-particle-morph__label {
+  color: color-mix(in srgb, var(--tf-ink-faint) 80%, var(--tf-primary));
+}
+
+@media (max-width: 760px) {
+  .tf-particle-morph__label {
+    right: 14px;
+    bottom: 13px;
+    font-size: 8px;
+  }
+
+  .tf-particle-morph__fallback {
+    inset: 2%;
+  }
+
+  .tf-particle-morph__fallback span:nth-child(1),
+  .tf-particle-morph__fallback span:nth-child(3),
+  .tf-particle-morph__fallback span:nth-child(5) {
+    left: -7%;
+    width: 34%;
+  }
+
+  .tf-particle-morph__fallback span:nth-child(2),
+  .tf-particle-morph__fallback span:nth-child(4),
+  .tf-particle-morph__fallback span:nth-child(6) {
+    right: -7%;
+    width: 34%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-particle-morph__canvas,
+  .tf-particle-morph__fallback {
+    transition: none;
+  }
+}

@@ -28,15 +28,20 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install
+      - name: Setup Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+
+      - name: Install Dependencies
         run: |
           yarn install --frozen-lockfile
-          yarn --cwd site install --frozen-lockfile
+          yarn --cwd site install --frozen-lockfile --ignore-scripts
 
-      - name: Build Site
+      - name: Run Build Site
         run: yarn run build:www
 
-      - name: Deploy for GitHub 🚀
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           branch: gh-pages

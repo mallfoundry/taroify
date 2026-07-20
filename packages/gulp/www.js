@@ -6,7 +6,7 @@ exports.buildH5 = task("taro build --type h5", {
   stdio: "inherit",
 })
 
-exports.buildSite = task("gatsby build --prefix-paths", {
+exports.buildSite = task("npm run site:build", {
   cwd: "site",
   stdio: "inherit",
 })
@@ -25,7 +25,7 @@ exports.copyGitIgnore = () => {
 }
 
 exports.copySite = () => {
-  const copySiteTask = () => gulp.src("./site/public/**").pipe(gulp.dest("./bundles/www"))
-  copySiteTask.displayName = "copy /public files to bundles/www from site"
+  const copySiteTask = () => gulp.src("./site/doc_build/**").pipe(gulp.dest("./bundles/www"))
+  copySiteTask.displayName = "copy Rspress output to bundles/www from site"
   return copySiteTask
 }

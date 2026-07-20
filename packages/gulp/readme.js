@@ -1,33 +1,23 @@
-const gulp = require("gulp")
 const { watch } = require("gulp")
-const rename = require("gulp-rename")
+const { exec } = require("gulp-execa")
 
-function copyReadmeFiles(src, dest) {
-  const copyReadmeFilesTask = () =>
-    gulp
-      .src([`./packages/${src}/**/README*.md?(x)`], {
-        ignore: "**/node_modules/**",
-      })
-      .pipe(
-        rename((path) => {
-          path.basename = "index"
-        }),
-      )
-      .pipe(gulp.dest(`./site/.content/${dest}`))
-  copyReadmeFilesTask.displayName = `copy README.md?(x) files to site/.contents/${dest} from packages/${src}`
-  return copyReadmeFilesTask
-}
-
-function watchReadmeFiles(src, dest) {
+function watchRspressDocs() {
   watch(
-    [`./packages/${src}/**/README*.md?(x)`],
+    [
+      "./site/content/**/*.{md,mdx}",
+      "./packages/{core,commerce,hooks}/{src,docs}/**/README*.{md,mdx}",
+      "./packages/demo/src/subpackages.js",
+    ],
     {
-      // events: "all",
-      ignoreInitial: false,
+      ignoreInitial: true,
+      delay: 180,
+      queue: true,
     },
-    copyReadmeFiles(src, dest),
+    () =>
+      exec("node site/scripts/prepare-docs.mjs", {
+        stdio: "inherit",
+      }),
   )
 }
 
-exports.copyReadmeFiles = copyReadmeFiles
-exports.watchReadmeFiles = watchReadmeFiles
+exports.watchRspressDocs = watchRspressDocs
