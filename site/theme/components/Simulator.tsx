@@ -1,9 +1,25 @@
-import { useEffect, useMemo, useRef, useState } from "react"
-import { useNavigate, usePage, useSite } from "@rspress/core/runtime"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useDark, useNavigate, usePage, useSite } from "@rspress/core/runtime"
 import { componentManifest, type ComponentManifestItem } from "../generated/component-manifest"
 
+const SITE_SOURCE = "taroify-site"
 const SIMULATOR_SOURCE = "taroify-simulator"
+const THEME_CHANGE_EVENT = "themeChange"
+const SIMULATOR_READY_EVENT = "ready"
 const DEFAULT_DEMO_PATH = "pages/home/index"
+
+type ThemeMode = "light" | "dark"
+
+function sendThemeChange(target: Window | null, themeMode: ThemeMode) {
+  target?.postMessage(
+    {
+      source: SITE_SOURCE,
+      event: THEME_CHANGE_EVENT,
+      payload: { themeMode },
+    },
+    "*",
+  )
+}
 
 function SimulatorIcon() {
   return (
@@ -42,7 +58,9 @@ function demoUrl(base: string, demoPath: string) {
 
 function useSimulatorNavigation() {
   const navigate = useNavigate()
+  const dark = useDark()
   const { site } = useSite()
+  const themeMode = dark ? "dark" : "light"
   const componentByName = useMemo(
     () =>
       new Map<string, string>(
@@ -69,6 +87,11 @@ function useSimulatorNavigation() {
         return
       }
 
+      if (event.data.event === SIMULATOR_READY_EVENT) {
+        sendThemeChange(event.source as Window, themeMode)
+        return
+      }
+
       if (event.data.event === "navigateBack") {
         navigate("/introduce/")
         return
@@ -90,7 +113,7 @@ function useSimulatorNavigation() {
 
     window.addEventListener("message", handleMessage)
     return () => window.removeEventListener("message", handleMessage)
-  }, [componentByName, navigate, site.base])
+  }, [componentByName, navigate, site.base, themeMode])
 }
 
 type DemoFrameProps = {
@@ -104,15 +127,28 @@ export function DemoFrame({
   title = "Taroify 组件交互演示",
   className = "",
 }: DemoFrameProps) {
+  const dark = useDark()
   const { site } = useSite()
+  const iframeRef = useRef<HTMLIFrameElement>(null)
   const path = component?.demoPath || DEFAULT_DEMO_PATH
+  const themeMode = dark ? "dark" : "light"
+  const syncTheme = useCallback(
+    () => sendThemeChange(iframeRef.current?.contentWindow ?? null, themeMode),
+    [themeMode],
+  )
+
+  useEffect(() => {
+    syncTheme()
+  }, [syncTheme])
 
   return (
     <iframe
+      ref={iframeRef}
       className={`tf-demo-frame ${className}`.trim()}
       title={title}
       src={demoUrl(site.base, path)}
       loading="lazy"
+      onLoad={syncTheme}
     />
   )
 }
