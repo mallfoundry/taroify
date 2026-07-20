@@ -6,7 +6,7 @@ const {
   watchTypescript,
   watchTypescriptSymlink,
 } = require("./typescript")
-const { copyReadmeFiles, watchReadmeFiles } = require("./readme")
+const { watchRspressDocs } = require("./readme")
 const { buildScss, symlinkScssFiles, watchScss, watchScssSymlink } = require("./scss")
 const { createBundle, cleanBundle } = require("./bundle")
 const { detectPort, serveDemo, serveSite } = require("./serve")
@@ -20,10 +20,7 @@ function watch() {
   watchTypescript("hooks")
   watchTypescript("core")
   watchTypescript("commerce")
-  watchReadmeFiles("commerce/src", "components")
-  watchReadmeFiles("core/src", "components")
-  watchReadmeFiles("core/docs", "components")
-  watchReadmeFiles("hooks/src", "hooks")
+  watchRspressDocs()
 }
 
 function watchSymlink() {
@@ -35,10 +32,7 @@ function watchSymlink() {
   watchTypescriptSymlink("commerce")
   watchFontFilesSymlink("core")
   watchFontFilesSymlink("commerce")
-  watchReadmeFiles("core/src", "components")
-  watchReadmeFiles("core/docs", "components")
-  watchReadmeFiles("commerce/src", "components")
-  watchReadmeFiles("hooks/src", "hooks")
+  watchRspressDocs()
 }
 
 const createBundles = parallel(
@@ -65,7 +59,7 @@ exports.symlinkBundles = symlinkBundles
 
 exports.clean = series(
   createBundles,
-  task("gatsby clean", {
+  task("npm run site:clean", {
     cwd: "site",
     stdio: "inherit",
   }),
@@ -93,18 +87,9 @@ exports.buildPackages = series(
   buildTypescript("commerce"),
 )
 
-const readme = series(
-  copyReadmeFiles("core/src", "components"), //
-  copyReadmeFiles("core/docs", "components"),
-  copyReadmeFiles("hooks/src", "hooks"),
-  copyReadmeFiles("commerce/docs", "components"),
-  copyReadmeFiles("commerce/src", "components"),
-)
-
 exports.buildWww = series(
   cleanBundle("www"),
   buildH5,
-  readme,
   buildSite,
   copyGitIgnore(),
   copyH5(),

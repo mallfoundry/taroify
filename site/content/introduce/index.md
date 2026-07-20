@@ -23,7 +23,7 @@
     <a href="https://codecov.io/gh/mallfoundry/taroify">
       <img src="https://img.shields.io/codecov/c/github/mallfoundry/taroify?style=flat-square&color=2f80ed" alt="coverage" />
     </a>
-    <a href="./LICENSE">
+    <a href="https://github.com/mallfoundry/taroify/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/mallfoundry/taroify?style=flat-square&color=67d5b5" alt="license" />
     </a>
   </p>
@@ -203,4 +203,4 @@ Taroify 的设计规范与大量组件经验来自 Vant。感谢
 
 ## License
 
-[MIT](./LICENSE) © Taroify Contributors
+[MIT](https://github.com/mallfoundry/taroify/blob/main/LICENSE) © Taroify Contributors

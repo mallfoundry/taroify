@@ -27,8 +27,10 @@ node_modules/
 /packages/*/build
 /problems/*/dist
 
-#gatsby
+# documentation generators
 .content/
+/site/.generated/
+/site/doc_build/
 
 # temp
 .temp/
@@ -48,6 +50,7 @@ yarn-error.log*
 lerna-debug.log*
 lerna-error.log*
 yarn.lock
+!/site/yarn.lock
 
 # IntelliJ IDEA
 .idea

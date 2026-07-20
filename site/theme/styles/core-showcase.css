@@ -1,0 +1,16 @@
+.tf-showcase,
+.tf-showcase__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tf-showcase {
+  z-index: 1;
+  min-height: 0;
+}
+
+.tf-showcase__canvas {
+  overflow: hidden;
+}
