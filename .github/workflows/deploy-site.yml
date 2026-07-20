@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
 
 concurrency:
   group: deploy-site-${{ github.ref }}
@@ -43,6 +44,8 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.3
+        env:
+          LEFTHOOK: "0"
         with:
           branch: gh-pages
           folder: bundles/www
