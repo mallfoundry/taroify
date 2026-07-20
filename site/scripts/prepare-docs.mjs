@@ -3,11 +3,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises"
 import { existsSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import path from "node:path"
-import {
-  authoredPages,
-  guideSidebarItems,
-  primaryNavigation,
-} from "../config/docs.mjs"
+import { authoredPages, guideSidebarItems, primaryNavigation } from "../config/docs.mjs"
 
 const require = createRequire(import.meta.url)
 const scriptDir = path.dirname(fileURLToPath(import.meta.url))
@@ -67,6 +63,30 @@ async function copyAuthoredPages() {
     const source = path.join(sourceRoot, page.source)
     const content = await readFile(source, "utf8")
     await writeMarkdown(page.source, content, page)
+  }
+}
+
+async function copyAuthoredAssets(
+  sourceDirectory = sourceRoot,
+  destinationDirectory = path.join(docsRoot, "public"),
+) {
+  const entries = await readdir(sourceDirectory, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const source = path.join(sourceDirectory, entry.name)
+    const destination = path.join(destinationDirectory, entry.name)
+
+    if (entry.isDirectory()) {
+      await copyAuthoredAssets(source, destination)
+      continue
+    }
+
+    if (/\.mdx?$/i.test(entry.name)) {
+      continue
+    }
+
+    await mkdir(destinationDirectory, { recursive: true })
+    await cp(source, destination)
   }
 }
 
@@ -181,6 +201,7 @@ async function main() {
   await cp(path.join(siteRoot, "assets"), path.join(docsRoot, "public"), {
     recursive: true,
   })
+  await copyAuthoredAssets()
   await copyAuthoredPages()
   const components = await copyComponents()
   const hooks = await copyHooks()

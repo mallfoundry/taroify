@@ -9,25 +9,6 @@
   <p>
     基于 Vant 设计语言，为小程序与 H5 提供一致、类型安全且高度可定制的开发体验。
   </p>
-
-  <p>
-    <a href="https://www.npmjs.com/package/@taroify/core">
-      <img src="https://img.shields.io/npm/v/@taroify/core?style=flat-square&color=2f80ed" alt="npm version" />
-    </a>
-    <a href="https://www.npmjs.com/package/@taroify/core">
-      <img src="https://img.shields.io/npm/dm/@taroify/core?style=flat-square&color=67d5b5" alt="npm downloads" />
-    </a>
-    <a href="https://github.com/mallfoundry/taroify/actions/workflows/test.yml">
-      <img src="https://github.com/mallfoundry/taroify/actions/workflows/test.yml/badge.svg" alt="CI status" />
-    </a>
-    <a href="https://codecov.io/gh/mallfoundry/taroify">
-      <img src="https://img.shields.io/codecov/c/github/mallfoundry/taroify?style=flat-square&color=2f80ed" alt="coverage" />
-    </a>
-    <a href="https://github.com/mallfoundry/taroify/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/mallfoundry/taroify?style=flat-square&color=67d5b5" alt="license" />
-    </a>
-  </p>
-
   <p>
     <a href="https://taroify.github.io/taroify.com/"><strong>官网</strong></a>
     ·
@@ -40,8 +21,6 @@
     <a href="https://github.com/mallfoundry/taroify/discussions"><strong>讨论区</strong></a>
   </p>
 </div>
-
----
 
 ## Taroify 是什么
 

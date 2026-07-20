@@ -287,7 +287,7 @@ body {
   border: 0;
   border-radius: 30px;
   background: #ffffff;
-  box-shadow: 0 18px 48px rgba(30, 48, 38, 0.1);
+  /* box-shadow: 0 18px 48px rgba(30, 48, 38, 0.1); */
 }
 
 .tf-device::before {
