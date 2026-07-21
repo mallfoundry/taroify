@@ -106,7 +106,7 @@ import { Stepper } from "@taroify/core"
 | ------------------------ | --------------------------- | ------------------ | ------- |
 | width                    | 输入框宽度，默认单位为 `px` | _number \| string_ | `32px`  |
 | disabled                 | 是否禁用输入框              | _boolean_          | `false` |
-| cursor `v0.1.0-alpha.10` | 指定 focus 时的光标位置     | _number_           | -       |
+| cursor | 指定 focus 时的光标位置     | _number_           | -       |
 
 ### Stepper.Button Props
 

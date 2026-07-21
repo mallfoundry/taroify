@@ -284,10 +284,10 @@ const onSelect = (_value) => {
 | title                         | 顶部标题                    | _ReactNode_                                                            | -                                                          |
 | swipeable                     | 是否开启手势左右滑动切换    | _boolean_                                                              | `false`                                                    |
 | animated                      | 是否开启动过渡动画          | _boolean_                                                              | `true`                                                     |
-| options <br>`v0.1.1-alpha.4`  | 可选项数据源                | _CascaderDataOption_                                                   | `[]`                                                       |
-| loadData <br>`v0.1.1-alpha.4` | 动态加载数据                | _(values: string[], options: CascaderEventOption[]) => Promise<any[]>_ | `_`                                                        |
-| fieldNames `v0.1.1-alpha.4`   | 自定义 options 结构中的字段 | _CascaderFieldNames_                                                   | `{ label: 'label', value: 'value', children: 'children' }` |
-| ellipsis <br>`v0.5.0-alpha.0` | 是否省略过长的标题文字      | _boolean_                                                              | `true`                                                     |
+| options  | 可选项数据源                | _CascaderDataOption_                                                   | `[]`                                                       |
+| loadData | 动态加载数据                | _(values: string[], options: CascaderEventOption[]) => Promise<any[]>_ | `_`                                                        |
+| fieldNames   | 自定义 options 结构中的字段 | _CascaderFieldNames_                                                   | `{ label: 'label', value: 'value', children: 'children' }` |
+| ellipsis | 是否省略过长的标题文字      | _boolean_                                                              | `true`                                                     |
 
 ### Cascader Events
 

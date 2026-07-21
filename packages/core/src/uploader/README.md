@@ -281,8 +281,8 @@ function CustomPreviewUploader() {
 | type                  | 文件类型(包含image时显示图标,其他显示)  |   _string_           |
 | name                  | 文件名称               | _string_             |
 | removable             | 是否可删除             | _boolean_            |
-| status                | 上传状态(uploading|failed|completed)          | _string_             |
-| message               | uploading|failed 状态时文字提示    | _string_ |
+| status                | 上传状态（uploading\|failed\|completed）     | _string_             |
+| message               | uploading\|failed 状态时文字提示              | _string_             |
 
 
 ## 主题定制

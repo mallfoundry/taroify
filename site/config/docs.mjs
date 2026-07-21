@@ -58,6 +58,14 @@ export const primaryNavigation = [
     link: "/mcp/",
     activeMatch: "^/mcp/",
   },
+  {
+    text: "React Vant",
+    link: "https://react-vant.3lang.dev/",
+  },
+  {
+    text: "Vant",
+    link: "https://vant.pro/vant",
+  },
 ]
 
 export const guideSidebarItems = [
@@ -66,3 +74,7 @@ export const guideSidebarItems = [
   { label: "开发指南", link: "/contribution/" },
   { label: "更新日志", link: "/changelog/" },
 ]
+
+export const componentSidebarTags = {
+  tour: "v1.0.0",
+}

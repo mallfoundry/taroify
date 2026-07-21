@@ -3,7 +3,12 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises"
 import { existsSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import path from "node:path"
-import { authoredPages, guideSidebarItems, primaryNavigation } from "../config/docs.mjs"
+import {
+  authoredPages,
+  componentSidebarTags,
+  guideSidebarItems,
+  primaryNavigation,
+} from "../config/docs.mjs"
 
 const require = createRequire(import.meta.url)
 const scriptDir = path.dirname(fileURLToPath(import.meta.url))
@@ -37,6 +42,17 @@ function withFrontmatter(content, metadata) {
     "",
   ].join("\n")
   return `${frontmatter}${content}`
+}
+
+function usesRspressTag(content) {
+  return content.includes("<Tag tag=")
+}
+
+function withRspressTagImport(content) {
+  if (!usesRspressTag(content)) {
+    return content
+  }
+  return `import { Tag } from "@rspress/core/theme"\n\n${content}`
 }
 
 async function writeMarkdown(relativePath, content, metadata) {
@@ -101,7 +117,8 @@ async function copyComponents() {
       seen.add(slug)
       const source = await findReadme(slug)
       const content = await readFile(source, "utf8")
-      await writeMarkdown(`components/${slug}/index.md`, content, {
+      const extension = usesRspressTag(content) ? "mdx" : "md"
+      await writeMarkdown(`components/${slug}/index.${extension}`, withRspressTagImport(content), {
         title: page.title,
         description: `Taroify ${page.title}组件文档，包含代码演示、API 和主题定制说明。`,
       })
@@ -134,8 +151,8 @@ async function copyHooks() {
   return hooks
 }
 
-function customLink(label, link) {
-  return { type: "custom-link", label, link }
+function customLink(label, link, tag) {
+  return { type: "custom-link", label, link, ...(tag ? { tag } : {}) }
 }
 
 async function writeNavigation(hooks) {
@@ -151,7 +168,7 @@ async function writeNavigation(hooks) {
     sidebar.push(
       ...group.pages.map((page) => {
         const slug = page.path.replace(/\/index$/, "")
-        return customLink(page.title, `/components/${slug}/`)
+        return customLink(page.title, `/components/${slug}/`, componentSidebarTags[slug])
       }),
     )
   }
@@ -181,17 +198,24 @@ async function writeManifest() {
     }),
   )
   const target = path.join(siteRoot, "theme/generated/component-manifest.ts")
+  const entries = manifest.map((item) =>
+    [
+      "  {",
+      ...Object.entries(item).map(([key, value]) => `    ${key}: ${JSON.stringify(value)},`),
+      "  },",
+    ].join("\n"),
+  )
   await mkdir(path.dirname(target), { recursive: true })
   await writeFile(
     target,
     [
-      "export const componentManifest = ",
-      JSON.stringify(manifest, null, 2),
-      " as const\n\n",
+      "export const componentManifest = [",
+      ...entries,
+      "] as const",
       "",
       "export type ComponentManifestItem = (typeof componentManifest)[number]",
       "",
-    ].join(""),
+    ].join("\n"),
   )
 }
 

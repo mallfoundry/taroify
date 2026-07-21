@@ -143,7 +143,7 @@ function CustomSearch() {
 | clearIcon                         | 清除图标                                                                                      | _string_                                                                              | `<Clear />`  |
 | clearTrigger                      | 显示清除图标的时机，`always` 表示输入框不为空时展示，<br>`focus` 表示输入框聚焦且不为空时展示 | _string_                                                                              | `focus`      |
 | feedback                          | 提示文案，为空时不展示                                                                        | _string \| [FormFeedbackProps](/components/form/#formfeedback-props) \| ReactElement_ | -            |
-| enableNative <br>`v0.4.0-alpha.0` | 使用原生键盘（仅支付宝小程序）                                                                | _boolean_                                                                             | `true`       |
+| enableNative | 使用原生键盘（仅支付宝小程序）                                                                | _boolean_                                                                             | `true`       |
 
 ### Events
 

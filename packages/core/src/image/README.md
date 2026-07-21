@@ -68,8 +68,8 @@ import { Photo, PhotoFail } from "@taroify/icons"
 | src                     | 图片链接                             | _string_         | -             |
 | mode                    | 图片填充模式                         | _string_         | `scaleToFill` |
 | alt                     | 替代文本                             | _string_         | -             |
-| width `v0.3.2-alpha.0`  | 宽度                                 | _string\|number_ | -             |
-| height `v0.3.2-alpha.0` | 长度                                 | _string\|number_ | -             |
+| width  | 宽度                                 | _string\|number_ | -             |
+| height | 长度                                 | _string\|number_ | -             |
 | shape                   | 图片形状 `square` `rounded` `circle` | _boolean_        | -             |
 | lazyLoad                | 是否开启图片懒加载                   | _boolean_        | `false`       |
 | placeholder             | 加载中提示                           | _ReactNode_      | -             |

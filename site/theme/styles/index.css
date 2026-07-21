@@ -30,7 +30,7 @@
 }
 
 html:root {
-  --rp-sidebar-width: 230px;
+  --rp-sidebar-width: 240px;
   --rp-sidebar-margin-left: max(0px, calc((100vw - 1600px) / 2));
 }
 
@@ -82,6 +82,10 @@ body {
   backdrop-filter: blur(18px) saturate(130%);
 }
 
+html .rp-nav {
+  --rp-nav-padding-x: 20px;
+}
+
 .rp-nav__left,
 .rp-nav__right {
   height: var(--rp-nav-height);
@@ -98,7 +102,7 @@ body {
 .tf-brand__mark {
   display: block;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(22, 167, 121, 0.2);
+  /* box-shadow: 0 8px 20px rgba(22, 167, 121, 0.2); */
 }
 
 .tf-brand__name {
@@ -835,6 +839,18 @@ body {
   letter-spacing: 0.08em;
 }
 
+@media (min-width: 1280px) {
+  .rp-doc-layout__container .rp-doc-layout__doc {
+    max-width: none;
+  }
+
+  .rp-doc-layout__doc:has(+ .rp-doc-layout__outline .tf-simulator-rail) .rp-table-scroll-container {
+    width: calc(100% + 64px);
+    margin-right: -32px;
+    margin-left: -32px;
+  }
+}
+
 @media (min-width: 1280px) and (max-width: 1599px) {
   .rp-doc-layout__outline:has(> .tf-simulator-rail) {
     --tf-compact-preview-device-width: 375px;
@@ -871,6 +887,11 @@ body {
     padding-left: 56px;
   }
 
+  .rp-doc-layout__doc:has(+ .rp-doc-layout__outline .tf-simulator-rail) .rp-table-scroll-container {
+    width: calc(100% + 32px);
+    margin-right: 0;
+  }
+
   .tf-simulator-trigger {
     display: none;
   }
@@ -889,13 +910,17 @@ body {
 }
 
 @media (min-width: 1600px) {
+  html:root {
+    --rp-sidebar-margin-left: 0;
+  }
+
   .rp-doc-layout__outline:has(> .tf-simulator-rail) {
-    --tf-detail-rail-width: clamp(448px, 32vw, 520px);
+    --tf-detail-rail-width: 571px;
 
     display: grid;
     width: var(--tf-detail-rail-width);
     flex: 0 0 var(--tf-detail-rail-width);
-    grid-template-columns: minmax(228px, 1.16fr) minmax(176px, 0.84fr);
+    grid-template-columns: 375px minmax(176px, 1fr);
     align-items: start;
     gap: 20px;
     margin-right: 20px;
@@ -904,6 +929,7 @@ body {
 
   .rp-doc-layout__outline:has(> .tf-simulator-rail) > .tf-simulator-rail {
     display: block;
+    width: 375px;
     min-width: 0;
     margin: 0;
   }
@@ -945,18 +971,11 @@ body {
   }
 }
 
-@media (min-width: 1280px) {
-  .rp-doc-layout__doc:has(+ .rp-doc-layout__outline .tf-simulator-rail) .rp-table-scroll-container {
-    width: calc(100% + 64px);
-    margin-right: -32px;
-    margin-left: -32px;
-  }
-}
-
 @media (min-width: 1480px) {
   .rp-doc-layout__outline:not(:has(> .tf-simulator-rail)) {
     width: 380px;
     flex: 0 0 380px;
+    margin-right: 0;
   }
 }
 

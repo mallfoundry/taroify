@@ -119,15 +119,15 @@ function PopupIndexBar() {
 | -------------------------------- | --------------------------------------------------- | ------------------ | -------------------------------------------- |
 | sticky                           | 是否开启锚点自动吸顶                                | _boolean_          | `true`                                       |
 | stickyOffsetTop                  | 锚点自动吸顶时与顶部的距离                          | _number \| string_ | `0`                                          |
-| inner <br>`v0.2.0-alpha.0`       | 是否是底部弹窗内使用                                | _boolean_          | `false`                                      |
-| delay <br>`v0.2.0-alpha.0`       | inner 为 `true`，并且自定义了弹窗弹出动画时长时设置 | _number_           | inner 为 true 时候是 `300`，false 时候是 `0` |
-| showSidebar <br>`v0.2.1-alpha.0` | 是否显示索引                                        | _boolean_          | `true`                                       |
+| inner       | 是否是底部弹窗内使用                                | _boolean_          | `false`                                      |
+| delay       | inner 为 `true`，并且自定义了弹窗弹出动画时长时设置 | _number_           | inner 为 true 时候是 `300`，false 时候是 `0` |
+| showSidebar | 是否显示索引                                        | _boolean_          | `true`                                       |
 
 ### IndexList Events
 
 | 事件名                        | 说明             | 回调参数                                    |
 | ----------------------------- | ---------------- | ------------------------------------------- |
-| onChange <br>`v0.2.1-alpha.0` | 索引位变化时触发 | _current: number, anchor: number \| string_ |
+| onChange | 索引位变化时触发 | _current: number, anchor: number \| string_ |
 
 ### IndexList Method
 
@@ -135,7 +135,7 @@ function PopupIndexBar() {
 
 | 方法名                        | 说明         | 参数  | 返回值 |
 | :---------------------------- | ------------ | ----- | ------ |
-| scrollTo <br>`v0.2.1-alpha.0` | 跳转指定位置 | index | -      |
+| scrollTo | 跳转指定位置 | index | -      |
 
 ### IndexList.Anchor Props
 

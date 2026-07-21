@@ -161,7 +161,7 @@ function CheckboxWithCustomIcon() {
 | defaultChecked | 默认是否为选中状态            | _boolean_          | `false`   |
 | checked        | 是否为选中状态            | _boolean_          | `false`   |
 | name           | 标识符                    | _any_              | -         |
-| shape          | 形状，可选值为 `square` `button` | _string_      | `round`   |
+| shape <Tag tag="v1.0.0" /> | 形状，可选值为 `square` `button` | _string_      | `round`   |
 | disabled       | 是否禁用复选框            | _boolean_          | `false`   |
 | size      | 图标大小，默认单位为 `px` | _number \| string_ | `20px`    |
 
@@ -212,12 +212,12 @@ function CheckboxWithCustomIcon() {
 | --checkbox-disabled-icon-color            | _var(--gray-5)_                  | -   |
 | --checkbox-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
 | --checkbox-disabled-icon-background-color | _var(--border-color)_            | -   |
-| --checkbox-button-padding                 | _5px * $hd 18px * $hd_           | -   |
-| --checkbox-button-border-radius           | _var(--border-radius-max)_        | -   |
-| --checkbox-button-color                   | _var(--text-color)_               | -   |
-| --checkbox-button-background-color        | _var(--gray-1)_                   | -   |
-| --checkbox-button-border-color            | _var(--checkbox-button-background-color)_ | -   |
-| --checkbox-button-checked-color           | _var(--primary-color)_            | -   |
-| --checkbox-button-checked-background-color | _var(--white)_                   | -   |
-| --checkbox-button-checked-border-color    | _var(--primary-color)_            | -   |
-| --checkbox-button-disabled-opacity        | _var(--disabled-opacity)_         | -   |
+| --checkbox-button-padding <Tag tag="v1.0.0" />                  | _5px * $hd 18px * $hd_           | -   |
+| --checkbox-button-border-radius <Tag tag="v1.0.0" />            | _var(--border-radius-max)_        | -   |
+| --checkbox-button-color <Tag tag="v1.0.0" />                    | _var(--text-color)_               | -   |
+| --checkbox-button-background-color <Tag tag="v1.0.0" />         | _var(--gray-1)_                   | -   |
+| --checkbox-button-border-color <Tag tag="v1.0.0" />             | _var(--checkbox-button-background-color)_ | -   |
+| --checkbox-button-checked-color <Tag tag="v1.0.0" />            | _var(--primary-color)_            | -   |
+| --checkbox-button-checked-background-color <Tag tag="v1.0.0" /> | _var(--white)_                    | -   |
+| --checkbox-button-checked-border-color <Tag tag="v1.0.0" />     | _var(--primary-color)_            | -   |
+| --checkbox-button-disabled-opacity <Tag tag="v1.0.0" />         | _var(--disabled-opacity)_         | -   |

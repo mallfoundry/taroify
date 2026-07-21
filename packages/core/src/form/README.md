@@ -620,7 +620,7 @@ function ShouldUpdateDemo() {
 | controlAlign                  | 表单项 control 对齐方式，可选值为 `center` `right`          | _string_  | `left`   |
 | validateTrigger               | 表单校验触发时机，可选值为 `onChange`、`onSubmit`，详见下表 | _string_  | `onBlur` |
 | colon                         | 是否在 label 后面添加冒号                                   | _boolean_ | `false`  |
-| disabled <br>`v0.3.1-alpha.0` | 是否禁用表单                                                | _boolean_ | `false`  |
+| disabled | 是否禁用表单                                                | _boolean_ | `false`  |
 
 ### Form Events
 
@@ -642,7 +642,7 @@ function ShouldUpdateDemo() {
 | setErrors                   | 设置表单验证错误信息(浅合并)                                 | _FormValidError[]_          | _void_             |
 | getErrors                   | 获得表单验证错误信息，支持传入 `name` 来获得单个或部分表单项 | _name?: string \| string[]_ | _FormValidError[]_ |
 | validate                    | 验证表单，支持传入 `name` 来验证单个或部分表单项             | _name?: string \| string[]_ | _Promise_          |
-| submit <br>`v0.3.1-alpha.0` | 提交表单，与点击提交按钮的效果等价                           | -                           | -                  |
+| submit | 提交表单，与点击提交按钮的效果等价                           | -                           | -                  |
 | reset                       | 重置表单                                                     | -                           | _void_             |
 
 ### validateTrigger 可选值
@@ -663,9 +663,9 @@ function ShouldUpdateDemo() {
 | defaultValue                      | 表单项默认值                         | _any_                                         | -       |
 | required                          | 是否显示表单必填星号                 | _boolean_                                     | `false` |
 | rules                             | 表单校验规则                         | _FormRule[]_                                  | -       |
-| dependencies <br>`v0.1.6-alpha.0` | 当依赖的字段值改变时，触发自身的校验 | _string[]_                                    | -       |
-| shouldUpdate <br>`v0.1.6-alpha.0` | 当值为 true 时，触发当前区域重新渲染 | _boolean\|(prevValues, curValues) => boolean_ | -       |
-| noStyle <br>`v0.1.6-alpha.0`      | 直接渲染 children                    | boolean                                       | -       |
+| dependencies | 当依赖的字段值改变时，触发自身的校验 | _string[]_                                    | -       |
+| shouldUpdate | 当值为 true 时，触发当前区域重新渲染 | _boolean\|(prevValues, curValues) => boolean_ | -       |
+| noStyle      | 直接渲染 children                    | boolean                                       | -       |
 
 > 属性继承自 Cell 组件，更多属性参见：[Cell 组件](/components/cell/#cell-props)
 
@@ -678,7 +678,7 @@ function ShouldUpdateDemo() {
 | required | 是否为必选字段，当值为空字符串、空数组、`undefined`、`null` 时，校验不通过 | _boolean_ |
 | message | 错误提示文案 | _string \| (value, rule) => string_ |
 | validator | 通过函数进行校验 | _(value, rule) => boolean \| string \| Promise_ |
-| validateFirst `v0.5.0-alpha.0` | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | _boolean_ | `false` |
+| validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | _boolean_ |
 | pattern | 通过正则表达式进行校验 | _RegExp_ |
 | trigger | 本项规则的触发时机，可选值为 `onChange`、`onBlur` | _string_ |
 | formatter | 格式化函数，将表单项的值转换后进行校验 | _(value, rule) => any_ |
@@ -721,8 +721,8 @@ interface FormController<V> {
 ### Form.List
 
 | 参数         | 说明                         | 类型                                                                                 |
-| ------------ | ---------------------------- | ------------------------------------------------------------------------------------ | --- |
-| children     | 渲染函数                     | _(fields: { key: string, name: string }[], operation: { add, remove }) => ReactNode_ | \_  |
+| ------------ | ---------------------------- | ------------------------------------------------------------------------------------ |
+| children     | 渲染函数                     | _(fields: { key: string, name: string }[], operation: { add, remove }) => ReactNode_ |
 | name         | 表单项名称，提交表单的标识符 | _string_                                                                             |
 | defaultValue | 表单项默认值                 | _any_                                                                                |
 
