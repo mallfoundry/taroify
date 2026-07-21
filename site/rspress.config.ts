@@ -23,6 +23,12 @@ export default defineConfig({
   search: {
     codeBlocks: true,
   },
+  markdown: {
+    defaultCodeOverflow: {
+      height: 420,
+      behavior: "fold",
+    },
+  },
   plugins: [
     pluginAlgolia(),
     pluginSitemap({

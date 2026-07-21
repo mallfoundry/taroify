@@ -44,15 +44,37 @@ function withFrontmatter(content, metadata) {
   return `${frontmatter}${content}`
 }
 
-function usesRspressTag(content) {
-  return content.includes("<Tag tag=")
+function getRspressThemeComponents(content) {
+  const components = []
+  if (content.includes("<Tag tag=")) {
+    components.push("Tag")
+  }
+  if (content.includes("<PackageManagerTabs")) {
+    components.push("PackageManagerTabs")
+  }
+  return components
 }
 
-function withRspressTagImport(content) {
-  if (!usesRspressTag(content)) {
+function withRspressImports(content) {
+  const components = getRspressThemeComponents(content)
+  const imports = []
+  if (components.length > 0) {
+    imports.push(`import { ${components.join(", ")} } from "@rspress/core/theme"`)
+  }
+  if (content.includes("withBase(")) {
+    imports.push('import { withBase } from "@rspress/core/runtime"')
+  }
+  if (imports.length === 0) {
     return content
   }
-  return `import { Tag } from "@rspress/core/theme"\n\n${content}`
+  return `${imports.join("\n")}\n\n${content}`
+}
+
+function withMdxExtension(relativePath, content) {
+  if (getRspressThemeComponents(content).length === 0 && !content.includes("withBase(")) {
+    return relativePath
+  }
+  return relativePath.replace(/\.md$/i, ".mdx")
 }
 
 async function writeMarkdown(relativePath, content, metadata) {
@@ -78,7 +100,7 @@ async function copyAuthoredPages() {
   for (const page of authoredPages) {
     const source = path.join(sourceRoot, page.source)
     const content = await readFile(source, "utf8")
-    await writeMarkdown(page.source, content, page)
+    await writeMarkdown(withMdxExtension(page.source, content), withRspressImports(content), page)
   }
 }
 
@@ -117,8 +139,8 @@ async function copyComponents() {
       seen.add(slug)
       const source = await findReadme(slug)
       const content = await readFile(source, "utf8")
-      const extension = usesRspressTag(content) ? "mdx" : "md"
-      await writeMarkdown(`components/${slug}/index.${extension}`, withRspressTagImport(content), {
+      const extension = getRspressThemeComponents(content).length > 0 ? "mdx" : "md"
+      await writeMarkdown(`components/${slug}/index.${extension}`, withRspressImports(content), {
         title: page.title,
         description: `Taroify ${page.title}组件文档，包含代码演示、API 和主题定制说明。`,
       })

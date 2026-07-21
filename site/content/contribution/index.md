@@ -39,7 +39,7 @@ yarn run develop
 
 项目主要目录如下：
 
-```
+```text
 taroify
 ├─ bundles         # 构建
 ├─ packages/core   # 组件
@@ -52,7 +52,7 @@ taroify
 
 添加新组件时，请按照下面的目录结构组织文件。
 
-```
+```text
 src
 └─ button
    ├─ __tests__        # 单元测试
