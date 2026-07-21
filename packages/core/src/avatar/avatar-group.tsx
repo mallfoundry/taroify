@@ -29,8 +29,9 @@ const useAvatars = (
     const luckyAvatars: ReactNode[] = []
     const length = Math.min(avatarsSize, limit)
 
-    const size = avatars[length]
-      ? (avatars[length] as ReactElement<AvatarProps>).props.size || "medium"
+    const sizeAvatar = avatars[length] || avatars[length - 1]
+    const size = sizeAvatar
+      ? (sizeAvatar as ReactElement<AvatarProps>).props.size || "medium"
       : "medium"
 
     for (let index = 0; index < length; index++) {
@@ -43,12 +44,12 @@ const useAvatars = (
           element,
           {
             key: key ?? index,
+            ...restProps,
             shape,
             style: {
               ...style,
               zIndex: index,
             },
-            ...restProps,
           },
           children,
         ),
@@ -59,7 +60,7 @@ const useAvatars = (
 }
 
 interface AvatarGroupProps {
-  children: ReactNode[]
+  children: ReactNode
   shape?: AvatarShape
   spacing?: AvatarSpacing
   limit?: number
@@ -77,6 +78,7 @@ export default function AvatarGroup(props: AvatarGroupProps) {
     children, //
   } = props
   const [avatars, avatarsSize, size] = useAvatars(children, shape, limit)
+  const remainingCount = Math.max((total ?? avatarsSize) - avatars.length, 0)
 
   return (
     <View
@@ -92,9 +94,9 @@ export default function AvatarGroup(props: AvatarGroupProps) {
       )}
     >
       {avatars}
-      {avatarsSize >= limit && (
+      {remainingCount > 0 && (
         <Avatar shape={shape} size={size} style={{ zIndex: avatarsSize }}>
-          +{total ? total - limit : avatarsSize - limit}
+          +{remainingCount}
         </Avatar>
       )}
     </View>
