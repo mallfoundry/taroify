@@ -6,23 +6,13 @@
 
 ### 安装
 
-npm
-
-```bash
-npm i @taroify/core
-```
-
-yarn
-
-```bash
-yarn add @taroify/core
-```
-
-pnpm
-
-```bash
-pnpm add @taroify/core
-```
+<PackageManagerTabs
+  command={{
+    npm: "npm install @taroify/core",
+    yarn: "yarn add @taroify/core",
+    pnpm: "pnpm add @taroify/core",
+  }}
+/>
 
 ## 引入组件
 
@@ -30,15 +20,17 @@ pnpm add @taroify/core
 
 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 babel 插件，它会在编译过程中将 import 的写法自动转换为按需引入的方式。
 
-```bash
-# 安装插件
-npm i babel-plugin-import -D
-```
+<PackageManagerTabs
+  command={{
+    npm: "npm install babel-plugin-import -D",
+    yarn: "yarn add babel-plugin-import -D",
+    pnpm: "pnpm add babel-plugin-import -D",
+  }}
+/>
 
 加载Sass源文件，通过Taro转成CSS
 
-```js
-// babel.config.js
+```js title="babel.config.js" lineNumbers
 module.exports = {
   plugins: [
     [
@@ -67,8 +59,7 @@ module.exports = {
 
 若不想加载Sass源文件或者其他情况，也可以加载编译后的CSS文件
 
-```js
-// babel.config.js
+```js title="babel.config.js" lineNumbers
 module.exports = {
   plugins: [
     [
@@ -97,10 +88,15 @@ module.exports = {
 
 Vite 版本
 
-`npm install -D vite-plugin-style-import consola`
+<PackageManagerTabs
+  command={{
+    npm: "npm install vite-plugin-style-import consola -D",
+    yarn: "yarn add vite-plugin-style-import consola -D",
+    pnpm: "pnpm add vite-plugin-style-import consola -D",
+  }}
+/>
 
-```js
-// config/index.ts
+```ts title="config/index.ts" lineNumbers
 import { createStyleImportPlugin } from "vite-plugin-style-import";
 
 export default defineConfig<"vite">(async (merge, { command, mode }) => {
@@ -169,8 +165,7 @@ import "@taroify/core/styles/index.css"
 
 Taroify 支持一次性导入所有组件，引入所有组件会增加代码包体积，因此不推荐这种做法。
 
-```tsx
-// app.ts
+```tsx title="app.ts"
 import "@taroify/icons/index.scss"
 import "@taroify/core/index.scss"
 // css
@@ -186,8 +181,7 @@ import "@taroify/core/index.css"
 
 Taroify 默认采用 `rem` 单位，需要对 `@taroify` 里的样式单位进行转换适配。
 
-```js
-// config/index.js
+```js title="config/index.js" lineNumbers
 const config = {
   h5: {
     esnextModules: ["@taroify"],
@@ -199,8 +193,7 @@ const config = {
 
 Taroify designWidth 为 750。如果你的 `designWidth` 为 375，显示效果会放大两倍。由于 Taroify 内部样式已经改为 Sass Modules（`@use`），旧的 `sass.data: "$hd: 1;"` 写法已经不会生效，需要改为在构建时配置 `variables` 模块：
 
-```tsx
-// config/index.js
+```js title="config/index.js" lineNumbers
 module.exports = {
   // ...
   sass: {

@@ -1,24 +1,26 @@
 <div align="center">
 <p align="center">
-  <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style="margin-bottom: 10px;">
+  <img alt="logo" src="https://img.yzcdn.cn/vant/logo.png" width="120" style={{ marginBottom: 10 }} />
 </p>
   <p>
     <strong>轻量、可靠、面向多端的 Taro React UI 组件库</strong>
   </p>
 
   <p>
-    基于 Vant 设计语言，为小程序与 H5 提供一致、类型安全且高度可定制的开发体验。
+    <span>基于 Vant 设计语言，为小程序与 H5 提供一致、类型安全且高度可定制的开发体验。</span>
   </p>
   <p>
-    <a href="https://taroify.github.io/taroify.com/"><strong>官网</strong></a>
-    ·
-    <a href="https://taroify.github.io/taroify.com/quickstart/"><strong>快速上手</strong></a>
-    ·
-    <a href="https://taroify.github.io/taroify.com/h5/index.html"><strong>在线演示</strong></a>
-    ·
-    <a href="https://taroify.github.io/taroify.com/mcp/"><strong>MCP</strong></a>
-    ·
-    <a href="https://github.com/mallfoundry/taroify/discussions"><strong>讨论区</strong></a>
+    <span>
+      <a href="https://taroify.github.io/taroify.com/"><strong>官网</strong></a>
+      {" · "}
+      <a href="https://taroify.github.io/taroify.com/quickstart/"><strong>快速上手</strong></a>
+      {" · "}
+      <a href="https://taroify.github.io/taroify.com/h5/index.html"><strong>在线演示</strong></a>
+      {" · "}
+      <a href="https://taroify.github.io/taroify.com/mcp/"><strong>MCP</strong></a>
+      {" · "}
+      <a href="https://github.com/mallfoundry/taroify/discussions"><strong>讨论区</strong></a>
+    </span>
   </p>
 </div>
 
@@ -49,17 +51,13 @@ Taroify 是移动端组件库 [Vant](https://github.com/youzan/vant) 的 Taro Re
 
 ### 安装
 
-```bash
-npm install @taroify/core
-```
-
-也可以使用 Yarn 或 pnpm：
-
-```bash
-yarn add @taroify/core
-
-pnpm add @taroify/core
-```
+<PackageManagerTabs
+  command={{
+    npm: "npm install @taroify/core",
+    yarn: "yarn add @taroify/core",
+    pnpm: "pnpm add @taroify/core",
+  }}
+/>
 
 ### 使用组件
 
@@ -118,7 +116,11 @@ yarn develop
 
   <br />
 
-  <img src="./wechat-qrcode.jpg" alt="Taroify 微信交流群" width="240" />
+  <img
+    src={withBase("/introduce/wechat-qrcode.jpg")}
+    alt="Taroify 微信交流群"
+    width="240"
+  />
 
   <p>添加好友时请备注「taroify」，通过后邀请进群。</p>
 </details>
