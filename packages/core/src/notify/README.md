@@ -104,8 +104,8 @@ Notify.open({
 | defaultOpen                 | 默认是否显示消息提示                         | _boolean_                  | -        |
 | open                        | 是否显示消息提示                             | _boolean_                  | -        |
 | type                        | 类型，可选值为 `primary` `success` `warning` | _string_                   | `danger` |
-| color `v0.6.0-alpha.0`      | 字体颜色                                     | _string_                   | -        |
-| background `v0.6.0-alpha.0` | 背景颜色                                     | _string_                   | -        |
+| color      | 字体颜色                                     | _string_                   | -        |
+| background | 背景颜色                                     | _string_                   | -        |
 | duration                    | 展示时长(ms)，值为 0 时，notify 不会消失     | _number_                   | `3000`   |
 | children                    | 展示文案，支持通过`\n`换行                   | _ReactNode_                | -        |
 | onClose                     | 关闭时的回调函数                             | _(open : boolean) => void_ | -        |

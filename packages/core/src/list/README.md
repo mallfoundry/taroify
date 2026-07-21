@@ -54,7 +54,7 @@ function BasicList() {
 }
 ```
 
-> Tips: 在 Tabs 里使用，通过设置 disabled={tabKey !== activeTabKey}，避免其他 tab 里的 List 也触发了滑动
+> Tips: 在 Tabs 里使用，通过设置 `disabled={tabKey !== activeTabKey}`，避免其他 tab 里的 List 也触发了滑动
 
 ### 固定高度
 
@@ -245,22 +245,22 @@ function FixedHeightPullRefreshList() {
 
 | 参数                                                                    | 说明                                             | 类型      | 默认值  |
 | ----------------------------------------------------------------------- | ------------------------------------------------ | --------- | ------- |
-| fixedHeight <br>`v0.1.1-alpha.2`                                        | 是否固定高度                                     | _boolean_ | `false` |
-| pullRefresh                                                             | 固定高度时自动同步下拉刷新的顶部状态             | _boolean_ | `false` |
+| fixedHeight                                        | 是否固定高度                                     | _boolean_ | `false` |
+| pullRefresh <Tag tag="v1.0.0" />                                       | 固定高度时自动同步下拉刷新的顶部状态             | _boolean_ | `false` |
 | loading                                                                 | 是否处于加载状态，加载过程中不触发 `onLoad` 事件 | _boolean_ | `false` |
 | hasMore                                                                 | 是否已加载完成，加载完成后不再触发 `onLoad` 事件 | _boolean_ | `false` |
 | offset                                                                  | 滚动条与底部距离小于 offset 时触发 `onLoad` 事件 | _number_  | `100`   |
-| immediateCheck <br>`v0.1.1-alpha.2`                                     | 是否在初始化时立即执行滚动位置检查               | _boolean_ | `true`  |
-| disabled <br>`v0.1.1-alpha.2`                                           | 是否禁用滚动加载                                 | _boolean_ | `false` |
+| immediateCheck                                     | 是否在初始化时立即执行滚动位置检查               | _boolean_ | `true`  |
+| disabled                                           | 是否禁用滚动加载                                 | _boolean_ | `false` |
 | direction                                                               | 滚动触发加载的方向，可选值为 `up`                | _string_  | `down`  |
-| <span style="color: red">~~scrollTop~~ <br>`v0.1.1-alpha.2 移除`</span> | 距离顶部的滚动距离                               | _number_  | `0`     |
+| ~~scrollTop~~                                                           | 距离顶部的滚动距离                               | _number_  | `0`     |
 
 ### Events
 
 | 事件名                                                                 | 说明                               | 回调参数 |
 | ---------------------------------------------------------------------- | ---------------------------------- | -------- |
 | onLoad                                                                 | 滚动条与底部距离小于 offset 时触发 | -        |
-| <span style="color: red">~~onLoading~~ <br>`v0.1.1-alpha.2移除`</span> | 内部 loading 改变时触发            | -        |
+| ~~onLoading~~                                                           | 内部 loading 改变时触发            | -        |
 | onScroll  | 滚动时触发      | e      |
 
 ### 方法
@@ -269,7 +269,7 @@ function FixedHeightPullRefreshList() {
 
 | 方法名                 | 说明                                                   | 参数 | 返回值 |
 | ---------------------- | ------------------------------------------------------ | ---- | ------ |
-| check `v0.1.1-alpha.2` | 检查当前的滚动位置，若已滚动至底部，则会触发 load 事件 | -    | -      |
+| check | 检查当前的滚动位置，若已滚动至底部，则会触发 load 事件 | -    | -      |
 
 ## 主题定制
 

@@ -99,7 +99,7 @@ function BasicCircle({ percent }: PercentProps) {
 | strokeWidth                        | 进度条宽度                                           | _number_           | `40`      |
 | strokeLinecap                      | 进度条端点的形状，可选值为 `sqaure` `butt` `round`   | _string_           | `round`   |
 | clockwise                          | 是否顺时针增加                                       | _boolean_          | `true`    |
-| startPosition <br>`v0.4.0-alpha.0` | 进度起始位置，可选值为 `left` `right` `top` `bottom` | _string_           | `top`     |
+| startPosition | 进度起始位置，可选值为 `left` `right` `top` `bottom` | _string_           | `top`     |
 | children                           | 文字                                                 | _ReactNode_        | -         |
 
 ## 主题定制

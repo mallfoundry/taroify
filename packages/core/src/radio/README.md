@@ -166,7 +166,7 @@ function CustomIconRadio() {
 | 参数           | 说明                      | 类型               | 默认值    |
 | -------------- | ------------------------- | ------------------ | --------- |
 | name           | 标识符                    | _any_              | -         |
-| shape          | 形状，可选值为 `square` `button` | _string_      | `round`   |
+| shape <Tag tag="v1.0.0" /> | 形状，可选值为 `square` `button` | _string_      | `round`   |
 | disabled       | 是否为禁用状态            | _boolean_          | `false`   |
 | size           | 图标大小，默认单位为`px`  | _number \| string_ | `20px`    |
 
@@ -210,12 +210,12 @@ function CustomIconRadio() {
 | --radio-disabled-icon-color            | _var(--gray-5)_                  | -   |
 | --radio-disabled-icon-border-color     | _var(--gray-5)_                  | -   |
 | --radio-disabled-icon-background-color | _var(--border-color)_            | -   |
-| --radio-button-padding                 | _5px * $hd 18px * $hd_           | -   |
-| --radio-button-border-radius           | _var(--border-radius-max)_        | -   |
-| --radio-button-color                   | _var(--text-color)_               | -   |
-| --radio-button-background-color        | _var(--gray-1)_                   | -   |
-| --radio-button-border-color            | _var(--radio-button-background-color)_ | -   |
-| --radio-button-checked-color           | _var(--primary-color)_            | -   |
-| --radio-button-checked-background-color | _var(--white)_                   | -   |
-| --radio-button-checked-border-color    | _var(--primary-color)_            | -   |
-| --radio-button-disabled-opacity        | _var(--disabled-opacity)_         | -   |
+| --radio-button-padding <Tag tag="v1.0.0" />                  | _5px * $hd 18px * $hd_           | -   |
+| --radio-button-border-radius <Tag tag="v1.0.0" />            | _var(--border-radius-max)_        | -   |
+| --radio-button-color <Tag tag="v1.0.0" />                    | _var(--text-color)_               | -   |
+| --radio-button-background-color <Tag tag="v1.0.0" />         | _var(--gray-1)_                   | -   |
+| --radio-button-border-color <Tag tag="v1.0.0" />             | _var(--radio-button-background-color)_ | -   |
+| --radio-button-checked-color <Tag tag="v1.0.0" />            | _var(--primary-color)_            | -   |
+| --radio-button-checked-background-color <Tag tag="v1.0.0" /> | _var(--white)_                    | -   |
+| --radio-button-checked-border-color <Tag tag="v1.0.0" />     | _var(--primary-color)_            | -   |
+| --radio-button-disabled-opacity <Tag tag="v1.0.0" />         | _var(--disabled-opacity)_         | -   |

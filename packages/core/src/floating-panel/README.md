@@ -169,14 +169,15 @@ function CustomHeight() {
 | duration            | 动画时长，单位秒，设置为 0 可以禁用动画 | _number_   | `0.3`                            |
 | contentDraggable    | 允许拖拽内容容器                        | _boolean_  | `true`                           |
 | safeAreaInsetBottom | 是否开启底部安全区适配                  | _boolean_  | `true`                           |
+| safeAreaProps <Tag tag="v1.0.0" /> | 底部安全区属性（不包含 `position`）     | _Omit&lt;SafeAreaProps, "position"&gt;_ | - |
 
 ### Events
 
 | 事件名      | 说明                             | 回调参数             |
 | ----------- | -------------------------------- | -------------------- |
-| onDragStart | 面板开始拖拽时触发               | _{ height: number }_ |
-| onDragging  | 面板拖拽过程中持续触发           | _{ height: number }_ |
-| onDragEnd   | 面板结束拖拽并吸附到锚点后触发   | _{ height: number }_ |
+| onDragStart <Tag tag="v1.0.0" /> | 面板开始拖拽时触发               | _&#123; height: number &#125;_ |
+| onDragging <Tag tag="v1.0.0" />  | 面板拖拽过程中持续触发           | _&#123; height: number &#125;_ |
+| onDragEnd <Tag tag="v1.0.0" />   | 面板结束拖拽并吸附到锚点后触发   | _&#123; height: number &#125;_ |
 
 ### 方法
 
@@ -202,3 +203,4 @@ function CustomHeight() {
 | --floating-panel-bar-width             | _40px_                          | -    |
 | --floating-panel-bar-color             | _var(--gray-5, $gray-5)_        | -    |
 | --floating-panel-background            | _var(--background-color-light)_ | -    |
+| --floating-panel-safe-area-background <Tag tag="v1.0.0" /> | _var(--floating-panel-background)_ | - |

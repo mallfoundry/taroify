@@ -65,3 +65,4 @@ yarn.lock
 .swc/
 
 bun.lockb
+.playwright-cli

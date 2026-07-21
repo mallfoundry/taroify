@@ -159,4 +159,4 @@ function CloseTag() {
 | --tag-danger-color                      | _var(--danger-color)_                                                   | -    |
 | --tag-danger-background-color           | _var(--danger-color)_                                                   | -    |
 | --tag-outlined-background-color         | _var(--white)_                                                          | -    |
-| --tag-border-color <br>`v0.4.0-alpha.0` | _var(--tag-border-color, currentColor)_                                 | -    |
+| --tag-border-color | _var(--tag-border-color, currentColor)_                                 | -    |

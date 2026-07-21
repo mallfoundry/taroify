@@ -101,7 +101,7 @@ import { Button, Space } from "@taroify/core"
 | wrap                  | 子元素的换行方式，可选值为 `nowrap` `wrap` `wrap-reverse`                    | _boolean_                               | `wrap`       |
 | justify               | 主轴对齐方式，可选值为 `start` `end` `center` `space-around` `space-between` | _string_                                | `start`      |
 | align                 | 交叉轴对齐方式，可选值为 `start` `center` `end` `baseline` `stretch`         | _string_                                | `start`      |
-| fill `v0.1.1-alpha.2` | 是否填充整个父元素                                                           | _boolean_                               | `false`      |
+| fill | 是否填充整个父元素                                                           | _boolean_                               | `false`      |
 
 ## 主题定制
 

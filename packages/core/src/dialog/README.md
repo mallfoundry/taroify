@@ -197,12 +197,12 @@ function AsyncCloseDialog() {
 | defaultOpen                   | 默认是否显示弹窗                      | _boolean_                                     | -        |
 | open                          | 是否显示弹窗                          | _boolean_                                     | -        |
 | children                      | 组件内容                              | _ReactNode_                                   | -        |
-| backdrop `v0.6.0-alpha.0`     | 遮罩层相关配置                        | _boolean \| Omit<PopupBackdropProps, "open">_ | -        |
-| title `v0.6.0-alpha.0`        | 标题                                  | _ReactNode_                                   | -        |
-| message `v0.6.0-alpha.0`      | 文本内容，支持通过 `\n` 换行          | _ReactNode_                                   | -        |
-| messageAlign `v0.6.0-alpha.0` | 内容对齐方式，可选值为 `left` `right` | _string_                                      | `center` |
-| confirm `v0.6.0-alpha.0`      | 确认按钮                              | _string \| ButtonProps_                       | -        |
-| cancel `v0.6.0-alpha.0`       | 取消按钮                              | _string \| ButtonProps_                       | -        |
+| backdrop     | 遮罩层相关配置                        | _boolean \| Omit<PopupBackdropProps, "open">_ | -        |
+| title        | 标题                                  | _ReactNode_                                   | -        |
+| message      | 文本内容，支持通过 `\n` 换行          | _ReactNode_                                   | -        |
+| messageAlign | 内容对齐方式，可选值为 `left` `right` | _string_                                      | `center` |
+| confirm      | 确认按钮                              | _string \| ButtonProps_                       | -        |
+| cancel       | 取消按钮                              | _string \| ButtonProps_                       | -        |
 
 ### Dialog Event
 
@@ -241,7 +241,7 @@ function AsyncCloseDialog() {
 | title                     | 标题                                  | _ReactNode_                                   | -        |
 | message                   | 文本内容，支持通过 `\n` 换行          | _ReactNode_                                   | -        |
 | messageAlign              | 内容对齐方式，可选值为 `left` `right` | _string_                                      | `center` |
-| backdrop `v0.6.0-alpha.0` | 遮罩层相关配置                        | _boolean \| Omit<PopupBackdropProps, "open">_ | -        |
+| backdrop | 遮罩层相关配置                        | _boolean \| Omit<PopupBackdropProps, "open">_ | -        |
 | confirm                   | 确认按钮                              | _string \| ButtonProps_                       | -        |
 | cancel                    | 取消按钮                              | _string \| ButtonProps_                       | -        |
 | onConfirm                 | 确认事件                              | _() => void_                                  | -        |
