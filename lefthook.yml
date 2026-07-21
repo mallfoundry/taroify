@@ -33,6 +33,12 @@ prepare-commit-msg:
   commands:
     commit:
       interactive: true
-      run: npx git-cz --hook
+      run: |
+        if [ -d "$(git rev-parse --git-path rebase-merge)" ] ||
+           [ -d "$(git rev-parse --git-path rebase-apply)" ]; then
+          exit 0
+        fi
+
+        npx git-cz --hook
       env:
         LEFTHOOK: "0"
