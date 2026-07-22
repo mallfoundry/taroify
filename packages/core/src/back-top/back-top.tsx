@@ -26,11 +26,12 @@ const BackTop: FC<BackTopProps> = (props) => {
     style: styleProp,
     right = 30,
     bottom = 40,
-    offset = 100,
+    offset = 200,
     zIndex = 100,
     immediate = false,
     children,
     onClick: onClickProp,
+    ...restProps
   } = props
 
   const [visible, setVisible] = useState(false)
@@ -48,14 +49,13 @@ const BackTop: FC<BackTopProps> = (props) => {
     setVisible(scrollParent.current ? top >= offset : false)
   })
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const rootStyle = useMemo(
     () => ({
       zIndex,
       right: addUnitPx(right),
       bottom: addUnitPx(bottom),
     }),
-    [right, bottom, offset, zIndex],
+    [right, bottom, zIndex],
   )
 
   const onClick = (event: ITouchEvent) => {
@@ -71,6 +71,7 @@ const BackTop: FC<BackTopProps> = (props) => {
   return (
     <View
       ref={rootRef}
+      {...restProps}
       className={classNames(prefixClassname("back-top"), className, {
         active: visible,
       })}
@@ -80,7 +81,7 @@ const BackTop: FC<BackTopProps> = (props) => {
       }}
       onClick={onClick}
     >
-      {children ? children : <BackTopIcon />}
+      {children ?? <BackTopIcon />}
     </View>
   )
 }
