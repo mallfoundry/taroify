@@ -53,6 +53,44 @@ function defaultFormatter(day: CalendarDayObject) {
   return day
 }
 
+function normalizeCalendarValue(
+  dateValue: CalendarValueType | undefined,
+  type: CalendarType,
+  min: Date,
+  max: Date,
+): CalendarValueType | undefined {
+  if (dateValue === null || dateValue === undefined) {
+    return dateValue
+  }
+
+  const limitDateRange = (date: Date, minDate = min, maxDate = max) => {
+    if (compareDate(date, minDate) === -1) {
+      return minDate
+    }
+    if (compareDate(date, maxDate) === 1) {
+      return maxDate
+    }
+    return date
+  }
+  const dates = Array.isArray(dateValue) ? dateValue : [dateValue]
+
+  if (type === "range") {
+    const [start, end] = dates
+    if (!start) {
+      return []
+    }
+
+    const normalizedStart = limitDateRange(start, min, createPreviousDay(max))
+    return end ? [normalizedStart, limitDateRange(end, createNextDay(min))] : [normalizedStart]
+  }
+
+  if (type === "multiple") {
+    return dates.map((date) => limitDateRange(date))
+  }
+
+  return dates[0] ? limitDateRange(dates[0]) : null
+}
+
 export interface CalendarProps extends ViewProps {
   type?: CalendarType
   showTitle?: boolean
@@ -123,11 +161,22 @@ function Calendar(props: CalendarProps) {
   )
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const defaultValue = useMemo(() => getInitialDate(defaultValueProp), [])
-  const { value, setValue } = useUncontrolled({
+  const { value: currentValue, setValue } = useUncontrolled({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
+  const minTime = minValue.getTime()
+  const maxTime = maxValue.getTime()
+  const calendarOptionsRef = useRef({ type, min: minTime, max: maxTime })
+  const [shouldNormalizeValue, setShouldNormalizeValue] = useState(false)
+  const value = useMemo(
+    () =>
+      shouldNormalizeValue
+        ? normalizeCalendarValue(currentValue, type, minValue, maxValue)
+        : currentValue,
+    [currentValue, type, minValue, maxValue, shouldNormalizeValue],
+  )
 
   const renderFooter = () => {
     let _footer: ReactNode = null
@@ -282,7 +331,7 @@ function Calendar(props: CalendarProps) {
           const disabledDay = getDisabledDate(disabledDays, startDay, date)
 
           if (disabledDay) {
-            change([startDay, createPreviousDay(disabledDay)])
+            change([startDay, createPreviousDay(disabledDay)], true)
           } else {
             change([startDay, date], true)
           }
@@ -318,7 +367,8 @@ function Calendar(props: CalendarProps) {
     }
     const top = await getScrollTop(scrollViewRef)
     const bottom = top + scrollViewHeightRef.current
-    const heights = months.map((item, index) => getMonthRef(index).current.getHeight())
+    const monthRefs = months.map((item, index) => getMonthRef(index).current)
+    const heights = monthRefs.map((monthRef) => monthRef?.getHeight() ?? 0)
     const heightSum = heights.reduce((a, b) => a + b, 0)
 
     // iOS scroll bounce may exceed the range
@@ -331,10 +381,10 @@ function Calendar(props: CalendarProps) {
     let currentMonthRef
 
     for (let i = 0; i < months.length; i++) {
-      const month = getMonthRef(i)
+      const month = monthRefs[i]
       const visible = height <= bottom && height + heights[i] >= top
 
-      if (visible && !currentMonthRef) {
+      if (visible && month && !currentMonthRef) {
         currentMonthRef = month
         break
       }
@@ -343,7 +393,7 @@ function Calendar(props: CalendarProps) {
     }
 
     if (currentMonthRef) {
-      setCurrentMonth(currentMonthRef.current.getValue())
+      setCurrentMonth(currentMonthRef.getValue())
     }
   }
 
@@ -352,23 +402,34 @@ function Calendar(props: CalendarProps) {
       if (compareYearMonth(month, targetDate as Date) === 0) {
         scrollToDateLoadingRef.current = true
         const currentMonthRef = getMonthRef(index)
-        const month = currentMonthRef.current.getValue()
+        const currentMonth = currentMonthRef.current
+        if (!currentMonth) {
+          scrollToDateLoadingRef.current = false
+          return false
+        }
+        const month = currentMonth.getValue()
         setCurrentMonth(month)
         if (getEnv() === "WEB") {
           nextTick(() => {
-            if (scrollViewRef.current) {
-              Promise.all([
-                getRect(scrollViewRef),
-                getScrollTop(scrollViewRef),
-                currentMonthRef.current?.getRectTop(),
-              ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
-                const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
-                scrollViewRef.current!.scrollTop = newBodyScrollTop
-                nextTick(() => {
-                  scrollToDateLoadingRef.current = false
-                })
+            const scrollView = scrollViewRef.current
+            if (!scrollView) {
+              scrollToDateLoadingRef.current = false
+              return
+            }
+            const resetScrollToDateLoading = () => {
+              nextTick(() => {
+                scrollToDateLoadingRef.current = false
               })
             }
+            Promise.all([
+              getRect(scrollView),
+              getScrollTop(scrollView),
+              currentMonth.getRectTop(),
+            ]).then(([{ top: scrollViewRectTop }, currentScrollTop, currentMonthRectTop]) => {
+              const newBodyScrollTop = currentMonthRectTop - scrollViewRectTop + currentScrollTop
+              scrollView.scrollTop = newBodyScrollTop
+              resetScrollToDateLoading()
+            }, resetScrollToDateLoading)
           })
         } else {
           setScrollIntoView(genMonthId(month))
@@ -419,6 +480,19 @@ function Calendar(props: CalendarProps) {
       reset(getInitialDate(value))
     }
   }, [value])
+
+  useEffect(() => {
+    const previousOptions = calendarOptionsRef.current
+    const changed =
+      previousOptions.type !== type ||
+      previousOptions.min !== minTime ||
+      previousOptions.max !== maxTime
+
+    calendarOptionsRef.current = { type, min: minTime, max: maxTime }
+    if (changed) {
+      setShouldNormalizeValue(true)
+    }
+  }, [type, minTime, maxTime])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {

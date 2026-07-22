@@ -26,6 +26,9 @@ describe("<ConfigProvider />", () => {
     expect(root.style.getPropertyValue("--background-color")).toBe("#101010")
     expect(root.style.getPropertyValue("--background-color-2")).toBe("#1c1c1e")
     expect(root.style.getPropertyValue("--border-color")).toBe("#3a3a3c")
+    expect(root.style.getPropertyValue("--calendar-month-watermark-color")).toBe(
+      "rgba(100, 101, 102, 0.2)",
+    )
     expect(root.style.colorScheme).toBe("dark")
   })
 
@@ -54,6 +57,7 @@ describe("<ConfigProvider />", () => {
 
     expect(root.style.getPropertyValue("--background-color")).toBe("")
     expect(root.style.getPropertyValue("--text-color")).toBe("")
+    expect(root.style.getPropertyValue("--calendar-month-watermark-color")).toBe("")
     expect(root.style.colorScheme).toBe("light")
   })
 })

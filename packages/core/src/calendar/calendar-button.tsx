@@ -37,6 +37,13 @@ function CalendarButton(props: CalendarButtonProps) {
     return Array.isArray(currentValue) ? currentValue.length === 0 : !currentValue
   }, [ctxType, currentValue])
 
+  const defaultContent = props.children === undefined ? children : undefined
+  const content = props.children
+    ? children
+    : disabled
+      ? (confirmDisabledText ?? defaultContent)
+      : (confirmText ?? defaultContent)
+
   return (
     <Button
       className={classNames(
@@ -57,7 +64,7 @@ function CalendarButton(props: CalendarButtonProps) {
       }}
       {...restProps}
     >
-      {props.children ? children : disabled ? confirmDisabledText : confirmText}
+      {content}
     </Button>
   )
 }

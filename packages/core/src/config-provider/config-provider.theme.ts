@@ -19,6 +19,7 @@ const darkThemeVars: ConfigProviderThemeVars = {
   backgroundColorLight: "#1c1c1e",
   borderColor: "#3a3a3c",
   textLinkColor: "#7aa2d6",
+  calendarMonthWatermarkColor: "rgba(100, 101, 102, 0.2)",
   pickerLoadingMaskColor: "rgba(28, 28, 30, 0.9)",
 }
 
