@@ -4,7 +4,7 @@ export { getEndDayOfMonth } from "../datetime-picker/datetime-picker.shared"
 
 export type CalendarType = "single" | "multiple" | "range"
 
-export type CalendarValueType = Date | Date[]
+export type CalendarValueType = Date | Date[] | null
 
 export type CalendarSubtitle = ReactNode | ((date: Date) => ReactNode)
 
