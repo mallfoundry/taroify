@@ -14,15 +14,17 @@ export interface CellProps extends CellBaseProps {
 function Cell(props: CellProps) {
   const { title, brief, children, titleStyle, titleClass, valueClass, briefClass, ...restProps } =
     props
+  const hasTitle = React.Children.toArray(title).length > 0
+  const hasBrief = React.Children.toArray(brief).length > 0
   return (
     <CellBase {...restProps}>
-      {title && (
+      {hasTitle && (
         <CellTitle titleStyle={titleStyle} titleClass={titleClass}>
           {title}
-          {brief && <CellBrief children={brief} briefClass={briefClass} />}
+          {hasBrief && <CellBrief children={brief} briefClass={briefClass} />}
         </CellTitle>
       )}
-      <CellValue alone={!title} children={children} valueClass={valueClass} />
+      <CellValue alone={!hasTitle} children={children} valueClass={valueClass} />
     </CellBase>
   )
 }
