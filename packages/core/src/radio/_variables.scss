@@ -26,7 +26,7 @@ $radio-disabled-icon-background-color: var(--radio-disabled-icon-background-colo
 $radio-button-padding: var(--radio-button-padding, 5px * $hd 18px * $hd);
 $radio-button-border-radius: var(--radio-button-border-radius, var(--border-radius-max, $border-radius-max));
 $radio-button-color: var(--radio-button-color, var(--text-color, $text-color));
-$radio-button-background-color: var(--radio-button-background-color, var(--gray-1, $gray-1));
+$radio-button-background-color: var(--radio-button-background-color, var(--gray-1, $gray-2));
 $radio-button-border-color: var(--radio-button-border-color, $radio-button-background-color);
 $radio-button-checked-color: var(--radio-button-checked-color, var(--primary-color, $primary-color));
 $radio-button-checked-background-color: var(--radio-button-checked-background-color, var(--background-color-2, $background-color-2));

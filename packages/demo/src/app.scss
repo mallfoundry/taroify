@@ -3,26 +3,26 @@
 body,
 page {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-  background: var(--background-color, #f7f8fa);
+  background: var(--background-color, #fff);
   color: var(--text-color, #323233);
 }
 
 html[data-taroify-theme="dark"] {
   body {
     background: #101010;
-    color: #f7f7f7;
+    color: #fff;
   }
 }
 
 .taroify-demo-theme {
   min-height: 100vh;
   color: var(--text-color, #323233);
-  background: var(--background-color, #f7f8fa);
+  background: var(--background-color, #fff);
 }
 
 .taro_router {
   color: var(--text-color, #323233);
-  background: var(--background-color, #f7f8fa);
+  background: var(--background-color, #fff);
 
   .taro_page {
     min-height: 100vh;
