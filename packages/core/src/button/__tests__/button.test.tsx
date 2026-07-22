@@ -1,289 +1,344 @@
-import { render, fireEvent } from "@testing-library/react"
-import * as React from "react"
-import { prefixClassname } from "../../styles"
-import Button, { createButton } from "../button"
-import Loading from "../../loading/loading"
 import { ArrowLeft as Icon } from "@taroify/icons"
-import ButtonContent from "../button-content"
-import ButtonGroupContext from "../button-group.context"
+import { fireEvent, render } from "@testing-library/react"
+import * as React from "react"
+import Loading from "../../loading/loading"
+import { prefixClassname } from "../../styles"
+import Button, { ButtonContext, type ButtonProps, createButton } from ".."
+
+function getButton(container: HTMLElement) {
+  return container.querySelector(`.${prefixClassname("button")}`) as HTMLElement
+}
+
+function getNativeButton(container: HTMLElement) {
+  return container.querySelector(`.${prefixClassname("button__button")}`) as HTMLElement
+}
 
 describe("<Button />", () => {
-  // The default button contains prefix--contained --medium --default
-  it("should have default classNames", () => {
-    const { container } = render(<Button />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(
-      "taroify-button--contained",
-      "taroify-button--medium",
-      "taroify-button--default",
-    )
-  })
-
-  it("should have disabled className", () => {
-    const { container } = render(<Button disabled />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass("taroify-button--disabled")
-  })
-
-  it("should have block className", () => {
-    const { container } = render(<Button block />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--block")}`)
-  })
-
-  it("should be hairline button", () => {
-    const { container } = render(<Button hairline />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(
-      `${prefixClassname("button--hairline")}`,
-      `${prefixClassname("hairline--surround")}`,
-    )
-  })
-
-  it("should be hairline button", () => {
-    const { container } = render(<Button hairline />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(
-      `${prefixClassname("button--hairline")}`,
-      `${prefixClassname("hairline--surround")}`,
-    )
-  })
-
-  it("should be text button", () => {
-    const { container } = render(<Button variant="text" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--text")}`)
-  })
-
-  it("should be outlined button", () => {
-    const { container } = render(<Button variant="outlined" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--outlined")}`)
-  })
-
-  it("should be round button", () => {
-    const { container } = render(<Button shape="round" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--round")}`)
-  })
-
-  it("should be mini button", () => {
-    const { container } = render(<Button size="mini" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--mini")}`)
-  })
-
-  it("should be small button", () => {
-    const { container } = render(<Button size="small" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--small")}`)
-  })
-
-  it("should be medium button", () => {
-    const { container } = render(<Button size="medium" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--medium")}`)
-  })
-
-  it("should be large button", () => {
-    const { container } = render(<Button size="large" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--large")}`)
-  })
-
-  it("should be default button", () => {
-    const { container } = render(<Button color="default" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--default")}`)
-  })
-
-  it("should be primary button", () => {
-    const { container } = render(<Button color="primary" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--primary")}`)
-  })
-
-  it("should be info button", () => {
-    const { container } = render(<Button color="info" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--info")}`)
-  })
-
-  it("should be success button", () => {
-    const { container } = render(<Button color="success" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--success")}`)
-  })
-  it("should be warning button", () => {
-    const { container } = render(<Button color="warning" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--warning")}`)
-  })
-
-  it("should be danger button", () => {
-    const { container } = render(<Button color="danger" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
-  })
-
-  it("should be formType reset", () => {
-    const { container } = render(<Button color="danger" formType="reset" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
-  })
-
-  it("should be formType button", () => {
-    const { container } = render(<Button color="danger" formType="button" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
-  })
-
-  it("should be formType submit", () => {
-    const { container } = render(<Button color="danger" formType="submit" />)
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
-  })
-
-  it("should have children", () => {
+  it("renders with default classes and custom styles", () => {
     const { container } = render(
-      <Button color="danger" formType="reset">
-        Test
+      <Button className="custom-button" style={{ color: "red" }}>
+        Confirm
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
+    const button = getButton(container)
+
+    expect(button).toHaveClass(
+      "custom-button",
+      prefixClassname("button--contained"),
+      prefixClassname("button--medium"),
+      prefixClassname("button--default"),
+    )
+    expect(button).toHaveStyle({ color: "red" })
+    expect(button).toHaveTextContent("Confirm")
+    expect(button.querySelector(`.${prefixClassname("button__text")}`)).toHaveTextContent("Confirm")
   })
 
-  it("should have startIcon", () => {
+  it.each(["contained", "text", "outlined"] as const)("renders the %s variant", (variant) => {
+    const { container } = render(<Button variant={variant} />)
+
+    expect(getButton(container)).toHaveClass(prefixClassname(`button--${variant}`))
+  })
+
+  it.each(["square", "round"] as const)("renders the %s shape", (shape) => {
+    const { container } = render(<Button shape={shape} />)
+
+    expect(getButton(container)).toHaveClass(prefixClassname(`button--${shape}`))
+  })
+
+  it.each(["mini", "small", "medium", "large"] as const)("renders at the %s size", (size) => {
+    const { container } = render(<Button size={size} />)
+
+    expect(getButton(container)).toHaveClass(prefixClassname(`button--${size}`))
+  })
+
+  it.each(["default", "primary", "info", "success", "warning", "danger"] as const)(
+    "renders with the %s color",
+    (color) => {
+      const { container } = render(<Button color={color} />)
+
+      expect(getButton(container)).toHaveClass(prefixClassname(`button--${color}`))
+    },
+  )
+
+  it("renders block and hairline states", () => {
+    const { container } = render(<Button block hairline />)
+
+    expect(getButton(container)).toHaveClass(
+      prefixClassname("button--block"),
+      prefixClassname("button--hairline"),
+      prefixClassname("hairline--surround"),
+    )
+  })
+
+  it.each([
+    ["button", null],
+    ["submit", "submit"],
+    ["reset", "reset"],
+  ] as const)("maps formType=%s to the native button", (formType, expected) => {
+    const { container } = render(<Button formType={formType} />)
+    const nativeButton = getNativeButton(container)
+
+    if (expected) {
+      expect(nativeButton).toHaveAttribute("form-type", expected)
+    } else {
+      expect(nativeButton).not.toHaveAttribute("form-type")
+    }
+  })
+
+  it("passes native button props to ButtonBase instead of the wrapper", () => {
     const { container } = render(
-      <Button color="danger" icon="icon">
-        Test
+      <Button id="native-button" openType="contact" data-testid="native-button" />,
+    )
+    const button = getButton(container)
+    const nativeButton = getNativeButton(container)
+
+    expect(button).not.toHaveAttribute("id")
+    expect(button).not.toHaveAttribute("open-type")
+    expect(nativeButton).toHaveClass(prefixClassname("button-base"))
+    expect(nativeButton).toHaveAttribute("id", "native-button")
+    expect(nativeButton).toHaveAttribute("open-type", "contact")
+    expect(nativeButton).toHaveAttribute("data-testid", "native-button")
+  })
+
+  it.each([
+    ["left", "button__icon--right"],
+    ["right", "button__icon--left"],
+  ] as const)("renders the icon prop on the %s", (iconPosition, spacingClass) => {
+    const { container, getByTestId } = render(
+      <Button icon={<Icon data-testid="button-icon" />} iconPosition={iconPosition}>
+        Continue
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--danger")}`)
+
+    expect(getByTestId("button-icon")).toHaveClass(prefixClassname(spacingClass))
+
+    const content = container.querySelector(`.${prefixClassname("button__content")}`)
+    const children = Array.from(content?.children ?? [])
+    expect(children[iconPosition === "left" ? 0 : children.length - 1]).toBe(
+      getByTestId("button-icon"),
+    )
   })
 
-  it("should have loading state", () => {
-    const { container } = render(
-      <Button loading color="danger" icon="icon">
-        Test
+  it("adds spacing classes to icon children at both edges", () => {
+    const { container, getByTestId } = render(
+      <Button>
+        <Icon data-testid="start-icon" />
+        Continue
+        <Icon data-testid="end-icon" />
       </Button>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
+
+    expect(getByTestId("start-icon")).toHaveClass(prefixClassname("button__icon--right"))
+    expect(getByTestId("end-icon")).toHaveClass(prefixClassname("button__icon--left"))
+    expect(container.querySelector(`.${prefixClassname("button__text")}`)).toHaveTextContent(
+      "Continue",
+    )
   })
 
-  it("should render with custom loading props", () => {
+  it("uses custom Button.Content without adding another content wrapper", () => {
+    const { container } = render(
+      <Button>
+        <Button.Content className="custom-content" id="button-content">
+          Custom
+        </Button.Content>
+      </Button>,
+    )
+    const contents = container.querySelectorAll(`.${prefixClassname("button__content")}`)
+
+    expect(contents).toHaveLength(1)
+    expect(contents[0]).toHaveClass("custom-content")
+    expect(contents[0]).toHaveAttribute("id", "button-content")
+    expect(contents[0]).toHaveTextContent("Custom")
+  })
+
+  it("renders the default loading indicator and disables interaction", () => {
+    const onClick = jest.fn()
+    const { container } = render(
+      <Button loading onClick={onClick}>
+        Loading
+      </Button>,
+    )
+    const button = getButton(container)
+
+    expect(button).toHaveClass(prefixClassname("button--loading"))
+    expect(container.querySelector(`.${prefixClassname("button__loading")}`)).toHaveClass(
+      prefixClassname("button__loading--right"),
+    )
+    expect(getNativeButton(container)).toHaveAttribute("disabled")
+
+    fireEvent.click(button)
+    expect(onClick).not.toHaveBeenCalled()
+  })
+
+  it("renders a loading indicator from LoadingProps", () => {
     const { container } = render(
       <Button
         loading={{
           className: "custom-loading",
+          id: "custom-loading",
           size: 20,
+          type: "spinner",
         }}
-        color="danger"
-        icon="icon"
+      />,
+    )
+    const loading = container.querySelector("#custom-loading")
+    const spinner = container.querySelector(`.${prefixClassname("loading__spinner")}`)
+
+    expect(loading).toHaveClass(
+      "custom-loading",
+      prefixClassname("button__loading"),
+      prefixClassname("button__loading--right"),
+      prefixClassname("loading--spinner"),
+    )
+    expect(spinner).toHaveStyle({ width: "20px", height: "20px" })
+  })
+
+  it("preserves props from a custom Loading element", () => {
+    const { container } = render(
+      <Button loading={<Loading id="element-loading" type="spinner" />}>Loading</Button>,
+    )
+    const loading = container.querySelector("#element-loading")
+
+    expect(loading).toHaveClass(
+      prefixClassname("button__loading"),
+      prefixClassname("button__loading--right"),
+      prefixClassname("loading--spinner"),
+    )
+  })
+
+  it("calls both the prop and context click handlers", () => {
+    const onClick = jest.fn()
+    const onContextClick = jest.fn()
+    const { container } = render(
+      <ButtonContext.Provider value={{ onClick: onContextClick }}>
+        <Button color="danger" onClick={onClick}>
+          Delete
+        </Button>
+      </ButtonContext.Provider>,
+    )
+
+    fireEvent.click(getButton(container))
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onContextClick).toHaveBeenCalledTimes(1)
+    expect(onContextClick).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ color: "danger", children: "Delete", onClick }),
+    )
+  })
+
+  it.each<[string, ButtonProps]>([
+    ["disabled", { disabled: true }],
+    ["loading", { loading: true }],
+  ])("does not call handlers while %s", (_, stateProps) => {
+    const onClick = jest.fn()
+    const onContextClick = jest.fn()
+    const { container } = render(
+      <ButtonContext.Provider value={{ onClick: onContextClick }}>
+        <Button {...stateProps} onClick={onClick}>
+          Continue
+        </Button>
+      </ButtonContext.Provider>,
+    )
+
+    fireEvent.click(getButton(container))
+
+    expect(onClick).not.toHaveBeenCalled()
+    expect(onContextClick).not.toHaveBeenCalled()
+    expect(getNativeButton(container)).toHaveAttribute("disabled")
+  })
+
+  it("creates a button from children and additional props", () => {
+    const { container } = render(createButton("Create", { color: "primary", id: "created" }))
+
+    expect(getButton(container)).toHaveClass(prefixClassname("button--primary"))
+    expect(getButton(container)).toHaveTextContent("Create")
+    expect(getNativeButton(container)).toHaveAttribute("id", "created")
+  })
+
+  it("creates a button from a props object and lets additional props override it", () => {
+    const { container } = render(
+      createButton(
+        { children: "Original", color: "primary", id: "original" },
+        { color: "danger", id: "override" },
+      ),
+    )
+
+    expect(getButton(container)).toHaveClass(prefixClassname("button--danger"))
+    expect(getButton(container)).toHaveTextContent("Original")
+    expect(getNativeButton(container)).toHaveAttribute("id", "override")
+  })
+})
+
+describe("<Button.Group />", () => {
+  it("renders group modifiers, view props, and shared child properties", () => {
+    const onClick = jest.fn()
+    const { container } = render(
+      <Button.Group
+        variant="outlined"
+        shape="round"
+        size="small"
+        color="primary"
+        block
+        hairline
+        disabled
+        className="custom-group"
+        id="button-group"
+        style={{ color: "blue" }}
       >
-        Test
-      </Button>,
+        <Button onClick={onClick}>First</Button>
+        <Button>Second</Button>
+      </Button.Group>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
+    const group = container.querySelector(`.${prefixClassname("button-group")}`)
+    const buttons = container.querySelectorAll(`.${prefixClassname("button")}`)
+
+    expect(group).toHaveClass(
+      "custom-group",
+      prefixClassname("button-group--outlined"),
+      prefixClassname("button-group--round"),
+      prefixClassname("button-group--block"),
+    )
+    expect(group).toHaveAttribute("id", "button-group")
+    expect(group).toHaveStyle({ color: "blue" })
+    expect(buttons).toHaveLength(2)
+
+    for (const button of Array.from(buttons)) {
+      expect(button).toHaveClass(
+        prefixClassname("button--outlined"),
+        prefixClassname("button--round"),
+        prefixClassname("button--small"),
+        prefixClassname("button--primary"),
+        prefixClassname("button--hairline"),
+        prefixClassname("button--disabled"),
+      )
+    }
+
+    fireEvent.click(buttons[0])
+    expect(onClick).not.toHaveBeenCalled()
   })
 
-  it("should render with custom loading children", () => {
+  it("lets button props override group properties", () => {
     const { container } = render(
-      <Button
-        iconPosition="right"
-        loading={<Loading className="test" />}
-        color="danger"
-        icon={<Icon className="test-icon" />}
-      >
-        Test
-      </Button>,
+      <Button.Group variant="outlined" shape="round" size="small" color="primary">
+        <Button variant="text" shape="square" size="large" color="danger">
+          Override
+        </Button>
+      </Button.Group>,
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toHaveClass(`${prefixClassname("button--loading")}`)
-  })
+    const button = getButton(container)
 
-  it("should render with ButtonContent", () => {
-    const { container } = render(
-      <Button color="danger">
-        <ButtonContent className="custom-icon" />
-      </Button>,
+    expect(button).toHaveClass(
+      prefixClassname("button--text"),
+      prefixClassname("button--square"),
+      prefixClassname("button--large"),
+      prefixClassname("button--danger"),
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toBeInTheDocument()
-  })
-
-  it("should render with Button Content children", () => {
-    const { container } = render(
-      <Button color="danger">
-        <Icon />
-        <Icon />
-      </Button>,
+    expect(button).not.toHaveClass(
+      prefixClassname("button--outlined"),
+      prefixClassname("button--round"),
+      prefixClassname("button--small"),
+      prefixClassname("button--primary"),
     )
-    const el = container.querySelector(`.${prefixClassname("button")}`)
-    expect(el).toBeInTheDocument()
-  })
-
-  it("should call onClick Event", () => {
-    const mockOnClick = jest.fn()
-    const { container } = render(
-      <Button onClick={mockOnClick} color="danger">
-        Click Here
-      </Button>,
-    )
-    const btn = container.querySelector(`.${prefixClassname("button")}`)
-    if (!btn) throw "err"
-
-    fireEvent.click(btn)
-
-    expect(mockOnClick).toHaveBeenCalled()
-  })
-
-  it("should not call onClick Event", () => {
-    const mockOnClick = jest.fn()
-    const { container } = render(
-      <Button disabled loading onClick={mockOnClick} color="danger">
-        Click Here
-      </Button>,
-    )
-    const btn = container.querySelector(`.${prefixClassname("button")}`)
-    if (!btn) throw "err"
-
-    fireEvent.click(btn)
-
-    expect(mockOnClick).toHaveBeenCalledTimes(0)
-  })
-
-  it("should render Button using createButton function with label only", () => {
-    const button = createButton("Click Me")
-    const { container } = render(button)
-    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`)
-    expect(renderedBtn).toBeInTheDocument()
-  })
-
-  it("should render Button using createButton function with props only", () => {
-    const button = createButton({
-      id: "btn1",
-    })
-    const { container } = render(button)
-    const renderedBtn = container.querySelector(`.${prefixClassname("button")}`)
-    expect(renderedBtn).toBeInTheDocument()
-  })
-
-  it("should render with buttonGroupContext", () => {
-    const { container } = render(
-      <ButtonGroupContext.Provider
-        value={{
-          variant: "outlined",
-        }}
-      >
-        <Button>Click Me</Button>
-      </ButtonGroupContext.Provider>,
-    )
-
-    expect(container.querySelector(`.${prefixClassname("button")}`)).toHaveTextContent("Click Me")
   })
 })
