@@ -9,6 +9,7 @@ import {
   guideSidebarItems,
   primaryNavigation,
 } from "../config/docs.mjs"
+import { updateChangelog } from "./generate-changelog.mjs"
 
 const require = createRequire(import.meta.url)
 const scriptDir = path.dirname(fileURLToPath(import.meta.url))
@@ -101,6 +102,22 @@ async function copyAuthoredPages() {
     const source = path.join(sourceRoot, page.source)
     const content = await readFile(source, "utf8")
     await writeMarkdown(withMdxExtension(page.source, content), withRspressImports(content), page)
+  }
+}
+
+async function updateGeneratedChangelog() {
+  const target = path.join(docsRoot, "changelog/index.md")
+
+  try {
+    const { added } = await updateChangelog(target)
+    if (added.length > 0) {
+      console.log(`Added changelog releases: ${added.join(", ")}.`)
+    }
+  } catch (error) {
+    if (process.env.CHANGELOG_STRICT === "true") {
+      throw error
+    }
+    console.warn(`Skipped changelog refresh: ${error.message}`)
   }
 }
 
@@ -249,6 +266,7 @@ async function main() {
   })
   await copyAuthoredAssets()
   await copyAuthoredPages()
+  await updateGeneratedChangelog()
   const components = await copyComponents()
   const hooks = await copyHooks()
   await writeNavigation(hooks)

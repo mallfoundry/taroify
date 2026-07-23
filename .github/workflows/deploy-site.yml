@@ -1,9 +1,11 @@
 name: Deploy Site
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  workflow_run:
+    workflows:
+      - Create Release Tag
+    types:
+      - completed
   workflow_dispatch:
 
 concurrency:
@@ -18,13 +20,16 @@ env:
 
 jobs:
   build-and-deploy:
-    if: github.repository == 'taroify/taroify'
+    if: >-
+      github.repository == 'taroify/taroify' &&
+      (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -43,6 +48,9 @@ jobs:
 
       - name: Run Build Site
         run: yarn run build:www
+        env:
+          CHANGELOG_STRICT: "true"
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.3

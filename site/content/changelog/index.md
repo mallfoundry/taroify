@@ -10,7 +10,56 @@ Taroify 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 - 次版本号：每隔一至二个月发布，包含新特性和较大的功能更新，向下兼容。
 - 主版本号：发布时间不定，包含不兼容更新。
 
+<!-- 新版本在文档构建时从 GitHub Releases 自动追加。 -->
+
 ## 更新内容
+
+### v1.0.0
+
+`2026-07-20`
+
+**新功能 🎉**
+
+- Tour
+  - 新增漫游式引导组件 [83027f7](https://github.com/taroify/taroify/commit/83027f755fedbf1022597081ee6267ad85ed5931) [@Pilotager](https://github.com/Pilotager)
+- ConfigProvider
+  - 支持暗黑模式 [7d0fcc8](https://github.com/taroify/taroify/commit/7d0fcc8cefc56208ea166cc80d6b5c5ff03d6e50) [@Pilotager](https://github.com/Pilotager)
+- Checkbox / Radio
+  - 增加 `shape="button"`，支持按钮式选择场景 [#1017](https://github.com/taroify/taroify/pull/1017) [@Pilotager](https://github.com/Pilotager)
+- SafeArea
+  - 支持自定义安全区背景 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- 文档站
+  - 从 Gatsby 迁移至 Rspress 2，新增定制主题、搜索和组件模拟器 [#1020](https://github.com/taroify/taroify/pull/1020) [@Pilotager](https://github.com/Pilotager)
+
+**性能优化 🚀**
+
+- Form
+  - Rule 支持布尔类型表单项 [#1015](https://github.com/taroify/taroify/pull/1015) [@felix9ia](https://github.com/felix9ia)
+
+**Bug 修复 🐞**
+
+- ActionBar
+  - 修复图标按钮 Badge 包装后缺少 React key 的警告 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- Input
+  - 修复 `type="number"` 时未过滤非数字字符的问题 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- DropdownMenu
+  - 增加 `ellipsis` 配置，支持关闭标题省略 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- FloatingPanel / FixedView
+  - 增加 `safeAreaProps`，支持独立配置安全区背景 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- List / PullRefresh
+  - 修复固定高度下拉刷新问题 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- Transition
+  - 修复微信小程序 `nodeRef` 警告 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- Textarea
+  - 修复安卓端 `limit` 字数限制失效问题 [#1016](https://github.com/taroify/taroify/pull/1016) [@Pilotager](https://github.com/Pilotager)
+- Form
+  - 修复嵌套字段提交结构 [#1018](https://github.com/taroify/taroify/pull/1018) [@Pilotager](https://github.com/Pilotager)
+
+**其他变更**
+
+- 更新 `vite-plugin-style-import` 配置 [#1011](https://github.com/taroify/taroify/pull/1011) [@xuxucode](https://github.com/xuxucode)
+
+**Full Changelog**: [v0.9.2...v1.0.0](https://github.com/taroify/taroify/compare/v0.9.2...v1.0.0)
 
 ### v0.9.2
 
