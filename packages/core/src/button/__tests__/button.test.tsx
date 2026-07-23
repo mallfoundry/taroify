@@ -253,6 +253,17 @@ describe("<Button />", () => {
     )
   })
 
+  it("wraps a custom loading node and disables interaction", () => {
+    const { container, getByTestId } = render(
+      <Button loading={<span data-testid="custom-loading">Custom loading</span>}>Loading</Button>,
+    )
+    const loading = container.querySelector(`.${prefixClassname("button__loading")}`)
+
+    expect(loading).toHaveClass(prefixClassname("button__loading--right"))
+    expect(loading).toContainElement(getByTestId("custom-loading"))
+    expect(getNativeButton(container)).toHaveAttribute("disabled")
+  })
+
   it("uses loading text and replaces the icon prop while loading", () => {
     const { container, queryByTestId } = render(
       <Button icon={<Icon data-testid="button-icon" />} loading loadingText="Submitting...">
