@@ -3,7 +3,14 @@ import { type ButtonProps as TaroButtonProps, View } from "@tarojs/components"
 import classNames from "classnames"
 import * as _ from "lodash"
 import * as React from "react"
-import { cloneElement, type ReactElement, type ReactNode, useContext, useMemo } from "react"
+import {
+  cloneElement,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useMemo,
+} from "react"
 import ButtonBase from "../button-base"
 import Loading, { type LoadingProps } from "../loading"
 import { prefixClassname } from "../styles"
@@ -20,82 +27,113 @@ import type {
   ButtonVariant,
   IconPosition,
 } from "./button.shared"
+import { isButtonPresetColor } from "./button.shared"
 
-function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): ReactNode {
+interface ButtonLoadingState {
+  active: boolean
+  icon?: ReactNode
+}
+
+function useButtonLoading(loading?: boolean | LoadingProps | ReactElement): ButtonLoadingState {
   return useMemo(() => {
+    const active = Boolean(loading)
+    const loadingClassName = classNames(
+      prefixClassname("button__loading"),
+      prefixClassname("button__loading--right"),
+    )
+
     if (_.isBoolean(loading) && loading) {
-      return (
-        <Loading
-          className={classNames(
-            prefixClassname("button__loading"),
-            prefixClassname("button__loading--right"),
-          )}
-        />
-      )
+      return { active, icon: <Loading className={loadingClassName} /> }
     }
 
     if (isObjectElement(loading as ReactNode)) {
       const { className, ...restProps } = loading as LoadingProps
-      return (
-        <Loading
-          className={classNames(
-            prefixClassname("button__loading"),
-            prefixClassname("button__loading--right"),
-            className,
-          )}
-          {...restProps}
-        />
-      )
+      return {
+        active,
+        icon: <Loading className={classNames(loadingClassName, className)} {...restProps} />,
+      }
     }
 
     if (isElementOf(loading as ReactNode, Loading)) {
-      return cloneElement(loading as ReactElement, {
-        className: classNames(
-          prefixClassname("button__loading"),
-          prefixClassname("button__loading--right"),
-        ),
-      })
+      const element = loading as ReactElement<LoadingProps>
+      return {
+        active,
+        icon: cloneElement(loading as ReactElement, {
+          className: classNames(loadingClassName, element.props.className),
+        }),
+      }
     }
 
-    return loading as ReactNode
+    if (React.isValidElement(loading)) {
+      return {
+        active,
+        icon: <View className={loadingClassName}>{loading}</View>,
+      }
+    }
+
+    return { active }
   }, [loading])
 }
 
-function appendButtonIconClassname(icon?: ReactNode, className?: string) {
-  return isIconElement(icon) ? cloneIconElement(icon, { className }) : icon
+function renderButtonIcon(icon?: ReactNode, className?: string) {
+  if (icon === undefined || icon === null || _.isBoolean(icon)) {
+    return null
+  }
+
+  const iconClassName = classNames(prefixClassname("button__icon"), className)
+  return isIconElement(icon) ? (
+    cloneIconElement(icon, { className: iconClassName })
+  ) : (
+    <View className={iconClassName}>{icon}</View>
+  )
 }
 
 interface UseButtonChildrenOptions {
   children?: ReactNode
-  loading?: ReactNode
+  loading: ButtonLoadingState
+  loadingText?: ReactNode
   icon?: ReactNode
   iconPosition?: IconPosition
 }
 
 function useButtonChildren(options: UseButtonChildrenOptions) {
-  const { loading, icon: iconProp, children, iconPosition } = options
+  const { loading, loadingText, icon: iconProp, children, iconPosition } = options
   if (isElementOf(children, ButtonContent)) {
-    return children
+    if (!loading.active) {
+      return children
+    }
+
+    const content = children as ReactElement<{ children?: ReactNode }>
+    return cloneElement(
+      content,
+      undefined,
+      loading.icon,
+      loadingText !== undefined ? loadingText : content.props.children,
+    )
   }
-  const childrenArray = Children.toArray(children)
+
+  const content = loading.active && loadingText !== undefined ? loadingText : children
+  const childrenArray = Children.toArray(content)
   const lastIndex = _.size(childrenArray) - 1
 
-  const icon = appendButtonIconClassname(
-    iconProp,
-    prefixClassname(iconPosition === "left" ? "button__icon--right" : "button__icon--left"),
-  )
+  const icon = loading.active
+    ? null
+    : renderButtonIcon(
+        iconProp,
+        prefixClassname(iconPosition === "left" ? "button__icon--right" : "button__icon--left"),
+      )
   return (
     <ButtonContent>
-      {loading}
+      {loading.icon}
       {iconPosition === "left" && icon}
       {
         //
         _.map(childrenArray, (child, index) => {
           if (isIconElement(child) && index === 0) {
-            return appendButtonIconClassname(child, prefixClassname("button__icon--right"))
+            return renderButtonIcon(child, prefixClassname("button__icon--right"))
           }
           if (isIconElement(child) && index === lastIndex) {
-            return appendButtonIconClassname(child, prefixClassname("button__icon--left"))
+            return renderButtonIcon(child, prefixClassname("button__icon--left"))
           }
           return (
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -110,16 +148,39 @@ function useButtonChildren(options: UseButtonChildrenOptions) {
   )
 }
 
-function useButtonPropertyValue<T>(value1?: T, value2?: T, defaultValue?: T) {
-  return useMemo(() => {
-    if (value1) {
-      return value1
-    }
-    if (value2) {
-      return value2
-    }
-    return defaultValue
-  }, [defaultValue, value1, value2])
+function resolveButtonPropertyValue<T>(value1?: T, value2?: T, defaultValue?: T) {
+  return value1 ?? value2 ?? defaultValue
+}
+
+function getButtonTextContent(node?: ReactNode): string {
+  if (_.isString(node) || _.isNumber(node)) {
+    return String(node)
+  }
+  if (_.isArray(node)) {
+    return _.map(node, getButtonTextContent).join("")
+  }
+  if (React.isValidElement<{ children?: ReactNode }>(node)) {
+    return getButtonTextContent(node.props.children)
+  }
+  return ""
+}
+
+function getButtonStyle(
+  style: TaroButtonProps["style"],
+  customColor?: string,
+): TaroButtonProps["style"] {
+  if (!customColor) {
+    return style
+  }
+
+  if (_.isString(style)) {
+    return `--button-custom-color: ${customColor};${style}`
+  }
+
+  return {
+    "--button-custom-color": customColor,
+    ...style,
+  } as CSSProperties
 }
 
 export interface ButtonProps
@@ -130,6 +191,7 @@ export interface ButtonProps
   color?: ButtonColor
   formType?: ButtonFormType
   loading?: boolean | LoadingProps | ReactElement
+  loadingText?: ReactNode
   block?: boolean
   hairline?: boolean
   disabled?: boolean
@@ -142,6 +204,14 @@ export default function Button(props: ButtonProps) {
   const {
     className,
     style,
+    hidden,
+    animation,
+    hoverClass,
+    hoverStyle,
+    hoverStopPropagation,
+    hoverStartTime,
+    hoverStayTime,
+    ariaLabel,
     variant: variantProp,
     shape: shapeProp,
     size: sizeProp,
@@ -151,6 +221,7 @@ export default function Button(props: ButtonProps) {
     hairline: hairlineProp,
     disabled: disabledProp,
     loading: loadingProp,
+    loadingText,
     icon,
     iconPosition = "left",
     children: childrenProp,
@@ -166,15 +237,27 @@ export default function Button(props: ButtonProps) {
     disabled: disabledCtx,
   } = useContext(ButtonGroupContext)
   const { onClick: onCtxClick } = useContext(ButtonContext)
-  const variant = useButtonPropertyValue(variantProp, variantCtx, "contained")
-  const shape = useButtonPropertyValue(shapeProp, shapeCtx)
-  const size = useButtonPropertyValue(sizeProp, sizeCtx, "medium")
-  const color = useButtonPropertyValue(colorProp, colorCtx, "default")
-  const hairline = useButtonPropertyValue(hairlineProp, hairlineCtx)
-  const disabled = useButtonPropertyValue(disabledProp, disabledCtx)
+  const variant = resolveButtonPropertyValue(variantProp, variantCtx, "contained")
+  const shape = resolveButtonPropertyValue(shapeProp, shapeCtx)
+  const size = resolveButtonPropertyValue(sizeProp, sizeCtx, "medium")
+  const color = resolveButtonPropertyValue(colorProp, colorCtx, "default")
+  const hairline = resolveButtonPropertyValue(hairlineProp, hairlineCtx)
+  const disabled = resolveButtonPropertyValue(disabledProp, disabledCtx)
 
   const loading = useButtonLoading(loadingProp)
-  const children = useButtonChildren({ children: childrenProp, loading, icon, iconPosition })
+  const children = useButtonChildren({
+    children: childrenProp,
+    loading,
+    loadingText,
+    icon,
+    iconPosition,
+  })
+  const presetColor = color && isButtonPresetColor(color) ? color : undefined
+  const customColor = color && !presetColor ? color : undefined
+  const buttonStyle = getButtonStyle(style, customColor)
+  const accessibilityContent =
+    loading.active && loadingText !== undefined ? loadingText : childrenProp
+  const accessibilityLabel = ariaLabel ?? (getButtonTextContent(accessibilityContent) || undefined)
 
   return (
     <View
@@ -186,7 +269,9 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button--contained")]: variant === "contained",
           [prefixClassname("button--outlined")]: variant === "outlined",
           // Set color style
-          [prefixClassname(`button--${color}`)]: color,
+          [prefixClassname(`button--${presetColor}`)]: presetColor,
+          [prefixClassname("button--custom")]: customColor,
+          [prefixClassname("button--gradient")]: customColor && /gradient/i.test(customColor),
           // Set shape style
           [prefixClassname("button--round")]: shape === "round",
           [prefixClassname("button--square")]: shape === "square",
@@ -199,14 +284,21 @@ export default function Button(props: ButtonProps) {
           [prefixClassname("button--hairline")]: hairline,
           [prefixClassname("hairline--surround")]: hairline,
           [prefixClassname("button--disabled")]: disabled,
-          [prefixClassname("button--loading")]: loading,
+          [prefixClassname("button--loading")]: loading.active,
           [prefixClassname("button--block")]: block,
         },
         className,
       )}
-      style={style}
+      style={buttonStyle}
+      hidden={hidden}
+      animation={animation}
+      hoverClass={hoverClass}
+      hoverStyle={hoverStyle}
+      hoverStopPropagation={hoverStopPropagation}
+      hoverStartTime={hoverStartTime}
+      hoverStayTime={hoverStayTime}
       onClick={(e) => {
-        if (!disabled && !loading) {
+        if (!disabled && !loading.active) {
           onClick?.(e)
           onCtxClick?.(e, props)
         }
@@ -216,8 +308,9 @@ export default function Button(props: ButtonProps) {
       <ButtonBase
         className={prefixClassname("button__button")}
         formType={formType === "submit" ? "submit" : formType === "reset" ? "reset" : undefined}
-        disabled={disabled || !!loading}
+        disabled={disabled || loading.active}
         loading={false}
+        ariaLabel={accessibilityLabel}
         {...restProps}
       />
     </View>

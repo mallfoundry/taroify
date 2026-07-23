@@ -18,7 +18,19 @@ interface ButtonGroupProps extends PropsWithChildren<ViewProps> {
 }
 
 function ButtonGroup(props: ButtonGroupProps) {
-  const { className, variant, shape, size, color, block, hairline, disabled, ...restProps } = props
+  const {
+    className,
+    variant,
+    shape,
+    size,
+    color,
+    block,
+    hairline,
+    disabled,
+    role = "group",
+    ariaRole = "group",
+    ...restProps
+  } = props
   return (
     <ButtonGroupContext.Provider
       value={{
@@ -42,6 +54,8 @@ function ButtonGroup(props: ButtonGroupProps) {
           },
           className,
         )}
+        role={role}
+        ariaRole={ariaRole}
         {...restProps}
       />
     </ButtonGroupContext.Provider>

@@ -60,6 +60,39 @@ describe("<Button />", () => {
     },
   )
 
+  it("renders a custom color without generating an invalid modifier class", () => {
+    const { container } = render(<Button color="#7232dd">Custom</Button>)
+    const button = getButton(container)
+
+    expect(button).toHaveClass(prefixClassname("button--custom"))
+    expect(button).not.toHaveClass(prefixClassname("button--#7232dd"))
+    expect(button.style.getPropertyValue("--button-custom-color")).toBe("#7232dd")
+  })
+
+  it("supports gradient colors", () => {
+    const color = "linear-gradient(to right, #ff6034, #ee0a24)"
+    const { container } = render(<Button color={color}>Gradient</Button>)
+    const button = getButton(container)
+
+    expect(button).toHaveClass(
+      prefixClassname("button--custom"),
+      prefixClassname("button--gradient"),
+    )
+    expect(button.style.getPropertyValue("--button-custom-color")).toBe(color)
+  })
+
+  it("merges a custom color with string styles", () => {
+    const { container } = render(
+      <Button color="#7232dd" style="margin-top: 4px">
+        Custom
+      </Button>,
+    )
+    const button = getButton(container)
+
+    expect(button.style.getPropertyValue("--button-custom-color")).toBe("#7232dd")
+    expect(button).toHaveStyle({ marginTop: "4px" })
+  })
+
   it("renders block and hairline states", () => {
     const { container } = render(<Button block hairline />)
 
@@ -111,12 +144,23 @@ describe("<Button />", () => {
     )
 
     expect(getByTestId("button-icon")).toHaveClass(prefixClassname(spacingClass))
+    expect(getByTestId("button-icon")).toHaveClass(prefixClassname("button__icon"))
 
     const content = container.querySelector(`.${prefixClassname("button__content")}`)
     const children = Array.from(content?.children ?? [])
     expect(children[iconPosition === "left" ? 0 : children.length - 1]).toBe(
       getByTestId("button-icon"),
     )
+  })
+
+  it("wraps a custom icon with the button icon classes", () => {
+    const { container, getByTestId } = render(
+      <Button icon={<span data-testid="custom-icon">custom</span>}>Continue</Button>,
+    )
+    const iconWrapper = container.querySelector(`.${prefixClassname("button__icon")}`)
+
+    expect(iconWrapper).toHaveClass(prefixClassname("button__icon--right"))
+    expect(iconWrapper).toContainElement(getByTestId("custom-icon"))
   })
 
   it("adds spacing classes to icon children at both edges", () => {
@@ -195,15 +239,67 @@ describe("<Button />", () => {
 
   it("preserves props from a custom Loading element", () => {
     const { container } = render(
-      <Button loading={<Loading id="element-loading" type="spinner" />}>Loading</Button>,
+      <Button loading={<Loading id="element-loading" className="element-loading" type="spinner" />}>
+        Loading
+      </Button>,
     )
     const loading = container.querySelector("#element-loading")
 
     expect(loading).toHaveClass(
+      "element-loading",
       prefixClassname("button__loading"),
       prefixClassname("button__loading--right"),
       prefixClassname("loading--spinner"),
     )
+  })
+
+  it("uses loading text and replaces the icon prop while loading", () => {
+    const { container, queryByTestId } = render(
+      <Button icon={<Icon data-testid="button-icon" />} loading loadingText="Submitting...">
+        Submit
+      </Button>,
+    )
+
+    expect(queryByTestId("button-icon")).not.toBeInTheDocument()
+    expect(getButton(container).textContent).toBe("Submitting...")
+    expect(getNativeButton(container)).toHaveAttribute("aria-label", "Submitting...")
+  })
+
+  it("prepends loading to custom Button.Content", () => {
+    const { container } = render(
+      <Button loading>
+        <Button.Content className="custom-content">Loading</Button.Content>
+      </Button>,
+    )
+    const content = container.querySelector(".custom-content")
+
+    expect(content?.querySelector(`.${prefixClassname("button__loading")}`)).toBeInTheDocument()
+    expect(content).toHaveTextContent("Loading")
+  })
+
+  it("derives the native accessibility label from its content", () => {
+    const { container } = render(
+      <Button>
+        Confirm <span>order</span>
+      </Button>,
+    )
+
+    expect(getNativeButton(container)).toHaveAttribute("aria-label", "Confirm order")
+  })
+
+  it("lets an explicit accessibility label override derived content", () => {
+    const { container } = render(<Button ariaLabel="Open cart" icon={<Icon />} />)
+
+    expect(getNativeButton(container)).toHaveAttribute("aria-label", "Open cart")
+  })
+
+  it("applies visual interaction props to the wrapper", () => {
+    const { container } = render(<Button hoverClass="button-hover">Hover</Button>)
+    const button = getButton(container)
+    const nativeButton = getNativeButton(container)
+
+    expect(button).toHaveAttribute("hover-class", "button-hover")
+    expect(nativeButton).not.toHaveAttribute("hover-class")
   })
 
   it("calls both the prop and context click handlers", () => {
@@ -340,5 +436,37 @@ describe("<Button.Group />", () => {
       prefixClassname("button--small"),
       prefixClassname("button--primary"),
     )
+  })
+
+  it("lets false button props override true group properties", () => {
+    const onClick = jest.fn()
+    const { container } = render(
+      <Button.Group hairline disabled>
+        <Button hairline={false} disabled={false} onClick={onClick}>
+          Enabled
+        </Button>
+      </Button.Group>,
+    )
+    const button = getButton(container)
+
+    expect(button).not.toHaveClass(
+      prefixClassname("button--hairline"),
+      prefixClassname("button--disabled"),
+    )
+    fireEvent.click(button)
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it("renders an accessible group role", () => {
+    const { container } = render(
+      <Button.Group ariaLabel="Pagination actions">
+        <Button>Previous</Button>
+        <Button>Next</Button>
+      </Button.Group>,
+    )
+    const group = container.querySelector(`.${prefixClassname("button-group")}`)
+
+    expect(group).toHaveAttribute("role", "group")
+    expect(group).toHaveAttribute("aria-label", "Pagination actions")
   })
 })

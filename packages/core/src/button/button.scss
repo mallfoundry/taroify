@@ -30,7 +30,12 @@
   }
 
   &:active::before {
-    opacity: 0.1;
+    opacity: $button-active-opacity;
+  }
+
+  &:focus-within {
+    outline: $button-focus-visible-outline;
+    outline-offset: $button-focus-visible-outline-offset;
   }
 
   &--mini {
@@ -78,7 +83,7 @@
   &--success {
     color: $button-success-color;
     background: $button-success-background-color;
-    border: $button-border-width solid $button-success-background-color;
+    border: $button-border-width solid $button-success-border-color;
   }
 
   &--warning {
@@ -103,6 +108,7 @@
   }
 
   &--loading {
+    cursor: default;
 
     &:active::before {
       opacity: 0;
@@ -119,7 +125,7 @@
     border: 0 none;
 
     &:active::before {
-      opacity: 0.1;
+      opacity: $button-active-opacity;
     }
 
     &.#{$component-prefix}button--default {
@@ -172,11 +178,10 @@
   }
 
   &--outlined {
-    background: transparent;
+    background: $button-outlined-background-color;
 
     &.#{$component-prefix}button--primary {
       color: $button-primary-background-color;
-      background: $button-primary-color;
 
       &:active::before {
         background: $button-primary-background-color;
@@ -185,7 +190,6 @@
 
     &.#{$component-prefix}button--info {
       color: $button-info-background-color;
-      background: $button-info-color;
 
       &:active::before {
         background: $button-info-background-color;
@@ -194,7 +198,6 @@
 
     &.#{$component-prefix}button--success {
       color: $button-success-background-color;
-      background: $button-success-color;
 
       &:active::before {
         background: $button-success-background-color;
@@ -203,7 +206,6 @@
 
     &.#{$component-prefix}button--warning {
       color: $button-warning-background-color;
-      background: $button-warning-color;
 
       &:active::before {
         background: $button-warning-background-color;
@@ -212,7 +214,6 @@
 
     &.#{$component-prefix}button--danger {
       color: $button-danger-background-color;
-      background: $button-danger-color;
 
       &:active::before {
         background: $button-danger-background-color;
@@ -220,12 +221,37 @@
     }
   }
 
+  &--custom {
+    color: var(--button-custom-color);
+
+    &.#{$component-prefix}button--contained {
+      color: var(--white, $white);
+      background: var(--button-custom-color); /* stylelint-disable-line order/properties-alphabetical-order */
+      border: $button-border-width solid var(--button-custom-color);
+    }
+
+    &.#{$component-prefix}button--text,
+    &.#{$component-prefix}button--outlined {
+      &:active::before {
+        background: var(--button-custom-color);
+      }
+    }
+
+    &.#{$component-prefix}button--outlined {
+      border: $button-border-width solid var(--button-custom-color);
+    }
+  }
+
+  &--gradient {
+    border: 0;
+  }
+
   &--hairline {
     border-width: 0;
 
     &::after {
       border-color: inherit;
-      border-radius: $button-border-radius;
+      border-radius: calc(#{$button-border-radius} * 2);
     }
 
     &.#{$component-prefix}button--round::after {
@@ -246,7 +272,7 @@
   }
 
   &__icon {
-    font-size: 1.2em;
+    font-size: $button-icon-size;
     line-height: inherit;
     color: inherit;
   }
@@ -280,21 +306,21 @@
 
   &__text+ {
     .#{$component-prefix}button__icon--left {
-      margin-left: var(--padding-base, $padding-base);
+      margin-left: $button-content-gap;
     }
   }
 
   &__loading--left+,
   &__icon--left+ {
     .#{$component-prefix}button__text {
-      margin-right: var(--padding-base, $padding-base);
+      margin-right: $button-content-gap;
     }
   }
 
   &__loading--right+,
   &__icon--right+ {
     .#{$component-prefix}button__text {
-      margin-left: var(--padding-base, $padding-base);
+      margin-left: $button-content-gap;
     }
   }
 }

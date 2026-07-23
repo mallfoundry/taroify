@@ -7,9 +7,15 @@ $button-border-width: var(--button-border-width, var(--border-width-base, $borde
 $button-border-radius: var(--button-border-radius, var(--border-radius-sm, $border-radius-md));
 $button-border-radius-max: var(--button-border-radius-max, var(--border-radius-max, $border-radius-max));
 $button-transition-duration: var(--button-transition-duration, var(--animation-duration-fast, $animation-duration-fast));
+$button-active-opacity: var(--button-active-opacity, 0.1);
 
 $button-disabled-opacity: var(--button-disabled-opacity, var(--disabled-opacity, $disabled-opacity));
+$button-outlined-background-color: var(--button-outlined-background-color, var(--background-color-2, $background-color-2));
+$button-focus-visible-outline: var(--button-focus-visible-outline, #{2px * $hd} solid var(--primary-color, $primary-color));
+$button-focus-visible-outline-offset: var(--button-focus-visible-outline-offset, 2px * $hd);
 
+$button-icon-size: var(--button-icon-size, 1.2em);
+$button-content-gap: var(--button-content-gap, var(--padding-base, $padding-base));
 $button-loading-icon-size: var(--button-loading-icon-size, 20px * $hd);
 
 $button-height-mini: var(--button-height-mini, 24px * $hd);
@@ -35,13 +41,13 @@ $button-primary-color: var(--button-primary-color, var(--white, $white));
 $button-primary-background-color: var(--button-primary-background-color, var(--primary-color, $primary-color));
 $button-primary-border-color: var(--button-primary-border-color, $button-primary-background-color);
 
-$button-info-color: var(--button-color-info, var(--white, $white));
+$button-info-color: var(--button-info-color, var(--white, $white));
 $button-info-background-color: var(--button-info-background-color, var(--info-color, $info-color));
 $button-info-border-color: var(--button-info-border-color, $button-info-background-color);
 
 $button-success-color: var(--button-success-color, var(--white, $white));
 $button-success-background-color: var(--button-success-background-color, var(--success-color, $success-color));
-$button-success-border-color: var(--button-success-border-color,$button-success-background-color);
+$button-success-border-color: var(--button-success-border-color, $button-success-background-color);
 
 $button-warning-color: var(--button-warning-color, var(--white, $white));
 $button-warning-background-color: var(--button-warning-background-color, var(--warning-color, $warning-color));
