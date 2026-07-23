@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: 🤖 提问、提供反馈、分享你的项目
-    url: https://github.com/mallfoundry/taroify/discussions
+    url: https://github.com/taroify/taroify/discussions
     about: 通过 Discussions 讨论区联系其他社区成员
   - name: 📱 通过微信获取帮助
-    url: https://github.com/mallfoundry/taroify#%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4
+    url: https://github.com/taroify/taroify#%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4
     about: 打开链接扫描二维码，通过微信讨论组获得帮助

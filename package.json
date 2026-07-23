@@ -5,10 +5,10 @@
   "private": true,
   "repository": {
     "type": "https",
-    "url": "https://github.com/mallfoundry/taroify.git"
+    "url": "https://github.com/taroify/taroify.git"
   },
   "bugs": {
-    "url": "https://github.com/mallfoundry/taroify/issues/new"
+    "url": "https://github.com/taroify/taroify/issues/new"
   },
   "scripts": {
     "clean:node_modules": "lerna clean --yes && rimraf node_modules && cd ./site && rimraf node_modules",

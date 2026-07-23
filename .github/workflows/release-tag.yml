@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    if: github.repository == 'mallfoundry/taroify'
+    if: github.repository == 'taroify/taroify'
     name: Create Release
     runs-on: ubuntu-latest
     steps:

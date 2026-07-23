@@ -19,7 +19,7 @@
       {" · "}
       <a href="https://taroify.github.io/taroify.com/mcp/"><strong>MCP</strong></a>
       {" · "}
-      <a href="https://github.com/mallfoundry/taroify/discussions"><strong>讨论区</strong></a>
+      <a href="https://github.com/taroify/taroify/discussions"><strong>讨论区</strong></a>
     </span>
   </p>
 </div>
@@ -89,7 +89,7 @@ Taroify 采用 Monorepo 组织，各能力可以独立安装和组合：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/mallfoundry/taroify.git
+git clone https://github.com/taroify/taroify.git
 cd taroify
 
 # 安装根目录、工作区和官网依赖
@@ -106,9 +106,9 @@ yarn develop
 
 如果你发现问题、希望增加组件，或对 API 设计有建议，欢迎通过以下方式参与：
 
-- [提交 Issue](https://github.com/mallfoundry/taroify/issues)
-- [发起 Pull Request](https://github.com/mallfoundry/taroify/pulls)
-- [参与 Discussions](https://github.com/mallfoundry/taroify/discussions)
+- [提交 Issue](https://github.com/mataroifyllfoundry/taroify/issues)
+- [发起 Pull Request](https://github.com/taroify/taroify/pulls)
+- [参与 Discussions](https://github.com/taroify/taroify/discussions)
 - [查看更新日志](https://taroify.github.io/taroify.com/changelog/)
 
 <details>
@@ -129,8 +129,8 @@ yarn develop
 
 感谢每一位为 Taroify 提交代码、文档、设计、Issue 与建议的贡献者。
 
-<a href="https://github.com/mallfoundry/taroify/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mallfoundry/taroify" alt="contributors"/>
+<a href="https://github.com/taroify/taroify/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=taroify/taroify" alt="contributors"/>
 </a>
 
 部分图形设计来自 [@BiscuitCoder](https://uyyu.xyz/)。
@@ -184,4 +184,4 @@ Taroify 的设计规范与大量组件经验来自 Vant。感谢
 
 ## License
 
-[MIT](https://github.com/mallfoundry/taroify/blob/main/LICENSE) © Taroify Contributors
+[MIT](https://github.com/taroify/taroify/blob/main/LICENSE) © Taroify Contributors
