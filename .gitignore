@@ -49,7 +49,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 lerna-error.log*
-yarn.lock
 !/site/yarn.lock
 
 # IntelliJ IDEA
