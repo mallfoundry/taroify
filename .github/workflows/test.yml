@@ -31,7 +31,7 @@ env:
 
 jobs:
   lint:
-    if: github.repository == 'mallfoundry/taroify'
+    if: github.repository == 'taroify/taroify'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
         run: yarn run lint
 
   test:
-    if: github.repository == 'mallfoundry/taroify'
+    if: github.repository == 'taroify/taroify'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,7 +68,7 @@ jobs:
         run: yarn run test:coverage --watchman=false
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage

@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   change-labeling:
-    if: github.repository == 'mallfoundry/taroify'
+    if: github.repository == 'taroify/taroify'
     name: Labeling for changes
     runs-on: ubuntu-latest
     steps:

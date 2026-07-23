@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   issue-to-be-closed:
-    if: github.repository == 'mallfoundry/taroify'
+    if: github.repository == 'taroify/taroify'
     runs-on: ubuntu-latest
     steps:
       - name: close-issues

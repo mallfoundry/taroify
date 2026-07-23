@@ -55,7 +55,7 @@ export default defineConfig({
       {
         icon: "github",
         mode: "link",
-        content: "https://github.com/mallfoundry/taroify",
+        content: "https://github.com/taroify/taroify",
       },
     ],
   },

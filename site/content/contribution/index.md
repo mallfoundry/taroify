@@ -23,7 +23,7 @@ npm install -g rimraf lerna
 
 # 克隆仓库
 # 默认为 main 分支，包含 Taroify 的代码
-git clone https://github.com/mallfoundry/taroify.git
+git clone https://github.com/taroify/taroify.git
 
 # 安装依赖
 cd taroify && yarn run install:node_modules
@@ -85,7 +85,7 @@ src
 
 ```bash
 # 添加主仓库到 remote，作为 fork 后仓库的上游仓库
-git remote add upstream https://github.com/mallfoundry/taroify.git
+git remote add upstream https://github.com/taroify/taroify.git
 
 # 拉取主仓库最新代码
 git fetch upstream
