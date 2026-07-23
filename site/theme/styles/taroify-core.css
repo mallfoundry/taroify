@@ -978,8 +978,8 @@
   justify-content: center;
   padding: var(--checkbox-button-padding, 5px 18px);
   color: var(--checkbox-button-color, var(--text-color, var(--text-color, var(--gray-8, #323233))));
-  background-color: var(--checkbox-button-background-color, var(--gray-1, #f7f8fa));
-  border: 1PX solid var(--checkbox-button-border-color, var(--checkbox-button-background-color, var(--gray-1, #f7f8fa)));
+  background-color: var(--checkbox-button-background-color, var(--gray-1, #f2f3f5));
+  border: 1PX solid var(--checkbox-button-border-color, var(--checkbox-button-background-color, var(--gray-1, #f2f3f5)));
   border-radius: var(--checkbox-button-border-radius, var(--border-radius-max, 999px));
   transition-duration: var(--checkbox-transition-duration, var(--animation-duration-fast, 0.2s));
   transition-property: color, border-color, background-color, opacity;
