@@ -4,11 +4,26 @@ export type ButtonVariant = "contained" | "text" | "outlined"
 
 export type ButtonSize = "mini" | "small" | "medium" | "large"
 
-export type ButtonColor = "default" | "primary" | "info" | "success" | "warning" | "danger"
+export const buttonPresetColors = [
+  "default",
+  "primary",
+  "info",
+  "success",
+  "warning",
+  "danger",
+] as const
+
+export type ButtonPresetColor = (typeof buttonPresetColors)[number]
+
+export type ButtonColor = ButtonPresetColor | (string & {})
 
 export type ButtonShape = "square" | "round"
 
 export type IconPosition = "left" | "right"
+
+export function isButtonPresetColor(color: ButtonColor): color is ButtonPresetColor {
+  return buttonPresetColors.includes(color as ButtonPresetColor)
+}
 
 export type ButtonThemeVars = {
   buttonLineHeight?: string
@@ -16,7 +31,13 @@ export type ButtonThemeVars = {
   buttonBorderRadius?: string
   buttonBorderRadiusMax?: string
   buttonTransitionDuration?: string
+  buttonActiveOpacity?: string
   buttonDisabledOpacity?: string
+  buttonOutlinedBackgroundColor?: string
+  buttonFocusVisibleOutline?: string
+  buttonFocusVisibleOutlineOffset?: string
+  buttonIconSize?: string
+  buttonContentGap?: string
   buttonLoadingIconSize?: string
   buttonHeightMini?: string
   buttonPaddingMini?: string

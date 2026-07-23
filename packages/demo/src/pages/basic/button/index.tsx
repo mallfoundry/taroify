@@ -121,8 +121,8 @@ export default function ButtonDemo() {
         <Space>
           <Button color="success" loading />
           <Button color="success" loading={{ type: "spinner" }} />
-          <Button color="primary" loading>
-            加载中...
+          <Button color="primary" loading loadingText="加载中...">
+            提交
           </Button>
         </Space>
       </Block>
@@ -138,7 +138,12 @@ export default function ButtonDemo() {
       </Block>
       <Block title="图标按钮">
         <Space>
-          <Button variant="contained" color="primary" icon={<ShopOutlined />} />
+          <Button
+            variant="contained"
+            color="primary"
+            icon={<ShopOutlined />}
+            ariaLabel="购物车"
+          />
           <Button variant="contained" color="primary" icon={<ShopOutlined />}>
             主要按钮
           </Button>
@@ -171,17 +176,11 @@ export default function ButtonDemo() {
       </Block>
       <Block title="自定义颜色">
         <Space>
-          <Button style={{ backgroundColor: "#7232dd", color: "#fff", borderColor: "#7232dd" }}>
-            单色按钮
+          <Button color="#7232dd">单色按钮</Button>
+          <Button variant="outlined" color="#7232dd">
+            轮廓按钮
           </Button>
-          <Button style={{ borderColor: "#7232dd", color: "#7232dd" }}>单色按钮</Button>
-          <Button
-            style={{
-              background: "linear-gradient(to right, #ff6034, #ee0a24)",
-              color: "#fff",
-              border: 0,
-            }}
-          >
+          <Button color="linear-gradient(to right, #ff6034, #ee0a24)">
             渐变色按钮
           </Button>
         </Space>
