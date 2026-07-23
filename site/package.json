@@ -6,6 +6,7 @@
   "author": "Taroify",
   "keywords": ["rspress", "taro", "components"],
   "scripts": {
+    "generate:changelog": "node scripts/generate-changelog.mjs content/changelog/index.md",
     "prepare:docs": "node scripts/prepare-docs.mjs",
     "prepare:theme": "node scripts/build-theme-css.mjs",
     "prepare:site": "npm run prepare:docs && npm run prepare:theme",
